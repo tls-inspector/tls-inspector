@@ -40,6 +40,9 @@
     self.certificates = [NSArray<CHCertificate *> new];
     uihelper = [UIHelper withViewController:self];
     self.headerViewLabel.text = lang(@"Loading...");
+    if (![self.host hasPrefix:@"http"]) {
+        self.host = [NSString stringWithFormat:@"https://%@", self.host];
+    }
     [[CHCertificate alloc] fromURL:self.host finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
         if (error) {
             [uihelper presentAlertWithError:error title:lang(@"Could not get certificates") dismissed:^(NSInteger buttonIndex) {
