@@ -1,0 +1,108 @@
+/* 
+  Localizable.strings
+  Cert Inspector
+
+  MIT License
+
+  Copyright (c) 2016 Ian Spence
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
+
+"%lu characters" = "%lu characters";
+"Algorithm" = "Algorithm";
+"Both values matched." = "Both values matched.";
+"C" = "Country";
+"CN" = "Common Name";
+"Cancel" = "Cancel";
+"Cancel" = "Cancel";
+"Certificate Errors" = "Certificate Errors";
+"Certificate Information" = "Certificate Information";
+"Certificate is expired or not valid yet." = "Certificate is expired or not valid yet.";
+"Certificate uses insecure SHA1 algorithm." = "Certificate uses insecure SHA1 algorithm.";
+"Copy" = "Copy";
+"Could not get certificates" = "Could not get certificates";
+"Dismiss" = "Dismiss";
+"Enter the value to verify" = "Enter the value to verify";
+"Fingerprints" = "Fingerprints";
+"Insecure Superfish (Lenovo) certificate." = "Insecure Superfish (Lenovo) certificate.";
+"Insecure eDellRoot certificate." = "Insecure eDellRoot certificate.";
+"Issuer" = "Issuer";
+"L" = "City";
+"Loading..." = "Loading...";
+"Not Verified" = "Not Verified";
+"O" = "Organization";
+"OU" = "Organizational Unit";
+"ST" = "State";
+"Share" = "Share";
+"Subject Names" = "Subject Names";
+"Trusted Chain" = "Trusted Chain";
+"Untrusted Chain" = "Untrusted Chain";
+"Valid From" = "Valid From";
+"Valid To" = "Valid To";
+"Value" = "Value";
+"Values do not match." = "Values do not match.";
+"Verified" = "Verified";
+"Verify Value" = "Verify Value";
+"Verify" = "Verify";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "0da-WA-eay"; */
+"0da-WA-eay.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Certificate Inspector"; ObjectID = "7Ah-zL-Gjb"; */
+"7Ah-zL-Gjb.title" = "Certificate Inspector";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "P3x-dj-Ama"; */
+"P3x-dj-Ama.text" = "Detail";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Q2T-Pv-8ls"; */
+"Q2T-Pv-8ls.text" = "Title";
+
+/* Class = "UITableViewController"; title = "Certificates"; ObjectID = "S2I-zI-YU5"; */
+"S2I-zI-YU5.title" = "Certificates";
+
+/* Class = "UITableViewController"; title = "Certificate Inspector"; ObjectID = "UeK-6B-NSA"; */
+"UeK-6B-NSA.title" = "Certificate Inspector";
+
+/* Class = "UITableViewSection"; footerTitle = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well."; ObjectID = "bgU-th-gof"; */
+"bgU-th-gof.footerTitle" = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.";
+
+/* Class = "UITableViewSection"; headerTitle = "FQDN or IP Address"; ObjectID = "bgU-th-gof"; */
+"bgU-th-gof.headerTitle" = "FQDN or IP Address";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "e3s-bJ-unQ"; */
+"e3s-bJ-unQ.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Inspect"; ObjectID = "gKd-2W-Kih"; */
+"gKd-2W-Kih.title" = "Inspect";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "gXH-uP-etF"; */
+"gXH-uP-etF.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "www.nsa.gov"; ObjectID = "grL-tY-LK1"; */
+"grL-tY-LK1.placeholder" = "www.nsa.gov";
+
+/* Class = "UITextView"; text = "Value"; ObjectID = "pgs-P6-Qwl"; */
+"pgs-P6-Qwl.text" = "Value";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wDB-Yx-eAZ"; */
+"wDB-Yx-eAZ.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wnt-yP-Cj2"; */
+"wnt-yP-Cj2.text" = "Title";
