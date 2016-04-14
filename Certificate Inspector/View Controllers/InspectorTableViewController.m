@@ -80,7 +80,23 @@ typedef NS_ENUM(NSInteger, InspectorSection) {
 # pragma mark -
 # pragma mark Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    return action == @selector(copy:);
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if (action == @selector(copy:)) {
+        UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        [[UIPasteboard generalPasteboard] setString:cell.detailTextLabel.text];
+    }
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.certErrors.count <= 0) {
         return 3;
     }
