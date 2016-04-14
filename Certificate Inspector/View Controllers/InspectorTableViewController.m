@@ -138,11 +138,13 @@ typedef NS_ENUM(NSInteger, InspectorSection) {
         NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = data[@"value"];
         cell.textLabel.text = data[@"label"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     } else if (indexPath.section == Names) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
         NSDictionary * data = [names objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = data[@"name"];
         cell.textLabel.text = lang(data[@"type"]);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     } else if (indexPath.section == Fingerprints) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
         switch (indexPath.row) {
@@ -168,8 +170,10 @@ typedef NS_ENUM(NSInteger, InspectorSection) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
         NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
         cell.textLabel.text = data[@"error"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
