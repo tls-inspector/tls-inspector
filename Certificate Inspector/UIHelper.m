@@ -44,7 +44,9 @@
     if(AlertControllerClass){
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title message:body preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * dismissButton = [UIAlertAction actionWithTitle:dismissButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            dismissed(0);
+            if (dismissed) {
+                dismissed(0);
+            }
         }];
         [alertController addAction:dismissButton];
         if (![self.viewController.presentedViewController isKindOfClass:[UINavigationController class]]){
@@ -64,7 +66,9 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    dismissedClosure(buttonIndex);
+    if (dismissedClosure) {
+        dismissedClosure(buttonIndex);
+    }
 }
 
 - (void) presentAlertWithError:(NSError *)error

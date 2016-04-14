@@ -36,4 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
+@property (weak, nonatomic) IBOutlet UIButton *headerButton;
+
+- (IBAction)headerButton:(id)sender;
 @end

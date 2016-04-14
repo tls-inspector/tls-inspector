@@ -29,6 +29,7 @@
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
     CHCertificate * selectedCertificate;
+    BOOL isTrusted;
 }
 
 @end
@@ -50,6 +51,7 @@
             }];
         } else {
             self.certificates = certificates;
+            isTrusted = trustedChain;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (trustedChain) {
                     self.headerViewLabel.text = lang(@"Trusted Chain");
@@ -94,4 +96,9 @@
     [self performSegueWithIdentifier:@"ViewCert" sender:nil];
 }
 
+- (IBAction)headerButton:(id)sender {
+    NSString * title = isTrusted ? lang(@"Trusted Chain") : lang(@"Untrusted Chain");
+    NSString * body = isTrusted ? lang(@"trusted_chain_description") : lang(@"untrusted_chain_description");
+    [uihelper presentAlertWithTitle:title body:body dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
+}
 @end
