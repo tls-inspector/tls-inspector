@@ -22,4 +22,8 @@
 #endif
 
 #define lang(key) NSLocalizedString(key, nil)
-#define langv(key, ...) [NSString stringWithFormat:NSLocalizedString(key, nil), __VA_ARGS__]
+#define langv(key, ...) [NSString stringWithFormat:NSLocalizedString(key, nil), ##__VA_ARGS__]
+
+#define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
+#define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
+#define PROJECT_GITHUB_URL @"https://github.com/certificate-helper/Certificate-Inspector/"

@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "0da-WA-eay"; */
+"0da-WA-eay.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Certificate Inspector"; ObjectID = "7Ah-zL-Gjb"; */
+"7Ah-zL-Gjb.title" = "Certificate Inspector";
+
+/* Class = "UILabel"; text = "#.#"; ObjectID = "Ewr-l1-6Iy"; */
+"Ewr-l1-6Iy.text" = "#.#";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "P3x-dj-Ama"; */
+"P3x-dj-Ama.text" = "Detail";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Q2T-Pv-8ls"; */
+"Q2T-Pv-8ls.text" = "Title";
+
+/* Class = "UILabel"; text = "Tell Friends About Certificate Inspector"; ObjectID = "QCM-IJ-RvJ"; */
+"QCM-IJ-RvJ.text" = "Tell Friends About Certificate Inspector";
+
+/* Class = "UITableViewController"; title = "Certificates"; ObjectID = "S2I-zI-YU5"; */
+"S2I-zI-YU5.title" = "Certificates";
+
+/* Class = "UITableViewController"; title = "About Certificate Inspector"; ObjectID = "UEQ-qB-mO8"; */
+"UEQ-qB-mO8.title" = "About Certificate Inspector";
+
+/* Class = "UITableViewController"; title = "Certificate Inspector"; ObjectID = "UeK-6B-NSA"; */
+"UeK-6B-NSA.title" = "Certificate Inspector";
+
+/* Class = "UITableViewSection"; footerTitle = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well."; ObjectID = "bgU-th-gof"; */
+"bgU-th-gof.footerTitle" = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.";
+
+/* Class = "UITableViewSection"; headerTitle = "FQDN or IP Address"; ObjectID = "bgU-th-gof"; */
+"bgU-th-gof.headerTitle" = "FQDN or IP Address";
+
+/* Class = "UILabel"; text = "Contribute"; ObjectID = "cE6-N8-FNP"; */
+"cE6-N8-FNP.text" = "Contribute";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "e3s-bJ-unQ"; */
+"e3s-bJ-unQ.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Inspect"; ObjectID = "gKd-2W-Kih"; */
+"gKd-2W-Kih.title" = "Inspect";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "gXH-uP-etF"; */
+"gXH-uP-etF.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "www.nsa.gov"; ObjectID = "grL-tY-LK1"; */
+"grL-tY-LK1.placeholder" = "www.nsa.gov";
+
+/* Class = "UILabel"; text = "App Version"; ObjectID = "jvL-xr-ouG"; */
+"jvL-xr-ouG.text" = "App Version";
+
+/* Class = "UILabel"; text = "Submit Feedback"; ObjectID = "ngB-Jk-o4T"; */
+"ngB-Jk-o4T.text" = "Submit Feedback";
+
+/* Class = "UITextView"; text = "Value"; ObjectID = "pgs-P6-Qwl"; */
+"pgs-P6-Qwl.text" = "Value";
+
+/* Class = "UIBarButtonItem"; title = "About"; ObjectID = "sIs-mI-6IT"; */
+"sIs-mI-6IT.title" = "About";
+
+/* Class = "UITableViewSection"; footerTitle = "Certificate Inspector is Free and Libre software licensed under GNU GPLv3.  Certificate Inspector is copyright © 2016 Ian Spence."; ObjectID = "uwH-jV-ihb"; */
+"uwH-jV-ihb.footerTitle" = "Certificate Inspector is Free and Libre software licensed under GNU GPLv3.  Certificate Inspector is copyright © 2016 Ian Spence.";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wDB-Yx-eAZ"; */
+"wDB-Yx-eAZ.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wnt-yP-Cj2"; */
+"wnt-yP-Cj2.text" = "Title";
