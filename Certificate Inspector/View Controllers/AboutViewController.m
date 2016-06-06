@@ -1,5 +1,5 @@
 //
-//  ValueViewController.h
+//  AboutViewController.m
 //  Certificate Inspector
 //
 //  MIT License
@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.versionLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    self.helper = [UIHelper withViewController:self];
+    self.helper = [UIHelper sharedInstance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,39 +52,43 @@
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[blurb]
                                                         applicationActivities:nil];
+        activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
         [self presentViewController:activityController animated:YES completion:nil];
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
-        [self.helper presentActionSheetWithTitle:lang(@"What kind of feedback would you like to submit?")
-                                        subtitle:lang(@"All feedback is appreciated!")
-                               cancelButtonTitle:lang(@"Cancel")
-                                         choices:@[
-                                                   lang(@"Something I Like"),
-                                                   lang(@"Something I Don't Like"),
-                                                   lang(@"Request a Feature"),
-                                                   lang(@"Report a Bug")
-                                                   ]
-                                       dismissed:^(NSInteger selectedIndex) {
-                                           switch (selectedIndex) {
-                                               case 0:
-                                                   [[UIApplication sharedApplication] openURL:
-                                                    [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=commendation")]];
-                                                   break;
-                                               case 1:
-                                                   [[UIApplication sharedApplication] openURL:
-                                                    [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=complaint")]];
-                                                   break;
-                                               case 2:
-                                                   [[UIApplication sharedApplication] openURL:
-                                                    [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=enhancement")]];
-                                                   break;
-                                               case 3:
-                                                   [[UIApplication sharedApplication] openURL:
-                                                    [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=bug")]];
-                                                   break;
-                                               default:
-                                                   break;
-                                           }
-                                       }];
+        [self.helper
+         presentActionSheetInViewController:self
+         attachToView:[cell viewWithTag:1]
+         title:lang(@"What kind of feedback would you like to submit?")
+         subtitle:lang(@"All feedback is appreciated!")
+         cancelButtonTitle:lang(@"Cancel")
+         items:@[
+                 lang(@"Something I Like"),
+                 lang(@"Something I Don't Like"),
+                 lang(@"Request a Feature"),
+                 lang(@"Report a Bug")
+                 ]
+         dismissed:^(NSInteger selectedIndex) {
+             switch (selectedIndex) {
+                 case 0:
+                     [[UIApplication sharedApplication] openURL:
+                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=commendation")]];
+                     break;
+                 case 1:
+                     [[UIApplication sharedApplication] openURL:
+                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=complaint")]];
+                     break;
+                 case 2:
+                     [[UIApplication sharedApplication] openURL:
+                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=enhancement")]];
+                     break;
+                 case 3:
+                     [[UIApplication sharedApplication] openURL:
+                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=bug")]];
+                     break;
+                 default:
+                     break;
+             }
+         }];
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_GITHUB_URL]];
     }

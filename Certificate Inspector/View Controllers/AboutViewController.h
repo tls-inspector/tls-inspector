@@ -1,5 +1,5 @@
 //
-//  ValueViewController.h
+//  AboutViewController.h
 //  Certificate Inspector
 //
 //  MIT License

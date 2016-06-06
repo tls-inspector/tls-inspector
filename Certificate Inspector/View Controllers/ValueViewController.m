@@ -25,10 +25,16 @@
 //  SOFTWARE.
 
 #import "ValueViewController.h"
+#import "UIHelper.h"
 
 @interface ValueViewController () {
     UIHelper * uihelper;
 }
+
+@property (strong, nonatomic) NSString * value;
+@property (strong, nonatomic) NSString * viewTitle;
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
@@ -37,7 +43,7 @@
 - (void)viewDidLoad {
     self.textView.text = self.value;
     self.title = self.viewTitle;
-    uihelper = [UIHelper withViewController:self];
+    uihelper = [UIHelper sharedInstance];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
@@ -56,11 +62,13 @@
 }
 
 - (void)actionButton:(id)sender {
-    [uihelper presentActionSheetWithTitle:self.title
-                                 subtitle:langv(@"%lu characters", self.value.length)
-                        cancelButtonTitle:lang(@"Cancel")
-                                  choices:@[lang(@"Copy"), lang(@"Verify"), lang(@"Share")]
-                                dismissed:^(NSInteger selectedIndex) {
+    [uihelper presentActionSheetInViewController:self
+                                    attachToView:self.view
+                                           title:self.title
+                                        subtitle:langv(@"%lu characters", self.value.length)
+                               cancelButtonTitle:lang(@"Cancel")
+                                           items:@[lang(@"Copy"), lang(@"Verify"), lang(@"Share")]
+                                       dismissed:^(NSInteger selectedIndex) {
         switch (selectedIndex) {
             case 0: { // Copy
                 [[UIPasteboard generalPasteboard] setString:self.value];
@@ -102,6 +110,7 @@
                 UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                                 initWithActivityItems:@[self.value]
                                                                 applicationActivities:nil];
+                activityController.popoverPresentationController.sourceView = self.view;
                 [self presentViewController:activityController animated:YES completion:nil];
                 break;
             }
@@ -124,13 +133,9 @@
     NSString * formattedCurrentValue = formatValue(self.value);
     NSString * formattedExpectedValue = formatValue(value);
     if ([formattedExpectedValue isEqualToString:formattedCurrentValue]) {
-        [uihelper presentAlertWithTitle:lang(@"Verified") body:lang(@"Both values matched.") dismissButtonTitle:lang(@"Dismiss") dismissed:^(NSInteger buttonIndex) {
-            //
-        }];
+        [uihelper presentAlertInViewController:self title:lang(@"Verified") body:lang(@"Both values matched.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
     } else {
-        [uihelper presentAlertWithTitle:lang(@"Not Verified") body:lang(@"Values do not match.") dismissButtonTitle:lang(@"Dismiss") dismissed:^(NSInteger buttonIndex) {
-            //
-        }];
+        [uihelper presentAlertInViewController:self title:lang(@"Not Verified") body:lang(@"Values do not match.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
     }
 }
 @end

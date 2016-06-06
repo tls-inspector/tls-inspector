@@ -25,18 +25,9 @@
 //  SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "CHCertificate.h"
-#import "InspectorTableViewController.h"
-#import "UIHelper.h"
 
 @interface CertificateListTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSString * host;
-@property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
 
-@property (weak, nonatomic) IBOutlet UIView *headerView;
-@property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
-@property (weak, nonatomic) IBOutlet UIButton *headerButton;
-
-- (IBAction)headerButton:(id)sender;
 @end
