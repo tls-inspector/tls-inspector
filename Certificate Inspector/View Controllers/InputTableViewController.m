@@ -25,8 +25,40 @@
 //  SOFTWARE.
 
 #import "InputTableViewController.h"
+#import "CertificateListTableViewController.h"
+#import "TrustedFingerprints.h"
+#import "UIHelper.h"
+
+@interface InputTableViewController()
+
+@property (weak, nonatomic) IBOutlet UITextField *hostField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *inspectButton;
+- (IBAction)hostFieldEdit:(id)sender;
+@property (strong, nonatomic) UIHelper * helper;
+
+@end
 
 @implementation InputTableViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [TrustedFingerprints sharedInstance];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(trustedFingerprintSecFailure:)
+     name:kTrustedFingerprintRemoteSecFailure
+     object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(trustedFingerprintSecFailure:)
+     name:kTrustedFingerprintLocalSecFailure
+     object:nil];
+    self.helper = [UIHelper sharedInstance];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"InspectCertificate"]) {
@@ -37,4 +69,14 @@
 - (IBAction)hostFieldEdit:(id)sender {
     self.inspectButton.enabled = self.hostField.text.length > 0;
 }
+
+- (void) trustedFingerprintSecFailure:(NSNotification *)n {
+    [self.helper
+     presentAlertInViewController:self
+     title:lang(@"Unable to fetch trusted fingerprint data")
+     body:lang(@"We were unable to verify the integrity of the trusted fingerprint data. A checksum mismatch occured.")
+     dismissButtonTitle:lang(@"Proceed with caution.")
+     dismissed:nil];
+}
+
 @end
