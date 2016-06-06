@@ -70,6 +70,11 @@
     self.inspectButton.enabled = self.hostField.text.length > 0;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+    return YES;
+}
+
 - (void) trustedFingerprintSecFailure:(NSNotification *)n {
     [self.helper
      presentAlertInViewController:self

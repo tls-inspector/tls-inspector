@@ -26,6 +26,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InputTableViewController : UITableViewController <UITableViewDelegate>
+@interface InputTableViewController : UITableViewController <UITableViewDelegate, UITextFieldDelegate>
 
 @end

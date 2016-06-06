@@ -60,8 +60,8 @@ typedef NS_ENUM(NSInteger, InspectorSection) {
 };
 
 typedef NS_ENUM(NSInteger, CellTags) {
-    CellTagValue,
-    CellTagVerified
+    CellTagValue = 1,
+    CellTagVerified = 2
 };
 
 - (void) viewDidLoad {
@@ -84,15 +84,12 @@ typedef NS_ENUM(NSInteger, CellTags) {
         [self.certErrors addObject:@{@"error": lang(@"Certificate uses insecure SHA1 algorithm.")}];
     }
     
-    
-    
-    
     NSDictionary * trustResults = [[TrustedFingerprints sharedInstance]
                                    dataForFingerprint:[[self.certificate SHA1Fingerprint]
                                                        stringByReplacingOccurrencesOfString:@" " withString:@""]];
     if (trustResults) {
         if (![[trustResults objectForKey:@"trust"] boolValue]) {
-            [self.certErrors addObject:@{@"error": [trustResults objectForKey:@"trust"]}];
+            [self.certErrors addObject:@{@"error": [trustResults objectForKey:@"description"]}];
         } else {
             self.certVerification = trustResults;
         }
@@ -263,22 +260,33 @@ typedef NS_ENUM(NSInteger, CellTags) {
             [self performSegueWithIdentifier:@"ShowValue" sender:nil];
             break;
         } case CellTagVerified: {
-            [self.helper
-             presentConfirmInViewController:self
-             title:lang(@"Trusted & Verified Certificate")
-             body:lang(@"This certificate has been security verified as legitimate.")
-             confirmButtonTitle:lang(@"Learn More")
-             cancelButtonTitle:lang(@"Dimiss")
-             confirmActionIsDestructive:NO
-             dismissed:^(BOOL confirmed) {
-                 if (confirmed) {
-                     [[UIApplication sharedApplication] openURL:
-                      [NSURL URLWithString:@"https://www.grc.com/fingerprints.htm"]];
-                 }
-             }];
+            [self showVerifiedAlert];
             break;
         }
     }
+}
+
+- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.tag == CellTagVerified) {
+        [self showVerifiedAlert];
+    }
+}
+
+- (void) showVerifiedAlert {
+    [self.helper
+     presentConfirmInViewController:self
+     title:lang(@"Trusted & Verified Certificate")
+     body:lang(@"This certificate has been security verified as legitimate.")
+     confirmButtonTitle:lang(@"Learn More")
+     cancelButtonTitle:lang(@"Dimiss")
+     confirmActionIsDestructive:NO
+     dismissed:^(BOOL confirmed) {
+         if (confirmed) {
+             [[UIApplication sharedApplication] openURL:
+              [NSURL URLWithString:@"https://www.grc.com/fingerprints.htm"]];
+         }
+     }];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
