@@ -200,6 +200,7 @@ typedef NS_ENUM(NSInteger, CellTags) {
             case 1:
                 cell.textLabel.text = @"SHA1";
                 cell.detailTextLabel.text = SHA1Fingerprint;
+                break;
             case 2:
                 cell.textLabel.text = @"MD5";
                 cell.detailTextLabel.text = MD5Fingerprint;
