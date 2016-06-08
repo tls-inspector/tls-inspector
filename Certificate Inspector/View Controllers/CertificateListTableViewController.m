@@ -25,11 +25,23 @@
 //  SOFTWARE.
 
 #import "CertificateListTableViewController.h"
+#import "CHCertificate.h"
+#import "InspectorTableViewController.h"
+#import "UIHelper.h"
 
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
     CHCertificate * selectedCertificate;
+    BOOL isTrusted;
 }
+
+@property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
+
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
+@property (weak, nonatomic) IBOutlet UIButton *headerButton;
+
+- (IBAction)headerButton:(id)sender;
 
 @end
 
@@ -38,15 +50,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.certificates = [NSArray<CHCertificate *> new];
-    uihelper = [UIHelper withViewController:self];
+    uihelper = [UIHelper sharedInstance];
     self.headerViewLabel.text = lang(@"Loading...");
+    if (![self.host hasPrefix:@"http"]) {
+        self.host = [NSString stringWithFormat:@"https://%@", self.host];
+    }
     [[CHCertificate alloc] fromURL:self.host finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
         if (error) {
-            [uihelper presentAlertWithError:error title:lang(@"Could not get certificates") dismissed:^(NSInteger buttonIndex) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
+            [uihelper
+             presentAlertInViewController:self
+             title:lang(@"Could not get certificates")
+             body:error.localizedDescription
+             dismissButtonTitle:lang(@"Dismiss")
+             dismissed:^(NSInteger buttonIndex) {
+                 [self.navigationController popViewControllerAnimated:YES];
+             }];
         } else {
             self.certificates = certificates;
+            isTrusted = trustedChain;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (trustedChain) {
                     self.headerViewLabel.text = lang(@"Trusted Chain");
@@ -69,7 +90,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ViewCert"]) {
-        [(InspectorTableViewController *)[segue destinationViewController] setCertificate:selectedCertificate];
+        [(InspectorTableViewController *)[segue destinationViewController] loadCertificate:selectedCertificate];
     }
 }
 
@@ -91,4 +112,14 @@
     [self performSegueWithIdentifier:@"ViewCert" sender:nil];
 }
 
+- (IBAction)headerButton:(id)sender {
+    NSString * title = isTrusted ? lang(@"Trusted Chain") : lang(@"Untrusted Chain");
+    NSString * body = isTrusted ? lang(@"trusted_chain_description") : lang(@"untrusted_chain_description");
+    [uihelper
+     presentAlertInViewController:self
+     title:title
+     body:body
+     dismissButtonTitle:lang(@"Dismiss")
+     dismissed:nil];
+}
 @end

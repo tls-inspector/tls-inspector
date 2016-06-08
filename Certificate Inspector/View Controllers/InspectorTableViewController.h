@@ -26,12 +26,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CHCertificate.h"
-#import "ValueViewController.h"
 
 @interface InspectorTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
 
-@property (strong, nonatomic) CHCertificate * certificate;
-@property (strong, nonatomic) NSMutableArray * cells;
-@property (strong, nonatomic) NSMutableArray * certErrors;
+- (void) loadCertificate:(CHCertificate *)certificate;
 
 @end

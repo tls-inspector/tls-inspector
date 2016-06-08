@@ -25,14 +25,9 @@
 //  SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "UIHelper.h"
 
 @interface ValueViewController : UIViewController <UIAlertViewDelegate>
 
-@property (strong, nonatomic) NSString * value;
-@property (strong, nonatomic) NSString * viewTitle;
 - (void) loadValue:(NSString *)value title:(NSString *)title;
-
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end

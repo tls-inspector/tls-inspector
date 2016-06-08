@@ -1,5 +1,5 @@
 //
-//  CertificateListTableViewController.h
+//  AboutViewController.h
 //  Certificate Inspector
 //
 //  MIT License
@@ -25,9 +25,8 @@
 //  SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "UIHelper.h"
 
-@interface CertificateListTableViewController : UITableViewController
-
-@property (strong, nonatomic) NSString * host;
+@interface AboutViewController : UITableViewController
 
 @end

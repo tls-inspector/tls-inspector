@@ -1,5 +1,5 @@
 //
-//  CertificateListTableViewController.h
+//  TrustedFingerprints.h
 //  Certificate Inspector
 //
 //  MIT License
@@ -24,10 +24,17 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface CertificateListTableViewController : UITableViewController
+static NSString * _Nonnull kTrustedFingerprintRemoteSecFailure = @"kTrustedFingerprintRemoteSecFailure";
+static NSString * _Nonnull kTrustedFingerprintLocalSecFailure  = @"kTrustedFingerprintLocalSecFailure";
 
-@property (strong, nonatomic) NSString * host;
+@interface TrustedFingerprints : NSObject
+
+- (id _Nonnull) init;
++ (TrustedFingerprints * _Nonnull) sharedInstance;
+- (void) checkForUpdates;
+
+- (NSDictionary<NSString *, id> * _Nullable) dataForFingerprint:(NSString * _Nonnull)sha1fingerprint;
 
 @end

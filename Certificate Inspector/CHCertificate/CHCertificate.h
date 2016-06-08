@@ -39,25 +39,116 @@ typedef NS_ENUM(NSInteger, kFingerprintType) {
     kFingerprintTypeMD5
 };
 
+/**
+ *  Creates a new CHCertificate object with the certificate reference
+ *
+ *  @param cert A SecCertificateRef reference to the cert object
+ *
+ *  @return an instatiated CHCertificate object
+ */
 + (CHCertificate *) withCertificateRef:(SecCertificateRef)cert;
+
+/**
+ *  Retrieve the certificate chain for the specified URL
+ *
+ *  @param URL      The URL to retrieve
+ *  @param finished Called when the network request has completed with either an error or an array
+ *                  of certificates
+ */
 - (void) fromURL:(NSString *)URL finished:(void (^)(NSError * error,
                                                     NSArray<CHCertificate *>* certificates,
                                                     BOOL trustedChain))finished;
+/**
+ *  Determine if the certificate chain is trusted by the systems certificate store
+ *
+ *  @param trust The SecTrustRef object to evalulate
+ *
+ *  @return Trusted?
+ */
 + (BOOL) trustedChain:(SecTrustRef)trust;
 
+/**
+ *  Returns the SHA256 fingerprint for the certificate
+ *
+ *  @return A NSString value of the fingerprint
+ */
 - (NSString *) SHA256Fingerprint;
+
+/**
+ *  Returns the MD5 fingerprint for the certificate
+ *
+ *  Warning! The security of the MD5 algorithm has been seriously compromised - avoid use!
+ *
+ *  @return A NSString value of the fingerprint
+ */
 - (NSString *) MD5Fingerprint;
+
+/**
+ *  Returns the SHA1 fingerprint for the certificate
+ *
+ *  Warning! SH1 is no longer considered cryptographically secure - avoide use!
+ *
+ *  @return A NSString value of the fingerprint
+ */
 - (NSString *) SHA1Fingerprint;
+
+/**
+ *  Verify the fingerprint of the certificate. Useful for certificate pinning.
+ *
+ *  @param fingerprint The fingerprint
+ *  @param type        The type of hashing algrotim used to generate the fingerprint
+ *
+ *  @return YES if verified
+ */
 - (BOOL) verifyFingerprint:(NSString *)fingerprint type:(kFingerprintType)type;
 
+/**
+ *  Returns the serial number for the certificate
+ *
+ *  @return A NSString value of the serial number
+ */
 - (NSString *) serialNumber;
+
+/**
+ *  Returns the human readable signature algorithm
+ *
+ *  @return A NSString value of the algorithm
+ */
 - (NSString *) algorithm;
 
+/**
+ *  Returns the expiry date for the certificate
+ *
+ *  @return A NSDate object for the "not after" field - Time is not critical for this date object.
+ */
 - (NSDate *) notAfter;
+
+/**
+ *  Returns the start date for the certificate
+ *
+ *  @return A NSDate object for the "not before" field - Time is not critical for this date object.
+ */
 - (NSDate *) notBefore;
+
+/**
+ *  Test if current date is within the certificates issue date range
+ *
+ *  @return current date within range?
+ */
 - (BOOL) validIssueDate;
 
+/**
+ *  Retuns the issuer name
+ *
+ *  @return A NSString value of the issuer identity
+ */
 - (NSString *) issuer;
+
+/**
+ *  Retruns an array of dictionaries with the subjet names, and name types (OU or CN)
+ *
+ *  @return An array of dictionaries: [ { "type": "OU", "name": "*.foo" } ]
+ */
 - (NSArray<NSDictionary *> *) names;
 
 @property (nonatomic) X509 * X509Certificate;

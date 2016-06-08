@@ -25,11 +25,7 @@
 //  SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "CertificateListTableViewController.h"
 
-@interface InputTableViewController : UITableViewController <UITableViewDelegate>
+@interface InputTableViewController : UITableViewController <UITableViewDelegate, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *hostField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *inspectButton;
-- (IBAction)hostFieldEdit:(id)sender;
 @end
