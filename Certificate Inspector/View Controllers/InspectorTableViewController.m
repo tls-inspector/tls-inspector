@@ -95,7 +95,29 @@ typedef NS_ENUM(NSInteger, CellTags) {
     SHA256Fingerprint = [self.certificate SHA256Fingerprint];
     serialNumber = [self.certificate serialNumber];
 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                              target:self action:@selector(actionButton:)];
+    
     names = [self.certificate names];
+}
+
+- (void)actionButton:(id)sender {
+    NSData * pem = [self.certificate publicKeyAsPEM];
+    if (pem) {
+        UIActivityViewController *activityController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:@[pem]
+                                                        applicationActivities:nil];
+        activityController.popoverPresentationController.sourceView = self.view;
+        [self presentViewController:activityController animated:YES completion:nil];
+    } else {
+        [self.helper
+         presentAlertInViewController:self
+         title:lang(@"Unable to share public key")
+         body:lang(@"We were unable to export the public key in PEM format.")
+         dismissButtonTitle:lang(@"Dismiss")
+         dismissed:nil];
+    }
 }
 
 # pragma mark -
