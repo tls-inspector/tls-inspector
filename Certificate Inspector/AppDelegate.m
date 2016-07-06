@@ -30,6 +30,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Set Default Options
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:RECENT_DOMAINS_KEY] == nil) {
+        [defaults setObject:@[] forKey:RECENT_DOMAINS_KEY];
+    }
+    if ([defaults objectForKey:SAVE_RECENT_DOMAINS] == nil) {
+        [defaults setBool:YES forKey:SAVE_RECENT_DOMAINS];
+    }
+    
     return YES;
 }
 

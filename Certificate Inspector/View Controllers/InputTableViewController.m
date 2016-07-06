@@ -23,13 +23,18 @@
 #import "CertificateListTableViewController.h"
 #import "TrustedFingerprints.h"
 #import "UIHelper.h"
+#import "RecentDomains.h"
 
-@interface InputTableViewController()
+@interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
+    NSString * hostAddress;
+}
 
-@property (weak, nonatomic) IBOutlet UITextField *hostField;
+@property (strong, nonatomic) UITextField *hostField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *inspectButton;
-- (IBAction)hostFieldEdit:(id)sender;
+- (IBAction)inspectButton:(UIBarButtonItem *)sender;
 @property (strong, nonatomic) UIHelper * helper;
+@property (strong, nonatomic) NSArray<NSString *> * recentDomains;
+@property (strong, nonatomic) RecentDomains * recentDomainManager;
 
 @end
 
@@ -48,7 +53,15 @@
      selector:@selector(trustedFingerprintSecFailure:)
      name:kTrustedFingerprintLocalSecFailure
      object:nil];
+    self.recentDomainManager = [RecentDomains new];
     self.helper = [UIHelper sharedInstance];
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.recentDomains = [self.recentDomainManager getRecentDomains];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,15 +70,17 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"InspectCertificate"]) {
-        [(CertificateListTableViewController *)[segue destinationViewController] setHost:self.hostField.text];
+        [(CertificateListTableViewController *)[segue destinationViewController] setHost:hostAddress];
     }
 }
 
-- (IBAction)hostFieldEdit:(id)sender {
+- (void)hostFieldEdit:(id)sender {
     self.inspectButton.enabled = self.hostField.text.length > 0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self saveRecent];
+    hostAddress = self.hostField.text;
     [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
     return YES;
 }
@@ -79,4 +94,98 @@
      dismissed:nil];
 }
 
+- (void) saveRecent {
+    if (self.recentDomainManager.saveRecentDomains) {
+        self.recentDomains = [self.recentDomainManager prependDomain:self.hostField.text];
+        [self.tableView reloadData];
+    }
+}
+
+- (IBAction) inspectButton:(UIBarButtonItem *)sender {
+    [self saveRecent];
+    hostAddress = self.hostField.text;
+    [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+}
+
+# pragma mark -
+# pragma mark Table View
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 1:
+            return YES;
+        default:
+            return NO;
+    }
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.recentDomains.count > 0 ? 2 : 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return 1;
+        case 1:
+            return self.recentDomains.count;
+        default:
+            return 0;
+    }
+}
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return lang(@"FQDN or IP Address");
+        case 1:
+            return lang(@"Recent Domains");
+        default:
+            return nil;
+    }
+}
+
+- (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return lang(@"Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.");
+        default:
+            return nil;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell * cell;
+    
+    switch (indexPath.section) {
+        case 0: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Input"];
+            self.hostField = (UITextField *)[cell viewWithTag:1];
+            [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+            self.hostField.delegate = self;
+            break;
+        } case 1: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
+            break;
+        }
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        self.recentDomains = [self.recentDomainManager removeDomainAtIndex:indexPath.row];
+        [self.tableView reloadData];
+    }
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section != 1) {
+        return;
+    }
+    
+    hostAddress = self.recentDomains[indexPath.row];
+    [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+}
 @end

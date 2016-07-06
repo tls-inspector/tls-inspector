@@ -15,6 +15,7 @@
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
 		3C5FA7C51CA853DB00C79D2B /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C41CA853DB00C79D2B /* CHCertificate.m */; };
+		3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */; };
 		3CFAE6DB1CA8440400CD946B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DA1CA8440400CD946B /* main.m */; };
 		3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DD1CA8440400CD946B /* AppDelegate.m */; };
 		3CFAE6E41CA8440400CD946B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E21CA8440400CD946B /* Main.storyboard */; };
@@ -41,6 +42,8 @@
 		3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CertificateListTableViewController.m; path = "View Controllers/CertificateListTableViewController.m"; sourceTree = "<group>"; };
 		3C5FA7C31CA853DB00C79D2B /* CHCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHCertificate.h; path = CHCertificate/CHCertificate.h; sourceTree = "<group>"; };
 		3C5FA7C41CA853DB00C79D2B /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHCertificate.m; path = CHCertificate/CHCertificate.m; sourceTree = "<group>"; };
+		3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDomains.h; sourceTree = "<group>"; };
+		3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDomains.m; sourceTree = "<group>"; };
 		3CFAE6D61CA8440400CD946B /* Cert Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cert Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFAE6DA1CA8440400CD946B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3CFAE6DC1CA8440400CD946B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -113,6 +116,8 @@
 		3CFAE6D91CA8440400CD946B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */,
+				3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */,
 				3C44D5BF1D053B1700799383 /* TrustedFingerprints.h */,
 				3C44D5C01D053B1700799383 /* TrustedFingerprints.m */,
 				3C04EE631CB4B3F100F56B68 /* PrefixHeader.pch */,
@@ -277,6 +282,7 @@
 			files = (
 				3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */,
 				3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */,
+				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3C5FA7C51CA853DB00C79D2B /* CHCertificate.m in Sources */,
 				3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */,
 				3C44D5C11D053B1700799383 /* TrustedFingerprints.m in Sources */,
