@@ -151,6 +151,14 @@ typedef NS_ENUM(NSInteger, kFingerprintType) {
  */
 - (NSArray<NSDictionary *> *) names;
 
+
+/**
+ *  Returns the public key encoded using Privacy-Enchanged Electronic Mail (PEM).
+ *
+ *  @return NSData representing the bytes (includes header and footer) or nil on error
+ */
+- (NSData *) publicKeyAsPEM;
+
 @property (nonatomic) X509 * X509Certificate;
 @property (strong, nonatomic) NSString * summary;
 @property (strong, nonatomic) NSString * host;

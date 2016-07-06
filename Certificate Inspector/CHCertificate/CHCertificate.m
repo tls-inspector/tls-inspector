@@ -25,6 +25,8 @@
 //  SOFTWARE.
 
 #import "CHCertificate.h"
+#import <openssl/pem.h>
+#import <openssl/bio.h>
 
 @implementation CHCertificate {
     void (^finishedCallback)(NSError * error,
@@ -284,6 +286,27 @@
         }
     }
     return [NSArray arrayWithArray:names];
+}
+
+- (NSData *) publicKeyAsPEM {
+    BIO * buffer = BIO_new(BIO_s_mem());
+    if (PEM_write_bio_X509(buffer, self.X509Certificate)) {
+        BUF_MEM *buffer_pointer;
+        BIO_get_mem_ptr(buffer, &buffer_pointer);
+        char * pem_bytes = malloc(buffer_pointer->length);
+        memcpy(pem_bytes, buffer_pointer->data, buffer_pointer->length-1);
+
+        // Exclude the null terminator from the NSData object
+        NSData * pem = [NSData dataWithBytes:pem_bytes length:buffer_pointer->length -1];
+
+        free(pem_bytes);
+        free(buffer);
+
+        return pem;
+    }
+
+    free(buffer);
+    return nil;
 }
 
 @end
