@@ -20,11 +20,17 @@
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import "AboutViewController.h"
+#import "RecentDomains.h"
+@import StoreKit;
 
-@interface AboutViewController ()
+@interface AboutViewController () <SKStoreProductViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *buildLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *recentSwitch;
+- (IBAction)recentSwitch:(UISwitch *)sender;
 @property (strong, nonatomic) UIHelper * helper;
+@property (strong, nonatomic) RecentDomains * recentDomainsManager;
 
 @end
 
@@ -32,7 +38,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.versionLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    self.recentDomainsManager = [RecentDomains new];
+    [self.recentSwitch setOn:self.recentDomainsManager.saveRecentDomains];
+    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    self.versionLabel.text = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    self.buildLabel.text = [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
     self.helper = [UIHelper sharedInstance];
 }
 
@@ -49,6 +59,16 @@
                                                         applicationActivities:nil];
         activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
         [self presentViewController:activityController animated:YES completion:nil];
+    } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
+        
+        if ([SKStoreProductViewController class] != nil) {
+            SKStoreProductViewController * productViewController = [SKStoreProductViewController new];
+            productViewController.delegate = self;
+            [productViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier: ITUNES_APP_ID} completionBlock:nil];
+            [self presentViewController:productViewController animated:YES completion:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", ITUNES_APP_ID]]];
+        }
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
         [self.helper
          presentActionSheetInViewController:self
@@ -87,6 +107,14 @@
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_GITHUB_URL]];
     }
+}
+
+- (IBAction)recentSwitch:(UISwitch *)sender {
+    self.recentDomainsManager.saveRecentDomains = sender.isOn;
+}
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

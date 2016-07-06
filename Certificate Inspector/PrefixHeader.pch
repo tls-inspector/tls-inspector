@@ -30,3 +30,4 @@
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 #define PROJECT_GITHUB_URL @"https://github.com/certificate-helper/Certificate-Inspector/"
+#define ITUNES_APP_ID @"1100539810"
