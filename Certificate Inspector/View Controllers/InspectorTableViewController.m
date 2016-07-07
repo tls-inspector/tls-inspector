@@ -102,11 +102,15 @@ typedef NS_ENUM(NSInteger, CellTags) {
     names = [self.certificate names];
 }
 
-- (void)actionButton:(id)sender {
+- (void)actionButton:(UIBarButtonItem *)sender {
     NSData * pem = [self.certificate publicKeyAsPEM];
     if (pem) {
+        NSString * fileName = format(@"/%@.pem", self.certificate.serialNumber);
+        NSURL * fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
+        [pem writeToURL:fileURL atomically:YES];
+
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
-                                                        initWithActivityItems:@[pem]
+                                                        initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
             activityController.popoverPresentationController.barButtonItem = sender;
