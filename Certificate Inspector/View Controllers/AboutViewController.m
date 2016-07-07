@@ -57,7 +57,9 @@
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[blurb]
                                                         applicationActivities:nil];
-        activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+            activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
+        }
         [self presentViewController:activityController animated:YES completion:nil];
     } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
         

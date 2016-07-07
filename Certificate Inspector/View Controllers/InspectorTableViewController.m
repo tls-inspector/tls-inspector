@@ -108,7 +108,9 @@ typedef NS_ENUM(NSInteger, CellTags) {
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[pem]
                                                         applicationActivities:nil];
-        activityController.popoverPresentationController.sourceView = self.view;
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+            activityController.popoverPresentationController.barButtonItem = sender;
+        }
         [self presentViewController:activityController animated:YES completion:nil];
     } else {
         [self.helper
