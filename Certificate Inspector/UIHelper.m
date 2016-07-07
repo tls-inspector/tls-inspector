@@ -179,7 +179,7 @@ static bool alertControllerSupported;
     } else {
         UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                                   delegate:self
-                                                         cancelButtonTitle:cancelButtonTitle
+                                                         cancelButtonTitle:nil
                                                     destructiveButtonTitle:nil
                                                          otherButtonTitles:nil];
         for (NSString * item in items) {
