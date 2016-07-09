@@ -79,10 +79,14 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self saveRecent];
-    hostAddress = self.hostField.text;
-    [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
-    return YES;
+    if (self.hostField.text.length > 0) {
+        [self saveRecent];
+        hostAddress = self.hostField.text;
+        [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (void) trustedFingerprintSecFailure:(NSNotification *)n {
