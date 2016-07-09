@@ -201,60 +201,74 @@ typedef NS_ENUM(NSInteger, CellTags) {
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * cell;
-    if (indexPath.section == CertificateInformation) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-        NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = data[@"value"];
-        cell.textLabel.text = data[@"label"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    } else if (indexPath.section == Names) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-        NSDictionary * data = [names objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = data[@"name"];
-        cell.textLabel.text = lang(data[@"type"]);
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    } else if (indexPath.section == Fingerprints) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-        switch (indexPath.row) {
-            case 0:
-                cell.textLabel.text = @"SHA256";
-                cell.detailTextLabel.text = SHA256Fingerprint;
-                break;
-            case 1:
-                cell.textLabel.text = @"SHA1";
-                cell.detailTextLabel.text = SHA1Fingerprint;
-                break;
-            case 2:
-                cell.textLabel.text = @"MD5";
-                cell.detailTextLabel.text = MD5Fingerprint;
-                break;
-            case 3:
-                cell.textLabel.text = @"Serial";
-                cell.detailTextLabel.text = serialNumber;
-                break;
-        }
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.tag = CellTagValue;
-    } else if (indexPath.section == CertificateErrorsOrVerification) {
-        if (self.certErrors.count > 0) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-            NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
-            cell.textLabel.text = data[@"error"];
+    
+    switch (indexPath.section) {
+        case CertificateInformation: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = data[@"value"];
+            cell.textLabel.text = data[@"label"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            break;
+        } case Names: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            NSDictionary * data = [names objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = data[@"name"];
+            cell.textLabel.text = lang(data[@"type"]);
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            break;
+        } case Fingerprints: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = @"SHA256";
+                    cell.detailTextLabel.text = SHA256Fingerprint;
+                    break;
+                case 1:
+                    cell.textLabel.text = @"SHA1";
+                    cell.detailTextLabel.text = SHA1Fingerprint;
+                    break;
+                case 2:
+                    cell.textLabel.text = @"MD5";
+                    cell.detailTextLabel.text = MD5Fingerprint;
+                    break;
+                case 3:
+                    cell.textLabel.text = @"Serial";
+                    cell.detailTextLabel.text = serialNumber;
+                    break;
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.tag = CellTagValue;
+            break;
+        } case CertificateErrorsOrVerification: {
+            if (self.certErrors.count > 0) {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+                NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
+                cell.textLabel.text = data[@"error"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            } else {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
+                cell.textLabel.text = self.certVerification[@"description"];
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.tag = CellTagVerified;
+            }
+        } case CertificateVerification: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
             cell.textLabel.text = self.certVerification[@"description"];
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagVerified;
+            break;
+        } default: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
-    } else if (indexPath.section == CertificateVerification) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
-        cell.textLabel.text = self.certVerification[@"description"];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        cell.tag = CellTagVerified;
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
