@@ -28,9 +28,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import <openssl/x509.h>
 
-@interface CHCertificate : NSObject <NSURLSessionDelegate> {
-    NSData * certificateData;
-}
+@interface CHCertificate : NSObject
 
 typedef NS_ENUM(NSInteger, kFingerprintType) {
     kFingerprintTypeSHA256,
