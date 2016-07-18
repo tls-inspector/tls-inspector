@@ -15,6 +15,9 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
+#define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
+#define SAVE_RECENT_DOMAINS @"SAVE_RECENT_DOMAINS"
+
 #if DEBUG
 #define d(s, ...) NSLog(@"%@", [NSString stringWithFormat:(s), ##__VA_ARGS__ ?:@""])
 #else
@@ -27,3 +30,4 @@
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 #define PROJECT_GITHUB_URL @"https://github.com/certificate-helper/Certificate-Inspector/"
+#define ITUNES_APP_ID @"1100539810"

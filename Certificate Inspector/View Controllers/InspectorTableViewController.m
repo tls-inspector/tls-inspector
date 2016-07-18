@@ -2,27 +2,22 @@
 //  InspectorTableViewController.m
 //  Certificate Inspector
 //
-//  MIT License
-//
+//  GPLv3 License
 //  Copyright (c) 2016 Ian Spence
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software Foundation,
+//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import "InspectorTableViewController.h"
 #import "CHCertificate.h"
@@ -100,7 +95,35 @@ typedef NS_ENUM(NSInteger, CellTags) {
     SHA256Fingerprint = [self.certificate SHA256Fingerprint];
     serialNumber = [self.certificate serialNumber];
 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                              target:self action:@selector(actionButton:)];
+    
     names = [self.certificate names];
+}
+
+- (void)actionButton:(UIBarButtonItem *)sender {
+    NSData * pem = [self.certificate publicKeyAsPEM];
+    if (pem) {
+        NSString * fileName = format(@"/%@.pem", self.certificate.serialNumber);
+        NSURL * fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
+        [pem writeToURL:fileURL atomically:YES];
+
+        UIActivityViewController *activityController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:@[fileURL]
+                                                        applicationActivities:nil];
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+            activityController.popoverPresentationController.barButtonItem = sender;
+        }
+        [self presentViewController:activityController animated:YES completion:nil];
+    } else {
+        [self.helper
+         presentAlertInViewController:self
+         title:lang(@"Unable to share public key")
+         body:lang(@"We were unable to export the public key in PEM format.")
+         dismissButtonTitle:lang(@"Dismiss")
+         dismissed:nil];
+    }
 }
 
 # pragma mark -
@@ -178,60 +201,74 @@ typedef NS_ENUM(NSInteger, CellTags) {
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * cell;
-    if (indexPath.section == CertificateInformation) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-        NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = data[@"value"];
-        cell.textLabel.text = data[@"label"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    } else if (indexPath.section == Names) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-        NSDictionary * data = [names objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = data[@"name"];
-        cell.textLabel.text = lang(data[@"type"]);
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    } else if (indexPath.section == Fingerprints) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-        switch (indexPath.row) {
-            case 0:
-                cell.textLabel.text = @"SHA256";
-                cell.detailTextLabel.text = SHA256Fingerprint;
-                break;
-            case 1:
-                cell.textLabel.text = @"SHA1";
-                cell.detailTextLabel.text = SHA1Fingerprint;
-                break;
-            case 2:
-                cell.textLabel.text = @"MD5";
-                cell.detailTextLabel.text = MD5Fingerprint;
-                break;
-            case 3:
-                cell.textLabel.text = @"Serial";
-                cell.detailTextLabel.text = serialNumber;
-                break;
-        }
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.tag = CellTagValue;
-    } else if (indexPath.section == CertificateErrorsOrVerification) {
-        if (self.certErrors.count > 0) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-            NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
-            cell.textLabel.text = data[@"error"];
+    
+    switch (indexPath.section) {
+        case CertificateInformation: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = data[@"value"];
+            cell.textLabel.text = data[@"label"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            break;
+        } case Names: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            NSDictionary * data = [names objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = data[@"name"];
+            cell.textLabel.text = lang(data[@"type"]);
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            break;
+        } case Fingerprints: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = @"SHA256";
+                    cell.detailTextLabel.text = SHA256Fingerprint;
+                    break;
+                case 1:
+                    cell.textLabel.text = @"SHA1";
+                    cell.detailTextLabel.text = SHA1Fingerprint;
+                    break;
+                case 2:
+                    cell.textLabel.text = @"MD5";
+                    cell.detailTextLabel.text = MD5Fingerprint;
+                    break;
+                case 3:
+                    cell.textLabel.text = @"Serial";
+                    cell.detailTextLabel.text = serialNumber;
+                    break;
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.tag = CellTagValue;
+            break;
+        } case CertificateErrorsOrVerification: {
+            if (self.certErrors.count > 0) {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+                NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
+                cell.textLabel.text = data[@"error"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            } else {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
+                cell.textLabel.text = self.certVerification[@"description"];
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.tag = CellTagVerified;
+            }
+        } case CertificateVerification: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
             cell.textLabel.text = self.certVerification[@"description"];
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagVerified;
+            break;
+        } default: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
-    } else if (indexPath.section == CertificateVerification) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
-        cell.textLabel.text = self.certVerification[@"description"];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        cell.tag = CellTagVerified;
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }

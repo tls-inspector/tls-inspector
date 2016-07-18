@@ -2,34 +2,35 @@
 //  AboutViewController.m
 //  Certificate Inspector
 //
-//  MIT License
-//
+//  GPLv3 License
 //  Copyright (c) 2016 Ian Spence
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software Foundation,
+//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import "AboutViewController.h"
+#import "RecentDomains.h"
+@import StoreKit;
 
-@interface AboutViewController ()
+@interface AboutViewController () <SKStoreProductViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *buildLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *recentSwitch;
+- (IBAction)recentSwitch:(UISwitch *)sender;
 @property (strong, nonatomic) UIHelper * helper;
+@property (strong, nonatomic) RecentDomains * recentDomainsManager;
 
 @end
 
@@ -37,7 +38,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.versionLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    self.recentDomainsManager = [RecentDomains new];
+    [self.recentSwitch setOn:self.recentDomainsManager.saveRecentDomains];
+    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    self.versionLabel.text = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    self.buildLabel.text = [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
     self.helper = [UIHelper sharedInstance];
 }
 
@@ -52,8 +57,20 @@
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[blurb]
                                                         applicationActivities:nil];
-        activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+            activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
+        }
         [self presentViewController:activityController animated:YES completion:nil];
+    } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
+        
+        if ([SKStoreProductViewController class] != nil) {
+            SKStoreProductViewController * productViewController = [SKStoreProductViewController new];
+            productViewController.delegate = self;
+            [productViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier: ITUNES_APP_ID} completionBlock:nil];
+            [self presentViewController:productViewController animated:YES completion:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", ITUNES_APP_ID]]];
+        }
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
         [self.helper
          presentActionSheetInViewController:self
@@ -92,6 +109,14 @@
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_GITHUB_URL]];
     }
+}
+
+- (IBAction)recentSwitch:(UISwitch *)sender {
+    self.recentDomainsManager.saveRecentDomains = sender.isOn;
+}
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

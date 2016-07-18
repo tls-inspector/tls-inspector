@@ -25,12 +25,19 @@
 //  SOFTWARE.
 
 #import "CHCertificate.h"
+#import <openssl/pem.h>
+#import <openssl/bio.h>
+
+@interface CHCertificate() <NSURLSessionDelegate>
+
+@end
 
 @implementation CHCertificate {
     void (^finishedCallback)(NSError * error,
                              NSArray<CHCertificate *>* certificates,
                              BOOL trustedChain);
     NSMutableArray<CHCertificate *>* certificates;
+    NSData * certificateData;
 }
 
 - (void) fromURL:(NSString *)URL finished:(void (^)(NSError * error,
@@ -270,20 +277,63 @@
 }
 
 - (NSArray<NSDictionary *> *) names {
-    NSString * namesString = [[NSString stringWithUTF8String:self.X509Certificate->name]
-                              stringByReplacingOccurrencesOfString:@" / " withString:@"\\"];
+    NSString * namesString = [NSString stringWithUTF8String:self.X509Certificate->name];
     NSMutableArray * names = [NSMutableArray new];
-    NSArray * nameTypes;
-    for (NSString * nameComponent in [namesString componentsSeparatedByString:@"/"]) {
-        if (![nameComponent isEqualToString:@""]) {
-            nameTypes = [nameComponent componentsSeparatedByString:@"="];
-            [names addObject:@{
-                @"type": nameTypes[0],
-                @"name": [nameTypes[1] stringByReplacingOccurrencesOfString:@"\\" withString:@" / "]
-            }];
+    NSError * error = nil;
+
+    NSRange searchedRange = NSMakeRange(0, [namesString length]);
+    NSString * pattern = @"/\\w{1,2}=";
+    
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:&error];
+    NSArray <NSTextCheckingResult *> * matches = [regex matchesInString:namesString options:0 range:searchedRange];
+    if (error) {
+        return @[];
+    }
+    NSTextCheckingResult * match;
+    NSRange valueRange;
+    NSUInteger rangeEnd;
+    for (int i = 0; i < matches.count; i++) {
+        match = matches[i];
+        
+        NSString * key = [namesString substringWithRange:[match range]];
+        // Remove leading / and trailing =
+        key = [key substringWithRange:NSMakeRange(1, key.length - 2)];
+        
+        if (i >= matches.count -1) {
+            rangeEnd = namesString.length - (match.range.location + match.range.length);
+        } else {
+            rangeEnd = matches[i + 1].range.location - (match.range.location + match.range.length);
         }
+        
+        valueRange = NSMakeRange(match.range.location + match.range.length, rangeEnd);
+        NSString * value = [namesString substringWithRange:valueRange];
+        [names addObject:@{
+            @"type": key,
+            @"name": value
+        }];
     }
     return [NSArray arrayWithArray:names];
+}
+
+- (NSData *) publicKeyAsPEM {
+    BIO * buffer = BIO_new(BIO_s_mem());
+    if (PEM_write_bio_X509(buffer, self.X509Certificate)) {
+        BUF_MEM *buffer_pointer;
+        BIO_get_mem_ptr(buffer, &buffer_pointer);
+        char * pem_bytes = malloc(buffer_pointer->length);
+        memcpy(pem_bytes, buffer_pointer->data, buffer_pointer->length-1);
+
+        // Exclude the null terminator from the NSData object
+        NSData * pem = [NSData dataWithBytes:pem_bytes length:buffer_pointer->length -1];
+
+        free(pem_bytes);
+        free(buffer);
+
+        return pem;
+    }
+
+    free(buffer);
+    return nil;
 }
 
 @end

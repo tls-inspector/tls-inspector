@@ -1,5 +1,5 @@
 //
-//  InspectorTableViewController.h
+//  RecentDomains.h
 //  Certificate Inspector
 //
 //  GPLv3 License
@@ -19,11 +19,15 @@
 //  along with this program; if not, write to the Free Software Foundation,
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
-#import <UIKit/UIKit.h>
-#import "CHCertificate.h"
+#import <Foundation/Foundation.h>
 
-@interface InspectorTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
+@interface RecentDomains : NSObject
 
-- (void) loadCertificate:(CHCertificate *)certificate;
+- (NSArray<NSString *> *) getRecentDomains;
+- (void) removeAllRecentDomains;
+- (NSArray<NSString *> *) removeDomainAtIndex:(NSUInteger)index;
+- (NSArray<NSString *> *) prependDomain:(NSString *)domain;
+- (BOOL) saveRecentDomains;
+- (void) setSaveRecentDomains:(BOOL)newValue;
 
 @end

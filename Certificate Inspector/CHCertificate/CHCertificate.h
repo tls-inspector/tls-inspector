@@ -28,9 +28,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import <openssl/x509.h>
 
-@interface CHCertificate : NSObject <NSURLSessionDelegate> {
-    NSData * certificateData;
-}
+@interface CHCertificate : NSObject
 
 typedef NS_ENUM(NSInteger, kFingerprintType) {
     kFingerprintTypeSHA256,
@@ -150,6 +148,14 @@ typedef NS_ENUM(NSInteger, kFingerprintType) {
  *  @return An array of dictionaries: [ { "type": "OU", "name": "*.foo" } ]
  */
 - (NSArray<NSDictionary *> *) names;
+
+
+/**
+ *  Returns the public key encoded using Privacy-Enchanged Electronic Mail (PEM).
+ *
+ *  @return NSData representing the bytes (includes header and footer) or nil on error
+ */
+- (NSData *) publicKeyAsPEM;
 
 @property (nonatomic) X509 * X509Certificate;
 @property (strong, nonatomic) NSString * summary;
