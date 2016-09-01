@@ -1,12 +1,7 @@
-# Uncomment this line to define a global platform for your project
-platform :ios, '7.0'
-# Uncomment this line if you're using Swift
-#use_frameworks!
+platform :ios, '9.3'
 
 target 'Cert Inspector' do
-
-pod 'OpenSSL-Universal'
-pod 'SSKeychain'
-
+    use_frameworks!
+    pod 'OpenSSL-Universal'
+    pod 'SSKeychain'
 end
-
