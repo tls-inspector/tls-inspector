@@ -18,6 +18,10 @@
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
 		3C5FA7C51CA853DB00C79D2B /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C41CA853DB00C79D2B /* CHCertificate.m */; };
+		3C7C95051D7A9E5300902E18 /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C41CA853DB00C79D2B /* CHCertificate.m */; };
+		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
+		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
+		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */; };
 		3CFAE6DB1CA8440400CD946B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DA1CA8440400CD946B /* main.m */; };
 		3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DD1CA8440400CD946B /* AppDelegate.m */; };
@@ -26,6 +30,7 @@
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		66C7AF235042CCA4BF1E3342 /* Pods_Cert_Inspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CC5ACA0D9E2E2E4E331F611 /* Pods_Cert_Inspector.framework */; };
+		B859FC5831450BCC55334D53 /* Pods_Inspect_Website.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +79,9 @@
 		3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CertificateListTableViewController.m; path = "View Controllers/CertificateListTableViewController.m"; sourceTree = "<group>"; };
 		3C5FA7C31CA853DB00C79D2B /* CHCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHCertificate.h; path = CHCertificate/CHCertificate.h; sourceTree = "<group>"; };
 		3C5FA7C41CA853DB00C79D2B /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHCertificate.m; path = CHCertificate/CHCertificate.m; sourceTree = "<group>"; };
+		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
+		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
+		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
 		3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDomains.h; sourceTree = "<group>"; };
 		3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDomains.m; sourceTree = "<group>"; };
 		3CFAE6D61CA8440400CD946B /* Cert Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cert Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,8 +95,11 @@
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputTableViewController.m; path = "View Controllers/InputTableViewController.m"; sourceTree = "<group>"; };
 		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorTableViewController.h; path = "View Controllers/InspectorTableViewController.h"; sourceTree = "<group>"; };
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorTableViewController.m; path = "View Controllers/InspectorTableViewController.m"; sourceTree = "<group>"; };
+		4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspect Website.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website.release.xcconfig"; sourceTree = "<group>"; };
 		507199DDF4AEB7E9BB1DDB97 /* Pods-Cert Inspector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cert Inspector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cert Inspector/Pods-Cert Inspector.debug.xcconfig"; sourceTree = "<group>"; };
 		7CC5ACA0D9E2E2E4E331F611 /* Pods_Cert_Inspector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cert_Inspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspect Website.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website.debug.xcconfig"; sourceTree = "<group>"; };
+		DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspect_Website.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC84F9E96D4B63DCDA28497 /* Pods-Cert Inspector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cert Inspector.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cert Inspector/Pods-Cert Inspector.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B859FC5831450BCC55334D53 /* Pods_Inspect_Website.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				7CC5ACA0D9E2E2E4E331F611 /* Pods_Cert_Inspector.framework */,
+				DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -122,6 +135,7 @@
 		3C43EF831D7A987F00AE65E9 /* Inspect Website */ = {
 			isa = PBXGroup;
 			children = (
+				3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */,
 				3C43EF841D7A987F00AE65E9 /* ActionViewController.h */,
 				3C43EF851D7A987F00AE65E9 /* ActionViewController.m */,
 				3C43EF871D7A987F00AE65E9 /* MainInterface.storyboard */,
@@ -179,6 +193,8 @@
 				3C5FA7C41CA853DB00C79D2B /* CHCertificate.m */,
 				3CFAE6DA1CA8440400CD946B /* main.m */,
 				3C39D7551CAC98EB007E07BC /* Localizable.strings */,
+				3C7C95071D7AA03500902E18 /* ActionTipTarget.h */,
+				3C7C95081D7AA03500902E18 /* ActionTipTarget.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -205,6 +221,8 @@
 			children = (
 				507199DDF4AEB7E9BB1DDB97 /* Pods-Cert Inspector.debug.xcconfig */,
 				FFC84F9E96D4B63DCDA28497 /* Pods-Cert Inspector.release.xcconfig */,
+				AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */,
+				4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -216,9 +234,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C43EF901D7A987F00AE65E9 /* Build configuration list for PBXNativeTarget "Inspect Website" */;
 			buildPhases = (
+				695C3D8DDD53AC9D112592B9 /* [CP] Check Pods Manifest.lock */,
 				3C43EF7E1D7A987F00AE65E9 /* Sources */,
 				3C43EF7F1D7A987F00AE65E9 /* Frameworks */,
 				3C43EF801D7A987F00AE65E9 /* Resources */,
+				4A9EC185537643A1CE5E6B7D /* [CP] Embed Pods Frameworks */,
+				388E73A1B996C27980A60B12 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -328,6 +349,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cert Inspector/Pods-Cert Inspector-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		388E73A1B996C27980A60B12 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A9EC185537643A1CE5E6B7D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4F872D8CF143697ECE0A81EB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,6 +409,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cert Inspector/Pods-Cert Inspector-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		695C3D8DDD53AC9D112592B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -365,6 +431,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */,
+				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
+				3C7C95051D7A9E5300902E18 /* CHCertificate.m in Sources */,
 				3C43EF861D7A987F00AE65E9 /* ActionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +444,7 @@
 			files = (
 				3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */,
 				3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */,
+				3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */,
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3C5FA7C51CA853DB00C79D2B /* CHCertificate.m in Sources */,
 				3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */,
@@ -428,11 +498,14 @@
 /* Begin XCBuildConfiguration section */
 		3C43EF8E1D7A987F00AE65E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -445,11 +518,14 @@
 		};
 		3C43EF8F1D7A987F00AE65E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -591,6 +667,7 @@
 				3C43EF8F1D7A987F00AE65E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3CFAE6D11CA8440400CD946B /* Build configuration list for PBXProject "Cert Inspector" */ = {
 			isa = XCConfigurationList;

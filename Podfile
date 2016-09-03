@@ -5,3 +5,8 @@ target 'Cert Inspector' do
     pod 'OpenSSL-Universal'
     pod 'SSKeychain'
 end
+
+target 'Inspect Website' do
+    use_frameworks!
+    pod 'OpenSSL-Universal'
+end
