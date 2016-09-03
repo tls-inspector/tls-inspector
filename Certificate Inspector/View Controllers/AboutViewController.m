@@ -72,9 +72,10 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", ITUNES_APP_ID]]];
         }
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
+        
         [self.helper
          presentActionSheetInViewController:self
-         attachToView:[cell viewWithTag:1]
+         attachToTarget:[ActionTipTarget targetWithView:[cell viewWithTag:1]]
          title:lang(@"What kind of feedback would you like to submit?")
          subtitle:lang(@"All feedback is appreciated!")
          cancelButtonTitle:lang(@"Cancel")

@@ -20,8 +20,10 @@
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "ActionTipTarget.h"
 
-@interface UIHelper : NSObject <UIActionSheetDelegate, UIAlertViewDelegate>
+@interface UIHelper : NSObject
 
 /**
  *  Return a shared instance of the UIHelper class
@@ -79,7 +81,7 @@
  *  Present an action sheet in the current view controller.
  *
  *  @param viewController    The view controller to present the alert on
- *  @param view              Attach the action sheet to this UIView (iPad only)
+ *  @param target            Attach the action sheet to this target UIView or bar button item (iPad only)
  *  @param title             The sheet title
  *  @param subtitle          The sheet subtitle (iOS 8+ only)
  *  @param cancelButtonTitle The cancel button title
@@ -87,11 +89,19 @@
  *  @param dismissed         Called when the sheet was dismissed
  */
 - (void) presentActionSheetInViewController:(UIViewController *)viewController
-                               attachToView:(UIView *)view
+                             attachToTarget:(ActionTipTarget *)target
                                       title:(NSString *)title
                                    subtitle:(NSString *)subtitle
                           cancelButtonTitle:(NSString *)cancelButtonTitle
                                       items:(NSArray<NSString *> *)items
                                   dismissed:(void (^)(NSInteger itemIndex))dismissed;
+
+/**
+ *  Apply better styles to the given button
+ *
+ *  @param button The button to update
+ *  @param color  The color of the outline and the text
+ */
+- (void) applyStylesToButton:(UIButton *)button withColor:(UIColor *)color;
 
 @end

@@ -58,7 +58,7 @@
 
 - (void)actionButton:(id)sender {
     [uihelper presentActionSheetInViewController:self
-                                    attachToView:self.view
+                                  attachToTarget:[ActionTipTarget targetWithBarButtonItem:self.navigationItem.rightBarButtonItem]
                                            title:self.title
                                         subtitle:langv(@"%lu characters", self.value.length)
                                cancelButtonTitle:lang(@"Cancel")
@@ -69,37 +69,26 @@
                 [[UIPasteboard generalPasteboard] setString:self.value];
                 break;
             } case 1: { // Verify
-                Class AlertControllerClass = NSClassFromString(@"UIAlertController");
-                if(AlertControllerClass){
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:lang(@"Verify Value")
-                                                                                             message:lang(@"Enter the value to verify")
-                                                                                      preferredStyle:UIAlertControllerStyleAlert];
-                    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                        textField.placeholder = lang(@"Value");
-                    }];
-
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:lang(@"Cancel")
-                                                                           style:UIAlertActionStyleCancel handler:nil];
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:lang(@"Verify")
-                                                                       style:UIAlertActionStyleDefault
-                                                                     handler:^(UIAlertAction *action) {
-                        UITextField * inputField = alertController.textFields.firstObject;
-                        [self verifyValue:inputField.text];
-                    }];
-
-                    [alertController addAction:cancelAction];
-                    [alertController addAction:okAction];
-
-                    [self presentViewController:alertController animated:YES completion:nil];
-                } else {
-                    UIAlertView * nameAlertView = [[UIAlertView alloc] initWithTitle:lang(@"Verify Value")
-                                                                             message:lang(@"Enter the value to verify")
-                                                                            delegate:self
-                                                                   cancelButtonTitle:lang(@"Cancel")
-                                                                   otherButtonTitles:lang(@"Verify"), nil];
-                    nameAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-                    [nameAlertView show];
-                }
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:lang(@"Verify Value")
+                                                                                         message:lang(@"Enter the value to verify")
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                    textField.placeholder = lang(@"Value");
+                }];
+                
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:lang(@"Cancel")
+                                                                       style:UIAlertActionStyleCancel handler:nil];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:lang(@"Verify")
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction *action) {
+                                                                     UITextField * inputField = alertController.textFields.firstObject;
+                                                                     [self verifyValue:inputField.text];
+                                                                 }];
+                
+                [alertController addAction:cancelAction];
+                [alertController addAction:okAction];
+                
+                [self presentViewController:alertController animated:YES completion:nil];
                 break;
             } case 2: { // Share
                 UIActivityViewController *activityController = [[UIActivityViewController alloc]
@@ -113,14 +102,6 @@
             }
         }
     }];
-}
-
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex == 1){
-        UITextField * inputField = [alertView textFieldAtIndex:0];
-        [self verifyValue:inputField.text];
-    }
 }
 
 - (void) verifyValue:(NSString *)value {
