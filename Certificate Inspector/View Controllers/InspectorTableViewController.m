@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger, CellTags) {
 
 #ifdef MAIN_APP
     NSDictionary * trustResults = [[TrustedFingerprints sharedInstance]
-                                   dataForFingerprint:[[self.certificate SHA1Fingerprint]
+                                   dataForFingerprint:[[[self.certificate SHA1Fingerprint] uppercaseString]
                                                        stringByReplacingOccurrencesOfString:@" " withString:@""]];
     if (trustResults) {
         if (![[trustResults objectForKey:@"trust"] boolValue]) {
