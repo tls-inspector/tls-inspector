@@ -30,7 +30,7 @@
 
 @interface InspectorTableViewController()
 
-@property (strong, nonatomic) CHCertificate  * certificate;
+@property (strong, nonatomic) CHCertificate   * certificate;
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
 @property (strong, nonatomic) NSDictionary   * certVerification;
@@ -39,7 +39,8 @@
 @end
 
 @implementation InspectorTableViewController {
-    NSArray<NSDictionary *> * names;
+    NSDictionary<NSString *, NSString *> * names;
+    NSArray<NSString *> * nameKeys;
     NSString * MD5Fingerprint;
     NSString * SHA1Fingerprint;
     NSString * SHA256Fingerprint;
@@ -105,6 +106,7 @@ typedef NS_ENUM(NSInteger, CellTags) {
                                               target:self action:@selector(actionButton:)];
     
     names = [self.certificate names];
+    nameKeys = [names allKeys];
 }
 
 - (void)actionButton:(UIBarButtonItem *)sender {
@@ -218,9 +220,15 @@ typedef NS_ENUM(NSInteger, CellTags) {
             break;
         } case Names: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-            NSDictionary * data = [names objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = data[@"name"];
-            cell.textLabel.text = lang(data[@"type"]);
+            NSString * key = [nameKeys objectAtIndex:indexPath.row];
+            NSString * value = [names objectForKey:key];
+            if ([key isEqualToString:@"C"]) {
+                NSString * langKey = nstrcat(@"Country::", value);
+                value = lang(langKey);
+            }
+
+            cell.detailTextLabel.text = value;
+            cell.textLabel.text = lang(key);
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;

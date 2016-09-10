@@ -20,15 +20,9 @@
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import <UIKit/UIKit.h>
-#import "CHCertificate.h"
 
 @interface CertificateListTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSString * host;
-@property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
 @end

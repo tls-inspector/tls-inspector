@@ -22,7 +22,7 @@
 #import <UIKit/UIKit.h>
 #import "CHCertificate.h"
 
-@interface InspectorTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
+@interface InspectorTableViewController : UITableViewController <NSURLConnectionDelegate>
 
 - (void) loadCertificate:(CHCertificate *)certificate;
 
