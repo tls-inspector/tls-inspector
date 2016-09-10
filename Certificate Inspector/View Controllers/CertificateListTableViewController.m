@@ -83,6 +83,7 @@
                 }
                 self.headerViewLabel.textColor = [UIColor whiteColor];
                 [self.tableView reloadData];
+                self.headerButton.hidden = NO;
             });
         }
     }];
@@ -95,7 +96,7 @@
 #endif
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return lang(@"Certificate Chain");
+    return self.certificates.count > 0 ? lang(@"Certificate Chain") : @"";
 }
 
 - (void)didReceiveMemoryWarning {
