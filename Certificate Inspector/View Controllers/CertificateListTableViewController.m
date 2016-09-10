@@ -20,7 +20,6 @@
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import "CertificateListTableViewController.h"
-#import "CHCertificate.h"
 #import "InspectorTableViewController.h"
 #import "UIHelper.h"
 
@@ -29,8 +28,6 @@
     CHCertificate * selectedCertificate;
     BOOL isTrusted;
 }
-
-@property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
@@ -50,6 +47,15 @@
     if (![self.host hasPrefix:@"http"]) {
         self.host = [NSString stringWithFormat:@"https://%@", self.host];
     }
+
+#ifdef EXTENSION
+    [self.navigationItem
+     setLeftBarButtonItem:[[UIBarButtonItem alloc]
+                           initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                           target:self
+                           action:@selector(dismissView:)]];
+#endif
+    
     [[CHCertificate alloc] fromURL:self.host finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
         if (error) {
             [uihelper
@@ -58,7 +64,11 @@
              body:error.localizedDescription
              dismissButtonTitle:lang(@"Dismiss")
              dismissed:^(NSInteger buttonIndex) {
+#ifdef MAIN_APP
                  [self.navigationController popViewControllerAnimated:YES];
+#else
+                 [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+#endif
              }];
         } else {
             self.certificates = certificates;
@@ -77,6 +87,12 @@
         }
     }];
 }
+
+#ifdef EXTENSION
+- (void) dismissView:(id)sender {
+    [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+}
+#endif
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -22,8 +22,11 @@
 #import "InspectorTableViewController.h"
 #import "CHCertificate.h"
 #import "ValueViewController.h"
-#import "TrustedFingerprints.h"
 #import "UIHelper.h"
+
+#ifdef MAIN_APP
+#import "TrustedFingerprints.h"
+#endif
 
 @interface InspectorTableViewController()
 
@@ -78,7 +81,8 @@ typedef NS_ENUM(NSInteger, CellTags) {
     if ([[self.certificate algorithm] hasPrefix:@"sha1"]) {
         [self.certErrors addObject:@{@"error": lang(@"Certificate uses insecure SHA1 algorithm.")}];
     }
-    
+
+#ifdef MAIN_APP
     NSDictionary * trustResults = [[TrustedFingerprints sharedInstance]
                                    dataForFingerprint:[[self.certificate SHA1Fingerprint]
                                                        stringByReplacingOccurrencesOfString:@" " withString:@""]];
@@ -89,6 +93,7 @@ typedef NS_ENUM(NSInteger, CellTags) {
             self.certVerification = trustResults;
         }
     }
+#endif
 
     MD5Fingerprint = [self.certificate MD5Fingerprint];
     SHA1Fingerprint = [self.certificate SHA1Fingerprint];
@@ -312,6 +317,7 @@ typedef NS_ENUM(NSInteger, CellTags) {
 }
 
 - (void) showVerifiedAlert {
+#ifdef MAIN_APP
     [self.helper
      presentConfirmInViewController:self
      title:lang(@"Trusted & Verified Certificate")
@@ -325,6 +331,14 @@ typedef NS_ENUM(NSInteger, CellTags) {
               [NSURL URLWithString:@"https://www.grc.com/fingerprints.htm"]];
          }
      }];
+#else
+    [self.helper
+     presentAlertInViewController:self
+     title:lang(@"Trusted & Verified Certificate")
+     body:lang(@"This certificate has been security verified as legitimate.")
+     dismissButtonTitle:lang(@"Dimiss")
+     dismissed:nil];
+#endif
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
