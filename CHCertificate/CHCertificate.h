@@ -24,46 +24,56 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#import <UIKit/UIKit.h>
+
+FOUNDATION_EXPORT double CHXertificateVersionNumber;
+FOUNDATION_EXPORT const unsigned char CHXertificateVersionString[];
+
 #import <Foundation/Foundation.h>
-#import <CommonCrypto/CommonCrypto.h>
-#import <openssl/x509.h>
 
 @interface CHCertificate : NSObject
 
-typedef NS_ENUM(NSInteger, kFingerprintType) {
-    kFingerprintTypeSHA256,
-    // Dangerous! Avoid using these.
-    kFingerprintTypeSHA1,
-    kFingerprintTypeMD5
+/**
+ *  Query the specified URL for its certificate chain.
+ *
+ *  @param URL      The URL to query. Must use the https scheme.
+ *                  The port is optional and will default to 443.
+ *  @param finished Called when finished with either an error or certificates.
+ */
++ (void) certificateChainFromURL:(NSURL *)URL finished:(void (^)(NSError * error,
+                                                                 NSArray<CHCertificate *> * certificates,
+                                                                 BOOL trustedChain))finished;
+
+/**
+ *  Create a CHCertificate object from a pre-existing X509 object.
+ *
+ *  @param cert A libssl compliant X509 cert.
+ *
+ *  @return A CHCertificate instance
+ */
++ (CHCertificate *) fromX509:(void *)cert;
+
+typedef NS_ENUM(NSInteger, CHCertificateFingerprintType) {
+    // SHA 512 fingerprint type
+    CHCertificateFingerprintTypeSHA512,
+    // SHA 256 fingerprint type
+    CHCertificateFingerprintTypeSHA256,
+    // MD5 fingerprint type
+    CHCertificateFingerprintTypeMD5,
+    // SHA1 fingerprint type
+    CHCertificateFingerprintTypeSHA1
 };
 
-/**
- *  Creates a new CHCertificate object with the certificate reference
- *
- *  @param cert A SecCertificateRef reference to the cert object
- *
- *  @return an instatiated CHCertificate object
- */
-+ (CHCertificate *) withCertificateRef:(SecCertificateRef)cert;
+typedef NS_ENUM(NSInteger, CHCertificateError) {
+    // Errors relating to connecting to the remote server.
+    CHCertificateErrorConnection,
+    // Crypto error usually resulting from being run on an unsupported platform.
+    CHCertificateErrorCrypto,
+    // Invalid parameter information such as hostnames.
+    CHCertificateErrorInvalidParameter
+};
 
-/**
- *  Retrieve the certificate chain for the specified URL
- *
- *  @param URL      The URL to retrieve
- *  @param finished Called when the network request has completed with either an error or an array
- *                  of certificates
- */
-- (void) fromURL:(NSString *)URL finished:(void (^)(NSError * error,
-                                                    NSArray<CHCertificate *>* certificates,
-                                                    BOOL trustedChain))finished;
-/**
- *  Determine if the certificate chain is trusted by the systems certificate store
- *
- *  @param trust The SecTrustRef object to evalulate
- *
- *  @return Trusted?
- */
-+ (BOOL) trustedChain:(SecTrustRef)trust;
+@property (strong, nonatomic, readonly) NSString * summary;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
@@ -84,7 +94,7 @@ typedef NS_ENUM(NSInteger, kFingerprintType) {
 /**
  *  Returns the SHA1 fingerprint for the certificate
  *
- *  Warning! SH1 is no longer considered cryptographically secure - avoide use!
+ *  Warning! SH1 is no longer considered cryptographically secure - avoid use!
  *
  *  @return A NSString value of the fingerprint
  */
@@ -94,11 +104,11 @@ typedef NS_ENUM(NSInteger, kFingerprintType) {
  *  Verify the fingerprint of the certificate. Useful for certificate pinning.
  *
  *  @param fingerprint The fingerprint
- *  @param type        The type of hashing algrotim used to generate the fingerprint
+ *  @param type        The type of hashing method used to generate the fingerprint
  *
  *  @return YES if verified
  */
-- (BOOL) verifyFingerprint:(NSString *)fingerprint type:(kFingerprintType)type;
+- (BOOL) verifyFingerprint:(NSString *)fingerprint type:(CHCertificateFingerprintType)type;
 
 /**
  *  Returns the serial number for the certificate
@@ -143,24 +153,18 @@ typedef NS_ENUM(NSInteger, kFingerprintType) {
 - (NSString *) issuer;
 
 /**
- *  Retruns an array of dictionaries with the subjet names, and name types (OU or CN)
+ *  Retruns an array of dictionaries with the subject names, and name types (OU or CN)
  *
  *  @return An array of dictionaries: [ { "type": "OU", "name": "*.foo" } ]
  */
-- (NSArray<NSDictionary *> *) names;
+- (NSDictionary<NSString *, NSString *> *) names;
 
 
 /**
- *  Returns the public key encoded using Privacy-Enchanged Electronic Mail (PEM).
+ *  Returns the public key encoded using Privacy-Enhanced Electronic Mail (PEM).
  *
  *  @return NSData representing the bytes (includes header and footer) or nil on error
  */
 - (NSData *) publicKeyAsPEM;
-
-@property (nonatomic) X509 * X509Certificate;
-@property (strong, nonatomic) NSString * summary;
-@property (strong, nonatomic) NSString * host;
-@property (nonatomic) BOOL trusted;
-@property (nonatomic) SecCertificateRef cert;
 
 @end
