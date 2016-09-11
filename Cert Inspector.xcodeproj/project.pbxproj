@@ -342,6 +342,7 @@
 				3C43EF801D7A987F00AE65E9 /* Resources */,
 				4A9EC185537643A1CE5E6B7D /* [CP] Embed Pods Frameworks */,
 				388E73A1B996C27980A60B12 /* [CP] Copy Pods Resources */,
+				3CA0F0201D84D5F700AA9307 /* Remove Frameworks */,
 			);
 			buildRules = (
 			);
@@ -484,6 +485,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		3CA0F0201D84D5F700AA9307 /* Remove Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 		};
 		4A9EC185537643A1CE5E6B7D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -661,7 +676,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
@@ -689,6 +704,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
