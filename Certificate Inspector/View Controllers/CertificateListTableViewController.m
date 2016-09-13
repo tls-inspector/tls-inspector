@@ -57,38 +57,40 @@
                            target:self
                            action:@selector(dismissView:)]];
 #endif
-    [NSThread detachNewThreadWithBlock:^{
-        [CHCertificate certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
-            if (error) {
-                [uihelper
-                 presentAlertInViewController:self
-                 title:lang(@"Could not get certificates")
-                 body:error.localizedDescription
-                 dismissButtonTitle:lang(@"Dismiss")
-                 dismissed:^(NSInteger buttonIndex) {
+    [NSThread detachNewThreadSelector:@selector(forkTheBlockChain) toTarget:self withObject:nil];
+}
+
+- (void) forkTheBlockChain {
+    [CHCertificate certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
+        if (error) {
+            [uihelper
+             presentAlertInViewController:self
+             title:lang(@"Could not get certificates")
+             body:error.localizedDescription
+             dismissButtonTitle:lang(@"Dismiss")
+             dismissed:^(NSInteger buttonIndex) {
 #ifdef MAIN_APP
-                     [self.navigationController popViewControllerAnimated:YES];
+                 [self.navigationController popViewControllerAnimated:YES];
 #else
-                     [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+                 [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
 #endif
-                 }];
-            } else {
-                self.certificates = certificates;
-                isTrusted = trustedChain;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (trustedChain) {
-                        self.headerViewLabel.text = lang(@"Trusted Chain");
-                        self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
-                    } else {
-                        self.headerViewLabel.text = lang(@"Untrusted Chain");
-                        self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
-                    }
-                    self.headerViewLabel.textColor = [UIColor whiteColor];
-                    [self.tableView reloadData];
-                    self.headerButton.hidden = NO;
-                });
-            }
-        }];
+             }];
+        } else {
+            self.certificates = certificates;
+            isTrusted = trustedChain;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (trustedChain) {
+                    self.headerViewLabel.text = lang(@"Trusted Chain");
+                    self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+                } else {
+                    self.headerViewLabel.text = lang(@"Untrusted Chain");
+                    self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+                }
+                self.headerViewLabel.textColor = [UIColor whiteColor];
+                [self.tableView reloadData];
+                self.headerButton.hidden = NO;
+            });
+        }
     }];
 }
 
