@@ -50,7 +50,7 @@ static int numberOfCerts = 0;
                                                                  NSArray<CHCertificate *> * certificates,
                                                                  BOOL trustedChain))finished {
 #if DEBUG
-#define opensslError() const char * file; int line; ERR_peek_last_error_line(&file, &line); NSLog(@"OpenSSL error in file: %s:%i", file, line)
+#define opensslError() const char * file; int line; long code = ERR_peek_last_error_line(&file, &line); NSLog(@"OpenSSL error %li in file: %s:%i", code, file, line)
 #else
 #define opensslError() ;
 #endif
@@ -94,7 +94,6 @@ static int numberOfCerts = 0;
     }
     
     const char * host = [[NSString stringWithFormat:@"%@:%i", URL.host, URL.port.intValue ?: 443] UTF8String];
-    NSLog(@"%s", host);
     if (BIO_set_conn_hostname(web, host) < 0) {
         opensslError();
         returnError = genErr(CHCertificateErrorInvalidParameter, @"Invalid hostname");

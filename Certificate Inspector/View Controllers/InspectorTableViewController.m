@@ -270,6 +270,7 @@ typedef NS_ENUM(NSInteger, CellTags) {
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.tag = CellTagVerified;
             }
+            break;
         } case CertificateVerification: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
             cell.textLabel.text = self.certVerification[@"description"];
