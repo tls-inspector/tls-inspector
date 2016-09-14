@@ -35,6 +35,10 @@
 @end
 
 @implementation AboutViewController
+    
+static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/Certificate-Inspector/";
+static NSString * ITUNES_APP_ID = @"1100539810";
+static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certificate-inspector-beta";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,6 +113,8 @@
          }];
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_GITHUB_URL]];
+    } else if ([cell.reuseIdentifier isEqualToString:@"beta"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_TESTFLIGHT_APPLICATION]];
     }
 }
 

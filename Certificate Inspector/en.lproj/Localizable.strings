@@ -308,26 +308,59 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "0da-WA-eay"; */
 "0da-WA-eay.text" = "Detail";
 
+/* Class = "UITableViewSection"; headerTitle = "Share & Feedback"; ObjectID = "6bK-79-a2M"; */
+"6bK-79-a2M.headerTitle" = "Share & Feedback";
+
+/* Class = "UITableViewSection"; headerTitle = "App Information"; ObjectID = "737-56-3zp"; */
+"737-56-3zp.headerTitle" = "App Information";
+
 /* Class = "UINavigationItem"; title = "Certificate Inspector"; ObjectID = "7Ah-zL-Gjb"; */
 "7Ah-zL-Gjb.title" = "Certificate Inspector";
+
+/* Class = "UILabel"; text = "#.#"; ObjectID = "Ewr-l1-6Iy"; */
+"Ewr-l1-6Iy.text" = "#.#";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "P3x-dj-Ama"; */
 "P3x-dj-Ama.text" = "Detail";
 
+/* Class = "UILabel"; text = "Remember Recent Lookups"; ObjectID = "PPe-sp-eDY"; */
+"PPe-sp-eDY.text" = "Remember Recent Lookups";
+
+/* Class = "UILabel"; text = "Test Beta Version"; ObjectID = "PrQ-rK-CEa"; */
+"PrQ-rK-CEa.text" = "Test Beta Version";
+
 /* Class = "UILabel"; text = "Title"; ObjectID = "Q2T-Pv-8ls"; */
 "Q2T-Pv-8ls.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Q85-Qc-aS9"; */
+"Q85-Qc-aS9.text" = "Title";
+
+/* Class = "UILabel"; text = "Tell Friends About Certificate Inspector"; ObjectID = "QCM-IJ-RvJ"; */
+"QCM-IJ-RvJ.text" = "Tell Friends About Certificate Inspector";
 
 /* Class = "UITableViewController"; title = "Certificates"; ObjectID = "S2I-zI-YU5"; */
 "S2I-zI-YU5.title" = "Certificates";
 
+/* Class = "UITableViewController"; title = "About Certificate Inspector"; ObjectID = "UEQ-qB-mO8"; */
+"UEQ-qB-mO8.title" = "About Certificate Inspector";
+
 /* Class = "UITableViewController"; title = "Certificate Inspector"; ObjectID = "UeK-6B-NSA"; */
 "UeK-6B-NSA.title" = "Certificate Inspector";
 
-/* Class = "UITableViewSection"; footerTitle = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well."; ObjectID = "bgU-th-gof"; */
-"bgU-th-gof.footerTitle" = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.";
+/* Class = "UITableViewSection"; headerTitle = "Options"; ObjectID = "WCN-W3-n9B"; */
+"WCN-W3-n9B.headerTitle" = "Options";
 
-/* Class = "UITableViewSection"; headerTitle = "FQDN or IP Address"; ObjectID = "bgU-th-gof"; */
-"bgU-th-gof.headerTitle" = "FQDN or IP Address";
+/* Class = "UILabel"; text = "Build"; ObjectID = "aXb-lO-Ryw"; */
+"aXb-lO-Ryw.text" = "Build";
+
+/* Class = "UILabel"; text = "#.#"; ObjectID = "bnd-Ok-o6R"; */
+"bnd-Ok-o6R.text" = "#.#";
+
+/* Class = "UILabel"; text = "Contribute"; ObjectID = "cE6-N8-FNP"; */
+"cE6-N8-FNP.text" = "Contribute";
+
+/* Class = "UILabel"; text = "Rate Certificate Inspector in the App Store"; ObjectID = "dGp-zk-8SI"; */
+"dGp-zk-8SI.text" = "Rate Certificate Inspector in the App Store";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "e3s-bJ-unQ"; */
 "e3s-bJ-unQ.text" = "Label";
@@ -341,8 +374,26 @@
 /* Class = "UITextField"; placeholder = "www.nsa.gov"; ObjectID = "grL-tY-LK1"; */
 "grL-tY-LK1.placeholder" = "www.nsa.gov";
 
+/* Class = "UILabel"; text = "Version"; ObjectID = "jvL-xr-ouG"; */
+"jvL-xr-ouG.text" = "Version";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "mTC-aF-yys"; */
+"mTC-aF-yys.text" = "Title";
+
+/* Class = "UILabel"; text = "Submit Feedback"; ObjectID = "ngB-Jk-o4T"; */
+"ngB-Jk-o4T.text" = "Submit Feedback";
+
 /* Class = "UITextView"; text = "Value"; ObjectID = "pgs-P6-Qwl"; */
 "pgs-P6-Qwl.text" = "Value";
+
+/* Class = "UIBarButtonItem"; title = "About"; ObjectID = "sIs-mI-6IT"; */
+"sIs-mI-6IT.title" = "About";
+
+/* Class = "UITableViewSection"; footerTitle = "Certificate Inspector is Free and Libre software licensed under GNU GPLv3.  Certificate Inspector is copyright © 2016 Ian Spence."; ObjectID = "uwH-jV-ihb"; */
+"uwH-jV-ihb.footerTitle" = "Certificate Inspector is Free and Libre software licensed under GNU GPLv3.  Certificate Inspector is copyright © 2016 Ian Spence.";
+
+/* Class = "UITableViewSection"; headerTitle = "Get Involved"; ObjectID = "uwH-jV-ihb"; */
+"uwH-jV-ihb.headerTitle" = "Get Involved";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "wDB-Yx-eAZ"; */
 "wDB-Yx-eAZ.text" = "Title";
