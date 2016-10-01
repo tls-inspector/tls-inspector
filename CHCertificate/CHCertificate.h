@@ -153,12 +153,18 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
 - (NSString *) issuer;
 
 /**
- *  Retruns an array of dictionaries with the subject names, and name types (OU or CN)
+ *  Retruns a dictionary with the subject names, and name types (OU or CN)
  *
- *  @return An array of dictionaries: [ { "type": "OU", "name": "*.foo" } ]
+ *  @return A dictionary of subject fields
  */
 - (NSDictionary<NSString *, NSString *> *) names;
-
+    
+/**
+ *  Returns an array of subject names applicable to the cert
+ *
+ *  @return An array of strings
+ */
+- (NSArray<NSString *> *) subjectAlternativeNames;
 
 /**
  *  Returns the public key encoded using Privacy-Enhanced Electronic Mail (PEM).

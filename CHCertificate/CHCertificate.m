@@ -28,6 +28,7 @@
 
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
+#include <openssl/x509v3.h>
 #include <openssl/err.h>
 #include <openssl/bio.h>
 #include <CommonCrypto/CommonCrypto.h>
@@ -36,6 +37,7 @@
 
 @property (nonatomic) X509 * certificate;
 @property (strong, nonatomic, readwrite) NSString * summary;
+@property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
 
 @end
 
@@ -424,6 +426,34 @@ int verify_callback(int preverify, X509_STORE_CTX* x509_ctx)
     
     free(buffer);
     return nil;
+}
+    
+- (NSArray<NSString *> *) subjectAlternativeNames {
+    STACK_OF(GENERAL_NAME) * sans = X509_get_ext_d2i(self.certificate, NID_subject_alt_name, NULL, NULL);
+    int numberOfSans = sk_GENERAL_NAME_num(sans);
+    if (numberOfSans < 1) {
+        return @[];
+    }
+    
+    if (self.subjectAltNames) {
+        return self.subjectAltNames;
+    }
+    
+    NSMutableArray<NSString *> * names = [NSMutableArray new];
+    const GENERAL_NAME * name;
+    char * domain;
+    for (int i = 0; i < numberOfSans; i++) {
+        name = sk_GENERAL_NAME_value(sans, i);
+        
+        if (name->type == GEN_DNS) {
+            domain = (char *)ASN1_STRING_data(name->d.dNSName);
+            [names addObject:[NSString stringWithUTF8String:domain]];
+        }
+    }
+    
+    self.subjectAltNames = names;
+    
+    return names;
 }
 
 @end
