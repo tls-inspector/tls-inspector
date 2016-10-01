@@ -23,6 +23,7 @@
 #import "CHCertificate.h"
 #import "ValueViewController.h"
 #import "UIHelper.h"
+#import "InspectorListTableViewController.h"
 
 #ifdef MAIN_APP
 #import "TrustedFingerprints.h"
@@ -30,7 +31,7 @@
 
 @interface InspectorTableViewController()
 
-@property (strong, nonatomic) CHCertificate   * certificate;
+@property (strong, nonatomic) CHCertificate  * certificate;
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
 @property (strong, nonatomic) NSDictionary   * certVerification;
@@ -51,16 +52,21 @@
 }
 
 typedef NS_ENUM(NSInteger, InspectorSection) {
+    SectionStart,
     CertificateInformation,
     Names,
     Fingerprints,
-    CertificateErrorsOrVerification,
-    CertificateVerification
+    SubjectAltNames,
+    CertificateErrors,
+    CertificateVerification,
+    SectionEnd
 };
 
 typedef NS_ENUM(NSInteger, CellTags) {
     CellTagValue = 1,
-    CellTagVerified = 2
+    CellTagVerified = 2,
+    CellTagSANS = 3
+};
 };
 
 - (void) viewDidLoad {
@@ -100,6 +106,8 @@ typedef NS_ENUM(NSInteger, CellTags) {
     SHA1Fingerprint = [self.certificate SHA1Fingerprint];
     SHA256Fingerprint = [self.certificate SHA256Fingerprint];
     serialNumber = [self.certificate serialNumber];
+    
+    [self.certificate subjectAlternativeNames];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
@@ -135,8 +143,7 @@ typedef NS_ENUM(NSInteger, CellTags) {
 
 # pragma mark -
 # pragma mark Table View
-
-
+    
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -153,55 +160,41 @@ typedef NS_ENUM(NSInteger, CellTags) {
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    int base = 3;
-    if (self.certErrors.count > 0) {
-        base += 1;
-    }
-    if (self.certVerification) {
-        base += 1;
-    }
-    return base;
+    return SectionEnd - SectionStart;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
+        case SubjectAltNames:
+            return self.certificate.subjectAlternativeNames.count > 0 ? 1 : 0;
         case CertificateInformation:
             return self.cells.count;
         case Names:
             return names.count;
         case Fingerprints:
             return 4;
-        case CertificateErrorsOrVerification: {
-            if (self.certErrors.count > 0) {
-                return self.certErrors.count;
-            } else if (self.certVerification) {
-                return 1;
-            }
-        }
-        case CertificateVerification: {
-            return 1;
-        }
+        case CertificateErrors:
+            return self.certErrors.count;
+        case CertificateVerification:
+            return self.certVerification ? 1 : 0;
     }
     return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
+        case SubjectAltNames:
+            return self.certificate.subjectAlternativeNames.count > 0 ? lang(@"Subject Alternative Names") : nil;
         case CertificateInformation:
             return lang(@"Certificate Information");
         case Names:
             return lang(@"Subject Names");
         case Fingerprints:
             return lang(@"Fingerprints");
-        case CertificateErrorsOrVerification: {
-            if (self.certErrors.count > 0) {
-                return lang(@"Certificate Errors");
-            } else if (self.certVerification) {
-                return lang(@"Verified Certificate");
-            }
-        }
+        case CertificateErrors:
+            return self.certErrors.count > 0 ? lang(@"Certificate Errors") : nil;
         case CertificateVerification:
-            return lang(@"Verified Certificate");
+            return self.certVerification ? lang(@"Verified Certificate") : nil;
     }
     return @"";
 }
@@ -256,20 +249,19 @@ typedef NS_ENUM(NSInteger, CellTags) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagValue;
             break;
-        } case CertificateErrorsOrVerification: {
-            if (self.certErrors.count > 0) {
-                cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-                NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
-                cell.textLabel.text = data[@"error"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            } else {
-                cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
-                cell.textLabel.text = self.certVerification[@"description"];
-                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.tag = CellTagVerified;
-            }
+        } case SubjectAltNames: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            cell.textLabel.text = lang(@"View all alternate names");
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.tag = CellTagSANS;
+            break;
+        } case CertificateErrors: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
+            cell.textLabel.text = data[@"error"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         } case CertificateVerification: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
@@ -314,6 +306,9 @@ typedef NS_ENUM(NSInteger, CellTags) {
         } case CellTagVerified: {
             [self showVerifiedAlert];
             break;
+        } case CellTagSANS: {
+            [self performSegueWithIdentifier:@"ShowList" sender:nil];
+            break;
         }
     }
 }
@@ -353,6 +348,8 @@ typedef NS_ENUM(NSInteger, CellTags) {
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowValue"]) {
         [segue.destinationViewController loadValue:valueToInspect title:titleForValue];
+    } else if ([segue.identifier isEqualToString:@"ShowList"]) {
+        [(InspectorListTableViewController *)segue.destinationViewController setList:self.certificate.subjectAlternativeNames title:lang(@"Subject Alt. Names")];
     }
 }
 

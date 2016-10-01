@@ -335,8 +335,8 @@
 /* Class = "UILabel"; text = "Title"; ObjectID = "Q85-Qc-aS9"; */
 "Q85-Qc-aS9.text" = "Title";
 
-/* Class = "UILabel"; text = "Tell Friends About Certificate Inspector"; ObjectID = "QCM-IJ-RvJ"; */
-"QCM-IJ-RvJ.text" = "Tell Friends About Certificate Inspector";
+/* Class = "UILabel"; text = "Tell Friends About Cert Inspector"; ObjectID = "QCM-IJ-RvJ"; */
+"QCM-IJ-RvJ.text" = "Tell Friends About Cert Inspector";
 
 /* Class = "UITableViewController"; title = "Certificates"; ObjectID = "S2I-zI-YU5"; */
 "S2I-zI-YU5.title" = "Certificates";
@@ -359,8 +359,8 @@
 /* Class = "UILabel"; text = "Contribute"; ObjectID = "cE6-N8-FNP"; */
 "cE6-N8-FNP.text" = "Contribute";
 
-/* Class = "UILabel"; text = "Rate Certificate Inspector in the App Store"; ObjectID = "dGp-zk-8SI"; */
-"dGp-zk-8SI.text" = "Rate Certificate Inspector in the App Store";
+/* Class = "UILabel"; text = "Rate Cert Inspector in the App Store"; ObjectID = "dGp-zk-8SI"; */
+"dGp-zk-8SI.text" = "Rate Cert Inspector in the App Store";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "e3s-bJ-unQ"; */
 "e3s-bJ-unQ.text" = "Label";

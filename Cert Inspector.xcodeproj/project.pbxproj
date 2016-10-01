@@ -29,6 +29,8 @@
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
+		3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
+		3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE611CB4AE5800F56B68 /* ValueViewController.m */; };
 		3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* Assets.xcassets */; };
@@ -114,6 +116,8 @@
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
 		3CDD52D592D30D74C49C0F7D /* Pods-CHXCertificate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHXCertificate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CHXCertificate/Pods-CHXCertificate.debug.xcconfig"; sourceTree = "<group>"; };
+		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorListTableViewController.h; path = "View Controllers/InspectorListTableViewController.h"; sourceTree = "<group>"; };
+		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorListTableViewController.m; path = "View Controllers/InspectorListTableViewController.m"; sourceTree = "<group>"; };
 		3CEAA5061D83CCD10011A706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDomains.h; sourceTree = "<group>"; };
 		3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDomains.m; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */,
 				3CFAE6F01CA8463900CD946B /* InputTableViewController.h */,
 				3CFAE6F11CA8463900CD946B /* InputTableViewController.m */,
+				3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */,
+				3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -610,6 +616,7 @@
 				3C3104E91D83C02E0093909E /* CertificateListTableViewController.m in Sources */,
 				3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */,
 				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
+				3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */,
 				3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -629,6 +636,7 @@
 				3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */,
 				3C04EE5F1CB4A23900F56B68 /* UIHelper.m in Sources */,
 				3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */,
+				3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
