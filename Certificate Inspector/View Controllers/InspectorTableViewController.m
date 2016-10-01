@@ -67,6 +67,10 @@ typedef NS_ENUM(NSInteger, CellTags) {
     CellTagVerified = 2,
     CellTagSANS = 3
 };
+
+typedef NS_ENUM(NSInteger, LeftDetailTag) {
+    LeftDetailTagTextLabel = 10,
+    LeftDetailTagDetailTextLabel = 20
 };
 
 - (void) viewDidLoad {
@@ -205,14 +209,20 @@ typedef NS_ENUM(NSInteger, CellTags) {
     switch (indexPath.section) {
         case CertificateInformation: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
+            UILabel * textLabel = [cell viewWithTag:LeftDetailTagTextLabel];
+            
             NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = data[@"value"];
-            cell.textLabel.text = data[@"label"];
+            detailTextLabel.text = data[@"value"];
+            textLabel.text = data[@"label"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         } case Names: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
+            UILabel * textLabel = [cell viewWithTag:LeftDetailTagTextLabel];
+
             NSString * key = [nameKeys objectAtIndex:indexPath.row];
             NSString * value = [names objectForKey:key];
             if ([key isEqualToString:@"C"]) {
@@ -220,29 +230,32 @@ typedef NS_ENUM(NSInteger, CellTags) {
                 value = lang(langKey);
             }
 
-            cell.detailTextLabel.text = value;
-            cell.textLabel.text = lang(key);
+            detailTextLabel.text = value;
+            textLabel.text = lang(key);
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         } case Fingerprints: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
+            UILabel * textLabel = [cell viewWithTag:LeftDetailTagTextLabel];
+
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = @"SHA256";
-                    cell.detailTextLabel.text = SHA256Fingerprint;
+                    textLabel.text = @"SHA256";
+                    detailTextLabel.text = SHA256Fingerprint;
                     break;
                 case 1:
-                    cell.textLabel.text = @"SHA1";
-                    cell.detailTextLabel.text = SHA1Fingerprint;
+                    textLabel.text = @"SHA1";
+                    detailTextLabel.text = SHA1Fingerprint;
                     break;
                 case 2:
-                    cell.textLabel.text = @"MD5";
-                    cell.detailTextLabel.text = MD5Fingerprint;
+                    textLabel.text = @"MD5";
+                    detailTextLabel.text = MD5Fingerprint;
                     break;
                 case 3:
-                    cell.textLabel.text = @"Serial";
-                    cell.detailTextLabel.text = serialNumber;
+                    textLabel.text = @"Serial";
+                    detailTextLabel.text = serialNumber;
                     break;
             }
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
