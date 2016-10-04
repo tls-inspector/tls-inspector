@@ -21,6 +21,7 @@
 
 #import "UIHelper.h"
 
+
 @interface UIHelper () {
     void (^alertDismissedCallback)(NSInteger buttonIndex);
     void (^confirmDismissedCallback)(BOOL confirmed);
@@ -33,18 +34,11 @@
 @implementation UIHelper
 
 static id _instance;
-static bool alertControllerSupported;
 
 - (id) init {
     if (_instance == nil) {
-        UIHelper * uihelper = [super init];
-        Class AlertControllerClass = NSClassFromString(@"UIAlertController");
-        if (AlertControllerClass) {
-            alertControllerSupported = YES;
-        } else {
-            alertControllerSupported = NO;
-        }
-        _instance = uihelper;
+        UIHelper * helper = [super init];
+        _instance = helper;
     }
     return _instance;
 }
@@ -72,28 +66,17 @@ static bool alertControllerSupported;
                                  body:(NSString *)body
                    dismissButtonTitle:(NSString *)dismissButtonTitle
                             dismissed:(void (^)(NSInteger buttonIndex))dismissed {
-    if (alertControllerSupported) {
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title
-                                                                                  message:body
-                                                                           preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * dismissButton = [UIAlertAction actionWithTitle:dismissButtonTitle
-                                                                 style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
-                                                                     if (dismissed) {
-                                                                         dismissed(0);
-                                                                     }
-                                                                 }];
-        [alertController addAction:dismissButton];
-        [self presentAlertController:alertController inViewController:viewController];
-    } else {
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:title
-                                                             message:body delegate:self
-                                                   cancelButtonTitle:dismissButtonTitle
-                                                   otherButtonTitles:nil];
-        alertDismissedCallback = dismissed;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [alertView show];
-        });
-    }
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title
+                                                                              message:body
+                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * dismissButton = [UIAlertAction actionWithTitle:dismissButtonTitle
+                                                             style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
+                                                                 if (dismissed) {
+                                                                     dismissed(0);
+                                                                 }
+                                                             }];
+    [alertController addAction:dismissButton];
+    [self presentAlertController:alertController inViewController:viewController];
 }
 
 - (void) presentErrorInViewController:(UIViewController *)viewController
@@ -113,101 +96,69 @@ static bool alertControllerSupported;
                       cancelButtonTitle:(NSString *)cancelButtonTitle
              confirmActionIsDestructive:(BOOL)confirmActionIsDestructive
                               dismissed:(void (^)(BOOL confirmed))dismissed {
-    if (alertControllerSupported) {
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title
-                                                                                  message:body
-                                                                           preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * dismissButton = [UIAlertAction actionWithTitle:cancelButtonTitle
-                                                                 style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
-                                                                     if (dismissed) {
-                                                                         dismissed(NO);
-                                                                     }
-                                                                 }];
-        [alertController addAction:dismissButton];
-        NSInteger style = confirmActionIsDestructive ? UIAlertActionStyleDestructive : UIAlertViewStyleDefault;
-        UIAlertAction * confirmButton = [UIAlertAction actionWithTitle:confirmButtonTitle
-                                                                 style:style handler:^(UIAlertAction *action){
-                                                                     if (dismissed) {
-                                                                         dismissed(YES);
-                                                                     }
-                                                                 }];
-        [alertController addAction:confirmButton];
-        [self presentAlertController:alertController inViewController:viewController];
-    } else {
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:title
-                                                             message:body
-                                                            delegate:self
-                                                   cancelButtonTitle:cancelButtonTitle
-                                                   otherButtonTitles:confirmButtonTitle, nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [alertView show];
-        });
-    }
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title
+                                                                              message:body
+                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * dismissButton = [UIAlertAction actionWithTitle:cancelButtonTitle
+                                                             style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
+                                                                 if (dismissed) {
+                                                                     dismissed(NO);
+                                                                 }
+                                                             }];
+    [alertController addAction:dismissButton];
+    NSInteger style = confirmActionIsDestructive ? UIAlertActionStyleDestructive : UIAlertViewStyleDefault;
+    UIAlertAction * confirmButton = [UIAlertAction actionWithTitle:confirmButtonTitle
+                                                             style:style handler:^(UIAlertAction *action){
+                                                                 if (dismissed) {
+                                                                     dismissed(YES);
+                                                                 }
+                                                             }];
+    [alertController addAction:confirmButton];
+    [self presentAlertController:alertController inViewController:viewController];
 }
 
 - (void) presentActionSheetInViewController:(UIViewController *)viewController
-                               attachToView:(UIView *)view
+                             attachToTarget:(ActionTipTarget *)target
                                       title:(NSString *)title
                                    subtitle:(NSString *)subtitle
                           cancelButtonTitle:(NSString *)cancelButtonTitle
                                       items:(NSArray<NSString *> *)items
                                   dismissed:(void (^)(NSInteger itemIndex))dismissed {
-    if (alertControllerSupported) {
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title
-                                                                                  message:subtitle
-                                                                           preferredStyle:UIAlertControllerStyleActionSheet];
-        UIAlertAction * cancelButton = [UIAlertAction actionWithTitle:cancelButtonTitle
-                                                                style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                                                                    if (dismissed) {
-                                                                        dismissed(-1);
-                                                                    }
-                                                                }];
-        [alertController addAction:cancelButton];
-        [items enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            UIAlertAction * button = [UIAlertAction actionWithTitle:obj
-                                                              style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                                                                  if (dismissed) {
-                                                                      dismissed(idx);
-                                                                  }
-                                                              }];
-            [alertController addAction:button];
-        }];
-        
-        alertController.popoverPresentationController.sourceView = view;
-        
-        [self presentAlertController:alertController inViewController:viewController];
-    } else {
-        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                                  delegate:self
-                                                         cancelButtonTitle:nil
-                                                    destructiveButtonTitle:nil
-                                                         otherButtonTitles:nil];
-        for (NSString * item in items) {
-            [actionSheet addButtonWithTitle:item];
-        }
-        actionSheetDismissedCallback = dismissed;
-        
-        actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:cancelButtonTitle];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [actionSheet showInView:viewController.view];
-        });
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title
+                                                                              message:subtitle
+                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * cancelButton = [UIAlertAction actionWithTitle:cancelButtonTitle
+                                                            style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                                                                if (dismissed) {
+                                                                    dismissed(-1);
+                                                                }
+                                                            }];
+    [alertController addAction:cancelButton];
+    [items enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIAlertAction * button = [UIAlertAction actionWithTitle:obj
+                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                                              if (dismissed) {
+                                                                  dismissed(idx);
+                                                              }
+                                                          }];
+        [alertController addAction:button];
+    }];
+    
+    if (target.targetView) {
+        alertController.popoverPresentationController.sourceView = target.targetView;
     }
+    if (target.targetBarButtonItem) {
+        alertController.popoverPresentationController.barButtonItem = target.targetBarButtonItem;
+    }
+    
+    [self presentAlertController:alertController inViewController:viewController];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (actionSheetDismissedCallback) {
-        actionSheetDismissedCallback(buttonIndex);
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertDismissedCallback) {
-        alertDismissedCallback(buttonIndex);
-        alertDismissedCallback = nil;
-    } else if (confirmDismissedCallback) {
-        confirmDismissedCallback(buttonIndex == 1 ? YES : NO);
-        confirmDismissedCallback = nil;
-    }
+- (void) applyStylesToButton:(UIButton *)button withColor:(UIColor *)color {
+    button.layer.borderWidth = 1;
+    button.layer.borderColor = color.CGColor;
+    button.layer.cornerRadius = 5;
+    button.layer.masksToBounds = YES;
 }
 
 @end

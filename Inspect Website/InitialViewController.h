@@ -1,5 +1,5 @@
 //
-//  InspectorTableViewController.h
+//  InitialViewController.h
 //  Certificate Inspector
 //
 //  GPLv3 License
@@ -20,10 +20,7 @@
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import <UIKit/UIKit.h>
-#import "CHCertificate.h"
 
-@interface InspectorTableViewController : UITableViewController <NSURLConnectionDelegate>
-
-- (void) loadCertificate:(CHCertificate *)certificate;
+@interface InitialViewController : UINavigationController
 
 @end

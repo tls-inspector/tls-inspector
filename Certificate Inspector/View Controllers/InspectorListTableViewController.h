@@ -1,5 +1,5 @@
 //
-//  InspectorTableViewController.h
+//  InspectorListTableViewController.h
 //  Certificate Inspector
 //
 //  GPLv3 License
@@ -20,10 +20,9 @@
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import <UIKit/UIKit.h>
-#import "CHCertificate.h"
 
-@interface InspectorTableViewController : UITableViewController <NSURLConnectionDelegate>
+@interface InspectorListTableViewController : UITableViewController
 
-- (void) loadCertificate:(CHCertificate *)certificate;
+- (void) setList:(NSArray *)array title:(NSString *)title;
 
 @end

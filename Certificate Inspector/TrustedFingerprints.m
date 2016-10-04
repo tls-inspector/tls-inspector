@@ -149,13 +149,10 @@ static NSString * KEYCHAIN_ACCOUNT = @"Trusted-Certificates";
 
 - (void) readLocalFingerprints {
     NSData * fileData = [NSData dataWithContentsOfFile:self.filePath];
-    NSString * error;
+    NSError * error;
     NSPropertyListFormat format;
     NSDictionary * fingerprints = [NSPropertyListSerialization
-                                   propertyListFromData:fileData
-                                   mutabilityOption:NSPropertyListImmutable
-                                   format:&format
-                                   errorDescription:&error];
+                                   propertyListWithData:fileData options:0 format:&format error:&error];
     if (!error) {
         d(@"Local fingerprint data updated");
         self.fingerprints = fingerprints;

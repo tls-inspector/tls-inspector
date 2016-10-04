@@ -1,5 +1,5 @@
 //
-//  InspectorTableViewController.h
+//  ActionTipTarget.h
 //  Certificate Inspector
 //
 //  GPLv3 License
@@ -19,11 +19,15 @@
 //  along with this program; if not, write to the Free Software Foundation,
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "CHCertificate.h"
 
-@interface InspectorTableViewController : UITableViewController <NSURLConnectionDelegate>
+@interface ActionTipTarget : NSObject
 
-- (void) loadCertificate:(CHCertificate *)certificate;
+@property (strong, nonatomic) UIView * targetView;
+@property (strong, nonatomic) UIBarButtonItem * targetBarButtonItem;
+
++ (ActionTipTarget *) targetWithView:(UIView *)view;
++ (ActionTipTarget *) targetWithBarButtonItem:(UIBarButtonItem *)barButtonItem;
 
 @end

@@ -20,9 +20,9 @@
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import "CertificateListTableViewController.h"
-#import "CHCertificate.h"
 #import "InspectorTableViewController.h"
 #import "UIHelper.h"
+#import "CHCertificate.h"
 
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
@@ -30,11 +30,10 @@
     BOOL isTrusted;
 }
 
-@property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
-
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
 @property (weak, nonatomic) IBOutlet UIButton *headerButton;
+@property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
 
 - (IBAction)headerButton:(id)sender;
 
@@ -50,7 +49,19 @@
     if (![self.host hasPrefix:@"http"]) {
         self.host = [NSString stringWithFormat:@"https://%@", self.host];
     }
-    [[CHCertificate alloc] fromURL:self.host finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
+
+#ifdef EXTENSION
+    [self.navigationItem
+     setLeftBarButtonItem:[[UIBarButtonItem alloc]
+                           initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                           target:self
+                           action:@selector(dismissView:)]];
+#endif
+    [NSThread detachNewThreadSelector:@selector(forkTheBlockChain) toTarget:self withObject:nil];
+}
+
+- (void) forkTheBlockChain {
+    [CHCertificate certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
         if (error) {
             [uihelper
              presentAlertInViewController:self
@@ -58,7 +69,11 @@
              body:error.localizedDescription
              dismissButtonTitle:lang(@"Dismiss")
              dismissed:^(NSInteger buttonIndex) {
+#ifdef MAIN_APP
                  [self.navigationController popViewControllerAnimated:YES];
+#else
+                 [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+#endif
              }];
         } else {
             self.certificates = certificates;
@@ -73,9 +88,20 @@
                 }
                 self.headerViewLabel.textColor = [UIColor whiteColor];
                 [self.tableView reloadData];
+                self.headerButton.hidden = NO;
             });
         }
     }];
+}
+
+#ifdef EXTENSION
+- (void) dismissView:(id)sender {
+    [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+}
+#endif
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.certificates.count > 0 ? lang(@"Certificate Chain") : @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,7 +124,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CHCertificate * cert = [self.certificates objectAtIndex:indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-    cell.textLabel.text = cert.summary;
+    cell.textLabel.text = [cert summary];
     return cell;
 }
 

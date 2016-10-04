@@ -35,6 +35,10 @@
 @end
 
 @implementation AboutViewController
+    
+static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/Certificate-Inspector/";
+static NSString * ITUNES_APP_ID = @"1100539810";
+static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certificate-inspector-beta";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,9 +76,10 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", ITUNES_APP_ID]]];
         }
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
+        
         [self.helper
          presentActionSheetInViewController:self
-         attachToView:[cell viewWithTag:1]
+         attachToTarget:[ActionTipTarget targetWithView:[cell viewWithTag:1]]
          title:lang(@"What kind of feedback would you like to submit?")
          subtitle:lang(@"All feedback is appreciated!")
          cancelButtonTitle:lang(@"Cancel")
@@ -108,6 +113,8 @@
          }];
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_GITHUB_URL]];
+    } else if ([cell.reuseIdentifier isEqualToString:@"beta"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_TESTFLIGHT_APPLICATION]];
     }
 }
 
