@@ -23,6 +23,8 @@
 #import "CertificateListTableViewController.h"
 #import "UIHelper.h"
 
+#include <MobileCoreServices/MobileCoreServices.h>
+
 @interface InitialViewController ()
 
 @end
@@ -31,39 +33,54 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    
-    NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
-    NSItemProvider * itemProvider = item.attachments.firstObject;
-    if ([itemProvider hasItemConformingToTypeIdentifier:@"public.url"]) {
-        [itemProvider loadItemForTypeIdentifier:@"public.url"
-                                        options:nil
-                              completionHandler:^(NSURL *url, NSError *error) {
-                                  if ([url.scheme isEqualToString:@"https"]) {
-                                      CertificateListTableViewController * certList = [[UIStoryboard
-                                                                                        storyboardWithName:@"Main"
-                                                                                        bundle:[NSBundle mainBundle]]
-                                                                                       instantiateViewControllerWithIdentifier:@"Certificate List"];
-                                      certList.host = url.absoluteString;
-                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                          [self pushViewController:certList animated:NO];
-                                      });
-                                  } else {
-                                      [[UIHelper sharedInstance]
-                                       presentAlertInViewController:self
-                                       title:lang(@"Unsupported Scheme")
-                                       body:lang(@"Only HTTPS sites can be inspected")
-                                       dismissButtonTitle:lang(@"Dismiss")
-                                       dismissed:^(NSInteger buttonIndex) {
-                                           [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
-                                       }];
-                                  }
-                              }];
+
+    for (NSExtensionItem *item in self.extensionContext.inputItems) {
+        for (NSItemProvider *itemProvider in item.attachments) {
+            
+            NSString * urlString = [item.attributedContentText string];
+            if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeURL]) {
+                [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypeURL options:nil completionHandler:^(NSURL *url, NSError *error) {
+                    if (!error && [url.scheme isEqualToString:@"https"]) {
+                        [self loadURL:url.absoluteString];
+                    } else {
+                        [self unsupportedURL];
+                    }
+                }];
+            } else if (urlString)  {
+                if ([urlString hasPrefix:@"https://"]){
+                    [self loadURL:[urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+                } else {
+                    [self unsupportedURL];
+                }
+            }
+        }
     }
+}
+
+- (void) loadURL:(NSString *)url {
+    CertificateListTableViewController * certList = [[UIStoryboard
+                                                      storyboardWithName:@"Main"
+                                                      bundle:[NSBundle mainBundle]]
+                                                     instantiateViewControllerWithIdentifier:@"Certificate List"];
+    certList.host = url;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self pushViewController:certList animated:NO];
+    });
+}
+
+- (void) unsupportedURL {
+    [[UIHelper sharedInstance]
+     presentAlertInViewController:self
+     title:lang(@"Unsupported Scheme")
+     body:lang(@"Only HTTPS sites can be inspected")
+     dismissButtonTitle:lang(@"Dismiss")
+     dismissed:^(NSInteger buttonIndex) {
+         [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+     }];
 }
 
 - (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
