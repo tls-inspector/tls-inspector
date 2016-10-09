@@ -22,8 +22,9 @@
 #import "AboutViewController.h"
 #import "RecentDomains.h"
 @import StoreKit;
+@import MessageUI;
 
-@interface AboutViewController () <SKStoreProductViewControllerDelegate>
+@interface AboutViewController () <SKStoreProductViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *buildLabel;
@@ -37,8 +38,10 @@
 @implementation AboutViewController
     
 static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/Certificate-Inspector/";
+static NSString * PROJECT_URL = @"https://certificate-inspector.com/";
 static NSString * ITUNES_APP_ID = @"1100539810";
-static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certificate-inspector-beta";
+static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/Certificate-Inspector/blob/master/CONTRIBUTE.md";
+static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Manager' <certificate-inspector@ecnepsnai.com>";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,13 +60,11 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell.reuseIdentifier isEqualToString:@"tell_friends"]) {
-        NSString * blurb = format(@"Easily view and inspect X509 certificates on your iOS device. %@", PROJECT_GITHUB_URL);
+        NSString * blurb = format(@"Easily view and inspect X509 certificates on your iOS device. %@", PROJECT_URL);
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[blurb]
                                                         applicationActivities:nil];
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-            activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
-        }
+        activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
         [self presentViewController:activityController animated:YES completion:nil];
     } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
         
@@ -87,7 +88,8 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
                  lang(@"Something I Like"),
                  lang(@"Something I Don't Like"),
                  lang(@"Request a Feature"),
-                 lang(@"Report a Bug")
+                 lang(@"Report a Bug"),
+                 lang(@"Something else"),
                  ]
          dismissed:^(NSInteger selectedIndex) {
              switch (selectedIndex) {
@@ -107,13 +109,24 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
                      [[UIApplication sharedApplication] openURL:
                       [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=bug")]];
                      break;
-                 default:
+                 case 4: {
+                     MFMailComposeViewController * mailController = [MFMailComposeViewController new];
+                     mailController.mailComposeDelegate = self;
+                     [mailController setSubject:lang(@"Certificate Inspector Feedback")];
+                     [mailController setToRecipients:@[PROJECT_MAINTAINER_EMAIL]];
+                     [self presentViewController:mailController animated:YES completion:nil];
+                     break;
+                 } default:
                      break;
              }
          }];
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_GITHUB_URL]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_CONTRIBUTE_URL]];
     }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)recentSwitch:(UISwitch *)sender {
