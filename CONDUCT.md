@@ -6,7 +6,7 @@ Diversity is one of our huge strengths, but it can also lead to communication is
 
 This isn’t an exhaustive list of things that you can’t do. Rather, take it in the spirit in which it’s intended - a guide to make it easier to enrich all of us and the technical communities in which we participate.
 
-If you believe someone is violating the code of conduct, we ask that you report it by emailing ian@ecnepsnai.com. For more details please see our Reporting Guidelines
+If you believe someone is violating the code of conduct, we ask that you report it by emailing certificate-inspector@ecnepsnai.com. For more details please see our Reporting Guidelines
 
 - **Be friendly and patient.**
 - **Be welcoming.** We strive to be a community that welcomes and supports people of all backgrounds and identities. This includes, but is not limited to members of any race, ethnicity, culture, national origin, colour, immigration status, social and economic class, educational level, sex, sexual orientation, gender identity and expression, age, size, family status, political belief, religion, and mental and physical ability.
