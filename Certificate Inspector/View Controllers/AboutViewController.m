@@ -113,8 +113,6 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
          }];
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_GITHUB_URL]];
-    } else if ([cell.reuseIdentifier isEqualToString:@"beta"]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_TESTFLIGHT_APPLICATION]];
     }
 }
 
