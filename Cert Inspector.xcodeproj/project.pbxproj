@@ -29,6 +29,26 @@
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
+		3CC6521F1DB06E1A001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
+		3CC652231DB06E96001FB7E1 /* UILabel+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652221DB06E96001FB7E1 /* UILabel+Lang.swift */; };
+		3CC6522C1DB06EC4001FB7E1 /* UIBarButtonItem+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652241DB06EC4001FB7E1 /* UIBarButtonItem+Lang.swift */; };
+		3CC6522D1DB06EC4001FB7E1 /* UIButton+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652251DB06EC4001FB7E1 /* UIButton+Lang.swift */; };
+		3CC6522E1DB06EC4001FB7E1 /* UINavigationItem+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652261DB06EC4001FB7E1 /* UINavigationItem+Lang.swift */; };
+		3CC6522F1DB06EC4001FB7E1 /* UISearchBar+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652271DB06EC4001FB7E1 /* UISearchBar+Lang.swift */; };
+		3CC652301DB06EC4001FB7E1 /* UISegmentedControl+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652281DB06EC4001FB7E1 /* UISegmentedControl+Lang.swift */; };
+		3CC652311DB06EC4001FB7E1 /* UITabBarItem+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652291DB06EC4001FB7E1 /* UITabBarItem+Lang.swift */; };
+		3CC652321DB06EC4001FB7E1 /* UITextView+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6522A1DB06EC4001FB7E1 /* UITextView+Lang.swift */; };
+		3CC652331DB06EC4001FB7E1 /* UIViewController+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6522B1DB06EC4001FB7E1 /* UIViewController+Lang.swift */; };
+		3CC652341DB07035001FB7E1 /* UILabel+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652221DB06E96001FB7E1 /* UILabel+Lang.swift */; };
+		3CC652351DB07035001FB7E1 /* UIBarButtonItem+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652241DB06EC4001FB7E1 /* UIBarButtonItem+Lang.swift */; };
+		3CC652361DB07035001FB7E1 /* UIButton+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652251DB06EC4001FB7E1 /* UIButton+Lang.swift */; };
+		3CC652371DB07035001FB7E1 /* UINavigationItem+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652261DB06EC4001FB7E1 /* UINavigationItem+Lang.swift */; };
+		3CC652381DB07035001FB7E1 /* UISearchBar+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652271DB06EC4001FB7E1 /* UISearchBar+Lang.swift */; };
+		3CC652391DB07035001FB7E1 /* UISegmentedControl+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652281DB06EC4001FB7E1 /* UISegmentedControl+Lang.swift */; };
+		3CC6523A1DB07035001FB7E1 /* UITabBarItem+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC652291DB06EC4001FB7E1 /* UITabBarItem+Lang.swift */; };
+		3CC6523B1DB07035001FB7E1 /* UITextView+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6522A1DB06EC4001FB7E1 /* UITextView+Lang.swift */; };
+		3CC6523C1DB07035001FB7E1 /* UIViewController+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6522B1DB06EC4001FB7E1 /* UIViewController+Lang.swift */; };
+		3CC6523D1DB07035001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
 		3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE611CB4AE5800F56B68 /* ValueViewController.m */; };
@@ -115,6 +135,18 @@
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
+		3CC6521D1DB06E1A001FB7E1 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lang.h; path = Localization/lang.h; sourceTree = "<group>"; };
+		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = lang.m; path = Localization/lang.m; sourceTree = "<group>"; };
+		3CC652211DB06E95001FB7E1 /* Cert Inspector-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cert Inspector-Bridging-Header.h"; sourceTree = "<group>"; };
+		3CC652221DB06E96001FB7E1 /* UILabel+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UILabel+Lang.swift"; path = "Localization/UI Elements/UILabel+Lang.swift"; sourceTree = "<group>"; };
+		3CC652241DB06EC4001FB7E1 /* UIBarButtonItem+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIBarButtonItem+Lang.swift"; path = "Localization/UI Elements/UIBarButtonItem+Lang.swift"; sourceTree = "<group>"; };
+		3CC652251DB06EC4001FB7E1 /* UIButton+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+Lang.swift"; path = "Localization/UI Elements/UIButton+Lang.swift"; sourceTree = "<group>"; };
+		3CC652261DB06EC4001FB7E1 /* UINavigationItem+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationItem+Lang.swift"; path = "Localization/UI Elements/UINavigationItem+Lang.swift"; sourceTree = "<group>"; };
+		3CC652271DB06EC4001FB7E1 /* UISearchBar+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UISearchBar+Lang.swift"; path = "Localization/UI Elements/UISearchBar+Lang.swift"; sourceTree = "<group>"; };
+		3CC652281DB06EC4001FB7E1 /* UISegmentedControl+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UISegmentedControl+Lang.swift"; path = "Localization/UI Elements/UISegmentedControl+Lang.swift"; sourceTree = "<group>"; };
+		3CC652291DB06EC4001FB7E1 /* UITabBarItem+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITabBarItem+Lang.swift"; path = "Localization/UI Elements/UITabBarItem+Lang.swift"; sourceTree = "<group>"; };
+		3CC6522A1DB06EC4001FB7E1 /* UITextView+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextView+Lang.swift"; path = "Localization/UI Elements/UITextView+Lang.swift"; sourceTree = "<group>"; };
+		3CC6522B1DB06EC4001FB7E1 /* UIViewController+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Lang.swift"; path = "Localization/UI Elements/UIViewController+Lang.swift"; sourceTree = "<group>"; };
 		3CDD52D592D30D74C49C0F7D /* Pods-CHXCertificate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHXCertificate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CHXCertificate/Pods-CHXCertificate.debug.xcconfig"; sourceTree = "<group>"; };
 		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorListTableViewController.h; path = "View Controllers/InspectorListTableViewController.h"; sourceTree = "<group>"; };
 		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorListTableViewController.m; path = "View Controllers/InspectorListTableViewController.m"; sourceTree = "<group>"; };
@@ -213,6 +245,32 @@
 			path = "Inspect Website";
 			sourceTree = "<group>";
 		};
+		3CC6521C1DB06DF2001FB7E1 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				3CC652201DB06E5F001FB7E1 /* UI Elements */,
+				3CC6521D1DB06E1A001FB7E1 /* lang.h */,
+				3CC6521E1DB06E1A001FB7E1 /* lang.m */,
+			);
+			name = Localization;
+			sourceTree = "<group>";
+		};
+		3CC652201DB06E5F001FB7E1 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				3CC652221DB06E96001FB7E1 /* UILabel+Lang.swift */,
+				3CC652241DB06EC4001FB7E1 /* UIBarButtonItem+Lang.swift */,
+				3CC652251DB06EC4001FB7E1 /* UIButton+Lang.swift */,
+				3CC652261DB06EC4001FB7E1 /* UINavigationItem+Lang.swift */,
+				3CC652271DB06EC4001FB7E1 /* UISearchBar+Lang.swift */,
+				3CC652281DB06EC4001FB7E1 /* UISegmentedControl+Lang.swift */,
+				3CC652291DB06EC4001FB7E1 /* UITabBarItem+Lang.swift */,
+				3CC6522A1DB06EC4001FB7E1 /* UITextView+Lang.swift */,
+				3CC6522B1DB06EC4001FB7E1 /* UIViewController+Lang.swift */,
+			);
+			name = "UI Elements";
+			sourceTree = "<group>";
+		};
 		3CFAE6CD1CA8440400CD946B = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +296,7 @@
 		3CFAE6D81CA8440400CD946B /* Certificate Inspector */ = {
 			isa = PBXGroup;
 			children = (
+				3CC6521C1DB06DF2001FB7E1 /* Localization */,
 				3CFAE6DC1CA8440400CD946B /* AppDelegate.h */,
 				3CFAE6DD1CA8440400CD946B /* AppDelegate.m */,
 				3CFAE6E21CA8440400CD946B /* Main.storyboard */,
@@ -258,6 +317,7 @@
 				3C44D5BF1D053B1700799383 /* TrustedFingerprints.h */,
 				3C44D5C01D053B1700799383 /* TrustedFingerprints.m */,
 				3C04EE631CB4B3F100F56B68 /* PrefixHeader.pch */,
+				3CC652211DB06E95001FB7E1 /* Cert Inspector-Bridging-Header.h */,
 				3C04EE5D1CB4A23900F56B68 /* UIHelper.h */,
 				3C04EE5E1CB4A23900F56B68 /* UIHelper.m */,
 				3CFAE6DA1CA8440400CD946B /* main.m */,
@@ -405,6 +465,7 @@
 					3CFAE6D51CA8440400CD946B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = WCW84NC7Y8;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -611,6 +672,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CC652341DB07035001FB7E1 /* UILabel+Lang.swift in Sources */,
+				3CC652351DB07035001FB7E1 /* UIBarButtonItem+Lang.swift in Sources */,
+				3CC652361DB07035001FB7E1 /* UIButton+Lang.swift in Sources */,
+				3CC652371DB07035001FB7E1 /* UINavigationItem+Lang.swift in Sources */,
+				3CC652381DB07035001FB7E1 /* UISearchBar+Lang.swift in Sources */,
+				3CC652391DB07035001FB7E1 /* UISegmentedControl+Lang.swift in Sources */,
+				3CC6523A1DB07035001FB7E1 /* UITabBarItem+Lang.swift in Sources */,
+				3CC6523B1DB07035001FB7E1 /* UITextView+Lang.swift in Sources */,
+				3CC6523C1DB07035001FB7E1 /* UIViewController+Lang.swift in Sources */,
+				3CC6523D1DB07035001FB7E1 /* lang.m in Sources */,
 				3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */,
 				3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */,
 				3C3104E91D83C02E0093909E /* CertificateListTableViewController.m in Sources */,
@@ -625,16 +696,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CC652311DB06EC4001FB7E1 /* UITabBarItem+Lang.swift in Sources */,
+				3CC6521F1DB06E1A001FB7E1 /* lang.m in Sources */,
 				3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */,
 				3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */,
+				3CC6522C1DB06EC4001FB7E1 /* UIBarButtonItem+Lang.swift in Sources */,
+				3CC652301DB06EC4001FB7E1 /* UISegmentedControl+Lang.swift in Sources */,
 				3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */,
+				3CC6522D1DB06EC4001FB7E1 /* UIButton+Lang.swift in Sources */,
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */,
 				3C44D5C11D053B1700799383 /* TrustedFingerprints.m in Sources */,
 				3CFAE6DB1CA8440400CD946B /* main.m in Sources */,
 				3C04EE621CB4AE5800F56B68 /* ValueViewController.m in Sources */,
+				3CC652321DB06EC4001FB7E1 /* UITextView+Lang.swift in Sources */,
+				3CC6522F1DB06EC4001FB7E1 /* UISearchBar+Lang.swift in Sources */,
 				3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */,
+				3CC652231DB06E96001FB7E1 /* UILabel+Lang.swift in Sources */,
 				3C04EE5F1CB4A23900F56B68 /* UIHelper.m in Sources */,
+				3CC652331DB06EC4001FB7E1 /* UIViewController+Lang.swift in Sources */,
+				3CC6522E1DB06EC4001FB7E1 /* UINavigationItem+Lang.swift in Sources */,
 				3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */,
 				3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */,
 			);
@@ -757,6 +838,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Certificate Inspector/Cert Inspector-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -786,6 +868,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Certificate Inspector/Cert Inspector-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -833,6 +916,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -872,6 +956,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -880,8 +965,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 507199DDF4AEB7E9BB1DDB97 /* Pods-Cert Inspector.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = "Certificate Inspector/PrefixHeader.pch";
 				INFOPLIST_FILE = "Certificate Inspector/Info.plist";
@@ -899,6 +986,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "Cert Inspector";
+				SWIFT_OBJC_BRIDGING_HEADER = "Certificate Inspector/Cert Inspector-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -907,8 +996,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FFC84F9E96D4B63DCDA28497 /* Pods-Cert Inspector.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = "Certificate Inspector/PrefixHeader.pch";
@@ -927,6 +1018,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "Cert Inspector";
+				SWIFT_OBJC_BRIDGING_HEADER = "Certificate Inspector/Cert Inspector-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

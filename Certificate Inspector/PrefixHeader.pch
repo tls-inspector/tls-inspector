@@ -1,7 +1,7 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#endif
+#ifndef CertInspector_Prefix_Header_pch
+#define CertInspector_Prefix_Header_pch
+
+#import "lang.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -18,8 +18,9 @@
 #define d(s, ...) ;
 #endif
 
-#define lang(key) NSLocalizedString(key, nil)
-#define langv(key, ...) [NSString stringWithFormat:NSLocalizedString(key, nil), ##__VA_ARGS__]
+#define lang(keyString) [lang key:keyString]
 
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
+
+#endif
