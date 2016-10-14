@@ -2,7 +2,7 @@ platform :ios, '9.3'
 
 target 'Cert Inspector' do
     use_frameworks!
-    pod 'SSKeychain'
+    pod 'SSKeychain', '1.4.0'
 end
 
 target 'Inspect Website' do
@@ -11,5 +11,5 @@ end
 
 target 'CHCertificate' do
     use_frameworks!
-    pod 'OpenSSL-Universal'
+    pod 'OpenSSL-Universal', '1.0.1.18'
 end

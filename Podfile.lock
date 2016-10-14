@@ -3,13 +3,13 @@ PODS:
   - SSKeychain (1.4.0)
 
 DEPENDENCIES:
-  - OpenSSL-Universal
-  - SSKeychain
+  - OpenSSL-Universal (= 1.0.1.18)
+  - SSKeychain (= 1.4.0)
 
 SPEC CHECKSUMS:
   OpenSSL-Universal: 79fd751a7b4db41f5b430e767c9bbf681b5c8330
   SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
 
-PODFILE CHECKSUM: bebcf2fe5003b845fcf895937e73bfe4e29ff9d1
+PODFILE CHECKSUM: ab1830d2522dcb3019ed76e61e9c48899bfacc1a
 
 COCOAPODS: 1.0.1
