@@ -81,8 +81,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     self.helper = [UIHelper sharedInstance];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString * algorythm = lang(nstrcat(@"CertAlgorithm::", [self.certificate algorithm]));
+    
     [self.cells addObject:@{@"label": lang(@"Issuer"), @"value": [self.certificate issuer]}];
-    [self.cells addObject:@{@"label": lang(@"Algorithm"), @"value": [self.certificate algorithm]}];
+    [self.cells addObject:@{@"label": lang(@"Algorithm"), @"value": algorythm}];
     [self.cells addObject:@{@"label": lang(@"Valid To"), @"value": [dateFormatter stringFromDate:[self.certificate notAfter]]}];
     [self.cells addObject:@{@"label": lang(@"Valid From"), @"value": [dateFormatter stringFromDate:[self.certificate notBefore]]}];
 
@@ -231,7 +234,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             }
 
             detailTextLabel.text = value;
-            textLabel.text = lang(key);
+            textLabel.text = lang(nstrcat(@"Subject::", key));
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
