@@ -60,7 +60,7 @@
     [uihelper presentActionSheetInViewController:self
                                   attachToTarget:[ActionTipTarget targetWithBarButtonItem:self.navigationItem.rightBarButtonItem]
                                            title:self.title
-                                        subtitle:[lang key:@"%lu characters" args:@[format(@"%lu", (unsigned long)self.value.length)]]
+                                        subtitle:[lang key:@"{0} characters" args:@[format(@"%lu", (unsigned long)self.value.length)]]
                                cancelButtonTitle:lang(@"Cancel")
                                            items:@[lang(@"Copy"), lang(@"Verify"), lang(@"Share")]
                                        dismissed:^(NSInteger selectedIndex) {
