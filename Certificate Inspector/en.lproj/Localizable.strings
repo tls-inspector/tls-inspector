@@ -29,31 +29,35 @@
 "Algorithm" = "Algorithm";
 "Both values matched." = "Both values matched.";
 "C" = "Country";
-"CN" = "Common Name";
 "Cancel" = "Cancel";
 "Cancel" = "Cancel";
 "Certificate Errors" = "Certificate Errors";
 "Certificate Information" = "Certificate Information";
 "Certificate is expired or not valid yet." = "Certificate is expired or not valid yet.";
 "Certificate uses insecure SHA1 algorithm." = "Certificate uses insecure SHA1 algorithm.";
+"CN" = "Common Name";
 "Copy" = "Copy";
 "Could not get certificates" = "Could not get certificates";
 "Dismiss" = "Dismiss";
 "Enter the value to verify" = "Enter the value to verify";
 "Fingerprints" = "Fingerprints";
-"Insecure Superfish (Lenovo) certificate." = "Insecure Superfish (Lenovo) certificate.";
 "Insecure eDellRoot certificate." = "Insecure eDellRoot certificate.";
+"Insecure Superfish (Lenovo) certificate." = "Insecure Superfish (Lenovo) certificate.";
 "Issuer" = "Issuer";
 "L" = "City";
 "Loading..." = "Loading...";
 "Not Verified" = "Not Verified";
 "O" = "Organization";
 "OU" = "Organizational Unit";
-"ST" = "State";
 "Share" = "Share";
+"ST" = "State";
+"S" = "State";
+"E" = "Email";
 "Subject Names" = "Subject Names";
 "Trusted Chain" = "Trusted Chain";
+"trusted_chain_description" = "The end certificate for this site is trusted by the system because the root certificate authority is trusted.";
 "Untrusted Chain" = "Untrusted Chain";
+"untrusted_chain_description" = "The end certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.";
 "Valid From" = "Valid From";
 "Valid To" = "Valid To";
 "Value" = "Value";
@@ -61,30 +65,302 @@
 "Verified" = "Verified";
 "Verify Value" = "Verify Value";
 "Verify" = "Verify";
+"Country::AF" = "Afghanistan";
+"Country::AL" = "Albania, People's Socialist Republic of";
+"Country::DZ" = "Algeria, People's Democratic Republic of";
+"Country::AS" = "American Samoa";
+"Country::AD" = "Andorra, Principality of";
+"Country::AO" = "Angola, Republic of";
+"Country::AI" = "Anguilla";
+"Country::AQ" = "Antarctica (the territory South of 60 deg S)";
+"Country::AG" = "Antigua and Barbuda";
+"Country::AR" = "Argentina, Argentine Republic";
+"Country::AM" = "Armenia";
+"Country::AW" = "Aruba";
+"Country::AU" = "Australia, Commonwealth of";
+"Country::AT" = "Austria, Republic of";
+"Country::AZ" = "Azerbaijan, Republic of";
+"Country::BS" = "Bahamas, Commonwealth of the";
+"Country::BH" = "Bahrain, Kingdom of";
+"Country::BD" = "Bangladesh, People's Republic of";
+"Country::BB" = "Barbados";
+"Country::BY" = "Belarus";
+"Country::BE" = "Belgium, Kingdom of";
+"Country::BZ" = "Belize";
+"Country::BJ" = "Benin, People's Republic of";
+"Country::BM" = "Bermuda";
+"Country::BT" = "Bhutan, Kingdom of";
+"Country::BO" = "Bolivia, Republic of";
+"Country::BA" = "Bosnia and Herzegovina";
+"Country::BW" = "Botswana, Republic of";
+"Country::BV" = "Bouvet Island (Bouvetoya)";
+"Country::BR" = "Brazil, Federative Republic of";
+"Country::IO" = "British Indian Ocean Territory (Chagos Archipelago)";
+"Country::VG" = "British Virgin Islands";
+"Country::BN" = "Brunei Darussalam";
+"Country::BG" = "Bulgaria, People's Republic of";
+"Country::BF" = "Burkina Faso";
+"Country::BI" = "Burundi, Republic of";
+"Country::KH" = "Cambodia, Kingdom of";
+"Country::CM" = "Cameroon, United Republic of";
+"Country::CA" = "Canada";
+"Country::CV" = "Cape Verde, Republic of";
+"Country::KY" = "Cayman Islands";
+"Country::CF" = "Central African Republic";
+"Country::TD" = "Chad, Republic of";
+"Country::CL" = "Chile, Republic of";
+"Country::CN" = "China, People's Republic of";
+"Country::CX" = "Christmas Island";
+"Country::CC" = "Cocos (Keeling) Islands";
+"Country::CO" = "Colombia, Republic of";
+"Country::KM" = "Comoros, Union of the";
+"Country::CD" = "Congo, Democratic Republic of";
+"Country::CG" = "Congo, People's Republic of";
+"Country::CK" = "Cook Islands";
+"Country::CR" = "Costa Rica, Republic of";
+"Country::CI" = "Cote D'Ivoire, Ivory Coast, Republic of the";
+"Country::CU" = "Cuba, Republic of";
+"Country::CY" = "Cyprus, Republic of";
+"Country::CZ" = "Czech Republic";
+"Country::DK" = "Denmark, Kingdom of";
+"Country::DJ" = "Djibouti, Republic of";
+"Country::DM" = "Dominica, Commonwealth of";
+"Country::DO" = "Dominican Republic";
+"Country::EC" = "Ecuador, Republic of";
+"Country::EG" = "Egypt, Arab Republic of";
+"Country::SV" = "El Salvador, Republic of";
+"Country::GQ" = "Equatorial Guinea, Republic of";
+"Country::ER" = "Eritrea";
+"Country::EE" = "Estonia";
+"Country::ET" = "Ethiopia";
+"Country::FO" = "Faeroe Islands";
+"Country::FK" = "Falkland Islands (Malvinas)";
+"Country::FJ" = "Fiji, Republic of the Fiji Islands";
+"Country::FI" = "Finland, Republic of";
+"Country::FR" = "France, French Republic";
+"Country::GF" = "French Guiana";
+"Country::PF" = "French Polynesia";
+"Country::TF" = "French Southern Territories";
+"Country::GA" = "Gabon, Gabonese Republic";
+"Country::GM" = "Gambia, Republic of the";
+"Country::GE" = "Georgia";
+"Country::DE" = "Germany";
+"Country::GH" = "Ghana, Republic of";
+"Country::GI" = "Gibraltar";
+"Country::GR" = "Greece, Hellenic Republic";
+"Country::GL" = "Greenland";
+"Country::GD" = "Grenada";
+"Country::GP" = "Guadaloupe";
+"Country::GU" = "Guam";
+"Country::GT" = "Guatemala, Republic of";
+"Country::GN" = "Guinea, Revolutionary People's Rep'c of";
+"Country::GW" = "Guinea-Bissau, Republic of";
+"Country::GY" = "Guyana, Republic of";
+"Country::HT" = "Haiti, Republic of";
+"Country::HM" = "Heard and McDonald Islands";
+"Country::VA" = "Holy See (Vatican City State)";
+"Country::HN" = "Honduras, Republic of";
+"Country::HK" = "Hong Kong, Special Administrative Region of China";
+"Country::HR" = "Hrvatska (Croatia)";
+"Country::HU" = "Hungary, Hungarian People's Republic";
+"Country::IS" = "Iceland, Republic of";
+"Country::IN" = "India, Republic of";
+"Country::ID" = "Indonesia, Republic of";
+"Country::IR" = "Iran, Islamic Republic of";
+"Country::IQ" = "Iraq, Republic of";
+"Country::IE" = "Ireland";
+"Country::IL" = "Israel, State of";
+"Country::IT" = "Italy, Italian Republic";
+"Country::JM" = "Jamaica";
+"Country::JP" = "Japan";
+"Country::JO" = "Jordan, Hashemite Kingdom of";
+"Country::KZ" = "Kazakhstan, Republic of";
+"Country::KE" = "Kenya, Republic of";
+"Country::KI" = "Kiribati, Republic of";
+"Country::KP" = "Korea, Democratic People's Republic of";
+"Country::KR" = "Korea, Republic of";
+"Country::KW" = "Kuwait, State of";
+"Country::KG" = "Kyrgyz Republic";
+"Country::LA" = "Lao People's Democratic Republic";
+"Country::LV" = "Latvia";
+"Country::LB" = "Lebanon, Lebanese Republic";
+"Country::LS" = "Lesotho, Kingdom of";
+"Country::LR" = "Liberia, Republic of";
+"Country::LY" = "Libyan Arab Jamahiriya";
+"Country::LI" = "Liechtenstein, Principality of";
+"Country::LT" = "Lithuania";
+"Country::LU" = "Luxembourg, Grand Duchy of";
+"Country::MO" = "Macao, Special Administrative Region of China";
+"Country::MK" = "Macedonia, the former Yugoslav Republic of";
+"Country::MG" = "Madagascar, Republic of";
+"Country::MW" = "Malawi, Republic of";
+"Country::MY" = "Malaysia";
+"Country::MV" = "Maldives, Republic of";
+"Country::ML" = "Mali, Republic of";
+"Country::MT" = "Malta, Republic of";
+"Country::MH" = "Marshall Islands";
+"Country::MQ" = "Martinique";
+"Country::MR" = "Mauritania, Islamic Republic of";
+"Country::MU" = "Mauritius";
+"Country::YT" = "Mayotte";
+"Country::MX" = "Mexico, United Mexican States";
+"Country::FM" = "Micronesia, Federated States of";
+"Country::MD" = "Moldova, Republic of";
+"Country::MC" = "Monaco, Principality of";
+"Country::MN" = "Mongolia, Mongolian People's Republic";
+"Country::MS" = "Montserrat";
+"Country::MA" = "Morocco, Kingdom of";
+"Country::MZ" = "Mozambique, People's Republic of";
+"Country::MM" = "Myanmar";
+"Country::NA" = "Namibia";
+"Country::NR" = "Nauru, Republic of";
+"Country::NP" = "Nepal, Kingdom of";
+"Country::AN" = "Netherlands Antilles";
+"Country::NL" = "Netherlands, Kingdom of the";
+"Country::NC" = "New Caledonia";
+"Country::NZ" = "New Zealand";
+"Country::NI" = "Nicaragua, Republic of";
+"Country::NE" = "Niger, Republic of the";
+"Country::NG" = "Nigeria, Federal Republic of";
+"Country::NU" = "Niue, Republic of";
+"Country::NF" = "Norfolk Island";
+"Country::MP" = "Northern Mariana Islands";
+"Country::NO" = "Norway, Kingdom of";
+"Country::OM" = "Oman, Sultanate of";
+"Country::PK" = "Pakistan, Islamic Republic of";
+"Country::PW" = "Palau";
+"Country::PS" = "Palestinian Territory, Occupied";
+"Country::PA" = "Panama, Republic of";
+"Country::PG" = "Papua New Guinea";
+"Country::PY" = "Paraguay, Republic of";
+"Country::PE" = "Peru, Republic of";
+"Country::PH" = "Philippines, Republic of the";
+"Country::PN" = "Pitcairn Island";
+"Country::PL" = "Poland, Polish People's Republic";
+"Country::PT" = "Portugal, Portuguese Republic";
+"Country::PR" = "Puerto Rico";
+"Country::QA" = "Qatar, State of";
+"Country::RE" = "Reunion";
+"Country::RO" = "Romania, Socialist Republic of";
+"Country::RU" = "Russian Federation";
+"Country::RW" = "Rwanda, Rwandese Republic";
+"Country::SH" = "St. Helena";
+"Country::KN" = "St. Kitts and Nevis";
+"Country::LC" = "St. Lucia";
+"Country::PM" = "St. Pierre and Miquelon";
+"Country::VC" = "St. Vincent and the Grenadines";
+"Country::WS" = "Samoa, Independent State of";
+"Country::SM" = "San Marino, Republic of";
+"Country::ST" = "Sao Tome and Principe, Democratic Republic of";
+"Country::SA" = "Saudi Arabia, Kingdom of";
+"Country::SN" = "Senegal, Republic of";
+"Country::CS" = "Serbia and Montenegro";
+"Country::SC" = "Seychelles, Republic of";
+"Country::SL" = "Sierra Leone, Republic of";
+"Country::SG" = "Singapore, Republic of";
+"Country::SK" = "Slovakia (Slovak Republic)";
+"Country::SI" = "Slovenia";
+"Country::SB" = "Solomon Islands";
+"Country::SO" = "Somalia, Somali Republic";
+"Country::ZA" = "South Africa, Republic of";
+"Country::GS" = "South Georgia and the South Sandwich Islands";
+"Country::ES" = "Spain, Spanish State";
+"Country::LK" = "Sri Lanka, Democratic Socialist Republic of";
+"Country::SD" = "Sudan, Democratic Republic of the";
+"Country::SR" = "Suriname, Republic of";
+"Country::SJ" = "Svalbard & Jan Mayen Islands";
+"Country::SZ" = "Swaziland, Kingdom of";
+"Country::SE" = "Sweden, Kingdom of";
+"Country::CH" = "Switzerland, Swiss Confederation";
+"Country::SY" = "Syrian Arab Republic";
+"Country::TW" = "Taiwan, Province of China";
+"Country::TJ" = "Tajikistan";
+"Country::TZ" = "Tanzania, United Republic of";
+"Country::TH" = "Thailand, Kingdom of";
+"Country::TL" = "Timor-Leste, Democratic Republic of";
+"Country::TG" = "Togo, Togolese Republic";
+"Country::TK" = "Tokelau (Tokelau Islands)";
+"Country::TO" = "Tonga, Kingdom of";
+"Country::TT" = "Trinidad and Tobago, Republic of";
+"Country::TN" = "Tunisia, Republic of";
+"Country::TR" = "Turkey, Republic of";
+"Country::TM" = "Turkmenistan";
+"Country::TC" = "Turks and Caicos Islands";
+"Country::TV" = "Tuvalu";
+"Country::VI" = "US Virgin Islands";
+"Country::UG" = "Uganda, Republic of";
+"Country::UA" = "Ukraine";
+"Country::AE" = "United Arab Emirates";
+"Country::GB" = "United Kingdom of Great Britain & N. Ireland";
+"Country::UM" = "United States Minor Outlying Islands";
+"Country::US" = "United States of America";
+"Country::UY" = "Uruguay, Eastern Republic of";
+"Country::UZ" = "Uzbekistan";
+"Country::VU" = "Vanuatu";
+"Country::VE" = "Venezuela, Bolivarian Republic of";
+"Country::VN" = "Viet Nam, Socialist Republic of";
+"Country::WF" = "Wallis and Futuna Islands";
+"Country::EH" = "Western Sahara";
+"Country::YE" = "Yemen";
+"Country::ZM" = "Zambia, Republic of";
+"Country::ZW" = "Zimbabwe";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "0da-WA-eay"; */
 "0da-WA-eay.text" = "Detail";
 
+/* Class = "UITableViewSection"; headerTitle = "Share & Feedback"; ObjectID = "6bK-79-a2M"; */
+"6bK-79-a2M.headerTitle" = "Share & Feedback";
+
+/* Class = "UITableViewSection"; headerTitle = "App Information"; ObjectID = "737-56-3zp"; */
+"737-56-3zp.headerTitle" = "App Information";
+
 /* Class = "UINavigationItem"; title = "Certificate Inspector"; ObjectID = "7Ah-zL-Gjb"; */
 "7Ah-zL-Gjb.title" = "Certificate Inspector";
+
+/* Class = "UILabel"; text = "#.#"; ObjectID = "Ewr-l1-6Iy"; */
+"Ewr-l1-6Iy.text" = "#.#";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "P3x-dj-Ama"; */
 "P3x-dj-Ama.text" = "Detail";
 
+/* Class = "UILabel"; text = "Remember Recent Lookups"; ObjectID = "PPe-sp-eDY"; */
+"PPe-sp-eDY.text" = "Remember Recent Lookups";
+
+/* Class = "UILabel"; text = "Test Beta Version"; ObjectID = "PrQ-rK-CEa"; */
+"PrQ-rK-CEa.text" = "Test Beta Version";
+
 /* Class = "UILabel"; text = "Title"; ObjectID = "Q2T-Pv-8ls"; */
 "Q2T-Pv-8ls.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Q85-Qc-aS9"; */
+"Q85-Qc-aS9.text" = "Title";
+
+/* Class = "UILabel"; text = "Tell Friends About Cert Inspector"; ObjectID = "QCM-IJ-RvJ"; */
+"QCM-IJ-RvJ.text" = "Tell Friends About Cert Inspector";
 
 /* Class = "UITableViewController"; title = "Certificates"; ObjectID = "S2I-zI-YU5"; */
 "S2I-zI-YU5.title" = "Certificates";
 
+/* Class = "UITableViewController"; title = "About Certificate Inspector"; ObjectID = "UEQ-qB-mO8"; */
+"UEQ-qB-mO8.title" = "About Certificate Inspector";
+
 /* Class = "UITableViewController"; title = "Certificate Inspector"; ObjectID = "UeK-6B-NSA"; */
 "UeK-6B-NSA.title" = "Certificate Inspector";
 
-/* Class = "UITableViewSection"; footerTitle = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well."; ObjectID = "bgU-th-gof"; */
-"bgU-th-gof.footerTitle" = "Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.";
+/* Class = "UITableViewSection"; headerTitle = "Options"; ObjectID = "WCN-W3-n9B"; */
+"WCN-W3-n9B.headerTitle" = "Options";
 
-/* Class = "UITableViewSection"; headerTitle = "FQDN or IP Address"; ObjectID = "bgU-th-gof"; */
-"bgU-th-gof.headerTitle" = "FQDN or IP Address";
+/* Class = "UILabel"; text = "Build"; ObjectID = "aXb-lO-Ryw"; */
+"aXb-lO-Ryw.text" = "Build";
+
+/* Class = "UILabel"; text = "#.#"; ObjectID = "bnd-Ok-o6R"; */
+"bnd-Ok-o6R.text" = "#.#";
+
+/* Class = "UILabel"; text = "Contribute"; ObjectID = "cE6-N8-FNP"; */
+"cE6-N8-FNP.text" = "Contribute";
+
+/* Class = "UILabel"; text = "Rate Cert Inspector in the App Store"; ObjectID = "dGp-zk-8SI"; */
+"dGp-zk-8SI.text" = "Rate Cert Inspector in the App Store";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "e3s-bJ-unQ"; */
 "e3s-bJ-unQ.text" = "Label";
@@ -98,8 +374,26 @@
 /* Class = "UITextField"; placeholder = "www.nsa.gov"; ObjectID = "grL-tY-LK1"; */
 "grL-tY-LK1.placeholder" = "www.nsa.gov";
 
+/* Class = "UILabel"; text = "Version"; ObjectID = "jvL-xr-ouG"; */
+"jvL-xr-ouG.text" = "Version";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "mTC-aF-yys"; */
+"mTC-aF-yys.text" = "Title";
+
+/* Class = "UILabel"; text = "Submit Feedback"; ObjectID = "ngB-Jk-o4T"; */
+"ngB-Jk-o4T.text" = "Submit Feedback";
+
 /* Class = "UITextView"; text = "Value"; ObjectID = "pgs-P6-Qwl"; */
 "pgs-P6-Qwl.text" = "Value";
+
+/* Class = "UIBarButtonItem"; title = "About"; ObjectID = "sIs-mI-6IT"; */
+"sIs-mI-6IT.title" = "About";
+
+/* Class = "UITableViewSection"; footerTitle = "Certificate Inspector is Free and Libre software licensed under GNU GPLv3.  Certificate Inspector is copyright © 2016 Ian Spence."; ObjectID = "uwH-jV-ihb"; */
+"uwH-jV-ihb.footerTitle" = "Certificate Inspector is Free and Libre software licensed under GNU GPLv3.  Certificate Inspector is copyright © 2016 Ian Spence.";
+
+/* Class = "UITableViewSection"; headerTitle = "Get Involved"; ObjectID = "uwH-jV-ihb"; */
+"uwH-jV-ihb.headerTitle" = "Get Involved";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "wDB-Yx-eAZ"; */
 "wDB-Yx-eAZ.text" = "Title";

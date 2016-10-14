@@ -2,33 +2,34 @@
 //  ValueViewController.m
 //  Certificate Inspector
 //
-//  MIT License
-//
+//  GPLv3 License
 //  Copyright (c) 2016 Ian Spence
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software Foundation,
+//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import "ValueViewController.h"
+#import "UIHelper.h"
 
 @interface ValueViewController () {
     UIHelper * uihelper;
 }
+
+@property (strong, nonatomic) NSString * value;
+@property (strong, nonatomic) NSString * viewTitle;
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
@@ -37,7 +38,7 @@
 - (void)viewDidLoad {
     self.textView.text = self.value;
     self.title = self.viewTitle;
-    uihelper = [UIHelper withViewController:self];
+    uihelper = [UIHelper sharedInstance];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
@@ -56,65 +57,51 @@
 }
 
 - (void)actionButton:(id)sender {
-    [uihelper presentActionSheetWithTitle:self.title
-                                 subtitle:langv(@"%lu characters", self.value.length)
-                        cancelButtonTitle:lang(@"Cancel")
-                                  choices:@[lang(@"Copy"), lang(@"Verify"), lang(@"Share")]
-                                dismissed:^(NSInteger selectedIndex) {
+    [uihelper presentActionSheetInViewController:self
+                                  attachToTarget:[ActionTipTarget targetWithBarButtonItem:self.navigationItem.rightBarButtonItem]
+                                           title:self.title
+                                        subtitle:langv(@"%lu characters", self.value.length)
+                               cancelButtonTitle:lang(@"Cancel")
+                                           items:@[lang(@"Copy"), lang(@"Verify"), lang(@"Share")]
+                                       dismissed:^(NSInteger selectedIndex) {
         switch (selectedIndex) {
             case 0: { // Copy
                 [[UIPasteboard generalPasteboard] setString:self.value];
                 break;
             } case 1: { // Verify
-                Class AlertControllerClass = NSClassFromString(@"UIAlertController");
-                if(AlertControllerClass){
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:lang(@"Verify Value")
-                                                                                             message:lang(@"Enter the value to verify")
-                                                                                      preferredStyle:UIAlertControllerStyleAlert];
-                    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                        textField.placeholder = lang(@"Value");
-                    }];
-
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:lang(@"Cancel")
-                                                                           style:UIAlertActionStyleCancel handler:nil];
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:lang(@"Verify")
-                                                                       style:UIAlertActionStyleDefault
-                                                                     handler:^(UIAlertAction *action) {
-                        UITextField * inputField = alertController.textFields.firstObject;
-                        [self verifyValue:inputField.text];
-                    }];
-
-                    [alertController addAction:cancelAction];
-                    [alertController addAction:okAction];
-
-                    [self presentViewController:alertController animated:YES completion:nil];
-                } else {
-                    UIAlertView * nameAlertView = [[UIAlertView alloc] initWithTitle:lang(@"Verify Value")
-                                                                             message:lang(@"Enter the value to verify")
-                                                                            delegate:self
-                                                                   cancelButtonTitle:lang(@"Cancel")
-                                                                   otherButtonTitles:lang(@"Verify"), nil];
-                    nameAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-                    [nameAlertView show];
-                }
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:lang(@"Verify Value")
+                                                                                         message:lang(@"Enter the value to verify")
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                    textField.placeholder = lang(@"Value");
+                }];
+                
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:lang(@"Cancel")
+                                                                       style:UIAlertActionStyleCancel handler:nil];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:lang(@"Verify")
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction *action) {
+                                                                     UITextField * inputField = alertController.textFields.firstObject;
+                                                                     [self verifyValue:inputField.text];
+                                                                 }];
+                
+                [alertController addAction:cancelAction];
+                [alertController addAction:okAction];
+                
+                [self presentViewController:alertController animated:YES completion:nil];
                 break;
             } case 2: { // Share
                 UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                                 initWithActivityItems:@[self.value]
                                                                 applicationActivities:nil];
+                if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+                    activityController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
+                }
                 [self presentViewController:activityController animated:YES completion:nil];
                 break;
             }
         }
     }];
-}
-
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex == 1){
-        UITextField * inputField = [alertView textFieldAtIndex:0];
-        [self verifyValue:inputField.text];
-    }
 }
 
 - (void) verifyValue:(NSString *)value {
@@ -124,13 +111,9 @@
     NSString * formattedCurrentValue = formatValue(self.value);
     NSString * formattedExpectedValue = formatValue(value);
     if ([formattedExpectedValue isEqualToString:formattedCurrentValue]) {
-        [uihelper presentAlertWithTitle:lang(@"Verified") body:lang(@"Both values matched.") dismissButtonTitle:lang(@"Dismiss") dismissed:^(NSInteger buttonIndex) {
-            //
-        }];
+        [uihelper presentAlertInViewController:self title:lang(@"Verified") body:lang(@"Both values matched.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
     } else {
-        [uihelper presentAlertWithTitle:lang(@"Not Verified") body:lang(@"Values do not match.") dismissButtonTitle:lang(@"Dismiss") dismissed:^(NSInteger buttonIndex) {
-            //
-        }];
+        [uihelper presentAlertInViewController:self title:lang(@"Not Verified") body:lang(@"Values do not match.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
     }
 }
 @end

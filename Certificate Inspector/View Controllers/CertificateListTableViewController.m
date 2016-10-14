@@ -2,34 +2,40 @@
 //  CertificateListTableViewController.m
 //  Certificate Inspector
 //
-//  MIT License
-//
+//  GPLv3 License
 //  Copyright (c) 2016 Ian Spence
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software Foundation,
+//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
 #import "CertificateListTableViewController.h"
+#import "InspectorTableViewController.h"
+#import "UIHelper.h"
+#import "CHCertificate.h"
 
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
     CHCertificate * selectedCertificate;
+    BOOL isTrusted;
 }
+
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
+@property (weak, nonatomic) IBOutlet UIButton *headerButton;
+@property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
+
+- (IBAction)headerButton:(id)sender;
 
 @end
 
@@ -38,15 +44,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.certificates = [NSArray<CHCertificate *> new];
-    uihelper = [UIHelper withViewController:self];
+    uihelper = [UIHelper sharedInstance];
     self.headerViewLabel.text = lang(@"Loading...");
-    [[CHCertificate alloc] fromURL:self.host finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
+    if (![self.host hasPrefix:@"http"]) {
+        self.host = [NSString stringWithFormat:@"https://%@", self.host];
+    }
+
+#ifdef EXTENSION
+    [self.navigationItem
+     setLeftBarButtonItem:[[UIBarButtonItem alloc]
+                           initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                           target:self
+                           action:@selector(dismissView:)]];
+#endif
+    [NSThread detachNewThreadSelector:@selector(forkTheBlockChain) toTarget:self withObject:nil];
+}
+
+- (void) forkTheBlockChain {
+    [CHCertificate certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
         if (error) {
-            [uihelper presentAlertWithError:error title:lang(@"Could not get certificates") dismissed:^(NSInteger buttonIndex) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
+            [uihelper
+             presentAlertInViewController:self
+             title:lang(@"Could not get certificates")
+             body:error.localizedDescription
+             dismissButtonTitle:lang(@"Dismiss")
+             dismissed:^(NSInteger buttonIndex) {
+#ifdef MAIN_APP
+                 [self.navigationController popViewControllerAnimated:YES];
+#else
+                 [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+#endif
+             }];
         } else {
             self.certificates = certificates;
+            isTrusted = trustedChain;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (trustedChain) {
                     self.headerViewLabel.text = lang(@"Trusted Chain");
@@ -57,9 +88,20 @@
                 }
                 self.headerViewLabel.textColor = [UIColor whiteColor];
                 [self.tableView reloadData];
+                self.headerButton.hidden = NO;
             });
         }
     }];
+}
+
+#ifdef EXTENSION
+- (void) dismissView:(id)sender {
+    [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+}
+#endif
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.certificates.count > 0 ? lang(@"Certificate Chain") : @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,7 +111,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ViewCert"]) {
-        [(InspectorTableViewController *)[segue destinationViewController] setCertificate:selectedCertificate];
+        [(InspectorTableViewController *)[segue destinationViewController] loadCertificate:selectedCertificate];
     }
 }
 
@@ -82,7 +124,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CHCertificate * cert = [self.certificates objectAtIndex:indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-    cell.textLabel.text = cert.summary;
+    cell.textLabel.text = [cert summary];
     return cell;
 }
 
@@ -91,4 +133,14 @@
     [self performSegueWithIdentifier:@"ViewCert" sender:nil];
 }
 
+- (IBAction)headerButton:(id)sender {
+    NSString * title = isTrusted ? lang(@"Trusted Chain") : lang(@"Untrusted Chain");
+    NSString * body = isTrusted ? lang(@"trusted_chain_description") : lang(@"untrusted_chain_description");
+    [uihelper
+     presentAlertInViewController:self
+     title:title
+     body:body
+     dismissButtonTitle:lang(@"Dismiss")
+     dismissed:nil];
+}
 @end

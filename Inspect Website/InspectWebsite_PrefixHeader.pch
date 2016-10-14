@@ -1,0 +1,23 @@
+#ifndef InspectWebsite_PrefixHeader_pch
+#define InspectWebsite_PrefixHeader_pch
+
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+#if DEBUG
+#define d(s, ...) NSLog(s, ##__VA_ARGS__)
+#else
+#define d(s, ...) ;
+#endif
+
+#define lang(key) NSLocalizedString(key, nil)
+#define langv(key, ...) [NSString stringWithFormat:NSLocalizedString(key, nil), ##__VA_ARGS__]
+
+#define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
+#define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
+
+#endif /* InspectWebsite_PrefixHeader_pch */
