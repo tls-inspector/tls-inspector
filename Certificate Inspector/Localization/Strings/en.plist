@@ -2,6 +2,56 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>What kind of feedback would you like to submit?</key>
+    <string>What kind of feedback would you like to submit?</string>
+    <key>All feedback is appreciated!</key>
+    <string>All feedback is appreciated!</string>
+    <key>Something I Like</key>
+    <string>Something I Like</string>
+    <key>Something I Don't Like</key>
+    <string>Something I Don't Like</string>
+    <key>Request a Feature</key>
+    <string>Request a Feature</string>
+    <key>Report a Bug</key>
+    <string>Report a Bug</string>
+    <key>Something else</key>
+    <string>Something else</string>
+    <key>Submit Feedback</key>
+    <string>Submit Feedback</string>
+    <key>Inspect</key>
+    <string>Inspect</string>
+    <key>About</key>
+    <string>About</string>
+    <key>FQDN or IP Address</key>
+    <string>FQDN or IP Address</string>
+    <key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
+    <string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
+    <key>Recent Domains</key>
+    <string>Recent Domains</string>
+    <key>Certificates</key>
+    <string>Certificates</string>
+    <key>Certificate Chain</key>
+    <string>Certificate Chain</string>
+    <key>Subject Alternative Names</key>
+    <string>Subject Alternative Names</string>
+    <key>View all alternate names</key>
+    <string>View all alternate names</string>
+    <key>Subject Alt. Names</key>
+    <string>Subject Alt. Names</string>
+    <key>About Certificate Inspector</key>
+    <string>About Certificate Inspector</string>
+    <key>Rate Cert Inspector in the App Store</key>
+    <string>Rate Cert Inspector in the App Store</string>
+    <key>Contribute</key>
+    <string>Contribute</string>
+    <key>Build</key>
+    <string>Build</string>
+    <key>Version</key>
+    <string>Version</string>
+    <key>Remember Recent Lookups</key>
+    <string>Remember Recent Lookups</string>
+    <key>Tell Friends About Cert Inspector</key>
+    <string>Tell Friends About Cert Inspector</string>
     <key>{0} characters</key>
     <string>{0} characters</string>
     <key>Algorithm</key>
