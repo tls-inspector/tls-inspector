@@ -24,6 +24,6 @@
 
 @interface InspectorTableViewController : UITableViewController <NSURLConnectionDelegate>
 
-- (void) loadCertificate:(CHCertificate *)certificate;
+- (void) loadCertificate:(CHCertificate *)certificate forDomain:(NSString *)domain;
 
 @end

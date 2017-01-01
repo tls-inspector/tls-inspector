@@ -111,7 +111,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ViewCert"]) {
-        [(InspectorTableViewController *)[segue destinationViewController] loadCertificate:selectedCertificate];
+        [(InspectorTableViewController *)[segue destinationViewController] loadCertificate:selectedCertificate forDomain:self.host];
     }
 }
 

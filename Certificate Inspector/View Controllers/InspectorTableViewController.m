@@ -24,6 +24,9 @@
 #import "ValueViewController.h"
 #import "UIHelper.h"
 #import "InspectorListTableViewController.h"
+#import "CertificateReminderManager.h"
+
+@import EventKit;
 
 @interface InspectorTableViewController()
 
@@ -31,6 +34,7 @@
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
 @property (strong, nonatomic) UIHelper       * helper;
+@property (strong, nonatomic) NSString       * domain;
 
 @end
 
@@ -105,12 +109,32 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void)actionButton:(UIBarButtonItem *)sender {
+    [[UIHelper sharedInstance]
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:self.title
+     subtitle:nil
+     cancelButtonTitle:[lang key:@"Cancel"]
+     items:@[
+             l(@"Share Public Key"),
+             l(@"Add Certificate Expiry Reminder")
+     ]
+     dismissed:^(NSInteger itemIndex) {
+        if (itemIndex == 0) {
+            [self sharePublicKey:sender];
+        } else if (itemIndex == 1) {
+            [self addCertificateExpiryReminder:sender];
+        }
+     }];
+}
+
+- (void) sharePublicKey:(UIBarButtonItem *)sender {
     NSData * pem = [self.certificate publicKeyAsPEM];
     if (pem) {
         NSString * fileName = format(@"/%@.pem", self.certificate.serialNumber);
         NSURL * fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
         [pem writeToURL:fileURL atomically:YES];
-
+        
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
@@ -126,6 +150,63 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
          dismissButtonTitle:l(@"Dismiss")
          dismissed:nil];
     }
+}
+
+- (void) addCertificateExpiryReminder:(UIBarButtonItem *)sender {
+    [[UIHelper sharedInstance]
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:l(@"Notification Date")
+     subtitle:l(@"How soon before the certificate expires should we notify you?")
+     cancelButtonTitle:l(@"Cancel")
+     items:@[
+             lv(@"{count} weeks", @[@"2"]),
+             l(@"1 month"),
+             lv(@"{count} months", @[@"3"]),
+             lv(@"{count} months", @[@"6"])]
+     dismissed:^(NSInteger itemIndex) {
+         if (itemIndex != -1) {
+             NSUInteger days = 0;
+             
+             switch (itemIndex) {
+                 case 0:
+                     days = 14;
+                     break;
+                 case 1:
+                     days = 30;
+                     break;
+                 case 2:
+                     days = 60;
+                     break;
+                 case 3:
+                     days = 180;
+                     break;
+                 default:
+                     break;
+             }
+             
+             [[CertificateReminderManager new]
+              addReminderForCertificate:self.certificate
+              forDomain:self.domain
+              daysBeforeExpires:days
+              completed:^(NSError *error, BOOL success) {
+                  if (success) {
+                      [self.helper
+                       presentAlertInViewController:self
+                       title:l(@"Reminder Added")
+                       body:l(@"You can modify the reminder in the reminders app.")
+                       dismissButtonTitle:l(@"Dismiss")
+                       dismissed:nil];
+                  } else if (error) {
+                      [self.helper
+                       presentErrorInViewController:self
+                       error:error
+                       dismissed:nil];
+                  }
+                  // If reminder permission was denied, success = NO and error = Nil
+              }];
+         }
+     }];
 }
 
 # pragma mark -
@@ -303,8 +384,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     }
 }
 
-- (void) loadCertificate:(CHCertificate *)certificate {
+- (void) loadCertificate:(CHCertificate *)certificate forDomain:(NSString *)domain {
     _certificate = certificate;
+    _domain = domain;
 }
 
 @end

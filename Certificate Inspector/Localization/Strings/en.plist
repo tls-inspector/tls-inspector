@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>1 month</key>
+	<string>1 month</string>
 	<key>About</key>
 	<string>About</string>
 	<key>About Certificate Inspector</key>
 	<string>About Certificate Inspector</string>
+	<key>Add Certificate Expiry Reminder</key>
+	<string>Add Certificate Expiry Reminder</string>
 	<key>Algorithm</key>
 	<string>Algorithm</string>
 	<key>All feedback is appreciated!</key>
@@ -73,7 +77,7 @@
 	<key>Country::AI</key>
 	<string>Anguilla</string>
 	<key>Country::AL</key>
-	<string>Albania, People&#39;s Socialist Republic of</string>
+	<string>Albania, People&apos;s Socialist Republic of</string>
 	<key>Country::AM</key>
 	<string>Armenia</string>
 	<key>Country::AN</key>
@@ -99,19 +103,19 @@
 	<key>Country::BB</key>
 	<string>Barbados</string>
 	<key>Country::BD</key>
-	<string>Bangladesh, People&#39;s Republic of</string>
+	<string>Bangladesh, People&apos;s Republic of</string>
 	<key>Country::BE</key>
 	<string>Belgium, Kingdom of</string>
 	<key>Country::BF</key>
 	<string>Burkina Faso</string>
 	<key>Country::BG</key>
-	<string>Bulgaria, People&#39;s Republic of</string>
+	<string>Bulgaria, People&apos;s Republic of</string>
 	<key>Country::BH</key>
 	<string>Bahrain, Kingdom of</string>
 	<key>Country::BI</key>
 	<string>Burundi, Republic of</string>
 	<key>Country::BJ</key>
-	<string>Benin, People&#39;s Republic of</string>
+	<string>Benin, People&apos;s Republic of</string>
 	<key>Country::BM</key>
 	<string>Bermuda</string>
 	<key>Country::BN</key>
@@ -141,11 +145,11 @@
 	<key>Country::CF</key>
 	<string>Central African Republic</string>
 	<key>Country::CG</key>
-	<string>Congo, People&#39;s Republic of</string>
+	<string>Congo, People&apos;s Republic of</string>
 	<key>Country::CH</key>
 	<string>Switzerland, Swiss Confederation</string>
 	<key>Country::CI</key>
-	<string>Cote D&#39;Ivoire, Ivory Coast, Republic of the</string>
+	<string>Cote D&apos;Ivoire, Ivory Coast, Republic of the</string>
 	<key>Country::CK</key>
 	<string>Cook Islands</string>
 	<key>Country::CL</key>
@@ -153,7 +157,7 @@
 	<key>Country::CM</key>
 	<string>Cameroon, United Republic of</string>
 	<key>Country::CN</key>
-	<string>China, People&#39;s Republic of</string>
+	<string>China, People&apos;s Republic of</string>
 	<key>Country::CO</key>
 	<string>Colombia, Republic of</string>
 	<key>Country::CR</key>
@@ -181,7 +185,7 @@
 	<key>Country::DO</key>
 	<string>Dominican Republic</string>
 	<key>Country::DZ</key>
-	<string>Algeria, People&#39;s Democratic Republic of</string>
+	<string>Algeria, People&apos;s Democratic Republic of</string>
 	<key>Country::EC</key>
 	<string>Ecuador, Republic of</string>
 	<key>Country::EE</key>
@@ -227,7 +231,7 @@
 	<key>Country::GM</key>
 	<string>Gambia, Republic of the</string>
 	<key>Country::GN</key>
-	<string>Guinea, Revolutionary People&#39;s Rep&#39;c of</string>
+	<string>Guinea, Revolutionary People&apos;s Rep&apos;c of</string>
 	<key>Country::GP</key>
 	<string>Guadaloupe</string>
 	<key>Country::GQ</key>
@@ -255,7 +259,7 @@
 	<key>Country::HT</key>
 	<string>Haiti, Republic of</string>
 	<key>Country::HU</key>
-	<string>Hungary, Hungarian People&#39;s Republic</string>
+	<string>Hungary, Hungarian People&apos;s Republic</string>
 	<key>Country::ID</key>
 	<string>Indonesia, Republic of</string>
 	<key>Country::IE</key>
@@ -293,7 +297,7 @@
 	<key>Country::KN</key>
 	<string>St. Kitts and Nevis</string>
 	<key>Country::KP</key>
-	<string>Korea, Democratic People&#39;s Republic of</string>
+	<string>Korea, Democratic People&apos;s Republic of</string>
 	<key>Country::KR</key>
 	<string>Korea, Republic of</string>
 	<key>Country::KW</key>
@@ -303,7 +307,7 @@
 	<key>Country::KZ</key>
 	<string>Kazakhstan, Republic of</string>
 	<key>Country::LA</key>
-	<string>Lao People&#39;s Democratic Republic</string>
+	<string>Lao People&apos;s Democratic Republic</string>
 	<key>Country::LB</key>
 	<string>Lebanon, Lebanese Republic</string>
 	<key>Country::LC</key>
@@ -341,7 +345,7 @@
 	<key>Country::MM</key>
 	<string>Myanmar</string>
 	<key>Country::MN</key>
-	<string>Mongolia, Mongolian People&#39;s Republic</string>
+	<string>Mongolia, Mongolian People&apos;s Republic</string>
 	<key>Country::MO</key>
 	<string>Macao, Special Administrative Region of China</string>
 	<key>Country::MP</key>
@@ -365,7 +369,7 @@
 	<key>Country::MY</key>
 	<string>Malaysia</string>
 	<key>Country::MZ</key>
-	<string>Mozambique, People&#39;s Republic of</string>
+	<string>Mozambique, People&apos;s Republic of</string>
 	<key>Country::NA</key>
 	<string>Namibia</string>
 	<key>Country::NC</key>
@@ -405,7 +409,7 @@
 	<key>Country::PK</key>
 	<string>Pakistan, Islamic Republic of</string>
 	<key>Country::PL</key>
-	<string>Poland, Polish People&#39;s Republic</string>
+	<string>Poland, Polish People&apos;s Republic</string>
 	<key>Country::PM</key>
 	<string>St. Pierre and Miquelon</string>
 	<key>Country::PN</key>
@@ -550,6 +554,8 @@
 	<string>FQDN or IP Address</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
+	<key>How soon before the certificate expires should we notify you?</key>
+	<string>How soon before the certificate expires should we notify you?</string>
 	<key>Insecure Superfish (Lenovo) certificate.</key>
 	<string>Insecure Superfish (Lenovo) certificate.</string>
 	<key>Insecure eDellRoot certificate.</key>
@@ -562,20 +568,28 @@
 	<string>Loading...</string>
 	<key>Not Verified</key>
 	<string>Not Verified</string>
+	<key>Notification Date</key>
+	<string>Notification Date</string>
 	<key>Rate Cert Inspector in the App Store</key>
 	<string>Rate Cert Inspector in the App Store</string>
 	<key>Recent Domains</key>
 	<string>Recent Domains</string>
 	<key>Remember Recent Lookups</key>
 	<string>Remember Recent Lookups</string>
+	<key>Reminder Added</key>
+	<string>Reminder Added</string>
+	<key>Renew Certificate for {domain}</key>
+	<string>Renew Certificate for {0}</string>
 	<key>Report a Bug</key>
 	<string>Report a Bug</string>
 	<key>Request a Feature</key>
 	<string>Request a Feature</string>
 	<key>Share</key>
 	<string>Share</string>
-	<key>Something I Don&#39;t Like</key>
-	<string>Something I Don&#39;t Like</string>
+	<key>Share Public Key</key>
+	<string>Share Public Key</string>
+	<key>Something I Don&apos;t Like</key>
+	<string>Something I Don&apos;t Like</string>
 	<key>Something I Like</key>
 	<string>Something I Like</string>
 	<key>Something else</key>
@@ -606,6 +620,8 @@
 	<string>Submit Feedback</string>
 	<key>Tell Friends About Cert Inspector</key>
 	<string>Tell Friends About Cert Inspector</string>
+	<key>The certificate for {domain} expires on {date}</key>
+	<string>The certificate for {0} expires on {1}</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
 	<key>Untrusted Chain</key>
@@ -630,11 +646,17 @@
 	<string>View all alternate names</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>What kind of feedback would you like to submit?</string>
+	<key>You can modify the reminder in the reminders app.</key>
+	<string>You can modify the reminder in the reminders app.</string>
 	<key>trusted_chain_description</key>
 	<string>The end certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>untrusted_chain_description</key>
 	<string>The end certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
+	<key>{count} months</key>
+	<string>{0} months</string>
+	<key>{count} weeks</key>
+	<string>{0} weeks</string>
 </dict>
 </plist>
