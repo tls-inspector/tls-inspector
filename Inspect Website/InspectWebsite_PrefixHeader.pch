@@ -15,8 +15,8 @@
 #define d(s, ...) ;
 #endif
 
-#define lang(keyString) [lang key:keyString]
-#define langv(key, ...) [NSString stringWithFormat:NSLocalizedString(key, nil), ##__VA_ARGS__]
+#define l(keyString) [lang key:keyString]
+#define lv(keyString, argsArray) [lang key:keyString args:argsArray]
 
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]

@@ -61,24 +61,24 @@
                                   attachToTarget:[ActionTipTarget targetWithBarButtonItem:self.navigationItem.rightBarButtonItem]
                                            title:self.title
                                         subtitle:[lang key:@"{0} characters" args:@[format(@"%lu", (unsigned long)self.value.length)]]
-                               cancelButtonTitle:lang(@"Cancel")
-                                           items:@[lang(@"Copy"), lang(@"Verify"), lang(@"Share")]
+                               cancelButtonTitle:l(@"Cancel")
+                                           items:@[l(@"Copy"), l(@"Verify"), l(@"Share")]
                                        dismissed:^(NSInteger selectedIndex) {
         switch (selectedIndex) {
             case 0: { // Copy
                 [[UIPasteboard generalPasteboard] setString:self.value];
                 break;
             } case 1: { // Verify
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:lang(@"Verify Value")
-                                                                                         message:lang(@"Enter the value to verify")
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:l(@"Verify Value")
+                                                                                         message:l(@"Enter the value to verify")
                                                                                   preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                    textField.placeholder = lang(@"Value");
+                    textField.placeholder = l(@"Value");
                 }];
                 
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:lang(@"Cancel")
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:l(@"Cancel")
                                                                        style:UIAlertActionStyleCancel handler:nil];
-                UIAlertAction *okAction = [UIAlertAction actionWithTitle:lang(@"Verify")
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:l(@"Verify")
                                                                    style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction *action) {
                                                                      UITextField * inputField = alertController.textFields.firstObject;
@@ -111,9 +111,9 @@
     NSString * formattedCurrentValue = formatValue(self.value);
     NSString * formattedExpectedValue = formatValue(value);
     if ([formattedExpectedValue isEqualToString:formattedCurrentValue]) {
-        [uihelper presentAlertInViewController:self title:lang(@"Verified") body:lang(@"Both values matched.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
+        [uihelper presentAlertInViewController:self title:l(@"Verified") body:l(@"Both values matched.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
     } else {
-        [uihelper presentAlertInViewController:self title:lang(@"Not Verified") body:lang(@"Values do not match.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
+        [uihelper presentAlertInViewController:self title:l(@"Not Verified") body:l(@"Values do not match.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
     }
 }
 @end

@@ -71,9 +71,9 @@
 - (void) unsupportedURL {
     [[UIHelper sharedInstance]
      presentAlertInViewController:self
-     title:lang(@"Unsupported Scheme")
-     body:lang(@"Only HTTPS sites can be inspected")
-     dismissButtonTitle:lang(@"Dismiss")
+     title:l(@"Unsupported Scheme")
+     body:l(@"Only HTTPS sites can be inspected")
+     dismissButtonTitle:l(@"Dismiss")
      dismissed:^(NSInteger buttonIndex) {
          [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
      }];

@@ -92,9 +92,9 @@
 - (void) trustedFingerprintSecFailure:(NSNotification *)n {
     [self.helper
      presentAlertInViewController:self
-     title:lang(@"Unable to fetch trusted fingerprint data")
-     body:lang(@"We were unable to verify the integrity of the trusted fingerprint data. A checksum mismatch occured.")
-     dismissButtonTitle:lang(@"Proceed with caution.")
+     title:l(@"Unable to fetch trusted fingerprint data")
+     body:l(@"We were unable to verify the integrity of the trusted fingerprint data. A checksum mismatch occured.")
+     dismissButtonTitle:l(@"Proceed with caution.")
      dismissed:nil];
 }
 
@@ -141,9 +141,9 @@
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return lang(@"FQDN or IP Address");
+            return l(@"FQDN or IP Address");
         case 1:
-            return lang(@"Recent Domains");
+            return l(@"Recent Domains");
         default:
             return nil;
     }
@@ -152,7 +152,7 @@
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return lang(@"Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.");
+            return l(@"Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.");
         default:
             return nil;
     }

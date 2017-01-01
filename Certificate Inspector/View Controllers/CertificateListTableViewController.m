@@ -45,7 +45,7 @@
     [super viewDidLoad];
     self.certificates = [NSArray<CHCertificate *> new];
     uihelper = [UIHelper sharedInstance];
-    self.headerViewLabel.text = lang(@"Loading...");
+    self.headerViewLabel.text = l(@"Loading...");
     if (![self.host hasPrefix:@"http"]) {
         self.host = [NSString stringWithFormat:@"https://%@", self.host];
     }
@@ -65,9 +65,9 @@
         if (error) {
             [uihelper
              presentAlertInViewController:self
-             title:lang(@"Could not get certificates")
+             title:l(@"Could not get certificates")
              body:error.localizedDescription
-             dismissButtonTitle:lang(@"Dismiss")
+             dismissButtonTitle:l(@"Dismiss")
              dismissed:^(NSInteger buttonIndex) {
 #ifdef MAIN_APP
                  [self.navigationController popViewControllerAnimated:YES];
@@ -80,10 +80,10 @@
             isTrusted = trustedChain;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (trustedChain) {
-                    self.headerViewLabel.text = lang(@"Trusted Chain");
+                    self.headerViewLabel.text = l(@"Trusted Chain");
                     self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
                 } else {
-                    self.headerViewLabel.text = lang(@"Untrusted Chain");
+                    self.headerViewLabel.text = l(@"Untrusted Chain");
                     self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
                 }
                 self.headerViewLabel.textColor = [UIColor whiteColor];
@@ -101,7 +101,7 @@
 #endif
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.certificates.count > 0 ? lang(@"Certificate Chain") : @"";
+    return self.certificates.count > 0 ? l(@"Certificate Chain") : @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,13 +134,13 @@
 }
 
 - (IBAction)headerButton:(id)sender {
-    NSString * title = isTrusted ? lang(@"Trusted Chain") : lang(@"Untrusted Chain");
-    NSString * body = isTrusted ? lang(@"trusted_chain_description") : lang(@"untrusted_chain_description");
+    NSString * title = isTrusted ? l(@"Trusted Chain") : l(@"Untrusted Chain");
+    NSString * body = isTrusted ? l(@"trusted_chain_description") : l(@"untrusted_chain_description");
     [uihelper
      presentAlertInViewController:self
      title:title
      body:body
-     dismissButtonTitle:lang(@"Dismiss")
+     dismissButtonTitle:l(@"Dismiss")
      dismissed:nil];
 }
 @end

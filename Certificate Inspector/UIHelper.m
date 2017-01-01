@@ -83,9 +83,9 @@ static id _instance;
                                 error:(NSError *)error
                             dismissed:(void (^)(NSInteger buttonIndex))dismissed {
     [self presentAlertInViewController:viewController
-                                 title:lang(@"Uh oh!")
+                                 title:l(@"Uh oh!")
                                   body:error.localizedDescription
-                    dismissButtonTitle:lang(@"That sucks.")
+                    dismissButtonTitle:l(@"That sucks.")
                              dismissed:dismissed];
 }
 

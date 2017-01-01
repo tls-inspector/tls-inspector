@@ -81,15 +81,15 @@ static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Ma
         [self.helper
          presentActionSheetInViewController:self
          attachToTarget:[ActionTipTarget targetWithView:[cell viewWithTag:1]]
-         title:lang(@"What kind of feedback would you like to submit?")
-         subtitle:lang(@"All feedback is appreciated!")
-         cancelButtonTitle:lang(@"Cancel")
+         title:l(@"What kind of feedback would you like to submit?")
+         subtitle:l(@"All feedback is appreciated!")
+         cancelButtonTitle:l(@"Cancel")
          items:@[
-                 lang(@"Something I Like"),
-                 lang(@"Something I Don't Like"),
-                 lang(@"Request a Feature"),
-                 lang(@"Report a Bug"),
-                 lang(@"Something else"),
+                 l(@"Something I Like"),
+                 l(@"Something I Don't Like"),
+                 l(@"Request a Feature"),
+                 l(@"Report a Bug"),
+                 l(@"Something else"),
                  ]
          dismissed:^(NSInteger selectedIndex) {
              switch (selectedIndex) {
@@ -112,7 +112,7 @@ static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Ma
                  case 4: {
                      MFMailComposeViewController * mailController = [MFMailComposeViewController new];
                      mailController.mailComposeDelegate = self;
-                     [mailController setSubject:lang(@"Certificate Inspector Feedback")];
+                     [mailController setSubject:l(@"Certificate Inspector Feedback")];
                      [mailController setToRecipients:@[PROJECT_MAINTAINER_EMAIL]];
                      [self presentViewController:mailController animated:YES completion:nil];
                      break;

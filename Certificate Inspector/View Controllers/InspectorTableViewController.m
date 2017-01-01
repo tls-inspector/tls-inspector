@@ -82,18 +82,18 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
-    NSString * algorythm = lang(nstrcat(@"CertAlgorithm::", [self.certificate algorithm]));
+    NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [self.certificate algorithm]));
     
-    [self.cells addObject:@{@"label": lang(@"Issuer"), @"value": [self.certificate issuer]}];
-    [self.cells addObject:@{@"label": lang(@"Algorithm"), @"value": algorythm}];
-    [self.cells addObject:@{@"label": lang(@"Valid To"), @"value": [dateFormatter stringFromDate:[self.certificate notAfter]]}];
-    [self.cells addObject:@{@"label": lang(@"Valid From"), @"value": [dateFormatter stringFromDate:[self.certificate notBefore]]}];
+    [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [self.certificate issuer]}];
+    [self.cells addObject:@{@"label": l(@"Algorithm"), @"value": algorythm}];
+    [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[self.certificate notAfter]]}];
+    [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[self.certificate notBefore]]}];
 
     if (![self.certificate validIssueDate]) {
-        [self.certErrors addObject:@{@"error": lang(@"Certificate is expired or not valid yet.")}];
+        [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];
     }
     if ([[self.certificate algorithm] hasPrefix:@"sha1"]) {
-        [self.certErrors addObject:@{@"error": lang(@"Certificate uses insecure SHA1 algorithm.")}];
+        [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
     }
 
 #ifdef MAIN_APP
@@ -141,9 +141,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     } else {
         [self.helper
          presentAlertInViewController:self
-         title:lang(@"Unable to share public key")
-         body:lang(@"We were unable to export the public key in PEM format.")
-         dismissButtonTitle:lang(@"Dismiss")
+         title:l(@"Unable to share public key")
+         body:l(@"We were unable to export the public key in PEM format.")
+         dismissButtonTitle:l(@"Dismiss")
          dismissed:nil];
     }
 }
@@ -191,17 +191,17 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
-            return self.certificate.subjectAlternativeNames.count > 0 ? lang(@"Subject Alternative Names") : nil;
+            return self.certificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
         case CertificateInformation:
-            return lang(@"Certificate Information");
+            return l(@"Certificate Information");
         case Names:
-            return lang(@"Subject Names");
+            return l(@"Subject Names");
         case Fingerprints:
-            return lang(@"Fingerprints");
+            return l(@"Fingerprints");
         case CertificateErrors:
-            return self.certErrors.count > 0 ? lang(@"Certificate Errors") : nil;
+            return self.certErrors.count > 0 ? l(@"Certificate Errors") : nil;
         case CertificateVerification:
-            return self.certVerification ? lang(@"Verified Certificate") : nil;
+            return self.certVerification ? l(@"Verified Certificate") : nil;
     }
     return @"";
 }
@@ -230,11 +230,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             NSString * value = [names objectForKey:key];
             if ([key isEqualToString:@"C"]) {
                 NSString * langKey = nstrcat(@"Country::", value);
-                value = lang(langKey);
+                value = l(langKey);
             }
 
             detailTextLabel.text = value;
-            textLabel.text = lang(nstrcat(@"Subject::", key));
+            textLabel.text = l(nstrcat(@"Subject::", key));
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
@@ -267,7 +267,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             break;
         } case SubjectAltNames: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-            cell.textLabel.text = lang(@"View all alternate names");
+            cell.textLabel.text = l(@"View all alternate names");
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagSANS;
@@ -340,10 +340,10 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 #ifdef MAIN_APP
     [self.helper
      presentConfirmInViewController:self
-     title:lang(@"Trusted & Verified Certificate")
-     body:lang(@"This certificate has been security verified as legitimate.")
-     confirmButtonTitle:lang(@"Learn More")
-     cancelButtonTitle:lang(@"Dimiss")
+     title:l(@"Trusted & Verified Certificate")
+     body:l(@"This certificate has been security verified as legitimate.")
+     confirmButtonTitle:l(@"Learn More")
+     cancelButtonTitle:l(@"Dimiss")
      confirmActionIsDestructive:NO
      dismissed:^(BOOL confirmed) {
          if (confirmed) {
@@ -354,9 +354,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 #else
     [self.helper
      presentAlertInViewController:self
-     title:lang(@"Trusted & Verified Certificate")
-     body:lang(@"This certificate has been security verified as legitimate.")
-     dismissButtonTitle:lang(@"Dimiss")
+     title:l(@"Trusted & Verified Certificate")
+     body:l(@"This certificate has been security verified as legitimate.")
+     dismissButtonTitle:l(@"Dimiss")
      dismissed:nil];
 #endif
 }
@@ -365,7 +365,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     if ([segue.identifier isEqualToString:@"ShowValue"]) {
         [segue.destinationViewController loadValue:valueToInspect title:titleForValue];
     } else if ([segue.identifier isEqualToString:@"ShowList"]) {
-        [(InspectorListTableViewController *)segue.destinationViewController setList:self.certificate.subjectAlternativeNames title:lang(@"Subject Alt. Names")];
+        [(InspectorListTableViewController *)segue.destinationViewController setList:self.certificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
     }
 }
 
