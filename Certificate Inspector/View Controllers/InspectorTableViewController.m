@@ -26,7 +26,7 @@
 #import "InspectorListTableViewController.h"
 #import "CertificateReminderManager.h"
 
-@import EventKit;
+@import MBProgressHUD;
 
 @interface InspectorTableViewController()
 
@@ -129,6 +129,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void) sharePublicKey:(UIBarButtonItem *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSData * pem = [self.certificate publicKeyAsPEM];
     if (pem) {
         NSString * fileName = format(@"/%@.pem", self.certificate.serialNumber);
@@ -141,14 +142,18 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
             activityController.popoverPresentationController.barButtonItem = sender;
         }
-        [self presentViewController:activityController animated:YES completion:nil];
+        [self presentViewController:activityController animated:YES completion:^() {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
     } else {
         [self.helper
          presentAlertInViewController:self
          title:l(@"Unable to share public key")
          body:l(@"We were unable to export the public key in PEM format.")
          dismissButtonTitle:l(@"Dismiss")
-         dismissed:nil];
+         dismissed:^(NSInteger buttonIndex) {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+         }];
     }
 }
 
