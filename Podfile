@@ -2,7 +2,6 @@ platform :ios, '9.3'
 
 target 'Cert Inspector' do
     use_frameworks!
-    pod 'SSKeychain', '1.4.0'
 end
 
 target 'Inspect Website' do

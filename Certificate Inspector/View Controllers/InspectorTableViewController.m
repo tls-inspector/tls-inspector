@@ -25,16 +25,11 @@
 #import "UIHelper.h"
 #import "InspectorListTableViewController.h"
 
-#ifdef MAIN_APP
-#import "TrustedFingerprints.h"
-#endif
-
 @interface InspectorTableViewController()
 
 @property (strong, nonatomic) CHCertificate  * certificate;
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
-@property (strong, nonatomic) NSDictionary   * certVerification;
 @property (strong, nonatomic) UIHelper       * helper;
 
 @end
@@ -58,14 +53,12 @@ typedef NS_ENUM(NSInteger, InspectorSection) {
     Fingerprints,
     SubjectAltNames,
     CertificateErrors,
-    CertificateVerification,
     SectionEnd
 };
 
 typedef NS_ENUM(NSInteger, CellTags) {
     CellTagValue = 1,
-    CellTagVerified = 2,
-    CellTagSANS = 3
+    CellTagSANS
 };
 
 typedef NS_ENUM(NSInteger, LeftDetailTag) {
@@ -95,19 +88,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     if ([[self.certificate algorithm] hasPrefix:@"sha1"]) {
         [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
     }
-
-#ifdef MAIN_APP
-    NSDictionary * trustResults = [[TrustedFingerprints sharedInstance]
-                                   dataForFingerprint:[[[self.certificate SHA1Fingerprint] uppercaseString]
-                                                       stringByReplacingOccurrencesOfString:@" " withString:@""]];
-    if (trustResults) {
-        if (![[trustResults objectForKey:@"trust"] boolValue]) {
-            [self.certErrors addObject:@{@"error": [trustResults objectForKey:@"description"]}];
-        } else {
-            self.certVerification = trustResults;
-        }
-    }
-#endif
 
     MD5Fingerprint = [self.certificate MD5Fingerprint];
     SHA1Fingerprint = [self.certificate SHA1Fingerprint];
@@ -182,8 +162,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             return 4;
         case CertificateErrors:
             return self.certErrors.count;
-        case CertificateVerification:
-            return self.certVerification ? 1 : 0;
     }
     return 0;
 }
@@ -200,8 +178,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             return l(@"Fingerprints");
         case CertificateErrors:
             return self.certErrors.count > 0 ? l(@"Certificate Errors") : nil;
-        case CertificateVerification:
-            return self.certVerification ? l(@"Verified Certificate") : nil;
     }
     return @"";
 }
@@ -279,13 +255,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
-        } case CertificateVerification: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
-            cell.textLabel.text = self.certVerification[@"description"];
-            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.tag = CellTagVerified;
-            break;
         } default: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -319,46 +288,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             }
             [self performSegueWithIdentifier:@"ShowValue" sender:nil];
             break;
-        } case CellTagVerified: {
-            [self showVerifiedAlert];
-            break;
         } case CellTagSANS: {
             [self performSegueWithIdentifier:@"ShowList" sender:nil];
             break;
         }
     }
-}
-
-- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.tag == CellTagVerified) {
-        [self showVerifiedAlert];
-    }
-}
-
-- (void) showVerifiedAlert {
-#ifdef MAIN_APP
-    [self.helper
-     presentConfirmInViewController:self
-     title:l(@"Trusted & Verified Certificate")
-     body:l(@"This certificate has been security verified as legitimate.")
-     confirmButtonTitle:l(@"Learn More")
-     cancelButtonTitle:l(@"Dimiss")
-     confirmActionIsDestructive:NO
-     dismissed:^(BOOL confirmed) {
-         if (confirmed) {
-             [[UIApplication sharedApplication] openURL:
-              [NSURL URLWithString:@"https://www.grc.com/fingerprints.htm"]];
-         }
-     }];
-#else
-    [self.helper
-     presentAlertInViewController:self
-     title:l(@"Trusted & Verified Certificate")
-     body:l(@"This certificate has been security verified as legitimate.")
-     dismissButtonTitle:l(@"Dimiss")
-     dismissed:nil];
-#endif
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

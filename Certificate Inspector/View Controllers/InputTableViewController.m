@@ -21,7 +21,6 @@
 
 #import "InputTableViewController.h"
 #import "CertificateListTableViewController.h"
-#import "TrustedFingerprints.h"
 #import "UIHelper.h"
 #import "RecentDomains.h"
 
@@ -42,17 +41,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [TrustedFingerprints sharedInstance];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(trustedFingerprintSecFailure:)
-     name:kTrustedFingerprintRemoteSecFailure
-     object:nil];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(trustedFingerprintSecFailure:)
-     name:kTrustedFingerprintLocalSecFailure
-     object:nil];
     self.recentDomainManager = [RecentDomains new];
     self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
@@ -87,15 +75,6 @@
     } else {
         return NO;
     }
-}
-
-- (void) trustedFingerprintSecFailure:(NSNotification *)n {
-    [self.helper
-     presentAlertInViewController:self
-     title:l(@"Unable to fetch trusted fingerprint data")
-     body:l(@"We were unable to verify the integrity of the trusted fingerprint data. A checksum mismatch occured.")
-     dismissButtonTitle:l(@"Proceed with caution.")
-     dismissed:nil];
 }
 
 - (void) saveRecent {
