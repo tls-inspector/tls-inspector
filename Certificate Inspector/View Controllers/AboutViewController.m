@@ -41,6 +41,7 @@ static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/C
 static NSString * PROJECT_URL = @"https://certificate-inspector.com/";
 static NSString * ITUNES_APP_ID = @"1100539810";
 static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/Certificate-Inspector/blob/master/CONTRIBUTE.md";
+static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certificate-inspector-beta.html";
 static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Manager' <certificate-inspector@ecnepsnai.com>";
 
 - (void)viewDidLoad {
@@ -122,6 +123,8 @@ static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Ma
          }];
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_CONTRIBUTE_URL]];
+    } else if ([cell.reuseIdentifier isEqualToString:@"beta"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_TESTFLIGHT_APPLICATION]];
     }
 }
 

@@ -620,6 +620,8 @@
 	<string>Submit Feedback</string>
 	<key>Tell Friends About Cert Inspector</key>
 	<string>Tell Friends About Cert Inspector</string>
+	<key>Test New Features</key>
+	<string>Test New Features</string>
 	<key>The certificate for {domain} expires on {date}</key>
 	<string>The certificate for {0} expires on {1}</string>
 	<key>Trusted Chain</key>
