@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSRemindersUsageDescription</key>
-	<string>Add reminders for when certificates are about to expire.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -29,7 +27,8 @@
 			<string>com.ecnepsnai.Certificate-Inspector</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>CertificateInspector</string>
+				<string>certificateinspector</string>
+				<string>certinspector</string>
 			</array>
 		</dict>
 	</array>
@@ -41,6 +40,8 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSRemindersUsageDescription</key>
+	<string>Add reminders for when certificates are about to expire.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>

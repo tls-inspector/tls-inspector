@@ -26,6 +26,7 @@
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
+    NSNumber * certIndex;
 }
 
 @property (strong, nonatomic) UITextField *hostField;
@@ -44,12 +45,15 @@
     self.recentDomainManager = [RecentDomains new];
     self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.recentDomains = [self.recentDomainManager getRecentDomains];
     [self.tableView reloadData];
+    hostAddress = nil;
+    certIndex = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,6 +63,9 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"InspectCertificate"]) {
         [(CertificateListTableViewController *)[segue destinationViewController] setHost:hostAddress];
+        if (certIndex) {
+            [(CertificateListTableViewController *)[segue destinationViewController] setIndex:certIndex];
+        }
     }
 }
 
@@ -88,6 +95,16 @@
     [self saveRecent];
     hostAddress = self.hostField.text;
     [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+}
+
+- (void) inspectWebsiteNotification:(NSNotification *)notification {
+    NSDictionary<NSString *, id> * data = (NSDictionary *)notification.object;
+    self.hostField.text = [data objectForKey:INSPECT_NOTIFICATION_HOST_KEY];
+    NSNumber * index = [data objectForKey:INSPECT_NOTIFICATION_INDEX_KEY];
+    if (index) {
+        certIndex = index;
+    }
+    [self inspectButton:nil];
 }
 
 # pragma mark -

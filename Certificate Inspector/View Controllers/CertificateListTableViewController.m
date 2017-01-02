@@ -89,6 +89,15 @@
                 self.headerViewLabel.textColor = [UIColor whiteColor];
                 [self.tableView reloadData];
                 self.headerButton.hidden = NO;
+                if (self.index) {
+                    NSUInteger certIndex = [self.index unsignedIntegerValue];
+                    if ((self.certificates.count - 1) >= certIndex) {
+                        selectedCertificate = self.certificates[certIndex];
+                        [self performSegueWithIdentifier:@"ViewCert" sender:nil];
+                    } else {
+                        NSLog(@"Cert index is out of bounds %lu > %lu", certIndex, self.certificates.count - 1);
+                    }
+                }
             });
         }
     }];
