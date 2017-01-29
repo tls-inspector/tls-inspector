@@ -24,25 +24,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
-
-FOUNDATION_EXPORT double CHXertificateVersionNumber;
-FOUNDATION_EXPORT const unsigned char CHXertificateVersionString[];
-
 #import <Foundation/Foundation.h>
 
 @interface CHCertificate : NSObject
-
-/**
- *  Query the specified URL for its certificate chain.
- *
- *  @param URL      The URL to query. Must use the https scheme.
- *                  The port is optional and will default to 443.
- *  @param finished Called when finished with either an error or certificates.
- */
-+ (void) certificateChainFromURL:(NSURL *)URL finished:(void (^)(NSError * error,
-                                                                 NSArray<CHCertificate *> * certificates,
-                                                                 BOOL trustedChain))finished;
 
 /**
  *  Create a CHCertificate object from a pre-existing X509 object.
@@ -158,7 +142,7 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
  *  @return A dictionary of subject fields
  */
 - (NSDictionary<NSString *, NSString *> *) names;
-    
+
 /**
  *  Returns an array of subject names applicable to the cert
  *
@@ -172,5 +156,12 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
  *  @return NSData representing the bytes (includes header and footer) or nil on error
  */
 - (NSData *) publicKeyAsPEM;
+
+/**
+ *  Returns the X509 value of the certificate. Safe to cast to (X509 *) if not nil.
+ *
+ *  @return (X509 *)void pointer representing the X509 struct of the certificate or nil on error
+ */
+- (void *) X509Certificate;
 
 @end

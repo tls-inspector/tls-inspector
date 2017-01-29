@@ -23,6 +23,7 @@
 #import "InspectorTableViewController.h"
 #import "UIHelper.h"
 #import "CHCertificate.h"
+#import "CHCertificateFactory.h"
 
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
@@ -34,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
 @property (weak, nonatomic) IBOutlet UIButton *headerButton;
 @property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
+@property (strong, nonnull, nonatomic) CHCertificateFactory * factory;
 
 - (IBAction)headerButton:(id)sender;
 
@@ -43,6 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.factory = [CHCertificateFactory new];
     self.certificates = [NSArray<CHCertificate *> new];
     uihelper = [UIHelper sharedInstance];
     self.headerViewLabel.text = l(@"Loading...");
@@ -61,7 +64,7 @@
 }
 
 - (void) forkTheBlockChain {
-    [CHCertificate certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
+    [self.factory certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
         if (error) {
             [uihelper
              presentAlertInViewController:self

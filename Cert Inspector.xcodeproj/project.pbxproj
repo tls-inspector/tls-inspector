@@ -9,11 +9,6 @@
 /* Begin PBXBuildFile section */
 		3C04EE5F1CB4A23900F56B68 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C04EE621CB4AE5800F56B68 /* ValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE611CB4AE5800F56B68 /* ValueViewController.m */; };
-		3C0937351D84C94C002DF50B /* CHCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C0937331D84C94C002DF50B /* CHCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C0937381D84C94C002DF50B /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0937311D84C94C002DF50B /* CHCertificate.framework */; };
-		3C0937391D84C94C002DF50B /* CHCertificate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0937311D84C94C002DF50B /* CHCertificate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3C09373D1D84C958002DF50B /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0937311D84C94C002DF50B /* CHCertificate.framework */; };
-		3C09373F1D84C99E002DF50B /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09373E1D84C99E002DF50B /* CHCertificate.m */; };
 		3C3104E91D83C02E0093909E /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
 		3C3104EE1D83C4A40093909E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C3104F01D83C4C30093909E /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C3104EF1D83C4C30093909E /* Extension.storyboard */; };
@@ -49,6 +44,13 @@
 		3CC652401DB0711F001FB7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6523E1DB0710C001FB7E1 /* Main.storyboard */; };
 		3CC652431DB07166001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
 		3CC652441DB071DF001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
+		3CCADFD71E3EAEDC0087B1DD /* CHCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CCADFDA1E3EAEDC0087B1DD /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; };
+		3CCADFDB1E3EAEDC0087B1DD /* CHCertificate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */; };
+		3CCADFE31E3EAF000087B1DD /* CHCertificateFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCADFE01E3EAF000087B1DD /* CHCertificateFactory.h */; };
+		3CCADFE41E3EAF000087B1DD /* CHCertificateFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCADFE11E3EAF000087B1DD /* CHCertificateFactory.m */; };
+		3CCADFE51E3EAF770087B1DD /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; };
 		3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */; };
@@ -63,24 +65,24 @@
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		66C7AF235042CCA4BF1E3342 /* Pods_Cert_Inspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CC5ACA0D9E2E2E4E331F611 /* Pods_Cert_Inspector.framework */; };
-		785B588F0576CA13537BE2E3 /* Pods_CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D583AA3C66988CF40443355 /* Pods_CHCertificate.framework */; };
+		8E5B4A66E60701A63119B290 /* Pods_CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D583AA3C66988CF40443355 /* Pods_CHCertificate.framework */; };
 		B859FC5831450BCC55334D53 /* Pods_Inspect_Website.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3C0937361D84C94C002DF50B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C0937301D84C94C002DF50B;
-			remoteInfo = CHCertificate;
-		};
 		3C43EF8B1D7A987F00AE65E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3C43EF811D7A987F00AE65E9;
 			remoteInfo = "Inspect Website";
+		};
+		3CCADFD81E3EAEDC0087B1DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CCADFD21E3EAEDC0087B1DD;
+			remoteInfo = CHCertificate;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -102,7 +104,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3C0937391D84C94C002DF50B /* CHCertificate.framework in Embed Frameworks */,
+				3CCADFDB1E3EAEDC0087B1DD /* CHCertificate.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,10 +117,6 @@
 		3C04EE601CB4AE5800F56B68 /* ValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueViewController.h; path = "View Controllers/ValueViewController.h"; sourceTree = "<group>"; };
 		3C04EE611CB4AE5800F56B68 /* ValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValueViewController.m; path = "View Controllers/ValueViewController.m"; sourceTree = "<group>"; };
 		3C04EE631CB4B3F100F56B68 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		3C0937311D84C94C002DF50B /* CHCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C0937331D84C94C002DF50B /* CHCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHCertificate.h; sourceTree = "<group>"; };
-		3C0937341D84C94C002DF50B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C09373E1D84C99E002DF50B /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificate.m; sourceTree = "<group>"; };
 		3C3104EF1D83C4C30093909E /* Extension.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Extension.storyboard; sourceTree = "<group>"; };
 		3C3104F21D83C5C70093909E /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
 		3C3104F31D83C5C70093909E /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
@@ -146,6 +144,12 @@
 		3CC6522B1DB06EC4001FB7E1 /* UIViewController+Lang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Lang.swift"; path = "Localization/UI Elements/UIViewController+Lang.swift"; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3CC652421DB07166001FB7E1 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = en.plist; path = Localization/Strings/en.plist; sourceTree = "<group>"; };
+		3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHCertificate.h; sourceTree = "<group>"; };
+		3CCADFD61E3EAEDC0087B1DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificate.m; sourceTree = "<group>"; };
+		3CCADFE01E3EAF000087B1DD /* CHCertificateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateFactory.h; sourceTree = "<group>"; };
+		3CCADFE11E3EAF000087B1DD /* CHCertificateFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateFactory.m; sourceTree = "<group>"; };
 		3CDD52D592D30D74C49C0F7D /* Pods-CHXCertificate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHXCertificate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CHXCertificate/Pods-CHXCertificate.debug.xcconfig"; sourceTree = "<group>"; };
 		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorListTableViewController.h; path = "View Controllers/InspectorListTableViewController.h"; sourceTree = "<group>"; };
 		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorListTableViewController.m; path = "View Controllers/InspectorListTableViewController.m"; sourceTree = "<group>"; };
@@ -181,20 +185,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3C09372D1D84C94C002DF50B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				785B588F0576CA13537BE2E3 /* Pods_CHCertificate.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C43EF7F1D7A987F00AE65E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C09373D1D84C958002DF50B /* CHCertificate.framework in Frameworks */,
+				3CCADFE51E3EAF770087B1DD /* CHCertificate.framework in Frameworks */,
 				B859FC5831450BCC55334D53 /* Pods_Inspect_Website.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CCADFCF1E3EAEDC0087B1DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E5B4A66E60701A63119B290 /* Pods_CHCertificate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66C7AF235042CCA4BF1E3342 /* Pods_Cert_Inspector.framework in Frameworks */,
-				3C0937381D84C94C002DF50B /* CHCertificate.framework in Frameworks */,
+				3CCADFDA1E3EAEDC0087B1DD /* CHCertificate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,16 +224,6 @@
 				7D583AA3C66988CF40443355 /* Pods_CHCertificate.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3C0937321D84C94C002DF50B /* CHCertificate */ = {
-			isa = PBXGroup;
-			children = (
-				3C0937331D84C94C002DF50B /* CHCertificate.h */,
-				3C09373E1D84C99E002DF50B /* CHCertificate.m */,
-				3C0937341D84C94C002DF50B /* Info.plist */,
-			);
-			path = CHCertificate;
 			sourceTree = "<group>";
 		};
 		3C43EF831D7A987F00AE65E9 /* Inspect Website */ = {
@@ -280,6 +274,18 @@
 			name = Strings;
 			sourceTree = "<group>";
 		};
+		3CCADFD41E3EAEDC0087B1DD /* CHCertificate */ = {
+			isa = PBXGroup;
+			children = (
+				3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */,
+				3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */,
+				3CCADFE01E3EAF000087B1DD /* CHCertificateFactory.h */,
+				3CCADFE11E3EAF000087B1DD /* CHCertificateFactory.m */,
+				3CCADFD61E3EAEDC0087B1DD /* Info.plist */,
+			);
+			path = CHCertificate;
+			sourceTree = "<group>";
+		};
 		3CE5D2AA1E199FEF009500E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,7 +300,7 @@
 			children = (
 				3CFAE6D81CA8440400CD946B /* Certificate Inspector */,
 				3C43EF831D7A987F00AE65E9 /* Inspect Website */,
-				3C0937321D84C94C002DF50B /* CHCertificate */,
+				3CCADFD41E3EAEDC0087B1DD /* CHCertificate */,
 				3CFAE6D71CA8440400CD946B /* Products */,
 				5389857E70C02DAF5C4C67AF /* Pods */,
 				21AEFC781B5B0A0FC4C01297 /* Frameworks */,
@@ -306,7 +312,7 @@
 			children = (
 				3CFAE6D61CA8440400CD946B /* Cert Inspector.app */,
 				3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */,
-				3C0937311D84C94C002DF50B /* CHCertificate.framework */,
+				3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,37 +389,18 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		3C09372E1D84C94C002DF50B /* Headers */ = {
+		3CCADFD01E3EAEDC0087B1DD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C0937351D84C94C002DF50B /* CHCertificate.h in Headers */,
+				3CCADFE31E3EAF000087B1DD /* CHCertificateFactory.h in Headers */,
+				3CCADFD71E3EAEDC0087B1DD /* CHCertificate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3C0937301D84C94C002DF50B /* CHCertificate */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C09373A1D84C94D002DF50B /* Build configuration list for PBXNativeTarget "CHCertificate" */;
-			buildPhases = (
-				DD4DB29254EC767D6EC2064D /* [CP] Check Pods Manifest.lock */,
-				3C09372C1D84C94C002DF50B /* Sources */,
-				3C09372D1D84C94C002DF50B /* Frameworks */,
-				3C09372E1D84C94C002DF50B /* Headers */,
-				3C09372F1D84C94C002DF50B /* Resources */,
-				985075AA37DF7E714BF16752 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CHCertificate;
-			productName = CHCertificate;
-			productReference = 3C0937311D84C94C002DF50B /* CHCertificate.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		3C43EF811D7A987F00AE65E9 /* Inspect Website */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C43EF901D7A987F00AE65E9 /* Build configuration list for PBXNativeTarget "Inspect Website" */;
@@ -434,11 +421,32 @@
 			productReference = 3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		3CCADFD21E3EAEDC0087B1DD /* CHCertificate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CCADFDE1E3EAEDC0087B1DD /* Build configuration list for PBXNativeTarget "CHCertificate" */;
+			buildPhases = (
+				90784C3F7F2B40C1B89149F5 /* [CP] Check Pods Manifest.lock */,
+				3CCADFCE1E3EAEDC0087B1DD /* Sources */,
+				3CCADFCF1E3EAEDC0087B1DD /* Frameworks */,
+				3CCADFD01E3EAEDC0087B1DD /* Headers */,
+				3CCADFD11E3EAEDC0087B1DD /* Resources */,
+				E7E7AFFFE31B368E5D0125EB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CHCertificate;
+			productName = CHCertificate;
+			productReference = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		3CFAE6D51CA8440400CD946B /* Cert Inspector */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CFAE6ED1CA8440400CD946B /* Build configuration list for PBXNativeTarget "Cert Inspector" */;
 			buildPhases = (
 				4F872D8CF143697ECE0A81EB /* [CP] Check Pods Manifest.lock */,
+				3CCADFE61E3EB05A0087B1DD /* Export */,
 				3CFAE6D21CA8440400CD946B /* Sources */,
 				3CFAE6D31CA8440400CD946B /* Frameworks */,
 				3CFAE6D41CA8440400CD946B /* Resources */,
@@ -451,7 +459,7 @@
 			);
 			dependencies = (
 				3C43EF8C1D7A987F00AE65E9 /* PBXTargetDependency */,
-				3C0937371D84C94C002DF50B /* PBXTargetDependency */,
+				3CCADFD91E3EAEDC0087B1DD /* PBXTargetDependency */,
 			);
 			name = "Cert Inspector";
 			productName = "Certificate Inspector";
@@ -464,17 +472,16 @@
 		3CFAE6CE1CA8440400CD946B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
-					3C0937301D84C94C002DF50B = {
+					3C43EF811D7A987F00AE65E9 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = WCW84NC7Y8;
 						ProvisioningStyle = Automatic;
 					};
-					3C43EF811D7A987F00AE65E9 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = WCW84NC7Y8;
+					3CCADFD21E3EAEDC0087B1DD = {
+						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
 					3CFAE6D51CA8440400CD946B = {
@@ -499,19 +506,12 @@
 			targets = (
 				3CFAE6D51CA8440400CD946B /* Cert Inspector */,
 				3C43EF811D7A987F00AE65E9 /* Inspect Website */,
-				3C0937301D84C94C002DF50B /* CHCertificate */,
+				3CCADFD21E3EAEDC0087B1DD /* CHCertificate */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3C09372F1D84C94C002DF50B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C43EF801D7A987F00AE65E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -521,6 +521,13 @@
 				3C3104EE1D83C4A40093909E /* Launch Screen.storyboard in Resources */,
 				3C3104F01D83C4C30093909E /* Extension.storyboard in Resources */,
 				3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CCADFD11E3EAEDC0087B1DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,22 +634,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		985075AA37DF7E714BF16752 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CHCertificate/Pods-CHCertificate-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DD4DB29254EC767D6EC2064D /* [CP] Check Pods Manifest.lock */ = {
+		90784C3F7F2B40C1B89149F5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -657,17 +649,24 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		E7E7AFFFE31B368E5D0125EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CHCertificate/Pods-CHCertificate-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3C09372C1D84C94C002DF50B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C09373F1D84C99E002DF50B /* CHCertificate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C43EF7E1D7A987F00AE65E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -690,6 +689,15 @@
 				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
 				3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */,
 				3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CCADFCE1E3EAEDC0087B1DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */,
+				3CCADFE41E3EAF000087B1DD /* CHCertificateFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,75 +733,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3C0937371D84C94C002DF50B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C0937301D84C94C002DF50B /* CHCertificate */;
-			targetProxy = 3C0937361D84C94C002DF50B /* PBXContainerItemProxy */;
-		};
 		3C43EF8C1D7A987F00AE65E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3C43EF811D7A987F00AE65E9 /* Inspect Website */;
 			targetProxy = 3C43EF8B1D7A987F00AE65E9 /* PBXContainerItemProxy */;
 		};
+		3CCADFD91E3EAEDC0087B1DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CCADFD21E3EAEDC0087B1DD /* CHCertificate */;
+			targetProxy = 3CCADFD81E3EAEDC0087B1DD /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3C09373B1D84C94D002DF50B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 794AA7DD74040FB12A3CBF0A /* Pods-CHCertificate.debug.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CHCertificate/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecnepsnai.CHCertificate;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		3C09373C1D84C94D002DF50B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC3E62E0AA001B1545EE1677 /* Pods-CHCertificate.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CHCertificate/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecnepsnai.CHCertificate;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		3C43EF8E1D7A987F00AE65E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */;
@@ -851,6 +803,56 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Certificate Inspector/Cert Inspector-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3CCADFDC1E3EAEDC0087B1DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 794AA7DD74040FB12A3CBF0A /* Pods-CHCertificate.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CHCertificate/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecnepsnai.CHCertificate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3CCADFDD1E3EAEDC0087B1DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC3E62E0AA001B1545EE1677 /* Pods-CHCertificate.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CHCertificate/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecnepsnai.CHCertificate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -937,6 +939,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1007,20 +1010,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3C09373A1D84C94D002DF50B /* Build configuration list for PBXNativeTarget "CHCertificate" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C09373B1D84C94D002DF50B /* Debug */,
-				3C09373C1D84C94D002DF50B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3C43EF901D7A987F00AE65E9 /* Build configuration list for PBXNativeTarget "Inspect Website" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3C43EF8E1D7A987F00AE65E9 /* Debug */,
 				3C43EF8F1D7A987F00AE65E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CCADFDE1E3EAEDC0087B1DD /* Build configuration list for PBXNativeTarget "CHCertificate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CCADFDC1E3EAEDC0087B1DD /* Debug */,
+				3CCADFDD1E3EAEDC0087B1DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

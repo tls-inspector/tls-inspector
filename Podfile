@@ -1,16 +1,16 @@
 platform :ios, '9.3'
 
 target 'Cert Inspector' do
-    pod 'MBProgressHUD'
     use_frameworks!
+    pod 'MBProgressHUD'
 end
 
 target 'Inspect Website' do
-    pod 'MBProgressHUD'
     use_frameworks!
+    pod 'MBProgressHUD'
 end
 
 target 'CHCertificate' do
     use_frameworks!
-    pod 'OpenSSL-Universal', '1.0.1.18'
+    pod 'OpenSSL-Universal', '1.0.1.20'
 end
