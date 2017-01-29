@@ -21,17 +21,17 @@
 
 #import "AboutViewController.h"
 #import "RecentDomains.h"
-@import StoreKit;
-@import MessageUI;
+@import GTAppLinks;
 
-@interface AboutViewController () <SKStoreProductViewControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface AboutViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *buildLabel;
+@property (weak, nonatomic) IBOutlet UILabel *opensslVersionLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *recentSwitch;
 - (IBAction)recentSwitch:(UISwitch *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) RecentDomains * recentDomainsManager;
+@property (strong, nonatomic) GTAppLinks * appLinks;
 
 @end
 
@@ -39,19 +39,18 @@
     
 static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/Certificate-Inspector/";
 static NSString * PROJECT_URL = @"https://certificate-inspector.com/";
-static NSString * ITUNES_APP_ID = @"1100539810";
 static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/Certificate-Inspector/blob/master/CONTRIBUTE.md";
 static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certificate-inspector-beta.html";
-static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Manager' <certificate-inspector@ecnepsnai.com>";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.recentDomainsManager = [RecentDomains new];
     [self.recentSwitch setOn:self.recentDomainsManager.saveRecentDomains];
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    self.versionLabel.text = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    self.buildLabel.text = [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
+    self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
+    self.opensslVersionLabel.text = OPENSSL_VERSION;
     self.helper = [UIHelper sharedInstance];
+    self.appLinks = [GTAppLinks new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,15 +67,9 @@ static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Ma
         activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
         [self presentViewController:activityController animated:YES completion:nil];
     } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
-        
-        if ([SKStoreProductViewController class] != nil) {
-            SKStoreProductViewController * productViewController = [SKStoreProductViewController new];
-            productViewController.delegate = self;
-            [productViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier: ITUNES_APP_ID} completionBlock:nil];
-            [self presentViewController:productViewController animated:YES completion:nil];
-        } else {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", ITUNES_APP_ID]]];
-        }
+        [self.appLinks showAppInAppStore:GTAppStoreIDCertificateInspector inViewController:self dismissed:^{
+            //
+        }];
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
         
         [self.helper
@@ -111,11 +104,12 @@ static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Ma
                       [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=bug")]];
                      break;
                  case 4: {
-                     MFMailComposeViewController * mailController = [MFMailComposeViewController new];
-                     mailController.mailComposeDelegate = self;
-                     [mailController setSubject:l(@"Certificate Inspector Feedback")];
-                     [mailController setToRecipients:@[PROJECT_MAINTAINER_EMAIL]];
-                     [self presentViewController:mailController animated:YES completion:nil];
+                     [self.appLinks
+                      showEmailComposeSheetForApp:APP_NAME_CERTIFICATE_INSPECTOR
+                      email:APP_SUPPORT_EMAIL_CERTIFICATE_INSPECTOR
+                      inViewController:self dismissed:^{
+                         //
+                     }];
                      break;
                  } default:
                      break;
@@ -128,16 +122,8 @@ static NSString * PROJECT_MAINTAINER_EMAIL = @"'Certificate Inspector Project Ma
     }
 }
 
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)recentSwitch:(UISwitch *)sender {
     self.recentDomainsManager.saveRecentDomains = sender.isOn;
-}
-
-- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
-    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

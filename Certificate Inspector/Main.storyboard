@@ -458,13 +458,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXb-lO-Ryw">
-                                                    <rect key="frame" x="20" y="11.5" width="38.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OpenSSL Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXb-lO-Ryw">
+                                                    <rect key="frame" x="20" y="11.5" width="133.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="Build"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="OpenSSL Version"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#.#" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnd-Ok-o6R">
@@ -624,7 +624,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About Certificate Inspector"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <outlet property="buildLabel" destination="bnd-Ok-o6R" id="Uh3-jy-Zfq"/>
+                        <outlet property="opensslVersionLabel" destination="bnd-Ok-o6R" id="Ipz-sV-EMt"/>
                         <outlet property="recentSwitch" destination="9uU-hF-JDx" id="raZ-0X-yck"/>
                         <outlet property="versionLabel" destination="Ewr-l1-6Iy" id="jii-ic-oOC"/>
                     </connections>
