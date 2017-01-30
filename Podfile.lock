@@ -1,5 +1,5 @@
 PODS:
-  - GTAppLinks (1.0.2)
+  - GTAppLinks (1.0.3)
   - MBProgressHUD (1.0.0)
   - OpenSSL-Universal (1.0.1.20)
 
@@ -15,11 +15,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   GTAppLinks:
-    :commit: df765c7c9dd8eddbcba6be45654fdc3baf4fa55f
+    :commit: 7eac120bd8cdcc497c058e9504e4d1e7d26b9e61
     :git: https://github.com/ecnepsnai/GTAppLinks.git
 
 SPEC CHECKSUMS:
-  GTAppLinks: f5fc14c6eee2c59c3b93efac744d2bbdade4af50
+  GTAppLinks: 240d3988c027f2aebfefccb031b34c64cfd17b4a
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   OpenSSL-Universal: 71f2c4b2ae758e2218090f905e95ca0ac5c01be7
 
