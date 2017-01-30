@@ -52,3 +52,4 @@ Carthage/Build
 fastlane/report.xml
 fastlane/screenshots
 .DS_Store
+/Certificate Inspector/defines.pch
