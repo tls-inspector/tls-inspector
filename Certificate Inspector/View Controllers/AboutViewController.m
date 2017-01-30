@@ -14,7 +14,7 @@
 @end
 
 @implementation AboutViewController
-    
+
 static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/Certificate-Inspector/";
 static NSString * PROJECT_URL = @"https://certificate-inspector.com/";
 static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/Certificate-Inspector/blob/master/CONTRIBUTE.md";
@@ -25,7 +25,16 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
     [self.recentSwitch setOn:[RecentDomains sharedInstance].saveRecentDomains];
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
-    self.opensslVersionLabel.text = OPENSSL_VERSION;
+    NSArray<NSString *> * alphabet = @[
+                                       @"a", @"b", @"c", @"d", @"e", @"f", @"g", @"h", @"i",
+                                       @"j", @"k", @"l", @"m", @"n", @"o", @"p", @"q", @"r",
+                                       @"s", @"t", @"u", @"v", @"w", @"x", @"y", @"z"
+                                       ];
+    NSMutableArray<NSString *> * components = [NSMutableArray arrayWithArray:[OPENSSL_VERSION componentsSeparatedByString:@"."]];
+    NSString * letter = [alphabet objectAtIndex:[[components lastObject] integerValue]];
+    [components replaceObjectAtIndex:components.count-1 withObject:letter];
+
+    self.opensslVersionLabel.text = [components componentsJoinedByString:@"."];
     self.helper = [UIHelper sharedInstance];
     self.appLinks = [GTAppLinks new];
 }
@@ -48,7 +57,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
             //
         }];
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
-        
+
         [self.helper
          presentActionSheetInViewController:self
          attachToTarget:[ActionTipTarget targetWithView:[cell viewWithTag:1]]
