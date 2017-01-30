@@ -28,4 +28,6 @@
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 
+#define open_url(url) [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]]
+
 #endif

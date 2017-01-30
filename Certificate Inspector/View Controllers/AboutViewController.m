@@ -65,20 +65,16 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
          dismissed:^(NSInteger selectedIndex) {
              switch (selectedIndex) {
                  case 0:
-                     [[UIApplication sharedApplication] openURL:
-                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=commendation")]];
+                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=commendation"));
                      break;
                  case 1:
-                     [[UIApplication sharedApplication] openURL:
-                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=complaint")]];
+                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=complaint"));
                      break;
                  case 2:
-                     [[UIApplication sharedApplication] openURL:
-                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=enhancement")]];
+                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=enhancement"));
                      break;
                  case 3:
-                     [[UIApplication sharedApplication] openURL:
-                      [NSURL URLWithString:nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=bug")]];
+                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=bug"));
                      break;
                  case 4: {
                      [self.appLinks
@@ -93,9 +89,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
              }
          }];
     } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_CONTRIBUTE_URL]];
+        open_url(PROJECT_CONTRIBUTE_URL);
     } else if ([cell.reuseIdentifier isEqualToString:@"beta"]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROJECT_TESTFLIGHT_APPLICATION]];
+        open_url(PROJECT_TESTFLIGHT_APPLICATION);
     }
 }
 

@@ -88,21 +88,33 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void)actionButton:(UIBarButtonItem *)sender {
+#ifdef MAIN_APP
+    NSArray<NSString *> * items = @[
+                                    l(@"Share Public Key"),
+                                    l(@"Add Certificate Expiry Reminder"),
+                                    l(@"View on SSL Labs")
+                                    ];
+#else
+    NSArray<NSString *> * items = @[
+                                    l(@"Share Public Key"),
+                                    l(@"Add Certificate Expiry Reminder")
+                                    ];
+#endif
     [[UIHelper sharedInstance]
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
      title:self.title
      subtitle:nil
      cancelButtonTitle:[lang key:@"Cancel"]
-     items:@[
-             l(@"Share Public Key"),
-             l(@"Add Certificate Expiry Reminder")
-     ]
+     items:items
      dismissed:^(NSInteger itemIndex) {
         if (itemIndex == 0) {
             [self sharePublicKey:sender];
         } else if (itemIndex == 1) {
             [self addCertificateExpiryReminder:sender];
+        } else if (itemIndex == 2) {
+            NSURL * url = [NSURL URLWithString:self.domain];
+            open_url(nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host));
         }
      }];
 }
