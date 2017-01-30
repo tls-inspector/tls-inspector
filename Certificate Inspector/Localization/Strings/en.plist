@@ -60,8 +60,10 @@
 	<string>Certificate uses insecure SHA1 algorithm.</string>
 	<key>Certificates</key>
 	<string>Certificates</string>
-	<key>Contribute</key>
-	<string>Contribute</string>
+	<key>Contact Us</key>
+	<string>Contact Us</string>
+	<key>Contribute on GitHub</key>
+	<string>Contribute on GitHub</string>
 	<key>Copy</key>
 	<string>Copy</string>
 	<key>Could not get certificates</key>
@@ -582,20 +584,12 @@
 	<string>Reminder Added</string>
 	<key>Renew Certificate for {domain}</key>
 	<string>Renew Certificate for {0}</string>
-	<key>Report a Bug</key>
-	<string>Report a Bug</string>
-	<key>Request a Feature</key>
-	<string>Request a Feature</string>
+	<key>Report Issue on GitHub</key>
+	<string>Report Issue on GitHub</string>
 	<key>Share</key>
 	<string>Share</string>
 	<key>Share Public Key</key>
 	<string>Share Public Key</string>
-	<key>Something I Don&apos;t Like</key>
-	<string>Something I Don&apos;t Like</string>
-	<key>Something I Like</key>
-	<string>Something I Like</string>
-	<key>Something else</key>
-	<string>Something else</string>
 	<key>Subject Alt. Names</key>
 	<string>Subject Alt. Names</string>
 	<key>Subject Alternative Names</key>

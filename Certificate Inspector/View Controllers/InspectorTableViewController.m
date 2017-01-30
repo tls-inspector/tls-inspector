@@ -112,9 +112,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             [self sharePublicKey:sender];
         } else if (itemIndex == 1) {
             [self addCertificateExpiryReminder:sender];
+#ifdef MAIN_APP
         } else if (itemIndex == 2) {
             NSURL * url = [NSURL URLWithString:self.domain];
             open_url(nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host));
+#endif
         }
      }];
 }

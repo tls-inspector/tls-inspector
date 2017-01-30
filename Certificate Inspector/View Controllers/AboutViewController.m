@@ -65,27 +65,15 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
          subtitle:l(@"All feedback is appreciated!")
          cancelButtonTitle:l(@"Cancel")
          items:@[
-                 l(@"Something I Like"),
-                 l(@"Something I Don't Like"),
-                 l(@"Request a Feature"),
-                 l(@"Report a Bug"),
-                 l(@"Something else"),
+                 l(@"Report Issue on GitHub"),
+                 l(@"Contact Us")
                  ]
          dismissed:^(NSInteger selectedIndex) {
              switch (selectedIndex) {
                  case 0:
-                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=commendation"));
+                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new"));
                      break;
-                 case 1:
-                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=complaint"));
-                     break;
-                 case 2:
-                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=enhancement"));
-                     break;
-                 case 3:
-                     open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new?labels=bug"));
-                     break;
-                 case 4: {
+                 case 1: {
                      [self.appLinks
                       showEmailComposeSheetForApp:APP_NAME_CERTIFICATE_INSPECTOR
                       email:APP_SUPPORT_EMAIL_CERTIFICATE_INSPECTOR
