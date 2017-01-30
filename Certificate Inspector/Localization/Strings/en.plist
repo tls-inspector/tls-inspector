@@ -570,6 +570,8 @@
 	<string>Not Verified</string>
 	<key>Notification Date</key>
 	<string>Notification Date</string>
+	<key>OpenSSL Version</key>
+	<string>OpenSSL Version</string>
 	<key>Rate Cert Inspector in the App Store</key>
 	<string>Rate Cert Inspector in the App Store</string>
 	<key>Recent Domains</key>
