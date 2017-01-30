@@ -111,7 +111,9 @@
         SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
         NSData * certificateData = (NSData *)CFBridgingRelease(SecCertificateCopyData(certificateRef));
         const unsigned char * bytes = (const unsigned char *)[certificateData bytes];
+        // This will leak
         X509 * cert = d2i_X509(NULL, &bytes, [certificateData length]);
+        certificateData = nil;
         [certs setObject:[CHCertificate fromX509:cert] atIndexedSubscript:i];
     }
 

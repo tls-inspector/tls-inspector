@@ -77,7 +77,7 @@
                         selectedCertificate = self.certificates[certIndex];
                         [self performSegueWithIdentifier:@"ViewCert" sender:nil];
                     } else {
-                        NSLog(@"Cert index is out of bounds %lu > %lu", certIndex, self.certificates.count - 1);
+                        NSLog(@"Cert index is out of bounds %lu > %lu", (unsigned long)certIndex, self.certificates.count - 1);
                     }
                 }
             });

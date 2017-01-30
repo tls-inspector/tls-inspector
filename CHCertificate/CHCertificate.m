@@ -63,7 +63,9 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     X509_NAME * name = X509_get_subject_name(self.certificate);
     char * value = malloc(CERTIFICATE_SUBJECT_MAX_LENGTH);
     int length = X509_NAME_get_text_by_NID(name, nid, value, CERTIFICATE_SUBJECT_MAX_LENGTH);
-    return [[NSString alloc] initWithBytes:value length:length encoding:NSUTF8StringEncoding];
+    NSString * subject = [[NSString alloc] initWithBytes:value length:length encoding:NSUTF8StringEncoding];
+    free(value);
+    return subject;
 }
 
 - (NSString *) generateSummary {
@@ -268,6 +270,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 }
 
 - (NSArray<NSString *> *) subjectAlternativeNames {
+    // This will leak
     STACK_OF(GENERAL_NAME) * sans = X509_get_ext_d2i(self.certificate, NID_subject_alt_name, NULL, NULL);
     int numberOfSans = sk_GENERAL_NAME_num(sans);
     if (numberOfSans < 1) {
@@ -291,6 +294,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     }
 
     self.subjectAltNames = names;
+    free(sans);
 
     return names;
 }

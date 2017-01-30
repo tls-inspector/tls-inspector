@@ -136,17 +136,18 @@
     
     switch (indexPath.section) {
         case 0: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Input"];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Input" forIndexPath:indexPath];
             self.hostField = (UITextField *)[cell viewWithTag:1];
             [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
             self.hostField.delegate = self;
             break;
         } case 1: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
             cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
             break;
         }
     }
+
     return cell;
 }
 
