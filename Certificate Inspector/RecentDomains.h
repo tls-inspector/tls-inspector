@@ -2,6 +2,9 @@
 
 @interface RecentDomains : NSObject
 
++ (RecentDomains *) sharedInstance;
+- (id) init;
+
 - (NSArray<NSString *> *) getRecentDomains;
 - (void) removeAllRecentDomains;
 - (NSArray<NSString *> *) removeDomainAtIndex:(NSUInteger)index;

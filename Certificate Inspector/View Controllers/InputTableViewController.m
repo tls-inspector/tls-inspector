@@ -13,7 +13,6 @@
 - (IBAction)inspectButton:(UIBarButtonItem *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
-@property (strong, nonatomic) RecentDomains * recentDomainManager;
 
 @end
 
@@ -21,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.recentDomainManager = [RecentDomains new];
     self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
@@ -29,7 +27,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.recentDomains = [self.recentDomainManager getRecentDomains];
+    self.recentDomains = [[RecentDomains sharedInstance] getRecentDomains];
     [self.tableView reloadData];
     hostAddress = nil;
     certIndex = nil;
@@ -64,8 +62,8 @@
 }
 
 - (void) saveRecent {
-    if (self.recentDomainManager.saveRecentDomains) {
-        self.recentDomains = [self.recentDomainManager prependDomain:self.hostField.text];
+    if ([RecentDomains sharedInstance].saveRecentDomains) {
+        self.recentDomains = [[RecentDomains sharedInstance] prependDomain:self.hostField.text];
         [self.tableView reloadData];
     }
 }
@@ -154,7 +152,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        self.recentDomains = [self.recentDomainManager removeDomainAtIndex:indexPath.row];
+        self.recentDomains = [[RecentDomains sharedInstance] removeDomainAtIndex:indexPath.row];
         [self.tableView reloadData];
     }
 }

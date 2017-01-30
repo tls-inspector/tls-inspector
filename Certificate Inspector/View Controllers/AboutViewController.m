@@ -9,7 +9,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *recentSwitch;
 - (IBAction)recentSwitch:(UISwitch *)sender;
 @property (strong, nonatomic) UIHelper * helper;
-@property (strong, nonatomic) RecentDomains * recentDomainsManager;
 @property (strong, nonatomic) GTAppLinks * appLinks;
 
 @end
@@ -23,8 +22,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.recentDomainsManager = [RecentDomains new];
-    [self.recentSwitch setOn:self.recentDomainsManager.saveRecentDomains];
+    [self.recentSwitch setOn:[RecentDomains sharedInstance].saveRecentDomains];
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
     self.opensslVersionLabel.text = OPENSSL_VERSION;
@@ -102,7 +100,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
 }
 
 - (IBAction)recentSwitch:(UISwitch *)sender {
-    self.recentDomainsManager.saveRecentDomains = sender.isOn;
+    [RecentDomains sharedInstance].saveRecentDomains = sender.isOn;
 }
 
 @end

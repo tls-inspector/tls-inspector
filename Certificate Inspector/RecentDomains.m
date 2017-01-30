@@ -7,10 +7,23 @@
 
 @implementation RecentDomains
 
+static id _instance;
+
++ (RecentDomains *) sharedInstance {
+    if (!_instance) {
+        _instance = [RecentDomains new];
+    }
+    return _instance;
+}
+
 - (id) init {
-    self = [super init];
-    defaults = [NSUserDefaults standardUserDefaults];
-    return self;
+    if (!_instance) {
+        _instance = [super init];
+        defaults = [NSUserDefaults standardUserDefaults];
+        return self;
+    }
+    
+    return _instance;
 }
 
 - (NSArray<NSString *> *) getRecentDomains {
@@ -46,8 +59,6 @@
 - (void) save:(NSArray<NSString *> *)recents {
     [defaults setObject:recents forKey:RECENT_DOMAINS_KEY];
 }
-
-
 
 - (BOOL) saveRecentDomains {
     return [defaults boolForKey:SAVE_RECENT_DOMAINS];
