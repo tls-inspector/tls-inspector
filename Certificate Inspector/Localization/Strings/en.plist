@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1 month</key>
+	<string>1 month</string>
+	<key>About</key>
+	<string>About</string>
+	<key>About Certificate Inspector</key>
+	<string>About Certificate Inspector</string>
+	<key>Add Certificate Expiry Reminder</key>
+	<string>Add Certificate Expiry Reminder</string>
+	<key>Algorithm</key>
+	<string>Algorithm</string>
+	<key>All feedback is appreciated!</key>
+	<string>All feedback is appreciated!</string>
+	<key>Both values matched.</key>
+	<string>Both values matched.</string>
+	<key>Build</key>
+	<string>Build</string>
+	<key>Cancel</key>
+	<string>Cancel</string>
+	<key>CertAlgorithm::ecdsa-with-SHA1</key>
+	<string>ECDSA with SHA1</string>
+	<key>CertAlgorithm::ecdsa-with-SHA224</key>
+	<string>ECDSA with SHA224</string>
+	<key>CertAlgorithm::ecdsa-with-SHA256</key>
+	<string>ECDSA with SHA256</string>
+	<key>CertAlgorithm::ecdsa-with-SHA384</key>
+	<string>ECDSA with SHA384</string>
+	<key>CertAlgorithm::ecdsa-with-SHA512</key>
+	<string>ECDSA with SHA512</string>
+	<key>CertAlgorithm::md2WithRSAEncryption</key>
+	<string>RSA with MD2</string>
+	<key>CertAlgorithm::md4WithRSAEncryption</key>
+	<string>RSA with MD4</string>
+	<key>CertAlgorithm::md5WithRSAEncryption</key>
+	<string>RSA with MD5</string>
+	<key>CertAlgorithm::sha1WithRSAEncryption</key>
+	<string>RSA with SHA1</string>
+	<key>CertAlgorithm::sha224WithRSAEncryption</key>
+	<string>RSA with SHA224</string>
+	<key>CertAlgorithm::sha256WithRSAEncryption</key>
+	<string>RSA with SHA256</string>
+	<key>CertAlgorithm::sha384WithRSAEncryption</key>
+	<string>RSA with SHA384</string>
+	<key>CertAlgorithm::sha512WithRSAEncryption</key>
+	<string>RSA with SHA512</string>
+	<key>Certificate Chain</key>
+	<string>Certificate Chain</string>
+	<key>Certificate Errors</key>
+	<string>Certificate Errors</string>
+	<key>Certificate Information</key>
+	<string>Certificate Information</string>
+	<key>Certificate Inspector</key>
+	<string>Certificate Inspector</string>
+	<key>Certificate is expired or not valid yet.</key>
+	<string>Certificate is expired or not valid yet.</string>
+	<key>Certificate uses insecure SHA1 algorithm.</key>
+	<string>Certificate uses insecure SHA1 algorithm.</string>
+	<key>Certificates</key>
+	<string>Certificates</string>
+	<key>Contact Us</key>
+	<string>Contact Us</string>
+	<key>Contribute on GitHub</key>
+	<string>Contribute on GitHub</string>
+	<key>Copy</key>
+	<string>Copy</string>
+	<key>Could not get certificates</key>
+	<string>Could not get certificates</string>
+	<key>Country::AD</key>
+	<string>Andorra, Principality of</string>
+	<key>Country::AE</key>
+	<string>United Arab Emirates</string>
+	<key>Country::AF</key>
+	<string>Afghanistan</string>
+	<key>Country::AG</key>
+	<string>Antigua and Barbuda</string>
+	<key>Country::AI</key>
+	<string>Anguilla</string>
+	<key>Country::AL</key>
+	<string>Albania, People&apos;s Socialist Republic of</string>
+	<key>Country::AM</key>
+	<string>Armenia</string>
+	<key>Country::AN</key>
+	<string>Netherlands Antilles</string>
+	<key>Country::AO</key>
+	<string>Angola, Republic of</string>
+	<key>Country::AQ</key>
+	<string>Antarctica (the territory South of 60 deg S)</string>
+	<key>Country::AR</key>
+	<string>Argentina, Argentine Republic</string>
+	<key>Country::AS</key>
+	<string>American Samoa</string>
+	<key>Country::AT</key>
+	<string>Austria, Republic of</string>
+	<key>Country::AU</key>
+	<string>Australia, Commonwealth of</string>
+	<key>Country::AW</key>
+	<string>Aruba</string>
+	<key>Country::AZ</key>
+	<string>Azerbaijan, Republic of</string>
+	<key>Country::BA</key>
+	<string>Bosnia and Herzegovina</string>
+	<key>Country::BB</key>
+	<string>Barbados</string>
+	<key>Country::BD</key>
+	<string>Bangladesh, People&apos;s Republic of</string>
+	<key>Country::BE</key>
+	<string>Belgium, Kingdom of</string>
+	<key>Country::BF</key>
+	<string>Burkina Faso</string>
+	<key>Country::BG</key>
+	<string>Bulgaria, People&apos;s Republic of</string>
+	<key>Country::BH</key>
+	<string>Bahrain, Kingdom of</string>
+	<key>Country::BI</key>
+	<string>Burundi, Republic of</string>
+	<key>Country::BJ</key>
+	<string>Benin, People&apos;s Republic of</string>
+	<key>Country::BM</key>
+	<string>Bermuda</string>
+	<key>Country::BN</key>
+	<string>Brunei Darussalam</string>
+	<key>Country::BO</key>
+	<string>Bolivia, Republic of</string>
+	<key>Country::BR</key>
+	<string>Brazil, Federative Republic of</string>
+	<key>Country::BS</key>
+	<string>Bahamas, Commonwealth of the</string>
+	<key>Country::BT</key>
+	<string>Bhutan, Kingdom of</string>
+	<key>Country::BV</key>
+	<string>Bouvet Island (Bouvetoya)</string>
+	<key>Country::BW</key>
+	<string>Botswana, Republic of</string>
+	<key>Country::BY</key>
+	<string>Belarus</string>
+	<key>Country::BZ</key>
+	<string>Belize</string>
+	<key>Country::CA</key>
+	<string>Canada</string>
+	<key>Country::CC</key>
+	<string>Cocos (Keeling) Islands</string>
+	<key>Country::CD</key>
+	<string>Congo, Democratic Republic of</string>
+	<key>Country::CF</key>
+	<string>Central African Republic</string>
+	<key>Country::CG</key>
+	<string>Congo, People&apos;s Republic of</string>
+	<key>Country::CH</key>
+	<string>Switzerland, Swiss Confederation</string>
+	<key>Country::CI</key>
+	<string>Cote D&apos;Ivoire, Ivory Coast, Republic of the</string>
+	<key>Country::CK</key>
+	<string>Cook Islands</string>
+	<key>Country::CL</key>
+	<string>Chile, Republic of</string>
+	<key>Country::CM</key>
+	<string>Cameroon, United Republic of</string>
+	<key>Country::CN</key>
+	<string>China, People&apos;s Republic of</string>
+	<key>Country::CO</key>
+	<string>Colombia, Republic of</string>
+	<key>Country::CR</key>
+	<string>Costa Rica, Republic of</string>
+	<key>Country::CS</key>
+	<string>Serbia and Montenegro</string>
+	<key>Country::CU</key>
+	<string>Cuba, Republic of</string>
+	<key>Country::CV</key>
+	<string>Cape Verde, Republic of</string>
+	<key>Country::CX</key>
+	<string>Christmas Island</string>
+	<key>Country::CY</key>
+	<string>Cyprus, Republic of</string>
+	<key>Country::CZ</key>
+	<string>Czech Republic</string>
+	<key>Country::DE</key>
+	<string>Germany</string>
+	<key>Country::DJ</key>
+	<string>Djibouti, Republic of</string>
+	<key>Country::DK</key>
+	<string>Denmark, Kingdom of</string>
+	<key>Country::DM</key>
+	<string>Dominica, Commonwealth of</string>
+	<key>Country::DO</key>
+	<string>Dominican Republic</string>
+	<key>Country::DZ</key>
+	<string>Algeria, People&apos;s Democratic Republic of</string>
+	<key>Country::EC</key>
+	<string>Ecuador, Republic of</string>
+	<key>Country::EE</key>
+	<string>Estonia</string>
+	<key>Country::EG</key>
+	<string>Egypt, Arab Republic of</string>
+	<key>Country::EH</key>
+	<string>Western Sahara</string>
+	<key>Country::ER</key>
+	<string>Eritrea</string>
+	<key>Country::ES</key>
+	<string>Spain, Spanish State</string>
+	<key>Country::ET</key>
+	<string>Ethiopia</string>
+	<key>Country::FI</key>
+	<string>Finland, Republic of</string>
+	<key>Country::FJ</key>
+	<string>Fiji, Republic of the Fiji Islands</string>
+	<key>Country::FK</key>
+	<string>Falkland Islands (Malvinas)</string>
+	<key>Country::FM</key>
+	<string>Micronesia, Federated States of</string>
+	<key>Country::FO</key>
+	<string>Faeroe Islands</string>
+	<key>Country::FR</key>
+	<string>France, French Republic</string>
+	<key>Country::GA</key>
+	<string>Gabon, Gabonese Republic</string>
+	<key>Country::GB</key>
+	<string>United Kingdom of Great Britain &amp; N. Ireland</string>
+	<key>Country::GD</key>
+	<string>Grenada</string>
+	<key>Country::GE</key>
+	<string>Georgia</string>
+	<key>Country::GF</key>
+	<string>French Guiana</string>
+	<key>Country::GH</key>
+	<string>Ghana, Republic of</string>
+	<key>Country::GI</key>
+	<string>Gibraltar</string>
+	<key>Country::GL</key>
+	<string>Greenland</string>
+	<key>Country::GM</key>
+	<string>Gambia, Republic of the</string>
+	<key>Country::GN</key>
+	<string>Guinea, Revolutionary People&apos;s Rep&apos;c of</string>
+	<key>Country::GP</key>
+	<string>Guadaloupe</string>
+	<key>Country::GQ</key>
+	<string>Equatorial Guinea, Republic of</string>
+	<key>Country::GR</key>
+	<string>Greece, Hellenic Republic</string>
+	<key>Country::GS</key>
+	<string>South Georgia and the South Sandwich Islands</string>
+	<key>Country::GT</key>
+	<string>Guatemala, Republic of</string>
+	<key>Country::GU</key>
+	<string>Guam</string>
+	<key>Country::GW</key>
+	<string>Guinea-Bissau, Republic of</string>
+	<key>Country::GY</key>
+	<string>Guyana, Republic of</string>
+	<key>Country::HK</key>
+	<string>Hong Kong, Special Administrative Region of China</string>
+	<key>Country::HM</key>
+	<string>Heard and McDonald Islands</string>
+	<key>Country::HN</key>
+	<string>Honduras, Republic of</string>
+	<key>Country::HR</key>
+	<string>Hrvatska (Croatia)</string>
+	<key>Country::HT</key>
+	<string>Haiti, Republic of</string>
+	<key>Country::HU</key>
+	<string>Hungary, Hungarian People&apos;s Republic</string>
+	<key>Country::ID</key>
+	<string>Indonesia, Republic of</string>
+	<key>Country::IE</key>
+	<string>Ireland</string>
+	<key>Country::IL</key>
+	<string>Israel, State of</string>
+	<key>Country::IN</key>
+	<string>India, Republic of</string>
+	<key>Country::IO</key>
+	<string>British Indian Ocean Territory (Chagos Archipelago)</string>
+	<key>Country::IQ</key>
+	<string>Iraq, Republic of</string>
+	<key>Country::IR</key>
+	<string>Iran, Islamic Republic of</string>
+	<key>Country::IS</key>
+	<string>Iceland, Republic of</string>
+	<key>Country::IT</key>
+	<string>Italy, Italian Republic</string>
+	<key>Country::JM</key>
+	<string>Jamaica</string>
+	<key>Country::JO</key>
+	<string>Jordan, Hashemite Kingdom of</string>
+	<key>Country::JP</key>
+	<string>Japan</string>
+	<key>Country::KE</key>
+	<string>Kenya, Republic of</string>
+	<key>Country::KG</key>
+	<string>Kyrgyz Republic</string>
+	<key>Country::KH</key>
+	<string>Cambodia, Kingdom of</string>
+	<key>Country::KI</key>
+	<string>Kiribati, Republic of</string>
+	<key>Country::KM</key>
+	<string>Comoros, Union of the</string>
+	<key>Country::KN</key>
+	<string>St. Kitts and Nevis</string>
+	<key>Country::KP</key>
+	<string>Korea, Democratic People&apos;s Republic of</string>
+	<key>Country::KR</key>
+	<string>Korea, Republic of</string>
+	<key>Country::KW</key>
+	<string>Kuwait, State of</string>
+	<key>Country::KY</key>
+	<string>Cayman Islands</string>
+	<key>Country::KZ</key>
+	<string>Kazakhstan, Republic of</string>
+	<key>Country::LA</key>
+	<string>Lao People&apos;s Democratic Republic</string>
+	<key>Country::LB</key>
+	<string>Lebanon, Lebanese Republic</string>
+	<key>Country::LC</key>
+	<string>St. Lucia</string>
+	<key>Country::LI</key>
+	<string>Liechtenstein, Principality of</string>
+	<key>Country::LK</key>
+	<string>Sri Lanka, Democratic Socialist Republic of</string>
+	<key>Country::LR</key>
+	<string>Liberia, Republic of</string>
+	<key>Country::LS</key>
+	<string>Lesotho, Kingdom of</string>
+	<key>Country::LT</key>
+	<string>Lithuania</string>
+	<key>Country::LU</key>
+	<string>Luxembourg, Grand Duchy of</string>
+	<key>Country::LV</key>
+	<string>Latvia</string>
+	<key>Country::LY</key>
+	<string>Libyan Arab Jamahiriya</string>
+	<key>Country::MA</key>
+	<string>Morocco, Kingdom of</string>
+	<key>Country::MC</key>
+	<string>Monaco, Principality of</string>
+	<key>Country::MD</key>
+	<string>Moldova, Republic of</string>
+	<key>Country::MG</key>
+	<string>Madagascar, Republic of</string>
+	<key>Country::MH</key>
+	<string>Marshall Islands</string>
+	<key>Country::MK</key>
+	<string>Macedonia, the former Yugoslav Republic of</string>
+	<key>Country::ML</key>
+	<string>Mali, Republic of</string>
+	<key>Country::MM</key>
+	<string>Myanmar</string>
+	<key>Country::MN</key>
+	<string>Mongolia, Mongolian People&apos;s Republic</string>
+	<key>Country::MO</key>
+	<string>Macao, Special Administrative Region of China</string>
+	<key>Country::MP</key>
+	<string>Northern Mariana Islands</string>
+	<key>Country::MQ</key>
+	<string>Martinique</string>
+	<key>Country::MR</key>
+	<string>Mauritania, Islamic Republic of</string>
+	<key>Country::MS</key>
+	<string>Montserrat</string>
+	<key>Country::MT</key>
+	<string>Malta, Republic of</string>
+	<key>Country::MU</key>
+	<string>Mauritius</string>
+	<key>Country::MV</key>
+	<string>Maldives, Republic of</string>
+	<key>Country::MW</key>
+	<string>Malawi, Republic of</string>
+	<key>Country::MX</key>
+	<string>Mexico, United Mexican States</string>
+	<key>Country::MY</key>
+	<string>Malaysia</string>
+	<key>Country::MZ</key>
+	<string>Mozambique, People&apos;s Republic of</string>
+	<key>Country::NA</key>
+	<string>Namibia</string>
+	<key>Country::NC</key>
+	<string>New Caledonia</string>
+	<key>Country::NE</key>
+	<string>Niger, Republic of the</string>
+	<key>Country::NF</key>
+	<string>Norfolk Island</string>
+	<key>Country::NG</key>
+	<string>Nigeria, Federal Republic of</string>
+	<key>Country::NI</key>
+	<string>Nicaragua, Republic of</string>
+	<key>Country::NL</key>
+	<string>Netherlands, Kingdom of the</string>
+	<key>Country::NO</key>
+	<string>Norway, Kingdom of</string>
+	<key>Country::NP</key>
+	<string>Nepal, Kingdom of</string>
+	<key>Country::NR</key>
+	<string>Nauru, Republic of</string>
+	<key>Country::NU</key>
+	<string>Niue, Republic of</string>
+	<key>Country::NZ</key>
+	<string>New Zealand</string>
+	<key>Country::OM</key>
+	<string>Oman, Sultanate of</string>
+	<key>Country::PA</key>
+	<string>Panama, Republic of</string>
+	<key>Country::PE</key>
+	<string>Peru, Republic of</string>
+	<key>Country::PF</key>
+	<string>French Polynesia</string>
+	<key>Country::PG</key>
+	<string>Papua New Guinea</string>
+	<key>Country::PH</key>
+	<string>Philippines, Republic of the</string>
+	<key>Country::PK</key>
+	<string>Pakistan, Islamic Republic of</string>
+	<key>Country::PL</key>
+	<string>Poland, Polish People&apos;s Republic</string>
+	<key>Country::PM</key>
+	<string>St. Pierre and Miquelon</string>
+	<key>Country::PN</key>
+	<string>Pitcairn Island</string>
+	<key>Country::PR</key>
+	<string>Puerto Rico</string>
+	<key>Country::PS</key>
+	<string>Palestinian Territory, Occupied</string>
+	<key>Country::PT</key>
+	<string>Portugal, Portuguese Republic</string>
+	<key>Country::PW</key>
+	<string>Palau</string>
+	<key>Country::PY</key>
+	<string>Paraguay, Republic of</string>
+	<key>Country::QA</key>
+	<string>Qatar, State of</string>
+	<key>Country::RE</key>
+	<string>Reunion</string>
+	<key>Country::RO</key>
+	<string>Romania, Socialist Republic of</string>
+	<key>Country::RU</key>
+	<string>Russian Federation</string>
+	<key>Country::RW</key>
+	<string>Rwanda, Rwandese Republic</string>
+	<key>Country::SA</key>
+	<string>Saudi Arabia, Kingdom of</string>
+	<key>Country::SB</key>
+	<string>Solomon Islands</string>
+	<key>Country::SC</key>
+	<string>Seychelles, Republic of</string>
+	<key>Country::SD</key>
+	<string>Sudan, Democratic Republic of the</string>
+	<key>Country::SE</key>
+	<string>Sweden, Kingdom of</string>
+	<key>Country::SG</key>
+	<string>Singapore, Republic of</string>
+	<key>Country::SH</key>
+	<string>St. Helena</string>
+	<key>Country::SI</key>
+	<string>Slovenia</string>
+	<key>Country::SJ</key>
+	<string>Svalbard &amp; Jan Mayen Islands</string>
+	<key>Country::SK</key>
+	<string>Slovakia (Slovak Republic)</string>
+	<key>Country::SL</key>
+	<string>Sierra Leone, Republic of</string>
+	<key>Country::SM</key>
+	<string>San Marino, Republic of</string>
+	<key>Country::SN</key>
+	<string>Senegal, Republic of</string>
+	<key>Country::SO</key>
+	<string>Somalia, Somali Republic</string>
+	<key>Country::SR</key>
+	<string>Suriname, Republic of</string>
+	<key>Country::ST</key>
+	<string>Sao Tome and Principe, Democratic Republic of</string>
+	<key>Country::SV</key>
+	<string>El Salvador, Republic of</string>
+	<key>Country::SY</key>
+	<string>Syrian Arab Republic</string>
+	<key>Country::SZ</key>
+	<string>Swaziland, Kingdom of</string>
+	<key>Country::TC</key>
+	<string>Turks and Caicos Islands</string>
+	<key>Country::TD</key>
+	<string>Chad, Republic of</string>
+	<key>Country::TF</key>
+	<string>French Southern Territories</string>
+	<key>Country::TG</key>
+	<string>Togo, Togolese Republic</string>
+	<key>Country::TH</key>
+	<string>Thailand, Kingdom of</string>
+	<key>Country::TJ</key>
+	<string>Tajikistan</string>
+	<key>Country::TK</key>
+	<string>Tokelau (Tokelau Islands)</string>
+	<key>Country::TL</key>
+	<string>Timor-Leste, Democratic Republic of</string>
+	<key>Country::TM</key>
+	<string>Turkmenistan</string>
+	<key>Country::TN</key>
+	<string>Tunisia, Republic of</string>
+	<key>Country::TO</key>
+	<string>Tonga, Kingdom of</string>
+	<key>Country::TR</key>
+	<string>Turkey, Republic of</string>
+	<key>Country::TT</key>
+	<string>Trinidad and Tobago, Republic of</string>
+	<key>Country::TV</key>
+	<string>Tuvalu</string>
+	<key>Country::TW</key>
+	<string>Taiwan, Province of China</string>
+	<key>Country::TZ</key>
+	<string>Tanzania, United Republic of</string>
+	<key>Country::UA</key>
+	<string>Ukraine</string>
+	<key>Country::UG</key>
+	<string>Uganda, Republic of</string>
+	<key>Country::UM</key>
+	<string>United States Minor Outlying Islands</string>
+	<key>Country::US</key>
+	<string>United States of America</string>
+	<key>Country::UY</key>
+	<string>Uruguay, Eastern Republic of</string>
+	<key>Country::UZ</key>
+	<string>Uzbekistan</string>
+	<key>Country::VA</key>
+	<string>Holy See (Vatican City State)</string>
+	<key>Country::VC</key>
+	<string>St. Vincent and the Grenadines</string>
+	<key>Country::VE</key>
+	<string>Venezuela, Bolivarian Republic of</string>
+	<key>Country::VG</key>
+	<string>British Virgin Islands</string>
+	<key>Country::VI</key>
+	<string>US Virgin Islands</string>
+	<key>Country::VN</key>
+	<string>Viet Nam, Socialist Republic of</string>
+	<key>Country::VU</key>
+	<string>Vanuatu</string>
+	<key>Country::WF</key>
+	<string>Wallis and Futuna Islands</string>
+	<key>Country::WS</key>
+	<string>Samoa, Independent State of</string>
+	<key>Country::YE</key>
+	<string>Yemen</string>
+	<key>Country::YT</key>
+	<string>Mayotte</string>
+	<key>Country::ZA</key>
+	<string>South Africa, Republic of</string>
+	<key>Country::ZM</key>
+	<string>Zambia, Republic of</string>
+	<key>Country::ZW</key>
+	<string>Zimbabwe</string>
+	<key>Dismiss</key>
+	<string>Dismiss</string>
+	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
+	<string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
+	<key>Enter the value to verify</key>
+	<string>Enter the value to verify</string>
+	<key>FQDN or IP Address</key>
+	<string>FQDN or IP Address</string>
+	<key>Fingerprints</key>
+	<string>Fingerprints</string>
+	<key>How soon before the certificate expires should we notify you?</key>
+	<string>How soon before the certificate expires should we notify you?</string>
+	<key>Insecure Superfish (Lenovo) certificate.</key>
+	<string>Insecure Superfish (Lenovo) certificate.</string>
+	<key>Insecure eDellRoot certificate.</key>
+	<string>Insecure eDellRoot certificate.</string>
+	<key>Inspect</key>
+	<string>Inspect</string>
+	<key>Issuer</key>
+	<string>Issuer</string>
+	<key>Loading...</key>
+	<string>Loading...</string>
+	<key>Not Verified</key>
+	<string>Not Verified</string>
+	<key>Notification Date</key>
+	<string>Notification Date</string>
+	<key>OpenSSL Version</key>
+	<string>OpenSSL Version</string>
+	<key>Rate Cert Inspector in the App Store</key>
+	<string>Rate Cert Inspector in the App Store</string>
+	<key>Recent Domains</key>
+	<string>Recent Domains</string>
+	<key>Remember Recent Lookups</key>
+	<string>Remember Recent Lookups</string>
+	<key>Reminder Added</key>
+	<string>Reminder Added</string>
+	<key>Renew Certificate for {domain}</key>
+	<string>Renew Certificate for {0}</string>
+	<key>Report Issue on GitHub</key>
+	<string>Report Issue on GitHub</string>
+	<key>Share</key>
+	<string>Share</string>
+	<key>Share Public Key</key>
+	<string>Share Public Key</string>
+	<key>Subject Alt. Names</key>
+	<string>Subject Alt. Names</string>
+	<key>Subject Alternative Names</key>
+	<string>Subject Alternative Names</string>
+	<key>Subject Names</key>
+	<string>Subject Names</string>
+	<key>Subject::C</key>
+	<string>Country</string>
+	<key>Subject::CN</key>
+	<string>Common Name</string>
+	<key>Subject::E</key>
+	<string>Email</string>
+	<key>Subject::L</key>
+	<string>City</string>
+	<key>Subject::O</key>
+	<string>Organization</string>
+	<key>Subject::OU</key>
+	<string>Organizational Unit</string>
+	<key>Subject::S</key>
+	<string>State</string>
+	<key>Subject::ST</key>
+	<string>State</string>
+	<key>Submit Feedback</key>
+	<string>Submit Feedback</string>
+	<key>Tell Friends About Cert Inspector</key>
+	<string>Tell Friends About Cert Inspector</string>
+	<key>Test New Features</key>
+	<string>Test New Features</string>
+	<key>The certificate for {domain} expires on {date}</key>
+	<string>The certificate for {0} expires on {1}</string>
+	<key>Trusted Chain</key>
+	<string>Trusted Chain</string>
+	<key>Untrusted Chain</key>
+	<string>Untrusted Chain</string>
+	<key>Valid From</key>
+	<string>Valid From</string>
+	<key>Valid To</key>
+	<string>Valid To</string>
+	<key>Value</key>
+	<string>Value</string>
+	<key>Values do not match.</key>
+	<string>Values do not match.</string>
+	<key>Verified</key>
+	<string>Verified</string>
+	<key>Verify</key>
+	<string>Verify</string>
+	<key>Verify Value</key>
+	<string>Verify Value</string>
+	<key>Version</key>
+	<string>Version</string>
+	<key>View all alternate names</key>
+	<string>View all alternate names</string>
+	<key>What kind of feedback would you like to submit?</key>
+	<string>What kind of feedback would you like to submit?</string>
+	<key>You can modify the reminder in the reminders app.</key>
+	<string>You can modify the reminder in the reminders app.</string>
+	<key>trusted_chain_description</key>
+	<string>The end certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
+	<key>untrusted_chain_description</key>
+	<string>The end certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
+	<key>{0} characters</key>
+	<string>{0} characters</string>
+	<key>{count} months</key>
+	<string>{0} months</string>
+	<key>{count} weeks</key>
+	<string>{0} weeks</string>
+</dict>
+</plist>

@@ -1,15 +1,28 @@
 PODS:
-  - OpenSSL-Universal (1.0.1.18)
-  - SSKeychain (1.4.0)
+  - GTAppLinks (1.0.3)
+  - MBProgressHUD (1.0.0)
+  - OpenSSL-Universal (1.0.1.20)
 
 DEPENDENCIES:
-  - OpenSSL-Universal
-  - SSKeychain
+  - GTAppLinks (from `https://github.com/ecnepsnai/GTAppLinks.git`, branch `master`)
+  - MBProgressHUD
+  - OpenSSL-Universal (= 1.0.1.20)
+
+EXTERNAL SOURCES:
+  GTAppLinks:
+    :branch: master
+    :git: https://github.com/ecnepsnai/GTAppLinks.git
+
+CHECKOUT OPTIONS:
+  GTAppLinks:
+    :commit: 7eac120bd8cdcc497c058e9504e4d1e7d26b9e61
+    :git: https://github.com/ecnepsnai/GTAppLinks.git
 
 SPEC CHECKSUMS:
-  OpenSSL-Universal: 79fd751a7b4db41f5b430e767c9bbf681b5c8330
-  SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
+  GTAppLinks: 240d3988c027f2aebfefccb031b34c64cfd17b4a
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  OpenSSL-Universal: 71f2c4b2ae758e2218090f905e95ca0ac5c01be7
 
-PODFILE CHECKSUM: bebcf2fe5003b845fcf895937e73bfe4e29ff9d1
+PODFILE CHECKSUM: b1b8a2a836cac021908e2ce7ccf484b886104d27
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0.beta.3

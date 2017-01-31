@@ -1,7 +1,8 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#endif
+#ifndef CertInspector_Prefix_Header_pch
+#define CertInspector_Prefix_Header_pch
+
+#import "lang.h"
+#import "defines.pch"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -11,6 +12,9 @@
 
 #define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
 #define SAVE_RECENT_DOMAINS @"SAVE_RECENT_DOMAINS"
+#define INSPECT_NOTIFICATION @"INSPECT_THIS_WEBSITE"
+#define INSPECT_NOTIFICATION_HOST_KEY @"host"
+#define INSPECT_NOTIFICATION_INDEX_KEY @"index"
 
 #if DEBUG
 #define d(s, ...) NSLog(s, ##__VA_ARGS__)
@@ -18,8 +22,12 @@
 #define d(s, ...) ;
 #endif
 
-#define lang(key) NSLocalizedString(key, nil)
-#define langv(key, ...) [NSString stringWithFormat:NSLocalizedString(key, nil), ##__VA_ARGS__]
+#define l(keyString) [lang key:keyString]
+#define lv(keyString, argsArray) [lang key:keyString args:argsArray]
 
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
+
+#define open_url(url) [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]]
+
+#endif

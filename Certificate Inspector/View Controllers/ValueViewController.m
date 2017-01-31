@@ -1,24 +1,3 @@
-//
-//  ValueViewController.m
-//  Certificate Inspector
-//
-//  GPLv3 License
-//  Copyright (c) 2016 Ian Spence
-//
-//  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software Foundation,
-//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
-
 #import "ValueViewController.h"
 #import "UIHelper.h"
 
@@ -60,25 +39,25 @@
     [uihelper presentActionSheetInViewController:self
                                   attachToTarget:[ActionTipTarget targetWithBarButtonItem:self.navigationItem.rightBarButtonItem]
                                            title:self.title
-                                        subtitle:langv(@"%lu characters", self.value.length)
-                               cancelButtonTitle:lang(@"Cancel")
-                                           items:@[lang(@"Copy"), lang(@"Verify"), lang(@"Share")]
+                                        subtitle:[lang key:@"{0} characters" args:@[format(@"%lu", (unsigned long)self.value.length)]]
+                               cancelButtonTitle:l(@"Cancel")
+                                           items:@[l(@"Copy"), l(@"Verify"), l(@"Share")]
                                        dismissed:^(NSInteger selectedIndex) {
         switch (selectedIndex) {
             case 0: { // Copy
                 [[UIPasteboard generalPasteboard] setString:self.value];
                 break;
             } case 1: { // Verify
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:lang(@"Verify Value")
-                                                                                         message:lang(@"Enter the value to verify")
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:l(@"Verify Value")
+                                                                                         message:l(@"Enter the value to verify")
                                                                                   preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                    textField.placeholder = lang(@"Value");
+                    textField.placeholder = l(@"Value");
                 }];
                 
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:lang(@"Cancel")
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:l(@"Cancel")
                                                                        style:UIAlertActionStyleCancel handler:nil];
-                UIAlertAction *okAction = [UIAlertAction actionWithTitle:lang(@"Verify")
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:l(@"Verify")
                                                                    style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction *action) {
                                                                      UITextField * inputField = alertController.textFields.firstObject;
@@ -111,9 +90,9 @@
     NSString * formattedCurrentValue = formatValue(self.value);
     NSString * formattedExpectedValue = formatValue(value);
     if ([formattedExpectedValue isEqualToString:formattedCurrentValue]) {
-        [uihelper presentAlertInViewController:self title:lang(@"Verified") body:lang(@"Both values matched.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
+        [uihelper presentAlertInViewController:self title:l(@"Verified") body:l(@"Both values matched.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
     } else {
-        [uihelper presentAlertInViewController:self title:lang(@"Not Verified") body:lang(@"Values do not match.") dismissButtonTitle:lang(@"Dismiss") dismissed:nil];
+        [uihelper presentAlertInViewController:self title:l(@"Not Verified") body:l(@"Values do not match.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
     }
 }
 @end

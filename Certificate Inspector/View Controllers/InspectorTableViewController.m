@@ -1,41 +1,19 @@
-//
-//  InspectorTableViewController.m
-//  Certificate Inspector
-//
-//  GPLv3 License
-//  Copyright (c) 2016 Ian Spence
-//
-//  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software Foundation,
-//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
-
 #import "InspectorTableViewController.h"
 #import "CHCertificate.h"
 #import "ValueViewController.h"
 #import "UIHelper.h"
 #import "InspectorListTableViewController.h"
+#import "CertificateReminderManager.h"
 
-#ifdef MAIN_APP
-#import "TrustedFingerprints.h"
-#endif
+@import MBProgressHUD;
 
 @interface InspectorTableViewController()
 
 @property (strong, nonatomic) CHCertificate  * certificate;
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
-@property (strong, nonatomic) NSDictionary   * certVerification;
 @property (strong, nonatomic) UIHelper       * helper;
+@property (strong, nonatomic) NSString       * domain;
 
 @end
 
@@ -58,14 +36,12 @@ typedef NS_ENUM(NSInteger, InspectorSection) {
     Fingerprints,
     SubjectAltNames,
     CertificateErrors,
-    CertificateVerification,
     SectionEnd
 };
 
 typedef NS_ENUM(NSInteger, CellTags) {
     CellTagValue = 1,
-    CellTagVerified = 2,
-    CellTagSANS = 3
+    CellTagSANS
 };
 
 typedef NS_ENUM(NSInteger, LeftDetailTag) {
@@ -81,30 +57,20 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     self.helper = [UIHelper sharedInstance];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    [self.cells addObject:@{@"label": lang(@"Issuer"), @"value": [self.certificate issuer]}];
-    [self.cells addObject:@{@"label": lang(@"Algorithm"), @"value": [self.certificate algorithm]}];
-    [self.cells addObject:@{@"label": lang(@"Valid To"), @"value": [dateFormatter stringFromDate:[self.certificate notAfter]]}];
-    [self.cells addObject:@{@"label": lang(@"Valid From"), @"value": [dateFormatter stringFromDate:[self.certificate notBefore]]}];
+    
+    NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [self.certificate algorithm]));
+    
+    [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [self.certificate issuer]}];
+    [self.cells addObject:@{@"label": l(@"Algorithm"), @"value": algorythm}];
+    [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[self.certificate notAfter]]}];
+    [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[self.certificate notBefore]]}];
 
     if (![self.certificate validIssueDate]) {
-        [self.certErrors addObject:@{@"error": lang(@"Certificate is expired or not valid yet.")}];
+        [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];
     }
     if ([[self.certificate algorithm] hasPrefix:@"sha1"]) {
-        [self.certErrors addObject:@{@"error": lang(@"Certificate uses insecure SHA1 algorithm.")}];
+        [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
     }
-
-#ifdef MAIN_APP
-    NSDictionary * trustResults = [[TrustedFingerprints sharedInstance]
-                                   dataForFingerprint:[[[self.certificate SHA1Fingerprint] uppercaseString]
-                                                       stringByReplacingOccurrencesOfString:@" " withString:@""]];
-    if (trustResults) {
-        if (![[trustResults objectForKey:@"trust"] boolValue]) {
-            [self.certErrors addObject:@{@"error": [trustResults objectForKey:@"description"]}];
-        } else {
-            self.certVerification = trustResults;
-        }
-    }
-#endif
 
     MD5Fingerprint = [self.certificate MD5Fingerprint];
     SHA1Fingerprint = [self.certificate SHA1Fingerprint];
@@ -122,27 +88,123 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void)actionButton:(UIBarButtonItem *)sender {
+#ifdef MAIN_APP
+    NSArray<NSString *> * items = @[
+                                    l(@"Share Public Key"),
+                                    l(@"Add Certificate Expiry Reminder"),
+                                    l(@"View on SSL Labs")
+                                    ];
+#else
+    NSArray<NSString *> * items = @[
+                                    l(@"Share Public Key"),
+                                    l(@"Add Certificate Expiry Reminder")
+                                    ];
+#endif
+    [[UIHelper sharedInstance]
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:self.title
+     subtitle:nil
+     cancelButtonTitle:[lang key:@"Cancel"]
+     items:items
+     dismissed:^(NSInteger itemIndex) {
+        if (itemIndex == 0) {
+            [self sharePublicKey:sender];
+        } else if (itemIndex == 1) {
+            [self addCertificateExpiryReminder:sender];
+#ifdef MAIN_APP
+        } else if (itemIndex == 2) {
+            NSURL * url = [NSURL URLWithString:self.domain];
+            open_url(nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host));
+#endif
+        }
+     }];
+}
+
+- (void) sharePublicKey:(UIBarButtonItem *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSData * pem = [self.certificate publicKeyAsPEM];
     if (pem) {
         NSString * fileName = format(@"/%@.pem", self.certificate.serialNumber);
         NSURL * fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
         [pem writeToURL:fileURL atomically:YES];
-
+        
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
             activityController.popoverPresentationController.barButtonItem = sender;
         }
-        [self presentViewController:activityController animated:YES completion:nil];
+        [self presentViewController:activityController animated:YES completion:^() {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
     } else {
         [self.helper
          presentAlertInViewController:self
-         title:lang(@"Unable to share public key")
-         body:lang(@"We were unable to export the public key in PEM format.")
-         dismissButtonTitle:lang(@"Dismiss")
-         dismissed:nil];
+         title:l(@"Unable to share public key")
+         body:l(@"We were unable to export the public key in PEM format.")
+         dismissButtonTitle:l(@"Dismiss")
+         dismissed:^(NSInteger buttonIndex) {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+         }];
     }
+}
+
+- (void) addCertificateExpiryReminder:(UIBarButtonItem *)sender {
+    [[UIHelper sharedInstance]
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:l(@"Notification Date")
+     subtitle:l(@"How soon before the certificate expires should we notify you?")
+     cancelButtonTitle:l(@"Cancel")
+     items:@[
+             lv(@"{count} weeks", @[@"2"]),
+             l(@"1 month"),
+             lv(@"{count} months", @[@"3"]),
+             lv(@"{count} months", @[@"6"])]
+     dismissed:^(NSInteger itemIndex) {
+         if (itemIndex != -1) {
+             NSUInteger days = 0;
+             
+             switch (itemIndex) {
+                 case 0:
+                     days = 14;
+                     break;
+                 case 1:
+                     days = 30;
+                     break;
+                 case 2:
+                     days = 60;
+                     break;
+                 case 3:
+                     days = 180;
+                     break;
+                 default:
+                     break;
+             }
+             
+             [[CertificateReminderManager new]
+              addReminderForCertificate:self.certificate
+              forDomain:self.domain
+              daysBeforeExpires:days
+              completed:^(NSError *error, BOOL success) {
+                  if (success) {
+                      [self.helper
+                       presentAlertInViewController:self
+                       title:l(@"Reminder Added")
+                       body:l(@"You can modify the reminder in the reminders app.")
+                       dismissButtonTitle:l(@"Dismiss")
+                       dismissed:nil];
+                  } else if (error) {
+                      [self.helper
+                       presentErrorInViewController:self
+                       error:error
+                       dismissed:nil];
+                  }
+                  // If reminder permission was denied, success = NO and error = Nil
+              }];
+         }
+     }];
 }
 
 # pragma mark -
@@ -179,8 +241,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             return 4;
         case CertificateErrors:
             return self.certErrors.count;
-        case CertificateVerification:
-            return self.certVerification ? 1 : 0;
     }
     return 0;
 }
@@ -188,17 +248,15 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
-            return self.certificate.subjectAlternativeNames.count > 0 ? lang(@"Subject Alternative Names") : nil;
+            return self.certificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
         case CertificateInformation:
-            return lang(@"Certificate Information");
+            return l(@"Certificate Information");
         case Names:
-            return lang(@"Subject Names");
+            return l(@"Subject Names");
         case Fingerprints:
-            return lang(@"Fingerprints");
+            return l(@"Fingerprints");
         case CertificateErrors:
-            return self.certErrors.count > 0 ? lang(@"Certificate Errors") : nil;
-        case CertificateVerification:
-            return self.certVerification ? lang(@"Verified Certificate") : nil;
+            return self.certErrors.count > 0 ? l(@"Certificate Errors") : nil;
     }
     return @"";
 }
@@ -227,11 +285,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             NSString * value = [names objectForKey:key];
             if ([key isEqualToString:@"C"]) {
                 NSString * langKey = nstrcat(@"Country::", value);
-                value = lang(langKey);
+                value = l(langKey);
             }
 
             detailTextLabel.text = value;
-            textLabel.text = lang(key);
+            textLabel.text = l(nstrcat(@"Subject::", key));
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
@@ -264,7 +322,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             break;
         } case SubjectAltNames: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-            cell.textLabel.text = lang(@"View all alternate names");
+            cell.textLabel.text = l(@"View all alternate names");
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagSANS;
@@ -275,13 +333,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             cell.textLabel.text = data[@"error"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
-            break;
-        } case CertificateVerification: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DetailButton"];
-            cell.textLabel.text = self.certVerification[@"description"];
-            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.tag = CellTagVerified;
             break;
         } default: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
@@ -316,9 +367,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             }
             [self performSegueWithIdentifier:@"ShowValue" sender:nil];
             break;
-        } case CellTagVerified: {
-            [self showVerifiedAlert];
-            break;
         } case CellTagSANS: {
             [self performSegueWithIdentifier:@"ShowList" sender:nil];
             break;
@@ -326,48 +374,17 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     }
 }
 
-- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.tag == CellTagVerified) {
-        [self showVerifiedAlert];
-    }
-}
-
-- (void) showVerifiedAlert {
-#ifdef MAIN_APP
-    [self.helper
-     presentConfirmInViewController:self
-     title:lang(@"Trusted & Verified Certificate")
-     body:lang(@"This certificate has been security verified as legitimate.")
-     confirmButtonTitle:lang(@"Learn More")
-     cancelButtonTitle:lang(@"Dimiss")
-     confirmActionIsDestructive:NO
-     dismissed:^(BOOL confirmed) {
-         if (confirmed) {
-             [[UIApplication sharedApplication] openURL:
-              [NSURL URLWithString:@"https://www.grc.com/fingerprints.htm"]];
-         }
-     }];
-#else
-    [self.helper
-     presentAlertInViewController:self
-     title:lang(@"Trusted & Verified Certificate")
-     body:lang(@"This certificate has been security verified as legitimate.")
-     dismissButtonTitle:lang(@"Dimiss")
-     dismissed:nil];
-#endif
-}
-
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowValue"]) {
         [segue.destinationViewController loadValue:valueToInspect title:titleForValue];
     } else if ([segue.identifier isEqualToString:@"ShowList"]) {
-        [(InspectorListTableViewController *)segue.destinationViewController setList:self.certificate.subjectAlternativeNames title:lang(@"Subject Alt. Names")];
+        [(InspectorListTableViewController *)segue.destinationViewController setList:self.certificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
     }
 }
 
-- (void) loadCertificate:(CHCertificate *)certificate {
+- (void) loadCertificate:(CHCertificate *)certificate forDomain:(NSString *)domain {
     _certificate = certificate;
+    _domain = domain;
 }
 
 @end

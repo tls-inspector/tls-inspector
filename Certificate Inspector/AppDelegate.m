@@ -1,24 +1,3 @@
-//
-//  AppDelegate.m
-//  Certificate Inspector
-//
-//  GPLv3 License
-//  Copyright (c) 2016 Ian Spence
-//
-//  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software Foundation,
-//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
-
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -41,6 +20,34 @@
     }
     
     return YES;
+}
+
+- (BOOL) application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    NSString * action = [url.host lowercaseString];
+    if ([action isEqualToString:@"inspect"]) {
+        NSString * host = [[url.path lowercaseString] substringFromIndex:1];
+        NSArray<NSString *> * hostComponents = [host componentsSeparatedByString:@"/"];
+        if (hostComponents.count == 1) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:INSPECT_NOTIFICATION object:@{INSPECT_NOTIFICATION_HOST_KEY: host}];
+        } else if (hostComponents.count == 2) {
+            NSString * indexString = hostComponents[1];
+            // Certificate index can only be integer (realistically between 0 and CHCertificate.CERTIFICATE_CHAIN_MAXIMUM)
+            if ([indexString rangeOfString:@"^[0-9]+$" options:NSRegularExpressionSearch].location == NSNotFound) {
+                NSLog(@"Invalid certificate index %@", indexString);
+                return NO;
+            }
+
+            // Although this is an idex, its safe to use an integer here since the above validation prevents using
+            // negitive values and we're later use this as an unsigned integer.
+            NSNumber * index = [NSNumber numberWithInteger:[indexString integerValue]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:INSPECT_NOTIFICATION object:@{INSPECT_NOTIFICATION_HOST_KEY: hostComponents[0], INSPECT_NOTIFICATION_INDEX_KEY: index}];
+        } else {
+            NSLog(@"Invalid syntax (too many directories)");
+            return NO;
+        }
+    }
+    NSLog(@"Unknown action %@", action);
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

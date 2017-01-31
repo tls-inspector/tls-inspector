@@ -1,6 +1,7 @@
 #ifndef InspectWebsite_PrefixHeader_pch
 #define InspectWebsite_PrefixHeader_pch
 
+#import "lang.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -14,10 +15,10 @@
 #define d(s, ...) ;
 #endif
 
-#define lang(key) NSLocalizedString(key, nil)
-#define langv(key, ...) [NSString stringWithFormat:NSLocalizedString(key, nil), ##__VA_ARGS__]
+#define l(keyString) [lang key:keyString]
+#define lv(keyString, argsArray) [lang key:keyString args:argsArray]
 
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 
-#endif /* InspectWebsite_PrefixHeader_pch */
+#endif

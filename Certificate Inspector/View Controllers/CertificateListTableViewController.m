@@ -1,28 +1,8 @@
-//
-//  CertificateListTableViewController.m
-//  Certificate Inspector
-//
-//  GPLv3 License
-//  Copyright (c) 2016 Ian Spence
-//
-//  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software Foundation,
-//  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
-
 #import "CertificateListTableViewController.h"
 #import "InspectorTableViewController.h"
 #import "UIHelper.h"
 #import "CHCertificate.h"
+#import "CHCertificateFactory.h"
 
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
@@ -34,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *headerViewLabel;
 @property (weak, nonatomic) IBOutlet UIButton *headerButton;
 @property (strong, nonatomic) NSArray<CHCertificate *> * certificates;
+@property (strong, nonnull, nonatomic) CHCertificateFactory * factory;
 
 - (IBAction)headerButton:(id)sender;
 
@@ -43,9 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.factory = [CHCertificateFactory new];
     self.certificates = [NSArray<CHCertificate *> new];
     uihelper = [UIHelper sharedInstance];
-    self.headerViewLabel.text = lang(@"Loading...");
+    self.headerViewLabel.text = l(@"Loading...");
     if (![self.host hasPrefix:@"http"]) {
         self.host = [NSString stringWithFormat:@"https://%@", self.host];
     }
@@ -61,13 +43,13 @@
 }
 
 - (void) forkTheBlockChain {
-    [CHCertificate certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
+    [self.factory certificateChainFromURL:[NSURL URLWithString:self.host] finished:^(NSError *error, NSArray<CHCertificate *> *certificates, BOOL trustedChain) {
         if (error) {
             [uihelper
              presentAlertInViewController:self
-             title:lang(@"Could not get certificates")
+             title:l(@"Could not get certificates")
              body:error.localizedDescription
-             dismissButtonTitle:lang(@"Dismiss")
+             dismissButtonTitle:l(@"Dismiss")
              dismissed:^(NSInteger buttonIndex) {
 #ifdef MAIN_APP
                  [self.navigationController popViewControllerAnimated:YES];
@@ -80,15 +62,24 @@
             isTrusted = trustedChain;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (trustedChain) {
-                    self.headerViewLabel.text = lang(@"Trusted Chain");
+                    self.headerViewLabel.text = l(@"Trusted Chain");
                     self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
                 } else {
-                    self.headerViewLabel.text = lang(@"Untrusted Chain");
+                    self.headerViewLabel.text = l(@"Untrusted Chain");
                     self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
                 }
                 self.headerViewLabel.textColor = [UIColor whiteColor];
                 [self.tableView reloadData];
                 self.headerButton.hidden = NO;
+                if (self.index) {
+                    NSUInteger certIndex = [self.index unsignedIntegerValue];
+                    if ((self.certificates.count - 1) >= certIndex) {
+                        selectedCertificate = self.certificates[certIndex];
+                        [self performSegueWithIdentifier:@"ViewCert" sender:nil];
+                    } else {
+                        NSLog(@"Cert index is out of bounds %lu > %lu", (unsigned long)certIndex, self.certificates.count - 1);
+                    }
+                }
             });
         }
     }];
@@ -101,7 +92,7 @@
 #endif
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.certificates.count > 0 ? lang(@"Certificate Chain") : @"";
+    return self.certificates.count > 0 ? l(@"Certificate Chain") : @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,7 +102,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ViewCert"]) {
-        [(InspectorTableViewController *)[segue destinationViewController] loadCertificate:selectedCertificate];
+        [(InspectorTableViewController *)[segue destinationViewController] loadCertificate:selectedCertificate forDomain:self.host];
     }
 }
 
@@ -134,13 +125,13 @@
 }
 
 - (IBAction)headerButton:(id)sender {
-    NSString * title = isTrusted ? lang(@"Trusted Chain") : lang(@"Untrusted Chain");
-    NSString * body = isTrusted ? lang(@"trusted_chain_description") : lang(@"untrusted_chain_description");
+    NSString * title = isTrusted ? l(@"Trusted Chain") : l(@"Untrusted Chain");
+    NSString * body = isTrusted ? l(@"trusted_chain_description") : l(@"untrusted_chain_description");
     [uihelper
      presentAlertInViewController:self
      title:title
      body:body
-     dismissButtonTitle:lang(@"Dismiss")
+     dismissButtonTitle:l(@"Dismiss")
      dismissed:nil];
 }
 @end
