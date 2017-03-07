@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Certificate Inspector-->
+        <!--TLS Inspector-->
         <scene sceneID="xxS-bf-TwA">
             <objects>
-                <tableViewController storyboardIdentifier="Input" title="Certificate Inspector" id="UeK-6B-NSA" customClass="InputTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Input" title="TLS Inspector" id="UeK-6B-NSA" customClass="InputTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="moy-x5-aZ3">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,7 +68,7 @@
                             <outlet property="delegate" destination="UeK-6B-NSA" id="H39-FF-YTe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Certificate Inspector" id="7Ah-zL-Gjb">
+                    <navigationItem key="navigationItem" title="TLS Inspector" id="7Ah-zL-Gjb">
                         <barButtonItem key="leftBarButtonItem" title="About" id="sIs-mI-6IT">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About"/>
@@ -86,7 +86,7 @@
                             </connections>
                         </barButtonItem>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="Certificate Inspector"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="TLS Inspector"/>
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
@@ -370,10 +370,10 @@
             </objects>
             <point key="canvasLocation" x="3053" y="1935"/>
         </scene>
-        <!--About Certificate Inspector-->
+        <!--About TLS Inspector-->
         <scene sceneID="afa-t4-m01">
             <objects>
-                <tableViewController title="About Certificate Inspector" id="UEQ-qB-mO8" customClass="AboutViewController" sceneMemberID="viewController">
+                <tableViewController title="About TLS Inspector" id="UEQ-qB-mO8" customClass="AboutViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="rTP-3g-FGt">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -494,13 +494,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell Friends About Cert Inspector" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCM-IJ-RvJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell Friends About TLS Inspector" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCM-IJ-RvJ">
                                                     <rect key="frame" x="61.5" y="11.5" width="252.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="Tell Friends About Cert Inspector"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="Tell Friends About TLS Inspector"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
@@ -518,13 +518,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Cert Inspector in the App Store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGp-zk-8SI">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate TLS Inspector in the App Store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGp-zk-8SI">
                                                     <rect key="frame" x="49" y="11.5" width="277" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="Rate Cert Inspector in the App Store"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="Rate TLS Inspector in the App Store"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
@@ -562,7 +562,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Get Involved" id="uwH-jV-ihb">
-                                <string key="footerTitle">Certificate Inspector is Free and Libre software licensed under GNU GPLv3.  Certificate Inspector is copyright © 2016 Ian Spence.</string>
+                                <string key="footerTitle">TLS Inspector is Free and Libre software licensed under GNU GPLv3.  TLS Inspector is copyright © 2016 Ian Spence.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contribute" id="IU4-C7-pAM">
                                         <rect key="frame" x="0.0" y="495" width="375" height="44"/>
@@ -621,7 +621,7 @@
                         </connections>
                     </tableView>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About Certificate Inspector"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About TLS Inspector"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="opensslVersionLabel" destination="bnd-Ok-o6R" id="Ipz-sV-EMt"/>

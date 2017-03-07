@@ -18,7 +18,7 @@
                BlueprintIdentifier = "3C43EF811D7A987F00AE65E9"
                BuildableName = "Inspect Website.appex"
                BlueprintName = "Inspect Website"
-               ReferencedContainer = "container:Cert Inspector.xcodeproj">
+               ReferencedContainer = "container:TLS Inspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,9 +30,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
-               BuildableName = "Cert Inspector.app"
-               BlueprintName = "Cert Inspector"
-               ReferencedContainer = "container:Cert Inspector.xcodeproj">
+               BuildableName = "TLS Inspector.app"
+               BlueprintName = "TLS Inspector"
+               ReferencedContainer = "container:TLS Inspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,7 +50,7 @@
             BlueprintIdentifier = "3C43EF811D7A987F00AE65E9"
             BuildableName = "Inspect Website.appex"
             BlueprintName = "Inspect Website"
-            ReferencedContainer = "container:Cert Inspector.xcodeproj">
+            ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
-            BuildableName = "Cert Inspector.app"
-            BlueprintName = "Cert Inspector"
-            ReferencedContainer = "container:Cert Inspector.xcodeproj">
+            BuildableName = "TLS Inspector.app"
+            BlueprintName = "TLS Inspector"
+            ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -92,9 +92,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
-            BuildableName = "Cert Inspector.app"
-            BlueprintName = "Cert Inspector"
-            ReferencedContainer = "container:Cert Inspector.xcodeproj">
+            BuildableName = "TLS Inspector.app"
+            BlueprintName = "TLS Inspector"
+            ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

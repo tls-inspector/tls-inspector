@@ -1,13 +1,13 @@
 # Contributing
 
-Certificate Inspector welcomes all members wanting to get involved with the project, regardless of your technical skill level.
+TLS Inspector welcomes all members wanting to get involved with the project, regardless of your technical skill level.
 
 Ways to contribute:
 
 # Code
 <img src="https://certificate-inspector.com/assets/img/Code.svg" width="200px" height="200px" />
 
-We welcome the opportunity to let anybody, regardless of skill level, contribute to the code base of Certificate Inspector and CHCertificate.
+We welcome the opportunity to let anybody, regardless of skill level, contribute to the code base of TLS Inspector and CHCertificate.
 Fork the project, and submit a pull request and we'll go from there!
 
 # Reporting Bugs, Answering Questions, and Suggesting ideas

@@ -15,15 +15,15 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
-               BuildableName = "Cert Inspector.app"
-               BlueprintName = "Cert Inspector"
-               ReferencedContainer = "container:Cert Inspector.xcodeproj">
+               BuildableName = "TLS Inspector.app"
+               BlueprintName = "TLS Inspector"
+               ReferencedContainer = "container:TLS Inspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -33,16 +33,16 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
-            BuildableName = "Cert Inspector.app"
-            BlueprintName = "Cert Inspector"
-            ReferencedContainer = "container:Cert Inspector.xcodeproj">
+            BuildableName = "TLS Inspector.app"
+            BlueprintName = "TLS Inspector"
+            ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -56,17 +56,12 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
-            BuildableName = "Cert Inspector.app"
-            BlueprintName = "Cert Inspector"
-            ReferencedContainer = "container:Cert Inspector.xcodeproj">
+            BuildableName = "TLS Inspector.app"
+            BlueprintName = "TLS Inspector"
+            ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -80,14 +75,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
-            BuildableName = "Cert Inspector.app"
-            BlueprintName = "Cert Inspector"
-            ReferencedContainer = "container:Cert Inspector.xcodeproj">
+            BuildableName = "TLS Inspector.app"
+            BlueprintName = "TLS Inspector"
+            ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"

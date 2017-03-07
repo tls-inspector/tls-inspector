@@ -6,8 +6,8 @@
 	<string>1 month</string>
 	<key>About</key>
 	<string>About</string>
-	<key>About Certificate Inspector</key>
-	<string>About Certificate Inspector</string>
+	<key>About TLS Inspector</key>
+	<string>About TLS Inspector</string>
 	<key>Add Certificate Expiry Reminder</key>
 	<string>Add Certificate Expiry Reminder</string>
 	<key>Algorithm</key>
@@ -52,8 +52,8 @@
 	<string>Certificate Errors</string>
 	<key>Certificate Information</key>
 	<string>Certificate Information</string>
-	<key>Certificate Inspector</key>
-	<string>Certificate Inspector</string>
+	<key>TLS Inspector</key>
+	<string>TLS Inspector</string>
 	<key>Certificate is expired or not valid yet.</key>
 	<string>Certificate is expired or not valid yet.</string>
 	<key>Certificate uses insecure SHA1 algorithm.</key>
@@ -574,8 +574,8 @@
 	<string>Notification Date</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
-	<key>Rate Cert Inspector in the App Store</key>
-	<string>Rate Cert Inspector in the App Store</string>
+	<key>Rate TLS Inspector in the App Store</key>
+	<string>Rate TLS Inspector in the App Store</string>
 	<key>Recent Domains</key>
 	<string>Recent Domains</string>
 	<key>Remember Recent Lookups</key>
@@ -614,8 +614,8 @@
 	<string>State</string>
 	<key>Submit Feedback</key>
 	<string>Submit Feedback</string>
-	<key>Tell Friends About Cert Inspector</key>
-	<string>Tell Friends About Cert Inspector</string>
+	<key>Tell Friends About TLS Inspector</key>
+	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
 	<string>Test New Features</string>
 	<key>The certificate for {domain} expires on {date}</key>

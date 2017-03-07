@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/ian/Development/Certificate Inspector/Cert Inspector.xcodeproj">
+      location = "self:/Users/ian/Development/TLS Inspector/TLS Inspector.xcodeproj">
    </FileRef>
 </Workspace>
