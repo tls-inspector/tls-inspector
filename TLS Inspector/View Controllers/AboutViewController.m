@@ -15,10 +15,10 @@
 
 @implementation AboutViewController
 
-static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/Certificate-Inspector/";
-static NSString * PROJECT_URL = @"https://certificate-inspector.com/";
-static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/Certificate-Inspector/blob/master/CONTRIBUTE.md";
-static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certificate-inspector-beta.html";
+static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/tls-Inspector/";
+static NSString * PROJECT_URL = @"https://tlsinspector.com/";
+static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/tls-inspector/blob/master/CONTRIBUTE.md";
+static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/beta.html";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,7 +53,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
         activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
         [self presentViewController:activityController animated:YES completion:nil];
     } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
-        [self.appLinks showAppInAppStore:GTAppStoreIDCertificateInspector inViewController:self dismissed:^{
+        [self.appLinks showAppInAppStore:GTAppStoreIDTLSInspector inViewController:self dismissed:^{
             //
         }];
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
@@ -75,8 +75,8 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://ianspence.com/certi
                      break;
                  case 1: {
                      [self.appLinks
-                      showEmailComposeSheetForApp:APP_NAME_CERTIFICATE_INSPECTOR
-                      email:APP_SUPPORT_EMAIL_CERTIFICATE_INSPECTOR
+                      showEmailComposeSheetForApp:APP_NAME_TLS_INSPECTOR
+                      email:APP_SUPPORT_EMAIL_TLS_INSPECTOR
                       inViewController:self dismissed:^{
                          //
                      }];

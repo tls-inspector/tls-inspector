@@ -12,7 +12,7 @@ $currentVersion = 0
 
 $pwd = File.expand_path(File.dirname(__FILE__))
 
-["Certificate Inspector/Info.plist", "Inspect Website/Info.plist"].each do |path|
+["TLS Inspector/Info.plist", "Inspect Website/Info.plist"].each do |path|
     properties = Plist::parse_xml("#{$pwd}/#{path}")
     $currentVersion = properties["CFBundleVersion"].to_i
     $currentVersion = $currentVersion += 1

@@ -1,15 +1,11 @@
-# Certificate-Inspector
+# TLS Inspector
 
-[![Join the chat at https://gitter.im/certificate-helper/Certificate-Inspector](https://badges.gitter.im/certificate-helper/Certificate-Inspector.svg)](https://gitter.im/certificate-helper/Certificate-Inspector?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/certificate-helper/TLS-Inspector](https://badges.gitter.im/certificate-helper/TLS-Inspector.svg)](https://gitter.im/certificate-helper/TLS-Inspector?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-<img src="https://s3.amazonaws.com/aws-website-certificateinspector-ihlyq/assets/img/screenshots.png" alt="Certificate Inspector Screenshots" />
+<img src="https://tlsinspector.com/assets/img/screenshots.png" alt="TLS Inspector Screenshots" />
 
-Certificate Inspector is the first **free & libre** X.509 certificate inspection utility for iOS! Effortlessly inspect the properties of certificates for HTTPS servers using your iOS Device with Certificate Inspector.
+## Trust & Safety On-the-go
 
-## Deep Packet Inspection
+With TLS Inspector you can be sure that the connection to your favourite website is secure from hackers & criminals.
 
-Concerned about your privacy online? Worried you might be the victim of a Man-In-The-Middle attack? With Certificate Inspector, you're able to verify the integrity of your secure connection to web servers to ensure that your information is safe.
-
-<img src="https://s3.amazonaws.com/aws-website-certificateinspector-ihlyq/assets/img/dpi.png" />
-
-Shown here is an example of a untrusted certificate authority (in this case a Fortinet NGFW capable of Deep-Packet Inspection) issuing a certificate for ianspence.com. Although the certificate's subject matches the domain, your connection is not private!
+Free WiFi, Workplace Internet, and Computer Viruses can put your personal information at risk. With TLS Inspector you can verify the secure connection information of any website and ensure that your information is private.
