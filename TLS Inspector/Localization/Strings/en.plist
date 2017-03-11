@@ -52,8 +52,6 @@
 	<string>Certificate Errors</string>
 	<key>Certificate Information</key>
 	<string>Certificate Information</string>
-	<key>TLS Inspector</key>
-	<string>TLS Inspector</string>
 	<key>Certificate is expired or not valid yet.</key>
 	<string>Certificate is expired or not valid yet.</string>
 	<key>Certificate uses insecure SHA1 algorithm.</key>
@@ -586,6 +584,8 @@
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Report Issue on GitHub</string>
+	<key>Search on Shodan</key>
+	<string>Search on Shodan</string>
 	<key>Share</key>
 	<string>Share</string>
 	<key>Share Public Key</key>
@@ -614,6 +614,8 @@
 	<string>State</string>
 	<key>Submit Feedback</key>
 	<string>Submit Feedback</string>
+	<key>TLS Inspector</key>
+	<string>TLS Inspector</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
@@ -642,6 +644,8 @@
 	<string>Version</string>
 	<key>View all alternate names</key>
 	<string>View all alternate names</string>
+	<key>View on SSL Labs</key>
+	<string>View on SSL Labs</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>What kind of feedback would you like to submit?</string>
 	<key>You can modify the reminder in the reminders app.</key>

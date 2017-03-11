@@ -17,6 +17,7 @@
 		3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
+		3C65C2D81E7482F300D88074 /* DNSResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D71E7482F300D88074 /* DNSResolver.m */; };
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
@@ -127,6 +128,8 @@
 		3C5D12A01D0531BD004B6E12 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = "View Controllers/AboutViewController.m"; sourceTree = "<group>"; };
 		3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CertificateListTableViewController.h; path = "View Controllers/CertificateListTableViewController.h"; sourceTree = "<group>"; };
 		3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CertificateListTableViewController.m; path = "View Controllers/CertificateListTableViewController.m"; sourceTree = "<group>"; };
+		3C65C2D61E7482F300D88074 /* DNSResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSResolver.h; sourceTree = "<group>"; };
+		3C65C2D71E7482F300D88074 /* DNSResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNSResolver.m; sourceTree = "<group>"; };
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
@@ -150,7 +153,6 @@
 		3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificate.m; sourceTree = "<group>"; };
 		3CCADFE01E3EAF000087B1DD /* CHCertificateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateFactory.h; sourceTree = "<group>"; };
 		3CCADFE11E3EAF000087B1DD /* CHCertificateFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateFactory.m; sourceTree = "<group>"; };
-		3CDD52D592D30D74C49C0F7D /* Pods-CHXCertificate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHXCertificate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CHXCertificate/Pods-CHXCertificate.debug.xcconfig"; sourceTree = "<group>"; };
 		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorListTableViewController.h; path = "View Controllers/InspectorListTableViewController.h"; sourceTree = "<group>"; };
 		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorListTableViewController.m; path = "View Controllers/InspectorListTableViewController.m"; sourceTree = "<group>"; };
 		3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateReminderManager.h; sourceTree = "<group>"; };
@@ -168,17 +170,14 @@
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputTableViewController.m; path = "View Controllers/InputTableViewController.m"; sourceTree = "<group>"; };
 		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorTableViewController.h; path = "View Controllers/InspectorTableViewController.h"; sourceTree = "<group>"; };
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorTableViewController.m; path = "View Controllers/InspectorTableViewController.m"; sourceTree = "<group>"; };
-		47D1840C7308B30799652256 /* Pods-CHXCertifcate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHXCertifcate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CHXCertifcate/Pods-CHXCertifcate.debug.xcconfig"; sourceTree = "<group>"; };
 		4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspect Website.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website.release.xcconfig"; sourceTree = "<group>"; };
 		507199DDF4AEB7E9BB1DDB97 /* Pods-TLS Inspector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TLS Inspector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TLS Inspector/Pods-TLS Inspector.debug.xcconfig"; sourceTree = "<group>"; };
-		65197ABA970BECB880EE21C4 /* Pods-CHXCertifcate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHXCertifcate.release.xcconfig"; path = "Pods/Target Support Files/Pods-CHXCertifcate/Pods-CHXCertifcate.release.xcconfig"; sourceTree = "<group>"; };
 		794AA7DD74040FB12A3CBF0A /* Pods-CHCertificate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHCertificate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CHCertificate/Pods-CHCertificate.debug.xcconfig"; sourceTree = "<group>"; };
 		7CC5ACA0D9E2E2E4E331F611 /* Pods_Cert_Inspector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cert_Inspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D583AA3C66988CF40443355 /* Pods_CHCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9188DD8F002653BFB69923E9 /* Pods_CHXCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHXCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspect Website.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website.debug.xcconfig"; sourceTree = "<group>"; };
 		BC3E62E0AA001B1545EE1677 /* Pods-CHCertificate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHCertificate.release.xcconfig"; path = "Pods/Target Support Files/Pods-CHCertificate/Pods-CHCertificate.release.xcconfig"; sourceTree = "<group>"; };
-		C21FD7A0BDEFE85FD3C835F6 /* Pods-CHXCertificate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHXCertificate.release.xcconfig"; path = "Pods/Target Support Files/Pods-CHXCertificate/Pods-CHXCertificate.release.xcconfig"; sourceTree = "<group>"; };
 		CBF28D33D30B90C712D57220 /* Pods_CHXCertifcate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHXCertifcate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F9D8B87D744A334A3F4E3D /* Pods_TLS_Inspector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TLS_Inspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspect_Website.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +290,8 @@
 		3CE5D2AA1E199FEF009500E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3C65C2D61E7482F300D88074 /* DNSResolver.h */,
+				3C65C2D71E7482F300D88074 /* DNSResolver.m */,
 				3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */,
 				3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */,
 			);
@@ -378,10 +379,6 @@
 				FFC84F9E96D4B63DCDA28497 /* Pods-TLS Inspector.release.xcconfig */,
 				AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */,
 				4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */,
-				47D1840C7308B30799652256 /* Pods-CHXCertifcate.debug.xcconfig */,
-				65197ABA970BECB880EE21C4 /* Pods-CHXCertifcate.release.xcconfig */,
-				3CDD52D592D30D74C49C0F7D /* Pods-CHXCertificate.debug.xcconfig */,
-				C21FD7A0BDEFE85FD3C835F6 /* Pods-CHXCertificate.release.xcconfig */,
 				794AA7DD74040FB12A3CBF0A /* Pods-CHCertificate.debug.xcconfig */,
 				BC3E62E0AA001B1545EE1677 /* Pods-CHCertificate.release.xcconfig */,
 			);
@@ -740,6 +737,7 @@
 				3CC652231DB06E96001FB7E1 /* UILabel+Lang.swift in Sources */,
 				3C04EE5F1CB4A23900F56B68 /* UIHelper.m in Sources */,
 				3CC652331DB06EC4001FB7E1 /* UIViewController+Lang.swift in Sources */,
+				3C65C2D81E7482F300D88074 /* DNSResolver.m in Sources */,
 				3CC6522E1DB06EC4001FB7E1 /* UINavigationItem+Lang.swift in Sources */,
 				3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */,
 				3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */,

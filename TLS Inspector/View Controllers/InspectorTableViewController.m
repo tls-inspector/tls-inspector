@@ -4,6 +4,7 @@
 #import "UIHelper.h"
 #import "InspectorListTableViewController.h"
 #import "CertificateReminderManager.h"
+#import "DNSResolver.h"
 
 @import MBProgressHUD;
 
@@ -92,7 +93,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     NSArray<NSString *> * items = @[
                                     l(@"Share Public Key"),
                                     l(@"Add Certificate Expiry Reminder"),
-                                    l(@"View on SSL Labs")
+                                    l(@"View on SSL Labs"),
+                                    l(@"Search on Shodan")
                                     ];
 #else
     NSArray<NSString *> * items = @[
@@ -116,6 +118,15 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
         } else if (itemIndex == 2) {
             NSURL * url = [NSURL URLWithString:self.domain];
             open_url(nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host));
+        } else if (itemIndex == 3) {
+            NSURL * url = [NSURL URLWithString:self.domain];
+            NSError * dnsError;
+            NSArray<NSString *> * addresses = [DNSResolver resolveHostname:url.host error:&dnsError];
+            if (addresses && addresses.count >= 1) {
+                open_url(nstrcat(@"https://www.shodan.io/host/", addresses[0]));
+            } else if (dnsError) {
+                [self.helper presentErrorInViewController:self error:dnsError dismissed:nil];
+            }
 #endif
         }
      }];
