@@ -29,13 +29,33 @@
 
 @interface CHCertificateChain : NSObject
 
+/**
+ The domain for the certificate chain
+ */
 @property (strong, nonatomic, nonnull, readonly) NSString * domain;
+
+/**
+ The array of certificates belonging to the chain
+ */
 @property (strong, nonatomic, nonnull, readonly) NSArray<CHCertificate *> * certificates;
+
+/**
+ The root of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
+ */
 @property (strong, nonatomic, nullable, readonly) CHCertificate * root;
+
+/**
+ If the system trusts the certificate chain
+ */
 @property (nonatomic, readonly) BOOL trusted;
 
-+ (CHCertificateChain * _Nonnull) chainFor:(NSString * _Nonnull)domain
-                          withCertificates:(NSArray<CHCertificate *> * _Nonnull)certs
-                                   trusted:(BOOL)trusted;
+/**
+ *  Query the specified URL for its certificate chain.
+ *
+ *  @param URL      The URL to query. Must use the https scheme.
+ *                  The port is optional and will default to 443.
+ *  @param finished Called when finished with either an error or certificate chain.
+ */
+- (void) certificateChainFromURL:(NSURL * _Nonnull)URL finished:(void (^ _Nonnull)(NSError * _Nullable error, CHCertificateChain * _Nullable chain))finished;
 
 @end

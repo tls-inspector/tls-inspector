@@ -17,6 +17,8 @@
 		3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
+		3C65C2D41E7479AD00D88074 /* CHCertificateChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */; };
+		3C65C2D51E7479AD00D88074 /* CHCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */; };
 		3C65C2D81E7482F300D88074 /* DNSResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D71E7482F300D88074 /* DNSResolver.m */; };
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
@@ -49,8 +51,6 @@
 		3CCADFDA1E3EAEDC0087B1DD /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; };
 		3CCADFDB1E3EAEDC0087B1DD /* CHCertificate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */; };
-		3CCADFE31E3EAF000087B1DD /* CHCertificateFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCADFE01E3EAF000087B1DD /* CHCertificateFactory.h */; };
-		3CCADFE41E3EAF000087B1DD /* CHCertificateFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCADFE11E3EAF000087B1DD /* CHCertificateFactory.m */; };
 		3CCADFE51E3EAF770087B1DD /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; };
 		3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
@@ -128,6 +128,8 @@
 		3C5D12A01D0531BD004B6E12 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = "View Controllers/AboutViewController.m"; sourceTree = "<group>"; };
 		3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CertificateListTableViewController.h; path = "View Controllers/CertificateListTableViewController.h"; sourceTree = "<group>"; };
 		3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CertificateListTableViewController.m; path = "View Controllers/CertificateListTableViewController.m"; sourceTree = "<group>"; };
+		3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateChain.h; sourceTree = "<group>"; };
+		3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateChain.m; sourceTree = "<group>"; };
 		3C65C2D61E7482F300D88074 /* DNSResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSResolver.h; sourceTree = "<group>"; };
 		3C65C2D71E7482F300D88074 /* DNSResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNSResolver.m; sourceTree = "<group>"; };
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
@@ -151,8 +153,6 @@
 		3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHCertificate.h; sourceTree = "<group>"; };
 		3CCADFD61E3EAEDC0087B1DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificate.m; sourceTree = "<group>"; };
-		3CCADFE01E3EAF000087B1DD /* CHCertificateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateFactory.h; sourceTree = "<group>"; };
-		3CCADFE11E3EAF000087B1DD /* CHCertificateFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateFactory.m; sourceTree = "<group>"; };
 		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorListTableViewController.h; path = "View Controllers/InspectorListTableViewController.h"; sourceTree = "<group>"; };
 		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorListTableViewController.m; path = "View Controllers/InspectorListTableViewController.m"; sourceTree = "<group>"; };
 		3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateReminderManager.h; sourceTree = "<group>"; };
@@ -280,8 +280,8 @@
 			children = (
 				3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */,
 				3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */,
-				3CCADFE01E3EAF000087B1DD /* CHCertificateFactory.h */,
-				3CCADFE11E3EAF000087B1DD /* CHCertificateFactory.m */,
+				3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */,
+				3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */,
 				3CCADFD61E3EAEDC0087B1DD /* Info.plist */,
 			);
 			path = CHCertificate;
@@ -392,7 +392,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CCADFE31E3EAF000087B1DD /* CHCertificateFactory.h in Headers */,
+				3C65C2D41E7479AD00D88074 /* CHCertificateChain.h in Headers */,
 				3CCADFD71E3EAEDC0087B1DD /* CHCertificate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,7 +710,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */,
-				3CCADFE41E3EAF000087B1DD /* CHCertificateFactory.m in Sources */,
+				3C65C2D51E7479AD00D88074 /* CHCertificateChain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
