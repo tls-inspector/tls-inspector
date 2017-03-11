@@ -32,9 +32,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                                        ];
     NSMutableArray<NSString *> * components = [NSMutableArray arrayWithArray:[OPENSSL_VERSION componentsSeparatedByString:@"."]];
     NSString * letter = [alphabet objectAtIndex:[[components lastObject] integerValue]];
-    [components replaceObjectAtIndex:components.count-1 withObject:letter];
+    [components removeLastObject];
 
-    self.opensslVersionLabel.text = [components componentsJoinedByString:@"."];
+    self.opensslVersionLabel.text = [NSString stringWithFormat:@"%@%@", [components componentsJoinedByString:@"."], letter];
     self.helper = [UIHelper sharedInstance];
     self.appLinks = [GTAppLinks new];
 }
