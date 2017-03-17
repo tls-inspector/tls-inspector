@@ -164,4 +164,10 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
  */
 - (void *) X509Certificate;
 
+/**
+ *  Get the OpenSSL version used by CHCertificate
+ *
+ *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"
+ */
++ (NSString *) openSSLVersion;
 @end

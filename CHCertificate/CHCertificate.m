@@ -299,4 +299,10 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     return names;
 }
 
++ (NSString *) openSSLVersion {
+    NSString * version = [NSString stringWithUTF8String:OPENSSL_VERSION_TEXT]; // OpenSSL <version> ...
+    NSArray<NSString *> * versionComponents = [version componentsSeparatedByString:@" "];
+    return versionComponents[1];
+}
+
 @end

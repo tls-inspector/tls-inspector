@@ -1,6 +1,7 @@
 #import "AboutViewController.h"
 #import "RecentDomains.h"
 @import GTAppLinks;
+@import CHCertificate;
 
 @interface AboutViewController ()
 
@@ -15,9 +16,9 @@
 
 @implementation AboutViewController
 
-static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/tls-Inspector/";
+static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/TLS-Inspector/";
 static NSString * PROJECT_URL = @"https://tlsinspector.com/";
-static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/tls-inspector/blob/master/CONTRIBUTE.md";
+static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/TLS-inspector/blob/master/CONTRIBUTE.md";
 static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/beta.html";
 
 - (void)viewDidLoad {
@@ -25,16 +26,8 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     [self.recentSwitch setOn:[RecentDomains sharedInstance].saveRecentDomains];
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
-    NSArray<NSString *> * alphabet = @[
-                                       @"a", @"b", @"c", @"d", @"e", @"f", @"g", @"h", @"i",
-                                       @"j", @"k", @"l", @"m", @"n", @"o", @"p", @"q", @"r",
-                                       @"s", @"t", @"u", @"v", @"w", @"x", @"y", @"z"
-                                       ];
-    NSMutableArray<NSString *> * components = [NSMutableArray arrayWithArray:[OPENSSL_VERSION componentsSeparatedByString:@"."]];
-    NSString * letter = [alphabet objectAtIndex:[[components lastObject] integerValue]];
-    [components removeLastObject];
 
-    self.opensslVersionLabel.text = [NSString stringWithFormat:@"%@%@", [components componentsJoinedByString:@"."], letter];
+    self.opensslVersionLabel.text = [CHCertificate openSSLVersion];
     self.helper = [UIHelper sharedInstance];
     self.appLinks = [GTAppLinks new];
 }
