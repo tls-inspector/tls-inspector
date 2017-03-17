@@ -134,36 +134,30 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 }
 
 - (NSString *) serialNumber {
-    NSMutableString * s = [NSMutableString new];
-    int length = (int)self.certificate->cert_info->serialNumber->length;
-    for (int i = 0; i < length; i++) {
-        unsigned char data = (unsigned char)self.certificate->cert_info->serialNumber->data[i];
-        [s appendString:[NSString stringWithFormat:@"%02x", data]];
-    }
-    return s;
+    long serial = ASN1_INTEGER_get(X509_get_serialNumber(self.certificate));
+    return [[NSNumber numberWithLong:serial] stringValue];
 }
 
 - (NSString *) algorithm {
-    X509_ALGOR * sig_type = self.certificate->sig_alg;
+    const X509_ALGOR * sig_type = X509_get0_tbs_sigalg(self.certificate);
     char buffer[128];
     OBJ_obj2txt(buffer, sizeof(buffer), sig_type->algorithm, 0);
     return [NSString stringWithUTF8String:buffer];
 }
 
 - (NSDate *) notAfter {
-    return [self dateFromASNTIME:X509_get_notAfter(self.certificate)];
+    return [self dateFromASNTIME:X509_get0_notAfter(self.certificate)];
 }
 
 - (NSDate *) notBefore {
-    return [self dateFromASNTIME:X509_get_notBefore(self.certificate)];
+    return [self dateFromASNTIME:X509_get0_notBefore(self.certificate)];
 }
 
-- (NSDate *) dateFromASNTIME:(ASN1_TIME *)time {
+- (NSDate *) dateFromASNTIME:(const ASN1_TIME *)time {
     // Source: http://stackoverflow.com/a/8903088/1112669
-    ASN1_GENERALIZEDTIME *certificateExpiryASN1Generalized = ASN1_TIME_to_generalizedtime(time,
-                                                                                          NULL);
+    ASN1_GENERALIZEDTIME *certificateExpiryASN1Generalized = ASN1_TIME_to_generalizedtime((ASN1_TIME *)time, NULL);
     if (certificateExpiryASN1Generalized != NULL) {
-        unsigned char *certificateExpiryData = ASN1_STRING_data(certificateExpiryASN1Generalized);
+        const unsigned char * certificateExpiryData = ASN1_STRING_get0_data(certificateExpiryASN1Generalized);
 
         // ASN1 generalized times look like this: "20131114230046Z"
         //                                format:  YYYYMMDDHHMMSS
@@ -219,7 +213,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
             ASN1_STRING *issuerNameASN1 = X509_NAME_ENTRY_get_data(issuerNameEntry);
 
             if (issuerNameASN1 != NULL) {
-                unsigned char *issuerName = ASN1_STRING_data(issuerNameASN1);
+                const unsigned char *issuerName = ASN1_STRING_get0_data(issuerNameASN1);
                 return [NSString stringWithUTF8String:(char *)issuerName];
             }
         }
@@ -283,13 +277,13 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
     NSMutableArray<NSString *> * names = [NSMutableArray new];
     const GENERAL_NAME * name;
-    char * domain;
+    const unsigned char * domain;
     for (int i = 0; i < numberOfSans; i++) {
         name = sk_GENERAL_NAME_value(sans, i);
 
         if (name->type == GEN_DNS) {
-            domain = (char *)ASN1_STRING_data(name->d.dNSName);
-            [names addObject:[NSString stringWithUTF8String:domain]];
+            domain = ASN1_STRING_get0_data(name->d.dNSName);
+            [names addObject:[NSString stringWithUTF8String:(const char *)domain]];
         }
     }
 
