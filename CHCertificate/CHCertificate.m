@@ -31,6 +31,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/err.h>
 #include <openssl/bio.h>
+#include <openssl/bn.h>
 #include <CommonCrypto/CommonCrypto.h>
 
 @interface CHCertificate()
@@ -134,8 +135,15 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 }
 
 - (NSString *) serialNumber {
-    long serial = ASN1_INTEGER_get(X509_get_serialNumber(self.certificate));
-    return [[NSNumber numberWithLong:serial] stringValue];
+    const ASN1_INTEGER * serial = X509_get0_serialNumber(self.certificate);
+    long value = ASN1_INTEGER_get(serial);
+    if (value == -1) {
+        BIGNUM * bnser = ASN1_INTEGER_to_BN(serial, NULL);
+        char * asciiHex = BN_bn2hex(bnser);
+        return [NSString stringWithUTF8String:asciiHex];
+    } else {
+        return [[NSNumber numberWithLong:value] stringValue];
+    }
 }
 
 - (NSString *) algorithm {
