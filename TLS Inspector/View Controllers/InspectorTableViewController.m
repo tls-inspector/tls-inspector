@@ -5,8 +5,7 @@
 #import "InspectorListTableViewController.h"
 #import "CertificateReminderManager.h"
 #import "DNSResolver.h"
-
-@import MBProgressHUD;
+#import "MBProgressHUD.h"
 
 @interface InspectorTableViewController()
 
