@@ -4,6 +4,7 @@
 #import "RecentDomains.h"
 #import "CHCertificate.h"
 #import "CHCertificateChain.h"
+#import "MBProgressHUD.h"
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
@@ -56,9 +57,8 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (self.hostField.text.length > 0) {
-        [self saveRecent];
         hostAddress = self.hostField.text;
-        [self inspectButton:nil];
+        [self inspectCertificate];
         return YES;
     } else {
         return NO;
@@ -67,22 +67,44 @@
 
 - (void) saveRecent {
     if ([RecentDomains sharedInstance].saveRecentDomains) {
-        self.recentDomains = [[RecentDomains sharedInstance] prependDomain:self.hostField.text];
-        [self.tableView reloadData];
+        NSArray<NSString *> * domains = [[RecentDomains sharedInstance] getRecentDomains];
+        if (![domains containsObject:hostAddress]) {
+            self.recentDomains = [[RecentDomains sharedInstance] prependDomain:hostAddress];
+            if ([self.tableView numberOfSections] == 2) {
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            } else {
+                [self.tableView beginUpdates];
+                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableView endUpdates];
+            }
+        }
     }
 }
 
 - (IBAction) inspectButton:(UIBarButtonItem *)sender {
-    [self saveRecent];
     hostAddress = self.hostField.text;
-    
+    [self inspectCertificate];
+}
+
+- (void) inspectCertificate {
+    [self saveRecent];
+
     if (![hostAddress hasPrefix:@"http"]) {
         hostAddress = [NSString stringWithFormat:@"https://%@", hostAddress];
     }
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hostField endEditing:YES];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    });
+    
     [self.chain
      certificateChainFromURL:[NSURL URLWithString:hostAddress]
      finished:^(NSError * _Nullable error, CHCertificateChain * _Nullable chain) {
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+         });
+
          if (error) {
              [[UIHelper sharedInstance]
               presentAlertInViewController:self
@@ -109,12 +131,8 @@
 
 - (void) inspectWebsiteNotification:(NSNotification *)notification {
     NSDictionary<NSString *, id> * data = (NSDictionary *)notification.object;
-    self.hostField.text = [data objectForKey:INSPECT_NOTIFICATION_HOST_KEY];
-    NSNumber * index = [data objectForKey:INSPECT_NOTIFICATION_INDEX_KEY];
-    if (index) {
-        certIndex = index;
-    }
-    [self inspectButton:nil];
+    hostAddress = [data objectForKey:INSPECT_NOTIFICATION_HOST_KEY];
+    [self inspectCertificate];
 }
 
 # pragma mark -
@@ -197,6 +215,6 @@
     }
     
     hostAddress = self.recentDomains[indexPath.row];
-    [self inspectButton:nil];
+    [self inspectCertificate];
 }
 @end
