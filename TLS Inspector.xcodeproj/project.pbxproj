@@ -31,6 +31,10 @@
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
+		3CBD8B931E7CE8D600F2A637 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B921E7CE8D600F2A637 /* AppState.m */; };
+		3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B921E7CE8D600F2A637 /* AppState.m */; };
+		3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
+		3CBD8B981E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
 		3CC6521F1DB06E1A001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
 		3CC6523D1DB07035001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
 		3CC6523F1DB0710C001FB7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6523E1DB0710C001FB7E1 /* Main.storyboard */; };
@@ -131,6 +135,10 @@
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
+		3CBD8B911E7CE8D600F2A637 /* AppState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppState.h; path = Classes/AppState.h; sourceTree = "<group>"; };
+		3CBD8B921E7CE8D600F2A637 /* AppState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppState.m; path = Classes/AppState.m; sourceTree = "<group>"; };
+		3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitViewController.h; path = "View Controllers/SplitViewController.h"; sourceTree = "<group>"; };
+		3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitViewController.m; path = "View Controllers/SplitViewController.m"; sourceTree = "<group>"; };
 		3CC6521D1DB06E1A001FB7E1 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lang.h; path = Localization/lang.h; sourceTree = "<group>"; };
 		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = lang.m; path = Localization/lang.m; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -274,6 +282,8 @@
 		3CE5D2AA1E199FEF009500E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3CBD8B911E7CE8D600F2A637 /* AppState.h */,
+				3CBD8B921E7CE8D600F2A637 /* AppState.m */,
 				3C65C2D61E7482F300D88074 /* DNSResolver.h */,
 				3C65C2D71E7482F300D88074 /* DNSResolver.m */,
 				3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */,
@@ -350,6 +360,8 @@
 				3CFAE6F11CA8463900CD946B /* InputTableViewController.m */,
 				3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */,
 				3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */,
+				3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */,
+				3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -542,11 +554,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */,
+				3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */,
 				3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CC6523D1DB07035001FB7E1 /* lang.m in Sources */,
 				3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */,
 				3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */,
 				3C3104E91D83C02E0093909E /* CertificateListTableViewController.m in Sources */,
+				3CBD8B981E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */,
 				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
 				3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */,
@@ -571,11 +585,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C0C6F341E7CCB6400E6FCA2 /* UILang.m in Sources */,
+				3CBD8B931E7CE8D600F2A637 /* AppState.m in Sources */,
 				3CC6521F1DB06E1A001FB7E1 /* lang.m in Sources */,
 				3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */,
 				3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */,
 				3C50969F1E7CCA7600AEAAB2 /* GTAppLinks.m in Sources */,
 				3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */,
+				3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */,

@@ -3,6 +3,7 @@
 
 #import "lang.h"
 #import "defines.pch"
+#import "AppState.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -15,6 +16,7 @@
 #define INSPECT_NOTIFICATION @"INSPECT_THIS_WEBSITE"
 #define INSPECT_NOTIFICATION_HOST_KEY @"host"
 #define INSPECT_NOTIFICATION_INDEX_KEY @"index"
+#define RELOAD_CERT_NOTIFICATION @"ReloadCertDetails"
 
 #if DEBUG
 #define d(s, ...) NSLog(s, ##__VA_ARGS__)
@@ -29,5 +31,14 @@
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 
 #define open_url(url) [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]]
+
+#define notify(nname) [[NSNotificationCenter defaultCenter] postNotificationName:nname object:nil]
+#define subscribe(sel, nname) [[NSNotificationCenter defaultCenter] addObserver:self selector:sel name:nname object:nil]
+
+#define appState [AppState currentState]
+#define currentChain appState.certificateChain
+#define selectedCertificate appState.selectedCertificate
+#define isCompact appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact
+#define isRegular appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
 
 #endif

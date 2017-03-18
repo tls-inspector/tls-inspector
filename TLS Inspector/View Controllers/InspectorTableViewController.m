@@ -6,10 +6,10 @@
 #import "CertificateReminderManager.h"
 #import "DNSResolver.h"
 #import "MBProgressHUD.h"
+#import "CHCertificate.h"
 
 @interface InspectorTableViewController()
 
-@property (strong, nonatomic) CHCertificate  * certificate;
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
 @property (strong, nonatomic) UIHelper       * helper;
@@ -51,40 +51,50 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.title = self.certificate.summary;
-    self.cells = [NSMutableArray new];
-    self.certErrors = [NSMutableArray new];
+
     self.helper = [UIHelper sharedInstance];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    
-    NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [self.certificate algorithm]));
-    
-    [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [self.certificate issuer]}];
-    [self.cells addObject:@{@"label": l(@"Algorithm"), @"value": algorythm}];
-    [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[self.certificate notAfter]]}];
-    [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[self.certificate notBefore]]}];
-
-    if (![self.certificate validIssueDate]) {
-        [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];
-    }
-    if ([[self.certificate algorithm] hasPrefix:@"sha1"]) {
-        [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
-    }
-
-    MD5Fingerprint = [self.certificate MD5Fingerprint];
-    SHA1Fingerprint = [self.certificate SHA1Fingerprint];
-    SHA256Fingerprint = [self.certificate SHA256Fingerprint];
-    serialNumber = [self.certificate serialNumber];
-    
-    [self.certificate subjectAlternativeNames];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
     
-    names = [self.certificate names];
+    [self loadCertificate];
+    subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
+}
+
+- (void) loadCertificate {
+    self.title = selectedCertificate.summary;
+    NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [selectedCertificate algorithm]));
+    
+    [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [selectedCertificate issuer]}];
+    [self.cells addObject:@{@"label": l(@"Algorithm"), @"value": algorythm}];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[selectedCertificate notAfter]]}];
+    [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[selectedCertificate notBefore]]}];
+    
+    if (![selectedCertificate validIssueDate]) {
+        [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];
+    }
+    if ([[selectedCertificate algorithm] hasPrefix:@"sha1"]) {
+        [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
+    }
+    
+    MD5Fingerprint = [selectedCertificate MD5Fingerprint];
+    SHA1Fingerprint = [selectedCertificate SHA1Fingerprint];
+    SHA256Fingerprint = [selectedCertificate SHA256Fingerprint];
+    serialNumber = [selectedCertificate serialNumber];
+    
+    [selectedCertificate subjectAlternativeNames];
+    
+    names = [selectedCertificate names];
     nameKeys = [names allKeys];
+
+    self.cells = [NSMutableArray new];
+    self.certErrors = [NSMutableArray new];
+
+    [self.tableView reloadData];
 }
 
 - (void)actionButton:(UIBarButtonItem *)sender {
@@ -133,9 +143,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 
 - (void) sharePublicKey:(UIBarButtonItem *)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSData * pem = [self.certificate publicKeyAsPEM];
+    NSData * pem = [selectedCertificate publicKeyAsPEM];
     if (pem) {
-        NSString * fileName = format(@"/%@.pem", self.certificate.serialNumber);
+        NSString * fileName = format(@"/%@.pem", selectedCertificate.serialNumber);
         NSURL * fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
         [pem writeToURL:fileURL atomically:YES];
         
@@ -194,7 +204,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
              }
              
              [[CertificateReminderManager new]
-              addReminderForCertificate:self.certificate
+              addReminderForCertificate:selectedCertificate
               forDomain:self.domain
               daysBeforeExpires:days
               completed:^(NSError *error, BOOL success) {
@@ -242,7 +252,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
-            return self.certificate.subjectAlternativeNames.count > 0 ? 1 : 0;
+            return selectedCertificate.subjectAlternativeNames.count > 0 ? 1 : 0;
         case CertificateInformation:
             return self.cells.count;
         case Names:
@@ -258,7 +268,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
-            return self.certificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
+            return selectedCertificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
         case CertificateInformation:
             return l(@"Certificate Information");
         case Names:
@@ -388,13 +398,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     if ([segue.identifier isEqualToString:@"ShowValue"]) {
         [segue.destinationViewController loadValue:valueToInspect title:titleForValue];
     } else if ([segue.identifier isEqualToString:@"ShowList"]) {
-        [(InspectorListTableViewController *)segue.destinationViewController setList:self.certificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
+        [(InspectorListTableViewController *)segue.destinationViewController setList:selectedCertificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
     }
-}
-
-- (void) loadCertificate:(CHCertificate *)certificate forDomain:(NSString *)domain {
-    _certificate = certificate;
-    _domain = domain;
 }
 
 @end

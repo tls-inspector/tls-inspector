@@ -18,7 +18,8 @@
     if ([defaults objectForKey:SAVE_RECENT_DOMAINS] == nil) {
         [defaults setBool:YES forKey:SAVE_RECENT_DOMAINS];
     }
-    
+
+    [AppState currentState];
     return YES;
 }
 

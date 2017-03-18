@@ -2,6 +2,8 @@
 #import "CertificateListTableViewController.h"
 #import "UIHelper.h"
 #import "RecentDomains.h"
+#import "CHCertificate.h"
+#import "CHCertificateChain.h"
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
@@ -13,6 +15,7 @@
 - (IBAction)inspectButton:(UIBarButtonItem *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
+@property (strong, nonatomic) CHCertificateChain * chain;
 
 @end
 
@@ -22,6 +25,7 @@
     [super viewDidLoad];
     self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    self.chain = [CHCertificateChain new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 }
 
@@ -54,7 +58,7 @@
     if (self.hostField.text.length > 0) {
         [self saveRecent];
         hostAddress = self.hostField.text;
-        [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+        [self inspectButton:nil];
         return YES;
     } else {
         return NO;
@@ -71,7 +75,36 @@
 - (IBAction) inspectButton:(UIBarButtonItem *)sender {
     [self saveRecent];
     hostAddress = self.hostField.text;
-    [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+    
+    if (![hostAddress hasPrefix:@"http"]) {
+        hostAddress = [NSString stringWithFormat:@"https://%@", hostAddress];
+    }
+    
+    [self.chain
+     certificateChainFromURL:[NSURL URLWithString:hostAddress]
+     finished:^(NSError * _Nullable error, CHCertificateChain * _Nullable chain) {
+         if (error) {
+             [[UIHelper sharedInstance]
+              presentAlertInViewController:self
+              title:l(@"Could not get certificates")
+              body:error.localizedDescription
+              dismissButtonTitle:l(@"Dismiss")
+              dismissed:^(NSInteger buttonIndex) {
+#ifdef MAIN_APP
+                  [self.navigationController popViewControllerAnimated:YES];
+#else
+                  [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+#endif
+              }];
+         } else {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 currentChain = chain;
+                 selectedCertificate = chain.certificates[0];
+                 UISplitViewController * split = [self.storyboard instantiateViewControllerWithIdentifier:@"SplitView"];
+                 [self presentViewController:split animated:YES completion:nil];
+             });
+         }
+     }];
 }
 
 - (void) inspectWebsiteNotification:(NSNotification *)notification {
@@ -164,6 +197,6 @@
     }
     
     hostAddress = self.recentDomains[indexPath.row];
-    [self performSegueWithIdentifier:@"InspectCertificate" sender:nil];
+    [self inspectButton:nil];
 }
 @end
