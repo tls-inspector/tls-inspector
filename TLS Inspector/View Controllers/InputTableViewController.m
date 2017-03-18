@@ -42,15 +42,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"InspectCertificate"]) {
-        [(CertificateListTableViewController *)[segue destinationViewController] setHost:hostAddress];
-        if (certIndex) {
-            [(CertificateListTableViewController *)[segue destinationViewController] setIndex:certIndex];
-        }
-    }
-}
-
 - (void)hostFieldEdit:(id)sender {
     self.inspectButton.enabled = self.hostField.text.length > 0;
 }

@@ -13,7 +13,6 @@
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
 @property (strong, nonatomic) UIHelper       * helper;
-@property (strong, nonatomic) NSString       * domain;
 
 @end
 
@@ -66,6 +65,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     self.title = selectedCertificate.summary;
     NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [selectedCertificate algorithm]));
     
+    self.cells = [NSMutableArray new];
+    self.certErrors = [NSMutableArray new];
+    
     [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [selectedCertificate issuer]}];
     [self.cells addObject:@{@"label": l(@"Algorithm"), @"value": algorythm}];
     
@@ -90,9 +92,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     
     names = [selectedCertificate names];
     nameKeys = [names allKeys];
-
-    self.cells = [NSMutableArray new];
-    self.certErrors = [NSMutableArray new];
 
     [self.tableView reloadData];
 }
@@ -125,12 +124,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             [self addCertificateExpiryReminder:sender];
 #ifdef MAIN_APP
         } else if (itemIndex == 2) {
-            NSURL * url = [NSURL URLWithString:self.domain];
+            NSURL * url = [NSURL URLWithString:currentChain.domain];
             open_url(nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host));
         } else if (itemIndex == 3) {
-            NSURL * url = [NSURL URLWithString:self.domain];
             NSError * dnsError;
-            NSArray<NSString *> * addresses = [DNSResolver resolveHostname:url.host error:&dnsError];
+            NSArray<NSString *> * addresses = [DNSResolver resolveHostname:currentChain.domain error:&dnsError];
             if (addresses && addresses.count >= 1) {
                 open_url(nstrcat(@"https://www.shodan.io/host/", addresses[0]));
             } else if (dnsError) {
@@ -205,7 +203,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
              
              [[CertificateReminderManager new]
               addReminderForCertificate:selectedCertificate
-              forDomain:self.domain
+              forDomain:currentChain.domain
               daysBeforeExpires:days
               completed:^(NSError *error, BOOL success) {
                   if (success) {

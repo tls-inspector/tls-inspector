@@ -29,6 +29,7 @@
         self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
     }
     self.headerViewLabel.textColor = [UIColor whiteColor];
+    self.headerButton.hidden = NO;
 
 #ifdef EXTENSION
     [self.navigationItem
@@ -38,7 +39,7 @@
                            action:@selector(dismissView:)]];
 #endif
     if (isRegular) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     }
 }
 
