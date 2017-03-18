@@ -66,8 +66,6 @@
 		3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* Assets.xcassets */; };
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
-		A3D13F7C0A683C012444EAA1 /* Pods_TLS_Inspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F9D8B87D744A334A3F4E3D /* Pods_TLS_Inspector.framework */; };
-		B859FC5831450BCC55334D53 /* Pods_Inspect_Website.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,16 +169,6 @@
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputTableViewController.m; path = "View Controllers/InputTableViewController.m"; sourceTree = "<group>"; };
 		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorTableViewController.h; path = "View Controllers/InspectorTableViewController.h"; sourceTree = "<group>"; };
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorTableViewController.m; path = "View Controllers/InspectorTableViewController.m"; sourceTree = "<group>"; };
-		4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspect Website.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website.release.xcconfig"; sourceTree = "<group>"; };
-		507199DDF4AEB7E9BB1DDB97 /* Pods-TLS Inspector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TLS Inspector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TLS Inspector/Pods-TLS Inspector.debug.xcconfig"; sourceTree = "<group>"; };
-		7CC5ACA0D9E2E2E4E331F611 /* Pods_Cert_Inspector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cert_Inspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D583AA3C66988CF40443355 /* Pods_CHCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9188DD8F002653BFB69923E9 /* Pods_CHXCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHXCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspect Website.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website.debug.xcconfig"; sourceTree = "<group>"; };
-		CBF28D33D30B90C712D57220 /* Pods_CHXCertifcate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHXCertifcate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2F9D8B87D744A334A3F4E3D /* Pods_TLS_Inspector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TLS_Inspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspect_Website.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FFC84F9E96D4B63DCDA28497 /* Pods-TLS Inspector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TLS Inspector.release.xcconfig"; path = "Pods/Target Support Files/Pods-TLS Inspector/Pods-TLS Inspector.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +177,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CCADFE51E3EAF770087B1DD /* CHCertificate.framework in Frameworks */,
-				B859FC5831450BCC55334D53 /* Pods_Inspect_Website.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,26 +193,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CCADFDA1E3EAEDC0087B1DD /* CHCertificate.framework in Frameworks */,
-				A3D13F7C0A683C012444EAA1 /* Pods_TLS_Inspector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21AEFC781B5B0A0FC4C01297 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7CC5ACA0D9E2E2E4E331F611 /* Pods_Cert_Inspector.framework */,
-				DBA5C80F73F71304D986EB2E /* Pods_Inspect_Website.framework */,
-				CBF28D33D30B90C712D57220 /* Pods_CHXCertifcate.framework */,
-				9188DD8F002653BFB69923E9 /* Pods_CHXCertificate.framework */,
-				7D583AA3C66988CF40443355 /* Pods_CHCertificate.framework */,
-				D2F9D8B87D744A334A3F4E3D /* Pods_TLS_Inspector.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3C43EF831D7A987F00AE65E9 /* Inspect Website */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,8 +278,6 @@
 				3C43EF831D7A987F00AE65E9 /* Inspect Website */,
 				3CCADFD41E3EAEDC0087B1DD /* CHCertificate */,
 				3CFAE6D71CA8440400CD946B /* Products */,
-				5389857E70C02DAF5C4C67AF /* Pods */,
-				21AEFC781B5B0A0FC4C01297 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -372,17 +343,6 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		5389857E70C02DAF5C4C67AF /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				507199DDF4AEB7E9BB1DDB97 /* Pods-TLS Inspector.debug.xcconfig */,
-				FFC84F9E96D4B63DCDA28497 /* Pods-TLS Inspector.release.xcconfig */,
-				AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */,
-				4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -402,11 +362,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C43EF901D7A987F00AE65E9 /* Build configuration list for PBXNativeTarget "Inspect Website" */;
 			buildPhases = (
-				695C3D8DDD53AC9D112592B9 /* [CP] Check Pods Manifest.lock */,
 				3C43EF7E1D7A987F00AE65E9 /* Sources */,
 				3C43EF7F1D7A987F00AE65E9 /* Frameworks */,
 				3C43EF801D7A987F00AE65E9 /* Resources */,
-				388E73A1B996C27980A60B12 /* [CP] Copy Pods Resources */,
 				3CA0F0201D84D5F700AA9307 /* Remove Frameworks */,
 			);
 			buildRules = (
@@ -440,13 +398,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CFAE6ED1CA8440400CD946B /* Build configuration list for PBXNativeTarget "TLS Inspector" */;
 			buildPhases = (
-				4F872D8CF143697ECE0A81EB /* [CP] Check Pods Manifest.lock */,
 				3CCADFE61E3EB05A0087B1DD /* Export */,
 				3CFAE6D21CA8440400CD946B /* Sources */,
 				3CFAE6D31CA8440400CD946B /* Frameworks */,
 				3CFAE6D41CA8440400CD946B /* Resources */,
-				675F85108306FC60C902650E /* [CP] Embed Pods Frameworks */,
-				37D5863E4196A4DE358FCB9B /* [CP] Copy Pods Resources */,
 				3C43EF911D7A987F00AE65E9 /* Embed App Extensions */,
 				3CB56A131D8494D300A7D303 /* Embed Frameworks */,
 			);
@@ -540,36 +495,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		37D5863E4196A4DE358FCB9B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TLS Inspector/Pods-TLS Inspector-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		388E73A1B996C27980A60B12 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspect Website/Pods-Inspect Website-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3CA0F0201D84D5F700AA9307 /* Remove Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -597,51 +522,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "DEFINES_HEADER=\"TLS Inspector/defines.pch\"\n\necho \"// THIS FILE IS AUTOMATICALLY GENERATED DURING COMPILE\" > $DEFINES_HEADER\necho \"// Any changes to this file will be lost!\" >> $DEFINES_HEADER\necho \"// Edit the \\\"Export\\\" Build Phase to update this file\" >> $DEFINES_HEADER\necho \"#define GIT_BRANCH @\\\"\"$(git symbolic-ref --short HEAD)\"\\\"\" >> $DEFINES_HEADER\necho \"#define GIT_REVISION @\\\"\"$(git --no-pager show --oneline --quiet --format=%h)\"\\\"\" >> $DEFINES_HEADER\necho \"#define GIT_AUTHOR @\\\"\"$(git --no-pager show -s --format='%an <%ae>' HEAD)\"\\\"\" >> $DEFINES_HEADER\necho \"#define GIT_MESSAGE @\\\"\"$(git --no-pager show -s --format='%B' HEAD | head -n 1)\"\\\"\" >> $DEFINES_HEADER\necho \"#define GIT_VERSION @\\\"\"$(git --version)\"\\\"\" >> $DEFINES_HEADER\necho \"#define GIT_PATH @\\\"\"$(which git)\"\\\"\" >> $DEFINES_HEADER\necho \"#define OS_HOSTNAME @\\\"\"$(hostname)\"\\\"\" >> $DEFINES_HEADER\necho \"#define OS_KERNEL_VERSION @\\\"\"$(uname -v)\"\\\"\" >> $DEFINES_HEADER\necho \"#define COMPILE_TIME @\\\"\"$(date)\"\\\"\" >> $DEFINES_HEADER\necho \"#define GIT_TAG @\\\"\"$(git describe --tags)\"\\\"\" >> $DEFINES_HEADER\necho \"#define OPENSSL_VERSION @\\\"\"$(grep 'OpenSSL-Universal' -- Podfile | cut -d \",\" -f2 | xargs)\"\\\"\" >> $DEFINES_HEADER\n";
-		};
-		4F872D8CF143697ECE0A81EB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		675F85108306FC60C902650E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TLS Inspector/Pods-TLS Inspector-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		695C3D8DDD53AC9D112592B9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -728,7 +608,6 @@
 /* Begin XCBuildConfiguration section */
 		3C43EF8E1D7A987F00AE65E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA184A51F1AA1ACB66D3C30D /* Pods-Inspect Website.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -758,7 +637,6 @@
 		};
 		3C43EF8F1D7A987F00AE65E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BA4FBE93AAFDB4CE786A330 /* Pods-Inspect Website.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -933,7 +811,6 @@
 		};
 		3CFAE6EE1CA8440400CD946B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 507199DDF4AEB7E9BB1DDB97 /* Pods-TLS Inspector.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -964,7 +841,6 @@
 		};
 		3CFAE6EF1CA8440400CD946B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFC84F9E96D4B63DCDA28497 /* Pods-TLS Inspector.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
