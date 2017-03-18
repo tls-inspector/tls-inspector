@@ -18,6 +18,10 @@
     if ([defaults objectForKey:SAVE_RECENT_DOMAINS] == nil) {
         [defaults setBool:YES forKey:SAVE_RECENT_DOMAINS];
     }
+    
+    UIView *selectionView = [UIView new];
+    selectionView.backgroundColor = [UIColor colorWithRed:0.08 green:0.12 blue:0.16 alpha:1.0];
+    [[UITableViewCell appearance] setSelectedBackgroundView:selectionView];
 
     [AppState currentState];
     return YES;
