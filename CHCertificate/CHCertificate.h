@@ -59,6 +59,8 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
 
 @property (strong, nonatomic, readonly) NSString * summary;
 
+@property (nonatomic, readonly) BOOL extendedValidation;
+
 /**
  *  Returns the SHA256 fingerprint for the certificate
  *
@@ -163,6 +165,13 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
  *  @return (X509 *)void pointer representing the X509 struct of the certificate or nil on error
  */
 - (void *) X509Certificate;
+
+/**
+ *  Returns the authority that manages the extended validation for this certificate.
+ *
+ *  @return A string representing the authority name, or nil
+ */
+- (NSString *) extendedValidationAuthority;
 
 /**
  *  Get the OpenSSL version used by CHCertificate

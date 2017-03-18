@@ -62,6 +62,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void) loadCertificate {
+    [selectedCertificate extendedValidation];
+    
     self.title = selectedCertificate.summary;
     NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [selectedCertificate algorithm]));
     
@@ -75,6 +77,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[selectedCertificate notAfter]]}];
     [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[selectedCertificate notBefore]]}];
+    
+    NSString * evAuthority = [selectedCertificate extendedValidationAuthority];
+    if (evAuthority) {
+        [self.cells addObject:@{@"label": l(@"EV Authority"), @"value": evAuthority}];
+    }
     
     if (![selectedCertificate validIssueDate]) {
         [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];

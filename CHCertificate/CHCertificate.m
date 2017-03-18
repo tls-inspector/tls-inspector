@@ -296,9 +296,69 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     }
 
     self.subjectAltNames = names;
-    free(sans);
+    sk_GENERAL_NAME_free(sans);
 
     return names;
+}
+
+- (NSString *) extendedValidationAuthority {
+    //
+    NSDictionary<NSString *, NSString *> * EV_MAP = @{
+        @"1.3.159.1.17.1":               @"Actalis",
+        @"1.3.6.1.4.1.34697.2.1":        @"AffirmTrust",
+        @"1.3.6.1.4.1.34697.2.2":        @"AffirmTrust",
+        @"1.3.6.1.4.1.34697.2.3":        @"AffirmTrust",
+        @"1.3.6.1.4.1.34697.2.4":        @"AffirmTrust",
+        @"2.16.578.1.26.1.3.3":          @"Buypass",
+        @"1.3.6.1.4.1.6449.1.2.1.5.1":   @"Comodo Group",
+        @"2.16.840.1.114412.2.1":        @"DigiCert",
+        @"2.16.840.1.114412.1.3.0.2":    @"DigiCert",
+        @"2.16.792.3.0.4.1.1.4":         @"E-Tugra",
+        @"2.16.840.1.114028.10.1.2":     @"Entrust",
+        @"1.3.6.1.4.1.14370.1.6":        @"GeoTrust",
+        @"1.3.6.1.4.1.4146.1.1":         @"GlobalSign",
+        @"2.16.840.1.114413.1.7.23.3":   @"Go Daddy",
+        @"1.3.6.1.4.1.14777.6.1.1":      @"Izenpe",
+        @"1.3.6.1.4.1.782.1.2.1.8.1":    @"Network Solutions",
+        @"1.3.6.1.4.1.8024.0.2.100.1.2": @"QuoVadis",
+        @"1.2.392.200091.100.721.1":     @"SECOM Trust Systems",
+        @"2.16.840.1.114414.1.7.23.3":   @"Starfield Technologies",
+        @"2.16.756.1.83.21.0":           @"Swisscom",
+        @"2.16.756.1.89.1.2.1.1":        @"SwissSign",
+        @"2.16.840.1.113733.1.7.48.1":   @"Thawte",
+        @"2.16.840.1.114404.1.1.2.4.1":  @"Trustwave",
+        @"2.16.840.1.113733.1.7.23.6":   @"Symantec (VeriSign)",
+        @"1.3.6.1.4.1.6334.1.100.1":     @"Verizon Business/Cybertrust",
+        @"2.16.840.1.114171.500.9":      @"Wells Fargo"
+    };
+
+    CERTIFICATEPOLICIES * policies = X509_get_ext_d2i(self.certificate, NID_certificate_policies, NULL, NULL);
+    int numberOfPolicies = sk_POLICYINFO_num(policies);
+    
+    const POLICYINFO * policy;
+    NSString * oid;
+    NSString * evAgency;
+    for (int i = 0; i < numberOfPolicies; i++) {
+        policy = sk_POLICYINFO_value(policies, i);
+
+# warning Find an appropriate maximum value to use. See https://crypto.stackexchange.com/questions/44842/what-is-the-maximum-length-of-a-x-509-oid
+#define POLICY_BUFF_MAX 1024
+        char buff[POLICY_BUFF_MAX];
+        OBJ_obj2txt(buff, POLICY_BUFF_MAX, policy->policyid, 0);
+        oid = [NSString stringWithUTF8String:buff];
+        evAgency = [EV_MAP objectForKey:oid];
+        if (evAgency) {
+            sk_POLICYINFO_free(policies);
+            return evAgency;
+        }
+    }
+
+    sk_POLICYINFO_free(policies);
+    return nil;
+}
+
+- (BOOL) extendedValidation {
+    return [self extendedValidationAuthority] != nil;
 }
 
 + (NSString *) openSSLVersion {

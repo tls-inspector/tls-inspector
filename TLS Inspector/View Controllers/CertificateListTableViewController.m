@@ -67,7 +67,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CHCertificate * cert = [currentChain.certificates objectAtIndex:indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
-    cell.textLabel.text = [cert summary];
+
+    if (cert.extendedValidation) {
+        NSDictionary * names = [cert names];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
+        cell.textLabel.textColor = self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+    } else {
+        cell.textLabel.text = [cert summary];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+
     return cell;
 }
 
