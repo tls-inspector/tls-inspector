@@ -37,6 +37,8 @@
  */
 + (CHCertificate *) fromX509:(void *)cert;
 
+typedef NSArray<NSURL *> distributionPoints;
+
 typedef NS_ENUM(NSInteger, CHCertificateFingerprintType) {
     // SHA 512 fingerprint type
     CHCertificateFingerprintTypeSHA512,
@@ -60,6 +62,8 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
 @property (strong, nonatomic, readonly) NSString * summary;
 
 @property (nonatomic, readonly) BOOL extendedValidation;
+
+@property (nonatomic) BOOL revoked;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
@@ -172,6 +176,8 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
  *  @return A string representing the authority name, or nil
  */
 - (NSString *) extendedValidationAuthority;
+
+- (distributionPoints *) crlDistributionPoints;
 
 /**
  *  Get the OpenSSL version used by CHCertificate

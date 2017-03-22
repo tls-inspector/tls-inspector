@@ -53,6 +53,8 @@
 		3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE611CB4AE5800F56B68 /* ValueViewController.m */; };
 		3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* Assets.xcassets */; };
+		3CEE30911E7EFCBE002B64B6 /* CHCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CEE308F1E7EFCBE002B64B6 /* CHCRLManager.h */; };
+		3CEE30921E7EFCBE002B64B6 /* CHCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEE30901E7EFCBE002B64B6 /* CHCRLManager.m */; };
 		3CEF8DAA1E7A48250036C98F /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEF8DA91E7A48250036C98F /* openssl.framework */; };
 		3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */; };
 		3CFAE6DB1CA8440400CD946B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DA1CA8440400CD946B /* main.m */; };
@@ -152,6 +154,8 @@
 		3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateReminderManager.h; sourceTree = "<group>"; };
 		3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateReminderManager.m; sourceTree = "<group>"; };
 		3CEAA5061D83CCD10011A706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3CEE308F1E7EFCBE002B64B6 /* CHCRLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCRLManager.h; sourceTree = "<group>"; };
+		3CEE30901E7EFCBE002B64B6 /* CHCRLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCRLManager.m; sourceTree = "<group>"; };
 		3CEF8DA91E7A48250036C98F /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
 		3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDomains.h; sourceTree = "<group>"; };
 		3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDomains.m; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 				3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */,
 				3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */,
 				3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */,
+				3CEE308F1E7EFCBE002B64B6 /* CHCRLManager.h */,
+				3CEE30901E7EFCBE002B64B6 /* CHCRLManager.m */,
 				3CCADFD61E3EAEDC0087B1DD /* Info.plist */,
 				3CEF8DA91E7A48250036C98F /* openssl.framework */,
 			);
@@ -375,6 +381,7 @@
 			files = (
 				3C65C2D41E7479AD00D88074 /* CHCertificateChain.h in Headers */,
 				3CCADFD71E3EAEDC0087B1DD /* CHCertificate.h in Headers */,
+				3CEE30911E7EFCBE002B64B6 /* CHCRLManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CEE30921E7EFCBE002B64B6 /* CHCRLManager.m in Sources */,
 				3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */,
 				3C65C2D51E7479AD00D88074 /* CHCertificateChain.m in Sources */,
 			);

@@ -39,6 +39,7 @@
 @property (nonatomic) X509 * certificate;
 @property (strong, nonatomic, readwrite) NSString * summary;
 @property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
+@property (strong, nonatomic) distributionPoints * crlCache;
 
 @end
 
@@ -64,6 +65,10 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     X509_NAME * name = X509_get_subject_name(self.certificate);
     char * value = malloc(CERTIFICATE_SUBJECT_MAX_LENGTH);
     int length = X509_NAME_get_text_by_NID(name, nid, value, CERTIFICATE_SUBJECT_MAX_LENGTH);
+    if (length < 0) {
+        return nil;
+    }
+
     NSString * subject = [[NSString alloc] initWithBytes:value length:length encoding:NSUTF8StringEncoding];
     free(value);
     return subject;
@@ -273,7 +278,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
 - (NSArray<NSString *> *) subjectAlternativeNames {
     // This will leak
-    STACK_OF(GENERAL_NAME) * sans = X509_get_ext_d2i(self.certificate, NID_subject_alt_name, NULL, NULL);
+    GENERAL_NAMES * sans = X509_get_ext_d2i(self.certificate, NID_subject_alt_name, NULL, NULL);
     int numberOfSans = sk_GENERAL_NAME_num(sans);
     if (numberOfSans < 1) {
         return @[];
@@ -302,7 +307,6 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 }
 
 - (NSString *) extendedValidationAuthority {
-    //
     NSDictionary<NSString *, NSString *> * EV_MAP = @{
         @"1.3.159.1.17.1":               @"Actalis",
         @"1.3.6.1.4.1.34697.2.1":        @"AffirmTrust",
@@ -341,8 +345,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     for (int i = 0; i < numberOfPolicies; i++) {
         policy = sk_POLICYINFO_value(policies, i);
 
-# warning Find an appropriate maximum value to use. See https://crypto.stackexchange.com/questions/44842/what-is-the-maximum-length-of-a-x-509-oid
-#define POLICY_BUFF_MAX 1024
+#define POLICY_BUFF_MAX 32
         char buff[POLICY_BUFF_MAX];
         OBJ_obj2txt(buff, POLICY_BUFF_MAX, policy->policyid, 0);
         oid = [NSString stringWithUTF8String:buff];
@@ -352,9 +355,36 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
             return evAgency;
         }
     }
-
+    
     sk_POLICYINFO_free(policies);
     return nil;
+}
+
+- (distributionPoints *) crlDistributionPoints {
+    if (self.crlCache) {
+        return self.crlCache;
+    }
+
+    CRL_DIST_POINTS * points = X509_get_ext_d2i(self.certificate, NID_crl_distribution_points, NULL, NULL);
+    int numberOfPoints = sk_DIST_POINT_num(points);
+    if (numberOfPoints < 0) {
+        return @[];
+    }
+    
+    DIST_POINT * point;
+    GENERAL_NAMES * fullNames;
+    GENERAL_NAME * fullName;
+    NSMutableArray<NSURL *> * urls = [NSMutableArray new];
+    for (int i = 0; i < numberOfPoints; i ++) {
+        point = sk_DIST_POINT_value(points, i);
+        fullNames = point->distpoint->name.fullname;
+        fullName = sk_GENERAL_NAME_value(fullNames, 0);
+        const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
+        [urls addObject:[NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]]];
+    }
+    
+    self.crlCache = urls;
+    return urls;
 }
 
 - (BOOL) extendedValidation {

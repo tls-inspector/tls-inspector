@@ -29,6 +29,25 @@
 
 @interface CHCertificateChain : NSObject
 
+typedef NS_ENUM(NSInteger, CHCertificateChainTrustStatus) {
+    /**
+     The system trusts this certificate
+     */
+    CHCertificateChainTrustStatusTrusted,
+    /**
+     The system does not trust this certificate
+     */
+    CHCertificateChainTrustStatusUntrusted,
+    /**
+     A certificate within the chain is revoked
+     */
+    CHCertificateChainTrustStatusRevoked,
+    /**
+     The CRL could not be downloaded, or an error occured during validation
+     */
+    CHCertificateChainTrustStatusCRLFailure
+};
+
 /**
  The domain for the certificate chain
  */
@@ -47,7 +66,15 @@
 /**
  If the system trusts the certificate chain
  */
-@property (nonatomic, readonly) BOOL trusted;
+@property (nonatomic, readonly) CHCertificateChainTrustStatus trusted;
+
+/**
+ If a CRL was presented in the server certificate and was validated against.
+ 
+ See the `revoked` property on a CHCertificate to check revoked status. This property
+ simple reflects if a check was performed.
+ */
+@property (nonatomic, readonly) BOOL crlVerified;
 
 /**
  *  Query the specified URL for its certificate chain.
