@@ -14,7 +14,7 @@
 - (IBAction)inspectButton:(UIBarButtonItem *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
-@property (strong, nonatomic) CHCertificateChain * chain;
+@property (strong, nonatomic) CKCertificateChain * chain;
 
 @end
 
@@ -24,7 +24,7 @@
     [super viewDidLoad];
     self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    self.chain = [CHCertificateChain new];
+    self.chain = [CKCertificateChain new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 }
 
@@ -89,7 +89,7 @@
     
     [self.chain
      certificateChainFromURL:[NSURL URLWithString:hostAddress]
-     finished:^(NSError * _Nullable error, CHCertificateChain * _Nullable chain) {
+     finished:^(NSError * _Nullable error, CKCertificateChain * _Nullable chain) {
          dispatch_async(dispatch_get_main_queue(), ^{
              [MBProgressHUD hideHUDForView:self.view animated:YES];
          });

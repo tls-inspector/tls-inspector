@@ -1,10 +1,10 @@
 //
-//  CHCertificateChain.h
+//  CKCertificateChain.h
 //
 //  MIT License
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/ecnepsnai/CHCertificate
+//  https://github.com/ecnepsnai/CKCertificate
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,19 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CHCertificate.h"
+#import "CKCertificate.h"
 
-@interface CHCertificateChain : NSObject
+@interface CKCertificateChain : NSObject
 
-typedef NS_ENUM(NSInteger, CHCertificateChainTrustStatus) {
+typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
     /**
      The system trusts this certificate
      */
-    CHCertificateChainTrustStatusTrusted,
+    CKCertificateChainTrustStatusTrusted,
     /**
      The system does not trust this certificate
      */
-    CHCertificateChainTrustStatusUntrusted,
+    CKCertificateChainTrustStatusUntrusted,
 };
 
 /**
@@ -48,27 +48,27 @@ typedef NS_ENUM(NSInteger, CHCertificateChainTrustStatus) {
 /**
  The array of certificates belonging to the chain
  */
-@property (strong, nonatomic, nonnull, readonly) NSArray<CHCertificate *> * certificates;
+@property (strong, nonatomic, nonnull, readonly) NSArray<CKCertificate *> * certificates;
 
 /**
  The root of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
  */
-@property (strong, nonatomic, nullable, readonly) CHCertificate * rootCA;
+@property (strong, nonatomic, nullable, readonly) CKCertificate * rootCA;
 
 /**
  The intermediate CA of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
  */
-@property (strong, nonatomic, nullable, readonly) CHCertificate * intermediateCA;
+@property (strong, nonatomic, nullable, readonly) CKCertificate * intermediateCA;
 
 /**
  The server certificate in the chain.
  */
-@property (strong, nonatomic, nullable, readonly) CHCertificate * server;
+@property (strong, nonatomic, nullable, readonly) CKCertificate * server;
 
 /**
  If the system trusts the certificate chain
  */
-@property (nonatomic, readonly) CHCertificateChainTrustStatus trusted;
+@property (nonatomic, readonly) CKCertificateChainTrustStatus trusted;
 
 /**
  *  Query the specified URL for its certificate chain.
@@ -77,6 +77,6 @@ typedef NS_ENUM(NSInteger, CHCertificateChainTrustStatus) {
  *                  The port is optional and will default to 443.
  *  @param finished Called when finished with either an error or certificate chain.
  */
-- (void) certificateChainFromURL:(NSURL * _Nonnull)URL finished:(void (^ _Nonnull)(NSError * _Nullable error, CHCertificateChain * _Nullable chain))finished;
+- (void) certificateChainFromURL:(NSURL * _Nonnull)URL finished:(void (^ _Nonnull)(NSError * _Nullable error, CKCertificateChain * _Nullable chain))finished;
 
 @end

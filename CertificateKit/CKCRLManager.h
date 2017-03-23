@@ -1,10 +1,10 @@
 //
-//  CHCRLManager.h
+//  CKCRLManager.h
 //
 //  MIT License
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/ecnepsnai/CHCertificate
+//  https://github.com/ecnepsnai/CKCertificate
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,11 +25,11 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CHCertificate.h"
+#import "CKCertificate.h"
 
-@interface CHCRLManager : NSObject
+@interface CKCRLManager : NSObject
 
-+ (CHCRLManager * _Nonnull) sharedInstance;
++ (CKCRLManager * _Nonnull) sharedInstance;
 - (id _Nonnull) init;
 
 - (void) loadCRLCache;

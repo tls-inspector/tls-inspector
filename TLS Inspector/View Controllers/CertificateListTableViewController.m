@@ -64,7 +64,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CHCertificate * cert = [currentChain.certificates objectAtIndex:indexPath.row];
+    CKCertificate * cert = [currentChain.certificates objectAtIndex:indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
     if (cert.extendedValidation) {

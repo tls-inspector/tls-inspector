@@ -1,15 +1,15 @@
-#import "CHCertificateRevoked.h"
+#import "CKCertificateRevoked.h"
 #import "NSDate+ASN1_TIME.h"
 
-#import "CHCRLManager.h"
+#import "CKCRLManager.h"
 #include <openssl/ssl.h>
 #include <openssl/ossl_typ.h>
 #include <openssl/x509v3.h>
 
-@interface CHCertificateRevoked () {
+@interface CKCertificateRevoked () {
     void (^finishedBlock)(NSError *);
-    CHCertificate * certificate;
-    CHCertificate * root;
+    CKCertificate * certificate;
+    CKCertificate * root;
     NSUInteger crlsRemaining;
     NSMutableArray<NSData *> * crlDataArray;
 }
@@ -18,20 +18,20 @@
 
 @end
 
-@implementation CHCertificateRevoked
+@implementation CKCertificateRevoked
 
-- (void) isCertificateRevoked:(CHCertificate *)cert rootCA:(CHCertificate *)rootCA finished:(void (^)(NSError * error))finished {
+- (void) isCertificateRevoked:(CKCertificate *)cert rootCA:(CKCertificate *)rootCA finished:(void (^)(NSError * error))finished {
     finishedBlock = finished;
     certificate = cert;
     root = rootCA;
     crlDataArray = [NSMutableArray new];
-    [[CHCRLManager sharedInstance] loadCRLCache];
+    [[CKCRLManager sharedInstance] loadCRLCache];
 
     distributionPoints * crls = [cert crlDistributionPoints];
     crlsRemaining = crls.count;
 
     for (NSURL * url in crls) {
-        [[CHCRLManager sharedInstance] getCRL:url finished:^(NSData *data, NSError *error) {
+        [[CKCRLManager sharedInstance] getCRL:url finished:^(NSData *data, NSError *error) {
             if (error) {
                 finished(error);
             } else {
@@ -47,7 +47,7 @@
 
 - (void) crlDownloaded {
     if (crlsRemaining == 0) {
-        [[CHCRLManager sharedInstance] unloadCRLCache];
+        [[CKCRLManager sharedInstance] unloadCRLCache];
 
         EVP_PKEY * pubKey = X509_get_pubkey(root.X509Certificate);
         X509_CRL * crl;
@@ -60,7 +60,7 @@
             int rv;
             if ((rv = X509_CRL_verify(crl, pubKey)) != 1) {
                 // CRL Verification failure
-                NSError * crlError = [NSError errorWithDomain:@"CHCRLManager" code:rv userInfo:@{NSLocalizedDescriptionKey: @"CRL verification failed"}];
+                NSError * crlError = [NSError errorWithDomain:@"CKCRLManager" code:rv userInfo:@{NSLocalizedDescriptionKey: @"CRL verification failed"}];
                 NSLog(@"CRL verification failed!");
                 finishedBlock(crlError);
                 return;

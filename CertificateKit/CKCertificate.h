@@ -1,10 +1,10 @@
 //
-//  CHCertificate.h
+//  CKCertificate.h
 //
 //  MIT License
 //
 //  Copyright (c) 2016 Ian Spence
-//  https://github.com/ecnepsnai/CHCertificate
+//  https://github.com/ecnepsnai/CKCertificate
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,48 +25,48 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CHCertificateRevoked.h"
+#import "CKCertificateRevoked.h"
 
-@class CHCertificateRevoked;
+@class CKCertificateRevoked;
 
-@interface CHCertificate : NSObject
+@interface CKCertificate : NSObject
 
 /**
- *  Create a CHCertificate object from a pre-existing X509 object.
+ *  Create a CKCertificate object from a pre-existing X509 object.
  *
  *  @param cert A libssl compliant X509 cert.
  *
- *  @return A CHCertificate instance
+ *  @return A CKCertificate instance
  */
-+ (CHCertificate *) fromX509:(void *)cert;
++ (CKCertificate *) fromX509:(void *)cert;
 
 typedef NSArray<NSURL *> distributionPoints;
 
-typedef NS_ENUM(NSInteger, CHCertificateFingerprintType) {
+typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
     // SHA 512 fingerprint type
-    CHCertificateFingerprintTypeSHA512,
+    CKCertificateFingerprintTypeSHA512,
     // SHA 256 fingerprint type
-    CHCertificateFingerprintTypeSHA256,
+    CKCertificateFingerprintTypeSHA256,
     // MD5 fingerprint type
-    CHCertificateFingerprintTypeMD5,
+    CKCertificateFingerprintTypeMD5,
     // SHA1 fingerprint type
-    CHCertificateFingerprintTypeSHA1
+    CKCertificateFingerprintTypeSHA1
 };
 
-typedef NS_ENUM(NSInteger, CHCertificateError) {
+typedef NS_ENUM(NSInteger, CKCertificateError) {
     // Errors relating to connecting to the remote server.
-    CHCertificateErrorConnection,
+    CKCertificateErrorConnection,
     // Crypto error usually resulting from being run on an unsupported platform.
-    CHCertificateErrorCrypto,
+    CKCertificateErrorCrypto,
     // Invalid parameter information such as hostnames.
-    CHCertificateErrorInvalidParameter
+    CKCertificateErrorInvalidParameter
 };
 
 @property (strong, nonatomic, readonly) NSString * summary;
 
 @property (nonatomic, readonly) BOOL extendedValidation;
 
-@property (strong, nonatomic) CHCertificateRevoked * revoked;
+@property (strong, nonatomic) CKCertificateRevoked * revoked;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
  *
  *  @return YES if verified
  */
-- (BOOL) verifyFingerprint:(NSString *)fingerprint type:(CHCertificateFingerprintType)type;
+- (BOOL) verifyFingerprint:(NSString *)fingerprint type:(CKCertificateFingerprintType)type;
 
 /**
  *  Returns the serial number for the certificate
@@ -183,7 +183,7 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
 - (distributionPoints *) crlDistributionPoints;
 
 /**
- *  Get the OpenSSL version used by CHCertificate
+ *  Get the OpenSSL version used by CKCertificate
  *
  *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"
  */

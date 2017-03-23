@@ -1,10 +1,10 @@
 //
-//  CHCRLManager.m
+//  CKCRLManager.m
 //
 //  MIT License
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/ecnepsnai/CHCertificate
+//  https://github.com/ecnepsnai/CKCertificate
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CHCRLManager.h"
+#import "CKCRLManager.h"
 
-@interface CHCRLManager ()
+@interface CKCRLManager ()
 
 @property (strong, nonatomic) NSFileManager * fs;
 @property (strong, nonatomic) NSString * crlCachePath;
@@ -34,9 +34,9 @@
 
 @end
 
-@implementation CHCRLManager
+@implementation CKCRLManager
 
-static CHCRLManager * _instance;
+static CKCRLManager * _instance;
 static NSDictionary<NSString *, id> * crlCache;
 
 #define CRL_CACHE_VERSION @"1"
@@ -45,9 +45,9 @@ static NSDictionary<NSString *, id> * crlCache;
 #define CRL_CACHE_DATA_KEY @"data"
 #define rightNow [NSNumber numberWithInteger:time(0)]
 
-+ (CHCRLManager * _Nonnull) sharedInstance {
++ (CKCRLManager * _Nonnull) sharedInstance {
     if (!_instance) {
-        _instance = [CHCRLManager new];
+        _instance = [CKCRLManager new];
     }
     return _instance;
 }

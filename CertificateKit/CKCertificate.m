@@ -1,10 +1,10 @@
 //
-//  CHCertificate.m
+//  CKCertificate.m
 //
 //  MIT License
 //
 //  Copyright (c) 2016 Ian Spence
-//  https://github.com/ecnepsnai/CHCertificate
+//  https://github.com/ecnepsnai/CKCertificate
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CHCertificate.h"
+#import "CKCertificate.h"
 #import "NSDate+ASN1_TIME.h"
 
 #include <openssl/ssl.h>
@@ -35,7 +35,7 @@
 #include <openssl/bn.h>
 #include <CommonCrypto/CommonCrypto.h>
 
-@interface CHCertificate()
+@interface CKCertificate()
 
 @property (nonatomic) X509 * certificate;
 @property (strong, nonatomic, readwrite) NSString * summary;
@@ -44,7 +44,7 @@
 
 @end
 
-@implementation CHCertificate
+@implementation CKCertificate
 
 static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
@@ -55,11 +55,11 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     NSLog(@"OpenSSL error in file: %s:%i", file, line);
 }
 
-+ (CHCertificate *) fromX509:(void *)cert {
-    CHCertificate * xcert = [CHCertificate new];
++ (CKCertificate *) fromX509:(void *)cert {
+    CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;
     xcert.summary = [xcert generateSummary];
-    xcert.revoked = [CHCertificateRevoked new];
+    xcert.revoked = [CKCertificateRevoked new];
     return xcert;
 }
 
@@ -81,35 +81,35 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 }
 
 - (NSString *) SHA512Fingerprint {
-    return [self digestOfType:CHCertificateFingerprintTypeSHA512];
+    return [self digestOfType:CKCertificateFingerprintTypeSHA512];
 }
 
 - (NSString *) SHA256Fingerprint {
-    return [self digestOfType:CHCertificateFingerprintTypeSHA256];
+    return [self digestOfType:CKCertificateFingerprintTypeSHA256];
 }
 
 - (NSString *) MD5Fingerprint {
-    return [self digestOfType:CHCertificateFingerprintTypeMD5];
+    return [self digestOfType:CKCertificateFingerprintTypeMD5];
 }
 
 - (NSString *) SHA1Fingerprint {
-    return [self digestOfType:CHCertificateFingerprintTypeSHA1];
+    return [self digestOfType:CKCertificateFingerprintTypeSHA1];
 }
 
-- (NSString *) digestOfType:(CHCertificateFingerprintType)type {
+- (NSString *) digestOfType:(CKCertificateFingerprintType)type {
     const EVP_MD * digest;
 
     switch (type) {
-        case CHCertificateFingerprintTypeSHA512:
+        case CKCertificateFingerprintTypeSHA512:
             digest = EVP_sha512();
             break;
-        case CHCertificateFingerprintTypeSHA256:
+        case CKCertificateFingerprintTypeSHA256:
             digest = EVP_sha256();
             break;
-        case CHCertificateFingerprintTypeSHA1:
+        case CKCertificateFingerprintTypeSHA1:
             digest = EVP_sha1();
             break;
-        case CHCertificateFingerprintTypeMD5:
+        case CKCertificateFingerprintTypeMD5:
             digest = EVP_md5();
             break;
     }
@@ -131,7 +131,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     return fingerprintString;
 }
 
-- (BOOL) verifyFingerprint:(NSString *)fingerprint type:(CHCertificateFingerprintType)type {
+- (BOOL) verifyFingerprint:(NSString *)fingerprint type:(CKCertificateFingerprintType)type {
     NSString * actualFingerprint = [self digestOfType:type];
     NSString * formattedFingerprint = [[fingerprint componentsSeparatedByCharactersInSet:[[NSCharacterSet
                                                                                            alphanumericCharacterSet]

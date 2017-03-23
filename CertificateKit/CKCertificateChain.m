@@ -1,10 +1,10 @@
 //
-//  CHCertificateChain.m
+//  CKCertificateChain.m
 //
 //  MIT License
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/ecnepsnai/CHCertificate
+//  https://github.com/ecnepsnai/CKCertificate
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,34 +24,34 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CHCertificateChain.h"
-#import "CHCRLManager.h"
+#import "CKCertificateChain.h"
+#import "CKCRLManager.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 
-@interface CHCertificateChain () <NSStreamDelegate> {
+@interface CKCertificateChain () <NSStreamDelegate> {
     CFReadStreamRef   readStream;
     CFWriteStreamRef  writeStream;
     NSInputStream   * inputStream;
     NSOutputStream  * outputStream;
     
-    void (^finishedBlock)(NSError *, CHCertificateChain *);
+    void (^finishedBlock)(NSError *, CKCertificateChain *);
     NSString * queryDomain;
 }
 
 @property (strong, nonatomic, nonnull, readwrite) NSString * domain;
-@property (strong, nonatomic, nonnull, readwrite) NSArray<CHCertificate *> * certificates;
-@property (strong, nonatomic, nullable, readwrite) CHCertificate * rootCA;
-@property (strong, nonatomic, nullable, readwrite) CHCertificate * intermediateCA;
-@property (strong, nonatomic, nullable, readwrite) CHCertificate * server;
-@property (nonatomic, readwrite) CHCertificateChainTrustStatus trusted;
+@property (strong, nonatomic, nonnull, readwrite) NSArray<CKCertificate *> * certificates;
+@property (strong, nonatomic, nullable, readwrite) CKCertificate * rootCA;
+@property (strong, nonatomic, nullable, readwrite) CKCertificate * intermediateCA;
+@property (strong, nonatomic, nullable, readwrite) CKCertificate * server;
+@property (nonatomic, readwrite) CKCertificateChainTrustStatus trusted;
 @property (nonatomic, readwrite) BOOL crlVerified;
 
 @end
 
-@implementation CHCertificateChain
+@implementation CKCertificateChain
 
-- (void) certificateChainFromURL:(NSURL *)URL finished:(void (^)(NSError * error, CHCertificateChain * chain))finished {
+- (void) certificateChainFromURL:(NSURL *)URL finished:(void (^)(NSError * error, CKCertificateChain * chain))finished {
     finishedBlock = finished;
     queryDomain = URL.host;
     
@@ -111,7 +111,7 @@
     SecTrustEvaluate(trust, &trustStatus);
     long count = SecTrustGetCertificateCount(trust);
     
-    NSMutableArray<CHCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
+    NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
     
     for (long i = 0; i < count; i ++) {
         SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
@@ -120,7 +120,7 @@
         // This will leak
         X509 * cert = d2i_X509(NULL, &bytes, [certificateData length]);
         certificateData = nil;
-        [certs setObject:[CHCertificate fromX509:cert] atIndexedSubscript:i];
+        [certs setObject:[CKCertificate fromX509:cert] atIndexedSubscript:i];
     }
     
     [inputStream close];
@@ -128,12 +128,12 @@
     
     BOOL isTrustedChain = trustStatus == kSecTrustResultUnspecified;
     
-    CHCertificateChain * chain = [CHCertificateChain new];
+    CKCertificateChain * chain = [CKCertificateChain new];
     chain.certificates = certs;
     if (isTrustedChain) {
-        chain.trusted = CHCertificateChainTrustStatusTrusted;
+        chain.trusted = CKCertificateChainTrustStatusTrusted;
     } else {
-        chain.trusted = CHCertificateChainTrustStatusUntrusted;
+        chain.trusted = CKCertificateChainTrustStatusUntrusted;
     }
 
     chain.domain = queryDomain;

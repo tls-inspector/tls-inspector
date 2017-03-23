@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#import "CHCertificateChain.h"
 #import "SplitViewController.h"
+@import CertificateKit;
 
 @interface AppState : NSObject
 
@@ -8,7 +8,7 @@
 - (id _Nonnull) init;
 
 @property (strong, nonatomic, nullable) SplitViewController * splitViewController;
-@property (strong, nonatomic, nullable) CHCertificateChain * certificateChain;
-@property (strong, nonatomic, nullable) CHCertificate * selectedCertificate;
+@property (strong, nonatomic, nullable) CKCertificateChain * certificateChain;
+@property (strong, nonatomic, nullable) CKCertificate * selectedCertificate;
 
 @end

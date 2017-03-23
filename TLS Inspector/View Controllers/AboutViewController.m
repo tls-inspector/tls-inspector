@@ -26,7 +26,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
 
-    self.opensslVersionLabel.text = [CHCertificate openSSLVersion];
+    self.opensslVersionLabel.text = [CKCertificate openSSLVersion];
     self.helper = [UIHelper sharedInstance];
     self.appLinks = [GTAppLinks new];
 }

@@ -36,7 +36,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:INSPECT_NOTIFICATION object:@{INSPECT_NOTIFICATION_HOST_KEY: host}];
         } else if (hostComponents.count == 2) {
             NSString * indexString = hostComponents[1];
-            // Certificate index can only be integer (realistically between 0 and CHCertificate.CERTIFICATE_CHAIN_MAXIMUM)
+            // Certificate index can only be integer (realistically between 0 and CKCertificate.CERTIFICATE_CHAIN_MAXIMUM)
             if ([indexString rangeOfString:@"^[0-9]+$" options:NSRegularExpressionSearch].location == NSNotFound) {
                 NSLog(@"Invalid certificate index %@", indexString);
                 return NO;
