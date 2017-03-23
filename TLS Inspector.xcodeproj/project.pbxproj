@@ -28,6 +28,10 @@
 		3C65C2D41E7479AD00D88074 /* CHCertificateChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */; };
 		3C65C2D51E7479AD00D88074 /* CHCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */; };
 		3C65C2D81E7482F300D88074 /* DNSResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D71E7482F300D88074 /* DNSResolver.m */; };
+		3C65DACA1E8361CD004AD96D /* CHCertificateRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAC81E8361CD004AD96D /* CHCertificateRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C65DACB1E8361CD004AD96D /* CHCertificateRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAC91E8361CD004AD96D /* CHCertificateRevoked.m */; };
+		3C65DAD01E8367D9004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DACE1E8367D9004AD96D /* NSDate+ASN1_TIME.h */; };
+		3C65DAD11E8367D9004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DACF1E8367D9004AD96D /* NSDate+ASN1_TIME.m */; };
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
@@ -134,6 +138,10 @@
 		3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateChain.m; sourceTree = "<group>"; };
 		3C65C2D61E7482F300D88074 /* DNSResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSResolver.h; sourceTree = "<group>"; };
 		3C65C2D71E7482F300D88074 /* DNSResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNSResolver.m; sourceTree = "<group>"; };
+		3C65DAC81E8361CD004AD96D /* CHCertificateRevoked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateRevoked.h; sourceTree = "<group>"; };
+		3C65DAC91E8361CD004AD96D /* CHCertificateRevoked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateRevoked.m; sourceTree = "<group>"; };
+		3C65DACE1E8367D9004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
+		3C65DACF1E8367D9004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
@@ -273,12 +281,16 @@
 		3CCADFD41E3EAEDC0087B1DD /* CHCertificate */ = {
 			isa = PBXGroup;
 			children = (
+				3C65DACE1E8367D9004AD96D /* NSDate+ASN1_TIME.h */,
+				3C65DACF1E8367D9004AD96D /* NSDate+ASN1_TIME.m */,
 				3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */,
 				3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */,
 				3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */,
 				3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */,
 				3CEE308F1E7EFCBE002B64B6 /* CHCRLManager.h */,
 				3CEE30901E7EFCBE002B64B6 /* CHCRLManager.m */,
+				3C65DAC81E8361CD004AD96D /* CHCertificateRevoked.h */,
+				3C65DAC91E8361CD004AD96D /* CHCertificateRevoked.m */,
 				3CCADFD61E3EAEDC0087B1DD /* Info.plist */,
 				3CEF8DA91E7A48250036C98F /* openssl.framework */,
 			);
@@ -381,7 +393,9 @@
 			files = (
 				3C65C2D41E7479AD00D88074 /* CHCertificateChain.h in Headers */,
 				3CCADFD71E3EAEDC0087B1DD /* CHCertificate.h in Headers */,
+				3C65DACA1E8361CD004AD96D /* CHCertificateRevoked.h in Headers */,
 				3CEE30911E7EFCBE002B64B6 /* CHCRLManager.h in Headers */,
+				3C65DAD01E8367D9004AD96D /* NSDate+ASN1_TIME.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +599,8 @@
 				3CEE30921E7EFCBE002B64B6 /* CHCRLManager.m in Sources */,
 				3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */,
 				3C65C2D51E7479AD00D88074 /* CHCertificateChain.m in Sources */,
+				3C65DACB1E8361CD004AD96D /* CHCertificateRevoked.m in Sources */,
+				3C65DAD11E8367D9004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

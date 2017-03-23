@@ -25,18 +25,12 @@
 //  SOFTWARE.
 
 #import "CHCRLManager.h"
-#include <openssl/ssl.h>
-#include <openssl/ossl_typ.h>
-#include <openssl/x509v3.h>
 
-@interface CHCRLManager () {
-    void (^finishedBlock)(BOOL, NSError *);
-    NSUInteger crlsRemaining;
-    CHCertificate * certificate;
-}
+@interface CHCRLManager ()
 
 @property (strong, nonatomic) NSFileManager * fs;
 @property (strong, nonatomic) NSString * crlCachePath;
+@property (nonatomic) NSTimeInterval crlCacheLifetime;
 
 @end
 
@@ -77,7 +71,7 @@ static NSDictionary<NSString *, id> * crlCache;
 
 - (void) loadCRLCache {
     if (crlCache) {
-        [self unloacCRLCache];
+        [self unloadCRLCache];
     }
 
     if ([self.fs fileExistsAtPath:self.crlCachePath]) {
@@ -96,7 +90,7 @@ static NSDictionary<NSString *, id> * crlCache;
     }
 }
 
-- (void) unloacCRLCache {
+- (void) unloadCRLCache {
     if (!crlCache) {
         return;
     }
@@ -124,7 +118,7 @@ static NSDictionary<NSString *, id> * crlCache;
             return;
         }
     }
-    
+
     NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.timeoutIntervalForResource = 5.0;
     NSURLSession * urlSession = [NSURLSession sessionWithConfiguration:config];
@@ -142,49 +136,11 @@ static NSDictionary<NSString *, id> * crlCache;
                                                        };
               [self addResponseToCache:[crl absoluteString] data:cache];
               finished(data, nil);
+              
           } else {
               finished(nil, error ?: [NSError errorWithDomain:@"HTTP" code:httpResponse.statusCode userInfo:nil]);
           }
       }] resume];
-}
-
-- (void) isCertificateRevoked:(CHCertificate *)cert finished:(void (^)(BOOL revoked, NSError * error))finished {
-    finishedBlock = finished;
-    certificate = cert;
-    [self loadCRLCache];
-    
-    
-    
-    distributionPoints * crls = [cert crlDistributionPoints];
-    crlsRemaining = crls.count;
-    
-    for (NSURL * url in crls) {
-        [self getCRL:url finished:^(NSData *data, NSError *error) {
-            if (error) {
-                finished(NO, error);
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    crlsRemaining --;
-                    [self crlDownloaded:crls];
-                });
-            }
-        }];
-    }
-}
-
-- (void) crlDownloaded:(distributionPoints *)crls {
-    if (crlsRemaining == 0) {
-        X509_CRL * crl;
-        NSData * crlData = [[crlCache objectForKey:[[crls objectAtIndex:0] absoluteString]] objectForKey:CRL_CACHE_DATA_KEY];
-        const unsigned char * bytes = (const unsigned char *)[crlData bytes];
-        crl = d2i_X509_CRL(NULL, &bytes, [crlData length]);
-        struct x509_revoked_st * revoked;
-        const ASN1_INTEGER * serial = X509_get0_serialNumber(certificate.X509Certificate);
-        X509_CRL_get0_by_serial(crl, &revoked, (ASN1_INTEGER *)serial);
-        if (revoked->reason == CRL_REASON_REMOVE_FROM_CRL) {
-            
-        }
-    }
 }
 
 @end

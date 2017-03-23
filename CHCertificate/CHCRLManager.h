@@ -32,8 +32,8 @@
 + (CHCRLManager * _Nonnull) sharedInstance;
 - (id _Nonnull) init;
 
-@property (nonatomic) NSTimeInterval crlCacheLifetime;
-
-- (void) isCertificateRevoked:(CHCertificate * _Nonnull)certificate finished:(void (^ _Nonnull)(BOOL revoked, NSError * _Nullable error))finished;
+- (void) loadCRLCache;
+- (void) unloadCRLCache;
+- (void) getCRL:(NSURL * _Nonnull)crl finished:(void (^ _Nonnull)(NSData * _Nullable data, NSError * _Nullable error))finished;
 
 @end

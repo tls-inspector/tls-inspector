@@ -138,28 +138,8 @@
     if (certs.count > 1) {
         chain.root = [chain.certificates lastObject];
     }
-    
-    
-    distributionPoints * urls = [[certs objectAtIndex:0] crlDistributionPoints];
-    if (urls.count > 0) {
-        [[CHCRLManager sharedInstance] isCertificateRevoked:[certs objectAtIndex:0] finished:^(BOOL revoked, NSError * _Nullable error) {
-            self.crlVerified = YES;
-            if (!error) {
-                [certs objectAtIndex:0].revoked = revoked;
-                if (!revoked) {
-                    chain.trusted = CHCertificateChainTrustStatusRevoked;
-                }
-            } else {
-                NSLog(@"Error checking CRL status: %@", error.localizedDescription);
-                chain.trusted = CHCertificateChainTrustStatusCRLFailure;
-            }
 
-            finishedBlock(nil, chain);
-        }];
-    } else {
-        self.crlVerified = NO;
-        finishedBlock(nil, chain);
-    }
+    finishedBlock(nil, chain);
 }
 
 @end

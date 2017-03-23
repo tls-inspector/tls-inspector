@@ -25,6 +25,7 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import "CHCertificateRevoked.h"
 
 @interface CHCertificate : NSObject
 
@@ -63,7 +64,7 @@ typedef NS_ENUM(NSInteger, CHCertificateError) {
 
 @property (nonatomic, readonly) BOOL extendedValidation;
 
-@property (nonatomic) BOOL revoked;
+@property (strong, nonatomic) CHCertificateRevoked * revoked;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
