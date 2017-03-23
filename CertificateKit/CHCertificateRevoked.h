@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "CHCertificate.h"
+
+@class CHCertificate;
 
 @interface CHCertificateRevoked : NSObject
 
@@ -18,5 +21,9 @@ typedef NS_ENUM(NSInteger, CHCertificateRevokedReason) {
 @property (nonatomic) BOOL isRevoked;
 @property (nonatomic) CHCertificateRevokedReason reason;
 @property (strong, nonatomic, readonly, nullable) NSDate * date;
+
+- (void) isCertificateRevoked:(CHCertificate * _Nonnull)cert
+                       rootCA:(CHCertificate * _Nonnull)rootCA
+                     finished:(void (^ _Nonnull)(NSError * _Nullable error))finished;
 
 @end

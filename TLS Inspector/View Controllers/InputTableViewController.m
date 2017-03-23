@@ -2,8 +2,6 @@
 #import "CertificateListTableViewController.h"
 #import "UIHelper.h"
 #import "RecentDomains.h"
-#import "CHCertificate.h"
-#import "CHCertificateChain.h"
 #import "MBProgressHUD.h"
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {

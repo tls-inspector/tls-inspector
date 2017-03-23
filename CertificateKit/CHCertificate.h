@@ -27,6 +27,8 @@
 #import <Foundation/Foundation.h>
 #import "CHCertificateRevoked.h"
 
+@class CHCertificateRevoked;
+
 @interface CHCertificate : NSObject
 
 /**

@@ -1,7 +1,6 @@
 #import "AboutViewController.h"
 #import "RecentDomains.h"
 #import "GTAppLinks.h"
-@import CHCertificate;
 
 @interface AboutViewController ()
 

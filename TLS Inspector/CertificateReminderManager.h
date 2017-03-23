@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "CHCertificate.h"
 @import EventKit;
 
 @interface CertificateReminderManager : NSObject

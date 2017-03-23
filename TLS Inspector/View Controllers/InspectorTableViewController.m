@@ -1,12 +1,10 @@
 #import "InspectorTableViewController.h"
-#import "CHCertificate.h"
 #import "ValueViewController.h"
 #import "UIHelper.h"
 #import "InspectorListTableViewController.h"
 #import "CertificateReminderManager.h"
 #import "DNSResolver.h"
 #import "MBProgressHUD.h"
-#import "CHCertificate.h"
 
 @interface InspectorTableViewController()
 

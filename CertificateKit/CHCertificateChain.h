@@ -53,7 +53,17 @@ typedef NS_ENUM(NSInteger, CHCertificateChainTrustStatus) {
 /**
  The root of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
  */
-@property (strong, nonatomic, nullable, readonly) CHCertificate * root;
+@property (strong, nonatomic, nullable, readonly) CHCertificate * rootCA;
+
+/**
+ The intermediate CA of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
+ */
+@property (strong, nonatomic, nullable, readonly) CHCertificate * intermediateCA;
+
+/**
+ The server certificate in the chain.
+ */
+@property (strong, nonatomic, nullable, readonly) CHCertificate * server;
 
 /**
  If the system trusts the certificate chain

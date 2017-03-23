@@ -59,6 +59,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     CHCertificate * xcert = [CHCertificate new];
     xcert.certificate = (X509 *)cert;
     xcert.summary = [xcert generateSummary];
+    xcert.revoked = [CHCertificateRevoked new];
     return xcert;
 }
 

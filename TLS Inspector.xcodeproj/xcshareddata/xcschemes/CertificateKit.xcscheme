@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3CCADFD21E3EAEDC0087B1DD"
-               BuildableName = "CHCertificate.framework"
-               BlueprintName = "CHCertificate"
+               BlueprintIdentifier = "3C65DAD91E836BE9004AD96D"
+               BuildableName = "CertificateKit.framework"
+               BlueprintName = "CertificateKit"
                ReferencedContainer = "container:TLS Inspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3CCADFD21E3EAEDC0087B1DD"
-            BuildableName = "CHCertificate.framework"
-            BlueprintName = "CHCertificate"
+            BlueprintIdentifier = "3C65DAD91E836BE9004AD96D"
+            BuildableName = "CertificateKit.framework"
+            BlueprintName = "CertificateKit"
             ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3CCADFD21E3EAEDC0087B1DD"
-            BuildableName = "CHCertificate.framework"
-            BlueprintName = "CHCertificate"
+            BlueprintIdentifier = "3C65DAD91E836BE9004AD96D"
+            BuildableName = "CertificateKit.framework"
+            BlueprintName = "CertificateKit"
             ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

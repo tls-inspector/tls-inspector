@@ -25,13 +25,21 @@
 		3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
-		3C65C2D41E7479AD00D88074 /* CHCertificateChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */; };
-		3C65C2D51E7479AD00D88074 /* CHCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */; };
 		3C65C2D81E7482F300D88074 /* DNSResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D71E7482F300D88074 /* DNSResolver.m */; };
-		3C65DACA1E8361CD004AD96D /* CHCertificateRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAC81E8361CD004AD96D /* CHCertificateRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C65DACB1E8361CD004AD96D /* CHCertificateRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAC91E8361CD004AD96D /* CHCertificateRevoked.m */; };
-		3C65DAD01E8367D9004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DACE1E8367D9004AD96D /* NSDate+ASN1_TIME.h */; };
-		3C65DAD11E8367D9004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DACF1E8367D9004AD96D /* NSDate+ASN1_TIME.m */; };
+		3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DADC1E836BE9004AD96D /* CertificateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C65DAE11E836BE9004AD96D /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
+		3C65DAE21E836BE9004AD96D /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C65DAF11E836C15004AD96D /* CHCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAE61E836C15004AD96D /* CHCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C65DAF21E836C15004AD96D /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE71E836C15004AD96D /* CHCertificate.m */; };
+		3C65DAF31E836C15004AD96D /* CHCertificateChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAE81E836C15004AD96D /* CHCertificateChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C65DAF41E836C15004AD96D /* CHCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE91E836C15004AD96D /* CHCertificateChain.m */; };
+		3C65DAF51E836C15004AD96D /* CHCertificateRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEA1E836C15004AD96D /* CHCertificateRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C65DAF61E836C15004AD96D /* CHCertificateRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEB1E836C15004AD96D /* CHCertificateRevoked.m */; };
+		3C65DAF71E836C15004AD96D /* CHCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEC1E836C15004AD96D /* CHCRLManager.h */; };
+		3C65DAF81E836C15004AD96D /* CHCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAED1E836C15004AD96D /* CHCRLManager.m */; };
+		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
+		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; };
+		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; };
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
@@ -45,11 +53,6 @@
 		3CC652401DB0711F001FB7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6523E1DB0710C001FB7E1 /* Main.storyboard */; };
 		3CC652431DB07166001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
 		3CC652441DB071DF001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
-		3CCADFD71E3EAEDC0087B1DD /* CHCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CCADFDA1E3EAEDC0087B1DD /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; };
-		3CCADFDB1E3EAEDC0087B1DD /* CHCertificate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */; };
-		3CCADFE51E3EAF770087B1DD /* CHCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */; };
 		3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */; };
@@ -57,9 +60,6 @@
 		3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE611CB4AE5800F56B68 /* ValueViewController.m */; };
 		3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* Assets.xcassets */; };
-		3CEE30911E7EFCBE002B64B6 /* CHCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CEE308F1E7EFCBE002B64B6 /* CHCRLManager.h */; };
-		3CEE30921E7EFCBE002B64B6 /* CHCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEE30901E7EFCBE002B64B6 /* CHCRLManager.m */; };
-		3CEF8DAA1E7A48250036C98F /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEF8DA91E7A48250036C98F /* openssl.framework */; };
 		3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */; };
 		3CFAE6DB1CA8440400CD946B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DA1CA8440400CD946B /* main.m */; };
 		3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DD1CA8440400CD946B /* AppDelegate.m */; };
@@ -76,12 +76,12 @@
 			remoteGlobalIDString = 3C43EF811D7A987F00AE65E9;
 			remoteInfo = "Inspect Website";
 		};
-		3CCADFD81E3EAEDC0087B1DD /* PBXContainerItemProxy */ = {
+		3C65DADF1E836BE9004AD96D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3CCADFD21E3EAEDC0087B1DD;
-			remoteInfo = CHCertificate;
+			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
+			remoteInfo = CertificateKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -103,7 +103,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3CCADFDB1E3EAEDC0087B1DD /* CHCertificate.framework in Embed Frameworks */,
+				3C65DAE21E836BE9004AD96D /* CertificateKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,14 +134,22 @@
 		3C5D12A01D0531BD004B6E12 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = "View Controllers/AboutViewController.m"; sourceTree = "<group>"; };
 		3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CertificateListTableViewController.h; path = "View Controllers/CertificateListTableViewController.h"; sourceTree = "<group>"; };
 		3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CertificateListTableViewController.m; path = "View Controllers/CertificateListTableViewController.m"; sourceTree = "<group>"; };
-		3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateChain.h; sourceTree = "<group>"; };
-		3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateChain.m; sourceTree = "<group>"; };
 		3C65C2D61E7482F300D88074 /* DNSResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSResolver.h; sourceTree = "<group>"; };
 		3C65C2D71E7482F300D88074 /* DNSResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNSResolver.m; sourceTree = "<group>"; };
-		3C65DAC81E8361CD004AD96D /* CHCertificateRevoked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateRevoked.h; sourceTree = "<group>"; };
-		3C65DAC91E8361CD004AD96D /* CHCertificateRevoked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateRevoked.m; sourceTree = "<group>"; };
-		3C65DACE1E8367D9004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
-		3C65DACF1E8367D9004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
+		3C65DADA1E836BE9004AD96D /* CertificateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CertificateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C65DADC1E836BE9004AD96D /* CertificateKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKit.h; sourceTree = "<group>"; };
+		3C65DADD1E836BE9004AD96D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C65DAE61E836C15004AD96D /* CHCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificate.h; sourceTree = "<group>"; };
+		3C65DAE71E836C15004AD96D /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificate.m; sourceTree = "<group>"; };
+		3C65DAE81E836C15004AD96D /* CHCertificateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateChain.h; sourceTree = "<group>"; };
+		3C65DAE91E836C15004AD96D /* CHCertificateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateChain.m; sourceTree = "<group>"; };
+		3C65DAEA1E836C15004AD96D /* CHCertificateRevoked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCertificateRevoked.h; sourceTree = "<group>"; };
+		3C65DAEB1E836C15004AD96D /* CHCertificateRevoked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificateRevoked.m; sourceTree = "<group>"; };
+		3C65DAEC1E836C15004AD96D /* CHCRLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCRLManager.h; sourceTree = "<group>"; };
+		3C65DAED1E836C15004AD96D /* CHCRLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCRLManager.m; sourceTree = "<group>"; };
+		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
+		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
+		3C65DAF01E836C15004AD96D /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
@@ -153,18 +161,11 @@
 		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = lang.m; path = Localization/lang.m; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3CC652421DB07166001FB7E1 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = en.plist; path = Localization/Strings/en.plist; sourceTree = "<group>"; };
-		3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHCertificate.h; sourceTree = "<group>"; };
-		3CCADFD61E3EAEDC0087B1DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCertificate.m; sourceTree = "<group>"; };
 		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorListTableViewController.h; path = "View Controllers/InspectorListTableViewController.h"; sourceTree = "<group>"; };
 		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorListTableViewController.m; path = "View Controllers/InspectorListTableViewController.m"; sourceTree = "<group>"; };
 		3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateReminderManager.h; sourceTree = "<group>"; };
 		3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateReminderManager.m; sourceTree = "<group>"; };
 		3CEAA5061D83CCD10011A706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3CEE308F1E7EFCBE002B64B6 /* CHCRLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCRLManager.h; sourceTree = "<group>"; };
-		3CEE30901E7EFCBE002B64B6 /* CHCRLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCRLManager.m; sourceTree = "<group>"; };
-		3CEF8DA91E7A48250036C98F /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
 		3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDomains.h; sourceTree = "<group>"; };
 		3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDomains.m; sourceTree = "<group>"; };
 		3CFAE6D61CA8440400CD946B /* TLS Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TLS Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,15 +185,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CCADFE51E3EAF770087B1DD /* CHCertificate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CCADFCF1E3EAEDC0087B1DD /* Frameworks */ = {
+		3C65DAD61E836BE9004AD96D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CEF8DAA1E7A48250036C98F /* openssl.framework in Frameworks */,
+				3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CCADFDA1E3EAEDC0087B1DD /* CHCertificate.framework in Frameworks */,
+				3C65DAE11E836BE9004AD96D /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +250,26 @@
 			path = GTAppLinks;
 			sourceTree = "<group>";
 		};
+		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
+			isa = PBXGroup;
+			children = (
+				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
+				3C65DADD1E836BE9004AD96D /* Info.plist */,
+				3C65DAE61E836C15004AD96D /* CHCertificate.h */,
+				3C65DAE71E836C15004AD96D /* CHCertificate.m */,
+				3C65DAE81E836C15004AD96D /* CHCertificateChain.h */,
+				3C65DAE91E836C15004AD96D /* CHCertificateChain.m */,
+				3C65DAEA1E836C15004AD96D /* CHCertificateRevoked.h */,
+				3C65DAEB1E836C15004AD96D /* CHCertificateRevoked.m */,
+				3C65DAEC1E836C15004AD96D /* CHCRLManager.h */,
+				3C65DAED1E836C15004AD96D /* CHCRLManager.m */,
+				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
+				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
+				3C65DAF01E836C15004AD96D /* openssl.framework */,
+			);
+			path = CertificateKit;
+			sourceTree = "<group>";
+		};
 		3CC6521C1DB06DF2001FB7E1 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,25 +298,6 @@
 			name = Strings;
 			sourceTree = "<group>";
 		};
-		3CCADFD41E3EAEDC0087B1DD /* CHCertificate */ = {
-			isa = PBXGroup;
-			children = (
-				3C65DACE1E8367D9004AD96D /* NSDate+ASN1_TIME.h */,
-				3C65DACF1E8367D9004AD96D /* NSDate+ASN1_TIME.m */,
-				3CCADFD51E3EAEDC0087B1DD /* CHCertificate.h */,
-				3CCADFDF1E3EAF000087B1DD /* CHCertificate.m */,
-				3C65C2D21E7479AD00D88074 /* CHCertificateChain.h */,
-				3C65C2D31E7479AD00D88074 /* CHCertificateChain.m */,
-				3CEE308F1E7EFCBE002B64B6 /* CHCRLManager.h */,
-				3CEE30901E7EFCBE002B64B6 /* CHCRLManager.m */,
-				3C65DAC81E8361CD004AD96D /* CHCertificateRevoked.h */,
-				3C65DAC91E8361CD004AD96D /* CHCertificateRevoked.m */,
-				3CCADFD61E3EAEDC0087B1DD /* Info.plist */,
-				3CEF8DA91E7A48250036C98F /* openssl.framework */,
-			);
-			path = CHCertificate;
-			sourceTree = "<group>";
-		};
 		3CE5D2AA1E199FEF009500E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,7 +316,7 @@
 			children = (
 				3CFAE6D81CA8440400CD946B /* TLS Inspector */,
 				3C43EF831D7A987F00AE65E9 /* Inspect Website */,
-				3CCADFD41E3EAEDC0087B1DD /* CHCertificate */,
+				3C65DADB1E836BE9004AD96D /* CertificateKit */,
 				3CFAE6D71CA8440400CD946B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -325,7 +326,7 @@
 			children = (
 				3CFAE6D61CA8440400CD946B /* TLS Inspector.app */,
 				3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */,
-				3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */,
+				3C65DADA1E836BE9004AD96D /* CertificateKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -387,15 +388,16 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		3CCADFD01E3EAEDC0087B1DD /* Headers */ = {
+		3C65DAD71E836BE9004AD96D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C65C2D41E7479AD00D88074 /* CHCertificateChain.h in Headers */,
-				3CCADFD71E3EAEDC0087B1DD /* CHCertificate.h in Headers */,
-				3C65DACA1E8361CD004AD96D /* CHCertificateRevoked.h in Headers */,
-				3CEE30911E7EFCBE002B64B6 /* CHCRLManager.h in Headers */,
-				3C65DAD01E8367D9004AD96D /* NSDate+ASN1_TIME.h in Headers */,
+				3C65DAF31E836C15004AD96D /* CHCertificateChain.h in Headers */,
+				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
+				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
+				3C65DAF51E836C15004AD96D /* CHCertificateRevoked.h in Headers */,
+				3C65DAF71E836C15004AD96D /* CHCRLManager.h in Headers */,
+				3C65DAF11E836C15004AD96D /* CHCertificate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,22 +422,22 @@
 			productReference = 3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		3CCADFD21E3EAEDC0087B1DD /* CHCertificate */ = {
+		3C65DAD91E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3CCADFDE1E3EAEDC0087B1DD /* Build configuration list for PBXNativeTarget "CHCertificate" */;
+			buildConfigurationList = 3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */;
 			buildPhases = (
-				3CCADFCE1E3EAEDC0087B1DD /* Sources */,
-				3CCADFCF1E3EAEDC0087B1DD /* Frameworks */,
-				3CCADFD01E3EAEDC0087B1DD /* Headers */,
-				3CCADFD11E3EAEDC0087B1DD /* Resources */,
+				3C65DAD51E836BE9004AD96D /* Sources */,
+				3C65DAD61E836BE9004AD96D /* Frameworks */,
+				3C65DAD71E836BE9004AD96D /* Headers */,
+				3C65DAD81E836BE9004AD96D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CHCertificate;
-			productName = CHCertificate;
-			productReference = 3CCADFD31E3EAEDC0087B1DD /* CHCertificate.framework */;
+			name = CertificateKit;
+			productName = CertificateKit;
+			productReference = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		3CFAE6D51CA8440400CD946B /* TLS Inspector */ = {
@@ -453,7 +455,7 @@
 			);
 			dependencies = (
 				3C43EF8C1D7A987F00AE65E9 /* PBXTargetDependency */,
-				3CCADFD91E3EAEDC0087B1DD /* PBXTargetDependency */,
+				3C65DAE01E836BE9004AD96D /* PBXTargetDependency */,
 			);
 			name = "TLS Inspector";
 			productName = "TLS Inspector";
@@ -474,7 +476,7 @@
 						DevelopmentTeam = WCW84NC7Y8;
 						ProvisioningStyle = Automatic;
 					};
-					3CCADFD21E3EAEDC0087B1DD = {
+					3C65DAD91E836BE9004AD96D = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -500,7 +502,7 @@
 			targets = (
 				3CFAE6D51CA8440400CD946B /* TLS Inspector */,
 				3C43EF811D7A987F00AE65E9 /* Inspect Website */,
-				3CCADFD21E3EAEDC0087B1DD /* CHCertificate */,
+				3C65DAD91E836BE9004AD96D /* CertificateKit */,
 			);
 		};
 /* End PBXProject section */
@@ -518,7 +520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CCADFD11E3EAEDC0087B1DD /* Resources */ = {
+		3C65DAD81E836BE9004AD96D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -592,15 +594,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CCADFCE1E3EAEDC0087B1DD /* Sources */ = {
+		3C65DAD51E836BE9004AD96D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CEE30921E7EFCBE002B64B6 /* CHCRLManager.m in Sources */,
-				3CCADFE21E3EAF000087B1DD /* CHCertificate.m in Sources */,
-				3C65C2D51E7479AD00D88074 /* CHCertificateChain.m in Sources */,
-				3C65DACB1E8361CD004AD96D /* CHCertificateRevoked.m in Sources */,
-				3C65DAD11E8367D9004AD96D /* NSDate+ASN1_TIME.m in Sources */,
+				3C65DAF21E836C15004AD96D /* CHCertificate.m in Sources */,
+				3C65DAF81E836C15004AD96D /* CHCRLManager.m in Sources */,
+				3C65DAF41E836C15004AD96D /* CHCertificateChain.m in Sources */,
+				3C65DAF61E836C15004AD96D /* CHCertificateRevoked.m in Sources */,
+				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,10 +641,10 @@
 			target = 3C43EF811D7A987F00AE65E9 /* Inspect Website */;
 			targetProxy = 3C43EF8B1D7A987F00AE65E9 /* PBXContainerItemProxy */;
 		};
-		3CCADFD91E3EAEDC0087B1DD /* PBXTargetDependency */ = {
+		3C65DAE01E836BE9004AD96D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3CCADFD21E3EAEDC0087B1DD /* CHCertificate */;
-			targetProxy = 3CCADFD81E3EAEDC0087B1DD /* PBXContainerItemProxy */;
+			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
+			targetProxy = 3C65DADF1E836BE9004AD96D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -705,12 +707,11 @@
 			};
 			name = Release;
 		};
-		3CCADFDC1E3EAEDC0087B1DD /* Debug */ = {
+		3C65DAE41E836BE9004AD96D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -718,13 +719,13 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CHCertificate",
+					"$(PROJECT_DIR)/CertificateKit",
 				);
-				INFOPLIST_FILE = CHCertificate/Info.plist;
+				INFOPLIST_FILE = CertificateKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecnepsnai.CHCertificate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -733,12 +734,11 @@
 			};
 			name = Debug;
 		};
-		3CCADFDD1E3EAEDC0087B1DD /* Release */ = {
+		3C65DAE51E836BE9004AD96D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -746,13 +746,13 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CHCertificate",
+					"$(PROJECT_DIR)/CertificateKit",
 				);
-				INFOPLIST_FILE = CHCertificate/Info.plist;
+				INFOPLIST_FILE = CertificateKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecnepsnai.CHCertificate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -916,14 +916,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3CCADFDE1E3EAEDC0087B1DD /* Build configuration list for PBXNativeTarget "CHCertificate" */ = {
+		3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3CCADFDC1E3EAEDC0087B1DD /* Debug */,
-				3CCADFDD1E3EAEDC0087B1DD /* Release */,
+				3C65DAE41E836BE9004AD96D /* Debug */,
+				3C65DAE51E836BE9004AD96D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		3CFAE6D11CA8440400CD946B /* Build configuration list for PBXProject "TLS Inspector" */ = {
 			isa = XCConfigurationList;

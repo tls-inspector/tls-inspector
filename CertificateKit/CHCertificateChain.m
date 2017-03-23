@@ -41,7 +41,9 @@
 
 @property (strong, nonatomic, nonnull, readwrite) NSString * domain;
 @property (strong, nonatomic, nonnull, readwrite) NSArray<CHCertificate *> * certificates;
-@property (strong, nonatomic, nullable, readwrite) CHCertificate * root;
+@property (strong, nonatomic, nullable, readwrite) CHCertificate * rootCA;
+@property (strong, nonatomic, nullable, readwrite) CHCertificate * intermediateCA;
+@property (strong, nonatomic, nullable, readwrite) CHCertificate * server;
 @property (nonatomic, readwrite) CHCertificateChainTrustStatus trusted;
 @property (nonatomic, readwrite) BOOL crlVerified;
 
@@ -136,8 +138,10 @@
 
     chain.domain = queryDomain;
     if (certs.count > 1) {
-        chain.root = [chain.certificates lastObject];
+        chain.rootCA = [chain.certificates lastObject];
+        chain.intermediateCA = [chain.certificates objectAtIndex:1];
     }
+    chain.server = [chain.certificates firstObject];
 
     finishedBlock(nil, chain);
 }

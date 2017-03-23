@@ -61,6 +61,7 @@
             if ((rv = X509_CRL_verify(crl, pubKey)) != 1) {
                 // CRL Verification failure
                 NSError * crlError = [NSError errorWithDomain:@"CHCRLManager" code:rv userInfo:@{NSLocalizedDescriptionKey: @"CRL verification failed"}];
+                NSLog(@"CRL verification failed!");
                 finishedBlock(crlError);
                 return;
             }
@@ -77,6 +78,7 @@
             X509_CRL_free(crl);
         }
         
+        NSLog(@"Finished checking CRLs");
         finishedBlock(nil);
     }
 }

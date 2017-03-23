@@ -1,7 +1,6 @@
 #import "CertificateListTableViewController.h"
 #import "InspectorTableViewController.h"
 #import "UIHelper.h"
-#import "CHCertificate.h"
 
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
