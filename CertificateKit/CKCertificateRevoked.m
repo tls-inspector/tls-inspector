@@ -71,16 +71,42 @@
             if (reason >= 0) {
                 self.isRevoked = YES;
                 self.reason = reason;
-                
+
                 const ASN1_TIME * revokedTime = X509_REVOKED_get0_revocationDate(revoked);
                 self.date = [NSDate fromASN1_TIME:revokedTime];
             }
             X509_CRL_free(crl);
         }
-        
+
         NSLog(@"Finished checking CRLs");
         finishedBlock(nil);
     }
+}
+
+- (NSString *) reasonString {
+    switch (self.reason) {
+        case CKCertificateRevokedReasonUnspecified:
+            return @"Unspecified";
+        case CKCertificateRevokedReasonKeyCompromise:
+            return @"Key compromise";
+        case CKCertificateRevokedReasonCACompromise:
+            return @"CA compromise";
+        case CKCertificateRevokedReasonAffiliationChanged:
+            return @"Affiliation changed";
+        case CKCertificateRevokedReasonSuperseded:
+            return @"Superseded";
+        case CKCertificateRevokedReasonCessationOfOperation:
+            return @"Cessation of operation";
+        case CKCertificateRevokedReasonCertificateHold:
+            return @"Certificate hold";
+        case CKCertificateRevokedReasonRemoveFromCRL:
+            return @"Remove from CRL";
+        case CKCertificateRevokedReasonPrivilegeWithdrawn:
+            return @"Privilege withdrawn";
+        case CKCertificateRevokedReasonAACompromise:
+            return @"AA compromise";
+    }
+    return nil;
 }
 
 @end

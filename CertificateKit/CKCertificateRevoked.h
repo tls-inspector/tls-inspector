@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, CKCertificateRevokedReason) {
 @property (nonatomic) BOOL isRevoked;
 @property (nonatomic) CKCertificateRevokedReason reason;
 @property (strong, nonatomic, readonly, nullable) NSDate * date;
+@property (strong, nonatomic, readonly, nullable) NSString * reasonString;
 
 - (void) isCertificateRevoked:(CKCertificate * _Nonnull)cert
                        rootCA:(CKCertificate * _Nonnull)rootCA

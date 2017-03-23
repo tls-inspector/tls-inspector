@@ -137,11 +137,21 @@
     }
 
     chain.domain = queryDomain;
+    chain.server = [chain.certificates firstObject];
     if (certs.count > 1) {
         chain.rootCA = [chain.certificates lastObject];
         chain.intermediateCA = [chain.certificates objectAtIndex:1];
+        
+        if (chain.server.crlDistributionPoints.count > 0) {
+            [chain.server.revoked
+             isCertificateRevoked:chain.server
+             rootCA:chain.intermediateCA
+             finished:^(NSError * _Nullable error) {
+                 finishedBlock(nil, chain);
+             }];
+            return;
+        }
     }
-    chain.server = [chain.certificates firstObject];
 
     finishedBlock(nil, chain);
 }
