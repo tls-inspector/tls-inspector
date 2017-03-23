@@ -4,7 +4,7 @@
 //  MIT License
 //
 //  Copyright (c) 2016 Ian Spence
-//  https://github.com/ecnepsnai/CKCertificate
+//  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -302,7 +302,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
     CERTIFICATEPOLICIES * policies = X509_get_ext_d2i(self.certificate, NID_certificate_policies, NULL, NULL);
     int numberOfPolicies = sk_POLICYINFO_num(policies);
-    
+
     const POLICYINFO * policy;
     NSString * oid;
     NSString * evAgency;
@@ -319,7 +319,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
             return evAgency;
         }
     }
-    
+
     sk_POLICYINFO_free(policies);
     return nil;
 }
@@ -334,7 +334,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     if (numberOfPoints < 0) {
         return @[];
     }
-    
+
     DIST_POINT * point;
     GENERAL_NAMES * fullNames;
     GENERAL_NAME * fullName;
@@ -346,7 +346,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
         const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
         [urls addObject:[NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]]];
     }
-    
+
     self.crlCache = urls;
     return urls;
 }

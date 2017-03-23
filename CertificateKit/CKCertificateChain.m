@@ -4,7 +4,7 @@
 //  MIT License
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/ecnepsnai/CKCertificate
+//  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@
     CFWriteStreamRef  writeStream;
     NSInputStream   * inputStream;
     NSOutputStream  * outputStream;
-    
+
     void (^finishedBlock)(NSError *, CKCertificateChain *);
     NSString * queryDomain;
 }
@@ -54,19 +54,19 @@
 - (void) certificateChainFromURL:(NSURL *)URL finished:(void (^)(NSError * error, CKCertificateChain * chain))finished {
     finishedBlock = finished;
     queryDomain = URL.host;
-    
+
     unsigned int port = URL.port != nil ? [URL.port unsignedIntValue] : 443;
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)URL.host, port, &readStream, &writeStream);
-    
+
     outputStream = (__bridge NSOutputStream *)writeStream;
     inputStream = (__bridge NSInputStream *)readStream;
-    
+
     inputStream.delegate = self;
     outputStream.delegate = self;
-    
+
     [outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [inputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    
+
     [outputStream open];
     [inputStream open];
 }
@@ -81,12 +81,12 @@
             [self streamHasSpaceAvailable:stream];
             break;
         }
-            
+
         case NSStreamEventHasBytesAvailable:
         case NSStreamEventNone: {
             break;
         }
-            
+
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered: {
             finishedBlock([stream streamError], nil);
@@ -110,9 +110,9 @@
     SecTrustResultType trustStatus;
     SecTrustEvaluate(trust, &trustStatus);
     long count = SecTrustGetCertificateCount(trust);
-    
+
     NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
-    
+
     for (long i = 0; i < count; i ++) {
         SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
         NSData * certificateData = (NSData *)CFBridgingRelease(SecCertificateCopyData(certificateRef));
@@ -122,12 +122,12 @@
         certificateData = nil;
         [certs setObject:[CKCertificate fromX509:cert] atIndexedSubscript:i];
     }
-    
+
     [inputStream close];
     [outputStream close];
-    
+
     BOOL isTrustedChain = trustStatus == kSecTrustResultUnspecified;
-    
+
     CKCertificateChain * chain = [CKCertificateChain new];
     chain.certificates = certs;
     if (isTrustedChain) {
@@ -141,7 +141,7 @@
     if (certs.count > 1) {
         chain.rootCA = [chain.certificates lastObject];
         chain.intermediateCA = [chain.certificates objectAtIndex:1];
-        
+
         if (chain.server.crlDistributionPoints.count > 0) {
             [chain.server.revoked
              isCertificateRevoked:chain.server

@@ -4,7 +4,7 @@
 //  MIT License
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/ecnepsnai/CKCertificate
+//  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -136,7 +136,7 @@ static NSDictionary<NSString *, id> * crlCache;
                                                        };
               [self addResponseToCache:[crl absoluteString] data:cache];
               finished(data, nil);
-              
+
           } else {
               finished(nil, error ?: [NSError errorWithDomain:@"HTTP" code:httpResponse.statusCode userInfo:nil]);
           }

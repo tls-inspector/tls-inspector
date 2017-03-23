@@ -9,7 +9,7 @@
     ASN1_GENERALIZEDTIME * certificateExpiryASN1Generalized = ASN1_TIME_to_generalizedtime((ASN1_TIME *)asn, NULL);
     if (certificateExpiryASN1Generalized != NULL) {
         const unsigned char * certificateExpiryData = ASN1_STRING_get0_data(certificateExpiryASN1Generalized);
-        
+
         // ASN1 generalized times look like this: "20131114230046Z"
         //                                format:  YYYYMMDDHHMMSS
         //                               indices:  01234567890123
@@ -19,10 +19,10 @@
         // we only use the date and not the time.
         //
         // (Source: http://www.obj-sys.com/asn1tutorial/node14.html)
-        
+
         NSString *expiryTimeStr = [NSString stringWithUTF8String:(char *)certificateExpiryData];
         NSDateComponents *expiryDateComponents = [[NSDateComponents alloc] init];
-        
+
         expiryDateComponents.year   = [[expiryTimeStr substringWithRange:NSMakeRange(0, 4)]
                                        intValue];
         expiryDateComponents.month  = [[expiryTimeStr substringWithRange:NSMakeRange(4, 2)]
@@ -35,7 +35,7 @@
                                        intValue];
         expiryDateComponents.second = [[expiryTimeStr substringWithRange:NSMakeRange(12, 2)]
                                        intValue];
-        
+
         NSCalendar *calendar = [NSCalendar currentCalendar];
         return [calendar dateFromComponents:expiryDateComponents];
     }
