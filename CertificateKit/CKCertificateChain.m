@@ -45,6 +45,7 @@
 @property (strong, nonatomic, nullable, readwrite) CKCertificate * intermediateCA;
 @property (strong, nonatomic, nullable, readwrite) CKCertificate * server;
 @property (nonatomic, readwrite) CKCertificateChainTrustStatus trusted;
+@property (nonatomic, readwrite) CKCertificateChainCipher cipher;
 @property (nonatomic, readwrite) BOOL crlVerified;
 
 @end
@@ -123,6 +124,12 @@
         [certs setObject:[CKCertificate fromX509:cert] atIndexedSubscript:i];
     }
 
+    SSLContextRef context = (SSLContextRef)CFReadStreamCopyProperty((__bridge CFReadStreamRef) inputStream, kCFStreamPropertySSLContext);
+    size_t numCiphers;
+    SSLGetNumberEnabledCiphers(context, &numCiphers);
+    SSLCipherSuite * ciphers = malloc(numCiphers);
+    SSLGetEnabledCiphers(context, ciphers, &numCiphers);
+
     [inputStream close];
     [outputStream close];
 
@@ -136,6 +143,8 @@
         chain.trusted = CKCertificateChainTrustStatusUntrusted;
     }
 
+    chain.cipher = ciphers[0];
+    
     chain.domain = queryDomain;
     chain.server = [chain.certificates firstObject];
     if (certs.count > 1) {
@@ -154,6 +163,305 @@
     }
 
     finishedBlock(nil, chain);
+}
+
+- (NSString *) cipherString {
+    switch (self.cipher) {
+        case CKCertificateChainCipher_SSL_NULL_WITH_NULL_NULL:
+            return @"SSL_NULL_WITH_NULL_NULL";
+        case CKCertificateChainCipher_SSL_RSA_WITH_NULL_MD5:
+            return @"SSL_RSA_WITH_NULL_MD5";
+        case CKCertificateChainCipher_SSL_RSA_WITH_NULL_SHA:
+            return @"SSL_RSA_WITH_NULL_SHA";
+        case CKCertificateChainCipher_SSL_RSA_EXPORT_WITH_RC4_40_MD5:
+            return @"SSL_RSA_EXPORT_WITH_RC4_40_MD5";
+        case CKCertificateChainCipher_SSL_RSA_WITH_RC4_128_MD5:
+            return @"SSL_RSA_WITH_RC4_128_MD5";
+        case CKCertificateChainCipher_SSL_RSA_WITH_RC4_128_SHA:
+            return @"SSL_RSA_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_SSL_RSA_EXPORT_WITH_RC2_CBC_40_MD5:
+            return @"SSL_RSA_EXPORT_WITH_RC2_CBC_40_MD5";
+        case CKCertificateChainCipher_SSL_RSA_WITH_IDEA_CBC_SHA:
+            return @"SSL_RSA_WITH_IDEA_CBC_SHA";
+        case CKCertificateChainCipher_SSL_RSA_EXPORT_WITH_DES40_CBC_SHA:
+            return @"SSL_RSA_EXPORT_WITH_DES40_CBC_SHA";
+        case CKCertificateChainCipher_SSL_RSA_WITH_DES_CBC_SHA:
+            return @"SSL_RSA_WITH_DES_CBC_SHA";
+        case CKCertificateChainCipher_SSL_RSA_WITH_3DES_EDE_CBC_SHA:
+            return @"SSL_RSA_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_DSS_EXPORT_WITH_DES40_CBC_SHA:
+            return @"SSL_DH_DSS_EXPORT_WITH_DES40_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_DSS_WITH_DES_CBC_SHA:
+            return @"SSL_DH_DSS_WITH_DES_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_DSS_WITH_3DES_EDE_CBC_SHA:
+            return @"SSL_DH_DSS_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_RSA_EXPORT_WITH_DES40_CBC_SHA:
+            return @"SSL_DH_RSA_EXPORT_WITH_DES40_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_RSA_WITH_DES_CBC_SHA:
+            return @"SSL_DH_RSA_WITH_DES_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_RSA_WITH_3DES_EDE_CBC_SHA:
+            return @"SSL_DH_RSA_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA:
+            return @"SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DHE_DSS_WITH_DES_CBC_SHA:
+            return @"SSL_DHE_DSS_WITH_DES_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA:
+            return @"SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA:
+            return @"SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DHE_RSA_WITH_DES_CBC_SHA:
+            return @"SSL_DHE_RSA_WITH_DES_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA:
+            return @"SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_anon_EXPORT_WITH_RC4_40_MD5:
+            return @"SSL_DH_anon_EXPORT_WITH_RC4_40_MD5";
+        case CKCertificateChainCipher_SSL_DH_anon_WITH_RC4_128_MD5:
+            return @"SSL_DH_anon_WITH_RC4_128_MD5";
+        case CKCertificateChainCipher_SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA:
+            return @"SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_anon_WITH_DES_CBC_SHA:
+            return @"SSL_DH_anon_WITH_DES_CBC_SHA";
+        case CKCertificateChainCipher_SSL_DH_anon_WITH_3DES_EDE_CBC_SHA:
+            return @"SSL_DH_anon_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_SSL_FORTEZZA_DMS_WITH_NULL_SHA:
+            return @"SSL_FORTEZZA_DMS_WITH_NULL_SHA";
+        case CKCertificateChainCipher_SSL_FORTEZZA_DMS_WITH_FORTEZZA_CBC_SHA:
+            return @"SSL_FORTEZZA_DMS_WITH_FORTEZZA_CBC_SHA";
+        case CKCertificateChainCipher_TLS_RSA_WITH_AES_128_CBC_SHA:
+            return @"TLS_RSA_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DH_DSS_WITH_AES_128_CBC_SHA:
+            return @"TLS_DH_DSS_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DH_RSA_WITH_AES_128_CBC_SHA:
+            return @"TLS_DH_RSA_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DHE_DSS_WITH_AES_128_CBC_SHA:
+            return @"TLS_DHE_DSS_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DHE_RSA_WITH_AES_128_CBC_SHA:
+            return @"TLS_DHE_RSA_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DH_anon_WITH_AES_128_CBC_SHA:
+            return @"TLS_DH_anon_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_RSA_WITH_AES_256_CBC_SHA:
+            return @"TLS_RSA_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DH_DSS_WITH_AES_256_CBC_SHA:
+            return @"TLS_DH_DSS_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DH_RSA_WITH_AES_256_CBC_SHA:
+            return @"TLS_DH_RSA_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DHE_DSS_WITH_AES_256_CBC_SHA:
+            return @"TLS_DHE_DSS_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DHE_RSA_WITH_AES_256_CBC_SHA:
+            return @"TLS_DHE_RSA_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DH_anon_WITH_AES_256_CBC_SHA:
+            return @"TLS_DH_anon_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_NULL_SHA:
+            return @"TLS_ECDH_ECDSA_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_RC4_128_SHA:
+            return @"TLS_ECDH_ECDSA_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA:
+            return @"TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA:
+            return @"TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_NULL_SHA:
+            return @"TLS_ECDHE_ECDSA_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA:
+            return @"TLS_ECDHE_ECDSA_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA:
+            return @"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:
+            return @"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_NULL_SHA:
+            return @"TLS_ECDH_RSA_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_RC4_128_SHA:
+            return @"TLS_ECDH_RSA_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA:
+            return @"TLS_ECDH_RSA_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA:
+            return @"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_NULL_SHA:
+            return @"TLS_ECDHE_RSA_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_RC4_128_SHA:
+            return @"TLS_ECDHE_RSA_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA:
+            return @"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA:
+            return @"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_anon_WITH_NULL_SHA:
+            return @"TLS_ECDH_anon_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_anon_WITH_RC4_128_SHA:
+            return @"TLS_ECDH_anon_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_anon_WITH_AES_128_CBC_SHA:
+            return @"TLS_ECDH_anon_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_ECDH_anon_WITH_AES_256_CBC_SHA:
+            return @"TLS_ECDH_anon_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_RSA_WITH_NULL_SHA256:
+            return @"TLS_RSA_WITH_NULL_SHA256";
+        case CKCertificateChainCipher_TLS_RSA_WITH_AES_128_CBC_SHA256:
+            return @"TLS_RSA_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_RSA_WITH_AES_256_CBC_SHA256:
+            return @"TLS_RSA_WITH_AES_256_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DH_DSS_WITH_AES_128_CBC_SHA256:
+            return @"TLS_DH_DSS_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DH_RSA_WITH_AES_128_CBC_SHA256:
+            return @"TLS_DH_RSA_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_DSS_WITH_AES_128_CBC_SHA256:
+            return @"TLS_DHE_DSS_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256:
+            return @"TLS_DHE_RSA_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DH_DSS_WITH_AES_256_CBC_SHA256:
+            return @"TLS_DH_DSS_WITH_AES_256_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DH_RSA_WITH_AES_256_CBC_SHA256:
+            return @"TLS_DH_RSA_WITH_AES_256_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_DSS_WITH_AES_256_CBC_SHA256:
+            return @"TLS_DHE_DSS_WITH_AES_256_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256:
+            return @"TLS_DHE_RSA_WITH_AES_256_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DH_anon_WITH_AES_128_CBC_SHA256:
+            return @"TLS_DH_anon_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DH_anon_WITH_AES_256_CBC_SHA256:
+            return @"TLS_DH_anon_WITH_AES_256_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_PSK_WITH_RC4_128_SHA:
+            return @"TLS_PSK_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_PSK_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_PSK_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_PSK_WITH_AES_128_CBC_SHA:
+            return @"TLS_PSK_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_PSK_WITH_AES_256_CBC_SHA:
+            return @"TLS_PSK_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_RC4_128_SHA:
+            return @"TLS_DHE_PSK_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_AES_128_CBC_SHA:
+            return @"TLS_DHE_PSK_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_AES_256_CBC_SHA:
+            return @"TLS_DHE_PSK_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_RC4_128_SHA:
+            return @"TLS_RSA_PSK_WITH_RC4_128_SHA";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA:
+            return @"TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_AES_128_CBC_SHA:
+            return @"TLS_RSA_PSK_WITH_AES_128_CBC_SHA";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_AES_256_CBC_SHA:
+            return @"TLS_RSA_PSK_WITH_AES_256_CBC_SHA";
+        case CKCertificateChainCipher_TLS_PSK_WITH_NULL_SHA:
+            return @"TLS_PSK_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_NULL_SHA:
+            return @"TLS_DHE_PSK_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_NULL_SHA:
+            return @"TLS_RSA_PSK_WITH_NULL_SHA";
+        case CKCertificateChainCipher_TLS_RSA_WITH_AES_128_GCM_SHA256:
+            return @"TLS_RSA_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_RSA_WITH_AES_256_GCM_SHA384:
+            return @"TLS_RSA_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256:
+            return @"TLS_DHE_RSA_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384:
+            return @"TLS_DHE_RSA_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_DH_RSA_WITH_AES_128_GCM_SHA256:
+            return @"TLS_DH_RSA_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_DH_RSA_WITH_AES_256_GCM_SHA384:
+            return @"TLS_DH_RSA_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_DHE_DSS_WITH_AES_128_GCM_SHA256:
+            return @"TLS_DHE_DSS_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_DSS_WITH_AES_256_GCM_SHA384:
+            return @"TLS_DHE_DSS_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_DH_DSS_WITH_AES_128_GCM_SHA256:
+            return @"TLS_DH_DSS_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_DH_DSS_WITH_AES_256_GCM_SHA384:
+            return @"TLS_DH_DSS_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_DH_anon_WITH_AES_128_GCM_SHA256:
+            return @"TLS_DH_anon_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_DH_anon_WITH_AES_256_GCM_SHA384:
+            return @"TLS_DH_anon_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_PSK_WITH_AES_128_GCM_SHA256:
+            return @"TLS_PSK_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_PSK_WITH_AES_256_GCM_SHA384:
+            return @"TLS_PSK_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256:
+            return @"TLS_DHE_PSK_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384:
+            return @"TLS_DHE_PSK_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256:
+            return @"TLS_RSA_PSK_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384:
+            return @"TLS_RSA_PSK_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_PSK_WITH_AES_128_CBC_SHA256:
+            return @"TLS_PSK_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_PSK_WITH_AES_256_CBC_SHA384:
+            return @"TLS_PSK_WITH_AES_256_CBC_SHA384";
+        case CKCertificateChainCipher_TLS_PSK_WITH_NULL_SHA256:
+            return @"TLS_PSK_WITH_NULL_SHA256";
+        case CKCertificateChainCipher_TLS_PSK_WITH_NULL_SHA384:
+            return @"TLS_PSK_WITH_NULL_SHA384";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256:
+            return @"TLS_DHE_PSK_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384:
+            return @"TLS_DHE_PSK_WITH_AES_256_CBC_SHA384";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_NULL_SHA256:
+            return @"TLS_DHE_PSK_WITH_NULL_SHA256";
+        case CKCertificateChainCipher_TLS_DHE_PSK_WITH_NULL_SHA384:
+            return @"TLS_DHE_PSK_WITH_NULL_SHA384";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256:
+            return @"TLS_RSA_PSK_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384:
+            return @"TLS_RSA_PSK_WITH_AES_256_CBC_SHA384";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_NULL_SHA256:
+            return @"TLS_RSA_PSK_WITH_NULL_SHA256";
+        case CKCertificateChainCipher_TLS_RSA_PSK_WITH_NULL_SHA384:
+            return @"TLS_RSA_PSK_WITH_NULL_SHA384";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:
+            return @"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384:
+            return @"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256:
+            return @"TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384:
+            return @"TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256:
+            return @"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384:
+            return @"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256:
+            return @"TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384:
+            return @"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:
+            return @"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:
+            return @"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256:
+            return @"TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384:
+            return @"TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:
+            return @"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:
+            return @"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256:
+            return @"TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256";
+        case CKCertificateChainCipher_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384:
+            return @"TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384";
+        case CKCertificateChainCipher_TLS_EMPTY_RENEGOTIATION_INFO_SCSV:
+            return @"TLS_EMPTY_RENEGOTIATION_INFO_SCSV";
+        case CKCertificateChainCipher_SSL_RSA_WITH_RC2_CBC_MD5:
+            return @"SSL_RSA_WITH_RC2_CBC_MD5";
+        case CKCertificateChainCipher_SSL_RSA_WITH_IDEA_CBC_MD5:
+            return @"SSL_RSA_WITH_IDEA_CBC_MD5";
+        case CKCertificateChainCipher_SSL_RSA_WITH_DES_CBC_MD5:
+            return @"SSL_RSA_WITH_DES_CBC_MD5";
+        case CKCertificateChainCipher_SSL_RSA_WITH_3DES_EDE_CBC_MD5:
+            return @"SSL_RSA_WITH_3DES_EDE_CBC_MD5";
+        case CKCertificateChainCipher_SSL_NO_SUCH_CIPHERSUITE:
+            return @"SSL_NO_SUCH_CIPHERSUITE";
+    }
 }
 
 @end
