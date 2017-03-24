@@ -21,7 +21,7 @@
     [super viewDidLoad];
     uihelper = [UIHelper sharedInstance];
     
-    if (currentChain.trusted) {
+    if (currentChain.trusted == CKCertificateChainTrustStatusTrusted) {
         self.headerViewLabel.text = l(@"Trusted Chain");
         self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
     } else {
@@ -90,7 +90,7 @@
         if (cert.extendedValidation) {
             NSDictionary * names = [cert names];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
-            cell.textLabel.textColor = self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+            cell.textLabel.textColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
         } else {
             cell.textLabel.text = [cert summary];
             cell.textLabel.textColor = [UIColor whiteColor];
@@ -113,11 +113,7 @@
     switch (indexPath.section) {
         case 1: {
             TitleValueTableViewCell * cell = (TitleValueTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-            if (cell.valueLabel.numberOfLines == 1) {
-                return 70.0f;
-            } else {
-                return 85.0f;
-            }
+            return [cell heightForCell];
         }
     }
 
