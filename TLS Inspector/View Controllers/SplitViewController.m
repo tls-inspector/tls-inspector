@@ -9,6 +9,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
+    self.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     [AppState currentState].splitViewController = self;
 }
 

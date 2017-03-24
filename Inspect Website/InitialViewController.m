@@ -41,7 +41,6 @@
                                                       storyboardWithName:@"Main"
                                                       bundle:[NSBundle mainBundle]]
                                                      instantiateViewControllerWithIdentifier:@"Certificate List"];
-    certList.host = url;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self pushViewController:certList animated:NO];
     });

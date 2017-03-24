@@ -9,16 +9,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    // Set Default Options
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:RECENT_DOMAINS_KEY] == nil) {
-        [defaults setObject:@[] forKey:RECENT_DOMAINS_KEY];
-    }
-    if ([defaults objectForKey:SAVE_RECENT_DOMAINS] == nil) {
-        [defaults setBool:YES forKey:SAVE_RECENT_DOMAINS];
-    }
-    
+
     UIView *selectionView = [UIView new];
     selectionView.backgroundColor = [UIColor colorWithRed:0.08 green:0.12 blue:0.16 alpha:1.0];
     [[UITableViewCell appearance] setSelectedBackgroundView:selectionView];

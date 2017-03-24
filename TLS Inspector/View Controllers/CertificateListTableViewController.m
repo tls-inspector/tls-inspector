@@ -1,6 +1,7 @@
 #import "CertificateListTableViewController.h"
 #import "InspectorTableViewController.h"
 #import "UIHelper.h"
+#import "TitleValueTableViewCell.h"
 
 @interface CertificateListTableViewController () {
     UIHelper * uihelper;
@@ -49,7 +50,14 @@
 #endif
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return currentChain.certificates.count > 0 ? l(@"Certificate Chain") : @"";
+    switch (section) {
+        case 0:
+            return currentChain.certificates.count > 0 ? l(@"Certificate Chain") : @"";
+        case 1:
+            return l(@"Connection Information");
+    }
+
+    return nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,24 +67,61 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return currentChain.certificates.count;
+    switch (section) {
+        case 0:
+            return currentChain.certificates.count;
+        case 1:
+            return 1;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CKCertificate * cert = [currentChain.certificates objectAtIndex:indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+    if (indexPath.section == 0) {
+        CKCertificate * cert = [currentChain.certificates objectAtIndex:indexPath.row];
 
-    if (cert.extendedValidation) {
-        NSDictionary * names = [cert names];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
-        cell.textLabel.textColor = self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
-    } else {
-        cell.textLabel.text = [cert summary];
-        cell.textLabel.textColor = [UIColor whiteColor];
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+
+        if (cert.extendedValidation) {
+            NSDictionary * names = [cert names];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
+            cell.textLabel.textColor = self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+        } else {
+            cell.textLabel.text = [cert summary];
+            cell.textLabel.textColor = [UIColor whiteColor];
+        }
+        
+        return cell;
+    } else if (indexPath.section == 1) {
+        TitleValueTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TitleValue"];
+
+        cell.titleLabel.text = l(@"Negotiated Cipher");
+        cell.valueLabel.text = currentChain.cipherString;
+
+        return cell;
     }
 
-    return cell;
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 1: {
+            TitleValueTableViewCell * cell = (TitleValueTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+            if (cell.valueLabel.numberOfLines == 1) {
+                return 70.0f;
+            } else {
+                return 85.0f;
+            }
+        }
+    }
+
+    return UITableViewAutomaticDimension;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

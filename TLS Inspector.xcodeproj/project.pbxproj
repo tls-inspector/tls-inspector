@@ -66,6 +66,8 @@
 		3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* Assets.xcassets */; };
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
+		A16ABDA31E844BF9007779BE /* TitleValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */; };
+		A16ABDA51E844C8A007779BE /* TitleValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,8 @@
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputTableViewController.m; path = "View Controllers/InputTableViewController.m"; sourceTree = "<group>"; };
 		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorTableViewController.h; path = "View Controllers/InspectorTableViewController.h"; sourceTree = "<group>"; };
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorTableViewController.m; path = "View Controllers/InspectorTableViewController.m"; sourceTree = "<group>"; };
+		A16ABDA11E844BF9007779BE /* TitleValueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueTableViewCell.h; sourceTree = "<group>"; };
+		A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +305,7 @@
 		3CE5D2AA1E199FEF009500E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A16ABDA41E844BFD007779BE /* UI Elements */,
 				3CBD8B911E7CE8D600F2A637 /* AppState.h */,
 				3CBD8B921E7CE8D600F2A637 /* AppState.m */,
 				3C65C2D61E7482F300D88074 /* DNSResolver.h */,
@@ -383,6 +388,16 @@
 				3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		A16ABDA41E844BFD007779BE /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				A16ABDA11E844BF9007779BE /* TitleValueTableViewCell.h */,
+				A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */,
+			);
+			name = "UI Elements";
+			path = "Classes/UI Elements";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -576,6 +591,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A16ABDA51E844C8A007779BE /* TitleValueTableViewCell.m in Sources */,
 				3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */,
 				3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */,
 				3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */,
@@ -611,6 +627,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C0C6F341E7CCB6400E6FCA2 /* UILang.m in Sources */,
+				A16ABDA31E844BF9007779BE /* TitleValueTableViewCell.m in Sources */,
 				3CBD8B931E7CE8D600F2A637 /* AppState.m in Sources */,
 				3CC6521F1DB06E1A001FB7E1 /* lang.m in Sources */,
 				3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */,
@@ -923,6 +940,7 @@
 				3C65DAE51E836BE9004AD96D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3CFAE6D11CA8440400CD946B /* Build configuration list for PBXProject "TLS Inspector" */ = {
 			isa = XCConfigurationList;
