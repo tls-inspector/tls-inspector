@@ -115,8 +115,8 @@
 /* Begin PBXFileReference section */
 		3C04EE5D1CB4A23900F56B68 /* UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
 		3C04EE5E1CB4A23900F56B68 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
-		3C04EE601CB4AE5800F56B68 /* ValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueViewController.h; path = "View Controllers/ValueViewController.h"; sourceTree = "<group>"; };
-		3C04EE611CB4AE5800F56B68 /* ValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValueViewController.m; path = "View Controllers/ValueViewController.m"; sourceTree = "<group>"; };
+		3C04EE601CB4AE5800F56B68 /* ValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueViewController.h; sourceTree = "<group>"; };
+		3C04EE611CB4AE5800F56B68 /* ValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueViewController.m; sourceTree = "<group>"; };
 		3C04EE631CB4B3F100F56B68 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3C0C6F321E7CCB6400E6FCA2 /* UILang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILang.h; sourceTree = "<group>"; };
 		3C0C6F331E7CCB6400E6FCA2 /* UILang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILang.m; sourceTree = "<group>"; };
@@ -132,10 +132,10 @@
 		3C50969D1E7CCA7600AEAAB2 /* UIDevice+PlatformString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformString.h"; sourceTree = "<group>"; };
 		3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+PlatformString.m"; sourceTree = "<group>"; };
 		3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		3C5D129F1D0531BD004B6E12 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = "View Controllers/AboutViewController.h"; sourceTree = "<group>"; };
-		3C5D12A01D0531BD004B6E12 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = "View Controllers/AboutViewController.m"; sourceTree = "<group>"; };
-		3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CertificateListTableViewController.h; path = "View Controllers/CertificateListTableViewController.h"; sourceTree = "<group>"; };
-		3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CertificateListTableViewController.m; path = "View Controllers/CertificateListTableViewController.m"; sourceTree = "<group>"; };
+		3C5D129F1D0531BD004B6E12 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		3C5D12A01D0531BD004B6E12 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateListTableViewController.h; sourceTree = "<group>"; };
+		3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateListTableViewController.m; sourceTree = "<group>"; };
 		3C65C2D61E7482F300D88074 /* DNSResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSResolver.h; sourceTree = "<group>"; };
 		3C65C2D71E7482F300D88074 /* DNSResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNSResolver.m; sourceTree = "<group>"; };
 		3C65DADA1E836BE9004AD96D /* CertificateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CertificateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,16 +155,16 @@
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
-		3CBD8B911E7CE8D600F2A637 /* AppState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppState.h; path = Classes/AppState.h; sourceTree = "<group>"; };
-		3CBD8B921E7CE8D600F2A637 /* AppState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppState.m; path = Classes/AppState.m; sourceTree = "<group>"; };
-		3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitViewController.h; path = "View Controllers/SplitViewController.h"; sourceTree = "<group>"; };
-		3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitViewController.m; path = "View Controllers/SplitViewController.m"; sourceTree = "<group>"; };
-		3CC6521D1DB06E1A001FB7E1 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lang.h; path = Localization/lang.h; sourceTree = "<group>"; };
-		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = lang.m; path = Localization/lang.m; sourceTree = "<group>"; };
+		3CBD8B911E7CE8D600F2A637 /* AppState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppState.h; sourceTree = "<group>"; };
+		3CBD8B921E7CE8D600F2A637 /* AppState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppState.m; sourceTree = "<group>"; };
+		3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
+		3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
+		3CC6521D1DB06E1A001FB7E1 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lang.h; sourceTree = "<group>"; };
+		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lang.m; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		3CC652421DB07166001FB7E1 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = en.plist; path = Localization/Strings/en.plist; sourceTree = "<group>"; };
-		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorListTableViewController.h; path = "View Controllers/InspectorListTableViewController.h"; sourceTree = "<group>"; };
-		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorListTableViewController.m; path = "View Controllers/InspectorListTableViewController.m"; sourceTree = "<group>"; };
+		3CC652421DB07166001FB7E1 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorListTableViewController.h; sourceTree = "<group>"; };
+		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorListTableViewController.m; sourceTree = "<group>"; };
 		3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateReminderManager.h; sourceTree = "<group>"; };
 		3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateReminderManager.m; sourceTree = "<group>"; };
 		3CEAA5061D83CCD10011A706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,10 +176,10 @@
 		3CFAE6DD1CA8440400CD946B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3CFAE6E51CA8440400CD946B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CFAE6EA1CA8440400CD946B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CFAE6F01CA8463900CD946B /* InputTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputTableViewController.h; path = "View Controllers/InputTableViewController.h"; sourceTree = "<group>"; };
-		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputTableViewController.m; path = "View Controllers/InputTableViewController.m"; sourceTree = "<group>"; };
-		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorTableViewController.h; path = "View Controllers/InspectorTableViewController.h"; sourceTree = "<group>"; };
-		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorTableViewController.m; path = "View Controllers/InspectorTableViewController.m"; sourceTree = "<group>"; };
+		3CFAE6F01CA8463900CD946B /* InputTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputTableViewController.h; sourceTree = "<group>"; };
+		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTableViewController.m; sourceTree = "<group>"; };
+		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorTableViewController.h; sourceTree = "<group>"; };
+		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorTableViewController.m; sourceTree = "<group>"; };
 		A16ABDA11E844BF9007779BE /* TitleValueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueTableViewCell.h; sourceTree = "<group>"; };
 		A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,15 +211,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C28B1151E881D1300715A5A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A16ABDA41E844BFD007779BE /* UI Elements */,
+				3C04EE5D1CB4A23900F56B68 /* UIHelper.h */,
+				3C04EE5E1CB4A23900F56B68 /* UIHelper.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		3C43EF831D7A987F00AE65E9 /* Inspect Website */ = {
 			isa = PBXGroup;
 			children = (
-				3C3104EF1D83C4C30093909E /* Extension.storyboard */,
-				3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */,
 				3CEAA5061D83CCD10011A706 /* Assets.xcassets */,
+				3C3104EF1D83C4C30093909E /* Extension.storyboard */,
 				3C43EF8A1D7A987F00AE65E9 /* Info.plist */,
 				3C3104F21D83C5C70093909E /* InitialViewController.h */,
 				3C3104F31D83C5C70093909E /* InitialViewController.m */,
+				3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */,
 			);
 			path = "Inspect Website";
 			sourceTree = "<group>";
@@ -230,8 +240,7 @@
 				3C50969A1E7CCA6A00AEAAB2 /* GTAppLinks */,
 				3C5096951E7CC9DC00AEAAB2 /* MBProgressHUD */,
 			);
-			name = Frameworks;
-			path = "Supporting Files/Frameworks";
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		3C5096951E7CC9DC00AEAAB2 /* MBProgressHUD */ = {
@@ -257,16 +266,16 @@
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXGroup;
 			children = (
-				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
-				3C65DADD1E836BE9004AD96D /* Info.plist */,
+				3C65DAEC1E836C15004AD96D /* CKCRLManager.h */,
+				3C65DAED1E836C15004AD96D /* CKCRLManager.m */,
 				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
 				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
 				3C65DAEA1E836C15004AD96D /* CKCertificateRevoked.h */,
 				3C65DAEB1E836C15004AD96D /* CKCertificateRevoked.m */,
-				3C65DAEC1E836C15004AD96D /* CKCRLManager.h */,
-				3C65DAED1E836C15004AD96D /* CKCRLManager.m */,
+				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
+				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
 				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
@@ -282,7 +291,7 @@
 				3CC6521D1DB06E1A001FB7E1 /* lang.h */,
 				3CC6521E1DB06E1A001FB7E1 /* lang.m */,
 			);
-			name = Localization;
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		3CC652201DB06E5F001FB7E1 /* UI Elements */ = {
@@ -291,7 +300,7 @@
 				3C0C6F321E7CCB6400E6FCA2 /* UILang.h */,
 				3C0C6F331E7CCB6400E6FCA2 /* UILang.m */,
 			);
-			name = "UI Elements";
+			path = "UI Elements";
 			sourceTree = "<group>";
 		};
 		3CC652411DB0714E001FB7E1 /* Strings */ = {
@@ -299,21 +308,20 @@
 			children = (
 				3CC652421DB07166001FB7E1 /* en.plist */,
 			);
-			name = Strings;
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		3CE5D2AA1E199FEF009500E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A16ABDA41E844BFD007779BE /* UI Elements */,
 				3CBD8B911E7CE8D600F2A637 /* AppState.h */,
 				3CBD8B921E7CE8D600F2A637 /* AppState.m */,
-				3C65C2D61E7482F300D88074 /* DNSResolver.h */,
-				3C65C2D71E7482F300D88074 /* DNSResolver.m */,
 				3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */,
 				3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */,
+				3C65C2D61E7482F300D88074 /* DNSResolver.h */,
+				3C65C2D71E7482F300D88074 /* DNSResolver.m */,
 			);
-			name = Classes;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		3CFAE6CD1CA8440400CD946B = {
@@ -341,14 +349,14 @@
 			children = (
 				3CE5D2AA1E199FEF009500E5 /* Classes */,
 				3CC6521C1DB06DF2001FB7E1 /* Localization */,
+				3CFAE6D91CA8440400CD946B /* Supporting Files */,
+				3CFAE6F31CA8464200CD946B /* View Controllers */,
 				3CFAE6DC1CA8440400CD946B /* AppDelegate.h */,
 				3CFAE6DD1CA8440400CD946B /* AppDelegate.m */,
-				3CC6523E1DB0710C001FB7E1 /* Main.storyboard */,
-				3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */,
 				3CFAE6E51CA8440400CD946B /* Assets.xcassets */,
 				3CFAE6EA1CA8440400CD946B /* Info.plist */,
-				3CFAE6F31CA8464200CD946B /* View Controllers */,
-				3CFAE6D91CA8440400CD946B /* Supporting Files */,
+				3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */,
+				3CC6523E1DB0710C001FB7E1 /* Main.storyboard */,
 			);
 			path = "TLS Inspector";
 			sourceTree = "<group>";
@@ -357,16 +365,15 @@
 			isa = PBXGroup;
 			children = (
 				3C50968F1E7CC8A900AEAAB2 /* Frameworks */,
-				3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */,
-				3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */,
-				3C04EE631CB4B3F100F56B68 /* PrefixHeader.pch */,
-				3C04EE5D1CB4A23900F56B68 /* UIHelper.h */,
-				3C04EE5E1CB4A23900F56B68 /* UIHelper.m */,
-				3CFAE6DA1CA8440400CD946B /* main.m */,
+				3C28B1151E881D1300715A5A /* UI */,
 				3C7C95071D7AA03500902E18 /* ActionTipTarget.h */,
 				3C7C95081D7AA03500902E18 /* ActionTipTarget.m */,
+				3C04EE631CB4B3F100F56B68 /* PrefixHeader.pch */,
+				3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */,
+				3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */,
+				3CFAE6DA1CA8440400CD946B /* main.m */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		3CFAE6F31CA8464200CD946B /* View Controllers */ = {
@@ -374,20 +381,20 @@
 			children = (
 				3C5D129F1D0531BD004B6E12 /* AboutViewController.h */,
 				3C5D12A01D0531BD004B6E12 /* AboutViewController.m */,
-				3C04EE601CB4AE5800F56B68 /* ValueViewController.h */,
-				3C04EE611CB4AE5800F56B68 /* ValueViewController.m */,
 				3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */,
 				3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */,
-				3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */,
-				3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */,
 				3CFAE6F01CA8463900CD946B /* InputTableViewController.h */,
 				3CFAE6F11CA8463900CD946B /* InputTableViewController.m */,
 				3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */,
 				3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */,
+				3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */,
+				3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */,
 				3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */,
 				3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */,
+				3C04EE601CB4AE5800F56B68 /* ValueViewController.h */,
+				3C04EE611CB4AE5800F56B68 /* ValueViewController.m */,
 			);
-			name = "View Controllers";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		A16ABDA41E844BFD007779BE /* UI Elements */ = {
@@ -396,8 +403,7 @@
 				A16ABDA11E844BF9007779BE /* TitleValueTableViewCell.h */,
 				A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */,
 			);
-			name = "UI Elements";
-			path = "Classes/UI Elements";
+			path = "UI Elements";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -871,7 +877,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PREFIX_HEADER = "TLS Inspector/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -900,7 +906,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = fast;
-				GCC_PREFIX_HEADER = "TLS Inspector/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
