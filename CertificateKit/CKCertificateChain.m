@@ -45,7 +45,8 @@
 @property (strong, nonatomic, nullable, readwrite) CKCertificate * intermediateCA;
 @property (strong, nonatomic, nullable, readwrite) CKCertificate * server;
 @property (nonatomic, readwrite) CKCertificateChainTrustStatus trusted;
-@property (nonatomic, readwrite) NSUInteger cipher;
+@property (nonatomic, readwrite) SSLCipherSuite cipher;
+@property (nonatomic, readwrite) SSLProtocol protocol;
 @property (nonatomic, readwrite) BOOL crlVerified;
 
 @end
@@ -129,6 +130,9 @@
     SSLGetNumberEnabledCiphers(context, &numCiphers);
     SSLCipherSuite * ciphers = malloc(numCiphers);
     SSLGetNegotiatedCipher(context, ciphers);
+    
+    SSLProtocol protocol = 0;
+    SSLGetNegotiatedProtocolVersion(context, &protocol);
 
     [inputStream close];
     [outputStream close];
@@ -144,6 +148,7 @@
     }
 
     chain.cipher = ciphers[0];
+    chain.protocol = protocol;
 
     chain.domain = queryDomain;
     chain.server = [chain.certificates firstObject];
@@ -463,6 +468,33 @@
             return @"SSL NO SUCH CIPHERSUITE";
     }
 
+    return @"Unknown";
+}
+
+- (NSString *)protocolString {
+    switch (self.protocol) {
+        case kSSLProtocolUnknown:
+            return @"Unknown";
+        case kSSLProtocol3:
+            return @"SSLv3";
+        case kTLSProtocol1:
+            return @"TLS 1.0";
+        case kTLSProtocol11:
+            return @"TLS 1.1";
+        case kTLSProtocol12:
+            return @"TLS 1.2";
+        case kDTLSProtocol1:
+            return @"DTLS 1";
+        case kSSLProtocol2:
+            return @"SSLv2";
+        case kSSLProtocol3Only:
+            return @"SSLv3 (Only)";
+        case kTLSProtocol1Only:
+            return @"TLS 1.0 (Only)";
+        case kSSLProtocolAll:
+            return @"All";
+    }
+    
     return @"Unknown";
 }
 

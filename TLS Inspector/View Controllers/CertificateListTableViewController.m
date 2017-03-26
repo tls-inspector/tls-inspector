@@ -76,7 +76,7 @@
         case 0:
             return currentChain.certificates.count;
         case 1:
-            return 1;
+            return 2;
     }
     return 0;
 }
@@ -100,8 +100,16 @@
     } else if (indexPath.section == 1) {
         TitleValueTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TitleValue"];
 
-        cell.titleLabel.text = l(@"Negotiated Cipher");
-        cell.valueLabel.text = currentChain.cipherString;
+        switch (indexPath.row) {
+            case 0:
+                cell.titleLabel.text = l(@"Negotiated Cipher");
+                cell.valueLabel.text = currentChain.cipherString;
+                break;
+            case 1:
+                cell.titleLabel.text = l(@"Negotiated Version");
+                cell.valueLabel.text = currentChain.protocolString;
+                break;
+        }
 
         return cell;
     }
