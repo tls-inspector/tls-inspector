@@ -105,14 +105,14 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 - (void)actionButton:(UIBarButtonItem *)sender {
 #ifdef MAIN_APP
     NSArray<NSString *> * items = @[
-                                    l(@"Share Public Key"),
+                                    l(@"Share Certificate"),
                                     l(@"Add Certificate Expiry Reminder"),
                                     l(@"View on SSL Labs"),
                                     l(@"Search on Shodan")
                                     ];
 #else
     NSArray<NSString *> * items = @[
-                                    l(@"Share Public Key"),
+                                    l(@"Share Certificate"),
                                     l(@"Add Certificate Expiry Reminder")
                                     ];
 #endif
@@ -165,8 +165,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     } else {
         [self.helper
          presentAlertInViewController:self
-         title:l(@"Unable to share public key")
-         body:l(@"We were unable to export the public key in PEM format.")
+         title:l(@"Unable to export certificate")
+         body:l(@"We were unable to export the certificate in PEM format.")
          dismissButtonTitle:l(@"Dismiss")
          dismissed:^(NSInteger buttonIndex) {
              [MBProgressHUD hideHUDForView:self.view animated:YES];

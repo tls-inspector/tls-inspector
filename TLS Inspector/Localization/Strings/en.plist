@@ -588,8 +588,8 @@
 	<string>Search on Shodan</string>
 	<key>Share</key>
 	<string>Share</string>
-	<key>Share Public Key</key>
-	<string>Share Public Key</string>
+	<key>Share Certificate</key>
+	<string>Share Certificate</string>
 	<key>Subject Alt. Names</key>
 	<string>Subject Alt. Names</string>
 	<key>Subject Alternative Names</key>
