@@ -44,13 +44,36 @@ typedef NS_ENUM(NSInteger, CKCertificateRevokedReason) {
     CKCertificateRevokedReasonAACompromise         = 10
 };
 
+/**
+ Was the certificate serial number present on a CRL
+ */
 @property (nonatomic) BOOL isRevoked;
+
+/**
+ For what reason was the certificate revoked
+ */
 @property (nonatomic) CKCertificateRevokedReason reason;
+
+/**
+ The date that the certificate was revoked.
+ */
 @property (strong, nonatomic, readonly, nullable) NSDate * date;
+
+/**
+ A string representation of the reason for revocation.
+ */
 @property (strong, nonatomic, readonly, nullable) NSString * reasonString;
 
+/**
+ Determine the status of the certificate, verified against the intermediateCA.
+ Will populate the instance of CKCertificateRevoked with the status when finished is called.
+
+ @param cert The certificate to check
+ @param intermediateCA The intermediate CA that issued the queried certificate
+ @param finished Called when finished with an error if one occured.
+ */
 - (void) isCertificateRevoked:(CKCertificate * _Nonnull)cert
-                       rootCA:(CKCertificate * _Nonnull)rootCA
+               intermediateCA:(CKCertificate * _Nonnull)intermediateCA
                      finished:(void (^ _Nonnull)(NSError * _Nullable error))finished;
 
 @end

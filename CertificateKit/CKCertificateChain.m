@@ -159,7 +159,7 @@
         if (chain.server.crlDistributionPoints.count > 0) {
             [chain.server.revoked
              isCertificateRevoked:chain.server
-             rootCA:chain.intermediateCA
+             intermediateCA:chain.intermediateCA
              finished:^(NSError * _Nullable error) {
                  finishedBlock(nil, chain);
              }];

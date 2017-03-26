@@ -35,7 +35,7 @@
 @interface CKCertificateRevoked () {
     void (^finishedBlock)(NSError *);
     CKCertificate * certificate;
-    CKCertificate * root;
+    CKCertificate * intermediate;
     NSUInteger crlsRemaining;
     NSMutableArray<NSData *> * crlDataArray;
 }
@@ -46,10 +46,10 @@
 
 @implementation CKCertificateRevoked
 
-- (void) isCertificateRevoked:(CKCertificate *)cert rootCA:(CKCertificate *)rootCA finished:(void (^)(NSError * error))finished {
+- (void) isCertificateRevoked:(CKCertificate *)cert intermediateCA:(CKCertificate *)intermediateCA finished:(void (^)(NSError * error))finished {
     finishedBlock = finished;
     certificate = cert;
-    root = rootCA;
+    intermediate = intermediateCA;
     crlDataArray = [NSMutableArray new];
     [[CKCRLManager sharedInstance] loadCRLCache];
 
@@ -75,7 +75,7 @@
     if (crlsRemaining == 0) {
         [[CKCRLManager sharedInstance] unloadCRLCache];
 
-        EVP_PKEY * pubKey = X509_get_pubkey(root.X509Certificate);
+        EVP_PKEY * pubKey = X509_get_pubkey(intermediate.X509Certificate);
         X509_CRL * crl;
         const ASN1_INTEGER * serial = X509_get0_serialNumber(certificate.X509Certificate);
 
@@ -98,8 +98,10 @@
                 self.isRevoked = YES;
                 self.reason = reason;
 
-                const ASN1_TIME * revokedTime = X509_REVOKED_get0_revocationDate(revoked);
-                self.date = [NSDate fromASN1_TIME:revokedTime];
+                if (reason > 0) {
+                    const ASN1_TIME * revokedTime = X509_REVOKED_get0_revocationDate(revoked);
+                    self.date = [NSDate fromASN1_TIME:revokedTime];
+                }
             }
             X509_CRL_free(crl);
         }

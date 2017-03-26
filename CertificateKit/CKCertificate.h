@@ -64,8 +64,14 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
 
 @property (strong, nonatomic, readonly) NSString * summary;
 
+/**
+ *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.
+ */
 @property (nonatomic, readonly) BOOL extendedValidation;
 
+/**
+ *  Certificate revocation information
+ */
 @property (strong, nonatomic) CKCertificateRevoked * revoked;
 
 /**
@@ -180,6 +186,11 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  */
 - (NSString *) extendedValidationAuthority;
 
+/**
+ *  Get an array of CRL distributionPoints (an array of URLs)
+ *
+ *  @return An array of URLs or nil
+ */
 - (distributionPoints *) crlDistributionPoints;
 
 /**
