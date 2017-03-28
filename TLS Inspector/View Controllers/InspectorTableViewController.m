@@ -64,13 +64,15 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     [selectedCertificate extendedValidation];
 
     self.title = selectedCertificate.summary;
-    NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [selectedCertificate algorithm]));
+    NSString * signatureAlgorythm = l(nstrcat(@"CertAlgorithm::", [selectedCertificate signatureAlgorithm]));
+    NSString * keyAlgorythm = l(nstrcat(@"KeyAlgorithm::", [selectedCertificate keyAlgorithm]));
 
     self.cells = [NSMutableArray new];
     self.certErrors = [NSMutableArray new];
 
     [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [selectedCertificate issuer]}];
-    [self.cells addObject:@{@"label": l(@"Algorithm"), @"value": algorythm}];
+    [self.cells addObject:@{@"label": l(@"Signature Algorithm"), @"value": signatureAlgorythm}];
+    [self.cells addObject:@{@"label": l(@"Key Algorithm"), @"value": keyAlgorythm}];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -85,7 +87,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     if (![selectedCertificate validIssueDate]) {
         [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];
     }
-    if ([[selectedCertificate algorithm] hasPrefix:@"sha1"]) {
+    if ([[selectedCertificate signatureAlgorithm] hasPrefix:@"sha1"]) {
         [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
     }
 

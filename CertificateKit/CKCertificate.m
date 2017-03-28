@@ -153,10 +153,23 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     }
 }
 
-- (NSString *) algorithm {
-    const X509_ALGOR * sig_type = X509_get0_tbs_sigalg(self.certificate);
+- (NSString *) signatureAlgorithm {
+    const X509_ALGOR * sigType = X509_get0_tbs_sigalg(self.certificate);
     char buffer[128];
-    OBJ_obj2txt(buffer, sizeof(buffer), sig_type->algorithm, 0);
+    OBJ_obj2txt(buffer, sizeof(buffer), sigType->algorithm, 0);
+    return [NSString stringWithUTF8String:buffer];
+}
+
+- (NSString *) keyAlgorithm {
+    X509_PUBKEY * pubkey = X509_get_X509_PUBKEY(self.certificate);
+    X509_ALGOR * keyType;
+    int rv = X509_PUBKEY_get0_param(NULL, NULL, NULL, &keyType, pubkey);
+    if (rv < 0) {
+        return nil;
+    }
+    
+    char buffer[128];
+    OBJ_obj2txt(buffer, sizeof(buffer), keyType->algorithm, 0);
     return [NSString stringWithUTF8String:buffer];
 }
 

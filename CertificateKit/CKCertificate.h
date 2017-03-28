@@ -121,7 +121,14 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  *
  *  @return A NSString value of the algorithm
  */
-- (NSString *) algorithm;
+- (NSString *) signatureAlgorithm;
+
+/**
+ *  Returns the human readable public key algorithm
+ *
+ *  @return A NSString value of the algorithm
+ */
+- (NSString *) keyAlgorithm;
 
 /**
  *  Returns the expiry date for the certificate

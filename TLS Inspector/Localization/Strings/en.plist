@@ -58,6 +58,8 @@
 	<string>Certificate uses insecure SHA1 algorithm.</string>
 	<key>Certificates</key>
 	<string>Certificates</string>
+	<key>Connection Information</key>
+	<string>Connection Information</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
 	<key>Contribute on GitHub</key>
@@ -564,8 +566,20 @@
 	<string>Inspect</string>
 	<key>Issuer</key>
 	<string>Issuer</string>
+	<key>Key Algorithm</key>
+	<string>Key Algorithm</string>
+	<key>KeyAlgorithm::dsaEncryption</key>
+	<string>DSA</string>
+	<key>KeyAlgorithm::id-ecPublicKey</key>
+	<string>ECDSA</string>
+	<key>KeyAlgorithm::rsaEncryption</key>
+	<string>RSA</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
+	<key>Negotiated Cipher</key>
+	<string>Negotiated Cipher</string>
+	<key>Negotiated Version</key>
+	<string>Negotiated Version</string>
 	<key>Not Verified</key>
 	<string>Not Verified</string>
 	<key>Notification Date</key>
@@ -590,6 +604,8 @@
 	<string>Share</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Signature Algorithm</key>
+	<string>Signature Algorithm</string>
 	<key>Subject Alt. Names</key>
 	<string>Subject Alt. Names</string>
 	<key>Subject Alternative Names</key>
