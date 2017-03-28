@@ -38,7 +38,7 @@
  *
  *  @return A CKCertificate instance
  */
-+ (CKCertificate *) fromX509:(void *)cert;
++ (CKCertificate * _Nullable) fromX509:(void * _Nonnull)cert;
 
 typedef NSArray<NSURL *> distributionPoints;
 
@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
     CKCertificateErrorInvalidParameter
 };
 
-@property (strong, nonatomic, readonly) NSString * summary;
+@property (strong, nonatomic, nullable, readonly) NSString * summary;
 
 /**
  *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.
@@ -72,32 +72,26 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
 /**
  *  Certificate revocation information
  */
-@property (strong, nonatomic) CKCertificateRevoked * revoked;
+@property (strong, nonatomic, nullable) CKCertificateRevoked * revoked;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
- *
- *  @return A NSString value of the fingerprint
  */
-- (NSString *) SHA256Fingerprint;
+@property (strong, nonatomic, nullable, readonly) NSString * SHA256Fingerprint;
 
 /**
  *  Returns the MD5 fingerprint for the certificate
  *
  *  Warning! The security of the MD5 algorithm has been seriously compromised - avoid use!
- *
- *  @return A NSString value of the fingerprint
  */
-- (NSString *) MD5Fingerprint;
+@property (strong, nonatomic, nullable, readonly) NSString * MD5Fingerprint;
 
 /**
  *  Returns the SHA1 fingerprint for the certificate
  *
  *  Warning! SH1 is no longer considered cryptographically secure - avoid use!
- *
- *  @return A NSString value of the fingerprint
  */
-- (NSString *) SHA1Fingerprint;
+@property (strong, nonatomic, nullable, readonly) NSString * SHA1Fingerprint;
 
 /**
  *  Verify the fingerprint of the certificate. Useful for certificate pinning.
@@ -107,42 +101,32 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  *
  *  @return YES if verified
  */
-- (BOOL) verifyFingerprint:(NSString *)fingerprint type:(CKCertificateFingerprintType)type;
+- (BOOL) verifyFingerprint:(NSString * _Nonnull)fingerprint type:(CKCertificateFingerprintType)type;
 
 /**
  *  Returns the serial number for the certificate
- *
- *  @return A NSString value of the serial number
  */
-- (NSString *) serialNumber;
+@property (strong, nonatomic, nullable, readonly) NSString * serialNumber;
 
 /**
  *  Returns the human readable signature algorithm
- *
- *  @return A NSString value of the algorithm
  */
-- (NSString *) signatureAlgorithm;
+@property (strong, nonatomic, nullable, readonly) NSString * signatureAlgorithm;
 
 /**
  *  Returns the human readable public key algorithm
- *
- *  @return A NSString value of the algorithm
  */
-- (NSString *) keyAlgorithm;
+@property (strong, nonatomic, nullable, readonly) NSString * keyAlgorithm;
 
 /**
- *  Returns the expiry date for the certificate
- *
- *  @return A NSDate object for the "not after" field - Time is not critical for this date object.
+ *  Returns the expiry date for the certificate. Time data may be unavailable and should not be relied upon.
  */
-- (NSDate *) notAfter;
+@property (strong, nonatomic, nullable, readonly) NSDate * notAfter;
 
 /**
- *  Returns the start date for the certificate
- *
- *  @return A NSDate object for the "not before" field - Time is not critical for this date object.
+ *  Returns the start date for the certificate. Time data may be unavailable and should not be relied upon.
  */
-- (NSDate *) notBefore;
+@property (strong, nonatomic, nullable, readonly) NSDate * notBefore;
 
 /**
  *  Test if current date is within the certificates issue date range
@@ -153,57 +137,43 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
 
 /**
  *  Retuns the issuer name
- *
- *  @return A NSString value of the issuer identity
  */
-- (NSString *) issuer;
+@property (strong, nonatomic, nullable, readonly) NSString * issuer;
 
 /**
  *  Retruns a dictionary with the subject names, and name types (OU or CN)
- *
- *  @return A dictionary of subject fields
  */
-- (NSDictionary<NSString *, NSString *> *) names;
+@property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * names;
 
 /**
  *  Returns an array of subject names applicable to the cert
- *
- *  @return An array of strings
  */
-- (NSArray<NSString *> *) subjectAlternativeNames;
+@property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * subjectAlternativeNames;
 
 /**
- *  Returns the public key encoded using Privacy-Enhanced Electronic Mail (PEM).
- *
- *  @return NSData representing the bytes (includes header and footer) or nil on error
+ *  Returns the public key encoded using Privacy-Enhanced Electronic Mail (PEM) includes header and footer.
  */
-- (NSData *) publicKeyAsPEM;
-
-/**
- *  Returns the X509 value of the certificate. Safe to cast to (X509 *) if not nil.
- *
- *  @return (X509 *)void pointer representing the X509 struct of the certificate or nil on error
- */
-- (void *) X509Certificate;
+@property (strong, nonatomic, nullable, readonly) NSData * publicKeyAsPEM;
 
 /**
  *  Returns the authority that manages the extended validation for this certificate.
- *
- *  @return A string representing the authority name, or nil
  */
-- (NSString *) extendedValidationAuthority;
+@property (strong, nonatomic, nullable, readonly) NSString * extendedValidationAuthority;
 
 /**
  *  Get an array of CRL distributionPoints (an array of URLs)
- *
- *  @return An array of URLs or nil
  */
-- (distributionPoints *) crlDistributionPoints;
+@property (strong, nonatomic, nullable, readonly) distributionPoints * crlDistributionPoints;
+
+/**
+ *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
+ */
+@property (nonatomic, nullable, readonly) void * X509Certificate;
 
 /**
  *  Get the OpenSSL version used by CKCertificate
  *
  *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"
  */
-+ (NSString *) openSSLVersion;
++ (NSString * _Nonnull) openSSLVersion;
 @end
