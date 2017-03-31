@@ -163,7 +163,7 @@
              finished:^(NSError * _Nullable error) {
                  if (!error) {
                      if (chain.server.revoked.isRevoked) {
-                         chain.trusted = CKCertificateChainTrustStatusUntrusted;
+                         chain.trusted = CKCertificateChainTrustStatusRevoked;
                      }
                  }
                  finishedBlock(nil, chain);

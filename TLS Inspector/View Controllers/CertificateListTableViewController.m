@@ -92,7 +92,10 @@
 
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
-        if (cert.extendedValidation) {
+        if (cert.revoked.isRevoked) {
+            cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[[cert summary]]];
+            cell.textLabel.textColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+        } else if (cert.extendedValidation) {
             NSDictionary * names = [cert names];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
             cell.textLabel.textColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];

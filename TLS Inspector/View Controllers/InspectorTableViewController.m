@@ -78,6 +78,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[selectedCertificate notAfter]]}];
     [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[selectedCertificate notBefore]]}];
+    if (selectedCertificate.revoked.isRevoked && selectedCertificate.revoked.date != nil) {
+        [self.cells addObject:@{@"label": l(@"Revoked On"), @"value": [dateFormatter stringFromDate:selectedCertificate.revoked.date]}];
+    }
 
     NSString * evAuthority = [selectedCertificate extendedValidationAuthority];
     if (evAuthority) {
