@@ -38,6 +38,10 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
      The system does not trust this certificate
      */
     CKCertificateChainTrustStatusUntrusted,
+    /**
+     The server certificate of this chain is revoked
+     */
+    CKCertificateChainTrustStatusRevoked,
 };
 
 /**

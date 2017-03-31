@@ -161,6 +161,11 @@
              isCertificateRevoked:chain.server
              intermediateCA:chain.intermediateCA
              finished:^(NSError * _Nullable error) {
+                 if (!error) {
+                     if (chain.server.revoked.isRevoked) {
+                         chain.trusted = CKCertificateChainTrustStatusUntrusted;
+                     }
+                 }
                  finishedBlock(nil, chain);
              }];
             return;

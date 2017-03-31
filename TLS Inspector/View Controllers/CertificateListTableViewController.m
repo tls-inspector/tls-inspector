@@ -20,14 +20,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     uihelper = [UIHelper sharedInstance];
-    
-    if (currentChain.trusted == CKCertificateChainTrustStatusTrusted) {
-        self.headerViewLabel.text = l(@"Trusted Chain");
-        self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
-    } else {
-        self.headerViewLabel.text = l(@"Untrusted Chain");
-        self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+
+    switch (currentChain.trusted) {
+        case CKCertificateChainTrustStatusTrusted:
+            self.headerViewLabel.text = l(@"Trusted Chain");
+            self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+            break;
+        case CKCertificateChainTrustStatusUntrusted:
+        case CKCertificateChainTrustStatusRevoked:
+            self.headerViewLabel.text = l(@"Untrusted Chain");
+            self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+            break;
     }
+
     self.headerViewLabel.textColor = [UIColor whiteColor];
     self.headerButton.hidden = NO;
 
@@ -139,8 +144,23 @@
 }
 
 - (IBAction)headerButton:(id)sender {
-    NSString * title = currentChain.trusted ? l(@"Trusted Chain") : l(@"Untrusted Chain");
-    NSString * body = currentChain.trusted ? l(@"trusted_chain_description") : l(@"untrusted_chain_description");
+    NSString * title, * body;
+
+    switch (currentChain.trusted) {
+        case CKCertificateChainTrustStatusUntrusted:
+            title = l(@"Untrusted Chain");
+            body = l(@"untrusted_chain_description");
+            break;
+        case CKCertificateChainTrustStatusTrusted:
+            title = l(@"Trusted Chain");
+            body = l(@"trusted_chain_description");
+            break;
+        case CKCertificateChainTrustStatusRevoked:
+            title = l(@"Untrusted Chain");
+            body = l(@"revoked_chain_description");
+            break;
+    }
+
     [uihelper
      presentAlertInViewController:self
      title:title
