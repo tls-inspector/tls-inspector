@@ -101,11 +101,7 @@
               body:error.localizedDescription
               dismissButtonTitle:l(@"Dismiss")
               dismissed:^(NSInteger buttonIndex) {
-#ifdef MAIN_APP
                   [self.navigationController popViewControllerAnimated:YES];
-#else
-                  [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
-#endif
               }];
          } else {
              dispatch_async(dispatch_get_main_queue(), ^{

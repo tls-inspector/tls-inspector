@@ -11,4 +11,8 @@
 @property (strong, nonatomic, nullable) CKCertificateChain * certificateChain;
 @property (strong, nonatomic, nullable) CKCertificate * selectedCertificate;
 
+#ifdef EXTENSION
+@property (nullable, nonatomic, strong) NSExtensionContext * extensionContext;
+#endif
+
 @end

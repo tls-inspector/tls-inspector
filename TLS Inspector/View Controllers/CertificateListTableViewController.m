@@ -50,7 +50,7 @@
 
 #ifdef EXTENSION
 - (void) dismissView:(id)sender {
-    [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+    [appState.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
 }
 #endif
 
