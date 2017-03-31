@@ -6,6 +6,7 @@
 #import "DNSResolver.h"
 #import "MBProgressHUD.h"
 #import "TitleValueTableViewCell.h"
+@import SafariServices;
 
 @interface InspectorTableViewController()
 
@@ -108,46 +109,49 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void)actionButton:(UIBarButtonItem *)sender {
-#ifdef MAIN_APP
-    NSArray<NSString *> * items = @[
-                                    l(@"Share Certificate"),
-                                    l(@"Add Certificate Expiry Reminder"),
-                                    l(@"View on SSL Labs"),
-                                    l(@"Search on Shodan")
-                                    ];
-#else
-    NSArray<NSString *> * items = @[
-                                    l(@"Share Certificate"),
-                                    l(@"Add Certificate Expiry Reminder")
-                                    ];
-#endif
     [[UIHelper sharedInstance]
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
      title:self.title
      subtitle:nil
      cancelButtonTitle:[lang key:@"Cancel"]
-     items:items
+     items:@[
+             l(@"Share Certificate"),
+             l(@"Add Certificate Expiry Reminder"),
+             l(@"View on SSL Labs"),
+             l(@"Search on Shodan")
+             ]
      dismissed:^(NSInteger itemIndex) {
         if (itemIndex == 0) {
             [self sharePublicKey:sender];
         } else if (itemIndex == 1) {
             [self addCertificateExpiryReminder:sender];
-#ifdef MAIN_APP
         } else if (itemIndex == 2) {
-            NSURL * url = [NSURL URLWithString:currentChain.domain];
-            open_url(nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host));
+            NSString * domain = currentChain.domain;
+#ifdef EXTENSION
+            // The app extension doesn't provide the URL with a protocol.
+            if (![domain hasPrefix:@"https://"]) {
+                domain = nstrcat(@"https://", domain);
+            }
+#endif
+            NSURL * url = [NSURL URLWithString:domain];
+            [self openURL:nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host)];
         } else if (itemIndex == 3) {
             NSError * dnsError;
             NSArray<NSString *> * addresses = [DNSResolver resolveHostname:currentChain.domain error:&dnsError];
             if (addresses && addresses.count >= 1) {
-                open_url(nstrcat(@"https://www.shodan.io/host/", addresses[0]));
+                [self openURL:nstrcat(@"https://www.shodan.io/host/", addresses[0])];
             } else if (dnsError) {
                 [self.helper presentErrorInViewController:self error:dnsError dismissed:nil];
             }
-#endif
         }
      }];
+}
+
+- (void) openURL:(NSString *)url {
+    SFSafariViewController * safariViewController = [[SFSafariViewController alloc]
+                                                     initWithURL:[NSURL URLWithString:url]];
+    [self presentViewController:safariViewController animated:YES completion:nil];
 }
 
 - (void) sharePublicKey:(UIBarButtonItem *)sender {

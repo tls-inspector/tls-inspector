@@ -68,6 +68,9 @@
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		A16ABDA31E844BF9007779BE /* TitleValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */; };
 		A16ABDA51E844C8A007779BE /* TitleValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */; };
+		A1BA8BE41E8EB2B30004FB0F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
+		A1BA8BE51E8EB2B90004FB0F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
+		A1BA8BE61E8EB3530004FB0F /* DNSResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65C2D71E7482F300D88074 /* DNSResolver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +186,7 @@
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorTableViewController.m; sourceTree = "<group>"; };
 		A16ABDA11E844BF9007779BE /* TitleValueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueTableViewCell.h; sourceTree = "<group>"; };
 		A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueTableViewCell.m; sourceTree = "<group>"; };
+		A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1BA8BE51E8EB2B90004FB0F /* SafariServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1BA8BE41E8EB2B30004FB0F /* SafariServices.framework in Frameworks */,
 				3C65DAE11E836BE9004AD96D /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +338,7 @@
 				3C43EF831D7A987F00AE65E9 /* Inspect Website */,
 				3C65DADB1E836BE9004AD96D /* CertificateKit */,
 				3CFAE6D71CA8440400CD946B /* Products */,
+				A1BA8BE21E8EB2B30004FB0F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -406,6 +413,14 @@
 				A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */,
 			);
 			path = "UI Elements";
+			sourceTree = "<group>";
+		};
+		A1BA8BE21E8EB2B30004FB0F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -599,6 +614,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1BA8BE61E8EB3530004FB0F /* DNSResolver.m in Sources */,
 				A16ABDA51E844C8A007779BE /* TitleValueTableViewCell.m in Sources */,
 				3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */,
 				3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */,
