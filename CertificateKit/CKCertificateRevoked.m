@@ -77,7 +77,6 @@
 
         EVP_PKEY * pubKey = X509_get_pubkey(intermediate.X509Certificate);
         X509_CRL * crl;
-        const ASN1_INTEGER * serial = X509_get0_serialNumber(certificate.X509Certificate);
 
         for (NSData * crlData in crlDataArray) {
             const unsigned char * bytes = (const unsigned char *)[crlData bytes];
@@ -93,15 +92,22 @@
             }
 
             X509_REVOKED * revoked;
-            int reason = X509_CRL_get0_by_serial(crl, &revoked, (ASN1_INTEGER *)serial);
-            if (reason >= 0) {
+            rv = X509_CRL_get0_by_cert(crl, &revoked, certificate.X509Certificate);
+            if (rv > 0) {
+                // Certificate is revoked
                 self.isRevoked = YES;
-                self.reason = reason;
-
-                if (reason > 0) {
-                    const ASN1_TIME * revokedTime = X509_REVOKED_get0_revocationDate(revoked);
-                    self.date = [NSDate fromASN1_TIME:revokedTime];
-                }
+                const ASN1_TIME * revokedTime = X509_REVOKED_get0_revocationDate(revoked);
+                self.date = [NSDate fromASN1_TIME:revokedTime];
+                finishedBlock(nil);
+            } else if (rv == 0) {
+                // Certificate not revoked
+                self.isRevoked = NO;
+                finishedBlock(nil);
+            } else {
+                // CRL parsing failure
+                NSError * crlError = [NSError errorWithDomain:@"CKCRLManager" code:rv userInfo:@{NSLocalizedDescriptionKey: @"CRL parsing failed"}];
+                NSLog(@"CRL parsing failed!");
+                finishedBlock(crlError);
             }
             X509_CRL_free(crl);
         }
