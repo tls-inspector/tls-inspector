@@ -2,7 +2,7 @@
 
 @interface UIDevice (PlatformString)
 
-- (NSString *)platform;
-- (NSString *)PlatformString;
+- (NSString *) platform;
+- (NSString *) PlatformString;
 
 @end

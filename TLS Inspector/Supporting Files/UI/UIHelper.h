@@ -9,7 +9,7 @@
  *
  *  @return A UIHelper class
  */
-+ (UIHelper *)sharedInstance;
++ (UIHelper *) sharedInstance;
 
 /**
  *  Present an alert in the current view controller with only a dismiss button.

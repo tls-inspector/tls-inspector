@@ -11,7 +11,7 @@
 
 @property (strong, nonatomic) UITextField *hostField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *inspectButton;
-- (IBAction)inspectButton:(UIBarButtonItem *)sender;
+- (IBAction) inspectButton:(UIBarButtonItem *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
 @property (strong, nonatomic) CKCertificateChain * chain;
@@ -20,7 +20,7 @@
 
 @implementation InputTableViewController
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     [super viewDidLoad];
     self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
@@ -36,15 +36,15 @@
     certIndex = nil;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)hostFieldEdit:(id)sender {
+- (void) hostFieldEdit:(id)sender {
     self.inspectButton.enabled = self.hostField.text.length > 0;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if (self.hostField.text.length > 0) {
         hostAddress = self.hostField.text;
         [self inspectCertificate];
@@ -76,17 +76,18 @@
 }
 
 - (void) inspectCertificate {
-    if (![hostAddress hasPrefix:@"http"]) {
-        hostAddress = [NSString stringWithFormat:@"https://%@", hostAddress];
+    NSString * lookupAddress = hostAddress;
+    if (![lookupAddress hasPrefix:@"http"]) {
+        lookupAddress = [NSString stringWithFormat:@"https://%@", lookupAddress];
     }
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.hostField endEditing:YES];
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     });
-    
+
     [self.chain
-     certificateChainFromURL:[NSURL URLWithString:hostAddress]
+     certificateChainFromURL:[NSURL URLWithString:lookupAddress]
      finished:^(NSError * _Nullable error, CKCertificateChain * _Nullable chain) {
          dispatch_async(dispatch_get_main_queue(), ^{
              [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -135,7 +136,7 @@
     return self.recentDomains.count > 0 ? 2 : 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
             return 1;
@@ -166,9 +167,9 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell;
-    
+
     switch (indexPath.section) {
         case 0: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"Input" forIndexPath:indexPath];
@@ -186,7 +187,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         self.recentDomains = [[RecentDomains sharedInstance] removeDomainAtIndex:indexPath.row];
         [self.tableView reloadData];
@@ -197,7 +198,7 @@
     if (indexPath.section != 1) {
         return;
     }
-    
+
     hostAddress = self.recentDomains[indexPath.row];
     [self inspectCertificate];
 }

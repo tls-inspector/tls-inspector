@@ -4,7 +4,7 @@
 
 @implementation UIDevice (PlatformString)
 
-- (NSString *)platform{
+- (NSString *) platform{
     size_t size;
     sysctlbyname("hw.machine", NULL, &size, NULL, 0);
     char *machine = malloc(size);
@@ -14,7 +14,7 @@
     return platform;
 }
 
-- (NSString *)PlatformString{
+- (NSString *) PlatformString{
     NSString *platform = [self platform];
 
     // Apple TV

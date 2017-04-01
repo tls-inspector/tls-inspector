@@ -26,7 +26,7 @@
     dismissedBlock = dismissed;
 }
 
-- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+- (void) productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
     if (viewController) {
         [self.viewController dismissViewControllerAnimated:YES completion:^{
             if (dismissedBlock) {
@@ -64,12 +64,12 @@
     }
 
     dismissedBlock = dismissed;
-    
+
     [viewController presentViewController:mailController animated:YES completion:nil];
     self.viewController = viewController;
 }
 
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:^{
         if (dismissedBlock) {
             dismissedBlock();

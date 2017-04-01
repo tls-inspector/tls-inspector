@@ -11,13 +11,13 @@
 @property (weak, nonatomic) IBOutlet UILabel * headerViewLabel;
 @property (weak, nonatomic) IBOutlet UIButton * headerButton;
 
-- (IBAction)headerButton:(id)sender;
+- (IBAction) headerButton:(id)sender;
 
 @end
 
 @implementation CertificateListTableViewController
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     [super viewDidLoad];
     uihelper = [UIHelper sharedInstance];
 
@@ -66,18 +66,18 @@
     return nil;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
             return currentChain.certificates.count;
@@ -87,7 +87,7 @@
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         CKCertificate * cert = [currentChain.certificates objectAtIndex:indexPath.row];
 
@@ -104,7 +104,7 @@
             cell.textLabel.text = [cert summary];
             cell.textLabel.textColor = [UIColor whiteColor];
         }
-        
+
         return cell;
     } else if (indexPath.section == 1) {
         TitleValueTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TitleValue"];
@@ -126,7 +126,7 @@
     return nil;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 1: {
             TitleValueTableViewCell * cell = (TitleValueTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -137,7 +137,7 @@
     return UITableViewAutomaticDimension;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     selectedCertificate = [currentChain.certificates objectAtIndex:indexPath.row];
     if (isRegular) {
         notify(RELOAD_CERT_NOTIFICATION);
@@ -147,7 +147,7 @@
     }
 }
 
-- (IBAction)headerButton:(id)sender {
+- (IBAction) headerButton:(id)sender {
     NSString * title, * body;
 
     switch (currentChain.trusted) {
@@ -177,7 +177,7 @@
      dismissed:nil];
 }
 
-- (IBAction)closeButton:(UIBarButtonItem *)sender {
+- (IBAction) closeButton:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

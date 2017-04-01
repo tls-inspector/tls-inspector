@@ -480,7 +480,7 @@
     return @"Unknown";
 }
 
-- (NSString *)protocolString {
+- (NSString *) protocolString {
     switch (self.protocol) {
         case kSSLProtocolUnknown:
             return @"Unknown";

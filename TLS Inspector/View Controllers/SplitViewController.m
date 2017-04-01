@@ -6,7 +6,7 @@
 
 @implementation SplitViewController
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
     self.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
@@ -17,7 +17,7 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 

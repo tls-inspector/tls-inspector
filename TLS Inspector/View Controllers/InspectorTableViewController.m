@@ -82,6 +82,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     if (selectedCertificate.revoked.isRevoked && selectedCertificate.revoked.date != nil) {
         [self.cells addObject:@{@"label": l(@"Revoked On"), @"value": [dateFormatter stringFromDate:selectedCertificate.revoked.date]}];
     }
+    if (selectedCertificate.isCA) {
+        [self.cells addObject:@{@"label": l(@"Certificate Authority"), @"value": l(@"Yes")}];
+    }
 
     NSString * evAuthority = [selectedCertificate extendedValidationAuthority];
     if (evAuthority) {
@@ -108,7 +111,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     [self.tableView reloadData];
 }
 
-- (void)actionButton:(UIBarButtonItem *)sender {
+- (void) actionButton:(UIBarButtonItem *)sender {
     [[UIHelper sharedInstance]
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
@@ -242,26 +245,44 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 # pragma mark -
 # pragma mark Table View
 
-- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL) tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+- (BOOL) tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     return action == @selector(copy:);
 }
 
-- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+- (void) tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     if (action == @selector(copy:)) {
         UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
         [[UIPasteboard generalPasteboard] setString:cell.detailTextLabel.text];
     }
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    NSInteger rows = [self tableView:tableView numberOfRowsInSection:section];
+    if (rows == 0) {
+        return CGFLOAT_MIN;
+    }
+
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    NSInteger rows = [self tableView:tableView numberOfRowsInSection:section];
+    if (rows == 0) {
+        return CGFLOAT_MIN;
+    }
+
+    return UITableViewAutomaticDimension;
+}
+
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return SectionEnd - SectionStart;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
             return selectedCertificate.subjectAlternativeNames.count > 0 ? 1 : 0;
@@ -277,7 +298,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     return 0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
             return selectedCertificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
@@ -299,7 +320,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
             UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
             UILabel * textLabel = [cell viewWithTag:LeftDetailTagTextLabel];
-            
+
             NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
             detailTextLabel.text = data[@"value"];
             textLabel.text = data[@"label"];
@@ -401,14 +422,14 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case Names: {
             TitleValueTableViewCell * cell = (TitleValueTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
             return [cell heightForCell];
         }
     }
-    
+
     return UITableViewAutomaticDimension;
 }
 
