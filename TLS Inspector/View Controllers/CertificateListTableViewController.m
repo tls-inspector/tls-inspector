@@ -28,6 +28,7 @@
             break;
         case CKCertificateChainTrustStatusUntrusted:
         case CKCertificateChainTrustStatusRevoked:
+        case CKCertificateChainTrustStatusSelfSigned:
             self.headerViewLabel.text = l(@"Untrusted Chain");
             self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
             break;
@@ -153,6 +154,10 @@
         case CKCertificateChainTrustStatusUntrusted:
             title = l(@"Untrusted Chain");
             body = l(@"untrusted_chain_description");
+            break;
+        case CKCertificateChainTrustStatusSelfSigned:
+            title = l(@"Untrusted Chain");
+            body = l(@"self_signed_chain_description");
             break;
         case CKCertificateChainTrustStatusTrusted:
             title = l(@"Trusted Chain");

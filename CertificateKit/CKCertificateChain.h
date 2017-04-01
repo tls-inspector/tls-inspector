@@ -42,6 +42,10 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
      The server certificate of this chain is revoked
      */
     CKCertificateChainTrustStatusRevoked,
+    /**
+     The server certificate is not issued by any CA and is not manually installed
+     */
+    CKCertificateChainTrustStatusSelfSigned,
 };
 
 /**

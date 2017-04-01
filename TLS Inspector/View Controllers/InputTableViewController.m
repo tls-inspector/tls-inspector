@@ -76,8 +76,6 @@
 }
 
 - (void) inspectCertificate {
-    [self saveRecent];
-
     if (![hostAddress hasPrefix:@"http"]) {
         hostAddress = [NSString stringWithFormat:@"https://%@", hostAddress];
     }
@@ -104,6 +102,7 @@
                   [self.navigationController popViewControllerAnimated:YES];
               }];
          } else {
+             [self saveRecent];
              dispatch_async(dispatch_get_main_queue(), ^{
                  currentChain = chain;
                  selectedCertificate = chain.certificates[0];

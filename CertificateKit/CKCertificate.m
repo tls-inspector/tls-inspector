@@ -301,6 +301,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
         @"2.16.840.1.114413.1.7.23.3":   @"Go Daddy",
         @"1.3.6.1.4.1.14777.6.1.1":      @"Izenpe",
         @"1.3.6.1.4.1.782.1.2.1.8.1":    @"Network Solutions",
+        @"1.3.6.1.4.1.22234.2.5.2.3.1":  @"OpenTrust/DocuSign France",
         @"1.3.6.1.4.1.8024.0.2.100.1.2": @"QuoVadis",
         @"1.2.392.200091.100.721.1":     @"SECOM Trust Systems",
         @"2.16.840.1.114414.1.7.23.3":   @"Starfield Technologies",

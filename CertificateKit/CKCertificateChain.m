@@ -144,7 +144,11 @@
     if (isTrustedChain) {
         chain.trusted = CKCertificateChainTrustStatusTrusted;
     } else {
-        chain.trusted = CKCertificateChainTrustStatusUntrusted;
+        if (chain.certificates.count == 1) {
+            chain.trusted = CKCertificateChainTrustStatusSelfSigned;
+        } else {
+            chain.trusted = CKCertificateChainTrustStatusUntrusted;
+        }
     }
 
     chain.cipher = ciphers[0];

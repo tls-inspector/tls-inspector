@@ -128,12 +128,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             [self addCertificateExpiryReminder:sender];
         } else if (itemIndex == 2) {
             NSString * domain = currentChain.domain;
-#ifdef EXTENSION
-            // The app extension doesn't provide the URL with a protocol.
+            // If the URL is lacking a protocol the host will be nil
             if (![domain hasPrefix:@"https://"]) {
                 domain = nstrcat(@"https://", domain);
             }
-#endif
+
             NSURL * url = [NSURL URLWithString:domain];
             [self openURL:nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host)];
         } else if (itemIndex == 3) {

@@ -670,10 +670,12 @@
 	<string>You can modify the reminder in the reminders app.</string>
 	<key>revoked_chain_description</key>
 	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
+	<key>self_signed_chain_description</key>
+	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
 	<key>trusted_chain_description</key>
 	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>untrusted_chain_description</key>
-	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
+	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{count} months</key>
