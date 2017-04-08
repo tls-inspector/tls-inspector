@@ -31,6 +31,7 @@
 typedef NS_ENUM(NSInteger, InspectorSection) {
     SectionStart,
     CertificateInformation,
+    Algorithms,
     Names,
     Fingerprints,
     SubjectAltNames,
@@ -68,15 +69,11 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     [selectedCertificate extendedValidation];
 
     self.title = selectedCertificate.summary;
-    NSString * signatureAlgorythm = l(nstrcat(@"CertAlgorithm::", [selectedCertificate signatureAlgorithm]));
-    NSString * keyAlgorythm = l(nstrcat(@"KeyAlgorithm::", [selectedCertificate keyAlgorithm]));
 
     self.cells = [NSMutableArray new];
     self.certErrors = [NSMutableArray new];
 
     [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [selectedCertificate issuer]}];
-    [self.cells addObject:@{@"label": l(@"Signature Algorithm"), @"value": signatureAlgorythm}];
-    [self.cells addObject:@{@"label": l(@"Key Algorithm"), @"value": keyAlgorythm}];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -95,10 +92,10 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     }
 
     if (![selectedCertificate validIssueDate]) {
-        [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];
+        [self.certErrors addObject:@{@"label": @"Invalid Date", @"error": l(@"Certificate is expired or not valid yet.")}];
     }
     if ([[selectedCertificate signatureAlgorithm] hasPrefix:@"sha1"]) {
-        [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
+        [self.certErrors addObject:@{@"label": @"Signature Algorithm", @"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
     }
 
     MD5Fingerprint = [selectedCertificate MD5Fingerprint];
@@ -265,6 +262,10 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     NSInteger rows = [self tableView:tableView numberOfRowsInSection:section];
+    if (section == 0) {
+        return UITableViewAutomaticDimension;
+    }
+
     if (rows == 0) {
         return CGFLOAT_MIN;
     }
@@ -291,6 +292,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             return selectedCertificate.subjectAlternativeNames.count > 0 ? 1 : 0;
         case CertificateInformation:
             return self.cells.count;
+        case Algorithms:
+            return 2;
         case Names:
             return names.count;
         case Fingerprints:
@@ -307,6 +310,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             return selectedCertificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
         case CertificateInformation:
             return l(@"Certificate Information");
+        case Algorithms:
+            return l(@"Algorithms");
         case Names:
             return l(@"Subject Names");
         case Fingerprints:
@@ -330,6 +335,16 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
+        } case Algorithms: {
+            NSString * title, * value;
+            if (indexPath.row == 0) {
+                title = l(@"Signature");
+                value = l(nstrcat(@"CertAlgorithm::", [selectedCertificate signatureAlgorithm]));
+            } else if (indexPath.row == 1) {
+                title = l(@"Key");
+                value = l(nstrcat(@"KeyAlgorithm::", [selectedCertificate keyAlgorithm]));
+            }
+            return [[TitleValueTableViewCell alloc] initWithTitle:title value:value];
         } case Names: {
             NSString * key = [nameKeys objectAtIndex:indexPath.row];
             NSString * value = [names objectForKey:key];
@@ -374,9 +389,10 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             cell.tag = CellTagSANS;
             return cell;
         } case CertificateErrors: {
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
-            cell.textLabel.text = data[@"error"];
+            TitleValueTableViewCell * cell = [[TitleValueTableViewCell alloc]
+                                              initWithTitle:l(data[@"label"]) value:l(data[@"error"])];
+            cell.userInteractionEnabled = NO;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;

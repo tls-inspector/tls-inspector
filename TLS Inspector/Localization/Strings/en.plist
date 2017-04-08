@@ -12,6 +12,8 @@
 	<string>Add Certificate Expiry Reminder</string>
 	<key>Algorithm</key>
 	<string>Algorithm</string>
+	<key>Algorithms</key>
+	<string>Algorithms</string>
 	<key>All feedback is appreciated!</key>
 	<string>All feedback is appreciated!</string>
 	<key>Both values matched.</key>
@@ -46,6 +48,8 @@
 	<string>RSA with SHA384</string>
 	<key>CertAlgorithm::sha512WithRSAEncryption</key>
 	<string>RSA with SHA512</string>
+	<key>Certificate Authority</key>
+	<string>Certificate Authority</string>
 	<key>Certificate Chain</key>
 	<string>Certificate Chain</string>
 	<key>Certificate Errors</key>
@@ -548,6 +552,8 @@
 	<string>Zimbabwe</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
+	<key>EV Authority</key>
+	<string>EV Authority</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
 	<string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
 	<key>Enter the value to verify</key>
@@ -564,8 +570,12 @@
 	<string>Insecure eDellRoot certificate.</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
+	<key>Invalid Date</key>
+	<string>Invalid Date</string>
 	<key>Issuer</key>
 	<string>Issuer</string>
+	<key>Key</key>
+	<string>Key</string>
 	<key>Key Algorithm</key>
 	<string>Key Algorithm</string>
 	<key>KeyAlgorithm::dsaEncryption</key>
@@ -606,6 +616,8 @@
 	<string>Share</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Signature</key>
+	<string>Signature</string>
 	<key>Signature Algorithm</key>
 	<string>Signature Algorithm</string>
 	<key>Subject Alt. Names</key>
@@ -666,6 +678,8 @@
 	<string>View on SSL Labs</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>What kind of feedback would you like to submit?</string>
+	<key>Yes</key>
+	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
 	<key>revoked_chain_description</key>
