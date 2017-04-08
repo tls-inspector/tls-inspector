@@ -37,6 +37,9 @@
     self.headerViewLabel.textColor = [UIColor whiteColor];
     self.headerButton.hidden = NO;
 
+    self.tableView.estimatedRowHeight = 85.0f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
 #ifdef EXTENSION
     [self.navigationItem
      setLeftBarButtonItem:[[UIBarButtonItem alloc]
@@ -107,34 +110,15 @@
 
         return cell;
     } else if (indexPath.section == 1) {
-        TitleValueTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TitleValue"];
-
         switch (indexPath.row) {
             case 0:
-                cell.titleLabel.text = l(@"Negotiated Cipher");
-                cell.valueLabel.text = currentChain.cipherString;
-                break;
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Cipher") value:currentChain.cipherString];
             case 1:
-                cell.titleLabel.text = l(@"Negotiated Version");
-                cell.valueLabel.text = currentChain.protocolString;
-                break;
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocolString];
         }
-
-        return cell;
     }
 
     return nil;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 1: {
-            TitleValueTableViewCell * cell = (TitleValueTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-            return [cell heightForCell];
-        }
-    }
-
-    return UITableViewAutomaticDimension;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

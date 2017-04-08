@@ -2,9 +2,9 @@
 
 @interface TitleValueTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (strong, nonatomic, readonly) UILabel * titleLabel;
+@property (strong, nonatomic, readonly) UILabel * valueLabel;
 
-- (CGFloat) heightForCell;
+- (id) initWithTitle:(NSString *)title value:(NSString *)value;
 
 @end

@@ -57,6 +57,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
 
+    self.tableView.estimatedRowHeight = 85.0f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
     [self loadCertificate];
     subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
 }
@@ -328,7 +331,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
         } case Names: {
-            TitleValueTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TitleValue"];
             NSString * key = [nameKeys objectAtIndex:indexPath.row];
             NSString * value = [names objectForKey:key];
             if ([key isEqualToString:@"C"]) {
@@ -336,9 +338,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                 value = l(langKey);
             }
 
-            cell.titleLabel.text = l(nstrcat(@"Subject::", key));
-            cell.valueLabel.text = value;
-            return cell;
+            return [[TitleValueTableViewCell alloc] initWithTitle:l(nstrcat(@"Subject::", key)) value:value];
         } case Fingerprints: {
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
             UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
@@ -420,17 +420,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             break;
         }
     }
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case Names: {
-            TitleValueTableViewCell * cell = (TitleValueTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-            return [cell heightForCell];
-        }
-    }
-
-    return UITableViewAutomaticDimension;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

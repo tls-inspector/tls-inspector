@@ -1,48 +1,73 @@
 #import "TitleValueTableViewCell.h"
 
+@interface TitleValueTableViewCell ()
+
+@property (strong, nonatomic, readwrite) UILabel * titleLabel;
+@property (strong, nonatomic, readwrite) UILabel * valueLabel;
+
+@end
+
 @implementation TitleValueTableViewCell
 
-- (CGFloat) heightForCell {
-    float base = 70.0f;
-    NSUInteger numberOfLines = [self lineCountForLabel:self.valueLabel];
-    if (numberOfLines > 1) {
-        return base + (10.0f * numberOfLines);
-    } else {
-        return base;
-    }
-}
+- (id) initWithTitle:(NSString *)title value:(NSString *)value {
+    self = [super initWithFrame:CGRectMake(0, 0, 375, 70)];
 
-- (NSUInteger) lineCountForLabel:(UILabel *)label {
-    NSTextStorage * textStorage = [[NSTextStorage alloc] initWithString:label.text attributes:@{NSFontAttributeName: label.font}];
-    
-    // The labels width appears to always be the full width of the superview (cell) when this method is called
-    // so we manually subtrack the padding of the label from the width
-    float padding;
-    if (isCompact) {
-        padding = 16.0f;
-    } else {
-        padding = 12.0f;
+    {
+        // Add title label
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(17, 11, 36, 17)];
+        self.titleLabel.textAlignment = NSTextAlignmentLeft;
+        self.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        self.titleLabel.textColor = [UIColor lightGrayColor];
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.titleLabel.text = title;
+        [self addSubview:self.titleLabel];
+
+        NSDictionary * views = @{ @"label": self.titleLabel };
+        [NSLayoutConstraint
+         activateConstraints:[NSLayoutConstraint
+                              constraintsWithVisualFormat:@"H:|-16-[label]"
+                              options:0
+                              metrics:nil
+                              views:views]];
+        [NSLayoutConstraint
+         activateConstraints:[NSLayoutConstraint
+                              constraintsWithVisualFormat:@"V:|-8-[label]"
+                              options:0
+                              metrics:nil
+                              views:views]];
     }
-    CGFloat width = label.frame.size.width - padding;
-    CGSize size = (CGSize){width, label.frame.size.height};
-    NSTextContainer * textContainer = [[NSTextContainer alloc] initWithSize:size];
-    textContainer.lineBreakMode = NSLineBreakByWordWrapping;
-    textContainer.maximumNumberOfLines = 0;
-    textContainer.lineFragmentPadding = 0;
-    
-    NSLayoutManager * layoutManager = [NSLayoutManager new];
-    layoutManager.textStorage = textStorage;
-    [layoutManager addTextContainer:textContainer];
-    
-    NSUInteger numberOfLines = 0, index = 0;
-    NSRange lineRange = NSMakeRange(0, 0);
-    
-    for (; index < layoutManager.numberOfGlyphs; numberOfLines++) {
-        [layoutManager lineFragmentRectForGlyphAtIndex:index effectiveRange:&lineRange];
-        index = NSMaxRange(lineRange);
+
+    {
+        // Add value label
+        self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(17, 36, 343, 21)];
+        self.valueLabel.textAlignment = NSTextAlignmentLeft;
+        self.valueLabel.textColor = [UIColor whiteColor];
+        self.valueLabel.numberOfLines = 0;
+        self.valueLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.valueLabel.text = value;
+        [self addSubview:self.valueLabel];
+
+        NSDictionary * views = @{ @"title": self.titleLabel, @"value": self.valueLabel };
+        [NSLayoutConstraint
+         activateConstraints:[NSLayoutConstraint
+                              constraintsWithVisualFormat:@"H:|-16-[value]-16-|"
+                              options:0
+                              metrics:nil
+                              views:views]];
+        [NSLayoutConstraint
+         activateConstraints:[NSLayoutConstraint
+                              constraintsWithVisualFormat:@"V:[title]-8-[value]-8-|"
+                              options:0
+                              metrics:nil
+                              views:views]];
     }
-    
-    return numberOfLines;
+
+    [self.titleLabel setNeedsLayout];
+    [self.valueLabel setNeedsLayout];
+    [self setNeedsLayout];
+
+    return self;
 }
 
 @end
