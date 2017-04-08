@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/ian/Development/TLS Inspector/TLS Inspector.xcodeproj">
+      location = "self:../TLS Inspector/Supporting Files/Frameworks/MBProgressHUD">
    </FileRef>
 </Workspace>

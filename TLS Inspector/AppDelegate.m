@@ -7,18 +7,25 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    // Set Default Options
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:RECENT_DOMAINS_KEY] == nil) {
-        [defaults setObject:@[] forKey:RECENT_DOMAINS_KEY];
-    }
-    if ([defaults objectForKey:SAVE_RECENT_DOMAINS] == nil) {
-        [defaults setBool:YES forKey:SAVE_RECENT_DOMAINS];
-    }
-    
+
+    // Style the navigation bar
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.141f green:0.204f blue:0.278f alpha:1.0f]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.114f green:0.631f blue:0.949f alpha:1.0f]];
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:0.141f green:0.204f blue:0.278f alpha:1.0f]];
+
+    // Style the tableview
+    [[UITableView appearance] setBackgroundColor:[UIColor colorWithRed:0.196f green:0.27f blue:0.329f alpha:1.0f]];
+    [[UITableView appearance] setSeparatorColor:[UIColor colorWithRed:0.078f green:0.114f blue:0.149f alpha:1.0f]];
+
+    // Style the tableview cells
+    [[UITableViewCell appearance] setBackgroundColor:[UIColor colorWithRed:0.106f green:0.157f blue:0.212f alpha:1.0f]];
+    UIView *selectionView = [UIView new];
+    selectionView.backgroundColor = [UIColor colorWithRed:0.08 green:0.12 blue:0.16 alpha:1.0];
+    [[UITableViewCell appearance] setSelectedBackgroundView:selectionView];
+
+    [AppState currentState];
     return YES;
 }
 
@@ -31,7 +38,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:INSPECT_NOTIFICATION object:@{INSPECT_NOTIFICATION_HOST_KEY: host}];
         } else if (hostComponents.count == 2) {
             NSString * indexString = hostComponents[1];
-            // Certificate index can only be integer (realistically between 0 and CHCertificate.CERTIFICATE_CHAIN_MAXIMUM)
+            // Certificate index can only be integer (realistically between 0 and CKCertificate.CERTIFICATE_CHAIN_MAXIMUM)
             if ([indexString rangeOfString:@"^[0-9]+$" options:NSRegularExpressionSearch].location == NSNotFound) {
                 NSLog(@"Invalid certificate index %@", indexString);
                 return NO;
@@ -50,25 +57,25 @@
     return NO;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
+- (void) applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
+- (void) applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
+- (void) applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
+- (void) applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
+- (void) applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

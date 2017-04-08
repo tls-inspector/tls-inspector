@@ -1,0 +1,46 @@
+#ifndef CertInspector_Prefix_Header_pch
+#define CertInspector_Prefix_Header_pch
+
+#import "lang.h"
+#import "defines.pch"
+#import "AppState.h"
+@import CertificateKit;
+#import "MBProgressHUD.h"
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+#define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
+#define SAVE_RECENT_DOMAINS @"SAVE_RECENT_DOMAINS"
+#define INSPECT_NOTIFICATION @"INSPECT_THIS_WEBSITE"
+#define INSPECT_NOTIFICATION_HOST_KEY @"host"
+#define INSPECT_NOTIFICATION_INDEX_KEY @"index"
+#define RELOAD_CERT_NOTIFICATION @"ReloadCertDetails"
+
+#if DEBUG
+#define d(s, ...) NSLog(s, ##__VA_ARGS__)
+#else
+#define d(s, ...) ;
+#endif
+
+#define l(keyString) [lang key:keyString]
+#define lv(keyString, argsArray) [lang key:keyString args:argsArray]
+
+#define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
+#define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
+
+#define open_url(url) [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]]
+
+#define notify(nname) [[NSNotificationCenter defaultCenter] postNotificationName:nname object:nil]
+#define subscribe(sel, nname) [[NSNotificationCenter defaultCenter] addObserver:self selector:sel name:nname object:nil]
+
+#define appState [AppState currentState]
+#define currentChain appState.certificateChain
+#define selectedCertificate appState.selectedCertificate
+#define isCompact appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact
+#define isRegular appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
+
+#endif

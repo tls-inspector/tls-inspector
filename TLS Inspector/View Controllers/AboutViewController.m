@@ -1,13 +1,13 @@
 #import "AboutViewController.h"
 #import "RecentDomains.h"
-@import GTAppLinks;
+#import "GTAppLinks.h"
 
 @interface AboutViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *opensslVersionLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *recentSwitch;
-- (IBAction)recentSwitch:(UISwitch *)sender;
+- (IBAction) recentSwitch:(UISwitch *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) GTAppLinks * appLinks;
 
@@ -15,31 +15,23 @@
 
 @implementation AboutViewController
 
-static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/tls-Inspector/";
+static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/TLS-Inspector/";
 static NSString * PROJECT_URL = @"https://tlsinspector.com/";
-static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/tls-inspector/blob/master/CONTRIBUTE.md";
+static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/TLS-inspector/blob/master/CONTRIBUTE.md";
 static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/beta.html";
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     [super viewDidLoad];
     [self.recentSwitch setOn:[RecentDomains sharedInstance].saveRecentDomains];
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
-    NSArray<NSString *> * alphabet = @[
-                                       @"a", @"b", @"c", @"d", @"e", @"f", @"g", @"h", @"i",
-                                       @"j", @"k", @"l", @"m", @"n", @"o", @"p", @"q", @"r",
-                                       @"s", @"t", @"u", @"v", @"w", @"x", @"y", @"z"
-                                       ];
-    NSMutableArray<NSString *> * components = [NSMutableArray arrayWithArray:[OPENSSL_VERSION componentsSeparatedByString:@"."]];
-    NSString * letter = [alphabet objectAtIndex:[[components lastObject] integerValue]];
-    [components removeLastObject];
 
-    self.opensslVersionLabel.text = [NSString stringWithFormat:@"%@%@", [components componentsJoinedByString:@"."], letter];
+    self.opensslVersionLabel.text = [CKCertificate openSSLVersion];
     self.helper = [UIHelper sharedInstance];
     self.appLinks = [GTAppLinks new];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
@@ -92,7 +84,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     }
 }
 
-- (IBAction)recentSwitch:(UISwitch *)sender {
+- (IBAction) recentSwitch:(UISwitch *)sender {
     [RecentDomains sharedInstance].saveRecentDomains = sender.isOn;
 }
 
