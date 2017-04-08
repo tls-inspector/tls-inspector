@@ -94,14 +94,28 @@
          });
 
          if (error) {
+             NSString * description;
+             switch (error.code) {
+                case 61: // Still trying to find the enum def for this one
+                     description = l(@"Connection refused.");
+                     break;
+                case kCFHostErrorUnknown:
+                case kCFHostErrorHostNotFound:
+                     description = l(@"Host was not found or invalid.");
+                     break;
+                case errSSLInternal:
+                     description = l(@"Internal error.");
+                     break;
+                default:
+                     description = error.localizedDescription;
+                     break;
+             }
              [[UIHelper sharedInstance]
               presentAlertInViewController:self
-              title:l(@"Could not get certificates")
-              body:error.localizedDescription
+              title:l(@"An error occurred")
+              body:description
               dismissButtonTitle:l(@"Dismiss")
-              dismissed:^(NSInteger buttonIndex) {
-                  [self.navigationController popViewControllerAnimated:YES];
-              }];
+              dismissed:nil];
          } else {
              [self saveRecent];
              dispatch_async(dispatch_get_main_queue(), ^{

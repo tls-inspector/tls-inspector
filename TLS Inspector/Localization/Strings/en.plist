@@ -16,6 +16,8 @@
 	<string>Algorithms</string>
 	<key>All feedback is appreciated!</key>
 	<string>All feedback is appreciated!</string>
+	<key>An error occurred</key>
+	<string>An error occurred</string>
 	<key>Both values matched.</key>
 	<string>Both values matched.</string>
 	<key>Build</key>
@@ -64,6 +66,8 @@
 	<string>Certificates</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
+	<key>Connection refused.</key>
+	<string>Connection refused.</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
 	<key>Contribute on GitHub</key>
@@ -562,6 +566,8 @@
 	<string>FQDN or IP Address</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
+	<key>Host was not found or invalid.</key>
+	<string>Host was not found or invalid.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>Insecure Superfish (Lenovo) certificate.</key>
@@ -570,6 +576,8 @@
 	<string>Insecure eDellRoot certificate.</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
+	<key>Internal error.</key>
+	<string>Internal error.</string>
 	<key>Invalid Date</key>
 	<string>Invalid Date</string>
 	<key>Issuer</key>
