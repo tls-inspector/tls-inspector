@@ -66,6 +66,7 @@
     [self.titleLabel setNeedsLayout];
     [self.valueLabel setNeedsLayout];
     [self setNeedsLayout];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return self;
 }

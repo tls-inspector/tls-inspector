@@ -95,7 +95,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
         [self.certErrors addObject:@{@"label": @"Invalid Date", @"error": l(@"Certificate is expired or not valid yet.")}];
     }
     if ([[selectedCertificate signatureAlgorithm] hasPrefix:@"sha1"]) {
-        [self.certErrors addObject:@{@"label": @"Signature Algorithm", @"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
+        if (currentChain.certificates.count > 1 && !selectedCertificate.isCA) {
+            [self.certErrors addObject:@{@"label": @"Signature Algorithm", @"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
+        }
     }
 
     MD5Fingerprint = [selectedCertificate MD5Fingerprint];
@@ -256,7 +258,13 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 - (void) tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     if (action == @selector(copy:)) {
         UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:cell.detailTextLabel.text];
+        NSString * data;
+        if ([cell isKindOfClass:[TitleValueTableViewCell class]]) {
+            data = ((TitleValueTableViewCell *)cell).valueLabel.text;
+        } else {
+            data = cell.detailTextLabel.text;
+        }
+        [[UIPasteboard generalPasteboard] setString:data];
     }
 }
 

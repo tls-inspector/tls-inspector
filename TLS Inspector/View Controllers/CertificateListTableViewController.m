@@ -122,12 +122,29 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    selectedCertificate = [currentChain.certificates objectAtIndex:indexPath.row];
-    if (isRegular) {
-        notify(RELOAD_CERT_NOTIFICATION);
-    } else {
-        UIViewController * inspectController = [self.storyboard instantiateViewControllerWithIdentifier:@"Inspector"];
-        [self.navigationController pushViewController:inspectController animated:YES];
+    if (indexPath.section == 0) {
+        selectedCertificate = [currentChain.certificates objectAtIndex:indexPath.row];
+        if (isRegular) {
+            notify(RELOAD_CERT_NOTIFICATION);
+        } else {
+            UIViewController * inspectController = [self.storyboard instantiateViewControllerWithIdentifier:@"Inspector"];
+            [self.navigationController pushViewController:inspectController animated:YES];
+        }
+    }
+}
+
+- (BOOL) tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    return action == @selector(copy:);
+}
+
+- (BOOL) tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section == 1;
+}
+
+- (void) tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if (action == @selector(copy:)) {
+        TitleValueTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        [[UIPasteboard generalPasteboard] setString:cell.valueLabel.text];
     }
 }
 
