@@ -37,7 +37,7 @@
 - (void) tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     if (action == @selector(copy:)) {
         UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:cell.detailTextLabel.text];
+        [[UIPasteboard generalPasteboard] setString:cell.textLabel.text];
     }
 }
 
