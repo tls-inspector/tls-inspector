@@ -67,6 +67,7 @@
     [self.valueLabel setNeedsLayout];
     [self setNeedsLayout];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = [UIColor colorWithRed:0.106 green:0.157 blue:0.212 alpha:1.0];
 
     return self;
 }
