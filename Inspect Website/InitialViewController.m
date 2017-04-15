@@ -15,6 +15,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
 
+    [[AppState currentState] setAppearance];
     [AppState currentState].extensionContext = self.extensionContext;
 
     self.chainManager = [[CKCertificateChain alloc] init];

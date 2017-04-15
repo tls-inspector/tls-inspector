@@ -25,12 +25,14 @@
         case CKCertificateChainTrustStatusTrusted:
             self.headerViewLabel.text = l(@"Trusted Chain");
             self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+            self.headerButton.tintColor = [UIColor whiteColor];
             break;
         case CKCertificateChainTrustStatusUntrusted:
         case CKCertificateChainTrustStatusRevoked:
         case CKCertificateChainTrustStatusSelfSigned:
             self.headerViewLabel.text = l(@"Untrusted Chain");
             self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+            self.headerButton.tintColor = [UIColor whiteColor];
             break;
     }
 
@@ -48,7 +50,12 @@
                            action:@selector(dismissView:)]];
 #endif
     if (isRegular) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+        [self.tableView
+         selectRowAtIndexPath:[NSIndexPath
+                               indexPathForRow:0
+                               inSection:0]
+         animated:NO
+         scrollPosition:UITableViewScrollPositionTop];
     }
 }
 

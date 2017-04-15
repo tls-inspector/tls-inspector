@@ -15,4 +15,6 @@
 @property (nullable, nonatomic, strong) NSExtensionContext * extensionContext;
 #endif
 
+- (void) setAppearance;
+
 @end
