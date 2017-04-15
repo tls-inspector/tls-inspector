@@ -110,9 +110,10 @@
                 finishedBlock(crlError);
             }
             X509_CRL_free(crl);
+            NSLog(@"Finished checking CRLs");
+            return;
         }
 
-        NSLog(@"Finished checking CRLs");
         finishedBlock(nil);
     }
 }
