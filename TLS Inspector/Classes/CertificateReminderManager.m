@@ -22,13 +22,11 @@
         formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
         formatter.dateFormat = @"MMM d, yyyy";
         
-        NSString * host = [NSURL URLWithString:domain].host;
-        
         EKReminder * reminder = [EKReminder reminderWithEventStore:store];
-        
-        reminder.title = lv(@"Renew Certificate for {domain}", @[host]);
-        reminder.notes = [lang key:@"The certificate for {domain} expires on {date}" args:@[host, [formatter stringFromDate:[cert notAfter]]]];
-        reminder.URL = [NSURL URLWithString:[NSString stringWithFormat:@"certinspector://%@", domain]];
+
+        reminder.title = lv(@"Renew Certificate for {domain}", @[currentChain.domain]);
+        reminder.notes = [lang key:@"The certificate for {domain} expires on {date}" args:@[currentChain.domain, [formatter stringFromDate:[cert notAfter]]]];
+        reminder.URL = [NSURL URLWithString:[NSString stringWithFormat:@"certinspector://%@", currentChain.domain]];
         
         NSDate * alarmDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
                                                                       value:-days
