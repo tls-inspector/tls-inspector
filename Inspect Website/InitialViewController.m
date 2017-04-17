@@ -32,15 +32,19 @@
                         [self unsupportedURL];
                     }
                 }];
+                return;
             } else if (urlString)  {
                 if ([urlString hasPrefix:@"https://"]){
                     [self loadURL:[NSURL URLWithString:[urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
                 } else {
                     [self unsupportedURL];
                 }
+                return;
             }
         }
     }
+
+    [self closeExtension];
 }
 
 - (void) loadURL:(NSURL *)url {
@@ -60,7 +64,7 @@
              body:error.localizedDescription
              dismissButtonTitle:l(@"Dismiss")
              dismissed:^(NSInteger buttonIndex) {
-                 [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+                 [self closeExtension];
              }];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -81,7 +85,7 @@
      body:l(@"Only HTTPS sites can be inspected")
      dismissButtonTitle:l(@"Dismiss")
      dismissed:^(NSInteger buttonIndex) {
-         [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+         [self closeExtension];
      }];
 }
 
@@ -89,4 +93,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void) closeExtension {
+    [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
+}
+
+- (IBAction)closeButton:(id)sender {
+    [self closeExtension];
+}
 @end
