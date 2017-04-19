@@ -340,9 +340,13 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
 - (BOOL) isCA {
     BASIC_CONSTRAINTS * constraints = X509_get_ext_d2i(self.certificate, NID_basic_constraints, NULL, NULL);
-    BOOL ret = constraints->ca > 0;
-    BASIC_CONSTRAINTS_free(constraints);
-    return ret;
+    if (constraints) {
+        BOOL ret = constraints->ca > 0;
+        BASIC_CONSTRAINTS_free(constraints);
+        return ret;
+    } else {
+        return NO;
+    }
 }
 
 - (distributionPoints *) crlDistributionPoints {

@@ -119,7 +119,7 @@
     } else if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0:
-                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Cipher") value:currentChain.cipherString];
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Cipher Suite") value:currentChain.cipherString];
             case 1:
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocolString];
         }

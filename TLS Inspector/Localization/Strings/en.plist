@@ -594,8 +594,8 @@
 	<string>RSA</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
-	<key>Negotiated Cipher</key>
-	<string>Negotiated Cipher</string>
+	<key>Negotiated Cipher Suite</key>
+	<string>Negotiated Cipher Suite</string>
 	<key>Negotiated Version</key>
 	<string>Negotiated Version</string>
 	<key>Not Verified</key>
