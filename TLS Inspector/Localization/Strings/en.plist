@@ -12,8 +12,12 @@
 	<string>Add Certificate Expiry Reminder</string>
 	<key>Algorithm</key>
 	<string>Algorithm</string>
+	<key>Algorithms</key>
+	<string>Algorithms</string>
 	<key>All feedback is appreciated!</key>
 	<string>All feedback is appreciated!</string>
+	<key>An error occurred</key>
+	<string>An error occurred</string>
 	<key>Both values matched.</key>
 	<string>Both values matched.</string>
 	<key>Build</key>
@@ -46,6 +50,8 @@
 	<string>RSA with SHA384</string>
 	<key>CertAlgorithm::sha512WithRSAEncryption</key>
 	<string>RSA with SHA512</string>
+	<key>Certificate Authority</key>
+	<string>Certificate Authority</string>
 	<key>Certificate Chain</key>
 	<string>Certificate Chain</string>
 	<key>Certificate Errors</key>
@@ -58,6 +64,10 @@
 	<string>Certificate uses insecure SHA1 algorithm.</string>
 	<key>Certificates</key>
 	<string>Certificates</string>
+	<key>Connection Information</key>
+	<string>Connection Information</string>
+	<key>Connection refused.</key>
+	<string>Connection refused.</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
 	<key>Contribute on GitHub</key>
@@ -546,6 +556,8 @@
 	<string>Zimbabwe</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
+	<key>EV Authority</key>
+	<string>EV Authority</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
 	<string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
 	<key>Enter the value to verify</key>
@@ -554,6 +566,8 @@
 	<string>FQDN or IP Address</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
+	<key>Host was not found or invalid.</key>
+	<string>Host was not found or invalid.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>Insecure Superfish (Lenovo) certificate.</key>
@@ -562,10 +576,28 @@
 	<string>Insecure eDellRoot certificate.</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
+	<key>Internal error.</key>
+	<string>Internal error.</string>
+	<key>Invalid Date</key>
+	<string>Invalid Date</string>
 	<key>Issuer</key>
 	<string>Issuer</string>
+	<key>Key</key>
+	<string>Key</string>
+	<key>Key Algorithm</key>
+	<string>Key Algorithm</string>
+	<key>KeyAlgorithm::dsaEncryption</key>
+	<string>DSA</string>
+	<key>KeyAlgorithm::id-ecPublicKey</key>
+	<string>ECDSA</string>
+	<key>KeyAlgorithm::rsaEncryption</key>
+	<string>RSA</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
+	<key>Negotiated Cipher Suite</key>
+	<string>Negotiated Cipher Suite</string>
+	<key>Negotiated Version</key>
+	<string>Negotiated Version</string>
 	<key>Not Verified</key>
 	<string>Not Verified</string>
 	<key>Notification Date</key>
@@ -584,12 +616,18 @@
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Report Issue on GitHub</string>
+	<key>Revoked On</key>
+	<string>Revoked On</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
 	<key>Share</key>
 	<string>Share</string>
-	<key>Share Public Key</key>
-	<string>Share Public Key</string>
+	<key>Share Certificate</key>
+	<string>Share Certificate</string>
+	<key>Signature</key>
+	<string>Signature</string>
+	<key>Signature Algorithm</key>
+	<string>Signature Algorithm</string>
 	<key>Subject Alt. Names</key>
 	<string>Subject Alt. Names</string>
 	<key>Subject Alternative Names</key>
@@ -648,17 +686,25 @@
 	<string>View on SSL Labs</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>What kind of feedback would you like to submit?</string>
+	<key>Yes</key>
+	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
+	<key>revoked_chain_description</key>
+	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
+	<key>self_signed_chain_description</key>
+	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
 	<key>trusted_chain_description</key>
-	<string>The end certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
+	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>untrusted_chain_description</key>
-	<string>The end certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
+	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{count} months</key>
 	<string>{0} months</string>
 	<key>{count} weeks</key>
 	<string>{0} weeks</string>
+	<key>{summary} (Revoked)</key>
+	<string>{0} (Revoked)</string>
 </dict>
 </plist>

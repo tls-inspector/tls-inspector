@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
 
-@interface InitialViewController : UINavigationController
+@interface InitialViewController : UIViewController
 
 @end

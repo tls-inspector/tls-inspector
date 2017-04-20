@@ -1,20 +1,18 @@
 #import "InspectorTableViewController.h"
-#import "CHCertificate.h"
 #import "ValueViewController.h"
 #import "UIHelper.h"
 #import "InspectorListTableViewController.h"
 #import "CertificateReminderManager.h"
 #import "DNSResolver.h"
-
-@import MBProgressHUD;
+#import "MBProgressHUD.h"
+#import "TitleValueTableViewCell.h"
+@import SafariServices;
 
 @interface InspectorTableViewController()
 
-@property (strong, nonatomic) CHCertificate  * certificate;
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
 @property (strong, nonatomic) UIHelper       * helper;
-@property (strong, nonatomic) NSString       * domain;
 
 @end
 
@@ -33,6 +31,7 @@
 typedef NS_ENUM(NSInteger, InspectorSection) {
     SectionStart,
     CertificateInformation,
+    Algorithms,
     Names,
     Fingerprints,
     SubjectAltNames,
@@ -52,94 +51,121 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.title = self.certificate.summary;
-    self.cells = [NSMutableArray new];
-    self.certErrors = [NSMutableArray new];
+
     self.helper = [UIHelper sharedInstance];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    
-    NSString * algorythm = l(nstrcat(@"CertAlgorithm::", [self.certificate algorithm]));
-    
-    [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [self.certificate issuer]}];
-    [self.cells addObject:@{@"label": l(@"Algorithm"), @"value": algorythm}];
-    [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[self.certificate notAfter]]}];
-    [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[self.certificate notBefore]]}];
-
-    if (![self.certificate validIssueDate]) {
-        [self.certErrors addObject:@{@"error": l(@"Certificate is expired or not valid yet.")}];
-    }
-    if ([[self.certificate algorithm] hasPrefix:@"sha1"]) {
-        [self.certErrors addObject:@{@"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
-    }
-
-    MD5Fingerprint = [self.certificate MD5Fingerprint];
-    SHA1Fingerprint = [self.certificate SHA1Fingerprint];
-    SHA256Fingerprint = [self.certificate SHA256Fingerprint];
-    serialNumber = [self.certificate serialNumber];
-    
-    [self.certificate subjectAlternativeNames];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
-    
-    names = [self.certificate names];
-    nameKeys = [names allKeys];
+
+    self.tableView.estimatedRowHeight = 85.0f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    [self loadCertificate];
+    subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
 }
 
-- (void)actionButton:(UIBarButtonItem *)sender {
-#ifdef MAIN_APP
-    NSArray<NSString *> * items = @[
-                                    l(@"Share Public Key"),
-                                    l(@"Add Certificate Expiry Reminder"),
-                                    l(@"View on SSL Labs"),
-                                    l(@"Search on Shodan")
-                                    ];
-#else
-    NSArray<NSString *> * items = @[
-                                    l(@"Share Public Key"),
-                                    l(@"Add Certificate Expiry Reminder")
-                                    ];
-#endif
+- (void) loadCertificate {
+    [selectedCertificate extendedValidation];
+
+    self.title = selectedCertificate.summary;
+
+    self.cells = [NSMutableArray new];
+    self.certErrors = [NSMutableArray new];
+
+    [self.cells addObject:@{@"label": l(@"Issuer"), @"value": [selectedCertificate issuer]}];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.cells addObject:@{@"label": l(@"Valid To"), @"value": [dateFormatter stringFromDate:[selectedCertificate notAfter]]}];
+    [self.cells addObject:@{@"label": l(@"Valid From"), @"value": [dateFormatter stringFromDate:[selectedCertificate notBefore]]}];
+    if (selectedCertificate.revoked.isRevoked && selectedCertificate.revoked.date != nil) {
+        [self.cells addObject:@{@"label": l(@"Revoked On"), @"value": [dateFormatter stringFromDate:selectedCertificate.revoked.date]}];
+    }
+    if (selectedCertificate.isCA) {
+        [self.cells addObject:@{@"label": l(@"Certificate Authority"), @"value": l(@"Yes")}];
+    }
+
+    NSString * evAuthority = [selectedCertificate extendedValidationAuthority];
+    if (evAuthority) {
+        [self.cells addObject:@{@"label": l(@"EV Authority"), @"value": evAuthority}];
+    }
+
+    if (![selectedCertificate validIssueDate]) {
+        [self.certErrors addObject:@{@"label": @"Invalid Date", @"error": l(@"Certificate is expired or not valid yet.")}];
+    }
+    if ([[selectedCertificate signatureAlgorithm] hasPrefix:@"sha1"]) {
+        if (currentChain.certificates.count > 1 && !selectedCertificate.isCA) {
+            [self.certErrors addObject:@{@"label": @"Signature Algorithm", @"error": l(@"Certificate uses insecure SHA1 algorithm.")}];
+        }
+    }
+
+    MD5Fingerprint = [selectedCertificate MD5Fingerprint];
+    SHA1Fingerprint = [selectedCertificate SHA1Fingerprint];
+    SHA256Fingerprint = [selectedCertificate SHA256Fingerprint];
+    serialNumber = [selectedCertificate serialNumber];
+
+    [selectedCertificate subjectAlternativeNames];
+
+    names = [selectedCertificate names];
+    nameKeys = [names allKeys];
+
+    [self.tableView reloadData];
+}
+
+- (void) actionButton:(UIBarButtonItem *)sender {
     [[UIHelper sharedInstance]
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
      title:self.title
      subtitle:nil
      cancelButtonTitle:[lang key:@"Cancel"]
-     items:items
+     items:@[
+             l(@"Share Certificate"),
+             l(@"Add Certificate Expiry Reminder"),
+             l(@"View on SSL Labs"),
+             l(@"Search on Shodan")
+             ]
      dismissed:^(NSInteger itemIndex) {
         if (itemIndex == 0) {
             [self sharePublicKey:sender];
         } else if (itemIndex == 1) {
             [self addCertificateExpiryReminder:sender];
-#ifdef MAIN_APP
         } else if (itemIndex == 2) {
-            NSURL * url = [NSURL URLWithString:self.domain];
-            open_url(nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host));
+            NSString * domain = currentChain.domain;
+            // If the URL is lacking a protocol the host will be nil
+            if (![domain hasPrefix:@"https://"]) {
+                domain = nstrcat(@"https://", domain);
+            }
+
+            NSURL * url = [NSURL URLWithString:domain];
+            [self openURL:nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host)];
         } else if (itemIndex == 3) {
-            NSURL * url = [NSURL URLWithString:self.domain];
             NSError * dnsError;
-            NSArray<NSString *> * addresses = [DNSResolver resolveHostname:url.host error:&dnsError];
+            NSArray<NSString *> * addresses = [DNSResolver resolveHostname:currentChain.domain error:&dnsError];
             if (addresses && addresses.count >= 1) {
-                open_url(nstrcat(@"https://www.shodan.io/host/", addresses[0]));
+                [self openURL:nstrcat(@"https://www.shodan.io/host/", addresses[0])];
             } else if (dnsError) {
                 [self.helper presentErrorInViewController:self error:dnsError dismissed:nil];
             }
-#endif
         }
      }];
 }
 
+- (void) openURL:(NSString *)url {
+    SFSafariViewController * safariViewController = [[SFSafariViewController alloc]
+                                                     initWithURL:[NSURL URLWithString:url]];
+    [self presentViewController:safariViewController animated:YES completion:nil];
+}
+
 - (void) sharePublicKey:(UIBarButtonItem *)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSData * pem = [self.certificate publicKeyAsPEM];
+    NSData * pem = [selectedCertificate publicKeyAsPEM];
     if (pem) {
-        NSString * fileName = format(@"/%@.pem", self.certificate.serialNumber);
+        NSString * fileName = format(@"/%@.pem", selectedCertificate.serialNumber);
         NSURL * fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
         [pem writeToURL:fileURL atomically:YES];
-        
+
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
@@ -152,8 +178,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     } else {
         [self.helper
          presentAlertInViewController:self
-         title:l(@"Unable to share public key")
-         body:l(@"We were unable to export the public key in PEM format.")
+         title:l(@"Unable to export certificate")
+         body:l(@"We were unable to export the certificate in PEM format.")
          dismissButtonTitle:l(@"Dismiss")
          dismissed:^(NSInteger buttonIndex) {
              [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -176,7 +202,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
      dismissed:^(NSInteger itemIndex) {
          if (itemIndex != -1) {
              NSUInteger days = 0;
-             
+
              switch (itemIndex) {
                  case 0:
                      days = 14;
@@ -193,10 +219,10 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                  default:
                      break;
              }
-             
+
              [[CertificateReminderManager new]
-              addReminderForCertificate:self.certificate
-              forDomain:self.domain
+              addReminderForCertificate:selectedCertificate
+              forDomain:currentChain.domain
               daysBeforeExpires:days
               completed:^(NSError *error, BOOL success) {
                   if (success) {
@@ -220,32 +246,62 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 
 # pragma mark -
 # pragma mark Table View
-    
-- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (BOOL) tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+- (BOOL) tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     return action == @selector(copy:);
 }
 
-- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+- (void) tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     if (action == @selector(copy:)) {
         UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:cell.detailTextLabel.text];
+        NSString * data;
+        if ([cell isKindOfClass:[TitleValueTableViewCell class]]) {
+            data = ((TitleValueTableViewCell *)cell).valueLabel.text;
+        } else {
+            data = cell.detailTextLabel.text;
+        }
+        [[UIPasteboard generalPasteboard] setString:data];
     }
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    NSInteger rows = [self tableView:tableView numberOfRowsInSection:section];
+    if (section == 0) {
+        return UITableViewAutomaticDimension;
+    }
+
+    if (rows == 0) {
+        return CGFLOAT_MIN;
+    }
+
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    NSInteger rows = [self tableView:tableView numberOfRowsInSection:section];
+    if (rows == 0) {
+        return CGFLOAT_MIN;
+    }
+
+    return UITableViewAutomaticDimension;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return SectionEnd - SectionStart;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
-            return self.certificate.subjectAlternativeNames.count > 0 ? 1 : 0;
+            return selectedCertificate.subjectAlternativeNames.count > 0 ? 1 : 0;
         case CertificateInformation:
             return self.cells.count;
+        case Algorithms:
+            return 2;
         case Names:
             return names.count;
         case Fingerprints:
@@ -256,12 +312,14 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     return 0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case SubjectAltNames:
-            return self.certificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
+            return selectedCertificate.subjectAlternativeNames.count > 0 ? l(@"Subject Alternative Names") : nil;
         case CertificateInformation:
             return l(@"Certificate Information");
+        case Algorithms:
+            return l(@"Algorithms");
         case Names:
             return l(@"Subject Names");
         case Fingerprints:
@@ -273,25 +331,29 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell;
-    
     switch (indexPath.section) {
         case CertificateInformation: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
             UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
             UILabel * textLabel = [cell viewWithTag:LeftDetailTagTextLabel];
-            
+
             NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
             detailTextLabel.text = data[@"value"];
             textLabel.text = data[@"label"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
-            break;
+            return cell;
+        } case Algorithms: {
+            NSString * title, * value;
+            if (indexPath.row == 0) {
+                title = l(@"Signature");
+                value = l(nstrcat(@"CertAlgorithm::", [selectedCertificate signatureAlgorithm]));
+            } else if (indexPath.row == 1) {
+                title = l(@"Key");
+                value = l(nstrcat(@"KeyAlgorithm::", [selectedCertificate keyAlgorithm]));
+            }
+            return [[TitleValueTableViewCell alloc] initWithTitle:title value:value];
         } case Names: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
-            UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
-            UILabel * textLabel = [cell viewWithTag:LeftDetailTagTextLabel];
-
             NSString * key = [nameKeys objectAtIndex:indexPath.row];
             NSString * value = [names objectForKey:key];
             if ([key isEqualToString:@"C"]) {
@@ -299,13 +361,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                 value = l(langKey);
             }
 
-            detailTextLabel.text = value;
-            textLabel.text = l(nstrcat(@"Subject::", key));
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            break;
+            return [[TitleValueTableViewCell alloc] initWithTitle:l(nstrcat(@"Subject::", key)) value:value];
         } case Fingerprints: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LeftDetail"];
             UILabel * detailTextLabel = [cell viewWithTag:LeftDetailTagDetailTextLabel];
             UILabel * textLabel = [cell viewWithTag:LeftDetailTagTextLabel];
 
@@ -330,28 +388,31 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagValue;
-            break;
+            return cell;
         } case SubjectAltNames: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             cell.textLabel.text = l(@"View all alternate names");
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagSANS;
-            break;
+            return cell;
         } case CertificateErrors: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             NSDictionary * data = [self.certErrors objectAtIndex:indexPath.row];
-            cell.textLabel.text = data[@"error"];
+            TitleValueTableViewCell * cell = [[TitleValueTableViewCell alloc]
+                                              initWithTitle:l(data[@"label"]) value:l(data[@"error"])];
+            cell.userInteractionEnabled = NO;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
-            break;
+            return cell;
         } default: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
+            return cell;
         }
     }
-    return cell;
+
+    return nil;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -389,13 +450,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     if ([segue.identifier isEqualToString:@"ShowValue"]) {
         [segue.destinationViewController loadValue:valueToInspect title:titleForValue];
     } else if ([segue.identifier isEqualToString:@"ShowList"]) {
-        [(InspectorListTableViewController *)segue.destinationViewController setList:self.certificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
+        [(InspectorListTableViewController *)segue.destinationViewController setList:selectedCertificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
     }
-}
-
-- (void) loadCertificate:(CHCertificate *)certificate forDomain:(NSString *)domain {
-    _certificate = certificate;
-    _domain = domain;
 }
 
 @end

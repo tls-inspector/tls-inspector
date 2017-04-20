@@ -14,7 +14,7 @@
 
 @implementation ValueViewController
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     self.textView.text = self.value;
     self.title = self.viewTitle;
     uihelper = [UIHelper sharedInstance];
@@ -25,7 +25,7 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -35,7 +35,7 @@
     _viewTitle = title;
 }
 
-- (void)actionButton:(id)sender {
+- (void) actionButton:(id)sender {
     [uihelper presentActionSheetInViewController:self
                                   attachToTarget:[ActionTipTarget targetWithBarButtonItem:self.navigationItem.rightBarButtonItem]
                                            title:self.title
@@ -54,7 +54,7 @@
                 [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
                     textField.placeholder = l(@"Value");
                 }];
-                
+
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:l(@"Cancel")
                                                                        style:UIAlertActionStyleCancel handler:nil];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:l(@"Verify")
@@ -63,10 +63,10 @@
                                                                      UITextField * inputField = alertController.textFields.firstObject;
                                                                      [self verifyValue:inputField.text];
                                                                  }];
-                
+
                 [alertController addAction:cancelAction];
                 [alertController addAction:okAction];
-                
+
                 [self presentViewController:alertController animated:YES completion:nil];
                 break;
             } case 2: { // Share
