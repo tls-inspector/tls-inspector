@@ -24,7 +24,14 @@
         for (NSItemProvider *itemProvider in item.attachments) {
             
             NSString * urlString = [item.attributedContentText string];
-            if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeURL]) {
+            if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePlainText]) {
+                // Long-press on URL in Safari or share from other app
+                [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypePlainText options:nil completionHandler:^(NSString *text, NSError *error) {
+                    [self parseURLString:text];
+                }];
+                return;
+            } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeURL]) {
+                // Share page from within Safari
                 [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypeURL options:nil completionHandler:^(NSURL *url, NSError *error) {
                     if (!error && [url.scheme isEqualToString:@"https"]) {
                         [self loadURL:url];
@@ -34,17 +41,23 @@
                 }];
                 return;
             } else if (urlString)  {
-                if ([urlString hasPrefix:@"https://"]){
-                    [self loadURL:[NSURL URLWithString:[urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
-                } else {
-                    [self unsupportedURL];
-                }
+                // Share page from third-party browsers (Chrome, Brave 🦁)
+                [self parseURLString:urlString];
                 return;
             }
         }
     }
 
     [self closeExtension];
+}
+
+- (void) parseURLString:(NSString *)urlString {
+    if ([urlString hasPrefix:@"https://"]){
+        [self loadURL:[NSURL URLWithString:[urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
+    } else {
+        [self unsupportedURL];
+    }
+    return;
 }
 
 - (void) loadURL:(NSURL *)url {
