@@ -81,6 +81,9 @@
         for (NSData * crlData in crlDataArray) {
             const unsigned char * bytes = (const unsigned char *)[crlData bytes];
             crl = d2i_X509_CRL(NULL, &bytes, [crlData length]);
+            if (!crl) {
+                continue;
+            }
 
             int rv;
             if ((rv = X509_CRL_verify(crl, pubKey)) != 1) {
