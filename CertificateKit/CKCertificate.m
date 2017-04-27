@@ -41,6 +41,7 @@
 @property (strong, nonatomic, readwrite) NSString * summary;
 @property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
 @property (strong, nonatomic) distributionPoints * crlCache;
+@property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 
 @end
 
@@ -60,6 +61,7 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     xcert.certificate = (X509 *)cert;
     xcert.summary = [xcert generateSummary];
     xcert.revoked = [CKCertificateRevoked new];
+    xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
     return xcert;
 }
 
@@ -157,19 +159,6 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     const X509_ALGOR * sigType = X509_get0_tbs_sigalg(self.certificate);
     char buffer[128];
     OBJ_obj2txt(buffer, sizeof(buffer), sigType->algorithm, 0);
-    return [NSString stringWithUTF8String:buffer];
-}
-
-- (NSString *) keyAlgorithm {
-    X509_PUBKEY * pubkey = X509_get_X509_PUBKEY(self.certificate);
-    X509_ALGOR * keyType;
-    int rv = X509_PUBKEY_get0_param(NULL, NULL, NULL, &keyType, pubkey);
-    if (rv < 0) {
-        return nil;
-    }
-    
-    char buffer[128];
-    OBJ_obj2txt(buffer, sizeof(buffer), keyType->algorithm, 0);
     return [NSString stringWithUTF8String:buffer];
 }
 

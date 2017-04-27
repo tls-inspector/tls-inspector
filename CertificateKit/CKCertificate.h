@@ -26,9 +26,14 @@
 
 #import <Foundation/Foundation.h>
 #import "CKCertificateRevoked.h"
+#import "CKCertificatePublicKey.h"
 
 @class CKCertificateRevoked;
+@class CKCertificatePublicKey;
 
+/**
+ *  A CKCertificate is the front-end to a libssl X.509 certificate.
+ */
 @interface CKCertificate : NSObject
 
 /**
@@ -40,28 +45,36 @@
  */
 + (CKCertificate * _Nullable) fromX509:(void * _Nonnull)cert;
 
+/**
+ *  Array of URLs representing distribution points for CRLs
+ */
 typedef NSArray<NSURL *> distributionPoints;
 
+/**
+ *  Finger (thumb) print types that CKCertificate can export
+ */
 typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
-    // SHA 512 fingerprint type
+    /**
+     * SHA 512 fingerprint type
+     */
     CKCertificateFingerprintTypeSHA512,
-    // SHA 256 fingerprint type
+    /**
+     * SHA 512 fingerprint type
+     */
     CKCertificateFingerprintTypeSHA256,
-    // MD5 fingerprint type
+    /**
+     * SHA 512 fingerprint type
+     */
     CKCertificateFingerprintTypeMD5,
-    // SHA1 fingerprint type
+    /**
+     * SHA 512 fingerprint type
+     */
     CKCertificateFingerprintTypeSHA1
 };
 
-typedef NS_ENUM(NSInteger, CKCertificateError) {
-    // Errors relating to connecting to the remote server.
-    CKCertificateErrorConnection,
-    // Crypto error usually resulting from being run on an unsupported platform.
-    CKCertificateErrorCrypto,
-    // Invalid parameter information such as hostnames.
-    CKCertificateErrorInvalidParameter
-};
-
+/**
+ *  The common name of the certificate
+ */
 @property (strong, nonatomic, nullable, readonly) NSString * summary;
 
 /**
@@ -114,9 +127,9 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
 @property (strong, nonatomic, nullable, readonly) NSString * signatureAlgorithm;
 
 /**
- *  Returns the human readable public key algorithm
+ *  Returns information about the certificates public key
  */
-@property (strong, nonatomic, nullable, readonly) NSString * keyAlgorithm;
+@property (strong, nonatomic, nullable, readonly) CKCertificatePublicKey * publicKey;
 
 /**
  *  Returns the expiry date for the certificate. Time data may be unavailable and should not be relied upon.
