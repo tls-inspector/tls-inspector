@@ -66,6 +66,9 @@
 		3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* Assets.xcassets */; };
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
+		A15CB48C1EB11DAC002EE845 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15CB48B1EB11DAC002EE845 /* DomainList.plist */; };
+		A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */; };
 		A16ABDA31E844BF9007779BE /* TitleValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */; };
 		A16ABDA51E844C8A007779BE /* TitleValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */; };
 		A1BA8BE41E8EB2B30004FB0F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
@@ -185,6 +188,9 @@
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTableViewController.m; sourceTree = "<group>"; };
 		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorTableViewController.h; sourceTree = "<group>"; };
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorTableViewController.m; sourceTree = "<group>"; };
+		A15CB48B1EB11DAC002EE845 /* DomainList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DomainList.plist; sourceTree = "<group>"; };
+		A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificatePublicKey.h; sourceTree = "<group>"; };
+		A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificatePublicKey.m; sourceTree = "<group>"; };
 		A16ABDA11E844BF9007779BE /* TitleValueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueTableViewCell.h; sourceTree = "<group>"; };
 		A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueTableViewCell.m; sourceTree = "<group>"; };
 		A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -223,6 +229,7 @@
 		3C28B1151E881D1300715A5A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A15CB48B1EB11DAC002EE845 /* DomainList.plist */,
 				A16ABDA41E844BFD007779BE /* UI Elements */,
 				3C04EE5D1CB4A23900F56B68 /* UIHelper.h */,
 				3C04EE5E1CB4A23900F56B68 /* UIHelper.m */,
@@ -279,6 +286,8 @@
 				3C65DAED1E836C15004AD96D /* CKCRLManager.m */,
 				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
 				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
+				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
+				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
 				3C65DAEA1E836C15004AD96D /* CKCertificateRevoked.h */,
@@ -435,6 +444,7 @@
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
 				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
+				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
 				3C65DAF51E836C15004AD96D /* CKCertificateRevoked.h in Headers */,
 				3C65DAF71E836C15004AD96D /* CKCRLManager.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
@@ -575,6 +585,7 @@
 				3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */,
 				3CC652431DB07166001FB7E1 /* en.plist in Resources */,
 				3CC6523F1DB0710C001FB7E1 /* Main.storyboard in Resources */,
+				A15CB48C1EB11DAC002EE845 /* DomainList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +655,7 @@
 				3C65DAF81E836C15004AD96D /* CKCRLManager.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
 				3C65DAF61E836C15004AD96D /* CKCertificateRevoked.m in Sources */,
+				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
