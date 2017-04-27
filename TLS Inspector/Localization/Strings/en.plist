@@ -700,6 +700,8 @@
 	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
+	<key>{alg}, {len} bits</key>
+	<string>{0}, {1} bits</string>
 	<key>{count} months</key>
 	<string>{0} months</string>
 	<key>{count} weeks</key>

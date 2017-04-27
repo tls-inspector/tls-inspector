@@ -350,7 +350,17 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                 value = l(nstrcat(@"CertAlgorithm::", [selectedCertificate signatureAlgorithm]));
             } else if (indexPath.row == 1) {
                 title = l(@"Key");
-                value = l(nstrcat(@"KeyAlgorithm::", [selectedCertificate keyAlgorithm]));
+                value = [lang
+                         key:@"{alg}, {len} bits"
+                         args:@[
+                                [lang
+                                 key:[NSString
+                                      stringWithFormat:@"%@%@", @"KeyAlgorithm::",
+                                      selectedCertificate.publicKey.algroithm]],
+                                [NSString
+                                 stringWithFormat:@"%i",
+                                 selectedCertificate.publicKey.bitLength]
+                                ]];
             }
             return [[TitleValueTableViewCell alloc] initWithTitle:title value:value];
         } case Names: {
