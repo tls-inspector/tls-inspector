@@ -61,6 +61,9 @@
 		3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* Assets.xcassets */; };
 		3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */; };
+		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
+		3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
+		3CF3974C1EB510FE00E8DBF4 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15CB48B1EB11DAC002EE845 /* DomainList.plist */; };
 		3CFAE6DB1CA8440400CD946B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DA1CA8440400CD946B /* main.m */; };
 		3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DD1CA8440400CD946B /* AppDelegate.m */; };
 		3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* Assets.xcassets */; };
@@ -91,6 +94,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
 			remoteInfo = CertificateKit;
+		};
+		3CF397461EB50E0900E8DBF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CFAE6D51CA8440400CD946B;
+			remoteInfo = "TLS Inspector";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -178,6 +188,9 @@
 		3CEAA5061D83CCD10011A706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDomains.h; sourceTree = "<group>"; };
 		3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDomains.m; sourceTree = "<group>"; };
+		3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKitTests.m; sourceTree = "<group>"; };
+		3CF397451EB50E0900E8DBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CFAE6D61CA8440400CD946B /* TLS Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TLS Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFAE6DA1CA8440400CD946B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3CFAE6DC1CA8440400CD946B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -211,6 +224,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CF3973E1EB50E0900E8DBF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,12 +363,22 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		3CF397421EB50E0900E8DBF4 /* CertificateKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */,
+				3CF397451EB50E0900E8DBF4 /* Info.plist */,
+			);
+			path = CertificateKitTests;
+			sourceTree = "<group>";
+		};
 		3CFAE6CD1CA8440400CD946B = {
 			isa = PBXGroup;
 			children = (
 				3CFAE6D81CA8440400CD946B /* TLS Inspector */,
 				3C43EF831D7A987F00AE65E9 /* Inspect Website */,
 				3C65DADB1E836BE9004AD96D /* CertificateKit */,
+				3CF397421EB50E0900E8DBF4 /* CertificateKitTests */,
 				3CFAE6D71CA8440400CD946B /* Products */,
 				A1BA8BE21E8EB2B30004FB0F /* Frameworks */,
 			);
@@ -359,6 +390,7 @@
 				3CFAE6D61CA8440400CD946B /* TLS Inspector.app */,
 				3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */,
 				3C65DADA1E836BE9004AD96D /* CertificateKit.framework */,
+				3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -490,6 +522,24 @@
 			productReference = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		3CF397401EB50E0900E8DBF4 /* CertificateKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CF397481EB50E0900E8DBF4 /* Build configuration list for PBXNativeTarget "CertificateKitTests" */;
+			buildPhases = (
+				3CF3973D1EB50E0900E8DBF4 /* Sources */,
+				3CF3973E1EB50E0900E8DBF4 /* Frameworks */,
+				3CF3973F1EB50E0900E8DBF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3CF397471EB50E0900E8DBF4 /* PBXTargetDependency */,
+			);
+			name = CertificateKitTests;
+			productName = CertificateKitTests;
+			productReference = 3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3CFAE6D51CA8440400CD946B /* TLS Inspector */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CFAE6ED1CA8440400CD946B /* Build configuration list for PBXNativeTarget "TLS Inspector" */;
@@ -530,6 +580,12 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
+					3CF397401EB50E0900E8DBF4 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = WCW84NC7Y8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3CFAE6D51CA8440400CD946B;
+					};
 					3CFAE6D51CA8440400CD946B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = WCW84NC7Y8;
@@ -553,6 +609,7 @@
 				3CFAE6D51CA8440400CD946B /* TLS Inspector */,
 				3C43EF811D7A987F00AE65E9 /* Inspect Website */,
 				3C65DAD91E836BE9004AD96D /* CertificateKit */,
+				3CF397401EB50E0900E8DBF4 /* CertificateKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -574,6 +631,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CF3973F1EB50E0900E8DBF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CF3974C1EB510FE00E8DBF4 /* DomainList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +725,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3CF3973D1EB50E0900E8DBF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CFAE6D21CA8440400CD946B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -700,6 +773,11 @@
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
 			targetProxy = 3C65DADF1E836BE9004AD96D /* PBXContainerItemProxy */;
+		};
+		3CF397471EB50E0900E8DBF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CFAE6D51CA8440400CD946B /* TLS Inspector */;
+			targetProxy = 3CF397461EB50E0900E8DBF4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -815,6 +893,38 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3CF397491EB50E0900E8DBF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				INFOPLIST_FILE = CertificateKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
+			};
+			name = Debug;
+		};
+		3CF3974A1EB50E0900E8DBF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				INFOPLIST_FILE = CertificateKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
 			};
 			name = Release;
 		};
@@ -981,6 +1091,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		3CF397481EB50E0900E8DBF4 /* Build configuration list for PBXNativeTarget "CertificateKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CF397491EB50E0900E8DBF4 /* Debug */,
+				3CF3974A1EB50E0900E8DBF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		3CFAE6D11CA8440400CD946B /* Build configuration list for PBXProject "TLS Inspector" */ = {
 			isa = XCConfigurationList;
