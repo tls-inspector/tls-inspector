@@ -13,13 +13,13 @@
 
 @implementation GTAppLinks
 
-- (void) showAppInAppStore:(GTAppStoreID)appID inViewController:(UIViewController *)viewController dismissed:(void(^)())dismissed {
+- (void) showAppInAppStore:(uint32_t)appID inViewController:(UIViewController *)viewController dismissed:(void(^)())dismissed {
     if ([SKStoreReviewController class]) {
         [SKStoreReviewController requestReview];
     } else {
         SKStoreProductViewController * productViewController = [SKStoreProductViewController new];
         productViewController.delegate = self;
-        NSString * appIDString = [NSString stringWithFormat:@"%lu", appID];
+        NSString * appIDString = [NSString stringWithFormat:@"%u", appID];
         [productViewController loadProductWithParameters:@{
                                                            SKStoreProductParameterITunesItemIdentifier:
                                                                appIDString}

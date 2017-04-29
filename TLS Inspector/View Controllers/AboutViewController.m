@@ -24,7 +24,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     [super viewDidLoad];
     [self.recentSwitch setOn:[RecentDomains sharedInstance].saveRecentDomains];
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
+    self.versionLabel.text = format(@"%@ (%@)",
+                                    [infoDictionary objectForKey:@"CFBundleShortVersionString"],
+                                    [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
 
     self.opensslVersionLabel.text = [CKCertificate openSSLVersion];
     self.helper = [UIHelper sharedInstance];
@@ -45,7 +47,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
         activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
         [self presentViewController:activityController animated:YES completion:nil];
     } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
-        [self.appLinks showAppInAppStore:GTAppStoreIDTLSInspector inViewController:self dismissed:^{
+        [self.appLinks showAppInAppStore:1100539810 inViewController:self dismissed:^{
             //
         }];
     } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
@@ -67,8 +69,8 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                      break;
                  case 1: {
                      [self.appLinks
-                      showEmailComposeSheetForApp:APP_NAME_TLS_INSPECTOR
-                      email:APP_SUPPORT_EMAIL_TLS_INSPECTOR
+                      showEmailComposeSheetForApp:@"TLS Inspector"
+                      email:@"'TLS Inspector Project Manager' <tls-inspector@ecnepsnai.com>"
                       inViewController:self dismissed:^{
                          //
                      }];
