@@ -1,6 +1,8 @@
 # TLS Inspector
 
-[![Join the chat at https://gitter.im/certificate-helper/TLS-Inspector](https://badges.gitter.im/certificate-helper/TLS-Inspector.svg)](https://gitter.im/certificate-helper/TLS-Inspector?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/certificate-helper/TLS-Inspector](https://badges.gitter.im/certificate-helper/TLS-Inspector.svg)](https://gitter.im/certificate-helper/TLS-Inspector) |
+[![Follow us on Twitter @TLSInspector](https://tlsinspector.com/assets/img/follow.png)](https://twitter.com/tlsinspector) |
+[Download TLS Inspector in the iTunes App Store](https://tlsinspector.com/dl.html)
 
 <img src="https://tlsinspector.com/assets/img/screenshots.png" alt="TLS Inspector Screenshots" />
 

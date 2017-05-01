@@ -7,6 +7,7 @@
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
     NSNumber * certIndex;
+    NSString * placeholder;
 }
 
 @property (strong, nonatomic) UITextField *hostField;
@@ -15,6 +16,7 @@
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
 @property (strong, nonatomic) CKCertificateChain * chain;
+@property (strong, nonatomic) NSArray<NSString *> * placeholderDomains;
 
 @end
 
@@ -26,6 +28,15 @@
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     self.chain = [CKCertificateChain new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
+
+    self.placeholderDomains = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DomainList" ofType:@"plist"]];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    NSUInteger randomIndex = arc4random() % [self.placeholderDomains count];
+    placeholder = [self.placeholderDomains objectAtIndex:randomIndex];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -190,6 +201,8 @@
             self.hostField = (UITextField *)[cell viewWithTag:1];
             [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
             self.hostField.delegate = self;
+            UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
+            self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
             break;
         } case 1: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];

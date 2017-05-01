@@ -43,13 +43,23 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3CF397401EB50E0900E8DBF4"
+               BuildableName = "CertificateKitTests.xctest"
+               BlueprintName = "CertificateKitTests"
+               ReferencedContainer = "container:TLS Inspector.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3C43EF811D7A987F00AE65E9"
-            BuildableName = "Inspect Website.appex"
-            BlueprintName = "Inspect Website"
+            BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
+            BuildableName = "TLS Inspector.app"
+            BlueprintName = "TLS Inspector"
             ReferencedContainer = "container:TLS Inspector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

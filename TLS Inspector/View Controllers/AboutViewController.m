@@ -1,13 +1,10 @@
 #import "AboutViewController.h"
 #import "RecentDomains.h"
 #import "GTAppLinks.h"
+#import "TitleValueTableViewCell.h"
 
 @interface AboutViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *opensslVersionLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *recentSwitch;
-- (IBAction) recentSwitch:(UISwitch *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) GTAppLinks * appLinks;
 
@@ -22,11 +19,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    [self.recentSwitch setOn:[RecentDomains sharedInstance].saveRecentDomains];
-    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    self.versionLabel.text = format(@"%@ (%@)", [infoDictionary objectForKey:@"CFBundleShortVersionString"], [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
 
-    self.opensslVersionLabel.text = [CKCertificate openSSLVersion];
     self.helper = [UIHelper sharedInstance];
     self.appLinks = [GTAppLinks new];
 }
@@ -35,24 +28,79 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     [super didReceiveMemoryWarning];
 }
 
+# pragma mark - Table View Source
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return 1;
+        case 1:
+            return 3;
+        case 2:
+            return 2;
+    }
+    return 0;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+        ((UILabel *)[switchCell viewWithTag:10]).text = l(@"Remember Recent Lookups");
+        UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+        [toggle setOn:[RecentDomains sharedInstance].saveRecentDomains];
+        [toggle addTarget:self action:@selector(recentSwitch:) forControlEvents:UIControlEventTouchUpInside];
+        return switchCell;
+    } else if (indexPath.section == 1) {
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
+        UILabel * label = (UILabel *)[cell viewWithTag:1];
+        switch (indexPath.row) {
+            case 0:
+                label.text = l(@"Tell Friends About TLS Inspector");
+                break;
+            case 1:
+                label.text = l(@"Rate TLS Inspector in the App Store");
+                break;
+            case 2:
+                label.text = l(@"Submit Feedback");
+                break;
+        }
+        return cell;
+    } else if (indexPath.section == 2) {
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
+        UILabel * label = (UILabel *)[cell viewWithTag:1];
+        switch (indexPath.row) {
+            case 0:
+                label.text = l(@"Contribute on GitHub");
+                break;
+            case 1:
+                label.text = l(@"Test New Features");
+                break;
+        }
+        return cell;
+    }
+    return nil;
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([cell.reuseIdentifier isEqualToString:@"tell_friends"]) {
-        NSString * blurb = format(@"Easily view and inspect X509 certificates on your iOS device. %@", PROJECT_URL);
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        NSString * blurb = format(@"Trust & Safety On-the-go with TLS Inspector: %@", PROJECT_URL);
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[blurb]
                                                         applicationActivities:nil];
-        activityController.popoverPresentationController.sourceView = [cell viewWithTag:1];
+        activityController.popoverPresentationController.sourceView = [tableView cellForRowAtIndexPath:indexPath];
         [self presentViewController:activityController animated:YES completion:nil];
-    } else if ([cell.reuseIdentifier isEqualToString:@"rate_app"]) {
-        [self.appLinks showAppInAppStore:GTAppStoreIDTLSInspector inViewController:self dismissed:^{
+    } else if (indexPath.section == 1 && indexPath.row == 1) {
+        [self.appLinks showAppInAppStore:1100539810 inViewController:self dismissed:^{
             //
         }];
-    } else if ([cell.reuseIdentifier isEqualToString:@"submit_feedback"]) {
-
+    } else if (indexPath.section == 1 && indexPath.row == 2) {
         [self.helper
          presentActionSheetInViewController:self
-         attachToTarget:[ActionTipTarget targetWithView:[cell viewWithTag:1]]
+         attachToTarget:[ActionTipTarget targetWithView:[tableView cellForRowAtIndexPath:indexPath]]
          title:l(@"What kind of feedback would you like to submit?")
          subtitle:l(@"All feedback is appreciated!")
          cancelButtonTitle:l(@"Cancel")
@@ -67,8 +115,8 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                      break;
                  case 1: {
                      [self.appLinks
-                      showEmailComposeSheetForApp:APP_NAME_TLS_INSPECTOR
-                      email:APP_SUPPORT_EMAIL_TLS_INSPECTOR
+                      showEmailComposeSheetForApp:@"TLS Inspector"
+                      email:@"'TLS Inspector Project Manager' <tls-inspector@ecnepsnai.com>"
                       inViewController:self dismissed:^{
                          //
                      }];
@@ -77,11 +125,37 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                      break;
              }
          }];
-    } else if ([cell.reuseIdentifier isEqualToString:@"contribute"]) {
+    } else if (indexPath.section == 2 && indexPath.row == 0) {
         open_url(PROJECT_CONTRIBUTE_URL);
-    } else if ([cell.reuseIdentifier isEqualToString:@"beta"]) {
+    } else if (indexPath.section == 2 && indexPath.row == 1) {
         open_url(PROJECT_TESTFLIGHT_APPLICATION);
     }
+}
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return l(@"Options");
+        case 1:
+            return l(@"Share & Feedback");
+        case 2:
+            return l(@"Get Involved");
+    }
+    return @"";
+}
+
+- (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    switch (section) {
+        case 1: {
+            NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            return format(@"%@.%@.%@",
+                          [infoDictionary objectForKey:@"CFBundleShortVersionString"],
+                          [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey],
+                          [CKCertificate openSSLVersion]);
+        } case 2:
+            return l(@"TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.");
+    }
+    return @"";
 }
 
 - (IBAction) recentSwitch:(UISwitch *)sender {

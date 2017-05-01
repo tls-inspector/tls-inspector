@@ -16,6 +16,7 @@
 
 - (NSString *) PlatformString{
     NSString *platform = [self platform];
+    // Source: https://www.theiphonewiki.com/wiki/Models
 
     // Apple TV
     if ([platform isEqualToString:@"AppleTV2,1"])   return @"Apple TV 2G";
@@ -78,6 +79,8 @@
     if ([platform isEqualToString:@"iPad6,8"])      return @"iPad Pro (12.9\" Cellular)";
     if ([platform isEqualToString:@"iPad6,3"])      return @"iPad Pro (9.7\" WiFi)";
     if ([platform isEqualToString:@"iPad6,4"])      return @"iPad Pro (9.7\" Cellular)";
+    if ([platform isEqualToString:@"iPad6,11"])      return @"iPad 5 (WiFi)";
+    if ([platform isEqualToString:@"iPad6,12"])      return @"iPad 5 (Cellular)";
 
     // iPad Mini
     if ([platform isEqualToString:@"iPad4,4"])      return @"iPad mini 2G (WiFi)";

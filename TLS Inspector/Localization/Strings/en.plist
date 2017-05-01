@@ -566,6 +566,8 @@
 	<string>FQDN or IP Address</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
+	<key>Get Involed</key>
+	<string>Get Involved</string>
 	<key>Host was not found or invalid.</key>
 	<string>Host was not found or invalid.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
@@ -604,6 +606,8 @@
 	<string>Notification Date</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
+	<key>Options</key>
+	<string>Options</string>
 	<key>Rate TLS Inspector in the App Store</key>
 	<string>Rate TLS Inspector in the App Store</string>
 	<key>Recent Domains</key>
@@ -622,6 +626,8 @@
 	<string>Search on Shodan</string>
 	<key>Share</key>
 	<string>Share</string>
+	<key>Share &amp; Feedback</key>
+	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
 	<key>Signature</key>
@@ -654,6 +660,8 @@
 	<string>Submit Feedback</string>
 	<key>TLS Inspector</key>
 	<string>TLS Inspector</string>
+	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</key>
+	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
@@ -700,6 +708,8 @@
 	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
+	<key>{alg}, {len} bits</key>
+	<string>{0}, {1} bits</string>
 	<key>{count} months</key>
 	<string>{0} months</string>
 	<key>{count} weeks</key>

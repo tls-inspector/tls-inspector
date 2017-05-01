@@ -13,17 +13,21 @@
 
 @implementation GTAppLinks
 
-- (void) showAppInAppStore:(GTAppStoreID)appID inViewController:(UIViewController *)viewController dismissed:(void(^)())dismissed {
-    SKStoreProductViewController * productViewController = [SKStoreProductViewController new];
-    productViewController.delegate = self;
-    NSString * appIDString = [NSString stringWithFormat:@"%lu", appID];
-    [productViewController loadProductWithParameters:@{
-                                                       SKStoreProductParameterITunesItemIdentifier:
-                                                           appIDString}
-                                     completionBlock:nil];
-    self.viewController = viewController;
-    [viewController presentViewController:productViewController animated:YES completion:nil];
-    dismissedBlock = dismissed;
+- (void) showAppInAppStore:(uint32_t)appID inViewController:(UIViewController *)viewController dismissed:(void(^)())dismissed {
+    if ([SKStoreReviewController class]) {
+        [SKStoreReviewController requestReview];
+    } else {
+        SKStoreProductViewController * productViewController = [SKStoreProductViewController new];
+        productViewController.delegate = self;
+        NSString * appIDString = [NSString stringWithFormat:@"%u", appID];
+        [productViewController loadProductWithParameters:@{
+                                                           SKStoreProductParameterITunesItemIdentifier:
+                                                               appIDString}
+                                         completionBlock:nil];
+        self.viewController = viewController;
+        [viewController presentViewController:productViewController animated:YES completion:nil];
+        dismissedBlock = dismissed;
+    }
 }
 
 - (void) productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
@@ -54,8 +58,8 @@
     NSString * bundleBuild = [NSString stringWithFormat:@"%i", [build intValue]];
     NSString * deviceName = [[UIDevice currentDevice] PlatformString];
     NSOperatingSystemVersion systemVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
-    NSString * body = [NSString stringWithFormat:@"Please do not delete the following line:<br/>%@ %@ (%@) %@ %i.%i.%i",
-                       bundleName, bundleVersion, bundleBuild, deviceName, systemVersion.majorVersion, systemVersion.minorVersion, systemVersion.patchVersion];
+    NSString * body = [NSString stringWithFormat:@"Please do not delete the following line:<br/>%@ %@ (%@) %@ %li.%li.%li",
+                       bundleName, bundleVersion, bundleBuild, deviceName, (long)systemVersion.majorVersion, (long)systemVersion.minorVersion, (long)systemVersion.patchVersion];
     [mailController setMessageBody:[NSString stringWithFormat:@"<p><br/><br/></p><hr/><p><small>%@</small></p>", body] isHTML:YES];
 
     if (!mailController) {

@@ -29,18 +29,54 @@
 
 @class CKCertificate;
 
+/**
+ Revocation information about a CKCertificate
+ */
 @interface CKCertificateRevoked : NSObject
 
+/**
+ The possible reasons a certificate can be revoked as defined in RFC 5280.
+ */
 typedef NS_ENUM(NSInteger, CKCertificateRevokedReason) {
+    /**
+     No reason is specified for the revocation.
+     */
     CKCertificateRevokedReasonUnspecified          = 0,
+    /**
+     It is known or is suspected that the subject's private key or other aspects of the subject that are validated in the certificate are compromised.
+     */
     CKCertificateRevokedReasonKeyCompromise        = 1,
+    /**
+     It is known or is suspected that the certification authority's (CA's) private key or other aspects of the CA that are validated in the certificate are compromised.
+     */
     CKCertificateRevokedReasonCACompromise         = 2,
+    /**
+     The subject's name or other information in the certificate has been modified, but there is no cause to suspect that the private key has been compromised.
+     */
     CKCertificateRevokedReasonAffiliationChanged   = 3,
+    /**
+     The certificate has been superseded, but there is no cause to suspect that the private key has been compromised.
+     */
     CKCertificateRevokedReasonSuperseded           = 4,
+    /**
+     The certificate is no longer needed for the purpose for which it was issued, but there is no cause to suspect that the private key has been compromised.
+     */
     CKCertificateRevokedReasonCessationOfOperation = 5,
+    /**
+     The certificate has been put on hold.
+     */
     CKCertificateRevokedReasonCertificateHold      = 6,
+    /**
+     The certificate shall be removed from the CRL.
+     */
     CKCertificateRevokedReasonRemoveFromCRL        = 8,
+    /**
+     Indicates that a certificate (public-key or attribute certificate) was revoked because a privilege contained within that certificate has been withdrawn.
+     */
     CKCertificateRevokedReasonPrivilegeWithdrawn   = 9,
+    /**
+     Indicates that it is known or suspected that aspects of the AA validated in the attribute certificate, have been compromised.
+     */
     CKCertificateRevokedReasonAACompromise         = 10
 };
 
