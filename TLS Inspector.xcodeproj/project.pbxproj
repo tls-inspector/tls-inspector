@@ -1099,6 +1099,7 @@
 				3CF3974A1EB50E0900E8DBF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3CFAE6D11CA8440400CD946B /* Build configuration list for PBXProject "TLS Inspector" */ = {
 			isa = XCConfigurationList;
