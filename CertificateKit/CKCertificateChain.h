@@ -90,19 +90,9 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (nonatomic, readonly) SSLCipherSuite cipher;
 
 /**
- Get a string representation of the cipher suite
- */
-@property (strong, nonatomic, nonnull, readonly) NSString * cipherString;
-
-/**
  Get the negotiated protocol used to retrieve the chain
  */
 @property (nonatomic, readonly) SSLProtocol protocol;
-
-/**
- Get a string representation of the protocol version
- */
-@property (strong, nonatomic, nonnull, readonly) NSString * protocolString;
 
 /**
  *  Query the specified URL for its certificate chain.

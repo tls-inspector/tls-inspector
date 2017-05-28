@@ -1,5 +1,5 @@
 //
-//  CertificateKit.h
+//  CKCertificateChain+EnumValues.h
 //
 //  MIT License
 //
@@ -24,17 +24,21 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <CertificateKit/CertificateKit.h>
 
-//! Project version number for CertificateKit.
-FOUNDATION_EXPORT double CertificateKitVersionNumber;
+/**
+ String values for cipher and protocol enums
+ */
+@interface CKCertificateChain (EnumValues)
 
-//! Project version string for CertificateKit.
-FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
+/**
+ Get a string representation of the cipher suite
+ */
+@property (strong, nonatomic, nonnull, readonly) NSString * cipherString;
 
-// In this header, you should import all the public headers of your framework using statements like #import <CertificateKit/PublicHeader.h>
-#import <CertificateKit/CKCertificate.h>
-#import <CertificateKit/CKCertificatePublicKey.h>
-#import <CertificateKit/CKCertificateChain.h>
-#import <CertificateKit/CKCertificateChain+EnumValues.h>
-#import <CertificateKit/CKCertificateRevoked.h>
+/**
+ Get a string representation of the protocol version
+ */
+@property (strong, nonatomic, nonnull, readonly) NSString * protocolString;
+
+@end

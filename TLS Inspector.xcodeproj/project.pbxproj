@@ -22,6 +22,8 @@
 		3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
 		3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
 		3C5096A21E7CCA7C00AEAAB2 /* GTAppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */; };
+		3C56FFDA1EDA75280032DCFE /* CKCertificateChain+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C56FFD81EDA75280032DCFE /* CKCertificateChain+EnumValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C56FFDB1EDA75280032DCFE /* CKCertificateChain+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C56FFD91EDA75280032DCFE /* CKCertificateChain+EnumValues.m */; };
 		3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
@@ -152,6 +154,8 @@
 		3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTAppLinks.m; sourceTree = "<group>"; };
 		3C50969D1E7CCA7600AEAAB2 /* UIDevice+PlatformString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformString.h"; sourceTree = "<group>"; };
 		3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+PlatformString.m"; sourceTree = "<group>"; };
+		3C56FFD81EDA75280032DCFE /* CKCertificateChain+EnumValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKCertificateChain+EnumValues.h"; sourceTree = "<group>"; };
+		3C56FFD91EDA75280032DCFE /* CKCertificateChain+EnumValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKCertificateChain+EnumValues.m"; sourceTree = "<group>"; };
 		3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3C5D129F1D0531BD004B6E12 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		3C5D12A01D0531BD004B6E12 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
+				3C56FFD81EDA75280032DCFE /* CKCertificateChain+EnumValues.h */,
+				3C56FFD91EDA75280032DCFE /* CKCertificateChain+EnumValues.m */,
 				3C65DAEA1E836C15004AD96D /* CKCertificateRevoked.h */,
 				3C65DAEB1E836C15004AD96D /* CKCertificateRevoked.m */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
@@ -489,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
+				3C56FFDA1EDA75280032DCFE /* CKCertificateChain+EnumValues.h in Headers */,
 				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
@@ -743,6 +750,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
+				3C56FFDB1EDA75280032DCFE /* CKCertificateChain+EnumValues.m in Sources */,
 				3C65DAF81E836C15004AD96D /* CKCRLManager.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
 				3C65DAF61E836C15004AD96D /* CKCertificateRevoked.m in Sources */,
