@@ -5,6 +5,7 @@
 #import "AppState.h"
 @import CertificateKit;
 #import "MBProgressHUD.h"
+#import "Storage.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -28,6 +29,7 @@
 #define l(keyString) [lang key:keyString]
 #define lv(keyString, argsArray) [lang key:keyString args:argsArray]
 
+#define AppDefaults Storage.sharedInstance.groupDefaults
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 

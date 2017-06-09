@@ -1,8 +1,7 @@
 #import "RecentDomains.h"
 
-@interface RecentDomains() {
-    NSUserDefaults * defaults;
-}
+@interface RecentDomains()
+
 @end
 
 @implementation RecentDomains
@@ -19,7 +18,6 @@ static id _instance;
 - (id) init {
     if (!_instance) {
         _instance = [super init];
-        defaults = [NSUserDefaults standardUserDefaults];
         return self;
     }
     
@@ -27,12 +25,12 @@ static id _instance;
 }
 
 - (NSArray<NSString *> *) getRecentDomains {
-    NSArray * recents = [defaults arrayForKey:RECENT_DOMAINS_KEY];
+    NSArray * recents = [AppDefaults arrayForKey:RECENT_DOMAINS_KEY];
     return recents ?: @[];
 }
 
 - (void) removeAllRecentDomains {
-    [defaults setObject:@[] forKey:RECENT_DOMAINS_KEY];
+    [AppDefaults setObject:@[] forKey:RECENT_DOMAINS_KEY];
 }
 
 - (NSArray<NSString *> *) removeDomainAtIndex:(NSUInteger)index {
@@ -57,15 +55,15 @@ static id _instance;
 }
 
 - (void) save:(NSArray<NSString *> *)recents {
-    [defaults setObject:recents forKey:RECENT_DOMAINS_KEY];
+    [AppDefaults setObject:recents forKey:RECENT_DOMAINS_KEY];
 }
 
 - (BOOL) saveRecentDomains {
-    return [defaults boolForKey:SAVE_RECENT_DOMAINS];
+    return [AppDefaults boolForKey:SAVE_RECENT_DOMAINS];
 }
 
 - (void) setSaveRecentDomains:(BOOL)newValue {
-    [defaults setBool:newValue forKey:SAVE_RECENT_DOMAINS];
+    [AppDefaults setBool:newValue forKey:SAVE_RECENT_DOMAINS];
     if (!newValue) {
         [self removeAllRecentDomains];
     }
