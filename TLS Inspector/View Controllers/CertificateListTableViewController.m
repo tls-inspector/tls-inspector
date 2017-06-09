@@ -112,7 +112,7 @@
             cell.textLabel.textColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
         } else {
             cell.textLabel.text = [cert summary];
-            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = themeTextColor;
         }
 
         return cell;

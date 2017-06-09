@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "SplitViewController.h"
-@import CertificateKit;
+#import <CertificateKit/CertificateKit.h>
 
 @interface AppState : NSObject
 
@@ -10,6 +10,7 @@
 @property (strong, nonatomic, nullable) SplitViewController * splitViewController;
 @property (strong, nonatomic, nullable) CKCertificateChain * certificateChain;
 @property (strong, nonatomic, nullable) CKCertificate * selectedCertificate;
+@property (nonatomic) BOOL lightTheme;
 
 #ifdef EXTENSION
 @property (nullable, nonatomic, strong) NSExtensionContext * extensionContext;

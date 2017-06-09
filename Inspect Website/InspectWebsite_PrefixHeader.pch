@@ -2,9 +2,10 @@
 #define InspectWebsite_PrefixHeader_pch
 
 #import "lang.h"
+#import "defines.pch"
 #import "AppState.h"
-@import CertificateKit;
 #import "MBProgressHUD.h"
+#import "UIHelper.h"
 #import "Storage.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
@@ -15,6 +16,7 @@
 
 #define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
 #define SAVE_RECENT_DOMAINS @"SAVE_RECENT_DOMAINS"
+#define USE_LIGHT_THEME @"USE_LIGHT_THEME"
 #define INSPECT_NOTIFICATION @"INSPECT_THIS_WEBSITE"
 #define INSPECT_NOTIFICATION_HOST_KEY @"host"
 #define INSPECT_NOTIFICATION_INDEX_KEY @"index"
@@ -30,6 +32,10 @@
 #define lv(keyString, argsArray) [lang key:keyString args:argsArray]
 
 #define AppDefaults Storage.sharedInstance.groupDefaults
+#define usingLightTheme appState.lightTheme
+#define colorForTheme(light, dark) usingLightTheme ? light : dark
+#define themeTextColor colorForTheme([UIColor blackColor], [UIColor whiteColor])
+
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 

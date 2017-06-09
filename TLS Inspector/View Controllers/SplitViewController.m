@@ -11,10 +11,15 @@
     self.delegate = self;
     self.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     [AppState currentState].splitViewController = self;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    if (usingLightTheme) {
+        return UIStatusBarStyleDefault;
+    } else {
+        return UIStatusBarStyleLightContent;
+    }
 }
 
 - (void) didReceiveMemoryWarning {

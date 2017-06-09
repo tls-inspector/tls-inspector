@@ -1,8 +1,7 @@
 #import "InputTableViewController.h"
 #import "CertificateListTableViewController.h"
-#import "UIHelper.h"
 #import "RecentDomains.h"
-#import "MBProgressHUD.h"
+#import <CertificateKit/CertificateKit.h>
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
@@ -201,12 +200,18 @@
             self.hostField = (UITextField *)[cell viewWithTag:1];
             [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
             self.hostField.delegate = self;
-            UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
-            self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
+            self.hostField.textColor = themeTextColor;
+            if (usingLightTheme) {
+                self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{}];
+            } else {
+                UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
+                self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
+            }
             break;
         } case 1: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
             cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
+            cell.textLabel.textColor = themeTextColor;
             break;
         }
     }

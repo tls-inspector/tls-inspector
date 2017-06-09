@@ -37,7 +37,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 1;
+            return 2;
         case 1:
             return 3;
         case 2:
@@ -48,15 +48,35 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
-        ((UILabel *)[switchCell viewWithTag:10]).text = l(@"Remember Recent Lookups");
-        UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
-        [toggle setOn:[RecentDomains sharedInstance].saveRecentDomains];
-        [toggle addTarget:self action:@selector(recentSwitch:) forControlEvents:UIControlEventTouchUpInside];
-        return switchCell;
+        if (indexPath.row == 0) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"Remember Recent Lookups");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:[RecentDomains sharedInstance].saveRecentDomains];
+            [toggle addTarget:self action:@selector(recentSwitch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 1) {
+            UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
+            label.text = l(@"Theme");
+            label.textColor = themeTextColor;
+            UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
+            [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
+            [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
+            if ([AppDefaults boolForKey:USE_LIGHT_THEME]) {
+                [segment setSelectedSegmentIndex:1];
+            } else {
+                [segment setSelectedSegmentIndex:0];
+            }
+            [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
+            return toggleCell;
+        }
     } else if (indexPath.section == 1) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
+        label.textColor = themeTextColor;
         switch (indexPath.row) {
             case 0:
                 label.text = l(@"Tell Friends About TLS Inspector");
@@ -72,6 +92,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     } else if (indexPath.section == 2) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
+        label.textColor = themeTextColor;
         switch (indexPath.row) {
             case 0:
                 label.text = l(@"Contribute on GitHub");
@@ -158,8 +179,16 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     return @"";
 }
 
-- (IBAction) recentSwitch:(UISwitch *)sender {
+- (void) recentSwitch:(UISwitch *)sender {
     [RecentDomains sharedInstance].saveRecentDomains = sender.isOn;
+}
+
+- (void) themeSwitch:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        [AppDefaults setBool:NO forKey:USE_LIGHT_THEME];
+    } else {
+        [AppDefaults setBool:YES forKey:USE_LIGHT_THEME];
+    }
 }
 
 @end

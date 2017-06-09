@@ -340,6 +340,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
             detailTextLabel.text = data[@"value"];
             textLabel.text = data[@"label"];
+            textLabel.textColor = themeTextColor;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
@@ -395,6 +396,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                     detailTextLabel.text = serialNumber;
                     break;
             }
+            textLabel.textColor = themeTextColor;
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagValue;
@@ -402,6 +404,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
         } case SubjectAltNames: {
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             cell.textLabel.text = l(@"View all alternate names");
+            cell.textLabel.textColor = themeTextColor;
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagSANS;

@@ -71,6 +71,7 @@
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		A116000B1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
 		A116000C1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
+		A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15622901EEA065600D61FB5 /* InitialNavigationController.m */; };
 		A15CB48C1EB11DAC002EE845 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15CB48B1EB11DAC002EE845 /* DomainList.plist */; };
 		A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */; };
@@ -207,6 +208,8 @@
 		A11600081EEB084F00D98E8F /* Inspect Website.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Inspect Website.entitlements"; sourceTree = "<group>"; };
 		A11600091EEB086800D98E8F /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
 		A116000A1EEB086800D98E8F /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
+		A156228F1EEA065600D61FB5 /* InitialNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialNavigationController.h; sourceTree = "<group>"; };
+		A15622901EEA065600D61FB5 /* InitialNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialNavigationController.m; sourceTree = "<group>"; };
 		A15CB48B1EB11DAC002EE845 /* DomainList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DomainList.plist; sourceTree = "<group>"; };
 		A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificatePublicKey.h; sourceTree = "<group>"; };
 		A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificatePublicKey.m; sourceTree = "<group>"; };
@@ -441,6 +444,8 @@
 		3CFAE6F31CA8464200CD946B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A156228F1EEA065600D61FB5 /* InitialNavigationController.h */,
+				A15622901EEA065600D61FB5 /* InitialNavigationController.m */,
 				3C5D129F1D0531BD004B6E12 /* AboutViewController.h */,
 				3C5D12A01D0531BD004B6E12 /* AboutViewController.m */,
 				3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */,
@@ -766,6 +771,7 @@
 				3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */,
 				3C50969F1E7CCA7600AEAAB2 /* GTAppLinks.m in Sources */,
 				3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */,
+				A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */,
 				3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
