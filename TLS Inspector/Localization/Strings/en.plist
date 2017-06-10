@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>tlstip1</key>
+	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
+	<key>tlstip2</key>
+	<string>You can view more information about the server on Shodan by tapping the &quot;Share&quot; button when viewing a certificate.</string>
+	<key>tlstip3</key>
+	<string>You can create a reminder when a certificate is about to expire by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
+	<key>tlstip4</key>
+	<string>You can change the theme in the &quot;About&quot; view of the app.</string>
+	<key>tlstip5</key>
+	<string>You can export the share the certificate data by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
+	<key>tlstip6</key>
+	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
+	<key>tlstip7</key>
+	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
+	<key>safari_hint</key>
+	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>About</key>

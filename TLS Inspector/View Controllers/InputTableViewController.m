@@ -2,11 +2,13 @@
 #import "CertificateListTableViewController.h"
 #import "RecentDomains.h"
 #import <CertificateKit/CertificateKit.h>
+#import "TitleValueTableViewCell.h"
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
     NSNumber * certIndex;
     NSString * placeholder;
+    NSString * tip;
 }
 
 @property (strong, nonatomic) UITextField *hostField;
@@ -16,10 +18,14 @@
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
 @property (strong, nonatomic) CKCertificateChain * chain;
 @property (strong, nonatomic) NSArray<NSString *> * placeholderDomains;
+@property (strong, nonatomic) NSArray<NSString *> * tipKeys;
 
 @end
 
 @implementation InputTableViewController
+
+#define tipSection(section) ![AppDefaults boolForKey:HIDE_TIPS] && section == 2
+#define recentSection(section) (![AppDefaults boolForKey:HIDE_TIPS] && section == 3) || ([AppDefaults boolForKey:HIDE_TIPS] && section == 2)
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -29,13 +35,27 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 
     self.placeholderDomains = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DomainList" ofType:@"plist"]];
+    self.tipKeys = @[
+                     @"tlstip1",
+                     @"tlstip2",
+                     @"tlstip3",
+                     @"tlstip4",
+                     @"tlstip5",
+                     @"tlstip6",
+                     @"tlstip7"
+                     ];
+
+    self.tableView.estimatedRowHeight = 85.0f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    NSUInteger randomIndex = arc4random() % [self.placeholderDomains count];
-    placeholder = [self.placeholderDomains objectAtIndex:randomIndex];
+    NSUInteger randomPlaceholderIndex = arc4random() % [self.placeholderDomains count];
+    placeholder = [self.placeholderDomains objectAtIndex:randomPlaceholderIndex];
+    NSUInteger randomTipIndex = arc4random() % [self.tipKeys count];
+    tip = [self.tipKeys objectAtIndex:randomTipIndex];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -69,12 +89,10 @@
         NSArray<NSString *> * domains = [[RecentDomains sharedInstance] getRecentDomains];
         if (![domains containsObject:hostAddress]) {
             self.recentDomains = [[RecentDomains sharedInstance] prependDomain:hostAddress];
-            if ([self.tableView numberOfSections] == 2) {
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            if ([self.tableView numberOfSections] == 3) {
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 1)] withRowAnimation:UITableViewRowAnimationNone];
             } else {
-                [self.tableView beginUpdates];
-                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-                [self.tableView endUpdates];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
             }
         }
     }
@@ -148,72 +166,76 @@
 # pragma mark Table View
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 1:
-            return YES;
-        default:
-            return NO;
+    if (recentSection(indexPath.section)) {
+        return YES;
     }
+    return NO;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.recentDomains.count > 0 ? 2 : 1;
+    NSInteger count = 1;
+    if (![AppDefaults boolForKey:HIDE_TIPS]) {
+        count ++;
+    }
+    if (self.recentDomains.count > 0) {
+        count ++;
+    }
+    return count;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return 1;
-        case 1:
-            return self.recentDomains.count;
-        default:
-            return 0;
+    if (section == 0) {
+        return 1;
+    } else if (tipSection(section)) {
+        return 1;
+    } else if (recentSection(section)) {
+        return self.recentDomains.count;
     }
+
+    return 0;
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return l(@"FQDN or IP Address");
-        case 1:
-            return l(@"Recent Domains");
-        default:
-            return nil;
+    if (section == 0) {
+        return l(@"FQDN or IP Address");
+    } else if (recentSection(section)) {
+        return l(@"Recent Domains");
     }
+
+    return nil;
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return l(@"Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.");
-        default:
-            return nil;
+    if (section == 0) {
+        return l(@"Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.");
     }
+    return nil;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell;
 
-    switch (indexPath.section) {
-        case 0: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Input" forIndexPath:indexPath];
-            self.hostField = (UITextField *)[cell viewWithTag:1];
-            [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
-            self.hostField.delegate = self;
-            self.hostField.textColor = themeTextColor;
-            if (usingLightTheme) {
-                self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{}];
-            } else {
-                UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
-                self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
-            }
-            break;
-        } case 1: {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
-            cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
-            cell.textLabel.textColor = themeTextColor;
-            break;
+    if (indexPath.section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Input" forIndexPath:indexPath];
+        self.hostField = (UITextField *)[cell viewWithTag:1];
+        [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+        self.hostField.delegate = self;
+        self.hostField.textColor = themeTextColor;
+        if (usingLightTheme) {
+            self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{}];
+        } else {
+            UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
+            self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
         }
+    } else if (tipSection(indexPath.section)) {
+        TitleValueTableViewCell * tvCell = [[TitleValueTableViewCell alloc] initWithTitle:[lang key:@"Did You Know..."] value:[lang key:tip]];
+        tvCell.valueLabel.font = [UIFont systemFontOfSize:13.0f];
+        tvCell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        return tvCell;
+    } else if (recentSection(indexPath.section)) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
+        cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
+        cell.textLabel.textColor = themeTextColor;
     }
 
     return cell;
@@ -227,11 +249,12 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 1) {
-        return;
+    if (recentSection(indexPath.section)) {
+        hostAddress = self.recentDomains[indexPath.row];
+        [self inspectCertificate];
     }
 
-    hostAddress = self.recentDomains[indexPath.row];
-    [self inspectCertificate];
+    return;
 }
+
 @end

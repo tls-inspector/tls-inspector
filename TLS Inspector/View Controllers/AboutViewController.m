@@ -37,7 +37,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 2;
+            return 3;
         case 1:
             return 3;
         case 2:
@@ -58,6 +58,15 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
             [toggle addTarget:self action:@selector(recentSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         } else if (indexPath.row == 1) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"Show Tips");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:![AppDefaults boolForKey:HIDE_TIPS]];
+            [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 2) {
             UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
             label.text = l(@"Theme");
@@ -181,6 +190,10 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (void) recentSwitch:(UISwitch *)sender {
     [RecentDomains sharedInstance].saveRecentDomains = sender.isOn;
+}
+
+- (void) tipsSwitch:(UISwitch *)sender {
+    [AppDefaults setBool:!sender.isOn forKey:HIDE_TIPS];
 }
 
 - (void) themeSwitch:(UISegmentedControl *)sender {
