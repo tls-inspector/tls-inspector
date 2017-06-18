@@ -22,8 +22,6 @@
 		3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
 		3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
 		3C5096A21E7CCA7C00AEAAB2 /* GTAppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */; };
-		3C56FFDA1EDA75280032DCFE /* CKCertificateChain+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C56FFD81EDA75280032DCFE /* CKCertificateChain+EnumValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C56FFDB1EDA75280032DCFE /* CKCertificateChain+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C56FFD91EDA75280032DCFE /* CKCertificateChain+EnumValues.m */; };
 		3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
@@ -45,6 +43,8 @@
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
+		3C7DE6061EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C7DE6041EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C7DE6071EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DE6051EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m */; };
 		3CBD8B931E7CE8D600F2A637 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B921E7CE8D600F2A637 /* AppState.m */; };
 		3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B921E7CE8D600F2A637 /* AppState.m */; };
 		3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
@@ -154,8 +154,6 @@
 		3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTAppLinks.m; sourceTree = "<group>"; };
 		3C50969D1E7CCA7600AEAAB2 /* UIDevice+PlatformString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformString.h"; sourceTree = "<group>"; };
 		3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+PlatformString.m"; sourceTree = "<group>"; };
-		3C56FFD81EDA75280032DCFE /* CKCertificateChain+EnumValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKCertificateChain+EnumValues.h"; sourceTree = "<group>"; };
-		3C56FFD91EDA75280032DCFE /* CKCertificateChain+EnumValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKCertificateChain+EnumValues.m"; sourceTree = "<group>"; };
 		3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3C5D129F1D0531BD004B6E12 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		3C5D12A01D0531BD004B6E12 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -180,6 +178,8 @@
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
+		3C7DE6041EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKCertificateChain+EnumValues.h"; sourceTree = "<group>"; };
+		3C7DE6051EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKCertificateChain+EnumValues.m"; sourceTree = "<group>"; };
 		3CBD8B911E7CE8D600F2A637 /* AppState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppState.h; sourceTree = "<group>"; };
 		3CBD8B921E7CE8D600F2A637 /* AppState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppState.m; sourceTree = "<group>"; };
 		3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
@@ -317,6 +317,11 @@
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXGroup;
 			children = (
+				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
+				3C6FE49E1EF4CB4D002021E3 /* CKServerQuery.h */,
+				3C6FE49F1EF4CB4D002021E3 /* CKServerQuery.m */,
+				3C6FE4A21EF4D098002021E3 /* CKServerInfo.h */,
+				3C6FE4A31EF4D098002021E3 /* CKServerInfo.m */,
 				3C65DAEC1E836C15004AD96D /* CKCRLManager.h */,
 				3C65DAED1E836C15004AD96D /* CKCRLManager.m */,
 				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
@@ -325,17 +330,24 @@
 				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
-				3C56FFD81EDA75280032DCFE /* CKCertificateChain+EnumValues.h */,
-				3C56FFD91EDA75280032DCFE /* CKCertificateChain+EnumValues.m */,
 				3C65DAEA1E836C15004AD96D /* CKCertificateRevoked.h */,
 				3C65DAEB1E836C15004AD96D /* CKCertificateRevoked.m */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
-				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
-				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
 			);
 			path = CertificateKit;
+			sourceTree = "<group>";
+		};
+		3C6FE49D1EF4C0EF002021E3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3C7DE6041EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h */,
+				3C7DE6051EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m */,
+				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
+				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3CC6521C1DB06DF2001FB7E1 /* Localization */ = {
@@ -495,13 +507,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
-				3C56FFDA1EDA75280032DCFE /* CKCertificateChain+EnumValues.h in Headers */,
 				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
+				3C6FE4A41EF4D098002021E3 /* CKServerInfo.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
+				3C6FE4A01EF4CB4D002021E3 /* CKServerQuery.h in Headers */,
 				3C65DAF51E836C15004AD96D /* CKCertificateRevoked.h in Headers */,
 				3C65DAF71E836C15004AD96D /* CKCRLManager.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
+				3C7DE6061EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,10 +764,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
-				3C56FFDB1EDA75280032DCFE /* CKCertificateChain+EnumValues.m in Sources */,
 				3C65DAF81E836C15004AD96D /* CKCRLManager.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
 				3C65DAF61E836C15004AD96D /* CKCertificateRevoked.m in Sources */,
+				3C7DE6071EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 			);
