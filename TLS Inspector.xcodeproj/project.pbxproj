@@ -49,6 +49,7 @@
 		3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B921E7CE8D600F2A637 /* AppState.m */; };
 		3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
 		3CBD8B981E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
+		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; };
 		3CC6521F1DB06E1A001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
 		3CC6523D1DB07035001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
 		3CC6523F1DB0710C001FB7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6523E1DB0710C001FB7E1 /* Main.storyboard */; };
@@ -184,6 +185,7 @@
 		3CBD8B921E7CE8D600F2A637 /* AppState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppState.m; sourceTree = "<group>"; };
 		3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
 		3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
+		3CC1E9321F035A3400ED9BAA /* curl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = curl.framework; sourceTree = "<group>"; };
 		3CC6521D1DB06E1A001FB7E1 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lang.h; sourceTree = "<group>"; };
 		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lang.m; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */,
 				3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,10 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
-				3C6FE49E1EF4CB4D002021E3 /* CKServerQuery.h */,
-				3C6FE49F1EF4CB4D002021E3 /* CKServerQuery.m */,
-				3C6FE4A21EF4D098002021E3 /* CKServerInfo.h */,
-				3C6FE4A31EF4D098002021E3 /* CKServerInfo.m */,
 				3C65DAEC1E836C15004AD96D /* CKCRLManager.h */,
 				3C65DAED1E836C15004AD96D /* CKCRLManager.m */,
 				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
@@ -334,6 +333,7 @@
 				3C65DAEB1E836C15004AD96D /* CKCertificateRevoked.m */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
+				3CC1E9321F035A3400ED9BAA /* curl.framework */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
 			);
 			path = CertificateKit;
@@ -509,9 +509,7 @@
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
 				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
-				3C6FE4A41EF4D098002021E3 /* CKServerInfo.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
-				3C6FE4A01EF4CB4D002021E3 /* CKServerQuery.h in Headers */,
 				3C65DAF51E836C15004AD96D /* CKCertificateRevoked.h in Headers */,
 				3C65DAF71E836C15004AD96D /* CKCRLManager.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
@@ -911,6 +909,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -939,6 +938,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
