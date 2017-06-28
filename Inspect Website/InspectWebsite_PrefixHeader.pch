@@ -2,7 +2,6 @@
 #define InspectWebsite_PrefixHeader_pch
 
 #import "lang.h"
-#import "defines.pch"
 #import "AppState.h"
 #import "MBProgressHUD.h"
 #import "UIHelper.h"

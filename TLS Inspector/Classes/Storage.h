@@ -15,6 +15,6 @@
 /**
  The user defaults for the app
  */
-@property (strong, nonatomic) NSUserDefaults * groupDefaults;
+@property (strong, nonatomic) NSUserDefaults * _Nullable groupDefaults;
 
 @end
