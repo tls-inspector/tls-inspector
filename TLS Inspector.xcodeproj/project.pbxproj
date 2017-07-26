@@ -55,6 +55,8 @@
 		3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
 		3CBD8B981E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
 		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; };
+		3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */; };
 		3CC6521F1DB06E1A001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
 		3CC6523D1DB07035001FB7E1 /* lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6521E1DB06E1A001FB7E1 /* lang.m */; };
 		3CC6523F1DB0710C001FB7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6523E1DB0710C001FB7E1 /* Main.storyboard */; };
@@ -200,6 +202,8 @@
 		3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
 		3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
 		3CC1E9321F035A3400ED9BAA /* curl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = curl.framework; sourceTree = "<group>"; };
+		3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKServerInfo.h; sourceTree = "<group>"; };
+		3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKServerInfo.m; sourceTree = "<group>"; };
 		3CC6521D1DB06E1A001FB7E1 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lang.h; sourceTree = "<group>"; };
 		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lang.m; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -353,6 +357,8 @@
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				3C65DAEC1E836C15004AD96D /* CKCRLManager.h */,
 				3C65DAED1E836C15004AD96D /* CKCRLManager.m */,
+				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
+				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
 				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
 				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
 				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
@@ -545,6 +551,7 @@
 				3C65DAF71E836C15004AD96D /* CKCRLManager.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
 				3C7DE6061EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h in Headers */,
+				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +802,7 @@
 			files = (
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3C65DAF81E836C15004AD96D /* CKCRLManager.m in Sources */,
+				3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
 				3C65DAF61E836C15004AD96D /* CKCertificateRevoked.m in Sources */,
 				3C7DE6071EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m in Sources */,

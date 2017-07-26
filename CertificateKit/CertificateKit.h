@@ -38,3 +38,4 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKCertificateChain.h>
 #import <CertificateKit/CKCertificateChain+EnumValues.h>
 #import <CertificateKit/CKCertificateRevoked.h>
+#import <CertificateKit/CKServerInfo.h>
