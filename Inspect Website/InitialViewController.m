@@ -4,9 +4,9 @@
 
 #include <MobileCoreServices/MobileCoreServices.h>
 
-@interface InitialViewController ()
+@interface InitialViewController () <CKGetterDelegate>
 
-@property (strong, nonatomic) CKCertificateChain * chainManager;
+@property (strong, nonatomic) CKGetter * infoGetter;
 
 @end
 
@@ -18,7 +18,8 @@
     [[AppState currentState] setAppearance];
     [AppState currentState].extensionContext = self.extensionContext;
 
-    self.chainManager = [[CKCertificateChain alloc] init];
+    self.infoGetter = [CKGetter newGetter];
+    self.infoGetter.delegate = self;
 
     for (NSExtensionItem *item in self.extensionContext.inputItems) {
         for (NSItemProvider *itemProvider in item.attachments) {
@@ -65,30 +66,7 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     });
 
-    [self.chainManager certificateChainFromURL:url finished:^(NSError * _Nullable error, CKCertificateChain * _Nullable chain) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-
-        if (error) {
-            [[UIHelper sharedInstance]
-             presentAlertInViewController:self
-             title:l(@"Could not get certificates")
-             body:error.localizedDescription
-             dismissButtonTitle:l(@"Dismiss")
-             dismissed:^(NSInteger buttonIndex) {
-                 [self closeExtension];
-             }];
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                currentChain = chain;
-                selectedCertificate = chain.certificates[0];
-                UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-                UISplitViewController * split = [main instantiateViewControllerWithIdentifier:@"SplitView"];
-                [self presentViewController:split animated:YES completion:nil];
-            });
-        }
-    }];
+    [self.infoGetter getInfoForURL:url];
 }
 
 - (void) unsupportedURL {
@@ -113,4 +91,32 @@
 - (IBAction)closeButton:(id)sender {
     [self closeExtension];
 }
+
+- (void) finishedGetter:(CKGetter *)getter {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        currentChain = getter.chain;
+        selectedCertificate = getter.chain.certificates[0];
+        UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        UISplitViewController * split = [main instantiateViewControllerWithIdentifier:@"SplitView"];
+        [self presentViewController:split animated:YES completion:nil];
+    });
+}
+
+- (void) getter:(CKGetter *)getter gotCertificateChain:(CKCertificateChain *)chain {
+    NSLog(@"Hi");
+}
+
+- (void) getter:(CKGetter *)getter gotServerInfo:(CKServerInfo * _Nonnull)serverInfo {
+    NSLog(@"Hi");
+}
+
+- (void) getter:(CKGetter *)getter errorGettingServerInfo:(NSError *)error {
+    NSLog(@"Hi");
+}
+
+- (void) getter:(CKGetter *)getter errorGettingCertificateChain:(NSError *)error {
+    NSLog(@"Hi");
+}
+
 @end

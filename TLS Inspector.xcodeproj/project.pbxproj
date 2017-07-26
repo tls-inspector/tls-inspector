@@ -13,6 +13,8 @@
 		3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0C6F331E7CCB6400E6FCA2 /* UILang.m */; };
 		3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C2A7A511F284DC700AA12B4 /* CKGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A521F284DC700AA12B4 /* CKGetter.m */; };
+		3C2A7A571F28561300AA12B4 /* GetterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A561F28561300AA12B4 /* GetterTableViewController.m */; };
+		3C2A7A581F28561700AA12B4 /* GetterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A561F28561300AA12B4 /* GetterTableViewController.m */; };
 		3C2A7A621F28589000AA12B4 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A5B1F28589000AA12B4 /* FAImageView.m */; };
 		3C2A7A631F28589000AA12B4 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A5D1F28589000AA12B4 /* NSString+FontAwesome.m */; };
 		3C2A7A641F28589000AA12B4 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A5F1F28589000AA12B4 /* UIFont+FontAwesome.m */; };
@@ -155,6 +157,8 @@
 		3C28B1161E88201400715A5A /* defines.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.pch; sourceTree = "<group>"; };
 		3C2A7A511F284DC700AA12B4 /* CKGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGetter.h; sourceTree = "<group>"; };
 		3C2A7A521F284DC700AA12B4 /* CKGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGetter.m; sourceTree = "<group>"; };
+		3C2A7A551F28561300AA12B4 /* GetterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetterTableViewController.h; sourceTree = "<group>"; };
+		3C2A7A561F28561300AA12B4 /* GetterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetterTableViewController.m; sourceTree = "<group>"; };
 		3C2A7A5A1F28589000AA12B4 /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
 		3C2A7A5B1F28589000AA12B4 /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
 		3C2A7A5C1F28589000AA12B4 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
@@ -505,6 +509,8 @@
 		3CFAE6F31CA8464200CD946B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3C2A7A551F28561300AA12B4 /* GetterTableViewController.h */,
+				3C2A7A561F28561300AA12B4 /* GetterTableViewController.m */,
 				A156228F1EEA065600D61FB5 /* InitialNavigationController.h */,
 				A15622901EEA065600D61FB5 /* InitialNavigationController.m */,
 				3C5D129F1D0531BD004B6E12 /* AboutViewController.h */,
@@ -784,6 +790,7 @@
 			files = (
 				A1BA8BE61E8EB3530004FB0F /* DNSResolver.m in Sources */,
 				A16ABDA51E844C8A007779BE /* TitleValueTableViewCell.m in Sources */,
+				3C2A7A581F28561700AA12B4 /* GetterTableViewController.m in Sources */,
 				3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */,
 				3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */,
 				3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */,
@@ -849,6 +856,7 @@
 				3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */,
 				A116000B1EEB086800D98E8F /* Storage.m in Sources */,
 				3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */,
+				3C2A7A571F28561300AA12B4 /* GetterTableViewController.m in Sources */,
 				3CFAE6DB1CA8440400CD946B /* main.m in Sources */,
 				3C2A7A651F28589000AA12B4 /* UIImage+FontAwesome.m in Sources */,
 				3C04EE621CB4AE5800F56B68 /* ValueViewController.m in Sources */,

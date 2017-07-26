@@ -3,6 +3,7 @@
 #import "RecentDomains.h"
 #import <CertificateKit/CertificateKit.h>
 #import "TitleValueTableViewCell.h"
+#import "GetterTableViewController.h"
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
@@ -16,7 +17,6 @@
 - (IBAction) inspectButton:(UIBarButtonItem *)sender;
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
-@property (strong, nonatomic) CKCertificateChain * chain;
 @property (strong, nonatomic) NSArray<NSString *> * placeholderDomains;
 @property (strong, nonatomic) NSArray<NSString *> * tipKeys;
 
@@ -31,7 +31,6 @@
     [super viewDidLoad];
     self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    self.chain = [CKCertificateChain new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 
     self.placeholderDomains = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DomainList" ofType:@"plist"]];
@@ -114,46 +113,9 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     });
 
-    [self.chain
-     certificateChainFromURL:[NSURL URLWithString:lookupAddress]
-     finished:^(NSError * _Nullable error, CKCertificateChain * _Nullable chain) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-         });
-
-         if (error) {
-             NSString * description;
-             switch (error.code) {
-                case 61: // Still trying to find the enum def for this one
-                     description = l(@"Connection refused.");
-                     break;
-                case kCFHostErrorUnknown:
-                case kCFHostErrorHostNotFound:
-                     description = l(@"Host was not found or invalid.");
-                     break;
-                case errSSLInternal:
-                     description = l(@"Internal error.");
-                     break;
-                default:
-                     description = error.localizedDescription;
-                     break;
-             }
-             [[UIHelper sharedInstance]
-              presentAlertInViewController:self
-              title:l(@"An error occurred")
-              body:description
-              dismissButtonTitle:l(@"Dismiss")
-              dismissed:nil];
-         } else {
-             [self saveRecent];
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 currentChain = chain;
-                 selectedCertificate = chain.certificates[0];
-                 UISplitViewController * split = [self.storyboard instantiateViewControllerWithIdentifier:@"SplitView"];
-                 [self presentViewController:split animated:YES completion:nil];
-             });
-         }
-     }];
+    GetterTableViewController * getter = [self.storyboard instantiateViewControllerWithIdentifier:@"Getter"];
+    getter.url = lookupAddress;
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:getter] animated:YES completion:nil];
 }
 
 - (void) inspectWebsiteNotification:(NSNotification *)notification {
