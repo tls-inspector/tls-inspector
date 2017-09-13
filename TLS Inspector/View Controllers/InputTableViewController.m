@@ -92,7 +92,6 @@
         [self.hostField endEditing:YES];
     });
 
-    GetterTableViewController * getter = [self.storyboard instantiateViewControllerWithIdentifier:@"Getter"];
     // Show a non-generic error for hosts containing unicode as we don't
     // support them (GH Issue #43)
     if (![lookupAddress canBeConvertedToEncoding:NSASCIIStringEncoding]) {
@@ -104,6 +103,7 @@
         [[UIHelper sharedInstance] presentAlertInViewController:self title:l(@"Invalid host") body:l(@"The host you provided is not valid") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
         return;
     }
+    GetterTableViewController * getter = [self.storyboard instantiateViewControllerWithIdentifier:@"Getter"];
     [getter presentGetter:self ForUrl:url finished:^(BOOL success) {
         if (success) {
             [self saveRecent];

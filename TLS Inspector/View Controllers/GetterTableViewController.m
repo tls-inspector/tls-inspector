@@ -93,7 +93,9 @@
 
 - (void) finishedGetter:(CKGetter *)getter {
     dispatch_async(dispatch_get_main_queue(), ^{
-        finishedBlock(YES);
+        if (finishedBlock != nil) {
+            finishedBlock(YES);
+        }
         currentChain = getter.chain;
         currentServerInfo = getter.serverInfo;
         selectedCertificate = getter.chain.certificates[0];
@@ -137,7 +139,9 @@
 
 - (void) showCloseButton {
     if (self.navigationItem.leftBarButtonItem == nil) {
-        finishedBlock(NO);
+        if (finishedBlock != nil) {
+            finishedBlock(YES);
+        }
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissView:)];
     }
 }

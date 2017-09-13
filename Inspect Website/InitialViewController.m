@@ -4,9 +4,7 @@
 
 #include <MobileCoreServices/MobileCoreServices.h>
 
-@interface InitialViewController () <CKGetterDelegate>
-
-@property (strong, nonatomic) CKGetter * infoGetter;
+@interface InitialViewController ()
 
 @end
 
@@ -17,9 +15,6 @@
 
     [[AppState currentState] setAppearance];
     [AppState currentState].extensionContext = self.extensionContext;
-
-    self.infoGetter = [CKGetter newGetter];
-    self.infoGetter.delegate = self;
 
     for (NSExtensionItem *item in self.extensionContext.inputItems) {
         for (NSItemProvider *itemProvider in item.attachments) {
@@ -62,11 +57,9 @@
 }
 
 - (void) loadURL:(NSURL *)url {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    });
-
-    [self.infoGetter getInfoForURL:url];
+    UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    GetterTableViewController * getter = [main instantiateViewControllerWithIdentifier:@"Getter"];
+    [getter presentGetter:self ForUrl:url finished:nil];
 }
 
 - (void) unsupportedURL {
@@ -90,34 +83,6 @@
 
 - (IBAction)closeButton:(id)sender {
     [self closeExtension];
-}
-
-- (void) finishedGetter:(CKGetter *)getter {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        currentChain = getter.chain;
-        currentServerInfo = getter.serverInfo;
-        selectedCertificate = getter.chain.certificates[0];
-        UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        UISplitViewController * split = [main instantiateViewControllerWithIdentifier:@"SplitView"];
-        [self presentViewController:split animated:YES completion:nil];
-    });
-}
-
-- (void) getter:(CKGetter *)getter gotCertificateChain:(CKCertificateChain *)chain {
-    NSLog(@"Hi");
-}
-
-- (void) getter:(CKGetter *)getter gotServerInfo:(CKServerInfo * _Nonnull)serverInfo {
-    NSLog(@"Hi");
-}
-
-- (void) getter:(CKGetter *)getter errorGettingServerInfo:(NSError *)error {
-    NSLog(@"Hi");
-}
-
-- (void) getter:(CKGetter *)getter errorGettingCertificateChain:(NSError *)error {
-    NSLog(@"Hi");
 }
 
 @end
