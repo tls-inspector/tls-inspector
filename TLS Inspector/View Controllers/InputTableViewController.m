@@ -110,11 +110,21 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.hostField endEditing:YES];
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     });
 
     GetterTableViewController * getter = [self.storyboard instantiateViewControllerWithIdentifier:@"Getter"];
-    getter.url = lookupAddress;
+    // Show a non-generic error for hosts containing unicode as we don't
+    // support them (GH Issue #43)
+    if (![lookupAddress canBeConvertedToEncoding:NSASCIIStringEncoding]) {
+        [[UIHelper sharedInstance] presentAlertInViewController:self title:l(@"IDN Not Supported") body:l(@"At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+        return;
+    }
+    NSURL * url = [NSURL URLWithString:lookupAddress];
+    if (url == nil || url.host == nil) {
+        [[UIHelper sharedInstance] presentAlertInViewController:self title:l(@"Invalid host") body:l(@"The host you provided is not valid") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+        return;
+    }
+    getter.url = url;
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:getter] animated:YES completion:nil];
 }
 

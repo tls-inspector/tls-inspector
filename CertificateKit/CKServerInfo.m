@@ -37,7 +37,9 @@
         response = curl_easy_perform(curl);
         // Check for errors
         if (response != CURLE_OK) {
-            NSLog(@"Error getting server info: %s", curl_easy_strerror(response));
+            NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
+            NSLog(@"Error getting server info: %@", errString);
+            error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
         }
 
         long http_code = 0;

@@ -186,6 +186,7 @@
 }
 
 - (IBAction) closeButton:(UIBarButtonItem *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [appState.getterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 @end

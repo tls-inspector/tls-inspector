@@ -2,6 +2,6 @@
 
 @interface GetterTableViewController : UITableViewController
 
-@property (strong, nonatomic, nonnull) NSString * url;
+@property (strong, nonatomic, nonnull) NSURL * url;
 
 @end
