@@ -20,6 +20,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     uihelper = [UIHelper sharedInstance];
+    self.title = currentChain.domain;
 
     switch (currentChain.trusted) {
         case CKCertificateChainTrustStatusTrusted:
@@ -71,6 +72,8 @@
             return currentChain.certificates.count > 0 ? l(@"Certificate Chain") : @"";
         case 1:
             return l(@"Connection Information");
+        case 2:
+            return l(@"Security HTTP Headers");
     }
 
     return nil;
@@ -84,7 +87,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -93,6 +96,8 @@
             return currentChain.certificates.count;
         case 1:
             return 2;
+        case 2:
+            return currentServerInfo.securityHeaders.allKeys.count;
     }
     return 0;
 }
@@ -123,6 +128,10 @@
             case 1:
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocolString];
         }
+    } else if (indexPath.section == 2) {
+        NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:indexPath.row];
+        NSString * value = [currentServerInfo.securityHeaders objectForKey:key];
+        return [[TitleValueTableViewCell alloc] initWithTitle:key value:value];
     }
 
     return nil;

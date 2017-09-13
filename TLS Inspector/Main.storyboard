@@ -355,9 +355,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="Certificates"/>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="headerButton" destination="dPh-iq-nWH" id="zFB-Fu-N2c"/>
                         <outlet property="headerView" destination="smF-ep-rUB" id="yYg-H0-CWk"/>
@@ -592,7 +589,7 @@
             <objects>
                 <navigationController id="59m-WK-2HE" customClass="InitialNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="E4h-bB-AaW">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -608,7 +605,7 @@
             <objects>
                 <navigationController id="qie-H8-7Gm" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8im-2P-AtH">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -624,7 +621,7 @@
             <objects>
                 <navigationController id="111-2l-UNU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kIS-CM-blR">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
