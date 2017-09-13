@@ -1,9 +1,6 @@
 #import "ValueViewController.h"
-#import "UIHelper.h"
 
-@interface ValueViewController () {
-    UIHelper * uihelper;
-}
+@interface ValueViewController ()
 
 @property (strong, nonatomic) NSString * value;
 @property (strong, nonatomic) NSString * viewTitle;
@@ -17,7 +14,6 @@
 - (void) viewDidLoad {
     self.textView.text = self.value;
     self.title = self.viewTitle;
-    uihelper = [UIHelper sharedInstance];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];

@@ -63,7 +63,7 @@
 }
 
 - (void) unsupportedURL {
-    [[UIHelper sharedInstance]
+    [uihelper
      presentAlertInViewController:self
      title:l(@"Unsupported Scheme")
      body:l(@"Only HTTPS sites can be inspected")

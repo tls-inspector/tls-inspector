@@ -7,6 +7,9 @@
     void (^alertBannerTappedCallback)();
 }
 
+@property (strong, nonatomic, readwrite) UIColor * greenColor;
+@property (strong, nonatomic, readwrite) UIColor * redColor;
+
 @end
 
 @implementation UIHelper
@@ -16,6 +19,8 @@ static id _instance;
 - (id) init {
     if (_instance == nil) {
         UIHelper * helper = [super init];
+        helper.greenColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+        helper.redColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
         _instance = helper;
     }
     return _instance;

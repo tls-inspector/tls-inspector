@@ -31,6 +31,7 @@
 #define lv(keyString, argsArray) [lang key:keyString args:argsArray]
 
 #define AppDefaults Storage.sharedInstance.groupDefaults
+#define uihelper [UIHelper sharedInstance]
 #define usingLightTheme appState.lightTheme
 #define colorForTheme(light, dark) usingLightTheme ? light : dark
 #define themeTextColor colorForTheme([UIColor blackColor], [UIColor whiteColor])

@@ -5,7 +5,6 @@
 
 @interface AboutViewController ()
 
-@property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) GTAppLinks * appLinks;
 
 @end
@@ -19,8 +18,6 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-
-    self.helper = [UIHelper sharedInstance];
     self.appLinks = [GTAppLinks new];
 }
 
@@ -128,7 +125,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
             //
         }];
     } else if (indexPath.section == 1 && indexPath.row == 2) {
-        [self.helper
+        [uihelper
          presentActionSheetInViewController:self
          attachToTarget:[ActionTipTarget targetWithView:[tableView cellForRowAtIndexPath:indexPath]]
          title:l(@"What kind of feedback would you like to submit?")

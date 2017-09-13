@@ -14,7 +14,6 @@
 @property (strong, nonatomic) UITextField *hostField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *inspectButton;
 - (IBAction) inspectButton:(UIBarButtonItem *)sender;
-@property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
 @property (strong, nonatomic) NSArray<NSString *> * placeholderDomains;
 
@@ -24,7 +23,6 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 
@@ -95,12 +93,12 @@
     // Show a non-generic error for hosts containing unicode as we don't
     // support them (GH Issue #43)
     if (![lookupAddress canBeConvertedToEncoding:NSASCIIStringEncoding]) {
-        [[UIHelper sharedInstance] presentAlertInViewController:self title:l(@"IDN Not Supported") body:l(@"At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+        [uihelper presentAlertInViewController:self title:l(@"IDN Not Supported") body:l(@"At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
         return;
     }
     NSURL * url = [NSURL URLWithString:lookupAddress];
     if (url == nil || url.host == nil) {
-        [[UIHelper sharedInstance] presentAlertInViewController:self title:l(@"Invalid host") body:l(@"The host you provided is not valid") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+        [uihelper presentAlertInViewController:self title:l(@"Invalid host") body:l(@"The host you provided is not valid") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
         return;
     }
     GetterTableViewController * getter = [self.storyboard instantiateViewControllerWithIdentifier:@"Getter"];

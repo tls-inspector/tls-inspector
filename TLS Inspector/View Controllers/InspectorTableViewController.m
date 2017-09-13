@@ -1,6 +1,5 @@
 #import "InspectorTableViewController.h"
 #import "ValueViewController.h"
-#import "UIHelper.h"
 #import "InspectorListTableViewController.h"
 #import "CertificateReminderManager.h"
 #import "DNSResolver.h"
@@ -12,7 +11,6 @@
 
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
-@property (strong, nonatomic) UIHelper       * helper;
 
 @end
 
@@ -51,8 +49,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-
-    self.helper = [UIHelper sharedInstance];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
@@ -114,7 +110,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void) actionButton:(UIBarButtonItem *)sender {
-    [[UIHelper sharedInstance]
+    [uihelper
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
      title:self.title
@@ -146,7 +142,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             if (addresses && addresses.count >= 1) {
                 [self openURL:nstrcat(@"https://www.shodan.io/host/", addresses[0])];
             } else if (dnsError) {
-                [self.helper presentErrorInViewController:self error:dnsError dismissed:nil];
+                [uihelper presentErrorInViewController:self error:dnsError dismissed:nil];
             }
         }
      }];
@@ -176,7 +172,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
     } else {
-        [self.helper
+        [uihelper
          presentAlertInViewController:self
          title:l(@"Unable to export certificate")
          body:l(@"We were unable to export the certificate in PEM format.")
@@ -188,7 +184,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void) addCertificateExpiryReminder:(UIBarButtonItem *)sender {
-    [[UIHelper sharedInstance]
+    [uihelper
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
      title:l(@"Notification Date")
@@ -226,14 +222,14 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
               daysBeforeExpires:days
               completed:^(NSError *error, BOOL success) {
                   if (success) {
-                      [self.helper
+                      [uihelper
                        presentAlertInViewController:self
                        title:l(@"Reminder Added")
                        body:l(@"You can modify the reminder in the reminders app.")
                        dismissButtonTitle:l(@"Dismiss")
                        dismissed:nil];
                   } else if (error) {
-                      [self.helper
+                      [uihelper
                        presentErrorInViewController:self
                        error:error
                        dismissed:nil];

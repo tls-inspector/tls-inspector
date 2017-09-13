@@ -1,11 +1,9 @@
 #import "CertificateListTableViewController.h"
 #import "InspectorTableViewController.h"
-#import "UIHelper.h"
 #import "TitleValueTableViewCell.h"
+#import "NSString+FontAwesome.h"
 
-@interface CertificateListTableViewController () {
-    UIHelper * uihelper;
-}
+@interface CertificateListTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView * headerView;
 @property (weak, nonatomic) IBOutlet UILabel * headerViewLabel;
@@ -19,20 +17,19 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    uihelper = [UIHelper sharedInstance];
     self.title = currentChain.domain;
 
     switch (currentChain.trusted) {
         case CKCertificateChainTrustStatusTrusted:
             self.headerViewLabel.text = l(@"Trusted Chain");
-            self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+            self.headerView.backgroundColor = uihelper.greenColor;
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
         case CKCertificateChainTrustStatusUntrusted:
         case CKCertificateChainTrustStatusRevoked:
         case CKCertificateChainTrustStatusSelfSigned:
             self.headerViewLabel.text = l(@"Untrusted Chain");
-            self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+            self.headerView.backgroundColor = uihelper.redColor;
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
     }
@@ -110,11 +107,11 @@
 
         if (cert.revoked.isRevoked) {
             cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[[cert summary]]];
-            cell.textLabel.textColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+            cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
             NSDictionary * names = [cert names];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
-            cell.textLabel.textColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+            cell.textLabel.textColor = uihelper.greenColor;
         } else {
             cell.textLabel.text = [cert summary];
             cell.textLabel.textColor = themeTextColor;
@@ -130,8 +127,21 @@
         }
     } else if (indexPath.section == 2) {
         NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:indexPath.row];
-        NSString * value = [currentServerInfo.securityHeaders objectForKey:key];
-        return [[TitleValueTableViewCell alloc] initWithTitle:key value:value];
+        id value = [currentServerInfo.securityHeaders objectForKey:key];
+
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Icon"];
+        UILabel * icon = [cell viewWithTag:1];
+        UILabel * label = [cell viewWithTag:2];
+        label.text = key;
+        if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:@NO]) {
+            icon.text = [NSString fontAwesomeIconStringForEnum:FATimesCircle];
+            icon.textColor = uihelper.redColor;
+        } else if ([value isKindOfClass:[NSString class]]) {
+            icon.text = [NSString fontAwesomeIconStringForEnum:FACheckCircle];
+            icon.textColor = uihelper.greenColor;
+        }
+
+        return cell;
     }
 
     return nil;
