@@ -489,7 +489,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPe-sp-eDY">
-                                            <rect key="frame" x="20" y="11" width="42" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -503,7 +503,7 @@
                                         </switch>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="PPe-sp-eDY" firstAttribute="leading" secondItem="YoO-7k-7wX" secondAttribute="leadingMargin" constant="12" id="40u-2E-kaS"/>
+                                        <constraint firstItem="PPe-sp-eDY" firstAttribute="leading" secondItem="YoO-7k-7wX" secondAttribute="leadingMargin" constant="8" id="40u-2E-kaS"/>
                                         <constraint firstItem="9uU-hF-JDx" firstAttribute="centerY" secondItem="YoO-7k-7wX" secondAttribute="centerY" id="4Qp-64-JeY"/>
                                         <constraint firstItem="PPe-sp-eDY" firstAttribute="centerY" secondItem="YoO-7k-7wX" secondAttribute="centerY" id="WGB-No-4of"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="9uU-hF-JDx" secondAttribute="trailing" constant="12" id="p8m-HB-tSC"/>
@@ -519,7 +519,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlX-Kk-WPL">
-                                            <rect key="frame" x="20" y="11" width="42" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -537,7 +537,7 @@
                                         </segmentedControl>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="GlX-Kk-WPL" firstAttribute="leading" secondItem="yLM-EN-UGl" secondAttribute="leadingMargin" constant="12" id="9RB-1R-6db"/>
+                                        <constraint firstItem="GlX-Kk-WPL" firstAttribute="leading" secondItem="yLM-EN-UGl" secondAttribute="leadingMargin" constant="8" id="9RB-1R-6db"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="wYw-DZ-Dvj" secondAttribute="trailing" constant="12" id="9cr-k1-O2u"/>
                                         <constraint firstItem="wYw-DZ-Dvj" firstAttribute="centerY" secondItem="yLM-EN-UGl" secondAttribute="centerY" id="fNY-Ep-LD5"/>
                                         <constraint firstItem="GlX-Kk-WPL" firstAttribute="centerY" secondItem="yLM-EN-UGl" secondAttribute="centerY" id="rTJ-Ht-PCv"/>
@@ -589,7 +589,7 @@
             <objects>
                 <navigationController id="59m-WK-2HE" customClass="InitialNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="E4h-bB-AaW">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -605,7 +605,7 @@
             <objects>
                 <navigationController id="qie-H8-7Gm" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8im-2P-AtH">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -621,7 +621,7 @@
             <objects>
                 <navigationController id="111-2l-UNU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kIS-CM-blR">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

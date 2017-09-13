@@ -2,8 +2,10 @@
 
 @interface GetterTableViewController () <CKGetterDelegate> {
     BOOL errorLoading;
+    void (^finishedBlock)(BOOL success);
 }
 
+@property (strong, nonatomic, nonnull) NSURL * url;
 @property (strong, nonatomic) NSArray<NSString *> * items;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> * itemStatus;
 @property (strong, nonatomic) CKGetter * infoGetter;
@@ -14,6 +16,12 @@
 
 #define CERT_CELL @"Certificates"
 #define SERV_CELL @"Server Info"
+
+- (void) presentGetter:(UIViewController *)parent ForUrl:(NSURL *)url finished:(void (^)(BOOL success))finished {
+    self.url = url;
+    finishedBlock = finished;
+    [parent presentViewController:[[UINavigationController alloc] initWithRootViewController:self] animated:YES completion:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -85,6 +93,7 @@
 
 - (void) finishedGetter:(CKGetter *)getter {
     dispatch_async(dispatch_get_main_queue(), ^{
+        finishedBlock(YES);
         currentChain = getter.chain;
         currentServerInfo = getter.serverInfo;
         selectedCertificate = getter.chain.certificates[0];
@@ -128,6 +137,7 @@
 
 - (void) showCloseButton {
     if (self.navigationItem.leftBarButtonItem == nil) {
+        finishedBlock(NO);
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissView:)];
     }
 }

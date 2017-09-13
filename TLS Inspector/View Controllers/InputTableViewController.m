@@ -9,7 +9,6 @@
     NSString * hostAddress;
     NSNumber * certIndex;
     NSString * placeholder;
-    NSString * tip;
 }
 
 @property (strong, nonatomic) UITextField *hostField;
@@ -18,14 +17,10 @@
 @property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
 @property (strong, nonatomic) NSArray<NSString *> * placeholderDomains;
-@property (strong, nonatomic) NSArray<NSString *> * tipKeys;
 
 @end
 
 @implementation InputTableViewController
-
-#define tipSection(section) ![AppDefaults boolForKey:HIDE_TIPS] && section == 2
-#define recentSection(section) (![AppDefaults boolForKey:HIDE_TIPS] && section == 3) || ([AppDefaults boolForKey:HIDE_TIPS] && section == 2)
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -34,15 +29,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 
     self.placeholderDomains = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DomainList" ofType:@"plist"]];
-    self.tipKeys = @[
-                     @"tlstip1",
-                     @"tlstip2",
-                     @"tlstip3",
-                     @"tlstip4",
-                     @"tlstip5",
-                     @"tlstip6",
-                     @"tlstip7"
-                     ];
 
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -53,8 +39,6 @@
 
     NSUInteger randomPlaceholderIndex = arc4random() % [self.placeholderDomains count];
     placeholder = [self.placeholderDomains objectAtIndex:randomPlaceholderIndex];
-    NSUInteger randomTipIndex = arc4random() % [self.tipKeys count];
-    tip = [self.tipKeys objectAtIndex:randomTipIndex];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -88,11 +72,7 @@
         NSArray<NSString *> * domains = [[RecentDomains sharedInstance] getRecentDomains];
         if (![domains containsObject:hostAddress]) {
             self.recentDomains = [[RecentDomains sharedInstance] prependDomain:hostAddress];
-            if ([self.tableView numberOfSections] == 3) {
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 1)] withRowAnimation:UITableViewRowAnimationNone];
-            } else {
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
-            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
         }
     }
 }
@@ -124,8 +104,11 @@
         [[UIHelper sharedInstance] presentAlertInViewController:self title:l(@"Invalid host") body:l(@"The host you provided is not valid") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
         return;
     }
-    getter.url = url;
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:getter] animated:YES completion:nil];
+    [getter presentGetter:self ForUrl:url finished:^(BOOL success) {
+        if (success) {
+            [self saveRecent];
+        }
+    }];
 }
 
 - (void) inspectWebsiteNotification:(NSNotification *)notification {
@@ -138,7 +121,7 @@
 # pragma mark Table View
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (recentSection(indexPath.section)) {
+    if (indexPath.section == 1) {
         return YES;
     }
     return NO;
@@ -158,9 +141,7 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-    } else if (tipSection(section)) {
-        return 1;
-    } else if (recentSection(section)) {
+    } else if (section == 1) {
         return self.recentDomains.count;
     }
 
@@ -170,7 +151,7 @@
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return l(@"FQDN or IP Address");
-    } else if (recentSection(section)) {
+    } else if (section == 1) {
         return l(@"Recent Domains");
     }
 
@@ -199,12 +180,7 @@
             UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
             self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
         }
-    } else if (tipSection(indexPath.section)) {
-        TitleValueTableViewCell * tvCell = [[TitleValueTableViewCell alloc] initWithTitle:[lang key:@"Did You Know..."] value:[lang key:tip]];
-        tvCell.valueLabel.font = [UIFont systemFontOfSize:13.0f];
-        tvCell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        return tvCell;
-    } else if (recentSection(indexPath.section)) {
+    } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
         cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
         cell.textLabel.textColor = themeTextColor;
@@ -221,7 +197,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (recentSection(indexPath.section)) {
+    if (indexPath.section == 1) {
         hostAddress = self.recentDomains[indexPath.row];
         [self inspectCertificate];
     }
