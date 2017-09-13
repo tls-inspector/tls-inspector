@@ -45,6 +45,7 @@
 
 #define appState [AppState currentState]
 #define currentChain appState.certificateChain
+#define currentServerInfo appState.serverInfo
 #define selectedCertificate appState.selectedCertificate
 #define isCompact appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact
 #define isRegular appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular

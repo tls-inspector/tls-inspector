@@ -86,6 +86,7 @@
 - (void) finishedGetter:(CKGetter *)getter {
     dispatch_async(dispatch_get_main_queue(), ^{
         currentChain = getter.chain;
+        currentServerInfo = getter.serverInfo;
         selectedCertificate = getter.chain.certificates[0];
         UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         UISplitViewController * split = [main instantiateViewControllerWithIdentifier:@"SplitView"];

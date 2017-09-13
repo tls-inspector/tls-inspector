@@ -2,6 +2,7 @@
 #import "CKCRLManager.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
+#include <curl/curl.h>
 
 @interface CKGetter () <NSStreamDelegate> {
     CFReadStreamRef   readStream;
@@ -22,10 +23,14 @@
 @property (nonatomic, readwrite) SSLCipherSuite cipher;
 @property (nonatomic, readwrite) SSLProtocol protocol;
 @property (nonatomic, readwrite) BOOL crlVerified;
+@property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> * headers;
+@property (nonatomic) NSUInteger statusCode;
 
 @end
 
 @implementation CKGetter
+
+@synthesize headers;
 
 + (CKGetter * _Nonnull) newGetter {
     return [CKGetter new];
@@ -34,11 +39,13 @@
 - (void) getInfoForURL:(NSURL *)URL; {
     queryURL = URL;
 
-    self.serverInfo = [CKServerInfo new];
     [NSThread detachNewThreadSelector:@selector(getServerInfo) toTarget:self withObject:nil];
+    [NSThread detachNewThreadSelector:@selector(getCertificates) toTarget:self withObject:nil];
+}
 
-    unsigned int port = URL.port != nil ? [URL.port unsignedIntValue] : 443;
-    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)URL.host, port, &readStream, &writeStream);
+- (void) getCertificates {
+    unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)queryURL.host, port, &readStream, &writeStream);
 
     outputStream = (__bridge NSOutputStream *)writeStream;
     inputStream = (__bridge NSInputStream *)readStream;
@@ -54,12 +61,15 @@
 }
 
 - (void) getServerInfo {
-    [self.serverInfo getServerInfoForURL:queryURL finished:^(NSError *error) {
+    [self getServerInfoForURL:queryURL finished:^(NSError *error) {
         if (error) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingServerInfo:)]) {
                 [self.delegate getter:self errorGettingServerInfo:error];
             }
         } else {
+            self.serverInfo = [CKServerInfo new];
+            self.serverInfo.headers = self.headers;
+            self.serverInfo.statusCode = self.statusCode;
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotServerInfo:)]) {
                 [self.delegate getter:self gotServerInfo:self.serverInfo];
             }
@@ -189,6 +199,66 @@
         gotChain = YES;
         [self checkIfFinished];
     });
+}
+
+- (void) getServerInfoForURL:(NSURL *)url finished:(void (^)(NSError * error))finished {
+    CURL * curl;
+    CURLcode response;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+
+    self.headers = [NSMutableDictionary new];
+
+    NSError * error;
+
+    curl = curl_easy_init();
+    if (curl) {
+        const char * urlString = url.absoluteString.UTF8String;
+        curl_easy_setopt(curl, CURLOPT_URL, urlString);
+        // Since we're only concerned with getting the HTTP servers
+        // info, we don't do any verification
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+
+        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_callback);
+        curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
+        // Perform the request, res will get the return code
+        response = curl_easy_perform(curl);
+        // Check for errors
+        if (response != CURLE_OK) {
+            NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
+            NSLog(@"Error getting server info: %@", errString);
+            error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
+        }
+
+        long http_code = 0;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+        self.statusCode = http_code;
+
+        // always cleanup
+        curl_easy_cleanup(curl);
+    } else {
+        error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to create curl session."}];
+    }
+    curl_global_cleanup();
+    finished(error);
+}
+
+static size_t header_callback(char *buffer, size_t size,
+                              size_t nitems, void *userdata) {
+    unsigned long len = nitems * size;
+    if (len > 2) {
+        NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
+        NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray<NSString *> * components = [headerValue componentsSeparatedByString:@":"];
+        if (components.count == 2) {
+            [((__bridge NSMutableDictionary<NSString *, NSString *> *)userdata)
+             setObject:[components[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
+             forKey:[components[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+        }
+    }
+
+    return len;
 }
 
 - (void) checkIfFinished {
