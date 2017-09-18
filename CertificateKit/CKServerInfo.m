@@ -26,6 +26,7 @@
 
 #import "CKServerInfo.h"
 #include <curl/curl.h>
+#include <curl/curlver.h>
 
 @interface CKServerInfo()
 
@@ -71,6 +72,10 @@
     }
 
     return nil;
+}
+
++ (NSString * _Nonnull) libcurlVersion {
+    return [NSString stringWithUTF8String:LIBCURL_VERSION];
 }
 
 @end

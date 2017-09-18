@@ -175,10 +175,11 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     switch (section) {
         case 1: {
             NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-            return format(@"%@.%@.%@",
+            return format(@"%@ (%@). %@, %@",
                           [infoDictionary objectForKey:@"CFBundleShortVersionString"],
                           [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey],
-                          [CKCertificate openSSLVersion]);
+                          [CKCertificate openSSLVersion],
+                          [CKServerInfo libcurlVersion]);
         } case 2:
             return l(@"TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.");
     }
