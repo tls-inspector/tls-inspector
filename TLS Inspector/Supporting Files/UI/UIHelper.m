@@ -4,7 +4,6 @@
     void (^alertDismissedCallback)(NSInteger buttonIndex);
     void (^confirmDismissedCallback)(BOOL confirmed);
     void (^actionSheetDismissedCallback)(NSInteger buttonIndex);
-    void (^alertBannerTappedCallback)();
 }
 
 @property (strong, nonatomic, readwrite) UIColor * greenColor;

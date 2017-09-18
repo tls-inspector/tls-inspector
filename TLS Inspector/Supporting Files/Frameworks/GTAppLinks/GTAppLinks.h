@@ -9,7 +9,7 @@
  @param viewController The view controller to present on.
  @param dismissed Called when the view has been dismissed.
  */
-- (void) showAppInAppStore:(uint32_t)appID inViewController:(UIViewController * _Nonnull)viewController dismissed:(void(^ _Nullable)())dismissed;
+- (void) showAppInAppStore:(uint32_t)appID inViewController:(UIViewController * _Nonnull)viewController dismissed:(void(^ _Nullable)(void))dismissed;
 
 /**
  Show the email compose sheet for the given app.
@@ -19,6 +19,6 @@
  @param viewController The view controller to present on.
  @param dismissed Called when the view has been dismissed.
  */
-- (void) showEmailComposeSheetForApp:(NSString * _Nonnull)appName email:(NSString * _Nonnull)appSupportEmail inViewController:(UIViewController * _Nonnull)viewController dismissed:(void(^ _Nullable)())dismissed;
+- (void) showEmailComposeSheetForApp:(NSString * _Nonnull)appName email:(NSString * _Nonnull)appSupportEmail inViewController:(UIViewController * _Nonnull)viewController dismissed:(void(^ _Nullable)(void))dismissed;
 
 @end
