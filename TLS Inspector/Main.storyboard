@@ -225,6 +225,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="1NQ-Ir-XK2"/>
                     <connections>
                         <outlet property="textView" destination="pgs-P6-Qwl" id="yet-Ua-AHq"/>
                     </connections>
@@ -265,6 +266,7 @@
                             <outlet property="delegate" destination="7YK-nc-nNG" id="UGD-qh-cUW"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="wRC-qj-hgr"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yE4-eG-wfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -503,10 +505,10 @@
             </objects>
             <point key="canvasLocation" x="2201" y="1934"/>
         </scene>
-        <!--About TLS Inspector-->
+        <!--About-->
         <scene sceneID="afa-t4-m01">
             <objects>
-                <tableViewController title="About TLS Inspector" id="UEQ-qB-mO8" customClass="AboutViewController" sceneMemberID="viewController">
+                <tableViewController title="About" id="UEQ-qB-mO8" customClass="AboutViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="rTP-3g-FGt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -607,8 +609,13 @@
                             <outlet property="delegate" destination="UEQ-qB-mO8" id="3dI-PV-k8a"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="About" largeTitleDisplayMode="never" id="QtS-um-01s">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About TLS Inspector"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About"/>
                     </userDefinedRuntimeAttributes>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhX-sM-KrA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -619,8 +626,8 @@
         <scene sceneID="ksD-vg-xmg">
             <objects>
                 <navigationController id="59m-WK-2HE" customClass="InitialNavigationController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="E4h-bB-AaW">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" largeTitles="YES" id="E4h-bB-AaW">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -635,7 +642,7 @@
         <scene sceneID="yBr-AC-fDl">
             <objects>
                 <navigationController id="qie-H8-7Gm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8im-2P-AtH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" largeTitles="YES" id="8im-2P-AtH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -651,8 +658,8 @@
         <scene sceneID="maC-pP-8cx">
             <objects>
                 <navigationController id="111-2l-UNU" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kIS-CM-blR">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" largeTitles="YES" id="kIS-CM-blR">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
