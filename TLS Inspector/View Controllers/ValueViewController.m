@@ -78,9 +78,7 @@
                 UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                                 initWithActivityItems:@[self.value]
                                                                 applicationActivities:nil];
-                if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-                    activityController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
-                }
+                activityController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
                 [self presentViewController:activityController animated:YES completion:nil];
                 break;
             }

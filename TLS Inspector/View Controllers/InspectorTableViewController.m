@@ -167,9 +167,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-            activityController.popoverPresentationController.barButtonItem = sender;
-        }
+        activityController.popoverPresentationController.barButtonItem = sender;
         [self presentViewController:activityController animated:YES completion:^() {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
