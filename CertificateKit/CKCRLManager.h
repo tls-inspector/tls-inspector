@@ -27,9 +27,23 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificate.h"
 
+/**
+ CKCRLManager is an interface for managing and querying certificate revocation lists
+ */
 @interface CKCRLManager : NSObject
 
+/**
+ Get or create the CRL Manager singleton
+
+ @return A CKCRLManager singleton instance
+ */
 + (CKCRLManager * _Nonnull) sharedInstance;
+
+/**
+ Get or create the CRL Manager singleton
+
+ @return A CKCRLManager singleton instance
+ */
 - (id _Nonnull) init;
 
 /**
