@@ -6,6 +6,6 @@
 @property (strong, nonatomic, readonly) UILabel * iconLabel;
 @property (strong, nonatomic, readonly) UILabel * titleLabel;
 
-- (id) initWithIcon:(FAIcon)icon title:(NSString *)title;
+- (id) initWithIcon:(FAIcon)icon color:(UIColor *)color title:(NSString *)title;
 
 @end

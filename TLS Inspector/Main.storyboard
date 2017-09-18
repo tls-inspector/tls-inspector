@@ -10,9 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="FontAwesome.ttf">
-            <string>FontAwesome</string>
-        </array>
         <array key="Menlo.ttc">
             <string>Menlo-Regular</string>
         </array>
@@ -344,37 +341,6 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Icon" id="MYp-3x-PU2">
-                                <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MYp-3x-PU2" id="U81-my-XZy">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQM-6b-DxJ">
-                                            <rect key="frame" x="12" y="12.5" width="16" height="19"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="16" id="neJ-Lc-IVh"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="18"/>
-                                            <color key="textColor" red="0.95699999999999996" green="0.26300000000000001" blue="0.314" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-Rb-jcj">
-                                            <rect key="frame" x="36" y="11" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="aAw-Rb-jcj" firstAttribute="leading" secondItem="DQM-6b-DxJ" secondAttribute="trailing" constant="8" id="Duv-Jx-dNj"/>
-                                        <constraint firstItem="aAw-Rb-jcj" firstAttribute="centerY" secondItem="U81-my-XZy" secondAttribute="centerY" id="IL5-Bj-HWA"/>
-                                        <constraint firstItem="DQM-6b-DxJ" firstAttribute="centerY" secondItem="U81-my-XZy" secondAttribute="centerY" id="Iie-og-vFU"/>
-                                        <constraint firstItem="DQM-6b-DxJ" firstAttribute="leading" secondItem="U81-my-XZy" secondAttribute="leadingMargin" constant="4" id="fiW-jN-13J"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="S2I-zI-YU5" id="df1-9K-ldd"/>
@@ -429,68 +395,6 @@
                                         <constraint firstItem="ndE-ek-qOa" firstAttribute="leading" secondItem="h2b-ar-s10" secondAttribute="leadingMargin" constant="8" id="Dck-p1-hM7"/>
                                         <constraint firstItem="xeO-8y-6eY" firstAttribute="centerY" secondItem="h2b-ar-s10" secondAttribute="centerY" id="bJp-kS-Y4c"/>
                                         <constraint firstItem="ndE-ek-qOa" firstAttribute="centerY" secondItem="h2b-ar-s10" secondAttribute="centerY" id="wFE-PD-rmW"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Done" id="mGf-Eg-aOU">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mGf-Eg-aOU" id="xJF-hv-PkZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPP-x9-3th">
-                                            <rect key="frame" x="16" y="10.5" width="20" height="23"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="855-HN-aYC"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="23"/>
-                                            <color key="textColor" red="0.29799999999999999" green="0.68600000000000005" blue="0.314" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZv-hH-EcO">
-                                            <rect key="frame" x="44" y="11" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="ZPP-x9-3th" firstAttribute="leading" secondItem="xJF-hv-PkZ" secondAttribute="leadingMargin" constant="8" id="BXf-qV-a14"/>
-                                        <constraint firstItem="ZPP-x9-3th" firstAttribute="centerY" secondItem="xJF-hv-PkZ" secondAttribute="centerY" id="EpC-If-8gn"/>
-                                        <constraint firstItem="jZv-hH-EcO" firstAttribute="leading" secondItem="ZPP-x9-3th" secondAttribute="trailing" constant="8" id="jbi-mo-rQE"/>
-                                        <constraint firstItem="jZv-hH-EcO" firstAttribute="centerY" secondItem="xJF-hv-PkZ" secondAttribute="centerY" id="knI-ZP-jU7"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Error" id="vBg-Cl-RhS">
-                                <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vBg-Cl-RhS" id="Rgs-kd-fpY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RS-3Y-85S">
-                                            <rect key="frame" x="16" y="10.5" width="20" height="23"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="He9-Og-7Db"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="23"/>
-                                            <color key="textColor" red="0.95699999999999996" green="0.26300000000000001" blue="0.314" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjF-p0-caw">
-                                            <rect key="frame" x="44" y="11" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="7RS-3Y-85S" firstAttribute="leading" secondItem="Rgs-kd-fpY" secondAttribute="leadingMargin" constant="8" id="47W-ns-jfo"/>
-                                        <constraint firstItem="7RS-3Y-85S" firstAttribute="centerY" secondItem="Rgs-kd-fpY" secondAttribute="centerY" id="9LO-ns-Mb6"/>
-                                        <constraint firstItem="cjF-p0-caw" firstAttribute="leading" secondItem="7RS-3Y-85S" secondAttribute="trailing" constant="8" id="Pgz-N9-Gb4"/>
-                                        <constraint firstItem="cjF-p0-caw" firstAttribute="centerY" secondItem="Rgs-kd-fpY" secondAttribute="centerY" id="zdg-Mm-A5G"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>

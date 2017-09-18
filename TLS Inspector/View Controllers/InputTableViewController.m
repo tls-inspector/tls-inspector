@@ -69,8 +69,13 @@
     if ([RecentDomains sharedInstance].saveRecentDomains) {
         NSArray<NSString *> * domains = [[RecentDomains sharedInstance] getRecentDomains];
         if (![domains containsObject:hostAddress]) {
+            NSUInteger count = self.recentDomains.count;
             self.recentDomains = [[RecentDomains sharedInstance] prependDomain:hostAddress];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            if (count == 0) {
+                [self.tableView reloadData];
+            } else {
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            }
         }
     }
 }
@@ -126,14 +131,7 @@
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger count = 1;
-    if (![AppDefaults boolForKey:HIDE_TIPS]) {
-        count ++;
-    }
-    if (self.recentDomains.count > 0) {
-        count ++;
-    }
-    return count;
+    return self.recentDomains.count > 0 ? 2 : 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

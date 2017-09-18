@@ -2,6 +2,7 @@
 #import "InspectorTableViewController.h"
 #import "TitleValueTableViewCell.h"
 #import "NSString+FontAwesome.h"
+#import "IconTableViewCell.h"
 
 @interface CertificateListTableViewController ()
 
@@ -129,19 +130,17 @@
         NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:indexPath.row];
         id value = [currentServerInfo.securityHeaders objectForKey:key];
 
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Icon"];
-        UILabel * icon = [cell viewWithTag:1];
-        UILabel * label = [cell viewWithTag:2];
-        label.text = key;
+        FAIcon icon;
+        UIColor * color;
         if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:@NO]) {
-            icon.text = [NSString fontAwesomeIconStringForEnum:FATimesCircle];
-            icon.textColor = uihelper.redColor;
+            icon = FATimesCircle;
+            color = uihelper.redColor;
         } else if ([value isKindOfClass:[NSString class]]) {
-            icon.text = [NSString fontAwesomeIconStringForEnum:FACheckCircle];
-            icon.textColor = uihelper.greenColor;
+            icon = FACheckCircle;
+            color = uihelper.greenColor;
         }
 
-        return cell;
+        return [[IconTableViewCell alloc] initWithIcon:FATimesCircle color:color title:key];
     }
 
     return nil;

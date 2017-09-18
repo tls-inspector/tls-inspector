@@ -1,4 +1,5 @@
 #import "GetterTableViewController.h"
+#import "IconTableViewCell.h"
 
 @interface GetterTableViewController () <CKGetterDelegate> {
     BOOL errorLoading;
@@ -34,7 +35,7 @@
 
     appState.getterViewController = self;
 
-    self.infoGetter = [CKGetter newGetter];
+    self.infoGetter = [CKGetter new];
     self.infoGetter.delegate = self;
     [self.infoGetter getInfoForURL:self.url];
     self.title = self.url.host;
@@ -74,21 +75,30 @@
     NSString * pending = [self.items objectAtIndex:indexPath.row];
     NSString * status = [self.itemStatus objectForKey:pending];
 
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:status forIndexPath:indexPath];
-
     if ([status isEqualToString:@"Loading"]) {
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Loading" forIndexPath:indexPath];
         UIActivityIndicatorView * spinner = [cell viewWithTag:2];
         if (usingLightTheme) {
             spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
         } else {
             spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
         }
+
+        UILabel * label = [cell viewWithTag:1];
+        label.text = l(pending);
+        label.textColor = themeTextColor;
+        return cell;
+    } else {
+        FAIcon icon = FATimesCircle;
+        UIColor * color = uihelper.greenColor;
+        if ([status isEqualToString:@"Done"]) {
+            icon = FACheckCircle;
+            color = uihelper.greenColor;
+        }
+        return [[IconTableViewCell alloc] initWithIcon:icon color:color title:l(pending)];
     }
 
-    UILabel * label = [cell viewWithTag:1];
-    label.text = l(pending);
-    label.textColor = themeTextColor;
-    return cell;
+    return nil;
 }
 
 - (void) finishedGetter:(CKGetter *)getter {
