@@ -21,7 +21,9 @@
 - (void) presentGetter:(UIViewController *)parent ForUrl:(NSURL *)url finished:(void (^)(BOOL success))finished {
     self.url = url;
     finishedBlock = finished;
-    [parent presentViewController:[[UINavigationController alloc] initWithRootViewController:self] animated:YES completion:nil];
+    UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:self];
+    [uihelper applyStylesToNavigationBar:controller.navigationBar];
+    [parent presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {

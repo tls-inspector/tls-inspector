@@ -17,6 +17,15 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
+
+    if (usingLightTheme) {
+        self.textView.backgroundColor = [UIColor whiteColor];
+        self.textView.textColor = [UIColor blackColor];
+    } else {
+        self.textView.backgroundColor = [UIColor colorWithRed:0.106 green:0.157 blue:0.212 alpha:1.0];
+        self.textView.textColor = [UIColor whiteColor];
+    }
+
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }

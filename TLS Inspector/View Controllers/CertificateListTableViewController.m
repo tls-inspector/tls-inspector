@@ -41,6 +41,8 @@
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
+    [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
+
 #ifdef EXTENSION
     [self.navigationItem
      setLeftBarButtonItem:[[UIBarButtonItem alloc]

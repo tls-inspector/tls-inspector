@@ -183,7 +183,7 @@
                             <outlet property="delegate" destination="DsX-RJ-VHK" id="KtF-XA-pU3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="oJ5-C9-jYa"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="oJ5-C9-jYa"/>
                     <connections>
                         <segue destination="i67-mg-EAA" kind="show" identifier="ShowValue" id="KTN-RT-lsk"/>
                         <segue destination="7YK-nc-nNG" kind="show" identifier="ShowList" id="67W-bs-8iI"/>
@@ -546,7 +546,7 @@
         <scene sceneID="yBr-AC-fDl">
             <objects>
                 <navigationController id="qie-H8-7Gm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" largeTitles="YES" id="8im-2P-AtH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8im-2P-AtH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

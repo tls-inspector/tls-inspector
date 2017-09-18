@@ -143,4 +143,14 @@ static id _instance;
     button.layer.masksToBounds = YES;
 }
 
+- (void) applyStylesToNavigationBar:(UINavigationBar *)navigationBar {
+    if (usingLightTheme) {
+        navigationBar.barStyle = UIBarStyleDefault;
+        navigationBar.translucent = YES;
+    } else {
+        navigationBar.barStyle = UIBarStyleBlack;
+        navigationBar.translucent = NO;
+    }
+}
+
 @end

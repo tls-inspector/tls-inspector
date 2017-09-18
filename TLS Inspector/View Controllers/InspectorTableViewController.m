@@ -57,6 +57,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
+    [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
+
     [self loadCertificate];
     subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
 }
@@ -336,7 +338,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
             detailTextLabel.text = data[@"value"];
             textLabel.text = data[@"label"];
-            textLabel.textColor = themeTextColor;
+            textLabel.textColor = colorForTheme([UIColor darkGrayColor], [UIColor lightGrayColor]);
+            detailTextLabel.textColor = themeTextColor;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
@@ -392,7 +395,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                     detailTextLabel.text = serialNumber;
                     break;
             }
-            textLabel.textColor = themeTextColor;
+            textLabel.textColor = colorForTheme([UIColor darkGrayColor], [UIColor lightGrayColor]);
+            detailTextLabel.textColor = themeTextColor;
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagValue;
