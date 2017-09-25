@@ -200,6 +200,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     } else {
         [AppDefaults setBool:YES forKey:USE_LIGHT_THEME];
     }
+    [appState setAppearance];
 }
 
 @end

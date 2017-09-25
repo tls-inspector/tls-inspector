@@ -22,42 +22,62 @@
         self.iconLabel.textColor = color;
         [self addSubview:self.iconLabel];
 
-        NSDictionary * views = @{ @"icon": self.iconLabel };
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"H:|-16-[icon(==20)]"
-                              options:0
-                              metrics:nil
-                              views:views]];
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"V:|-[icon(==20)]-|"
-                              options:0
-                              metrics:nil
-                              views:views]];
+        NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.iconLabel
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1.0f
+                                                                             constant:20];
+        NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.iconLabel
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:nil
+                                                                             attribute:NSLayoutAttributeNotAnAttribute
+                                                                            multiplier:1.0f
+                                                                              constant:20];
+        NSLayoutConstraint * xConstraint = [NSLayoutConstraint constraintWithItem:self.iconLabel
+                                                                        attribute:NSLayoutAttributeLeft
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeLeftMargin
+                                                                       multiplier:1.0f
+                                                                         constant:8.0f];
+        NSLayoutConstraint * yConstraint = [NSLayoutConstraint constraintWithItem:self.iconLabel
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.0f
+                                                                         constant:0];
+        [NSLayoutConstraint activateConstraints:@[widthConstraint, heightConstraint, xConstraint, yConstraint]];
+        self.iconLabel.translatesAutoresizingMaskIntoConstraints = NO;
     }
 
     // Add Value
     {
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 11, 20, 20)];
         self.titleLabel.text = title;
-        self.titleLabel.textColor = themeTextColor;
+        self.titleLabel.textColor = [UIColor blackColor];
         [self addSubview:self.titleLabel];
 
-        NSDictionary * views = @{ @"title": self.titleLabel, @"icon": self.iconLabel };
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"H:[icon]-8-[title]-8-|"
-                              options:0
-                              metrics:nil
-                              views:views]];
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"V:|-8-[title]-8-|"
-                              options:0
-                              metrics:nil
-                              views:views]];
+        NSLayoutConstraint * xConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                                        attribute:NSLayoutAttributeLeft
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.iconLabel
+                                                                        attribute:NSLayoutAttributeRight
+                                                                       multiplier:1.0f
+                                                                         constant:12.0f];
+        NSLayoutConstraint * yConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.0f
+                                                                         constant:0];
+        [NSLayoutConstraint activateConstraints:@[xConstraint, yConstraint]];
         [self.titleLabel sizeToFit];
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     }
 
     [self.heightAnchor constraintEqualToConstant:44.0f].active = YES;
