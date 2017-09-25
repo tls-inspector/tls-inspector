@@ -24,7 +24,6 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 
     self.placeholderDomains = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DomainList" ofType:@"plist"]];
 
@@ -112,12 +111,6 @@
             [self saveRecent];
         }
     }];
-}
-
-- (void) inspectWebsiteNotification:(NSNotification *)notification {
-    NSDictionary<NSString *, id> * data = (NSDictionary *)notification.object;
-    hostAddress = [data objectForKey:INSPECT_NOTIFICATION_HOST_KEY];
-    [self inspectCertificate];
 }
 
 # pragma mark -
