@@ -26,6 +26,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CKCertificate.h"
+#import "CKServerInfo.h"
 
 /**
  A chain of CKCertificate objects and metadata about the chain
@@ -57,42 +58,42 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 /**
  The domain for the certificate chain
  */
-@property (strong, nonatomic, nonnull, readonly) NSString * domain;
+@property (strong, nonatomic, nonnull) NSString * domain;
 
 /**
  The array of certificates belonging to the chain
  */
-@property (strong, nonatomic, nonnull, readonly) NSArray<CKCertificate *> * certificates;
+@property (strong, nonatomic, nonnull) NSArray<CKCertificate *> * certificates;
 
 /**
  The root of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
  */
-@property (strong, nonatomic, nullable, readonly) CKCertificate * rootCA;
+@property (strong, nonatomic, nullable) CKCertificate * rootCA;
 
 /**
  The intermediate CA of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
  */
-@property (strong, nonatomic, nullable, readonly) CKCertificate * intermediateCA;
+@property (strong, nonatomic, nullable) CKCertificate * intermediateCA;
 
 /**
  The server certificate in the chain.
  */
-@property (strong, nonatomic, nullable, readonly) CKCertificate * server;
+@property (strong, nonatomic, nullable) CKCertificate * server;
 
 /**
  If the system trusts the certificate chain
  */
-@property (nonatomic, readonly) CKCertificateChainTrustStatus trusted;
+@property (nonatomic) CKCertificateChainTrustStatus trusted;
 
 /**
  Get the negotiated ciphersuite used to retrieve the chain
  */
-@property (nonatomic, readonly) SSLCipherSuite cipher;
+@property (nonatomic) SSLCipherSuite cipher;
 
 /**
  Get the negotiated protocol used to retrieve the chain
  */
-@property (nonatomic, readonly) SSLProtocol protocol;
+@property (nonatomic) SSLProtocol protocol;
 
 /**
  *  Query the specified URL for its certificate chain.
@@ -101,6 +102,6 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
  *                  The port is optional and will default to 443.
  *  @param finished Called when finished with either an error or certificate chain.
  */
-- (void) certificateChainFromURL:(NSURL * _Nonnull)URL finished:(void (^ _Nonnull)(NSError * _Nullable error, CKCertificateChain * _Nullable chain))finished;
+;
 
 @end

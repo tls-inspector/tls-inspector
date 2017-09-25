@@ -1,6 +1,5 @@
 #import "InspectorTableViewController.h"
 #import "ValueViewController.h"
-#import "UIHelper.h"
 #import "InspectorListTableViewController.h"
 #import "CertificateReminderManager.h"
 #import "DNSResolver.h"
@@ -12,7 +11,6 @@
 
 @property (strong, nonatomic) NSMutableArray * cells;
 @property (strong, nonatomic) NSMutableArray * certErrors;
-@property (strong, nonatomic) UIHelper       * helper;
 
 @end
 
@@ -52,14 +50,14 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 - (void) viewDidLoad {
     [super viewDidLoad];
 
-    self.helper = [UIHelper sharedInstance];
-
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
 
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
 
     [self loadCertificate];
     subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
@@ -114,7 +112,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void) actionButton:(UIBarButtonItem *)sender {
-    [[UIHelper sharedInstance]
+    [uihelper
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
      title:self.title
@@ -146,7 +144,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             if (addresses && addresses.count >= 1) {
                 [self openURL:nstrcat(@"https://www.shodan.io/host/", addresses[0])];
             } else if (dnsError) {
-                [self.helper presentErrorInViewController:self error:dnsError dismissed:nil];
+                [uihelper presentErrorInViewController:self error:dnsError dismissed:nil];
             }
         }
      }];
@@ -169,14 +167,12 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-            activityController.popoverPresentationController.barButtonItem = sender;
-        }
+        activityController.popoverPresentationController.barButtonItem = sender;
         [self presentViewController:activityController animated:YES completion:^() {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
     } else {
-        [self.helper
+        [uihelper
          presentAlertInViewController:self
          title:l(@"Unable to export certificate")
          body:l(@"We were unable to export the certificate in PEM format.")
@@ -188,7 +184,7 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 }
 
 - (void) addCertificateExpiryReminder:(UIBarButtonItem *)sender {
-    [[UIHelper sharedInstance]
+    [uihelper
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
      title:l(@"Notification Date")
@@ -226,14 +222,14 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
               daysBeforeExpires:days
               completed:^(NSError *error, BOOL success) {
                   if (success) {
-                      [self.helper
+                      [uihelper
                        presentAlertInViewController:self
                        title:l(@"Reminder Added")
                        body:l(@"You can modify the reminder in the reminders app.")
                        dismissButtonTitle:l(@"Dismiss")
                        dismissed:nil];
                   } else if (error) {
-                      [self.helper
+                      [uihelper
                        presentErrorInViewController:self
                        error:error
                        dismissed:nil];
@@ -340,7 +336,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
             NSDictionary * data = [self.cells objectAtIndex:indexPath.row];
             detailTextLabel.text = data[@"value"];
             textLabel.text = data[@"label"];
-            textLabel.textColor = themeTextColor;
+            textLabel.textColor = colorForTheme([UIColor darkGrayColor], [UIColor lightGrayColor]);
+            detailTextLabel.textColor = themeTextColor;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
@@ -396,7 +393,8 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
                     detailTextLabel.text = serialNumber;
                     break;
             }
-            textLabel.textColor = themeTextColor;
+            textLabel.textColor = colorForTheme([UIColor darkGrayColor], [UIColor lightGrayColor]);
+            detailTextLabel.textColor = themeTextColor;
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.tag = CellTagValue;

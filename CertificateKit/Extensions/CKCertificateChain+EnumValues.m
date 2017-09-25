@@ -331,8 +331,6 @@
 
 - (NSString *) protocolString {
     switch (self.protocol) {
-        case kSSLProtocolUnknown:
-            return @"Unknown";
         case kSSLProtocol3:
             return @"SSLv3";
         case kTLSProtocol1:
@@ -341,16 +339,14 @@
             return @"TLS 1.1";
         case kTLSProtocol12:
             return @"TLS 1.2";
+        case kTLSProtocol13:
+            return @"TLS 1.3";
         case kDTLSProtocol1:
             return @"DTLS 1";
         case kSSLProtocol2:
             return @"SSLv2";
-        case kSSLProtocol3Only:
-            return @"SSLv3 (Only)";
-        case kTLSProtocol1Only:
-            return @"TLS 1.0 (Only)";
-        case kSSLProtocolAll:
-            return @"All";
+        default:
+            return @"Unknown";
     }
 
     return @"Unknown";

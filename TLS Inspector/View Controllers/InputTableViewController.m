@@ -3,47 +3,30 @@
 #import "RecentDomains.h"
 #import <CertificateKit/CertificateKit.h>
 #import "TitleValueTableViewCell.h"
+#import "GetterTableViewController.h"
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
     NSNumber * certIndex;
     NSString * placeholder;
-    NSString * tip;
 }
 
 @property (strong, nonatomic) UITextField *hostField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *inspectButton;
 - (IBAction) inspectButton:(UIBarButtonItem *)sender;
-@property (strong, nonatomic) UIHelper * helper;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
-@property (strong, nonatomic) CKCertificateChain * chain;
 @property (strong, nonatomic) NSArray<NSString *> * placeholderDomains;
-@property (strong, nonatomic) NSArray<NSString *> * tipKeys;
 
 @end
 
 @implementation InputTableViewController
 
-#define tipSection(section) ![AppDefaults boolForKey:HIDE_TIPS] && section == 2
-#define recentSection(section) (![AppDefaults boolForKey:HIDE_TIPS] && section == 3) || ([AppDefaults boolForKey:HIDE_TIPS] && section == 2)
-
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.helper = [UIHelper sharedInstance];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    self.chain = [CKCertificateChain new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inspectWebsiteNotification:) name:INSPECT_NOTIFICATION object:nil];
 
     self.placeholderDomains = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DomainList" ofType:@"plist"]];
-    self.tipKeys = @[
-                     @"tlstip1",
-                     @"tlstip2",
-                     @"tlstip3",
-                     @"tlstip4",
-                     @"tlstip5",
-                     @"tlstip6",
-                     @"tlstip7"
-                     ];
 
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -54,8 +37,6 @@
 
     NSUInteger randomPlaceholderIndex = arc4random() % [self.placeholderDomains count];
     placeholder = [self.placeholderDomains objectAtIndex:randomPlaceholderIndex];
-    NSUInteger randomTipIndex = arc4random() % [self.tipKeys count];
-    tip = [self.tipKeys objectAtIndex:randomTipIndex];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -88,11 +69,12 @@
     if ([RecentDomains sharedInstance].saveRecentDomains) {
         NSArray<NSString *> * domains = [[RecentDomains sharedInstance] getRecentDomains];
         if (![domains containsObject:hostAddress]) {
+            NSUInteger count = self.recentDomains.count;
             self.recentDomains = [[RecentDomains sharedInstance] prependDomain:hostAddress];
-            if ([self.tableView numberOfSections] == 3) {
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 1)] withRowAnimation:UITableViewRowAnimationNone];
+            if (count == 0) {
+                [self.tableView reloadData];
             } else {
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
             }
         }
     }
@@ -111,49 +93,25 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.hostField endEditing:YES];
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     });
 
-    [self.chain
-     certificateChainFromURL:[NSURL URLWithString:lookupAddress]
-     finished:^(NSError * _Nullable error, CKCertificateChain * _Nullable chain) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-         });
-
-         if (error) {
-             NSString * description;
-             switch (error.code) {
-                case 61: // Still trying to find the enum def for this one
-                     description = l(@"Connection refused.");
-                     break;
-                case kCFHostErrorUnknown:
-                case kCFHostErrorHostNotFound:
-                     description = l(@"Host was not found or invalid.");
-                     break;
-                case errSSLInternal:
-                     description = l(@"Internal error.");
-                     break;
-                default:
-                     description = error.localizedDescription;
-                     break;
-             }
-             [[UIHelper sharedInstance]
-              presentAlertInViewController:self
-              title:l(@"An error occurred")
-              body:description
-              dismissButtonTitle:l(@"Dismiss")
-              dismissed:nil];
-         } else {
-             [self saveRecent];
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 currentChain = chain;
-                 selectedCertificate = chain.certificates[0];
-                 UISplitViewController * split = [self.storyboard instantiateViewControllerWithIdentifier:@"SplitView"];
-                 [self presentViewController:split animated:YES completion:nil];
-             });
-         }
-     }];
+    // Show a non-generic error for hosts containing unicode as we don't
+    // support them (GH Issue #43)
+    if (![lookupAddress canBeConvertedToEncoding:NSASCIIStringEncoding]) {
+        [uihelper presentAlertInViewController:self title:l(@"IDN Not Supported") body:l(@"At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+        return;
+    }
+    NSURL * url = [NSURL URLWithString:lookupAddress];
+    if (url == nil || url.host == nil) {
+        [uihelper presentAlertInViewController:self title:l(@"Invalid host") body:l(@"The host you provided is not valid") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+        return;
+    }
+    GetterTableViewController * getter = [self.storyboard instantiateViewControllerWithIdentifier:@"Getter"];
+    [getter presentGetter:self ForUrl:url finished:^(BOOL success) {
+        if (success) {
+            [self saveRecent];
+        }
+    }];
 }
 
 - (void) inspectWebsiteNotification:(NSNotification *)notification {
@@ -166,29 +124,20 @@
 # pragma mark Table View
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (recentSection(indexPath.section)) {
+    if (indexPath.section == 1) {
         return YES;
     }
     return NO;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger count = 1;
-    if (![AppDefaults boolForKey:HIDE_TIPS]) {
-        count ++;
-    }
-    if (self.recentDomains.count > 0) {
-        count ++;
-    }
-    return count;
+    return self.recentDomains.count > 0 ? 2 : 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-    } else if (tipSection(section)) {
-        return 1;
-    } else if (recentSection(section)) {
+    } else if (section == 1) {
         return self.recentDomains.count;
     }
 
@@ -198,7 +147,7 @@
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return l(@"FQDN or IP Address");
-    } else if (recentSection(section)) {
+    } else if (section == 1) {
         return l(@"Recent Domains");
     }
 
@@ -227,12 +176,7 @@
             UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
             self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
         }
-    } else if (tipSection(indexPath.section)) {
-        TitleValueTableViewCell * tvCell = [[TitleValueTableViewCell alloc] initWithTitle:[lang key:@"Did You Know..."] value:[lang key:tip]];
-        tvCell.valueLabel.font = [UIFont systemFontOfSize:13.0f];
-        tvCell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        return tvCell;
-    } else if (recentSection(indexPath.section)) {
+    } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
         cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
         cell.textLabel.textColor = themeTextColor;
@@ -249,7 +193,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (recentSection(indexPath.section)) {
+    if (indexPath.section == 1) {
         hostAddress = self.recentDomains[indexPath.row];
         [self inspectCertificate];
     }

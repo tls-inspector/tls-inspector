@@ -4,7 +4,7 @@
 @import MessageUI;
 
 @interface GTAppLinks() <SKStoreProductViewControllerDelegate, MFMailComposeViewControllerDelegate> {
-    void (^dismissedBlock)();
+    void (^dismissedBlock)(void);
 }
 
 @property (strong, nonatomic) UIViewController * viewController;
@@ -13,7 +13,7 @@
 
 @implementation GTAppLinks
 
-- (void) showAppInAppStore:(uint32_t)appID inViewController:(UIViewController *)viewController dismissed:(void(^)())dismissed {
+- (void) showAppInAppStore:(uint32_t)appID inViewController:(UIViewController *)viewController dismissed:(void(^)(void))dismissed {
     if ([SKStoreReviewController class]) {
         [SKStoreReviewController requestReview];
     } else {
@@ -44,7 +44,7 @@
     }
 }
 
-- (void) showEmailComposeSheetForApp:(NSString * _Nonnull)appName email:(NSString * _Nonnull)appSupportEmail inViewController:(UIViewController * _Nonnull)viewController dismissed:(void(^ _Nullable)())dismissed {
+- (void) showEmailComposeSheetForApp:(NSString * _Nonnull)appName email:(NSString * _Nonnull)appSupportEmail inViewController:(UIViewController * _Nonnull)viewController dismissed:(void(^ _Nullable)(void))dismissed {
     MFMailComposeViewController * mailController = [MFMailComposeViewController new];
     mailController.mailComposeDelegate = self;
     [mailController setSubject:[NSString stringWithFormat:@"%@ Feedback", appName]];

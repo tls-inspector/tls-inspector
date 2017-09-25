@@ -49,6 +49,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
 
     cell.textLabel.text = self.items[indexPath.row];
+    cell.textLabel.textColor = themeTextColor;
 
     return cell;
 }

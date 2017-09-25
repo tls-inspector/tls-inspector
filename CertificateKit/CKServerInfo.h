@@ -1,5 +1,5 @@
 //
-//  CKCRLManager.h
+//  CKServerInfo.h
 //
 //  MIT License
 //
@@ -25,44 +25,30 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificate.h"
 
 /**
- CKCRLManager is an interface for managing and querying certificate revocation lists
+ CKServerInfo is a interface containing information about a HTTPS protected server
  */
-@interface CKCRLManager : NSObject
+@interface CKServerInfo : NSObject
 
 /**
- Get or create the CRL Manager singleton
-
- @return A CKCRLManager singleton instance
+ A dictionary of all response headers recieved when querying the domain
  */
-+ (CKCRLManager * _Nonnull) sharedInstance;
+@property (strong, nonatomic) NSDictionary<NSString *, NSString *> * headers;
+/**
+ A dictionary of all security response headers mapped to a (NSNumber)BOOL of if the header was present
+ */
+@property (strong, nonatomic) NSDictionary<NSString *, id> * securityHeaders;
+/**
+ The HTTP status code seen when querying the domain
+ */
+@property (nonatomic) NSUInteger statusCode;
 
 /**
- Get or create the CRL Manager singleton
+ Convience method to get the version of libcurl used by CKServerInfo
 
- @return A CKCRLManager singleton instance
+ @return A string representing the libcurl version
  */
-- (id _Nonnull) init;
-
-/**
- Load the CRL cache from disk. Due to the potential size of the cache, ensure you unload the cache
- when you're finished using it.
- */
-- (void) loadCRLCache;
-
-/**
- Flush the CRL cache to disk, and unload it from memory.
- */
-- (void) unloadCRLCache;
-
-/**
- Get the CRL data for the given CRL URL
-
- @param crl The URL of the CRL
- @param finished Called with the data of the CRL or an error
- */
-- (void) getCRL:(NSURL * _Nonnull)crl finished:(void (^ _Nonnull)(NSData * _Nullable data, NSError * _Nullable error))finished;
++ (NSString *) libcurlVersion;
 
 @end

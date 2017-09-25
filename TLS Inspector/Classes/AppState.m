@@ -25,7 +25,11 @@ static AppState * _instance;
         [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.141f green:0.204f blue:0.278f alpha:1.0f]];
         [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.114f green:0.631f blue:0.949f alpha:1.0f]];
         [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:0.141f green:0.204f blue:0.278f alpha:1.0f]];
-        [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+        NSDictionary<NSAttributedStringDocumentAttributeKey, id> * attributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+        [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+        if (@available(iOS 11, *)) {
+            [[UINavigationBar appearance] setLargeTitleTextAttributes:attributes];
+        }
 
         // Style the tableview
         [[UITableView appearance] setBackgroundColor:[UIColor colorWithRed:0.08f green:0.11f blue:0.15f alpha:1.0f]];

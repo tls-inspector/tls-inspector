@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "SplitViewController.h"
+#import "GetterTableViewController.h"
 #import <CertificateKit/CertificateKit.h>
 
 @interface AppState : NSObject
@@ -8,7 +9,9 @@
 - (id _Nonnull) init;
 
 @property (strong, nonatomic, nullable) SplitViewController * splitViewController;
+@property (strong, nonatomic, nullable) GetterTableViewController * getterViewController;
 @property (strong, nonatomic, nullable) CKCertificateChain * certificateChain;
+@property (strong, nonatomic, nullable) CKServerInfo * serverInfo;
 @property (strong, nonatomic, nullable) CKCertificate * selectedCertificate;
 @property (nonatomic) BOOL lightTheme;
 
