@@ -92,7 +92,7 @@
         return cell;
     } else {
         FAIcon icon = FATimesCircle;
-        UIColor * color = uihelper.greenColor;
+        UIColor * color = uihelper.redColor;
         if ([status isEqualToString:@"Done"]) {
             icon = FACheckCircle;
             color = uihelper.greenColor;

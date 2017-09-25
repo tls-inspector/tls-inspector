@@ -195,12 +195,27 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 }
 
 - (void) themeSwitch:(UISegmentedControl *)sender {
-    if (sender.selectedSegmentIndex == 0) {
-        [AppDefaults setBool:NO forKey:USE_LIGHT_THEME];
-    } else {
-        [AppDefaults setBool:YES forKey:USE_LIGHT_THEME];
-    }
-    [appState setAppearance];
+    [uihelper
+     presentConfirmInViewController:self
+     title:l(@"Change Theme")
+     body:l(@"You must restart the app for the change to take affect")
+     confirmButtonTitle:l(@"Change")
+     cancelButtonTitle:l(@"Cancel")
+     confirmActionIsDestructive:NO
+     dismissed:^(BOOL confirmed) {
+        if (confirmed) {
+            if (sender.selectedSegmentIndex == 0) {
+                [AppDefaults setBool:NO forKey:USE_LIGHT_THEME];
+            } else {
+                [AppDefaults setBool:YES forKey:USE_LIGHT_THEME];
+            }
+            [appState setAppearance];
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:l(@"Restart TLS Inspector") message:l(@"You must restart TLS Inspector for theme changes to take affect.") preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:alert animated:YES completion:nil];
+        } else {
+            [sender setSelectedSegmentIndex:sender.selectedSegmentIndex == 0 ? 1 : 0];
+        }
+    }];
 }
 
 @end

@@ -7,7 +7,6 @@ static AppState * _instance;
 + (AppState *) currentState {
     if (!_instance) {
         _instance = [AppState new];
-        _instance.lightTheme = [AppDefaults boolForKey:USE_LIGHT_THEME];
     }
     return _instance;
 }
@@ -17,6 +16,10 @@ static AppState * _instance;
         _instance = [super init];
     }
     return _instance;
+}
+
+- (BOOL) lightTheme {
+    return [AppDefaults boolForKey:USE_LIGHT_THEME];
 }
 
 - (void) setAppearance {
