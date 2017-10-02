@@ -58,7 +58,7 @@
     {
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 11, 20, 20)];
         self.titleLabel.text = title;
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.textColor = themeTextColor;
         [self addSubview:self.titleLabel];
 
         NSLayoutConstraint * xConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel

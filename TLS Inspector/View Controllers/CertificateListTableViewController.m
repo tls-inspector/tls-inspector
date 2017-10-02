@@ -132,8 +132,8 @@
         NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:indexPath.row];
         id value = [currentServerInfo.securityHeaders objectForKey:key];
 
-        FAIcon icon;
-        UIColor * color;
+        FAIcon icon = FAQuestionCircle;
+        UIColor * color = [UIColor darkGrayColor];
         if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:@NO]) {
             icon = FATimesCircle;
             color = uihelper.redColor;
@@ -142,7 +142,7 @@
             color = uihelper.greenColor;
         }
 
-        return [[IconTableViewCell alloc] initWithIcon:FATimesCircle color:color title:key];
+        return [[IconTableViewCell alloc] initWithIcon:icon color:color title:key];
     }
 
     return nil;
