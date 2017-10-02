@@ -239,6 +239,10 @@
 
     curl = curl_easy_init();
     if (curl) {
+#ifdef DEBUG
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+#endif
+
         const char * urlString = url.absoluteString.UTF8String;
         curl_easy_setopt(curl, CURLOPT_URL, urlString);
         // Since we're only concerned with getting the HTTP servers
@@ -248,6 +252,8 @@
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
         curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_callback);
         curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
         // Perform the request, res will get the return code
         response = curl_easy_perform(curl);
         // Check for errors

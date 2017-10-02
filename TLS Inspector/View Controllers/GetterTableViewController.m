@@ -85,6 +85,7 @@
         } else {
             spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
         }
+        [spinner startAnimating];
 
         UILabel * label = [cell viewWithTag:1];
         label.text = l(pending);
