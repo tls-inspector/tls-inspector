@@ -4,6 +4,7 @@
 #import <CertificateKit/CertificateKit.h>
 #import "TitleValueTableViewCell.h"
 #import "GetterTableViewController.h"
+#import "AppLinks.h"
 
 @interface InputTableViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     NSString * hostAddress;
@@ -29,6 +30,10 @@
 
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+#ifndef DEBUG
+    [[AppLinks new] appLaunchRate];
+#endif
 }
 
 - (void) viewWillAppear:(BOOL)animated {

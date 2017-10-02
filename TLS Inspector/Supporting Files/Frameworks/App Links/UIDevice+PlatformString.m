@@ -14,7 +14,7 @@
     return platform;
 }
 
-- (NSString *) PlatformString{
+- (NSString *) platformString{
     NSString *platform = [self platform];
     // Source: https://www.theiphonewiki.com/wiki/Models
 
@@ -23,6 +23,7 @@
     if ([platform isEqualToString:@"AppleTV3,1"])   return @"Apple TV 3G";
     if ([platform isEqualToString:@"AppleTV3,2"])   return @"Apple TV 3G (Rev 2)";
     if ([platform isEqualToString:@"AppleTV5,3"])   return @"Apple TV 4G";
+    if ([platform isEqualToString:@"AppleTV6,2"])   return @"Apple TV 4K";
 
     // iPhone
     if ([platform isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
@@ -46,6 +47,12 @@
     if ([platform isEqualToString:@"iPhone9,3"])    return @"iPhone 7";
     if ([platform isEqualToString:@"iPhone9,2"])    return @"iPhone 7 Plus";
     if ([platform isEqualToString:@"iPhone9,4"])    return @"iPhone 7 Plus";
+    if ([platform isEqualToString:@"iPhone10,1"])   return @"iPhone 8";
+    if ([platform isEqualToString:@"iPhone10,4"])   return @"iPhone 8";
+    if ([platform isEqualToString:@"iPhone10,2"])   return @"iPhone 8 Plus";
+    if ([platform isEqualToString:@"iPhone10,5"])   return @"iPhone 8 Plus";
+    if ([platform isEqualToString:@"iPhone10,3"])   return @"iPhone X";
+    if ([platform isEqualToString:@"iPhone10,6"])   return @"iPhone X";
 
     // iPod Touch
     if ([platform isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
@@ -79,6 +86,8 @@
     if ([platform isEqualToString:@"iPad6,8"])      return @"iPad Pro (12.9\" Cellular)";
     if ([platform isEqualToString:@"iPad6,3"])      return @"iPad Pro (9.7\" WiFi)";
     if ([platform isEqualToString:@"iPad6,4"])      return @"iPad Pro (9.7\" Cellular)";
+    if ([platform isEqualToString:@"iPad7,3"])      return @"iPad Pro (10.5\" WiFi)";
+    if ([platform isEqualToString:@"iPad7,4"])      return @"iPad Pro (10.5\" Cellular)";
     if ([platform isEqualToString:@"iPad6,11"])      return @"iPad 5 (WiFi)";
     if ([platform isEqualToString:@"iPad6,12"])      return @"iPad 5 (Cellular)";
 

@@ -3,6 +3,6 @@
 @interface UIDevice (PlatformString)
 
 - (NSString *) platform;
-- (NSString *) PlatformString;
+- (NSString *) platformString;
 
 @end

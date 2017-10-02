@@ -29,10 +29,10 @@
 		3C43EF8D1D7A987F00AE65E9 /* Inspect Website.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */; };
 		3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */; };
-		3C50969F1E7CCA7600AEAAB2 /* GTAppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */; };
+		3C50969F1E7CCA7600AEAAB2 /* AppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */; };
 		3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
 		3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
-		3C5096A21E7CCA7C00AEAAB2 /* GTAppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */; };
+		3C5096A21E7CCA7C00AEAAB2 /* AppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */; };
 		3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
@@ -91,6 +91,8 @@
 		3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* Assets.xcassets */; };
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
+		67D03D7E1F82EC7900981806 /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D03D7D1F82EC7900981806 /* MoreTableViewController.m */; };
+		67D03D811F82EF3700981806 /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D03D801F82EF3700981806 /* OptionsTableViewController.m */; };
 		A116000B1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
 		A116000C1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
 		A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15622901EEA065600D61FB5 /* InitialNavigationController.m */; };
@@ -185,8 +187,8 @@
 		3C43EF8A1D7A987F00AE65E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C5096961E7CC9FC00AEAAB2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		3C50969B1E7CCA7600AEAAB2 /* GTAppLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTAppLinks.h; sourceTree = "<group>"; };
-		3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTAppLinks.m; sourceTree = "<group>"; };
+		3C50969B1E7CCA7600AEAAB2 /* AppLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLinks.h; sourceTree = "<group>"; };
+		3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinks.m; sourceTree = "<group>"; };
 		3C50969D1E7CCA7600AEAAB2 /* UIDevice+PlatformString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformString.h"; sourceTree = "<group>"; };
 		3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+PlatformString.m"; sourceTree = "<group>"; };
 		3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -248,6 +250,10 @@
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTableViewController.m; sourceTree = "<group>"; };
 		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorTableViewController.h; sourceTree = "<group>"; };
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorTableViewController.m; sourceTree = "<group>"; };
+		67D03D7C1F82EC7900981806 /* MoreTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
+		67D03D7D1F82EC7900981806 /* MoreTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
+		67D03D7F1F82EF3700981806 /* OptionsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
+		67D03D801F82EF3700981806 /* OptionsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
 		A11600071EEB083500D98E8F /* TLS Inspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TLS Inspector.entitlements"; sourceTree = "<group>"; };
 		A11600081EEB084F00D98E8F /* Inspect Website.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Inspect Website.entitlements"; sourceTree = "<group>"; };
 		A11600091EEB086800D98E8F /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
@@ -345,7 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				3C2A7A591F28587E00AA12B4 /* FontAwesome+iOS */,
-				3C50969A1E7CCA6A00AEAAB2 /* GTAppLinks */,
+				3C50969A1E7CCA6A00AEAAB2 /* App Links */,
 				3C5096951E7CC9DC00AEAAB2 /* MBProgressHUD */,
 			);
 			path = Frameworks;
@@ -360,15 +366,15 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		3C50969A1E7CCA6A00AEAAB2 /* GTAppLinks */ = {
+		3C50969A1E7CCA6A00AEAAB2 /* App Links */ = {
 			isa = PBXGroup;
 			children = (
-				3C50969B1E7CCA7600AEAAB2 /* GTAppLinks.h */,
-				3C50969C1E7CCA7600AEAAB2 /* GTAppLinks.m */,
+				3C50969B1E7CCA7600AEAAB2 /* AppLinks.h */,
+				3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */,
 				3C50969D1E7CCA7600AEAAB2 /* UIDevice+PlatformString.h */,
 				3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */,
 			);
-			path = GTAppLinks;
+			path = "App Links";
 			sourceTree = "<group>";
 		};
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
@@ -523,12 +529,11 @@
 		3CFAE6F31CA8464200CD946B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				67D03D821F82EF5500981806 /* More */,
 				3C2A7A551F28561300AA12B4 /* GetterTableViewController.h */,
 				3C2A7A561F28561300AA12B4 /* GetterTableViewController.m */,
 				A156228F1EEA065600D61FB5 /* InitialNavigationController.h */,
 				A15622901EEA065600D61FB5 /* InitialNavigationController.m */,
-				3C5D129F1D0531BD004B6E12 /* AboutViewController.h */,
-				3C5D12A01D0531BD004B6E12 /* AboutViewController.m */,
 				3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */,
 				3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */,
 				3CFAE6F01CA8463900CD946B /* InputTableViewController.h */,
@@ -543,6 +548,19 @@
 				3C04EE611CB4AE5800F56B68 /* ValueViewController.m */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		67D03D821F82EF5500981806 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				67D03D7F1F82EF3700981806 /* OptionsTableViewController.h */,
+				67D03D801F82EF3700981806 /* OptionsTableViewController.m */,
+				67D03D7C1F82EC7900981806 /* MoreTableViewController.h */,
+				67D03D7D1F82EC7900981806 /* MoreTableViewController.m */,
+				3C5D129F1D0531BD004B6E12 /* AboutViewController.h */,
+				3C5D12A01D0531BD004B6E12 /* AboutViewController.m */,
+			);
+			path = More;
 			sourceTree = "<group>";
 		};
 		A16ABDA41E844BFD007779BE /* UI Elements */ = {
@@ -825,7 +843,7 @@
 				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
 				3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */,
 				3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */,
-				3C5096A21E7CCA7C00AEAAB2 /* GTAppLinks.m in Sources */,
+				3C5096A21E7CCA7C00AEAAB2 /* AppLinks.m in Sources */,
 				3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */,
 				3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */,
 				A116000C1EEB086800D98E8F /* Storage.m in Sources */,
@@ -868,8 +886,10 @@
 				3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */,
 				3C2A7A631F28589000AA12B4 /* NSString+FontAwesome.m in Sources */,
 				3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */,
-				3C50969F1E7CCA7600AEAAB2 /* GTAppLinks.m in Sources */,
+				3C50969F1E7CCA7600AEAAB2 /* AppLinks.m in Sources */,
 				3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */,
+				67D03D811F82EF3700981806 /* OptionsTableViewController.m in Sources */,
+				67D03D7E1F82EC7900981806 /* MoreTableViewController.m in Sources */,
 				3CF7E3451F789E9800EEEE21 /* NSAtomicNumber.m in Sources */,
 				A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */,
 				3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */,

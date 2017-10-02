@@ -1,11 +1,10 @@
 #import "AboutViewController.h"
-#import "RecentDomains.h"
-#import "GTAppLinks.h"
+#import "AppLinks.h"
 #import "TitleValueTableViewCell.h"
 
 @interface AboutViewController ()
 
-@property (strong, nonatomic) GTAppLinks * appLinks;
+@property (strong, nonatomic) AppLinks * appLinks;
 
 @end
 
@@ -18,7 +17,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.appLinks = [GTAppLinks new];
+    self.appLinks = [AppLinks new];
 }
 
 - (void) didReceiveMemoryWarning {
@@ -28,7 +27,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 # pragma mark - Table View Source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -36,8 +35,6 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
         case 0:
             return 3;
         case 1:
-            return 3;
-        case 2:
             return 2;
     }
     return 0;
@@ -45,41 +42,6 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
-            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
-            label.text = l(@"Remember Recent Lookups");
-            label.textColor = themeTextColor;
-            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
-            [toggle setOn:[RecentDomains sharedInstance].saveRecentDomains];
-            [toggle addTarget:self action:@selector(recentSwitch:) forControlEvents:UIControlEventTouchUpInside];
-            return switchCell;
-        } else if (indexPath.row == 1) {
-            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
-            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
-            label.text = l(@"Show Tips");
-            label.textColor = themeTextColor;
-            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
-            [toggle setOn:![AppDefaults boolForKey:HIDE_TIPS]];
-            [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
-            return switchCell;
-        } else if (indexPath.row == 2) {
-            UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
-            UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
-            label.text = l(@"Theme");
-            label.textColor = themeTextColor;
-            UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
-            [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
-            [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
-            if ([AppDefaults boolForKey:USE_LIGHT_THEME]) {
-                [segment setSelectedSegmentIndex:1];
-            } else {
-                [segment setSelectedSegmentIndex:0];
-            }
-            [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
-            return toggleCell;
-        }
-    } else if (indexPath.section == 1) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
         label.textColor = themeTextColor;
@@ -95,7 +57,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                 break;
         }
         return cell;
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 1) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
         label.textColor = themeTextColor;
@@ -113,18 +75,16 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1 && indexPath.row == 0) {
+    if (indexPath.section == 0 && indexPath.row == 0) {
         NSString * blurb = format(@"Trust & Safety On-the-go with TLS Inspector: %@", PROJECT_URL);
         UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                         initWithActivityItems:@[blurb]
                                                         applicationActivities:nil];
         activityController.popoverPresentationController.sourceView = [tableView cellForRowAtIndexPath:indexPath];
         [self presentViewController:activityController animated:YES completion:nil];
-    } else if (indexPath.section == 1 && indexPath.row == 1) {
-        [self.appLinks showAppInAppStore:1100539810 inViewController:self dismissed:^{
-            //
-        }];
-    } else if (indexPath.section == 1 && indexPath.row == 2) {
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        [self.appLinks showAppInAppStorInViewController:self dismissed:nil];
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
         [uihelper
          presentActionSheetInViewController:self
          attachToTarget:[ActionTipTarget targetWithView:[tableView cellForRowAtIndexPath:indexPath]]
@@ -141,20 +101,15 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                      open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new"));
                      break;
                  case 1: {
-                     [self.appLinks
-                      showEmailComposeSheetForApp:@"TLS Inspector"
-                      email:@"'TLS Inspector Project Manager' <tls-inspector@ecnepsnai.com>"
-                      inViewController:self dismissed:^{
-                         //
-                     }];
+                     [self.appLinks showEmailComposeSheetForAppInViewController:self dismissed:nil];
                      break;
                  } default:
                      break;
              }
          }];
-    } else if (indexPath.section == 2 && indexPath.row == 0) {
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
         open_url(PROJECT_CONTRIBUTE_URL);
-    } else if (indexPath.section == 2 && indexPath.row == 1) {
+    } else if (indexPath.section == 1 && indexPath.row == 1) {
         open_url(PROJECT_TESTFLIGHT_APPLICATION);
     }
 }
@@ -162,10 +117,8 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return l(@"Options");
-        case 1:
             return l(@"Share & Feedback");
-        case 2:
+        case 1:
             return l(@"Get Involved");
     }
     return @"";
@@ -173,49 +126,17 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     switch (section) {
-        case 1: {
+        case 0: {
             NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
             return format(@"%@ (%@). %@, %@",
                           [infoDictionary objectForKey:@"CFBundleShortVersionString"],
                           [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey],
                           [CKCertificate openSSLVersion],
                           [CKServerInfo libcurlVersion]);
-        } case 2:
+        } case 1:
             return l(@"TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.");
     }
     return @"";
-}
-
-- (void) recentSwitch:(UISwitch *)sender {
-    [RecentDomains sharedInstance].saveRecentDomains = sender.isOn;
-}
-
-- (void) tipsSwitch:(UISwitch *)sender {
-    [AppDefaults setBool:!sender.isOn forKey:HIDE_TIPS];
-}
-
-- (void) themeSwitch:(UISegmentedControl *)sender {
-    [uihelper
-     presentConfirmInViewController:self
-     title:l(@"Change Theme")
-     body:l(@"You must restart the app for the change to take affect")
-     confirmButtonTitle:l(@"Change")
-     cancelButtonTitle:l(@"Cancel")
-     confirmActionIsDestructive:NO
-     dismissed:^(BOOL confirmed) {
-        if (confirmed) {
-            if (sender.selectedSegmentIndex == 0) {
-                [AppDefaults setBool:NO forKey:USE_LIGHT_THEME];
-            } else {
-                [AppDefaults setBool:YES forKey:USE_LIGHT_THEME];
-            }
-            [appState setAppearance];
-            UIAlertController * alert = [UIAlertController alertControllerWithTitle:l(@"Restart TLS Inspector") message:l(@"You must restart TLS Inspector for theme changes to take affect.") preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alert animated:YES completion:nil];
-        } else {
-            [sender setSelectedSegmentIndex:sender.selectedSegmentIndex == 0 ? 1 : 0];
-        }
-    }];
 }
 
 @end
