@@ -4,8 +4,11 @@
     void (^alertDismissedCallback)(NSInteger buttonIndex);
     void (^confirmDismissedCallback)(BOOL confirmed);
     void (^actionSheetDismissedCallback)(NSInteger buttonIndex);
-    void (^alertBannerTappedCallback)();
 }
+
+@property (strong, nonatomic, readwrite) UIColor * greenColor;
+@property (strong, nonatomic, readwrite) UIColor * redColor;
+@property (strong, nonatomic, readwrite) UIColor * blueColor;
 
 @end
 
@@ -16,6 +19,9 @@ static id _instance;
 - (id) init {
     if (_instance == nil) {
         UIHelper * helper = [super init];
+        helper.greenColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+        helper.redColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+        helper.blueColor = [UIColor colorWithRed:0.114 green:0.631 blue:0.949 alpha:1];
         _instance = helper;
     }
     return _instance;
@@ -137,6 +143,16 @@ static id _instance;
     button.layer.borderColor = color.CGColor;
     button.layer.cornerRadius = 5;
     button.layer.masksToBounds = YES;
+}
+
+- (void) applyStylesToNavigationBar:(UINavigationBar *)navigationBar {
+    if (usingLightTheme) {
+        navigationBar.barStyle = UIBarStyleDefault;
+        navigationBar.translucent = YES;
+    } else {
+        navigationBar.barStyle = UIBarStyleBlack;
+        navigationBar.translucent = NO;
+    }
 }
 
 @end

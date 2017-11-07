@@ -1,9 +1,6 @@
 #import "ValueViewController.h"
-#import "UIHelper.h"
 
-@interface ValueViewController () {
-    UIHelper * uihelper;
-}
+@interface ValueViewController ()
 
 @property (strong, nonatomic) NSString * value;
 @property (strong, nonatomic) NSString * viewTitle;
@@ -17,10 +14,18 @@
 - (void) viewDidLoad {
     self.textView.text = self.value;
     self.title = self.viewTitle;
-    uihelper = [UIHelper sharedInstance];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                               target:self action:@selector(actionButton:)];
+
+    if (usingLightTheme) {
+        self.textView.backgroundColor = [UIColor whiteColor];
+        self.textView.textColor = [UIColor blackColor];
+    } else {
+        self.textView.backgroundColor = [UIColor colorWithRed:0.106 green:0.157 blue:0.212 alpha:1.0];
+        self.textView.textColor = [UIColor whiteColor];
+    }
+
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -73,9 +78,7 @@
                 UIActivityViewController *activityController = [[UIActivityViewController alloc]
                                                                 initWithActivityItems:@[self.value]
                                                                 applicationActivities:nil];
-                if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-                    activityController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
-                }
+                activityController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
                 [self presentViewController:activityController animated:YES completion:nil];
                 break;
             }

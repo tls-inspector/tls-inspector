@@ -3,17 +3,13 @@
 
 #import "lang.h"
 #import "AppState.h"
-@import CertificateKit;
 #import "MBProgressHUD.h"
-
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+#import "UIHelper.h"
+#import "Storage.h"
 
 #define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
 #define SAVE_RECENT_DOMAINS @"SAVE_RECENT_DOMAINS"
+#define USE_LIGHT_THEME @"USE_LIGHT_THEME"
 #define INSPECT_NOTIFICATION @"INSPECT_THIS_WEBSITE"
 #define INSPECT_NOTIFICATION_HOST_KEY @"host"
 #define INSPECT_NOTIFICATION_INDEX_KEY @"index"
@@ -28,6 +24,12 @@
 #define l(keyString) [lang key:keyString]
 #define lv(keyString, argsArray) [lang key:keyString args:argsArray]
 
+#define AppDefaults Storage.sharedInstance.groupDefaults
+#define uihelper [UIHelper sharedInstance]
+#define usingLightTheme appState.lightTheme
+#define colorForTheme(light, dark) usingLightTheme ? light : dark
+#define themeTextColor colorForTheme([UIColor blackColor], [UIColor whiteColor])
+
 #define format(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
 #define nstrcat(s1, s2) [NSString stringWithFormat:@"%@%@", s1, s2]
 
@@ -38,6 +40,7 @@
 
 #define appState [AppState currentState]
 #define currentChain appState.certificateChain
+#define currentServerInfo appState.serverInfo
 #define selectedCertificate appState.selectedCertificate
 #define isCompact appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact
 #define isRegular appState.splitViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular

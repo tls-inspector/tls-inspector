@@ -17,7 +17,6 @@
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(17, 11, 36, 17)];
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
         self.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-        self.titleLabel.textColor = [UIColor lightGrayColor];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         self.titleLabel.text = title;
         [self addSubview:self.titleLabel];
@@ -41,7 +40,6 @@
         // Add value label
         self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(17, 36, 343, 21)];
         self.valueLabel.textAlignment = NSTextAlignmentLeft;
-        self.valueLabel.textColor = [UIColor whiteColor];
         self.valueLabel.numberOfLines = 0;
         self.valueLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -67,9 +65,21 @@
     [self.valueLabel setNeedsLayout];
     [self setNeedsLayout];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.backgroundColor = [UIColor colorWithRed:0.106 green:0.157 blue:0.212 alpha:1.0];
+    [self setAppearance];
 
     return self;
+}
+
+- (void) setAppearance {
+    if (usingLightTheme) {
+        self.titleLabel.textColor = [UIColor darkGrayColor];
+        self.valueLabel.textColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor whiteColor];
+    } else {
+        self.titleLabel.textColor = [UIColor lightGrayColor];
+        self.valueLabel.textColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed:0.106 green:0.157 blue:0.212 alpha:1.0];
+    }
 }
 
 @end

@@ -18,6 +18,8 @@
 	<string>All feedback is appreciated!</string>
 	<key>An error occurred</key>
 	<string>An error occurred</string>
+	<key>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</key>
+	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
 	<key>Both values matched.</key>
 	<string>Both values matched.</string>
 	<key>Build</key>
@@ -64,6 +66,10 @@
 	<string>Certificate uses insecure SHA1 algorithm.</string>
 	<key>Certificates</key>
 	<string>Certificates</string>
+	<key>Change</key>
+	<string>Change</string>
+	<key>Change Theme</key>
+	<string>Change Theme</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
 	<key>Connection refused.</key>
@@ -554,6 +560,8 @@
 	<string>Zambia, Republic of</string>
 	<key>Country::ZW</key>
 	<string>Zimbabwe</string>
+	<key>Dark</key>
+	<string>Dark</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
 	<key>EV Authority</key>
@@ -566,12 +574,18 @@
 	<string>FQDN or IP Address</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
+	<key>Finished</key>
+	<string>Finished</string>
 	<key>Get Involed</key>
+	<string>Get Involved</string>
+	<key>Get Involved</key>
 	<string>Get Involved</string>
 	<key>Host was not found or invalid.</key>
 	<string>Host was not found or invalid.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
 	<string>How soon before the certificate expires should we notify you?</string>
+	<key>IDN Not Supported</key>
+	<string>IDN Not Supported</string>
 	<key>Insecure Superfish (Lenovo) certificate.</key>
 	<string>Insecure Superfish (Lenovo) certificate.</string>
 	<key>Insecure eDellRoot certificate.</key>
@@ -582,6 +596,8 @@
 	<string>Internal error.</string>
 	<key>Invalid Date</key>
 	<string>Invalid Date</string>
+	<key>Invalid host</key>
+	<string>Invalid host</string>
 	<key>Issuer</key>
 	<string>Issuer</string>
 	<key>Key</key>
@@ -594,6 +610,8 @@
 	<string>ECDSA</string>
 	<key>KeyAlgorithm::rsaEncryption</key>
 	<string>RSA</string>
+	<key>Light</key>
+	<string>Light</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
 	<key>Negotiated Cipher Suite</key>
@@ -620,16 +638,22 @@
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Report Issue on GitHub</string>
+	<key>Restart TLS Inspector</key>
+	<string>Restart TLS Inspector</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
+	<key>Server Info</key>
+	<string>Server Info</string>
 	<key>Share</key>
 	<string>Share</string>
 	<key>Share &amp; Feedback</key>
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Show Tips</key>
+	<string>Show Tips</string>
 	<key>Signature</key>
 	<string>Signature</string>
 	<key>Signature Algorithm</key>
@@ -668,6 +692,12 @@
 	<string>Test New Features</string>
 	<key>The certificate for {domain} expires on {date}</key>
 	<string>The certificate for {0} expires on {1}</string>
+	<key>The host you provided is not valid</key>
+	<string>The host you provided is not valid</string>
+	<key>Theme</key>
+	<string>Theme</string>
+	<key>There were one or more errors while inspecting {host}</key>
+	<string>There were one or more errors while inspecting {0}</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
 	<key>Untrusted Chain</key>
@@ -698,10 +728,28 @@
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
+	<key>You must restart the app for the change to take affect</key>
+	<string>You must restart the app for the change to take affect</string>
 	<key>revoked_chain_description</key>
 	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
+	<key>safari_hint</key>
+	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>self_signed_chain_description</key>
 	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
+	<key>tlstip1</key>
+	<string>You can view the certificate of a website in Safari or other web browser by tapping the "Share" button and selecting "Show Certificate".</string>
+	<key>tlstip2</key>
+	<string>You can view more information about the server on Shodan by tapping the "Share" button when viewing a certificate.</string>
+	<key>tlstip3</key>
+	<string>You can create a reminder when a certificate is about to expire by tapping the "Share" button when inspecting a certificate.</string>
+	<key>tlstip4</key>
+	<string>You can change the theme in the "About" view of the app.</string>
+	<key>tlstip5</key>
+	<string>You can export the share the certificate data by tapping the "Share" button when inspecting a certificate.</string>
+	<key>tlstip6</key>
+	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the "Share" button when inspecting the value.</string>
+	<key>tlstip7</key>
+	<string>You can copy a parameters value by long-pressing on it and tapping "Copy".</string>
 	<key>trusted_chain_description</key>
 	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>untrusted_chain_description</key>

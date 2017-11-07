@@ -83,4 +83,10 @@
  */
 - (void) applyStylesToButton:(UIButton *)button withColor:(UIColor *)color;
 
+- (void) applyStylesToNavigationBar:(UINavigationBar *)navigationBar;
+
+@property (strong, nonatomic, readonly) UIColor * greenColor;
+@property (strong, nonatomic, readonly) UIColor * redColor;
+@property (strong, nonatomic, readonly) UIColor * blueColor;
+
 @end

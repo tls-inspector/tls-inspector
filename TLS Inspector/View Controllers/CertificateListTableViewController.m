@@ -1,11 +1,10 @@
 #import "CertificateListTableViewController.h"
 #import "InspectorTableViewController.h"
-#import "UIHelper.h"
 #import "TitleValueTableViewCell.h"
+#import "NSString+FontAwesome.h"
+#import "IconTableViewCell.h"
 
-@interface CertificateListTableViewController () {
-    UIHelper * uihelper;
-}
+@interface CertificateListTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView * headerView;
 @property (weak, nonatomic) IBOutlet UILabel * headerViewLabel;
@@ -19,19 +18,19 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    uihelper = [UIHelper sharedInstance];
+    self.title = currentChain.domain;
 
     switch (currentChain.trusted) {
         case CKCertificateChainTrustStatusTrusted:
             self.headerViewLabel.text = l(@"Trusted Chain");
-            self.headerView.backgroundColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+            self.headerView.backgroundColor = uihelper.greenColor;
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
         case CKCertificateChainTrustStatusUntrusted:
         case CKCertificateChainTrustStatusRevoked:
         case CKCertificateChainTrustStatusSelfSigned:
             self.headerViewLabel.text = l(@"Untrusted Chain");
-            self.headerView.backgroundColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+            self.headerView.backgroundColor = uihelper.redColor;
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
     }
@@ -41,6 +40,8 @@
 
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
 
 #ifdef EXTENSION
     [self.navigationItem
@@ -71,6 +72,8 @@
             return currentChain.certificates.count > 0 ? l(@"Certificate Chain") : @"";
         case 1:
             return l(@"Connection Information");
+        case 2:
+            return l(@"Security HTTP Headers");
     }
 
     return nil;
@@ -84,7 +87,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -93,6 +96,8 @@
             return currentChain.certificates.count;
         case 1:
             return 2;
+        case 2:
+            return currentServerInfo.securityHeaders.allKeys.count;
     }
     return 0;
 }
@@ -105,14 +110,14 @@
 
         if (cert.revoked.isRevoked) {
             cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[[cert summary]]];
-            cell.textLabel.textColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
+            cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
             NSDictionary * names = [cert names];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
-            cell.textLabel.textColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+            cell.textLabel.textColor = uihelper.greenColor;
         } else {
             cell.textLabel.text = [cert summary];
-            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = themeTextColor;
         }
 
         return cell;
@@ -123,6 +128,21 @@
             case 1:
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocolString];
         }
+    } else if (indexPath.section == 2) {
+        NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:indexPath.row];
+        id value = [currentServerInfo.securityHeaders objectForKey:key];
+
+        FAIcon icon = FAQuestionCircle;
+        UIColor * color = [UIColor darkGrayColor];
+        if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:@NO]) {
+            icon = FATimesCircle;
+            color = uihelper.redColor;
+        } else if ([value isKindOfClass:[NSString class]]) {
+            icon = FACheckCircle;
+            color = uihelper.greenColor;
+        }
+
+        return [[IconTableViewCell alloc] initWithIcon:icon color:color title:key];
     }
 
     return nil;
@@ -186,6 +206,7 @@
 }
 
 - (IBAction) closeButton:(UIBarButtonItem *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [appState.getterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 @end

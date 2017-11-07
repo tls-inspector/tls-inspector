@@ -1,12 +1,14 @@
 #import "InitialViewController.h"
 #import "SplitViewController.h"
 #import "UIHelper.h"
+#import "NSAtomicNumber.h"
 
 #include <MobileCoreServices/MobileCoreServices.h>
 
 @interface InitialViewController ()
 
-@property (strong, nonatomic) CKCertificateChain * chainManager;
+@property (strong, nonatomic) NSAtomicNumber * latch;
+@property (strong, nonatomic) NSMutableArray * values;
 
 @end
 
@@ -18,37 +20,72 @@
     [[AppState currentState] setAppearance];
     [AppState currentState].extensionContext = self.extensionContext;
 
-    self.chainManager = [[CKCertificateChain alloc] init];
+    self.latch = [NSAtomicNumber numberWithInitialValue:0];
+    self.values = [NSMutableArray new];
 
     for (NSExtensionItem *item in self.extensionContext.inputItems) {
         for (NSItemProvider *itemProvider in item.attachments) {
-            
             NSString * urlString = [item.attributedContentText string];
-            if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePlainText]) {
-                // Long-press on URL in Safari or share from other app
-                [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypePlainText options:nil completionHandler:^(NSString *text, NSError *error) {
-                    [self parseURLString:text];
-                }];
-                return;
-            } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeURL]) {
+            if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeURL]) {
+                [self.latch incrementAndGet];
                 // Share page from within Safari
                 [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypeURL options:nil completionHandler:^(NSURL *url, NSError *error) {
-                    if (!error && [url.scheme isEqualToString:@"https"]) {
-                        [self loadURL:url];
-                    } else {
-                        [self unsupportedURL];
+                    [self.latch decrementAndGet];
+                    if (url) {
+                        [self.values addObject:url];
                     }
+                    dispatch_async(dispatch_get_main_queue(), ^{ [self checkValues]; });
                 }];
-                return;
             } else if (urlString)  {
                 // Share page from third-party browsers (Chrome, Brave 🦁)
-                [self parseURLString:urlString];
-                return;
+                [self.values addObject:urlString];
+                dispatch_async(dispatch_get_main_queue(), ^{ [self checkValues]; });
+            } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePlainText]) {
+                [self.latch incrementAndGet];
+                // Long-press on URL in Safari or share from other app
+                [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypePlainText options:nil completionHandler:^(NSString *text, NSError *error) {
+                    [self.latch decrementAndGet];
+                    NSURL * url = [NSURL URLWithString:text];
+                    if (url) {
+                        [self.values addObject:text];
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{ [self checkValues]; });
+                }];
             }
         }
     }
+    dispatch_async(dispatch_get_main_queue(), ^{ [self checkValues]; });
+}
 
-    [self closeExtension];
+- (void) checkValues {
+    if ([self.latch getValue] <= 0) {
+        if (self.values.count == 0) {
+            [self closeExtension];
+            return;
+        }
+
+        BOOL validURLFound = NO;
+
+        for (id value in self.values) {
+            NSURL * url;
+            if ([value isKindOfClass:[NSURL class]]) {
+                url = (NSURL *)value;
+            } else if ([value isKindOfClass:[NSString class]]) {
+                url = [NSURL URLWithString:value];
+            }
+
+            if (url) {
+                if ([url.scheme isEqualToString:@"https"]) {
+                    validURLFound = YES;
+                    [self loadURL:url];
+                }
+            }
+        }
+
+        if (!validURLFound) {
+            [self unsupportedURL];
+        }
+    }
 }
 
 - (void) parseURLString:(NSString *)urlString {
@@ -61,38 +98,13 @@
 }
 
 - (void) loadURL:(NSURL *)url {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    });
-
-    [self.chainManager certificateChainFromURL:url finished:^(NSError * _Nullable error, CKCertificateChain * _Nullable chain) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-
-        if (error) {
-            [[UIHelper sharedInstance]
-             presentAlertInViewController:self
-             title:l(@"Could not get certificates")
-             body:error.localizedDescription
-             dismissButtonTitle:l(@"Dismiss")
-             dismissed:^(NSInteger buttonIndex) {
-                 [self closeExtension];
-             }];
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                currentChain = chain;
-                selectedCertificate = chain.certificates[0];
-                UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-                UISplitViewController * split = [main instantiateViewControllerWithIdentifier:@"SplitView"];
-                [self presentViewController:split animated:YES completion:nil];
-            });
-        }
-    }];
+    UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    GetterTableViewController * getter = [main instantiateViewControllerWithIdentifier:@"Getter"];
+    [getter presentGetter:self ForUrl:url finished:nil];
 }
 
 - (void) unsupportedURL {
-    [[UIHelper sharedInstance]
+    [uihelper
      presentAlertInViewController:self
      title:l(@"Unsupported Scheme")
      body:l(@"Only HTTPS sites can be inspected")
@@ -113,4 +125,5 @@
 - (IBAction)closeButton:(id)sender {
     [self closeExtension];
 }
+
 @end
