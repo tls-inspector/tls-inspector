@@ -12,7 +12,7 @@
 
 static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/TLS-Inspector/";
 static NSString * PROJECT_URL = @"https://tlsinspector.com/";
-static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/TLS-inspector/blob/master/CONTRIBUTE.md";
+static NSString * PROJECT_CONTRIBUTE_URL = @"https://tlsinspector.com/contribute.html";
 static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/beta.html";
 
 - (void) viewDidLoad {
