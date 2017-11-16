@@ -146,7 +146,9 @@
 - (void) streamHasSpaceAvailable:(NSStream *)stream {
     SecTrustRef trust = (__bridge SecTrustRef)[stream propertyForKey: (__bridge NSString *)kCFStreamPropertySSLPeerTrust];
     SecTrustResultType trustStatus;
-    SecTrustEvaluate(trust, &trustStatus);
+
+    OSStatus evalulateResult = SecTrustEvaluate(trust, &trustStatus);
+    (void)evalulateResult;
     long count = SecTrustGetCertificateCount(trust);
 
     NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
@@ -243,8 +245,13 @@
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 #endif
 
+        NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString * version = infoDictionary[@"CFBundleShortVersionString"];
+        NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@", version];
+
         const char * urlString = url.absoluteString.UTF8String;
         curl_easy_setopt(curl, CURLOPT_URL, urlString);
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
         // Since we're only concerned with getting the HTTP servers
         // info, we don't do any verification
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
