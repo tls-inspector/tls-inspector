@@ -358,7 +358,12 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
         fullNames = point->distpoint->name.fullname;
         fullName = sk_GENERAL_NAME_value(fullNames, 0);
         const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
-        [urls addObject:[NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]]];
+        NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
+        if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
+            [urls addObject:crlURL];
+        } else {
+            NSLog(@"Unsupported CRL distribution point: %s", url);
+        }
     }
 
     self.crlCache = urls;
