@@ -29,6 +29,7 @@
         case CKCertificateChainTrustStatusUntrusted:
         case CKCertificateChainTrustStatusRevoked:
         case CKCertificateChainTrustStatusSelfSigned:
+        case CKCertificateChainTrustStatusInvalidDate:
             self.headerViewLabel.text = l(@"Untrusted Chain");
             self.headerView.backgroundColor = uihelper.redColor;
             self.headerButton.tintColor = [UIColor whiteColor];
@@ -195,6 +196,9 @@
             title = l(@"Untrusted Chain");
             body = l(@"revoked_chain_description");
             break;
+        case CKCertificateChainTrustStatusInvalidDate:
+            title = l(@"Untrusted Chain");
+            body = l(@"invalid_date_chain_description");
     }
 
     [uihelper

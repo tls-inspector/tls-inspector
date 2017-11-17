@@ -182,10 +182,21 @@
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;
     } else {
-        if (self.chain.certificates.count == 1) {
+        // Apple does not provide (as far as I am aware) detailed information as to why a certificate chain
+        // failed evalulation. Therefor we have to made some deductions based off of information we do know.
+        // These are:
+        // - If the any cert in the chain is expired or not yet valid
+        // - If the chain has less than 3 certificates, consider it self signed (risky)
+        // Otherwise, fall back to a generic reason
+        if (self.chain.certificates.count < 3) {
             self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
         } else {
             self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
+        }
+        for (CKCertificate * cert in self.chain.certificates) {
+            if (!cert.validIssueDate) {
+                self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
+            }
         }
     }
 
