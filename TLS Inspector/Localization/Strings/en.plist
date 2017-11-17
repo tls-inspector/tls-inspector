@@ -76,8 +76,8 @@
 	<string>Connection refused.</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
-	<key>Contribute on GitHub</key>
-	<string>Contribute on GitHub</string>
+	<key>Contribute to TLS Inspector</key>
+	<string>Contribute to TLS Inspector</string>
 	<key>Copy</key>
 	<string>Copy</string>
 	<key>Could not get certificates</key>
