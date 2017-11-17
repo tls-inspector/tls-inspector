@@ -147,8 +147,7 @@
     SecTrustRef trust = (__bridge SecTrustRef)[stream propertyForKey: (__bridge NSString *)kCFStreamPropertySSLPeerTrust];
     SecTrustResultType trustStatus;
 
-    OSStatus evalulateResult = SecTrustEvaluate(trust, &trustStatus);
-    (void)evalulateResult;
+    SecTrustEvaluate(trust, &trustStatus);
     long count = SecTrustGetCertificateCount(trust);
 
     NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
@@ -258,7 +257,7 @@
 
         NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
         NSString * version = infoDictionary[@"CFBundleShortVersionString"];
-        NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@", version];
+        NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
 
         const char * urlString = url.absoluteString.UTF8String;
         curl_easy_setopt(curl, CURLOPT_URL, urlString);
