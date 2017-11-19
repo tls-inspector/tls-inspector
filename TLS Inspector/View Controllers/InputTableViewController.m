@@ -10,13 +10,19 @@
     NSString * hostAddress;
     NSNumber * certIndex;
     NSString * placeholder;
+    NSString * tip;
 }
 
 @property (strong, nonatomic) UITextField *hostField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *inspectButton;
 - (IBAction) inspectButton:(UIBarButtonItem *)sender;
+@property (weak, nonatomic) IBOutlet UIView *tipView;
+@property (weak, nonatomic) IBOutlet UILabel *tipIconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tipTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tipBodyLabel;
 @property (strong, nonatomic) NSArray<NSString *> * recentDomains;
 @property (strong, nonatomic) NSArray<NSString *> * placeholderDomains;
+@property (strong, nonatomic) NSArray<NSString *> * tipKeys;
 
 @end
 
@@ -34,6 +40,25 @@
 #ifndef DEBUG
     [[AppLinks new] appLaunchRate];
 #endif
+
+    self.tipIconLabel.textColor = uihelper.blueColor;
+    if (usingLightTheme) {
+        self.tipTitleLabel.textColor = UIColor.blackColor;
+        self.tipBodyLabel.textColor = UIColor.blackColor;
+    } else {
+        self.tipTitleLabel.textColor = UIColor.whiteColor;
+        self.tipBodyLabel.textColor = UIColor.whiteColor;
+    }
+
+    self.tipKeys = @[
+                     @"tlstip1",
+                     @"tlstip2",
+                     @"tlstip3",
+                     @"tlstip4",
+                     @"tlstip5",
+                     @"tlstip6",
+                     @"tlstip7"
+                     ];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -41,12 +66,18 @@
 
     NSUInteger randomPlaceholderIndex = arc4random() % [self.placeholderDomains count];
     placeholder = [self.placeholderDomains objectAtIndex:randomPlaceholderIndex];
+    NSUInteger randomTipIndex = arc4random() % [self.tipKeys count];
+    tip = [self.tipKeys objectAtIndex:randomTipIndex];
+    self.recentDomains = [[RecentDomains sharedInstance] getRecentDomains];
+    [self setHoldFieldPlaceholder];
+    self.tipBodyLabel.text = [lang key:tip];
+
+    BOOL hideTips = [AppDefaults boolForKey:HIDE_TIPS];
+    self.tipIconLabel.hidden = self.tipTitleLabel.hidden = self.tipBodyLabel.hidden = hideTips;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.recentDomains = [[RecentDomains sharedInstance] getRecentDomains];
-    [self.tableView reloadData];
     hostAddress = nil;
     certIndex = nil;
 }
@@ -168,12 +199,7 @@
         [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
         self.hostField.delegate = self;
         self.hostField.textColor = themeTextColor;
-        if (usingLightTheme) {
-            self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{}];
-        } else {
-            UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
-            self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
-        }
+        [self setHoldFieldPlaceholder];
     } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
         cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
@@ -181,6 +207,15 @@
     }
 
     return cell;
+}
+
+- (void) setHoldFieldPlaceholder {
+    if (usingLightTheme) {
+        self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{}];
+    } else {
+        UIColor *color = [UIColor colorWithRed:0.304f green:0.362f blue:0.48f alpha:1.0f];
+        self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
+    }
 }
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

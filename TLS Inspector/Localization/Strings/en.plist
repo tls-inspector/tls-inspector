@@ -76,8 +76,8 @@
 	<string>Connection refused.</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
-	<key>Contribute on GitHub</key>
-	<string>Contribute on GitHub</string>
+	<key>Contribute to TLS Inspector</key>
+	<string>Contribute to TLS Inspector</string>
 	<key>Copy</key>
 	<string>Copy</string>
 	<key>Could not get certificates</key>
@@ -562,6 +562,8 @@
 	<string>Zimbabwe</string>
 	<key>Dark</key>
 	<string>Dark</string>
+	<key>Did You Know:</key>
+	<string>Did You Know:</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
 	<key>EV Authority</key>
@@ -614,6 +616,8 @@
 	<string>Light</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
+	<key>More</key>
+	<string>More</string>
 	<key>Negotiated Cipher Suite</key>
 	<string>Negotiated Cipher Suite</string>
 	<key>Negotiated Version</key>
@@ -644,6 +648,8 @@
 	<string>Revoked On</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
+	<key>Security HTTP Headers</key>
+	<string>Security HTTP Headers</string>
 	<key>Server Info</key>
 	<string>Server Info</string>
 	<key>Share</key>
@@ -728,8 +734,12 @@
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
+	<key>You must restart TLS Inspector for theme changes to take affect.</key>
+	<string>You must restart TLS Inspector for theme changes to take affect.</string>
 	<key>You must restart the app for the change to take affect</key>
 	<string>You must restart the app for the change to take affect</string>
+	<key>invalid_date_chain_description</key>
+	<string>The server certificate for this site is not trusted becuase one or more certificates in the chain is expired or not yet valid.</string>
 	<key>revoked_chain_description</key>
 	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
 	<key>safari_hint</key>
@@ -737,19 +747,19 @@
 	<key>self_signed_chain_description</key>
 	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
 	<key>tlstip1</key>
-	<string>You can view the certificate of a website in Safari or other web browser by tapping the "Share" button and selecting "Show Certificate".</string>
+	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tlstip2</key>
-	<string>You can view more information about the server on Shodan by tapping the "Share" button when viewing a certificate.</string>
+	<string>You can view more information about the server on Shodan by tapping the &quot;Share&quot; button when viewing a certificate.</string>
 	<key>tlstip3</key>
-	<string>You can create a reminder when a certificate is about to expire by tapping the "Share" button when inspecting a certificate.</string>
+	<string>You can create a reminder when a certificate is about to expire by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
 	<key>tlstip4</key>
-	<string>You can change the theme in the "About" view of the app.</string>
+	<string>You can change between night and day theme in options.</string>
 	<key>tlstip5</key>
-	<string>You can export the share the certificate data by tapping the "Share" button when inspecting a certificate.</string>
+	<string>You can export the share the certificate data by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
 	<key>tlstip6</key>
-	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the "Share" button when inspecting the value.</string>
+	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
 	<key>tlstip7</key>
-	<string>You can copy a parameters value by long-pressing on it and tapping "Copy".</string>
+	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
 	<key>trusted_chain_description</key>
 	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>untrusted_chain_description</key>

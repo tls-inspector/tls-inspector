@@ -46,11 +46,17 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
      */
     CKCertificateChainTrustStatusUntrusted,
     /**
+     One or more certificates in the chain is expired or not yet valid
+     */
+    CKCertificateChainTrustStatusInvalidDate,
+    /**
      The server certificate of this chain is revoked
      */
     CKCertificateChainTrustStatusRevoked,
     /**
-     The server certificate is not issued by any CA and is not manually installed
+     The server certificate is not issued by any trusted CA and is not manually installed
+     Note: Since iOS 10 it is not possible to manually trust a self-signed certificate through
+     the use of a configuration profile (except on managed devices).
      */
     CKCertificateChainTrustStatusSelfSigned,
 };
@@ -94,14 +100,5 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
  Get the negotiated protocol used to retrieve the chain
  */
 @property (nonatomic) SSLProtocol protocol;
-
-/**
- *  Query the specified URL for its certificate chain.
- *
- *  @param URL      The URL to query. Must use the https scheme.
- *                  The port is optional and will default to 443.
- *  @param finished Called when finished with either an error or certificate chain.
- */
-;
 
 @end

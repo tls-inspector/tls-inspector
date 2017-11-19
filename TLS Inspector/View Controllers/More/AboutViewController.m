@@ -12,7 +12,7 @@
 
 static NSString * PROJECT_GITHUB_URL = @"https://github.com/certificate-helper/TLS-Inspector/";
 static NSString * PROJECT_URL = @"https://tlsinspector.com/";
-static NSString * PROJECT_CONTRIBUTE_URL = @"https://github.com/certificate-helper/TLS-inspector/blob/master/CONTRIBUTE.md";
+static NSString * PROJECT_CONTRIBUTE_URL = @"https://tlsinspector.com/contribute.html";
 static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/beta.html";
 
 - (void) viewDidLoad {
@@ -63,7 +63,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
         label.textColor = themeTextColor;
         switch (indexPath.row) {
             case 0:
-                label.text = l(@"Contribute on GitHub");
+                label.text = l(@"Contribute to TLS Inspector");
                 break;
             case 1:
                 label.text = l(@"Test New Features");
@@ -128,7 +128,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     switch (section) {
         case 0: {
             NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-            return format(@"%@ (%@). %@, %@",
+            return format(@"App: %@ (%@). OpenSSL: %@, cURL: %@",
                           [infoDictionary objectForKey:@"CFBundleShortVersionString"],
                           [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey],
                           [CKCertificate openSSLVersion],

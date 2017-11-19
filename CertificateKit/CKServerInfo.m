@@ -45,7 +45,7 @@
 
     // Shoutout to Scott Helme for putting together this list! 🇬🇧
     // https://securityheaders.io, https://scotthelme.co.uk/
-    NSArray<NSString *> * SECURE_HEADERS = @[@"Content-Security-Policy", @"Public-Key-Pins", @"Strict-Transport-Security", @"X-Frame-Options", @"X-XSS-Protection", @"X-Content-Type-Options", @"Referrer-Policy"];
+    NSArray<NSString *> * SECURE_HEADERS = @[@"Content-Security-Policy", @"Strict-Transport-Security", @"X-Frame-Options", @"X-XSS-Protection", @"X-Content-Type-Options", @"Referrer-Policy"];
 
     NSArray<NSString *> * headerKeys = self.headers.allKeys;
     for (NSString * secureHeaderKey in SECURE_HEADERS) {

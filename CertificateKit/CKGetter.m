@@ -146,6 +146,7 @@
 - (void) streamHasSpaceAvailable:(NSStream *)stream {
     SecTrustRef trust = (__bridge SecTrustRef)[stream propertyForKey: (__bridge NSString *)kCFStreamPropertySSLPeerTrust];
     SecTrustResultType trustStatus;
+
     SecTrustEvaluate(trust, &trustStatus);
     long count = SecTrustGetCertificateCount(trust);
 
@@ -180,10 +181,21 @@
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;
     } else {
-        if (self.chain.certificates.count == 1) {
+        // Apple does not provide (as far as I am aware) detailed information as to why a certificate chain
+        // failed evalulation. Therefor we have to made some deductions based off of information we do know.
+        // These are:
+        // - If the any cert in the chain is expired or not yet valid
+        // - If the chain has less than 3 certificates, consider it self signed (risky)
+        // Otherwise, fall back to a generic reason
+        if (self.chain.certificates.count < 3) {
             self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
         } else {
             self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
+        }
+        for (CKCertificate * cert in self.chain.certificates) {
+            if (!cert.validIssueDate) {
+                self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
+            }
         }
     }
 
@@ -243,8 +255,13 @@
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 #endif
 
+        NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString * version = infoDictionary[@"CFBundleShortVersionString"];
+        NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
+
         const char * urlString = url.absoluteString.UTF8String;
         curl_easy_setopt(curl, CURLOPT_URL, urlString);
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
         // Since we're only concerned with getting the HTTP servers
         // info, we don't do any verification
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
@@ -281,12 +298,20 @@ static size_t header_callback(char *buffer, size_t size, size_t nitems, void *us
     if (len > 2) {
         NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
         NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSArray<NSString *> * components = [headerValue componentsSeparatedByString:@":"];
-        if (components.count == 2) {
-            [((__bridge NSMutableDictionary<NSString *, NSString *> *)userdata)
-             setObject:[components[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
-             forKey:[components[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+        NSArray<NSString *> * components = [headerValue componentsSeparatedByString:@": "];
+        if (components.count < 2) {
+            return len;
         }
+
+        NSString * key = components[0];
+        NSInteger keyLength = key.length + 1; // Chop off the ":"
+        if ((NSInteger)headerValue.length - keyLength < 0) {
+            return len;
+        }
+        NSString * value = [headerValue substringWithRange:NSMakeRange(keyLength, headerValue.length - keyLength)];
+        [((__bridge NSMutableDictionary<NSString *, NSString *> *)userdata)
+         setObject:value
+         forKey:key];
     }
 
     return len;
