@@ -25,306 +25,103 @@
 //  SOFTWARE.
 
 #import "CKGetter.h"
-#import "CKCRLManager.h"
-#include <openssl/ssl.h>
-#include <openssl/x509.h>
-#include <curl/curl.h>
+#import "CKServerInfoGetter.h"
+#import "CKCertificateChainGetter.h"
 
-@interface CKGetter () <NSStreamDelegate> {
-    CFReadStreamRef   readStream;
-    CFWriteStreamRef  writeStream;
-    NSInputStream   * inputStream;
-    NSOutputStream  * outputStream;
-    NSURL * queryURL;
+@interface CKGetter () <NSStreamDelegate, CKGetterTaskDelegate> {
     BOOL gotChain;
     BOOL gotServerInfo;
 }
 
-@property (strong, nonatomic, nonnull, readwrite) NSString * domain;
-@property (strong, nonatomic, nonnull, readwrite) NSArray<CKCertificate *> * certificates;
-@property (strong, nonatomic, nullable, readwrite) CKCertificate * rootCA;
-@property (strong, nonatomic, nullable, readwrite) CKCertificate * intermediateCA;
-@property (strong, nonatomic, nullable, readwrite) CKCertificate * server;
-@property (nonatomic, readwrite) CKCertificateChainTrustStatus trusted;
-@property (nonatomic, readwrite) SSLCipherSuite cipher;
-@property (nonatomic, readwrite) SSLProtocol protocol;
-@property (nonatomic, readwrite) BOOL crlVerified;
-@property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> * headers;
-@property (nonatomic) NSUInteger statusCode;
+@property (strong, nonatomic, nonnull) CKCertificateChainGetter * chainGetter;
+@property (strong, nonatomic, nonnull) CKServerInfoGetter * serverInfoGetter;
+@property (strong, nonatomic, nonnull) NSArray<CKGetterTask *> * tasks;
 
 @end
 
 @implementation CKGetter
 
-@synthesize headers;
+typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
+    CKGetterTaskTagChain,
+    CKGetterTaskTagServerInfo,
+};
+
 
 + (CKGetter * _Nonnull) newGetter {
     return [CKGetter new];
 }
 
 - (void) getInfoForURL:(NSURL *)URL; {
-    queryURL = URL;
+    self.chainGetter = [CKCertificateChainGetter new];
+    self.chainGetter.delegate = self;
+    self.chainGetter.tag = CKGetterTaskTagChain;
+    self.serverInfoGetter = [CKServerInfoGetter new];
+    self.serverInfoGetter.delegate = self;
+    self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
 
-    [NSThread detachNewThreadSelector:@selector(getServerInfo) toTarget:self withObject:nil];
-    [NSThread detachNewThreadSelector:@selector(getCertificates) toTarget:self withObject:nil];
+    self.tasks = @[
+                   self.chainGetter,
+                   self.serverInfoGetter
+                   ];
+
+    for (CKGetterTask * task in self.tasks) {
+        [NSThread detachNewThreadSelector:@selector(performTaskForURL:) toTarget:task withObject:URL];
+    }
 }
 
-- (void) getCertificates {
-    unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
-    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)queryURL.host, port, &readStream, &writeStream);
-
-    outputStream = (__bridge NSOutputStream *)writeStream;
-    inputStream = (__bridge NSInputStream *)readStream;
-
-    inputStream.delegate = self;
-    outputStream.delegate = self;
-
-    [outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [inputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-
-    [outputStream open];
-    [inputStream open];
-}
-
-- (void) getServerInfo {
-    [self getServerInfoForURL:queryURL finished:^(NSError *error) {
-        if (error) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingServerInfo:)]) {
-                [self.delegate getter:self errorGettingServerInfo:error];
+- (void) getter:(CKGetterTask *)getter finishedTaskWithResult:(id)data {
+    switch (getter.tag) {
+        case CKGetterTaskTagChain:
+            self.chain = (CKCertificateChain *)data;
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotCertificateChain:)]) {
+                [self.delegate getter:self gotCertificateChain:self.chain];
             }
-        } else {
-            self.serverInfo = [CKServerInfo new];
-            self.serverInfo.headers = self.headers;
-            self.serverInfo.statusCode = self.statusCode;
+            break;
+        case CKGetterTaskTagServerInfo:
+            self.serverInfo = (CKServerInfo *)data;
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotServerInfo:)]) {
                 [self.delegate getter:self gotServerInfo:self.serverInfo];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                gotServerInfo = YES;
-                [self checkIfFinished];
-            });
-        }
-    }];
-}
-
-- (void) stream:(NSStream *)stream handleEvent:(NSStreamEvent)event {
-    switch (event) {
-        case NSStreamEventOpenCompleted: {
-            [self streamOpened:stream];
             break;
-        }
-        case NSStreamEventHasSpaceAvailable: {
-            [self streamHasSpaceAvailable:stream];
+        default:
             break;
-        }
-
-        case NSStreamEventHasBytesAvailable:
-        case NSStreamEventNone: {
-            break;
-        }
-
-        case NSStreamEventErrorOccurred:
-        case NSStreamEventEndEncountered: {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingCertificateChain:)]) {
-                [self.delegate getter:self errorGettingCertificateChain:[stream streamError]];
-            }
-            [inputStream close];
-            [outputStream close];
-            break;
-        }
-    }
-}
-
-- (void) streamOpened:(NSStream *)stream {
-    NSDictionary *settings = @{
-                               (__bridge NSString *)kCFStreamSSLValidatesCertificateChain: (__bridge NSNumber *)kCFBooleanFalse
-                               };
-    CFReadStreamSetProperty((CFReadStreamRef)inputStream, kCFStreamPropertySSLSettings, (CFTypeRef)settings);
-    CFWriteStreamSetProperty((CFWriteStreamRef)outputStream, kCFStreamPropertySSLSettings, (CFTypeRef)settings);
-}
-
-- (void) streamHasSpaceAvailable:(NSStream *)stream {
-    SecTrustRef trust = (__bridge SecTrustRef)[stream propertyForKey: (__bridge NSString *)kCFStreamPropertySSLPeerTrust];
-    SecTrustResultType trustStatus;
-
-    SecTrustEvaluate(trust, &trustStatus);
-    long count = SecTrustGetCertificateCount(trust);
-
-    NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
-
-    for (long i = 0; i < count; i ++) {
-        SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
-        NSData * certificateData = (NSData *)CFBridgingRelease(SecCertificateCopyData(certificateRef));
-        const unsigned char * bytes = (const unsigned char *)[certificateData bytes];
-        // This will leak
-        X509 * cert = d2i_X509(NULL, &bytes, [certificateData length]);
-        certificateData = nil;
-        [certs setObject:[CKCertificate fromX509:cert] atIndexedSubscript:i];
     }
 
-    SSLContextRef context = (SSLContextRef)CFReadStreamCopyProperty((__bridge CFReadStreamRef) inputStream, kCFStreamPropertySSLContext);
-    size_t numCiphers;
-    SSLGetNumberEnabledCiphers(context, &numCiphers);
-    SSLCipherSuite * ciphers = malloc(numCiphers);
-    SSLGetNegotiatedCipher(context, ciphers);
-
-    SSLProtocol protocol = 0;
-    SSLGetNegotiatedProtocolVersion(context, &protocol);
-
-    [inputStream close];
-    [outputStream close];
-
-    BOOL isTrustedChain = trustStatus == kSecTrustResultUnspecified;
-
-    self.chain = [CKCertificateChain new];
-    self.chain.certificates = certs;
-    if (isTrustedChain) {
-        self.chain.trusted = CKCertificateChainTrustStatusTrusted;
-    } else {
-        // Apple does not provide (as far as I am aware) detailed information as to why a certificate chain
-        // failed evalulation. Therefor we have to made some deductions based off of information we do know.
-        // These are:
-        // - If the any cert in the chain is expired or not yet valid
-        // - If the chain has less than 3 certificates, consider it self signed (risky)
-        // Otherwise, fall back to a generic reason
-        if (self.chain.certificates.count < 3) {
-            self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
-        } else {
-            self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
-        }
-        for (CKCertificate * cert in self.chain.certificates) {
-            if (!cert.validIssueDate) {
-                self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
-            }
-        }
-    }
-
-    self.chain.cipher = ciphers[0];
-    self.chain.protocol = protocol;
-
-    self.chain.domain = queryURL.host;
-    self.chain.server = [self.chain.certificates firstObject];
-    if (certs.count > 1) {
-        self.chain.rootCA = [self.chain.certificates lastObject];
-        self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
-
-        if (self.chain.server.crlDistributionPoints.count > 0) {
-            [self.chain.server.revoked
-             isCertificateRevoked:self.chain.server
-             intermediateCA:self.chain.intermediateCA
-             finished:^(NSError * _Nullable error) {
-                 if (!error) {
-                     if (self.chain.server.revoked.isRevoked) {
-                         self.chain.trusted = CKCertificateChainTrustStatusRevoked;
-                     }
-                 }
-                 if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotCertificateChain:)]) {
-                     [self.delegate getter:self gotCertificateChain:self.chain];
-                 }
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     gotChain = YES;
-                     [self checkIfFinished];
-                 });
-             }];
-            return;
-        }
-    }
-
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotCertificateChain:)]) {
-        [self.delegate getter:self gotCertificateChain:self.chain];
-    }
     dispatch_async(dispatch_get_main_queue(), ^{
-        gotChain = YES;
         [self checkIfFinished];
     });
 }
 
-- (void) getServerInfoForURL:(NSURL *)url finished:(void (^)(NSError * error))finished {
-    CURL * curl;
-    CURLcode response;
-
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-
-    self.headers = [NSMutableDictionary new];
-
-    NSError * error;
-
-    curl = curl_easy_init();
-    if (curl) {
-#ifdef DEBUG
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-#endif
-
-        NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-        NSString * version = infoDictionary[@"CFBundleShortVersionString"];
-        NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
-
-        const char * urlString = url.absoluteString.UTF8String;
-        curl_easy_setopt(curl, CURLOPT_URL, urlString);
-        curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
-        // Since we're only concerned with getting the HTTP servers
-        // info, we don't do any verification
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
-        // Perform the request, res will get the return code
-        response = curl_easy_perform(curl);
-        // Check for errors
-        if (response != CURLE_OK) {
-            NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
-            NSLog(@"Error getting server info: %@", errString);
-            error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
-        }
-
-        long http_code = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-        self.statusCode = http_code;
-
-        // always cleanup
-        curl_easy_cleanup(curl);
-    } else {
-        error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to create curl session."}];
-    }
-    curl_global_cleanup();
-    finished(error);
-}
-
-static size_t header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
-    unsigned long len = nitems * size;
-    if (len > 2) {
-        NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
-        NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSArray<NSString *> * components = [headerValue componentsSeparatedByString:@": "];
-        if (components.count < 2) {
-            return len;
-        }
-
-        NSString * key = components[0];
-        NSInteger keyLength = key.length + 1; // Chop off the ":"
-        if ((NSInteger)headerValue.length - keyLength < 0) {
-            return len;
-        }
-        NSString * value = [headerValue substringWithRange:NSMakeRange(keyLength, headerValue.length - keyLength)];
-        [((__bridge NSMutableDictionary<NSString *, NSString *> *)userdata)
-         setObject:value
-         forKey:key];
+- (void) getter:(CKGetterTask *)getter failedTaskWithError:(NSError *)error {
+    switch (getter.tag) {
+        case CKGetterTaskTagChain:
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingCertificateChain:)]) {
+                [self.delegate getter:self errorGettingCertificateChain:error];
+            }
+            break;
+        case CKGetterTaskTagServerInfo:
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingServerInfo:)]) {
+                [self.delegate getter:self errorGettingServerInfo:error];
+            }
+            break;
+        default:
+            break;
     }
 
-    return len;
-}
-
-size_t write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
-    // We don't really care about the actual HTTP body, so just convince CURL that we did something with it
-    // (we don't)
-    return size * nmemb;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self checkIfFinished];
+    });
 }
 
 - (void) checkIfFinished {
-    if (gotChain && gotServerInfo) {
+    BOOL allFinished = YES;
+    for (CKGetterTask * task in self.tasks) {
+        if (!task.finished) {
+            allFinished = NO;
+            break;
+        }
+    }
+    if (allFinished) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
             [self.delegate finishedGetter:self];
         }
