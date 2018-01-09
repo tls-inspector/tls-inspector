@@ -17,7 +17,7 @@
 #define APP_LAUNCH_RATE_KEY @"__APP_LAUNCH_RATE"
 #define APP_ID 1100539810
 #define APP_NAME @"TLS Inspector"
-#define APP_EMAIL @"'TLS Inspector Project Manager' <tls-inspector@ecnepsnai.com>"
+#define APP_EMAIL @"'TLS Inspector Project Manager' <hello@tlsinspector.com>"
 
 - (void) showAppInAppStorInViewController:(UIViewController *)viewController dismissed:(void (^)(void))dismissed {
     SKStoreProductViewController * productViewController = [SKStoreProductViewController new];
