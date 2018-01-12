@@ -57,6 +57,9 @@
 		3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
 		3C7DE6061EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C7DE6041EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C7DE6071EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DE6051EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m */; };
+		3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */; };
+		3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */; };
+		3CB4F159200451D000A9CF51 /* CKGetterTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686E31FC8FAA200BB7AE8 /* CKGetterTask.m */; };
 		3CBD8B931E7CE8D600F2A637 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B921E7CE8D600F2A637 /* AppState.m */; };
 		3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B921E7CE8D600F2A637 /* AppState.m */; };
 		3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */; };
@@ -93,6 +96,9 @@
 		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		67D03D7E1F82EC7900981806 /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D03D7D1F82EC7900981806 /* MoreTableViewController.m */; };
 		67D03D811F82EF3700981806 /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D03D801F82EF3700981806 /* OptionsTableViewController.m */; };
+		67F686E41FC8FAA200BB7AE8 /* CKGetterTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686E21FC8FAA200BB7AE8 /* CKGetterTask.h */; };
+		67F686E81FC8FAB800BB7AE8 /* CKCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686E61FC8FAB800BB7AE8 /* CKCertificateChainGetter.h */; };
+		67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686EA1FC8FACD00BB7AE8 /* CKServerInfoGetter.h */; };
 		A116000B1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
 		A116000C1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
 		A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15622901EEA065600D61FB5 /* InitialNavigationController.m */; };
@@ -254,6 +260,12 @@
 		67D03D7D1F82EC7900981806 /* MoreTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
 		67D03D7F1F82EF3700981806 /* OptionsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
 		67D03D801F82EF3700981806 /* OptionsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
+		67F686E21FC8FAA200BB7AE8 /* CKGetterTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKGetterTask.h; sourceTree = "<group>"; };
+		67F686E31FC8FAA200BB7AE8 /* CKGetterTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKGetterTask.m; sourceTree = "<group>"; };
+		67F686E61FC8FAB800BB7AE8 /* CKCertificateChainGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateChainGetter.h; sourceTree = "<group>"; };
+		67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateChainGetter.m; sourceTree = "<group>"; };
+		67F686EA1FC8FACD00BB7AE8 /* CKServerInfoGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKServerInfoGetter.h; sourceTree = "<group>"; };
+		67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKServerInfoGetter.m; sourceTree = "<group>"; };
 		A11600071EEB083500D98E8F /* TLS Inspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TLS Inspector.entitlements"; sourceTree = "<group>"; };
 		A11600081EEB084F00D98E8F /* Inspect Website.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Inspect Website.entitlements"; sourceTree = "<group>"; };
 		A11600091EEB086800D98E8F /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
@@ -381,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
+				67F686EF1FC8FAE400BB7AE8 /* Getters */,
 				3C2A7A511F284DC700AA12B4 /* CKGetter.h */,
 				3C2A7A521F284DC700AA12B4 /* CKGetter.m */,
 				3C65DAEC1E836C15004AD96D /* CKCRLManager.h */,
@@ -563,6 +576,19 @@
 			path = More;
 			sourceTree = "<group>";
 		};
+		67F686EF1FC8FAE400BB7AE8 /* Getters */ = {
+			isa = PBXGroup;
+			children = (
+				67F686EA1FC8FACD00BB7AE8 /* CKServerInfoGetter.h */,
+				67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */,
+				67F686E61FC8FAB800BB7AE8 /* CKCertificateChainGetter.h */,
+				67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */,
+				67F686E21FC8FAA200BB7AE8 /* CKGetterTask.h */,
+				67F686E31FC8FAA200BB7AE8 /* CKGetterTask.m */,
+			);
+			path = Getters;
+			sourceTree = "<group>";
+		};
 		A16ABDA41E844BFD007779BE /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -589,12 +615,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67F686E41FC8FAA200BB7AE8 /* CKGetterTask.h in Headers */,
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
 				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
+				67F686E81FC8FAB800BB7AE8 /* CKCertificateChainGetter.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
 				3C65DAF51E836C15004AD96D /* CKCertificateRevoked.h in Headers */,
 				3C65DAF71E836C15004AD96D /* CKCRLManager.h in Headers */,
+				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
 				3C7DE6061EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
@@ -853,6 +882,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
+				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
 				3C65DAF81E836C15004AD96D /* CKCRLManager.m in Sources */,
 				3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
@@ -860,7 +890,9 @@
 				3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */,
 				3C7DE6071EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
+				3CB4F159200451D000A9CF51 /* CKGetterTask.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
+				3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

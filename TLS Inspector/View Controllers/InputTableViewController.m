@@ -92,7 +92,7 @@
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if (self.hostField.text.length > 0) {
-        hostAddress = self.hostField.text;
+        hostAddress = [self.hostField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
         [self inspectCertificate];
         return YES;
     } else {
@@ -116,7 +116,7 @@
 }
 
 - (IBAction) inspectButton:(UIBarButtonItem *)sender {
-    hostAddress = self.hostField.text;
+    hostAddress = [self.hostField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
     [self inspectCertificate];
 }
 

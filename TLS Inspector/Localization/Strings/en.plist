@@ -572,6 +572,8 @@
 	<string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
 	<key>Enter the value to verify</key>
 	<string>Enter the value to verify</string>
+	<key>Errors</key>
+	<string>Errors</string>
 	<key>FQDN or IP Address</key>
 	<string>FQDN or IP Address</string>
 	<key>Fingerprints</key>

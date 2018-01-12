@@ -1,5 +1,6 @@
 #import "GetterTableViewController.h"
 #import "IconTableViewCell.h"
+#import "TitleValueTableViewCell.h"
 
 @interface GetterTableViewController () <CKGetterDelegate> {
     BOOL errorLoading;
@@ -8,6 +9,7 @@
 
 @property (strong, nonatomic, nonnull) NSURL * url;
 @property (strong, nonatomic) NSArray<NSString *> * items;
+@property (strong, nonatomic) NSMutableArray<NSError *> * getterErrors;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> * itemStatus;
 @property (strong, nonatomic) CKGetter * infoGetter;
 
@@ -26,7 +28,7 @@
     [parent presentViewController:controller animated:YES completion:nil];
 }
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     [super viewDidLoad];
 
     NSAssert(self.url != nil, @"URL should not be nil");
@@ -42,7 +44,11 @@
     [self.infoGetter getInfoForURL:self.url];
     self.title = self.url.host;
 
+    self.tableView.estimatedRowHeight = 85.0f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
     self.items = @[CERT_CELL, SERV_CELL];
+    self.getterErrors = [NSMutableArray arrayWithCapacity:self.items.count];
     self.itemStatus = [NSMutableDictionary dictionaryWithDictionary:@{CERT_CELL: @"Loading", SERV_CELL: @"Loading"}];
 }
 
@@ -53,20 +59,36 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.getterErrors.count > 0) {
+        return 2;
+    }
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.items.count;
+    if (section == 0) {
+        return self.items.count;
+    } else if (section == 1) {
+        return self.getterErrors.count;
+    }
+
+    return 0;
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return errorLoading ? l(@"Finished") : l(@"Loading...");
+    if (section == 0) {
+        return errorLoading ? l(@"Finished") : l(@"Loading...");
+    } else if (section == 1) {
+        return l(@"Errors");
+    }
+
+    return nil;
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (errorLoading) {
+    if (section == 0 && errorLoading) {
         return lv(@"There were one or more errors while inspecting {host}", @[self.url.host]);
     }
 
@@ -74,31 +96,36 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString * pending = [self.items objectAtIndex:indexPath.row];
-    NSString * status = [self.itemStatus objectForKey:pending];
+    if (indexPath.section == 0) {
+        NSString * pending = [self.items objectAtIndex:indexPath.row];
+        NSString * status = [self.itemStatus objectForKey:pending];
 
-    if ([status isEqualToString:@"Loading"]) {
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Loading" forIndexPath:indexPath];
-        UIActivityIndicatorView * spinner = [cell viewWithTag:2];
-        if (usingLightTheme) {
-            spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        if ([status isEqualToString:@"Loading"]) {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Loading" forIndexPath:indexPath];
+            UIActivityIndicatorView * spinner = [cell viewWithTag:2];
+            if (usingLightTheme) {
+                spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+            } else {
+                spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+            }
+            [spinner startAnimating];
+
+            UILabel * label = [cell viewWithTag:1];
+            label.text = l(pending);
+            label.textColor = themeTextColor;
+            return cell;
         } else {
-            spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+            FAIcon icon = FATimesCircle;
+            UIColor * color = uihelper.redColor;
+            if ([status isEqualToString:@"Done"]) {
+                icon = FACheckCircle;
+                color = uihelper.greenColor;
+            }
+            return [[IconTableViewCell alloc] initWithIcon:icon color:color title:l(pending)];
         }
-        [spinner startAnimating];
-
-        UILabel * label = [cell viewWithTag:1];
-        label.text = l(pending);
-        label.textColor = themeTextColor;
-        return cell;
-    } else {
-        FAIcon icon = FATimesCircle;
-        UIColor * color = uihelper.redColor;
-        if ([status isEqualToString:@"Done"]) {
-            icon = FACheckCircle;
-            color = uihelper.greenColor;
-        }
-        return [[IconTableViewCell alloc] initWithIcon:icon color:color title:l(pending)];
+    } if (indexPath.section == 1) {
+        NSError * error = self.getterErrors[indexPath.row];
+        return [[TitleValueTableViewCell alloc] initWithTitle:error.domain value:error.localizedDescription];
     }
 
     return nil;
@@ -119,32 +146,34 @@
 }
 
 - (void) getter:(CKGetter *)getter gotCertificateChain:(CKCertificateChain *)chain {
-    [self.itemStatus setValue:@"Done" forKey:CERT_CELL];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.itemStatus setValue:@"Done" forKey:CERT_CELL];
         [self.tableView reloadData];
     });
 }
 
 - (void) getter:(CKGetter *)getter gotServerInfo:(CKServerInfo * _Nonnull)serverInfo {
-    [self.itemStatus setValue:@"Done" forKey:SERV_CELL];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.itemStatus setValue:@"Done" forKey:SERV_CELL];
         [self.tableView reloadData];
     });
 }
 
 - (void) getter:(CKGetter *)getter errorGettingCertificateChain:(NSError *)error {
-    [self.itemStatus setValue:@"Error" forKey:CERT_CELL];
-    errorLoading = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.itemStatus setValue:@"Error" forKey:CERT_CELL];
+        errorLoading = YES;
+        [self.getterErrors addObject:error];
         [self.tableView reloadData];
         [self showCloseButton];
     });
 }
 
 - (void) getter:(CKGetter *)getter errorGettingServerInfo:(NSError *)error {
-    [self.itemStatus setValue:@"Error" forKey:SERV_CELL];
-    errorLoading = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.itemStatus setValue:@"Error" forKey:SERV_CELL];
+        errorLoading = YES;
+        [self.getterErrors addObject:error];
         [self.tableView reloadData];
         [self showCloseButton];
     });
