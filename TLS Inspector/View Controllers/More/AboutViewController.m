@@ -2,8 +2,9 @@
 #import "AppLinks.h"
 #import "TitleValueTableViewCell.h"
 
-@interface AboutViewController ()
+@interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) AppLinks * appLinks;
 
 @end
@@ -17,11 +18,20 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     self.appLinks = [AppLinks new];
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (IBAction) closeButton:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 # pragma mark - Table View Source
@@ -134,7 +144,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                           [CKCertificate openSSLVersion],
                           [CKServerInfo libcurlVersion]);
         } case 1:
-            return l(@"TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.");
+            return l(@"TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.");
     }
     return @"";
 }
