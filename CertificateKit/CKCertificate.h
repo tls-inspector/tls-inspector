@@ -27,6 +27,7 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificateRevoked.h"
 #import "CKCertificatePublicKey.h"
+#import "CKNameObject.h"
 
 @class CKCertificateRevoked;
 @class CKCertificatePublicKey;
@@ -149,19 +150,19 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 - (BOOL) validIssueDate;
 
 /**
- *  Retuns the issuer name
+ *  Returns the certificates subject names.
  */
-@property (strong, nonatomic, nullable, readonly) NSString * issuer;
+@property (strong, nonatomic, nonnull, readonly) CKNameObject * subject;
+
+/**
+ *  Returns the certificates issuers subject names.
+ */
+@property (strong, nonatomic, nonnull, readonly) CKNameObject * issuer;
 
 /**
  *  Is this a certificate authority
  */
 @property (nonatomic, readonly) BOOL isCA;
-
-/**
- *  Retruns a dictionary with the subject names, and name types (OU or CN)
- */
-@property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * names;
 
 /**
  *  Returns an array of subject names applicable to the cert
