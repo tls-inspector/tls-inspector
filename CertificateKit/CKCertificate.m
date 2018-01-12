@@ -374,6 +374,48 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     return [self extendedValidationAuthority] != nil;
 }
 
+- (NSArray<NSString *> *) keyUsage {
+    int crit = -1;
+    int idx = -1;
+    ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_key_usage, &crit, &idx);
+    NSArray<NSString *> * usages = @[@"digitalSignature",
+                                     @"nonRepudiation",
+                                     @"keyEncipherment",
+                                     @"dataEncipherment",
+                                     @"keyAgreement",
+                                     @"keyCertSign",
+                                     @"cRLSign",
+                                     @"encipherOnly",
+                                     @"decipherOnly"];
+    NSMutableArray<NSString *> * values = [NSMutableArray arrayWithCapacity:usages.count];
+    for (int i = 0; i < usages.count; i++) {
+        if (ASN1_BIT_STRING_get_bit(keyUsage, i)) {
+            [values addObject:usages[i]];
+        }
+    }
+    return values;
+}
+
+- (NSArray<NSString *> *) extendedKeyUsage {
+    int crit = -1;
+    int idx = -1;
+    ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_ext_key_usage, &crit, &idx);
+    NSArray<NSString *> * usages = @[@"anyExtendedKeyUsage",
+                                     @"serverAuth",
+                                     @"clientAuth",
+                                     @"codeSigning",
+                                     @"emailProtection",
+                                     @"timeStamping",
+                                     @"OCSPSigning"];
+    NSMutableArray<NSString *> * values = [NSMutableArray arrayWithCapacity:usages.count];
+    for (int i = 0; i < usages.count; i++) {
+        if (ASN1_BIT_STRING_get_bit(keyUsage, i)) {
+            [values addObject:usages[i]];
+        }
+    }
+    return values;
+}
+
 + (NSString *) openSSLVersion {
     NSString * version = [NSString stringWithUTF8String:OPENSSL_VERSION_TEXT]; // OpenSSL <version> ...
     NSArray<NSString *> * versionComponents = [version componentsSeparatedByString:@" "];

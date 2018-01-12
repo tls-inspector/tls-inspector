@@ -184,6 +184,16 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) distributionPoints * crlDistributionPoints;
 
 /**
+ *  Get an array of key usage identifiers
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * keyUsage;
+
+/**
+ *  Get an array of extended key usage identifiers
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * extendedKeyUsage;
+
+/**
  *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
  */
 @property (nonatomic, nullable, readonly) void * X509Certificate;
