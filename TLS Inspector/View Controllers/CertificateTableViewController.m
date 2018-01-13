@@ -2,6 +2,7 @@
 #import "CertificateTableRowSection.h"
 #import "CertificateTableRowItem.h"
 #import "InspectorListTableViewController.h"
+#import "TitleValueTableViewCell.h"
 
 @interface CertificateTableViewController ()
 
@@ -130,6 +131,12 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowList"]) {
+        [(InspectorListTableViewController *)segue.destinationViewController setList:selectedCertificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -164,9 +171,24 @@
     }
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ShowList"]) {
-        [(InspectorListTableViewController *)segue.destinationViewController setList:selectedCertificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
+- (BOOL) tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL) tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    return action == @selector(copy:);
+}
+
+- (void) tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if (action == @selector(copy:)) {
+        UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSString * data;
+        if ([cell isKindOfClass:[TitleValueTableViewCell class]]) {
+            data = ((TitleValueTableViewCell *)cell).valueLabel.text;
+        } else {
+            data = cell.detailTextLabel.text;
+        }
+        [[UIPasteboard generalPasteboard] setString:data];
     }
 }
 
