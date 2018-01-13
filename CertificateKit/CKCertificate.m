@@ -59,17 +59,13 @@
 + (CKCertificate *) fromX509:(void *)cert {
     CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;
-    xcert.summary = [xcert generateSummary];
     xcert.revoked = [CKCertificateRevoked new];
     xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
     xcert.subject = [CKNameObject fromSubject:X509_get_subject_name(cert)];
     xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
+    xcert.summary = xcert.subject.commonName;
 
     return xcert;
-}
-
-- (NSString *) generateSummary {
-    return self.subject.commonName;
 }
 
 - (NSString *) SHA512Fingerprint {

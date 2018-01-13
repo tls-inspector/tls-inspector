@@ -56,7 +56,6 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
 
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
 
     [self loadCertificate];
@@ -67,6 +66,9 @@ typedef NS_ENUM(NSInteger, LeftDetailTag) {
     [selectedCertificate extendedValidation];
 
     self.title = selectedCertificate.summary;
+
+    NSLog(@"Usage: %@", selectedCertificate.keyUsage.description);
+    NSLog(@"Extended Usage: %@", selectedCertificate.extendedKeyUsage.description);
 
     self.cells = [NSMutableArray new];
     self.certErrors = [NSMutableArray new];

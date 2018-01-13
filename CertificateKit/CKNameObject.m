@@ -45,7 +45,7 @@
     CKNameObject * object = [CKNameObject new];
 
     NSString * (^valueForNID)(int) = ^NSString *(int nid) {
-        int idx = X509_NAME_get_index_by_NID((X509_NAME *)name, NID_commonName, -1);
+        int idx = X509_NAME_get_index_by_NID((X509_NAME *)name, nid, -1);
         X509_NAME_ENTRY * entry = X509_NAME_get_entry((X509_NAME *)name, idx);
         if (entry == NULL) {
             return nil;

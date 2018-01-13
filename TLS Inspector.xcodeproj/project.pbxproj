@@ -81,7 +81,6 @@
 		3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */; };
 		3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */; };
 		3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE611CB4AE5800F56B68 /* ValueViewController.m */; };
-		3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
 		3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* Assets.xcassets */; };
 		3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */; };
 		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
@@ -96,7 +95,12 @@
 		3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DD1CA8440400CD946B /* AppDelegate.m */; };
 		3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* Assets.xcassets */; };
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
-		3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */; };
+		3CFF7E7020098FD900478E0A /* CertificateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E6F20098FD900478E0A /* CertificateTableViewController.m */; };
+		3CFF7E732009900F00478E0A /* CertificateTableRowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E722009900F00478E0A /* CertificateTableRowItem.m */; };
+		3CFF7E762009907200478E0A /* CertificateTableRowSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E752009907200478E0A /* CertificateTableRowSection.m */; };
+		3CFF7E772009958A00478E0A /* CertificateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E6F20098FD900478E0A /* CertificateTableViewController.m */; };
+		3CFF7E782009962C00478E0A /* CertificateTableRowSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E752009907200478E0A /* CertificateTableRowSection.m */; };
+		3CFF7E792009962F00478E0A /* CertificateTableRowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E722009900F00478E0A /* CertificateTableRowItem.m */; };
 		67D03D7E1F82EC7900981806 /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D03D7D1F82EC7900981806 /* MoreTableViewController.m */; };
 		67D03D811F82EF3700981806 /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D03D801F82EF3700981806 /* OptionsTableViewController.m */; };
 		67F686E41FC8FAA200BB7AE8 /* CKGetterTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686E21FC8FAA200BB7AE8 /* CKGetterTask.h */; };
@@ -263,6 +267,12 @@
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTableViewController.m; sourceTree = "<group>"; };
 		3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorTableViewController.h; sourceTree = "<group>"; };
 		3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorTableViewController.m; sourceTree = "<group>"; };
+		3CFF7E6E20098FD900478E0A /* CertificateTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateTableViewController.h; sourceTree = "<group>"; };
+		3CFF7E6F20098FD900478E0A /* CertificateTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateTableViewController.m; sourceTree = "<group>"; };
+		3CFF7E712009900F00478E0A /* CertificateTableRowItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateTableRowItem.h; sourceTree = "<group>"; };
+		3CFF7E722009900F00478E0A /* CertificateTableRowItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateTableRowItem.m; sourceTree = "<group>"; };
+		3CFF7E742009907200478E0A /* CertificateTableRowSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateTableRowSection.h; sourceTree = "<group>"; };
+		3CFF7E752009907200478E0A /* CertificateTableRowSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateTableRowSection.m; sourceTree = "<group>"; };
 		67D03D7C1F82EC7900981806 /* MoreTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
 		67D03D7D1F82EC7900981806 /* MoreTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
 		67D03D7F1F82EF3700981806 /* OptionsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
@@ -566,6 +576,8 @@
 				3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */,
 				3CFAE6F41CA8466300CD946B /* InspectorTableViewController.h */,
 				3CFAE6F51CA8466300CD946B /* InspectorTableViewController.m */,
+				3CFF7E6E20098FD900478E0A /* CertificateTableViewController.h */,
+				3CFF7E6F20098FD900478E0A /* CertificateTableViewController.m */,
 				3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */,
 				3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */,
 				3C04EE601CB4AE5800F56B68 /* ValueViewController.h */,
@@ -603,6 +615,10 @@
 		A16ABDA41E844BFD007779BE /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
+				3CFF7E742009907200478E0A /* CertificateTableRowSection.h */,
+				3CFF7E752009907200478E0A /* CertificateTableRowSection.m */,
+				3CFF7E712009900F00478E0A /* CertificateTableRowItem.h */,
+				3CFF7E722009900F00478E0A /* CertificateTableRowItem.m */,
 				A16ABDA11E844BF9007779BE /* TitleValueTableViewCell.h */,
 				A16ABDA21E844BF9007779BE /* TitleValueTableViewCell.m */,
 				3C2B8B861F69877800A54769 /* IconTableViewCell.h */,
@@ -733,7 +749,8 @@
 				TargetAttributes = {
 					3C43EF811D7A987F00AE65E9 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = WCW84NC7Y8;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -751,8 +768,9 @@
 					};
 					3CFAE6D51CA8440400CD946B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = WCW84NC7Y8;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -872,10 +890,11 @@
 				3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */,
 				3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CC6523D1DB07035001FB7E1 /* lang.m in Sources */,
+				3CFF7E772009958A00478E0A /* CertificateTableViewController.m in Sources */,
 				3CF7E3461F789E9800EEEE21 /* NSAtomicNumber.m in Sources */,
 				3CEAA5021D83C8180011A706 /* ValueViewController.m in Sources */,
-				3CEAA5031D83C8180011A706 /* InspectorTableViewController.m in Sources */,
 				3C3104E91D83C02E0093909E /* CertificateListTableViewController.m in Sources */,
+				3CFF7E782009962C00478E0A /* CertificateTableRowSection.m in Sources */,
 				3C2B8B891F69877C00A54769 /* IconTableViewCell.m in Sources */,
 				3CBD8B981E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */,
@@ -883,6 +902,7 @@
 				3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */,
 				3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */,
 				3C5096A21E7CCA7C00AEAAB2 /* AppLinks.m in Sources */,
+				3CFF7E792009962F00478E0A /* CertificateTableRowItem.m in Sources */,
 				3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */,
 				3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */,
 				A116000C1EEB086800D98E8F /* Storage.m in Sources */,
@@ -935,7 +955,9 @@
 				67D03D7E1F82EC7900981806 /* MoreTableViewController.m in Sources */,
 				3CF7E3451F789E9800EEEE21 /* NSAtomicNumber.m in Sources */,
 				A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */,
+				3CFF7E7020098FD900478E0A /* CertificateTableViewController.m in Sources */,
 				3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */,
+				3CFF7E732009900F00478E0A /* CertificateTableRowItem.m in Sources */,
 				3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */,
@@ -946,8 +968,8 @@
 				3C1D28A5200959B800A606BB /* GradientView.m in Sources */,
 				3CFAE6DB1CA8440400CD946B /* main.m in Sources */,
 				3C2A7A651F28589000AA12B4 /* UIImage+FontAwesome.m in Sources */,
+				3CFF7E762009907200478E0A /* CertificateTableRowSection.m in Sources */,
 				3C04EE621CB4AE5800F56B68 /* ValueViewController.m in Sources */,
-				3CFAE6F61CA8466300CD946B /* InspectorTableViewController.m in Sources */,
 				3C04EE5F1CB4A23900F56B68 /* UIHelper.m in Sources */,
 				3C65C2D81E7482F300D88074 /* DNSResolver.m in Sources */,
 				3C2B8B881F69877800A54769 /* IconTableViewCell.m in Sources */,
@@ -985,8 +1007,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
@@ -1016,8 +1039,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
@@ -1244,8 +1268,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
@@ -1274,8 +1299,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
