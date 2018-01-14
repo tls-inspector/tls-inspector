@@ -63,7 +63,25 @@
     xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
     xcert.subject = [CKNameObject fromSubject:X509_get_subject_name(cert)];
     xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
-    xcert.summary = xcert.subject.commonName;
+
+    // Keep trying with each subject name for the summary
+    if (xcert.subject.commonName.length > 0) {
+        xcert.summary = xcert.subject.commonName;
+    } else if (xcert.subject.organizationalUnitName.length > 0) {
+        xcert.summary = xcert.subject.organizationalUnitName;
+    } else if (xcert.subject.organizationName.length > 0) {
+        xcert.summary = xcert.subject.organizationName;
+    } else if (xcert.subject.emailAddress.length > 0) {
+        xcert.summary = xcert.subject.emailAddress;
+    } else if (xcert.subject.countryName.length > 0) {
+        xcert.summary = xcert.subject.countryName;
+    } else if (xcert.subject.stateOrProvinceName.length > 0) {
+        xcert.summary = xcert.subject.stateOrProvinceName;
+    } else if (xcert.subject.localityName.length > 0) {
+        xcert.summary = xcert.subject.localityName;
+    } else {
+        xcert.summary = @"Untitled Certificate";
+    }
 
     return xcert;
 }
