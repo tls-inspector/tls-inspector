@@ -50,10 +50,14 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     CertificateTableRowSection * dateSection = [CertificateTableRowSection sectionWithTitle:@"Validity Period"];
-    dateSection.items = @[
-                            [CertificateTableRowItem itemWithTitle:l(@"Not Valid Before") value:[dateFormatter stringFromDate:[selectedCertificate notBefore]] style:CertificateTableRowItemStyleBasicValue],
-                            [CertificateTableRowItem itemWithTitle:l(@"Not Valid After") value:[dateFormatter stringFromDate:[selectedCertificate notAfter]] style:CertificateTableRowItemStyleBasicValue],
-                            ];
+    NSMutableArray<CertificateTableRowItem *> * dateItems = [NSMutableArray arrayWithArray:@[
+                                                                                             [CertificateTableRowItem itemWithTitle:l(@"Not Valid Before") value:[dateFormatter stringFromDate:[selectedCertificate notBefore]] style:CertificateTableRowItemStyleBasicValue],
+                                                                                             [CertificateTableRowItem itemWithTitle:l(@"Not Valid After") value:[dateFormatter stringFromDate:[selectedCertificate notAfter]] style:CertificateTableRowItemStyleBasicValue],
+                                                                                             ]];
+    if (selectedCertificate.revoked.isRevoked) {
+        [dateItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Revoked On") value:[dateFormatter stringFromDate:selectedCertificate.revoked.date] style:CertificateTableRowItemStyleBasicValue]];
+    }
+    dateSection.items = dateItems;
     [self.sections addObject:dateSection];
 
     // Key Usage
