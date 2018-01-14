@@ -20,6 +20,11 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
 
+    [[UIMenuController sharedMenuController] setMenuItems: @[
+                                                             [[UIMenuItem alloc] initWithTitle:l(@"Verify") action:@selector(verifyValue:)],
+                                                             [[UIMenuItem alloc] initWithTitle:l(@"Share") action:@selector(shareValue:)]]];
+    [[UIMenuController sharedMenuController] update];
+
     [self loadCertificate];
     subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
 }
@@ -176,7 +181,16 @@
 }
 
 - (BOOL) tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-    return action == @selector(copy:);
+    if (action == @selector(copy:)) {
+        return YES;
+    } else if (action == @selector(shareValue:) || action == @selector(verifyValue:)) {
+        CertificateTableRowSection * section = self.sections[indexPath.section];
+        BOOL match = [section.title isEqualToString:@"Fingerprints"];
+        NSLog(@"Section '%@' == 'Fingerprints'", section.title);
+        return match;
+    }
+
+    return NO;
 }
 
 - (void) tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
@@ -189,7 +203,53 @@
             data = cell.detailTextLabel.text;
         }
         [[UIPasteboard generalPasteboard] setString:data];
+    } else if (action == @selector(shareValue:)) {
+        TitleValueTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        UIActivityViewController *activityController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:@[cell.valueLabel.text]
+                                                        applicationActivities:nil];
+        activityController.popoverPresentationController.sourceView = cell;
+        [self presentViewController:activityController animated:YES completion:nil];
+    } else if (action == @selector(verifyValue:)) {
+        TitleValueTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:l(@"Verify Value")
+                                                                                 message:l(@"Enter the value to verify")
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = l(@"Value");
+        }];
+
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:l(@"Cancel")
+                                                               style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:l(@"Verify")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             UITextField * inputField = alertController.textFields.firstObject;
+                                                             [self compareValue:inputField.text withValue:cell.valueLabel.text];
+                                                         }];
+
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
+
+- (void) compareValue:(NSString *)left withValue:(NSString *)right {
+    NSString * (^formatValue)(NSString *) = ^NSString *(NSString * unformattedValue) {
+        return [[unformattedValue lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    };
+    NSString * formattedCurrentValue = formatValue(left);
+    NSString * formattedExpectedValue = formatValue(right);
+    if ([formattedExpectedValue isEqualToString:formattedCurrentValue]) {
+        [uihelper presentAlertInViewController:self title:l(@"Verified") body:l(@"Both values matched.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+    } else {
+        [uihelper presentAlertInViewController:self title:l(@"Not Verified") body:l(@"Values do not match.") dismissButtonTitle:l(@"Dismiss") dismissed:nil];
+    }
+}
+
+- (void) shareValue:(UIMenuItem *)sender { }
+
+- (void) verifyValue:(UIMenuItem *)sender { }
 
 @end

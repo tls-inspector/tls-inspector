@@ -28,12 +28,15 @@
             cell.textLabel.text = self.title;
             cell.detailTextLabel.text = self.value;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.textColor = colorForTheme([UIColor darkGrayColor], [UIColor lightGrayColor]);
+            cell.detailTextLabel.textColor = themeTextColor;
             return cell;
         }
         case CertificateTableRowItemStyleBasic: {
             UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Row"];
             cell.textLabel.text = self.title;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.textColor = themeTextColor;
             return cell;
         }
         default:

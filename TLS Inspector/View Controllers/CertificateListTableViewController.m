@@ -1,5 +1,4 @@
 #import "CertificateListTableViewController.h"
-#import "InspectorTableViewController.h"
 #import "TitleValueTableViewCell.h"
 #import "NSString+FontAwesome.h"
 #import "IconTableViewCell.h"
