@@ -2,38 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>keyUsage::digitalSignature</key>
-<string>Digital Signature</string>
-<key>keyUsage::nonRepudiation</key>
-<string>Non-Repudiation</string>
-<key>keyUsage::keyEncipherment</key>
-<string>Key Encipherment</string>
-<key>keyUsage::dataEncipherment</key>
-<string>Data Encipherment</string>
-<key>keyUsage::keyAgreement</key>
-<string>Key Agreement</string>
-<key>keyUsage::keyCertSign</key>
-<string>Key Cert Sign</string>
-<key>keyUsage::cRLSign</key>
-<string>CRL Sign</string>
-<key>keyUsage::encipherOnly</key>
-<string>Encipher Only</string>
-<key>keyUsage::decipherOnly</key>
-<string>Decipher Only</string>
-<key>keyUsage::anyExtendedKeyUsage</key>
-<string>Any</string>
-<key>keyUsage::serverAuth</key>
-<string>Server Auth</string>
-<key>keyUsage::clientAuth</key>
-<string>Client Auth</string>
-<key>keyUsage::codeSigning</key>
-<string>Code Signing</string>
-<key>keyUsage::emailProtection</key>
-<string>Email Protection</string>
-<key>keyUsage::timeStamping</key>
-<string>Time Stamping</string>
-<key>keyUsage::OCSPSigning</key>
-<string>OCSP Signing</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>About</key>
@@ -772,14 +740,54 @@
 	<string>You must restart TLS Inspector for theme changes to take affect.</string>
 	<key>You must restart the app for the change to take affect</key>
 	<string>You must restart the app for the change to take affect</string>
-	<key>invalid_date_chain_description</key>
+	<key>chainErr::invalid_date</key>
 	<string>The server certificate for this site is not trusted becuase one or more certificates in the chain is expired or not yet valid.</string>
-	<key>revoked_chain_description</key>
+	<key>chainErr::revoked</key>
 	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
+	<key>chainErr::self_signed</key>
+	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
+	<key>chainErr::sha1_int</key>
+	<string>The intermediate certificate for this site is signed using SHA-1, which is no longer considered secure.</string>
+	<key>chainErr::sha1_leaf</key>
+	<string>The server certificate for this site is signed using SHA-1, which is no longer considered secure.</string>
+	<key>chainErr::untrusted</key>
+	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
+	<key>chainErr::wrong_host</key>
+	<string>The server certificate is for a different host than the one connected to.</string>
+	<key>keyUsage::OCSPSigning</key>
+	<string>OCSP Signing</string>
+	<key>keyUsage::anyExtendedKeyUsage</key>
+	<string>Any</string>
+	<key>keyUsage::cRLSign</key>
+	<string>CRL Sign</string>
+	<key>keyUsage::clientAuth</key>
+	<string>Client Auth</string>
+	<key>keyUsage::codeSigning</key>
+	<string>Code Signing</string>
+	<key>keyUsage::dataEncipherment</key>
+	<string>Data Encipherment</string>
+	<key>keyUsage::decipherOnly</key>
+	<string>Decipher Only</string>
+	<key>keyUsage::digitalSignature</key>
+	<string>Digital Signature</string>
+	<key>keyUsage::emailProtection</key>
+	<string>Email Protection</string>
+	<key>keyUsage::encipherOnly</key>
+	<string>Encipher Only</string>
+	<key>keyUsage::keyAgreement</key>
+	<string>Key Agreement</string>
+	<key>keyUsage::keyCertSign</key>
+	<string>Key Cert Sign</string>
+	<key>keyUsage::keyEncipherment</key>
+	<string>Key Encipherment</string>
+	<key>keyUsage::nonRepudiation</key>
+	<string>Non-Repudiation</string>
+	<key>keyUsage::serverAuth</key>
+	<string>Server Auth</string>
+	<key>keyUsage::timeStamping</key>
+	<string>Time Stamping</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
-	<key>self_signed_chain_description</key>
-	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
 	<key>tlstip1</key>
 	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tlstip2</key>
@@ -796,8 +804,6 @@
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
 	<key>trusted_chain_description</key>
 	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
-	<key>untrusted_chain_description</key>
-	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>

@@ -38,25 +38,36 @@
  */
 typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
     /**
-     The system trusts this certificate
+     The system trusts this certificate.
      */
     CKCertificateChainTrustStatusTrusted,
     /**
-     The system does not trust this certificate
+     The system does not trust this certificate.
      */
     CKCertificateChainTrustStatusUntrusted,
     /**
-     One or more certificates in the chain is expired or not yet valid
+     The system does not trust this certificate because one or more certificates in the chain
+     are expired or not yet valid.
      */
     CKCertificateChainTrustStatusInvalidDate,
     /**
-     The server certificate of this chain is revoked
+     The system does not trust this certificate because the server certificate is for a different host.
+     */
+    CKCertificateChainTrustStatusWrongHost,
+    /**
+     The system does not trust this certificate because the server certificate is signed using SHA-1.
+     */
+    CKCertificateChainTrustStatusSHA1Leaf,
+    /**
+     The system does not trust this certificate because the intermediate certificate is signed using SHA-1.
+     */
+    CKCertificateChainTrustStatusSHA1Intermediate,
+    /**
+     The system does not trust this certificate because one or more certificates have been revoked.
      */
     CKCertificateChainTrustStatusRevoked,
     /**
-     The server certificate is not issued by any trusted CA and is not manually installed
-     Note: Since iOS 10 it is not possible to manually trust a self-signed certificate through
-     the use of a configuration profile (except on managed devices).
+     The system does not trust this certificate because it is a self-signed certificate.
      */
     CKCertificateChainTrustStatusSelfSigned,
 };

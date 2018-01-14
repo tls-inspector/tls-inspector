@@ -29,6 +29,9 @@
         case CKCertificateChainTrustStatusRevoked:
         case CKCertificateChainTrustStatusSelfSigned:
         case CKCertificateChainTrustStatusInvalidDate:
+        case CKCertificateChainTrustStatusWrongHost:
+        case CKCertificateChainTrustStatusSHA1Leaf:
+        case CKCertificateChainTrustStatusSHA1Intermediate:
             self.headerViewLabel.text = l(@"Untrusted Chain");
             self.headerView.backgroundColor = uihelper.redColor;
             self.headerButton.tintColor = [UIColor whiteColor];
@@ -179,25 +182,38 @@
     NSString * title, * body;
 
     switch (currentChain.trusted) {
-        case CKCertificateChainTrustStatusUntrusted:
-            title = l(@"Untrusted Chain");
-            body = l(@"untrusted_chain_description");
-            break;
-        case CKCertificateChainTrustStatusSelfSigned:
-            title = l(@"Untrusted Chain");
-            body = l(@"self_signed_chain_description");
-            break;
         case CKCertificateChainTrustStatusTrusted:
             title = l(@"Trusted Chain");
             body = l(@"trusted_chain_description");
             break;
+        case CKCertificateChainTrustStatusUntrusted:
+            title = l(@"Untrusted Chain");
+            body = l(@"chainErr::untrusted");
+            break;
+        case CKCertificateChainTrustStatusSelfSigned:
+            title = l(@"Untrusted Chain");
+            body = l(@"chainErr::self_signed");
+            break;
         case CKCertificateChainTrustStatusRevoked:
             title = l(@"Untrusted Chain");
-            body = l(@"revoked_chain_description");
+            body = l(@"chainErr::revoked");
             break;
         case CKCertificateChainTrustStatusInvalidDate:
             title = l(@"Untrusted Chain");
-            body = l(@"invalid_date_chain_description");
+            body = l(@"chainErr::invalid_date");
+            break;
+        case CKCertificateChainTrustStatusSHA1Intermediate:
+            title = l(@"Untrusted Chain");
+            body = l(@"chainErr::sha1_int");
+            break;
+        case CKCertificateChainTrustStatusSHA1Leaf:
+            title = l(@"Untrusted Chain");
+            body = l(@"chainErr::sha1_leaf");
+            break;
+        case CKCertificateChainTrustStatusWrongHost:
+            title = l(@"Untrusted Chain");
+            body = l(@"chainErr::wrong_host");
+            break;
     }
 
     [uihelper

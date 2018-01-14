@@ -141,32 +141,22 @@
 
     self.chain = [CKCertificateChain new];
     self.chain.certificates = certs;
+
+    self.chain.domain = queryURL.host;
+    self.chain.server = certs[0];
+    if (certs.count > 1) {
+        self.chain.rootCA = [certs lastObject];
+        self.chain.intermediateCA = [certs objectAtIndex:1];
+    }
+
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;
     } else {
-        // Apple does not provide (as far as I am aware) detailed information as to why a certificate chain
-        // failed evalulation. Therefor we have to made some deductions based off of information we do know.
-        // These are:
-        // - If the any cert in the chain is expired or not yet valid
-        // - If the chain has less than 3 certificates, consider it self signed (risky)
-        // Otherwise, fall back to a generic reason
-        if (self.chain.certificates.count < 3) {
-            self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
-        } else {
-            self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
-        }
-        for (CKCertificate * cert in self.chain.certificates) {
-            if (!cert.validIssueDate) {
-                self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
-            }
-        }
+        [self determineTrust];
     }
 
     self.chain.cipher = ciphers[0];
     self.chain.protocol = protocol;
-
-    self.chain.domain = queryURL.host;
-    self.chain.server = [self.chain.certificates firstObject];
     if (certs.count > 1) {
         self.chain.rootCA = [self.chain.certificates lastObject];
         self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
@@ -190,6 +180,98 @@
 
     [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
+}
+
+// Apple does not provide (as far as I am aware) detailed information as to why a certificate chain
+// failed evalulation. Therefor we have to made some deductions based off of information we do know.
+// Expired (Any)
+- (void) determineTrust {
+    // Expired/Not Valid
+    for (CKCertificate * cert in self.chain.certificates) {
+        if (!cert.validIssueDate) {
+            self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
+            return;
+        }
+    }
+
+    // Revoked
+    for (CKCertificate * cert in self.chain.certificates) {
+        if (cert.revoked.isRevoked) {
+            self.chain.trusted = CKCertificateChainTrustStatusRevoked;
+            return;
+        }
+    }
+
+    // SHA-1 Leaf
+    if ([self.chain.server.signatureAlgorithm hasPrefix:@"sha1"]) {
+        self.chain.trusted = CKCertificateChainTrustStatusSHA1Leaf;
+        return;
+    }
+
+    // SHA-1 Intermediate
+    if ([self.chain.intermediateCA.signatureAlgorithm hasPrefix:@"sha1"]) {
+        self.chain.trusted = CKCertificateChainTrustStatusSHA1Intermediate;
+        return;
+    }
+
+    // Self-Signed
+    if (self.chain.certificates.count == 1) {
+        self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
+        return;
+    }
+
+    // Wrong Host
+    if (self.chain.server.subjectAlternativeNames.count == 0) {
+        self.chain.trusted = CKCertificateChainTrustStatusWrongHost;
+        return;
+    }
+    BOOL match = NO;
+    NSArray<NSString *> * domainComponents = [self.chain.domain.lowercaseString componentsSeparatedByString:@"."];
+    for (NSString * name in self.chain.server.subjectAlternativeNames) {
+        NSArray<NSString *> * nameComponents = [name.lowercaseString componentsSeparatedByString:@"."];
+        if (domainComponents.count != nameComponents.count) {
+            // Invalid
+            continue;
+        }
+
+        // SAN Rules:
+        //
+        // Only the first component of the SAN can be a wildcard
+        // Valid: *.google.com
+        // Invalid: mail.*.google.com
+        //
+        // Wildcards only match the same-level of the domain. I.E. *.google.com:
+        // Match: mail.google.com
+        // Match: calendar.google.com
+        // Doesn't match: beta.mail.google.com
+        BOOL hasWildcard = [nameComponents[0] isEqualToString:@"*"];
+        BOOL validComponents = YES;
+        for (int i = 0; i < nameComponents.count; i++) {
+            if (i == 0) {
+                if (![domainComponents[i] isEqualToString:nameComponents[i]] && !hasWildcard) {
+                    validComponents = NO;
+                    break;
+                }
+            } else {
+                if (![domainComponents[i] isEqualToString:nameComponents[i]]) {
+                    validComponents = NO;
+                    break;
+                }
+            }
+        }
+        if (validComponents) {
+            match = YES;
+            break;
+        }
+    }
+    if (!match) {
+        self.chain.trusted = CKCertificateChainTrustStatusWrongHost;
+        return;
+    }
+
+    // Fallback (We don't know)
+    self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
+    return;
 }
 
 @end
