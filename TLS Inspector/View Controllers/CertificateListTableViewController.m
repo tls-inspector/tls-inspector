@@ -1,5 +1,4 @@
 #import "CertificateListTableViewController.h"
-#import "InspectorTableViewController.h"
 #import "TitleValueTableViewCell.h"
 #import "NSString+FontAwesome.h"
 #import "IconTableViewCell.h"
@@ -110,14 +109,14 @@
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
         if (cert.revoked.isRevoked) {
-            cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[[cert summary]]];
+            cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[cert.summary]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
-            NSDictionary * names = [cert names];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", name.commonName, name.organizationName, name.countryName];
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
-            cell.textLabel.text = [cert summary];
+            cell.textLabel.text = cert.summary;
             cell.textLabel.textColor = themeTextColor;
         }
 

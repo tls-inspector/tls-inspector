@@ -2,6 +2,38 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>keyUsage::digitalSignature</key>
+<string>Digital Signature</string>
+<key>keyUsage::nonRepudiation</key>
+<string>Non-Repudiation</string>
+<key>keyUsage::keyEncipherment</key>
+<string>Key Encipherment</string>
+<key>keyUsage::dataEncipherment</key>
+<string>Data Encipherment</string>
+<key>keyUsage::keyAgreement</key>
+<string>Key Agreement</string>
+<key>keyUsage::keyCertSign</key>
+<string>Key Cert Sign</string>
+<key>keyUsage::cRLSign</key>
+<string>CRL Sign</string>
+<key>keyUsage::encipherOnly</key>
+<string>Encipher Only</string>
+<key>keyUsage::decipherOnly</key>
+<string>Decipher Only</string>
+<key>keyUsage::anyExtendedKeyUsage</key>
+<string>Any</string>
+<key>keyUsage::serverAuth</key>
+<string>Server Auth</string>
+<key>keyUsage::clientAuth</key>
+<string>Client Auth</string>
+<key>keyUsage::codeSigning</key>
+<string>Code Signing</string>
+<key>keyUsage::emailProtection</key>
+<string>Email Protection</string>
+<key>keyUsage::timeStamping</key>
+<string>Time Stamping</string>
+<key>keyUsage::OCSPSigning</key>
+<string>OCSP Signing</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>About</key>

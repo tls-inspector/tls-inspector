@@ -42,12 +42,12 @@
 @property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
 @property (strong, nonatomic) distributionPoints * crlCache;
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
+@property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
+@property (strong, nonatomic, nonnull, readwrite) CKNameObject * issuer;
 
 @end
 
 @implementation CKCertificate
-
-static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
 - (void) openSSLError {
     const char * file;
@@ -59,27 +59,31 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 + (CKCertificate *) fromX509:(void *)cert {
     CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;
-    xcert.summary = [xcert generateSummary];
     xcert.revoked = [CKCertificateRevoked new];
     xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
-    return xcert;
-}
+    xcert.subject = [CKNameObject fromSubject:X509_get_subject_name(cert)];
+    xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
 
-- (NSString *) getSubjectNID:(int)nid {
-    X509_NAME * name = X509_get_subject_name(self.certificate);
-    char * value = malloc(CERTIFICATE_SUBJECT_MAX_LENGTH);
-    int length = X509_NAME_get_text_by_NID(name, nid, value, CERTIFICATE_SUBJECT_MAX_LENGTH);
-    if (length < 0) {
-        return nil;
+    // Keep trying with each subject name for the summary
+    if (xcert.subject.commonName.length > 0) {
+        xcert.summary = xcert.subject.commonName;
+    } else if (xcert.subject.organizationalUnitName.length > 0) {
+        xcert.summary = xcert.subject.organizationalUnitName;
+    } else if (xcert.subject.organizationName.length > 0) {
+        xcert.summary = xcert.subject.organizationName;
+    } else if (xcert.subject.emailAddress.length > 0) {
+        xcert.summary = xcert.subject.emailAddress;
+    } else if (xcert.subject.countryName.length > 0) {
+        xcert.summary = xcert.subject.countryName;
+    } else if (xcert.subject.stateOrProvinceName.length > 0) {
+        xcert.summary = xcert.subject.stateOrProvinceName;
+    } else if (xcert.subject.localityName.length > 0) {
+        xcert.summary = xcert.subject.localityName;
+    } else {
+        xcert.summary = @"Untitled Certificate";
     }
 
-    NSString * subject = [[NSString alloc] initWithBytes:value length:length encoding:NSUTF8StringEncoding];
-    free(value);
-    return subject;
-}
-
-- (NSString *) generateSummary {
-    return [self getSubjectNID:NID_commonName];
+    return xcert;
 }
 
 - (NSString *) SHA512Fingerprint {
@@ -179,42 +183,6 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
         valid = NO;
     }
     return valid;
-}
-
-- (NSString *) issuer {
-    X509_NAME *issuerX509Name = X509_get_issuer_name(self.certificate);
-
-    if (issuerX509Name != NULL) {
-        int index = X509_NAME_get_index_by_NID(issuerX509Name, NID_organizationName, -1);
-        X509_NAME_ENTRY *issuerNameEntry = X509_NAME_get_entry(issuerX509Name, index);
-
-        if (issuerNameEntry) {
-            ASN1_STRING *issuerNameASN1 = X509_NAME_ENTRY_get_data(issuerNameEntry);
-
-            if (issuerNameASN1 != NULL) {
-                const unsigned char *issuerName = ASN1_STRING_get0_data(issuerNameASN1);
-                return [NSString stringWithUTF8String:(char *)issuerName];
-            }
-        }
-    }
-    return @"";
-}
-
-- (NSDictionary<NSString *, NSString *> *) names {
-#define add_subject(k, nid) value = [self getSubjectNID:nid]; if (value != nil) { [names setObject:value forKey:k]; }
-
-    NSMutableDictionary<NSString *, NSString *> * names = [NSMutableDictionary new];
-    NSString * value;
-
-    add_subject(@"CN", NID_commonName);
-    add_subject(@"C", NID_countryName);
-    add_subject(@"S", NID_stateOrProvinceName);
-    add_subject(@"L", NID_localityName);
-    add_subject(@"O", NID_organizationName);
-    add_subject(@"OU", NID_organizationalUnitName);
-    add_subject(@"E", NID_pkcs9_emailAddress);
-
-    return names;
 }
 
 - (void *) X509Certificate {
@@ -372,6 +340,48 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
 - (BOOL) extendedValidation {
     return [self extendedValidationAuthority] != nil;
+}
+
+- (NSArray<NSString *> *) keyUsage {
+    int crit = -1;
+    int idx = -1;
+    ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_key_usage, &crit, &idx);
+    NSArray<NSString *> * usages = @[@"digitalSignature",
+                                     @"nonRepudiation",
+                                     @"keyEncipherment",
+                                     @"dataEncipherment",
+                                     @"keyAgreement",
+                                     @"keyCertSign",
+                                     @"cRLSign",
+                                     @"encipherOnly",
+                                     @"decipherOnly"];
+    NSMutableArray<NSString *> * values = [NSMutableArray arrayWithCapacity:usages.count];
+    for (int i = 0; i < usages.count; i++) {
+        if (ASN1_BIT_STRING_get_bit(keyUsage, i)) {
+            [values addObject:usages[i]];
+        }
+    }
+    return values;
+}
+
+- (NSArray<NSString *> *) extendedKeyUsage {
+    int crit = -1;
+    int idx = -1;
+    ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_ext_key_usage, &crit, &idx);
+    NSArray<NSString *> * usages = @[@"anyExtendedKeyUsage",
+                                     @"serverAuth",
+                                     @"clientAuth",
+                                     @"codeSigning",
+                                     @"emailProtection",
+                                     @"timeStamping",
+                                     @"OCSPSigning"];
+    NSMutableArray<NSString *> * values = [NSMutableArray arrayWithCapacity:usages.count];
+    for (int i = 0; i < usages.count; i++) {
+        if (ASN1_BIT_STRING_get_bit(keyUsage, i)) {
+            [values addObject:usages[i]];
+        }
+    }
+    return values;
 }
 
 + (NSString *) openSSLVersion {

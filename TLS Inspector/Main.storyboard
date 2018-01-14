@@ -13,9 +13,6 @@
         <array key="FontAwesome.ttf">
             <string>FontAwesome</string>
         </array>
-        <array key="Menlo.ttc">
-            <string>Menlo-Regular</string>
-        </array>
     </customFonts>
     <scenes>
         <!--TLS Inspector-->
@@ -141,10 +138,10 @@
             </objects>
             <point key="canvasLocation" x="1397.5999999999999" y="1933.5832083958023"/>
         </scene>
-        <!--Inspector Table View Controller-->
+        <!--Certificate Table View Controller-->
         <scene sceneID="6qM-sY-WcU">
             <objects>
-                <tableViewController storyboardIdentifier="Inspector" id="DsX-RJ-VHK" customClass="InspectorTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Inspector" id="DsX-RJ-VHK" customClass="CertificateTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ApI-gX-vcG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,51 +221,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="oJ5-C9-jYa"/>
                     <connections>
-                        <segue destination="i67-mg-EAA" kind="show" identifier="ShowValue" id="KTN-RT-lsk"/>
                         <segue destination="7YK-nc-nNG" kind="show" identifier="ShowList" id="67W-bs-8iI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C9t-I3-xGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4583" y="2412"/>
-        </scene>
-        <!--Value View Controller-->
-        <scene sceneID="Lge-aT-X7Q">
-            <objects>
-                <viewController id="i67-mg-EAA" customClass="ValueViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VLQ-sj-48M"/>
-                        <viewControllerLayoutGuide type="bottom" id="cx1-iL-Gzn"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="09s-tt-PSH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Value" translatesAutoresizingMaskIntoConstraints="NO" id="pgs-P6-Qwl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pgs-P6-Qwl" secondAttribute="trailing" id="1bj-FL-d3S"/>
-                            <constraint firstItem="pgs-P6-Qwl" firstAttribute="leading" secondItem="09s-tt-PSH" secondAttribute="leading" id="59B-pf-cdS"/>
-                            <constraint firstAttribute="bottom" secondItem="pgs-P6-Qwl" secondAttribute="bottom" id="BFp-Ik-yaK"/>
-                            <constraint firstItem="pgs-P6-Qwl" firstAttribute="top" secondItem="09s-tt-PSH" secondAttribute="top" id="efO-Ek-1nx"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="1NQ-Ir-XK2"/>
-                    <connections>
-                        <outlet property="textView" destination="pgs-P6-Qwl" id="yet-Ua-AHq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uun-tT-F3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5370" y="2067"/>
         </scene>
         <!--Inspector List Table View Controller-->
         <scene sceneID="mb3-AM-kEd">
@@ -306,7 +264,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yE4-eG-wfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5370" y="2766"/>
+            <point key="canvasLocation" x="5321" y="2411"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Fmc-Ft-S6c">
