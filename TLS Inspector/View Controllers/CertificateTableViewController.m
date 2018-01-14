@@ -75,9 +75,10 @@
     // Public Key Info
     CertificateTableRowSection * publicKeySection = [CertificateTableRowSection sectionWithTitle:@"Public Key"];
     publicKeySection.items = @[
-                               [CertificateTableRowItem itemWithTitle:l(@"Algorithm") value:[lang key:[NSString stringWithFormat:@"KeyAlgorithm::%@", selectedCertificate.publicKey.algroithm]] style:CertificateTableRowItemStyleExpandedValue],
-                                 [CertificateTableRowItem itemWithTitle:l(@"Size") value:[NSString stringWithFormat:@"%i", selectedCertificate.publicKey.bitLength] style:CertificateTableRowItemStyleExpandedValue],
-                                 ];
+                               [CertificateTableRowItem itemWithTitle:l(@"Algorithm") value:[lang key:[NSString stringWithFormat:@"KeyAlgorithm::%@", selectedCertificate.publicKey.algroithm]] style:CertificateTableRowItemStyleBasicValue],
+                               [CertificateTableRowItem itemWithTitle:l(@"Signature") value:[lang key:[NSString stringWithFormat:@"CertAlgorithm::%@", selectedCertificate.signatureAlgorithm]] style:CertificateTableRowItemStyleBasicValue],
+                               [CertificateTableRowItem itemWithTitle:l(@"Size") value:[NSString stringWithFormat:@"%i", selectedCertificate.publicKey.bitLength] style:CertificateTableRowItemStyleBasicValue],
+                               ];
     [self.sections addObject:publicKeySection];
 
     // Fingerprint
