@@ -2,6 +2,8 @@
 #import "TitleValueTableViewCell.h"
 #import "NSString+FontAwesome.h"
 #import "IconTableViewCell.h"
+#import "DNSResolver.h"
+@import SafariServices;
 
 @interface CertificateListTableViewController ()
 
@@ -44,6 +46,8 @@
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
+
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
 
 #ifdef EXTENSION
@@ -68,6 +72,55 @@
     [appState.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
 }
 #endif
+
+- (void) showActionSheet:(id)sender {
+    [uihelper
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:currentChain.domain
+     subtitle:nil
+     cancelButtonTitle:[lang key:@"Cancel"]
+     items:@[
+             l(@"View on SSL Labs"),
+             l(@"Search on Shodan"),
+             l(@"Search on crt.sh"),
+             ]
+     dismissed:^(NSInteger itemIndex) {
+         if (itemIndex == 0) {
+             NSString * domain = currentChain.domain;
+             // If the URL is lacking a protocol the host will be nil
+             if (![domain hasPrefix:@"https://"]) {
+                 domain = nstrcat(@"https://", domain);
+             }
+
+             NSURL * url = [NSURL URLWithString:domain];
+             [self openURL:nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host)];
+         } else if (itemIndex == 1) {
+             NSError * dnsError;
+             NSArray<NSString *> * addresses = [DNSResolver resolveHostname:currentChain.domain error:&dnsError];
+             if (addresses && addresses.count >= 1) {
+                 [self openURL:nstrcat(@"https://www.shodan.io/host/", addresses[0])];
+             } else if (dnsError) {
+                 [uihelper presentErrorInViewController:self error:dnsError dismissed:nil];
+             }
+         } else if (itemIndex == 2) {
+             NSString * domain = currentChain.domain;
+             // If the URL is lacking a protocol the host will be nil
+             if (![domain hasPrefix:@"https://"]) {
+                 domain = nstrcat(@"https://", domain);
+             }
+
+             NSURL * url = [NSURL URLWithString:domain];
+             [self openURL:nstrcat(@"https://crt.sh/?q=", url.host)];
+         }
+     }];
+}
+
+- (void) openURL:(NSString *)url {
+    SFSafariViewController * safariViewController = [[SFSafariViewController alloc]
+                                                     initWithURL:[NSURL URLWithString:url]];
+    [self presentViewController:safariViewController animated:YES completion:nil];
+}
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {

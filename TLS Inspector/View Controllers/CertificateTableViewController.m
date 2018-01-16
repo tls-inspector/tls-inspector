@@ -3,6 +3,7 @@
 #import "CertificateTableRowItem.h"
 #import "InspectorListTableViewController.h"
 #import "TitleValueTableViewCell.h"
+#import "CertificateReminderManager.h"
 
 @interface CertificateTableViewController ()
 
@@ -27,6 +28,8 @@
 
     [self loadCertificate];
     subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
 }
 
 - (void) loadCertificate {
@@ -135,6 +138,110 @@
     }
 
     return subjectItems;
+}
+
+- (void) showActionSheet:(id)sender {
+    [uihelper
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:currentChain.domain
+     subtitle:nil
+     cancelButtonTitle:[lang key:@"Cancel"]
+     items:@[
+             l(@"Share Certificate"),
+             l(@"Add Certificate Expiry Reminder"),
+             ]
+     dismissed:^(NSInteger itemIndex) {
+         if (itemIndex == 0) {
+             [self sharePublicKey:sender];
+         } else if (itemIndex == 1) {
+             [self addCertificateExpiryReminder:sender];
+         }
+     }];
+}
+
+- (void) sharePublicKey:(UIBarButtonItem *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSData * pem = [selectedCertificate publicKeyAsPEM];
+    if (pem) {
+        NSString * fileName = format(@"/%@.pem", selectedCertificate.serialNumber);
+        NSURL * fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
+        [pem writeToURL:fileURL atomically:YES];
+
+        UIActivityViewController *activityController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:@[fileURL]
+                                                        applicationActivities:nil];
+        activityController.popoverPresentationController.barButtonItem = sender;
+        [self presentViewController:activityController animated:YES completion:^() {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+    } else {
+        [uihelper
+         presentAlertInViewController:self
+         title:l(@"Unable to export certificate")
+         body:l(@"We were unable to export the certificate in PEM format.")
+         dismissButtonTitle:l(@"Dismiss")
+         dismissed:^(NSInteger buttonIndex) {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+         }];
+    }
+}
+
+- (void) addCertificateExpiryReminder:(UIBarButtonItem *)sender {
+    [uihelper
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:l(@"Notification Date")
+     subtitle:l(@"How soon before the certificate expires should we notify you?")
+     cancelButtonTitle:l(@"Cancel")
+     items:@[
+             lv(@"{count} weeks", @[@"2"]),
+             l(@"1 month"),
+             lv(@"{count} months", @[@"3"]),
+             lv(@"{count} months", @[@"6"])]
+     dismissed:^(NSInteger itemIndex) {
+         if (itemIndex != -1) {
+             NSUInteger days = 0;
+
+             switch (itemIndex) {
+                 case 0:
+                     days = 14;
+                     break;
+                 case 1:
+                     days = 30;
+                     break;
+                 case 2:
+                     days = 60;
+                     break;
+                 case 3:
+                     days = 180;
+                     break;
+                 default:
+                     break;
+             }
+
+             [[CertificateReminderManager new]
+              addReminderForCertificate:selectedCertificate
+              forDomain:currentChain.domain
+              daysBeforeExpires:days
+              completed:^(NSError *error, BOOL success) {
+                  if (success) {
+                      [uihelper
+                       presentAlertInViewController:self
+                       title:l(@"Reminder Added")
+                       body:l(@"You can modify the reminder in the reminders app.")
+                       dismissButtonTitle:l(@"Dismiss")
+                       dismissed:nil];
+                  } else if (error) {
+                      [uihelper
+                       presentErrorInViewController:self
+                       error:error
+                       dismissed:nil];
+                  }
+                  // If reminder permission was denied, success = NO and error = Nil
+              }];
+         }
+     }];
 }
 
 - (void) didReceiveMemoryWarning {
