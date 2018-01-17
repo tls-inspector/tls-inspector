@@ -608,6 +608,8 @@
 	<string>Key</string>
 	<key>Key Algorithm</key>
 	<string>Key Algorithm</string>
+	<key>Key Usage</key>
+	<string>Key Usage</string>
 	<key>KeyAlgorithm::dsaEncryption</key>
 	<string>DSA</string>
 	<key>KeyAlgorithm::id-ecPublicKey</key>
@@ -624,6 +626,10 @@
 	<string>Negotiated Cipher Suite</string>
 	<key>Negotiated Version</key>
 	<string>Negotiated Version</string>
+	<key>Not Valid After</key>
+	<string>Not Valid After</string>
+	<key>Not Valid Before</key>
+	<string>Not Valid Before</string>
 	<key>Not Verified</key>
 	<string>Not Verified</string>
 	<key>Notification Date</key>
@@ -632,6 +638,8 @@
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
+	<key>Public Key</key>
+	<string>Public Key</string>
 	<key>Rate TLS Inspector in the App Store</key>
 	<string>Rate TLS Inspector in the App Store</string>
 	<key>Recent Domains</key>
@@ -650,6 +658,8 @@
 	<string>Revoked On</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
+	<key>Search on crt.sh</key>
+	<string>Search on crt.sh</string>
 	<key>Security HTTP Headers</key>
 	<string>Security HTTP Headers</string>
 	<key>Server Info</key>
@@ -666,6 +676,10 @@
 	<string>Signature</string>
 	<key>Signature Algorithm</key>
 	<string>Signature Algorithm</string>
+	<key>Size</key>
+	<string>Size</string>
+	<key>Subject</key>
+	<string>Subject</string>
 	<key>Subject Alt. Names</key>
 	<string>Subject Alt. Names</string>
 	<key>Subject Alternative Names</key>
@@ -694,6 +708,8 @@
 	<string>TLS Inspector</string>
 	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</key>
 	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</string>
+	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</key>
+	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
@@ -714,6 +730,8 @@
 	<string>Valid From</string>
 	<key>Valid To</key>
 	<string>Valid To</string>
+	<key>Validity Period</key>
+	<string>Validity Period</string>
 	<key>Value</key>
 	<string>Value</string>
 	<key>Values do not match.</key>
@@ -789,19 +807,19 @@
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>tlstip1</key>
-	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
+	<string>You can view the certificate of a website in Safari or other web browser by tapping the "Share" button and selecting "Show Certificate".</string>
 	<key>tlstip2</key>
-	<string>You can view more information about the server on Shodan by tapping the &quot;Share&quot; button when viewing a certificate.</string>
+	<string>You can view more information about the server on Shodan by tapping the "Share" button when viewing a certificate.</string>
 	<key>tlstip3</key>
-	<string>You can create a reminder when a certificate is about to expire by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
+	<string>You can create a reminder when a certificate is about to expire by tapping the "Share" button when inspecting a certificate.</string>
 	<key>tlstip4</key>
 	<string>You can change between night and day theme in options.</string>
 	<key>tlstip5</key>
-	<string>You can export the share the certificate data by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
+	<string>You can export the share the certificate data by tapping the "Share" button when inspecting a certificate.</string>
 	<key>tlstip6</key>
-	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
+	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the "Share" button when inspecting the value.</string>
 	<key>tlstip7</key>
-	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
+	<string>You can copy a parameters value by long-pressing on it and tapping "Copy".</string>
 	<key>trusted_chain_description</key>
 	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>{0} characters</key>

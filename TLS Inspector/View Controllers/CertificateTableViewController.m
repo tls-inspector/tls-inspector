@@ -27,9 +27,15 @@
     [[UIMenuController sharedMenuController] update];
 
     [self loadCertificate];
-    subscribe(@selector(loadCertificate), RELOAD_CERT_NOTIFICATION);
+    subscribe(@selector(reloadCert), RELOAD_CERT_NOTIFICATION);
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
+}
+
+- (void) reloadCert {
+    self.sections = [NSMutableArray new];
+    [self loadCertificate];
+    [self.tableView reloadData];
 }
 
 - (void) loadCertificate {
@@ -66,18 +72,24 @@
     // Key Usage
     CertificateTableRowSection * keyUsageSection = [CertificateTableRowSection sectionWithTitle:@"Key Usage"];
     NSMutableArray<NSString *> * keyUsage = [NSMutableArray arrayWithCapacity:selectedCertificate.keyUsage.count];
+    NSMutableArray<CertificateTableRowItem *> * usageItems = [NSMutableArray new];
     for (NSString * usage in selectedCertificate.keyUsage) {
         [keyUsage addObject:[lang key:[NSString stringWithFormat:@"keyUsage::%@", usage]]];
+    }
+    if (keyUsage.count > 0) {
+        [usageItems addObject:[CertificateTableRowItem itemWithTitle:@"Basic" value:[keyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue]];
     }
     NSMutableArray<NSString *> * extKeyUsage = [NSMutableArray arrayWithCapacity:selectedCertificate.extendedKeyUsage.count];
     for (NSString * usage in selectedCertificate.extendedKeyUsage) {
         [extKeyUsage addObject:[lang key:[NSString stringWithFormat:@"keyUsage::%@", usage]]];
     }
-    keyUsageSection.items = @[
-                                 [CertificateTableRowItem itemWithTitle:@"Basic" value:[keyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue],
-                                 [CertificateTableRowItem itemWithTitle:@"Extended" value:[extKeyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue],
-                                 ];
-    [self.sections addObject:keyUsageSection];
+    if (extKeyUsage.count > 0) {
+        [usageItems addObject:[CertificateTableRowItem itemWithTitle:@"Extended" value:[extKeyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue]];
+    }
+    keyUsageSection.items = usageItems;
+    if (usageItems.count > 0) {
+        [self.sections addObject:keyUsageSection];
+    }
 
     // Public Key Info
     CertificateTableRowSection * publicKeySection = [CertificateTableRowSection sectionWithTitle:@"Public Key"];
@@ -110,31 +122,31 @@
     NSMutableArray<CertificateTableRowItem *> * subjectItems = [NSMutableArray arrayWithCapacity:8];
 
     if (name.commonName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Common Name") value:name.commonName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::CN") value:name.commonName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.organizationalUnitName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Organizational Unit") value:name.organizationalUnitName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::OU") value:name.organizationalUnitName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.organizationName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Organization") value:name.organizationName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::O") value:name.organizationName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.localityName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"City") value:name.localityName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::L") value:name.localityName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.stateOrProvinceName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"State/Province") value:name.stateOrProvinceName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::S") value:name.stateOrProvinceName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.countryName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Country") value:l(nstrcat(@"Country::", name.countryName)) style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::C") value:l(nstrcat(@"Country::", name.countryName)) style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.emailAddress != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"E-Mail Address") value:name.emailAddress style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::E") value:name.emailAddress style:CertificateTableRowItemStyleBasicValue]];
     }
 
     return subjectItems;
@@ -144,7 +156,7 @@
     [uihelper
      presentActionSheetInViewController:self
      attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
-     title:currentChain.domain
+     title:selectedCertificate.summary
      subtitle:nil
      cancelButtonTitle:[lang key:@"Cancel"]
      items:@[
