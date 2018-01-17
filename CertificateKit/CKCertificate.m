@@ -40,7 +40,6 @@
 @property (nonatomic) X509 * certificate;
 @property (strong, nonatomic, readwrite) NSString * summary;
 @property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
-@property (strong, nonatomic) distributionPoints * crlCache;
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * issuer;
@@ -59,7 +58,6 @@
 + (CKCertificate *) fromX509:(void *)cert {
     CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;
-    xcert.revoked = [CKCertificateRevoked new];
     xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
     xcert.subject = [CKNameObject fromSubject:X509_get_subject_name(cert)];
     xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
@@ -304,38 +302,6 @@
     } else {
         return NO;
     }
-}
-
-- (distributionPoints *) crlDistributionPoints {
-    if (self.crlCache) {
-        return self.crlCache;
-    }
-
-    CRL_DIST_POINTS * points = X509_get_ext_d2i(self.certificate, NID_crl_distribution_points, NULL, NULL);
-    int numberOfPoints = sk_DIST_POINT_num(points);
-    if (numberOfPoints < 0) {
-        return @[];
-    }
-
-    DIST_POINT * point;
-    GENERAL_NAMES * fullNames;
-    GENERAL_NAME * fullName;
-    NSMutableArray<NSURL *> * urls = [NSMutableArray new];
-    for (int i = 0; i < numberOfPoints; i ++) {
-        point = sk_DIST_POINT_value(points, i);
-        fullNames = point->distpoint->name.fullname;
-        fullName = sk_GENERAL_NAME_value(fullNames, 0);
-        const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
-        NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
-        if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
-            [urls addObject:crlURL];
-        } else {
-            NSLog(@"Unsupported CRL distribution point: %s", url);
-        }
-    }
-
-    self.crlCache = urls;
-    return urls;
 }
 
 - (BOOL) extendedValidation {

@@ -164,10 +164,7 @@
 
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
-        if (cert.revoked.isRevoked) {
-            cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[cert.summary]];
-            cell.textLabel.textColor = uihelper.redColor;
-        } else if (cert.extendedValidation) {
+        if (cert.extendedValidation) {
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", name.commonName, name.organizationName, name.countryName];
             cell.textLabel.textColor = uihelper.greenColor;

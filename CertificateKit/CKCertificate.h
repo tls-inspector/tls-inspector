@@ -25,11 +25,9 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificateRevoked.h"
 #import "CKCertificatePublicKey.h"
 #import "CKNameObject.h"
 
-@class CKCertificateRevoked;
 @class CKCertificatePublicKey;
 
 /**
@@ -45,11 +43,6 @@
  *  @return A CKCertificate instance
  */
 + (CKCertificate * _Nullable) fromX509:(void * _Nonnull)cert;
-
-/**
- *  Array of URLs representing distribution points for CRLs
- */
-typedef NSArray<NSURL *> distributionPoints;
 
 /**
  *  Finger (thumb) print types that CKCertificate can export
@@ -82,11 +75,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.
  */
 @property (nonatomic, readonly) BOOL extendedValidation;
-
-/**
- *  Certificate revocation information
- */
-@property (strong, nonatomic, nullable) CKCertificateRevoked * revoked;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
@@ -178,11 +166,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  Returns the authority that manages the extended validation for this certificate.
  */
 @property (strong, nonatomic, nullable, readonly) NSString * extendedValidationAuthority;
-
-/**
- *  Get an array of CRL distributionPoints (an array of URLs)
- */
-@property (strong, nonatomic, nullable, readonly) distributionPoints * crlDistributionPoints;
 
 /**
  *  Get an array of key usage identifiers

@@ -27,7 +27,6 @@
 #import "CKCertificateChainGetter.h"
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
-#import "CKCRLManager.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 
@@ -160,22 +159,6 @@
     if (certs.count > 1) {
         self.chain.rootCA = [self.chain.certificates lastObject];
         self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
-
-        if (self.chain.server.crlDistributionPoints.count > 0) {
-            [self.chain.server.revoked
-             isCertificateRevoked:self.chain.server
-             intermediateCA:self.chain.intermediateCA
-             finished:^(NSError * _Nullable error) {
-                 if (!error) {
-                     if (self.chain.server.revoked.isRevoked) {
-                         self.chain.trusted = CKCertificateChainTrustStatusRevoked;
-                     }
-                 }
-                 [self.delegate getter:self finishedTaskWithResult:self.chain];
-                 self.finished = YES;
-             }];
-            return;
-        }
     }
 
     [self.delegate getter:self finishedTaskWithResult:self.chain];
@@ -190,14 +173,6 @@
     for (CKCertificate * cert in self.chain.certificates) {
         if (!cert.validIssueDate) {
             self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
-            return;
-        }
-    }
-
-    // Revoked
-    for (CKCertificate * cert in self.chain.certificates) {
-        if (cert.revoked.isRevoked) {
-            self.chain.trusted = CKCertificateChainTrustStatusRevoked;
             return;
         }
     }

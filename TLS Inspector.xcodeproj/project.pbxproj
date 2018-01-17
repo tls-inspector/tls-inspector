@@ -46,10 +46,6 @@
 		3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE71E836C15004AD96D /* CKCertificate.m */; };
 		3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAE81E836C15004AD96D /* CKCertificateChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE91E836C15004AD96D /* CKCertificateChain.m */; };
-		3C65DAF51E836C15004AD96D /* CKCertificateRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEA1E836C15004AD96D /* CKCertificateRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C65DAF61E836C15004AD96D /* CKCertificateRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEB1E836C15004AD96D /* CKCertificateRevoked.m */; };
-		3C65DAF71E836C15004AD96D /* CKCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEC1E836C15004AD96D /* CKCRLManager.h */; };
-		3C65DAF81E836C15004AD96D /* CKCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAED1E836C15004AD96D /* CKCRLManager.m */; };
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; };
 		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; };
@@ -218,10 +214,6 @@
 		3C65DAE71E836C15004AD96D /* CKCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificate.m; sourceTree = "<group>"; };
 		3C65DAE81E836C15004AD96D /* CKCertificateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificateChain.h; sourceTree = "<group>"; };
 		3C65DAE91E836C15004AD96D /* CKCertificateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificateChain.m; sourceTree = "<group>"; };
-		3C65DAEA1E836C15004AD96D /* CKCertificateRevoked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificateRevoked.h; sourceTree = "<group>"; };
-		3C65DAEB1E836C15004AD96D /* CKCertificateRevoked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificateRevoked.m; sourceTree = "<group>"; };
-		3C65DAEC1E836C15004AD96D /* CKCRLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCRLManager.h; sourceTree = "<group>"; };
-		3C65DAED1E836C15004AD96D /* CKCRLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCRLManager.m; sourceTree = "<group>"; };
 		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C65DAF01E836C15004AD96D /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
@@ -407,8 +399,6 @@
 				67F686EF1FC8FAE400BB7AE8 /* Getters */,
 				3C2A7A511F284DC700AA12B4 /* CKGetter.h */,
 				3C2A7A521F284DC700AA12B4 /* CKGetter.m */,
-				3C65DAEC1E836C15004AD96D /* CKCRLManager.h */,
-				3C65DAED1E836C15004AD96D /* CKCRLManager.m */,
 				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
 				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
 				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
@@ -419,8 +409,6 @@
 				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
-				3C65DAEA1E836C15004AD96D /* CKCertificateRevoked.h */,
-				3C65DAEB1E836C15004AD96D /* CKCertificateRevoked.m */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3CC1E9321F035A3400ED9BAA /* curl.framework */,
@@ -638,8 +626,6 @@
 				67F686E81FC8FAB800BB7AE8 /* CKCertificateChainGetter.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
-				3C65DAF51E836C15004AD96D /* CKCertificateRevoked.h in Headers */,
-				3C65DAF71E836C15004AD96D /* CKCRLManager.h in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
 				3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
@@ -904,10 +890,8 @@
 			files = (
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
-				3C65DAF81E836C15004AD96D /* CKCRLManager.m in Sources */,
 				3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
-				3C65DAF61E836C15004AD96D /* CKCertificateRevoked.m in Sources */,
 				3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */,
 				3C7DE6071EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
