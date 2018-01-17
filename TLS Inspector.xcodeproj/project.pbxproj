@@ -49,6 +49,8 @@
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; };
 		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; };
+		3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C70425020100CA900BE941A /* CKOCSPManager.h */; };
+		3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C70425120100CA900BE941A /* CKOCSPManager.m */; };
 		3C7B9F7D1F68F52A00C99092 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A7A661F2858A100AA12B4 /* FontAwesome.ttf */; };
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
@@ -217,6 +219,8 @@
 		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C65DAF01E836C15004AD96D /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
+		3C70425020100CA900BE941A /* CKOCSPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPManager.h; sourceTree = "<group>"; };
+		3C70425120100CA900BE941A /* CKOCSPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPManager.m; sourceTree = "<group>"; };
 		3C7C95071D7AA03500902E18 /* ActionTipTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTipTarget.h; sourceTree = "<group>"; };
 		3C7C95081D7AA03500902E18 /* ActionTipTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTipTarget.m; sourceTree = "<group>"; };
 		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
@@ -409,6 +413,8 @@
 				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
+				3C70425020100CA900BE941A /* CKOCSPManager.h */,
+				3C70425120100CA900BE941A /* CKOCSPManager.m */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3CC1E9321F035A3400ED9BAA /* curl.framework */,
@@ -630,6 +636,7 @@
 				3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
 				3C7DE6061EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.h in Headers */,
+				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
 			);
@@ -892,6 +899,7 @@
 				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
 				3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
+				3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */,
 				3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */,
 				3C7DE6071EF700FE00DC2AD6 /* CKCertificateChain+EnumValues.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,

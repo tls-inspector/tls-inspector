@@ -168,6 +168,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSString * extendedValidationAuthority;
 
 /**
+ *  Returns the URL for which OCSP queries can be performed for this certificate.
+ */
+@property (strong, nonatomic, nullable, readonly) NSURL * ocspURL;
+
+/**
  *  Get an array of key usage identifiers
  */
 @property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * keyUsage;

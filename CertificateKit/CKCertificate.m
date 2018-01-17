@@ -43,6 +43,7 @@
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * issuer;
+@property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
 
 @end
 
