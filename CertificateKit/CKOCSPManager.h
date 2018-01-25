@@ -29,6 +29,17 @@
 
 @interface CKOCSPManager : NSObject
 
+static const size_t OCSP_REQUEST_MAX_LENGTH = 127;
+typedef NS_ENUM(int, OCSPResponse) {
+    OCSPResponseSuccess             = 0,
+    OCSPResponseMalformedRequest    = 1,
+    OCSPResponseServerError         = 2,
+    OCSPResponseTryServerLater      = 3,
+    OCSPResponseRequestNeedsSig     = 5,
+    OCSPResponseUnauthorizedRequest = 6,
+    OCSPResponseUnknown,
+};
+
 + (CKOCSPManager * _Nonnull) sharedManager;
 - (void) queryCertificate:(CKCertificate * _Nonnull)certificate finished:(void (^ _Nonnull)(NSError * _Nullable error))finished;
 
