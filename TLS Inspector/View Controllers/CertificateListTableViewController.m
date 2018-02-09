@@ -193,7 +193,7 @@
         NSUInteger idx = indexPath.row;
         if (currentServerInfo.redirectedTo != nil) {
             if (idx == 0) {
-                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Ingored Redirect To") value:currentServerInfo.redirectedTo.host];
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Server Redirected To") value:currentServerInfo.redirectedTo.host];
             } else {
                 idx --;
             }

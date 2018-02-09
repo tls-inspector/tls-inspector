@@ -86,6 +86,7 @@
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
         curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_callback);
         curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 10L); // Only follow up-to 10 redirects
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L); // Give up after 5 seconds
         curl_easy_setopt(curl, CURLOPT_COOKIEFILE, ""); // Start the cookie engile (but don't save cookies)
@@ -93,10 +94,12 @@
         response = curl_easy_perform(curl);
         if (response == CURLE_OK) {
             char *urlstr = NULL;
-            curl_easy_getinfo(curl, CURLINFO_REDIRECT_URL, &urlstr);
+            curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &urlstr);
             if (urlstr != NULL) {
                 NSURL * redirectURL = [NSURL URLWithString:[NSString stringWithCString:urlstr encoding:NSASCIIStringEncoding]];
-                self.redirectedTo = redirectURL;
+                if (![url.host isEqualToString:redirectURL.host]) {
+                    self.redirectedTo = redirectURL;
+                }
             }
         } else {
             // Check for errors
