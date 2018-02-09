@@ -590,6 +590,8 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
+	<key>Server Redirected To</key>
+	<string>Server Redirected To</string>
 	<key>Insecure Superfish (Lenovo) certificate.</key>
 	<string>Insecure Superfish (Lenovo) certificate.</string>
 	<key>Insecure eDellRoot certificate.</key>
@@ -807,19 +809,19 @@
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>tlstip1</key>
-	<string>You can view the certificate of a website in Safari or other web browser by tapping the "Share" button and selecting "Show Certificate".</string>
+	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tlstip2</key>
-	<string>You can view more information about the server on Shodan by tapping the "Share" button when viewing a certificate.</string>
+	<string>You can view more information about the server on Shodan by tapping the &quot;Share&quot; button when viewing a certificate.</string>
 	<key>tlstip3</key>
-	<string>You can create a reminder when a certificate is about to expire by tapping the "Share" button when inspecting a certificate.</string>
+	<string>You can create a reminder when a certificate is about to expire by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
 	<key>tlstip4</key>
 	<string>You can change between night and day theme in options.</string>
 	<key>tlstip5</key>
-	<string>You can export the share the certificate data by tapping the "Share" button when inspecting a certificate.</string>
+	<string>You can export the share the certificate data by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
 	<key>tlstip6</key>
-	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the "Share" button when inspecting the value.</string>
+	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
 	<key>tlstip7</key>
-	<string>You can copy a parameters value by long-pressing on it and tapping "Copy".</string>
+	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
 	<key>trusted_chain_description</key>
 	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>{0} characters</key>
