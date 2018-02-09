@@ -29,7 +29,6 @@
 
 @interface CKOCSPManager : NSObject
 
-static const size_t OCSP_REQUEST_MAX_LENGTH = 127;
 typedef NS_ENUM(int, OCSPResponse) {
     OCSPResponseSuccess             = 0,
     OCSPResponseMalformedRequest    = 1,

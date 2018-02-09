@@ -166,8 +166,6 @@
 }
 
 - (NSDate *) notAfter {
-    ASN1_GENERALIZEDTIME_set_string(<#ASN1_GENERALIZEDTIME *s#>, <#const char *str#>)
-    X509_set1_notAfter(self.certificate, <#const ASN1_TIME *tm#>);
     return [NSDate fromASN1_TIME:X509_get0_notAfter(self.certificate)];
 }
 

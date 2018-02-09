@@ -31,6 +31,8 @@
 
 @implementation CKOCSPManager
 
+static const size_t OCSP_REQUEST_MAX_LENGTH = 127;
+
 static CKOCSPManager * _instance;
 
 + (CKOCSPManager *) sharedManager {
@@ -48,11 +50,13 @@ static CKOCSPManager * _instance;
     return _instance;
 }
 
+#define HASH_ALGORITM_SIZE 11
+
 - (void) queryCertificate:(CKCertificate *)certificate finished:(void (^)(NSError *))finished {
     // Since we don't know whether the OCSP responder supports anything other
     // than SHA-1, we have no choice but to use SHA-1 for issuerNameHash and
     // issuerKeyHash.
-    static const uint8_t hashAlgorithm[11] = {
+    static const uint8_t hashAlgorithm[HASH_ALGORITM_SIZE] = {
         0x30, 0x09,                               // SEQUENCE
         0x06, 0x05, 0x2B, 0x0E, 0x03, 0x02, 0x1A, //   OBJECT IDENTIFIER id-sha1
         0x05, 0x00,                               //   NULL
@@ -85,8 +89,8 @@ static CKOCSPManager * _instance;
     size_t outLen = totalLenWithoutSerialNumberData + certificate.serialNumber.length;
     uint8_t totalLen = (uint8_t)outLen;
 
-    uint8_t * out;
-    uint8_t* d = out;
+    uint8_t * out = 0;
+    uint8_t * d = out;
     *d++ = 0x30; *d++ = totalLen - 2u;  // OCSPRequest (SEQUENCE)
     *d++ = 0x30; *d++ = totalLen - 4u;  //   tbsRequest (SEQUENCE)
     *d++ = 0x30; *d++ = totalLen - 6u;  //     requestList (SEQUENCE OF)
@@ -94,7 +98,8 @@ static CKOCSPManager * _instance;
     *d++ = 0x30; *d++ = totalLen - 10u; //         reqCert (CertID SEQUENCE)
 
     // reqCert.hashAlgorithm
-    for (const uint8_t hashAlgorithmByte : hashAlgorithm) {
+    for (int i = 0; i < HASH_ALGORITM_SIZE; i++) {
+        const uint8_t hashAlgorithmByte = hashAlgorithm[i];
         *d++ = hashAlgorithmByte;
     }
 }
