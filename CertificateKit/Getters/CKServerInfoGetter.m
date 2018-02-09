@@ -7,6 +7,7 @@
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> * headers;
 @property (nonatomic) NSUInteger statusCode;
 @property (strong, nonatomic) CKServerInfo * serverInfo;
+@property (strong, nonatomic) NSURL * redirectedTo;
 
 @end
 
@@ -22,6 +23,7 @@
             self.serverInfo = [CKServerInfo new];
             self.serverInfo.headers = self.headers;
             self.serverInfo.statusCode = self.statusCode;
+            self.serverInfo.redirectedTo = self.redirectedTo;
             [self.delegate getter:self finishedTaskWithResult:self.serverInfo];
             self.finished = YES;
         }
@@ -58,14 +60,20 @@
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
         curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_callback);
         curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L); // Follow redirects...
-        curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 10L); // ...but only 10
+        curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 10L); // Only follow up-to 10 redirects
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L); // Give up after 5 seconds
         curl_easy_setopt(curl, CURLOPT_COOKIEFILE, ""); // Start the cookie engile (but don't save cookies)
         // Perform the request, res will get the return code
         response = curl_easy_perform(curl);
-        // Check for errors
-        if (response != CURLE_OK) {
+        if (response == CURLE_OK) {
+            char *urlstr = NULL;
+            curl_easy_getinfo(curl, CURLINFO_REDIRECT_URL, &urlstr);
+            if (urlstr != NULL) {
+                NSURL * redirectURL = [NSURL URLWithString:[NSString stringWithCString:urlstr encoding:NSASCIIStringEncoding]];
+                self.redirectedTo = redirectURL;
+            }
+        } else {
+            // Check for errors
             NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
             NSLog(@"Error getting server info: %@", errString);
             error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];

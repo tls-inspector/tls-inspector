@@ -590,6 +590,8 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
+	<key>Ingored Redirect To</key>
+	<string>Ingored Redirect To</string>
 	<key>Insecure Superfish (Lenovo) certificate.</key>
 	<string>Insecure Superfish (Lenovo) certificate.</string>
 	<key>Insecure eDellRoot certificate.</key>
