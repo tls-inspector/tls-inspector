@@ -152,8 +152,13 @@
             return currentChain.certificates.count;
         case 1:
             return 2;
-        case 2:
-            return currentServerInfo.securityHeaders.allKeys.count;
+        case 2: {
+            NSUInteger count = currentServerInfo.securityHeaders.allKeys.count;
+            if (currentServerInfo.redirectedTo != nil) {
+                count ++;
+            }
+            return count;
+        }
     }
     return 0;
 }
@@ -185,7 +190,15 @@
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocolString];
         }
     } else if (indexPath.section == 2) {
-        NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:indexPath.row];
+        NSUInteger idx = indexPath.row;
+        if (currentServerInfo.redirectedTo != nil) {
+            if (idx == 0) {
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Ingored Redirect To") value:currentServerInfo.redirectedTo.host];
+            } else {
+                idx --;
+            }
+        }
+        NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:idx];
         id value = [currentServerInfo.securityHeaders objectForKey:key];
 
         FAIcon icon = FAQuestionCircle;

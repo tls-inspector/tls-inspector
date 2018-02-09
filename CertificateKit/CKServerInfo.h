@@ -45,6 +45,11 @@
 @property (nonatomic) NSUInteger statusCode;
 
 /**
+ The URL that the server redirected to, if any.
+ */
+@property (strong, nonatomic) NSURL * redirectedTo;
+
+/**
  Convience method to get the version of libcurl used by CKServerInfo
 
  @return A string representing the libcurl version
