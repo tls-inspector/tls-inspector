@@ -29,9 +29,13 @@
 #import <openssl/ocsp.h>
 #import <curl/curl.h>
 
-@implementation CKOCSPManager
+@interface CKOCSPManager ()
 
-static const size_t OCSP_REQUEST_MAX_LENGTH = 127;
+@property (strong, nonatomic) NSMutableData * responseDataBuffer;
+
+@end
+
+@implementation CKOCSPManager
 
 static CKOCSPManager * _instance;
 
@@ -52,56 +56,81 @@ static CKOCSPManager * _instance;
 
 #define HASH_ALGORITM_SIZE 11
 
-- (void) queryCertificate:(CKCertificate *)certificate finished:(void (^)(NSError *))finished {
-    // Since we don't know whether the OCSP responder supports anything other
-    // than SHA-1, we have no choice but to use SHA-1 for issuerNameHash and
-    // issuerKeyHash.
-    static const uint8_t hashAlgorithm[HASH_ALGORITM_SIZE] = {
-        0x30, 0x09,                               // SEQUENCE
-        0x06, 0x05, 0x2B, 0x0E, 0x03, 0x02, 0x1A, //   OBJECT IDENTIFIER id-sha1
-        0x05, 0x00,                               //   NULL
-    };
-    static const uint8_t hashLen = 160 / 8;
+- (void) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer finished:(void (^)(NSError *))finished {
+    NSURL * ocspURL = certificate.ocspURL;
+    
+    OCSP_CERTID * certID = OCSP_cert_to_id(NULL, certificate.X509Certificate, issuer.X509Certificate);
+    NSData * request = [self generateOCSPRequestForCertificate:certID];
+    
+    OCSP_BASICRESP * resp = [self queryOCSPResponder:ocspURL withRequest:request];
+    
+    int status;
+    int reason;
+    ASN1_GENERALIZEDTIME * time;
+    ASN1_GENERALIZEDTIME * thisUP;
+    ASN1_GENERALIZEDTIME * nextUP;
+    int rt = OCSP_resp_find_status(resp, certID, &status, &reason, &time, &thisUP, &nextUP);
+    NSLog(@"rt: %i", rt);
+}
 
-    static const unsigned int totalLenWithoutSerialNumberData
-    = 2                             // OCSPRequest
-    + 2                             //   tbsRequest
-    + 2                             //     requestList
-    + 2                             //       Request
-    + 2                             //         reqCert (CertID)
-    + sizeof(hashAlgorithm)         //           hashAlgorithm
-    + 2 + hashLen                   //           issuerNameHash
-    + 2 + hashLen                   //           issuerKeyHash
-    + 2;                            //           serialNumber (header)
+- (NSData *) generateOCSPRequestForCertificate:(OCSP_CERTID *)certid {
+    OCSP_REQUEST * request = OCSP_REQUEST_new();
+    OCSP_request_add0_id(request, certid);
+    unsigned char * request_data = NULL;
+    int len = i2d_OCSP_REQUEST(request, &request_data);
+    return [[NSData alloc] initWithBytes:request_data length:len];
+}
 
-    // The only way we could have a request this large is if the serialNumber was
-    // ridiculously and unreasonably large. RFC 5280 says "Conforming CAs MUST
-    // NOT use serialNumber values longer than 20 octets." With this restriction,
-    // we allow for some amount of non-conformance with that requirement while
-    // still ensuring we can encode the length values in the ASN.1 TLV structures
-    // in a single byte.
-    NSAssert(totalLenWithoutSerialNumberData < OCSP_REQUEST_MAX_LENGTH, @"totalLenWithoutSerialNumberData too big");
-    if (certificate.serialNumber.length > OCSP_REQUEST_MAX_LENGTH - totalLenWithoutSerialNumberData) {
-        finished([NSError errorWithDomain:@"" code:-1 userInfo:@{NSLocalizedDescriptionKey: @""}]);
-        return;
+- (OCSP_RESPONSE *) decodeResponse:(NSData *)data {
+    const unsigned char * bytes = [data bytes];
+    OCSP_RESPONSE * response = d2i_OCSP_RESPONSE(NULL, &bytes, data.length);
+    return response;
+}
+
+- (OCSP_BASICRESP *) queryOCSPResponder:(NSURL *)responder withRequest:(NSData *)request {
+    CURL * curl;
+    CURLcode response;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+    if (!curl) {
+        // Error
     }
 
-    size_t outLen = totalLenWithoutSerialNumberData + certificate.serialNumber.length;
-    uint8_t totalLen = (uint8_t)outLen;
+#ifdef DEBUG
+    curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+#endif
 
-    uint8_t * out = 0;
-    uint8_t * d = out;
-    *d++ = 0x30; *d++ = totalLen - 2u;  // OCSPRequest (SEQUENCE)
-    *d++ = 0x30; *d++ = totalLen - 4u;  //   tbsRequest (SEQUENCE)
-    *d++ = 0x30; *d++ = totalLen - 6u;  //     requestList (SEQUENCE OF)
-    *d++ = 0x30; *d++ = totalLen - 8u;  //       Request (SEQUENCE)
-    *d++ = 0x30; *d++ = totalLen - 10u; //         reqCert (CertID SEQUENCE)
+    self.responseDataBuffer = [NSMutableData new];
+    
+    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
+    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
 
-    // reqCert.hashAlgorithm
-    for (int i = 0; i < HASH_ALGORITM_SIZE; i++) {
-        const uint8_t hashAlgorithmByte = hashAlgorithm[i];
-        *d++ = hashAlgorithmByte;
+    curl_easy_setopt(curl, CURLOPT_URL, responder.absoluteString.UTF8String);
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ocsp_write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, self.responseDataBuffer);
+
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "Content-Type: application/ocsp-request");
+
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, request.bytes);
+
+    response = curl_easy_perform(curl);
+    if (response != CURLE_OK) {
+        NSLog(@"CURL ERROR!");
     }
+    
+    OCSP_RESPONSE * ocspResponse = [self decodeResponse:self.responseDataBuffer];
+    return OCSP_response_get1_basic(ocspResponse);
+}
+
+size_t ocsp_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
+    [((__bridge NSMutableData *)userp) appendBytes:buffer length:size * nmemb];
+    return size * nmemb;
 }
 
 @end

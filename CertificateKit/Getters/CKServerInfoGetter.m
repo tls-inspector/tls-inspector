@@ -83,8 +83,8 @@
         // info, we don't do any verification
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_callback);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, server_info_write_callback);
+        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, server_info_header_callback);
         curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 10L); // Only follow up-to 10 redirects
@@ -121,7 +121,7 @@
     finished(error);
 }
 
-static size_t header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
+static size_t server_info_header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
     unsigned long len = nitems * size;
     if (len > 2) {
         NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
@@ -145,7 +145,7 @@ static size_t header_callback(char *buffer, size_t size, size_t nitems, void *us
     return len;
 }
 
-size_t write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
+size_t server_info_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
     // We don't really care about the actual HTTP body, so just convince CURL that we did something with it
     // (we don't)
     return size * nmemb;
