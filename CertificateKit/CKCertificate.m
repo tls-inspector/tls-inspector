@@ -81,6 +81,20 @@
     } else {
         xcert.summary = @"Untitled Certificate";
     }
+    
+    AUTHORITY_INFO_ACCESS * info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
+    int len = sk_ACCESS_DESCRIPTION_num(info);
+    for (int i = 0; i < len; i++) {
+        // Look for the OCSP entry
+        ACCESS_DESCRIPTION * description = sk_ACCESS_DESCRIPTION_value(info, i);
+        if (OBJ_obj2nid(description->method) == NID_ad_OCSP) {
+            if (description->location->type == GEN_URI) {
+                char * ocspurlchar = i2s_ASN1_IA5STRING(NULL, description->location->d.ia5);
+                NSString * ocspurlString = [[NSString alloc] initWithUTF8String:ocspurlchar];
+                xcert.ocspURL = [NSURL URLWithString:ocspurlString];
+            }
+        }
+    }
 
     return xcert;
 }
