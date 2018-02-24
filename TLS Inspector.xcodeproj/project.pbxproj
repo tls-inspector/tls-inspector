@@ -28,6 +28,8 @@
 		3C3104EE1D83C4A40093909E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C3104F01D83C4C30093909E /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C3104EF1D83C4C30093909E /* Extension.storyboard */; };
 		3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3104F31D83C5C70093909E /* InitialViewController.m */; };
+		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; };
 		3C43EF8D1D7A987F00AE65E9 /* Inspect Website.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */; };
 		3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */; };
@@ -194,6 +196,8 @@
 		3C3104EF1D83C4C30093909E /* Extension.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Extension.storyboard; sourceTree = "<group>"; };
 		3C3104F21D83C5C70093909E /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
 		3C3104F31D83C5C70093909E /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
+		3C36B3B220412564005C66E8 /* CKOCSPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPResponse.h; sourceTree = "<group>"; };
+		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
 		3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Inspect Website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C43EF8A1D7A987F00AE65E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C5096961E7CC9FC00AEAAB2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -415,6 +419,8 @@
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
 				3C70425020100CA900BE941A /* CKOCSPManager.h */,
 				3C70425120100CA900BE941A /* CKOCSPManager.m */,
+				3C36B3B220412564005C66E8 /* CKOCSPResponse.h */,
+				3C36B3B320412564005C66E8 /* CKOCSPResponse.m */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3CC1E9321F035A3400ED9BAA /* curl.framework */,
@@ -630,6 +636,7 @@
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
 				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
 				67F686E81FC8FAB800BB7AE8 /* CKCertificateChainGetter.h in Headers */,
+				3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
@@ -897,6 +904,7 @@
 			files = (
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
+				3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */,
 				3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
 				3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */,

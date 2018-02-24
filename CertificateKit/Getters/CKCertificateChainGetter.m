@@ -27,6 +27,7 @@
 #import "CKCertificateChainGetter.h"
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
+#import "CKOCSPManager.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 
@@ -147,6 +148,12 @@
         self.chain.rootCA = [certs lastObject];
         self.chain.intermediateCA = [certs objectAtIndex:1];
     }
+    
+    [[CKOCSPManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA finished:^(CKOCSPResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"OCSP Error: %@", error.description);
+        }
+    }];
 
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;

@@ -1,5 +1,5 @@
 //
-//  CKOCSPManager.h
+//  CKOCSPResponse.m
 //
 //  MIT License
 //
@@ -24,13 +24,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "CKCertificate.h"
 #import "CKOCSPResponse.h"
 
-@interface CKOCSPManager : NSObject
-
-+ (CKOCSPManager * _Nonnull) sharedManager;
-- (void) queryCertificate:(CKCertificate * _Nonnull)certificate issuer:(CKCertificate * _Nonnull)issuer finished:(void (^ _Nonnull)(CKOCSPResponse * _Nullable response, NSError * _Nullable error))finished;
+@implementation CKOCSPResponse
 
 @end
