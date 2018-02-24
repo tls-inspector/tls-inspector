@@ -149,11 +149,24 @@
         self.chain.intermediateCA = [certs objectAtIndex:1];
     }
     
-    [[CKOCSPManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA finished:^(CKOCSPResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"OCSP Error: %@", error.description);
+    if (self.options.checkOCSP) {
+        CKOCSPResponse * ocspResponse;
+        NSError * ocspError;
+        
+        [[CKOCSPManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA response:&ocspResponse error:&ocspError];
+        if (ocspError != nil) {
+            NSLog(@"%@", ocspError.description);
+        } else {
+            self.chain.server.revoked = [CKRevoked fromOCSPResponse:ocspResponse];
         }
-    }];
+        
+        [[CKOCSPManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&ocspResponse error:&ocspError];
+        if (ocspError != nil) {
+            NSLog(@"%@", ocspError.description);
+        }  else {
+            self.chain.intermediateCA.revoked = [CKRevoked fromOCSPResponse:ocspResponse];
+        }
+    }
 
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;
@@ -199,6 +212,18 @@
     // Self-Signed
     if (self.chain.certificates.count == 1) {
         self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
+        return;
+    }
+    
+    // Revoked Leaf
+    if (self.chain.server.revoked.isRevoked) {
+        self.chain.trusted = CKCertificateChainTrustStatusRevokedLeaf;
+        return;
+    }
+    
+    // Revoked Intermedia
+    if (self.chain.intermediateCA.revoked.isRevoked) {
+        self.chain.trusted = CKCertificateChainTrustStatusRevokedIntermediate;
         return;
     }
 

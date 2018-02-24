@@ -28,7 +28,8 @@
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
         case CKCertificateChainTrustStatusUntrusted:
-        case CKCertificateChainTrustStatusRevoked:
+        case CKCertificateChainTrustStatusRevokedLeaf:
+        case CKCertificateChainTrustStatusRevokedIntermediate:
         case CKCertificateChainTrustStatusSelfSigned:
         case CKCertificateChainTrustStatusInvalidDate:
         case CKCertificateChainTrustStatusWrongHost:
@@ -257,7 +258,11 @@
             title = l(@"Untrusted Chain");
             body = l(@"chainErr::self_signed");
             break;
-        case CKCertificateChainTrustStatusRevoked:
+        case CKCertificateChainTrustStatusRevokedLeaf:
+            title = l(@"Untrusted Chain");
+            body = l(@"chainErr::revoked");
+            break;
+        case CKCertificateChainTrustStatusRevokedIntermediate:
             title = l(@"Untrusted Chain");
             body = l(@"chainErr::revoked");
             break;

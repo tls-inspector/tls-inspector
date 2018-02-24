@@ -39,7 +39,12 @@
 
     appState.getterViewController = self;
 
-    self.infoGetter = [CKGetter new];
+    CKGetterOptions * options = [CKGetterOptions new];
+    options.checkOCSP = YES;
+    options.queryServerInfo = YES;
+    options.checkCRL = YES;
+    
+    self.infoGetter = [CKGetter getterWithOptions:options];
     self.infoGetter.delegate = self;
     [self.infoGetter getInfoForURL:self.url];
     self.title = self.url.host;

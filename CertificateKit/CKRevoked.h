@@ -1,5 +1,5 @@
 //
-//  CKOCSPManager.h
+//  CKRevoked.h
 //
 //  MIT License
 //
@@ -25,12 +25,50 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificate.h"
 #import "CKOCSPResponse.h"
 
-@interface CKOCSPManager : NSObject
+/**
+ An object describing information about a certificates revocation status.
+ */
+@interface CKRevoked : NSObject
 
-+ (CKOCSPManager * _Nonnull) sharedManager;
-- (void) queryCertificate:(CKCertificate * _Nonnull)certificate issuer:(CKCertificate * _Nonnull)issuer response:(CKOCSPResponse * _Nullable * _Nonnull)response error:(NSError * _Nullable * _Nonnull)error;
+/**
+ Possible ways a certificate could be revoked.
+
+ - CKRevokedUsingOCSP: The online certificate status protocol.
+ - CKRevokedUsingCRL: A certificate revocation list.
+ */
+typedef NS_ENUM(NSUInteger, CKRevokedUsing) {
+    CKRevokedUsingOCSP = 1,
+    CKRevokedUsingCRL  = 2,
+};
+
+/**
+ Is this certificate revoked.
+ */
+@property (nonatomic, readonly) BOOL isRevoked;
+/**
+ If revoked, what is the reason it was revoked.
+ */
+@property (strong, nonatomic, nullable, readonly) NSString * reasonString;
+/**
+ If revoked, what was the date it was revoked (CRL only).
+ */
+@property (strong, nonatomic, nullable, readonly) NSDate * revokedOn;
+/**
+ Which method was used to determine the certificate was revoked. Bitflag.
+ */
+@property (nonatomic, readonly) CKRevokedUsing revokedUsing;
+
+/**
+ The OCSP response information, if OCSP was used.
+ */
+@property (strong, nonatomic, nullable, readonly) CKOCSPResponse * ocspResponse;
+/**
+ The CRL response information, if CRL was used.
+ */
+//@property (strong, nonatomic, nullable, readonly) CKCRLResponse * crlResponse;
+
++ (CKRevoked * _Nonnull) fromOCSPResponse:(CKOCSPResponse * _Nonnull)response;
 
 @end

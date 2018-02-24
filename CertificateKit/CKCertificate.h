@@ -27,6 +27,7 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificatePublicKey.h"
 #import "CKNameObject.h"
+#import "CKRevoked.h"
 
 @class CKCertificatePublicKey;
 
@@ -146,6 +147,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  Returns the certificates issuers subject names.
  */
 @property (strong, nonatomic, nonnull, readonly) CKNameObject * issuer;
+
+/**
+ *  Information about the certificates revocation status.
+ */
+@property (strong, nonatomic, nonnull) CKRevoked * revoked;
 
 /**
  *  Is this a certificate authority

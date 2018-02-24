@@ -1,9 +1,9 @@
 //
-//  CKCertificateChainGetter.h
+//  CKRevoked.m
 //
 //  MIT License
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2018 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,11 +24,35 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CKGetterTask.h"
-#import "CKGetterOptions.h"
+#import "CKRevoked.h"
 
-@interface CKCertificateChainGetter : CKGetterTask
+@interface CKRevoked ()
 
-@property (strong, nonatomic, nonnull) CKGetterOptions * options;
+@property (nonatomic, readwrite) BOOL isRevoked;
+@property (strong, nonatomic, nullable, readwrite) NSString * reasonString;
+@property (strong, nonatomic, nullable, readwrite) NSDate * revokedOn;
+@property (nonatomic, readwrite) CKRevokedUsing revokedUsing;
+@property (strong, nonatomic, nullable, readwrite) CKOCSPResponse * ocspResponse;
+//@property (strong, nonatomic, nullable, readwrite) CKCRLResponse * crlResponse;
+
+@end
+
+@implementation CKRevoked
+
++ (CKRevoked *) fromOCSPResponse:(CKOCSPResponse *)response {
+    CKRevoked * revoked = [CKRevoked new];
+    
+    revoked.revokedUsing |= CKRevokedUsingOCSP;
+    revoked.ocspResponse = response;
+    
+    if (response.status == CKOCSPResponseStatusRevoked) {
+        revoked.isRevoked = YES;
+        revoked.reasonString = response.reasonString;
+    } else {
+        revoked.isRevoked = NO;
+    }
+    
+    return revoked;
+}
 
 @end

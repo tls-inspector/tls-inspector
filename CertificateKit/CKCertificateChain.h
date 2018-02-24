@@ -63,13 +63,17 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
      */
     CKCertificateChainTrustStatusSHA1Intermediate,
     /**
-     The system does not trust this certificate because one or more certificates have been revoked.
-     */
-    CKCertificateChainTrustStatusRevoked,
-    /**
      The system does not trust this certificate because it is a self-signed certificate.
      */
     CKCertificateChainTrustStatusSelfSigned,
+    /**
+     The system does not trust this certificate because is has been revoked.
+     */
+    CKCertificateChainTrustStatusRevokedLeaf,
+    /**
+     The system does not trust this certificate because the intermediate CA has been revoked.
+     */
+    CKCertificateChainTrustStatusRevokedIntermediate,
 };
 
 /**
