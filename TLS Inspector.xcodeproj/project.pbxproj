@@ -425,6 +425,7 @@
 			children = (
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				67F686EF1FC8FAE400BB7AE8 /* Getters */,
+				3CF6773420464A9E00A3B4C1 /* Revocation */,
 				3C2A7A511F284DC700AA12B4 /* CKGetter.h */,
 				3C2A7A521F284DC700AA12B4 /* CKGetter.m */,
 				3C36B3B62041310E005C66E8 /* CKGetterOptions.h */,
@@ -439,16 +440,6 @@
 				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
-				3C28D0B2204209E8004C260F /* CKRevoked.h */,
-				3C28D0B3204209E8004C260F /* CKRevoked.m */,
-				3C70425020100CA900BE941A /* CKOCSPManager.h */,
-				3C70425120100CA900BE941A /* CKOCSPManager.m */,
-				3C36B3B220412564005C66E8 /* CKOCSPResponse.h */,
-				3C36B3B320412564005C66E8 /* CKOCSPResponse.m */,
-				3CF677282046335D00A3B4C1 /* CKCRLManager.h */,
-				3CF677292046335D00A3B4C1 /* CKCRLManager.m */,
-				3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */,
-				3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3CC1E9321F035A3400ED9BAA /* curl.framework */,
@@ -524,6 +515,23 @@
 				3CF397451EB50E0900E8DBF4 /* Info.plist */,
 			);
 			path = CertificateKitTests;
+			sourceTree = "<group>";
+		};
+		3CF6773420464A9E00A3B4C1 /* Revocation */ = {
+			isa = PBXGroup;
+			children = (
+				3C28D0B2204209E8004C260F /* CKRevoked.h */,
+				3C28D0B3204209E8004C260F /* CKRevoked.m */,
+				3C70425020100CA900BE941A /* CKOCSPManager.h */,
+				3C70425120100CA900BE941A /* CKOCSPManager.m */,
+				3C36B3B220412564005C66E8 /* CKOCSPResponse.h */,
+				3C36B3B320412564005C66E8 /* CKOCSPResponse.m */,
+				3CF677282046335D00A3B4C1 /* CKCRLManager.h */,
+				3CF677292046335D00A3B4C1 /* CKCRLManager.m */,
+				3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */,
+				3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */,
+			);
+			path = Revocation;
 			sourceTree = "<group>";
 		};
 		3CFAE6CD1CA8440400CD946B = {
