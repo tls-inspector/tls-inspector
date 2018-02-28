@@ -1,0 +1,10 @@
+#ifndef CertificateKit_PrefixHeader_pch
+#define CertificateKit_PrefixHeader_pch
+
+#include "CKLogging.h"
+
+#define Console CKLogging.sharedInstance
+#define PDebug(format, ...) [Console writeDebug:[NSString stringWithFormat:(format), ##__VA_ARGS__]]
+#define PError(format, ...) [Console writeError:[NSString stringWithFormat:(format), ##__VA_ARGS__]]
+
+#endif
