@@ -170,9 +170,17 @@
 
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
-        if (cert.extendedValidation) {
+        if (cert.revoked.isRevoked) {
             CKNameObject * name = cert.subject;
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", name.commonName, name.organizationName, name.countryName];
+            cell.textLabel.text = [lang key:@"{commonName} (Revoked)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
+        } else if (!cert.validIssueDate) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
+        } else if (cert.extendedValidation) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[name.commonName, name.organizationName, name.countryName]];
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
             cell.textLabel.text = cert.summary;

@@ -60,6 +60,8 @@
 	<string>Certificate Errors</string>
 	<key>Certificate Information</key>
 	<string>Certificate Information</string>
+	<key>Certificate Status</key>
+	<string>Certificate Status</string>
 	<key>Certificate is expired or not valid yet.</key>
 	<string>Certificate is expired or not valid yet.</string>
 	<key>Certificate uses insecure SHA1 algorithm.</key>
@@ -566,6 +568,8 @@
 	<string>Did You Know:</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
+	<key>Download &amp; Check CRL</key>
+	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
 	<string>EV Authority</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
@@ -580,6 +584,8 @@
 	<string>Fingerprints</string>
 	<key>Finished</key>
 	<string>Finished</string>
+	<key>General</key>
+	<string>General</string>
 	<key>Get Involed</key>
 	<string>Get Involved</string>
 	<key>Get Involved</key>
@@ -590,8 +596,6 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
-	<key>Server Redirected To</key>
-	<string>Server Redirected To</string>
 	<key>Insecure Superfish (Lenovo) certificate.</key>
 	<string>Insecure Superfish (Lenovo) certificate.</string>
 	<key>Insecure eDellRoot certificate.</key>
@@ -642,6 +646,8 @@
 	<string>Options</string>
 	<key>Public Key</key>
 	<string>Public Key</string>
+	<key>Query OCSP Responder</key>
+	<string>Query OCSP Responder</string>
 	<key>Rate TLS Inspector in the App Store</key>
 	<string>Rate TLS Inspector in the App Store</string>
 	<key>Recent Domains</key>
@@ -666,6 +672,8 @@
 	<string>Security HTTP Headers</string>
 	<key>Server Info</key>
 	<string>Server Info</string>
+	<key>Server Redirected To</key>
+	<string>Server Redirected To</string>
 	<key>Share</key>
 	<string>Share</string>
 	<key>Share &amp; Feedback</key>
@@ -760,6 +768,8 @@
 	<string>You must restart TLS Inspector for theme changes to take affect.</string>
 	<key>You must restart the app for the change to take affect</key>
 	<string>You must restart the app for the change to take affect</string>
+	<key>certificate_status_footer</key>
+	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
 	<key>chainErr::invalid_date</key>
 	<string>The server certificate for this site is not trusted becuase one or more certificates in the chain is expired or not yet valid.</string>
 	<key>chainErr::revoked</key>
@@ -828,6 +838,12 @@
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
 	<string>{0}, {1} bits</string>
+	<key>{commonName} (Expired)</key>
+	<string>{0} (Expired)</string>
+	<key>{commonName} (Revoked)</key>
+	<string>{0} (Revoked)</string>
+	<key>{commonName} ({orgName} {countryName})</key>
+	<string>{0} ({1} {2})</string>
 	<key>{count} months</key>
 	<string>{0} months</string>
 	<key>{count} weeks</key>

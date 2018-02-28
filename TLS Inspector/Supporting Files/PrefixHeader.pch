@@ -13,6 +13,8 @@
 #define USE_LIGHT_THEME @"USE_LIGHT_THEME"
 #define HIDE_TIPS @"HIDE_TIPS"
 #define RELOAD_CERT_NOTIFICATION @"ReloadCertDetails"
+#define QUERY_OCSP @"QUERY_OCSP"
+#define DOWNLOAD_CRL @"DOWNLOAD_CRL"
 
 #if DEBUG
 #define d(s, ...) NSLog(s, ##__VA_ARGS__)
