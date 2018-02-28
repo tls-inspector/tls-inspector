@@ -70,11 +70,23 @@ static CKOCSPManager * _instance;
     NSURL * ocspURL = certificate.ocspURL;
     
     OCSP_CERTID * certID = OCSP_cert_to_id(NULL, certificate.X509Certificate, issuer.X509Certificate);
-    NSData * request = [self generateOCSPRequestForCertificate:certID];
+    OCSP_REQUEST * request = [self generateOCSPRequestForCertificate:certID];
+    
+    unsigned char * request_data = NULL;
+    int len = i2d_OCSP_REQUEST(request, &request_data);
+    if (len == 0) {
+        *rterror = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Unable to create OCSP request"}];
+        return;
+    }
+    NSData * requestData = [[NSData alloc] initWithBytes:request_data length:len];
     
     OCSP_BASICRESP * resp;
     NSError * queryError;
-    [self queryOCSPResponder:ocspURL withRequest:request resp:&resp error:&queryError];
+    [self queryOCSPResponder:ocspURL withRequest:requestData resp:&resp error:&queryError];
+    if (queryError != nil) {
+        *rterror = queryError;
+        return;
+    }
     CKOCSPResponse * response = [CKOCSPResponse new];
     *rtresponse = response;
     
@@ -110,19 +122,16 @@ static CKOCSPManager * _instance;
             response.reasonString = [NSString stringWithUTF8String:OCSP_crl_reason_str(reason)];
             break;
     }
+    
+    [self.responseDataBuffer setLength:0];
+    OCSP_REQUEST_free(request);
+    OCSP_BASICRESP_free(resp);
 }
 
-- (NSData *) generateOCSPRequestForCertificate:(OCSP_CERTID *)certid {
+- (OCSP_REQUEST *) generateOCSPRequestForCertificate:(OCSP_CERTID *)certid {
     OCSP_REQUEST * request = OCSP_REQUEST_new();
     OCSP_request_add0_id(request, certid);
-    unsigned char * request_data = NULL;
-    int len = i2d_OCSP_REQUEST(request, &request_data);
-    if (len > 0) {
-        return [[NSData alloc] initWithBytes:request_data length:len];
-    }
-    
-    // Will only hit for invalid requests
-    return nil;
+    return request;
 }
 
 - (OCSP_RESPONSE *) decodeResponse:(NSData *)data {
