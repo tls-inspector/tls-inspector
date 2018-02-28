@@ -24,7 +24,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CKLogging : NSObject
 
@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
 };
 
 + (CKLogging *) sharedInstance;
-- (id) initWithLogFile:(NSURL *)logFile;
+- (id) initWithLogFile:(NSString *)file;
 
 @property (nonatomic) CKLoggingLevel level;
 @property (strong, nonatomic) NSString * file;

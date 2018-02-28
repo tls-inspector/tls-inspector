@@ -42,17 +42,7 @@ static dispatch_queue_t queue;
 
 - (id) init {
     if (_instance == nil) {
-        CKLogging * logging = [super init];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        logging.file = [documentsDirectory stringByAppendingPathComponent:@"ckcertificate.log"];
-        [logging createQueue];
-#if DEBUG
-        logging.level = CKLoggingLevelDebug;
-#else
-        logging.level = CKLoggingLevelInfo;
-#endif
-        _instance = logging;
+        _instance = [[CKLogging alloc] initWithLogFile:@"CertificateKit.log"];
     }
     return _instance;
 }
@@ -68,6 +58,7 @@ static dispatch_queue_t queue;
     self.level = CKLoggingLevelInfo;
 #endif
     [self createQueue];
+    [self open];
     return self;
 }
 
@@ -75,6 +66,28 @@ static dispatch_queue_t queue;
     if (!queue) {
         queue = dispatch_queue_create("com.tlsinspector.CKCertificate", NULL);
     }
+}
+
+- (void) open {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appWillTerminate:)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:nil];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self.file]) {
+        [[NSFileManager defaultManager] createFileAtPath:self.file contents:nil attributes:nil];
+    }
+    
+    self.handle = [NSFileHandle fileHandleForWritingAtPath:self.file];
+    [self.handle seekToEndOfFile];
+}
+
+- (void) appWillTerminate:(NSNotification *)n {
+    [self close];
+}
+
+- (void) close {
+    [self.handle closeFile];
 }
 
 + (CKLogging *) sharedInstance {
