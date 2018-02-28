@@ -40,9 +40,9 @@
     appState.getterViewController = self;
 
     CKGetterOptions * options = [CKGetterOptions new];
-    options.checkOCSP = [AppDefaults boolForKey:QUERY_OCSP];
+    options.checkOCSP = UserOptions.currentOptions.queryOCSP;
     options.queryServerInfo = YES;
-    options.checkCRL = [AppDefaults boolForKey:DOWNLOAD_CRL];
+    options.checkCRL = UserOptions.currentOptions.checkCRL;
     
     self.infoGetter = [CKGetter getterWithOptions:options];
     self.infoGetter.delegate = self;

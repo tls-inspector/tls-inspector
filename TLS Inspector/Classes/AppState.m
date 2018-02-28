@@ -19,7 +19,7 @@ static AppState * _instance;
 }
 
 - (BOOL) lightTheme {
-    return [AppDefaults boolForKey:USE_LIGHT_THEME];
+    return UserOptions.currentOptions.useLightTheme;
 }
 
 - (void) setAppearance {

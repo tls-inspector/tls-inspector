@@ -92,6 +92,8 @@
 		3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF677292046335D00A3B4C1 /* CKCRLManager.m */; };
 		3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */; };
+		3CF67732204643CB00A3B4C1 /* UserOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF67731204643CB00A3B4C1 /* UserOptions.m */; };
+		3CF67733204643CB00A3B4C1 /* UserOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF67731204643CB00A3B4C1 /* UserOptions.m */; };
 		3CF7E33B1F78900900EEEE21 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A5B1F28589000AA12B4 /* FAImageView.m */; };
 		3CF7E33C1F78900900EEEE21 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A5D1F28589000AA12B4 /* NSString+FontAwesome.m */; };
 		3CF7E33D1F78900900EEEE21 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A5F1F28589000AA12B4 /* UIFont+FontAwesome.m */; };
@@ -267,6 +269,8 @@
 		3CF677292046335D00A3B4C1 /* CKCRLManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCRLManager.m; sourceTree = "<group>"; };
 		3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCRLResponse.h; sourceTree = "<group>"; };
 		3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCRLResponse.m; sourceTree = "<group>"; };
+		3CF67730204643CB00A3B4C1 /* UserOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserOptions.h; sourceTree = "<group>"; };
+		3CF67731204643CB00A3B4C1 /* UserOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserOptions.m; sourceTree = "<group>"; };
 		3CF7E3431F789E9800EEEE21 /* NSAtomicNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSAtomicNumber.h; sourceTree = "<group>"; };
 		3CF7E3441F789E9800EEEE21 /* NSAtomicNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSAtomicNumber.m; sourceTree = "<group>"; };
 		3CFAE6D61CA8440400CD946B /* TLS Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TLS Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -497,6 +501,8 @@
 		3CE5D2AA1E199FEF009500E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3CF67730204643CB00A3B4C1 /* UserOptions.h */,
+				3CF67731204643CB00A3B4C1 /* UserOptions.m */,
 				3CF7E3431F789E9800EEEE21 /* NSAtomicNumber.h */,
 				3CF7E3441F789E9800EEEE21 /* NSAtomicNumber.m */,
 				3CBD8B911E7CE8D600F2A637 /* AppState.h */,
@@ -903,6 +909,7 @@
 				3CF7E33D1F78900900EEEE21 /* UIFont+FontAwesome.m in Sources */,
 				A1BA8BE61E8EB3530004FB0F /* DNSResolver.m in Sources */,
 				A16ABDA51E844C8A007779BE /* TitleValueTableViewCell.m in Sources */,
+				3CF67733204643CB00A3B4C1 /* UserOptions.m in Sources */,
 				3C2A7A581F28561700AA12B4 /* GetterTableViewController.m in Sources */,
 				3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */,
 				3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */,
@@ -987,6 +994,7 @@
 				3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */,
 				3C2A7A571F28561300AA12B4 /* GetterTableViewController.m in Sources */,
 				3C1D28A5200959B800A606BB /* GradientView.m in Sources */,
+				3CF67732204643CB00A3B4C1 /* UserOptions.m in Sources */,
 				3CFAE6DB1CA8440400CD946B /* main.m in Sources */,
 				3C2A7A651F28589000AA12B4 /* UIImage+FontAwesome.m in Sources */,
 				3CFF7E762009907200478E0A /* CertificateTableRowSection.m in Sources */,

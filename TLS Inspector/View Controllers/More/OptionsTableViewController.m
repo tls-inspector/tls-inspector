@@ -48,7 +48,7 @@
             label.text = l(@"Show Tips");
             label.textColor = themeTextColor;
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
-            [toggle setOn:![AppDefaults boolForKey:HIDE_TIPS]];
+            [toggle setOn:UserOptions.currentOptions.showTips];
             [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         } else if (indexPath.row == 2) {
@@ -59,7 +59,7 @@
             UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
             [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
             [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
-            if ([AppDefaults boolForKey:USE_LIGHT_THEME]) {
+            if (UserOptions.currentOptions.useLightTheme) {
                 [segment setSelectedSegmentIndex:1];
             } else {
                 [segment setSelectedSegmentIndex:0];
@@ -74,7 +74,7 @@
             label.text = l(@"Query OCSP Responder");
             label.textColor = themeTextColor;
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
-            [toggle setOn:[AppDefaults boolForKey:QUERY_OCSP]];
+            [toggle setOn:UserOptions.currentOptions.queryOCSP];
             [toggle addTarget:self action:@selector(ocspSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         } else if (indexPath.row == 1) {
@@ -83,7 +83,7 @@
             label.text = l(@"Download & Check CRL");
             label.textColor = themeTextColor;
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
-            [toggle setOn:[AppDefaults boolForKey:DOWNLOAD_CRL]];
+            [toggle setOn:UserOptions.currentOptions.checkCRL];
             [toggle addTarget:self action:@selector(crlSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         }
@@ -96,15 +96,15 @@
 }
 
 - (void) tipsSwitch:(UISwitch *)sender {
-    [AppDefaults setBool:!sender.isOn forKey:HIDE_TIPS];
+    UserOptions.currentOptions.showTips = sender.isOn;
 }
 
 - (void) ocspSwitch:(UISwitch *)sender {
-    [AppDefaults setBool:sender.isOn forKey:QUERY_OCSP];
+    UserOptions.currentOptions.queryOCSP = sender.isOn;
 }
 
 - (void) crlSwitch:(UISwitch *)sender {
-    [AppDefaults setBool:sender.isOn forKey:DOWNLOAD_CRL];
+    UserOptions.currentOptions.checkCRL = sender.isOn;
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -135,11 +135,7 @@
      confirmActionIsDestructive:NO
      dismissed:^(BOOL confirmed) {
          if (confirmed) {
-             if (sender.selectedSegmentIndex == 0) {
-                 [AppDefaults setBool:NO forKey:USE_LIGHT_THEME];
-             } else {
-                 [AppDefaults setBool:YES forKey:USE_LIGHT_THEME];
-             }
+             UserOptions.currentOptions.useLightTheme = sender.selectedSegmentIndex == 0;
              [appState setAppearance];
              UIAlertController * alert = [UIAlertController alertControllerWithTitle:l(@"Restart TLS Inspector") message:l(@"You must restart TLS Inspector for theme changes to take affect.") preferredStyle:UIAlertControllerStyleAlert];
              [self presentViewController:alert animated:YES completion:nil];

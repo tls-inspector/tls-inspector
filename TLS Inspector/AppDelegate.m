@@ -3,6 +3,7 @@
 @implementation AppDelegate
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [UserOptions setDefaultValues];
     [[AppState currentState] setAppearance];
     return YES;
 }
