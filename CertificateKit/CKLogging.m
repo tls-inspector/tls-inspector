@@ -47,6 +47,11 @@ static dispatch_queue_t queue;
         NSString *documentsDirectory = [paths objectAtIndex:0];
         logging.file = [documentsDirectory stringByAppendingPathComponent:@"ckcertificate.log"];
         [logging createQueue];
+#if DEBUG
+        logging.level = CKLoggingLevelDebug;
+#else
+        logging.level = CKLoggingLevelInfo;
+#endif
         _instance = logging;
     }
     return _instance;
@@ -57,6 +62,11 @@ static dispatch_queue_t queue;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     self.file = [documentsDirectory stringByAppendingPathComponent:file];
+#if DEBUG
+    self.level = CKLoggingLevelDebug;
+#else
+    self.level = CKLoggingLevelInfo;
+#endif
     [self createQueue];
     return self;
 }

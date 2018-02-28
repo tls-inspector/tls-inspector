@@ -56,6 +56,7 @@
 @implementation CKCertificateChainGetter
 
 - (void) performTaskForURL:(NSURL *)url {
+    PDebug(@"Getting certificate chain");
     queryURL = url;
     unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)url.host, port, &readStream, &writeStream);
@@ -91,6 +92,7 @@
 
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered: {
+            PError(@"NSStream error occured: %@", stream.streamError.description);
             [self.delegate getter:self failedTaskWithError:[stream streamError]];
             [inputStream close];
             [outputStream close];
@@ -159,13 +161,13 @@
     if (self.options.checkOCSP) {
         [[CKOCSPManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA response:&ocspResponse error:&ocspError];
         if (ocspError != nil) {
-            NSLog(@"OCSP Error: %@", ocspError.description);
+            PError(@"OCSP Error: %@", ocspError.description);
         }
     }
     if (self.options.checkCRL) {
         [[CKCRLManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA response:&crlResponse error:&crlError];
         if (crlError != nil) {
-            NSLog(@"CRL Error: %@", crlError.description);
+            PError(@"CRL Error: %@", crlError.description);
         }
     }
     self.chain.server.revoked = [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
@@ -174,13 +176,13 @@
     if (self.options.checkOCSP) {
         [[CKOCSPManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&ocspResponse error:&ocspError];
         if (ocspError != nil) {
-            NSLog(@"OCSP Error: %@", ocspError.description);
+            PError(@"OCSP Error: %@", ocspError.description);
         }
     }
     if (self.options.checkCRL) {
         [[CKCRLManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&crlResponse error:&crlError];
         if (crlError != nil) {
-            NSLog(@"CRL Error: %@", crlError.description);
+            PError(@"CRL Error: %@", crlError.description);
         }
     }
     self.chain.intermediateCA.revoked = [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
@@ -198,6 +200,7 @@
         self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
     }
 
+    PDebug(@"Finished getting certificate chain");
     [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
 }
@@ -209,6 +212,7 @@
     // Expired/Not Valid
     for (CKCertificate * cert in self.chain.certificates) {
         if (!cert.validIssueDate) {
+            PWarn(@"Certificate: '%@' has an invalid date", cert.subject.commonName);
             self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
             return;
         }
@@ -216,36 +220,42 @@
 
     // SHA-1 Leaf
     if ([self.chain.server.signatureAlgorithm hasPrefix:@"sha1"]) {
+        PWarn(@"Certificate: '%@' is using SHA-1", self.chain.server.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusSHA1Leaf;
         return;
     }
 
     // SHA-1 Intermediate
     if ([self.chain.intermediateCA.signatureAlgorithm hasPrefix:@"sha1"]) {
+        PWarn(@"Certificate: '%@' is using SHA-1", self.chain.intermediateCA.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusSHA1Intermediate;
         return;
     }
 
     // Self-Signed
     if (self.chain.certificates.count == 1) {
+        PWarn(@"Chain only contains a single certificate");
         self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
         return;
     }
     
     // Revoked Leaf
     if (self.chain.server.revoked.isRevoked) {
+        PWarn(@"Certificate: '%@' is revoked", self.chain.server.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusRevokedLeaf;
         return;
     }
     
     // Revoked Intermedia
     if (self.chain.intermediateCA.revoked.isRevoked) {
+        PWarn(@"Certificate: '%@' is revoked", self.chain.intermediateCA.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusRevokedIntermediate;
         return;
     }
 
     // Wrong Host
     if (self.chain.server.subjectAlternativeNames.count == 0) {
+        PWarn(@"Certificate: '%@' has no subject alternate names", self.chain.server.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
@@ -289,11 +299,13 @@
         }
     }
     if (!match) {
+        PWarn(@"Certificate: '%@' has no subject alternate names that match: '%@'", self.chain.server.subject.commonName, self.chain.domain);
         self.chain.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
 
     // Fallback (We don't know)
+    PWarn(@"Unable to determine why certificate: '%@' is untrusted", self.chain.server.subject.commonName);
     self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
     return;
 }

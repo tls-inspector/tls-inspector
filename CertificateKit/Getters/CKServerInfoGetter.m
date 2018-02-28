@@ -42,7 +42,9 @@
 @synthesize headers;
 
 - (void) performTaskForURL:(NSURL *)url {
+    PDebug(@"Getting HTTP server info");
     [self getServerInfoForURL:url finished:^(NSError *error) {
+        PDebug(@"Finished getting HTTP server info");
         if (error) {
             [self.delegate getter:self failedTaskWithError:error];
         } else {
@@ -76,6 +78,8 @@
         NSString * version = infoDictionary[@"CFBundleShortVersionString"];
         NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
 
+        PDebug(@"Server Info Request: HTTP GET %@", url.absoluteString);
+        
         const char * urlString = url.absoluteString.UTF8String;
         curl_easy_setopt(curl, CURLOPT_URL, urlString);
         curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
@@ -97,6 +101,7 @@
             curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &urlstr);
             if (urlstr != NULL) {
                 NSURL * redirectURL = [NSURL URLWithString:[NSString stringWithCString:urlstr encoding:NSASCIIStringEncoding]];
+                PWarn(@"Server redirected to: '%@'", redirectURL.absoluteString);
                 if (![url.host isEqualToString:redirectURL.host]) {
                     self.redirectedTo = redirectURL;
                 }
@@ -104,18 +109,20 @@
         } else {
             // Check for errors
             NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
-            NSLog(@"Error getting server info: %@", errString);
+            PError(@"Error getting server info: %@", errString);
             error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
         }
 
         long http_code = 0;
         curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
         self.statusCode = http_code;
+        PDebug(@"Server Info HTTP Response: %ld", http_code);
 
         // always cleanup
         curl_easy_cleanup(curl);
     } else {
         error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to create curl session."}];
+        PError(@"Unable to create curl session (this shouldn't happen!)");
     }
     curl_global_cleanup();
     finished(error);

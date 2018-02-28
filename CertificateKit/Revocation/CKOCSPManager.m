@@ -70,12 +70,14 @@ static CKOCSPManager * _instance;
     NSURL * ocspURL = certificate.ocspURL;
     
     OCSP_CERTID * certID = OCSP_cert_to_id(NULL, certificate.X509Certificate, issuer.X509Certificate);
+    PDebug(@"Querying OCSP for certificate: '%@'", certificate.subject.commonName);
     OCSP_REQUEST * request = [self generateOCSPRequestForCertificate:certID];
     
     unsigned char * request_data = NULL;
     int len = i2d_OCSP_REQUEST(request, &request_data);
     if (len == 0) {
         *rterror = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Unable to create OCSP request"}];
+        PError(@"Error getting ASN bytes from OCSP request object");
         return;
     }
     NSData * requestData = [[NSData alloc] initWithBytes:request_data length:len];
@@ -93,6 +95,7 @@ static CKOCSPManager * _instance;
     if (queryError != nil) {
         if (queryError.code == OCSP_ERROR_REQUEST_ERROR) {
             response.status = CKOCSPResponseStatusUnknown;
+            PDebug(@"OCSP request status: Unknown");
             return;
         }
         *rterror = queryError;
@@ -106,18 +109,23 @@ static CKOCSPManager * _instance;
     ASN1_GENERALIZEDTIME * nextUP;
     if (!OCSP_resp_find_status(resp, certID, &status, &reason, &time, &thisUP, &nextUP)) {
         *rterror = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid OCSP response."}];
+        [self openSSLError];
+        PError(@"Unable to from status in OCSP response");
         return;
     }
     
     switch (status) {
         case V_OCSP_CERTSTATUS_GOOD:
             response.status = CKOCSPResponseStatusOK;
+            PDebug(@"OCSP certificate status GOOD");
             break;
         case V_OCSP_CERTSTATUS_UNKNOWN:
             response.status = CKOCSPResponseStatusUnknown;
+            PDebug(@"OCSP certificate status UNKNOWN");
             break;
         case V_OCSP_CERTSTATUS_REVOKED:
             response.status = CKOCSPResponseStatusRevoked;
+            PDebug(@"OCSP certificate status REVOKED");
             response.reason = reason;
             response.reasonString = [NSString stringWithUTF8String:OCSP_crl_reason_str(reason)];
             break;
@@ -147,6 +155,7 @@ static CKOCSPManager * _instance;
     curl = curl_easy_init();
     if (!curl) {
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_CURL_LIBRARY userInfo:@{NSLocalizedDescriptionKey: @"Error initalizing CURL library"}];
+        PError(@"Error initalizing the CURL library. This shouldn't happen!");
         return;
     }
     
@@ -179,26 +188,33 @@ static CKOCSPManager * _instance;
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 0);
     curl_easy_setopt(curl, CURLOPT_TCP_NODELAY, 1);
     
+    PDebug(@"OCSP Request: HTTP GET %@", responder.absoluteString);
+    
     CURLcode response = curl_easy_perform(curl);
     if (response != CURLE_OK) {
         long response_code;
         curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
         
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
+        PError(@"OCSP HTTP Response: %ld", response_code);
         
         curl_easy_cleanup(curl);
         return;
     }
     
+    PDebug(@"OCSP HTTP Response: 200");
+    
     OCSP_RESPONSE * ocspResponse = [self decodeResponse:self.responseDataBuffer];
     if (ocspResponse == NULL) {
         [self openSSLError];
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];
+        PError(@"Error decoding OCSP response");
         return;
     }
     int requestResponse = OCSP_response_status(ocspResponse);
     if (requestResponse != OCSP_RESPONSE_STATUS_SUCCESSFUL) {
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_REQUEST_ERROR userInfo:@{NSLocalizedDescriptionKey: @"OCSP request error."}];
+        PError(@"OCSP Response status: %i", requestResponse);
         return;
     }
     
@@ -206,6 +222,7 @@ static CKOCSPManager * _instance;
     if (basicResp == NULL) {
         [self openSSLError];
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];
+        PError(@"Error getting basic OCSP response from OCSP response object");
         return;
     }
     
@@ -219,11 +236,6 @@ size_t ocsp_write_callback(void *buffer, size_t size, size_t nmemb, void *userp)
     return size * nmemb;
 }
 
-- (void) openSSLError {
-    const char * file;
-    int line;
-    ERR_peek_last_error_line(&file, &line);
-    NSLog(@"OpenSSL error in file: %s:%i", file, line);
-}
+INSERT_OPENSSL_ERROR_METHOD
 
 @end

@@ -77,6 +77,7 @@ static CKCRLManager * _instance;
     if ((rv = X509_CRL_verify(crl, issuerKey)) != 1) {
         // CRL Verification failure
         *rtError = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CRL_ERROR userInfo:@{NSLocalizedDescriptionKey: @"CRL verification failed"}];
+        PError(@"CRL verification error");
         return;
     }
     
@@ -87,6 +88,7 @@ static CKCRLManager * _instance;
     rv = X509_CRL_get0_by_cert(crl, &revoked, certificate.X509Certificate);
     if (rv > 0) {
         // Certificate is revoked
+        PDebug(@"CRL Status: Revoked");
         crlResponse.status = CKCRLResponseStatusRevoked;
         const ASN1_TIME * revokedTime = X509_REVOKED_get0_revocationDate(revoked);
         crlResponse.revokedOn = [NSDate fromASN1_TIME:revokedTime];
@@ -98,9 +100,11 @@ static CKCRLManager * _instance;
         crlResponse.reasonString = [self reasonString:reason];
     } else if (rv == 0) {
         // Certificate not found
+        PDebug(@"CRL Status: Not Found");
         crlResponse.status = CKCRLResponseStatusNotFound;
     } else {
         // CRL parsing failure
+        PDebug(@"CRL Status: Unknown");
         *rtError = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CRL_ERROR userInfo:@{NSLocalizedDescriptionKey: @"CRL parsing failed"}];
         return;
     }
@@ -143,16 +147,21 @@ static CKCRLManager * _instance;
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 0);
     curl_easy_setopt(curl, CURLOPT_TCP_NODELAY, 1);
     
+    PDebug(@"CRL HTTP GET %@", url.absoluteString);
+    
     CURLcode response = curl_easy_perform(curl);
     if (response != CURLE_OK) {
         long response_code;
         curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
         
         *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
+        PError(@"CRL HTTP Response: %ld", response_code);
         
         curl_easy_cleanup(curl);
         return;
     }
+    
+    PDebug(@"CRL HTTP Response: 200");
     
     X509_CRL * crl = NULL;
     const unsigned char * bytes = self.responseDataBuffer.bytes;
@@ -160,6 +169,7 @@ static CKCRLManager * _instance;
     if (crl == NULL) {
         [self openSSLError];
         *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding CRL response"}];
+        PError(@"Error decoding CRL response");
     }
     *crlResponse = crl;
     curl_easy_cleanup(curl);
@@ -169,13 +179,6 @@ static CKCRLManager * _instance;
 size_t crl_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
     [((__bridge NSMutableData *)userp) appendBytes:buffer length:size * nmemb];
     return size * nmemb;
-}
-
-- (void) openSSLError {
-    const char * file;
-    int line;
-    ERR_peek_last_error_line(&file, &line);
-    NSLog(@"OpenSSL error in file: %s:%i", file, line);
 }
 
 - (NSString *) reasonString:(long)reason {
@@ -206,5 +209,7 @@ size_t crl_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) 
             return @"Unknown";
     }
 }
+
+INSERT_OPENSSL_ERROR_METHOD
 
 @end

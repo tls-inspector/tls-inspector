@@ -53,6 +53,8 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 }
 
 - (void) getInfoForURL:(NSURL *)URL; {
+    PDebug(@"Starting getter for: %@", URL.absoluteString);
+    
     self.chainGetter = [CKCertificateChainGetter new];
     self.chainGetter.delegate = self;
     self.chainGetter.tag = CKGetterTaskTagChain;
@@ -127,6 +129,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         }
     }
     if (allFinished) {
+        PDebug(@"Getter finished all tasks");
         if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
             [self.delegate finishedGetter:self];
         }

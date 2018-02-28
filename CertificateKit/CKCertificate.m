@@ -50,12 +50,7 @@
 
 @implementation CKCertificate
 
-- (void) openSSLError {
-    const char * file;
-    int line;
-    ERR_peek_last_error_line(&file, &line);
-    NSLog(@"OpenSSL error in file: %s:%i", file, line);
-}
+INSERT_OPENSSL_ERROR_METHOD
 
 + (CKCertificate *) fromX509:(void *)cert {
     CKCertificate * xcert = [CKCertificate new];
@@ -115,7 +110,7 @@
             if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
                 [urls addObject:crlURL];
             } else {
-                NSLog(@"Unsupported CRL distribution point: %s", url);
+                PDebug(@"Unsupported CRL distribution point: %s", url);
             }
         }
         xcert.crlDistributionPoints = urls;
@@ -162,7 +157,8 @@
 
     unsigned int fingerprint_size = sizeof(fingerprint);
     if (X509_digest(self.certificate, digest, fingerprint, &fingerprint_size) < 0) {
-        NSLog(@"Unable to generate certificate fingerprint");
+        [self openSSLError];
+        PError(@"Unable to generate certificate fingerprint");
         return @"";
     }
 
