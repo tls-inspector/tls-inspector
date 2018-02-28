@@ -179,6 +179,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSURL * ocspURL;
 
 /**
+ *  Returns an array of URLs that contain certificate revocation lists.
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<NSURL *> * crlDistributionPoints;
+
+/**
  *  Get an array of key usage identifiers
  */
 @property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * keyUsage;

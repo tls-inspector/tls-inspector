@@ -28,6 +28,7 @@
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
 #import "CKOCSPManager.h"
+#import "CKCRLManager.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 
@@ -149,24 +150,40 @@
         self.chain.intermediateCA = [certs objectAtIndex:1];
     }
     
+    CKOCSPResponse * ocspResponse;
+    CKCRLResponse * crlResponse;
+    NSError * ocspError;
+    NSError * crlError;
+    
+    // Check Server
     if (self.options.checkOCSP) {
-        CKOCSPResponse * ocspResponse;
-        NSError * ocspError;
-        
         [[CKOCSPManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA response:&ocspResponse error:&ocspError];
         if (ocspError != nil) {
-            NSLog(@"%@", ocspError.description);
-        } else {
-            self.chain.server.revoked = [CKRevoked fromOCSPResponse:ocspResponse];
-        }
-        
-        [[CKOCSPManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&ocspResponse error:&ocspError];
-        if (ocspError != nil) {
-            NSLog(@"%@", ocspError.description);
-        }  else {
-            self.chain.intermediateCA.revoked = [CKRevoked fromOCSPResponse:ocspResponse];
+            NSLog(@"OCSP Error: %@", ocspError.description);
         }
     }
+    if (self.options.checkCRL) {
+        [[CKCRLManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA response:&crlResponse error:&crlError];
+        if (crlError != nil) {
+            NSLog(@"CRL Error: %@", crlError.description);
+        }
+    }
+    self.chain.server.revoked = [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
+    
+    // Check Intermediate
+    if (self.options.checkOCSP) {
+        [[CKOCSPManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&ocspResponse error:&ocspError];
+        if (ocspError != nil) {
+            NSLog(@"OCSP Error: %@", ocspError.description);
+        }
+    }
+    if (self.options.checkCRL) {
+        [[CKCRLManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&crlResponse error:&crlError];
+        if (crlError != nil) {
+            NSLog(@"CRL Error: %@", crlError.description);
+        }
+    }
+    self.chain.intermediateCA.revoked = [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
 
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;

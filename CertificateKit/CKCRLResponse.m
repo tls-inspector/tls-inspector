@@ -1,9 +1,9 @@
 //
-//  CertificateKit.h
+//  CKCRLResponse.m
 //
 //  MIT License
 //
-//  Copyright (c) 2017 Ian Spence
+//  Copyright (c) 2018 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,22 +24,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import "CKCRLResponse.h"
 
-//! Project version number for CertificateKit.
-FOUNDATION_EXPORT double CertificateKitVersionNumber;
+@implementation CKCRLResponse
 
-//! Project version string for CertificateKit.
-FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
+@end
 
-// In this header, you should import all the public headers of your framework using statements like #import <CertificateKit/PublicHeader.h>
-#import <CertificateKit/CKCertificate.h>
-#import <CertificateKit/CKCertificatePublicKey.h>
-#import <CertificateKit/CKCertificateChain.h>
-#import <CertificateKit/CKCertificateChain+EnumValues.h>
-#import <CertificateKit/CKServerInfo.h>
-#import <CertificateKit/CKGetter.h>
-#import <CertificateKit/CKRevoked.h>
-#import <CertificateKit/CKOCSPResponse.h>
-#import <CertificateKit/CKCRLResponse.h>
-#import <CertificateKit/CKGetterOptions.h>

@@ -1,5 +1,5 @@
 //
-//  CertificateKit.h
+//  CKCRLManager.h
 //
 //  MIT License
 //
@@ -24,22 +24,13 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "CKCertificate.h"
+#import "CKCRLResponse.h"
 
-//! Project version number for CertificateKit.
-FOUNDATION_EXPORT double CertificateKitVersionNumber;
+@interface CKCRLManager : NSObject
 
-//! Project version string for CertificateKit.
-FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
++ (CKCRLManager * _Nonnull) sharedManager;
+- (void) queryCertificate:(CKCertificate * _Nonnull)certificate issuer:(CKCertificate * _Nonnull)issuer response:(CKCRLResponse * _Nullable * _Nonnull)response error:(NSError * _Nullable * _Nonnull)error;
 
-// In this header, you should import all the public headers of your framework using statements like #import <CertificateKit/PublicHeader.h>
-#import <CertificateKit/CKCertificate.h>
-#import <CertificateKit/CKCertificatePublicKey.h>
-#import <CertificateKit/CKCertificateChain.h>
-#import <CertificateKit/CKCertificateChain+EnumValues.h>
-#import <CertificateKit/CKServerInfo.h>
-#import <CertificateKit/CKGetter.h>
-#import <CertificateKit/CKRevoked.h>
-#import <CertificateKit/CKOCSPResponse.h>
-#import <CertificateKit/CKCRLResponse.h>
-#import <CertificateKit/CKGetterOptions.h>
+@end

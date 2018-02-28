@@ -33,25 +33,42 @@
 @property (strong, nonatomic, nullable, readwrite) NSDate * revokedOn;
 @property (nonatomic, readwrite) CKRevokedUsing revokedUsing;
 @property (strong, nonatomic, nullable, readwrite) CKOCSPResponse * ocspResponse;
-//@property (strong, nonatomic, nullable, readwrite) CKCRLResponse * crlResponse;
+@property (strong, nonatomic, nullable, readwrite) CKCRLResponse * crlResponse;
 
 @end
 
 @implementation CKRevoked
 
 + (CKRevoked *) fromOCSPResponse:(CKOCSPResponse *)response {
+    return [CKRevoked fromOCSPResponse:response andCRLResponse:nil];
+}
+
++ (CKRevoked *) fromCRLResponse:(CKCRLResponse *)response {
+    return [CKRevoked fromOCSPResponse:nil andCRLResponse:response];
+}
+
++ (CKRevoked *) fromOCSPResponse:(CKOCSPResponse *)ocspResponse andCRLResponse:(CKCRLResponse *)crlResponse {
     CKRevoked * revoked = [CKRevoked new];
-    
-    revoked.revokedUsing |= CKRevokedUsingOCSP;
-    revoked.ocspResponse = response;
-    
-    if (response.status == CKOCSPResponseStatusRevoked) {
-        revoked.isRevoked = YES;
-        revoked.reasonString = response.reasonString;
-    } else {
-        revoked.isRevoked = NO;
+    if (ocspResponse != nil) {
+        revoked.revokedUsing |= CKRevokedUsingOCSP;
+        revoked.ocspResponse = ocspResponse;
+        
+        if (ocspResponse.status == CKOCSPResponseStatusRevoked) {
+            revoked.isRevoked = YES;
+            revoked.reasonString = ocspResponse.reasonString;
+        } else {
+            revoked.isRevoked = NO;
+        }
     }
-    
+    if (crlResponse != nil) {
+        revoked.revokedUsing |= CKRevokedUsingCRL;
+        revoked.crlResponse = crlResponse;
+        
+        if (crlResponse.status == CKCRLResponseStatusRevoked) {
+            revoked.revokedOn = crlResponse.revokedOn;
+            revoked.isRevoked = YES;
+        }
+    }
     return revoked;
 }
 

@@ -26,6 +26,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CKOCSPResponse.h"
+#import "CKCRLResponse.h"
 
 /**
  An object describing information about a certificates revocation status.
@@ -67,8 +68,10 @@ typedef NS_ENUM(NSUInteger, CKRevokedUsing) {
 /**
  The CRL response information, if CRL was used.
  */
-//@property (strong, nonatomic, nullable, readonly) CKCRLResponse * crlResponse;
+@property (strong, nonatomic, nullable, readonly) CKCRLResponse * crlResponse;
 
 + (CKRevoked * _Nonnull) fromOCSPResponse:(CKOCSPResponse * _Nonnull)response;
++ (CKRevoked * _Nonnull) fromCRLResponse:(CKCRLResponse * _Nonnull)response;
++ (CKRevoked * _Nonnull) fromOCSPResponse:(CKOCSPResponse * _Nullable)ocspResponse andCRLResponse:(CKCRLResponse * _Nullable)crlResponse;
 
 @end
