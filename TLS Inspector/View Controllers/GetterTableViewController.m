@@ -26,8 +26,6 @@
     UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:self];
     [uihelper applyStylesToNavigationBar:controller.navigationBar];
     [parent presentViewController:controller animated:YES completion:nil];
-    
-    (void)@[][666];
 }
 
 - (void) viewDidLoad {

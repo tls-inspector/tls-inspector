@@ -61,6 +61,10 @@ static CKCRLManager * _instance;
 }
 
 - (void) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKCRLResponse **)rtResponse error:(NSError **)rtError {
+    if (certificate.crlDistributionPoints <= 0) {
+        return;
+    }
+
     NSURL * crlURL = certificate.crlDistributionPoints[0];
     
     NSError * crlError;

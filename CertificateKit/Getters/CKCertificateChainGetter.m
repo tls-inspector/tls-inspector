@@ -152,40 +152,12 @@
         self.chain.intermediateCA = [certs objectAtIndex:1];
     }
     
-    CKOCSPResponse * ocspResponse;
-    CKCRLResponse * crlResponse;
-    NSError * ocspError;
-    NSError * crlError;
-    
-    // Check Server
-    if (self.options.checkOCSP) {
-        [[CKOCSPManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA response:&ocspResponse error:&ocspError];
-        if (ocspError != nil) {
-            PError(@"OCSP Error: %@", ocspError.description);
-        }
+    if (certs.count > 1) {
+        self.chain.server.revoked = [self getRevokedInformationForCertificate:certs[0] issuer:certs[1]];
     }
-    if (self.options.checkCRL) {
-        [[CKCRLManager sharedManager] queryCertificate:self.chain.server issuer:self.chain.intermediateCA response:&crlResponse error:&crlError];
-        if (crlError != nil) {
-            PError(@"CRL Error: %@", crlError.description);
-        }
+    if (certs.count > 2) {
+        self.chain.intermediateCA.revoked = [self getRevokedInformationForCertificate:certs[1] issuer:certs[2]];
     }
-    self.chain.server.revoked = [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
-    
-    // Check Intermediate
-    if (self.options.checkOCSP) {
-        [[CKOCSPManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&ocspResponse error:&ocspError];
-        if (ocspError != nil) {
-            PError(@"OCSP Error: %@", ocspError.description);
-        }
-    }
-    if (self.options.checkCRL) {
-        [[CKCRLManager sharedManager] queryCertificate:self.chain.intermediateCA issuer:self.chain.rootCA response:&crlResponse error:&crlError];
-        if (crlError != nil) {
-            PError(@"CRL Error: %@", crlError.description);
-        }
-    }
-    self.chain.intermediateCA.revoked = [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
 
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;
@@ -203,6 +175,27 @@
     PDebug(@"Finished getting certificate chain");
     [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
+}
+
+- (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {
+    CKOCSPResponse * ocspResponse;
+    CKCRLResponse * crlResponse;
+    NSError * ocspError;
+    NSError * crlError;
+    
+    if (self.options.checkOCSP) {
+        [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
+        if (ocspError != nil) {
+            PError(@"OCSP Error: %@", ocspError.description);
+        }
+    }
+    if (self.options.checkCRL) {
+        [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
+        if (crlError != nil) {
+            PError(@"CRL Error: %@", crlError.description);
+        }
+    }
+    return [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
 }
 
 // Apple does not provide (as far as I am aware) detailed information as to why a certificate chain

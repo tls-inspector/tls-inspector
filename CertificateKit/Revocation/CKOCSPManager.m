@@ -68,6 +68,9 @@ static CKOCSPManager * _instance;
 
 - (void)queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKOCSPResponse * __autoreleasing *)rtresponse error:(NSError **)rterror {
     NSURL * ocspURL = certificate.ocspURL;
+    if (ocspURL == nil) {
+        return;
+    }
     
     OCSP_CERTID * certID = OCSP_cert_to_id(NULL, certificate.X509Certificate, issuer.X509Certificate);
     PDebug(@"Querying OCSP for certificate: '%@'", certificate.subject.commonName);
