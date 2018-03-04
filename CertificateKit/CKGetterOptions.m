@@ -1,9 +1,9 @@
 //
-//  CKCertificateChainGetter.h
+//  CKGetterOptions.m
 //
 //  MIT License
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2018 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,11 +24,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CKGetterTask.h"
 #import "CKGetterOptions.h"
 
-@interface CKCertificateChainGetter : CKGetterTask
-
-@property (strong, nonatomic, nonnull) CKGetterOptions * options;
+@implementation CKGetterOptions
 
 @end

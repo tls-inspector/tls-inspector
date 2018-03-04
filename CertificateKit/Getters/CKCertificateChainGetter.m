@@ -27,6 +27,7 @@
 #import "CKCertificateChainGetter.h"
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
+#import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
@@ -55,6 +56,7 @@
 @implementation CKCertificateChainGetter
 
 - (void) performTaskForURL:(NSURL *)url {
+    PDebug(@"Getting certificate chain");
     queryURL = url;
     unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)url.host, port, &readStream, &writeStream);
@@ -90,6 +92,7 @@
 
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered: {
+            PError(@"NSStream error occured: %@", stream.streamError.description);
             [self.delegate getter:self failedTaskWithError:[stream streamError]];
             [inputStream close];
             [outputStream close];
@@ -148,6 +151,13 @@
         self.chain.rootCA = [certs lastObject];
         self.chain.intermediateCA = [certs objectAtIndex:1];
     }
+    
+    if (certs.count > 1) {
+        self.chain.server.revoked = [self getRevokedInformationForCertificate:certs[0] issuer:certs[1]];
+    }
+    if (certs.count > 2) {
+        self.chain.intermediateCA.revoked = [self getRevokedInformationForCertificate:certs[1] issuer:certs[2]];
+    }
 
     if (isTrustedChain) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;
@@ -160,26 +170,32 @@
     if (certs.count > 1) {
         self.chain.rootCA = [self.chain.certificates lastObject];
         self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
-
-        if (self.chain.server.crlDistributionPoints.count > 0) {
-            [self.chain.server.revoked
-             isCertificateRevoked:self.chain.server
-             intermediateCA:self.chain.intermediateCA
-             finished:^(NSError * _Nullable error) {
-                 if (!error) {
-                     if (self.chain.server.revoked.isRevoked) {
-                         self.chain.trusted = CKCertificateChainTrustStatusRevoked;
-                     }
-                 }
-                 [self.delegate getter:self finishedTaskWithResult:self.chain];
-                 self.finished = YES;
-             }];
-            return;
-        }
     }
 
+    PDebug(@"Finished getting certificate chain");
     [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
+}
+
+- (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {
+    CKOCSPResponse * ocspResponse;
+    CKCRLResponse * crlResponse;
+    NSError * ocspError;
+    NSError * crlError;
+    
+    if (self.options.checkOCSP) {
+        [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
+        if (ocspError != nil) {
+            PError(@"OCSP Error: %@", ocspError.description);
+        }
+    }
+    if (self.options.checkCRL) {
+        [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
+        if (crlError != nil) {
+            PError(@"CRL Error: %@", crlError.description);
+        }
+    }
+    return [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
 }
 
 // Apple does not provide (as far as I am aware) detailed information as to why a certificate chain
@@ -189,39 +205,50 @@
     // Expired/Not Valid
     for (CKCertificate * cert in self.chain.certificates) {
         if (!cert.validIssueDate) {
+            PWarn(@"Certificate: '%@' has an invalid date", cert.subject.commonName);
             self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
-            return;
-        }
-    }
-
-    // Revoked
-    for (CKCertificate * cert in self.chain.certificates) {
-        if (cert.revoked.isRevoked) {
-            self.chain.trusted = CKCertificateChainTrustStatusRevoked;
             return;
         }
     }
 
     // SHA-1 Leaf
     if ([self.chain.server.signatureAlgorithm hasPrefix:@"sha1"]) {
+        PWarn(@"Certificate: '%@' is using SHA-1", self.chain.server.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusSHA1Leaf;
         return;
     }
 
     // SHA-1 Intermediate
     if ([self.chain.intermediateCA.signatureAlgorithm hasPrefix:@"sha1"]) {
+        PWarn(@"Certificate: '%@' is using SHA-1", self.chain.intermediateCA.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusSHA1Intermediate;
         return;
     }
 
     // Self-Signed
     if (self.chain.certificates.count == 1) {
+        PWarn(@"Chain only contains a single certificate");
         self.chain.trusted = CKCertificateChainTrustStatusSelfSigned;
+        return;
+    }
+    
+    // Revoked Leaf
+    if (self.chain.server.revoked.isRevoked) {
+        PWarn(@"Certificate: '%@' is revoked", self.chain.server.subject.commonName);
+        self.chain.trusted = CKCertificateChainTrustStatusRevokedLeaf;
+        return;
+    }
+    
+    // Revoked Intermedia
+    if (self.chain.intermediateCA.revoked.isRevoked) {
+        PWarn(@"Certificate: '%@' is revoked", self.chain.intermediateCA.subject.commonName);
+        self.chain.trusted = CKCertificateChainTrustStatusRevokedIntermediate;
         return;
     }
 
     // Wrong Host
     if (self.chain.server.subjectAlternativeNames.count == 0) {
+        PWarn(@"Certificate: '%@' has no subject alternate names", self.chain.server.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
@@ -265,11 +292,13 @@
         }
     }
     if (!match) {
+        PWarn(@"Certificate: '%@' has no subject alternate names that match: '%@'", self.chain.server.subject.commonName, self.chain.domain);
         self.chain.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
 
     // Fallback (We don't know)
+    PWarn(@"Unable to determine why certificate: '%@' is untrusted", self.chain.server.subject.commonName);
     self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
     return;
 }

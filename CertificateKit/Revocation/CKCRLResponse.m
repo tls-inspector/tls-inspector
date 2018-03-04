@@ -1,9 +1,9 @@
 //
-//  CKCRLManager.h
+//  CKCRLResponse.m
 //
 //  MIT License
 //
-//  Copyright (c) 2017 Ian Spence
+//  Copyright (c) 2018 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,45 +24,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "CKCertificate.h"
+#import "CKCRLResponse.h"
 
-/**
- CKCRLManager is an interface for managing and querying certificate revocation lists
- */
-@interface CKCRLManager : NSObject
-
-/**
- Get or create the CRL Manager singleton
-
- @return A CKCRLManager singleton instance
- */
-+ (CKCRLManager * _Nonnull) sharedInstance;
-
-/**
- Get or create the CRL Manager singleton
-
- @return A CKCRLManager singleton instance
- */
-- (id _Nonnull) init;
-
-/**
- Load the CRL cache from disk. Due to the potential size of the cache, ensure you unload the cache
- when you're finished using it.
- */
-- (void) loadCRLCache;
-
-/**
- Flush the CRL cache to disk, and unload it from memory.
- */
-- (void) unloadCRLCache;
-
-/**
- Get the CRL data for the given CRL URL
-
- @param crl The URL of the CRL
- @param finished Called with the data of the CRL or an error
- */
-- (void) getCRL:(NSURL * _Nonnull)crl finished:(void (^ _Nonnull)(NSData * _Nullable data, NSError * _Nullable error))finished;
+@implementation CKCRLResponse
 
 @end
+

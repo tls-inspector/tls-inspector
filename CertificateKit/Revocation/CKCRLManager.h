@@ -1,9 +1,9 @@
 //
-//  CKCertificateChainGetter.h
+//  CKCRLManager.h
 //
 //  MIT License
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2017 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,11 +24,13 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CKGetterTask.h"
-#import "CKGetterOptions.h"
+#import <Foundation/Foundation.h>
+#import "CKCertificate.h"
+#import "CKCRLResponse.h"
 
-@interface CKCertificateChainGetter : CKGetterTask
+@interface CKCRLManager : NSObject
 
-@property (strong, nonatomic, nonnull) CKGetterOptions * options;
++ (CKCRLManager * _Nonnull) sharedManager;
+- (void) queryCertificate:(CKCertificate * _Nonnull)certificate issuer:(CKCertificate * _Nonnull)issuer response:(CKCRLResponse * _Nullable * _Nonnull)response error:(NSError * _Nullable * _Nonnull)error;
 
 @end

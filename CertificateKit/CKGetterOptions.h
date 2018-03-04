@@ -1,9 +1,9 @@
 //
-//  CKCertificateChainGetter.h
+//  CKGetterOptions.h
 //
 //  MIT License
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2018 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,11 +24,26 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CKGetterTask.h"
-#import "CKGetterOptions.h"
+#import <Foundation/Foundation.h>
 
-@interface CKCertificateChainGetter : CKGetterTask
+/**
+ Describes options for the CKGetter class
+ */
+@interface CKGetterOptions : NSObject
 
-@property (strong, nonatomic, nonnull) CKGetterOptions * options;
+/**
+ Should HTTP server information be collected for the domain
+ */
+@property (nonatomic) BOOL queryServerInfo;
+
+/**
+ Should the OCSP responder be checked for certificates in the chain
+ */
+@property (nonatomic) BOOL checkOCSP;
+
+/**
+ Should any CRLs be downloaded and checked
+ */
+@property (nonatomic) BOOL checkCRL;
 
 @end

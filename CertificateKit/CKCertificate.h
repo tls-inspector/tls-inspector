@@ -25,11 +25,10 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificateRevoked.h"
 #import "CKCertificatePublicKey.h"
 #import "CKNameObject.h"
+#import "CKRevoked.h"
 
-@class CKCertificateRevoked;
 @class CKCertificatePublicKey;
 
 /**
@@ -45,11 +44,6 @@
  *  @return A CKCertificate instance
  */
 + (CKCertificate * _Nullable) fromX509:(void * _Nonnull)cert;
-
-/**
- *  Array of URLs representing distribution points for CRLs
- */
-typedef NSArray<NSURL *> distributionPoints;
 
 /**
  *  Finger (thumb) print types that CKCertificate can export
@@ -82,11 +76,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.
  */
 @property (nonatomic, readonly) BOOL extendedValidation;
-
-/**
- *  Certificate revocation information
- */
-@property (strong, nonatomic, nullable) CKCertificateRevoked * revoked;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
@@ -160,6 +149,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nonnull, readonly) CKNameObject * issuer;
 
 /**
+ *  Information about the certificates revocation status.
+ */
+@property (strong, nonatomic, nonnull) CKRevoked * revoked;
+
+/**
  *  Is this a certificate authority
  */
 @property (nonatomic, readonly) BOOL isCA;
@@ -180,9 +174,14 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSString * extendedValidationAuthority;
 
 /**
- *  Get an array of CRL distributionPoints (an array of URLs)
+ *  Returns the URL for which OCSP queries can be performed for this certificate.
  */
-@property (strong, nonatomic, nullable, readonly) distributionPoints * crlDistributionPoints;
+@property (strong, nonatomic, nullable, readonly) NSURL * ocspURL;
+
+/**
+ *  Returns an array of URLs that contain certificate revocation lists.
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<NSURL *> * crlDistributionPoints;
 
 /**
  *  Get an array of key usage identifiers

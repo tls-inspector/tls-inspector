@@ -28,7 +28,8 @@
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
         case CKCertificateChainTrustStatusUntrusted:
-        case CKCertificateChainTrustStatusRevoked:
+        case CKCertificateChainTrustStatusRevokedLeaf:
+        case CKCertificateChainTrustStatusRevokedIntermediate:
         case CKCertificateChainTrustStatusSelfSigned:
         case CKCertificateChainTrustStatusInvalidDate:
         case CKCertificateChainTrustStatusWrongHost:
@@ -170,11 +171,16 @@
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
         if (cert.revoked.isRevoked) {
-            cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[cert.summary]];
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Revoked)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
+        } else if (!cert.validIssueDate) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[name.commonName]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
             CKNameObject * name = cert.subject;
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", name.commonName, name.organizationName, name.countryName];
+            cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[name.commonName, name.organizationName, name.countryName]];
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
             cell.textLabel.text = cert.summary;
@@ -260,7 +266,11 @@
             title = l(@"Untrusted Chain");
             body = l(@"chainErr::self_signed");
             break;
-        case CKCertificateChainTrustStatusRevoked:
+        case CKCertificateChainTrustStatusRevokedLeaf:
+            title = l(@"Untrusted Chain");
+            body = l(@"chainErr::revoked");
+            break;
+        case CKCertificateChainTrustStatusRevokedIntermediate:
             title = l(@"Untrusted Chain");
             body = l(@"chainErr::revoked");
             break;

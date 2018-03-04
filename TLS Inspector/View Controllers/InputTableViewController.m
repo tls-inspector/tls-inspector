@@ -72,8 +72,7 @@
     [self setHoldFieldPlaceholder];
     self.tipBodyLabel.text = [lang key:tip];
 
-    BOOL hideTips = [AppDefaults boolForKey:HIDE_TIPS];
-    self.tipIconLabel.hidden = self.tipTitleLabel.hidden = self.tipBodyLabel.hidden = hideTips;
+    self.tipIconLabel.hidden = self.tipTitleLabel.hidden = self.tipBodyLabel.hidden = !UserOptions.currentOptions.showTips;
 }
 
 - (void) viewDidAppear:(BOOL)animated {

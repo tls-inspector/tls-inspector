@@ -1,9 +1,9 @@
 //
-//  CKCertificateChainGetter.h
+//  CKLogging.h
 //
 //  MIT License
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2018 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,11 +24,26 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CKGetterTask.h"
-#import "CKGetterOptions.h"
+#import <UIKit/UIKit.h>
 
-@interface CKCertificateChainGetter : CKGetterTask
+@interface CKLogging : NSObject
 
-@property (strong, nonatomic, nonnull) CKGetterOptions * options;
+typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
+    CKLoggingLevelDebug = 0,
+    CKLoggingLevelInfo,
+    CKLoggingLevelWarning,
+    CKLoggingLevelError,
+};
+
++ (CKLogging *) sharedInstance;
+- (id) initWithLogFile:(NSString *)file;
+
+@property (nonatomic) CKLoggingLevel level;
+@property (strong, nonatomic) NSString * file;
+
+- (void) writeDebug:(NSString *)message;
+- (void) writeInfo:(NSString *)message;
+- (void) writeWarn:(NSString *)message;
+- (void) writeError:(NSString *)message;
 
 @end

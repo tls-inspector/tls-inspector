@@ -46,23 +46,30 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     CKGetterTaskTagServerInfo,
 };
 
-
-+ (CKGetter * _Nonnull) newGetter {
-    return [CKGetter new];
++ (CKGetter *) getterWithOptions:(CKGetterOptions *)options {
+    CKGetter * getter = [CKGetter new];
+    getter.options = options;
+    return getter;
 }
 
 - (void) getInfoForURL:(NSURL *)URL; {
+    PDebug(@"Starting getter for: %@", URL.absoluteString);
+    
     self.chainGetter = [CKCertificateChainGetter new];
     self.chainGetter.delegate = self;
     self.chainGetter.tag = CKGetterTaskTagChain;
+    self.chainGetter.options = self.options;
+
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
     self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
 
-    self.tasks = @[
-                   self.chainGetter,
-                   self.serverInfoGetter
-                   ];
+    NSMutableArray<CKGetterTask *> * tasks = [NSMutableArray arrayWithCapacity:2];
+    [tasks addObject:self.chainGetter];
+    if (self.options.queryServerInfo) {
+        [tasks addObject:self.serverInfoGetter];
+    }
+    self.tasks = tasks;
 
     for (CKGetterTask * task in self.tasks) {
         [NSThread detachNewThreadSelector:@selector(performTaskForURL:) toTarget:task withObject:URL];
@@ -122,6 +129,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         }
     }
     if (allFinished) {
+        PDebug(@"Getter finished all tasks");
         if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
             [self.delegate finishedGetter:self];
         }

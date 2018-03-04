@@ -59,11 +59,11 @@ static id _instance;
 }
 
 - (BOOL) saveRecentDomains {
-    return [AppDefaults boolForKey:SAVE_RECENT_DOMAINS];
+    return UserOptions.currentOptions.rememberRecentLookups;
 }
 
 - (void) setSaveRecentDomains:(BOOL)newValue {
-    [AppDefaults setBool:newValue forKey:SAVE_RECENT_DOMAINS];
+    UserOptions.currentOptions.rememberRecentLookups = newValue;
     if (!newValue) {
         [self removeAllRecentDomains];
     }

@@ -40,26 +40,21 @@
 @property (nonatomic) X509 * certificate;
 @property (strong, nonatomic, readwrite) NSString * summary;
 @property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
-@property (strong, nonatomic) distributionPoints * crlCache;
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * issuer;
+@property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
+@property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
 
 @end
 
 @implementation CKCertificate
 
-- (void) openSSLError {
-    const char * file;
-    int line;
-    ERR_peek_last_error_line(&file, &line);
-    NSLog(@"OpenSSL error in file: %s:%i", file, line);
-}
+INSERT_OPENSSL_ERROR_METHOD
 
 + (CKCertificate *) fromX509:(void *)cert {
     CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;
-    xcert.revoked = [CKCertificateRevoked new];
     xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
     xcert.subject = [CKNameObject fromSubject:X509_get_subject_name(cert)];
     xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
@@ -81,6 +76,44 @@
         xcert.summary = xcert.subject.localityName;
     } else {
         xcert.summary = @"Untitled Certificate";
+    }
+    
+    AUTHORITY_INFO_ACCESS * info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
+    int len = sk_ACCESS_DESCRIPTION_num(info);
+    for (int i = 0; i < len; i++) {
+        // Look for the OCSP entry
+        ACCESS_DESCRIPTION * description = sk_ACCESS_DESCRIPTION_value(info, i);
+        if (OBJ_obj2nid(description->method) == NID_ad_OCSP) {
+            if (description->location->type == GEN_URI) {
+                char * ocspurlchar = i2s_ASN1_IA5STRING(NULL, description->location->d.ia5);
+                NSString * ocspurlString = [[NSString alloc] initWithUTF8String:ocspurlchar];
+                xcert.ocspURL = [NSURL URLWithString:ocspurlString];
+            }
+        }
+    }
+    
+    CRL_DIST_POINTS * points = X509_get_ext_d2i(cert, NID_crl_distribution_points, NULL, NULL);
+    int numberOfPoints = sk_DIST_POINT_num(points);
+    if (numberOfPoints < 0) {
+        xcert.crlDistributionPoints = @[];
+    } else {
+        DIST_POINT * point;
+        GENERAL_NAMES * fullNames;
+        GENERAL_NAME * fullName;
+        NSMutableArray<NSURL *> * urls = [NSMutableArray new];
+        for (int i = 0; i < numberOfPoints; i ++) {
+            point = sk_DIST_POINT_value(points, i);
+            fullNames = point->distpoint->name.fullname;
+            fullName = sk_GENERAL_NAME_value(fullNames, 0);
+            const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
+            NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
+            if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
+                [urls addObject:crlURL];
+            } else {
+                PDebug(@"Unsupported CRL distribution point: %s", url);
+            }
+        }
+        xcert.crlDistributionPoints = urls;
     }
 
     return xcert;
@@ -124,7 +157,8 @@
 
     unsigned int fingerprint_size = sizeof(fingerprint);
     if (X509_digest(self.certificate, digest, fingerprint, &fingerprint_size) < 0) {
-        NSLog(@"Unable to generate certificate fingerprint");
+        [self openSSLError];
+        PError(@"Unable to generate certificate fingerprint");
         return @"";
     }
 
@@ -304,38 +338,6 @@
     } else {
         return NO;
     }
-}
-
-- (distributionPoints *) crlDistributionPoints {
-    if (self.crlCache) {
-        return self.crlCache;
-    }
-
-    CRL_DIST_POINTS * points = X509_get_ext_d2i(self.certificate, NID_crl_distribution_points, NULL, NULL);
-    int numberOfPoints = sk_DIST_POINT_num(points);
-    if (numberOfPoints < 0) {
-        return @[];
-    }
-
-    DIST_POINT * point;
-    GENERAL_NAMES * fullNames;
-    GENERAL_NAME * fullName;
-    NSMutableArray<NSURL *> * urls = [NSMutableArray new];
-    for (int i = 0; i < numberOfPoints; i ++) {
-        point = sk_DIST_POINT_value(points, i);
-        fullNames = point->distpoint->name.fullname;
-        fullName = sk_GENERAL_NAME_value(fullNames, 0);
-        const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
-        NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
-        if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
-            [urls addObject:crlURL];
-        } else {
-            NSLog(@"Unsupported CRL distribution point: %s", url);
-        }
-    }
-
-    self.crlCache = urls;
-    return urls;
 }
 
 - (BOOL) extendedValidation {

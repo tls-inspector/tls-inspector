@@ -7,11 +7,9 @@
 #import "MBProgressHUD.h"
 #import "UIHelper.h"
 #import "Storage.h"
+#import "UserOptions.h"
 
 #define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
-#define SAVE_RECENT_DOMAINS @"SAVE_RECENT_DOMAINS"
-#define USE_LIGHT_THEME @"USE_LIGHT_THEME"
-#define HIDE_TIPS @"HIDE_TIPS"
 #define RELOAD_CERT_NOTIFICATION @"ReloadCertDetails"
 
 #if DEBUG
