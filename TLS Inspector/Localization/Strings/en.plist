@@ -624,6 +624,8 @@
 	<string>Light</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
+	<key>Locally Trusted Chain</key>
+	<string>Locally Trusted Chain</string>
 	<key>More</key>
 	<string>More</string>
 	<key>More Info</key>
