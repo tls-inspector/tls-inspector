@@ -61,7 +61,7 @@ static CKCRLManager * _instance;
 }
 
 - (void) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKCRLResponse **)rtResponse error:(NSError **)rtError {
-    if (certificate.crlDistributionPoints <= 0) {
+    if (certificate.crlDistributionPoints.count <= 0) {
         return;
     }
 
