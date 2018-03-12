@@ -135,7 +135,7 @@
      confirmActionIsDestructive:NO
      dismissed:^(BOOL confirmed) {
          if (confirmed) {
-             UserOptions.currentOptions.useLightTheme = sender.selectedSegmentIndex == 0;
+             UserOptions.currentOptions.useLightTheme = sender.selectedSegmentIndex == 1;
              [appState setAppearance];
              UIAlertController * alert = [UIAlertController alertControllerWithTitle:l(@"Restart TLS Inspector") message:l(@"You must restart TLS Inspector for theme changes to take affect.") preferredStyle:UIAlertControllerStyleAlert];
              [self presentViewController:alert animated:YES completion:nil];
