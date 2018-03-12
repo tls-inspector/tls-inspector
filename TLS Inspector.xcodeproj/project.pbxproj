@@ -79,6 +79,8 @@
 		3CC652401DB0711F001FB7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6523E1DB0710C001FB7E1 /* Main.storyboard */; };
 		3CC652431DB07166001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
 		3CC652441DB071DF001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
+		3CDEE27C2056129B007F72B0 /* ChainExplainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */; };
+		3CDEE2802056236F007F72B0 /* ChainExplainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */; };
 		3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE03EB31D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
 		3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */; };
@@ -258,6 +260,8 @@
 		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lang.m; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3CC652421DB07166001FB7E1 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		3CDEE27A2056129B007F72B0 /* ChainExplainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainExplainTableViewController.h; sourceTree = "<group>"; };
+		3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainExplainTableViewController.m; sourceTree = "<group>"; };
 		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorListTableViewController.h; sourceTree = "<group>"; };
 		3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorListTableViewController.m; sourceTree = "<group>"; };
 		3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateReminderManager.h; sourceTree = "<group>"; };
@@ -611,6 +615,8 @@
 				A15622901EEA065600D61FB5 /* InitialNavigationController.m */,
 				3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */,
 				3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */,
+				3CDEE27A2056129B007F72B0 /* ChainExplainTableViewController.h */,
+				3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */,
 				3CFAE6F01CA8463900CD946B /* InputTableViewController.h */,
 				3CFAE6F11CA8463900CD946B /* InputTableViewController.m */,
 				3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */,
@@ -943,6 +949,7 @@
 				3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */,
 				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
 				3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */,
+				3CDEE2802056236F007F72B0 /* ChainExplainTableViewController.m in Sources */,
 				3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */,
 				3C5096A21E7CCA7C00AEAAB2 /* AppLinks.m in Sources */,
 				3CFF7E792009962F00478E0A /* CertificateTableRowItem.m in Sources */,
@@ -1018,6 +1025,7 @@
 				3CFAE6DB1CA8440400CD946B /* main.m in Sources */,
 				3C2A7A651F28589000AA12B4 /* UIImage+FontAwesome.m in Sources */,
 				3CFF7E762009907200478E0A /* CertificateTableRowSection.m in Sources */,
+				3CDEE27C2056129B007F72B0 /* ChainExplainTableViewController.m in Sources */,
 				3C04EE5F1CB4A23900F56B68 /* UIHelper.m in Sources */,
 				3C65C2D81E7482F300D88074 /* DNSResolver.m in Sources */,
 				3C2B8B881F69877800A54769 /* IconTableViewCell.m in Sources */,

@@ -3,6 +3,7 @@
 #import "NSString+FontAwesome.h"
 #import "IconTableViewCell.h"
 #import "DNSResolver.h"
+#import "ChainExplainTableViewController.h"
 @import SafariServices;
 
 @interface CertificateListTableViewController ()
@@ -25,6 +26,13 @@
         case CKCertificateChainTrustStatusTrusted:
             self.headerViewLabel.text = l(@"Trusted Chain");
             self.headerView.backgroundColor = uihelper.greenColor;
+            self.headerViewLabel.textColor = [UIColor whiteColor];
+            self.headerButton.tintColor = [UIColor whiteColor];
+            break;
+        case CKCertificateChainTrustStatusLocallyTrusted:
+            self.headerViewLabel.text = l(@"Locally Trusted Chain");
+            self.headerView.backgroundColor = uihelper.altGreenColor;
+            self.headerViewLabel.textColor = [UIColor whiteColor];
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
         case CKCertificateChainTrustStatusUntrusted:
@@ -37,11 +45,11 @@
         case CKCertificateChainTrustStatusSHA1Intermediate:
             self.headerViewLabel.text = l(@"Untrusted Chain");
             self.headerView.backgroundColor = uihelper.redColor;
+            self.headerViewLabel.textColor = [UIColor whiteColor];
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
     }
 
-    self.headerViewLabel.textColor = [UIColor whiteColor];
     self.headerButton.hidden = NO;
 
     self.tableView.estimatedRowHeight = 85.0f;
@@ -178,6 +186,10 @@
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[name.commonName]];
             cell.textLabel.textColor = uihelper.redColor;
+        } else if ([cert.signatureAlgorithm hasPrefix:@"sha1"] && !cert.isRootCA) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Insecure)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[name.commonName, name.organizationName, name.countryName]];
@@ -251,53 +263,7 @@
 }
 
 - (IBAction) headerButton:(id)sender {
-    NSString * title, * body;
-
-    switch (currentChain.trusted) {
-        case CKCertificateChainTrustStatusTrusted:
-            title = l(@"Trusted Chain");
-            body = l(@"trusted_chain_description");
-            break;
-        case CKCertificateChainTrustStatusUntrusted:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::untrusted");
-            break;
-        case CKCertificateChainTrustStatusSelfSigned:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::self_signed");
-            break;
-        case CKCertificateChainTrustStatusRevokedLeaf:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::revoked");
-            break;
-        case CKCertificateChainTrustStatusRevokedIntermediate:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::revoked");
-            break;
-        case CKCertificateChainTrustStatusInvalidDate:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::invalid_date");
-            break;
-        case CKCertificateChainTrustStatusSHA1Intermediate:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::sha1_int");
-            break;
-        case CKCertificateChainTrustStatusSHA1Leaf:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::sha1_leaf");
-            break;
-        case CKCertificateChainTrustStatusWrongHost:
-            title = l(@"Untrusted Chain");
-            body = l(@"chainErr::wrong_host");
-            break;
-    }
-
-    [uihelper
-     presentAlertInViewController:self
-     title:title
-     body:body
-     dismissButtonTitle:l(@"Dismiss")
-     dismissed:nil];
+    [self performSegueWithIdentifier:@"Explain" sender:nil];
 }
 
 - (IBAction) closeButton:(UIBarButtonItem *)sender {
@@ -305,4 +271,11 @@
         [appState.getterViewController dismissViewControllerAnimated:YES completion:nil];
     }];
 }
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Explain"]) {
+        [(ChainExplainTableViewController *)segue.destinationViewController explainTrustStatus:currentChain.trusted];
+    }
+}
+
 @end

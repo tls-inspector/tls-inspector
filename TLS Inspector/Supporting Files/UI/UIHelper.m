@@ -7,6 +7,7 @@
 }
 
 @property (strong, nonatomic, readwrite) UIColor * greenColor;
+@property (strong, nonatomic, readwrite) UIColor * altGreenColor;
 @property (strong, nonatomic, readwrite) UIColor * redColor;
 @property (strong, nonatomic, readwrite) UIColor * blueColor;
 
@@ -20,6 +21,7 @@ static id _instance;
     if (_instance == nil) {
         UIHelper * helper = [super init];
         helper.greenColor = [UIColor colorWithRed:0.298 green:0.686 blue:0.314 alpha:1];
+        helper.altGreenColor = [UIColor colorWithRed:0.55 green:0.76 blue:0.29 alpha:1.0];
         helper.redColor = [UIColor colorWithRed:0.957 green:0.263 blue:0.212 alpha:1];
         helper.blueColor = [UIColor colorWithRed:0.114 green:0.631 blue:0.949 alpha:1];
         _instance = helper;

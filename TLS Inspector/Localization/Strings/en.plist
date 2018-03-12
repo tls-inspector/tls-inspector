@@ -596,10 +596,6 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
-	<key>Insecure Superfish (Lenovo) certificate.</key>
-	<string>Insecure Superfish (Lenovo) certificate.</string>
-	<key>Insecure eDellRoot certificate.</key>
-	<string>Insecure eDellRoot certificate.</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
 	<key>Internal error.</key>
@@ -608,6 +604,8 @@
 	<string>Invalid Date</string>
 	<key>Invalid host</key>
 	<string>Invalid host</string>
+	<key>Is the connection to this site secure?</key>
+	<string>Is the connection to this site secure?</string>
 	<key>Issuer</key>
 	<string>Issuer</string>
 	<key>Key</key>
@@ -628,6 +626,8 @@
 	<string>Loading...</string>
 	<key>More</key>
 	<string>More</string>
+	<key>More Info</key>
+	<string>More Info</string>
 	<key>Negotiated Cipher Suite</key>
 	<string>Negotiated Cipher Suite</string>
 	<key>Negotiated Version</key>
@@ -758,6 +758,8 @@
 	<string>View all alternate names</string>
 	<key>View on SSL Labs</key>
 	<string>View on SSL Labs</string>
+	<key>What does this mean?</key>
+	<string>What does this mean?</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>What kind of feedback would you like to submit?</string>
 	<key>Yes</key>
@@ -770,19 +772,23 @@
 	<string>You must restart the app for the change to take affect</string>
 	<key>certificate_status_footer</key>
 	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
-	<key>chainErr::invalid_date</key>
-	<string>The server certificate for this site is not trusted becuase one or more certificates in the chain is expired or not yet valid.</string>
-	<key>chainErr::revoked</key>
+	<key>explanation::invalid_date</key>
+	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
+	<key>explanation::local_trust</key>
+	<string>The server certificate for this site is trusted because it, or the issuing certificate, has been locally installed and trusted on your device.</string>
+	<key>explanation::revoked</key>
 	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
-	<key>chainErr::self_signed</key>
+	<key>explanation::self_signed</key>
 	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
-	<key>chainErr::sha1_int</key>
+	<key>explanation::sha1_int</key>
 	<string>The intermediate certificate for this site is signed using SHA-1, which is no longer considered secure.</string>
-	<key>chainErr::sha1_leaf</key>
+	<key>explanation::sha1_leaf</key>
 	<string>The server certificate for this site is signed using SHA-1, which is no longer considered secure.</string>
-	<key>chainErr::untrusted</key>
+	<key>explanation::trust</key>
+	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
+	<key>explanation::untrusted</key>
 	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
-	<key>chainErr::wrong_host</key>
+	<key>explanation::wrong_host</key>
 	<string>The server certificate is for a different host than the one connected to.</string>
 	<key>keyUsage::OCSPSigning</key>
 	<string>OCSP Signing</string>
@@ -818,6 +824,42 @@
 	<string>Time Stamping</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
+	<key>secure::invalid_date</key>
+	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator.
+
+Exercise caution if continuing to this website.</string>
+	<key>secure::local_trust</key>
+	<string>Yes. your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
+
+If you or the administrator of this device didn&apos;t install this certificate then you should not continue to this site.</string>
+	<key>secure::revoked</key>
+	<string>No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.
+
+Exercise caution if continuing to this website.</string>
+	<key>secure::self_signed</key>
+	<string>No. The certificate for this site was not issued by any known certificate authority and therefor your device has no way of checking if the certificate is actually for the website and not an attacker.
+
+Exercise extreme caution if continuing to this website.</string>
+	<key>secure::sha1_int</key>
+	<string>No. While currently unlikely, it may be possible for an attacker to craft a fake certificate that takes advantage of the weakness of SHA-1.
+
+Exercise caution if continuing to this website.</string>
+	<key>secure::sha1_leaf</key>
+	<string>No. While currently unlikely, it may be possible for an attacker to craft a fake certificate that takes advantage of the weakness of SHA-1.
+
+Exercise caution if continuing to this website.</string>
+	<key>secure::trust</key>
+	<string>Yes. your device has determined that the connection to this site is secure.</string>
+	<key>secure::untrusted</key>
+	<string>No. Your device was unable to check if the certificate presented by the website actually belongs to the website, and not somebody else.
+
+Exercise extreme caution if continuing to this website.</string>
+	<key>secure::wrong_host</key>
+	<string>No. Because the certificate presented by the server was for another site there is no way to be sure that this certificate is not dangerous.
+
+It&apos;s likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.
+
+Exercise caution if continuing to this website.</string>
 	<key>tlstip1</key>
 	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tlstip2</key>
@@ -832,14 +874,14 @@
 	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
 	<key>tlstip7</key>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
-	<key>trusted_chain_description</key>
-	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
 	<string>{0}, {1} bits</string>
 	<key>{commonName} (Expired)</key>
 	<string>{0} (Expired)</string>
+	<key>{commonName} (Insecure)</key>
+	<string>{0} (Insecure)</string>
 	<key>{commonName} (Revoked)</key>
 	<string>{0} (Revoked)</string>
 	<key>{commonName} ({orgName} {countryName})</key>
