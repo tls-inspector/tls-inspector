@@ -139,17 +139,28 @@
 
     [inputStream close];
     [outputStream close];
-
-    BOOL isTrustedChain = trustStatus == kSecTrustResultUnspecified;
+    
+    PDebug(@"Domain: '%@' trust result: '%@' (%d)", queryURL, [self trustResultToString:trustStatus], trustStatus);
 
     self.chain = [CKCertificateChain new];
     self.chain.certificates = certs;
 
     self.chain.domain = queryURL.host;
+    
+    if (certs.count == 0) {
+        PError(@"No certificates presented by server");
+        [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"CKCertificate" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"No certificates presented by server."}]];
+        return;
+    }
+    
     self.chain.server = certs[0];
-    if (certs.count > 1) {
+    if (certs.count > 2) {
         self.chain.rootCA = [certs lastObject];
+        self.chain.rootCA.isRootCA = YES;
         self.chain.intermediateCA = [certs objectAtIndex:1];
+    } else if (certs.count == 2) {
+        self.chain.rootCA = [certs lastObject];
+        self.chain.rootCA.isRootCA = YES;
     }
     
     if (certs.count > 1) {
@@ -158,9 +169,11 @@
     if (certs.count > 2) {
         self.chain.intermediateCA.revoked = [self getRevokedInformationForCertificate:certs[1] issuer:certs[2]];
     }
-
-    if (isTrustedChain) {
+    
+    if (trustStatus == kSecTrustResultUnspecified) {
         self.chain.trusted = CKCertificateChainTrustStatusTrusted;
+    } else if (trustStatus == kSecTrustResultProceed) {
+        self.chain.trusted = CKCertificateChainTrustStatusLocallyTrusted;
     } else {
         [self determineTrust];
     }
@@ -301,6 +314,40 @@
     PWarn(@"Unable to determine why certificate: '%@' is untrusted", self.chain.server.subject.commonName);
     self.chain.trusted = CKCertificateChainTrustStatusUntrusted;
     return;
+}
+
+- (NSString *) trustResultToString:(SecTrustResultType)result {
+    switch (result) {
+        case kSecTrustResultInvalid:
+            return @"Invalid";
+            break;
+        case kSecTrustResultProceed:
+            return @"Proceed";
+            break;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        case kSecTrustResultConfirm:
+            return @"Confirm";
+            break;
+#pragma clang diagnostic pop
+        case kSecTrustResultDeny:
+            return @"Deny";
+            break;
+        case kSecTrustResultUnspecified:
+            return @"Unspecified";
+            break;
+        case kSecTrustResultRecoverableTrustFailure:
+            return @"Recoverable Trust Failure";
+            break;
+        case kSecTrustResultFatalTrustFailure:
+            return @"Fatal Trust Failure";
+            break;
+        case kSecTrustResultOtherError:
+            return @"Other Error";
+            break;
+    }
+    
+    return @"Unknown";
 }
 
 @end
