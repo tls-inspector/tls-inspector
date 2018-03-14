@@ -1,4 +1,5 @@
 #import "UserOptions.h"
+@import CertificateKit;
 
 @interface UserOptions ()
 
@@ -82,6 +83,16 @@ static UserOptions * _instance;
 
 - (void) setCheckCRL:(BOOL)checkCRL {
     [AppDefaults setBool:checkCRL forKey:KEY_CHECK_CRL];
+}
+
+- (void) setVerboseLogging:(BOOL)verboseLogging {
+    _verboseLogging = verboseLogging;
+
+    if (verboseLogging) {
+        [CertificateKit setLoggingLevel:CKLoggingLevelDebug];
+    } else {
+        [CertificateKit setLoggingLevel:CKLoggingLevelInfo];
+    }
 }
 
 @end

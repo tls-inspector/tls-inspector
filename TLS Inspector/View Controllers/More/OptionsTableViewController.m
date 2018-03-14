@@ -1,7 +1,9 @@
 #import "OptionsTableViewController.h"
 #import "RecentDomains.h"
+#import "IconTableViewCell.h"
+@import MessageUI;
 
-@interface OptionsTableViewController ()
+@interface OptionsTableViewController () <MFMailComposeViewControllerDelegate>
 
 @end
 
@@ -18,13 +20,15 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 3;
     } else if (section == 1) {
+        return 2;
+    } else if (section == 2) {
         return 2;
     }
     
@@ -87,6 +91,21 @@
             [toggle addTarget:self action:@selector(crlSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         }
+    }  else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"Enable Debug Logging");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:UserOptions.currentOptions.verboseLogging];
+            [toggle addTarget:self action:@selector(verboseLoggingSwitch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 1) {
+            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FABug color:uihelper.redColor title:l(@"Submit Logs")];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
+        }
     }
     return nil;
 }
@@ -107,11 +126,17 @@
     UserOptions.currentOptions.checkCRL = sender.isOn;
 }
 
+- (void) verboseLoggingSwitch:(UISwitch *)sender {
+    UserOptions.currentOptions.verboseLogging = sender.isOn;
+}
+
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return [lang key:@"General"];
     } else if (section == 1) {
         return [lang key:@"Certificate Status"];
+    } else if (section == 2) {
+        return [lang key:@"Logging"];
     }
     
     return nil;
@@ -120,9 +145,17 @@
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 1) {
         return [lang key:@"certificate_status_footer"];
+    } else if (section == 2) {
+        return [lang key:@"verbose_logging_footer"];
     }
     
     return nil;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row == 1) {
+        [self sendDebugLogs];
+    }
 }
 
 - (void) themeSwitch:(UISegmentedControl *)sender {
@@ -143,6 +176,34 @@
              [sender setSelectedSegmentIndex:sender.selectedSegmentIndex == 0 ? 1 : 0];
          }
      }];
+}
+
+- (void) sendDebugLogs {
+    MFMailComposeViewController * mailController = [MFMailComposeViewController new];
+    mailController.mailComposeDelegate = self;
+
+    if (!mailController) {
+        return;
+    }
+
+    [mailController setSubject:@"TLS Inspector Debug Logs"];
+    [mailController setToRecipients:@[@"'TLS Inspector Project Manager' <hello@tlsinspector.com>"]];
+    [mailController setMessageBody:@"<p><br/><br/></p><hr/><p><small>Please do not remove the following attachments:</small></p>" isHTML:YES];
+
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString * documentsDirectory = [paths objectAtIndex:0];
+    NSString * cklogPath = [documentsDirectory stringByAppendingPathComponent:@"CertificateKit.log"];
+    [mailController addAttachmentData:[NSData dataWithContentsOfFile:cklogPath] mimeType:@"text/plain" fileName:@"TLS Inspector.log"];
+    NSString * exceptionsLogPath = [documentsDirectory stringByAppendingPathComponent:@"exceptions.log"];
+    if ([NSFileManager.defaultManager fileExistsAtPath:exceptionsLogPath]) {
+        [mailController addAttachmentData:[NSData dataWithContentsOfFile:exceptionsLogPath] mimeType:@"text/plain" fileName:@"Exceptions.log"];
+    }
+
+    [self presentViewController:mailController animated:YES completion:nil];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

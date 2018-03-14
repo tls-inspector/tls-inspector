@@ -37,5 +37,10 @@
  Should the app download and check CRLs?
  */
 @property (nonatomic) BOOL checkCRL;
+/**
+ Should the app collect more verbose information in the logs?
+ Note: This value is NOT persisted and will always revert back to the default (NO) upon launch.
+ */
+@property (nonatomic) BOOL verboseLogging;
 
 @end

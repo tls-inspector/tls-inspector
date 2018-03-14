@@ -572,6 +572,8 @@
 	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
 	<string>EV Authority</string>
+	<key>Enable Debug Logging</key>
+	<string>Enable Debug Logging</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
 	<string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
 	<key>Enter the value to verify</key>
@@ -626,6 +628,8 @@
 	<string>Loading...</string>
 	<key>Locally Trusted Chain</key>
 	<string>Locally Trusted Chain</string>
+	<key>Logging</key>
+	<string>Logging</string>
 	<key>More</key>
 	<string>More</string>
 	<key>More Info</key>
@@ -716,6 +720,8 @@
 	<string>State</string>
 	<key>Submit Feedback</key>
 	<string>Submit Feedback</string>
+	<key>Submit Logs</key>
+	<string>Submit Logs</string>
 	<key>TLS Inspector</key>
 	<string>TLS Inspector</string>
 	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</key>
@@ -876,6 +882,8 @@ Exercise caution if continuing to this website.</string>
 	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
 	<key>tlstip7</key>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
+	<key>verbose_logging_footer</key>
+	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
