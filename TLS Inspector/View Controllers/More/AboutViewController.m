@@ -141,8 +141,8 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
             return format(@"App: %@ (%@). OpenSSL: %@, cURL: %@",
                           [infoDictionary objectForKey:@"CFBundleShortVersionString"],
                           [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey],
-                          [CKCertificate openSSLVersion],
-                          [CKServerInfo libcurlVersion]);
+                          [CertificateKit opensslVersion],
+                          [CertificateKit libcurlVersion]);
         } case 1:
             return l(@"TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.");
     }

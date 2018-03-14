@@ -40,6 +40,13 @@ static dispatch_queue_t queue;
 
 @implementation CKLogging
 
++ (CKLogging *) sharedInstance {
+    if (!_instance) {
+        _instance = [CKLogging new];
+    }
+    return _instance;
+}
+
 - (id) init {
     if (_instance == nil) {
         _instance = [[CKLogging alloc] initWithLogFile:@"CertificateKit.log"];
@@ -52,13 +59,9 @@ static dispatch_queue_t queue;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     self.file = [documentsDirectory stringByAppendingPathComponent:file];
-#if DEBUG
-    self.level = CKLoggingLevelDebug;
-#else
-    self.level = CKLoggingLevelInfo;
-#endif
     [self createQueue];
     [self open];
+    self.level = CKLoggingLevelInfo;
     return self;
 }
 
@@ -90,13 +93,6 @@ static dispatch_queue_t queue;
     [self.handle closeFile];
 }
 
-+ (CKLogging *) sharedInstance {
-    if (!_instance) {
-        _instance = [CKLogging new];
-    }
-    return _instance;
-}
-
 - (NSString *) stringForLevel:(CKLoggingLevel)level {
     switch (level) {
         case CKLoggingLevelDebug:
@@ -120,7 +116,7 @@ static dispatch_queue_t queue;
 }
 
 - (void) writeLine:(NSString *)string forLevel:(CKLoggingLevel)level {
-    if (self.level >= level) {
+    if (self.level <= level) {
         [self write:[NSString stringWithFormat:@"%@\n", string] forLevel:level];
     }
 }
@@ -139,6 +135,11 @@ static dispatch_queue_t queue;
 
 - (void) writeError:(NSString *)message {
     [self writeLine:message forLevel:CKLoggingLevelError];
+}
+
+- (void) setLevel:(CKLoggingLevel)level {
+    _level = level;
+    [self writeDebug:[NSString stringWithFormat:@"Setting log level to: %@ (%lu)", [self stringForLevel:level], (unsigned long)level]];
 }
 
 @end

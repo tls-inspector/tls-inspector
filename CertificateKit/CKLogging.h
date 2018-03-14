@@ -24,19 +24,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import "CertificateKit.h"
 
 @interface CKLogging : NSObject
 
-typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
-    CKLoggingLevelDebug = 0,
-    CKLoggingLevelInfo,
-    CKLoggingLevelWarning,
-    CKLoggingLevelError,
-};
-
 + (CKLogging *) sharedInstance;
-- (id) initWithLogFile:(NSString *)file;
 
 @property (nonatomic) CKLoggingLevel level;
 @property (strong, nonatomic) NSString * file;

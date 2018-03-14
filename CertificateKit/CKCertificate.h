@@ -203,10 +203,4 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  */
 @property (nonatomic, nullable, readonly) void * X509Certificate;
 
-/**
- *  Get the OpenSSL version used by CKCertificate
- *
- *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"
- */
-+ (NSString * _Nonnull) openSSLVersion;
 @end
