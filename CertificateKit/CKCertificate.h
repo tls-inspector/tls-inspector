@@ -25,10 +25,10 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificateRevoked.h"
 #import "CKCertificatePublicKey.h"
+#import "CKNameObject.h"
+#import "CKRevoked.h"
 
-@class CKCertificateRevoked;
 @class CKCertificatePublicKey;
 
 /**
@@ -44,11 +44,6 @@
  *  @return A CKCertificate instance
  */
 + (CKCertificate * _Nullable) fromX509:(void * _Nonnull)cert;
-
-/**
- *  Array of URLs representing distribution points for CRLs
- */
-typedef NSArray<NSURL *> distributionPoints;
 
 /**
  *  Finger (thumb) print types that CKCertificate can export
@@ -81,11 +76,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.
  */
 @property (nonatomic, readonly) BOOL extendedValidation;
-
-/**
- *  Certificate revocation information
- */
-@property (strong, nonatomic, nullable) CKCertificateRevoked * revoked;
 
 /**
  *  Returns the SHA256 fingerprint for the certificate
@@ -149,9 +139,19 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 - (BOOL) validIssueDate;
 
 /**
- *  Retuns the issuer name
+ *  Returns the certificates subject names.
  */
-@property (strong, nonatomic, nullable, readonly) NSString * issuer;
+@property (strong, nonatomic, nonnull, readonly) CKNameObject * subject;
+
+/**
+ *  Returns the certificates issuers subject names.
+ */
+@property (strong, nonatomic, nonnull, readonly) CKNameObject * issuer;
+
+/**
+ *  Information about the certificates revocation status.
+ */
+@property (strong, nonatomic, nonnull) CKRevoked * revoked;
 
 /**
  *  Is this a certificate authority
@@ -159,9 +159,9 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (nonatomic, readonly) BOOL isCA;
 
 /**
- *  Retruns a dictionary with the subject names, and name types (OU or CN)
+ *  Is this certificate a root certificate, installed on your device.
  */
-@property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * names;
+@property (nonatomic) BOOL isRootCA;
 
 /**
  *  Returns an array of subject names applicable to the cert
@@ -179,19 +179,28 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSString * extendedValidationAuthority;
 
 /**
- *  Get an array of CRL distributionPoints (an array of URLs)
+ *  Returns the URL for which OCSP queries can be performed for this certificate.
  */
-@property (strong, nonatomic, nullable, readonly) distributionPoints * crlDistributionPoints;
+@property (strong, nonatomic, nullable, readonly) NSURL * ocspURL;
+
+/**
+ *  Returns an array of URLs that contain certificate revocation lists.
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<NSURL *> * crlDistributionPoints;
+
+/**
+ *  Get an array of key usage identifiers
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * keyUsage;
+
+/**
+ *  Get an array of extended key usage identifiers
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * extendedKeyUsage;
 
 /**
  *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
  */
 @property (nonatomic, nullable, readonly) void * X509Certificate;
 
-/**
- *  Get the OpenSSL version used by CKCertificate
- *
- *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"
- */
-+ (NSString * _Nonnull) openSSLVersion;
 @end

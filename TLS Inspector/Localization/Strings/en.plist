@@ -60,6 +60,8 @@
 	<string>Certificate Errors</string>
 	<key>Certificate Information</key>
 	<string>Certificate Information</string>
+	<key>Certificate Status</key>
+	<string>Certificate Status</string>
 	<key>Certificate is expired or not valid yet.</key>
 	<string>Certificate is expired or not valid yet.</string>
 	<key>Certificate uses insecure SHA1 algorithm.</key>
@@ -566,8 +568,12 @@
 	<string>Did You Know:</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
+	<key>Download &amp; Check CRL</key>
+	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
 	<string>EV Authority</string>
+	<key>Enable Debug Logging</key>
+	<string>Enable Debug Logging</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
 	<string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
 	<key>Enter the value to verify</key>
@@ -580,6 +586,8 @@
 	<string>Fingerprints</string>
 	<key>Finished</key>
 	<string>Finished</string>
+	<key>General</key>
+	<string>General</string>
 	<key>Get Involed</key>
 	<string>Get Involved</string>
 	<key>Get Involved</key>
@@ -590,12 +598,6 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
-	<key>Ingored Redirect To</key>
-	<string>Ingored Redirect To</string>
-	<key>Insecure Superfish (Lenovo) certificate.</key>
-	<string>Insecure Superfish (Lenovo) certificate.</string>
-	<key>Insecure eDellRoot certificate.</key>
-	<string>Insecure eDellRoot certificate.</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
 	<key>Internal error.</key>
@@ -604,12 +606,16 @@
 	<string>Invalid Date</string>
 	<key>Invalid host</key>
 	<string>Invalid host</string>
+	<key>Is the connection to this site secure?</key>
+	<string>Is the connection to this site secure?</string>
 	<key>Issuer</key>
 	<string>Issuer</string>
 	<key>Key</key>
 	<string>Key</string>
 	<key>Key Algorithm</key>
 	<string>Key Algorithm</string>
+	<key>Key Usage</key>
+	<string>Key Usage</string>
 	<key>KeyAlgorithm::dsaEncryption</key>
 	<string>DSA</string>
 	<key>KeyAlgorithm::id-ecPublicKey</key>
@@ -620,12 +626,22 @@
 	<string>Light</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
+	<key>Locally Trusted Chain</key>
+	<string>Locally Trusted Chain</string>
+	<key>Logging</key>
+	<string>Logging</string>
 	<key>More</key>
 	<string>More</string>
+	<key>More Info</key>
+	<string>More Info</string>
 	<key>Negotiated Cipher Suite</key>
 	<string>Negotiated Cipher Suite</string>
 	<key>Negotiated Version</key>
 	<string>Negotiated Version</string>
+	<key>Not Valid After</key>
+	<string>Not Valid After</string>
+	<key>Not Valid Before</key>
+	<string>Not Valid Before</string>
 	<key>Not Verified</key>
 	<string>Not Verified</string>
 	<key>Notification Date</key>
@@ -634,6 +650,10 @@
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
+	<key>Public Key</key>
+	<string>Public Key</string>
+	<key>Query OCSP Responder</key>
+	<string>Query OCSP Responder</string>
 	<key>Rate TLS Inspector in the App Store</key>
 	<string>Rate TLS Inspector in the App Store</string>
 	<key>Recent Domains</key>
@@ -652,10 +672,14 @@
 	<string>Revoked On</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
+	<key>Search on crt.sh</key>
+	<string>Search on crt.sh</string>
 	<key>Security HTTP Headers</key>
 	<string>Security HTTP Headers</string>
 	<key>Server Info</key>
 	<string>Server Info</string>
+	<key>Server Redirected To</key>
+	<string>Server Redirected To</string>
 	<key>Share</key>
 	<string>Share</string>
 	<key>Share &amp; Feedback</key>
@@ -668,6 +692,10 @@
 	<string>Signature</string>
 	<key>Signature Algorithm</key>
 	<string>Signature Algorithm</string>
+	<key>Size</key>
+	<string>Size</string>
+	<key>Subject</key>
+	<string>Subject</string>
 	<key>Subject Alt. Names</key>
 	<string>Subject Alt. Names</string>
 	<key>Subject Alternative Names</key>
@@ -692,10 +720,14 @@
 	<string>State</string>
 	<key>Submit Feedback</key>
 	<string>Submit Feedback</string>
+	<key>Submit Logs</key>
+	<string>Submit Logs</string>
 	<key>TLS Inspector</key>
 	<string>TLS Inspector</string>
 	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</key>
 	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</string>
+	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</key>
+	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
@@ -716,6 +748,8 @@
 	<string>Valid From</string>
 	<key>Valid To</key>
 	<string>Valid To</string>
+	<key>Validity Period</key>
+	<string>Validity Period</string>
 	<key>Value</key>
 	<string>Value</string>
 	<key>Values do not match.</key>
@@ -732,6 +766,8 @@
 	<string>View all alternate names</string>
 	<key>View on SSL Labs</key>
 	<string>View on SSL Labs</string>
+	<key>What does this mean?</key>
+	<string>What does this mean?</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>What kind of feedback would you like to submit?</string>
 	<key>Yes</key>
@@ -742,14 +778,94 @@
 	<string>You must restart TLS Inspector for theme changes to take affect.</string>
 	<key>You must restart the app for the change to take affect</key>
 	<string>You must restart the app for the change to take affect</string>
-	<key>invalid_date_chain_description</key>
-	<string>The server certificate for this site is not trusted becuase one or more certificates in the chain is expired or not yet valid.</string>
-	<key>revoked_chain_description</key>
+	<key>certificate_status_footer</key>
+	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
+	<key>explanation::invalid_date</key>
+	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
+	<key>explanation::local_trust</key>
+	<string>The server certificate for this site is trusted because it, or the issuing certificate, has been locally installed and trusted on your device.</string>
+	<key>explanation::revoked</key>
 	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
+	<key>explanation::self_signed</key>
+	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
+	<key>explanation::sha1_int</key>
+	<string>The intermediate certificate for this site is signed using SHA-1, which is no longer considered secure.</string>
+	<key>explanation::sha1_leaf</key>
+	<string>The server certificate for this site is signed using SHA-1, which is no longer considered secure.</string>
+	<key>explanation::trust</key>
+	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
+	<key>explanation::untrusted</key>
+	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
+	<key>explanation::wrong_host</key>
+	<string>The server certificate is for a different host than the one connected to.</string>
+	<key>keyUsage::OCSPSigning</key>
+	<string>OCSP Signing</string>
+	<key>keyUsage::anyExtendedKeyUsage</key>
+	<string>Any</string>
+	<key>keyUsage::cRLSign</key>
+	<string>CRL Sign</string>
+	<key>keyUsage::clientAuth</key>
+	<string>Client Auth</string>
+	<key>keyUsage::codeSigning</key>
+	<string>Code Signing</string>
+	<key>keyUsage::dataEncipherment</key>
+	<string>Data Encipherment</string>
+	<key>keyUsage::decipherOnly</key>
+	<string>Decipher Only</string>
+	<key>keyUsage::digitalSignature</key>
+	<string>Digital Signature</string>
+	<key>keyUsage::emailProtection</key>
+	<string>Email Protection</string>
+	<key>keyUsage::encipherOnly</key>
+	<string>Encipher Only</string>
+	<key>keyUsage::keyAgreement</key>
+	<string>Key Agreement</string>
+	<key>keyUsage::keyCertSign</key>
+	<string>Key Cert Sign</string>
+	<key>keyUsage::keyEncipherment</key>
+	<string>Key Encipherment</string>
+	<key>keyUsage::nonRepudiation</key>
+	<string>Non-Repudiation</string>
+	<key>keyUsage::serverAuth</key>
+	<string>Server Auth</string>
+	<key>keyUsage::timeStamping</key>
+	<string>Time Stamping</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
-	<key>self_signed_chain_description</key>
-	<string>The server certificate for this site is not trusted by the system because the root certificate authority is unknown or not present.</string>
+	<key>secure::invalid_date</key>
+	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
+	<key>secure::local_trust</key>
+	<string>Yes. your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
+
+Typically, private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance.</string>
+	<key>secure::revoked</key>
+	<string>No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.
+
+Exercise caution if continuing to this website.</string>
+	<key>secure::self_signed</key>
+	<string>No. The certificate for this site was not issued by any known certificate authority and therefor your device has no way of checking if the certificate is actually for the website and not an attacker.
+
+Exercise extreme caution if continuing to this website.</string>
+	<key>secure::sha1_int</key>
+	<string>No. While currently unlikely, it may be possible for an attacker to craft a fake certificate that takes advantage of the weakness of SHA-1.
+
+Exercise caution if continuing to this website.</string>
+	<key>secure::sha1_leaf</key>
+	<string>No. While currently unlikely, it may be possible for an attacker to craft a fake certificate that takes advantage of the weakness of SHA-1.
+
+Exercise caution if continuing to this website.</string>
+	<key>secure::trust</key>
+	<string>Yes. your device has determined that the connection to this site is secure.</string>
+	<key>secure::untrusted</key>
+	<string>No. Your device was unable to check if the certificate presented by the website actually belongs to the website, and not somebody else.
+
+Exercise extreme caution if continuing to this website.</string>
+	<key>secure::wrong_host</key>
+	<string>No. Because the certificate presented by the server was for another site there is no way to be sure that this certificate is not dangerous.
+
+It&apos;s likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.
+
+Exercise caution if continuing to this website.</string>
 	<key>tlstip1</key>
 	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tlstip2</key>
@@ -764,14 +880,20 @@
 	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
 	<key>tlstip7</key>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
-	<key>trusted_chain_description</key>
-	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
-	<key>untrusted_chain_description</key>
-	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
+	<key>verbose_logging_footer</key>
+	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
 	<string>{0}, {1} bits</string>
+	<key>{commonName} (Expired)</key>
+	<string>{0} (Expired)</string>
+	<key>{commonName} (Insecure)</key>
+	<string>{0} (Insecure)</string>
+	<key>{commonName} (Revoked)</key>
+	<string>{0} (Revoked)</string>
+	<key>{commonName} ({orgName} {countryName})</key>
+	<string>{0} ({1} {2})</string>
 	<key>{count} months</key>
 	<string>{0} months</string>
 	<key>{count} weeks</key>

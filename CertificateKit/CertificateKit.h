@@ -37,6 +37,54 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKCertificatePublicKey.h>
 #import <CertificateKit/CKCertificateChain.h>
 #import <CertificateKit/CKCertificateChain+EnumValues.h>
-#import <CertificateKit/CKCertificateRevoked.h>
 #import <CertificateKit/CKServerInfo.h>
 #import <CertificateKit/CKGetter.h>
+#import <CertificateKit/CKRevoked.h>
+#import <CertificateKit/CKOCSPResponse.h>
+#import <CertificateKit/CKCRLResponse.h>
+#import <CertificateKit/CKGetterOptions.h>
+
+/**
+ Interface for global CertificateKit methods.
+ */
+@interface CertificateKit : NSObject
+
+/**
+ Logging levels for the certificate kit log
+
+ - CKLoggingLevelDebug: Debug logs will include all information sent to the log instance,
+                        including domain names. Use with caution.
+ - CKLoggingLevelInfo: Informational logs for irregular, but not dangerous events.
+ - CKLoggingLevelWarning: Warning logs for dangerous, but not fatal events.
+ - CKLoggingLevelError: Error events for when things really go sideways.
+ */
+typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
+    CKLoggingLevelDebug = 0,
+    CKLoggingLevelInfo,
+    CKLoggingLevelWarning,
+    CKLoggingLevelError,
+};
+
+/**
+ *  Get the OpenSSL version used by CKCertificate
+ *
+ *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"
+ */
++ (NSString *) opensslVersion;
+
+/**
+ Convience method to get the version of libcurl used by CKServerInfo
+ 
+ @return A string representing the libcurl version
+ */
++ (NSString *) libcurlVersion;
+
+/**
+ Set the minimum level for which logs of that or greater levels will be recorded
+ in the CertificateKit log file.
+
+ @param level The log level
+ */
++ (void) setLoggingLevel:(CKLoggingLevel)level;
+
+@end

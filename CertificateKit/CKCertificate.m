@@ -40,46 +40,83 @@
 @property (nonatomic) X509 * certificate;
 @property (strong, nonatomic, readwrite) NSString * summary;
 @property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
-@property (strong, nonatomic) distributionPoints * crlCache;
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
+@property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
+@property (strong, nonatomic, nonnull, readwrite) CKNameObject * issuer;
+@property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
+@property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
 
 @end
 
 @implementation CKCertificate
 
-static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
-
-- (void) openSSLError {
-    const char * file;
-    int line;
-    ERR_peek_last_error_line(&file, &line);
-    NSLog(@"OpenSSL error in file: %s:%i", file, line);
-}
+INSERT_OPENSSL_ERROR_METHOD
 
 + (CKCertificate *) fromX509:(void *)cert {
     CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;
-    xcert.summary = [xcert generateSummary];
-    xcert.revoked = [CKCertificateRevoked new];
     xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
-    return xcert;
-}
+    xcert.subject = [CKNameObject fromSubject:X509_get_subject_name(cert)];
+    xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
 
-- (NSString *) getSubjectNID:(int)nid {
-    X509_NAME * name = X509_get_subject_name(self.certificate);
-    char * value = malloc(CERTIFICATE_SUBJECT_MAX_LENGTH);
-    int length = X509_NAME_get_text_by_NID(name, nid, value, CERTIFICATE_SUBJECT_MAX_LENGTH);
-    if (length < 0) {
-        return nil;
+    // Keep trying with each subject name for the summary
+    if (xcert.subject.commonName.length > 0) {
+        xcert.summary = xcert.subject.commonName;
+    } else if (xcert.subject.organizationalUnitName.length > 0) {
+        xcert.summary = xcert.subject.organizationalUnitName;
+    } else if (xcert.subject.organizationName.length > 0) {
+        xcert.summary = xcert.subject.organizationName;
+    } else if (xcert.subject.emailAddress.length > 0) {
+        xcert.summary = xcert.subject.emailAddress;
+    } else if (xcert.subject.countryName.length > 0) {
+        xcert.summary = xcert.subject.countryName;
+    } else if (xcert.subject.stateOrProvinceName.length > 0) {
+        xcert.summary = xcert.subject.stateOrProvinceName;
+    } else if (xcert.subject.localityName.length > 0) {
+        xcert.summary = xcert.subject.localityName;
+    } else {
+        xcert.summary = @"Untitled Certificate";
+    }
+    
+    AUTHORITY_INFO_ACCESS * info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
+    int len = sk_ACCESS_DESCRIPTION_num(info);
+    for (int i = 0; i < len; i++) {
+        // Look for the OCSP entry
+        ACCESS_DESCRIPTION * description = sk_ACCESS_DESCRIPTION_value(info, i);
+        if (OBJ_obj2nid(description->method) == NID_ad_OCSP) {
+            if (description->location->type == GEN_URI) {
+                char * ocspurlchar = i2s_ASN1_IA5STRING(NULL, description->location->d.ia5);
+                NSString * ocspurlString = [[NSString alloc] initWithUTF8String:ocspurlchar];
+                xcert.ocspURL = [NSURL URLWithString:ocspurlString];
+            }
+        }
+    }
+    
+    CRL_DIST_POINTS * points = X509_get_ext_d2i(cert, NID_crl_distribution_points, NULL, NULL);
+    int numberOfPoints = sk_DIST_POINT_num(points);
+    if (numberOfPoints < 0) {
+        xcert.crlDistributionPoints = @[];
+    } else {
+        DIST_POINT * point;
+        GENERAL_NAMES * fullNames;
+        GENERAL_NAME * fullName;
+        NSMutableArray<NSURL *> * urls = [NSMutableArray new];
+        for (int i = 0; i < numberOfPoints; i ++) {
+            point = sk_DIST_POINT_value(points, i);
+            fullNames = point->distpoint->name.fullname;
+            fullName = sk_GENERAL_NAME_value(fullNames, 0);
+            const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
+            NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
+            if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
+                [urls addObject:crlURL];
+            } else {
+                PDebug(@"Unsupported CRL distribution point: %s", url);
+            }
+        }
+        xcert.crlDistributionPoints = urls;
     }
 
-    NSString * subject = [[NSString alloc] initWithBytes:value length:length encoding:NSUTF8StringEncoding];
-    free(value);
-    return subject;
-}
-
-- (NSString *) generateSummary {
-    return [self getSubjectNID:NID_commonName];
+    return xcert;
 }
 
 - (NSString *) SHA512Fingerprint {
@@ -120,7 +157,8 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
 
     unsigned int fingerprint_size = sizeof(fingerprint);
     if (X509_digest(self.certificate, digest, fingerprint, &fingerprint_size) < 0) {
-        NSLog(@"Unable to generate certificate fingerprint");
+        [self openSSLError];
+        PError(@"Unable to generate certificate fingerprint");
         return @"";
     }
 
@@ -179,42 +217,6 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
         valid = NO;
     }
     return valid;
-}
-
-- (NSString *) issuer {
-    X509_NAME *issuerX509Name = X509_get_issuer_name(self.certificate);
-
-    if (issuerX509Name != NULL) {
-        int index = X509_NAME_get_index_by_NID(issuerX509Name, NID_organizationName, -1);
-        X509_NAME_ENTRY *issuerNameEntry = X509_NAME_get_entry(issuerX509Name, index);
-
-        if (issuerNameEntry) {
-            ASN1_STRING *issuerNameASN1 = X509_NAME_ENTRY_get_data(issuerNameEntry);
-
-            if (issuerNameASN1 != NULL) {
-                const unsigned char *issuerName = ASN1_STRING_get0_data(issuerNameASN1);
-                return [NSString stringWithUTF8String:(char *)issuerName];
-            }
-        }
-    }
-    return @"";
-}
-
-- (NSDictionary<NSString *, NSString *> *) names {
-#define add_subject(k, nid) value = [self getSubjectNID:nid]; if (value != nil) { [names setObject:value forKey:k]; }
-
-    NSMutableDictionary<NSString *, NSString *> * names = [NSMutableDictionary new];
-    NSString * value;
-
-    add_subject(@"CN", NID_commonName);
-    add_subject(@"C", NID_countryName);
-    add_subject(@"S", NID_stateOrProvinceName);
-    add_subject(@"L", NID_localityName);
-    add_subject(@"O", NID_organizationName);
-    add_subject(@"OU", NID_organizationalUnitName);
-    add_subject(@"E", NID_pkcs9_emailAddress);
-
-    return names;
 }
 
 - (void *) X509Certificate {
@@ -338,46 +340,50 @@ static const int CERTIFICATE_SUBJECT_MAX_LENGTH = 150;
     }
 }
 
-- (distributionPoints *) crlDistributionPoints {
-    if (self.crlCache) {
-        return self.crlCache;
-    }
-
-    CRL_DIST_POINTS * points = X509_get_ext_d2i(self.certificate, NID_crl_distribution_points, NULL, NULL);
-    int numberOfPoints = sk_DIST_POINT_num(points);
-    if (numberOfPoints < 0) {
-        return @[];
-    }
-
-    DIST_POINT * point;
-    GENERAL_NAMES * fullNames;
-    GENERAL_NAME * fullName;
-    NSMutableArray<NSURL *> * urls = [NSMutableArray new];
-    for (int i = 0; i < numberOfPoints; i ++) {
-        point = sk_DIST_POINT_value(points, i);
-        fullNames = point->distpoint->name.fullname;
-        fullName = sk_GENERAL_NAME_value(fullNames, 0);
-        const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
-        NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
-        if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
-            [urls addObject:crlURL];
-        } else {
-            NSLog(@"Unsupported CRL distribution point: %s", url);
-        }
-    }
-
-    self.crlCache = urls;
-    return urls;
-}
-
 - (BOOL) extendedValidation {
     return [self extendedValidationAuthority] != nil;
 }
 
-+ (NSString *) openSSLVersion {
-    NSString * version = [NSString stringWithUTF8String:OPENSSL_VERSION_TEXT]; // OpenSSL <version> ...
-    NSArray<NSString *> * versionComponents = [version componentsSeparatedByString:@" "];
-    return versionComponents[1];
+- (NSArray<NSString *> *) keyUsage {
+    int crit = -1;
+    int idx = -1;
+    ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_key_usage, &crit, &idx);
+    NSArray<NSString *> * usages = @[@"digitalSignature",
+                                     @"nonRepudiation",
+                                     @"keyEncipherment",
+                                     @"dataEncipherment",
+                                     @"keyAgreement",
+                                     @"keyCertSign",
+                                     @"cRLSign",
+                                     @"encipherOnly",
+                                     @"decipherOnly"];
+    NSMutableArray<NSString *> * values = [NSMutableArray arrayWithCapacity:usages.count];
+    for (int i = 0; i < usages.count; i++) {
+        if (ASN1_BIT_STRING_get_bit(keyUsage, i)) {
+            [values addObject:usages[i]];
+        }
+    }
+    return values;
+}
+
+- (NSArray<NSString *> *) extendedKeyUsage {
+    int crit = -1;
+    int idx = -1;
+    ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_ext_key_usage, &crit, &idx);
+    NSArray<NSString *> * usages = @[@"anyExtendedKeyUsage",
+                                     @"serverAuth",
+                                     @"clientAuth",
+                                     @"codeSigning",
+                                     @"emailProtection",
+                                     @"timeStamping",
+                                     @"OCSPSigning"];
+    NSMutableArray<NSString *> * values = [NSMutableArray arrayWithCapacity:usages.count];
+    for (int i = 0; i < usages.count; i++) {
+        if (ASN1_BIT_STRING_get_bit(keyUsage, i)) {
+            [values addObject:usages[i]];
+        }
+    }
+    return values;
 }
 
 @end

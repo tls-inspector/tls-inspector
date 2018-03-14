@@ -27,12 +27,21 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificateChain.h"
 #import "CKServerInfo.h"
+#import "CKGetterOptions.h"
 
 /**
  CKGetter is the interface used to get all information about a specific domain. Used to track progress
  of all of the required requests
  */
 @interface CKGetter : NSObject
+
+/**
+ Initalize a new CKGetter with specified options
+
+ @param options options for the CKGetter
+ @return A CKGetter instance
+ */
++ (CKGetter * _Nonnull) getterWithOptions:(CKGetterOptions * _Nonnull)options;
 
 /**
  Get information for the given URL. This will start the getter process and make all required requests for
@@ -47,6 +56,11 @@
  The object that conforms to the CKGetterDelegate protocol
  */
 @property (weak, nonatomic, nullable) id delegate;
+
+/**
+ Options for the getter
+ */
+@property (strong, nonatomic, nonnull) CKGetterOptions * options;
 
 /**
  The certificate chain for the URL

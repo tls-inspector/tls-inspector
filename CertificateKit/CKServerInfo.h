@@ -49,11 +49,4 @@
  */
 @property (strong, nonatomic) NSURL * redirectedTo;
 
-/**
- Convience method to get the version of libcurl used by CKServerInfo
-
- @return A string representing the libcurl version
- */
-+ (NSString *) libcurlVersion;
-
 @end

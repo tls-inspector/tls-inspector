@@ -74,8 +74,4 @@
     return nil;
 }
 
-+ (NSString * _Nonnull) libcurlVersion {
-    return [NSString stringWithUTF8String:LIBCURL_VERSION];
-}
-
 @end

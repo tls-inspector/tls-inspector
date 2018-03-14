@@ -1,8 +1,10 @@
 #import "CertificateListTableViewController.h"
-#import "InspectorTableViewController.h"
 #import "TitleValueTableViewCell.h"
 #import "NSString+FontAwesome.h"
 #import "IconTableViewCell.h"
+#import "DNSResolver.h"
+#import "ChainExplainTableViewController.h"
+@import SafariServices;
 
 @interface CertificateListTableViewController ()
 
@@ -24,23 +26,36 @@
         case CKCertificateChainTrustStatusTrusted:
             self.headerViewLabel.text = l(@"Trusted Chain");
             self.headerView.backgroundColor = uihelper.greenColor;
+            self.headerViewLabel.textColor = [UIColor whiteColor];
+            self.headerButton.tintColor = [UIColor whiteColor];
+            break;
+        case CKCertificateChainTrustStatusLocallyTrusted:
+            self.headerViewLabel.text = l(@"Locally Trusted Chain");
+            self.headerView.backgroundColor = uihelper.altGreenColor;
+            self.headerViewLabel.textColor = [UIColor whiteColor];
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
         case CKCertificateChainTrustStatusUntrusted:
-        case CKCertificateChainTrustStatusRevoked:
+        case CKCertificateChainTrustStatusRevokedLeaf:
+        case CKCertificateChainTrustStatusRevokedIntermediate:
         case CKCertificateChainTrustStatusSelfSigned:
         case CKCertificateChainTrustStatusInvalidDate:
+        case CKCertificateChainTrustStatusWrongHost:
+        case CKCertificateChainTrustStatusSHA1Leaf:
+        case CKCertificateChainTrustStatusSHA1Intermediate:
             self.headerViewLabel.text = l(@"Untrusted Chain");
             self.headerView.backgroundColor = uihelper.redColor;
+            self.headerViewLabel.textColor = [UIColor whiteColor];
             self.headerButton.tintColor = [UIColor whiteColor];
             break;
     }
 
-    self.headerViewLabel.textColor = [UIColor whiteColor];
     self.headerButton.hidden = NO;
 
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
 
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
 
@@ -66,6 +81,55 @@
     [appState.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
 }
 #endif
+
+- (void) showActionSheet:(id)sender {
+    [uihelper
+     presentActionSheetInViewController:self
+     attachToTarget:[ActionTipTarget targetWithBarButtonItem:sender]
+     title:currentChain.domain
+     subtitle:nil
+     cancelButtonTitle:[lang key:@"Cancel"]
+     items:@[
+             l(@"View on SSL Labs"),
+             l(@"Search on Shodan"),
+             l(@"Search on crt.sh"),
+             ]
+     dismissed:^(NSInteger itemIndex) {
+         if (itemIndex == 0) {
+             NSString * domain = currentChain.domain;
+             // If the URL is lacking a protocol the host will be nil
+             if (![domain hasPrefix:@"https://"]) {
+                 domain = nstrcat(@"https://", domain);
+             }
+
+             NSURL * url = [NSURL URLWithString:domain];
+             [self openURL:nstrcat(@"https://www.ssllabs.com/ssltest/analyze.html?d=", url.host)];
+         } else if (itemIndex == 1) {
+             NSError * dnsError;
+             NSArray<NSString *> * addresses = [DNSResolver resolveHostname:currentChain.domain error:&dnsError];
+             if (addresses && addresses.count >= 1) {
+                 [self openURL:nstrcat(@"https://www.shodan.io/host/", addresses[0])];
+             } else if (dnsError) {
+                 [uihelper presentErrorInViewController:self error:dnsError dismissed:nil];
+             }
+         } else if (itemIndex == 2) {
+             NSString * domain = currentChain.domain;
+             // If the URL is lacking a protocol the host will be nil
+             if (![domain hasPrefix:@"https://"]) {
+                 domain = nstrcat(@"https://", domain);
+             }
+
+             NSURL * url = [NSURL URLWithString:domain];
+             [self openURL:nstrcat(@"https://crt.sh/?q=", url.host)];
+         }
+     }];
+}
+
+- (void) openURL:(NSString *)url {
+    SFSafariViewController * safariViewController = [[SFSafariViewController alloc]
+                                                     initWithURL:[NSURL URLWithString:url]];
+    [self presentViewController:safariViewController animated:YES completion:nil];
+}
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
@@ -115,14 +179,23 @@
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
         if (cert.revoked.isRevoked) {
-            cell.textLabel.text = [lang key:@"{summary} (Revoked)" args:@[[cert summary]]];
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Revoked)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
+        } else if (!cert.validIssueDate) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
+        } else if ([cert.signatureAlgorithm hasPrefix:@"sha1"] && !cert.isRootCA) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Insecure)" args:@[name.commonName]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
-            NSDictionary * names = [cert names];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@ [%@])", [cert summary], [names objectForKey:@"O"], [names objectForKey:@"C"]];
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[name.commonName, name.organizationName, name.countryName]];
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
-            cell.textLabel.text = [cert summary];
+            cell.textLabel.text = cert.summary;
             cell.textLabel.textColor = themeTextColor;
         }
 
@@ -138,7 +211,7 @@
         NSUInteger idx = indexPath.row;
         if (currentServerInfo.redirectedTo != nil) {
             if (idx == 0) {
-                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Ingored Redirect To") value:currentServerInfo.redirectedTo.host];
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Server Redirected To") value:currentServerInfo.redirectedTo.host];
             } else {
                 idx --;
             }
@@ -190,40 +263,19 @@
 }
 
 - (IBAction) headerButton:(id)sender {
-    NSString * title, * body;
-
-    switch (currentChain.trusted) {
-        case CKCertificateChainTrustStatusUntrusted:
-            title = l(@"Untrusted Chain");
-            body = l(@"untrusted_chain_description");
-            break;
-        case CKCertificateChainTrustStatusSelfSigned:
-            title = l(@"Untrusted Chain");
-            body = l(@"self_signed_chain_description");
-            break;
-        case CKCertificateChainTrustStatusTrusted:
-            title = l(@"Trusted Chain");
-            body = l(@"trusted_chain_description");
-            break;
-        case CKCertificateChainTrustStatusRevoked:
-            title = l(@"Untrusted Chain");
-            body = l(@"revoked_chain_description");
-            break;
-        case CKCertificateChainTrustStatusInvalidDate:
-            title = l(@"Untrusted Chain");
-            body = l(@"invalid_date_chain_description");
-    }
-
-    [uihelper
-     presentAlertInViewController:self
-     title:title
-     body:body
-     dismissButtonTitle:l(@"Dismiss")
-     dismissed:nil];
+    [self performSegueWithIdentifier:@"Explain" sender:nil];
 }
 
 - (IBAction) closeButton:(UIBarButtonItem *)sender {
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [appState.getterViewController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:^{
+        [appState.getterViewController dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Explain"]) {
+        [(ChainExplainTableViewController *)segue.destinationViewController explainTrustStatus:currentChain.trusted];
+    }
+}
+
 @end

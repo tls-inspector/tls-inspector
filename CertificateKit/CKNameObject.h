@@ -1,9 +1,9 @@
 //
-//  CKCRLManager.h
+//  CKNameObject.h
 //
 //  MIT License
 //
-//  Copyright (c) 2017 Ian Spence
+//  Copyright (c) 2018 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,44 +25,48 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificate.h"
 
 /**
- CKCRLManager is an interface for managing and querying certificate revocation lists
+ Describes a X.509 name object
  */
-@interface CKCRLManager : NSObject
+@interface CKNameObject : NSObject
 
 /**
- Get or create the CRL Manager singleton
+ Generate a certificate subject object from the X509 name
 
- @return A CKCRLManager singleton instance
+ @param name The X509 name object
+ @return A popuated name object
  */
-+ (CKCRLManager * _Nonnull) sharedInstance;
++ (CKNameObject * _Nonnull) fromSubject:(void * _Nonnull)name;
 
 /**
- Get or create the CRL Manager singleton
-
- @return A CKCRLManager singleton instance
+ The common name of the name.
  */
-- (id _Nonnull) init;
-
+@property (strong, nonatomic, nullable, readonly) NSString * commonName;
 /**
- Load the CRL cache from disk. Due to the potential size of the cache, ensure you unload the cache
- when you're finished using it.
+ The ISO 3166 2-letter country code for the name.
  */
-- (void) loadCRLCache;
-
+@property (strong, nonatomic, nullable, readonly) NSString * countryName;
 /**
- Flush the CRL cache to disk, and unload it from memory.
+ The state or province for the name.
  */
-- (void) unloadCRLCache;
-
+@property (strong, nonatomic, nullable, readonly) NSString * stateOrProvinceName;
 /**
- Get the CRL data for the given CRL URL
-
- @param crl The URL of the CRL
- @param finished Called with the data of the CRL or an error
+ The city name for the name.
  */
-- (void) getCRL:(NSURL * _Nonnull)crl finished:(void (^ _Nonnull)(NSData * _Nullable data, NSError * _Nullable error))finished;
+@property (strong, nonatomic, nullable, readonly) NSString * localityName;
+/**
+ The organization name for the name.
+ */
+@property (strong, nonatomic, nullable, readonly) NSString * organizationName;
+/**
+ The organizational unit (department) for the name.
+ */
+@property (strong, nonatomic, nullable, readonly) NSString * organizationalUnitName;
+/**
+ The PKCS9 Email Address for the name. Non-standard.
+ */
+@property (strong, nonatomic, nullable, readonly) NSString * emailAddress;
 
 @end
+
