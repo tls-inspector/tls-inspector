@@ -833,13 +833,11 @@
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>secure::invalid_date</key>
-	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator.
-
-Exercise caution if continuing to this website.</string>
+	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
 	<key>secure::local_trust</key>
 	<string>Yes. your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
 
-If you or the administrator of this device didn&apos;t install this certificate then you should not continue to this site.</string>
+Typically, private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance.</string>
 	<key>secure::revoked</key>
 	<string>No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.
 
