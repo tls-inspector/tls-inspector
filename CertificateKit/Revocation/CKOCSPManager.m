@@ -66,7 +66,7 @@ static CKOCSPManager * _instance;
 
 #define HASH_ALGORITM_SIZE 11
 
-- (void)queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKOCSPResponse * __autoreleasing *)rtresponse error:(NSError **)rterror {
+- (void) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKOCSPResponse * __autoreleasing *)rtresponse error:(NSError **)rterror {
     NSURL * ocspURL = certificate.ocspURL;
     if (ocspURL == nil) {
         return;
