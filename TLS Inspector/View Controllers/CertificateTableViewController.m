@@ -57,7 +57,7 @@
 
     // Validity Period
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     CertificateTableRowSection * dateSection = [CertificateTableRowSection sectionWithTitle:@"Validity Period"];
     NSMutableArray<CertificateTableRowItem *> * dateItems = [NSMutableArray arrayWithArray:@[
                                                                                              [CertificateTableRowItem itemWithTitle:l(@"Not Valid Before") value:[dateFormatter stringFromDate:[selectedCertificate notBefore]] style:CertificateTableRowItemStyleBasicValue],

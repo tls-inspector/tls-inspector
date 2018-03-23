@@ -182,9 +182,13 @@
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [lang key:@"{commonName} (Revoked)" args:@[name.commonName]];
             cell.textLabel.textColor = uihelper.redColor;
-        } else if (!cert.validIssueDate) {
+        } else if (cert.isExpired) {
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
+        } else if (cert.isNotYetValid) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Not Yet Valid)" args:@[name.commonName]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if ([cert.signatureAlgorithm hasPrefix:@"sha1"] && !cert.isRootCA) {
             CKNameObject * name = cert.subject;

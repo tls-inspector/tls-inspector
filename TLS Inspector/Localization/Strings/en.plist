@@ -890,6 +890,8 @@ Exercise caution if continuing to this website.</string>
 	<string>{0} (Expired)</string>
 	<key>{commonName} (Insecure)</key>
 	<string>{0} (Insecure)</string>
+	<key>{commonName} (Not Yet Valid)</key>
+	<string>{0} (Not Yet Valid)</string>
 	<key>{commonName} (Revoked)</key>
 	<string>{0} (Revoked)</string>
 	<key>{commonName} ({orgName} {countryName})</key>

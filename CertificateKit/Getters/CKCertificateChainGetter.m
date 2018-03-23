@@ -217,8 +217,12 @@
 - (void) determineTrust {
     // Expired/Not Valid
     for (CKCertificate * cert in self.chain.certificates) {
-        if (!cert.validIssueDate) {
-            PWarn(@"Certificate: '%@' has an invalid date", cert.subject.commonName);
+        if (cert.isExpired) {
+            PWarn(@"Certificate: '%@' expired on: %@", cert.subject.commonName, cert.notAfter.description);
+            self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
+            return;
+        } else if (cert.isNotYetValid) {
+            PWarn(@"Certificate: '%@' is not yet valid until: %@", cert.subject.commonName, cert.notBefore.description);
             self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
             return;
         }
