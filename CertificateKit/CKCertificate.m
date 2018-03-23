@@ -43,6 +43,13 @@
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * issuer;
+
+@property (strong, nonatomic, nullable, readwrite) NSDate * notAfter;
+@property (strong, nonatomic, nullable, readwrite) NSDate * notBefore;
+@property (nonatomic, readwrite) BOOL isValidDate;
+@property (nonatomic, readwrite) BOOL isExpired;
+@property (nonatomic, readwrite) BOOL isNotYetValid;
+
 @property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
 
@@ -77,6 +84,14 @@ INSERT_OPENSSL_ERROR_METHOD
     } else {
         xcert.summary = @"Untitled Certificate";
     }
+
+    xcert.notAfter = [NSDate fromASN1_TIME:X509_get0_notAfter(cert)];
+    xcert.notBefore = [NSDate fromASN1_TIME:X509_get0_notBefore(cert)];
+
+    // Don't consider certs expired/notyetvalid if they're just hours away from the date.
+    xcert.isExpired = [xcert.notAfter timeIntervalSinceNow] < 86400;
+    xcert.isNotYetValid = [xcert.notBefore timeIntervalSinceNow] > 86400;
+    xcert.isValidDate = !xcert.isExpired && !xcert.isNotYetValid;
     
     AUTHORITY_INFO_ACCESS * info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
     int len = sk_ACCESS_DESCRIPTION_num(info);
@@ -198,25 +213,6 @@ INSERT_OPENSSL_ERROR_METHOD
     char buffer[128];
     OBJ_obj2txt(buffer, sizeof(buffer), sigType->algorithm, 0);
     return [NSString stringWithUTF8String:buffer];
-}
-
-- (NSDate *) notAfter {
-    return [NSDate fromASN1_TIME:X509_get0_notAfter(self.certificate)];
-}
-
-- (NSDate *) notBefore {
-    return [NSDate fromASN1_TIME:X509_get0_notBefore(self.certificate)];
-}
-
-- (BOOL) validIssueDate {
-    BOOL valid = YES;
-    if ([self.notBefore timeIntervalSinceNow] > 0) {
-        valid = NO;
-    }
-    if ([self.notAfter timeIntervalSinceNow] < 0) {
-        valid = NO;
-    }
-    return valid;
 }
 
 - (void *) X509Certificate {
