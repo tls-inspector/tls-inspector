@@ -152,7 +152,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    if (UserOptions.currentOptions.getHTTPHeaders) {
+        return 3;
+    } else {
+        return 2;
+    }
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

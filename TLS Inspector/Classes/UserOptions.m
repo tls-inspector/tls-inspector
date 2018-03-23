@@ -12,6 +12,7 @@ static UserOptions * _instance;
 #define KEY_REMEMBER_RECENT_LOOKUPS @"remember_recent_lookups"
 #define KEY_USE_LIGHT_THEME @"use_light_theme"
 #define KEY_SHOW_TIPS @"show_tips"
+#define KEY_GET_HTTP_HEADERS @"get_http_headers"
 #define KEY_QUERY_OCSP @"query_ocsp"
 #define KEY_CHECK_CRL @"check_crl"
 
@@ -34,6 +35,7 @@ static UserOptions * _instance;
         KEY_REMEMBER_RECENT_LOOKUPS: @YES,
         KEY_USE_LIGHT_THEME: @NO,
         KEY_SHOW_TIPS: @YES,
+        KEY_GET_HTTP_HEADERS: @YES,
         KEY_QUERY_OCSP: @YES,
         KEY_CHECK_CRL: @NO,
     };
@@ -67,6 +69,14 @@ static UserOptions * _instance;
 
 - (void) setShowTips:(BOOL)showTips {
     [AppDefaults setBool:showTips forKey:KEY_SHOW_TIPS];
+}
+
+- (BOOL) getHTTPHeaders {
+    return [AppDefaults boolForKey:KEY_GET_HTTP_HEADERS];
+}
+
+- (void) setGetHTTPHeaders:(BOOL)getHTTPHeaders {
+    [AppDefaults setBool:getHTTPHeaders forKey:KEY_GET_HTTP_HEADERS];
 }
 
 - (BOOL) queryOCSP {

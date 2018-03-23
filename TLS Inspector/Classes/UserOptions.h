@@ -30,6 +30,10 @@
  */
 @property (nonatomic) BOOL showTips;
 /**
+ Should the app get HTTP security headers when inspecting a domain?
+ */
+@property (nonatomic) BOOL getHTTPHeaders;
+/**
  Should the app query the OCSP responder for a certificate?
  */
 @property (nonatomic) BOOL queryOCSP;

@@ -8,7 +8,7 @@
 }
 
 @property (strong, nonatomic, nonnull) NSURL * url;
-@property (strong, nonatomic) NSArray<NSString *> * items;
+@property (strong, nonatomic) NSMutableArray<NSString *> * items;
 @property (strong, nonatomic) NSMutableArray<NSError *> * getterErrors;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> * itemStatus;
 @property (strong, nonatomic) CKGetter * infoGetter;
@@ -41,7 +41,7 @@
 
     CKGetterOptions * options = [CKGetterOptions new];
     options.checkOCSP = UserOptions.currentOptions.queryOCSP;
-    options.queryServerInfo = YES;
+    options.queryServerInfo = UserOptions.currentOptions.getHTTPHeaders;
     options.checkCRL = UserOptions.currentOptions.checkCRL;
     
     self.infoGetter = [CKGetter getterWithOptions:options];
@@ -52,7 +52,12 @@
     self.tableView.estimatedRowHeight = 85.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
-    self.items = @[CERT_CELL, SERV_CELL];
+    self.items = [NSMutableArray arrayWithCapacity:2];
+    [self.items addObject:CERT_CELL];
+    if (UserOptions.currentOptions.getHTTPHeaders) {
+        [self.items addObject:SERV_CELL];
+    }
+
     self.getterErrors = [NSMutableArray arrayWithCapacity:self.items.count];
     self.itemStatus = [NSMutableDictionary dictionaryWithDictionary:@{CERT_CELL: @"Loading", SERV_CELL: @"Loading"}];
 }

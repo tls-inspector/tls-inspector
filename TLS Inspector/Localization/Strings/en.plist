@@ -686,6 +686,8 @@
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Show HTTP Headers</key>
+	<string>Show HTTP Headers</string>
 	<key>Show Tips</key>
 	<string>Show Tips</string>
 	<key>Signature</key>

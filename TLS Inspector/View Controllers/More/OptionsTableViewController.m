@@ -25,7 +25,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 3;
+        return 4;
     } else if (section == 1) {
         return 2;
     } else if (section == 2) {
@@ -49,13 +49,22 @@
         } else if (indexPath.row == 1) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"Show HTTP Headers");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:UserOptions.currentOptions.getHTTPHeaders];
+            [toggle addTarget:self action:@selector(httpSwitch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 2) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Show Tips");
             label.textColor = themeTextColor;
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showTips];
             [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == 3) {
             UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
             label.text = l(@"Theme");
@@ -112,6 +121,10 @@
 
 - (void) recentSwitch:(UISwitch *)sender {
     [RecentDomains sharedInstance].saveRecentDomains = sender.isOn;
+}
+
+- (void) httpSwitch:(UISwitch *)sender {
+    UserOptions.currentOptions.getHTTPHeaders = sender.isOn;
 }
 
 - (void) tipsSwitch:(UISwitch *)sender {
