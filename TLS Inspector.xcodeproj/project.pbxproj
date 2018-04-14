@@ -80,6 +80,7 @@
 		3CC652401DB0711F001FB7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6523E1DB0710C001FB7E1 /* Main.storyboard */; };
 		3CC652431DB07166001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
 		3CC652441DB071DF001FB7E1 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC652421DB07166001FB7E1 /* en.plist */; };
+		3CC7C9D820819B6800E206BE /* ContactSupportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7C9D720819B6800E206BE /* ContactSupportTableViewController.m */; };
 		3CDEE27C2056129B007F72B0 /* ChainExplainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */; };
 		3CDEE2802056236F007F72B0 /* ChainExplainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */; };
 		3CE03EB21D88FE210081EF50 /* InspectorListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE03EB11D88FE210081EF50 /* InspectorListTableViewController.m */; };
@@ -262,6 +263,8 @@
 		3CC6521E1DB06E1A001FB7E1 /* lang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lang.m; sourceTree = "<group>"; };
 		3CC6523E1DB0710C001FB7E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3CC652421DB07166001FB7E1 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		3CC7C9D620819B6800E206BE /* ContactSupportTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactSupportTableViewController.h; sourceTree = "<group>"; };
+		3CC7C9D720819B6800E206BE /* ContactSupportTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactSupportTableViewController.m; sourceTree = "<group>"; };
 		3CDEE27A2056129B007F72B0 /* ChainExplainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainExplainTableViewController.h; sourceTree = "<group>"; };
 		3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainExplainTableViewController.m; sourceTree = "<group>"; };
 		3CE03EB01D88FE210081EF50 /* InspectorListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorListTableViewController.h; sourceTree = "<group>"; };
@@ -635,6 +638,8 @@
 		67D03D821F82EF5500981806 /* More */ = {
 			isa = PBXGroup;
 			children = (
+				3CC7C9D620819B6800E206BE /* ContactSupportTableViewController.h */,
+				3CC7C9D720819B6800E206BE /* ContactSupportTableViewController.m */,
 				67D03D7F1F82EF3700981806 /* OptionsTableViewController.h */,
 				67D03D801F82EF3700981806 /* OptionsTableViewController.m */,
 				67D03D7C1F82EC7900981806 /* MoreTableViewController.h */,
@@ -801,7 +806,8 @@
 				TargetAttributes = {
 					3C43EF811D7A987F00AE65E9 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = WCW84NC7Y8;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -819,8 +825,9 @@
 					};
 					3CFAE6D51CA8440400CD946B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = WCW84NC7Y8;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1018,6 +1025,7 @@
 				3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */,
+				3CC7C9D820819B6800E206BE /* ContactSupportTableViewController.m in Sources */,
 				3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */,
 				A116000B1EEB086800D98E8F /* Storage.m in Sources */,
 				3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */,
@@ -1065,7 +1073,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
@@ -1082,6 +1092,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1094,7 +1105,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
@@ -1111,6 +1124,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1324,7 +1338,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
@@ -1342,6 +1358,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "TLS Inspector";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1352,7 +1369,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
@@ -1371,6 +1390,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "TLS Inspector";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

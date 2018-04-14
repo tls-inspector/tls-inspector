@@ -1,6 +1,7 @@
 #import "OptionsTableViewController.h"
 #import "RecentDomains.h"
 #import "IconTableViewCell.h"
+#import "ContactSupportTableViewController.h"
 @import MessageUI;
 
 @interface OptionsTableViewController () <MFMailComposeViewControllerDelegate>
@@ -167,7 +168,9 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2 && indexPath.row == 1) {
-        [self sendDebugLogs];
+        [ContactSupportTableViewController collectFeedbackOnController:self finished:^(NSString *comments) {
+            [self sendDebugLogsWithComments:comments];
+        }];
     }
 }
 
@@ -191,7 +194,7 @@
      }];
 }
 
-- (void) sendDebugLogs {
+- (void) sendDebugLogsWithComments:(NSString *)comments {
     MFMailComposeViewController * mailController = [MFMailComposeViewController new];
     mailController.mailComposeDelegate = self;
 
@@ -201,7 +204,7 @@
 
     [mailController setSubject:@"TLS Inspector Debug Logs"];
     [mailController setToRecipients:@[@"'TLS Inspector Project Manager' <hello@tlsinspector.com>"]];
-    [mailController setMessageBody:@"<p><br/><br/></p><hr/><p><small>Please do not remove the following attachments:</small></p>" isHTML:YES];
+    [mailController setMessageBody:[NSString stringWithFormat:@"<p>%@<br/><br/></p><hr/><p><small>Please do not remove the following attachments:</small></p>", comments] isHTML:YES];
 
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString * documentsDirectory = [paths objectAtIndex:0];

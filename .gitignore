@@ -54,3 +54,4 @@ fastlane/screenshots
 .DS_Store
 defines.pch
 *.xcworkspacedata
+/TLS Inspector.xcodeproj/project.xcworkspace
