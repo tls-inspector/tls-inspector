@@ -209,10 +209,16 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString * documentsDirectory = [paths objectAtIndex:0];
     NSString * cklogPath = [documentsDirectory stringByAppendingPathComponent:@"CertificateKit.log"];
-    [mailController addAttachmentData:[NSData dataWithContentsOfFile:cklogPath] mimeType:@"text/plain" fileName:@"TLS Inspector.log"];
+    NSData * logData = [NSData dataWithContentsOfFile:cklogPath];
+    if (logData != nil) {
+        [mailController addAttachmentData:logData mimeType:@"text/plain" fileName:@"TLS Inspector.log"];
+    }
     NSString * exceptionsLogPath = [documentsDirectory stringByAppendingPathComponent:@"exceptions.log"];
     if ([NSFileManager.defaultManager fileExistsAtPath:exceptionsLogPath]) {
-        [mailController addAttachmentData:[NSData dataWithContentsOfFile:exceptionsLogPath] mimeType:@"text/plain" fileName:@"Exceptions.log"];
+        NSData * exceptionData = [NSData dataWithContentsOfFile:exceptionsLogPath];
+        if (exceptionData != nil) {
+            [mailController addAttachmentData:exceptionData mimeType:@"text/plain" fileName:@"Exceptions.log"];
+        }
     }
 
     [self presentViewController:mailController animated:YES completion:nil];
