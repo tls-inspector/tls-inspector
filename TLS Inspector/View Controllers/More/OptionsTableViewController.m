@@ -1,6 +1,7 @@
 #import "OptionsTableViewController.h"
 #import "RecentDomains.h"
 #import "IconTableViewCell.h"
+#import "ContactSupportTableViewController.h"
 @import MessageUI;
 
 @interface OptionsTableViewController () <MFMailComposeViewControllerDelegate>
@@ -25,7 +26,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 3;
+        return 4;
     } else if (section == 1) {
         return 2;
     } else if (section == 2) {
@@ -49,13 +50,22 @@
         } else if (indexPath.row == 1) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"Show HTTP Headers");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:UserOptions.currentOptions.getHTTPHeaders];
+            [toggle addTarget:self action:@selector(httpSwitch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 2) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Show Tips");
             label.textColor = themeTextColor;
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showTips];
             [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == 3) {
             UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
             label.text = l(@"Theme");
@@ -114,6 +124,10 @@
     [RecentDomains sharedInstance].saveRecentDomains = sender.isOn;
 }
 
+- (void) httpSwitch:(UISwitch *)sender {
+    UserOptions.currentOptions.getHTTPHeaders = sender.isOn;
+}
+
 - (void) tipsSwitch:(UISwitch *)sender {
     UserOptions.currentOptions.showTips = sender.isOn;
 }
@@ -154,7 +168,9 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2 && indexPath.row == 1) {
-        [self sendDebugLogs];
+        [ContactSupportTableViewController collectFeedbackOnController:self finished:^(NSString *comments) {
+            [self sendDebugLogsWithComments:comments];
+        }];
     }
 }
 
@@ -178,7 +194,7 @@
      }];
 }
 
-- (void) sendDebugLogs {
+- (void) sendDebugLogsWithComments:(NSString *)comments {
     MFMailComposeViewController * mailController = [MFMailComposeViewController new];
     mailController.mailComposeDelegate = self;
 
@@ -188,15 +204,21 @@
 
     [mailController setSubject:@"TLS Inspector Debug Logs"];
     [mailController setToRecipients:@[@"'TLS Inspector Project Manager' <hello@tlsinspector.com>"]];
-    [mailController setMessageBody:@"<p><br/><br/></p><hr/><p><small>Please do not remove the following attachments:</small></p>" isHTML:YES];
+    [mailController setMessageBody:[NSString stringWithFormat:@"<p>%@<br/><br/></p><hr/><p><small>Please do not remove the following attachments:</small></p>", comments] isHTML:YES];
 
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString * documentsDirectory = [paths objectAtIndex:0];
     NSString * cklogPath = [documentsDirectory stringByAppendingPathComponent:@"CertificateKit.log"];
-    [mailController addAttachmentData:[NSData dataWithContentsOfFile:cklogPath] mimeType:@"text/plain" fileName:@"TLS Inspector.log"];
+    NSData * logData = [NSData dataWithContentsOfFile:cklogPath];
+    if (logData != nil) {
+        [mailController addAttachmentData:logData mimeType:@"text/plain" fileName:@"TLS Inspector.log"];
+    }
     NSString * exceptionsLogPath = [documentsDirectory stringByAppendingPathComponent:@"exceptions.log"];
     if ([NSFileManager.defaultManager fileExistsAtPath:exceptionsLogPath]) {
-        [mailController addAttachmentData:[NSData dataWithContentsOfFile:exceptionsLogPath] mimeType:@"text/plain" fileName:@"Exceptions.log"];
+        NSData * exceptionData = [NSData dataWithContentsOfFile:exceptionsLogPath];
+        if (exceptionData != nil) {
+            [mailController addAttachmentData:exceptionData mimeType:@"text/plain" fileName:@"Exceptions.log"];
+        }
     }
 
     [self presentViewController:mailController animated:YES completion:nil];

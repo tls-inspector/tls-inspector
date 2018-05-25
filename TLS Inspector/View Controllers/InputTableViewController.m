@@ -198,6 +198,7 @@
         [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
         self.hostField.delegate = self;
         self.hostField.textColor = themeTextColor;
+        self.hostField.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
         [self setHoldFieldPlaceholder];
     } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];

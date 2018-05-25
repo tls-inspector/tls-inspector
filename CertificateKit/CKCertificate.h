@@ -27,6 +27,7 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificatePublicKey.h"
 #import "CKNameObject.h"
+#import "CKAlternateNameObject.h"
 #import "CKRevoked.h"
 
 @class CKCertificatePublicKey;
@@ -132,11 +133,19 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSDate * notBefore;
 
 /**
- *  Test if current date is within the certificates issue date range
- *
- *  @return current date within range?
+ *  Returns if the certificates is between the start and expiry date.
  */
-- (BOOL) validIssueDate;
+@property (nonatomic, readonly) BOOL isDateValid;
+
+/**
+ *  Returns if the certificates notAfter date is in the past
+ */
+@property (nonatomic, readonly) BOOL isExpired;
+
+/**
+ *  Returns if the certificates notBefore date is in the future
+ */
+@property (nonatomic, readonly) BOOL isNotYetValid;
 
 /**
  *  Returns the certificates subject names.
@@ -166,7 +175,7 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 /**
  *  Returns an array of subject names applicable to the cert
  */
-@property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * subjectAlternativeNames;
+@property (strong, nonatomic, nullable, readonly) NSArray<CKAlternateNameObject *> * alternateNames;
 
 /**
  *  Returns the public key encoded using Privacy-Enhanced Electronic Mail (PEM) includes header and footer.

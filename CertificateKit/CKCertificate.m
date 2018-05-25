@@ -39,10 +39,17 @@
 
 @property (nonatomic) X509 * certificate;
 @property (strong, nonatomic, readwrite) NSString * summary;
-@property (strong, nonatomic) NSArray<NSString *> * subjectAltNames;
+@property (strong, nonatomic) NSArray<CKAlternateNameObject *> * subjectAltNames;
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * issuer;
+
+@property (strong, nonatomic, nullable, readwrite) NSDate * notAfter;
+@property (strong, nonatomic, nullable, readwrite) NSDate * notBefore;
+@property (nonatomic, readwrite) BOOL isValidDate;
+@property (nonatomic, readwrite) BOOL isExpired;
+@property (nonatomic, readwrite) BOOL isNotYetValid;
+
 @property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
 
@@ -77,6 +84,14 @@ INSERT_OPENSSL_ERROR_METHOD
     } else {
         xcert.summary = @"Untitled Certificate";
     }
+
+    xcert.notAfter = [NSDate fromASN1_TIME:X509_get0_notAfter(cert)];
+    xcert.notBefore = [NSDate fromASN1_TIME:X509_get0_notBefore(cert)];
+
+    // Don't consider certs expired/notyetvalid if they're just hours away from the date.
+    xcert.isExpired = [xcert.notAfter timeIntervalSinceNow] < 86400;
+    xcert.isNotYetValid = [xcert.notBefore timeIntervalSinceNow] > 86400;
+    xcert.isValidDate = !xcert.isExpired && !xcert.isNotYetValid;
     
     AUTHORITY_INFO_ACCESS * info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
     int len = sk_ACCESS_DESCRIPTION_num(info);
@@ -200,25 +215,6 @@ INSERT_OPENSSL_ERROR_METHOD
     return [NSString stringWithUTF8String:buffer];
 }
 
-- (NSDate *) notAfter {
-    return [NSDate fromASN1_TIME:X509_get0_notAfter(self.certificate)];
-}
-
-- (NSDate *) notBefore {
-    return [NSDate fromASN1_TIME:X509_get0_notBefore(self.certificate)];
-}
-
-- (BOOL) validIssueDate {
-    BOOL valid = YES;
-    if ([self.notBefore timeIntervalSinceNow] > 0) {
-        valid = NO;
-    }
-    if ([self.notAfter timeIntervalSinceNow] < 0) {
-        valid = NO;
-    }
-    return valid;
-}
-
 - (void *) X509Certificate {
     return self.certificate;
 }
@@ -244,7 +240,11 @@ INSERT_OPENSSL_ERROR_METHOD
     return nil;
 }
 
-- (NSArray<NSString *> *) subjectAlternativeNames {
+- (NSArray<CKAlternateNameObject *> *) alternateNames {
+    if (self.subjectAltNames) {
+        return self.subjectAltNames;
+    }
+
     // This will leak
     GENERAL_NAMES * sans = X509_get_ext_d2i(self.certificate, NID_subject_alt_name, NULL, NULL);
     int numberOfSans = sk_GENERAL_NAME_num(sans);
@@ -252,19 +252,59 @@ INSERT_OPENSSL_ERROR_METHOD
         return @[];
     }
 
-    if (self.subjectAltNames) {
-        return self.subjectAltNames;
-    }
-
-    NSMutableArray<NSString *> * names = [NSMutableArray new];
+    NSMutableArray<CKAlternateNameObject *> * names = [NSMutableArray arrayWithCapacity:numberOfSans];
     const GENERAL_NAME * name;
-    const unsigned char * domain;
+
     for (int i = 0; i < numberOfSans; i++) {
         name = sk_GENERAL_NAME_value(sans, i);
+        unsigned char * value = NULL;
 
-        if (name->type == GEN_DNS) {
-            domain = ASN1_STRING_get0_data(name->d.dNSName);
-            [names addObject:[NSString stringWithUTF8String:(const char *)domain]];
+        CKAlternateNameObject * nameObject = [CKAlternateNameObject new];
+
+        switch (name->type) {
+            case GEN_EMAIL:
+                nameObject.type = AlternateNameTypeEmail;
+                value = name->d.ia5->data;
+                break;
+            case GEN_DNS:
+                nameObject.type = AlternateNameTypeDNS;
+                value = name->d.ia5->data;
+                break;
+            case GEN_URI:
+                nameObject.type = AlternateNameTypeURI;
+                value = name->d.ia5->data;
+                break;
+            case GEN_IPADD:
+                nameObject.type = AlternateNameTypeIP;
+
+                unsigned char *p;
+                char oline[256], htmp[5];
+                int i;
+                p = name->d.ip->data;
+                if (name->d.ip->length == 4) {
+                    snprintf(oline, sizeof(oline), "%d.%d.%d.%d", p[0], p[1], p[2], p[3]);
+                    value = (unsigned char *)&oline;
+                    printf("IP Address: %s\n", value);
+                } else if (name->d.ip->length == 16) {
+                    oline[0] = 0;
+                    for (i = 0; i < 8; i++) {
+                        snprintf(htmp, sizeof(htmp), "%X", p[0] << 8 | p[1]);
+                        p += 2;
+                        // Use of strcat is acceptable here as we use "snprintf" above.
+                        strcat(oline, htmp);
+                        if (i != 7) {
+                            strcat(oline, ":");
+                        }
+                    }
+                    value = (unsigned char *)&oline;
+                }
+                break;
+            default:
+                break;
+        }
+        if (value != NULL) {
+            nameObject.value = [NSString stringWithUTF8String:(const char *)value];
+            [names addObject:nameObject];
         }
     }
 

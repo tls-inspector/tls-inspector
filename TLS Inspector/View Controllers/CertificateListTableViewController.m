@@ -152,7 +152,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    if (UserOptions.currentOptions.getHTTPHeaders) {
+        return 3;
+    } else {
+        return 2;
+    }
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -182,9 +186,13 @@
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [lang key:@"{commonName} (Revoked)" args:@[name.commonName]];
             cell.textLabel.textColor = uihelper.redColor;
-        } else if (!cert.validIssueDate) {
+        } else if (cert.isExpired) {
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[name.commonName]];
+            cell.textLabel.textColor = uihelper.redColor;
+        } else if (cert.isNotYetValid) {
+            CKNameObject * name = cert.subject;
+            cell.textLabel.text = [lang key:@"{commonName} (Not Yet Valid)" args:@[name.commonName]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if ([cert.signatureAlgorithm hasPrefix:@"sha1"] && !cert.isRootCA) {
             CKNameObject * name = cert.subject;

@@ -1,6 +1,7 @@
 #import "AboutViewController.h"
 #import "AppLinks.h"
 #import "TitleValueTableViewCell.h"
+#import "ContactSupportTableViewController.h"
 
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -45,7 +46,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
         case 0:
             return 3;
         case 1:
-            return 2;
+            return 1;
     }
     return 0;
 }
@@ -111,7 +112,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                      open_url(nstrcat(PROJECT_GITHUB_URL, @"issues/new"));
                      break;
                  case 1: {
-                     [self.appLinks showEmailComposeSheetForAppInViewController:self dismissed:nil];
+                     [ContactSupportTableViewController collectFeedbackOnController:self finished:^(NSString *comments) {
+                         [self.appLinks showEmailComposeSheetForAppInViewController:self withComments:comments dismissed:nil];
+                     }];
                      break;
                  } default:
                      break;

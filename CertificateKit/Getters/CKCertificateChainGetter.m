@@ -217,8 +217,12 @@
 - (void) determineTrust {
     // Expired/Not Valid
     for (CKCertificate * cert in self.chain.certificates) {
-        if (!cert.validIssueDate) {
-            PWarn(@"Certificate: '%@' has an invalid date", cert.subject.commonName);
+        if (cert.isExpired) {
+            PWarn(@"Certificate: '%@' expired on: %@", cert.subject.commonName, cert.notAfter.description);
+            self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
+            return;
+        } else if (cert.isNotYetValid) {
+            PWarn(@"Certificate: '%@' is not yet valid until: %@", cert.subject.commonName, cert.notBefore.description);
             self.chain.trusted = CKCertificateChainTrustStatusInvalidDate;
             return;
         }
@@ -260,15 +264,15 @@
     }
 
     // Wrong Host
-    if (self.chain.server.subjectAlternativeNames.count == 0) {
+    if (self.chain.server.alternateNames.count == 0) {
         PWarn(@"Certificate: '%@' has no subject alternate names", self.chain.server.subject.commonName);
         self.chain.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
     BOOL match = NO;
     NSArray<NSString *> * domainComponents = [self.chain.domain.lowercaseString componentsSeparatedByString:@"."];
-    for (NSString * name in self.chain.server.subjectAlternativeNames) {
-        NSArray<NSString *> * nameComponents = [name.lowercaseString componentsSeparatedByString:@"."];
+    for (CKAlternateNameObject * name in self.chain.server.alternateNames) {
+        NSArray<NSString *> * nameComponents = [name.value.lowercaseString componentsSeparatedByString:@"."];
         if (domainComponents.count != nameComponents.count) {
             // Invalid
             continue;

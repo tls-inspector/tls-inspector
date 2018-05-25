@@ -14,6 +14,10 @@ static AppState * _instance;
 - (id) init {
     if (!_instance) {
         _instance = [super init];
+
+#if DEBUG
+        [CertificateKit setLoggingLevel:CKLoggingLevelDebug];
+#endif
     }
     return _instance;
 }

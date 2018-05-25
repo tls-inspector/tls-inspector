@@ -1,9 +1,9 @@
 #import "CertificateTableViewController.h"
 #import "CertificateTableRowSection.h"
 #import "CertificateTableRowItem.h"
-#import "InspectorListTableViewController.h"
 #import "TitleValueTableViewCell.h"
 #import "CertificateReminderManager.h"
+#import "SANListTableViewController.h"
 
 @interface CertificateTableViewController ()
 
@@ -57,7 +57,7 @@
 
     // Validity Period
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     CertificateTableRowSection * dateSection = [CertificateTableRowSection sectionWithTitle:@"Validity Period"];
     NSMutableArray<CertificateTableRowItem *> * dateItems = [NSMutableArray arrayWithArray:@[
                                                                                              [CertificateTableRowItem itemWithTitle:l(@"Not Valid Before") value:[dateFormatter stringFromDate:[selectedCertificate notBefore]] style:CertificateTableRowItemStyleBasicValue],
@@ -106,11 +106,9 @@
     [self.sections addObject:fingerprintSection];
 
     // Subject Alt. Names
-    if (selectedCertificate.subjectAlternativeNames.count > 0) {
+    if (selectedCertificate.alternateNames.count > 0) {
         CertificateTableRowSection * sanSection = [CertificateTableRowSection sectionWithTitle:@"Subject Alternative Names"];
-        sanSection.items = @[
-                                     [CertificateTableRowItem itemWithTitle:@"View all alternative names" value:@"" style:CertificateTableRowItemStyleBasic],
-                                     ];
+        sanSection.items = @[[CertificateTableRowItem itemWithTitle:@"View all alternative names" value:@"" style:CertificateTableRowItemStyleBasic]];
         [self.sections addObject:sanSection];
     }
 }
@@ -259,7 +257,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowList"]) {
-        [(InspectorListTableViewController *)segue.destinationViewController setList:selectedCertificate.subjectAlternativeNames title:l(@"Subject Alt. Names")];
+        ((SANListTableViewController *)segue.destinationViewController).items = selectedCertificate.alternateNames;
     }
 }
 

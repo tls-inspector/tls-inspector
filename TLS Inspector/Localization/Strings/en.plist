@@ -686,6 +686,8 @@
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Show HTTP Headers</key>
+	<string>Show HTTP Headers</string>
 	<key>Show Tips</key>
 	<string>Show Tips</string>
 	<key>Signature</key>
@@ -832,6 +834,18 @@
 	<string>Time Stamping</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
+	<key>sanType::DNS</key>
+	<string>DNS</string>
+	<key>sanType::Directory</key>
+	<string>Directory</string>
+	<key>sanType::Email</key>
+	<string>Email</string>
+	<key>sanType::IP</key>
+	<string>IP Address</string>
+	<key>sanType::Other</key>
+	<string>Other</string>
+	<key>sanType::URI</key>
+	<string>URI</string>
 	<key>secure::invalid_date</key>
 	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
 	<key>secure::local_trust</key>
@@ -890,6 +904,8 @@ Exercise caution if continuing to this website.</string>
 	<string>{0} (Expired)</string>
 	<key>{commonName} (Insecure)</key>
 	<string>{0} (Insecure)</string>
+	<key>{commonName} (Not Yet Valid)</key>
+	<string>{0} (Not Yet Valid)</string>
 	<key>{commonName} (Revoked)</key>
 	<string>{0} (Revoked)</string>
 	<key>{commonName} ({orgName} {countryName})</key>

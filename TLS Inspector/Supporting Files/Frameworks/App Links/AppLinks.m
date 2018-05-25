@@ -63,7 +63,7 @@
     }
 }
 
-- (void) showEmailComposeSheetForAppInViewController:(UIViewController * _Nonnull)viewController dismissed:(void(^ _Nullable)(void))dismissed {
+- (void)showEmailComposeSheetForAppInViewController:(UIViewController *)viewController withComments:(NSString *)comments dismissed:(void (^)(void))dismissed {
     MFMailComposeViewController * mailController = [MFMailComposeViewController new];
     mailController.mailComposeDelegate = self;
     [mailController setSubject:[NSString stringWithFormat:@"%@ Feedback", APP_NAME]];
@@ -79,7 +79,7 @@
     NSOperatingSystemVersion systemVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
     NSString * body = [NSString stringWithFormat:@"Please do not delete the following line:<br/>%@ %@ (%@) %@ %li.%li.%li",
                        bundleName, bundleVersion, bundleBuild, deviceName, (long)systemVersion.majorVersion, (long)systemVersion.minorVersion, (long)systemVersion.patchVersion];
-    [mailController setMessageBody:[NSString stringWithFormat:@"<p><br/><br/></p><hr/><p><small>%@</small></p>", body] isHTML:YES];
+    [mailController setMessageBody:[NSString stringWithFormat:@"<p>%@<br/><br/></p><hr/><p><small>%@</small></p>", (comments != nil ? comments : @""), body] isHTML:YES];
 
     if (!mailController) {
         if (dismissed) {
