@@ -18,6 +18,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(next:)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.descriptionInput.textColor = themeTextColor;
+    self.descriptionInput.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
