@@ -26,6 +26,9 @@ case "$mode" in
             exit 1
         fi
 
-        plutil -convert binary1 "$2" && plutil -convert xml1 "$2" && sed -i '' "s/'/\&apos;/g" "$2"
+        plutil -convert binary1 "$2" && plutil -convert xml1 "$2"
+        gsed -ie "4,\$s/'/\&apos;/g" "$2"
+        gsed -ie "4,\$s/\"/\&quot;/g" "$2"
+        rm -f "$2"e
         ;;
 esac
