@@ -248,7 +248,6 @@
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HTm-7i-kbV">
                                                     <rect key="frame" x="8" y="8" width="359" height="83.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" smartQuotesType="no"/>
                                                     <connections>
@@ -282,24 +281,31 @@
             </objects>
             <point key="canvasLocation" x="3852" y="3182"/>
         </scene>
-        <!--Inspector List Table View Controller-->
+        <!--Alternate Names-->
         <scene sceneID="mb3-AM-kEd">
             <objects>
-                <tableViewController id="7YK-nc-nNG" customClass="InspectorListTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SANs" id="7YK-nc-nNG" customClass="SANListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="yeW-ra-m34">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Basic" textLabel="oPy-rA-KGu" style="IBUITableViewCellStyleDefault" id="cwC-hU-dfv">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Left" textLabel="ONR-vG-CRv" detailTextLabel="35K-yP-tHv" style="IBUITableViewCellStyleValue1" id="exO-wl-GJD">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cwC-hU-dfv" id="9re-br-Mx6">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="exO-wl-GJD" id="F76-6P-ZAA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oPy-rA-KGu">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ONR-vG-CRv">
+                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.11372549019607843" green="0.63137254901960782" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="35K-yP-tHv">
+                                            <rect key="frame" x="315" y="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -314,7 +320,11 @@
                             <outlet property="delegate" destination="7YK-nc-nNG" id="UGD-qh-cUW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="wRC-qj-hgr"/>
+                    <navigationItem key="navigationItem" title="Alternate Names" largeTitleDisplayMode="never" id="wRC-qj-hgr">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="Alternate Names"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yE4-eG-wfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

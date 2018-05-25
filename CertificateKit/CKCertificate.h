@@ -27,6 +27,7 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificatePublicKey.h"
 #import "CKNameObject.h"
+#import "CKAlternateNameObject.h"
 #import "CKRevoked.h"
 
 @class CKCertificatePublicKey;
@@ -174,7 +175,7 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 /**
  *  Returns an array of subject names applicable to the cert
  */
-@property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * subjectAlternativeNames;
+@property (strong, nonatomic, nullable, readonly) NSArray<CKAlternateNameObject *> * alternateNames;
 
 /**
  *  Returns the public key encoded using Privacy-Enhanced Electronic Mail (PEM) includes header and footer.
