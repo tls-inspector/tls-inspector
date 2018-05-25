@@ -13,9 +13,11 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
 
+    [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(next:)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.descriptionInput.textColor = themeTextColor;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
