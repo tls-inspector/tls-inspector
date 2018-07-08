@@ -58,7 +58,7 @@ static int numberOfCerts = 0;
 
 INSERT_OPENSSL_ERROR_METHOD
 
-#define SSL_CLEANUP if (web != NULL) { BIO_free_all(web); }; if (NULL != ctx) { SSL_CTX_free(ctx); };
+#define SSL_CLEANUP if (web != NULL) { BIO_free_all(web); }; if (ctx != NULL) { SSL_CTX_free(ctx); };
 
 - (void) failWithError:(CKCertificateError)code description:(NSString *)description {
     [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.certificatekit" code:code userInfo:@{NSLocalizedDescriptionKey: description}]];
@@ -91,7 +91,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, verify_callback);
-    SSL_CTX_set_verify_depth(ctx, 4);
+    SSL_CTX_set_verify_depth(ctx, CERTIFICATE_CHAIN_MAXIMUM);
     SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_COMPRESSION);
 
     web = BIO_new_ssl_connect(ctx);
@@ -119,6 +119,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     const char* const PREFERRED_CIPHERS = "HIGH:!aNULL:!MD5:!RC4";
+    PDebug(@"Requesting ciphers: %s", PREFERRED_CIPHERS);
     if (SSL_set_cipher_list(ssl, PREFERRED_CIPHERS) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorCrypto description:@"Unsupported client ciphersuite"];
@@ -154,6 +155,13 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
+    self.chain = [CKCertificateChain new];
+    const SSL_CIPHER * cipher = SSL_get_current_cipher(ssl);
+    self.chain.protocol = SSL_version(ssl);
+    self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];
+    PDebug(@"Connected to '%@', Protocol version: %@, Ciphersuite: %@", url.host, self.chain.protocolString, self.chain.cipherSuite);
+    PDebug(@"Server returned %d certificates during handshake", numberOfCerts);
+
     SSL_CLEANUP
 
     // For security purposes, regular iOS applications are not allowed to access the root CA store
@@ -161,15 +169,14 @@ INSERT_OPENSSL_ERROR_METHOD
     // trusted or get the root CA certificate (as most websites do not present it)
     // The work-around for this is to export import the certificate into Apple's security
     // library, determine the trust status (which gets the root CA for us)
-    // The compare the certificates presented from the server. If the security library gave us
-    // one more certificate than what the server presented, that's the system-installed root CA
-
+    // If the security library gave us one more certificate than what the server presented,
+    // that's the system-installed root CA
     X509 * cert;
     NSMutableArray * secCertificates = [NSMutableArray arrayWithCapacity:numberOfCerts];
     for (int i = 0; i < numberOfCerts; i++) {
         cert = certificateChain[i];
         if (cert) {
-            unsigned char * bytes;
+            unsigned char * bytes = NULL;
             int len = i2d_X509(cert, &bytes);
             if (len == 0) {
                 PError(@"Error converting libssl.X509* to DER bytes");
@@ -200,13 +207,13 @@ INSERT_OPENSSL_ERROR_METHOD
     SecTrustEvaluate(trust, &trustStatus);
 
     long trustCount = SecTrustGetCertificateCount(trust);
+    PDebug(@"Trust returned %ld certificates", trustCount);
 
     NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:trustCount];
     for (int i = 0; i < trustCount; i++) {
         [certs addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
     }
 
-    self.chain = [CKCertificateChain new];
     self.chain.certificates = certs;
 
     self.chain.domain = queryURL.host;
@@ -255,15 +262,15 @@ INSERT_OPENSSL_ERROR_METHOD
 int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {
     STACK_OF(X509) * certs = X509_STORE_CTX_get1_chain(x509_ctx);
     X509 * cert;
-    for (int i = 0, count = sk_X509_num(certs); i < count; i++) {
+    int count = sk_X509_num(certs);
+    PError(@"Certificate chain exceeds maximum number of supported certificates %d, max: %d. Truncating chain.", count, CERTIFICATE_CHAIN_MAXIMUM);
+    for (int i = 0; i < count; i++) {
         if (i < CERTIFICATE_CHAIN_MAXIMUM) {
             cert = sk_X509_value(certs, i);
             if (cert != NULL) {
                 certificateChain[i] = cert;
                 numberOfCerts ++;
             }
-        } else {
-            NSLog(@"Certificate chain maximum exceeded.");
         }
     }
 
@@ -355,6 +362,7 @@ int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {
         NSArray<NSString *> * nameComponents = [name.value.lowercaseString componentsSeparatedByString:@"."];
         if (domainComponents.count != nameComponents.count) {
             // Invalid
+            PWarn(@"Domain components does not match name components");
             continue;
         }
 
