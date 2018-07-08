@@ -107,9 +107,10 @@ static dispatch_queue_t queue;
 }
 
 - (void) write:(NSString *)string forLevel:(CKLoggingLevel)level {
+    NSString * thread = [NSThread currentThread].description;
     dispatch_async(queue, ^{
-        NSString * writeString = [NSString stringWithFormat:@"[%@][%ld] %@",
-                                  [self stringForLevel:level], time(0), string];
+        NSString * writeString = [NSString stringWithFormat:@"[%@][%ld][%@] %@",
+                                  [self stringForLevel:level], time(0), thread, string];
         [self.handle writeData:[writeString dataUsingEncoding:NSUTF8StringEncoding]];
         printf("%s", [writeString UTF8String]);
     });
