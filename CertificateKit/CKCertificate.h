@@ -47,6 +47,15 @@
 + (CKCertificate * _Nullable) fromX509:(void * _Nonnull)cert;
 
 /**
+ *  Create a CKCertificate object from a pre-existing X509 object.
+ *
+ *  @param cert A SecCertificateRef certificate reference
+ *
+ *  @return A CKCertificate instance
+ */
++ (CKCertificate * _Nullable) fromSecCertificateRef:(SecCertificateRef _Nonnull)cert;
+
+/**
  *  Finger (thumb) print types that CKCertificate can export
  */
 typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {

@@ -65,6 +65,15 @@ typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
     CKLoggingLevelError,
 };
 
+typedef NS_ENUM(NSInteger, CKCertificateError) {
+    // Errors relating to connecting to the remote server.
+    CKCertificateErrorConnection,
+    // Crypto error usually resulting from being run on an unsupported platform.
+    CKCertificateErrorCrypto,
+    // Invalid parameter information such as hostnames.
+    CKCertificateErrorInvalidParameter
+};
+
 /**
  *  Get the OpenSSL version used by CKCertificate
  *
