@@ -143,8 +143,8 @@
 
 - (void) finishedGetter:(CKGetter *)getter {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (finishedBlock != nil) {
-            finishedBlock(YES);
+        if (self->finishedBlock != nil) {
+            self->finishedBlock(YES);
         }
         currentChain = getter.chain;
         currentServerInfo = getter.serverInfo;
@@ -172,7 +172,7 @@
 - (void) getter:(CKGetter *)getter errorGettingCertificateChain:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.itemStatus setValue:@"Error" forKey:CERT_CELL];
-        errorLoading = YES;
+        self->errorLoading = YES;
         [self.getterErrors addObject:error];
         [self.tableView reloadData];
         [self showCloseButton];
@@ -182,7 +182,7 @@
 - (void) getter:(CKGetter *)getter errorGettingServerInfo:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.itemStatus setValue:@"Error" forKey:SERV_CELL];
-        errorLoading = YES;
+        self->errorLoading = YES;
         [self.getterErrors addObject:error];
         [self.tableView reloadData];
         [self showCloseButton];
