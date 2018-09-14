@@ -10,6 +10,8 @@
  * https://www.openssl.org/source/license.html
  */
 
+#include <openssl/opensslv.h>
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
@@ -91,9 +93,6 @@ extern "C" {
 #ifndef OPENSSL_NO_SSL3_METHOD
 # define OPENSSL_NO_SSL3_METHOD
 #endif
-#ifndef OPENSSL_NO_TLS13DOWNGRADE
-# define OPENSSL_NO_TLS13DOWNGRADE
-#endif
 #ifndef OPENSSL_NO_UBSAN
 # define OPENSSL_NO_UBSAN
 #endif
@@ -123,10 +122,14 @@ extern "C" {
  * still won't see them if the library has been built to disable deprecated
  * functions.
  */
-#if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ > 0)
-# define DECLARE_DEPRECATED(f)    f __attribute__ ((deprecated));
-#else
+#ifndef DECLARE_DEPRECATED
 # define DECLARE_DEPRECATED(f)   f;
+# ifdef __GNUC__
+#  if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ > 0)
+#   undef DECLARE_DEPRECATED
+#   define DECLARE_DEPRECATED(f)    f __attribute__ ((deprecated));
+#  endif
+# endif
 #endif
 
 #ifndef OPENSSL_FILE
@@ -148,7 +151,13 @@ extern "C" {
 # define OPENSSL_API_COMPAT OPENSSL_MIN_API
 #endif
 
-#if OPENSSL_API_COMPAT < 0x10200000L
+/*
+ * Do not deprecate things to be deprecated in version 1.2.0 before the
+ * OpenSSL version number matches.
+ */
+#if OPENSSL_VERSION_NUMBER < 0x10200000L
+# define DEPRECATEDIN_1_2_0(f)   f;
+#elif OPENSSL_API_COMPAT < 0x10200000L
 # define DEPRECATEDIN_1_2_0(f)   DECLARE_DEPRECATED(f)
 #else
 # define DEPRECATEDIN_1_2_0(f)
