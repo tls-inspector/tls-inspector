@@ -21,17 +21,23 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
     self.appLinks = [AppLinks new];
+    self.view.backgroundColor = colorForTheme(UIColor.groupTableViewBackgroundColor, [UIColor colorWithRed:0.08f green:0.11f blue:0.15f alpha:1.0f]);
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    if (usingLightTheme) {
+        return UIStatusBarStyleLightContent;
+    } else {
+        return UIStatusBarStyleDefault;
+    }
 }
 
 - (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction) closeButton:(UIButton *)sender {
+- (IBAction) closeButton:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

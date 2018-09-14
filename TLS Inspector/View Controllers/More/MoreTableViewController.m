@@ -10,13 +10,9 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
-
-    if (self.presentingViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(close)];
-    }
 }
 
-- (void) close {
+- (IBAction) close:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
