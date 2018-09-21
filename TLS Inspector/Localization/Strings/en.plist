@@ -849,7 +849,7 @@
 	<key>secure::invalid_date</key>
 	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
 	<key>secure::local_trust</key>
-	<string>Yes. your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
+	<string>Yes. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
 
 Typically, private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance.</string>
 	<key>secure::revoked</key>
@@ -869,7 +869,7 @@ Exercise caution if continuing to this website.</string>
 
 Exercise caution if continuing to this website.</string>
 	<key>secure::trust</key>
-	<string>Yes. your device has determined that the connection to this site is secure.</string>
+	<string>Yes. Your device has determined that the connection to this site is secure.</string>
 	<key>secure::untrusted</key>
 	<string>No. Your device was unable to check if the certificate presented by the website actually belongs to the website, and not somebody else.
 
