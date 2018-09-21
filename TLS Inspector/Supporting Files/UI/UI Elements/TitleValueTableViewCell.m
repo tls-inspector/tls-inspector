@@ -21,19 +21,8 @@
         self.titleLabel.text = title;
         [self addSubview:self.titleLabel];
 
-        NSDictionary * views = @{ @"label": self.titleLabel };
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"H:|-16-[label]"
-                              options:0
-                              metrics:nil
-                              views:views]];
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"V:|-8-[label]"
-                              options:0
-                              metrics:nil
-                              views:views]];
+		[[self.titleLabel.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor] setActive:YES];
+		[[self.titleLabel.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor] setActive:YES];
     }
 
     {
@@ -45,21 +34,14 @@
         self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
         self.valueLabel.text = value;
         [self addSubview:self.valueLabel];
-
-        NSDictionary * views = @{ @"title": self.titleLabel, @"value": self.valueLabel };
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"H:|-16-[value]-16-|"
-                              options:0
-                              metrics:nil
-                              views:views]];
-        [NSLayoutConstraint
-         activateConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"V:[title]-8-[value]-8-|"
-                              options:0
-                              metrics:nil
-                              views:views]];
+		
+		[[self.valueLabel.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor] setActive:YES];
+		[[self.valueLabel.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]  setActive:YES];
+		[[self.valueLabel.bottomAnchor constraintEqualToAnchor:self.layoutMarginsGuide.bottomAnchor] setActive:YES];
     }
+	
+	NSLayoutConstraint *verticalSpacing = [NSLayoutConstraint constraintWithItem:self.valueLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.titleLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:8.0];
+	[self addConstraint:verticalSpacing];
 
     [self.titleLabel setNeedsLayout];
     [self.valueLabel setNeedsLayout];
