@@ -52,7 +52,7 @@
                             <constraints>
                                 <constraint firstItem="JrK-ul-rTW" firstAttribute="top" secondItem="FIN-oX-rNz" secondAttribute="bottom" constant="4" id="3bM-jr-OaV"/>
                                 <constraint firstItem="JrK-ul-rTW" firstAttribute="leading" secondItem="lNR-RR-Xvi" secondAttribute="leadingMargin" constant="11" id="Xvu-Xg-7Vt"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="JrK-ul-rTW" secondAttribute="trailing" constant="16" id="YpN-aa-st5"/>
+                                <constraint firstAttribute="trailing" secondItem="JrK-ul-rTW" secondAttribute="trailing" constant="16" id="YpN-aa-st5"/>
                                 <constraint firstItem="uQw-S7-WH4" firstAttribute="leading" secondItem="lNR-RR-Xvi" secondAttribute="leadingMargin" constant="11" id="izL-BO-BjA"/>
                                 <constraint firstItem="FIN-oX-rNz" firstAttribute="top" secondItem="lNR-RR-Xvi" secondAttribute="topMargin" id="kNM-xy-JNw"/>
                                 <constraint firstItem="FIN-oX-rNz" firstAttribute="leading" secondItem="uQw-S7-WH4" secondAttribute="trailing" constant="4" id="naY-mk-ViS"/>
@@ -377,9 +377,9 @@
                             <constraints>
                                 <constraint firstItem="dPh-iq-nWH" firstAttribute="centerY" secondItem="smF-ep-rUB" secondAttribute="centerY" id="2Pb-FD-ifi"/>
                                 <constraint firstItem="e3s-bJ-unQ" firstAttribute="top" secondItem="smF-ep-rUB" secondAttribute="top" constant="10" id="3IM-BK-YlP"/>
+                                <constraint firstAttribute="trailing" secondItem="dPh-iq-nWH" secondAttribute="trailing" constant="10" id="IRd-jq-K6F"/>
                                 <constraint firstItem="e3s-bJ-unQ" firstAttribute="leading" secondItem="smF-ep-rUB" secondAttribute="leadingMargin" constant="8" id="QR9-pN-ez2"/>
                                 <constraint firstAttribute="bottom" secondItem="e3s-bJ-unQ" secondAttribute="bottom" constant="10" id="XNq-r2-Ljx"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="dPh-iq-nWH" secondAttribute="trailing" constant="6" id="ejn-Yt-OUs"/>
                                 <constraint firstItem="dPh-iq-nWH" firstAttribute="leading" secondItem="e3s-bJ-unQ" secondAttribute="trailing" constant="10" id="yQp-dV-C4I"/>
                             </constraints>
                         </view>
@@ -746,13 +746,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="ek1-GA-Upk" firstAttribute="leading" secondItem="yoa-Kp-7gu" secondAttribute="leading" constant="10" id="4xD-Ka-pUd"/>
                                     <constraint firstItem="2BQ-1S-aQg" firstAttribute="top" secondItem="yoa-Kp-7gu" secondAttribute="top" constant="80" id="53z-B2-eHW"/>
                                     <constraint firstAttribute="height" constant="300" id="6aH-6R-Wzi"/>
                                     <constraint firstItem="bET-vI-HT9" firstAttribute="top" secondItem="2BQ-1S-aQg" secondAttribute="bottom" constant="30" id="7rU-Va-0bz"/>
+                                    <constraint firstItem="ek1-GA-Upk" firstAttribute="top" secondItem="yoa-Kp-7gu" secondAttribute="top" constant="25" id="N48-A2-kav"/>
                                     <constraint firstItem="2BQ-1S-aQg" firstAttribute="centerX" secondItem="yoa-Kp-7gu" secondAttribute="centerX" id="dXM-9e-mbe"/>
                                     <constraint firstItem="bET-vI-HT9" firstAttribute="centerX" secondItem="yoa-Kp-7gu" secondAttribute="centerX" id="pA1-UE-nYr"/>
-                                    <constraint firstItem="ek1-GA-Upk" firstAttribute="leading" secondItem="yoa-Kp-7gu" secondAttribute="leadingMargin" id="rKT-Te-Qvh"/>
-                                    <constraint firstItem="ek1-GA-Upk" firstAttribute="top" secondItem="yoa-Kp-7gu" secondAttribute="topMargin" id="uvD-ck-xPn"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -817,9 +817,9 @@
                             <constraint firstItem="yoa-Kp-7gu" firstAttribute="top" secondItem="p0K-QC-1sB" secondAttribute="top" id="NLR-FG-3AX"/>
                             <constraint firstAttribute="trailing" secondItem="dpJ-4L-808" secondAttribute="trailing" id="c8a-eV-nVN"/>
                             <constraint firstItem="yoa-Kp-7gu" firstAttribute="leading" secondItem="p0K-QC-1sB" secondAttribute="leading" id="jNU-Po-YNa"/>
+                            <constraint firstItem="j4s-YF-fYA" firstAttribute="top" secondItem="dpJ-4L-808" secondAttribute="bottom" id="lAA-kl-8PX"/>
                             <constraint firstItem="dpJ-4L-808" firstAttribute="top" secondItem="yoa-Kp-7gu" secondAttribute="bottom" id="rGO-yw-pzm"/>
                             <constraint firstItem="dpJ-4L-808" firstAttribute="leading" secondItem="p0K-QC-1sB" secondAttribute="leading" id="tg5-oc-9k7"/>
-                            <constraint firstAttribute="bottom" secondItem="dpJ-4L-808" secondAttribute="bottom" id="xNU-as-lRc"/>
                         </constraints>
                     </view>
                     <userDefinedRuntimeAttributes>
