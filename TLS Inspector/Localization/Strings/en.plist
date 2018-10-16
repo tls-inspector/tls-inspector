@@ -662,6 +662,8 @@
 	<string>Remember Recent Lookups</string>
 	<key>Reminder Added</key>
 	<string>Reminder Added</string>
+	<key>Remote Address</key>
+	<string>Remote Address</string>
 	<key>Renew Certificate for {domain}</key>
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>

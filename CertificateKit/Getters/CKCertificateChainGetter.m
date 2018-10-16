@@ -32,6 +32,7 @@
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/err.h>
+#include <arpa/inet.h>
 
 @interface CKCertificateChainGetter () {
     NSURL * queryURL;
@@ -141,6 +142,30 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
+    int sock_fd;
+    if (BIO_get_fd(web, &sock_fd) == -1) {
+        [self failWithError:CKCertificateErrorInvalidParameter description:@"Internal Error"];
+        SSL_CLEANUP
+        return;
+    }
+    struct sockaddr addr;
+    socklen_t addr_len = sizeof(addr);
+    getpeername(sock_fd, &addr, &addr_len);
+    NSString * remoteAddr;
+    if (addr.sa_family == AF_INET) {
+        char addressString[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &((struct sockaddr_in *)&addr)->sin_addr, addressString, INET_ADDRSTRLEN);
+        remoteAddr = [[NSString alloc] initWithUTF8String:addressString];
+    } else if (addr.sa_family == AF_INET6) {
+        char addressString[INET6_ADDRSTRLEN];
+        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)&addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
+        remoteAddr = [[NSString alloc] initWithUTF8String:addressString];
+    } else {
+        [self failWithError:CKCertificateErrorInvalidParameter description:@"Unknown address family"];
+        SSL_CLEANUP
+        return;
+    }
+
     if (BIO_do_handshake(web) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorConnection description:@"Connection failed"];
@@ -159,7 +184,8 @@ INSERT_OPENSSL_ERROR_METHOD
     const SSL_CIPHER * cipher = SSL_get_current_cipher(ssl);
     self.chain.protocol = SSL_version(ssl);
     self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];
-    PDebug(@"Connected to '%@', Protocol version: %@, Ciphersuite: %@", url.host, self.chain.protocolString, self.chain.cipherSuite);
+    self.chain.remoteAddress = remoteAddr;
+    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@", url.host, remoteAddr, self.chain.protocolString, self.chain.cipherSuite);
     PDebug(@"Server returned %d certificates during handshake", numberOfCerts);
 
     SSL_CLEANUP

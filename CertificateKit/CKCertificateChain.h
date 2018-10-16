@@ -87,6 +87,11 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (strong, nonatomic, nonnull) NSString * domain;
 
 /**
+ The remote address for the server
+ */
+@property (strong, nonatomic, nonnull) NSString * remoteAddress;
+
+/**
  The array of certificates belonging to the chain
  */
 @property (strong, nonatomic, nonnull) NSArray<CKCertificate *> * certificates;
