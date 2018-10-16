@@ -32,11 +32,6 @@
 @interface CKCertificateChain (EnumValues)
 
 /**
- Get a string representation of the cipher suite
- */
-@property (strong, nonatomic, nonnull, readonly) NSString * cipherString;
-
-/**
  Get a string representation of the protocol version
  */
 @property (strong, nonatomic, nonnull, readonly) NSString * protocolString;

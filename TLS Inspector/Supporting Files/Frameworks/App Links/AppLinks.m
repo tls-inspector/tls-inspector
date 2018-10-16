@@ -52,13 +52,13 @@
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
     if (viewController) {
         [self.viewController dismissViewControllerAnimated:YES completion:^{
-            if (dismissedBlock) {
-                dismissedBlock();
+            if (self->dismissedBlock) {
+                self->dismissedBlock();
             }
         }];
     } else {
-        if (dismissedBlock) {
-            dismissedBlock();
+        if (self->dismissedBlock) {
+            self->dismissedBlock();
         }
     }
 }
@@ -96,8 +96,8 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:^{
-        if (dismissedBlock) {
-            dismissedBlock();
+        if (self->dismissedBlock) {
+            self->dismissedBlock();
         }
     }];
 }

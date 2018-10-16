@@ -59,6 +59,15 @@
 
 INSERT_OPENSSL_ERROR_METHOD
 
++ (CKCertificate * _Nullable) fromSecCertificateRef:(SecCertificateRef _Nonnull)cert {
+    NSData * certificateData = (NSData *)CFBridgingRelease(SecCertificateCopyData(cert));
+    const unsigned char * bytes = (const unsigned char *)[certificateData bytes];
+    // This will leak
+    X509 * xcert = d2i_X509(NULL, &bytes, [certificateData length]);
+    certificateData = nil;
+    return [CKCertificate fromX509:xcert];
+}
+
 + (CKCertificate *) fromX509:(void *)cert {
     CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;

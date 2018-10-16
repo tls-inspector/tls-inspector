@@ -87,6 +87,11 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (strong, nonatomic, nonnull) NSString * domain;
 
 /**
+ The remote address for the server
+ */
+@property (strong, nonatomic, nonnull) NSString * remoteAddress;
+
+/**
  The array of certificates belonging to the chain
  */
 @property (strong, nonatomic, nonnull) NSArray<CKCertificate *> * certificates;
@@ -112,13 +117,13 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (nonatomic) CKCertificateChainTrustStatus trusted;
 
 /**
- Get the negotiated ciphersuite used to retrieve the chain
+ Get the negotiated ciphersuite used to retrieve the chain.
  */
-@property (nonatomic) SSLCipherSuite cipher;
+@property (strong, nonatomic) NSString * cipherSuite;
 
 /**
- Get the negotiated protocol used to retrieve the chain
+ Get the negotiated protocol used to retrieve the chain. Use protocolString to get a readable string.
  */
-@property (nonatomic) SSLProtocol protocol;
+@property (nonatomic) int protocol;
 
 @end
