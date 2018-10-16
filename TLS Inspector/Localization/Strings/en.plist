@@ -564,6 +564,8 @@
 	<string>Zimbabwe</string>
 	<key>Dark</key>
 	<string>Dark</string>
+	<key>Debug Logging Enabled</key>
+	<string>Debug Logging Enabled</string>
 	<key>Did You Know:</key>
 	<string>Did You Know:</string>
 	<key>Dismiss</key>
@@ -778,6 +780,8 @@
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
+	<key>You must inspect at least one site with debug logging enabled before you can submit logs</key>
+	<string>You must inspect at least one site with debug logging enabled before you can submit logs</string>
 	<key>You must restart TLS Inspector for theme changes to take affect.</key>
 	<string>You must restart TLS Inspector for theme changes to take affect.</string>
 	<key>You must restart the app for the change to take affect</key>

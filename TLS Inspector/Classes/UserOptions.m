@@ -100,9 +100,14 @@ static UserOptions * _instance;
 
     if (verboseLogging) {
         [CertificateKit setLoggingLevel:CKLoggingLevelDebug];
+        self.inspectionsWithVerboseLogging = 0;
     } else {
         [CertificateKit setLoggingLevel:CKLoggingLevelInfo];
     }
+}
+
+- (void) setInspectionsWithVerboseLogging:(NSUInteger)inspectionsWithVerboseLogging {
+    _inspectionsWithVerboseLogging = inspectionsWithVerboseLogging;
 }
 
 @end

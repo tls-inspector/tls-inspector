@@ -168,9 +168,13 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2 && indexPath.row == 1) {
-        [ContactSupportTableViewController collectFeedbackOnController:self finished:^(NSString *comments) {
-            [self sendDebugLogsWithComments:comments];
-        }];
+        if (UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
+            [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];
+        } else {
+            [ContactSupportTableViewController collectFeedbackOnController:self finished:^(NSString *comments) {
+                [self sendDebugLogsWithComments:comments];
+            }];
+        }
     }
 }
 
