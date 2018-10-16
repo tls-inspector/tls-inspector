@@ -52,7 +52,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
         case 0:
             return 3;
         case 1:
-            return 1;
+            return 2;
     }
     return 0;
 }
