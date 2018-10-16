@@ -7,7 +7,7 @@
 @implementation Storage
 
 static Storage * _instance;
-#define SUITE_NAME @"group.com.ecnepsnai.Certificate-Inspector"
+#define SUITE_NAME @"group.com.ecnepsnai.TLS-Inspector"
 
 + (Storage *) sharedInstance {
     if (!_instance) {
