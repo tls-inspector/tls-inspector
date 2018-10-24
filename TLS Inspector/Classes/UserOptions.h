@@ -18,6 +18,10 @@
 + (void) setDefaultValues;
 
 /**
+ Has the app been launched at least 1 time
+ */
+@property (nonatomic) BOOL firstRunCompleted;
+/**
  Should the app remember up to 5 of the last recently inspected domains?
  */
 @property (nonatomic) BOOL rememberRecentLookups;

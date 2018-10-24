@@ -9,6 +9,7 @@
 
 static UserOptions * _instance;
 
+#define KEY_FIRST_RUN_COMPLETE @"first_run_complete"
 #define KEY_REMEMBER_RECENT_LOOKUPS @"remember_recent_lookups"
 #define KEY_USE_LIGHT_THEME @"use_light_theme"
 #define KEY_SHOW_TIPS @"show_tips"
@@ -45,6 +46,14 @@ static UserOptions * _instance;
             [AppDefaults setValue:defaults[key] forKey:key];
         }
     }
+}
+
+- (BOOL) firstRunCompleted {
+    return [AppDefaults boolForKey:KEY_FIRST_RUN_COMPLETE];
+}
+
+- (void) setFirstRunCompleted:(BOOL)firstRunCompleted {
+    [AppDefaults setBool:firstRunCompleted forKey:KEY_FIRST_RUN_COMPLETE];
 }
 
 - (BOOL) rememberRecentLookups {

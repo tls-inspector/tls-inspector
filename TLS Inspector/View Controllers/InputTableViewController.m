@@ -41,6 +41,15 @@
     [[AppLinks new] appLaunchRate];
 #endif
 
+    if (!UserOptions.currentOptions.firstRunCompleted) {
+        UIViewController * notice = [self.storyboard instantiateViewControllerWithIdentifier:@"Notice"];
+        UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:notice];
+        if (@available(iOS 11.0, *)) {
+            controller.navigationBar.prefersLargeTitles = YES;
+        }
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+
     self.tipIconLabel.textColor = uihelper.blueColor;
     if (usingLightTheme) {
         self.tipTitleLabel.textColor = UIColor.blackColor;
