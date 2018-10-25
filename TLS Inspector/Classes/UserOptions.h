@@ -18,6 +18,10 @@
 + (void) setDefaultValues;
 
 /**
+ Has the app been launched at least 1 time
+ */
+@property (nonatomic) BOOL firstRunCompleted;
+/**
  Should the app remember up to 5 of the last recently inspected domains?
  */
 @property (nonatomic) BOOL rememberRecentLookups;
@@ -46,5 +50,10 @@
  Note: This value is NOT persisted and will always revert back to the default (NO) upon launch.
  */
 @property (nonatomic) BOOL verboseLogging;
+/**
+ The number of sites inspection since verbose logging was enabled. This resets every time
+ verbose logging is enabled
+ */
+@property (nonatomic) NSUInteger inspectionsWithVerboseLogging;
 
 @end

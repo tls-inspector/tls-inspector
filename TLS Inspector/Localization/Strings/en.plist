@@ -18,6 +18,8 @@
 	<string>All feedback is appreciated!</string>
 	<key>An error occurred</key>
 	<string>An error occurred</string>
+	<key>Apple Support</key>
+	<string>Apple Support</string>
 	<key>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</key>
 	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
 	<key>Both values matched.</key>
@@ -76,6 +78,8 @@
 	<string>Connection Information</string>
 	<key>Connection refused.</key>
 	<string>Connection refused.</string>
+	<key>Contact Support</key>
+	<string>Contact Support</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
 	<key>Contribute to TLS Inspector</key>
@@ -564,6 +568,8 @@
 	<string>Zimbabwe</string>
 	<key>Dark</key>
 	<string>Dark</string>
+	<key>Debug Logging Enabled</key>
+	<string>Debug Logging Enabled</string>
 	<key>Did You Know:</key>
 	<string>Did You Know:</string>
 	<key>Dismiss</key>
@@ -644,6 +650,8 @@
 	<string>Not Valid Before</string>
 	<key>Not Verified</key>
 	<string>Not Verified</string>
+	<key>Notice</key>
+	<string>Notice</string>
 	<key>Notification Date</key>
 	<string>Notification Date</string>
 	<key>OpenSSL Version</key>
@@ -746,6 +754,8 @@
 	<string>There were one or more errors while inspecting {0}</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
+	<key>Understood</key>
+	<string>Understood</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
 	<key>Valid From</key>
@@ -778,6 +788,8 @@
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
+	<key>You must inspect at least one site with debug logging enabled before you can submit logs</key>
+	<string>You must inspect at least one site with debug logging enabled before you can submit logs</string>
 	<key>You must restart TLS Inspector for theme changes to take affect.</key>
 	<string>You must restart TLS Inspector for theme changes to take affect.</string>
 	<key>You must restart the app for the change to take affect</key>
@@ -802,6 +814,10 @@
 	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
 	<key>explanation::wrong_host</key>
 	<string>The server certificate is for a different host than the one connected to.</string>
+	<key>first_run_notice</key>
+	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware. 
+
+If you&apos;re concerned about the security of your device; contact Apple Support.</string>
 	<key>keyUsage::OCSPSigning</key>
 	<string>OCSP Signing</string>
 	<key>keyUsage::anyExtendedKeyUsage</key>

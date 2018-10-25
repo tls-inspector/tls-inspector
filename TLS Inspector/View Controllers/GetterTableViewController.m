@@ -38,6 +38,7 @@
     }
 
     appState.getterViewController = self;
+    UserOptions.currentOptions.inspectionsWithVerboseLogging += 1;
 
     CKGetterOptions * options = [CKGetterOptions new];
     options.checkOCSP = UserOptions.currentOptions.queryOCSP;
