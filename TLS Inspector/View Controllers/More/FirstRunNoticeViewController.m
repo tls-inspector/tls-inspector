@@ -32,6 +32,12 @@
     [noticeText addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18.0f] range:foundRange];
 
     self.noticeTextView.attributedText = noticeText;
+
+    if (usingLightTheme) {
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    } else {
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    }
 }
 
 - (IBAction)dismissButtonTouchUpInside:(UIButton *)sender {

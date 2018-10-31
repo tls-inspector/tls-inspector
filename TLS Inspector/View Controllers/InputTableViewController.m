@@ -42,8 +42,13 @@
 #endif
 
     if (!UserOptions.currentOptions.firstRunCompleted) {
+        UserOptions.currentOptions.firstRunCompleted = YES;
         UIViewController * notice = [self.storyboard instantiateViewControllerWithIdentifier:@"Notice"];
         UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:notice];
+        if (!usingLightTheme) {
+            controller.navigationBar.translucent = NO;
+        }
+        controller.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;
         if (@available(iOS 11.0, *)) {
             controller.navigationBar.prefersLargeTitles = YES;
         }
