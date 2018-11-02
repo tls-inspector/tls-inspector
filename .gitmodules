@@ -1,0 +1,9 @@
+[submodule "Include/--force"]
+	path = Include/--force
+	url = https://github.com/certificate-helper/libcurl-ios.git
+[submodule "Include/libcurl-ios"]
+	path = Include/libcurl-ios
+	url = https://github.com/certificate-helper/libcurl-ios.git
+[submodule "Include/openssl-ios"]
+	path = Include/openssl-ios
+	url = https://github.com/certificate-helper/openssl-ios.git

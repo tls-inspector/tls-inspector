@@ -58,3 +58,4 @@ defines.pch
 
 # Built Libraries
 CertificateKit/*.framework
+Include/*.has
