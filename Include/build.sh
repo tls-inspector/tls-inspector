@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-set -x
 
 OPENSSL_WANTS=$(cat openssl.wants)
 CURL_WANTS=$(cat curl.wants)
@@ -14,6 +13,7 @@ NEED_BUILD_CURL=1
 
 if [ -f openssl.has ]; then
     OPENSSL_HAS=$(cat openssl.has)
+    echo "OpenSSL Version Present: ${OPENSSL_HAS}"
     if [ "${OPENSSL_WANTS}" = "${OPENSSL_HAS}" ]; then
         NEED_BUILD_OPENSSL=0
     fi
@@ -21,6 +21,7 @@ fi
 
 if [ -f curl.has ]; then
     CURL_HAS=$(cat curl.has)
+    echo "CURL Version Present: ${CURL_HAS}"
     if [ "${CURL_WANTS}" = "${CURL_HAS}" ]; then
         NEED_BUILD_CURL=0
     fi
