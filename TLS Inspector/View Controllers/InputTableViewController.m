@@ -82,7 +82,15 @@
     placeholder = [self.placeholderDomains objectAtIndex:randomPlaceholderIndex];
     NSUInteger randomTipIndex = arc4random() % [self.tipKeys count];
     tip = [self.tipKeys objectAtIndex:randomTipIndex];
-    self.recentDomains = [[RecentDomains sharedInstance] getRecentDomains];
+
+    if (RecentDomains.sharedInstance.saveRecentDomains) {
+        self.recentDomains = [[RecentDomains sharedInstance] getRecentDomains];
+    } else {
+        self.recentDomains = @[];
+    }
+    // Needed to hide the recent doamains list if the user turned it off in settings
+    [self.tableView reloadData];
+
     [self setHoldFieldPlaceholder];
     self.tipBodyLabel.text = [lang key:tip];
 
