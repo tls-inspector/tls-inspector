@@ -753,7 +753,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */;
 			buildPhases = (
-				3C956A4F218BE53800955720 /* ShellScript */,
 				3C65DAD51E836BE9004AD96D /* Sources */,
 				3C65DAD61E836BE9004AD96D /* Frameworks */,
 				3C65DAD71E836BE9004AD96D /* Headers */,
@@ -915,23 +914,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C956A4F218BE53800955720 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd $SRCROOT/Include/\n./build.sh\n";
-		};
 		3CA0F0201D84D5F700AA9307 /* Remove Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -55,7 +55,3 @@ fastlane/screenshots
 defines.pch
 *.xcworkspacedata
 /TLS Inspector.xcodeproj/project.xcworkspace
-
-# Built Libraries
-CertificateKit/*.framework
-Include/*.has
