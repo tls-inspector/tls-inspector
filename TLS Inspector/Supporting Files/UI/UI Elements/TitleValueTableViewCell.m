@@ -70,6 +70,10 @@
     return self;
 }
 
+- (void) useFixedWidthFont {
+    self.valueLabel.font = [UIFont fontWithName:@"Menlo" size:14.0f];
+}
+
 - (void) setAppearance {
     if (usingLightTheme) {
         self.titleLabel.textColor = [UIColor darkGrayColor];

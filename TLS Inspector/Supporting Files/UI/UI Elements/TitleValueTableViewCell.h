@@ -6,5 +6,6 @@
 @property (strong, nonatomic, readonly) UILabel * valueLabel;
 
 - (id) initWithTitle:(NSString *)title value:(NSString *)value;
+- (void) useFixedWidthFont;
 
 @end

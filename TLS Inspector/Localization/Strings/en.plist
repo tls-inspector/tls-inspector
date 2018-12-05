@@ -598,6 +598,8 @@
 	<string>Get Involved</string>
 	<key>Get Involved</key>
 	<string>Get Involved</string>
+	<key>HTTP Headers</key>
+	<string>HTTP Headers</string>
 	<key>Host was not found or invalid.</key>
 	<string>Host was not found or invalid.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
@@ -776,6 +778,8 @@
 	<string>Verify Value</string>
 	<key>Version</key>
 	<string>Version</string>
+	<key>View All</key>
+	<string>View All</string>
 	<key>View all alternate names</key>
 	<string>View all alternate names</string>
 	<key>View on SSL Labs</key>

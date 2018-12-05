@@ -19,7 +19,7 @@
         case CertificateTableRowItemStyleFixedValue: {
             TitleValueTableViewCell * cell = [[TitleValueTableViewCell alloc] initWithTitle:self.title value:self.value];
             if (self.style == CertificateTableRowItemStyleFixedValue) {
-                cell.valueLabel.font = [UIFont fontWithName:@"Menlo" size:14.0f];
+                [cell useFixedWidthFont];
             }
             return cell;
         }

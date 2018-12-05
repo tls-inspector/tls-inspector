@@ -10,6 +10,7 @@
 		3C04EE5F1CB4A23900F56B68 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C0C6F341E7CCB6400E6FCA2 /* UILang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0C6F331E7CCB6400E6FCA2 /* UILang.m */; };
 		3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0C6F331E7CCB6400E6FCA2 /* UILang.m */; };
+		3C15B72A21B76D08009E05BE /* HTTPHeadersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C15B72921B76D08009E05BE /* HTTPHeadersTableViewController.m */; };
 		3C1D28A5200959B800A606BB /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28A4200959B800A606BB /* GradientView.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; };
@@ -193,6 +194,8 @@
 		3C04EE631CB4B3F100F56B68 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3C0C6F321E7CCB6400E6FCA2 /* UILang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILang.h; sourceTree = "<group>"; };
 		3C0C6F331E7CCB6400E6FCA2 /* UILang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILang.m; sourceTree = "<group>"; };
+		3C15B72821B76D08009E05BE /* HTTPHeadersTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPHeadersTableViewController.h; sourceTree = "<group>"; };
+		3C15B72921B76D08009E05BE /* HTTPHeadersTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPHeadersTableViewController.m; sourceTree = "<group>"; };
 		3C1D28A3200959B800A606BB /* GradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		3C1D28A4200959B800A606BB /* GradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
@@ -640,6 +643,8 @@
 				3CFF7E6F20098FD900478E0A /* CertificateTableViewController.m */,
 				3CBD8B951E7CF0F900F2A637 /* SplitViewController.h */,
 				3CBD8B961E7CF0F900F2A637 /* SplitViewController.m */,
+				3C15B72821B76D08009E05BE /* HTTPHeadersTableViewController.h */,
+				3C15B72921B76D08009E05BE /* HTTPHeadersTableViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1033,6 +1038,7 @@
 				67D03D7E1F82EC7900981806 /* MoreTableViewController.m in Sources */,
 				3CF7E3451F789E9800EEEE21 /* NSAtomicNumber.m in Sources */,
 				A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */,
+				3C15B72A21B76D08009E05BE /* HTTPHeadersTableViewController.m in Sources */,
 				3CFF7E7020098FD900478E0A /* CertificateTableViewController.m in Sources */,
 				3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3CFF7E732009900F00478E0A /* CertificateTableRowItem.m in Sources */,
