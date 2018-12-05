@@ -62,6 +62,7 @@ INSERT_OPENSSL_ERROR_METHOD
 #define SSL_CLEANUP if (web != NULL) { BIO_free_all(web); }; if (ctx != NULL) { SSL_CTX_free(ctx); };
 
 - (void) failWithError:(CKCertificateError)code description:(NSString *)description {
+    PError(@"Failing with error (%ld): %@", (long)code, description);
     [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.certificatekit" code:code userInfo:@{NSLocalizedDescriptionKey: description}]];
 }
 
@@ -169,6 +170,12 @@ INSERT_OPENSSL_ERROR_METHOD
     if (BIO_do_handshake(web) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorConnection description:@"Connection failed"];
+        SSL_CLEANUP
+        return;
+    }
+
+    if (numberOfCerts > CERTIFICATE_CHAIN_MAXIMUM) {
+        [self failWithError:CKCertificateErrorConnection description:@"Too many certificates from server"];
         SSL_CLEANUP
         return;
     }
@@ -289,13 +296,16 @@ int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {
     STACK_OF(X509) * certs = X509_STORE_CTX_get1_chain(x509_ctx);
     X509 * cert;
     int count = sk_X509_num(certs);
-    PError(@"Certificate chain exceeds maximum number of supported certificates %d, max: %d. Truncating chain.", count, CERTIFICATE_CHAIN_MAXIMUM);
+    numberOfCerts = count;
+    if (count > CERTIFICATE_CHAIN_MAXIMUM) {
+        PError(@"Certificate chain exceeds maximum number of supported certificates: Count: %d, Max: %d", count, CERTIFICATE_CHAIN_MAXIMUM);
+        return 0;
+    }
     for (int i = 0; i < count; i++) {
         if (i < CERTIFICATE_CHAIN_MAXIMUM) {
             cert = sk_X509_value(certs, i);
             if (cert != NULL) {
                 certificateChain[i] = cert;
-                numberOfCerts ++;
             }
         }
     }
