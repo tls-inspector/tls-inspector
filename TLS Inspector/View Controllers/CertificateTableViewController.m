@@ -99,11 +99,23 @@
 
     // Fingerprint
     CertificateTableRowSection * fingerprintSection = [CertificateTableRowSection sectionWithTitle:@"Fingerprints"];
-    fingerprintSection.items = @[
-                                 [CertificateTableRowItem itemWithTitle:@"SHA-256" value:selectedCertificate.SHA256Fingerprint style:CertificateTableRowItemStyleFixedValue],
-                                 [CertificateTableRowItem itemWithTitle:@"SHA-1" value:selectedCertificate.SHA1Fingerprint style:CertificateTableRowItemStyleFixedValue],
-                                 ];
-    [self.sections addObject:fingerprintSection];
+    NSMutableArray<CertificateTableRowItem *> * fingerprintSectionItems = [NSMutableArray new];
+    if (UserOptions.currentOptions.showFingerprintMD5) {
+        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"MD5" value:selectedCertificate.MD5Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+    }
+    if (UserOptions.currentOptions.showFingerprintSHA128) {
+        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"SHA-128" value:selectedCertificate.SHA1Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+    }
+    if (UserOptions.currentOptions.showFingerprintSHA256) {
+        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"SHA-256" value:selectedCertificate.SHA256Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+    }
+    if (UserOptions.currentOptions.showFingerprintSHA512) {
+        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"SHA-512" value:selectedCertificate.SHA512Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+    }
+    fingerprintSection.items = fingerprintSectionItems;
+    if (fingerprintSectionItems.count > 0) {
+        [self.sections addObject:fingerprintSection];
+    }
 
     // Subject Alt. Names
     if (selectedCertificate.alternateNames.count > 0) {

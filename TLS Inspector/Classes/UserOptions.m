@@ -16,6 +16,10 @@ static UserOptions * _instance;
 #define KEY_GET_HTTP_HEADERS @"get_http_headers"
 #define KEY_QUERY_OCSP @"query_ocsp"
 #define KEY_CHECK_CRL @"check_crl"
+#define KEY_FINGEPRINT_MD5 @"fingerprint_md5"
+#define KEY_FINGEPRINT_SHA128 @"fingerprint_sha128"
+#define KEY_FINGEPRINT_SHA256 @"fingerprint_sha256"
+#define KEY_FINGEPRINT_SHA512 @"fingerprint_sha512"
 
 + (UserOptions * _Nonnull) currentOptions {
     if (!_instance) {
@@ -39,6 +43,10 @@ static UserOptions * _instance;
         KEY_GET_HTTP_HEADERS: @YES,
         KEY_QUERY_OCSP: @YES,
         KEY_CHECK_CRL: @NO,
+        KEY_FINGEPRINT_MD5: @NO,
+        KEY_FINGEPRINT_SHA128: @YES,
+        KEY_FINGEPRINT_SHA256: @YES,
+        KEY_FINGEPRINT_SHA512: @NO,
     };
     
     for (NSString * key in defaults.allKeys) {
@@ -117,6 +125,38 @@ static UserOptions * _instance;
 
 - (void) setInspectionsWithVerboseLogging:(NSUInteger)inspectionsWithVerboseLogging {
     _inspectionsWithVerboseLogging = inspectionsWithVerboseLogging;
+}
+
+- (BOOL) showFingerprintMD5 {
+    return [AppDefaults boolForKey:KEY_FINGEPRINT_MD5];
+}
+
+- (void) setShowFingerprintMD5:(BOOL)showFingerprintMD5 {
+    [AppDefaults setBool:showFingerprintMD5 forKey:KEY_FINGEPRINT_MD5];
+}
+
+- (BOOL) showFingerprintSHA128 {
+    return [AppDefaults boolForKey:KEY_FINGEPRINT_SHA128];
+}
+
+- (void) setShowFingerprintSHA128:(BOOL)showFingerprintSHA128 {
+    [AppDefaults setBool:showFingerprintSHA128 forKey:KEY_FINGEPRINT_SHA128];
+}
+
+- (BOOL) showFingerprintSHA256 {
+    return [AppDefaults boolForKey:KEY_FINGEPRINT_SHA256];
+}
+
+- (void) setShowFingerprintSHA256:(BOOL)showFingerprintSHA256 {
+    [AppDefaults setBool:showFingerprintSHA256 forKey:KEY_FINGEPRINT_SHA256];
+}
+
+- (BOOL) showFingerprintSHA512 {
+    return [AppDefaults boolForKey:KEY_FINGEPRINT_SHA512];
+}
+
+- (void) setShowFingerprintSHA512:(BOOL)showFingerprintSHA512 {
+    [AppDefaults setBool:showFingerprintSHA512 forKey:KEY_FINGEPRINT_SHA512];
 }
 
 @end
