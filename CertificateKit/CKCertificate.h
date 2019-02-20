@@ -88,6 +88,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (nonatomic, readonly) BOOL extendedValidation;
 
 /**
+ *  Returns the SHA512 fingerprint for the certificate
+ */
+@property (strong, nonatomic, nullable, readonly) NSString * SHA512Fingerprint;
+
+/**
  *  Returns the SHA256 fingerprint for the certificate
  */
 @property (strong, nonatomic, nullable, readonly) NSString * SHA256Fingerprint;

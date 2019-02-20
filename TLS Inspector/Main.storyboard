@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="59m-WK-2HE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="59m-WK-2HE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -340,6 +340,29 @@
             </objects>
             <point key="canvasLocation" x="3052" y="1935"/>
         </scene>
+        <!--HTTP Headers-->
+        <scene sceneID="8bE-KT-VxX">
+            <objects>
+                <tableViewController storyboardIdentifier="HTTPHeaders" id="LW6-C0-7BP" customClass="HTTPHeadersTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xYx-nO-i37">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="LW6-C0-7BP" id="s75-bQ-ORV"/>
+                            <outlet property="delegate" destination="LW6-C0-7BP" id="BLG-q6-hYh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="HTTP Headers" largeTitleDisplayMode="never" id="Bbc-oo-nXi">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="HTTP Headers"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ezf-kd-K2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5321" y="895"/>
+        </scene>
         <!--Certificates-->
         <scene sceneID="qbH-oC-dwU">
             <objects>
@@ -417,6 +440,7 @@
                         <outlet property="headerView" destination="smF-ep-rUB" id="yYg-H0-CWk"/>
                         <outlet property="headerViewLabel" destination="e3s-bJ-unQ" id="SlZ-kk-7Y0"/>
                         <segue destination="ebb-2b-pqe" kind="show" identifier="Explain" id="VAh-oO-si9"/>
+                        <segue destination="LW6-C0-7BP" kind="show" identifier="Headers" id="P6g-26-d1H"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPb-aU-f3i" userLabel="First Responder" sceneMemberID="firstResponder"/>

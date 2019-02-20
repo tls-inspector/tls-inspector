@@ -8,6 +8,6 @@
 #define PWarn(format, ...) [Console writeWarn:[NSString stringWithFormat:(format), ##__VA_ARGS__]]
 #define PError(format, ...) [Console writeError:[NSString stringWithFormat:(format), ##__VA_ARGS__]]
 
-#define INSERT_OPENSSL_ERROR_METHOD - (void) openSSLError { const char * file; int line; ERR_peek_last_error_line(&file, &line); PError(@"OpenSSL error in file: %s:%i", file, line); }
+#define INSERT_OPENSSL_ERROR_METHOD - (void) openSSLError { const char * file = NULL; int line; ERR_peek_last_error_line(&file, &line); if (file != NULL) { PError(@"OpenSSL error in file: %s:%i", file, line); } }
 
 #endif

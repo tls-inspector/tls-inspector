@@ -4,6 +4,7 @@
 #import "IconTableViewCell.h"
 #import "DNSResolver.h"
 #import "ChainExplainTableViewController.h"
+#import "HTTPHeadersTableViewController.h"
 @import SafariServices;
 
 @interface CertificateListTableViewController ()
@@ -164,13 +165,13 @@
         case 0:
             return currentChain.certificates.count;
         case 1:
+            if (currentServerInfo.redirectedTo != nil) {
+                return 4;
+            }
             return 3;
         case 2: {
             NSUInteger count = currentServerInfo.securityHeaders.allKeys.count;
-            if (currentServerInfo.redirectedTo != nil) {
-                count ++;
-            }
-            return count;
+            return count + 1;
         }
     }
     return 0;
@@ -216,16 +217,18 @@
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocolString];
             case 2:
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Remote Address") value:currentChain.remoteAddress];
+            case 3:
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Server Redirected To") value:currentServerInfo.redirectedTo.host];
         }
     } else if (indexPath.section == 2) {
         NSUInteger idx = indexPath.row;
-        if (currentServerInfo.redirectedTo != nil) {
-            if (idx == 0) {
-                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Server Redirected To") value:currentServerInfo.redirectedTo.host];
-            } else {
-                idx --;
-            }
+        if (idx >= currentServerInfo.securityHeaders.allKeys.count) {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
+            cell.textLabel.text = [lang key:@"View All"];
+            cell.textLabel.textColor = themeTextColor;
+            return cell;
         }
+
         NSString * key = [currentServerInfo.securityHeaders.allKeys objectAtIndex:idx];
         id value = [currentServerInfo.securityHeaders objectForKey:key];
 
@@ -254,6 +257,8 @@
             UIViewController * inspectController = [self.storyboard instantiateViewControllerWithIdentifier:@"Inspector"];
             [self.navigationController pushViewController:inspectController animated:YES];
         }
+    } else if (indexPath.section == 2 && indexPath.row >= currentServerInfo.securityHeaders.allKeys.count) {
+        [self performSegueWithIdentifier:@"Headers" sender:nil];
     }
 }
 
@@ -285,6 +290,8 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Explain"]) {
         [(ChainExplainTableViewController *)segue.destinationViewController explainTrustStatus:currentChain.trusted];
+    } else if ([segue.identifier isEqualToString:@"Headers"]) {
+        [(HTTPHeadersTableViewController *)segue.destinationViewController setHeaders:currentServerInfo.headers];
     }
 }
 

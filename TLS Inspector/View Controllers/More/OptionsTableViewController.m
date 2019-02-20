@@ -21,7 +21,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -30,6 +30,8 @@
     } else if (section == 1) {
         return 2;
     } else if (section == 2) {
+        return 4;
+    } else if (section == 3) {
         return 2;
     }
     
@@ -101,7 +103,45 @@
             [toggle addTarget:self action:@selector(crlSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         }
-    }  else if (indexPath.section == 2) {
+    } else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"MD5");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:UserOptions.currentOptions.showFingerprintMD5];
+            [toggle addTarget:self action:@selector(md5Switch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 1) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"SHA-128");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:UserOptions.currentOptions.showFingerprintSHA128];
+            [toggle addTarget:self action:@selector(sha128Switch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 2) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"SHA-256");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:UserOptions.currentOptions.showFingerprintSHA256];
+            [toggle addTarget:self action:@selector(sha256Switch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        } else if (indexPath.row == 3) {
+            UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
+            UILabel * label = (UILabel *)[switchCell viewWithTag:10];
+            label.text = l(@"SHA-512");
+            label.textColor = themeTextColor;
+            UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
+            [toggle setOn:UserOptions.currentOptions.showFingerprintSHA512];
+            [toggle addTarget:self action:@selector(sha512Switch:) forControlEvents:UIControlEventTouchUpInside];
+            return switchCell;
+        }
+    } else if (indexPath.section == 3) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
@@ -144,12 +184,31 @@
     UserOptions.currentOptions.verboseLogging = sender.isOn;
 }
 
+- (void) md5Switch:(UISwitch *)sender {
+    UserOptions.currentOptions.showFingerprintMD5 = sender.isOn;
+}
+
+- (void) sha128Switch:(UISwitch *)sender {
+    UserOptions.currentOptions.showFingerprintSHA128 = sender.isOn;
+}
+
+- (void) sha256Switch:(UISwitch *)sender {
+    UserOptions.currentOptions.showFingerprintSHA256 = sender.isOn;
+}
+
+- (void) sha512Switch:(UISwitch *)sender {
+    UserOptions.currentOptions.showFingerprintSHA512 = sender.isOn;
+}
+
+
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return [lang key:@"General"];
     } else if (section == 1) {
         return [lang key:@"Certificate Status"];
     } else if (section == 2) {
+        return [lang key:@"Show Certificate Fingerprint"];
+    } else if (section == 3) {
         return [lang key:@"Logging"];
     }
     
@@ -159,7 +218,7 @@
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 1) {
         return [lang key:@"certificate_status_footer"];
-    } else if (section == 2) {
+    } else if (section == 3) {
         return [lang key:@"verbose_logging_footer"];
     }
     
@@ -167,7 +226,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2 && indexPath.row == 1) {
+    if (indexPath.section == 3 && indexPath.row == 1) {
         if (UserOptions.currentOptions.verboseLogging && UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
             [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];
         } else {

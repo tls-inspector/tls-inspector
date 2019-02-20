@@ -16,6 +16,8 @@
 	<string>Algorithms</string>
 	<key>All feedback is appreciated!</key>
 	<string>All feedback is appreciated!</string>
+	<key>Alternate Names</key>
+	<string>Alternate Names</string>
 	<key>An error occurred</key>
 	<string>An error occurred</string>
 	<key>Apple Support</key>
@@ -598,6 +600,8 @@
 	<string>Get Involved</string>
 	<key>Get Involved</key>
 	<string>Get Involved</string>
+	<key>HTTP Headers</key>
+	<string>HTTP Headers</string>
 	<key>Host was not found or invalid.</key>
 	<string>Host was not found or invalid.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
@@ -636,6 +640,8 @@
 	<string>Locally Trusted Chain</string>
 	<key>Logging</key>
 	<string>Logging</string>
+	<key>MD5</key>
+	<string>MD5</string>
 	<key>More</key>
 	<string>More</string>
 	<key>More Info</key>
@@ -680,6 +686,12 @@
 	<string>Restart TLS Inspector</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
+	<key>SHA-128</key>
+	<string>SHA-128</string>
+	<key>SHA-256</key>
+	<string>SHA-256</string>
+	<key>SHA-512</key>
+	<string>SHA-512</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
 	<key>Search on crt.sh</key>
@@ -696,6 +708,8 @@
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Show Certificate Fingerprint</key>
+	<string>Show Certificate Fingerprint</string>
 	<key>Show HTTP Headers</key>
 	<string>Show HTTP Headers</string>
 	<key>Show Tips</key>
@@ -776,6 +790,8 @@
 	<string>Verify Value</string>
 	<key>Version</key>
 	<string>Version</string>
+	<key>View All</key>
+	<string>View All</string>
 	<key>View all alternate names</key>
 	<string>View all alternate names</string>
 	<key>View on SSL Labs</key>

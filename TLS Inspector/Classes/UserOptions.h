@@ -55,5 +55,21 @@
  verbose logging is enabled
  */
 @property (nonatomic) NSUInteger inspectionsWithVerboseLogging;
+/**
+ Should the app show a MD5 fingerprint
+ */
+@property (nonatomic) BOOL showFingerprintMD5;
+/**
+ Should the app show a SHA128 fingerprint
+ */
+@property (nonatomic) BOOL showFingerprintSHA128;
+/**
+ Should the app show a SHA256 fingerprint
+ */
+@property (nonatomic) BOOL showFingerprintSHA256;
+/**
+ Should the app show a SHA512 fingerprint
+ */
+@property (nonatomic) BOOL showFingerprintSHA512;
 
 @end
