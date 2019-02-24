@@ -71,5 +71,13 @@
  Should the app show a SHA512 fingerprint
  */
 @property (nonatomic) BOOL showFingerprintSHA512;
+/**
+ Should the app use OpenSSL to inspect websites
+ */
+@property (nonatomic) BOOL useOpenSSL;
+/**
+ The preferred ciphers for OpenSSL
+ */
+@property (strong, nonatomic) NSString * preferredCiphers;
 
 @end

@@ -26,7 +26,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 4;
+        return 5;
     } else if (section == 1) {
         return 2;
     } else if (section == 2) {
@@ -82,6 +82,10 @@
             }
             [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
             return toggleCell;
+        } else if (indexPath.row == 4) {
+            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:themeTextColor title:l(@"Advanced Settings")];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -226,7 +230,9 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 3 && indexPath.row == 1) {
+    if (indexPath.section == 0 && indexPath.row == 4) {
+        [self performSegueWithIdentifier:@"CryptoOptionsSegue" sender:nil];
+    } else if (indexPath.section == 3 && indexPath.row == 1) {
         if (UserOptions.currentOptions.verboseLogging && UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
             [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];
         } else {

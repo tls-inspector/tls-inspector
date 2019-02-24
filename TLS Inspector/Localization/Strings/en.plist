@@ -2,6 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Advanced Settings</key>
+	<string>Advanced Settings</string>
+	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
+	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
+	<key>Crypto Engine</key>
+	<string>Crypto Engine</string>
+	<key>iOS</key>
+	<string>iOS</string>
+	<key>OpenSSL</key>
+	<string>OpenSSL</string>
+	<key>Ciphers</key>
+	<string>Ciphers</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>About</key>
