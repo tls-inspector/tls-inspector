@@ -244,23 +244,22 @@
 }
 
 - (void) themeSwitch:(UISegmentedControl *)sender {
-    [uihelper
-     presentConfirmInViewController:self
-     title:l(@"Change Theme")
-     body:l(@"You must restart the app for the change to take affect")
-     confirmButtonTitle:l(@"Change")
-     cancelButtonTitle:l(@"Cancel")
-     confirmActionIsDestructive:NO
-     dismissed:^(BOOL confirmed) {
-         if (confirmed) {
-             UserOptions.currentOptions.useLightTheme = sender.selectedSegmentIndex == 1;
-             [appState setAppearance];
-             UIAlertController * alert = [UIAlertController alertControllerWithTitle:l(@"Restart TLS Inspector") message:l(@"You must restart TLS Inspector for theme changes to take affect.") preferredStyle:UIAlertControllerStyleAlert];
-             [self presentViewController:alert animated:YES completion:nil];
-         } else {
-             [sender setSelectedSegmentIndex:sender.selectedSegmentIndex == 0 ? 1 : 0];
-         }
-     }];
+    UserOptions.currentOptions.useLightTheme = sender.selectedSegmentIndex == 1;
+    [appState setAppearance];
+    [NSNotificationCenter.defaultCenter postNotificationName:CHANGE_THEME_NOTIFICATION object:nil];
+
+    // Do this here (and not in app state) since state is shared with the
+    // extension, and sharedApplication isn't defined there.
+    NSArray *windows = [UIApplication sharedApplication].windows;
+    for (UIWindow *window in windows) {
+        for (UIView *view in window.subviews) {
+            [view removeFromSuperview];
+            [window addSubview:view];
+        }
+        NSLog(@"Reloaded window");
+    }
+
+    [self.tableView reloadData];
 }
 
 - (void) sendDebugLogsWithComments:(NSString *)comments {

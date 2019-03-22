@@ -16,6 +16,8 @@
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C28D0B3204209E8004C260F /* CKRevoked.m */; };
+		3C2951402244830500A3784E /* ThemedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C29513F2244830500A3784E /* ThemedNavigationController.m */; };
+		3C2951412244830500A3784E /* ThemedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C29513F2244830500A3784E /* ThemedNavigationController.m */; };
 		3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C2A7A511F284DC700AA12B4 /* CKGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A521F284DC700AA12B4 /* CKGetter.m */; };
 		3C2A7A571F28561300AA12B4 /* GetterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A561F28561300AA12B4 /* GetterTableViewController.m */; };
@@ -129,7 +131,6 @@
 		67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686EA1FC8FACD00BB7AE8 /* CKServerInfoGetter.h */; };
 		A116000B1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
 		A116000C1EEB086800D98E8F /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = A116000A1EEB086800D98E8F /* Storage.m */; };
-		A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15622901EEA065600D61FB5 /* InitialNavigationController.m */; };
 		A15CB48C1EB11DAC002EE845 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15CB48B1EB11DAC002EE845 /* DomainList.plist */; };
 		A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */; };
@@ -205,6 +206,8 @@
 		3C28B1161E88201400715A5A /* defines.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.pch; sourceTree = "<group>"; };
 		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
+		3C29513E2244830500A3784E /* ThemedNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemedNavigationController.h; sourceTree = "<group>"; };
+		3C29513F2244830500A3784E /* ThemedNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemedNavigationController.m; sourceTree = "<group>"; };
 		3C2A7A511F284DC700AA12B4 /* CKGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGetter.h; sourceTree = "<group>"; };
 		3C2A7A521F284DC700AA12B4 /* CKGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGetter.m; sourceTree = "<group>"; };
 		3C2A7A551F28561300AA12B4 /* GetterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetterTableViewController.h; sourceTree = "<group>"; };
@@ -330,8 +333,6 @@
 		A11600081EEB084F00D98E8F /* Inspect Website.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Inspect Website.entitlements"; sourceTree = "<group>"; };
 		A11600091EEB086800D98E8F /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
 		A116000A1EEB086800D98E8F /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
-		A156228F1EEA065600D61FB5 /* InitialNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialNavigationController.h; sourceTree = "<group>"; };
-		A15622901EEA065600D61FB5 /* InitialNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialNavigationController.m; sourceTree = "<group>"; };
 		A15CB48B1EB11DAC002EE845 /* DomainList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DomainList.plist; sourceTree = "<group>"; };
 		A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificatePublicKey.h; sourceTree = "<group>"; };
 		A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificatePublicKey.m; sourceTree = "<group>"; };
@@ -633,8 +634,6 @@
 				67D03D821F82EF5500981806 /* More */,
 				3C2A7A551F28561300AA12B4 /* GetterTableViewController.h */,
 				3C2A7A561F28561300AA12B4 /* GetterTableViewController.m */,
-				A156228F1EEA065600D61FB5 /* InitialNavigationController.h */,
-				A15622901EEA065600D61FB5 /* InitialNavigationController.m */,
 				3C5FA7C01CA852DF00C79D2B /* CertificateListTableViewController.h */,
 				3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */,
 				3CDEE27A2056129B007F72B0 /* ChainExplainTableViewController.h */,
@@ -688,6 +687,8 @@
 		A16ABDA41E844BFD007779BE /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
+				3C29513E2244830500A3784E /* ThemedNavigationController.h */,
+				3C29513F2244830500A3784E /* ThemedNavigationController.m */,
 				3CFF7E742009907200478E0A /* CertificateTableRowSection.h */,
 				3CFF7E752009907200478E0A /* CertificateTableRowSection.m */,
 				3CFF7E712009900F00478E0A /* CertificateTableRowItem.h */,
@@ -977,6 +978,7 @@
 				3C3104E91D83C02E0093909E /* CertificateListTableViewController.m in Sources */,
 				3CFF7E782009962C00478E0A /* CertificateTableRowSection.m in Sources */,
 				3C2B8B891F69877C00A54769 /* IconTableViewCell.m in Sources */,
+				3C2951412244830500A3784E /* ThemedNavigationController.m in Sources */,
 				3CBD8B981E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */,
 				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
@@ -1030,6 +1032,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C2951402244830500A3784E /* ThemedNavigationController.m in Sources */,
 				3C0C6F341E7CCB6400E6FCA2 /* UILang.m in Sources */,
 				A16ABDA31E844BF9007779BE /* TitleValueTableViewCell.m in Sources */,
 				3C7CEE5E20A15A9100DCC770 /* SANListTableViewController.m in Sources */,
@@ -1045,7 +1048,6 @@
 				67D03D811F82EF3700981806 /* OptionsTableViewController.m in Sources */,
 				67D03D7E1F82EC7900981806 /* MoreTableViewController.m in Sources */,
 				3CF7E3451F789E9800EEEE21 /* NSAtomicNumber.m in Sources */,
-				A15622911EEA065600D61FB5 /* InitialNavigationController.m in Sources */,
 				3C15B72A21B76D08009E05BE /* HTTPHeadersTableViewController.m in Sources */,
 				3CFF7E7020098FD900478E0A /* CertificateTableViewController.m in Sources */,
 				3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */,

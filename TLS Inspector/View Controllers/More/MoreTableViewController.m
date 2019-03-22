@@ -10,6 +10,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeTheme) name:CHANGE_THEME_NOTIFICATION object:nil];
 }
 
 - (IBAction) close:(UIBarButtonItem *)sender {
@@ -18,6 +19,10 @@
 
 - (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void) didChangeTheme {
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

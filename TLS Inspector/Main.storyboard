@@ -545,10 +545,10 @@
             </objects>
             <point key="canvasLocation" x="2201" y="1934"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Themed Navigation Controller-->
         <scene sceneID="mb8-Ef-tn2">
             <objects>
-                <navigationController id="gw3-fA-qN5" sceneMemberID="viewController">
+                <navigationController id="gw3-fA-qN5" customClass="ThemedNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q7y-fM-BIl">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -687,10 +687,10 @@
             </objects>
             <point key="canvasLocation" x="3052" y="3897"/>
         </scene>
-        <!--Initial Navigation Controller-->
+        <!--Themed Navigation Controller-->
         <scene sceneID="ksD-vg-xmg">
             <objects>
-                <navigationController id="59m-WK-2HE" customClass="InitialNavigationController" sceneMemberID="viewController">
+                <navigationController id="59m-WK-2HE" customClass="ThemedNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" largeTitles="YES" id="E4h-bB-AaW">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -864,13 +864,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kU3-ZX-MM6">
-                                <rect key="frame" x="32" y="96" width="26.5" height="27"/>
+                                <rect key="frame" x="32" y="96" width="23" height="23"/>
                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4tD-AA-wyN">
-                                <rect key="frame" x="70.5" y="87" width="272.5" height="520"/>
+                                <rect key="frame" x="67" y="87" width="276" height="520"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware. If you're concerned about the security of your device; contact Apple Support.</string>

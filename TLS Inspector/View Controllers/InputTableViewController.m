@@ -41,6 +41,8 @@
     [[AppLinks new] appLaunchRate];
 #endif
 
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeTheme) name:CHANGE_THEME_NOTIFICATION object:nil];
+
     if (!UserOptions.currentOptions.firstRunCompleted) {
         UserOptions.currentOptions.firstRunCompleted = YES;
         UIViewController * notice = [self.storyboard instantiateViewControllerWithIdentifier:@"Notice"];
@@ -56,13 +58,7 @@
     }
 
     self.tipIconLabel.textColor = uihelper.blueColor;
-    if (usingLightTheme) {
-        self.tipTitleLabel.textColor = UIColor.blackColor;
-        self.tipBodyLabel.textColor = UIColor.blackColor;
-    } else {
-        self.tipTitleLabel.textColor = UIColor.whiteColor;
-        self.tipBodyLabel.textColor = UIColor.whiteColor;
-    }
+    [self setTipTheme];
 
     self.tipKeys = @[
                      @"tlstip1",
@@ -95,6 +91,21 @@
     self.tipBodyLabel.text = [lang key:tip];
 
     self.tipIconLabel.hidden = self.tipTitleLabel.hidden = self.tipBodyLabel.hidden = !UserOptions.currentOptions.showTips;
+}
+
+- (void) didChangeTheme {
+    [self.tableView reloadData];
+    [self setTipTheme];
+}
+
+- (void) setTipTheme {
+    if (usingLightTheme) {
+        self.tipTitleLabel.textColor = UIColor.blackColor;
+        self.tipBodyLabel.textColor = UIColor.blackColor;
+    } else {
+        self.tipTitleLabel.textColor = UIColor.whiteColor;
+        self.tipBodyLabel.textColor = UIColor.whiteColor;
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {

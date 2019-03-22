@@ -692,8 +692,6 @@
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Report Issue on GitHub</string>
-	<key>Restart TLS Inspector</key>
-	<string>Restart TLS Inspector</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
 	<key>SHA-128</key>
@@ -818,10 +816,6 @@
 	<string>You can modify the reminder in the reminders app.</string>
 	<key>You must inspect at least one site with debug logging enabled before you can submit logs</key>
 	<string>You must inspect at least one site with debug logging enabled before you can submit logs</string>
-	<key>You must restart TLS Inspector for theme changes to take affect.</key>
-	<string>You must restart TLS Inspector for theme changes to take affect.</string>
-	<key>You must restart the app for the change to take affect</key>
-	<string>You must restart the app for the change to take affect</string>
 	<key>certificate_status_footer</key>
 	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
 	<key>explanation::invalid_date</key>
