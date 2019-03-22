@@ -2,18 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Advanced Settings</key>
-	<string>Advanced Settings</string>
-	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
-	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
-	<key>Crypto Engine</key>
-	<string>Crypto Engine</string>
-	<key>iOS</key>
-	<string>iOS</string>
-	<key>OpenSSL</key>
-	<string>OpenSSL</string>
-	<key>Ciphers</key>
-	<string>Ciphers</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>About</key>
@@ -22,6 +10,8 @@
 	<string>About TLS Inspector</string>
 	<key>Add Certificate Expiry Reminder</key>
 	<string>Add Certificate Expiry Reminder</string>
+	<key>Advanced Settings</key>
+	<string>Advanced Settings</string>
 	<key>Algorithm</key>
 	<string>Algorithm</string>
 	<key>Algorithms</key>
@@ -88,6 +78,10 @@
 	<string>Change</string>
 	<key>Change Theme</key>
 	<string>Change Theme</string>
+	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
+	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
+	<key>Ciphers</key>
+	<string>Ciphers</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
 	<key>Connection refused.</key>
@@ -580,6 +574,8 @@
 	<string>Zambia, Republic of</string>
 	<key>Country::ZW</key>
 	<string>Zimbabwe</string>
+	<key>Crypto Engine</key>
+	<string>Crypto Engine</string>
 	<key>Dark</key>
 	<string>Dark</string>
 	<key>Debug Logging Enabled</key>
@@ -672,6 +668,8 @@
 	<string>Notice</string>
 	<key>Notification Date</key>
 	<string>Notification Date</string>
+	<key>OpenSSL</key>
+	<string>OpenSSL</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
 	<key>Options</key>
@@ -760,6 +758,8 @@
 	<string>Submit Feedback</string>
 	<key>Submit Logs</key>
 	<string>Submit Logs</string>
+	<key>TLS Features</key>
+	<string>TLS Features</string>
 	<key>TLS Inspector</key>
 	<string>TLS Inspector</string>
 	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</key>
@@ -846,6 +846,8 @@
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware. 
 
 If you&apos;re concerned about the security of your device; contact Apple Support.</string>
+	<key>iOS</key>
+	<string>iOS</string>
 	<key>keyUsage::OCSPSigning</key>
 	<string>OCSP Signing</string>
 	<key>keyUsage::anyExtendedKeyUsage</key>
@@ -926,6 +928,10 @@ Exercise extreme caution if continuing to this website.</string>
 It&apos;s likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.
 
 Exercise caution if continuing to this website.</string>
+	<key>tls_feature_status_request</key>
+	<string>Status Request</string>
+	<key>tls_feature_status_request_v2</key>
+	<string>Status Request (2.0)</string>
 	<key>tlstip1</key>
 	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tlstip2</key>

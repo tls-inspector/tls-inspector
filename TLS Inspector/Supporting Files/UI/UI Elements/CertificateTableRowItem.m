@@ -32,10 +32,16 @@
             cell.detailTextLabel.textColor = themeTextColor;
             return cell;
         }
-        case CertificateTableRowItemStyleBasic: {
+        case CertificateTableRowItemStyleBasic:
+        case CertificateTableRowItemStyleBasicDisclosure: {
             UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Row"];
             cell.textLabel.text = self.title;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if (self.style == CertificateTableRowItemStyleBasicDisclosure) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            } else {
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
             cell.textLabel.textColor = themeTextColor;
             return cell;
         }
