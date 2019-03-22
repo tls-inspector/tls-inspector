@@ -58,6 +58,7 @@
 		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; };
 		3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C70425020100CA900BE941A /* CKOCSPManager.h */; };
 		3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C70425120100CA900BE941A /* CKOCSPManager.m */; };
+		3C7B448D2222788E003CFFBC /* HTTPHeadersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C15B72921B76D08009E05BE /* HTTPHeadersTableViewController.m */; };
 		3C7B9F7D1F68F52A00C99092 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A7A661F2858A100AA12B4 /* FontAwesome.ttf */; };
 		3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04EE5E1CB4A23900F56B68 /* UIHelper.m */; };
 		3C7C95091D7AA03500902E18 /* ActionTipTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C95081D7AA03500902E18 /* ActionTipTarget.m */; };
@@ -974,6 +975,7 @@
 				3CBD8B981E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3C7C950A1D7AA07100902E18 /* ActionTipTarget.m in Sources */,
 				3C7C95061D7A9F4100902E18 /* UIHelper.m in Sources */,
+				3C7B448D2222788E003CFFBC /* HTTPHeadersTableViewController.m in Sources */,
 				3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */,
 				3CDEE2802056236F007F72B0 /* ChainExplainTableViewController.m in Sources */,
 				3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */,
