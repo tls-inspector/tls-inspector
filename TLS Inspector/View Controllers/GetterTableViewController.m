@@ -47,7 +47,6 @@
     
     self.infoGetter = [CKGetter getterWithOptions:options];
     self.infoGetter.delegate = self;
-    [self.infoGetter getInfoForURL:self.url];
     self.title = self.url.host;
 
     self.tableView.estimatedRowHeight = 85.0f;
@@ -61,6 +60,14 @@
 
     self.getterErrors = [NSMutableArray arrayWithCapacity:self.items.count];
     self.itemStatus = [NSMutableDictionary dictionaryWithDictionary:@{CERT_CELL: @"Loading", SERV_CELL: @"Loading"}];
+
+    if (appState.proxyConfigured) {
+        [uihelper presentAlertInViewController:self title:[lang key:@"Proxy Detected"] body:[lang key:@"proxy_warning"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:^(NSInteger index) {
+            [self.infoGetter getInfoForURL:self.url];
+        }];
+    } else {
+        [self.infoGetter getInfoForURL:self.url];
+    }
 }
 
 - (void) didReceiveMemoryWarning {

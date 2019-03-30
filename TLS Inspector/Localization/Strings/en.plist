@@ -674,6 +674,8 @@
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
+	<key>Proxy Detected</key>
+	<string>Proxy Detected</string>
 	<key>Public Key</key>
 	<string>Public Key</string>
 	<key>Query OCSP Responder</key>
@@ -874,6 +876,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Server Auth</string>
 	<key>keyUsage::timeStamping</key>
 	<string>Time Stamping</string>
+	<key>proxy_warning</key>
+	<string>An HTTP Proxy was detected. TLS Inspector is not compatible with HTTP Proxies and may interfere with the app.</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>sanType::DNS</key>
