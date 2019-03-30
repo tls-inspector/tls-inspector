@@ -78,6 +78,6 @@
 /**
  The preferred ciphers for OpenSSL
  */
-@property (strong, nonatomic) NSString * preferredCiphers;
+@property (strong, nonatomic, nonnull) NSString * preferredCiphers;
 
 @end

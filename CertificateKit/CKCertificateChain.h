@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 /**
  Get the negotiated ciphersuite used to retrieve the chain.
  */
-@property (strong, nonatomic) NSString * cipherSuite;
+@property (strong, nonatomic, nonnull) NSString * cipherSuite;
 
 /**
  Get the negotiated protocol used to retrieve the chain. Use protocolString to get a readable string.
