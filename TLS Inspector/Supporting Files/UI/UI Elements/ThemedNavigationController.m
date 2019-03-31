@@ -8,6 +8,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self didChangeTheme];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeTheme) name:CHANGE_THEME_NOTIFICATION object:nil];
 }
 
