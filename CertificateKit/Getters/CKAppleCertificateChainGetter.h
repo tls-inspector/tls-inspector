@@ -1,9 +1,9 @@
 //
-//  CKCertificateChain+EnumValues.h
+//  CKAppleCertificateChainGetter.h
 //
 //  MIT License
 //
-//  Copyright (c) 2017 Ian Spence
+//  Copyright (c) 2019 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,16 +24,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <CertificateKit/CertificateKit.h>
+#import "CKGetterTask.h"
+#import "CKGetterOptions.h"
+#import "CKCertificateChainGetter.h"
 
-/**
- String values for cipher and protocol enums
- */
-@interface CKCertificateChain (EnumValues)
-
-/**
- Get a string representation of the protocol version
- */
-@property (strong, nonatomic, nonnull, readonly) NSString * protocolString;
+@interface CKAppleCertificateChainGetter : CKCertificateChainGetter
 
 @end

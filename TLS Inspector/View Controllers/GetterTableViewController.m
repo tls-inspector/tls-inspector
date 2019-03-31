@@ -44,6 +44,8 @@
     options.checkOCSP = UserOptions.currentOptions.queryOCSP;
     options.queryServerInfo = UserOptions.currentOptions.getHTTPHeaders;
     options.checkCRL = UserOptions.currentOptions.checkCRL;
+    options.useOpenSSL = UserOptions.currentOptions.useOpenSSL;
+    options.ciphers = UserOptions.currentOptions.preferredCiphers;
     
     self.infoGetter = [CKGetter getterWithOptions:options];
     self.infoGetter.delegate = self;

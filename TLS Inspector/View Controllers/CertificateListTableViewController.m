@@ -214,7 +214,7 @@
             case 0:
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Cipher Suite") value:currentChain.cipherSuite];
             case 1:
-                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocolString];
+                return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Negotiated Version") value:currentChain.protocol];
             case 2:
                 return [[TitleValueTableViewCell alloc] initWithTitle:l(@"Remote Address") value:currentChain.remoteAddress];
             case 3:

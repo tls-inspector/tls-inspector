@@ -46,4 +46,8 @@
  */
 @property (nonatomic) BOOL checkCRL;
 
+@property (nonatomic) BOOL useOpenSSL;
+
+@property (strong, nonatomic, nullable) NSString * ciphers;
+
 @end

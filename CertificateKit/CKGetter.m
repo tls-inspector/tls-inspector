@@ -27,6 +27,8 @@
 #import "CKGetter.h"
 #import "CKServerInfoGetter.h"
 #import "CKCertificateChainGetter.h"
+#import "CKOpenSSLCertificateChainGetter.h"
+#import "CKAppleCertificateChainGetter.h"
 
 @interface CKGetter () <NSStreamDelegate, CKGetterTaskDelegate> {
     BOOL gotChain;
@@ -54,8 +56,13 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
 - (void) getInfoForURL:(NSURL *)URL; {
     PDebug(@"Starting getter for: %@", URL.absoluteString);
-    
-    self.chainGetter = [CKCertificateChainGetter new];
+
+    if (self.options.useOpenSSL) {
+        self.chainGetter = [CKOpenSSLCertificateChainGetter new];
+    } else {
+        self.chainGetter = [CKAppleCertificateChainGetter new];
+    }
+
     self.chainGetter.delegate = self;
     self.chainGetter.tag = CKGetterTaskTagChain;
     self.chainGetter.options = self.options;
