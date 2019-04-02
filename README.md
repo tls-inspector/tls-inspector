@@ -1,6 +1,7 @@
 # TLS Inspector
 
-[Download TLS Inspector in the iTunes App Store](https://tlsinspector.com/dl.html)
+[![Download](https://img.shields.io/itunes/v/1100539810.svg?label=iTunes%20App%20Store&style=flat-square)](https://tlsinspector.com/dl.html)
+[![LICENSE](https://img.shields.io/github/license/certificate-helper/TLS-Inspector.svg?style=flat-square)](https://github.com/ecnepsnai/ds/blob/master/LICENSE)
 
 <img src="https://tlsinspector.com/assets/img/screenshots.png" alt="TLS Inspector Screenshots" />
 
