@@ -1,9 +1,9 @@
 //
-//  CKCertificateChain+EnumValues.m
+//  CKOpenSSLCertificateChainGetter.h
 //
 //  MIT License
 //
-//  Copyright (c) 2017 Ian Spence
+//  Copyright (c) 2019 Ian Spence
 //  https://github.com/certificate-helper/CertificateKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,36 +24,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "CKCertificateChain+EnumValues.h"
-#import <openssl/ssl.h>
+#import "CKGetterTask.h"
+#import "CKGetterOptions.h"
+#import "CKCertificateChainGetter.h"
 
-@implementation CKCertificateChain (EnumValues)
-
-- (NSString *) protocolString {
-    switch (self.protocol) {
-        case TLS1_3_VERSION:
-            return @"TLS 1.3";
-            break;
-        case TLS1_2_VERSION:
-            return @"TLS 1.2";
-            break;
-        case TLS1_1_VERSION:
-            return @"TLS 1.1";
-            break;
-        case TLS1_VERSION:
-            return @"TLS 1.0";
-        case SSL3_VERSION:
-            return @"SSL 3.0";
-            break;
-        case SSL2_VERSION:
-            return @"SSL 2.0";
-            break;
-        default:
-            return @"Unknown";
-            break;
-    }
-
-    return @"Unknown";
-}
+@interface CKOpenSSLCertificateChainGetter : CKCertificateChainGetter
 
 @end

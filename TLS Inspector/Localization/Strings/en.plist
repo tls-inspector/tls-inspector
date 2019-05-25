@@ -10,6 +10,8 @@
 	<string>About TLS Inspector</string>
 	<key>Add Certificate Expiry Reminder</key>
 	<string>Add Certificate Expiry Reminder</string>
+	<key>Advanced Settings</key>
+	<string>Advanced Settings</string>
 	<key>Algorithm</key>
 	<string>Algorithm</string>
 	<key>Algorithms</key>
@@ -76,6 +78,10 @@
 	<string>Change</string>
 	<key>Change Theme</key>
 	<string>Change Theme</string>
+	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
+	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
+	<key>Ciphers</key>
+	<string>Ciphers</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
 	<key>Connection refused.</key>
@@ -568,6 +574,8 @@
 	<string>Zambia, Republic of</string>
 	<key>Country::ZW</key>
 	<string>Zimbabwe</string>
+	<key>Crypto Engine</key>
+	<string>Crypto Engine</string>
 	<key>Dark</key>
 	<string>Dark</string>
 	<key>Debug Logging Enabled</key>
@@ -660,10 +668,14 @@
 	<string>Notice</string>
 	<key>Notification Date</key>
 	<string>Notification Date</string>
+	<key>OpenSSL</key>
+	<string>OpenSSL</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
+	<key>Proxy Detected</key>
+	<string>Proxy Detected</string>
 	<key>Public Key</key>
 	<string>Public Key</string>
 	<key>Query OCSP Responder</key>
@@ -682,8 +694,6 @@
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Report Issue on GitHub</string>
-	<key>Restart TLS Inspector</key>
-	<string>Restart TLS Inspector</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
 	<key>SHA-128</key>
@@ -748,6 +758,8 @@
 	<string>Submit Feedback</string>
 	<key>Submit Logs</key>
 	<string>Submit Logs</string>
+	<key>TLS Features</key>
+	<string>TLS Features</string>
 	<key>TLS Inspector</key>
 	<string>TLS Inspector</string>
 	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</key>
@@ -806,10 +818,6 @@
 	<string>You can modify the reminder in the reminders app.</string>
 	<key>You must inspect at least one site with debug logging enabled before you can submit logs</key>
 	<string>You must inspect at least one site with debug logging enabled before you can submit logs</string>
-	<key>You must restart TLS Inspector for theme changes to take affect.</key>
-	<string>You must restart TLS Inspector for theme changes to take affect.</string>
-	<key>You must restart the app for the change to take affect</key>
-	<string>You must restart the app for the change to take affect</string>
 	<key>certificate_status_footer</key>
 	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
 	<key>explanation::invalid_date</key>
@@ -834,6 +842,8 @@
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware. 
 
 If you&apos;re concerned about the security of your device; contact Apple Support.</string>
+	<key>iOS</key>
+	<string>iOS</string>
 	<key>keyUsage::OCSPSigning</key>
 	<string>OCSP Signing</string>
 	<key>keyUsage::anyExtendedKeyUsage</key>
@@ -866,6 +876,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Server Auth</string>
 	<key>keyUsage::timeStamping</key>
 	<string>Time Stamping</string>
+	<key>proxy_warning</key>
+	<string>An HTTP Proxy was detected. TLS Inspector is not compatible with HTTP Proxies and may interfere with the app.</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>sanType::DNS</key>
@@ -914,6 +926,10 @@ Exercise extreme caution if continuing to this website.</string>
 It&apos;s likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.
 
 Exercise caution if continuing to this website.</string>
+	<key>tls_feature_status_request</key>
+	<string>Status Request</string>
+	<key>tls_feature_status_request_v2</key>
+	<string>Status Request (2.0)</string>
 	<key>tlstip1</key>
 	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tlstip2</key>

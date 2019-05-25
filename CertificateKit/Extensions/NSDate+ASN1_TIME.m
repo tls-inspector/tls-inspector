@@ -36,6 +36,7 @@
         expiryDateComponents.second = [[expiryTimeStr substringWithRange:NSMakeRange(12, 2)]
                                        intValue];
 
+        ASN1_GENERALIZEDTIME_free(certificateExpiryASN1Generalized);
         NSCalendar *calendar = [NSCalendar currentCalendar];
         return [calendar dateFromComponents:expiryDateComponents];
     }

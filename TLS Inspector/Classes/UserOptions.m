@@ -20,6 +20,8 @@ static UserOptions * _instance;
 #define KEY_FINGEPRINT_SHA128 @"fingerprint_sha128"
 #define KEY_FINGEPRINT_SHA256 @"fingerprint_sha256"
 #define KEY_FINGEPRINT_SHA512 @"fingerprint_sha512"
+#define KEY_USE_OPENSSL @"use_openssl"
+#define KEY_PREFERRED_CIPHERS @"preferred_ciphers"
 
 + (UserOptions * _Nonnull) currentOptions {
     if (!_instance) {
@@ -35,19 +37,25 @@ static UserOptions * _instance;
     return _instance;
 }
 
++ (NSDictionary<NSString *, id> *) defaultValues {
+    return @{
+             KEY_REMEMBER_RECENT_LOOKUPS: @YES,
+             KEY_USE_LIGHT_THEME: @NO,
+             KEY_SHOW_TIPS: @YES,
+             KEY_GET_HTTP_HEADERS: @YES,
+             KEY_QUERY_OCSP: @YES,
+             KEY_CHECK_CRL: @NO,
+             KEY_FINGEPRINT_MD5: @NO,
+             KEY_FINGEPRINT_SHA128: @YES,
+             KEY_FINGEPRINT_SHA256: @YES,
+             KEY_FINGEPRINT_SHA512: @NO,
+             KEY_USE_OPENSSL: @NO,
+             KEY_PREFERRED_CIPHERS: @"HIGH:!aNULL:!MD5:!RC4",
+             };
+}
+
 + (void) setDefaultValues {
-    NSDictionary<NSString *, id> * defaults = @{
-        KEY_REMEMBER_RECENT_LOOKUPS: @YES,
-        KEY_USE_LIGHT_THEME: @NO,
-        KEY_SHOW_TIPS: @YES,
-        KEY_GET_HTTP_HEADERS: @YES,
-        KEY_QUERY_OCSP: @YES,
-        KEY_CHECK_CRL: @NO,
-        KEY_FINGEPRINT_MD5: @NO,
-        KEY_FINGEPRINT_SHA128: @YES,
-        KEY_FINGEPRINT_SHA256: @YES,
-        KEY_FINGEPRINT_SHA512: @NO,
-    };
+    NSDictionary<NSString *, id> * defaults = [UserOptions defaultValues];
     
     for (NSString * key in defaults.allKeys) {
         if ([AppDefaults valueForKey:key] == nil) {
@@ -157,6 +165,27 @@ static UserOptions * _instance;
 
 - (void) setShowFingerprintSHA512:(BOOL)showFingerprintSHA512 {
     [AppDefaults setBool:showFingerprintSHA512 forKey:KEY_FINGEPRINT_SHA512];
+}
+
+- (BOOL) useOpenSSL {
+    return [AppDefaults boolForKey:KEY_USE_OPENSSL];
+}
+
+- (void) setUseOpenSSL:(BOOL)useOpenSSL {
+    [AppDefaults setBool:useOpenSSL forKey:KEY_USE_OPENSSL];
+
+    if (!useOpenSSL) {
+        NSDictionary<NSString *, id> * defaults = [UserOptions defaultValues];
+        [self setPreferredCiphers:defaults[KEY_PREFERRED_CIPHERS]];
+    }
+}
+
+- (NSString *) preferredCiphers{
+    return [AppDefaults stringForKey:KEY_PREFERRED_CIPHERS];
+}
+
+- (void) setPreferredCiphers:(NSString *)preferredCiphers {
+    [AppDefaults setObject:preferredCiphers forKey:KEY_PREFERRED_CIPHERS];
 }
 
 @end

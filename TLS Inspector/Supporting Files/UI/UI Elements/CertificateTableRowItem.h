@@ -4,6 +4,7 @@
 
 typedef NS_ENUM(NSUInteger, CertificateTableRowItemStyle) {
     CertificateTableRowItemStyleBasic,
+    CertificateTableRowItemStyleBasicDisclosure,
     CertificateTableRowItemStyleBasicValue,
     CertificateTableRowItemStyleExpandedValue,
     CertificateTableRowItemStyleFixedValue,

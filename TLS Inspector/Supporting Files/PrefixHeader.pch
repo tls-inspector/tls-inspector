@@ -10,7 +10,8 @@
 #import "UserOptions.h"
 
 #define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
-#define RELOAD_CERT_NOTIFICATION @"ReloadCertDetails"
+#define RELOAD_CERT_NOTIFICATION @"🤔"
+#define CHANGE_THEME_NOTIFICATION @"🏳️‍🌈"
 
 #if DEBUG
 #define d(s, ...) NSLog(s, ##__VA_ARGS__)

@@ -88,6 +88,18 @@
         [self.sections addObject:keyUsageSection];
     }
 
+    // Features
+    NSArray<NSString *> * tlsFeatures = selectedCertificate.tlsFeatures;
+    if (tlsFeatures != nil && tlsFeatures.count > 0) {
+        CertificateTableRowSection * tlsFeaturesSection = [CertificateTableRowSection sectionWithTitle:@"TLS Features"];
+        NSMutableArray<CertificateTableRowItem *> * featureItems = [NSMutableArray arrayWithCapacity:tlsFeatures.count];
+        for (NSString * feature in tlsFeatures) {
+            [featureItems addObject:[CertificateTableRowItem itemWithTitle:[lang key:feature] value:@"" style:CertificateTableRowItemStyleBasic]];
+        }
+        tlsFeaturesSection.items = featureItems;
+        [self.sections addObject:tlsFeaturesSection];
+    }
+
     // Public Key Info
     CertificateTableRowSection * publicKeySection = [CertificateTableRowSection sectionWithTitle:@"Public Key"];
     publicKeySection.items = @[
@@ -120,7 +132,7 @@
     // Subject Alt. Names
     if (selectedCertificate.alternateNames.count > 0) {
         CertificateTableRowSection * sanSection = [CertificateTableRowSection sectionWithTitle:@"Subject Alternative Names"];
-        sanSection.items = @[[CertificateTableRowItem itemWithTitle:@"View all alternative names" value:@"" style:CertificateTableRowItemStyleBasic]];
+        sanSection.items = @[[CertificateTableRowItem itemWithTitle:@"View all alternative names" value:@"" style:CertificateTableRowItemStyleBasicDisclosure]];
         [self.sections addObject:sanSection];
     }
 }

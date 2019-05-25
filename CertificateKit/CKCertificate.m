@@ -52,6 +52,7 @@
 
 @property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
+@property (strong, nonatomic, nullable, readwrite) NSArray<NSString *> * tlsFeatures;
 
 @end
 
@@ -101,43 +102,78 @@ INSERT_OPENSSL_ERROR_METHOD
     xcert.isExpired = [xcert.notAfter timeIntervalSinceNow] < 86400;
     xcert.isNotYetValid = [xcert.notBefore timeIntervalSinceNow] > 86400;
     xcert.isValidDate = !xcert.isExpired && !xcert.isNotYetValid;
-    
-    AUTHORITY_INFO_ACCESS * info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
-    int len = sk_ACCESS_DESCRIPTION_num(info);
-    for (int i = 0; i < len; i++) {
-        // Look for the OCSP entry
-        ACCESS_DESCRIPTION * description = sk_ACCESS_DESCRIPTION_value(info, i);
-        if (OBJ_obj2nid(description->method) == NID_ad_OCSP) {
-            if (description->location->type == GEN_URI) {
-                char * ocspurlchar = i2s_ASN1_IA5STRING(NULL, description->location->d.ia5);
-                NSString * ocspurlString = [[NSString alloc] initWithUTF8String:ocspurlchar];
-                xcert.ocspURL = [NSURL URLWithString:ocspurlString];
+
+    // Get the OCSP URL
+    {
+        AUTHORITY_INFO_ACCESS * info = X509_get_ext_d2i(cert, NID_info_access, NULL, NULL);
+        int len = sk_ACCESS_DESCRIPTION_num(info);
+        for (int i = 0; i < len; i++) {
+            // Look for the OCSP entry
+            ACCESS_DESCRIPTION * description = sk_ACCESS_DESCRIPTION_value(info, i);
+            if (OBJ_obj2nid(description->method) == NID_ad_OCSP) {
+                if (description->location->type == GEN_URI) {
+                    char * ocspurlchar = i2s_ASN1_IA5STRING(NULL, description->location->d.ia5);
+                    NSString * ocspurlString = [[NSString alloc] initWithUTF8String:ocspurlchar];
+                    xcert.ocspURL = [NSURL URLWithString:ocspurlString];
+                }
             }
         }
+        AUTHORITY_INFO_ACCESS_free(info);
     }
-    
-    CRL_DIST_POINTS * points = X509_get_ext_d2i(cert, NID_crl_distribution_points, NULL, NULL);
-    int numberOfPoints = sk_DIST_POINT_num(points);
-    if (numberOfPoints < 0) {
-        xcert.crlDistributionPoints = @[];
-    } else {
-        DIST_POINT * point;
-        GENERAL_NAMES * fullNames;
-        GENERAL_NAME * fullName;
-        NSMutableArray<NSURL *> * urls = [NSMutableArray new];
-        for (int i = 0; i < numberOfPoints; i ++) {
-            point = sk_DIST_POINT_value(points, i);
-            fullNames = point->distpoint->name.fullname;
-            fullName = sk_GENERAL_NAME_value(fullNames, 0);
-            const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
-            NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
-            if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
-                [urls addObject:crlURL];
-            } else {
-                PDebug(@"Unsupported CRL distribution point: %s", url);
+
+    // Get CLR Distribution points
+    {
+        CRL_DIST_POINTS * points = X509_get_ext_d2i(cert, NID_crl_distribution_points, NULL, NULL);
+        int numberOfPoints = sk_DIST_POINT_num(points);
+        if (numberOfPoints < 0) {
+            xcert.crlDistributionPoints = @[];
+        } else {
+            DIST_POINT * point;
+            GENERAL_NAMES * fullNames;
+            GENERAL_NAME * fullName;
+            NSMutableArray<NSURL *> * urls = [NSMutableArray new];
+            for (int i = 0; i < numberOfPoints; i ++) {
+                point = sk_DIST_POINT_value(points, i);
+                fullNames = point->distpoint->name.fullname;
+                fullName = sk_GENERAL_NAME_value(fullNames, 0);
+                const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
+                NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
+                if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
+                    [urls addObject:crlURL];
+                } else {
+                    PDebug(@"Unsupported CRL distribution point: %s", url);
+                }
             }
+            xcert.crlDistributionPoints = urls;
         }
-        xcert.crlDistributionPoints = urls;
+        CRL_DIST_POINTS_free(points);
+    }
+
+    // Get any TLS features
+    {
+        TLS_FEATURE * tlsFeatures = X509_get_ext_d2i(cert, NID_tlsfeature, NULL, NULL);
+        int len = sk_ASN1_INTEGER_num(tlsFeatures);
+        if (len > 0) {
+            NSDictionary<NSNumber *, NSString *> * tlsFeatureIDs = @{
+                                                                     @5: @"tls_feature_status_request",
+                                                                     @15: @"tls_feature_status_request_v2",
+                                                                     };
+
+            NSMutableArray<NSString *> * featureNames = [NSMutableArray arrayWithCapacity:len];
+            for (int i = 0; i < len; i++) {
+                ASN1_INTEGER * feature = sk_ASN1_INTEGER_value(tlsFeatures, i);
+                NSNumber * featureID = [NSNumber numberWithLong:ASN1_INTEGER_get(feature)];
+                NSString * featureName = tlsFeatureIDs[featureID];
+                if (featureName == nil) {
+                    PError(@"Unknown TLS feature ID %lu", featureID.longValue);
+                    [featureNames addObject:[NSString stringWithFormat:@"Unknown Feature %lu", featureID.longValue]];
+                } else {
+                    [featureNames addObject:featureName];
+                }
+            }
+            xcert.tlsFeatures = featureNames;
+        }
+        TLS_FEATURE_free(tlsFeatures);
     }
 
     return xcert;
@@ -250,6 +286,9 @@ INSERT_OPENSSL_ERROR_METHOD
 }
 
 - (NSArray<CKAlternateNameObject *> *) alternateNames {
+    // Lazy load this as it's leaky and can be really resource heavy for certificates
+    // with a crazy amount of names.
+
     if (self.subjectAltNames) {
         return self.subjectAltNames;
     }
@@ -258,6 +297,11 @@ INSERT_OPENSSL_ERROR_METHOD
     GENERAL_NAMES * sans = X509_get_ext_d2i(self.certificate, NID_subject_alt_name, NULL, NULL);
     int numberOfSans = sk_GENERAL_NAME_num(sans);
     if (numberOfSans < 1) {
+        return @[];
+    }
+    if (numberOfSans > 10000) {
+        // Enforce a reasonable limit of 10,000 names
+        PError(@"Certificate has too many alternate names: %i.", numberOfSans);
         return @[];
     }
 

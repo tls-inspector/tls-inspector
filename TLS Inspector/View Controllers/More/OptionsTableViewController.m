@@ -26,7 +26,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 4;
+        return 5;
     } else if (section == 1) {
         return 2;
     } else if (section == 2) {
@@ -82,6 +82,10 @@
             }
             [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
             return toggleCell;
+        } else if (indexPath.row == 4) {
+            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:themeTextColor title:l(@"Advanced Settings")];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -226,7 +230,9 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 3 && indexPath.row == 1) {
+    if (indexPath.section == 0 && indexPath.row == 4) {
+        [self performSegueWithIdentifier:@"CryptoOptionsSegue" sender:nil];
+    } else if (indexPath.section == 3 && indexPath.row == 1) {
         if (UserOptions.currentOptions.verboseLogging && UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
             [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];
         } else {
@@ -238,23 +244,22 @@
 }
 
 - (void) themeSwitch:(UISegmentedControl *)sender {
-    [uihelper
-     presentConfirmInViewController:self
-     title:l(@"Change Theme")
-     body:l(@"You must restart the app for the change to take affect")
-     confirmButtonTitle:l(@"Change")
-     cancelButtonTitle:l(@"Cancel")
-     confirmActionIsDestructive:NO
-     dismissed:^(BOOL confirmed) {
-         if (confirmed) {
-             UserOptions.currentOptions.useLightTheme = sender.selectedSegmentIndex == 1;
-             [appState setAppearance];
-             UIAlertController * alert = [UIAlertController alertControllerWithTitle:l(@"Restart TLS Inspector") message:l(@"You must restart TLS Inspector for theme changes to take affect.") preferredStyle:UIAlertControllerStyleAlert];
-             [self presentViewController:alert animated:YES completion:nil];
-         } else {
-             [sender setSelectedSegmentIndex:sender.selectedSegmentIndex == 0 ? 1 : 0];
-         }
-     }];
+    UserOptions.currentOptions.useLightTheme = sender.selectedSegmentIndex == 1;
+    [appState setAppearance];
+    [NSNotificationCenter.defaultCenter postNotificationName:CHANGE_THEME_NOTIFICATION object:nil];
+
+    // Do this here (and not in app state) since state is shared with the
+    // extension, and sharedApplication isn't defined there.
+    NSArray *windows = [UIApplication sharedApplication].windows;
+    for (UIWindow *window in windows) {
+        for (UIView *view in window.subviews) {
+            [view removeFromSuperview];
+            [window addSubview:view];
+        }
+        NSLog(@"Reloaded window");
+    }
+
+    [self.tableView reloadData];
 }
 
 - (void) sendDebugLogsWithComments:(NSString *)comments {

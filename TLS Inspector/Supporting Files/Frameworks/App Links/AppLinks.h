@@ -23,6 +23,6 @@
  @param comments Optional comments to populate the email with
  @param dismissed Called when the view has been dismissed.
  */
-- (void) showEmailComposeSheetForAppInViewController:(UIViewController * _Nonnull)viewController withComments:(NSString *)comments dismissed:(void(^ _Nullable)(void))dismissed;
+- (void) showEmailComposeSheetForAppInViewController:(UIViewController * _Nonnull)viewController withComments:(NSString * _Nonnull)comments dismissed:(void(^ _Nullable)(void))dismissed;
 
 @end

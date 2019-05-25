@@ -21,4 +21,6 @@
 
 - (void) setAppearance;
 
+- (BOOL) proxyConfigured;
+
 @end

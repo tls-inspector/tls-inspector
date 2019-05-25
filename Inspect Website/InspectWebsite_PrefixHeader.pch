@@ -12,7 +12,8 @@
 #define INSPECT_NOTIFICATION @"INSPECT_THIS_WEBSITE"
 #define INSPECT_NOTIFICATION_HOST_KEY @"host"
 #define INSPECT_NOTIFICATION_INDEX_KEY @"index"
-#define RELOAD_CERT_NOTIFICATION @"ReloadCertDetails"
+#define RELOAD_CERT_NOTIFICATION @"🤔"
+#define CHANGE_THEME_NOTIFICATION @"🏳️‍🌈"
 
 #if DEBUG
 #define d(s, ...) NSLog(s, ##__VA_ARGS__)

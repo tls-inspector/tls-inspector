@@ -48,7 +48,36 @@ static AppState * _instance;
         selectionView.backgroundColor = [UIColor colorWithRed:0.08 green:0.12 blue:0.16 alpha:1.0];
         [[UITableViewCell appearance] setSelectedBackgroundView:selectionView];
         [[[UITableViewCell appearance] textLabel] setTextColor:[UIColor whiteColor]];
+    } else {
+        // Style the navigation bar
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.969f green:0.969f blue:0.969f alpha:1.0f]];
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.0f green:0.478431f blue:1.0f alpha:1.0f]];
+        [[UINavigationBar appearance] setBackgroundColor:nil];
+
+        NSDictionary<NSAttributedStringDocumentAttributeKey, id> * attributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
+        [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+        if (@available(iOS 11, *)) {
+            [[UINavigationBar appearance] setLargeTitleTextAttributes:attributes];
+        }
+
+        // Style the tableview
+        [[UITableView appearance] setBackgroundColor:UIColor.groupTableViewBackgroundColor];
+        [[UITableView appearance] setSeparatorColor:UIColor.lightGrayColor];
+
+        // Style the tableview cells
+        [[UITableViewCell appearance] setBackgroundColor:UIColor.whiteColor];
+        UIView *selectionView = [UIView new];
+        selectionView.backgroundColor = [UIColor colorWithRed:0.851f green:0.851f blue:0.851f alpha:0.851f];
+        [[UITableViewCell appearance] setSelectedBackgroundView:selectionView];
+        [[[UITableViewCell appearance] textLabel] setTextColor:UIColor.blackColor];
     }
+}
+
+- (BOOL) proxyConfigured {
+    CFDictionaryRef proxySettings = CFNetworkCopySystemProxySettings();
+    const CFStringRef proxyCFString = (const CFStringRef)CFDictionaryGetValue(proxySettings, (const void*)kCFNetworkProxiesHTTPProxy);
+    NSString * proxyString = (__bridge NSString *)(proxyCFString);
+    return proxyString != nil && proxyString.length > 0;
 }
 
 @end
