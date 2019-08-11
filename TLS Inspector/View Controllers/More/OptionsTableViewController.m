@@ -10,6 +10,15 @@
 
 @implementation OptionsTableViewController
 
+typedef NS_ENUM(NSInteger, TableSections) {
+    SectionGeneral = 0,
+    SectionAppearance,
+    SectionCertificateStatus,
+    SectionFingerprints,
+    SectionLogging,
+    SectionLast
+};
+
 - (void) viewDidLoad {
     [super viewDidLoad];
 }
@@ -21,17 +30,22 @@
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return SectionLast;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 5;
-    } else if (section == 1) {
-        return 2;
-    } else if (section == 2) {
+    if (section == SectionGeneral) {
         return 4;
-    } else if (section == 3) {
+    } else if (section == SectionAppearance) {
+        if (ATLEAST_IOS_13) {
+            return 1;
+        }
+        return 2;
+    } else if (section == SectionCertificateStatus) {
+        return 2;
+    } else if (section == SectionFingerprints) {
+        return 4;
+    } else if (section == SectionLogging) {
         return 2;
     }
     
@@ -39,7 +53,7 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == SectionGeneral) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
@@ -74,6 +88,17 @@
             [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         } else if (indexPath.row == 3) {
+            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:themeTextColor title:l(@"Advanced Settings")];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
+        }
+    } else if (indexPath.section == SectionAppearance) {
+        if (indexPath.row == 0) {
+            UITableViewCell * cell = [UITableViewCell new];
+            cell.textLabel.text = [lang key:@"Change App Icon"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
+        } else if (indexPath.row == 1) {
             UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
             label.text = l(@"Theme");
@@ -90,12 +115,8 @@
             }
             [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
             return toggleCell;
-        } else if (indexPath.row == 4) {
-            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:themeTextColor title:l(@"Advanced Settings")];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == SectionCertificateStatus) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
@@ -119,7 +140,7 @@
             [toggle addTarget:self action:@selector(crlSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         }
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == SectionFingerprints) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
@@ -165,7 +186,7 @@
             [toggle addTarget:self action:@selector(sha512Switch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         }
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == SectionLogging) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
@@ -228,13 +249,15 @@
 
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == SectionGeneral) {
         return [lang key:@"General"];
-    } else if (section == 1) {
+    } else if (section == SectionAppearance) {
+        return [lang key:@"Appearance"];
+    } else if (section == SectionCertificateStatus) {
         return [lang key:@"Certificate Status"];
-    } else if (section == 2) {
+    } else if (section == SectionFingerprints) {
         return [lang key:@"Show Certificate Fingerprint"];
-    } else if (section == 3) {
+    } else if (section == SectionLogging) {
         return [lang key:@"Logging"];
     }
     
@@ -242,9 +265,9 @@
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == SectionCertificateStatus) {
         return [lang key:@"certificate_status_footer"];
-    } else if (section == 3) {
+    } else if (section == SectionLogging) {
         return [lang key:@"verbose_logging_footer"];
     }
     
@@ -252,9 +275,9 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 4) {
+    if (indexPath.section == SectionGeneral && indexPath.row == 4) {
         [self performSegueWithIdentifier:@"CryptoOptionsSegue" sender:nil];
-    } else if (indexPath.section == 3 && indexPath.row == 1) {
+    } else if (indexPath.section == SectionLogging && indexPath.row == 1) {
         if (UserOptions.currentOptions.verboseLogging && UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
             [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];
         } else {

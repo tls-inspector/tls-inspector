@@ -22,6 +22,8 @@
 	<string>Alternate Names</string>
 	<key>An error occurred</key>
 	<string>An error occurred</string>
+	<key>Appearance</key>
+	<string>Appearance</string>
 	<key>Apple Support</key>
 	<string>Apple Support</string>
 	<key>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</key>
@@ -76,6 +78,8 @@
 	<string>Certificates</string>
 	<key>Change</key>
 	<string>Change</string>
+	<key>Change App Icon</key>
+	<string>Change App Icon</string>
 	<key>Change Theme</key>
 	<string>Change Theme</string>
 	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
@@ -107,7 +111,7 @@
 	<key>Country::AI</key>
 	<string>Anguilla</string>
 	<key>Country::AL</key>
-	<string>Albania, People&apos;s Socialist Republic of</string>
+	<string>Albania, People's Socialist Republic of</string>
 	<key>Country::AM</key>
 	<string>Armenia</string>
 	<key>Country::AN</key>
@@ -133,19 +137,19 @@
 	<key>Country::BB</key>
 	<string>Barbados</string>
 	<key>Country::BD</key>
-	<string>Bangladesh, People&apos;s Republic of</string>
+	<string>Bangladesh, People's Republic of</string>
 	<key>Country::BE</key>
 	<string>Belgium, Kingdom of</string>
 	<key>Country::BF</key>
 	<string>Burkina Faso</string>
 	<key>Country::BG</key>
-	<string>Bulgaria, People&apos;s Republic of</string>
+	<string>Bulgaria, People's Republic of</string>
 	<key>Country::BH</key>
 	<string>Bahrain, Kingdom of</string>
 	<key>Country::BI</key>
 	<string>Burundi, Republic of</string>
 	<key>Country::BJ</key>
-	<string>Benin, People&apos;s Republic of</string>
+	<string>Benin, People's Republic of</string>
 	<key>Country::BM</key>
 	<string>Bermuda</string>
 	<key>Country::BN</key>
@@ -175,11 +179,11 @@
 	<key>Country::CF</key>
 	<string>Central African Republic</string>
 	<key>Country::CG</key>
-	<string>Congo, People&apos;s Republic of</string>
+	<string>Congo, People's Republic of</string>
 	<key>Country::CH</key>
 	<string>Switzerland, Swiss Confederation</string>
 	<key>Country::CI</key>
-	<string>Cote D&apos;Ivoire, Ivory Coast, Republic of the</string>
+	<string>Cote D'Ivoire, Ivory Coast, Republic of the</string>
 	<key>Country::CK</key>
 	<string>Cook Islands</string>
 	<key>Country::CL</key>
@@ -187,7 +191,7 @@
 	<key>Country::CM</key>
 	<string>Cameroon, United Republic of</string>
 	<key>Country::CN</key>
-	<string>China, People&apos;s Republic of</string>
+	<string>China, People's Republic of</string>
 	<key>Country::CO</key>
 	<string>Colombia, Republic of</string>
 	<key>Country::CR</key>
@@ -215,7 +219,7 @@
 	<key>Country::DO</key>
 	<string>Dominican Republic</string>
 	<key>Country::DZ</key>
-	<string>Algeria, People&apos;s Democratic Republic of</string>
+	<string>Algeria, People's Democratic Republic of</string>
 	<key>Country::EC</key>
 	<string>Ecuador, Republic of</string>
 	<key>Country::EE</key>
@@ -261,7 +265,7 @@
 	<key>Country::GM</key>
 	<string>Gambia, Republic of the</string>
 	<key>Country::GN</key>
-	<string>Guinea, Revolutionary People&apos;s Rep&apos;c of</string>
+	<string>Guinea, Revolutionary People's Rep'c of</string>
 	<key>Country::GP</key>
 	<string>Guadaloupe</string>
 	<key>Country::GQ</key>
@@ -289,7 +293,7 @@
 	<key>Country::HT</key>
 	<string>Haiti, Republic of</string>
 	<key>Country::HU</key>
-	<string>Hungary, Hungarian People&apos;s Republic</string>
+	<string>Hungary, Hungarian People's Republic</string>
 	<key>Country::ID</key>
 	<string>Indonesia, Republic of</string>
 	<key>Country::IE</key>
@@ -327,7 +331,7 @@
 	<key>Country::KN</key>
 	<string>St. Kitts and Nevis</string>
 	<key>Country::KP</key>
-	<string>Korea, Democratic People&apos;s Republic of</string>
+	<string>Korea, Democratic People's Republic of</string>
 	<key>Country::KR</key>
 	<string>Korea, Republic of</string>
 	<key>Country::KW</key>
@@ -337,7 +341,7 @@
 	<key>Country::KZ</key>
 	<string>Kazakhstan, Republic of</string>
 	<key>Country::LA</key>
-	<string>Lao People&apos;s Democratic Republic</string>
+	<string>Lao People's Democratic Republic</string>
 	<key>Country::LB</key>
 	<string>Lebanon, Lebanese Republic</string>
 	<key>Country::LC</key>
@@ -375,7 +379,7 @@
 	<key>Country::MM</key>
 	<string>Myanmar</string>
 	<key>Country::MN</key>
-	<string>Mongolia, Mongolian People&apos;s Republic</string>
+	<string>Mongolia, Mongolian People's Republic</string>
 	<key>Country::MO</key>
 	<string>Macao, Special Administrative Region of China</string>
 	<key>Country::MP</key>
@@ -399,7 +403,7 @@
 	<key>Country::MY</key>
 	<string>Malaysia</string>
 	<key>Country::MZ</key>
-	<string>Mozambique, People&apos;s Republic of</string>
+	<string>Mozambique, People's Republic of</string>
 	<key>Country::NA</key>
 	<string>Namibia</string>
 	<key>Country::NC</key>
@@ -439,7 +443,7 @@
 	<key>Country::PK</key>
 	<string>Pakistan, Islamic Republic of</string>
 	<key>Country::PL</key>
-	<string>Poland, Polish People&apos;s Republic</string>
+	<string>Poland, Polish People's Republic</string>
 	<key>Country::PM</key>
 	<string>St. Pierre and Miquelon</string>
 	<key>Country::PN</key>
@@ -839,9 +843,9 @@
 	<key>explanation::wrong_host</key>
 	<string>The server certificate is for a different host than the one connected to.</string>
 	<key>first_run_notice</key>
-	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware. 
+	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
-If you&apos;re concerned about the security of your device; contact Apple Support.</string>
+If you're concerned about the security of your device; contact Apple Support.</string>
 	<key>iOS</key>
 	<string>iOS</string>
 	<key>keyUsage::OCSPSigning</key>
@@ -893,11 +897,11 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<key>sanType::URI</key>
 	<string>URI</string>
 	<key>secure::invalid_date</key>
-	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
+	<string>Most likely. An expired or not-yet-valid certificate isn't necessarily invalid, but often a mistake by the site administrator, or your phone's time settings being incorrect.</string>
 	<key>secure::local_trust</key>
-	<string>Yes. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
+	<string>Yes. Your device has been told to trust this certificate, even if it wouldn't otherwise.
 
-Typically, private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance.</string>
+Typically, private or internal websites, such as those used in an enterprise, use these types of certificates. If you're seeing this on a public website such as a bank or social network do not continue to that site and seek assistance.</string>
 	<key>secure::revoked</key>
 	<string>No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.
 
@@ -923,7 +927,7 @@ Exercise extreme caution if continuing to this website.</string>
 	<key>secure::wrong_host</key>
 	<string>No. Because the certificate presented by the server was for another site there is no way to be sure that this certificate is not dangerous.
 
-It&apos;s likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.
+It's likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.
 
 Exercise caution if continuing to this website.</string>
 	<key>tls_feature_status_request</key>
@@ -931,21 +935,21 @@ Exercise caution if continuing to this website.</string>
 	<key>tls_feature_status_request_v2</key>
 	<string>Status Request (2.0)</string>
 	<key>tlstip1</key>
-	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
+	<string>You can view the certificate of a website in Safari or other web browser by tapping the "Share" button and selecting "Show Certificate".</string>
 	<key>tlstip2</key>
-	<string>You can view more information about the server on Shodan by tapping the &quot;Share&quot; button when viewing a certificate.</string>
+	<string>You can view more information about the server on Shodan by tapping the "Share" button when viewing a certificate.</string>
 	<key>tlstip3</key>
-	<string>You can create a reminder when a certificate is about to expire by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
+	<string>You can create a reminder when a certificate is about to expire by tapping the "Share" button when inspecting a certificate.</string>
 	<key>tlstip4</key>
 	<string>You can change between night and day theme in options.</string>
 	<key>tlstip5</key>
-	<string>You can export the share the certificate data by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
+	<string>You can export the share the certificate data by tapping the "Share" button when inspecting a certificate.</string>
 	<key>tlstip6</key>
-	<string>You can verify a certificate&apos;s serial number or fingerprint by tapping the &quot;Share&quot; button when inspecting the value.</string>
+	<string>You can verify a certificate's serial number or fingerprint by tapping the "Share" button when inspecting the value.</string>
 	<key>tlstip7</key>
-	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
+	<string>You can copy a parameters value by long-pressing on it and tapping "Copy".</string>
 	<key>verbose_logging_footer</key>
-	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
+	<string>If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
