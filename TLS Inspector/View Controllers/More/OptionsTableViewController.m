@@ -44,7 +44,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Remember Recent Lookups");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:[RecentDomains sharedInstance].saveRecentDomains];
             [toggle addTarget:self action:@selector(recentSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -53,7 +55,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Show HTTP Headers");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.getHTTPHeaders];
             [toggle addTarget:self action:@selector(httpSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -62,7 +66,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Show Tips");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showTips];
             [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -71,7 +77,9 @@
             UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
             label.text = l(@"Theme");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
             [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
             [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
@@ -92,7 +100,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Query OCSP Responder");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.queryOCSP];
             [toggle addTarget:self action:@selector(ocspSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -101,7 +111,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Download & Check CRL");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.checkCRL];
             [toggle addTarget:self action:@selector(crlSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -112,7 +124,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"MD5");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintMD5];
             [toggle addTarget:self action:@selector(md5Switch:) forControlEvents:UIControlEventTouchUpInside];
@@ -121,7 +135,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"SHA-128");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintSHA128];
             [toggle addTarget:self action:@selector(sha128Switch:) forControlEvents:UIControlEventTouchUpInside];
@@ -130,7 +146,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"SHA-256");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintSHA256];
             [toggle addTarget:self action:@selector(sha256Switch:) forControlEvents:UIControlEventTouchUpInside];
@@ -139,7 +157,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"SHA-512");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintSHA512];
             [toggle addTarget:self action:@selector(sha512Switch:) forControlEvents:UIControlEventTouchUpInside];
@@ -150,7 +170,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Enable Debug Logging");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.verboseLogging];
             [toggle addTarget:self action:@selector(verboseLoggingSwitch:) forControlEvents:UIControlEventTouchUpInside];

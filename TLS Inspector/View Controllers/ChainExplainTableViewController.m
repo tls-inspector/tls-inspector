@@ -116,7 +116,9 @@
         iconLabel.text = self.labelIcon;
         iconLabel.textColor = self.labelIconColor;
         titleLabel.text = self.labelText;
-        titleLabel.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            titleLabel.textColor = themeTextColor;
+        }
         
         return cell;
     } else if (indexPath.section == 1) {

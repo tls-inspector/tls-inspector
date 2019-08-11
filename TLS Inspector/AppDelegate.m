@@ -5,7 +5,9 @@
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [UserOptions setDefaultValues];
-    [[AppState currentState] setAppearance];
+    if (!ATLEAST_IOS_13) {
+        [[AppState currentState] setAppearance];
+    }
     return YES;
 }
 

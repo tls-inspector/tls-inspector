@@ -61,7 +61,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     if (indexPath.section == 0) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
-        label.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            label.textColor = themeTextColor;
+        }
         switch (indexPath.row) {
             case 0:
                 label.text = l(@"Tell Friends About TLS Inspector");
@@ -77,7 +79,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     } else if (indexPath.section == 1) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
-        label.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            label.textColor = themeTextColor;
+        }
         switch (indexPath.row) {
             case 0:
                 label.text = l(@"Contribute to TLS Inspector");

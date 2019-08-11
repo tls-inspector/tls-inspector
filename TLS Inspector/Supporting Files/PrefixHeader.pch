@@ -13,6 +13,12 @@
 #define RELOAD_CERT_NOTIFICATION @"🤔"
 #define CHANGE_THEME_NOTIFICATION @"🏳️‍🌈"
 
+#define ATLEAST_IOS_9   [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9,3,0}]
+#define ATLEAST_IOS_10  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,0,0}]
+#define ATLEAST_IOS_11  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){11,0,0}]
+#define ATLEAST_IOS_12  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){12,0,0}]
+#define ATLEAST_IOS_13  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){13,0,0}]
+
 #if DEBUG
 #define d(s, ...) NSLog(s, ##__VA_ARGS__)
 #else

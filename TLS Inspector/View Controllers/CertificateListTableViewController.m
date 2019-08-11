@@ -205,7 +205,9 @@
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
             cell.textLabel.text = cert.summary;
-            cell.textLabel.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                cell.textLabel.textColor = themeTextColor;
+            }
         }
 
         return cell;
@@ -225,7 +227,9 @@
         if (idx >= currentServerInfo.securityHeaders.allKeys.count) {
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             cell.textLabel.text = [lang key:@"View All"];
-            cell.textLabel.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                cell.textLabel.textColor = themeTextColor;
+            }
             return cell;
         }
 

@@ -57,7 +57,6 @@
         [self presentViewController:controller animated:YES completion:nil];
     }
 
-    self.tipIconLabel.textColor = uihelper.blueColor;
     [self setTipTheme];
 
     self.tipKeys = @[
@@ -99,6 +98,12 @@
 }
 
 - (void) setTipTheme {
+    self.tipIconLabel.textColor = uihelper.blueColor;
+    
+    if (ATLEAST_IOS_13) {
+        return;
+    }
+
     if (usingLightTheme) {
         self.tipTitleLabel.textColor = UIColor.blackColor;
         self.tipBodyLabel.textColor = UIColor.blackColor;
@@ -230,19 +235,27 @@
         self.hostField = (UITextField *)[cell viewWithTag:1];
         [self.hostField addTarget:self action:@selector(hostFieldEdit:) forControlEvents:UIControlEventEditingChanged];
         self.hostField.delegate = self;
-        self.hostField.textColor = themeTextColor;
-        self.hostField.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
+        if (!ATLEAST_IOS_13) {
+            self.hostField.textColor = themeTextColor;
+            self.hostField.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
+        }
         [self setHoldFieldPlaceholder];
     } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
         cell.textLabel.text = [self.recentDomains objectAtIndex:indexPath.row];
-        cell.textLabel.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            cell.textLabel.textColor = themeTextColor;
+        }
     }
 
     return cell;
 }
 
 - (void) setHoldFieldPlaceholder {
+    if (ATLEAST_IOS_13) {
+        return;
+    }
+
     if (usingLightTheme) {
         self.hostField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{}];
     } else {
