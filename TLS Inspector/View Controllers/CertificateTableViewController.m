@@ -192,7 +192,6 @@
 }
 
 - (void) sharePublicKey:(UIBarButtonItem *)sender {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSData * pem = [selectedCertificate publicKeyAsPEM];
     if (pem) {
         NSString * fileName = format(@"/%@.pem", selectedCertificate.serialNumber);
@@ -203,18 +202,14 @@
                                                         initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
         activityController.popoverPresentationController.barButtonItem = sender;
-        [self presentViewController:activityController animated:YES completion:^() {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        }];
+        [self presentViewController:activityController animated:YES completion:^() {}];
     } else {
         [uihelper
          presentAlertInViewController:self
          title:l(@"Unable to export certificate")
          body:l(@"We were unable to export the certificate in PEM format.")
          dismissButtonTitle:l(@"Dismiss")
-         dismissed:^(NSInteger buttonIndex) {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-         }];
+         dismissed:^(NSInteger buttonIndex) {}];
     }
 }
 

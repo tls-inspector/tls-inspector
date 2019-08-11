@@ -3,7 +3,6 @@
 
 #import "lang.h"
 #import "AppState.h"
-#import "MBProgressHUD.h"
 #import "UIHelper.h"
 #import "Storage.h"
 #import "UserOptions.h"

@@ -38,8 +38,6 @@
 		3C36B3B82041310E005C66E8 /* CKGetterOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B62041310E005C66E8 /* CKGetterOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C36B3B92041310E005C66E8 /* CKGetterOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B72041310E005C66E8 /* CKGetterOptions.m */; };
 		3C43EF8D1D7A987F00AE65E9 /* Inspect Website.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */; };
-		3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */; };
 		3C50969F1E7CCA7600AEAAB2 /* AppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */; };
 		3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
 		3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
@@ -238,8 +236,6 @@
 		3C36B3B72041310E005C66E8 /* CKGetterOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKGetterOptions.m; sourceTree = "<group>"; };
 		3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Inspect Website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C43EF8A1D7A987F00AE65E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C5096961E7CC9FC00AEAAB2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3C50969B1E7CCA7600AEAAB2 /* AppLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLinks.h; sourceTree = "<group>"; };
 		3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinks.m; sourceTree = "<group>"; };
 		3C50969D1E7CCA7600AEAAB2 /* UIDevice+PlatformString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformString.h"; sourceTree = "<group>"; };
@@ -433,18 +429,8 @@
 			children = (
 				3C2A7A591F28587E00AA12B4 /* FontAwesome+iOS */,
 				3C50969A1E7CCA6A00AEAAB2 /* App Links */,
-				3C5096951E7CC9DC00AEAAB2 /* MBProgressHUD */,
 			);
 			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		3C5096951E7CC9DC00AEAAB2 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				3C5096961E7CC9FC00AEAAB2 /* MBProgressHUD.h */,
-				3C5096971E7CC9FC00AEAAB2 /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		3C50969A1E7CCA6A00AEAAB2 /* App Links */ = {
@@ -984,7 +970,6 @@
 				3C2A7A581F28561700AA12B4 /* GetterTableViewController.m in Sources */,
 				3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */,
 				3CBD8B941E7CE8D600F2A637 /* AppState.m in Sources */,
-				3C5096991E7CCA1900AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CC6523D1DB07035001FB7E1 /* lang.m in Sources */,
 				3CFF7E772009958A00478E0A /* CertificateTableViewController.m in Sources */,
 				3CF7E3461F789E9800EEEE21 /* NSAtomicNumber.m in Sources */,
@@ -1068,7 +1053,6 @@
 				3CFF7E7020098FD900478E0A /* CertificateTableViewController.m in Sources */,
 				3CBD8B971E7CF0F900F2A637 /* SplitViewController.m in Sources */,
 				3CFF7E732009900F00478E0A /* CertificateTableRowItem.m in Sources */,
-				3C5096981E7CC9FC00AEAAB2 /* MBProgressHUD.m in Sources */,
 				3CD048562180DDFA00D963F6 /* FirstRunNoticeViewController.m in Sources */,
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */,
