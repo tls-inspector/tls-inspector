@@ -277,6 +277,8 @@ typedef NS_ENUM(NSInteger, TableSections) {
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == SectionGeneral && indexPath.row == 4) {
         [self performSegueWithIdentifier:@"CryptoOptionsSegue" sender:nil];
+    } else if (indexPath.section == SectionAppearance && indexPath.row == 0) {
+        [self performSegueWithIdentifier:@"ChangeIconSegue" sender:nil];
     } else if (indexPath.section == SectionLogging && indexPath.row == 1) {
         if (UserOptions.currentOptions.verboseLogging && UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
             [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];

@@ -97,9 +97,10 @@
 		3CD048562180DDFA00D963F6 /* FirstRunNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD048552180DDFA00D963F6 /* FirstRunNoticeViewController.m */; };
 		3CDEE27C2056129B007F72B0 /* ChainExplainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */; };
 		3CDEE2802056236F007F72B0 /* ChainExplainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */; };
+		3CE332C02301F8F800C62908 /* ChangeIconTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE332BF2301F8F800C62908 /* ChangeIconTableViewController.m */; };
 		3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */; };
 		3CE5D2AB1E19A4A6009500E5 /* CertificateReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */; };
-		3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* Assets.xcassets */; };
+		3CEAA5071D83CCD10011A706 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* ExtensionAssets.xcassets */; };
 		3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */; };
 		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
 		3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
@@ -120,7 +121,7 @@
 		3CF7E3461F789E9800EEEE21 /* NSAtomicNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF7E3441F789E9800EEEE21 /* NSAtomicNumber.m */; };
 		3CFAE6DB1CA8440400CD946B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DA1CA8440400CD946B /* main.m */; };
 		3CFAE6DE1CA8440400CD946B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6DD1CA8440400CD946B /* AppDelegate.m */; };
-		3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* Assets.xcassets */; };
+		3CFAE6E61CA8440400CD946B /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAE6E51CA8440400CD946B /* AppAssets.xcassets */; };
 		3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAE6F11CA8463900CD946B /* InputTableViewController.m */; };
 		3CFF7E7020098FD900478E0A /* CertificateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E6F20098FD900478E0A /* CertificateTableViewController.m */; };
 		3CFF7E732009900F00478E0A /* CertificateTableRowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF7E722009900F00478E0A /* CertificateTableRowItem.m */; };
@@ -290,9 +291,11 @@
 		3CD048552180DDFA00D963F6 /* FirstRunNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstRunNoticeViewController.m; sourceTree = "<group>"; };
 		3CDEE27A2056129B007F72B0 /* ChainExplainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainExplainTableViewController.h; sourceTree = "<group>"; };
 		3CDEE27B2056129B007F72B0 /* ChainExplainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainExplainTableViewController.m; sourceTree = "<group>"; };
+		3CE332BE2301F8F800C62908 /* ChangeIconTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeIconTableViewController.h; sourceTree = "<group>"; };
+		3CE332BF2301F8F800C62908 /* ChangeIconTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeIconTableViewController.m; sourceTree = "<group>"; };
 		3CE5D2A71E199FE9009500E5 /* CertificateReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateReminderManager.h; sourceTree = "<group>"; };
 		3CE5D2A81E199FE9009500E5 /* CertificateReminderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateReminderManager.m; sourceTree = "<group>"; };
-		3CEAA5061D83CCD10011A706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3CEAA5061D83CCD10011A706 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		3CF29A051D2CBC9C00FD9603 /* RecentDomains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDomains.h; sourceTree = "<group>"; };
 		3CF29A061D2CBC9C00FD9603 /* RecentDomains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDomains.m; sourceTree = "<group>"; };
 		3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -313,7 +316,7 @@
 		3CFAE6DA1CA8440400CD946B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3CFAE6DC1CA8440400CD946B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3CFAE6DD1CA8440400CD946B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3CFAE6E51CA8440400CD946B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3CFAE6E51CA8440400CD946B /* AppAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppAssets.xcassets; sourceTree = "<group>"; };
 		3CFAE6EA1CA8440400CD946B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CFAE6F01CA8463900CD946B /* InputTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputTableViewController.h; sourceTree = "<group>"; };
 		3CFAE6F11CA8463900CD946B /* InputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTableViewController.m; sourceTree = "<group>"; };
@@ -414,7 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				A11600081EEB084F00D98E8F /* Inspect Website.entitlements */,
-				3CEAA5061D83CCD10011A706 /* Assets.xcassets */,
+				3CEAA5061D83CCD10011A706 /* ExtensionAssets.xcassets */,
 				3C3104EF1D83C4C30093909E /* Extension.storyboard */,
 				3C43EF8A1D7A987F00AE65E9 /* Info.plist */,
 				3C3104F21D83C5C70093909E /* InitialViewController.h */,
@@ -595,7 +598,7 @@
 				3CFAE6F31CA8464200CD946B /* View Controllers */,
 				3CFAE6DC1CA8440400CD946B /* AppDelegate.h */,
 				3CFAE6DD1CA8440400CD946B /* AppDelegate.m */,
-				3CFAE6E51CA8440400CD946B /* Assets.xcassets */,
+				3CFAE6E51CA8440400CD946B /* AppAssets.xcassets */,
 				3CFAE6EA1CA8440400CD946B /* Info.plist */,
 				3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */,
 				3CC6523E1DB0710C001FB7E1 /* Main.storyboard */,
@@ -659,6 +662,8 @@
 				67D03D7D1F82EC7900981806 /* MoreTableViewController.m */,
 				3C5D129F1D0531BD004B6E12 /* AboutViewController.h */,
 				3C5D12A01D0531BD004B6E12 /* AboutViewController.m */,
+				3CE332BE2301F8F800C62908 /* ChangeIconTableViewController.h */,
+				3CE332BF2301F8F800C62908 /* ChangeIconTableViewController.m */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -890,7 +895,7 @@
 				3CC652401DB0711F001FB7E1 /* Main.storyboard in Resources */,
 				3C3104EE1D83C4A40093909E /* Launch Screen.storyboard in Resources */,
 				3C3104F01D83C4C30093909E /* Extension.storyboard in Resources */,
-				3CEAA5071D83CCD10011A706 /* Assets.xcassets in Resources */,
+				3CEAA5071D83CCD10011A706 /* ExtensionAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,7 +919,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C2A7A671F285C5F00AA12B4 /* FontAwesome.ttf in Resources */,
-				3CFAE6E61CA8440400CD946B /* Assets.xcassets in Resources */,
+				3CFAE6E61CA8440400CD946B /* AppAssets.xcassets in Resources */,
 				3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */,
 				3CC652431DB07166001FB7E1 /* en.plist in Resources */,
 				3CC6523F1DB0710C001FB7E1 /* Main.storyboard in Resources */,
@@ -1057,6 +1062,7 @@
 				3CF29A071D2CBC9C00FD9603 /* RecentDomains.m in Sources */,
 				3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */,
 				3CC7C9D820819B6800E206BE /* ContactSupportTableViewController.m in Sources */,
+				3CE332C02301F8F800C62908 /* ChangeIconTableViewController.m in Sources */,
 				3CE5D2A91E199FE9009500E5 /* CertificateReminderManager.m in Sources */,
 				A116000B1EEB086800D98E8F /* Storage.m in Sources */,
 				3CFAE6F21CA8463900CD946B /* InputTableViewController.m in Sources */,
@@ -1375,7 +1381,7 @@
 		3CFAE6EE1CA8440400CD946B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = IconDark;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1408,7 +1414,7 @@
 		3CFAE6EF1CA8440400CD946B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = IconDark;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
