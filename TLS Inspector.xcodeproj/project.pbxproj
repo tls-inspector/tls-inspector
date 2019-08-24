@@ -43,7 +43,6 @@
 		3C50969F1E7CCA7600AEAAB2 /* AppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */; };
 		3C5096A01E7CCA7600AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
 		3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969E1E7CCA7600AEAAB2 /* UIDevice+PlatformString.m */; };
-		3C5096A21E7CCA7C00AEAAB2 /* AppLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50969C1E7CCA7600AEAAB2 /* AppLinks.m */; };
 		3C5D129E1D05287F004B6E12 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D129D1D05287F004B6E12 /* Launch Screen.storyboard */; };
 		3C5D12A11D0531BD004B6E12 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D12A01D0531BD004B6E12 /* AboutViewController.m */; };
 		3C5FA7C21CA852DF00C79D2B /* CertificateListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FA7C11CA852DF00C79D2B /* CertificateListTableViewController.m */; };
@@ -999,7 +998,6 @@
 				3C0C6F351E7CCB6400E6FCA2 /* UILang.m in Sources */,
 				3CDEE2802056236F007F72B0 /* ChainExplainTableViewController.m in Sources */,
 				3C5096A11E7CCA7A00AEAAB2 /* UIDevice+PlatformString.m in Sources */,
-				3C5096A21E7CCA7C00AEAAB2 /* AppLinks.m in Sources */,
 				3CFF7E792009962F00478E0A /* CertificateTableRowItem.m in Sources */,
 				3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */,
 				A116000C1EEB086800D98E8F /* Storage.m in Sources */,

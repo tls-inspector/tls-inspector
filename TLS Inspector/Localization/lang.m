@@ -34,6 +34,10 @@ static NSMutableArray<NSString *> * _missingKeys;
     NSString * stringKey;
     NSUInteger length = args.count;
     for (int i = 0; i < length; i++) {
+        NSString * val = args[i];
+        if (val == nil) {
+            val = @"";
+        }
         stringKey = [NSString stringWithFormat:@"{%u}", i];
         translatedString = [translatedString stringByReplacingOccurrencesOfString:stringKey
                                                                        withString:args[i]];
