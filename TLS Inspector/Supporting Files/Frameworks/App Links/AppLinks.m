@@ -63,24 +63,41 @@
     }
 }
 
-- (void)showEmailComposeSheetForAppInViewController:(UIViewController *)viewController withComments:(NSString *)comments dismissed:(void (^)(void))dismissed {
+- (void) showEmailComposeSheetForAppInViewController:(UIViewController *)viewController withComments:(NSString *)comments includeLogs:(BOOL)includeLogs dismissed:(void (^)(void))dismissed {
     MFMailComposeViewController * mailController = [MFMailComposeViewController new];
     mailController.mailComposeDelegate = self;
     [mailController setSubject:[NSString stringWithFormat:@"%@ Feedback", APP_NAME]];
     [mailController setToRecipients:@[APP_EMAIL]];
 
     NSDictionary * infoDict = [[NSBundle mainBundle] infoDictionary];
-
     NSString * bundleName = [[NSBundle mainBundle] bundleIdentifier];
     NSString * bundleVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
     NSNumber * build = [infoDict objectForKey:@"CFBundleVersion"];
     NSString * bundleBuild = [NSString stringWithFormat:@"%i", [build intValue]];
+    NSString * gitRevision = GIT_REVISION;
     NSString * deviceName = [[UIDevice currentDevice] platformString];
     NSOperatingSystemVersion systemVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
-    NSString * body = [NSString stringWithFormat:@"Please do not delete the following line:<br/>%@ %@ (%@) %@ %li.%li.%li",
-                       bundleName, bundleVersion, bundleBuild, deviceName, (long)systemVersion.majorVersion, (long)systemVersion.minorVersion, (long)systemVersion.patchVersion];
+    NSString * body = [NSString stringWithFormat:@"Please do not delete the following line:<br/>%@ %@ (%@ - %@) %@ %li.%li.%li",
+                       bundleName, bundleVersion, bundleBuild, gitRevision, deviceName, (long)systemVersion.majorVersion, (long)systemVersion.minorVersion, (long)systemVersion.patchVersion];
     [mailController setMessageBody:[NSString stringWithFormat:@"<p>%@<br/><br/></p><hr/><p><small>%@</small></p>", (comments != nil ? comments : @""), body] isHTML:YES];
 
+    if (includeLogs) {
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString * documentsDirectory = [paths objectAtIndex:0];
+        NSString * cklogPath = [documentsDirectory stringByAppendingPathComponent:@"CertificateKit.log"];
+        NSData * logData = [NSData dataWithContentsOfFile:cklogPath];
+        if (logData != nil) {
+            [mailController addAttachmentData:logData mimeType:@"text/plain" fileName:@"TLS Inspector.log"];
+        }
+        NSString * exceptionsLogPath = [documentsDirectory stringByAppendingPathComponent:@"exceptions.log"];
+        if ([NSFileManager.defaultManager fileExistsAtPath:exceptionsLogPath]) {
+            NSData * exceptionData = [NSData dataWithContentsOfFile:exceptionsLogPath];
+            if (exceptionData != nil) {
+                [mailController addAttachmentData:exceptionData mimeType:@"text/plain" fileName:@"Exceptions.log"];
+            }
+        }
+    }
+    
     if (!mailController) {
         if (dismissed) {
             dismissed();

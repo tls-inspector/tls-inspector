@@ -123,7 +123,7 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
                      break;
                  case 1: {
                      [ContactSupportTableViewController collectFeedbackOnController:self finished:^(NSString *comments) {
-                         [self.appLinks showEmailComposeSheetForAppInViewController:self withComments:comments dismissed:nil];
+                         [self.appLinks showEmailComposeSheetForAppInViewController:self withComments:comments includeLogs:NO dismissed:nil];
                      }];
                      break;
                  } default:

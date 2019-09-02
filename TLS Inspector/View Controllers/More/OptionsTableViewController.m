@@ -2,9 +2,11 @@
 #import "RecentDomains.h"
 #import "IconTableViewCell.h"
 #import "ContactSupportTableViewController.h"
-@import MessageUI;
+#import "AppLinks.h"
 
-@interface OptionsTableViewController () <MFMailComposeViewControllerDelegate>
+@interface OptionsTableViewController ()
+
+@property (strong, nonatomic) AppLinks * appLinks;
 
 @end
 
@@ -20,6 +22,7 @@ typedef NS_ENUM(NSInteger, TableSections) {
 };
 
 - (void) viewDidLoad {
+    self.appLinks = [AppLinks new];
     [super viewDidLoad];
 }
 
@@ -310,37 +313,7 @@ typedef NS_ENUM(NSInteger, TableSections) {
 }
 
 - (void) sendDebugLogsWithComments:(NSString *)comments {
-    MFMailComposeViewController * mailController = [MFMailComposeViewController new];
-    mailController.mailComposeDelegate = self;
-
-    if (!mailController) {
-        return;
-    }
-
-    [mailController setSubject:@"TLS Inspector Debug Logs"];
-    [mailController setToRecipients:@[@"'TLS Inspector Project Manager' <hello@tlsinspector.com>"]];
-    [mailController setMessageBody:[NSString stringWithFormat:@"<p>%@<br/><br/></p><hr/><p><small>Please do not remove the following attachments:</small></p>", comments] isHTML:YES];
-
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString * documentsDirectory = [paths objectAtIndex:0];
-    NSString * cklogPath = [documentsDirectory stringByAppendingPathComponent:@"CertificateKit.log"];
-    NSData * logData = [NSData dataWithContentsOfFile:cklogPath];
-    if (logData != nil) {
-        [mailController addAttachmentData:logData mimeType:@"text/plain" fileName:@"TLS Inspector.log"];
-    }
-    NSString * exceptionsLogPath = [documentsDirectory stringByAppendingPathComponent:@"exceptions.log"];
-    if ([NSFileManager.defaultManager fileExistsAtPath:exceptionsLogPath]) {
-        NSData * exceptionData = [NSData dataWithContentsOfFile:exceptionsLogPath];
-        if (exceptionData != nil) {
-            [mailController addAttachmentData:exceptionData mimeType:@"text/plain" fileName:@"Exceptions.log"];
-        }
-    }
-
-    [self presentViewController:mailController animated:YES completion:nil];
-}
-
-- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
-    [controller dismissViewControllerAnimated:YES completion:nil];
+    [self.appLinks showEmailComposeSheetForAppInViewController:self withComments:comments includeLogs:YES dismissed:nil];
 }
 
 @end

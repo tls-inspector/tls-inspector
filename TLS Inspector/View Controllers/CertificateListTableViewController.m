@@ -183,31 +183,28 @@
 
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
 
+        NSString * summary = cert.summary;
         if (cert.revoked.isRevoked) {
-            CKNameObject * name = cert.subject;
-            cell.textLabel.text = [lang key:@"{commonName} (Revoked)" args:@[name.commonName]];
+            cell.textLabel.text = [lang key:@"{commonName} (Revoked)" args:@[summary]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.isExpired) {
-            CKNameObject * name = cert.subject;
-            cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[name.commonName]];
+            cell.textLabel.text = [lang key:@"{commonName} (Expired)" args:@[summary]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.isNotYetValid) {
-            CKNameObject * name = cert.subject;
-            cell.textLabel.text = [lang key:@"{commonName} (Not Yet Valid)" args:@[name.commonName]];
+            cell.textLabel.text = [lang key:@"{commonName} (Not Yet Valid)" args:@[summary]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if ([cert.signatureAlgorithm hasPrefix:@"sha1"] && !cert.isRootCA) {
-            CKNameObject * name = cert.subject;
-            cell.textLabel.text = [lang key:@"{commonName} (Insecure)" args:@[name.commonName]];
+            cell.textLabel.text = [lang key:@"{commonName} (Insecure)" args:@[summary]];
             cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
             CKNameObject * name = cert.subject;
             cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[name.commonName, name.organizationName, name.countryName]];
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
-            cell.textLabel.text = cert.summary;
             if (!ATLEAST_IOS_13) {
                 cell.textLabel.textColor = themeTextColor;
             }
+            cell.textLabel.text = summary;
         }
 
         return cell;
