@@ -41,9 +41,9 @@ typedef NS_ENUM(NSInteger, TableSections) {
         return 4;
     } else if (section == SectionAppearance) {
         if (ATLEAST_IOS_13) {
-            return 1;
+            return 0;
         }
-        return 2;
+        return 1;
     } else if (section == SectionCertificateStatus) {
         return 2;
     } else if (section == SectionFingerprints) {
@@ -96,29 +96,22 @@ typedef NS_ENUM(NSInteger, TableSections) {
             return cell;
         }
     } else if (indexPath.section == SectionAppearance) {
-        if (indexPath.row == 0) {
-            UITableViewCell * cell = [UITableViewCell new];
-            cell.textLabel.text = [lang key:@"Change App Icon"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
-        } else if (indexPath.row == 1) {
-            UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
-            UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
-            label.text = l(@"Theme");
-            if (!ATLEAST_IOS_13) {
-                label.textColor = themeTextColor;
-            }
-            UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
-            [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
-            [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
-            if (UserOptions.currentOptions.useLightTheme) {
-                [segment setSelectedSegmentIndex:1];
-            } else {
-                [segment setSelectedSegmentIndex:0];
-            }
-            [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
-            return toggleCell;
+        UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
+        UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
+        label.text = l(@"Theme");
+        if (!ATLEAST_IOS_13) {
+            label.textColor = themeTextColor;
         }
+        UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
+        [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
+        [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
+        if (UserOptions.currentOptions.useLightTheme) {
+            [segment setSelectedSegmentIndex:1];
+        } else {
+            [segment setSelectedSegmentIndex:0];
+        }
+        [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
+        return toggleCell;
     } else if (indexPath.section == SectionCertificateStatus) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
@@ -280,8 +273,6 @@ typedef NS_ENUM(NSInteger, TableSections) {
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == SectionGeneral && indexPath.row == 3) {
         [self performSegueWithIdentifier:@"CryptoOptionsSegue" sender:nil];
-    } else if (indexPath.section == SectionAppearance && indexPath.row == 0) {
-        [self performSegueWithIdentifier:@"ChangeIconSegue" sender:nil];
     } else if (indexPath.section == SectionLogging && indexPath.row == 1) {
         if (UserOptions.currentOptions.verboseLogging && UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
             [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];
