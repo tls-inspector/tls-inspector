@@ -91,7 +91,7 @@ typedef NS_ENUM(NSInteger, TableSections) {
             [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         } else if (indexPath.row == 3) {
-            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:themeTextColor title:l(@"Advanced Settings")];
+            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:uihelper.blueColor title:l(@"Advanced Settings")];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
         }
@@ -278,7 +278,7 @@ typedef NS_ENUM(NSInteger, TableSections) {
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == SectionGeneral && indexPath.row == 4) {
+    if (indexPath.section == SectionGeneral && indexPath.row == 3) {
         [self performSegueWithIdentifier:@"CryptoOptionsSegue" sender:nil];
     } else if (indexPath.section == SectionAppearance && indexPath.row == 0) {
         [self performSegueWithIdentifier:@"ChangeIconSegue" sender:nil];

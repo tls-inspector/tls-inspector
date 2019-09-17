@@ -1109,7 +1109,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
@@ -1143,7 +1143,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
@@ -1384,7 +1384,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
@@ -1417,7 +1417,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = "TLS Inspector/Supporting Files/PrefixHeader.pch";

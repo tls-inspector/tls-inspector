@@ -10,6 +10,8 @@
 	<string>About TLS Inspector</string>
 	<key>Add Certificate Expiry Reminder</key>
 	<string>Add Certificate Expiry Reminder</string>
+	<key>Advanced Options</key>
+	<string>Advanced Options</string>
 	<key>Advanced Settings</key>
 	<string>Advanced Settings</string>
 	<key>Algorithm</key>
