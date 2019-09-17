@@ -24,7 +24,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Left" forIndexPath:indexPath];
     
     cell.detailTextLabel.text = self.items[indexPath.row].value;
-    cell.detailTextLabel.textColor = themeTextColor;
+    if (@available(iOS 13, *)) {
+        cell.detailTextLabel.textColor = [UIColor labelColor];
+    } else {
+        cell.detailTextLabel.textColor = themeTextColor;
+    }
 
     NSString * type;
     switch (self.items[indexPath.row].type) {
