@@ -1,10 +1,10 @@
-#import "CertificateTableRowItem.h"
+#import "TableRowItem.h"
 #import "TitleValueTableViewCell.h"
 
-@implementation CertificateTableRowItem
+@implementation TableRowItem
 
-+ (CertificateTableRowItem *) itemWithTitle:(NSString *)title value:(NSString *)value style:(CertificateTableRowItemStyle)style {
-    CertificateTableRowItem * item = [CertificateTableRowItem new];
++ (TableRowItem *) itemWithTitle:(NSString *)title value:(NSString *)value style:(CertificateTableRowItemStyle)style {
+    TableRowItem * item = [TableRowItem new];
 
     item.title = title;
     item.value = value;
