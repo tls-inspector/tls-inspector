@@ -30,6 +30,10 @@ typedef NS_ENUM(NSInteger, TableSections) {
     [super didReceiveMemoryWarning];
 }
 
+- (void) traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:SectionAppearance] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -40,9 +44,6 @@ typedef NS_ENUM(NSInteger, TableSections) {
     if (section == SectionGeneral) {
         return 4;
     } else if (section == SectionAppearance) {
-        if (ATLEAST_IOS_13) {
-            return 0;
-        }
         return 1;
     } else if (section == SectionCertificateStatus) {
         return 2;
@@ -105,10 +106,19 @@ typedef NS_ENUM(NSInteger, TableSections) {
         UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
         [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
         [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
-        if (UserOptions.currentOptions.useLightTheme) {
-            [segment setSelectedSegmentIndex:1];
+        if (@available(iOS 13, *)) {
+            if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                [segment setSelectedSegmentIndex:0];
+            } else {
+                [segment setSelectedSegmentIndex:1];
+            }
+            [segment setEnabled:NO];
         } else {
-            [segment setSelectedSegmentIndex:0];
+            if (UserOptions.currentOptions.useLightTheme) {
+                [segment setSelectedSegmentIndex:1];
+            } else {
+                [segment setSelectedSegmentIndex:0];
+            }
         }
         [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
         return toggleCell;
@@ -263,6 +273,8 @@ typedef NS_ENUM(NSInteger, TableSections) {
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == SectionCertificateStatus) {
         return [lang key:@"certificate_status_footer"];
+    } else if (section == SectionAppearance && ATLEAST_IOS_13) {
+        return [lang key:@"TLS Inspector is using the appearance settings of your device."];
     } else if (section == SectionLogging) {
         return [lang key:@"verbose_logging_footer"];
     }
