@@ -43,15 +43,23 @@
     UILabel * label = [cell viewWithTag:10];
     label.text = [lang key:self.iconTitles[indexPath.row]];
     
-    UIImageView * image = [cell viewWithTag:20];
-    NSString * iconName = [NSString stringWithFormat:@"%@76x76", self.iconFileNames[indexPath.row]];
-    image.image = [UIImage imageNamed:iconName];
+    UIImageView * imageView = [cell viewWithTag:20];
+    NSString * iconName = [NSString stringWithFormat:@"%@", self.iconFileNames[indexPath.row]];
+    UIImage * image = [UIImage imageNamed:iconName];
+    if (image == nil) {
+        NSLog(@"'%@'\tNO", iconName);
+    } else {
+        NSLog(@"'%@'\tYES", iconName);
+    }
+    imageView.image = image;
     
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[UIApplication sharedApplication] setAlternateIconName:self.iconFileNames[indexPath.row] completionHandler:nil];
+    NSString * name = self.iconFileNames[indexPath.row];
+    NSLog(@"Setting app icon to '%@'", name);
+    [[UIApplication sharedApplication] setAlternateIconName:name completionHandler:nil];
 }
 
 @end

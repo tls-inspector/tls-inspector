@@ -80,6 +80,8 @@
 	<string>Change</string>
 	<key>Change App Icon</key>
 	<string>Change App Icon</string>
+	<key>Change Icon</key>
+	<string>Change Icon</string>
 	<key>Change Theme</key>
 	<string>Change Theme</string>
 	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
@@ -678,6 +680,8 @@
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
+	<key>Pride</key>
+	<string>Pride</string>
 	<key>Proxy Detected</key>
 	<string>Proxy Detected</string>
 	<key>Public Key</key>
@@ -686,6 +690,8 @@
 	<string>Query OCSP Responder</string>
 	<key>Rate TLS Inspector in the App Store</key>
 	<string>Rate TLS Inspector in the App Store</string>
+	<key>Really Dark</key>
+	<string>Really Dark</string>
 	<key>Recent Domains</key>
 	<string>Recent Domains</string>
 	<key>Remember Recent Lookups</key>
@@ -782,6 +788,8 @@
 	<string>Theme</string>
 	<key>There were one or more errors while inspecting {host}</key>
 	<string>There were one or more errors while inspecting {0}</string>
+	<key>Trans</key>
+	<string>Trans</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
 	<key>Understood</key>
