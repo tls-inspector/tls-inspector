@@ -18,8 +18,12 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(next:)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
-    self.descriptionInput.textColor = themeTextColor;
-    self.descriptionInput.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
+    if (@available(iOS 13, *)) {
+        self.descriptionInput.textColor = [UIColor labelColor];
+    } else {
+        self.descriptionInput.textColor = themeTextColor;
+        self.descriptionInput.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
+    }
 }
 
 IMPL_SET_THEME_WORKAROUND
