@@ -1111,7 +1111,7 @@
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.9.4;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-isystem",
@@ -1145,7 +1145,7 @@
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.9.4;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-isystem",
@@ -1385,7 +1385,7 @@
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.9.4;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -1419,7 +1419,7 @@
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.9.4;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
