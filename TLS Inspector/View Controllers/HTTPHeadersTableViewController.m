@@ -13,7 +13,11 @@
     [super viewDidLoad];
 
     self.headerKeys = self.headers.allKeys;
+    
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (BOOL) tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     return action == @selector(copy:);

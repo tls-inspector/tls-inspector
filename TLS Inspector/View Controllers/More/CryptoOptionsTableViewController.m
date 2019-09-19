@@ -8,7 +8,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (UserOptions.currentOptions.useOpenSSL) {

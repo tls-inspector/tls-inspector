@@ -68,7 +68,11 @@
                      @"tlstip6",
                      @"tlstip7"
                      ];
+    
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

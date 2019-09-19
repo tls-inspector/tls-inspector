@@ -24,7 +24,10 @@ typedef NS_ENUM(NSInteger, TableSections) {
 - (void) viewDidLoad {
     self.appLinks = [AppLinks new];
     [super viewDidLoad];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

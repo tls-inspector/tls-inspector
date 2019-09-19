@@ -30,7 +30,10 @@
     subscribe(@selector(reloadCert), RELOAD_CERT_NOTIFICATION);
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) reloadCert {
     self.sections = [NSMutableArray new];

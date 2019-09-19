@@ -27,7 +27,10 @@
     [uihelper applyStylesToNavigationBar:controller.navigationBar];
     controller.modalPresentationStyle = UIModalPresentationFullScreen;
     [parent presentViewController:controller animated:YES completion:nil];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) viewDidLoad {
     [super viewDidLoad];

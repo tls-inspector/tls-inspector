@@ -23,7 +23,11 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     self.appLinks = [AppLinks new];
     self.view.backgroundColor = colorForTheme(UIColor.groupTableViewBackgroundColor, [UIColor colorWithRed:0.08f green:0.11f blue:0.15f alpha:1.0f]);
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
     if (usingLightTheme) {

@@ -12,6 +12,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    ADD_SET_THEME_WORKAROUND
 
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
@@ -20,6 +21,8 @@
     self.descriptionInput.textColor = themeTextColor;
     self.descriptionInput.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) viewDidAppear:(BOOL)animated {
     [self.descriptionInput becomeFirstResponder];

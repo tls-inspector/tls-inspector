@@ -75,7 +75,11 @@
          animated:NO
          scrollPosition:UITableViewScrollPositionTop];
     }
+    
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 #ifdef EXTENSION
 - (void) dismissView:(id)sender {
