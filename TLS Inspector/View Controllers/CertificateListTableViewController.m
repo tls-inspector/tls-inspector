@@ -198,7 +198,9 @@
             cell.textLabel.textColor = uihelper.redColor;
         } else if (cert.extendedValidation) {
             CKNameObject * name = cert.subject;
-            cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[name.commonName, name.organizationName, name.countryName]];
+            NSString * orgName = (name.organizationName != nil ? name.organizationName : @"");
+            NSString * countryName = (name.countryName != nil ? name.countryName : @"");
+            cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[summary, orgName, countryName]];
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
             cell.textLabel.text = summary;
