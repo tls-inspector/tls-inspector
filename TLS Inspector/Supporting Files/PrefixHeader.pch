@@ -4,7 +4,6 @@
 #import "lang.h"
 #import "defines.pch"
 #import "AppState.h"
-#import "MBProgressHUD.h"
 #import "UIHelper.h"
 #import "Storage.h"
 #import "UserOptions.h"
@@ -12,6 +11,18 @@
 #define RECENT_DOMAINS_KEY @"RECENT_DOMAINS"
 #define RELOAD_CERT_NOTIFICATION @"🤔"
 #define CHANGE_THEME_NOTIFICATION @"🏳️‍🌈"
+
+#define ATLEAST_IOS_9   [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9,3,0}]
+#define ATLEAST_IOS_10  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,0,0}]
+#define ATLEAST_IOS_11  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){11,0,0}]
+#define ATLEAST_IOS_12  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){12,0,0}]
+#define ATLEAST_IOS_13  [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){13,0,0}]
+
+// This is a crap workaround to a problem where
+// [[UITableView appearance] setBackgroundColor:...] doesn't seem to want to work when the app is built
+// using Xcode 13. See https://github.com/certificate-helper/TLS-Inspector/issues/155 for more.
+#define ADD_SET_THEME_WORKAROUND if (!ATLEAST_IOS_13) {[self __temporary_set_background_color];[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(__temporary_set_background_color) name:CHANGE_THEME_NOTIFICATION object:nil]; }
+#define IMPL_SET_THEME_WORKAROUND - (void) __temporary_set_background_color { if (usingLightTheme) { [self.tableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]]; } else { [self.tableView setBackgroundColor:[UIColor colorWithRed:0.08f green:0.11f blue:0.15f alpha:1.0f]]; } }
 
 #if DEBUG
 #define d(s, ...) NSLog(s, ##__VA_ARGS__)

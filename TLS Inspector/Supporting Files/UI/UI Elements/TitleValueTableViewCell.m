@@ -75,6 +75,10 @@
 }
 
 - (void) setAppearance {
+    if (ATLEAST_IOS_13) {
+        return;
+    }
+
     if (usingLightTheme) {
         self.titleLabel.textColor = [UIColor darkGrayColor];
         self.valueLabel.textColor = [UIColor blackColor];

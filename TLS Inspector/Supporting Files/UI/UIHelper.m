@@ -148,7 +148,7 @@ static id _instance;
 }
 
 - (void) applyStylesToNavigationBar:(UINavigationBar *)navigationBar {
-    if (usingLightTheme) {
+    if (ATLEAST_IOS_13 || usingLightTheme) {
         navigationBar.barStyle = UIBarStyleDefault;
         navigationBar.translucent = YES;
     } else {

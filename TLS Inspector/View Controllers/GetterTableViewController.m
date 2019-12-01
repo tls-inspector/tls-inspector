@@ -25,8 +25,12 @@
     finishedBlock = finished;
     UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:self];
     [uihelper applyStylesToNavigationBar:controller.navigationBar];
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
     [parent presentViewController:controller animated:YES completion:nil];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -123,16 +127,27 @@
         if ([status isEqualToString:@"Loading"]) {
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Loading" forIndexPath:indexPath];
             UIActivityIndicatorView * spinner = [cell viewWithTag:2];
-            if (usingLightTheme) {
-                spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+            
+            if (@available(iOS 13, *)) {
+                if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight || self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleUnspecified) {
+                    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+                } else {
+                    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+                }
             } else {
-                spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+                if (usingLightTheme) {
+                    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+                } else {
+                    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+                }
             }
             [spinner startAnimating];
 
             UILabel * label = [cell viewWithTag:1];
             label.text = l(pending);
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             return cell;
         } else {
             FAIcon icon = FATimesCircle;
@@ -161,6 +176,7 @@
         selectedCertificate = getter.chain.certificates[0];
         UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         UISplitViewController * split = [main instantiateViewControllerWithIdentifier:@"SplitView"];
+        split.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:split animated:YES completion:nil];
     });
 }

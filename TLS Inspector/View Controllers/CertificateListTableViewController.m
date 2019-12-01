@@ -75,7 +75,11 @@
          animated:NO
          scrollPosition:UITableViewScrollPositionTop];
     }
+    
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 #ifdef EXTENSION
 - (void) dismissView:(id)sender {
@@ -203,8 +207,10 @@
             cell.textLabel.text = [lang key:@"{commonName} ({orgName} {countryName})" args:@[summary, orgName, countryName]];
             cell.textLabel.textColor = uihelper.greenColor;
         } else {
+            if (!ATLEAST_IOS_13) {
+                cell.textLabel.textColor = themeTextColor;
+            }
             cell.textLabel.text = summary;
-            cell.textLabel.textColor = themeTextColor;
         }
 
         return cell;
@@ -224,7 +230,9 @@
         if (idx >= currentServerInfo.securityHeaders.allKeys.count) {
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Basic"];
             cell.textLabel.text = [lang key:@"View All"];
-            cell.textLabel.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                cell.textLabel.textColor = themeTextColor;
+            }
             return cell;
         }
 

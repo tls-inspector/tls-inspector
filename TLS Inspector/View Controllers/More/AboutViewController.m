@@ -23,7 +23,11 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     self.appLinks = [AppLinks new];
     self.view.backgroundColor = colorForTheme(UIColor.groupTableViewBackgroundColor, [UIColor colorWithRed:0.08f green:0.11f blue:0.15f alpha:1.0f]);
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
     if (usingLightTheme) {
@@ -61,7 +65,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     if (indexPath.section == 0) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
-        label.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            label.textColor = themeTextColor;
+        }
         switch (indexPath.row) {
             case 0:
                 label.text = l(@"Tell Friends About TLS Inspector");
@@ -77,7 +83,9 @@ static NSString * PROJECT_TESTFLIGHT_APPLICATION = @"https://tlsinspector.com/be
     } else if (indexPath.section == 1) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"action" forIndexPath:indexPath];
         UILabel * label = (UILabel *)[cell viewWithTag:1];
-        label.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            label.textColor = themeTextColor;
+        }
         switch (indexPath.row) {
             case 0:
                 label.text = l(@"Contribute to TLS Inspector");

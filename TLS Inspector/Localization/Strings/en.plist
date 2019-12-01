@@ -10,6 +10,8 @@
 	<string>About TLS Inspector</string>
 	<key>Add Certificate Expiry Reminder</key>
 	<string>Add Certificate Expiry Reminder</string>
+	<key>Advanced Options</key>
+	<string>Advanced Options</string>
 	<key>Advanced Settings</key>
 	<string>Advanced Settings</string>
 	<key>Algorithm</key>
@@ -22,6 +24,8 @@
 	<string>Alternate Names</string>
 	<key>An error occurred</key>
 	<string>An error occurred</string>
+	<key>Appearance</key>
+	<string>Appearance</string>
 	<key>Apple Support</key>
 	<string>Apple Support</string>
 	<key>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</key>
@@ -76,6 +80,10 @@
 	<string>Certificates</string>
 	<key>Change</key>
 	<string>Change</string>
+	<key>Change App Icon</key>
+	<string>Change App Icon</string>
+	<key>Change Icon</key>
+	<string>Change Icon</string>
 	<key>Change Theme</key>
 	<string>Change Theme</string>
 	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
@@ -674,6 +682,8 @@
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
+	<key>Pride</key>
+	<string>Pride</string>
 	<key>Proxy Detected</key>
 	<string>Proxy Detected</string>
 	<key>Public Key</key>
@@ -682,6 +692,8 @@
 	<string>Query OCSP Responder</string>
 	<key>Rate TLS Inspector in the App Store</key>
 	<string>Rate TLS Inspector in the App Store</string>
+	<key>Really Dark</key>
+	<string>Really Dark</string>
 	<key>Recent Domains</key>
 	<string>Recent Domains</string>
 	<key>Remember Recent Lookups</key>
@@ -766,6 +778,8 @@
 	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</string>
 	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</key>
 	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</string>
+	<key>TLS Inspector is using the appearance settings of your device.</key>
+	<string>TLS Inspector is using the appearance settings of your device.</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
@@ -778,6 +792,8 @@
 	<string>Theme</string>
 	<key>There were one or more errors while inspecting {host}</key>
 	<string>There were one or more errors while inspecting {0}</string>
+	<key>Trans</key>
+	<string>Trans</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
 	<key>Understood</key>
@@ -839,7 +855,7 @@
 	<key>explanation::wrong_host</key>
 	<string>The server certificate is for a different host than the one connected to.</string>
 	<key>first_run_notice</key>
-	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware. 
+	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
 If you&apos;re concerned about the security of your device; contact Apple Support.</string>
 	<key>iOS</key>

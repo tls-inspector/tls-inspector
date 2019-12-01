@@ -1,10 +1,10 @@
-#import "CertificateTableRowItem.h"
+#import "TableRowItem.h"
 #import "TitleValueTableViewCell.h"
 
-@implementation CertificateTableRowItem
+@implementation TableRowItem
 
-+ (CertificateTableRowItem *) itemWithTitle:(NSString *)title value:(NSString *)value style:(CertificateTableRowItemStyle)style {
-    CertificateTableRowItem * item = [CertificateTableRowItem new];
++ (TableRowItem *) itemWithTitle:(NSString *)title value:(NSString *)value style:(CertificateTableRowItemStyle)style {
+    TableRowItem * item = [TableRowItem new];
 
     item.title = title;
     item.value = value;
@@ -28,8 +28,14 @@
             cell.textLabel.text = self.title;
             cell.detailTextLabel.text = self.value;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.textColor = colorForTheme([UIColor darkGrayColor], [UIColor lightGrayColor]);
-            cell.detailTextLabel.textColor = themeTextColor;
+            if (@available(iOS 13, *)) {
+                cell.textLabel.textColor = [UIColor secondaryLabelColor];
+                cell.detailTextLabel.textColor = [UIColor labelColor];
+            } else {
+                cell.textLabel.textColor = colorForTheme([UIColor darkGrayColor], [UIColor lightGrayColor]);
+                cell.detailTextLabel.textColor = themeTextColor;
+            }
+            
             return cell;
         }
         case CertificateTableRowItemStyleBasic:
@@ -42,7 +48,11 @@
             } else {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
-            cell.textLabel.textColor = themeTextColor;
+            if (@available(iOS 13, *)) {
+                cell.textLabel.textColor = [UIColor labelColor];
+            } else {
+                cell.textLabel.textColor = themeTextColor;
+            }
             return cell;
         }
         default:

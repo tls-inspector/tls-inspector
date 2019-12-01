@@ -12,29 +12,47 @@
 
 @implementation OptionsTableViewController
 
+typedef NS_ENUM(NSInteger, TableSections) {
+    SectionGeneral = 0,
+    SectionAppearance,
+    SectionCertificateStatus,
+    SectionFingerprints,
+    SectionLogging,
+    SectionLast
+};
+
 - (void) viewDidLoad {
     self.appLinks = [AppLinks new];
     [super viewDidLoad];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+- (void) traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:SectionAppearance] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return SectionLast;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 5;
-    } else if (section == 1) {
-        return 2;
-    } else if (section == 2) {
+    if (section == SectionGeneral) {
         return 4;
-    } else if (section == 3) {
+    } else if (section == SectionAppearance) {
+        return 1;
+    } else if (section == SectionCertificateStatus) {
+        return 2;
+    } else if (section == SectionFingerprints) {
+        return 4;
+    } else if (section == SectionLogging) {
         return 2;
     }
     
@@ -42,12 +60,14 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == SectionGeneral) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Remember Recent Lookups");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:[RecentDomains sharedInstance].saveRecentDomains];
             [toggle addTarget:self action:@selector(recentSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -56,7 +76,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Show HTTP Headers");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.getHTTPHeaders];
             [toggle addTarget:self action:@selector(httpSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -65,37 +87,52 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Show Tips");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showTips];
             [toggle addTarget:self action:@selector(tipsSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         } else if (indexPath.row == 3) {
-            UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
-            UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
-            label.text = l(@"Theme");
+            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:uihelper.blueColor title:l(@"Advanced Settings")];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
+        }
+    } else if (indexPath.section == SectionAppearance) {
+        UITableViewCell * toggleCell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
+        UILabel * label = (UILabel *)[toggleCell viewWithTag:10];
+        label.text = l(@"Theme");
+        if (!ATLEAST_IOS_13) {
             label.textColor = themeTextColor;
-            UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
-            [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
-            [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
+        }
+        UISegmentedControl * segment = (UISegmentedControl *)[toggleCell viewWithTag:20];
+        [segment setTitle:[lang key:@"Dark"] forSegmentAtIndex:0];
+        [segment setTitle:[lang key:@"Light"] forSegmentAtIndex:1];
+        if (@available(iOS 13, *)) {
+            if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                [segment setSelectedSegmentIndex:0];
+            } else {
+                [segment setSelectedSegmentIndex:1];
+            }
+            [segment setEnabled:NO];
+        } else {
             if (UserOptions.currentOptions.useLightTheme) {
                 [segment setSelectedSegmentIndex:1];
             } else {
                 [segment setSelectedSegmentIndex:0];
             }
-            [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
-            return toggleCell;
-        } else if (indexPath.row == 4) {
-            IconTableViewCell * cell = [[IconTableViewCell alloc] initWithIcon:FACog color:themeTextColor title:l(@"Advanced Settings")];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
         }
-    } else if (indexPath.section == 1) {
+        [segment addTarget:self action:@selector(themeSwitch:) forControlEvents:UIControlEventValueChanged];
+        return toggleCell;
+    } else if (indexPath.section == SectionCertificateStatus) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Query OCSP Responder");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.queryOCSP];
             [toggle addTarget:self action:@selector(ocspSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -104,18 +141,22 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Download & Check CRL");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.checkCRL];
             [toggle addTarget:self action:@selector(crlSwitch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         }
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == SectionFingerprints) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"MD5");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintMD5];
             [toggle addTarget:self action:@selector(md5Switch:) forControlEvents:UIControlEventTouchUpInside];
@@ -124,7 +165,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"SHA-128");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintSHA128];
             [toggle addTarget:self action:@selector(sha128Switch:) forControlEvents:UIControlEventTouchUpInside];
@@ -133,7 +176,9 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"SHA-256");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintSHA256];
             [toggle addTarget:self action:@selector(sha256Switch:) forControlEvents:UIControlEventTouchUpInside];
@@ -142,18 +187,22 @@
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"SHA-512");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.showFingerprintSHA512];
             [toggle addTarget:self action:@selector(sha512Switch:) forControlEvents:UIControlEventTouchUpInside];
             return switchCell;
         }
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == SectionLogging) {
         if (indexPath.row == 0) {
             UITableViewCell * switchCell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
             UILabel * label = (UILabel *)[switchCell viewWithTag:10];
             label.text = l(@"Enable Debug Logging");
-            label.textColor = themeTextColor;
+            if (!ATLEAST_IOS_13) {
+                label.textColor = themeTextColor;
+            }
             UISwitch * toggle = (UISwitch *)[switchCell viewWithTag:20];
             [toggle setOn:UserOptions.currentOptions.verboseLogging];
             [toggle addTarget:self action:@selector(verboseLoggingSwitch:) forControlEvents:UIControlEventTouchUpInside];
@@ -209,13 +258,15 @@
 
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == SectionGeneral) {
         return [lang key:@"General"];
-    } else if (section == 1) {
+    } else if (section == SectionAppearance) {
+        return [lang key:@"Appearance"];
+    } else if (section == SectionCertificateStatus) {
         return [lang key:@"Certificate Status"];
-    } else if (section == 2) {
+    } else if (section == SectionFingerprints) {
         return [lang key:@"Show Certificate Fingerprint"];
-    } else if (section == 3) {
+    } else if (section == SectionLogging) {
         return [lang key:@"Logging"];
     }
     
@@ -223,9 +274,11 @@
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == SectionCertificateStatus) {
         return [lang key:@"certificate_status_footer"];
-    } else if (section == 3) {
+    } else if (section == SectionAppearance && ATLEAST_IOS_13) {
+        return [lang key:@"TLS Inspector is using the appearance settings of your device."];
+    } else if (section == SectionLogging) {
         return [lang key:@"verbose_logging_footer"];
     }
     
@@ -233,9 +286,9 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 4) {
+    if (indexPath.section == SectionGeneral && indexPath.row == 3) {
         [self performSegueWithIdentifier:@"CryptoOptionsSegue" sender:nil];
-    } else if (indexPath.section == 3 && indexPath.row == 1) {
+    } else if (indexPath.section == SectionLogging && indexPath.row == 1) {
         if (UserOptions.currentOptions.verboseLogging && UserOptions.currentOptions.inspectionsWithVerboseLogging < 1) {
             [uihelper presentAlertInViewController:self title:[lang key:@"Debug Logging Enabled"] body:[lang key:@"You must inspect at least one site with debug logging enabled before you can submit logs"] dismissButtonTitle:[lang key:@"Dismiss"] dismissed:nil];
         } else {

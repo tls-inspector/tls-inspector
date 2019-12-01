@@ -13,6 +13,12 @@
 }
 
 - (void) didChangeTheme {
+    if (ATLEAST_IOS_13) {
+        [self.navigationBar setTranslucent:YES];
+        [self setNeedsStatusBarAppearanceUpdate];
+        return;
+    }
+
     if (usingLightTheme) {
         [self.navigationBar setTranslucent:NO];
     } else {
@@ -22,6 +28,10 @@
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
+    if (ATLEAST_IOS_13) {
+        return UIStatusBarStyleDefault;
+    }
+
     if (usingLightTheme) {
         return UIStatusBarStyleDefault;
     } else {

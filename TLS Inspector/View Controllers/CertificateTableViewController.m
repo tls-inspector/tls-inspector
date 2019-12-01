@@ -1,13 +1,13 @@
 #import "CertificateTableViewController.h"
-#import "CertificateTableRowSection.h"
-#import "CertificateTableRowItem.h"
+#import "TableRowSection.h"
+#import "TableRowItem.h"
 #import "TitleValueTableViewCell.h"
 #import "CertificateReminderManager.h"
 #import "SANListTableViewController.h"
 
 @interface CertificateTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray<CertificateTableRowSection *> * sections;
+@property (strong, nonatomic) NSMutableArray<TableRowSection *> * sections;
 
 @end
 
@@ -30,7 +30,10 @@
     subscribe(@selector(reloadCert), RELOAD_CERT_NOTIFICATION);
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (void) reloadCert {
     self.sections = [NSMutableArray new];
@@ -42,46 +45,46 @@
     self.title = selectedCertificate.summary;
 
     // Subject
-    CertificateTableRowSection * subjectSection = [CertificateTableRowSection sectionWithTitle:@"Subject"];
-    NSMutableArray<CertificateTableRowItem *> * items = [self rowsFromNameObject:selectedCertificate.subject];
+    TableRowSection * subjectSection = [TableRowSection sectionWithTitle:@"Subject"];
+    NSMutableArray<TableRowItem *> * items = [self rowsFromNameObject:selectedCertificate.subject];
     if (selectedCertificate.extendedValidation) {
-        [items addObject:[CertificateTableRowItem itemWithTitle:l(@"Extended Validation Authority") value:selectedCertificate.extendedValidationAuthority style:CertificateTableRowItemStyleExpandedValue]];
+        [items addObject:[TableRowItem itemWithTitle:l(@"Extended Validation Authority") value:selectedCertificate.extendedValidationAuthority style:CertificateTableRowItemStyleExpandedValue]];
     }
     subjectSection.items = items;
     [self.sections addObject:subjectSection];
 
     // Issuer
-    CertificateTableRowSection * issuerSection = [CertificateTableRowSection sectionWithTitle:@"Issuer"];
+    TableRowSection * issuerSection = [TableRowSection sectionWithTitle:@"Issuer"];
     issuerSection.items = [self rowsFromNameObject:selectedCertificate.issuer];
     [self.sections addObject:issuerSection];
 
     // Validity Period
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    CertificateTableRowSection * dateSection = [CertificateTableRowSection sectionWithTitle:@"Validity Period"];
-    NSMutableArray<CertificateTableRowItem *> * dateItems = [NSMutableArray arrayWithArray:@[
-                                                                                             [CertificateTableRowItem itemWithTitle:l(@"Not Valid Before") value:[dateFormatter stringFromDate:[selectedCertificate notBefore]] style:CertificateTableRowItemStyleBasicValue],
-                                                                                             [CertificateTableRowItem itemWithTitle:l(@"Not Valid After") value:[dateFormatter stringFromDate:[selectedCertificate notAfter]] style:CertificateTableRowItemStyleBasicValue],
+    TableRowSection * dateSection = [TableRowSection sectionWithTitle:@"Validity Period"];
+    NSMutableArray<TableRowItem *> * dateItems = [NSMutableArray arrayWithArray:@[
+                                                                                             [TableRowItem itemWithTitle:l(@"Not Valid Before") value:[dateFormatter stringFromDate:[selectedCertificate notBefore]] style:CertificateTableRowItemStyleBasicValue],
+                                                                                             [TableRowItem itemWithTitle:l(@"Not Valid After") value:[dateFormatter stringFromDate:[selectedCertificate notAfter]] style:CertificateTableRowItemStyleBasicValue],
                                                                                              ]];
     dateSection.items = dateItems;
     [self.sections addObject:dateSection];
 
     // Key Usage
-    CertificateTableRowSection * keyUsageSection = [CertificateTableRowSection sectionWithTitle:@"Key Usage"];
+    TableRowSection * keyUsageSection = [TableRowSection sectionWithTitle:@"Key Usage"];
     NSMutableArray<NSString *> * keyUsage = [NSMutableArray arrayWithCapacity:selectedCertificate.keyUsage.count];
-    NSMutableArray<CertificateTableRowItem *> * usageItems = [NSMutableArray new];
+    NSMutableArray<TableRowItem *> * usageItems = [NSMutableArray new];
     for (NSString * usage in selectedCertificate.keyUsage) {
         [keyUsage addObject:[lang key:[NSString stringWithFormat:@"keyUsage::%@", usage]]];
     }
     if (keyUsage.count > 0) {
-        [usageItems addObject:[CertificateTableRowItem itemWithTitle:@"Basic" value:[keyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue]];
+        [usageItems addObject:[TableRowItem itemWithTitle:@"Basic" value:[keyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue]];
     }
     NSMutableArray<NSString *> * extKeyUsage = [NSMutableArray arrayWithCapacity:selectedCertificate.extendedKeyUsage.count];
     for (NSString * usage in selectedCertificate.extendedKeyUsage) {
         [extKeyUsage addObject:[lang key:[NSString stringWithFormat:@"keyUsage::%@", usage]]];
     }
     if (extKeyUsage.count > 0) {
-        [usageItems addObject:[CertificateTableRowItem itemWithTitle:@"Extended" value:[extKeyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue]];
+        [usageItems addObject:[TableRowItem itemWithTitle:@"Extended" value:[extKeyUsage componentsJoinedByString:@", "] style:CertificateTableRowItemStyleExpandedValue]];
     }
     keyUsageSection.items = usageItems;
     if (usageItems.count > 0) {
@@ -91,38 +94,38 @@
     // Features
     NSArray<NSString *> * tlsFeatures = selectedCertificate.tlsFeatures;
     if (tlsFeatures != nil && tlsFeatures.count > 0) {
-        CertificateTableRowSection * tlsFeaturesSection = [CertificateTableRowSection sectionWithTitle:@"TLS Features"];
-        NSMutableArray<CertificateTableRowItem *> * featureItems = [NSMutableArray arrayWithCapacity:tlsFeatures.count];
+        TableRowSection * tlsFeaturesSection = [TableRowSection sectionWithTitle:@"TLS Features"];
+        NSMutableArray<TableRowItem *> * featureItems = [NSMutableArray arrayWithCapacity:tlsFeatures.count];
         for (NSString * feature in tlsFeatures) {
-            [featureItems addObject:[CertificateTableRowItem itemWithTitle:[lang key:feature] value:@"" style:CertificateTableRowItemStyleBasic]];
+            [featureItems addObject:[TableRowItem itemWithTitle:[lang key:feature] value:@"" style:CertificateTableRowItemStyleBasic]];
         }
         tlsFeaturesSection.items = featureItems;
         [self.sections addObject:tlsFeaturesSection];
     }
 
     // Public Key Info
-    CertificateTableRowSection * publicKeySection = [CertificateTableRowSection sectionWithTitle:@"Public Key"];
+    TableRowSection * publicKeySection = [TableRowSection sectionWithTitle:@"Public Key"];
     publicKeySection.items = @[
-                               [CertificateTableRowItem itemWithTitle:l(@"Algorithm") value:[lang key:[NSString stringWithFormat:@"KeyAlgorithm::%@", selectedCertificate.publicKey.algroithm]] style:CertificateTableRowItemStyleBasicValue],
-                               [CertificateTableRowItem itemWithTitle:l(@"Signature") value:[lang key:[NSString stringWithFormat:@"CertAlgorithm::%@", selectedCertificate.signatureAlgorithm]] style:CertificateTableRowItemStyleBasicValue],
-                               [CertificateTableRowItem itemWithTitle:l(@"Size") value:[NSString stringWithFormat:@"%i", selectedCertificate.publicKey.bitLength] style:CertificateTableRowItemStyleBasicValue],
+                               [TableRowItem itemWithTitle:l(@"Algorithm") value:[lang key:[NSString stringWithFormat:@"KeyAlgorithm::%@", selectedCertificate.publicKey.algroithm]] style:CertificateTableRowItemStyleBasicValue],
+                               [TableRowItem itemWithTitle:l(@"Signature") value:[lang key:[NSString stringWithFormat:@"CertAlgorithm::%@", selectedCertificate.signatureAlgorithm]] style:CertificateTableRowItemStyleBasicValue],
+                               [TableRowItem itemWithTitle:l(@"Size") value:[NSString stringWithFormat:@"%i", selectedCertificate.publicKey.bitLength] style:CertificateTableRowItemStyleBasicValue],
                                ];
     [self.sections addObject:publicKeySection];
 
     // Fingerprint
-    CertificateTableRowSection * fingerprintSection = [CertificateTableRowSection sectionWithTitle:@"Fingerprints"];
-    NSMutableArray<CertificateTableRowItem *> * fingerprintSectionItems = [NSMutableArray new];
+    TableRowSection * fingerprintSection = [TableRowSection sectionWithTitle:@"Fingerprints"];
+    NSMutableArray<TableRowItem *> * fingerprintSectionItems = [NSMutableArray new];
     if (UserOptions.currentOptions.showFingerprintMD5) {
-        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"MD5" value:selectedCertificate.MD5Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+        [fingerprintSectionItems addObject:[TableRowItem itemWithTitle:@"MD5" value:selectedCertificate.MD5Fingerprint style:CertificateTableRowItemStyleFixedValue]];
     }
     if (UserOptions.currentOptions.showFingerprintSHA128) {
-        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"SHA-128" value:selectedCertificate.SHA1Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+        [fingerprintSectionItems addObject:[TableRowItem itemWithTitle:@"SHA-128" value:selectedCertificate.SHA1Fingerprint style:CertificateTableRowItemStyleFixedValue]];
     }
     if (UserOptions.currentOptions.showFingerprintSHA256) {
-        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"SHA-256" value:selectedCertificate.SHA256Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+        [fingerprintSectionItems addObject:[TableRowItem itemWithTitle:@"SHA-256" value:selectedCertificate.SHA256Fingerprint style:CertificateTableRowItemStyleFixedValue]];
     }
     if (UserOptions.currentOptions.showFingerprintSHA512) {
-        [fingerprintSectionItems addObject:[CertificateTableRowItem itemWithTitle:@"SHA-512" value:selectedCertificate.SHA512Fingerprint style:CertificateTableRowItemStyleFixedValue]];
+        [fingerprintSectionItems addObject:[TableRowItem itemWithTitle:@"SHA-512" value:selectedCertificate.SHA512Fingerprint style:CertificateTableRowItemStyleFixedValue]];
     }
     fingerprintSection.items = fingerprintSectionItems;
     if (fingerprintSectionItems.count > 0) {
@@ -131,41 +134,41 @@
 
     // Subject Alt. Names
     if (selectedCertificate.alternateNames.count > 0) {
-        CertificateTableRowSection * sanSection = [CertificateTableRowSection sectionWithTitle:@"Subject Alternative Names"];
-        sanSection.items = @[[CertificateTableRowItem itemWithTitle:@"View all alternative names" value:@"" style:CertificateTableRowItemStyleBasicDisclosure]];
+        TableRowSection * sanSection = [TableRowSection sectionWithTitle:@"Subject Alternative Names"];
+        sanSection.items = @[[TableRowItem itemWithTitle:@"View all alternative names" value:@"" style:CertificateTableRowItemStyleBasicDisclosure]];
         [self.sections addObject:sanSection];
     }
 }
 
-- (NSMutableArray<CertificateTableRowItem *> *) rowsFromNameObject:(CKNameObject *)name {
-    NSMutableArray<CertificateTableRowItem *> * subjectItems = [NSMutableArray arrayWithCapacity:8];
+- (NSMutableArray<TableRowItem *> *) rowsFromNameObject:(CKNameObject *)name {
+    NSMutableArray<TableRowItem *> * subjectItems = [NSMutableArray arrayWithCapacity:8];
 
     if (name.commonName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::CN") value:name.commonName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[TableRowItem itemWithTitle:l(@"Subject::CN") value:name.commonName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.organizationalUnitName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::OU") value:name.organizationalUnitName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[TableRowItem itemWithTitle:l(@"Subject::OU") value:name.organizationalUnitName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.organizationName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::O") value:name.organizationName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[TableRowItem itemWithTitle:l(@"Subject::O") value:name.organizationName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.localityName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::L") value:name.localityName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[TableRowItem itemWithTitle:l(@"Subject::L") value:name.localityName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.stateOrProvinceName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::S") value:name.stateOrProvinceName style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[TableRowItem itemWithTitle:l(@"Subject::S") value:name.stateOrProvinceName style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.countryName != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::C") value:l(nstrcat(@"Country::", name.countryName)) style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[TableRowItem itemWithTitle:l(@"Subject::C") value:l(nstrcat(@"Country::", name.countryName)) style:CertificateTableRowItemStyleBasicValue]];
     }
 
     if (name.emailAddress != nil) {
-        [subjectItems addObject:[CertificateTableRowItem itemWithTitle:l(@"Subject::E") value:name.emailAddress style:CertificateTableRowItemStyleBasicValue]];
+        [subjectItems addObject:[TableRowItem itemWithTitle:l(@"Subject::E") value:name.emailAddress style:CertificateTableRowItemStyleBasicValue]];
     }
 
     return subjectItems;
@@ -192,7 +195,6 @@
 }
 
 - (void) sharePublicKey:(UIBarButtonItem *)sender {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSData * pem = [selectedCertificate publicKeyAsPEM];
     if (pem) {
         NSString * fileName = format(@"/%@.pem", selectedCertificate.serialNumber);
@@ -203,18 +205,14 @@
                                                         initWithActivityItems:@[fileURL]
                                                         applicationActivities:nil];
         activityController.popoverPresentationController.barButtonItem = sender;
-        [self presentViewController:activityController animated:YES completion:^() {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        }];
+        [self presentViewController:activityController animated:YES completion:^() {}];
     } else {
         [uihelper
          presentAlertInViewController:self
          title:l(@"Unable to export certificate")
          body:l(@"We were unable to export the certificate in PEM format.")
          dismissButtonTitle:l(@"Dismiss")
-         dismissed:^(NSInteger buttonIndex) {
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-         }];
+         dismissed:^(NSInteger buttonIndex) {}];
     }
 }
 
@@ -292,28 +290,28 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)idx {
-    CertificateTableRowSection * section = self.sections[idx];
+    TableRowSection * section = self.sections[idx];
     return section.items.count;
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)idx {
-    CertificateTableRowSection * section = self.sections[idx];
+    TableRowSection * section = self.sections[idx];
     return l(section.title);
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)idx {
-    CertificateTableRowSection * section = self.sections[idx];
+    TableRowSection * section = self.sections[idx];
     return l(section.footer);
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CertificateTableRowSection * section = self.sections[indexPath.section];
-    CertificateTableRowItem * row = section.items[indexPath.row];
+    TableRowSection * section = self.sections[indexPath.section];
+    TableRowItem * row = section.items[indexPath.row];
     return [row cellForRowItem];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CertificateTableRowSection * section = self.sections[indexPath.section];
+    TableRowSection * section = self.sections[indexPath.section];
     if ([section.title isEqualToString:@"Subject Alternative Names"]) {
         [self performSegueWithIdentifier:@"ShowList" sender:nil];
     }
@@ -327,7 +325,7 @@
     if (action == @selector(copy:)) {
         return YES;
     } else if (action == @selector(shareValue:) || action == @selector(verifyValue:)) {
-        CertificateTableRowSection * section = self.sections[indexPath.section];
+        TableRowSection * section = self.sections[indexPath.section];
         BOOL match = [section.title isEqualToString:@"Fingerprints"];
         NSLog(@"Section '%@' == 'Fingerprints'", section.title);
         return match;

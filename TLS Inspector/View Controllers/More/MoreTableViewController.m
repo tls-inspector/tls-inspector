@@ -11,7 +11,10 @@
     [super viewDidLoad];
     [uihelper applyStylesToNavigationBar:self.navigationController.navigationBar];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didChangeTheme) name:CHANGE_THEME_NOTIFICATION object:nil];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (IBAction) close:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

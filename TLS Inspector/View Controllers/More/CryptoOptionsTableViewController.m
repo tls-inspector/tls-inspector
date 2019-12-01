@@ -8,7 +8,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    ADD_SET_THEME_WORKAROUND
 }
+
+IMPL_SET_THEME_WORKAROUND
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (UserOptions.currentOptions.useOpenSSL) {
@@ -29,7 +32,9 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
         UILabel * label = [cell viewWithTag:10];
         label.text = l(@"Crypto Engine");
-        label.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            label.textColor = themeTextColor;
+        }
         UISegmentedControl * toggle = [cell viewWithTag:20];
         [toggle setTitle:l(@"iOS") forSegmentAtIndex:0];
         [toggle setTitle:l(@"OpenSSL") forSegmentAtIndex:1];
@@ -43,14 +48,18 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"input" forIndexPath:indexPath];
         UILabel * label = [cell viewWithTag:10];
         label.text = l(@"Ciphers");
-        label.textColor = themeTextColor;
+        if (!ATLEAST_IOS_13) {
+            label.textColor = themeTextColor;
+        }
         UITextField * input = [cell viewWithTag:20];
         input.placeholder = @"HIGH:!aNULL:!MD5:!RC4";
         input.text  = UserOptions.currentOptions.preferredCiphers;
         [input addTarget:self action:@selector(cipherEdit:) forControlEvents:UIControlEventEditingChanged];
         input.delegate = self;
-        input.textColor = themeTextColor;
-        input.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
+        if (!ATLEAST_IOS_13) {
+            input.textColor = themeTextColor;
+            input.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
+        }
     }
 
     return cell;
