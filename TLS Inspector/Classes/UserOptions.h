@@ -79,5 +79,9 @@
  The preferred ciphers for OpenSSL
  */
 @property (strong, nonatomic, nonnull) NSString * preferredCiphers;
+/**
+ Contact support nag already seen
+ */
+@property (nonatomic) BOOL contactNagDismissed;
 
 @end
