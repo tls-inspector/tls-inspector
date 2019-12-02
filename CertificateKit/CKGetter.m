@@ -38,6 +38,7 @@
 @property (strong, nonatomic, nonnull) CKCertificateChainGetter * chainGetter;
 @property (strong, nonatomic, nonnull) CKServerInfoGetter * serverInfoGetter;
 @property (strong, nonatomic, nonnull) NSArray<CKGetterTask *> * tasks;
+@property (nonatomic) BOOL didCallFinished;
 
 @end
 
@@ -135,7 +136,8 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             break;
         }
     }
-    if (allFinished) {
+    if (allFinished && !self.didCallFinished) {
+        self.didCallFinished = YES;
         PDebug(@"Getter finished all tasks");
         if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
             [self.delegate finishedGetter:self];
