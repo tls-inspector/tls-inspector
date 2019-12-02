@@ -24,6 +24,20 @@
         self.descriptionInput.textColor = themeTextColor;
         self.descriptionInput.keyboardAppearance = usingLightTheme ? UIKeyboardAppearanceLight : UIKeyboardAppearanceDark;
     }
+    
+    if (!UserOptions.currentOptions.contactNagDismissed) {
+        UIViewController * notice = [self.storyboard instantiateViewControllerWithIdentifier:@"Notice"];
+        UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:notice];
+        if (!usingLightTheme) {
+            controller.navigationBar.translucent = NO;
+        }
+        controller.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;
+        if (@available(iOS 11.0, *)) {
+            controller.navigationBar.prefersLargeTitles = YES;
+        }
+        UserOptions.currentOptions.contactNagDismissed = YES;
+        [self presentViewController:controller animated:YES completion:nil];
+    }
 }
 
 IMPL_SET_THEME_WORKAROUND

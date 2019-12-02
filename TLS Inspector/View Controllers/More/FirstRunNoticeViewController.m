@@ -21,10 +21,17 @@
     self.iconLabel.textColor = colorForTheme(uihelper.blueColor, UIColor.whiteColor);
     self.view.backgroundColor = colorForTheme(UIColor.groupTableViewBackgroundColor, [UIColor colorWithRed:0.08f green:0.11f blue:0.15f alpha:1.0f]);
 
+    UIColor * forgroundColor;
+    if (@available(iOS 13, *)) {
+        forgroundColor = UIColor.labelColor;
+    } else {
+        forgroundColor = themeTextColor;
+    }
+    
     NSMutableAttributedString * noticeText = [[NSMutableAttributedString alloc]
                                               initWithString:[lang key:@"first_run_notice"]
                                               attributes:@{
-                                                           NSForegroundColorAttributeName: themeTextColor,
+                                                           NSForegroundColorAttributeName: forgroundColor,
                                                            NSFontAttributeName: [UIFont systemFontOfSize:18.0f],
                                                            }];
     NSRange foundRange = [noticeText.mutableString rangeOfString:[lang key:@"Apple Support"]];

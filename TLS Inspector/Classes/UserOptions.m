@@ -22,6 +22,7 @@ static UserOptions * _instance;
 #define KEY_FINGEPRINT_SHA512 @"fingerprint_sha512"
 #define KEY_USE_OPENSSL @"use_openssl"
 #define KEY_PREFERRED_CIPHERS @"preferred_ciphers"
+#define KEY_CONTACT_NAG_DISMISSED @"contact_nag_dismissed"
 
 + (UserOptions * _Nonnull) currentOptions {
     if (!_instance) {
@@ -51,6 +52,7 @@ static UserOptions * _instance;
              KEY_FINGEPRINT_SHA512: @NO,
              KEY_USE_OPENSSL: @NO,
              KEY_PREFERRED_CIPHERS: @"HIGH:!aNULL:!MD5:!RC4",
+             KEY_CONTACT_NAG_DISMISSED: @NO,
              };
 }
 
@@ -186,6 +188,14 @@ static UserOptions * _instance;
 
 - (void) setPreferredCiphers:(NSString *)preferredCiphers {
     [AppDefaults setObject:preferredCiphers forKey:KEY_PREFERRED_CIPHERS];
+}
+
+- (BOOL) contactNagDismissed {
+    return [AppDefaults boolForKey:KEY_CONTACT_NAG_DISMISSED];
+}
+
+- (void) setContactNagDismissed:(BOOL)contactNagDismissed {
+    [AppDefaults setBool:contactNagDismissed forKey:KEY_CONTACT_NAG_DISMISSED];
 }
 
 @end
