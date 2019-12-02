@@ -35,7 +35,7 @@
         if (@available(iOS 11.0, *)) {
             controller.navigationBar.prefersLargeTitles = YES;
         }
-        UserOptions.currentOptions.contactNagDismissed = @YES;
+        UserOptions.currentOptions.contactNagDismissed = YES;
         [self presentViewController:controller animated:YES completion:nil];
     }
 }
