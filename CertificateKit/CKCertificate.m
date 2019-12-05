@@ -211,6 +211,8 @@ INSERT_OPENSSL_ERROR_METHOD
         case CKCertificateFingerprintTypeMD5:
             digest = EVP_md5();
             break;
+        default:
+            return nil;
     }
 
     unsigned char fingerprint[EVP_MAX_MD_SIZE];
@@ -219,7 +221,7 @@ INSERT_OPENSSL_ERROR_METHOD
     if (X509_digest(self.certificate, digest, fingerprint, &fingerprint_size) < 0) {
         [self openSSLError];
         PError(@"Unable to generate certificate fingerprint");
-        return @"";
+        return nil;
     }
 
     NSMutableString * fingerprintString = [NSMutableString new];

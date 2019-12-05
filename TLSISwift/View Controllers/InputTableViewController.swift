@@ -30,7 +30,11 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 1 {
-            return tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
+            if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
+                activity.startAnimating()
+            }
+            return cell
         }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Input", for: indexPath)
@@ -59,7 +63,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         self.domainInput?.isEnabled = false
         self.isLoading = true
         let text = self.domainInput?.text ?? ""
-        self.tableView.reloadSections(IndexSet(arrayLiteral: 0), with: .automatic)
+        self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
         self.inspectButton.isEnabled = false
         self.inspectDomain(text: text)
     }
@@ -81,6 +85,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         options.queryServerInfo = true
         options.useOpenSSL = true
         options.ciphers = "HIGH:!aNULL:!MD5:!RC4"
+        CertificateKit.setLoggingLevel(.debug)
 
         self.getter = CKGetter(options: options)
         self.getter?.delegate = self
@@ -95,7 +100,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
     func showInputError() {
         UIHelper.presentAlert(viewController: self, title: "Unable to Inspect Domain", body: "The URL or IP Address inputted is not valid") {
             self.isLoading = false
-            self.tableView.reloadSections(IndexSet(arrayLiteral: 0), with: .automatic)
+            self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
         }
@@ -105,13 +110,19 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
     func finishedGetter(_ getter: CKGetter) {
         print("Getter finished")
         guard let chain = self.certificateChain else {
+            showInputError()
             return
         }
         guard let info = self.serverInfo else {
+            showInputError()
             return
         }
         DispatchQueue.main.async {
-            CertificateChainTableViewController.present(viewController: self, certificateChain: chain, serverInfo: info)
+            CertificateChainTableViewController.present(viewController: self, certificateChain: chain, serverInfo: info, completion: {
+                self.isLoading = false
+                self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                self.domainInput?.isEnabled = true
+            })
         }
     }
     

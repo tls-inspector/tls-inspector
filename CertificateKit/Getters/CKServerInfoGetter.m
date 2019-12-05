@@ -52,8 +52,8 @@
             self.serverInfo.headers = self.headers;
             self.serverInfo.statusCode = self.statusCode;
             self.serverInfo.redirectedTo = self.redirectedTo;
-            [self.delegate getter:self finishedTaskWithResult:self.serverInfo];
             self.finished = YES;
+            [self.delegate getter:self finishedTaskWithResult:self.serverInfo];
         }
     }];
 }

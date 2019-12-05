@@ -291,8 +291,8 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     PDebug(@"Finished getting certificate chain");
-    [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
+    [self.delegate getter:self finishedTaskWithResult:self.chain];
 }
 
 int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {

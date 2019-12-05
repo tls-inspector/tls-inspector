@@ -39,6 +39,7 @@
 @property (strong, nonatomic, nonnull) CKServerInfoGetter * serverInfoGetter;
 @property (strong, nonatomic, nonnull) NSArray<CKGetterTask *> * tasks;
 @property (nonatomic) BOOL didCallFinished;
+@property (strong, nonatomic) NSObject * finishedMutex;
 
 @end
 
@@ -71,6 +72,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
     self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
+    self.finishedMutex = [NSObject new];
 
     NSMutableArray<CKGetterTask *> * tasks = [NSMutableArray arrayWithCapacity:2];
     [tasks addObject:self.chainGetter];
@@ -101,10 +103,8 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         default:
             break;
     }
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self checkIfFinished];
-    });
+    
+    [self checkIfFinished];
 }
 
 - (void) getter:(CKGetterTask *)getter failedTaskWithError:(NSError *)error {
@@ -123,24 +123,26 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             break;
     }
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self checkIfFinished];
-    });
+    [self checkIfFinished];
 }
 
 - (void) checkIfFinished {
+    PDebug(@"Checking if all tasks are finished");
     BOOL allFinished = YES;
     for (CKGetterTask * task in self.tasks) {
         if (!task.finished) {
+            PDebug(@"Task %ld not finished", task.tag);
             allFinished = NO;
             break;
         }
     }
-    if (allFinished && !self.didCallFinished) {
-        self.didCallFinished = YES;
-        PDebug(@"Getter finished all tasks");
-        if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
-            [self.delegate finishedGetter:self];
+    @synchronized (self.finishedMutex) {
+        if (allFinished && !self.didCallFinished) {
+            self.didCallFinished = YES;
+            PDebug(@"Getter finished all tasks");
+            if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
+                [self.delegate finishedGetter:self];
+            }
         }
     }
 }
