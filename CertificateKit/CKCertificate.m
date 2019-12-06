@@ -77,20 +77,20 @@ INSERT_OPENSSL_ERROR_METHOD
     xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
 
     // Keep trying with each subject name for the summary
-    if (xcert.subject.commonName.length > 0) {
-        xcert.summary = xcert.subject.commonName;
-    } else if (xcert.subject.organizationalUnitName.length > 0) {
-        xcert.summary = xcert.subject.organizationalUnitName;
-    } else if (xcert.subject.organizationName.length > 0) {
-        xcert.summary = xcert.subject.organizationName;
-    } else if (xcert.subject.emailAddress.length > 0) {
-        xcert.summary = xcert.subject.emailAddress;
-    } else if (xcert.subject.countryName.length > 0) {
-        xcert.summary = xcert.subject.countryName;
-    } else if (xcert.subject.stateOrProvinceName.length > 0) {
-        xcert.summary = xcert.subject.stateOrProvinceName;
-    } else if (xcert.subject.localityName.length > 0) {
-        xcert.summary = xcert.subject.localityName;
+    if (xcert.subject.commonNames.count > 0) {
+        xcert.summary = xcert.subject.commonNames[0];
+    } else if (xcert.subject.organizationalUnits.count > 0) {
+        xcert.summary = xcert.subject.organizationalUnits[0];
+    } else if (xcert.subject.organizations.count > 0) {
+        xcert.summary = xcert.subject.organizations[0];
+    } else if (xcert.subject.emailAddresses.count > 0) {
+        xcert.summary = xcert.subject.emailAddresses[0];
+    } else if (xcert.subject.countryCodes.count > 0) {
+        xcert.summary = xcert.subject.countryCodes[0];
+    } else if (xcert.subject.states.count > 0) {
+        xcert.summary = xcert.subject.states[0];
+    } else if (xcert.subject.cities.count > 0) {
+        xcert.summary = xcert.subject.cities[0];
     } else {
         xcert.summary = @"Untitled Certificate";
     }

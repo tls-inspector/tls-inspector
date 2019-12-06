@@ -43,32 +43,32 @@ class CertificateChainTableViewController: UITableViewController {
         self.trustView.layer.cornerRadius = 5.0
         
         var trustColor = UIColor.materialPink()
-        var trustText = "Unknown"
+        var trustText = Lang(key: "Unknown")
         var trustIcon = FAIcon.FAQuestionCircleSolid
         switch (self.certificateChain.trusted) {
         case .trusted:
             trustColor = UIColor.materialGreen()
-            trustText = "Trusted"
+            trustText = Lang(key: "Trusted")
             trustIcon = FAIcon.FACheckCircleSolid
             break
         case .locallyTrusted:
             trustColor = UIColor.materialLightGreen()
-            trustText = "Locally Trusted"
+            trustText = Lang(key: "Locally Trusted")
             trustIcon = FAIcon.FACheckCircleRegular
             break
         case .untrusted, .invalidDate, .wrongHost:
             trustColor = UIColor.materialAmber()
-            trustText = "Untrusted"
+            trustText = Lang(key: "Untrusted")
             trustIcon = FAIcon.FAExclamationCircleSolid
             break
         case .sha1Leaf, .sha1Intermediate:
             trustColor = UIColor.materialRed()
-            trustText = "Insecure"
+            trustText = Lang(key: "Insecure")
             trustIcon = FAIcon.FATimesCircleSolid
             break
         case .selfSigned, .revokedLeaf, .revokedIntermediate:
             trustColor = UIColor.materialRed()
-            trustText = "Untrusted"
+            trustText = Lang(key: "Untrusted")
             trustIcon = FAIcon.FATimesCircleSolid
             break
         @unknown default:
@@ -113,16 +113,16 @@ class CertificateChainTableViewController: UITableViewController {
             return cell
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                return TitleValueTableViewCell.Cell(title: "Negotiated Ciphersuite", value: self.certificateChain.cipherSuite, useFixedWidthFont: true)
+                return TitleValueTableViewCell.Cell(title: Lang(key: "Negotiated Ciphersuite"), value: self.certificateChain.cipherSuite, useFixedWidthFont: true)
             } else if indexPath.row == 1 {
-                return TitleValueTableViewCell.Cell(title: "Negotiated Version", value: self.certificateChain.protocol, useFixedWidthFont: false)
+                return TitleValueTableViewCell.Cell(title: Lang(key: "Negotiated Version"), value: self.certificateChain.protocol, useFixedWidthFont: false)
             } else if indexPath.row == 2 {
-                return TitleValueTableViewCell.Cell(title: "Remote Address", value: self.certificateChain.remoteAddress, useFixedWidthFont: true)
+                return TitleValueTableViewCell.Cell(title: Lang(key: "Remote Address"), value: self.certificateChain.remoteAddress, useFixedWidthFont: true)
             }
         } else if indexPath.section == 2 {
             if indexPath.row >= self.securityHeadersSorted.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
-                cell.textLabel?.text = "View All"
+                cell.textLabel?.text = Lang(key: "View All")
                 return cell
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: "Icon", for: indexPath)
@@ -153,11 +153,11 @@ class CertificateChainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Certificates"
+            return Lang(key: "Certificates")
         } else if section == 1 {
-            return "Connection Information"
+            return Lang(key: "Connection Information")
         } else if section == 2 {
-            return "Security HTTP Headers"
+            return Lang(key: "Security HTTP Headers")
         }
         
         return ""

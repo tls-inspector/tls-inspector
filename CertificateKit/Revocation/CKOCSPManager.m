@@ -73,7 +73,7 @@ static CKOCSPManager * _instance;
     }
     
     OCSP_CERTID * certID = OCSP_cert_to_id(NULL, certificate.X509Certificate, issuer.X509Certificate);
-    PDebug(@"Querying OCSP for certificate: '%@'", certificate.subject.commonName);
+    PDebug(@"Querying OCSP for certificate: '%@'", certificate.subject.commonNames);
     OCSP_REQUEST * request = [self generateOCSPRequestForCertificate:certID];
     
     unsigned char * request_data = NULL;

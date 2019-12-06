@@ -46,26 +46,26 @@ class CertificateTableViewController: UITableViewController {
     
     func makeNameSection(name: CKNameObject) -> TableViewSection? {
         let section = TableViewSection()
-        if let cn = name.commonName {
+        for cn in name.commonNames {
             section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::CN"), value: cn, useFixedWidthFont: false))
         }
-        if let email = name.emailAddress {
-            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::E"), value: email, useFixedWidthFont: false))
+        for country in name.countryCodes {
+            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::C"), value: Lang(key: "Country::" + country), useFixedWidthFont: false))
         }
-        if let org = name.organizationName {
-            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::O"), value: org, useFixedWidthFont: false))
-        }
-        if let ou = name.organizationalUnitName {
-            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::OU"), value: ou, useFixedWidthFont: false))
-        }
-        if let locale = name.localityName {
+        for locale in name.states {
             section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::L"), value: locale, useFixedWidthFont: false))
         }
-        if let state = name.stateOrProvinceName {
+        for state in name.cities {
             section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::S"), value: state, useFixedWidthFont: false))
         }
-        if let country = name.countryName {
-            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::C"), value: Lang(key: "Country::" + country), useFixedWidthFont: false))
+        for org in name.organizations {
+            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::O"), value: org, useFixedWidthFont: false))
+        }
+        for ou in name.organizationalUnits {
+            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::OU"), value: ou, useFixedWidthFont: false))
+        }
+        for email in name.emailAddresses {
+            section.cells.append(TitleValueTableViewCell.Cell(title: Lang(key: "Subject::E"), value: email, useFixedWidthFont: false))
         }
         return section
     }
