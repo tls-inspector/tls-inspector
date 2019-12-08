@@ -255,6 +255,10 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 }
 
+- (NSNumber *) version {
+    return [NSNumber numberWithLong:X509_get_version((X509 *)self.X509Certificate)];
+}
+
 - (NSString *) signatureAlgorithm {
     const X509_ALGOR * sigType = X509_get0_tbs_sigalg(self.certificate);
     char buffer[128];

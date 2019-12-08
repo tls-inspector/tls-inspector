@@ -127,6 +127,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSString * serialNumber;
 
 /**
+ *  Returns the certificate version
+ */
+@property (strong, nonatomic, nullable, readonly) NSNumber * version;
+
+/**
  *  Returns the human readable signature algorithm
  */
 @property (strong, nonatomic, nullable, readonly) NSString * signatureAlgorithm;

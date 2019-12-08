@@ -6,13 +6,23 @@ class CertificateTableViewController: UITableViewController {
     var sections: [TableViewSection] = []
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.buildTable()
+
+        NotificationCenter.default.addObserver(forName: CHANGE_CERTIFICATE_NOTIFICATION, object: nil, queue: nil) { (notification) in
+            DispatchQueue.main.async {
+                self.buildTable()
+            }
+        }
+    }
+    
+    func buildTable() {
         guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else {
-            self.dismiss(animated: false, completion: nil)
             return
         }
-
-        self.certificate = certificate
         
+        self.sections = []
+        self.certificate = certificate
         self.title = self.certificate.summary
 
         if let subjectSection = makeNameSection(name: self.certificate.subject) {
@@ -37,11 +47,23 @@ class CertificateTableViewController: UITableViewController {
             self.sections.append(featureSection)
         }
         
+        if let publicKeySection = makePublicKeySection() {
+            self.sections.append(publicKeySection)
+        }
+        
         if let fingerprintsSection = makeFingerprintsSection() {
             self.sections.append(fingerprintsSection)
         }
         
-        super.viewDidLoad()
+        if let metadataSection = makeMetadataSection() {
+            self.sections.append(metadataSection)
+        }
+        
+        if let subjectAltNameSection = makeSubjectAltNameSection() {
+            self.sections.append(subjectAltNameSection)
+        }
+        
+        self.tableView.reloadData()
     }
     
     func makeNameSection(name: CKNameObject) -> TableViewSection? {
@@ -168,6 +190,87 @@ class CertificateTableViewController: UITableViewController {
             return nil
         }
         return fingerprintsSection
+    }
+    
+    func makePublicKeySection() -> TableViewSection? {
+        let pubKeySection = TableViewSection()
+        pubKeySection.title = Lang(key: "Public Key")
+        
+        guard let publicKey = self.certificate.publicKey else {
+            return nil
+        }
+        
+        guard let algorithmCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
+            return nil
+        }
+        algorithmCell.textLabel?.text = Lang(key: "Algoritm")
+        algorithmCell.detailTextLabel?.text = Lang(key: "KeyAlgorithm::" + publicKey.algroithm)
+        pubKeySection.cells.append(algorithmCell)
+
+        guard let signatureCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
+            return nil
+        }
+        signatureCell.textLabel?.text = Lang(key: "Signature")
+        signatureCell.detailTextLabel?.text = Lang(key: "CertAlgorithm::" + (self.certificate.signatureAlgorithm ?? "Unknown"))
+        pubKeySection.cells.append(signatureCell)
+        
+        guard let sizeCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
+            return nil
+        }
+        sizeCell.textLabel?.text = Lang(key: "Size")
+        sizeCell.detailTextLabel?.text = String.init(format: "%ld", publicKey.bitLength)
+        pubKeySection.cells.append(sizeCell)
+        
+        return pubKeySection
+    }
+    
+    func makeMetadataSection() -> TableViewSection? {
+        let metadataSection = TableViewSection()
+        metadataSection.title = Lang(key: "Metadata")
+        
+        if let serial = self.certificate.serialNumber {
+            metadataSection.cells.append(TitleValueTableViewCell.Cell(title: "Serial Number", value: serial, useFixedWidthFont: true))
+        }
+        
+        if let version = self.certificate.version {
+            guard let versionCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
+                return nil
+            }
+            versionCell.textLabel?.text = Lang(key: "Version")
+            versionCell.detailTextLabel?.text = version.stringValue
+            metadataSection.cells.append(versionCell)
+        }
+        
+        if metadataSection.cells.count == 0 {
+            return nil
+        }
+        return metadataSection
+    }
+    
+    func makeSubjectAltNameSection() -> TableViewSection? {
+        let sanSection = TableViewSection()
+        sanSection.title = Lang(key: "Subject Alternate Names")
+        
+        guard let alternateNames = self.certificate.alternateNames else {
+            return nil
+        }
+        if alternateNames.count == 0 {
+            return nil
+        }
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Count") else {
+            return nil
+        }
+        guard let label = cell.viewWithTag(1) as? UILabel else {
+            return nil
+        }
+        guard let count = cell.viewWithTag(2) as? UILabel else {
+            return nil
+        }
+        label.text = Lang(key: "View All")
+        count.text = String.init(format: "%ld", alternateNames.count)
+        sanSection.cells.append(cell)
+        
+        return sanSection
     }
 
     // MARK: - Table view data source

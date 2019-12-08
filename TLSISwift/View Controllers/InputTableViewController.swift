@@ -117,12 +117,12 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             showInputError()
             return
         }
+        
+        CERTIFICATE_CHAIN = chain
+        SERVER_INFO = info
+        
         DispatchQueue.main.async {
-            CertificateChainTableViewController.present(viewController: self, certificateChain: chain, serverInfo: info, completion: {
-                self.isLoading = false
-                self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-                self.domainInput?.isEnabled = true
-            })
+            self.performSegue(withIdentifier: "Inspect", sender: nil)
         }
     }
     
