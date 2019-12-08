@@ -1,10 +1,10 @@
 import UIKit
 
 class TitleValueTableViewCell: UITableViewCell {
-    
+
     var titleLabel: UILabel!
     var valueLabel: UILabel!
-    
+
     static func Cell(title: String, value: String, useFixedWidthFont: Bool) -> TitleValueTableViewCell {
         let cell = TitleValueTableViewCell(style: .default, reuseIdentifier: "")
         cell.frame = CGRect(x: 0, y: 0, width: 375, height: 70)
@@ -31,7 +31,7 @@ class TitleValueTableViewCell: UITableViewCell {
                                            metrics: nil,
                                            views: titleLabelViews as [String : Any])
         )
-        
+
         cell.valueLabel = UILabel(frame: CGRect(x: 17, y: 36, width: 343, height: 21))
         cell.valueLabel.textAlignment = .left
         cell.valueLabel.numberOfLines = 0
@@ -58,22 +58,22 @@ class TitleValueTableViewCell: UITableViewCell {
                                            metrics: nil,
                                            views: valueLabelViews as [String : Any])
         )
-        
+
         cell.titleLabel.setNeedsLayout()
         cell.valueLabel.setNeedsLayout()
         cell.setNeedsLayout()
         cell.selectionStyle = .none
         return cell
     }
-    
+
     static func Cell(title: String, value: String) -> TitleValueTableViewCell {
         return TitleValueTableViewCell.Cell(title: title, value: value, useFixedWidthFont: false)
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }

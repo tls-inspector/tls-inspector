@@ -3116,12 +3116,12 @@ enum FAIcon: Int {
         for family in familyNames {
             print("Family name " + family)
             let fontNames = UIFont.fontNames(forFamilyName: family)
-            
+
             for font in fontNames {
                 print("    Font name: " + font)
             }
         }
-        
+
         if self.rawValue >= 100000 && self.rawValue <= 199999 {
             return UIFont(name: "FontAwesome5Brands-Regular", size: size)!
         } else if self.rawValue >= 200000 && self.rawValue <= 299999 {

@@ -9,7 +9,7 @@ class UIHelper: NSObject {
     ///   - dismissed: Optional closure to call when the alert is dismissed
     static func presentAlert(viewController: UIViewController, title: String, body: String, dismissed: (() -> Void)?) {
         let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
-        let dismissButton = UIAlertAction(title: "Dismiss", style: .default) { (action) in
+        let dismissButton = UIAlertAction(title: "Dismiss", style: .default) { (_) in
             dismissed?()
         }
         alertController.addAction(dismissButton)
@@ -17,8 +17,11 @@ class UIHelper: NSObject {
             viewController.present(alertController, animated: true, completion: nil)
         }
     }
-    
+
     static func presentError(viewController: UIViewController, error: Error, dismissed: (() -> Void)?) {
-        UIHelper.presentAlert(viewController: viewController, title: "Error", body: error.localizedDescription, dismissed: dismissed)
+        UIHelper.presentAlert(viewController: viewController,
+                              title: "Error",
+                              body: error.localizedDescription,
+                              dismissed: dismissed)
     }
 }

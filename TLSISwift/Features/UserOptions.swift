@@ -1,19 +1,21 @@
 import Foundation
 
-fileprivate let KEY_FIRST_RUN_COMPLETE = "first_run_complete"
-fileprivate let KEY_REMEMBER_RECENT_LOOKUPS = "remember_recent_lookups"
-fileprivate let KEY_USE_LIGHT_THEME = "use_light_theme"
-fileprivate let KEY_SHOW_TIPS = "show_tips"
-fileprivate let KEY_GET_HTTP_HEADERS = "get_http_headers"
-fileprivate let KEY_QUERY_OCSP = "query_ocsp"
-fileprivate let KEY_CHECK_CRL = "check_crl"
-fileprivate let KEY_FINGEPRINT_MD5 = "fingerprint_md5"
-fileprivate let KEY_FINGEPRINT_SHA128 = "fingerprint_sha128"
-fileprivate let KEY_FINGEPRINT_SHA256 = "fingerprint_sha256"
-fileprivate let KEY_FINGEPRINT_SHA512 = "fingerprint_sha512"
-fileprivate let KEY_USE_OPENSSL = "use_openssl"
-fileprivate let KEY_PREFERRED_CIPHERS = "preferred_ciphers"
-fileprivate let KEY_CONTACT_NAG_DISMISSED = "contact_nag_dismissed"
+// swiftlint:disable identifier_name
+private let KEY_FIRST_RUN_COMPLETE = "first_run_complete"
+private let KEY_REMEMBER_RECENT_LOOKUPS = "remember_recent_lookups"
+private let KEY_USE_LIGHT_THEME = "use_light_theme"
+private let KEY_SHOW_TIPS = "show_tips"
+private let KEY_GET_HTTP_HEADERS = "get_http_headers"
+private let KEY_QUERY_OCSP = "query_ocsp"
+private let KEY_CHECK_CRL = "check_crl"
+private let KEY_FINGEPRINT_MD5 = "fingerprint_md5"
+private let KEY_FINGEPRINT_SHA128 = "fingerprint_sha128"
+private let KEY_FINGEPRINT_SHA256 = "fingerprint_sha256"
+private let KEY_FINGEPRINT_SHA512 = "fingerprint_sha512"
+private let KEY_USE_OPENSSL = "use_openssl"
+private let KEY_PREFERRED_CIPHERS = "preferred_ciphers"
+private let KEY_CONTACT_NAG_DISMISSED = "contact_nag_dismissed"
+// swiftlint:enable identifier_name
 
 class UserOptions {
     private static var userDefaults: UserDefaults?

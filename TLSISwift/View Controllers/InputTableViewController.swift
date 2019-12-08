@@ -8,7 +8,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
     var getter: CKGetter?
     var certificateChain: CKCertificateChain?
     var serverInfo: CKServerInfo?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -23,7 +23,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         }
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 56.0
     }
@@ -43,14 +43,14 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             self.domainInput = textField
             textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
         }
-        
+
         return cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Domain Name or IP Address"
     }
-    
+
     @objc func domainInputChanged(sender: UITextField) {
         if let text = sender.text {
             self.inspectButton.isEnabled = text.count > 0
@@ -67,7 +67,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         self.inspectButton.isEnabled = false
         self.inspectDomain(text: text)
     }
-    
+
     func inspectDomain(text: String) {
         var domainText = text
         if domainText.hasPrefix("http://") {
@@ -77,7 +77,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         if !domainText.hasPrefix("https://") {
             domainText = "https://" + domainText
         }
-        
+
         let options = CKGetterOptions()
 
         options.checkOCSP = true
@@ -96,16 +96,18 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             showInputError()
         }
     }
-    
+
     func showInputError() {
-        UIHelper.presentAlert(viewController: self, title: "Unable to Inspect Domain", body: "The URL or IP Address inputted is not valid") {
+        UIHelper.presentAlert(viewController: self,
+                              title: "Unable to Inspect Domain",
+                              body: "The URL or IP Address inputted is not valid") {
             self.isLoading = false
             self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
         }
     }
-    
+
     // MARK: Getter Delegates
     func finishedGetter(_ getter: CKGetter) {
         print("Getter finished")
@@ -117,30 +119,30 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             showInputError()
             return
         }
-        
+
         CERTIFICATE_CHAIN = chain
         SERVER_INFO = info
-        
+
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "Inspect", sender: nil)
         }
     }
-    
+
     func getter(_ getter: CKGetter, gotCertificateChain chain: CKCertificateChain) {
         print("Got certificate chain")
         self.certificateChain = chain
     }
-    
+
     func getter(_ getter: CKGetter, gotServerInfo serverInfo: CKServerInfo) {
         print("Got server info")
         self.serverInfo = serverInfo
     }
-    
+
     func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {
         UIHelper.presentError(viewController: self, error: error, dismissed: nil)
         print("Error getting certificate chain")
     }
-    
+
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
         UIHelper.presentError(viewController: self, error: error, dismissed: nil)
         print("Error getting server info")
