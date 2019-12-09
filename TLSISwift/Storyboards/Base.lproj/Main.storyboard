@@ -12,6 +12,14 @@
         </array>
     </customFonts>
     <scenes>
+        <!--More-->
+        <scene sceneID="P0D-pP-Prg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="More" referencedIdentifier="More" id="2K4-Gk-kau" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d2C-dA-d4G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="759" y="-314"/>
+        </scene>
         <!--TLS Inspector-->
         <scene sceneID="Oby-nR-hlp">
             <objects>
@@ -87,7 +95,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="TLS Inspector" id="XJW-xh-YEf">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="Options" id="jS6-Fj-Gad"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Options" id="jS6-Fj-Gad">
+                            <connections>
+                                <segue destination="2K4-Gk-kau" kind="presentation" id="YPH-0K-6ao"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="ArrowRight" id="0qx-qm-eb4">
                             <connections>
                                 <action selector="inspectButtonPressed:" destination="cY4-Ck-Oam" id="zrs-GJ-rT5"/>
