@@ -59,6 +59,8 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 - (void) getInfoForURL:(NSURL *)URL; {
     PDebug(@"Starting getter for: %@", URL.absoluteString);
 
+    self.url = URL;
+
     if (self.options.useOpenSSL) {
         self.chainGetter = [CKOpenSSLCertificateChainGetter new];
     } else {
