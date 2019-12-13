@@ -13,8 +13,6 @@
 		3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C28D0B3204209E8004C260F /* CKRevoked.m */; };
 		3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C2A7A511F284DC700AA12B4 /* CKGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A521F284DC700AA12B4 /* CKGetter.m */; };
-		3C3104F01D83C4C30093909E /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C3104EF1D83C4C30093909E /* Extension.storyboard */; };
-		3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3104F31D83C5C70093909E /* InitialViewController.m */; };
 		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; };
 		3C36B3B82041310E005C66E8 /* CKGetterOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B62041310E005C66E8 /* CKGetterOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,13 +70,11 @@
 		3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */; };
 		3CCD0299239DDE68009364D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD0298239DDE68009364D0 /* Main.storyboard */; };
 		3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD029A239DDE7F009364D0 /* LaunchScreen.storyboard */; };
-		3CCD029C239DDF4D009364D0 /* Inspect Website.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */; };
 		3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AD2398B40800B2C8FC /* Globals.swift */; };
 		3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */; };
 		3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B32398BC1700B2C8FC /* Lang.swift */; };
 		3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */; };
-		3CEAA5071D83CCD10011A706 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAA5061D83CCD10011A706 /* ExtensionAssets.xcassets */; };
 		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
 		3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
 		3CF6772A2046335D00A3B4C1 /* CKCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677282046335D00A3B4C1 /* CKCRLManager.h */; };
@@ -93,8 +89,6 @@
 		67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686EA1FC8FACD00BB7AE8 /* CKServerInfoGetter.h */; };
 		A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */; };
-		A1BA8BE51E8EB2B90004FB0F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
-		A1BA8BE71E8EB5060004FB0F /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,13 +98,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
 			remoteInfo = CertificateKit;
-		};
-		3CCD029D239DDF4D009364D0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C43EF811D7A987F00AE65E9;
-			remoteInfo = "Inspect Website";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -132,7 +119,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3CCD029C239DDF4D009364D0 /* Inspect Website.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +139,6 @@
 		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
 		3C36B3B62041310E005C66E8 /* CKGetterOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKGetterOptions.h; sourceTree = "<group>"; };
 		3C36B3B72041310E005C66E8 /* CKGetterOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKGetterOptions.m; sourceTree = "<group>"; };
-		3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Inspect Website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C43EF8A1D7A987F00AE65E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		3C5F4655239D77CA00B3A727 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
@@ -233,15 +218,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3C43EF7F1D7A987F00AE65E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A1BA8BE71E8EB5060004FB0F /* CertificateKit.framework in Frameworks */,
-				A1BA8BE51E8EB2B90004FB0F /* SafariServices.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C65DAD61E836BE9004AD96D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -469,7 +445,6 @@
 		3CFAE6D71CA8440400CD946B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */,
 				3C65DADA1E836BE9004AD96D /* CertificateKit.framework */,
 				3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */,
 				3C72692423949ABD002A0B19 /* TLS Inspector.app */,
@@ -539,24 +514,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3C43EF811D7A987F00AE65E9 /* Inspect Website */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C43EF901D7A987F00AE65E9 /* Build configuration list for PBXNativeTarget "Inspect Website" */;
-			buildPhases = (
-				3C43EF7E1D7A987F00AE65E9 /* Sources */,
-				3C43EF7F1D7A987F00AE65E9 /* Frameworks */,
-				3C43EF801D7A987F00AE65E9 /* Resources */,
-				3CA0F0201D84D5F700AA9307 /* Remove Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Inspect Website";
-			productName = "Inspect Website";
-			productReference = 3C43EF821D7A987F00AE65E9 /* Inspect Website.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		3C65DAD91E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */;
@@ -590,10 +547,9 @@
 			);
 			dependencies = (
 				3C7269602394C16F002A0B19 /* PBXTargetDependency */,
-				3CCD029E239DDF4D009364D0 /* PBXTargetDependency */,
 			);
 			name = "TLS Inspector";
-			productName = TLSISwift;
+			productName = "TLS Inspector";
 			productReference = 3C72692423949ABD002A0B19 /* TLS Inspector.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -624,16 +580,6 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
-					3C43EF811D7A987F00AE65E9 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = WCW84NC7Y8;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
-					};
 					3C65DAD91E836BE9004AD96D = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Manual;
@@ -664,7 +610,6 @@
 			projectRoot = "";
 			targets = (
 				3C72692323949ABD002A0B19 /* TLS Inspector */,
-				3C43EF811D7A987F00AE65E9 /* Inspect Website */,
 				3C65DAD91E836BE9004AD96D /* CertificateKit */,
 				3CF397401EB50E0900E8DBF4 /* CertificateKitTests */,
 			);
@@ -672,15 +617,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3C43EF801D7A987F00AE65E9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C3104F01D83C4C30093909E /* Extension.storyboard in Resources */,
-				3CEAA5071D83CCD10011A706 /* ExtensionAssets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C65DAD81E836BE9004AD96D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -712,20 +648,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3CA0F0201D84D5F700AA9307 /* Remove Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Remove Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
-		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -747,14 +669,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3C43EF7E1D7A987F00AE65E9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C3104F41D83C5C70093909E /* InitialViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C65DAD51E836BE9004AD96D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -830,82 +744,9 @@
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
 			targetProxy = 3C72695F2394C16F002A0B19 /* PBXContainerItemProxy */;
 		};
-		3CCD029E239DDF4D009364D0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C43EF811D7A987F00AE65E9 /* Inspect Website */;
-			targetProxy = 3CCD029D239DDF4D009364D0 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3C43EF8E1D7A987F00AE65E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
-				INFOPLIST_FILE = "Inspect Website/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.9.6;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-isystem",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"-isystem",
-					"\"${PODS_ROOT}/Headers/Public/OpenSSL-Universal\"",
-					"-DEXTENSION",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3C43EF8F1D7A987F00AE65E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Inspect Website/InspectWebsite_PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/TLS\\ Inspector/Supporting\\ Files/Frameworks/**";
-				INFOPLIST_FILE = "Inspect Website/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.9.6;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-isystem",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"-isystem",
-					"\"${PODS_ROOT}/Headers/Public/OpenSSL-Universal\"",
-					"-DEXTENSION",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		3C65DAE41E836BE9004AD96D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -983,8 +824,8 @@
 				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = TLSISwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				INFOPLIST_FILE = "TLS Inspector/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1011,8 +852,8 @@
 				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = TLSISwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				INFOPLIST_FILE = "TLS Inspector/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0.0;
 				MTL_FAST_MATH = YES;
@@ -1172,15 +1013,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3C43EF901D7A987F00AE65E9 /* Build configuration list for PBXNativeTarget "Inspect Website" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C43EF8E1D7A987F00AE65E9 /* Debug */,
-				3C43EF8F1D7A987F00AE65E9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

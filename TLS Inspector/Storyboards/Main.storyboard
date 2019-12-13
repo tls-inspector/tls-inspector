@@ -23,7 +23,7 @@
         <!--TLS Inspector-->
         <scene sceneID="Oby-nR-hlp">
             <objects>
-                <tableViewController id="cY4-Ck-Oam" customClass="InputTableViewController" customModule="TLSISwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cY4-Ck-Oam" customClass="InputTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="jbf-yi-jfY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,7 +118,7 @@
         <!--Chain-->
         <scene sceneID="2DZ-Af-hkj">
             <objects>
-                <tableViewController storyboardIdentifier="CertificateChain" id="aeL-we-gfT" customClass="CertificateChainTableViewController" customModule="TLSISwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CertificateChain" id="aeL-we-gfT" customClass="CertificateChainTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="vm7-gO-R0x">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -248,7 +248,7 @@
         <!--Certificate Table View Controller-->
         <scene sceneID="RTv-JE-Svk">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Xlh-kz-i8G" customClass="CertificateTableViewController" customModule="TLSISwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Xlh-kz-i8G" customClass="CertificateTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="oiY-jI-2hK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,7 +357,7 @@
         <!--Split View Controller-->
         <scene sceneID="r8A-bl-j7T">
             <objects>
-                <splitViewController id="pHA-f4-JWe" customClass="SplitViewController" customModule="TLSISwift" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="pHA-f4-JWe" customClass="SplitViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="89s-Jg-cQg" kind="relationship" relationship="masterViewController" id="5Ws-HF-Krf"/>
                         <segue destination="maj-6d-HTY" kind="relationship" relationship="detailViewController" id="RUd-El-Fty"/>
@@ -386,7 +386,7 @@
         <!--Headers Table View Controller-->
         <scene sceneID="WoS-r2-VXF">
             <objects>
-                <tableViewController id="fQO-vT-fgD" customClass="HTTPHeadersTableViewController" customModule="TLSISwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fQO-vT-fgD" customClass="HTTPHeadersTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1ss-Xd-bOG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -421,7 +421,7 @@
         <!--List Table View Controller-->
         <scene sceneID="Kgs-Yq-6Fp">
             <objects>
-                <tableViewController id="iIF-qS-Rbw" customClass="SANListTableViewController" customModule="TLSISwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="iIF-qS-Rbw" customClass="SANListTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dfv-v2-FTw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -38,7 +38,7 @@ class UserOptions {
     private static var _inspectionsWithVerboseLogging = 0
 
     static func loadDefaults() {
-        userDefaults = UserDefaults(suiteName: "group.com.ecnepsnai.TLSISwift")
+        userDefaults = UserDefaults(suiteName: "group.com.ecnepsnai.TLS Inspector")
         for key in defaults.keys {
             if userDefaults?.value(forKey: key) == nil {
                 userDefaults?.set(defaults[key], forKey: key)
