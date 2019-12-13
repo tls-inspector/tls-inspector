@@ -14,7 +14,7 @@ class TitleValueTableViewCell: UITableViewCell {
         cell.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
         cell.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         cell.titleLabel.text = title
-        cell.titleLabel.textColor = UIColor.darkGray
+        cell.titleLabel.textColor = UIColor.gray
         cell.addSubview(cell.titleLabel)
         let titleLabelViews = [
             "title": cell.titleLabel,

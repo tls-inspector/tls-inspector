@@ -23,7 +23,7 @@
         <!--TLS Inspector-->
         <scene sceneID="Oby-nR-hlp">
             <objects>
-                <tableViewController id="cY4-Ck-Oam" customClass="InputTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cY4-Ck-Oam" customClass="InputTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="jbf-yi-jfY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,7 +118,7 @@
         <!--Chain-->
         <scene sceneID="2DZ-Af-hkj">
             <objects>
-                <tableViewController storyboardIdentifier="CertificateChain" id="aeL-we-gfT" customClass="CertificateChainTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CertificateChain" id="aeL-we-gfT" customClass="CertificateChainTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="vm7-gO-R0x">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,9 +142,18 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1q-rf-9Ga">
+                                            <rect key="frame" x="355" y="12" width="25" height="24"/>
+                                            <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <connections>
+                                                <segue destination="wbL-Xi-g5R" kind="presentation" id="wYT-ci-faD"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="v1q-rf-9Ga" secondAttribute="trailing" constant="18" id="4Y8-WM-A0Q"/>
+                                        <constraint firstItem="v1q-rf-9Ga" firstAttribute="centerY" secondItem="blQ-7D-w50" secondAttribute="centerY" id="7Nu-BL-OcM"/>
                                         <constraint firstItem="0RE-sl-RGn" firstAttribute="leading" secondItem="eeX-Br-ciK" secondAttribute="trailing" constant="8" id="IT2-ow-phO"/>
                                         <constraint firstItem="0RE-sl-RGn" firstAttribute="centerY" secondItem="blQ-7D-w50" secondAttribute="centerY" id="Qlc-Ot-RC6"/>
                                         <constraint firstItem="eeX-Br-ciK" firstAttribute="centerY" secondItem="blQ-7D-w50" secondAttribute="centerY" id="tUO-0w-3IB"/>
@@ -248,7 +257,7 @@
         <!--Certificate Table View Controller-->
         <scene sceneID="RTv-JE-Svk">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Xlh-kz-i8G" customClass="CertificateTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Xlh-kz-i8G" customClass="CertificateTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="oiY-jI-2hK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,7 +366,7 @@
         <!--Split View Controller-->
         <scene sceneID="r8A-bl-j7T">
             <objects>
-                <splitViewController id="pHA-f4-JWe" customClass="SplitViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="pHA-f4-JWe" customClass="SplitViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="89s-Jg-cQg" kind="relationship" relationship="masterViewController" id="5Ws-HF-Krf"/>
                         <segue destination="maj-6d-HTY" kind="relationship" relationship="detailViewController" id="RUd-El-Fty"/>
@@ -386,7 +395,7 @@
         <!--Headers Table View Controller-->
         <scene sceneID="WoS-r2-VXF">
             <objects>
-                <tableViewController id="fQO-vT-fgD" customClass="HTTPHeadersTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fQO-vT-fgD" customClass="HTTPHeadersTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1ss-Xd-bOG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -421,7 +430,7 @@
         <!--List Table View Controller-->
         <scene sceneID="Kgs-Yq-6Fp">
             <objects>
-                <tableViewController id="iIF-qS-Rbw" customClass="SANListTableViewController" customModule="TLS Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="iIF-qS-Rbw" customClass="SANListTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dfv-v2-FTw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -436,6 +445,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8q-fr-3kV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4645" y="580"/>
+        </scene>
+        <!--Trust Details Table View Controller-->
+        <scene sceneID="q9n-QR-2NO">
+            <objects>
+                <tableViewController id="jEW-bB-iw7" customClass="TrustDetailsTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="n1S-uT-qLq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="cX4-dW-qDL">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COD-Tn-QBg">
+                                    <rect key="frame" x="8" y="8" width="398" height="48"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnL-P7-b4S">
+                                            <rect key="frame" x="16" y="15.5" width="17" height="17"/>
+                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBP-NU-L1p">
+                                            <rect key="frame" x="41" y="13.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstItem="DnL-P7-b4S" firstAttribute="leading" secondItem="COD-Tn-QBg" secondAttribute="leadingMargin" constant="8" id="B7y-ZE-XJz"/>
+                                        <constraint firstItem="tBP-NU-L1p" firstAttribute="leading" secondItem="DnL-P7-b4S" secondAttribute="trailing" constant="8" id="W5C-h1-7AG"/>
+                                        <constraint firstItem="tBP-NU-L1p" firstAttribute="centerY" secondItem="COD-Tn-QBg" secondAttribute="centerY" id="nYK-sM-ymS"/>
+                                        <constraint firstItem="DnL-P7-b4S" firstAttribute="centerY" secondItem="COD-Tn-QBg" secondAttribute="centerY" id="zdM-T6-izd"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="COD-Tn-QBg" secondAttribute="trailing" constant="8" id="53M-I1-Ols"/>
+                                <constraint firstItem="COD-Tn-QBg" firstAttribute="top" secondItem="cX4-dW-qDL" secondAttribute="top" constant="8" id="CSQ-Zx-IAW"/>
+                                <constraint firstAttribute="bottom" secondItem="COD-Tn-QBg" secondAttribute="bottom" id="XCp-j8-d0c"/>
+                                <constraint firstItem="COD-Tn-QBg" firstAttribute="leading" secondItem="cX4-dW-qDL" secondAttribute="leading" constant="8" id="f1i-Ne-rYh"/>
+                            </constraints>
+                        </view>
+                        <connections>
+                            <outlet property="dataSource" destination="jEW-bB-iw7" id="Oki-MB-fMp"/>
+                            <outlet property="delegate" destination="jEW-bB-iw7" id="M6r-Q9-9d0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="2dW-jP-01K">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="GLB-dG-pWi"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="trustIconLabel" destination="DnL-P7-b4S" id="eNU-oa-Fnn"/>
+                        <outlet property="trustResultLabel" destination="tBP-NU-L1p" id="zMa-gK-t8p"/>
+                        <outlet property="trustView" destination="COD-Tn-QBg" id="HQd-cs-rpN"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LdF-8P-Xs0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5614" y="-181"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wfe-UR-Xlk">
+            <objects>
+                <navigationController id="wbL-Xi-g5R" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C4u-S1-0kC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jEW-bB-iw7" kind="relationship" relationship="rootViewController" id="YEb-O3-D8R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SUW-0A-Ofq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4645" y="-181"/>
         </scene>
     </scenes>
     <resources>

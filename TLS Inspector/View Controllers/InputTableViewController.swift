@@ -151,8 +151,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
+            let domainsBefore = RecentLookups.GetRecentLookups().count
             RecentLookups.AddLookup(query: getter.url.host ?? "")
-            if RecentLookups.GetRecentLookups().count == 1 {
+            if RecentLookups.GetRecentLookups().count == 1 && domainsBefore == 0 {
                 self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)
             } else {
                 self.tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
