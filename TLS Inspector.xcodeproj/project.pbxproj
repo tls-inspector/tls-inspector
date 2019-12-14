@@ -85,6 +85,8 @@
 		3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6773520464C7E00A3B4C1 /* CKLogging.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6773620464C7E00A3B4C1 /* CKLogging.m */; };
 		3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */; };
+		3CF9CC9623A4804600535173 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9523A4804600535173 /* DomainList.plist */; };
+		3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9823A482F500535173 /* UIObject+Lang.swift */; };
 		67F686E41FC8FAA200BB7AE8 /* CKGetterTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686E21FC8FAA200BB7AE8 /* CKGetterTask.h */; };
 		67F686E81FC8FAB800BB7AE8 /* CKCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686E61FC8FAB800BB7AE8 /* CKCertificateChainGetter.h */; };
 		67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F686EA1FC8FACD00BB7AE8 /* CKServerInfoGetter.h */; };
@@ -207,6 +209,9 @@
 		3CF6773520464C7E00A3B4C1 /* CKLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKLogging.h; sourceTree = "<group>"; };
 		3CF6773620464C7E00A3B4C1 /* CKLogging.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKLogging.m; sourceTree = "<group>"; };
 		3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKit_PrefixHeader.pch; sourceTree = "<group>"; };
+		3CF9CC9523A4804600535173 /* DomainList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DomainList.plist; sourceTree = "<group>"; };
+		3CF9CC9823A482F500535173 /* UIObject+Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIObject+Lang.swift"; sourceTree = "<group>"; };
+		3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TLS Inspector.entitlements"; sourceTree = "<group>"; };
 		67F686E21FC8FAA200BB7AE8 /* CKGetterTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKGetterTask.h; sourceTree = "<group>"; };
 		67F686E31FC8FAA200BB7AE8 /* CKGetterTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKGetterTask.m; sourceTree = "<group>"; };
 		67F686E61FC8FAB800BB7AE8 /* CKCertificateChainGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateChainGetter.h; sourceTree = "<group>"; };
@@ -265,6 +270,7 @@
 		3C5F465D239DAE7D00B3A727 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				3CF9CC9723A482DA00535173 /* UI Elements */,
 				3CD4A7B32398BC1700B2C8FC /* Lang.swift */,
 				3C5F465E239DAE8400B3A727 /* Strings */,
 			);
@@ -325,12 +331,14 @@
 		3C72692523949ABD002A0B19 /* TLS Inspector */ = {
 			isa = PBXGroup;
 			children = (
+				3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */,
 				3CCD028C239DCEA7009364D0 /* Storyboards */,
 				3CCD0289239DC072009364D0 /* External */,
 				3C5F465D239DAE7D00B3A727 /* Localization */,
 				3CD4A7B62398C2F100B2C8FC /* Features */,
 				3C7269622394C2D3002A0B19 /* User Interface */,
 				3C7269382394BC0F002A0B19 /* View Controllers */,
+				3CF9CC9423A4802400535173 /* Supporting Files */,
 				3C72692623949ABD002A0B19 /* AppDelegate.swift */,
 				3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */,
 				3C72692F23949ABD002A0B19 /* Assets.xcassets */,
@@ -431,6 +439,22 @@
 				3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */,
 			);
 			path = Revocation;
+			sourceTree = "<group>";
+		};
+		3CF9CC9423A4802400535173 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CF9CC9523A4804600535173 /* DomainList.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3CF9CC9723A482DA00535173 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				3CF9CC9823A482F500535173 /* UIObject+Lang.swift */,
+			);
+			path = "UI Elements";
 			sourceTree = "<group>";
 		};
 		3CFAE6CD1CA8440400CD946B = {
@@ -637,6 +661,7 @@
 				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
 				3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */,
 				3C5F4660239DAE9900B3A727 /* en.plist in Resources */,
+				3CF9CC9623A4804600535173 /* DomainList.plist in Resources */,
 				3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,6 +731,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */,
 				3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */,
 				3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */,
 				3C72693A2394BC1D002A0B19 /* InputTableViewController.swift in Sources */,
@@ -825,6 +851,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
@@ -854,6 +881,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;

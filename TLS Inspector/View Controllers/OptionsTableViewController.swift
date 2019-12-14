@@ -45,26 +45,45 @@ class OptionsTableViewController: UITableViewController {
             statusSection.cells.append(cell)
         }
         self.sections.append(statusSection)
+
+        let loggingSection = TableViewSection()
+        loggingSection.title = lang(key: "Logging")
+        loggingSection.footer = lang(key: "verbose_logging_footer")
+        if let cell = newSwitchCell(labelText: lang(key: "Enable Debug Logging"),
+                                    initialValue: UserOptions.verboseLogging,
+                                    changed: #selector(changeVerboseLogging(sender:))) {
+            loggingSection.cells.append(cell)
+        }
+        if let cell = newIconCell(labelText: lang(key: "Submit Logs"),
+                                  icon: .FABugSolid,
+                                  iconColor: UIColor.systemRed) {
+            loggingSection.cells.append(cell)
+        }
+        self.sections.append(loggingSection)
     }
 
     @objc func changeRememberLookups(sender: UISwitch) {
-
+        UserOptions.rememberRecentLookups = sender.isOn
     }
 
     @objc func changeShowHTTPHeaders(sender: UISwitch) {
-
+        UserOptions.getHTTPHeaders = sender.isOn
     }
 
     @objc func changeShowTips(sender: UISwitch) {
-
+        UserOptions.showTips = sender.isOn
     }
 
     @objc func changeQueryOCSP(sender: UISwitch) {
-
+        UserOptions.queryOCSP = sender.isOn
     }
 
     @objc func changeCheckCRL(sender: UISwitch) {
+        UserOptions.checkCRL = sender.isOn
+    }
 
+    @objc func changeVerboseLogging(sender: UISwitch) {
+        UserOptions.verboseLogging = sender.isOn
     }
 
     // MARK: - Table view data source
@@ -101,7 +120,7 @@ class OptionsTableViewController: UITableViewController {
 
         label.text = labelText
         toggle.setOn(initialValue, animated: false)
-        toggle.addTarget(self, action: changed, for: .editingChanged)
+        toggle.addTarget(self, action: changed, for: .valueChanged)
 
         return cell
     }

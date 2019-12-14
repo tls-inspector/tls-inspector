@@ -23,6 +23,10 @@ class TrustDetailsTableViewController: UITableViewController {
         }
     }
 
+    @IBAction func closeButton(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     func buildTrustHeader() {
         self.trustView.layer.cornerRadius = 5.0
 
@@ -63,6 +67,7 @@ class TrustDetailsTableViewController: UITableViewController {
         self.trustIconLabel.text = trustIcon.string()
     }
 
+    //swiftlint:disable cyclomatic_complexity
     func buildTrustSection() -> TableViewSection? {
         let trustSection = TableViewSection()
         trustSection.title = lang(key: "Trust Details")
@@ -112,6 +117,7 @@ class TrustDetailsTableViewController: UITableViewController {
 
         return trustSection
     }
+    //swiftlint:enable cyclomatic_complexity
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -96,13 +96,16 @@
                                 <action selector="closeButton:" destination="SAS-dU-fSF" id="QYi-36-eG0"/>
                             </connections>
                         </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="More"/>
+                        </userDefinedRuntimeAttributes>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gsD-6b-5Z5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="487" y="155"/>
         </scene>
-        <!--Options Table View Controller-->
+        <!--Options-->
         <scene sceneID="NZs-NY-vU5">
             <objects>
                 <tableViewController id="CDR-e3-isx" customClass="OptionsTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
@@ -126,6 +129,7 @@
                                         </label>
                                         <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Teb-Zf-Yl3">
                                             <rect key="frame" x="345" y="6.5" width="51" height="31"/>
+                                            <color key="onTintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </switch>
                                     </subviews>
                                     <constraints>
@@ -170,13 +174,17 @@
                             <outlet property="delegate" destination="CDR-e3-isx" id="hT8-4z-P9Y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ZUm-O7-pbb"/>
+                    <navigationItem key="navigationItem" title="Options" id="ZUm-O7-pbb">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="Options"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7b-mp-JKY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1496" y="499"/>
         </scene>
-        <!--About Table View Controller-->
+        <!--About-->
         <scene sceneID="Ram-Na-oNy">
             <objects>
                 <viewController id="geb-Kz-ZRO" customClass="AboutTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
@@ -258,7 +266,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RQF-cc-9a2"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oaZ-B0-l0R"/>
+                    <navigationItem key="navigationItem" title="About" id="oaZ-B0-l0R">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="About"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6n-k2-jin" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

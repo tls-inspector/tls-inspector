@@ -2,15 +2,47 @@ import UIKit
 import CertificateKit
 
 class InputTableViewController: UITableViewController, CKGetterDelegate {
-    var domainInput: UITextField?
-    @IBOutlet weak var inspectButton: UIBarButtonItem!
     var isLoading = false
     var getter: CKGetter?
+    var placeholderDomains: [String] = []
+    let tipKeys: [String] = ["tlstip1", "tlstip2", "tlstip3", "tlstip5", "tlstip6", "tlstip7"]
+
     var certificateChain: CKCertificateChain?
     var serverInfo: CKServerInfo?
 
+    var domainInput: UITextField?
+    @IBOutlet weak var inspectButton: UIBarButtonItem!
+    @IBOutlet weak var tipView: UIView!
+    @IBOutlet weak var tipTextView: UILabel!
+
     override func viewDidLoad() {
+        if let domains = loadPlaceholderDomains() {
+            self.placeholderDomains = domains
+        }
+
         super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        if let tip = tipKeys.randomElement() {
+            self.tipTextView.text = lang(key: tip)
+        }
+
+        if let placeholder = placeholderDomains.randomElement() {
+            domainInput?.placeholder = placeholder
+        }
+
+        super.viewWillAppear(animated)
+    }
+
+    func loadPlaceholderDomains() -> [String]? {
+        guard let domainListPath = Bundle.main.path(forResource: "DomainList", ofType: "plist") else {
+            return nil
+        }
+        guard let domains = NSArray.init(contentsOfFile: domainListPath) as? [String] else {
+            return nil
+        }
+        return domains
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,6 +86,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
 
             if let textField = cell.viewWithTag(1) as? UITextField {
                 self.domainInput = textField
+                textField.placeholder = placeholderDomains.randomElement()
                 textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
             }
 

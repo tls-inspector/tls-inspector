@@ -12,6 +12,7 @@ class CertificateChainTableViewController: UITableViewController {
     @IBOutlet weak var trustView: UIView!
     @IBOutlet weak var trustIconLabel: UILabel!
     @IBOutlet weak var trustResultLabel: UILabel!
+    @IBOutlet weak var trustDetailsButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +70,10 @@ class CertificateChainTableViewController: UITableViewController {
         self.trustIconLabel.textColor = UIColor.white
         self.trustIconLabel.font = trustIcon.font(size: self.trustIconLabel.font.pointSize)
         self.trustIconLabel.text = trustIcon.string()
+
+        if #available(iOS 13, *) {} else {
+            self.trustDetailsButton.tintColor = UIColor.white
+        }
     }
 
     func buildTable() {
