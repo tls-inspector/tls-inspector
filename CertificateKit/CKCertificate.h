@@ -231,6 +231,8 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  */
 @property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * tlsFeatures;
 
+@property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * keyIdentifiers;
+
 /**
  *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
  */

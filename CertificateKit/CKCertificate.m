@@ -53,6 +53,7 @@
 @property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSString *> * tlsFeatures;
+@property (strong, nonatomic, nullable, readwrite) NSDictionary<NSString *, NSString *> * keyIdentifiers;
 
 @end
 
@@ -174,6 +175,46 @@ INSERT_OPENSSL_ERROR_METHOD
             xcert.tlsFeatures = featureNames;
         }
         TLS_FEATURE_free(tlsFeatures);
+    }
+
+    // Get key identifiers
+    {
+        NSMutableDictionary<NSString *, NSString *> * identifiers = [NSMutableDictionary new];
+
+        ASN1_OCTET_STRING * subjectIdentifier = X509_get_ext_d2i(cert, NID_subject_key_identifier, NULL, NULL);
+        AUTHORITY_KEYID * authorityIdentifier = X509_get_ext_d2i(cert, NID_authority_key_identifier, NULL, NULL);
+
+        if (subjectIdentifier != NULL && subjectIdentifier->data != NULL) {
+            NSString * subject = [CKCertificate asn1OctetStringToHexString:subjectIdentifier];
+            if (subject != nil) {
+                identifiers[@"subject"] = subject;
+            }
+        }
+
+        if (authorityIdentifier != NULL && authorityIdentifier->keyid != NULL) {
+            NSString * authority = [CKCertificate asn1OctetStringToHexString:authorityIdentifier->keyid];
+            if (authority != nil) {
+                identifiers[@"authority"] = authority;
+            }
+        }
+
+        if (identifiers.allKeys.count > 0) {
+            xcert.keyIdentifiers = identifiers;
+        }
+    }
+
+    {
+        CERTIFICATEPOLICIES * policies = X509_get_ext_d2i(cert, NID_certificate_policies, NULL, NULL);
+        int len = sk_POLICYINFO_num(policies);
+        if (len > 0) {
+            for (int i = 0; i < len; i++) {
+                POLICYINFO * info = sk_POLICYINFO_value(policies, i);
+                ASN1_OBJECT * policyID = info->policyid;
+                char idBuf[128];
+                OBJ_obj2txt(idBuf, sizeof(idBuf), policyID, 0);
+                printf("ID: %s\n", idBuf);
+            }
+        }
     }
 
     return xcert;
@@ -483,6 +524,32 @@ INSERT_OPENSSL_ERROR_METHOD
         }
     }
     return values;
+}
+
++ (NSString *) asn1OctetStringToHexString:(ASN1_OCTET_STRING *)str {
+    unsigned char * buffer = str->data;
+    int len = str->length;
+
+    char *tmp, *q;
+    const unsigned char *p;
+    int i;
+    static const char hexdig[] = "0123456789ABCDEF";
+    if (!buffer || !len)
+        return nil;
+    if (!(tmp = malloc(len * 3 + 1))) {
+        return nil;
+    }
+    q = tmp;
+    for (i = 0, p = buffer; i < len; i++, p++) {
+        *q++ = hexdig[(*p >> 4) & 0xf];
+        *q++ = hexdig[*p & 0xf];
+        *q++ = ':';
+    }
+    q[-1] = 0;
+
+    NSString * string = [[NSString alloc] initWithUTF8String:tmp];
+    free(tmp);
+    return string;
 }
 
 @end

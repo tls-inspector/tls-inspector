@@ -49,6 +49,10 @@ class CertificateTableViewController: UITableViewController {
             self.sections.append(fingerprintsSection)
         }
 
+        if let keyIdentifierSection = makeKeyIdentifierSection() {
+            self.sections.append(keyIdentifierSection)
+        }
+
         if let metadataSection = makeMetadataSection() {
             self.sections.append(metadataSection)
         }
@@ -243,6 +247,32 @@ class CertificateTableViewController: UITableViewController {
         return pubKeySection
     }
 
+    func makeKeyIdentifierSection() -> TableViewSection? {
+        let keyIdentifierSection = TableViewSection()
+        keyIdentifierSection.title = lang(key: "Key Identifier")
+
+        guard let identifiers = self.certificate.keyIdentifiers else {
+            return nil
+        }
+
+        if let subject = identifiers["subject"] {
+            keyIdentifierSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Subject"),
+                                                                           value: subject,
+                                                                           useFixedWidthFont: true))
+        }
+
+        if let authority = identifiers["authority"] {
+            keyIdentifierSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Authority"),
+                                                                           value: authority,
+                                                                           useFixedWidthFont: true))
+        }
+
+        if keyIdentifierSection.cells.count == 0 {
+            return nil
+        }
+        return keyIdentifierSection
+    }
+
     func makeMetadataSection() -> TableViewSection? {
         let metadataSection = TableViewSection()
         metadataSection.title = lang(key: "Metadata")
@@ -251,6 +281,12 @@ class CertificateTableViewController: UITableViewController {
             metadataSection.cells.append(TitleValueTableViewCell.Cell(title: "Serial Number",
                                                                       value: serial,
                                                                       useFixedWidthFont: true))
+        }
+
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
+            cell.textLabel?.text = lang(key: "Certificate Authority")
+            cell.detailTextLabel?.text = self.certificate.isCA ? lang(key: "Yes") : lang(key: "No")
+            metadataSection.cells.append(cell)
         }
 
         if let version = self.certificate.version {

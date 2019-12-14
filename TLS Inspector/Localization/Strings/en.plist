@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Key Identifier</key>
+	<string>Key Identifier</string>
+	<key>Authority</key>
+	<string>Authority</string>
+	<key>Metadata</key>
+	<string>Metadata</string>
+	<key>No</key>
+	<string>No</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>About</key>
