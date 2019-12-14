@@ -42,6 +42,10 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
                 if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
                     activity.startAnimating()
+
+                    if #available(iOS 13, *) {
+                        activity.style = .medium
+                    }
                 }
                 return cell
             }

@@ -57,7 +57,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
             let libcurlVersion = CertificateKit.libcurlVersion() ?? "Unknown"
             return "App: \(appVersion) (\(build)), OpenSSL: \(opensslVersion), cURL: \(libcurlVersion)"
         } else if section == 1 {
-            return lang(key: "TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2020 Ian Spence.")
+            return lang(key: "copyright_license_footer")
         }
 
         return nil

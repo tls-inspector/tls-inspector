@@ -133,7 +133,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     BOOL allFinished = YES;
     for (CKGetterTask * task in self.tasks) {
         if (!task.finished) {
-            PDebug(@"Task %ld not finished", task.tag);
+            PDebug(@"Task %lu not finished", (unsigned long)task.tag);
             allFinished = NO;
             break;
         }
