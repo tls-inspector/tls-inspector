@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 /**
  *  The common name of the certificate
  */
-@property (strong, nonatomic, nullable, readonly) NSString * summary;
+@property (strong, nonatomic, nonnull, readonly) NSString * summary;
 
 /**
  *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.

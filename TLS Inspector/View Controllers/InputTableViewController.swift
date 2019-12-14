@@ -139,9 +139,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
 
         let options = CKGetterOptions()
 
-        options.checkOCSP = true
-        options.checkCRL = false
-        options.queryServerInfo = true
+        options.checkOCSP = UserOptions.queryOCSP
+        options.checkCRL = UserOptions.checkCRL
+        options.queryServerInfo = UserOptions.getHTTPHeaders
         options.useOpenSSL = true
         options.ciphers = "HIGH:!aNULL:!MD5:!RC4"
         CertificateKit.setLoggingLevel(.debug)
@@ -174,13 +174,12 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             showInputError()
             return
         }
-        guard let info = self.serverInfo else {
-            showInputError()
-            return
+
+        if let info = self.serverInfo {
+            SERVER_INFO = info
         }
 
         CERTIFICATE_CHAIN = chain
-        SERVER_INFO = info
 
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "Inspect", sender: nil)

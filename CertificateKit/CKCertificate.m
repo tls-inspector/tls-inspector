@@ -26,6 +26,7 @@
 
 #import "CKCertificate.h"
 #import "NSDate+ASN1_TIME.h"
+#import "CKEVOIDList.h"
 
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
@@ -38,7 +39,7 @@
 @interface CKCertificate()
 
 @property (nonatomic) X509 * certificate;
-@property (strong, nonatomic, readwrite) NSString * summary;
+@property (strong, nonatomic, nonnull, readwrite) NSString * summary;
 @property (strong, nonatomic) NSArray<CKAlternateNameObject *> * subjectAltNames;
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
@@ -200,20 +201,6 @@ INSERT_OPENSSL_ERROR_METHOD
 
         if (identifiers.allKeys.count > 0) {
             xcert.keyIdentifiers = identifiers;
-        }
-    }
-
-    {
-        CERTIFICATEPOLICIES * policies = X509_get_ext_d2i(cert, NID_certificate_policies, NULL, NULL);
-        int len = sk_POLICYINFO_num(policies);
-        if (len > 0) {
-            for (int i = 0; i < len; i++) {
-                POLICYINFO * info = sk_POLICYINFO_value(policies, i);
-                ASN1_OBJECT * policyID = info->policyid;
-                char idBuf[128];
-                OBJ_obj2txt(idBuf, sizeof(idBuf), policyID, 0);
-                printf("ID: %s\n", idBuf);
-            }
         }
     }
 

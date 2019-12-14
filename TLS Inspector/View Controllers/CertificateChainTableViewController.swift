@@ -105,7 +105,24 @@ class CertificateChainTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
                 return nil
             }
-            cell.textLabel?.text = certificate.summary
+
+            if certificate.isExpired {
+                cell.textLabel?.text = lang(key: "{commonName} (Expired)", args: [certificate.summary])
+                cell.textLabel?.textColor = UIColor.systemRed
+            } else if certificate.isNotYetValid {
+                cell.textLabel?.text = lang(key: "{commonName} (Not Yet Valid)", args: [certificate.summary])
+                cell.textLabel?.textColor = UIColor.systemRed
+            } else if let ev = certificate.extendedValidationAuthority {
+                let country = certificate.subject.countryCodes.first ?? ""
+                cell.textLabel?.text = lang(key: "{commonName} ({orgName} {countryName})", args: [certificate.summary, ev, country])
+                cell.textLabel?.textColor = UIColor.systemGreen
+            } else if certificate.revoked.isRevoked {
+                cell.textLabel?.text = lang(key: "{commonName} (Revoked)", args: [certificate.summary])
+                cell.textLabel?.textColor = UIColor.systemRed
+            } else {
+                cell.textLabel?.text = certificate.summary
+            }
+
             certificateSection.cells.append(cell)
         }
 
