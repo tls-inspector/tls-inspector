@@ -16,21 +16,8 @@ class TitleValueTableViewCell: UITableViewCell {
         cell.titleLabel.text = title
         cell.titleLabel.textColor = UIColor.gray
         cell.addSubview(cell.titleLabel)
-        let titleLabelViews = [
-            "title": cell.titleLabel,
-        ]
-        NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[title]",
-                                           options: [],
-                                           metrics: nil,
-                                           views: titleLabelViews as [String : Any])
-        )
-        NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[title]",
-                                           options: [],
-                                           metrics: nil,
-                                           views: titleLabelViews as [String : Any])
-        )
+        cell.titleLabel.leadingAnchor.constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor).isActive = true
+        cell.titleLabel.topAnchor.constraint(equalTo: cell.layoutMarginsGuide.topAnchor).isActive = true
 
         cell.valueLabel = UILabel(frame: CGRect(x: 17, y: 36, width: 343, height: 21))
         cell.valueLabel.textAlignment = .left
@@ -42,23 +29,18 @@ class TitleValueTableViewCell: UITableViewCell {
             cell.valueLabel.font = UIFont(name: "Menlo", size: 14.0)
         }
         cell.addSubview(cell.valueLabel)
-        let valueLabelViews = [
-            "value": cell.valueLabel,
-            "title": cell.titleLabel,
-        ]
-        NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[value]-16-|",
-                                           options: [],
-                                           metrics: nil,
-                                           views: valueLabelViews as [String : Any])
-        )
-        NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "V:[title]-8-[value]-8-|",
-                                           options: [],
-                                           metrics: nil,
-                                           views: valueLabelViews as [String : Any])
-        )
+        cell.valueLabel.leadingAnchor.constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor).isActive = true
+        cell.valueLabel.trailingAnchor.constraint(equalTo: cell.layoutMarginsGuide.trailingAnchor).isActive = true
+        cell.valueLabel.bottomAnchor.constraint(equalTo: cell.layoutMarginsGuide.bottomAnchor).isActive = true
 
+        let verticalSpacing = NSLayoutConstraint(item: cell.valueLabel as Any,
+                                                 attribute: .top,
+                                                 relatedBy: .equal,
+                                                 toItem: cell.titleLabel,
+                                                 attribute: .bottom,
+                                                 multiplier: 1.0,
+                                                 constant: 8.0)
+        cell.addConstraint(verticalSpacing)
         cell.titleLabel.setNeedsLayout()
         cell.valueLabel.setNeedsLayout()
         cell.setNeedsLayout()
