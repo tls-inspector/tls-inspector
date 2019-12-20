@@ -2,13 +2,21 @@ import UIKit
 import CertificateKit
 
 class InputTableViewController: UITableViewController, CKGetterDelegate {
-    var isLoading = false
+    enum PendingCellStates {
+        case none
+        case loading
+        case error
+    }
+
     var getter: CKGetter?
+    var pendingCellState: PendingCellStates = .none
     var placeholderDomains: [String] = []
     let tipKeys: [String] = ["tlstip1", "tlstip2", "tlstip3", "tlstip5", "tlstip6", "tlstip7"]
 
     var certificateChain: CKCertificateChain?
     var serverInfo: CKServerInfo?
+    var chainError: Error?
+    var serverError: Error?
 
     var domainInput: UITextField?
     @IBOutlet weak var inspectButton: UIBarButtonItem!
@@ -54,7 +62,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if isLoading {
+            if self.pendingCellState != .none {
                 return 2
             }
             return 1
@@ -71,13 +79,18 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
-                if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
-                    activity.startAnimating()
+                var cell: UITableViewCell!
+                if self.pendingCellState == .loading {
+                    cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
+                    if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
+                        activity.startAnimating()
 
-                    if #available(iOS 13, *) {
-                        activity.style = .medium
+                        if #available(iOS 13, *) {
+                            activity.style = .medium
+                        }
                     }
+                } else if self.pendingCellState == .error {
+                    cell = tableView.dequeueReusableCell(withIdentifier: "Error", for: indexPath)
                 }
                 return cell
             }
@@ -124,8 +137,18 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
 
     func inspectDomain(text: String) {
         self.domainInput?.isEnabled = false
-        self.isLoading = true
-        self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        var insertRow = false
+        if self.pendingCellState == .none {
+            insertRow = true
+        }
+        self.pendingCellState = .loading
+
+        if insertRow {
+            self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        } else {
+            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        }
+
         self.inspectButton.isEnabled = false
 
         var domainText = text
@@ -160,7 +183,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         UIHelper.presentAlert(viewController: self,
                               title: "Unable to Inspect Domain",
                               body: "The URL or IP Address inputted is not valid") {
-            self.isLoading = false
+            self.pendingCellState = .none
             self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
@@ -183,7 +206,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
 
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "Inspect", sender: nil)
-            self.isLoading = false
+            self.pendingCellState = .none
             self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
@@ -203,18 +226,28 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
     }
 
     func getter(_ getter: CKGetter, gotServerInfo serverInfo: CKServerInfo) {
-        print("Got server info")
         self.serverInfo = serverInfo
+        print("Got server info")
     }
 
     func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {
-        UIHelper.presentError(viewController: self, error: error, dismissed: nil)
+        self.pendingCellState = .error
+        self.chainError = error
         print("Error getting certificate chain")
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            self.domainInput?.isEnabled = true
+        }
     }
 
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
-        UIHelper.presentError(viewController: self, error: error, dismissed: nil)
+        self.pendingCellState = .error
+        self.serverError = error
         print("Error getting server info")
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            self.domainInput?.isEnabled = true
+        }
     }
 
     override func tableView(_ tableView: UITableView,
@@ -248,5 +281,13 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
 
         let query = RecentLookups.GetRecentLookups()[indexPath.row]
         self.inspectDomain(text: query)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Error" {
+            let destination = segue.destination as? GetterErrorTableViewController
+            destination?.chainError = self.chainError
+            destination?.serverError = self.serverError
+        }
     }
 }
