@@ -70,10 +70,7 @@ class CertificateChainTableViewController: UITableViewController {
         self.trustIconLabel.textColor = UIColor.white
         self.trustIconLabel.font = trustIcon.font(size: self.trustIconLabel.font.pointSize)
         self.trustIconLabel.text = trustIcon.string()
-
-        if #available(iOS 13, *) {} else {
-            self.trustDetailsButton.tintColor = UIColor.white
-        }
+        self.trustDetailsButton.tintColor = UIColor.white
     }
 
     func buildTable() {
