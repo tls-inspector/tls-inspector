@@ -51,38 +51,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="XHj-p2-0zN">
-                            <rect key="frame" x="0.0" y="299.5" width="414" height="140"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="lNR-RR-Xvi">
+                            <rect key="frame" x="0.0" y="299.5" width="414" height="81"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yO-TM-OkA">
-                                    <rect key="frame" x="16" y="8" width="17" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQw-S7-WH4">
+                                    <rect key="frame" x="19" y="10" width="17" height="17"/>
                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="17"/>
                                     <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did You Know?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkg-h0-z7z">
-                                    <rect key="frame" x="41" y="6" width="121" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did You Know:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIN-oX-rNz">
+                                    <rect key="frame" x="40" y="8" width="115" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="Did You Know:"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGU-I4-mit">
-                                    <rect key="frame" x="16" y="35" width="382" height="97"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrK-ul-rTW">
+                                    <rect key="frame" x="19" y="37" width="379" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="nGU-I4-mit" firstAttribute="top" secondItem="wkg-h0-z7z" secondAttribute="bottom" constant="8" id="5nn-vT-12d"/>
-                                <constraint firstItem="4yO-TM-OkA" firstAttribute="top" secondItem="XHj-p2-0zN" secondAttribute="topMargin" id="AeM-iA-nEt"/>
-                                <constraint firstItem="4yO-TM-OkA" firstAttribute="leading" secondItem="XHj-p2-0zN" secondAttribute="leadingMargin" constant="8" id="ZmM-Ef-yUm"/>
-                                <constraint firstItem="wkg-h0-z7z" firstAttribute="top" secondItem="XHj-p2-0zN" secondAttribute="top" constant="6" id="g6l-Hz-kjo"/>
-                                <constraint firstItem="nGU-I4-mit" firstAttribute="leading" secondItem="XHj-p2-0zN" secondAttribute="leadingMargin" constant="8" id="i8R-lp-7Ur"/>
-                                <constraint firstItem="wkg-h0-z7z" firstAttribute="leading" secondItem="4yO-TM-OkA" secondAttribute="trailing" constant="8" id="wK8-Yk-2pr"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="nGU-I4-mit" secondAttribute="trailing" constant="8" id="wyi-8w-cdA"/>
-                                <constraint firstItem="nGU-I4-mit" firstAttribute="bottom" secondItem="XHj-p2-0zN" secondAttribute="bottomMargin" id="ynz-th-5HL"/>
+                                <constraint firstItem="JrK-ul-rTW" firstAttribute="top" secondItem="FIN-oX-rNz" secondAttribute="bottom" constant="8" id="3bM-jr-OaV"/>
+                                <constraint firstItem="JrK-ul-rTW" firstAttribute="leading" secondItem="lNR-RR-Xvi" secondAttribute="leadingMargin" constant="11" id="Xvu-Xg-7Vt"/>
+                                <constraint firstAttribute="trailing" secondItem="JrK-ul-rTW" secondAttribute="trailing" constant="16" id="YpN-aa-st5"/>
+                                <constraint firstItem="uQw-S7-WH4" firstAttribute="leading" secondItem="lNR-RR-Xvi" secondAttribute="leadingMargin" constant="11" id="izL-BO-BjA"/>
+                                <constraint firstItem="FIN-oX-rNz" firstAttribute="top" secondItem="lNR-RR-Xvi" secondAttribute="topMargin" id="kNM-xy-JNw"/>
+                                <constraint firstItem="FIN-oX-rNz" firstAttribute="leading" secondItem="uQw-S7-WH4" secondAttribute="trailing" constant="4" id="naY-mk-ViS"/>
+                                <constraint firstItem="uQw-S7-WH4" firstAttribute="top" secondItem="lNR-RR-Xvi" secondAttribute="topMargin" constant="2" id="rLq-SF-vuA"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -202,8 +204,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="inspectButton" destination="0qx-qm-eb4" id="nZ9-HU-m9A"/>
-                        <outlet property="tipTextView" destination="nGU-I4-mit" id="EjO-Sb-KEk"/>
-                        <outlet property="tipView" destination="XHj-p2-0zN" id="iT1-kk-Ta0"/>
+                        <outlet property="tipTextView" destination="JrK-ul-rTW" id="wIW-Ty-acQ"/>
+                        <outlet property="tipView" destination="lNR-RR-Xvi" id="AAG-zr-4Sp"/>
                         <segue destination="pHA-f4-JWe" kind="presentation" identifier="Inspect" modalPresentationStyle="fullScreen" id="Cjn-ou-xrS"/>
                     </connections>
                 </tableViewController>
