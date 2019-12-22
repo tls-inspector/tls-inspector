@@ -94,7 +94,7 @@
 	<string>Change Icon</string>
 	<key>Change Theme</key>
 	<string>Change Theme</string>
-	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
+	<key>crypto_engine_footer</key>
 	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
 	<key>Ciphers</key>
 	<string>Ciphers</string>
@@ -898,6 +898,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Time Stamping</string>
 	<key>proxy_warning</key>
 	<string>An HTTP Proxy was detected. TLS Inspector is not compatible with HTTP Proxies and may interfere with the app.</string>
+	<key>Warning</key>
+	<string>Warning</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>sanType::DNS</key>
@@ -964,6 +966,8 @@ Exercise caution if continuing to this website.</string>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
 	<key>verbose_logging_footer</key>
 	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
+	<key>advanced_settings_nag</key>
+	<string>Improper settings can prevent TLS Inspector from working. These settings should only be changed for advanced troubleshooting.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>

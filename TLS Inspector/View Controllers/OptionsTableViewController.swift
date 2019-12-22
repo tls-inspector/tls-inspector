@@ -3,6 +3,7 @@ import UIKit
 class OptionsTableViewController: UITableViewController {
 
     var sections: [TableViewSection] = []
+    let advancedOptionsCellTag = 101
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class OptionsTableViewController: UITableViewController {
         if let cell = newIconCell(labelText: lang(key: "Advanced Options"),
                                   icon: .FACogSolid,
                                   iconColor: UIColor.systemBlue) {
+            cell.tag = advancedOptionsCellTag
             generalSection.cells.append(cell)
         }
         self.sections.append(generalSection)
@@ -105,6 +107,13 @@ class OptionsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         self.sections[section].footer
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellTag = self.sections[indexPath.section].cells[indexPath.row].tag
+        if cellTag == advancedOptionsCellTag {
+            self.performSegue(withIdentifier: "Advanced", sender: nil)
+        }
     }
 
     func newSwitchCell(labelText: String, initialValue: Bool, changed: Selector) -> UITableViewCell? {

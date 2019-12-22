@@ -15,6 +15,7 @@ private let KEY_FINGEPRINT_SHA512 = "fingerprint_sha512"
 private let KEY_USE_OPENSSL = "use_openssl"
 private let KEY_PREFERRED_CIPHERS = "preferred_ciphers"
 private let KEY_CONTACT_NAG_DISMISSED = "contact_nag_dismissed"
+private let KEY_ADVANCED_SETTINGS_NAG_DISMISSED = "advanced_settings_nag_dismissed"
 // swiftlint:enable identifier_name
 
 class UserOptions {
@@ -33,6 +34,7 @@ class UserOptions {
         KEY_USE_OPENSSL: false,
         KEY_PREFERRED_CIPHERS: "HIGH:!aNULL:!MD5:!RC4",
         KEY_CONTACT_NAG_DISMISSED: false,
+        KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
     ]
     private static var _verboseLogging = false
     private static var _inspectionsWithVerboseLogging = 0
@@ -156,6 +158,14 @@ class UserOptions {
         }
         set {
             userDefaults?.set(newValue, forKey: KEY_CONTACT_NAG_DISMISSED)
+        }
+    }
+    static var advancedSettingsNagDismissed: Bool {
+        get {
+            return userDefaults?.bool(forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED) ?? false
+        }
+        set {
+            userDefaults?.set(newValue, forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED)
         }
     }
 

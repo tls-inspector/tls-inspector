@@ -18,7 +18,7 @@ class UIHelper {
             dismissed?()
         }
         alertController.addAction(dismissButton)
-        DispatchQueue.main.async {
+        RunOnMain {
             self.viewController.present(alertController, animated: true, completion: nil)
         }
     }
@@ -57,7 +57,7 @@ class UIHelper {
             controller.addAction(action)
         }
         target?.attach(to: controller.popoverPresentationController)
-        DispatchQueue.main.async {
+        RunOnMain {
             self.viewController.present(controller, animated: true, completion: nil)
         }
     }
