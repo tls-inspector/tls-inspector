@@ -10,6 +10,89 @@ class CertificateTableViewController: UITableViewController {
         self.buildTable()
     }
 
+    @IBAction func actionButton(_ sender: UIBarButtonItem) {
+        UIHelper.presentActionSheet(viewController: self,
+                                    target: ActionTipTarget(barButtonItem: sender),
+                                    title: self.certificate.summary,
+                                    subtitle: nil,
+                                    items: [
+                                        lang(key: "Share Certificate"),
+                                        lang(key: "Add Certificate Expiry Reminder"),
+                                    ])
+        { (index) in
+            if index == 0 {
+                self.shareCertificate(sender)
+            } else if index == 1 {
+                self.addCertificateReminder(sender)
+            }
+        }
+    }
+
+    func addCertificateReminder(_ sender: UIBarButtonItem) {
+        guard let chain = CERTIFICATE_CHAIN else {
+            return
+        }
+
+        UIHelper.presentActionSheet(viewController: self,
+                                    target: ActionTipTarget(barButtonItem: sender),
+                                    title: lang(key: "Notification Date"),
+                                    subtitle: lang(key: "How soon before the certificate expires should we notify you?"),
+                                    items: [
+                                        lang(key: "2 weeks"),
+                                        lang(key: "1 month"),
+                                        lang(key: "3 months"),
+                                        lang(key: "6 months"),
+                                    ])
+        { (index) in
+            var days = 0
+            if index == 0 {
+                days = 2 * 7
+            } else if index == 1 {
+                days = 30
+            } else if index == 2 {
+                days = 30 * 3
+            } else if index == 3 {
+                days = 30 * 6
+            }
+            CertificateReminder.addReminder(certificate: self.certificate,
+                                            domain: chain.domain,
+                                            daysBeforeExpire: days)
+            { (rerror) in
+                if let error = rerror {
+                    UIHelper.presentError(viewController: self, error: error, dismissed: nil)
+                } else {
+                    UIHelper.presentAlert(viewController: self,
+                                          title: lang(key: "Reminder Added"),
+                                          body: lang(key: "Use the Reminders app to customize the reminder"),
+                                          dismissed: nil)
+                }
+            }
+        }
+    }
+
+    func shareCertificate(_ sender: UIBarButtonItem) {
+        guard let pem = self.certificate.publicKeyAsPEM else {
+            UIHelper.presentAlert(viewController: self,
+                                  title: lang(key: "Unable to export certificate"),
+                                  body: lang(key: "We were unable to export the certificate in PEM format."),
+                                  dismissed: nil)
+            return
+        }
+
+        let fileName = (self.certificate.serialNumber ?? "certificate") + ".pem"
+        let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        do {
+            try pem.write(to: fileURL)
+        } catch {
+            UIHelper.presentError(viewController: self, error: error, dismissed: nil)
+            return
+        }
+        let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+        ActionTipTarget(barButtonItem: sender).attach(to: activityController.popoverPresentationController)
+        self.present(activityController, animated: true, completion: nil)
+    }
+
+    // swiftlint:disable cyclomatic_complexity
     func buildTable() {
         guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else {
             return
@@ -63,6 +146,7 @@ class CertificateTableViewController: UITableViewController {
 
         self.tableView.reloadData()
     }
+    // swiftlint:enable cyclomatic_complexity
 
     func makeNameSection(name: CKNameObject) -> TableViewSection? {
         let section = TableViewSection()

@@ -324,6 +324,11 @@
                                 <action selector="closeButton:" destination="aeL-we-gfT" id="TH6-NS-Irg"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="oIL-K0-XyF">
+                            <connections>
+                                <action selector="actionButton:" destination="aeL-we-gfT" id="DMm-mp-yNP"/>
+                            </connections>
+                        </barButtonItem>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="Chain"/>
                         </userDefinedRuntimeAttributes>
@@ -356,7 +361,7 @@
             </objects>
             <point key="canvasLocation" x="-193" y="141"/>
         </scene>
-        <!--Certificate Table View Controller-->
+        <!--Title-->
         <scene sceneID="RTv-JE-Svk">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="Xlh-kz-i8G" customClass="CertificateTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
@@ -440,7 +445,15 @@
                             <outlet property="delegate" destination="Xlh-kz-i8G" id="VVx-7c-b1A"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="CTs-hq-tI3"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="yz3-tg-Rfn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Pp5-QF-9BG">
+                            <connections>
+                                <action selector="actionButton:" destination="Xlh-kz-i8G" id="vzw-1y-Ltg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="iIF-qS-Rbw" kind="show" identifier="SANSUNDERTALE" id="XUp-ok-XTn"/>
                     </connections>

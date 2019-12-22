@@ -1,5 +1,6 @@
 import UIKit
 import CertificateKit
+import SafariServices
 
 class CertificateChainTableViewController: UITableViewController {
 
@@ -30,6 +31,38 @@ class CertificateChainTableViewController: UITableViewController {
 
     @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func actionButton(_ sender: UIBarButtonItem) {
+        guard let chain = self.certificateChain else {
+            return
+        }
+
+        UIHelper.presentActionSheet(viewController: self,
+                                    target: ActionTipTarget(barButtonItem: sender),
+                                    title: self.certificateChain?.domain,
+                                    subtitle: nil,
+                                    items: [
+                                        lang(key: "View on SSL Labs"),
+                                        lang(key: "Search on Shodan"),
+                                        lang(key: "Search on crt.sh")
+                                    ])
+        { (index) in
+            if index == 0 {
+                self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain)
+            } else if index == 1 {
+                self.openURL("https://www.shodan.io/host/" + chain.remoteAddress)
+            } else if index == 2 {
+                self.openURL("https://crt.sh/?q=" + chain.domain)
+            }
+        }
+    }
+
+    func openURL(_ urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
     func buildTrustHeader() {
@@ -111,7 +144,8 @@ class CertificateChainTableViewController: UITableViewController {
                 cell.textLabel?.textColor = UIColor.systemRed
             } else if let ev = certificate.extendedValidationAuthority {
                 let country = certificate.subject.countryCodes.first ?? ""
-                cell.textLabel?.text = lang(key: "{commonName} ({orgName} {countryName})", args: [certificate.summary, ev, country])
+                cell.textLabel?.text = lang(key: "{commonName} ({orgName} {countryName})",
+                                            args: [certificate.summary, ev, country])
                 cell.textLabel?.textColor = UIColor.systemGreen
             } else if certificate.revoked.isRevoked {
                 cell.textLabel?.text = lang(key: "{commonName} (Revoked)", args: [certificate.summary])
