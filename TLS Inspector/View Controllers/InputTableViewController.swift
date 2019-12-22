@@ -28,6 +28,14 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             self.placeholderDomains = domains
         }
 
+        if !UserOptions.firstRunCompleted {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Notice") {
+                viewController.modalPresentationStyle = .fullScreen
+                self.present(viewController, animated: true, completion: nil)
+            }
+            UserOptions.firstRunCompleted = true
+        }
+
         super.viewDidLoad()
     }
 

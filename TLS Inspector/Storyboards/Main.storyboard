@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -34,6 +35,108 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDK-Z2-fcF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1764" y="-590"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Q35-ne-vMg">
+            <objects>
+                <navigationController storyboardIdentifier="Notice" id="b6p-qK-1pv" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="nm5-jE-3xv">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ov7-IF-mkF" kind="relationship" relationship="rootViewController" id="Ioa-U0-8c3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PrL-on-lfZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1065" y="-605"/>
+        </scene>
+        <!--Notice-->
+        <scene sceneID="rgt-hi-4Kj">
+            <objects>
+                <viewController id="ov7-IF-mkF" customClass="NoticeViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C9x-Rb-otS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ca-7L-lQX">
+                                <rect key="frame" x="20" y="160" width="374" height="702"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onL-g6-TjA">
+                                        <rect key="frame" x="0.0" y="8" width="20" height="20"/>
+                                        <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="20"/>
+                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxA-AZ-Jfg">
+                                        <rect key="frame" x="28" y="0.0" width="346" height="652"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <attributes>
+                                                    <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <font key="NSFont" metaFont="system" size="17"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3P-e5-64m">
+                                        <rect key="frame" x="8" y="660" width="358" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Understood"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="defaultTitleKey" value="Understood"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="dismissButtonPressed:" destination="ov7-IF-mkF" eventType="touchUpInside" id="bgw-1W-n2Z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fxA-AZ-Jfg" firstAttribute="leading" secondItem="onL-g6-TjA" secondAttribute="trailing" constant="8" id="0lZ-cl-wcl"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="D0y-zP-xEM"/>
+                                    <constraint firstAttribute="trailing" secondItem="A3P-e5-64m" secondAttribute="trailing" constant="8" id="HVA-Iv-sIH"/>
+                                    <constraint firstItem="onL-g6-TjA" firstAttribute="top" secondItem="8Ca-7L-lQX" secondAttribute="top" constant="8" id="V8Z-k3-6Ij"/>
+                                    <constraint firstItem="fxA-AZ-Jfg" firstAttribute="top" secondItem="8Ca-7L-lQX" secondAttribute="top" id="XK7-XV-XNF"/>
+                                    <constraint firstItem="A3P-e5-64m" firstAttribute="top" secondItem="fxA-AZ-Jfg" secondAttribute="bottom" constant="8" id="ZB8-D7-b8B"/>
+                                    <constraint firstItem="A3P-e5-64m" firstAttribute="leading" secondItem="8Ca-7L-lQX" secondAttribute="leading" constant="8" id="chD-3L-FQx"/>
+                                    <constraint firstAttribute="trailing" secondItem="fxA-AZ-Jfg" secondAttribute="trailing" id="qN3-u3-dF1"/>
+                                    <constraint firstAttribute="bottom" secondItem="A3P-e5-64m" secondAttribute="bottom" constant="8" id="tpq-ee-7Su"/>
+                                    <constraint firstItem="onL-g6-TjA" firstAttribute="leading" secondItem="8Ca-7L-lQX" secondAttribute="leading" id="whv-eJ-0ZK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="8Ca-7L-lQX" firstAttribute="centerX" secondItem="xgG-m2-Mct" secondAttribute="centerX" id="FzV-Xa-TKm"/>
+                            <constraint firstItem="xgG-m2-Mct" firstAttribute="trailing" secondItem="8Ca-7L-lQX" secondAttribute="trailing" priority="999" constant="20" id="HqP-JG-adg"/>
+                            <constraint firstItem="8Ca-7L-lQX" firstAttribute="bottom" secondItem="xgG-m2-Mct" secondAttribute="bottom" id="LnE-C0-Rxh"/>
+                            <constraint firstItem="8Ca-7L-lQX" firstAttribute="leading" secondItem="xgG-m2-Mct" secondAttribute="leading" priority="999" constant="20" id="MRF-BG-hf2"/>
+                            <constraint firstItem="8Ca-7L-lQX" firstAttribute="top" secondItem="xgG-m2-Mct" secondAttribute="top" constant="20" id="hFs-Vl-Ls3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xgG-m2-Mct"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notice" largeTitleDisplayMode="always" id="N8s-I0-6GX">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="Notice"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dismissButton" destination="A3P-e5-64m" id="3U8-1g-1TE"/>
+                        <outlet property="textView" destination="fxA-AZ-Jfg" id="TGz-4A-5Aj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n9N-Ge-cQj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-194.20289855072465" y="-605.35714285714278"/>
         </scene>
         <!--More-->
         <scene sceneID="P0D-pP-Prg">
