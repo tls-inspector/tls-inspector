@@ -4,6 +4,9 @@ disabled_rules:
     - colon
     - type_body_length
     - function_body_length
+    - opening_brace
+    - line_length
+    - file_length
 excluded:
     - 'AppDelegate.swift'
     - 'SceneDelegate.swift'

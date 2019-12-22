@@ -1,37 +1,46 @@
 import UIKit
 
-class UIHelper: NSObject {
+class UIHelper {
+    private var viewController: UIViewController!
+
+    init(_ viewController: UIViewController) {
+        self.viewController = viewController
+    }
+
     /// Present a generic alert in the given view controller. Alert has a single "Dismiss" button.
     /// - Parameters:
-    ///   - viewController: The view controller to present the alert in
     ///   - title: The title of the alert
     ///   - body: The body of the alert
     ///   - dismissed: Optional closure to call when the alert is dismissed
-    static func presentAlert(viewController: UIViewController, title: String, body: String, dismissed: (() -> Void)?) {
+    public func presentAlert(title: String, body: String, dismissed: (() -> Void)?) {
         let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
         let dismissButton = UIAlertAction(title: "Dismiss", style: .default) { (_) in
             dismissed?()
         }
         alertController.addAction(dismissButton)
         DispatchQueue.main.async {
-            viewController.present(alertController, animated: true, completion: nil)
+            self.viewController.present(alertController, animated: true, completion: nil)
         }
     }
 
     /// Present an error alert in the given view controller. Alert has a single "Dismiss" button.
     /// - Parameters:
-    ///   - viewController: The view controller to present the alert in
     ///   - error: The error to display
     ///   - dismissed: Optional closure to call when the alert is dismissed
-    static func presentError(viewController: UIViewController, error: Error, dismissed: (() -> Void)?) {
-        UIHelper.presentAlert(viewController: viewController,
-                              title: "Error",
-                              body: error.localizedDescription,
-                              dismissed: dismissed)
+    public func presentError(error: Error, dismissed: (() -> Void)?) {
+        self.presentAlert(title: "Error",
+                          body: error.localizedDescription,
+                          dismissed: dismissed)
     }
 
-    static func presentActionSheet(viewController: UIViewController,
-                                   target: ActionTipTarget?,
+    /// Present an action sheet in the given view controller.
+    /// - Parameters:
+    ///   - target: The target of the action sheet
+    ///   - title: Tht optional title of the action sheet
+    ///   - subtitle: The optional subtitle of the action sheet
+    ///   - items: The titles for each option
+    ///   - dismissed: Optional closure to call when an option is selected. Cancel is -1.
+    public func presentActionSheet(target: ActionTipTarget?,
                                    title: String?,
                                    subtitle: String?,
                                    items: [String],
@@ -48,6 +57,8 @@ class UIHelper: NSObject {
             controller.addAction(action)
         }
         target?.attach(to: controller.popoverPresentationController)
-        viewController.present(controller, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.viewController.present(controller, animated: true, completion: nil)
+        }
     }
 }

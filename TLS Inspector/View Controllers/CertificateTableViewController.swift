@@ -11,14 +11,13 @@ class CertificateTableViewController: UITableViewController {
     }
 
     @IBAction func actionButton(_ sender: UIBarButtonItem) {
-        UIHelper.presentActionSheet(viewController: self,
-                                    target: ActionTipTarget(barButtonItem: sender),
-                                    title: self.certificate.summary,
-                                    subtitle: nil,
-                                    items: [
-                                        lang(key: "Share Certificate"),
-                                        lang(key: "Add Certificate Expiry Reminder"),
-                                    ])
+        UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
+                                          title: self.certificate.summary,
+                                          subtitle: nil,
+                                          items: [
+                                            lang(key: "Share Certificate"),
+                                            lang(key: "Add Certificate Expiry Reminder"),
+                                        ])
         { (index) in
             if index == 0 {
                 self.shareCertificate(sender)
@@ -33,16 +32,15 @@ class CertificateTableViewController: UITableViewController {
             return
         }
 
-        UIHelper.presentActionSheet(viewController: self,
-                                    target: ActionTipTarget(barButtonItem: sender),
-                                    title: lang(key: "Notification Date"),
-                                    subtitle: lang(key: "How soon before the certificate expires should we notify you?"),
-                                    items: [
-                                        lang(key: "2 weeks"),
-                                        lang(key: "1 month"),
-                                        lang(key: "3 months"),
-                                        lang(key: "6 months"),
-                                    ])
+        UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
+                                          title: lang(key: "Notification Date"),
+                                          subtitle: lang(key: "How soon before the certificate expires should we notify you?"),
+                                          items: [
+                                            lang(key: "2 weeks"),
+                                            lang(key: "1 month"),
+                                            lang(key: "3 months"),
+                                            lang(key: "6 months"),
+                                        ])
         { (index) in
             var days = 0
             if index == 0 {
@@ -59,12 +57,11 @@ class CertificateTableViewController: UITableViewController {
                                             daysBeforeExpire: days)
             { (rerror) in
                 if let error = rerror {
-                    UIHelper.presentError(viewController: self, error: error, dismissed: nil)
+                    UIHelper(self).presentError(error: error, dismissed: nil)
                 } else {
-                    UIHelper.presentAlert(viewController: self,
-                                          title: lang(key: "Reminder Added"),
-                                          body: lang(key: "Use the Reminders app to customize the reminder"),
-                                          dismissed: nil)
+                    UIHelper(self).presentAlert(title: lang(key: "Reminder Added"),
+                                                body: lang(key: "Use the Reminders app to customize the reminder"),
+                                                dismissed: nil)
                 }
             }
         }
@@ -72,10 +69,9 @@ class CertificateTableViewController: UITableViewController {
 
     func shareCertificate(_ sender: UIBarButtonItem) {
         guard let pem = self.certificate.publicKeyAsPEM else {
-            UIHelper.presentAlert(viewController: self,
-                                  title: lang(key: "Unable to export certificate"),
-                                  body: lang(key: "We were unable to export the certificate in PEM format."),
-                                  dismissed: nil)
+            UIHelper(self).presentAlert(title: lang(key: "Unable to export certificate"),
+                                        body: lang(key: "We were unable to export the certificate in PEM format."),
+                                        dismissed: nil)
             return
         }
 
@@ -84,7 +80,7 @@ class CertificateTableViewController: UITableViewController {
         do {
             try pem.write(to: fileURL)
         } catch {
-            UIHelper.presentError(viewController: self, error: error, dismissed: nil)
+            UIHelper(self).presentError(error: error, dismissed: nil)
             return
         }
         let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)

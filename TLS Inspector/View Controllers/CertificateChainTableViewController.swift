@@ -38,15 +38,14 @@ class CertificateChainTableViewController: UITableViewController {
             return
         }
 
-        UIHelper.presentActionSheet(viewController: self,
-                                    target: ActionTipTarget(barButtonItem: sender),
-                                    title: self.certificateChain?.domain,
-                                    subtitle: nil,
-                                    items: [
-                                        lang(key: "View on SSL Labs"),
-                                        lang(key: "Search on Shodan"),
-                                        lang(key: "Search on crt.sh")
-                                    ])
+        UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
+                                          title: self.certificateChain?.domain,
+                                          subtitle: nil,
+                                          items: [
+                                            lang(key: "View on SSL Labs"),
+                                            lang(key: "Search on Shodan"),
+                                            lang(key: "Search on crt.sh")
+                                        ])
         { (index) in
             if index == 0 {
                 self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain)

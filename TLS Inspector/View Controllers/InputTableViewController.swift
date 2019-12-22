@@ -180,9 +180,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
     }
 
     func showInputError() {
-        UIHelper.presentAlert(viewController: self,
-                              title: "Unable to Inspect Domain",
-                              body: "The URL or IP Address inputted is not valid") {
+        UIHelper(self).presentAlert(title: "Unable to Inspect Domain",
+                                    body: "The URL or IP Address inputted is not valid") {
             self.pendingCellState = .none
             self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
