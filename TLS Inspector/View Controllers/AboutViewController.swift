@@ -2,6 +2,10 @@ import UIKit
 import CertificateKit
 
 class AboutTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    let projectGithubURL = "https://tlsinspector.com/github.html"
+    let projectURL = "https://tlsinspector.com/"
+    let projectContributeURL = "https://tlsinspector.com/contribute.html"
+    let testflightURL = "https://tlsinspector.com/beta.html"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,5 +65,28 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         }
 
         return nil
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+
+        if indexPath.section == 0 && indexPath.row == 0 {
+            let blub = lang(key: "Trust & Safety On-The-Go with TLS Inspector: {url}", args: [projectURL])
+            let activityController = UIActivityViewController(activityItems: [blub], applicationActivities: nil)
+            ActionTipTarget(view: cell).attach(to: activityController.popoverPresentationController)
+            self.present(activityController, animated: true, completion: nil)
+        } else if indexPath.section == 0 && indexPath.row == 1 {
+            AppLinks().showAppStore(self, dismissed: nil)
+        } else if indexPath.section == 0 && indexPath.row == 2 {
+            ContactTableViewController.show(self) { (support) in
+                AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: false, dismissed: nil)
+            }
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            OpenURLInSafari(projectContributeURL)
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            OpenURLInSafari(testflightURL)
+        }
     }
 }

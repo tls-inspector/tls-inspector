@@ -4,6 +4,7 @@ class OptionsTableViewController: UITableViewController {
 
     var sections: [TableViewSection] = []
     let advancedOptionsCellTag = 101
+    let submitLogsCellTag = 100
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,7 @@ class OptionsTableViewController: UITableViewController {
         if let cell = newIconCell(labelText: lang(key: "Submit Logs"),
                                   icon: .FABugSolid,
                                   iconColor: UIColor.systemRed) {
+            cell.tag = submitLogsCellTag
             loggingSection.cells.append(cell)
         }
         self.sections.append(loggingSection)
@@ -113,6 +115,16 @@ class OptionsTableViewController: UITableViewController {
         let cellTag = self.sections[indexPath.section].cells[indexPath.row].tag
         if cellTag == advancedOptionsCellTag {
             self.performSegue(withIdentifier: "Advanced", sender: nil)
+        } else if cellTag == submitLogsCellTag {
+            if UserOptions.verboseLogging && UserOptions.inspectionsWithVerboseLogging == 0 {
+                UIHelper(self).presentAlert(title: lang(key: "Debug Logging Enabled"),
+                                            body: lang(key: "You must inspect at least one site with debug logging enabled before you can submit logs."),
+                                            dismissed: nil)
+                return
+            }
+            ContactTableViewController.show(self) { (support) in
+                AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: true, dismissed: nil)
+            }
         }
     }
 

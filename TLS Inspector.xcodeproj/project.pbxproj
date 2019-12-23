@@ -18,6 +18,10 @@
 		3C36B3B82041310E005C66E8 /* CKGetterOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B62041310E005C66E8 /* CKGetterOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C36B3B92041310E005C66E8 /* CKGetterOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B72041310E005C66E8 /* CKGetterOptions.m */; };
 		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
+		3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */; };
+		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
+		3C57F4A123B0243300DCCB54 /* UIDevicePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */; };
+		3C57F4A323B02B0700DCCB54 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F4A223B02B0700DCCB54 /* AppLinks.swift */; };
 		3C5F4654239A169400B3A727 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */; };
 		3C5F4656239D77CA00B3A727 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4655239D77CA00B3A727 /* SplitViewController.swift */; };
 		3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */; };
@@ -151,6 +155,10 @@
 		3C36B3B72041310E005C66E8 /* CKGetterOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKGetterOptions.m; sourceTree = "<group>"; };
 		3C43EF8A1D7A987F00AE65E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
+		3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
+		3C57F49E23B0220300DCCB54 /* SupportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportType.swift; sourceTree = "<group>"; };
+		3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevicePlatform.swift; sourceTree = "<group>"; };
+		3C57F4A223B02B0700DCCB54 /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
 		3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		3C5F4655239D77CA00B3A727 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeadersTableViewController.swift; sourceTree = "<group>"; };
@@ -366,6 +374,7 @@
 		3C7269382394BC0F002A0B19 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */,
 				3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */,
 				3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */,
 				3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */,
@@ -432,6 +441,9 @@
 				3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */,
 				3CCD028A239DC64C009364D0 /* RecentLookups.swift */,
 				3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */,
+				3C57F49E23B0220300DCCB54 /* SupportType.swift */,
+				3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */,
+				3C57F4A223B02B0700DCCB54 /* AppLinks.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -756,13 +768,17 @@
 			files = (
 				3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */,
 				3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */,
+				3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */,
 				3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */,
+				3C57F4A323B02B0700DCCB54 /* AppLinks.swift in Sources */,
+				3C57F4A123B0243300DCCB54 /* UIDevicePlatform.swift in Sources */,
 				3C72693A2394BC1D002A0B19 /* InputTableViewController.swift in Sources */,
 				3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */,
 				3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */,
 				3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */,
 				3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */,
 				3C72692723949ABD002A0B19 /* AppDelegate.swift in Sources */,
+				3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */,
 				3C7269642394C2E1002A0B19 /* UIHelper.swift in Sources */,
 				3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */,
 				3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */,

@@ -305,7 +305,7 @@ class CertificateTableViewController: UITableViewController {
         guard let algorithmCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
             return nil
         }
-        algorithmCell.textLabel?.text = lang(key: "Algoritm")
+        algorithmCell.textLabel?.text = lang(key: "Algorithm")
         algorithmCell.detailTextLabel?.text = lang(key: "KeyAlgorithm::" + publicKey.algroithm)
         pubKeySection.cells.append(algorithmCell)
 

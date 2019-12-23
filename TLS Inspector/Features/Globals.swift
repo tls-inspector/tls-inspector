@@ -16,3 +16,11 @@ func NewError(description: String) -> Error {
     return NSError(domain: "io.ecn.tlsinspector", code: 500,
                    userInfo: [NSLocalizedDescriptionKey: description]) as Error
 }
+
+func OpenURLInSafari(_ urlString: String) {
+    guard let url = URL(string: urlString) else {
+        return
+    }
+
+    UIApplication.shared.openURL(url)
+}

@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Key Identifier</key>
-	<string>Key Identifier</string>
-	<key>Authority</key>
-	<string>Authority</string>
-	<key>Metadata</key>
-	<string>Metadata</string>
-	<key>No</key>
-	<string>No</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>About</key>
@@ -20,26 +12,20 @@
 	<string>Add Certificate Expiry Reminder</string>
 	<key>Advanced Options</key>
 	<string>Advanced Options</string>
-	<key>Advanced Settings</key>
-	<string>Advanced Settings</string>
 	<key>Algorithm</key>
 	<string>Algorithm</string>
 	<key>Algorithms</key>
 	<string>Algorithms</string>
-	<key>All feedback is appreciated!</key>
-	<string>All feedback is appreciated!</string>
 	<key>Alternate Names</key>
 	<string>Alternate Names</string>
-	<key>An error occurred</key>
-	<string>An error occurred</string>
-	<key>Appearance</key>
-	<string>Appearance</string>
 	<key>Apple Support</key>
 	<string>Apple Support</string>
 	<key>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</key>
 	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
-	<key>Both values matched.</key>
-	<string>Both values matched.</string>
+	<key>Authority</key>
+	<string>Authority</string>
+	<key>Basic</key>
+	<string>Basic</string>
 	<key>Build</key>
 	<string>Build</string>
 	<key>Cancel</key>
@@ -94,8 +80,6 @@
 	<string>Change Icon</string>
 	<key>Change Theme</key>
 	<string>Change Theme</string>
-	<key>crypto_engine_footer</key>
-	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
 	<key>Ciphers</key>
 	<string>Ciphers</string>
 	<key>Connection Information</key>
@@ -106,6 +90,8 @@
 	<string>Contact Support</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
+	<key>Contacting support requires that at least one email account be configured on this device.</key>
+	<string>Contacting support requires that at least one email account be configured on this device.</string>
 	<key>Contribute to TLS Inspector</key>
 	<string>Contribute to TLS Inspector</string>
 	<key>Copy</key>
@@ -600,6 +586,10 @@
 	<string>Did You Know:</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
+	<key>Do not contact support for issues with your iOS Device or to report unsafe websites.</key>
+	<string>Do not contact support for issues with your iOS Device or to report unsafe websites.</string>
+	<key>Domain Name or IP Address</key>
+	<string>Domain Name or IP Address</string>
 	<key>Download &amp; Check CRL</key>
 	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
@@ -612,8 +602,12 @@
 	<string>Enter the value to verify</string>
 	<key>Errors</key>
 	<string>Errors</string>
-	<key>Domain Name or IP Address</key>
-	<string>Domain Name or IP Address</string>
+	<key>Extended</key>
+	<string>Extended</string>
+	<key>Features</key>
+	<string>Features</string>
+	<key>Feedback</key>
+	<string>Feedback</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
 	<key>Finished</key>
@@ -648,6 +642,8 @@
 	<string>Key</string>
 	<key>Key Algorithm</key>
 	<string>Key Algorithm</string>
+	<key>Key Identifier</key>
+	<string>Key Identifier</string>
 	<key>Key Usage</key>
 	<string>Key Usage</string>
 	<key>KeyAlgorithm::dsaEncryption</key>
@@ -666,6 +662,10 @@
 	<string>Logging</string>
 	<key>MD5</key>
 	<string>MD5</string>
+	<key>Mail Account Required</key>
+	<string>Mail Account Required</string>
+	<key>Metadata</key>
+	<string>Metadata</string>
 	<key>More</key>
 	<string>More</string>
 	<key>More Info</key>
@@ -674,6 +674,14 @@
 	<string>Negotiated Ciphersuite</string>
 	<key>Negotiated Version</key>
 	<string>Negotiated Version</string>
+	<key>Next</key>
+	<string>Next</string>
+	<key>No</key>
+	<string>No</string>
+	<key>Not After</key>
+	<string>Not After</string>
+	<key>Not Before</key>
+	<string>Not Before</string>
 	<key>Not Valid After</key>
 	<string>Not Valid After</string>
 	<key>Not Valid Before</key>
@@ -690,16 +698,20 @@
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
+	<key>Please describe the problem in at least 5 words.</key>
+	<string>Please describe the problem in at least 5 words.</string>
 	<key>Pride</key>
 	<string>Pride</string>
+	<key>Provide Feedback</key>
+	<string>Provide Feedback</string>
 	<key>Proxy Detected</key>
 	<string>Proxy Detected</string>
 	<key>Public Key</key>
 	<string>Public Key</string>
 	<key>Query OCSP Responder</key>
 	<string>Query OCSP Responder</string>
-	<key>Rate TLS Inspector in the App Store</key>
-	<string>Rate TLS Inspector in the App Store</string>
+	<key>Rate in App Store</key>
+	<string>Rate in App Store</string>
 	<key>Really Dark</key>
 	<string>Really Dark</string>
 	<key>Recent Lookups</key>
@@ -714,6 +726,10 @@
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Report Issue on GitHub</string>
+	<key>Report a Bug</key>
+	<string>Report a Bug</string>
+	<key>Request a Feature</key>
+	<string>Request a Feature</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
 	<key>SHA-128</key>
@@ -728,6 +744,8 @@
 	<string>Search on crt.sh</string>
 	<key>Security HTTP Headers</key>
 	<string>Security HTTP Headers</string>
+	<key>Select Feedback Type</key>
+	<string>Select Feedback Type</string>
 	<key>Server Info</key>
 	<string>Server Info</string>
 	<key>Server Redirected To</key>
@@ -738,6 +756,8 @@
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Share TLS Inspector</key>
+	<string>Share TLS Inspector</string>
 	<key>Show Certificate Fingerprint</key>
 	<string>Show Certificate Fingerprint</string>
 	<key>Show HTTP Headers</key>
@@ -750,6 +770,8 @@
 	<string>Signature Algorithm</string>
 	<key>Size</key>
 	<string>Size</string>
+	<key>Something Else</key>
+	<string>Something Else</string>
 	<key>Subject</key>
 	<string>Subject</string>
 	<key>Subject Alternate Names</key>
@@ -780,8 +802,8 @@
 	<string>TLS Features</string>
 	<key>TLS Inspector</key>
 	<string>TLS Inspector</string>
-	<key>copyright_license_footer</key>
-	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2020 Ian Spence.</string>
+	<key>TLS Inspector Issues Only</key>
+	<string>TLS Inspector Issues Only</string>
 	<key>TLS Inspector is using the appearance settings of your device.</key>
 	<string>TLS Inspector is using the appearance settings of your device.</string>
 	<key>Tell Friends About TLS Inspector</key>
@@ -798,10 +820,16 @@
 	<string>There were one or more errors while inspecting {0}</string>
 	<key>Trans</key>
 	<string>Trans</string>
+	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
+	<string>Trust &amp; Safety On-The-Go with TLS Inspector: {0}</string>
+	<key>Trusted</key>
+	<string>Trusted</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
 	<key>Understood</key>
 	<string>Understood</string>
+	<key>Unknown</key>
+	<string>Unknown</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
 	<key>Valid From</key>
@@ -828,6 +856,8 @@
 	<string>View all alternate names</string>
 	<key>View on SSL Labs</key>
 	<string>View on SSL Labs</string>
+	<key>Warning</key>
+	<string>Warning</string>
 	<key>What does this mean?</key>
 	<string>What does this mean?</string>
 	<key>What kind of feedback would you like to submit?</key>
@@ -836,10 +866,16 @@
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
-	<key>You must inspect at least one site with debug logging enabled before you can submit logs</key>
-	<string>You must inspect at least one site with debug logging enabled before you can submit logs</string>
+	<key>You must inspect at least one site with debug logging enabled before you can submit logs.</key>
+	<string>You must inspect at least one site with debug logging enabled before you can submit logs.</string>
+	<key>advanced_settings_nag</key>
+	<string>Improper settings can prevent TLS Inspector from working. These settings should only be changed for advanced troubleshooting.</string>
 	<key>certificate_status_footer</key>
 	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
+	<key>copyright_license_footer</key>
+	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2020 Ian Spence.</string>
+	<key>crypto_engine_footer</key>
+	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
 	<key>explanation::invalid_date</key>
 	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
 	<key>explanation::local_trust</key>
@@ -898,8 +934,6 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Time Stamping</string>
 	<key>proxy_warning</key>
 	<string>An HTTP Proxy was detected. TLS Inspector is not compatible with HTTP Proxies and may interfere with the app.</string>
-	<key>Warning</key>
-	<string>Warning</string>
 	<key>safari_hint</key>
 	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
 	<key>sanType::DNS</key>
@@ -966,8 +1000,6 @@ Exercise caution if continuing to this website.</string>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
 	<key>verbose_logging_footer</key>
 	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
-	<key>advanced_settings_nag</key>
-	<string>Improper settings can prevent TLS Inspector from working. These settings should only be changed for advanced troubleshooting.</string>
 	<key>{0} characters</key>
 	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
@@ -988,19 +1020,5 @@ Exercise caution if continuing to this website.</string>
 	<string>{0} weeks</string>
 	<key>{summary} (Revoked)</key>
 	<string>{0} (Revoked)</string>
-	<key>Unknown</key>
-	<string>Unknown</string>
-	<key>Trusted</key>
-	<string>Trusted</string>
-	<key>Not Before</key>
-	<string>Not Before</string>
-	<key>Not After</key>
-	<string>Not After</string>
-	<key>Basic</key>
-	<string>Basic</string>
-	<key>Extended</key>
-	<string>Extended</string>
-	<key>Features</key>
-	<string>Features</string>
 </dict>
 </plist>
