@@ -146,14 +146,10 @@
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
 		3C2A7A511F284DC700AA12B4 /* CKGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGetter.h; sourceTree = "<group>"; };
 		3C2A7A521F284DC700AA12B4 /* CKGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGetter.m; sourceTree = "<group>"; };
-		3C3104EF1D83C4C30093909E /* Extension.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Extension.storyboard; sourceTree = "<group>"; };
-		3C3104F21D83C5C70093909E /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
-		3C3104F31D83C5C70093909E /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
 		3C36B3B220412564005C66E8 /* CKOCSPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPResponse.h; sourceTree = "<group>"; };
 		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
 		3C36B3B62041310E005C66E8 /* CKGetterOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKGetterOptions.h; sourceTree = "<group>"; };
 		3C36B3B72041310E005C66E8 /* CKGetterOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKGetterOptions.m; sourceTree = "<group>"; };
-		3C43EF8A1D7A987F00AE65E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 		3C57F49E23B0220300DCCB54 /* SupportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportType.swift; sourceTree = "<group>"; };
@@ -186,7 +182,6 @@
 		3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChainTableViewController.swift; sourceTree = "<group>"; };
 		3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleValueTableViewCell.swift; sourceTree = "<group>"; };
 		3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedOptionsTableViewController.swift; sourceTree = "<group>"; };
-		3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectWebsite_PrefixHeader.pch; sourceTree = "<group>"; };
 		3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKAlternateNameObject.h; sourceTree = "<group>"; };
 		3C7CEE6120A15BD500DCC770 /* CKAlternateNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKAlternateNameObject.m; sourceTree = "<group>"; };
 		3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterErrorTableViewController.swift; sourceTree = "<group>"; };
@@ -218,7 +213,6 @@
 		3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		3CD4A7B32398BC1700B2C8FC /* Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lang.swift; sourceTree = "<group>"; };
 		3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptions.swift; sourceTree = "<group>"; };
-		3CEAA5061D83CCD10011A706 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		3CF3482523A56CA1000382CE /* CKEVOIDList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKEVOIDList.h; sourceTree = "<group>"; };
 		3CF3482623A56CA1000382CE /* CKEVOIDList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKEVOIDList.m; sourceTree = "<group>"; };
 		3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,7 +234,6 @@
 		67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateChainGetter.m; sourceTree = "<group>"; };
 		67F686EA1FC8FACD00BB7AE8 /* CKServerInfoGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKServerInfoGetter.h; sourceTree = "<group>"; };
 		67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKServerInfoGetter.m; sourceTree = "<group>"; };
-		A11600081EEB084F00D98E8F /* Inspect Website.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Inspect Website.entitlements"; sourceTree = "<group>"; };
 		A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificatePublicKey.h; sourceTree = "<group>"; };
 		A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificatePublicKey.m; sourceTree = "<group>"; };
 		A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -275,20 +268,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C43EF831D7A987F00AE65E9 /* Inspect Website */ = {
-			isa = PBXGroup;
-			children = (
-				A11600081EEB084F00D98E8F /* Inspect Website.entitlements */,
-				3CEAA5061D83CCD10011A706 /* ExtensionAssets.xcassets */,
-				3C3104EF1D83C4C30093909E /* Extension.storyboard */,
-				3C43EF8A1D7A987F00AE65E9 /* Info.plist */,
-				3C3104F21D83C5C70093909E /* InitialViewController.h */,
-				3C3104F31D83C5C70093909E /* InitialViewController.m */,
-				3C7C950B1D7AA18700902E18 /* InspectWebsite_PrefixHeader.pch */,
-			);
-			path = "Inspect Website";
-			sourceTree = "<group>";
-		};
 		3C5F465D239DAE7D00B3A727 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -494,7 +473,6 @@
 			isa = PBXGroup;
 			children = (
 				3C72692523949ABD002A0B19 /* TLS Inspector */,
-				3C43EF831D7A987F00AE65E9 /* Inspect Website */,
 				3C65DADB1E836BE9004AD96D /* CertificateKit */,
 				3CF397421EB50E0900E8DBF4 /* CertificateKitTests */,
 				3CFAE6D71CA8440400CD946B /* Products */,
