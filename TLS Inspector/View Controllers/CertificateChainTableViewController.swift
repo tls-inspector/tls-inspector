@@ -30,7 +30,9 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     @IBAction func closeButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: VIEW_CLOSE_NOTIFICATION, object: nil)
+        }
     }
 
     @IBAction func actionButton(_ sender: UIBarButtonItem) {

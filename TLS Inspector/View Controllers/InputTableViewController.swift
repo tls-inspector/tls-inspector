@@ -51,6 +51,10 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         super.viewWillAppear(animated)
     }
 
+    @IBAction func moreButtonPressed(_ sender: Any) {
+        self.present(UIStoryboard(name: "More", bundle: Bundle.main).instantiateViewController(withIdentifier: "More"), animated: true, completion: nil)
+    }
+
     func loadPlaceholderDomains() -> [String]? {
         guard let domainListPath = Bundle.main.path(forResource: "DomainList", ofType: "plist") else {
             return nil
@@ -168,16 +172,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             domainText = "https://" + domainText
         }
 
-        let options = CKGetterOptions()
-
-        options.checkOCSP = UserOptions.queryOCSP
-        options.checkCRL = UserOptions.checkCRL
-        options.queryServerInfo = UserOptions.getHTTPHeaders
-        options.useOpenSSL = true
-        options.ciphers = "HIGH:!aNULL:!MD5:!RC4"
-        CertificateKit.setLoggingLevel(.debug)
-
-        self.getter = CKGetter(options: options)
+        self.getter = CKGetter(options: UserOptions.getterOptions())
         self.getter?.delegate = self
         if let url = URL(string: domainText) {
             print("Inspecting domain")
@@ -197,7 +192,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         }
     }
 
-    // MARK: Getter Delegates
+    // MARK: Getter Delegate Methods
     func finishedGetter(_ getter: CKGetter) {
         print("Getter finished")
         guard let chain = self.certificateChain else {
@@ -205,13 +200,10 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             return
         }
 
-        if let info = self.serverInfo {
-            SERVER_INFO = info
-        }
-
         CERTIFICATE_CHAIN = chain
+        SERVER_INFO = self.serverInfo
 
-        DispatchQueue.main.async {
+        RunOnMain {
             self.performSegue(withIdentifier: "Inspect", sender: nil)
             self.pendingCellState = .none
             self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
@@ -241,7 +233,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         self.pendingCellState = .error
         self.chainError = error
         print("Error getting certificate chain")
-        DispatchQueue.main.async {
+        RunOnMain {
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
         }
@@ -251,12 +243,13 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         self.pendingCellState = .error
         self.serverError = error
         print("Error getting server info")
-        DispatchQueue.main.async {
+        RunOnMain {
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
         }
     }
 
+    // MARK: Table View Delegate Methods
     override func tableView(_ tableView: UITableView,
                             editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if indexPath.section == 0 {

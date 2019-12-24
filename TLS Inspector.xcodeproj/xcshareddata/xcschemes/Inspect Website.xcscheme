@@ -15,8 +15,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3C43EF811D7A987F00AE65E9"
-               BuildableName = "Inspect Website.appex"
+               BlueprintIdentifier = "3CDC14A623B0453B0053932F"
+               BuildableName = "Show Certificate.appex"
                BlueprintName = "Inspect Website"
                ReferencedContainer = "container:TLS Inspector.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
+               BlueprintIdentifier = "3C72692323949ABD002A0B19"
                BuildableName = "TLS Inspector.app"
                BlueprintName = "TLS Inspector"
                ReferencedContainer = "container:TLS Inspector.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
+            BlueprintIdentifier = "3C72692323949ABD002A0B19"
             BuildableName = "TLS Inspector.app"
             BlueprintName = "TLS Inspector"
             ReferencedContainer = "container:TLS Inspector.xcodeproj">
@@ -80,7 +80,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
+            BlueprintIdentifier = "3C72692323949ABD002A0B19"
             BuildableName = "TLS Inspector.app"
             BlueprintName = "TLS Inspector"
             ReferencedContainer = "container:TLS Inspector.xcodeproj">
@@ -98,7 +98,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3CFAE6D51CA8440400CD946B"
+            BlueprintIdentifier = "3C72692323949ABD002A0B19"
             BuildableName = "TLS Inspector.app"
             BlueprintName = "TLS Inspector"
             ReferencedContainer = "container:TLS Inspector.xcodeproj">

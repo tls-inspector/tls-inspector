@@ -211,8 +211,8 @@
     }
 
     PDebug(@"Finished getting certificate chain");
-    [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
+    [self.delegate getter:self finishedTaskWithResult:self.chain];
 }
 
 - (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {

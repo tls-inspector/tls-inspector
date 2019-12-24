@@ -91,12 +91,14 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 - (void) getter:(CKGetterTask *)getter finishedTaskWithResult:(id)data {
     switch (getter.tag) {
         case CKGetterTaskTagChain:
+            PDebug(@"Certificate chain task finished");
             self.chain = (CKCertificateChain *)data;
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotCertificateChain:)]) {
                 [self.delegate getter:self gotCertificateChain:self.chain];
             }
             break;
         case CKGetterTaskTagServerInfo:
+            PDebug(@"Server info task finished");
             self.serverInfo = (CKServerInfo *)data;
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotServerInfo:)]) {
                 [self.delegate getter:self gotServerInfo:self.serverInfo];
@@ -112,11 +114,13 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 - (void) getter:(CKGetterTask *)getter failedTaskWithError:(NSError *)error {
     switch (getter.tag) {
         case CKGetterTaskTagChain:
+            PDebug(@"Certificate chain task failed");
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingCertificateChain:)]) {
                 [self.delegate getter:self errorGettingCertificateChain:error];
             }
             break;
         case CKGetterTaskTagServerInfo:
+            PDebug(@"Server info task failed");
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingServerInfo:)]) {
                 [self.delegate getter:self errorGettingServerInfo:error];
             }
@@ -133,7 +137,17 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     BOOL allFinished = YES;
     for (CKGetterTask * task in self.tasks) {
         if (!task.finished) {
-            PDebug(@"Task %lu not finished", (unsigned long)task.tag);
+            switch (task.tag) {
+                case CKGetterTaskTagChain:
+                    PDebug(@"Certificate chain task not finished");
+                    break;
+                case CKGetterTaskTagServerInfo:
+                    PDebug(@"Server info task not finished");
+                    break;
+                default:
+                    PDebug(@"Unknown task (%u) not finished", (unsigned int)task.tag);
+                    break;
+            }
             allFinished = NO;
             break;
         }
