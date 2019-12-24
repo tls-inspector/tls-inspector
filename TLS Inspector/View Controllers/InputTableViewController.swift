@@ -172,6 +172,12 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             domainText = "https://" + domainText
         }
 
+        if UserOptions.verboseLogging {
+            CertificateKit.setLoggingLevel(.debug)
+        } else {
+            CertificateKit.setLoggingLevel(.warning)
+        }
+
         self.getter = CKGetter(options: UserOptions.getterOptions())
         self.getter?.delegate = self
         if let url = URL(string: domainText) {
@@ -199,6 +205,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
             showInputError()
             return
         }
+
+        UserOptions.inspectionsWithVerboseLogging += 1
 
         CERTIFICATE_CHAIN = chain
         SERVER_INFO = self.serverInfo
