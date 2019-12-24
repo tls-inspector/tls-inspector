@@ -19,7 +19,6 @@ private let KEY_ADVANCED_SETTINGS_NAG_DISMISSED = "advanced_settings_nag_dismiss
 // swiftlint:enable identifier_name
 
 class UserOptions {
-    private static var userDefaults: UserDefaults?
     private static let defaults: [String:Any] = [
         KEY_REMEMBER_RECENT_LOOKUPS: true,
         KEY_USE_LIGHT_THEME: false,
@@ -40,132 +39,131 @@ class UserOptions {
     private static var _inspectionsWithVerboseLogging = 0
 
     static func loadDefaults() {
-        userDefaults = UserDefaults(suiteName: "group.com.ecnepsnai.TLS Inspector")
         for key in defaults.keys {
-            if userDefaults?.value(forKey: key) == nil {
-                userDefaults?.set(defaults[key], forKey: key)
+            if AppDefaults.value(forKey: key) == nil {
+                AppDefaults.set(defaults[key], forKey: key)
             }
         }
     }
 
     static var firstRunCompleted: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_FIRST_RUN_COMPLETE) ?? false
+            return AppDefaults.bool(forKey: KEY_FIRST_RUN_COMPLETE)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_FIRST_RUN_COMPLETE)
+            AppDefaults.set(newValue, forKey: KEY_FIRST_RUN_COMPLETE)
         }
     }
     static var rememberRecentLookups: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_REMEMBER_RECENT_LOOKUPS) ?? true
+            return AppDefaults.bool(forKey: KEY_REMEMBER_RECENT_LOOKUPS)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_REMEMBER_RECENT_LOOKUPS)
+            AppDefaults.set(newValue, forKey: KEY_REMEMBER_RECENT_LOOKUPS)
         }
     }
     static var useLightTheme: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_USE_LIGHT_THEME) ?? false
+            return AppDefaults.bool(forKey: KEY_USE_LIGHT_THEME)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_USE_LIGHT_THEME)
+            AppDefaults.set(newValue, forKey: KEY_USE_LIGHT_THEME)
         }
     }
     static var showTips: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_SHOW_TIPS) ?? true
+            return AppDefaults.bool(forKey: KEY_SHOW_TIPS)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_SHOW_TIPS)
+            AppDefaults.set(newValue, forKey: KEY_SHOW_TIPS)
         }
     }
     static var getHTTPHeaders: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_GET_HTTP_HEADERS) ?? true
+            return AppDefaults.bool(forKey: KEY_GET_HTTP_HEADERS)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_GET_HTTP_HEADERS)
+            AppDefaults.set(newValue, forKey: KEY_GET_HTTP_HEADERS)
         }
     }
     static var queryOCSP: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_QUERY_OCSP) ?? true
+            return AppDefaults.bool(forKey: KEY_QUERY_OCSP)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_QUERY_OCSP)
+            AppDefaults.set(newValue, forKey: KEY_QUERY_OCSP)
         }
     }
     static var checkCRL: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_CHECK_CRL) ?? false
+            return AppDefaults.bool(forKey: KEY_CHECK_CRL)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_CHECK_CRL)
+            AppDefaults.set(newValue, forKey: KEY_CHECK_CRL)
         }
     }
     static var showFingerprintMD5: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_FINGEPRINT_MD5) ?? false
+            return AppDefaults.bool(forKey: KEY_FINGEPRINT_MD5)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_FINGEPRINT_MD5)
+            AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_MD5)
         }
     }
     static var showFingerprintSHA128: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_FINGEPRINT_SHA128) ?? true
+            return AppDefaults.bool(forKey: KEY_FINGEPRINT_SHA128)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_FINGEPRINT_SHA128)
+            AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_SHA128)
         }
     }
     static var showFingerprintSHA256: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_FINGEPRINT_SHA256) ?? true
+            return AppDefaults.bool(forKey: KEY_FINGEPRINT_SHA256)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_FINGEPRINT_SHA256)
+            AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_SHA256)
         }
     }
     static var showFingerprintSHA512: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_FINGEPRINT_SHA512) ?? false
+            return AppDefaults.bool(forKey: KEY_FINGEPRINT_SHA512)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_FINGEPRINT_SHA512)
+            AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_SHA512)
         }
     }
     static var useOpenSSL: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_USE_OPENSSL) ?? false
+            return AppDefaults.bool(forKey: KEY_USE_OPENSSL)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_USE_OPENSSL)
+            AppDefaults.set(newValue, forKey: KEY_USE_OPENSSL)
         }
     }
     static var preferredCiphers: String {
         get {
-            return userDefaults?.string(forKey: KEY_PREFERRED_CIPHERS) ?? "HIGH:!aNULL:!MD5:!RC4"
+            return AppDefaults.string(forKey: KEY_PREFERRED_CIPHERS)!
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_PREFERRED_CIPHERS)
+            AppDefaults.set(newValue, forKey: KEY_PREFERRED_CIPHERS)
         }
     }
     static var contactNagDismissed: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_CONTACT_NAG_DISMISSED) ?? false
+            return AppDefaults.bool(forKey: KEY_CONTACT_NAG_DISMISSED)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_CONTACT_NAG_DISMISSED)
+            AppDefaults.set(newValue, forKey: KEY_CONTACT_NAG_DISMISSED)
         }
     }
     static var advancedSettingsNagDismissed: Bool {
         get {
-            return userDefaults?.bool(forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED) ?? false
+            return AppDefaults.bool(forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED)
         }
         set {
-            userDefaults?.set(newValue, forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED)
+            AppDefaults.set(newValue, forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED)
         }
     }
 

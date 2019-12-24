@@ -4,7 +4,7 @@ private let LIST_KEY = "RECENT_DOMAINS"
 
 class RecentLookups {
     public static func GetRecentLookups() -> [String] {
-        guard let list = UserDefaults.standard.array(forKey: LIST_KEY) as? [String] else {
+        guard let list = AppDefaults.array(forKey: LIST_KEY) as? [String] else {
             return []
         }
 
@@ -13,7 +13,7 @@ class RecentLookups {
 
     public static func AddLookup(query: String) {
         var list: [String] = []
-        if let savedList = UserDefaults.standard.array(forKey: LIST_KEY) as? [String] {
+        if let savedList = AppDefaults.array(forKey: LIST_KEY) as? [String] {
             list = savedList
         }
 
@@ -26,19 +26,19 @@ class RecentLookups {
         }
         list.insert(query, at: 0)
 
-        UserDefaults.standard.set(list, forKey: LIST_KEY)
+        AppDefaults.set(list, forKey: LIST_KEY)
     }
 
     public static func RemoveLookup(index: Int) {
-        guard var list = UserDefaults.standard.array(forKey: LIST_KEY) as? [String] else {
+        guard var list = AppDefaults.array(forKey: LIST_KEY) as? [String] else {
             return
         }
         list.remove(at: index)
 
-        UserDefaults.standard.set(list, forKey: LIST_KEY)
+        AppDefaults.set(list, forKey: LIST_KEY)
     }
 
     public static func RemoveAllLookups() {
-        UserDefaults.standard.set([], forKey: LIST_KEY)
+        AppDefaults.set([], forKey: LIST_KEY)
     }
 }

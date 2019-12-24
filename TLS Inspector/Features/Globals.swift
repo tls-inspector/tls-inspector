@@ -9,6 +9,8 @@ var SPLIT_VIEW_CONTROLLER: UISplitViewController?
 var VIEW_CLOSE_NOTIFICATION: Notification.Name = Notification.Name("🏳️‍🌈")
 // swiftlint:enable identifier_name
 
+let AppDefaults = UserDefaults(suiteName: "group.com.ecnepsnai.TLS-Inspector")!
+
 func RunOnMain(_ closure: @escaping () -> Void) {
     DispatchQueue.main.async(execute: closure)
 }
