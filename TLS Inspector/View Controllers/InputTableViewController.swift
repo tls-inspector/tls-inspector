@@ -95,6 +95,13 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
+        // Show a non-generic error for hosts containing unicode as we don't
+        // support them (GH Issue #43)
+        if !text.canBeConverted(to: .ascii) {
+            UIHelper(self).presentAlert(title: lang(key: "IDN Not Supported"), body: lang(key: "idn_warning"), dismissed: nil)
+            return
+        }
+
         self.domainInput?.isEnabled = false
         var insertRow = false
         if self.pendingCellState == .none {

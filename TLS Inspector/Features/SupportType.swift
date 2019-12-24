@@ -33,10 +33,9 @@ class SupportType {
         }
 
         if let infoDict = Bundle.main.infoDictionary {
-            let bundleVersion = infoDict["CFBundleShortVersionString"] as? String
-            let build = infoDict["CFBundleVersion"] as? NSNumber
-            let bundleBuild = build?.stringValue
-            self.appVersion = (bundleVersion ?? "Unknown") + " (" + (bundleBuild ?? "Unknown") + ")"
+            let appVersion: String = (infoDict["CFBundleShortVersionString"] as? String) ?? "Unknown"
+            let build: String = (infoDict[kCFBundleVersionKey as String] as? String) ?? "Unknown"
+            self.appVersion = appVersion + " (" + build + ")"
         }
     }
 

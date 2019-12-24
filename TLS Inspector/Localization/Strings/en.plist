@@ -20,7 +20,7 @@
 	<string>Alternate Names</string>
 	<key>Apple Support</key>
 	<string>Apple Support</string>
-	<key>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</key>
+	<key>idn_warning</key>
 	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
 	<key>Authority</key>
 	<string>Authority</string>

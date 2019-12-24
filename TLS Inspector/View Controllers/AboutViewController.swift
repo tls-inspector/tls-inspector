@@ -57,8 +57,8 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
             let info = Bundle.main.infoDictionary ?? [:]
             let appVersion: String = (info["CFBundleShortVersionString"] as? String) ?? "Unknown"
             let build: String = (info[kCFBundleVersionKey as String] as? String) ?? "Unknown"
-            let opensslVersion = CertificateKit.opensslVersion() ?? "Unknown"
-            let libcurlVersion = CertificateKit.libcurlVersion() ?? "Unknown"
+            let opensslVersion = CertificateKit.opensslVersion()
+            let libcurlVersion = CertificateKit.libcurlVersion()
             return "App: \(appVersion) (\(build)), OpenSSL: \(opensslVersion), cURL: \(libcurlVersion)"
         } else if section == 1 {
             return lang(key: "copyright_license_footer")
