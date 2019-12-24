@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="NAl-dN-IqC">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NAl-dN-IqC">
                                 <rect key="frame" x="182" y="428" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="2Sf-dJ-e7Z"/>
@@ -56,6 +56,7 @@
                         <viewLayoutGuide key="safeArea" id="HWu-05-e6Y"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="NAl-dN-IqC" id="IFb-0B-7Lw"/>
                         <outlet property="cancelButton" destination="BIQ-lY-Df2" id="6oQ-xY-B2B"/>
                         <segue destination="g46-1t-FOL" kind="presentation" identifier="Inspect" modalPresentationStyle="fullScreen" id="lpY-m2-efm"/>
                     </connections>

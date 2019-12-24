@@ -10,12 +10,20 @@ class InitialViewController: UIViewController, CKGetterDelegate {
     var serverInfo: CKServerInfo?
     var observer: NSObjectProtocol?
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    // swiftlint:disable cyclomatic_complexity
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13, *) {
+            self.activityIndicator.style = .large
+        }
+
         if CertificateKit.isProxyConfigured() {
-            UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
+            UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"),
+                                        body: lang(key: "proxy_warning"),
+                                        dismissed: nil)
             self.closeExtension()
             return
         }
@@ -68,6 +76,7 @@ class InitialViewController: UIViewController, CKGetterDelegate {
         }
         RunOnMain { self.checkValues() }
     }
+    // swiftlint:enable cyclomatic_complexity
 
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.closeExtension()
