@@ -18,4 +18,11 @@
     [[CKLogging sharedInstance] setLevel:level];
 }
 
++ (BOOL) isProxyConfigured {
+    CFDictionaryRef proxySettings = CFNetworkCopySystemProxySettings();
+    const CFStringRef proxyCFString = (const CFStringRef)CFDictionaryGetValue(proxySettings, (const void*)kCFNetworkProxiesHTTPProxy);
+    NSString * proxyString = (__bridge NSString *)(proxyCFString);
+    return proxyString != nil && proxyString.length > 0;
+}
+
 @end

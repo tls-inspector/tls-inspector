@@ -78,14 +78,14 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  *
  *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"
  */
-+ (NSString *) opensslVersion;
++ (NSString * _Nonnull) opensslVersion;
 
 /**
  Convience method to get the version of libcurl used by CKServerInfo
  
  @return A string representing the libcurl version
  */
-+ (NSString *) libcurlVersion;
++ (NSString * _Nonnull) libcurlVersion;
 
 /**
  Set the minimum level for which logs of that or greater levels will be recorded
@@ -94,5 +94,10 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  @param level The log level
  */
 + (void) setLoggingLevel:(CKLoggingLevel)level;
+
+/**
+ Is a HTTP proxy configured on the device
+ */
++ (BOOL) isProxyConfigured;
 
 @end

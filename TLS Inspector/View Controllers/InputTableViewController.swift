@@ -1,7 +1,7 @@
 import UIKit
 import CertificateKit
 
-class InputTableViewController: UITableViewController, CKGetterDelegate {
+class InputTableViewController: UITableViewController, CKGetterDelegate, UITextFieldDelegate {
     enum PendingCellStates {
         case none
         case loading
@@ -51,8 +51,24 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         super.viewWillAppear(animated)
     }
 
+    // MARK: Interface Actions
     @IBAction func moreButtonPressed(_ sender: Any) {
         self.present(UIStoryboard(name: "More", bundle: Bundle.main).instantiateViewController(withIdentifier: "More"), animated: true, completion: nil)
+    }
+
+    @IBAction func inspectButtonPressed(_ sender: UIBarButtonItem) {
+        let text = self.domainInput?.text ?? ""
+        self.inspectDomain(text: text)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if self.inputIsValid() {
+            textField.resignFirstResponder()
+            self.inspectDomain(text: textField.text!)
+            return true
+        } else {
+            return false
+        }
     }
 
     func loadPlaceholderDomains() -> [String]? {
@@ -65,89 +81,20 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
         return domains
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        if UserOptions.rememberRecentLookups && RecentLookups.GetRecentLookups().count > 0 {
-            return 2
-        }
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            if self.pendingCellState != .none {
-                return 2
-            }
-            return 1
-        } else if section == 1 {
-            return RecentLookups.GetRecentLookups().count
-        }
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56.0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            if indexPath.row == 1 {
-                var cell: UITableViewCell!
-                if self.pendingCellState == .loading {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
-                    if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
-                        activity.startAnimating()
-
-                        if #available(iOS 13, *) {
-                            activity.style = .medium
-                        }
-                    }
-                } else if self.pendingCellState == .error {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "Error", for: indexPath)
-                }
-                return cell
-            }
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Input", for: indexPath)
-
-            if let textField = cell.viewWithTag(1) as? UITextField {
-                self.domainInput = textField
-                textField.placeholder = placeholderDomains.randomElement()
-                textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
-            }
-
-            return cell
-        } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
-            cell.textLabel?.text = RecentLookups.GetRecentLookups()[indexPath.row]
-            return cell
-        }
-
-        return UITableViewCell()
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return lang(key: "Domain Name or IP Address")
-        } else if section == 1 {
-            return lang(key: "Recent Lookups")
-        }
-        return ""
-    }
-
     @objc func domainInputChanged(sender: UITextField) {
-        if let text = sender.text {
-            self.inspectButton.isEnabled = text.count > 0
-        } else {
-            self.inspectButton.isEnabled = false
-        }
+        self.inspectButton.isEnabled = self.inputIsValid()
     }
 
-    @IBAction func inspectButtonPressed(_ sender: UIBarButtonItem) {
-        let text = self.domainInput?.text ?? ""
-        self.inspectDomain(text: text)
+    func inputIsValid() -> Bool {
+        return (self.domainInput?.text ?? "").count > 0
     }
 
     func inspectDomain(text: String) {
+        if CertificateKit.isProxyConfigured() {
+            UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
+            return
+        }
+
         self.domainInput?.isEnabled = false
         var insertRow = false
         if self.pendingCellState == .none {
@@ -258,6 +205,76 @@ class InputTableViewController: UITableViewController, CKGetterDelegate {
     }
 
     // MARK: Table View Delegate Methods
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if UserOptions.rememberRecentLookups && RecentLookups.GetRecentLookups().count > 0 {
+            return 2
+        }
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            if self.pendingCellState != .none {
+                return 2
+            }
+            return 1
+        } else if section == 1 {
+            return RecentLookups.GetRecentLookups().count
+        }
+        return 0
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56.0
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            if indexPath.row == 1 {
+                var cell: UITableViewCell!
+                if self.pendingCellState == .loading {
+                    cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
+                    if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
+                        activity.startAnimating()
+
+                        if #available(iOS 13, *) {
+                            activity.style = .medium
+                        }
+                    }
+                } else if self.pendingCellState == .error {
+                    cell = tableView.dequeueReusableCell(withIdentifier: "Error", for: indexPath)
+                }
+                return cell
+            }
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Input", for: indexPath)
+
+            if let textField = cell.viewWithTag(1) as? UITextField {
+                self.domainInput = textField
+                textField.delegate = self
+                textField.placeholder = placeholderDomains.randomElement()
+                textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
+            }
+
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
+            cell.textLabel?.text = RecentLookups.GetRecentLookups()[indexPath.row]
+            return cell
+        }
+
+        return UITableViewCell()
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return lang(key: "Domain Name or IP Address")
+        } else if section == 1 {
+            return lang(key: "Recent Lookups")
+        }
+        return ""
+    }
+
     override func tableView(_ tableView: UITableView,
                             editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if indexPath.section == 0 {

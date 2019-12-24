@@ -14,6 +14,12 @@ class InitialViewController: UIViewController, CKGetterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if CertificateKit.isProxyConfigured() {
+            UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
+            self.closeExtension()
+            return
+        }
+
         // We use a notification to know when the user dismissed the split view
         self.observer = NotificationCenter.default.addObserver(forName: VIEW_CLOSE_NOTIFICATION,
                                                                object: nil,
