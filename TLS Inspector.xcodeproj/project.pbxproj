@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,10 +34,9 @@
 		3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE91E836C15004AD96D /* CKCertificateChain.m */; };
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; };
-		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; };
+		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; platformFilter = ios; };
 		3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */; };
 		3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
-		3C6FF89323B1A280008DC981 /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
 		3C6FF89923B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
 		3C6FF89B23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */; };
@@ -59,6 +58,8 @@
 		3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */; };
 		3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
 		3C84A98623AD9FCD003B76D3 /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
+		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
+		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */; };
 		3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005C23974A660027D1C1 /* FontAwesome.swift */; };
 		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
@@ -75,7 +76,7 @@
 		3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */; };
 		3CB94046225036FC0055C067 /* CKAppleCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94042225036FC0055C067 /* CKAppleCertificateChainGetter.m */; };
 		3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */; };
-		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; };
+		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; platformFilter = ios; };
 		3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */; };
 		3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028A239DC64C009364D0 /* RecentLookups.swift */; };
@@ -165,17 +166,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3C6FF89623B1A280008DC981 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3C6FF89323B1A280008DC981 /* CertificateKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C7269612394C16F002A0B19 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +313,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */,
 				3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */,
 				3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,7 +688,6 @@
 				3CDC14A423B0453B0053932F /* Frameworks */,
 				3CDC14A523B0453B0053932F /* Resources */,
 				3CDC14B623B045730053932F /* SwiftLint */,
-				3C6FF89623B1A280008DC981 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -770,9 +761,9 @@
 			projectRoot = "";
 			targets = (
 				3C72692323949ABD002A0B19 /* TLS Inspector */,
+				3CDC14A623B0453B0053932F /* Inspect Website */,
 				3C65DAD91E836BE9004AD96D /* CertificateKit */,
 				3CF397401EB50E0900E8DBF4 /* CertificateKitTests */,
-				3CDC14A623B0453B0053932F /* Inspect Website */,
 			);
 		};
 /* End PBXProject section */
@@ -1026,7 +1017,11 @@
 				INFOPLIST_FILE = CertificateKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1058,7 +1053,11 @@
 				INFOPLIST_FILE = CertificateKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1088,7 +1087,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1120,7 +1122,10 @@
 				GCC_OPTIMIZATION_LEVEL = z;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
@@ -1148,7 +1153,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 2.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1178,7 +1187,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 2.0.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
@@ -1200,7 +1213,11 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CertificateKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1218,7 +1235,11 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CertificateKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
