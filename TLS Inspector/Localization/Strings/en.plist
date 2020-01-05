@@ -4,6 +4,12 @@
 <dict>
 	<key>1 month</key>
 	<string>1 month</string>
+	<key>2 weeks</key>
+	<string>2 weeks</string>
+	<key>3 months</key>
+	<string>3 months</string>
+	<key>6 months</key>
+	<string>6 months</string>
 	<key>About</key>
 	<string>About</string>
 	<key>About TLS Inspector</key>
@@ -20,8 +26,6 @@
 	<string>Alternate Names</string>
 	<key>Apple Support</key>
 	<string>Apple Support</string>
-	<key>idn_warning</key>
-	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
 	<key>Authority</key>
 	<string>Authority</string>
 	<key>Basic</key>
@@ -72,20 +76,12 @@
 	<string>Certificate uses insecure SHA1 algorithm.</string>
 	<key>Certificates</key>
 	<string>Certificates</string>
-	<key>Change</key>
-	<string>Change</string>
-	<key>Change App Icon</key>
-	<string>Change App Icon</string>
-	<key>Change Icon</key>
-	<string>Change Icon</string>
-	<key>Change Theme</key>
-	<string>Change Theme</string>
+	<key>Chain</key>
+	<string>Chain</string>
 	<key>Ciphers</key>
 	<string>Ciphers</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
-	<key>Connection refused.</key>
-	<string>Connection refused.</string>
 	<key>Contact Support</key>
 	<string>Contact Support</string>
 	<key>Contact Us</key>
@@ -578,8 +574,6 @@
 	<string>Zimbabwe</string>
 	<key>Crypto Engine</key>
 	<string>Crypto Engine</string>
-	<key>Dark</key>
-	<string>Dark</string>
 	<key>Debug Logging Enabled</key>
 	<string>Debug Logging Enabled</string>
 	<key>Did You Know:</key>
@@ -652,8 +646,6 @@
 	<string>ECDSA</string>
 	<key>KeyAlgorithm::rsaEncryption</key>
 	<string>RSA</string>
-	<key>Light</key>
-	<string>Light</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
 	<key>Locally Trusted Chain</key>
@@ -700,8 +692,6 @@
 	<string>Options</string>
 	<key>Please describe the problem in at least 5 words.</key>
 	<string>Please describe the problem in at least 5 words.</string>
-	<key>Pride</key>
-	<string>Pride</string>
 	<key>Provide Feedback</key>
 	<string>Provide Feedback</string>
 	<key>Proxy Detected</key>
@@ -712,8 +702,6 @@
 	<string>Query OCSP Responder</string>
 	<key>Rate in App Store</key>
 	<string>Rate in App Store</string>
-	<key>Really Dark</key>
-	<string>Really Dark</string>
 	<key>Recent Lookups</key>
 	<string>Recent Lookups</string>
 	<key>Remember Recent Lookups</key>
@@ -750,8 +738,6 @@
 	<string>Server Info</string>
 	<key>Server Redirected To</key>
 	<string>Server Redirected To</string>
-	<key>Share</key>
-	<string>Share</string>
 	<key>Share &amp; Feedback</key>
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
@@ -804,8 +790,6 @@
 	<string>TLS Inspector</string>
 	<key>TLS Inspector Issues Only</key>
 	<string>TLS Inspector Issues Only</string>
-	<key>TLS Inspector is using the appearance settings of your device.</key>
-	<string>TLS Inspector is using the appearance settings of your device.</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
@@ -814,12 +798,6 @@
 	<string>The certificate for {0} expires on {1}</string>
 	<key>The host you provided is not valid</key>
 	<string>The host you provided is not valid</string>
-	<key>Theme</key>
-	<string>Theme</string>
-	<key>There were one or more errors while inspecting {host}</key>
-	<string>There were one or more errors while inspecting {0}</string>
-	<key>Trans</key>
-	<string>Trans</string>
 	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
 	<string>Trust &amp; Safety On-The-Go with TLS Inspector: {0}</string>
 	<key>Trusted</key>
@@ -832,6 +810,8 @@
 	<string>Unknown</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
+	<key>Use the Reminders app to customize the reminder</key>
+	<string>Use the Reminders app to customize the reminder</string>
 	<key>Valid From</key>
 	<string>Valid From</string>
 	<key>Valid To</key>
@@ -840,14 +820,8 @@
 	<string>Validity Period</string>
 	<key>Value</key>
 	<string>Value</string>
-	<key>Values do not match.</key>
-	<string>Values do not match.</string>
 	<key>Verified</key>
 	<string>Verified</string>
-	<key>Verify</key>
-	<string>Verify</string>
-	<key>Verify Value</key>
-	<string>Verify Value</string>
 	<key>Version</key>
 	<string>Version</string>
 	<key>View All</key>
@@ -869,7 +843,7 @@
 	<key>You must inspect at least one site with debug logging enabled before you can submit logs.</key>
 	<string>You must inspect at least one site with debug logging enabled before you can submit logs.</string>
 	<key>advanced_settings_nag</key>
-	<string>Improper settings can prevent TLS Inspector from working. These settings should only be changed for advanced troubleshooting.</string>
+	<string>These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.</string>
 	<key>certificate_status_footer</key>
 	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
 	<key>copyright_license_footer</key>
@@ -898,8 +872,8 @@
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
 If you&apos;re concerned about the security of your device; contact Apple Support.</string>
-	<key>iOS</key>
-	<string>iOS</string>
+	<key>idn_warning</key>
+	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
 	<key>keyUsage::OCSPSigning</key>
 	<string>OCSP Signing</string>
 	<key>keyUsage::anyExtendedKeyUsage</key>
@@ -933,9 +907,7 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<key>keyUsage::timeStamping</key>
 	<string>Time Stamping</string>
 	<key>proxy_warning</key>
-	<string>An HTTP Proxy was detected. TLS Inspector is not compatible with HTTP Proxies and may interfere with the app.</string>
-	<key>safari_hint</key>
-	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
+	<string>An HTTP Proxy is configured. TLS Inspector is not compatible with HTTP Proxies and it must be disabled from the systems WiFi settings.</string>
 	<key>sanType::DNS</key>
 	<string>DNS</string>
 	<key>sanType::Directory</key>
@@ -1000,8 +972,6 @@ Exercise caution if continuing to this website.</string>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
 	<key>verbose_logging_footer</key>
 	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
-	<key>{0} characters</key>
-	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
 	<string>{0}, {1} bits</string>
 	<key>{commonName} (Expired)</key>

@@ -29,20 +29,20 @@ class SANListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let altName = self.altrnateNames[indexPath.row]
-        var type: String = lang(key: "Unknown")
+        var type: String = lang(key: "sanType::Unknown")
         switch altName.type {
         case .directory:
-            type = lang(key: "Directory")
+            type = lang(key: "sanType::Directory")
         case .DNS:
-            type = lang(key: "DNS")
+            type = lang(key: "sanType::DNS")
         case .other:
-            type = lang(key: "Other")
+            type = lang(key: "sanType::Other")
         case .email:
-            type = lang(key: "Email")
+            type = lang(key: "sanType::Email")
         case .IP:
-            type = lang(key: "IP")
+            type = lang(key: "sanType::IP")
         case .URI:
-            type = lang(key: "URI")
+            type = lang(key: "sanType::URI")
         @unknown default:
             break
         }
