@@ -167,6 +167,7 @@
     self.chain.certificates = certs;
 
     self.chain.domain = queryURL.host;
+    self.chain.url = queryURL;
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");

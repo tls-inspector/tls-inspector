@@ -53,7 +53,7 @@ class CertificateTableViewController: UITableViewController {
                 days = 30 * 6
             }
             CertificateReminder.addReminder(certificate: self.certificate,
-                                            domain: chain.domain,
+                                            domain: chain.url,
                                             daysBeforeExpire: days)
             { (rerror) in
                 if let error = rerror {
