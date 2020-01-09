@@ -576,6 +576,8 @@
 	<string>Crypto Engine</string>
 	<key>Debug Logging Enabled</key>
 	<string>Debug Logging Enabled</string>
+	<key>Delete</key>
+	<string>Delete</string>
 	<key>Did You Know:</key>
 	<string>Did You Know:</string>
 	<key>Dismiss</key>
@@ -620,6 +622,8 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
+	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
+	<string>If you believe this to be in error, contact support from within the TLS Inspector app.</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
 	<key>Internal error.</key>
@@ -670,6 +674,8 @@
 	<string>Next</string>
 	<key>No</key>
 	<string>No</string>
+	<key>No Supported URL Found</key>
+	<string>No Supported URL Found</string>
 	<key>Not After</key>
 	<string>Not After</string>
 	<key>Not Before</key>
@@ -684,6 +690,8 @@
 	<string>Notice</string>
 	<key>Notification Date</key>
 	<string>Notification Date</string>
+	<key>Only HTTPS URLs can be inspected</key>
+	<string>Only HTTPS URLs can be inspected</string>
 	<key>OpenSSL</key>
 	<string>OpenSSL</string>
 	<key>OpenSSL Version</key>
@@ -800,10 +808,16 @@
 	<string>The host you provided is not valid</string>
 	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
 	<string>Trust &amp; Safety On-The-Go with TLS Inspector: {0}</string>
+	<key>Trust Details</key>
+	<string>Trust Details</string>
 	<key>Trusted</key>
 	<string>Trusted</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
+	<key>Unable to Inspect</key>
+	<string>Unable to Inspect</string>
+	<key>Unable to export certificate</key>
+	<string>Unable to export certificate</string>
 	<key>Understood</key>
 	<string>Understood</string>
 	<key>Unknown</key>
@@ -832,6 +846,8 @@
 	<string>View on SSL Labs</string>
 	<key>Warning</key>
 	<string>Warning</string>
+	<key>We were unable to export the certificate in PEM format.</key>
+	<string>We were unable to export the certificate in PEM format.</string>
 	<key>What does this mean?</key>
 	<string>What does this mean?</string>
 	<key>What kind of feedback would you like to submit?</key>
@@ -920,6 +936,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Other</string>
 	<key>sanType::URI</key>
 	<string>URI</string>
+	<key>sanType::Unknown</key>
+	<string>Unknown</string>
 	<key>secure::invalid_date</key>
 	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
 	<key>secure::local_trust</key>
