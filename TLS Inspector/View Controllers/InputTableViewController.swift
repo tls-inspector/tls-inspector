@@ -192,20 +192,20 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {
-        self.pendingCellState = .error
         self.chainError = error
         print("Error getting certificate chain")
         RunOnMain {
+            self.pendingCellState = .error
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
         }
     }
 
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
-        self.pendingCellState = .error
         self.serverError = error
         print("Error getting server info")
         RunOnMain {
+            self.pendingCellState = .error
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
         }
