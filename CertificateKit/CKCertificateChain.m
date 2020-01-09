@@ -47,14 +47,14 @@
 
     // SHA-1 Leaf
     if ([self.server.signatureAlgorithm hasPrefix:@"sha1"]) {
-        PWarn(@"Certificate: '%@' is using SHA-1", self.server.subject.commonNames);
+        PWarn(@"Certificate: '%@' is using SHA-1: '%@'", self.server.subject.commonNames, self.server.signatureAlgorithm);
         self.trusted = CKCertificateChainTrustStatusSHA1Leaf;
         return;
     }
 
     // SHA-1 Intermediate
     if ([self.intermediateCA.signatureAlgorithm hasPrefix:@"sha1"]) {
-        PWarn(@"Certificate: '%@' is using SHA-1", self.intermediateCA.subject.commonNames);
+        PWarn(@"Certificate: '%@' is using SHA-1: '%@'", self.intermediateCA.subject.commonNames, self.intermediateCA.signatureAlgorithm);
         self.trusted = CKCertificateChainTrustStatusSHA1Intermediate;
         return;
     }

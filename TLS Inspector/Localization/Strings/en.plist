@@ -925,7 +925,7 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<key>secure::local_trust</key>
 	<string>Yes. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
 
-Typically, private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance.</string>
+Typically private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance from Apple.</string>
 	<key>secure::revoked</key>
 	<string>No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.
 

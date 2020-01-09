@@ -85,26 +85,26 @@ class TrustDetailsTableViewController: UITableViewController {
             explanation = lang(key: "explanation::untrusted")
             isSecure = lang(key: "secure::untrusted")
         case .invalidDate:
-            explanation = lang(key: "explanation::self_signed")
-            isSecure = lang(key: "secure::self_signed")
-        case .wrongHost:
-            explanation = lang(key: "explanation::revoked")
-            isSecure = lang(key: "secure::revoked")
-        case .sha1Leaf:
-            explanation = lang(key: "explanation::revoked")
-            isSecure = lang(key: "secure::revoked")
-        case .sha1Intermediate:
             explanation = lang(key: "explanation::invalid_date")
             isSecure = lang(key: "secure::invalid_date")
-        case .selfSigned:
-            explanation = lang(key: "explanation::sha1_int")
-            isSecure = lang(key: "secure::sha1_int")
-        case .revokedLeaf:
-            explanation = lang(key: "explanation::sha1_leaf")
-            isSecure = lang(key: "secure::sha1_leaf")
-        case .revokedIntermediate:
+        case .wrongHost:
             explanation = lang(key: "explanation::wrong_host")
             isSecure = lang(key: "secure::wrong_host")
+        case .sha1Leaf:
+            explanation = lang(key: "explanation::sha1_leaf")
+            isSecure = lang(key: "secure::sha1_leaf")
+        case .sha1Intermediate:
+            explanation = lang(key: "explanation::sha1_int")
+            isSecure = lang(key: "secure::sha1_int")
+        case .selfSigned:
+            explanation = lang(key: "explanation::self_signed")
+            isSecure = lang(key: "secure::self_signed")
+        case .revokedLeaf:
+            explanation = lang(key: "explanation::revoked")
+            isSecure = lang(key: "secure::revoked")
+        case .revokedIntermediate:
+            explanation = lang(key: "explanation::revoked")
+            isSecure = lang(key: "secure::revoked")
         @unknown default:
             explanation = lang(key: "Unknown")
             isSecure = lang(key: "Unknown")
