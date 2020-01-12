@@ -7,6 +7,7 @@ var SERVER_INFO: CKServerInfo?
 var CURRENT_CERTIFICATE: Int = 0
 var SPLIT_VIEW_CONTROLLER: UISplitViewController?
 var VIEW_CLOSE_NOTIFICATION: Notification.Name = Notification.Name("🏳️‍🌈")
+var RELOAD_RECENT_NOTIFICATION: Notification.Name = Notification.Name("🇹🇼")
 // swiftlint:enable identifier_name
 
 let AppDefaults = UserDefaults(suiteName: "group.com.ecnepsnai.TLS-Inspector")!

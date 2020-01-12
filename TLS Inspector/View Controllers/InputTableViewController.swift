@@ -36,6 +36,10 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             UserOptions.firstRunCompleted = true
         }
 
+        NotificationCenter.default.addObserver(forName: RELOAD_RECENT_NOTIFICATION, object: nil, queue: nil) { (_) in
+            self.tableView.reloadData()
+        }
+
         super.viewDidLoad()
     }
 
@@ -160,12 +164,11 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
-        UserOptions.inspectionsWithVerboseLogging += 1
-
-        CERTIFICATE_CHAIN = chain
-        SERVER_INFO = self.serverInfo
-
         RunOnMain {
+            UserOptions.inspectionsWithVerboseLogging += 1
+            CERTIFICATE_CHAIN = chain
+            SERVER_INFO = self.serverInfo
+
             self.performSegue(withIdentifier: "Inspect", sender: nil)
             self.pendingCellState = .none
             self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
@@ -173,22 +176,28 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.domainInput?.text = ""
             let domainsBefore = RecentLookups.GetRecentLookups().count
             RecentLookups.AddLookup(query: getter.url.host ?? "")
-            if RecentLookups.GetRecentLookups().count == 1 && domainsBefore == 0 {
-                self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)
-            } else {
-                self.tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
+            if UserOptions.rememberRecentLookups {
+                if RecentLookups.GetRecentLookups().count == 1 && domainsBefore == 0 {
+                    self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)
+                } else {
+                    self.tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
+                }
             }
         }
     }
 
     func getter(_ getter: CKGetter, gotCertificateChain chain: CKCertificateChain) {
         print("Got certificate chain")
-        self.certificateChain = chain
+        RunOnMain {
+            self.certificateChain = chain
+        }
     }
 
     func getter(_ getter: CKGetter, gotServerInfo serverInfo: CKServerInfo) {
-        self.serverInfo = serverInfo
         print("Got server info")
+        RunOnMain {
+            self.serverInfo = serverInfo
+        }
     }
 
     func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {

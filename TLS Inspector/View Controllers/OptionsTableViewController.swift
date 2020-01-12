@@ -68,6 +68,10 @@ class OptionsTableViewController: UITableViewController {
 
     @objc func changeRememberLookups(sender: UISwitch) {
         UserOptions.rememberRecentLookups = sender.isOn
+        if !sender.isOn {
+            RecentLookups.RemoveAllLookups()
+        }
+        NotificationCenter.default.post(name: RELOAD_RECENT_NOTIFICATION, object: nil)
     }
 
     @objc func changeShowHTTPHeaders(sender: UISwitch) {
