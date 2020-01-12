@@ -6,9 +6,43 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     let projectURL = "https://tlsinspector.com/"
     let projectContributeURL = "https://tlsinspector.com/contribute.html"
     let testflightURL = "https://tlsinspector.com/beta.html"
+    @IBOutlet weak var lockCircle: UIImageView!
+    var quotes: [String] = []
+    var taps = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if let q = loadQuotes() {
+            self.quotes = q
+        }
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapPicture(target:)))
+        self.lockCircle.isUserInteractionEnabled = true
+        self.lockCircle.addGestureRecognizer(tap)
+    }
+
+    func loadQuotes() -> [String]? {
+        guard let quotesPath = Bundle.main.path(forResource: "QuoteList", ofType: "plist") else {
+            return nil
+        }
+        guard let quotes = NSArray.init(contentsOfFile: quotesPath) as? [String] else {
+            return nil
+        }
+        return quotes
+    }
+
+    @objc func didTapPicture(target: UIImageView) {
+        if self.quotes.count == 0 {
+            return
+        }
+
+        self.taps += 1
+        if self.taps >= 3 {
+            self.taps = 0
+
+            UIHelper(self).presentAlert(title: self.quotes.randomElement() ?? "", body: "", dismissed: nil)
+        }
     }
 
     // MARK: - Table view data source

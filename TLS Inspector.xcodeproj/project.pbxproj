@@ -58,6 +58,7 @@
 		3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */; };
 		3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
 		3C84A98623AD9FCD003B76D3 /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
+		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
 		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */; };
@@ -241,6 +242,7 @@
 		3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterErrorTableViewController.swift; sourceTree = "<group>"; };
 		3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateReminder.swift; sourceTree = "<group>"; };
 		3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTipTarget.swift; sourceTree = "<group>"; };
+		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
 		3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+MaterialColors.swift"; sourceTree = "<group>"; };
 		3CA2005C23974A660027D1C1 /* FontAwesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
 		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 			isa = PBXGroup;
 			children = (
 				3CF9CC9523A4804600535173 /* DomainList.plist */,
+				3C8B1AEB23CBD0050093E65D /* QuoteList.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CCD0299239DDE68009364D0 /* Main.storyboard in Resources */,
+				3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */,
 				3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */,
 				3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */,
 				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
