@@ -177,7 +177,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
             let domainsBefore = RecentLookups.GetRecentLookups().count
-            RecentLookups.AddLookup(query: getter.url.host ?? "")
+            RecentLookups.AddLookup(getter.url.host ?? "")
             if UserOptions.rememberRecentLookups {
                 if RecentLookups.GetRecentLookups().count == 1 && domainsBefore == 0 {
                     self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)
