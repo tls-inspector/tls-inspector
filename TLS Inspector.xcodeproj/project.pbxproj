@@ -17,6 +17,8 @@
 		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; };
 		3C36B3B82041310E005C66E8 /* CKGetterOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B62041310E005C66E8 /* CKGetterOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C36B3B92041310E005C66E8 /* CKGetterOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B72041310E005C66E8 /* CKGetterOptions.m */; };
+		3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C45AD5823D831A900E541EC /* CKCurlCommon.h */; };
+		3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45AD5923D831A900E541EC /* CKCurlCommon.m */; };
 		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
 		3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */; };
 		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
@@ -202,6 +204,8 @@
 		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
 		3C36B3B62041310E005C66E8 /* CKGetterOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKGetterOptions.h; sourceTree = "<group>"; };
 		3C36B3B72041310E005C66E8 /* CKGetterOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKGetterOptions.m; sourceTree = "<group>"; };
+		3C45AD5823D831A900E541EC /* CKCurlCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCurlCommon.h; sourceTree = "<group>"; };
+		3C45AD5923D831A900E541EC /* CKCurlCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCurlCommon.m; sourceTree = "<group>"; };
 		3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 		3C57F49E23B0220300DCCB54 /* SupportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportType.swift; sourceTree = "<group>"; };
@@ -386,6 +390,8 @@
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
 				3CF3482523A56CA1000382CE /* CKEVOIDList.h */,
 				3CF3482623A56CA1000382CE /* CKEVOIDList.m */,
+				3C45AD5823D831A900E541EC /* CKCurlCommon.h */,
+				3C45AD5923D831A900E541EC /* CKCurlCommon.m */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3CC1E9321F035A3400ED9BAA /* curl.framework */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
@@ -633,6 +639,7 @@
 				3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */,
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
+				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
 				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
 				3CB94044225036FC0055C067 /* CKAppleCertificateChainGetter.h in Headers */,
@@ -872,6 +879,7 @@
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
 				3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */,
 				3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */,
+				3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */,
 				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
 				3CB9403E225035E80055C067 /* (null) in Sources */,
 				3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */,

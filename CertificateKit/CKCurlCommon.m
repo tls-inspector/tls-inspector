@@ -1,5 +1,5 @@
 //
-//  CKEVOIDList.h
+//  CKCurlCommon.h
 //
 //  MIT License
 //
@@ -24,14 +24,42 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "CKCurlCommon.h"
 
-NS_ASSUME_NONNULL_BEGIN
+static id _instance;
 
-@interface CKEVOIDList : NSObject
+@implementation CKCurlCommon
 
-@property (strong, nonatomic, nonnull, readonly) NSDictionary<NSString *, NSString *> * oidMap;
++ (CKCurlCommon *) sharedInstance {
+    if (!_instance) {
+        _instance = [CKCurlCommon new];
+    }
+    return _instance;
+}
+
+- (CURL *) curlHandle {
+    CURL * curl;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+    if (!curl) {
+        return nil;
+    }
+
+    if (Console.level == CKLoggingLevelDebug) {
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, libcurl_write_callback);
+    } else {
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
+    }
+
+    return curl;
+}
+
+size_t libcurl_write_callback(char *ptr, size_t size, size_t nmemb, void *userdata) {
+    NSString * string = [[NSString alloc] initWithUTF8String:ptr];
+    [Console writeDebug:string];
+    return size * nmemb;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

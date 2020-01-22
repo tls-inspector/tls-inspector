@@ -24,7 +24,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#import "CertificateKit.h"
 #import "CKOCSPManager.h"
+#import "CKCurlCommon.h"
 #import <openssl/x509.h>
 #import <openssl/ocsp.h>
 #import <openssl/err.h>
@@ -150,22 +152,14 @@ static CKOCSPManager * _instance;
 }
 
 - (void) queryOCSPResponder:(NSURL *)responder withRequest:(NSData *)request resp:(OCSP_BASICRESP **)resp error:(NSError **)error {
-    CURL * curl;
-    
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
+    CURL * curl = [[CKCurlCommon sharedInstance] curlHandle];
     if (!curl) {
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_CURL_LIBRARY userInfo:@{NSLocalizedDescriptionKey: @"Error initalizing CURL library"}];
         PError(@"Error initalizing the CURL library. This shouldn't happen!");
         return;
     }
-    
-#ifdef DEBUG
-    curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-#endif
-    
+
     self.responseDataBuffer = [NSMutableData new];
-    
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString * version = infoDictionary[@"CFBundleShortVersionString"];
     NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];

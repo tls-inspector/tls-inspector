@@ -1,5 +1,5 @@
 //
-//  CKEVOIDList.h
+//  CKCurlCommon.h
 //
 //  MIT License
 //
@@ -25,12 +25,14 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#include <curl/curl.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CKEVOIDList : NSObject
+@interface CKCurlCommon : NSObject
 
-@property (strong, nonatomic, nonnull, readonly) NSDictionary<NSString *, NSString *> * oidMap;
++ (CKCurlCommon *) sharedInstance;
+- (CURL *) curlHandle;
 
 @end
 

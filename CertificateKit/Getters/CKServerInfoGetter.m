@@ -26,6 +26,7 @@
 
 #import "CKServerInfoGetter.h"
 #import "CKServerInfo.h"
+#import "CKCurlCommon.h"
 #include <curl/curl.h>
 
 @interface CKServerInfoGetter ()
@@ -59,71 +60,63 @@
 }
 
 - (void) getServerInfoForURL:(NSURL *)url finished:(void (^)(NSError * error))finished {
-    CURL * curl;
     CURLcode response;
-
-    curl_global_init(CURL_GLOBAL_DEFAULT);
+    CURL * curl = [[CKCurlCommon sharedInstance] curlHandle];
+    if (!curl) {
+        PError(@"Unable to create curl session (this shouldn't happen!)");
+        curl_global_cleanup();
+        finished([NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to create curl session."}]);
+        return;
+    }
 
     self.headers = [NSMutableDictionary new];
-
     NSError * error;
+    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
+    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
 
-    curl = curl_easy_init();
-    if (curl) {
-#ifdef DEBUG
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-#endif
+    PDebug(@"Server Info Request: HTTP GET %@", url.absoluteString);
 
-        NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-        NSString * version = infoDictionary[@"CFBundleShortVersionString"];
-        NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
+    const char * urlString = url.absoluteString.UTF8String;
+    curl_easy_setopt(curl, CURLOPT_URL, urlString);
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
+    // Since we're only concerned with getting the HTTP servers
+    // info, we don't do any verification
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
-        PDebug(@"Server Info Request: HTTP GET %@", url.absoluteString);
-        
-        const char * urlString = url.absoluteString.UTF8String;
-        curl_easy_setopt(curl, CURLOPT_URL, urlString);
-        curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
-        // Since we're only concerned with getting the HTTP servers
-        // info, we don't do any verification
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, server_info_write_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, server_info_header_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-        curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 10L); // Only follow up-to 10 redirects
-        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L); // Give up after 5 seconds
-        curl_easy_setopt(curl, CURLOPT_COOKIEFILE, ""); // Start the cookie engile (but don't save cookies)
-        // Perform the request, res will get the return code
-        response = curl_easy_perform(curl);
-        if (response == CURLE_OK) {
-            char *urlstr = NULL;
-            curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &urlstr);
-            if (urlstr != NULL) {
-                NSURL * redirectURL = [NSURL URLWithString:[NSString stringWithCString:urlstr encoding:NSASCIIStringEncoding]];
-                PWarn(@"Server redirected to: '%@'", redirectURL.absoluteString);
-                if (![url.host isEqualToString:redirectURL.host]) {
-                    self.redirectedTo = redirectURL;
-                }
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, server_info_write_callback);
+    curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, server_info_header_callback);
+    curl_easy_setopt(curl, CURLOPT_HEADERDATA, self.headers);
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 10L); // Only follow up-to 10 redirects
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L); // Give up after 5 seconds
+    curl_easy_setopt(curl, CURLOPT_COOKIEFILE, ""); // Start the cookie engile (but don't save cookies)
+    // Perform the request, res will get the return code
+    response = curl_easy_perform(curl);
+    if (response == CURLE_OK) {
+        char *urlstr = NULL;
+        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &urlstr);
+        if (urlstr != NULL) {
+            NSURL * redirectURL = [NSURL URLWithString:[NSString stringWithCString:urlstr encoding:NSASCIIStringEncoding]];
+            PWarn(@"Server redirected to: '%@'", redirectURL.absoluteString);
+            if (![url.host isEqualToString:redirectURL.host]) {
+                self.redirectedTo = redirectURL;
             }
-        } else {
-            // Check for errors
-            NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
-            PError(@"Error getting server info: %@", errString);
-            error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
         }
-
-        long http_code = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-        self.statusCode = http_code;
-        PDebug(@"Server Info HTTP Response: %ld", http_code);
-
-        // always cleanup
-        curl_easy_cleanup(curl);
     } else {
-        error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to create curl session."}];
-        PError(@"Unable to create curl session (this shouldn't happen!)");
+        // Check for errors
+        NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
+        PError(@"Error getting server info: %@", errString);
+        error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
     }
+
+    long http_code = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+    self.statusCode = http_code;
+    PDebug(@"Server Info HTTP Response: %ld", http_code);
+
+    // always cleanup
+    curl_easy_cleanup(curl);
     curl_global_cleanup();
     finished(error);
 }
