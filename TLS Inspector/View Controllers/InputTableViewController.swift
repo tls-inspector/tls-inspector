@@ -161,12 +161,13 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     // MARK: Getter Delegate Methods
     func finishedGetter(_ getter: CKGetter) {
         print("Getter finished")
-        guard let chain = self.certificateChain else {
-            showInputError()
-            return
-        }
-
         RunOnMain {
+            guard let chain = self.certificateChain else {
+                print("Getter finished but no chain present?")
+                self.showInputError()
+                return
+            }
+
             UserOptions.inspectionsWithVerboseLogging += 1
             CERTIFICATE_CHAIN = chain
             SERVER_INFO = self.serverInfo
@@ -203,9 +204,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {
-        self.chainError = error
-        print("Error getting certificate chain")
+        print("Error getting certificate chain: \(error)")
         RunOnMain {
+            self.chainError = error
             self.pendingCellState = .error
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
@@ -213,9 +214,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
-        self.serverError = error
-        print("Error getting server info")
+        print("Error getting server info: \(error)")
         RunOnMain {
+            self.serverError = error
             self.pendingCellState = .error
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
