@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 /**
  *  The common name of the certificate
  */
-@property (strong, nonatomic, nullable, readonly) NSString * summary;
+@property (strong, nonatomic, nonnull, readonly) NSString * summary;
 
 /**
  *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.
@@ -125,6 +125,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  Returns the serial number for the certificate
  */
 @property (strong, nonatomic, nullable, readonly) NSString * serialNumber;
+
+/**
+ *  Returns the certificate version
+ */
+@property (strong, nonatomic, nullable, readonly) NSNumber * version;
 
 /**
  *  Returns the human readable signature algorithm
@@ -225,6 +230,8 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  Get an array of TLS features for this certificate
  */
 @property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * tlsFeatures;
+
+@property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * keyIdentifiers;
 
 /**
  *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.

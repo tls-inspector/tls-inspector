@@ -253,6 +253,7 @@ INSERT_OPENSSL_ERROR_METHOD
     self.chain.certificates = certs;
 
     self.chain.domain = queryURL.host;
+    self.chain.url = queryURL;
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
@@ -291,8 +292,8 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     PDebug(@"Finished getting certificate chain");
-    [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
+    [self.delegate getter:self finishedTaskWithResult:self.chain];
 }
 
 int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {

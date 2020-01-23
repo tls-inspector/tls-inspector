@@ -26,6 +26,7 @@
 
 #import "CKCertificate.h"
 #import "NSDate+ASN1_TIME.h"
+#import "CKEVOIDList.h"
 
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
@@ -38,7 +39,7 @@
 @interface CKCertificate()
 
 @property (nonatomic) X509 * certificate;
-@property (strong, nonatomic, readwrite) NSString * summary;
+@property (strong, nonatomic, nonnull, readwrite) NSString * summary;
 @property (strong, nonatomic) NSArray<CKAlternateNameObject *> * subjectAltNames;
 @property (strong, nonatomic, readwrite) CKCertificatePublicKey * publicKey;
 @property (strong, nonatomic, nonnull, readwrite) CKNameObject * subject;
@@ -53,6 +54,7 @@
 @property (strong, nonatomic, nullable, readwrite) NSURL * ocspURL;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSString *> * tlsFeatures;
+@property (strong, nonatomic, nullable, readwrite) NSDictionary<NSString *, NSString *> * keyIdentifiers;
 
 @end
 
@@ -77,20 +79,20 @@ INSERT_OPENSSL_ERROR_METHOD
     xcert.issuer = [CKNameObject fromSubject:X509_get_issuer_name(cert)];
 
     // Keep trying with each subject name for the summary
-    if (xcert.subject.commonName.length > 0) {
-        xcert.summary = xcert.subject.commonName;
-    } else if (xcert.subject.organizationalUnitName.length > 0) {
-        xcert.summary = xcert.subject.organizationalUnitName;
-    } else if (xcert.subject.organizationName.length > 0) {
-        xcert.summary = xcert.subject.organizationName;
-    } else if (xcert.subject.emailAddress.length > 0) {
-        xcert.summary = xcert.subject.emailAddress;
-    } else if (xcert.subject.countryName.length > 0) {
-        xcert.summary = xcert.subject.countryName;
-    } else if (xcert.subject.stateOrProvinceName.length > 0) {
-        xcert.summary = xcert.subject.stateOrProvinceName;
-    } else if (xcert.subject.localityName.length > 0) {
-        xcert.summary = xcert.subject.localityName;
+    if (xcert.subject.commonNames.count > 0) {
+        xcert.summary = xcert.subject.commonNames[0];
+    } else if (xcert.subject.organizationalUnits.count > 0) {
+        xcert.summary = xcert.subject.organizationalUnits[0];
+    } else if (xcert.subject.organizations.count > 0) {
+        xcert.summary = xcert.subject.organizations[0];
+    } else if (xcert.subject.emailAddresses.count > 0) {
+        xcert.summary = xcert.subject.emailAddresses[0];
+    } else if (xcert.subject.countryCodes.count > 0) {
+        xcert.summary = xcert.subject.countryCodes[0];
+    } else if (xcert.subject.states.count > 0) {
+        xcert.summary = xcert.subject.states[0];
+    } else if (xcert.subject.cities.count > 0) {
+        xcert.summary = xcert.subject.cities[0];
     } else {
         xcert.summary = @"Untitled Certificate";
     }
@@ -176,6 +178,32 @@ INSERT_OPENSSL_ERROR_METHOD
         TLS_FEATURE_free(tlsFeatures);
     }
 
+    // Get key identifiers
+    {
+        NSMutableDictionary<NSString *, NSString *> * identifiers = [NSMutableDictionary new];
+
+        ASN1_OCTET_STRING * subjectIdentifier = X509_get_ext_d2i(cert, NID_subject_key_identifier, NULL, NULL);
+        AUTHORITY_KEYID * authorityIdentifier = X509_get_ext_d2i(cert, NID_authority_key_identifier, NULL, NULL);
+
+        if (subjectIdentifier != NULL && subjectIdentifier->data != NULL) {
+            NSString * subject = [CKCertificate asn1OctetStringToHexString:subjectIdentifier];
+            if (subject != nil) {
+                identifiers[@"subject"] = subject;
+            }
+        }
+
+        if (authorityIdentifier != NULL && authorityIdentifier->keyid != NULL) {
+            NSString * authority = [CKCertificate asn1OctetStringToHexString:authorityIdentifier->keyid];
+            if (authority != nil) {
+                identifiers[@"authority"] = authority;
+            }
+        }
+
+        if (identifiers.allKeys.count > 0) {
+            xcert.keyIdentifiers = identifiers;
+        }
+    }
+
     return xcert;
 }
 
@@ -211,6 +239,8 @@ INSERT_OPENSSL_ERROR_METHOD
         case CKCertificateFingerprintTypeMD5:
             digest = EVP_md5();
             break;
+        default:
+            return nil;
     }
 
     unsigned char fingerprint[EVP_MAX_MD_SIZE];
@@ -219,7 +249,7 @@ INSERT_OPENSSL_ERROR_METHOD
     if (X509_digest(self.certificate, digest, fingerprint, &fingerprint_size) < 0) {
         [self openSSLError];
         PError(@"Unable to generate certificate fingerprint");
-        return @"";
+        return nil;
     }
 
     NSMutableString * fingerprintString = [NSMutableString new];
@@ -251,6 +281,10 @@ INSERT_OPENSSL_ERROR_METHOD
     } else {
         return [[NSNumber numberWithLong:value] stringValue];
     }
+}
+
+- (NSNumber *) version {
+    return [NSNumber numberWithLong:X509_get_version((X509 *)self.X509Certificate)];
 }
 
 - (NSString *) signatureAlgorithm {
@@ -368,36 +402,7 @@ INSERT_OPENSSL_ERROR_METHOD
 }
 
 - (NSString *) extendedValidationAuthority {
-    NSDictionary<NSString *, NSString *> * EV_MAP = @{
-        @"1.3.159.1.17.1":               @"Actalis",
-        @"1.3.6.1.4.1.34697.2.1":        @"AffirmTrust",
-        @"1.3.6.1.4.1.34697.2.2":        @"AffirmTrust",
-        @"1.3.6.1.4.1.34697.2.3":        @"AffirmTrust",
-        @"1.3.6.1.4.1.34697.2.4":        @"AffirmTrust",
-        @"2.16.578.1.26.1.3.3":          @"Buypass",
-        @"1.3.6.1.4.1.6449.1.2.1.5.1":   @"Comodo Group",
-        @"2.16.840.1.114412.2.1":        @"DigiCert",
-        @"2.16.840.1.114412.1.3.0.2":    @"DigiCert",
-        @"2.16.792.3.0.4.1.1.4":         @"E-Tugra",
-        @"2.16.840.1.114028.10.1.2":     @"Entrust",
-        @"1.3.6.1.4.1.14370.1.6":        @"GeoTrust",
-        @"1.3.6.1.4.1.4146.1.1":         @"GlobalSign",
-        @"2.16.840.1.114413.1.7.23.3":   @"Go Daddy",
-        @"1.3.6.1.4.1.14777.6.1.1":      @"Izenpe",
-        @"1.3.6.1.4.1.782.1.2.1.8.1":    @"Network Solutions",
-        @"1.3.6.1.4.1.22234.2.5.2.3.1":  @"OpenTrust/DocuSign France",
-        @"1.3.6.1.4.1.8024.0.2.100.1.2": @"QuoVadis",
-        @"1.2.392.200091.100.721.1":     @"SECOM Trust Systems",
-        @"2.16.840.1.114414.1.7.23.3":   @"Starfield Technologies",
-        @"2.16.756.1.83.21.0":           @"Swisscom",
-        @"2.16.756.1.89.1.2.1.1":        @"SwissSign",
-        @"2.16.840.1.113733.1.7.48.1":   @"Thawte",
-        @"2.16.840.1.114404.1.1.2.4.1":  @"Trustwave",
-        @"2.16.840.1.113733.1.7.23.6":   @"Symantec (VeriSign)",
-        @"1.3.6.1.4.1.6334.1.100.1":     @"Verizon Business/Cybertrust",
-        @"2.16.840.1.114171.500.9":      @"Wells Fargo"
-    };
-
+    CKEVOIDList * evOIDlist = [CKEVOIDList new];
     CERTIFICATEPOLICIES * policies = X509_get_ext_d2i(self.certificate, NID_certificate_policies, NULL, NULL);
     int numberOfPolicies = sk_POLICYINFO_num(policies);
 
@@ -411,7 +416,7 @@ INSERT_OPENSSL_ERROR_METHOD
         char buff[POLICY_BUFF_MAX];
         OBJ_obj2txt(buff, POLICY_BUFF_MAX, policy->policyid, 0);
         oid = [NSString stringWithUTF8String:buff];
-        evAgency = [EV_MAP objectForKey:oid];
+        evAgency = [evOIDlist.oidMap objectForKey:oid];
         if (evAgency) {
             sk_POLICYINFO_free(policies);
             return evAgency;
@@ -477,6 +482,32 @@ INSERT_OPENSSL_ERROR_METHOD
         }
     }
     return values;
+}
+
++ (NSString *) asn1OctetStringToHexString:(ASN1_OCTET_STRING *)str {
+    unsigned char * buffer = str->data;
+    int len = str->length;
+
+    char *tmp, *q;
+    const unsigned char *p;
+    int i;
+    static const char hexdig[] = "0123456789ABCDEF";
+    if (!buffer || !len)
+        return nil;
+    if (!(tmp = malloc(len * 3 + 1))) {
+        return nil;
+    }
+    q = tmp;
+    for (i = 0, p = buffer; i < len; i++, p++) {
+        *q++ = hexdig[(*p >> 4) & 0xf];
+        *q++ = hexdig[*p & 0xf];
+        *q++ = ':';
+    }
+    q[-1] = 0;
+
+    NSString * string = [[NSString alloc] initWithUTF8String:tmp];
+    free(tmp);
+    return string;
 }
 
 @end

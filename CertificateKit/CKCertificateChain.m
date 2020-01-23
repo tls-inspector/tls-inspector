@@ -35,11 +35,11 @@
     // Expired/Not Valid
     for (CKCertificate * cert in self.certificates) {
         if (cert.isExpired) {
-            PWarn(@"Certificate: '%@' expired on: %@", cert.subject.commonName, cert.notAfter.description);
+            PWarn(@"Certificate: '%@' expired on: %@", cert.subject.commonNames, cert.notAfter.description);
             self.trusted = CKCertificateChainTrustStatusInvalidDate;
             return;
         } else if (cert.isNotYetValid) {
-            PWarn(@"Certificate: '%@' is not yet valid until: %@", cert.subject.commonName, cert.notBefore.description);
+            PWarn(@"Certificate: '%@' is not yet valid until: %@", cert.subject.commonNames, cert.notBefore.description);
             self.trusted = CKCertificateChainTrustStatusInvalidDate;
             return;
         }
@@ -47,14 +47,14 @@
 
     // SHA-1 Leaf
     if ([self.server.signatureAlgorithm hasPrefix:@"sha1"]) {
-        PWarn(@"Certificate: '%@' is using SHA-1", self.server.subject.commonName);
+        PWarn(@"Certificate: '%@' is using SHA-1: '%@'", self.server.subject.commonNames, self.server.signatureAlgorithm);
         self.trusted = CKCertificateChainTrustStatusSHA1Leaf;
         return;
     }
 
     // SHA-1 Intermediate
     if ([self.intermediateCA.signatureAlgorithm hasPrefix:@"sha1"]) {
-        PWarn(@"Certificate: '%@' is using SHA-1", self.intermediateCA.subject.commonName);
+        PWarn(@"Certificate: '%@' is using SHA-1: '%@'", self.intermediateCA.subject.commonNames, self.intermediateCA.signatureAlgorithm);
         self.trusted = CKCertificateChainTrustStatusSHA1Intermediate;
         return;
     }
@@ -68,21 +68,21 @@
 
     // Revoked Leaf
     if (self.server.revoked.isRevoked) {
-        PWarn(@"Certificate: '%@' is revoked", self.server.subject.commonName);
+        PWarn(@"Certificate: '%@' is revoked", self.server.subject.commonNames);
         self.trusted = CKCertificateChainTrustStatusRevokedLeaf;
         return;
     }
 
     // Revoked Intermedia
     if (self.intermediateCA.revoked.isRevoked) {
-        PWarn(@"Certificate: '%@' is revoked", self.intermediateCA.subject.commonName);
+        PWarn(@"Certificate: '%@' is revoked", self.intermediateCA.subject.commonNames);
         self.trusted = CKCertificateChainTrustStatusRevokedIntermediate;
         return;
     }
 
     // Wrong Host
     if (self.server.alternateNames.count == 0) {
-        PWarn(@"Certificate: '%@' has no subject alternate names", self.server.subject.commonName);
+        PWarn(@"Certificate: '%@' has no subject alternate names", self.server.subject.commonNames);
         self.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
@@ -127,13 +127,13 @@
         }
     }
     if (!match) {
-        PWarn(@"Certificate: '%@' has no subject alternate names that match: '%@'", self.server.subject.commonName, self.domain);
+        PWarn(@"Certificate: '%@' has no subject alternate names that match: '%@'", self.server.subject.commonNames, self.domain);
         self.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
 
     // Fallback (We don't know)
-    PWarn(@"Unable to determine why certificate: '%@' is untrusted", self.server.subject.commonName);
+    PWarn(@"Unable to determine why certificate: '%@' is untrusted", self.server.subject.commonNames);
     self.trusted = CKCertificateChainTrustStatusUntrusted;
     return;
 }

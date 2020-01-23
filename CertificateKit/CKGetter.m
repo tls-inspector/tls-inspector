@@ -38,6 +38,8 @@
 @property (strong, nonatomic, nonnull) CKCertificateChainGetter * chainGetter;
 @property (strong, nonatomic, nonnull) CKServerInfoGetter * serverInfoGetter;
 @property (strong, nonatomic, nonnull) NSArray<CKGetterTask *> * tasks;
+@property (nonatomic) BOOL didCallFinished;
+@property (strong, nonatomic) NSObject * finishedMutex;
 
 @end
 
@@ -57,6 +59,8 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 - (void) getInfoForURL:(NSURL *)URL; {
     PDebug(@"Starting getter for: %@", URL.absoluteString);
 
+    self.url = URL;
+
     if (self.options.useOpenSSL) {
         self.chainGetter = [CKOpenSSLCertificateChainGetter new];
     } else {
@@ -70,6 +74,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
     self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
+    self.finishedMutex = [NSObject new];
 
     NSMutableArray<CKGetterTask *> * tasks = [NSMutableArray arrayWithCapacity:2];
     [tasks addObject:self.chainGetter];
@@ -86,12 +91,14 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 - (void) getter:(CKGetterTask *)getter finishedTaskWithResult:(id)data {
     switch (getter.tag) {
         case CKGetterTaskTagChain:
+            PDebug(@"Certificate chain task finished");
             self.chain = (CKCertificateChain *)data;
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotCertificateChain:)]) {
                 [self.delegate getter:self gotCertificateChain:self.chain];
             }
             break;
         case CKGetterTaskTagServerInfo:
+            PDebug(@"Server info task finished");
             self.serverInfo = (CKServerInfo *)data;
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:gotServerInfo:)]) {
                 [self.delegate getter:self gotServerInfo:self.serverInfo];
@@ -100,20 +107,20 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         default:
             break;
     }
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self checkIfFinished];
-    });
+    
+    [self checkIfFinished];
 }
 
 - (void) getter:(CKGetterTask *)getter failedTaskWithError:(NSError *)error {
     switch (getter.tag) {
         case CKGetterTaskTagChain:
+            PDebug(@"Certificate chain task failed");
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingCertificateChain:)]) {
                 [self.delegate getter:self errorGettingCertificateChain:error];
             }
             break;
         case CKGetterTaskTagServerInfo:
+            PDebug(@"Server info task failed");
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:errorGettingServerInfo:)]) {
                 [self.delegate getter:self errorGettingServerInfo:error];
             }
@@ -122,23 +129,36 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             break;
     }
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self checkIfFinished];
-    });
+    [self checkIfFinished];
 }
 
 - (void) checkIfFinished {
+    PDebug(@"Checking if all tasks are finished");
     BOOL allFinished = YES;
     for (CKGetterTask * task in self.tasks) {
         if (!task.finished) {
+            switch (task.tag) {
+                case CKGetterTaskTagChain:
+                    PDebug(@"Certificate chain task not finished");
+                    break;
+                case CKGetterTaskTagServerInfo:
+                    PDebug(@"Server info task not finished");
+                    break;
+                default:
+                    PDebug(@"Unknown task (%u) not finished", (unsigned int)task.tag);
+                    break;
+            }
             allFinished = NO;
             break;
         }
     }
-    if (allFinished) {
-        PDebug(@"Getter finished all tasks");
-        if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
-            [self.delegate finishedGetter:self];
+    @synchronized (self.finishedMutex) {
+        if (allFinished && !self.didCallFinished) {
+            self.didCallFinished = YES;
+            PDebug(@"Getter finished all tasks");
+            if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
+                [self.delegate finishedGetter:self];
+            }
         }
     }
 }

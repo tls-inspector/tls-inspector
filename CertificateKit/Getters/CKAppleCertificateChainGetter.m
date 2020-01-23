@@ -167,6 +167,7 @@
     self.chain.certificates = certs;
 
     self.chain.domain = queryURL.host;
+    self.chain.url = queryURL;
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
@@ -211,8 +212,8 @@
     }
 
     PDebug(@"Finished getting certificate chain");
-    [self.delegate getter:self finishedTaskWithResult:self.chain];
     self.finished = YES;
+    [self.delegate getter:self finishedTaskWithResult:self.chain];
 }
 
 - (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {

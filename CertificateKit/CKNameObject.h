@@ -40,33 +40,39 @@
 + (CKNameObject * _Nonnull) fromSubject:(void * _Nonnull)name;
 
 /**
- The common name of the name.
+ All common names in this name object
  */
-@property (strong, nonatomic, nullable, readonly) NSString * commonName;
+@property (strong, nonatomic, nonnull, readonly) NSArray<NSString *> * commonNames;
+
 /**
- The ISO 3166 2-letter country code for the name.
+ All 2-letter country codes in this name object
  */
-@property (strong, nonatomic, nullable, readonly) NSString * countryName;
+@property (strong, nonatomic, nonnull, readonly) NSArray<NSString *> * countryCodes;
+
 /**
- The state or province for the name.
+ All states (provinces) in this name object
  */
-@property (strong, nonatomic, nullable, readonly) NSString * stateOrProvinceName;
+@property (strong, nonatomic, nonnull, readonly) NSArray<NSString *> * states;
+
 /**
- The city name for the name.
+ All cities (localities) in this name object
  */
-@property (strong, nonatomic, nullable, readonly) NSString * localityName;
+@property (strong, nonatomic, nonnull, readonly) NSArray<NSString *> * cities;
+
 /**
- The organization name for the name.
+ All organization names in this name object
  */
-@property (strong, nonatomic, nullable, readonly) NSString * organizationName;
+@property (strong, nonatomic, nonnull, readonly) NSArray<NSString *> * organizations;
+
 /**
- The organizational unit (department) for the name.
+ All organization unit names in this name object
  */
-@property (strong, nonatomic, nullable, readonly) NSString * organizationalUnitName;
+@property (strong, nonatomic, nonnull, readonly) NSArray<NSString *> * organizationalUnits;
+
 /**
- The PKCS9 Email Address for the name. Non-standard.
+ All PKCS#9 Email-Addresses in this name object
  */
-@property (strong, nonatomic, nullable, readonly) NSString * emailAddress;
+@property (strong, nonatomic, nonnull, readonly) NSArray<NSString *> * emailAddresses;
 
 @end
 

@@ -4,6 +4,12 @@
 <dict>
 	<key>1 month</key>
 	<string>1 month</string>
+	<key>2 weeks</key>
+	<string>2 weeks</string>
+	<key>3 months</key>
+	<string>3 months</string>
+	<key>6 months</key>
+	<string>6 months</string>
 	<key>About</key>
 	<string>About</string>
 	<key>About TLS Inspector</key>
@@ -12,26 +18,18 @@
 	<string>Add Certificate Expiry Reminder</string>
 	<key>Advanced Options</key>
 	<string>Advanced Options</string>
-	<key>Advanced Settings</key>
-	<string>Advanced Settings</string>
 	<key>Algorithm</key>
 	<string>Algorithm</string>
 	<key>Algorithms</key>
 	<string>Algorithms</string>
-	<key>All feedback is appreciated!</key>
-	<string>All feedback is appreciated!</string>
 	<key>Alternate Names</key>
 	<string>Alternate Names</string>
-	<key>An error occurred</key>
-	<string>An error occurred</string>
-	<key>Appearance</key>
-	<string>Appearance</string>
 	<key>Apple Support</key>
 	<string>Apple Support</string>
-	<key>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</key>
-	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
-	<key>Both values matched.</key>
-	<string>Both values matched.</string>
+	<key>Authority</key>
+	<string>Authority</string>
+	<key>Basic</key>
+	<string>Basic</string>
 	<key>Build</key>
 	<string>Build</string>
 	<key>Cancel</key>
@@ -78,26 +76,18 @@
 	<string>Certificate uses insecure SHA1 algorithm.</string>
 	<key>Certificates</key>
 	<string>Certificates</string>
-	<key>Change</key>
-	<string>Change</string>
-	<key>Change App Icon</key>
-	<string>Change App Icon</string>
-	<key>Change Icon</key>
-	<string>Change Icon</string>
-	<key>Change Theme</key>
-	<string>Change Theme</string>
-	<key>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</key>
-	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
+	<key>Chain</key>
+	<string>Chain</string>
 	<key>Ciphers</key>
 	<string>Ciphers</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
-	<key>Connection refused.</key>
-	<string>Connection refused.</string>
 	<key>Contact Support</key>
 	<string>Contact Support</string>
 	<key>Contact Us</key>
 	<string>Contact Us</string>
+	<key>Contacting support requires that at least one email account be configured on this device.</key>
+	<string>Contacting support requires that at least one email account be configured on this device.</string>
 	<key>Contribute to TLS Inspector</key>
 	<string>Contribute to TLS Inspector</string>
 	<key>Copy</key>
@@ -584,14 +574,18 @@
 	<string>Zimbabwe</string>
 	<key>Crypto Engine</key>
 	<string>Crypto Engine</string>
-	<key>Dark</key>
-	<string>Dark</string>
 	<key>Debug Logging Enabled</key>
 	<string>Debug Logging Enabled</string>
+	<key>Delete</key>
+	<string>Delete</string>
 	<key>Did You Know:</key>
 	<string>Did You Know:</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
+	<key>Do not contact support for issues with your iOS Device or to report unsafe websites.</key>
+	<string>Do not contact support for issues with your iOS Device or to report unsafe websites.</string>
+	<key>Domain Name or IP Address</key>
+	<string>Domain Name or IP Address</string>
 	<key>Download &amp; Check CRL</key>
 	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
@@ -604,8 +598,12 @@
 	<string>Enter the value to verify</string>
 	<key>Errors</key>
 	<string>Errors</string>
-	<key>FQDN or IP Address</key>
-	<string>FQDN or IP Address</string>
+	<key>Extended</key>
+	<string>Extended</string>
+	<key>Features</key>
+	<string>Features</string>
+	<key>Feedback</key>
+	<string>Feedback</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
 	<key>Finished</key>
@@ -624,6 +622,8 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
+	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
+	<string>If you believe this to be in error, contact support from within the TLS Inspector app.</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
 	<key>Internal error.</key>
@@ -640,6 +640,8 @@
 	<string>Key</string>
 	<key>Key Algorithm</key>
 	<string>Key Algorithm</string>
+	<key>Key Identifier</key>
+	<string>Key Identifier</string>
 	<key>Key Usage</key>
 	<string>Key Usage</string>
 	<key>KeyAlgorithm::dsaEncryption</key>
@@ -648,8 +650,6 @@
 	<string>ECDSA</string>
 	<key>KeyAlgorithm::rsaEncryption</key>
 	<string>RSA</string>
-	<key>Light</key>
-	<string>Light</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
 	<key>Locally Trusted Chain</key>
@@ -658,14 +658,28 @@
 	<string>Logging</string>
 	<key>MD5</key>
 	<string>MD5</string>
+	<key>Mail Account Required</key>
+	<string>Mail Account Required</string>
+	<key>Metadata</key>
+	<string>Metadata</string>
 	<key>More</key>
 	<string>More</string>
 	<key>More Info</key>
 	<string>More Info</string>
-	<key>Negotiated Cipher Suite</key>
-	<string>Negotiated Cipher Suite</string>
+	<key>Negotiated Ciphersuite</key>
+	<string>Negotiated Ciphersuite</string>
 	<key>Negotiated Version</key>
 	<string>Negotiated Version</string>
+	<key>Next</key>
+	<string>Next</string>
+	<key>No</key>
+	<string>No</string>
+	<key>No Supported URL Found</key>
+	<string>No Supported URL Found</string>
+	<key>Not After</key>
+	<string>Not After</string>
+	<key>Not Before</key>
+	<string>Not Before</string>
 	<key>Not Valid After</key>
 	<string>Not Valid After</string>
 	<key>Not Valid Before</key>
@@ -676,26 +690,28 @@
 	<string>Notice</string>
 	<key>Notification Date</key>
 	<string>Notification Date</string>
+	<key>Only HTTPS URLs can be inspected</key>
+	<string>Only HTTPS URLs can be inspected</string>
 	<key>OpenSSL</key>
 	<string>OpenSSL</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
 	<key>Options</key>
 	<string>Options</string>
-	<key>Pride</key>
-	<string>Pride</string>
+	<key>Please describe the problem in at least 5 words.</key>
+	<string>Please describe the problem in at least 5 words.</string>
+	<key>Provide Feedback</key>
+	<string>Provide Feedback</string>
 	<key>Proxy Detected</key>
 	<string>Proxy Detected</string>
 	<key>Public Key</key>
 	<string>Public Key</string>
 	<key>Query OCSP Responder</key>
 	<string>Query OCSP Responder</string>
-	<key>Rate TLS Inspector in the App Store</key>
-	<string>Rate TLS Inspector in the App Store</string>
-	<key>Really Dark</key>
-	<string>Really Dark</string>
-	<key>Recent Domains</key>
-	<string>Recent Domains</string>
+	<key>Rate in App Store</key>
+	<string>Rate in App Store</string>
+	<key>Recent Lookups</key>
+	<string>Recent Lookups</string>
 	<key>Remember Recent Lookups</key>
 	<string>Remember Recent Lookups</string>
 	<key>Reminder Added</key>
@@ -706,6 +722,10 @@
 	<string>Renew Certificate for {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Report Issue on GitHub</string>
+	<key>Report a Bug</key>
+	<string>Report a Bug</string>
+	<key>Request a Feature</key>
+	<string>Request a Feature</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
 	<key>SHA-128</key>
@@ -720,16 +740,18 @@
 	<string>Search on crt.sh</string>
 	<key>Security HTTP Headers</key>
 	<string>Security HTTP Headers</string>
+	<key>Select Feedback Type</key>
+	<string>Select Feedback Type</string>
 	<key>Server Info</key>
 	<string>Server Info</string>
 	<key>Server Redirected To</key>
 	<string>Server Redirected To</string>
-	<key>Share</key>
-	<string>Share</string>
 	<key>Share &amp; Feedback</key>
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Share TLS Inspector</key>
+	<string>Share TLS Inspector</string>
 	<key>Show Certificate Fingerprint</key>
 	<string>Show Certificate Fingerprint</string>
 	<key>Show HTTP Headers</key>
@@ -742,12 +764,12 @@
 	<string>Signature Algorithm</string>
 	<key>Size</key>
 	<string>Size</string>
+	<key>Something Else</key>
+	<string>Something Else</string>
 	<key>Subject</key>
 	<string>Subject</string>
-	<key>Subject Alt. Names</key>
-	<string>Subject Alt. Names</string>
-	<key>Subject Alternative Names</key>
-	<string>Subject Alternative Names</string>
+	<key>Subject Alternate Names</key>
+	<string>Subject Alternate Names</string>
 	<key>Subject Names</key>
 	<string>Subject Names</string>
 	<key>Subject::C</key>
@@ -774,12 +796,8 @@
 	<string>TLS Features</string>
 	<key>TLS Inspector</key>
 	<string>TLS Inspector</string>
-	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</key>
-	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016 Ian Spence.</string>
-	<key>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</key>
-	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2018 Ian Spence.</string>
-	<key>TLS Inspector is using the appearance settings of your device.</key>
-	<string>TLS Inspector is using the appearance settings of your device.</string>
+	<key>TLS Inspector Issues Only</key>
+	<string>TLS Inspector Issues Only</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>
@@ -788,18 +806,26 @@
 	<string>The certificate for {0} expires on {1}</string>
 	<key>The host you provided is not valid</key>
 	<string>The host you provided is not valid</string>
-	<key>Theme</key>
-	<string>Theme</string>
-	<key>There were one or more errors while inspecting {host}</key>
-	<string>There were one or more errors while inspecting {0}</string>
-	<key>Trans</key>
-	<string>Trans</string>
+	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
+	<string>Trust &amp; Safety On-The-Go with TLS Inspector: {0}</string>
+	<key>Trust Details</key>
+	<string>Trust Details</string>
+	<key>Trusted</key>
+	<string>Trusted</string>
 	<key>Trusted Chain</key>
 	<string>Trusted Chain</string>
+	<key>Unable to Inspect</key>
+	<string>Unable to Inspect</string>
+	<key>Unable to export certificate</key>
+	<string>Unable to export certificate</string>
 	<key>Understood</key>
 	<string>Understood</string>
+	<key>Unknown</key>
+	<string>Unknown</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
+	<key>Use the Reminders app to customize the reminder</key>
+	<string>Use the Reminders app to customize the reminder</string>
 	<key>Valid From</key>
 	<string>Valid From</string>
 	<key>Valid To</key>
@@ -808,14 +834,8 @@
 	<string>Validity Period</string>
 	<key>Value</key>
 	<string>Value</string>
-	<key>Values do not match.</key>
-	<string>Values do not match.</string>
 	<key>Verified</key>
 	<string>Verified</string>
-	<key>Verify</key>
-	<string>Verify</string>
-	<key>Verify Value</key>
-	<string>Verify Value</string>
 	<key>Version</key>
 	<string>Version</string>
 	<key>View All</key>
@@ -824,6 +844,10 @@
 	<string>View all alternate names</string>
 	<key>View on SSL Labs</key>
 	<string>View on SSL Labs</string>
+	<key>Warning</key>
+	<string>Warning</string>
+	<key>We were unable to export the certificate in PEM format.</key>
+	<string>We were unable to export the certificate in PEM format.</string>
 	<key>What does this mean?</key>
 	<string>What does this mean?</string>
 	<key>What kind of feedback would you like to submit?</key>
@@ -832,10 +856,16 @@
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
-	<key>You must inspect at least one site with debug logging enabled before you can submit logs</key>
-	<string>You must inspect at least one site with debug logging enabled before you can submit logs</string>
+	<key>You must inspect at least one site with debug logging enabled before you can submit logs.</key>
+	<string>You must inspect at least one site with debug logging enabled before you can submit logs.</string>
+	<key>advanced_settings_nag</key>
+	<string>These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.</string>
 	<key>certificate_status_footer</key>
 	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
+	<key>copyright_license_footer</key>
+	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2020 Ian Spence.</string>
+	<key>crypto_engine_footer</key>
+	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
 	<key>explanation::invalid_date</key>
 	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
 	<key>explanation::local_trust</key>
@@ -858,8 +888,8 @@
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
 If you&apos;re concerned about the security of your device; contact Apple Support.</string>
-	<key>iOS</key>
-	<string>iOS</string>
+	<key>idn_warning</key>
+	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
 	<key>keyUsage::OCSPSigning</key>
 	<string>OCSP Signing</string>
 	<key>keyUsage::anyExtendedKeyUsage</key>
@@ -893,9 +923,7 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<key>keyUsage::timeStamping</key>
 	<string>Time Stamping</string>
 	<key>proxy_warning</key>
-	<string>An HTTP Proxy was detected. TLS Inspector is not compatible with HTTP Proxies and may interfere with the app.</string>
-	<key>safari_hint</key>
-	<string>You can quickly view the certificate of a website in Safari or other web browser by tapping the “Share” icon and selecting “Show Certificate”.</string>
+	<string>An HTTP Proxy is configured. TLS Inspector is not compatible with HTTP Proxies and it must be disabled from the systems WiFi settings.</string>
 	<key>sanType::DNS</key>
 	<string>DNS</string>
 	<key>sanType::Directory</key>
@@ -908,12 +936,14 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Other</string>
 	<key>sanType::URI</key>
 	<string>URI</string>
+	<key>sanType::Unknown</key>
+	<string>Unknown</string>
 	<key>secure::invalid_date</key>
 	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
 	<key>secure::local_trust</key>
 	<string>Yes. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
 
-Typically, private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance.</string>
+Typically private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance from Apple.</string>
 	<key>secure::revoked</key>
 	<string>No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.
 
@@ -952,8 +982,6 @@ Exercise caution if continuing to this website.</string>
 	<string>You can view more information about the server on Shodan by tapping the &quot;Share&quot; button when viewing a certificate.</string>
 	<key>tlstip3</key>
 	<string>You can create a reminder when a certificate is about to expire by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
-	<key>tlstip4</key>
-	<string>You can change between night and day theme in options.</string>
 	<key>tlstip5</key>
 	<string>You can export the share the certificate data by tapping the &quot;Share&quot; button when inspecting a certificate.</string>
 	<key>tlstip6</key>
@@ -962,8 +990,6 @@ Exercise caution if continuing to this website.</string>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
 	<key>verbose_logging_footer</key>
 	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
-	<key>{0} characters</key>
-	<string>{0} characters</string>
 	<key>{alg}, {len} bits</key>
 	<string>{0}, {1} bits</string>
 	<key>{commonName} (Expired)</key>

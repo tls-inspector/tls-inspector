@@ -1,0 +1,13 @@
+disabled_rules:
+    - identifier_name
+    - trailing_comma
+    - colon
+    - type_body_length
+    - function_body_length
+    - opening_brace
+    - line_length
+    - file_length
+excluded:
+    - 'AppDelegate.swift'
+    - 'SceneDelegate.swift'
+    - 'External/'
