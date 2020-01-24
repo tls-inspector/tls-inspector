@@ -110,15 +110,9 @@ class CertificateChainTableViewController: UITableViewController {
     func buildTable() {
         self.sections = []
 
-        if let section = makeCertificateSection() {
-            self.sections.append(section)
-        }
-        if let section = makeConnectionInfoSection() {
-            self.sections.append(section)
-        }
-        if let section = makeHeadersSection() {
-            self.sections.append(section)
-        }
+        self.sections.maybeAppend(makeCertificateSection())
+        self.sections.maybeAppend(makeConnectionInfoSection())
+        self.sections.maybeAppend(makeHeadersSection())
 
         self.tableView.reloadData()
     }

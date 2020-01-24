@@ -88,7 +88,6 @@ class CertificateTableViewController: UITableViewController {
         self.present(activityController, animated: true, completion: nil)
     }
 
-    // swiftlint:disable cyclomatic_complexity
     func buildTable() {
         guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else {
             return
@@ -108,41 +107,17 @@ class CertificateTableViewController: UITableViewController {
             self.sections.append(issuerSection)
         }
 
-        if let validityPeriodSection = makeValidityPeriodSection() {
-            self.sections.append(validityPeriodSection)
-        }
-
-        if let keyUsageSection = makeKeyUsageSection() {
-            self.sections.append(keyUsageSection)
-        }
-
-        if let featureSection = makeFeatureSection() {
-            self.sections.append(featureSection)
-        }
-
-        if let publicKeySection = makePublicKeySection() {
-            self.sections.append(publicKeySection)
-        }
-
-        if let fingerprintsSection = makeFingerprintsSection() {
-            self.sections.append(fingerprintsSection)
-        }
-
-        if let keyIdentifierSection = makeKeyIdentifierSection() {
-            self.sections.append(keyIdentifierSection)
-        }
-
-        if let metadataSection = makeMetadataSection() {
-            self.sections.append(metadataSection)
-        }
-
-        if let subjectAltNameSection = makeSubjectAltNameSection() {
-            self.sections.append(subjectAltNameSection)
-        }
+        self.sections.maybeAppend(makeValidityPeriodSection())
+        self.sections.maybeAppend(makeKeyUsageSection())
+        self.sections.maybeAppend(makeFeatureSection())
+        self.sections.maybeAppend(makePublicKeySection())
+        self.sections.maybeAppend(makeFingerprintsSection())
+        self.sections.maybeAppend(makeKeyIdentifierSection())
+        self.sections.maybeAppend(makeMetadataSection())
+        self.sections.maybeAppend(makeSubjectAltNameSection())
 
         self.tableView.reloadData()
     }
-    // swiftlint:enable cyclomatic_complexity
 
     func makeNameSection(name: CKNameObject) -> TableViewSection? {
         let section = TableViewSection()
