@@ -80,6 +80,7 @@ class OptionsTableViewController: UITableViewController {
 
     @objc func changeShowTips(sender: UISwitch) {
         UserOptions.showTips = sender.isOn
+        NotificationCenter.default.post(name: SHOW_TIPS_NOTIFICATION, object: nil)
     }
 
     @objc func changeQueryOCSP(sender: UISwitch) {

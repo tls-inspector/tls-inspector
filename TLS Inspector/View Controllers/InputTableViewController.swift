@@ -40,8 +40,12 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         NotificationCenter.default.addObserver(forName: RELOAD_RECENT_NOTIFICATION, object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }
+        NotificationCenter.default.addObserver(forName: SHOW_TIPS_NOTIFICATION, object: nil, queue: nil) { (_) in
+            self.tipView.isHidden = !UserOptions.showTips
+        }
         // swiftlint:enable discarded_notification_center_observer
 
+        self.tipView.isHidden = !UserOptions.showTips
         super.viewDidLoad()
     }
 
