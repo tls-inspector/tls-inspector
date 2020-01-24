@@ -278,7 +278,7 @@ class CertificateTableViewController: UITableViewController {
                                                                           useFixedWidthFont: true))
         }
         if UserOptions.showFingerprintSHA256, let s256 = self.certificate.sha256Fingerprint {
-            fingerprintsSection.cells.append(TitleValueTableViewCell.Cell(title: "SHA-258",
+            fingerprintsSection.cells.append(TitleValueTableViewCell.Cell(title: "SHA-256",
                                                                           value: s256,
                                                                           useFixedWidthFont: true))
         }
