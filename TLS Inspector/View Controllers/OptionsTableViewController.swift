@@ -9,6 +9,13 @@ class OptionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.sections.maybeAppend(makeGeneralSection())
+        self.sections.maybeAppend(makeStatusSection())
+        self.sections.maybeAppend(makeFingerprintSection())
+        self.sections.maybeAppend(makeDebugSection())
+    }
+
+    func makeGeneralSection() -> TableViewSection? {
         let generalSection = TableViewSection()
         generalSection.title = lang(key: "General")
         if let cell = newSwitchCell(labelText: lang(key: "Remember Recent Lookups"),
@@ -32,8 +39,15 @@ class OptionsTableViewController: UITableViewController {
             cell.tag = advancedOptionsCellTag
             generalSection.cells.append(cell)
         }
-        self.sections.append(generalSection)
 
+        if generalSection.cells.count > 0 {
+            return generalSection
+        }
+
+        return nil
+    }
+
+    func makeStatusSection() -> TableViewSection? {
         let statusSection = TableViewSection()
         statusSection.title = lang(key: "Certificate Status")
         statusSection.footer = lang(key: "certificate_status_footer")
@@ -47,8 +61,46 @@ class OptionsTableViewController: UITableViewController {
                                     changed: #selector(changeCheckCRL(sender:))) {
             statusSection.cells.append(cell)
         }
-        self.sections.append(statusSection)
 
+        if statusSection.cells.count > 0 {
+            return statusSection
+        }
+
+        return nil
+    }
+
+    func makeFingerprintSection() -> TableViewSection? {
+        let fingerprintSection = TableViewSection()
+        fingerprintSection.title = lang(key: "Fingerprints")
+        if let cell = newSwitchCell(labelText: lang(key: "MD5"),
+                                    initialValue: UserOptions.showFingerprintMD5,
+                                    changed: #selector(changeShowFingerprintMD5(sender:))) {
+            fingerprintSection.cells.append(cell)
+        }
+        if let cell = newSwitchCell(labelText: lang(key: "SHA-128"),
+                                    initialValue: UserOptions.showFingerprintSHA128,
+                                    changed: #selector(changeShowFingerprintSHA128(sender:))) {
+            fingerprintSection.cells.append(cell)
+        }
+        if let cell = newSwitchCell(labelText: lang(key: "SHA-256"),
+                                    initialValue: UserOptions.showFingerprintSHA256,
+                                    changed: #selector(changeShowFingerprintSHA256(sender:))) {
+            fingerprintSection.cells.append(cell)
+        }
+        if let cell = newSwitchCell(labelText: lang(key: "SHA-512"),
+                                    initialValue: UserOptions.showFingerprintSHA512,
+                                    changed: #selector(changeShowFingerprintSHA512(sender:))) {
+            fingerprintSection.cells.append(cell)
+        }
+
+        if fingerprintSection.cells.count > 0 {
+            return fingerprintSection
+        }
+
+        return nil
+    }
+
+    func makeDebugSection() -> TableViewSection? {
         let loggingSection = TableViewSection()
         loggingSection.title = lang(key: "Logging")
         loggingSection.footer = lang(key: "verbose_logging_footer")
@@ -63,7 +115,12 @@ class OptionsTableViewController: UITableViewController {
             cell.tag = submitLogsCellTag
             loggingSection.cells.append(cell)
         }
-        self.sections.append(loggingSection)
+
+        if loggingSection.cells.count > 0 {
+            return loggingSection
+        }
+
+        return nil
     }
 
     @objc func changeRememberLookups(sender: UISwitch) {
@@ -80,6 +137,7 @@ class OptionsTableViewController: UITableViewController {
 
     @objc func changeShowTips(sender: UISwitch) {
         UserOptions.showTips = sender.isOn
+        NotificationCenter.default.post(name: SHOW_TIPS_NOTIFICATION, object: nil)
     }
 
     @objc func changeQueryOCSP(sender: UISwitch) {
@@ -88,6 +146,22 @@ class OptionsTableViewController: UITableViewController {
 
     @objc func changeCheckCRL(sender: UISwitch) {
         UserOptions.checkCRL = sender.isOn
+    }
+
+    @objc func changeShowFingerprintMD5(sender: UISwitch) {
+        UserOptions.showFingerprintMD5 = sender.isOn
+    }
+
+    @objc func changeShowFingerprintSHA128(sender: UISwitch) {
+        UserOptions.showFingerprintSHA128 = sender.isOn
+    }
+
+    @objc func changeShowFingerprintSHA256(sender: UISwitch) {
+        UserOptions.showFingerprintSHA256 = sender.isOn
+    }
+
+    @objc func changeShowFingerprintSHA512(sender: UISwitch) {
+        UserOptions.showFingerprintSHA512 = sender.isOn
     }
 
     @objc func changeVerboseLogging(sender: UISwitch) {
