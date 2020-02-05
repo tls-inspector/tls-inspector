@@ -4,6 +4,7 @@ import CertificateKit
 // swiftlint:disable identifier_name
 var CERTIFICATE_CHAIN: CKCertificateChain?
 var SERVER_INFO: CKServerInfo?
+var SERVER_ERROR: Error?
 var CURRENT_CERTIFICATE: Int = 0
 var SPLIT_VIEW_CONTROLLER: UISplitViewController?
 var VIEW_CLOSE_NOTIFICATION: Notification.Name = Notification.Name("🏳️‍🌈")

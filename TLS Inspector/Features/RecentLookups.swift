@@ -15,10 +15,22 @@ class RecentLookups {
 
     /// Add a new recently inspected domain. If the domain was already in the list, it is moved to index 0.
     /// - Parameter domain: The domain to add. Case insensitive.
-    public static func AddLookup(_ domain: String) {
+    public static func AddLookup(_ url: URL) {
         var list: [String] = []
         if let savedList = AppDefaults.array(forKey: LIST_KEY) as? [String] {
             list = savedList
+        }
+
+        guard let host = url.host else {
+            return
+        }
+        guard let port = url.port else {
+            return
+        }
+
+        var domain = host
+        if port != 443 {
+            domain += ":\(port)"
         }
 
         if let index = list.firstIndex(of: domain.lowercased()) {

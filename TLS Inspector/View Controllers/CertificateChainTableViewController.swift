@@ -158,6 +158,9 @@ class CertificateChainTableViewController: UITableViewController {
     func makeConnectionInfoSection() -> TableViewSection? {
         let connectionSection = TableViewSection()
         connectionSection.title = lang(key: "Connection Information")
+        if let serverError = SERVER_ERROR {
+            connectionSection.footer = lang(key: "server_error_footer", args: [serverError.localizedDescription])
+        }
 
         guard let chain = self.certificateChain else {
             return nil
@@ -231,6 +234,10 @@ class CertificateChainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.sections[section].title
+    }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return self.sections[section].footer
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

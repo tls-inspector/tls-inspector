@@ -135,6 +135,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 - (void) checkIfFinished {
     PDebug(@"Checking if all tasks are finished");
     BOOL allFinished = YES;
+    BOOL allSuccessful = YES;
     for (CKGetterTask * task in self.tasks) {
         if (!task.finished) {
             switch (task.tag) {
@@ -151,14 +152,33 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             allFinished = NO;
             break;
         }
+        if (!task.successful) {
+            switch (task.tag) {
+                case CKGetterTaskTagChain:
+                    PDebug(@"Certificate chain task failed");
+                    break;
+                case CKGetterTaskTagServerInfo:
+                    PDebug(@"Server info task failed");
+                    break;
+                default:
+                    PDebug(@"Unknown task (%u) failed", (unsigned int)task.tag);
+                    break;
+            }
+            allSuccessful = NO;
+            break;
+        }
     }
     @synchronized (self.finishedMutex) {
         if (allFinished && !self.didCallFinished) {
             self.didCallFinished = YES;
             PDebug(@"Getter finished all tasks");
-            if (self.delegate && [self.delegate respondsToSelector:@selector(finishedGetter:)]) {
-                [self.delegate finishedGetter:self];
+            if (!self.delegate) {
+                return;
             }
+            if (![self.delegate respondsToSelector:@selector(finishedGetter:successful:)]) {
+                return;
+            }
+            [self.delegate finishedGetter:self successful:allSuccessful];
         }
     }
 }

@@ -26,16 +26,44 @@
 
 #import "CertificateKit.h"
 
+/// The certificate kit logging class
 @interface CKLogging : NSObject
 
-+ (CKLogging *) sharedInstance;
+/**
+ Logging levels for the certificate kit log
 
+ - CKLoggingLevelDebug: Debug logs will include all information sent to the log instance,
+                        including domain names. Use with caution.
+ - CKLoggingLevelInfo: Informational logs for irregular, but not dangerous events.
+ - CKLoggingLevelWarning: Warning logs for dangerous, but not fatal events.
+ - CKLoggingLevelError: Error events for when things really go sideways.
+ */
+typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
+    CKLoggingLevelDebug = 0,
+    CKLoggingLevelInfo,
+    CKLoggingLevelWarning,
+    CKLoggingLevelError,
+};
+
+/// The shared instance of the CKLogging class
++ (CKLogging * _Nonnull) sharedInstance;
+
+/// The current logging level
 @property (nonatomic) CKLoggingLevel level;
-@property (strong, nonatomic) NSString * file;
+/// The filepath of the log file
+@property (strong, nonatomic, nonnull) NSString * file;
 
-- (void) writeDebug:(NSString *)message;
-- (void) writeInfo:(NSString *)message;
-- (void) writeWarn:(NSString *)message;
-- (void) writeError:(NSString *)message;
+/// Write a DEBUG level message
+/// @param message The message to write
+- (void) writeDebug:(NSString * _Nonnull)message;
+/// Write an INFO level message
+/// @param message The message to write
+- (void) writeInfo:(NSString * _Nonnull)message;
+/// Write a WARN level message
+/// @param message The message to write
+- (void) writeWarn:(NSString * _Nonnull)message;
+/// Write an ERROR level message
+/// @param message The message to write
+- (void) writeError:(NSString * _Nonnull)message;
 
 @end

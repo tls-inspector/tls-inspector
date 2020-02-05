@@ -32,6 +32,7 @@
 @property (strong, nonatomic) id delegate;
 @property (nonatomic) NSUInteger tag;
 @property (nonatomic) BOOL finished;
+@property (nonatomic) BOOL successful;
 
 @end
 

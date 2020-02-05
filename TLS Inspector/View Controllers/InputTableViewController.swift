@@ -36,6 +36,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             UserOptions.firstRunCompleted = true
         }
 
+        MigrateAssistant.AppLaunch()
+
         // swiftlint:disable discarded_notification_center_observer
         NotificationCenter.default.addObserver(forName: RELOAD_RECENT_NOTIFICATION, object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
@@ -100,6 +102,15 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func inspectDomain(text: String) {
+        // Reset
+        self.certificateChain = nil
+        self.serverInfo = nil
+        self.chainError = nil
+        self.serverError = nil
+        CERTIFICATE_CHAIN = nil
+        SERVER_INFO = nil
+        SERVER_ERROR = nil
+
         if CertificateKit.isProxyConfigured() {
             UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
             return
@@ -137,9 +148,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
 
         if UserOptions.verboseLogging {
-            CertificateKit.setLoggingLevel(.debug)
+            CKLogging.sharedInstance().level = .debug
         } else {
-            CertificateKit.setLoggingLevel(.warning)
+            CKLogging.sharedInstance().level = .warning
         }
 
         self.getter = CKGetter(options: UserOptions.getterOptions())
@@ -163,17 +174,16 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     // MARK: Getter Delegate Methods
-    func finishedGetter(_ getter: CKGetter) {
-        print("Getter finished")
+    func finishedGetter(_ getter: CKGetter, successful success: Bool) {
+        print("Getter finished, success: \(success)")
         RunOnMain {
-            guard let chain = self.certificateChain else {
-                print("Getter finished but no chain present?")
-                self.showInputError()
+            if !success && self.certificateChain == nil {
                 return
             }
+            CKLogging.sharedInstance().writeWarn("Chain suceeded but Server failed - Ignoring error")
 
             UserOptions.inspectionsWithVerboseLogging += 1
-            CERTIFICATE_CHAIN = chain
+            CERTIFICATE_CHAIN = self.certificateChain
             SERVER_INFO = self.serverInfo
 
             self.performSegue(withIdentifier: "Inspect", sender: nil)
@@ -182,7 +192,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
             let domainsBefore = RecentLookups.GetRecentLookups().count
-            RecentLookups.AddLookup(getter.url.host ?? "")
+            RecentLookups.AddLookup(getter.url)
             if UserOptions.rememberRecentLookups {
                 if RecentLookups.GetRecentLookups().count == 1 && domainsBefore == 0 {
                     self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)
@@ -219,12 +229,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
         print("Error getting server info: \(error)")
-        RunOnMain {
-            self.serverError = error
-            self.pendingCellState = .error
-            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-            self.domainInput?.isEnabled = true
-        }
+        self.serverError = error
+        SERVER_ERROR = error
     }
 
     // MARK: Table View Delegate Methods

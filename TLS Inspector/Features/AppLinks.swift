@@ -62,6 +62,12 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         viewController.present(mailController, animated: true, completion: nil)
     }
 
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true) {
+            self.dimissedBlock?()
+        }
+    }
+
     private func attachCertificateKitLog(_ mailController: MFMailComposeViewController) {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         guard let documentsDirectory = URL(string: paths[0]) else {

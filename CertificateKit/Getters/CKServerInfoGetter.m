@@ -46,6 +46,7 @@
     PDebug(@"Getting HTTP server info");
     [self getServerInfoForURL:url finished:^(NSError *error) {
         PDebug(@"Finished getting HTTP server info");
+        self.finished = YES;
         if (error) {
             [self.delegate getter:self failedTaskWithError:error];
         } else {
@@ -53,7 +54,7 @@
             self.serverInfo.headers = self.headers;
             self.serverInfo.statusCode = self.statusCode;
             self.serverInfo.redirectedTo = self.redirectedTo;
-            self.finished = YES;
+            self.successful = YES;
             [self.delegate getter:self finishedTaskWithResult:self.serverInfo];
         }
     }];

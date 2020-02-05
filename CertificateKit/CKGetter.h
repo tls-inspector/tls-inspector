@@ -81,13 +81,13 @@
  Protocol for visibility into the status of the getter
  */
 @protocol CKGetterDelegate
-
 /**
- Called when the getter has finished all of its task only if all succeeded
+ Called when the getter has finished all of its tasks
 
  @param getter The getter
+ @param success If the getter was successful
  */
-- (void) finishedGetter:(CKGetter * _Nonnull)getter;
+- (void) finishedGetter:(CKGetter * _Nonnull)getter successful:(BOOL)success;
 /**
  Called when the getter has finished getting the certificate chian
 

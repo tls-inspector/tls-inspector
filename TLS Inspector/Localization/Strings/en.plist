@@ -972,6 +972,8 @@ Exercise extreme caution if continuing to this website.</string>
 It&apos;s likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.
 
 Exercise caution if continuing to this website.</string>
+	<key>server_error_footer</key>
+	<string>HTTP Headers could not be fetched from this server due to the following error: {0}</string>
 	<key>tls_feature_status_request</key>
 	<string>Status Request</string>
 	<key>tls_feature_status_request_v2</key>

@@ -56,8 +56,8 @@ static dispatch_queue_t queue;
 
 - (id) initWithLogFile:(NSString *)file {
     self = [super init];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentsDirectory = [paths objectAtIndex:0];
     self.file = [documentsDirectory stringByAppendingPathComponent:file];
     [self createQueue];
     [self open];
@@ -67,7 +67,7 @@ static dispatch_queue_t queue;
 
 - (void) createQueue {
     if (!queue) {
-        queue = dispatch_queue_create("com.tlsinspector.CKCertificate", NULL);
+        queue = dispatch_queue_create("com.tlsinspector.CKCertificate.CKLogging", NULL);
     }
 }
 
