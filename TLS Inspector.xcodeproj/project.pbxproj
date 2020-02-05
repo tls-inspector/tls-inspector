@@ -138,7 +138,7 @@
 		3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF677292046335D00A3B4C1 /* CKCRLManager.m */; };
 		3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */; };
-		3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6773520464C7E00A3B4C1 /* CKLogging.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6773520464C7E00A3B4C1 /* CKLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6773620464C7E00A3B4C1 /* CKLogging.m */; };
 		3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */; };
 		3CF9CC9623A4804600535173 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9523A4804600535173 /* DomainList.plist */; };

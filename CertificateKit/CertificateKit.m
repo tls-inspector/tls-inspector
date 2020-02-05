@@ -14,10 +14,6 @@
     return [NSString stringWithUTF8String:LIBCURL_VERSION];
 }
 
-+ (void) setLoggingLevel:(CKLoggingLevel)level {
-    [[CKLogging sharedInstance] setLevel:level];
-}
-
 + (BOOL) isProxyConfigured {
     CFDictionaryRef proxySettings = CFNetworkCopySystemProxySettings();
     const CFStringRef proxyCFString = (const CFStringRef)CFDictionaryGetValue(proxySettings, (const void*)kCFNetworkProxiesHTTPProxy);

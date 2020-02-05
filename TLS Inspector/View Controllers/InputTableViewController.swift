@@ -139,9 +139,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
 
         if UserOptions.verboseLogging {
-            CertificateKit.setLoggingLevel(.debug)
+            CKLogging.sharedInstance().level = .debug
         } else {
-            CertificateKit.setLoggingLevel(.warning)
+            CKLogging.sharedInstance().level = .warning
         }
 
         self.getter = CKGetter(options: UserOptions.getterOptions())

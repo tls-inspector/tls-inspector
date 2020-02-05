@@ -42,27 +42,12 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKOCSPResponse.h>
 #import <CertificateKit/CKCRLResponse.h>
 #import <CertificateKit/CKGetterOptions.h>
+#import <CertificateKit/CKLogging.h>
 
 /**
  Interface for global CertificateKit methods.
  */
 @interface CertificateKit : NSObject
-
-/**
- Logging levels for the certificate kit log
-
- - CKLoggingLevelDebug: Debug logs will include all information sent to the log instance,
-                        including domain names. Use with caution.
- - CKLoggingLevelInfo: Informational logs for irregular, but not dangerous events.
- - CKLoggingLevelWarning: Warning logs for dangerous, but not fatal events.
- - CKLoggingLevelError: Error events for when things really go sideways.
- */
-typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
-    CKLoggingLevelDebug = 0,
-    CKLoggingLevelInfo,
-    CKLoggingLevelWarning,
-    CKLoggingLevelError,
-};
 
 typedef NS_ENUM(NSInteger, CKCertificateError) {
     // Errors relating to connecting to the remote server.
@@ -86,14 +71,6 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  @return A string representing the libcurl version
  */
 + (NSString * _Nonnull) libcurlVersion;
-
-/**
- Set the minimum level for which logs of that or greater levels will be recorded
- in the CertificateKit log file.
-
- @param level The log level
- */
-+ (void) setLoggingLevel:(CKLoggingLevel)level;
 
 /**
  Is a HTTP proxy configured on the device
