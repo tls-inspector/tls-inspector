@@ -27,16 +27,8 @@ class SupportType {
         self.comments = comments
         self.device = UIDevice.current.platformName()
         self.deviceVersion = UIDevice.current.systemVersion
-
-        if let bundleName = Bundle.main.bundleIdentifier {
-            self.appIdentifier = bundleName
-        }
-
-        if let infoDict = Bundle.main.infoDictionary {
-            let appVersion: String = (infoDict["CFBundleShortVersionString"] as? String) ?? "Unknown"
-            let build: String = (infoDict[kCFBundleVersionKey as String] as? String) ?? "Unknown"
-            self.appVersion = appVersion + " (" + build + ")"
-        }
+        self.appIdentifier = AppInfo.bundleName()
+        self.appVersion = AppInfo.version() + " (" + AppInfo.build() + ")"
     }
 
     public func body() -> String {

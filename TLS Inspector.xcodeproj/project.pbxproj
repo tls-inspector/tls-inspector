@@ -24,6 +24,10 @@
 		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
 		3C57F4A123B0243300DCCB54 /* UIDevicePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */; };
 		3C57F4A323B02B0700DCCB54 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F4A223B02B0700DCCB54 /* AppLinks.swift */; };
+		3C599F6823EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */; };
+		3C599F6923EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */; };
+		3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
+		3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
 		3C5F4654239A169400B3A727 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */; };
 		3C5F4656239D77CA00B3A727 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4655239D77CA00B3A727 /* SplitViewController.swift */; };
 		3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */; };
@@ -213,6 +217,8 @@
 		3C57F49E23B0220300DCCB54 /* SupportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportType.swift; sourceTree = "<group>"; };
 		3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevicePlatform.swift; sourceTree = "<group>"; };
 		3C57F4A223B02B0700DCCB54 /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
+		3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrateAssistant.swift; sourceTree = "<group>"; };
+		3C599F6A23EA8D8200791DF1 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		3C5F4655239D77CA00B3A727 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeadersTableViewController.swift; sourceTree = "<group>"; };
@@ -508,6 +514,8 @@
 				3C57F4A223B02B0700DCCB54 /* AppLinks.swift */,
 				3C6FF89723B1A420008DC981 /* AtomicInt.swift */,
 				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
+				3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */,
+				3C599F6A23EA8D8200791DF1 /* AppInfo.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -921,8 +929,10 @@
 				3CCEB4D823DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
 				3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */,
 				3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */,
+				3C599F6823EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */,
 				3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */,
 				3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */,
+				3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */,
 				3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */,
 				3CCD0294239DD966009364D0 /* MoreTableViewController.swift in Sources */,
 				3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */,
@@ -956,6 +966,7 @@
 				3CDC14BE23B045C50053932F /* TrustDetailsTableViewController.swift in Sources */,
 				3CDC14CC23B046000053932F /* Globals.swift in Sources */,
 				3CDC14C123B045C50053932F /* CertificateChainTableViewController.swift in Sources */,
+				3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */,
 				3CDC14C623B045DA0053932F /* Lang.swift in Sources */,
 				3CDC14BB23B045B20053932F /* UIView+RoundedCorners.swift in Sources */,
 				3CDC14C023B045C50053932F /* CertificateTableViewController.swift in Sources */,
@@ -965,6 +976,7 @@
 				3CDC14BC23B045B20053932F /* GradientView.swift in Sources */,
 				3CDC14C523B045DA0053932F /* UIObject+Lang.swift in Sources */,
 				3C6FF89923B1A420008DC981 /* AtomicInt.swift in Sources */,
+				3C599F6923EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */,
 				3CDC14CD23B046000053932F /* UserOptions.swift in Sources */,
 				3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
