@@ -180,7 +180,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             if !success && self.certificateChain == nil {
                 return
             }
-            CKLogging.sharedInstance().writeWarn("CertificateChain getter suceeded but ServerInfo failed - ignoreing failure")
+            CKLogging.sharedInstance().writeWarn("Chain suceeded but Server failed - Ignoring error")
 
             UserOptions.inspectionsWithVerboseLogging += 1
             CERTIFICATE_CHAIN = self.certificateChain
@@ -192,7 +192,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
             let domainsBefore = RecentLookups.GetRecentLookups().count
-            RecentLookups.AddLookup(getter.url.host ?? "")
+            RecentLookups.AddLookup(getter.url)
             if UserOptions.rememberRecentLookups {
                 if RecentLookups.GetRecentLookups().count == 1 && domainsBefore == 0 {
                     self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)

@@ -136,7 +136,7 @@ class InitialViewController: UIViewController, CKGetterDelegate {
             if !success && self.certificateChain == nil {
                 return
             }
-            CKLogging.sharedInstance().writeWarn("CertificateChain getter suceeded but ServerInfo failed - ignoreing failure")
+            CKLogging.sharedInstance().writeWarn("Chain suceeded but Server failed - Ignoring error")
 
             CERTIFICATE_CHAIN = self.certificateChain
             SERVER_INFO = self.serverInfo
