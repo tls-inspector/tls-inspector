@@ -130,17 +130,16 @@ class InitialViewController: UIViewController, CKGetterDelegate {
     }
 
     // MARK: CKGetterDelegate Methods
-    func finishedGetter(_ getter: CKGetter) {
-        print("Getter finished")
-        guard let chain = self.certificateChain else {
-            print("No chain found but getter finished?")
-            return
-        }
-
-        CERTIFICATE_CHAIN = chain
-        SERVER_INFO = self.serverInfo
-
+    func finishedGetter(_ getter: CKGetter, successful success: Bool) {
+        print("Getter finished, success: \(success)")
         RunOnMain {
+            if !success && self.certificateChain == nil {
+                return
+            }
+            CKLogging.sharedInstance().writeWarn("CertificateChain getter suceeded but ServerInfo failed - ignoreing failure")
+
+            CERTIFICATE_CHAIN = self.certificateChain
+            SERVER_INFO = self.serverInfo
             self.performSegue(withIdentifier: "Inspect", sender: nil)
         }
     }
@@ -164,8 +163,6 @@ class InitialViewController: UIViewController, CKGetterDelegate {
 
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
         print("Error server info: " + error.localizedDescription)
-        UIHelper(self).presentError(error: error) {
-            self.closeExtension()
-        }
+        SERVER_ERROR = error
     }
 }

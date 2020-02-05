@@ -94,6 +94,7 @@
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered: {
             PError(@"NSStream error occured: %@", stream.streamError.description);
+            self.finished = YES;
             [self.delegate getter:self failedTaskWithError:[stream streamError]];
             [inputStream close];
             [outputStream close];
@@ -171,6 +172,7 @@
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
+        self.finished = YES;
         [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"CKCertificate" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"No certificates presented by server."}]];
         return;
     }
@@ -213,6 +215,7 @@
 
     PDebug(@"Finished getting certificate chain");
     self.finished = YES;
+    self.successful = YES;
     [self.delegate getter:self finishedTaskWithResult:self.chain];
 }
 

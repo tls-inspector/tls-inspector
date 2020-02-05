@@ -102,6 +102,15 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func inspectDomain(text: String) {
+        // Reset
+        self.certificateChain = nil
+        self.serverInfo = nil
+        self.chainError = nil
+        self.serverError = nil
+        CERTIFICATE_CHAIN = nil
+        SERVER_INFO = nil
+        SERVER_ERROR = nil
+
         if CertificateKit.isProxyConfigured() {
             UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
             return
@@ -165,17 +174,16 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     // MARK: Getter Delegate Methods
-    func finishedGetter(_ getter: CKGetter) {
-        print("Getter finished")
+    func finishedGetter(_ getter: CKGetter, successful success: Bool) {
+        print("Getter finished, success: \(success)")
         RunOnMain {
-            guard let chain = self.certificateChain else {
-                print("Getter finished but no chain present?")
-                self.showInputError()
+            if !success && self.certificateChain == nil {
                 return
             }
+            CKLogging.sharedInstance().writeWarn("CertificateChain getter suceeded but ServerInfo failed - ignoreing failure")
 
             UserOptions.inspectionsWithVerboseLogging += 1
-            CERTIFICATE_CHAIN = chain
+            CERTIFICATE_CHAIN = self.certificateChain
             SERVER_INFO = self.serverInfo
 
             self.performSegue(withIdentifier: "Inspect", sender: nil)
@@ -221,12 +229,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
         print("Error getting server info: \(error)")
-        RunOnMain {
-            self.serverError = error
-            self.pendingCellState = .error
-            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-            self.domainInput?.isEnabled = true
-        }
+        self.serverError = error
+        SERVER_ERROR = error
     }
 
     // MARK: Table View Delegate Methods
