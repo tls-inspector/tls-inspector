@@ -22,3 +22,19 @@ func NewError(description: String) -> Error {
     return NSError(domain: "io.ecn.tlsinspector", code: 500,
                    userInfo: [NSLocalizedDescriptionKey: description]) as Error
 }
+
+func LogError(_ message: String) {
+    CKLogging.sharedInstance().writeError(message)
+}
+
+func LogWarn(_ message: String) {
+    CKLogging.sharedInstance().writeWarn(message)
+}
+
+func LogInfo(_ message: String) {
+    CKLogging.sharedInstance().writeInfo(message)
+}
+
+func LogDebug(_ message: String) {
+    CKLogging.sharedInstance().writeDebug(message)
+}

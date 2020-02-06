@@ -22,10 +22,12 @@ class RecentLookups {
         }
 
         guard let host = url.host else {
+            LogError("Unable to add URL \(url) to lookup list: host is nil")
             return
         }
-        guard let port = url.port else {
-            return
+        var port = 443
+        if let urlPort = url.port {
+            port = urlPort
         }
 
         var domain = host
@@ -40,6 +42,7 @@ class RecentLookups {
         if list.count >= 5 {
             list.remove(at: 4)
         }
+        LogDebug("Adding query '\(domain.lowercased())' to recent lookup list")
         list.insert(domain.lowercased(), at: 0)
 
         AppDefaults.set(list, forKey: LIST_KEY)

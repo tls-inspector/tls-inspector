@@ -193,8 +193,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.domainInput?.text = ""
             let domainsBefore = RecentLookups.GetRecentLookups().count
             RecentLookups.AddLookup(getter.url)
-            if UserOptions.rememberRecentLookups {
-                if RecentLookups.GetRecentLookups().count == 1 && domainsBefore == 0 {
+            let recentLookups = RecentLookups.GetRecentLookups()
+            if UserOptions.rememberRecentLookups && recentLookups.count > 0 {
+                if recentLookups.count == 1 && domainsBefore == 0 {
                     self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)
                 } else {
                     self.tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
