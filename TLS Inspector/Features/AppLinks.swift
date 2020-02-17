@@ -54,8 +54,8 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         mailController.setMessageBody(object.body(), isHTML: true)
 
         if includeLogs {
-            self.attachCertificateKitLog(mailController)
-            self.attachExceptionLog(mailController)
+            self.attachLogFile(actualName: "CertificateKit.log", attachmentName: "TLS Inspector.log", mailController: mailController)
+            self.attachLogFile(actualName: "exceptions.log", attachmentName: "Exceptions.log", mailController: mailController)
         }
 
         self.dimissedBlock = dismissed
@@ -68,13 +68,17 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         }
     }
 
-    private func attachCertificateKitLog(_ mailController: MFMailComposeViewController) {
+    private func attachLogFile(actualName: String, attachmentName: String, mailController: MFMailComposeViewController) {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        guard let documentsDirectory = URL(string: paths[0]) else {
+        if paths.count == 0 {
+            LogError("Error getting documents directory")
             return
         }
-        let ckLogPath = documentsDirectory.appendingPathComponent("CertificateKit.log")
-        if !FileManager.default.fileExists(atPath: ckLogPath.absoluteString) {
+        let documentsDirectory = URL(fileURLWithPath: paths[0])
+
+        let ckLogPath = documentsDirectory.appendingPathComponent(actualName)
+        if !FileManager.default.fileExists(atPath: ckLogPath.path) {
+            LogError("Error getting CertificateKit.log")
             return
         }
 
@@ -82,29 +86,10 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         do {
             try data = Data(contentsOf: ckLogPath)
         } catch {
+            LogError("Error reading log file: \(error.localizedDescription)")
             return
         }
 
-        mailController.addAttachmentData(data ?? Data(), mimeType: "text/plain", fileName: "TLS Inspector.log")
-    }
-
-    private func attachExceptionLog(_ mailController: MFMailComposeViewController) {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        guard let documentsDirectory = URL(string: paths[0]) else {
-            return
-        }
-        let exceptionsLogPath = documentsDirectory.appendingPathComponent("exceptions.log")
-        if !FileManager.default.fileExists(atPath: exceptionsLogPath.absoluteString) {
-            return
-        }
-
-        var data: Data?
-        do {
-            try data = Data(contentsOf: exceptionsLogPath)
-        } catch {
-            return
-        }
-
-        mailController.addAttachmentData(data ?? Data(), mimeType: "text/plain", fileName: "Exceptions.log")
+        mailController.addAttachmentData(data ?? Data(), mimeType: "text/plain", fileName: attachmentName)
     }
 }
