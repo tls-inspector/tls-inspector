@@ -8,6 +8,9 @@ class CertificateChainTableViewController: UITableViewController {
     var serverInfo: CKServerInfo?
     var securityHeadersSorted: [String]?
 
+    let certificatesSectionTag = 1
+    let headersSectionTag = 2
+
     var sections: [TableViewSection] = []
 
     @IBOutlet weak var trustView: UIView!
@@ -120,7 +123,7 @@ class CertificateChainTableViewController: UITableViewController {
     func makeCertificateSection() -> TableViewSection? {
         let certificateSection = TableViewSection()
         certificateSection.title = lang(key: "Certificates")
-        certificateSection.tag = 1
+        certificateSection.tag = certificatesSectionTag
 
         guard let certificates = self.certificateChain?.certificates else {
             return nil
@@ -182,7 +185,7 @@ class CertificateChainTableViewController: UITableViewController {
     func makeHeadersSection() -> TableViewSection? {
         let headersSection = TableViewSection()
         headersSection.title = lang(key: "Security HTTP Headers")
-        headersSection.tag = 2
+        headersSection.tag = headersSectionTag
 
         guard let serverInfo = self.serverInfo else {
             return nil
@@ -243,13 +246,13 @@ class CertificateChainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sectionTag = self.sections[indexPath.section].tag
 
-        if sectionTag == 1 {
+        if sectionTag == certificatesSectionTag {
             CURRENT_CERTIFICATE = indexPath.row
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Certificate") else {
                 return
             }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
-        } else if sectionTag == 2 {
+        } else if sectionTag == headersSectionTag && indexPath.row == self.sections[indexPath.section].cells.count-1 {
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else {
                 return
             }
@@ -258,6 +261,11 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        let sectionTag = self.sections[indexPath.section].tag
+        if sectionTag == headersSectionTag {
+            return false
+        }
+
         return true
     }
 
