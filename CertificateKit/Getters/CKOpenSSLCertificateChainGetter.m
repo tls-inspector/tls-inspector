@@ -29,6 +29,7 @@
 #import "CKCertificateChain.h"
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
+#import "CKSocketUtils.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/err.h>
@@ -153,20 +154,10 @@ INSERT_OPENSSL_ERROR_METHOD
         SSL_CLEANUP
         return;
     }
-    struct sockaddr addr;
-    socklen_t addr_len = sizeof(addr);
-    getpeername(sock_fd, &addr, &addr_len);
-    NSString * remoteAddr;
-    if (addr.sa_family == AF_INET) {
-        char addressString[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &((struct sockaddr_in *)&addr)->sin_addr, addressString, INET_ADDRSTRLEN);
-        remoteAddr = [[NSString alloc] initWithUTF8String:addressString];
-    } else if (addr.sa_family == AF_INET6) {
-        char addressString[INET6_ADDRSTRLEN];
-        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)&addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
-        remoteAddr = [[NSString alloc] initWithUTF8String:addressString];
-    } else {
-        [self failWithError:CKCertificateErrorInvalidParameter description:@"Unknown address family"];
+
+    NSString * remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
+    if (remoteAddr == nil) {
+        [self failWithError:CKCertificateErrorInvalidParameter description:@"No Peer Address"];
         SSL_CLEANUP
         return;
     }
@@ -204,8 +195,8 @@ INSERT_OPENSSL_ERROR_METHOD
     // For security purposes, regular iOS applications are not allowed to access the root CA store
     // for the device. This means that OpenSSL will not be able to determine if a certificate is
     // trusted or get the root CA certificate (as most websites do not present it)
-    // The work-around for this is to export import the certificate into Apple's security
-    // library, determine the trust status (which gets the root CA for us)
+    // The work-around for this is to export and import the certificate into Apple's security
+    // library, determine the trust status (which gets the root CA for us).
     // If the security library gave us one more certificate than what the server presented,
     // that's the system-installed root CA
     X509 * cert;
