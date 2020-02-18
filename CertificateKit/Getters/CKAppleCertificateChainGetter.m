@@ -29,6 +29,7 @@
 #import "CKCertificateChain.h"
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
+#import "CKSocketUtils.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <arpa/inet.h>
@@ -135,20 +136,14 @@
     uint8_t * buffer = malloc(length);
     CFDataGetBytes(handleData, CFRangeMake(0, length), buffer);
     int sock_fd = (int)*buffer;
-    struct sockaddr addr;
-    socklen_t addr_len = sizeof(addr);
-    getpeername(sock_fd, &addr, &addr_len);
-    NSString * remoteAddr;
-    if (addr.sa_family == AF_INET) {
-        char addressString[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &((struct sockaddr_in *)&addr)->sin_addr, addressString, INET_ADDRSTRLEN);
-        remoteAddr = [[NSString alloc] initWithUTF8String:addressString];
-    } else if (addr.sa_family == AF_INET6) {
-        char addressString[INET6_ADDRSTRLEN];
-        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)&addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
-        remoteAddr = [[NSString alloc] initWithUTF8String:addressString];
-    }
+    NSString * remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
     free(buffer);
+    if (remoteAddr == nil) {
+        PError(@"No remote address from socket");
+        self.finished = YES;
+        [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"CKCertificate" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to get remote address of peer"}]];
+        return;
+    }
 
     SSLContextRef context = (SSLContextRef)CFReadStreamCopyProperty((__bridge CFReadStreamRef) inputStream, kCFStreamPropertySSLContext);
     size_t numCiphers;

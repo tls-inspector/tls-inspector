@@ -19,6 +19,7 @@ private let KEY_ADVANCED_SETTINGS_NAG_DISMISSED = "advanced_settings_nag_dismiss
 // swiftlint:enable identifier_name
 
 class UserOptions {
+    private static let defaultOpenSSLCiphers = "HIGH:!aNULL:!MD5:!RC4"
     private static let defaults: [String:Any] = [
         KEY_REMEMBER_RECENT_LOOKUPS: true,
         KEY_USE_LIGHT_THEME: false,
@@ -31,7 +32,7 @@ class UserOptions {
         KEY_FINGEPRINT_SHA256: true,
         KEY_FINGEPRINT_SHA512: false,
         KEY_USE_OPENSSL: false,
-        KEY_PREFERRED_CIPHERS: "HIGH:!aNULL:!MD5:!RC4",
+        KEY_PREFERRED_CIPHERS: defaultOpenSSLCiphers,
         KEY_CONTACT_NAG_DISMISSED: false,
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
     ]
@@ -144,7 +145,7 @@ class UserOptions {
     }
     static var preferredCiphers: String {
         get {
-            return AppDefaults.string(forKey: KEY_PREFERRED_CIPHERS)!
+            return AppDefaults.string(forKey: KEY_PREFERRED_CIPHERS) ?? defaultOpenSSLCiphers
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_PREFERRED_CIPHERS)
