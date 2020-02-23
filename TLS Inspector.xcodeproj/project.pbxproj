@@ -673,6 +673,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */;
 			buildPhases = (
+				3C20A22724033687006824CB /* Validate Checksums */,
 				3C65DAD51E836BE9004AD96D /* Sources */,
 				3C65DAD61E836BE9004AD96D /* Frameworks */,
 				3C65DAD71E836BE9004AD96D /* Headers */,
@@ -844,6 +845,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C20A22724033687006824CB /* Validate Checksums */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Validate Checksums";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# Validate OpenSSL and libCURL Checksums\ncd CertificateKit\n./validate.sh\n";
+		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
