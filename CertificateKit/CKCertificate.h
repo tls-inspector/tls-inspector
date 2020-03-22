@@ -246,4 +246,9 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  */
 @property (nonatomic, nullable, readonly) void * X509Certificate;
 
+/**
+ *  Return a detailed description of the certificate
+ */
+- (NSString * _Nonnull) description;
+
 @end

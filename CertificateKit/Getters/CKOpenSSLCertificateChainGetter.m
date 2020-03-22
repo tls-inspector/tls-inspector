@@ -233,6 +233,11 @@ INSERT_OPENSSL_ERROR_METHOD
 
     SecTrustResultType trustStatus;
     SecTrustEvaluate(trust, &trustStatus);
+    if ([CKLogging sharedInstance].level == CKLoggingLevelDebug) {
+        CFDictionaryRef trustResultDictionary = SecTrustCopyResult(trust);
+        PDebug(@"Trust result details: %@", [(__bridge NSDictionary *)trustResultDictionary description]);
+        CFRelease(trustResultDictionary);
+    }
 
     long trustCount = SecTrustGetCertificateCount(trust);
     PDebug(@"Trust returned %ld certificates", trustCount);
@@ -283,6 +288,7 @@ INSERT_OPENSSL_ERROR_METHOD
         self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
     }
 
+    PDebug(@"Certificate chain: %@", [self.chain description]);
     PDebug(@"Finished getting certificate chain");
     self.finished = YES;
     self.successful = YES;

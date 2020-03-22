@@ -527,4 +527,21 @@ INSERT_OPENSSL_ERROR_METHOD
     return string;
 }
 
+- (NSString *) description {
+    BIO * buf = BIO_new(BIO_s_mem());
+    X509_print(buf, (X509 *)self.X509Certificate);
+
+    NSMutableData * debugData = [NSMutableData new];
+    while (1) {
+        unsigned char ref[1024];
+        int len = BIO_read(buf, ref, 1024);
+        if (len <= 0) {
+            break;
+        }
+        [debugData appendBytes:ref length:len];
+    }
+    NSString * certificateOut = [[NSString alloc] initWithData:debugData encoding:NSUTF8StringEncoding];
+    return certificateOut;
+}
+
 @end
