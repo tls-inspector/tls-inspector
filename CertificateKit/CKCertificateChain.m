@@ -150,7 +150,7 @@
 
     // Issue Date too long
     if (self.server.validDays > 825) {
-        PWarn(@"Certificate: '%@' is valid for too long %lu days", self.server.subject.commonNames, self.server.validDays);
+        PWarn(@"Certificate: '%@' is valid for too long %lu days", self.server.subject.commonNames, (unsigned long)self.server.validDays);
         self.trusted = CKCertificateChainTrustStatusIssueDateTooLong;
         return;
     }
