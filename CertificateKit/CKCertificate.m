@@ -99,6 +99,8 @@ INSERT_OPENSSL_ERROR_METHOD
 
     xcert.notAfter = [NSDate fromASN1_TIME:X509_get0_notAfter(cert)];
     xcert.notBefore = [NSDate fromASN1_TIME:X509_get0_notBefore(cert)];
+    NSDateComponents * components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:xcert.notBefore toDate:xcert.notAfter options:0];
+    xcert.validDays = [components day] + 1;
 
     // Don't consider certs expired/notyetvalid if they're just hours away from the date.
     xcert.isExpired = [xcert.notAfter timeIntervalSinceNow] < 86400;
@@ -446,6 +448,8 @@ INSERT_OPENSSL_ERROR_METHOD
     int crit = -1;
     int idx = -1;
     ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_key_usage, &crit, &idx);
+    // KU permissions are defined by their index
+    // which is listed in the spec: https://tools.ietf.org/html/rfc5280#section-4.2.1.3
     NSArray<NSString *> * usages = @[@"digitalSignature",
                                      @"nonRepudiation",
                                      @"keyEncipherment",
@@ -465,23 +469,36 @@ INSERT_OPENSSL_ERROR_METHOD
 }
 
 - (NSArray<NSString *> *) extendedKeyUsage {
-    int crit = -1;
-    int idx = -1;
-    ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(self.certificate, NID_ext_key_usage, &crit, &idx);
-    NSArray<NSString *> * usages = @[@"anyExtendedKeyUsage",
-                                     @"serverAuth",
-                                     @"clientAuth",
-                                     @"codeSigning",
-                                     @"emailProtection",
-                                     @"timeStamping",
-                                     @"OCSPSigning"];
-    NSMutableArray<NSString *> * values = [NSMutableArray arrayWithCapacity:usages.count];
-    for (int i = 0; i < usages.count; i++) {
-        if (ASN1_BIT_STRING_get_bit(keyUsage, i)) {
-            [values addObject:usages[i]];
+    NSMutableArray<NSString *> * usages = [NSMutableArray new];
+    EXTENDED_KEY_USAGE * eku = X509_get_ext_d2i(self.certificate, NID_ext_key_usage, NULL, NULL);
+    for (int i = 0; i < sk_ASN1_OBJECT_num(eku); i++) {
+        int usage = OBJ_obj2nid(sk_ASN1_OBJECT_value(eku, i));
+        switch (usage) {
+            case NID_server_auth:
+                [usages addObject:@"serverAuth"];
+                break;
+            case NID_client_auth:
+                [usages addObject:@"clientAuth"];
+                break;
+            case NID_email_protect:
+                [usages addObject:@"emailProtection"];
+                break;
+            case NID_code_sign:
+                [usages addObject:@"codeSigning"];
+                break;
+            case NID_OCSP_sign:
+                [usages addObject:@"OCSPSigning"];
+                break;
+            case NID_time_stamp:
+                [usages addObject:@"timeStamping"];
+                break;
+            default:
+                PWarn(@"Certificate has unknown extended key usage %u", usage);
+                break;
         }
     }
-    return values;
+    sk_ASN1_OBJECT_pop_free(eku, ASN1_OBJECT_free);
+    return usages;
 }
 
 + (NSString *) asn1OctetStringToHexString:(ASN1_OCTET_STRING *)str {

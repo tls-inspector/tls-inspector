@@ -54,6 +54,18 @@ class TrustDetailsTableViewController: UITableViewController {
             trustColor = UIColor.materialRed()
             trustText = lang(key: "Untrusted")
             trustIcon = FAIcon.FATimesCircleSolid
+        case .leafMissingRequiredKeyUsage:
+            trustColor = UIColor.materialAmber()
+            trustText = lang(key: "Untrusted")
+            trustIcon = FAIcon.FAExclamationCircleSolid
+        case .weakRSAKey:
+            trustColor = UIColor.materialRed()
+            trustText = lang(key: "Insecure")
+            trustIcon = FAIcon.FATimesCircleSolid
+        case .issueDateTooLong:
+            trustColor = UIColor.materialAmber()
+            trustText = lang(key: "Untrusted")
+            trustIcon = FAIcon.FAExclamationCircleSolid
         @unknown default:
             // Default already set
             break
@@ -105,6 +117,15 @@ class TrustDetailsTableViewController: UITableViewController {
         case .revokedIntermediate:
             explanation = lang(key: "explanation::revoked")
             isSecure = lang(key: "secure::revoked")
+        case .leafMissingRequiredKeyUsage:
+            explanation = lang(key: "explanation::leaf_keyusage")
+            isSecure = lang(key: "secure::leaf_keyusage")
+        case .weakRSAKey:
+            explanation = lang(key: "explanation::weak_rsa")
+            isSecure = lang(key: "secure::weak_rsa")
+        case .issueDateTooLong:
+            explanation = lang(key: "explanation::issue_date_too_long")
+            isSecure = lang(key: "secure::issue_date_too_long")
         @unknown default:
             explanation = lang(key: "Unknown")
             isSecure = lang(key: "Unknown")

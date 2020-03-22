@@ -868,6 +868,10 @@
 	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
 	<key>explanation::invalid_date</key>
 	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
+	<key>explanation::issue_date_too_long</key>
+	<string>The server certificate is valid for more than 825 days. Certificates with excessive validity periods are not considered secure as they may become weak as they age.</string>
+	<key>explanation::leaf_keyusage</key>
+	<string>The server certificate for this site is invalid and is missing the required Server Authentication key usage.</string>
 	<key>explanation::local_trust</key>
 	<string>The server certificate for this site is trusted because it, or the issuing certificate, has been locally installed and trusted on your device.</string>
 	<key>explanation::revoked</key>
@@ -882,6 +886,8 @@
 	<string>The server certificate for this site is trusted by the system because the root certificate authority is trusted.</string>
 	<key>explanation::untrusted</key>
 	<string>The server certificate for this site is not trusted by the system because the server certificate is incorrect.</string>
+	<key>explanation::weak_rsa</key>
+	<string>The server or issuing certificate is signed using a weak RSA key (contains less than 2048 bits of data).</string>
 	<key>explanation::wrong_host</key>
 	<string>The server certificate is for a different host than the one connected to.</string>
 	<key>first_run_notice</key>
@@ -940,6 +946,10 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Unknown</string>
 	<key>secure::invalid_date</key>
 	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
+	<key>secure::issue_date_too_long</key>
+	<string>Most likely. Apple changed requirements for certificates in iOS 13 to enforce shorter validity periods.</string>
+	<key>secure::leaf_keyusage</key>
+	<string>Most likely. A certificate that is missing the key usage parameter is likely still valid otherwise.</string>
 	<key>secure::local_trust</key>
 	<string>Yes. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
 
@@ -966,6 +976,8 @@ Exercise caution if continuing to this website.</string>
 	<string>No. Your device was unable to check if the certificate presented by the website actually belongs to the website, and not somebody else.
 
 Exercise extreme caution if continuing to this website.</string>
+	<key>secure::weak_rsa</key>
+	<string>No. One or more certificates for this host are using weak cryptography and are not considered secure.</string>
 	<key>secure::wrong_host</key>
 	<string>No. Because the certificate presented by the server was for another site there is no way to be sure that this certificate is not dangerous.
 

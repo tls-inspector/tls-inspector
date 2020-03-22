@@ -96,6 +96,18 @@ class CertificateChainTableViewController: UITableViewController {
             trustColor = UIColor.materialRed()
             trustText = lang(key: "Untrusted")
             trustIcon = FAIcon.FATimesCircleSolid
+        case .leafMissingRequiredKeyUsage:
+            trustColor = UIColor.materialAmber()
+            trustText = lang(key: "Untrusted")
+            trustIcon = FAIcon.FAExclamationCircleSolid
+        case .weakRSAKey:
+            trustColor = UIColor.materialRed()
+            trustText = lang(key: "Insecure")
+            trustIcon = FAIcon.FATimesCircleSolid
+        case .issueDateTooLong:
+            trustColor = UIColor.materialAmber()
+            trustText = lang(key: "Untrusted")
+            trustIcon = FAIcon.FAExclamationCircleSolid
         @unknown default:
             // Default already set
             break
