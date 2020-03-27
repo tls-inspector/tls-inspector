@@ -111,9 +111,6 @@ extern "C" {
 #ifndef OPENSSL_NO_STATIC_ENGINE
 # define OPENSSL_NO_STATIC_ENGINE
 #endif
-#ifndef OPENSSL_NO_AFALGENG
-# define OPENSSL_NO_AFALGENG
-#endif
 
 
 /*

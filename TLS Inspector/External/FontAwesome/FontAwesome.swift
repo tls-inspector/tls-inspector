@@ -3111,13 +3111,30 @@ enum FAIcon: Int {
     }
 
     func font(size: CGFloat) -> UIFont {
+        var font: UIFont?
         if self.rawValue >= 100000 && self.rawValue <= 199999 {
-            return UIFont(name: "FontAwesome5Brands-Regular", size: size)!
+            font = UIFont(name: "FontAwesome5Brands-Regular", size: size)
         } else if self.rawValue >= 200000 && self.rawValue <= 299999 {
-            return UIFont(name: "FontAwesome5Free-Light", size: size)!
+            font = UIFont(name: "FontAwesome5Free-Light", size: size)
         } else if self.rawValue >= 400000 && self.rawValue <= 499999 {
-            return UIFont(name: "FontAwesome5Free-Solid", size: size)!
+            font = UIFont(name: "FontAwesome5Free-Solid", size: size)
+        } else {
+            font = UIFont(name: "FontAwesome5Free-Regular", size: size)
         }
-        return UIFont(name: "FontAwesome5Free-Regular", size: size)!
+
+        if let f = font {
+            return f
+        }
+
+        LogError("FontAwesome font not located - failing to LastResort font")
+        for family in UIFont.familyNames {
+            LogError("Family name " + family)
+            let fontNames = UIFont.fontNames(forFamilyName: family)
+            for font in fontNames {
+                LogError(" - Font name: " + font)
+            }
+        }
+
+        return UIFont.systemFont(ofSize: size) // Last resort
     }
 }

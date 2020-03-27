@@ -115,8 +115,13 @@
 - (void) streamHasSpaceAvailable:(NSStream *)stream {
     SecTrustRef trust = (__bridge SecTrustRef)[stream propertyForKey: (__bridge NSString *)kCFStreamPropertySSLPeerTrust];
     SecTrustResultType trustStatus;
-
     SecTrustEvaluate(trust, &trustStatus);
+    if ([CKLogging sharedInstance].level == CKLoggingLevelDebug) {
+        CFDictionaryRef trustResultDictionary = SecTrustCopyResult(trust);
+        PDebug(@"Trust result details: %@", [(__bridge NSDictionary *)trustResultDictionary description]);
+        CFRelease(trustResultDictionary);
+    }
+
     long count = SecTrustGetCertificateCount(trust);
 
     NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
@@ -208,6 +213,7 @@
         self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
     }
 
+    PDebug(@"Certificate chain: %@", [self.chain description]);
     PDebug(@"Finished getting certificate chain");
     self.finished = YES;
     self.successful = YES;

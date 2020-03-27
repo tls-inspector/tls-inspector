@@ -79,6 +79,18 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
      The system does not trust this certificate because the intermediate CA has been revoked.
      */
     CKCertificateChainTrustStatusRevokedIntermediate,
+    /**
+     The leaf or intermediate certificate is using an RSA bey with fewer than 2048 bits.
+     */
+    CKCertificateChainTrustStatusWeakRSAKey,
+    /**
+     The leaf certificate has an issue date longer than 825 days
+     */
+    CKCertificateChainTrustStatusIssueDateTooLong,
+    /**
+     The leaf certificate is missing require key usage permissions
+     */
+    CKCertificateChainTrustStatusLeafMissingRequiredKeyUsage,
 };
 
 /**
@@ -132,5 +144,7 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (strong, nonatomic, nonnull) NSString * protocol;
 
 - (void) determineTrustFailureReason;
+
+-(NSString * _Nonnull) description;
 
 @end

@@ -152,6 +152,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSDate * notBefore;
 
 /**
+ *  The number of days this certificate is valid
+ */
+@property (nonatomic) NSUInteger validDays;
+
+/**
  *  Returns if the certificates is between the start and expiry date.
  */
 @property (nonatomic, readonly) BOOL isDateValid;
@@ -231,11 +236,19 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  */
 @property (strong, nonatomic, nullable, readonly) NSArray<NSString *> * tlsFeatures;
 
+/**
+ *  Get a dictionary of all key identifiers
+ */
 @property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * keyIdentifiers;
 
 /**
  *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
  */
 @property (nonatomic, nullable, readonly) void * X509Certificate;
+
+/**
+ *  Return a detailed description of the certificate
+ */
+- (NSString * _Nonnull) description;
 
 @end

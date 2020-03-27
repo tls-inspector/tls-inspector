@@ -3,18 +3,28 @@ import StoreKit
 import MessageUI
 
 class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeViewControllerDelegate {
+    // Settings key to track the number of times the application has been launched
     private let appLaunchKey = "__APP_LAUNCH_TIMES"
+    // Settings key to track if the user has been prompted to rate the app
     private let appLaunchRateKey = "__APP_LAUNCH_RATE"
+    // App Store ID number for TLS Inspector. Not secret.
     private let appID = "1100539810"
     private let appName = "TLS Inspector"
     private let appEmail = "'TLS Inspector Project Manager' <hello@tlsinspector.com>"
+    // Used to track which app store views come from the app v.s. which come from our website
+    // not used to track you or your device.
+    private let appCampaignToken = "acid-burn"
     private var dimissedBlock: (() -> Void)?
     public static var current = AppLinks()
 
     public func showAppStore(_ viewController: UIViewController, dismissed: (() -> Void)?) {
         let productViewController = SKStoreProductViewController()
         productViewController.delegate = self
-        productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: appID], completionBlock: nil)
+        let parameters = [
+            SKStoreProductParameterITunesItemIdentifier: appID,
+            SKStoreProductParameterCampaignToken: appCampaignToken,
+        ]
+        productViewController.loadProduct(withParameters: parameters, completionBlock: nil)
         viewController.present(productViewController, animated: true, completion: nil)
         self.dimissedBlock = dismissed
     }

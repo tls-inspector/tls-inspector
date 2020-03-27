@@ -45,6 +45,15 @@
         }
     }
 
+    // Weak RSA
+    for (CKCertificate * certificate in self.certificates) {
+        if ([certificate.publicKey isWeakRSA]) {
+            PWarn(@"Certificate: '%@' has a weak RSA key", certificate.subject.commonNames);
+            self.trusted = CKCertificateChainTrustStatusWeakRSAKey;
+            return;
+        }
+    }
+
     // SHA-1 Leaf
     if ([self.server.signatureAlgorithm hasPrefix:@"sha1"]) {
         PWarn(@"Certificate: '%@' is using SHA-1: '%@'", self.server.subject.commonNames, self.server.signatureAlgorithm);
@@ -132,10 +141,36 @@
         return;
     }
 
+    // Server cert is missing serverAuth EKU
+    if (![self.server.extendedKeyUsage containsObject:@"serverAuth"]) {
+        PWarn(@"Certificate: '%@' is missing required serverAuth key usage permission", self.server);
+        self.trusted = CKCertificateChainTrustStatusLeafMissingRequiredKeyUsage;
+        return;
+    }
+
+    // Issue Date too long
+    if (self.server.validDays > 825) {
+        PWarn(@"Certificate: '%@' is valid for too long %lu days", self.server.subject.commonNames, (unsigned long)self.server.validDays);
+        self.trusted = CKCertificateChainTrustStatusIssueDateTooLong;
+        return;
+    }
+
+
     // Fallback (We don't know)
     PWarn(@"Unable to determine why certificate: '%@' is untrusted", self.server.subject.commonNames);
     self.trusted = CKCertificateChainTrustStatusUntrusted;
+
     return;
+}
+
+- (NSString *) description {
+    NSMutableString * description = [NSMutableString string];
+    for (int i = 0; i < self.certificates.count; i++) {
+        CKCertificate * certificate = self.certificates[i];
+        [description appendFormat:@"Certificate %d:", i];
+        [description appendString:[certificate description]];
+    }
+    return description;
 }
 
 @end

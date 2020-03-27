@@ -44,6 +44,12 @@
 @property (nonatomic, readonly) int bitLength;
 
 /**
+ Is this public key a weak RSA key?
+ (<2048 bits)
+ */
+- (BOOL) isWeakRSA;
+
+/**
  Populate a public key info model with information from the given CKCertificate.
 
  @param cert The CKCertificate to populate the model from.

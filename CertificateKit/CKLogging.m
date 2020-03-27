@@ -61,7 +61,7 @@ static dispatch_queue_t queue;
     self.file = [documentsDirectory stringByAppendingPathComponent:file];
     [self createQueue];
     [self open];
-    self.level = CKLoggingLevelInfo;
+    self.level = CKLoggingLevelWarning;
     return self;
 }
 

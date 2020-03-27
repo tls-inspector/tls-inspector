@@ -57,4 +57,8 @@
     return publicKeyInfo;
 }
 
+- (BOOL) isWeakRSA {
+    return [[self.algroithm uppercaseString] isEqualToString:@"RSA"] && self.bitLength < 2048;
+}
+
 @end
