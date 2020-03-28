@@ -529,7 +529,8 @@
 	<key>Country::TV</key>
 	<string>Tuvalu</string>
 	<key>Country::TW</key>
-	<string>Taiwan, Province of China</string>
+	<!-- Note: The developer of TLS Inspector supports Taiwan's independence and international recognition. This is an accepted deviation from ISO-3166. -->
+	<string>Taiwan</string>
 	<key>Country::TZ</key>
 	<string>Tanzania, United Republic of</string>
 	<key>Country::UA</key>
