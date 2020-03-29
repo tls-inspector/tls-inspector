@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1 month</key>
+	<string>1 Monat</string>
+	<key>2 weeks</key>
+	<string>2 Wochen</string>
+	<key>3 months</key>
+	<string>3 Monate</string>
+	<key>6 months</key>
+	<string>6 Monate</string>
+	<key>About</key>
+	<string>Über</string>
+	<key>About TLS Inspector</key>
+	<string>Über TLS Inspector</string>
+	<key>Add Certificate Expiry Reminder</key>
+	<string>Ablauf-Erinnerung hinzufügen</string>
+	<key>Advanced Options</key>
+	<string>Erweiterte Optionen</string>
+	<key>Algorithm</key>
+	<string>Algorithmus</string>
+	<key>Algorithms</key>
+	<string>Algorithmen</string>
+	<key>Alternate Names</key>
+	<string>Alternative Namen</string>
+	<key>Authority</key>
+	<string>Zertifizierungsstelle</string>
+	<key>Basic</key>
+	<string>Einfach</string>
+	<key>Build</key>
+	<string>TODO</string>
+	<key>Cancel</key>
+	<string>Abbrechen</string>
+	<key>CertAlgorithm::ecdsa-with-SHA1</key>
+	<string>ECDSA mit SHA1</string>
+	<key>CertAlgorithm::ecdsa-with-SHA224</key>
+	<string>ECDSA mit SHA224</string>
+	<key>CertAlgorithm::ecdsa-with-SHA256</key>
+	<string>ECDSA mit SHA256</string>
+	<key>CertAlgorithm::ecdsa-with-SHA384</key>
+	<string>ECDSA mit SHA384</string>
+	<key>CertAlgorithm::ecdsa-with-SHA512</key>
+	<string>ECDSA mit SHA512</string>
+	<key>CertAlgorithm::md2WithRSAEncryption</key>
+	<string>RSA mit MD2</string>
+	<key>CertAlgorithm::md4WithRSAEncryption</key>
+	<string>RSA mit MD4</string>
+	<key>CertAlgorithm::md5WithRSAEncryption</key>
+	<string>RSA mit MD5</string>
+	<key>CertAlgorithm::sha1WithRSAEncryption</key>
+	<string>RSA mit SHA1</string>
+	<key>CertAlgorithm::sha224WithRSAEncryption</key>
+	<string>RSA mit SHA224</string>
+	<key>CertAlgorithm::sha256WithRSAEncryption</key>
+	<string>RSA mit SHA256</string>
+	<key>CertAlgorithm::sha384WithRSAEncryption</key>
+	<string>RSA mit SHA384</string>
+	<key>CertAlgorithm::sha512WithRSAEncryption</key>
+	<string>RSA mit SHA512</string>
+	<key>Certificate Authority</key>
+	<string>Zertifizierungsstelle</string>
+	<key>Certificate Chain</key>
+	<string>Zertifikatskette</string>
+	<key>Certificate Errors</key>
+	<string>Zertifikatsfehler</string>
+	<key>Certificate Information</key>
+	<string>Zertifikatsinformationen</string>
+	<key>Certificate Status</key>
+	<string>Zertifikatsstatus</string>
+	<key>Certificate is expired or not valid yet.</key>
+	<string>Zertifikat ist abgelaufen oder noch nicht gültig.</string>
+	<key>Certificate uses insecure SHA1 algorithm.</key>
+	<string>Zertifikat verwendet unsicheren SHA1-Algorithmus.</string>
+	<key>Certificates</key>
+	<string>Zertifikate</string>
+	<key>Chain</key>
+	<string>Kette</string>
+	<key>Ciphers</key>
+	<string>Verschlüsselungsverfahren</string>
+	<key>Connection Information</key>
+	<string>Verbindungsinformationen</string>
+	<key>Contact Support</key>
+	<string>Support kontaktieren</string>
+	<key>Contact Us</key>
+	<string>Kontaktiere uns</string>
+	<key>Contacting support requires that at least one email account be configured on this device.</key>
+	<string>Den Support zu kontaktieren setzt voraus, dass zumindest ein E-Mail-Account am Gerät konfiguriert ist.</string>
+	<key>Contribute to TLS Inspector</key>
+	<string>Trage zu TLS Inspector bei</string>
+	<key>Copy</key>
+	<string>Kopieren</string>
+	<key>Could not get certificates</key>
+	<string>Zertifikate können nicht geladen werden</string>
+	<key>Crypto Engine</key>
+	<string>Crypto-Engine</string>
+	<key>Debug Logging Enabled</key>
+	<string>Protokollierung aktiviert</string>
+	<key>Delete</key>
+	<string>Löschen</string>
+	<key>Did You Know:</key>
+	<string>Wusstest du schon:</string>
+	<key>Dismiss</key>
+	<string>TODO</string>
+	<key>Do not contact support for issues with your iOS Device or to report unsafe websites.</key>
+	<string>Kontaktiere den Support nicht bezüglich Fehler des iOS-Geräts oder unsicheren Webseiten.</string>
+	<key>Domain Name or IP Address</key>
+	<string>Domainname oder IP-Adresse</string>
+	<key>Download &amp; Check CRL</key>
+	<string>CRL herunterladen &amp; überprüfen</string>
+	<key>EV Authority</key>
+	<string>EV-Zertifizierungsstelle</string>
+	<key>Enable Debug Logging</key>
+	<string>Protokollierung aktivieren</string>
+	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
+	<string>TODO</string>
+	<key>Enter the value to verify</key>
+	<string>TODO</string>
+	<key>Errors</key>
+	<string>Fehler</string>
+	<key>Extended</key>
+	<string>Erweitert</string>
+	<key>Features</key>
+	<string>Funtionen</string>
+	<key>Fingerprints</key>
+	<string>Fingerabdrücke</string>
+	<key>Finished</key>
+	<string>Fertig</string>
+	<key>General</key>
+	<string>Allgemein</string>
+	<key>Get Involved</key>
+	<string>Mach mit</string>
+	<key>HTTP Headers</key>
+	<string>HTTP-Header</string>
+	<key>Host was not found or invalid.</key>
+	<string>Host nicht gefunden oder ungültig.</string>
+	<key>How soon before the certificate expires should we notify you?</key>
+	<string>Wie knapp vor Ablauf des Zertifikats möchtest du erinnert werden?</string>
+	<key>IDN Not Supported</key>
+	<string>IDN nicht unterstützt</string>
+	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
+	<string>TODO</string>
+	<key>Inspect</key>
+	<string>TODO</string>
+	<key>Internal error.</key>
+	<string>Interner Fehler.</string>
+	<key>Invalid Date</key>
+	<string>Ungültiges Datum</string>
+	<key>Invalid host</key>
+	<string>Ungültiger Host</string>
+	<key>Is the connection to this site secure?</key>
+	<string>Ist die Verbindung zu dieser Seite sicher?</string>
+	<key>Issuer</key>
+	<string>Aussteller</string>
+	<key>Key</key>
+	<string>Schlüssel</string>
+	<key>Key Algorithm</key>
+	<string>Schlüsselalgorithmus</string>
+	<key>Key Identifier</key>
+	<string>Schlüssel-ID</string>
+	<key>Key Usage</key>
+	<string>Verwendungszweck</string>
+	<key>Loading...</key>
+	<string>Laden…</string>
+	<key>Locally Trusted Chain</key>
+	<string>Lokal vertrauenswürdige Kette</string>
+	<key>Mail Account Required</key>
+	<string>E-Mail-Account erforderlich</string>
+	<key>Metadata</key>
+	<string>Metadaten</string>
+	<key>More</key>
+	<string>Mehr</string>
+	<key>More Info</key>
+	<string>TODO</string>
+	<key>Negotiated Ciphersuite</key>
+	<string>Verhandelte Ciphersuite</string>
+	<key>Negotiated Version</key>
+	<string>Verhandelte Version</string>
+	<key>Next</key>
+	<string>Weiter</string>
+	<key>No</key>
+	<string>Nein</string>
+	<key>No Supported URL Found</key>
+	<string>Keine unterstützte URL gefunden</string>
+	<key>Not After</key>
+	<string>Nicht nach</string>
+	<key>Not Before</key>
+	<string>Nicht vor</string>
+	<key>Not Valid After</key>
+	<string>Nicht gültig nach</string>
+	<key>Not Valid Before</key>
+	<string>Nicht gültig vor</string>
+	<key>Not Verified</key>
+	<string>Nicht verifiziert</string>
+	<key>Notice</key>
+	<string>TODO</string>
+	<key>Notification Date</key>
+	<string>Erinnerungsdatum</string>
+	<key>Only HTTPS URLs can be inspected</key>
+	<string>Nur HTTPS URLs können analysiert werden</string>
+	<key>OpenSSL Version</key>
+	<string>OpenSSL-Version</string>
+	<key>Options</key>
+	<string>Optionen</string>
+	<key>Please describe the problem in at least 5 words.</key>
+	<string>Bitte beschreibe das Problem in mehr als 5 Worten.</string>
+	<key>Provide Feedback</key>
+	<string>TODO</string>
+	<key>Proxy Detected</key>
+	<string>TODO</string>
+	<key>Public Key</key>
+	<string>Öffentlicher Schlüssel</string>
+	<key>Query OCSP Responder</key>
+	<string>OCSP-Responder abfragen</string>
+	<key>Rate in App Store</key>
+	<string>Im App Store bewerten</string>
+	<key>Recent Lookups</key>
+	<string>Verlauf</string>
+	<key>Remember Recent Lookups</key>
+	<string>Kürzliche Anfragen im Verlauf zeigen</string>
+	<key>Reminder Added</key>
+	<string>Erinnerung hinzugefügr</string>
+	<key>Remote Address</key>
+	<string>TODO</string>
+	<key>Renew Certificate for {domain}</key>
+	<string>TODO</string>
+	<key>Report Issue on GitHub</key>
+	<string>TODO</string>
+	<key>Report a Bug</key>
+	<string>Fehler melden</string>
+	<key>Request a Feature</key>
+	<string>Feature anfragen</string>
+	<key>Revoked On</key>
+	<string>Annulliert am</string>
+	<key>Search on Shodan</key>
+	<string>Auf Shodan suchen</string>
+	<key>Search on crt.sh</key>
+	<string>Auf crt.sh suchen</string>
+	<key>Security HTTP Headers</key>
+	<string>HTTP-Sicherheit</string>
+	<key>Select Feedback Type</key>
+	<string>Art des Feedbacks auswählen</string>
+	<key>Server Info</key>
+	<string>Server-Information</string>
+	<key>Server Redirected To</key>
+	<string>Server weitergeleitet zu</string>
+	<key>Share &amp; Feedback</key>
+	<string>Teilen &amp; Feedback</string>
+	<key>Share Certificate</key>
+	<string>Zertifikat teilen</string>
+	<key>Share TLS Inspector</key>
+	<string>Teile TLS Inspector</string>
+	<key>Show Certificate Fingerprint</key>
+	<string>Zeige Fingerabdruck des Zertifikats</string>
+	<key>Show HTTP Headers</key>
+	<string>HTTP Header anzeigen</string>
+	<key>Show Tips</key>
+	<string>Hinweise anzeigen</string>
+	<key>Signature</key>
+	<string>Signatur</string>
+	<key>Signature Algorithm</key>
+	<string>Signatur-Algorithmus</string>
+	<key>Size</key>
+	<string>Größe</string>
+	<key>Something Else</key>
+	<string>Andere Anfrage</string>
+	<key>Subject</key>
+	<string>Subjekt</string>
+	<key>Subject Alternate Names</key>
+	<string>Alternative Namen des Subjekts</string>
+	<key>Subject Names</key>
+	<string>Subjekt-Namen</string>
+	<key>Subject::C</key>
+	<string>Land</string>
+	<key>Subject::CN</key>
+	<string>Name</string>
+	<key>Subject::E</key>
+	<string>E-Mail</string>
+	<key>Subject::L</key>
+	<string>Stadt</string>
+	<key>Subject::O</key>
+	<string>Organisation</string>
+	<key>Subject::OU</key>
+	<string>Organisationseinheit</string>
+	<key>Subject::S</key>
+	<string>Bundesland</string>
+	<key>Subject::ST</key>
+	<string>Bundesland</string>
+	<key>Submit Feedback</key>
+	<string>Feedback schicken</string>
+	<key>Submit Logs</key>
+	<string>Protokoll schicken</string>
+	<key>TLS Features</key>
+	<string>TLS-Funktionen</string>
+	<key>TLS Inspector Issues Only</key>
+	<string>Nur Feedback zu TLS Inspector</string>
+	<key>Tell Friends About TLS Inspector</key>
+	<string>Erzähle Freunden von TLS Inspector</string>
+	<key>Test New Features</key>
+	<string>Teste neue Funktionen</string>
+	<key>The certificate for {domain} expires on {date}</key>
+	<string>Das Zertifikat für {0} läuft ab am {1}</string>
+	<key>The host you provided is not valid</key>
+	<string>Der angegebene Host ist ungültig</string>
+	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
+	<string>Vertrauen &amp; Sicherheit immer dabei mit TLS Inspector: {0}</string><!-- This is not a 1:1 translation. Instead of "On-The-Go", it is translated as "always with you" -->
+	<key>Trust Details</key>
+	<string>Vertrauens-Details</string>
+	<key>Trusted</key>
+	<string>Vertrauenswürdig</string>
+	<key>Trusted Chain</key>
+	<string>Vertrauenswürdige Kette</string>
+	<key>Unable to Inspect</key>
+	<string>Kann nicht analysiert werden</string>
+	<key>Unable to export certificate</key>
+	<string>Zertifikat kann nicht exportiert werden</string>
+	<key>Understood</key>
+	<string>Verstanden</string>
+	<key>Unknown</key>
+	<string>Unbekannt</string>
+	<key>Untrusted Chain</key>
+	<string>Nicht vertrauenswürdige Kette</string>
+	<key>Use the Reminders app to customize the reminder</key>
+	<string>Bearbeite die Erinnerung in der Erinnerungen-App</string>
+	<key>Valid From</key>
+	<string>Gültig ab</string>
+	<key>Valid To</key>
+	<string>Gültig bis</string>
+	<key>Validity Period</key>
+	<string>Gültigkeitsperiode</string>
+	<key>Value</key>
+	<string>Wert</string>
+	<key>Verified</key>
+	<string>Verifiziert</string>
+	<key>Version</key>
+	<string>Version</string>
+	<key>View All</key>
+	<string>Alle anzeigen</string>
+	<key>View all alternate names</key>
+	<string>Alle alternativen Namen anzeigen</string>
+	<key>View on SSL Labs</key>
+	<string>In SSL Labs anzeigen</string>
+	<key>Warning</key>
+	<string>Achtung</string>
+	<key>We were unable to export the certificate in PEM format.</key>
+	<string>Zertifikat konnte nicht im PEM-Format exportiert werden.</string>
+	<key>What does this mean?</key>
+	<string>Was bedeutet das?</string>
+	<key>What kind of feedback would you like to submit?</key>
+	<string>Welche Art an Feedback möchtest du schicken?</string>
+	<key>Yes</key>
+	<string>Ja</string>
+	<key>You can modify the reminder in the reminders app.</key>
+	<string>Du kannst die Erinnerung in der Erinnerungen-App bearbeiten.</string>
+	<key>You must inspect at least one site with debug logging enabled before you can submit logs.</key>
+	<string>Du musst mindestens eine Analyse mit Protokollierung durchgeführt haben, um ein Protokoll zu schicken.</string>
+	<key>advanced_settings_nag</key>
+	<string>Diese Einstellungen sind für erweiterte Fehlerbehebung gedacht. Falsche Einstellungen können TLS Inspector an einer korrekten Funktionsweise hindern.</string>
+	<key>certificate_status_footer</key>
+	<string>OCSP-Abfragen deaktivieren kann die Privatsphäre erhöhen, verringert jedoch die Datenqualität. CRL-Überprüfung aktivieren kann zu langsameren Abfragen und erhöhtem Datenverbrauch führen.</string>
+	<key>copyright_license_footer</key>
+	<string>TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2020 Ian Spence.</string>
+	<key>crypto_engine_footer</key>
+	<string>Änderungen an der Crypto-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als jene, die von diesem iOS-Gerät verwendet werden.</string>
+	<key>explanation::invalid_date</key>
+	<string>TODO</string>
+	<key>explanation::issue_date_too_long</key>
+	<string>TODO</string>
+	<key>explanation::leaf_keyusage</key>
+	<string>TODO</string>
+	<key>explanation::local_trust</key>
+	<string>TODO</string>
+	<key>explanation::revoked</key>
+	<string>TODO</string>
+	<key>explanation::self_signed</key>
+	<string>TODO</string>
+	<key>explanation::sha1_int</key>
+	<string>TODO</string>
+	<key>explanation::sha1_leaf</key>
+	<string>TODO</string>
+	<key>explanation::trust</key>
+	<string>TODO</string>
+	<key>explanation::untrusted</key>
+	<string>TODO</string>
+	<key>explanation::weak_rsa</key>
+	<string>TODO</string>
+	<key>explanation::wrong_host</key>
+	<string>TODO</string>
+	<key>first_run_notice</key>
+	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
+
+If you&apos;re concerned about the security of your device; contact Apple Support.</string>
+	<key>idn_warning</key>
+	<string>TODO</string>
+	<key>keyUsage::OCSPSigning</key>
+	<string>OCSP-Signatur</string>
+	<key>keyUsage::anyExtendedKeyUsage</key>
+	<string>Alle Verwendungszwecke</string>
+	<key>keyUsage::cRLSign</key>
+	<string>CRL-Signatur</string>
+	<key>keyUsage::clientAuth</key>
+	<string>Client-Authentifizierung</string>
+	<key>keyUsage::codeSigning</key>
+	<string>Code-Signatur</string>
+	<key>keyUsage::dataEncipherment</key>
+	<string>Datenverschlüsselung</string>
+	<key>keyUsage::decipherOnly</key>
+	<string>Nur Entschlüsselung</string>
+	<key>keyUsage::digitalSignature</key>
+	<string>Digitale Signatur</string>
+	<key>keyUsage::emailProtection</key>
+	<string>E-Mail-Schutz</string>
+	<key>keyUsage::encipherOnly</key>
+	<string>Nur Verschlüsselung</string>
+	<key>keyUsage::keyAgreement</key>
+	<string>Schlüsselverhandlung</string>
+	<key>keyUsage::keyCertSign</key>
+	<string>Schlüssel- und Zertifikats-Signatur</string>
+	<key>keyUsage::keyEncipherment</key>
+	<string>Schlüssel-Verschlüsselung</string>
+	<key>keyUsage::nonRepudiation</key>
+	<string>Herkunftsverifikation</string>
+	<key>keyUsage::serverAuth</key>
+	<string>Server-Authentifizierung</string>
+	<key>keyUsage::timeStamping</key>
+	<string>Zeitstempel</string>
+	<key>proxy_warning</key>
+	<string>Ein HTTP-Proxy ist konfiguriert. TLS Inspector ist nicht mit mit HTTP-Proxies kompatibel, der Proxy muss in den WLAN-Einstellungen des Systems deaktiviert werden.</string>
+	<key>sanType::Directory</key>
+	<string>Verzeichnis</string>
+	<key>sanType::Email</key>
+	<string>E-Mail</string>
+	<key>sanType::IP</key>
+	<string>IP-Adresse</string>
+	<key>sanType::Other</key>
+	<string>Anderer Typ</string>
+	<key>sanType::Unknown</key>
+	<string>Unbekannt</string>
+	<key>secure::invalid_date</key>
+	<string>TODO</string>
+	<key>secure::issue_date_too_long</key>
+	<string>TODO</string>
+	<key>secure::leaf_keyusage</key>
+	<string>TODO</string>
+	<key>secure::local_trust</key>
+	<string>TODO</string>
+	<key>secure::revoked</key>
+	<string>TODO</string>
+	<key>secure::self_signed</key>
+	<string>TODO</string>
+	<key>secure::sha1_int</key>
+	<string>TODO</string>
+	<key>secure::sha1_leaf</key>
+	<string>TODO</string>
+	<key>secure::trust</key>
+	<string>TODO</string>
+	<key>secure::untrusted</key>
+	<string>TODO</string>
+	<key>secure::weak_rsa</key>
+	<string>TODO</string>
+	<key>secure::wrong_host</key>
+	<string>TODO</string>
+	<key>server_error_footer</key>
+	<string>TODO</string>
+	<key>tls_feature_status_request</key>
+	<string>TODO</string>
+	<key>tls_feature_status_request_v2</key>
+	<string>TODO</string>
+	<key>tlstip1</key>
+	<string>TODO</string>
+	<key>tlstip2</key>
+	<string>TODO</string>
+	<key>tlstip3</key>
+	<string>TODO</string>
+	<key>tlstip5</key>
+	<string>TODO</string>
+	<key>tlstip6</key>
+	<string>TODO</string>
+	<key>tlstip7</key>
+	<string>TODO</string>
+	<key>verbose_logging_footer</key>
+	<string>Wenn ein Problem mit TLS Inspector auftritt, bitten wir, Protokollierung zu aktivieren und uns ein Protokoll zu schicken, damit wir das Problem besser analysieren können. Es werden keine personenbezogenen Daten gesammelt, jedoch sind die analysierten Domains im Protokoll enthalten. Wir sehen niemals das Protokoll, es sei denn, es wird uns über die Zusende-Funktion oben geschickt.</string>
+	<key>{commonName} (Expired)</key>
+	<string>{0} (Abgelaufen)</string>
+	<key>{commonName} (Insecure)</key>
+	<string>{0} (Unsicher)</string>
+	<key>{commonName} (Not Yet Valid)</key>
+	<string>{0} (Noch nicht gültig)</string>
+	<key>{commonName} (Revoked)</key>
+	<string>{0} (Annulliert)</string>
+	<key>{count} months</key>
+	<string>{0} Monate</string>
+	<key>{count} weeks</key>
+	<string>{0} Wochen</string>
+	<key>{summary} (Revoked)</key>
+	<string>{0} (Annulliert)</string>
+</dict>
+</plist>
