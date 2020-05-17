@@ -20,13 +20,12 @@ if [ -f ../openssl.framework/Headers/opensslv.h ]; then
         echo "warning: OpenSSL version did not match. recompiling version ${OPENSSL_WANT_VERSION}"
         rm -r ../openssl.framework
     fi
-else
-    echo "warning: OpenSSL needs to be compiled. This will take a while..."
 fi
 
+echo "warning: OpenSSL needs to be compiled. This will take a while..."
+
 cd openssl-ios
-rm -rf build/ output/
-./build-openssl.sh ${OPENSSL_WANT_VERSION}
+./build-ios.sh ${OPENSSL_WANT_VERSION}
 mv openssl.framework ../../
 cd ../
 

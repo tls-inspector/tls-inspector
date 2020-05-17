@@ -20,12 +20,11 @@ if [ -f ../curl.framework/Headers/curlver.h ]; then
         echo "warning: cURL version did not match. recompiling version ${CURL_WANT_VERSION}"
         rm -r ../curl.framework
     fi
-else
-    echo "warning: cURL needs to be compiled. This will take a while..."
 fi
 
-cd libcurl-ios
-rm -rf build/ output/
+echo "warning: cURL needs to be compiled. This will take a while..."
+
+cd curl-ios
 ./build-ios.sh ${CURL_WANT_VERSION}
 mv curl.framework ../../
 cd ../
