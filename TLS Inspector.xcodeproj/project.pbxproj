@@ -673,7 +673,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */;
 			buildPhases = (
-				3C20A22724033687006824CB /* Validate Checksums */,
+				3C000AB22471D154009BC68A /* Compile OpenSSL */,
+				3C5AE3E22471D9B00004292C /* Compile cURL */,
 				3C65DAD51E836BE9004AD96D /* Sources */,
 				3C65DAD61E836BE9004AD96D /* Frameworks */,
 				3C65DAD71E836BE9004AD96D /* Headers */,
@@ -845,7 +846,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C20A22724033687006824CB /* Validate Checksums */ = {
+		3C000AB22471D154009BC68A /* Compile OpenSSL */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -854,14 +855,32 @@
 			);
 			inputPaths = (
 			);
-			name = "Validate Checksums";
+			name = "Compile OpenSSL";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# Validate OpenSSL and libCURL Checksums\ncd CertificateKit\n./validate.sh\n";
+			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\n./build-openssl.sh\n";
+		};
+		3C5AE3E22471D9B00004292C /* Compile cURL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile cURL";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\n./build-curl.sh\n";
 		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
