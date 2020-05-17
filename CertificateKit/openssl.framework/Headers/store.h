@@ -1,17 +1,23 @@
 /*
- * Copyright 2016-2019 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2016-2020 The OpenSSL Project Authors. All Rights Reserved.
  *
- * Licensed under the OpenSSL license (the "License").  You may not use
+ * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
 
-#ifndef HEADER_OSSL_STORE_H
-# define HEADER_OSSL_STORE_H
+#ifndef OPENSSL_STORE_H
+# define OPENSSL_STORE_H
+# pragma once
+
+# include <openssl/macros.h>
+# ifndef OPENSSL_NO_DEPRECATED_3_0
+#  define HEADER_OSSL_STORE_H
+# endif
 
 # include <stdarg.h>
-# include <openssl/ossl_typ.h>
+# include <openssl/types.h>
 # include <openssl/pem.h>
 # include <openssl/storeerr.h>
 
@@ -96,6 +102,24 @@ int OSSL_STORE_error(OSSL_STORE_CTX *ctx);
  */
 int OSSL_STORE_close(OSSL_STORE_CTX *ctx);
 
+/*
+ * Attach to a BIO.  This works like OSSL_STORE_open() except it takes a
+ * BIO instead of a uri, along with a scheme to use when reading.
+ * The given UI method will be used any time the loader needs extra input,
+ * for example when a password or pin is needed, and will be passed the
+ * same user data every time it's needed in this context.
+ *
+ * Returns a context reference which represents the channel to communicate
+ * through.
+ *
+ * Note that this function is considered unsafe, all depending on what the
+ * BIO actually reads.
+ */
+OSSL_STORE_CTX *OSSL_STORE_attach(BIO *bio, OPENSSL_CTX *libctx,
+                                  const char *scheme, const char *propq,
+                                  const UI_METHOD *ui_method, void *ui_data,
+                                  OSSL_STORE_post_process_info_fn post_process,
+                                  void *post_process_data);
 
 /*-
  *  Extracting OpenSSL types from and creating new OSSL_STORE_INFOs
@@ -185,7 +209,7 @@ void OSSL_STORE_SEARCH_free(OSSL_STORE_SEARCH *search);
 
 /* Search term accessors */
 int OSSL_STORE_SEARCH_get_type(const OSSL_STORE_SEARCH *criterion);
-X509_NAME *OSSL_STORE_SEARCH_get0_name(OSSL_STORE_SEARCH *criterion);
+X509_NAME *OSSL_STORE_SEARCH_get0_name(const OSSL_STORE_SEARCH *criterion);
 const ASN1_INTEGER *OSSL_STORE_SEARCH_get0_serial(const OSSL_STORE_SEARCH
                                                   *criterion);
 const unsigned char *OSSL_STORE_SEARCH_get0_bytes(const OSSL_STORE_SEARCH
@@ -198,7 +222,7 @@ const EVP_MD *OSSL_STORE_SEARCH_get0_digest(const OSSL_STORE_SEARCH *criterion);
  * to the loading channel.  This MUST happen before the first OSSL_STORE_load().
  */
 int OSSL_STORE_expect(OSSL_STORE_CTX *ctx, int expected_type);
-int OSSL_STORE_find(OSSL_STORE_CTX *ctx, OSSL_STORE_SEARCH *search);
+int OSSL_STORE_find(OSSL_STORE_CTX *ctx, const OSSL_STORE_SEARCH *search);
 
 
 /*-
@@ -222,6 +246,16 @@ typedef OSSL_STORE_LOADER_CTX *(*OSSL_STORE_open_fn)(const OSSL_STORE_LOADER
                                                      void *ui_data);
 int OSSL_STORE_LOADER_set_open(OSSL_STORE_LOADER *loader,
                                OSSL_STORE_open_fn open_function);
+typedef OSSL_STORE_LOADER_CTX *(*OSSL_STORE_attach_fn)(const OSSL_STORE_LOADER
+                                                       *loader,
+                                                       BIO *bio,
+                                                       OPENSSL_CTX *libctx,
+                                                       const char *propq,
+                                                       const UI_METHOD
+                                                       *ui_method,
+                                                       void *ui_data);
+int OSSL_STORE_LOADER_set_attach(OSSL_STORE_LOADER *loader,
+                                 OSSL_STORE_attach_fn attach_function);
 typedef int (*OSSL_STORE_ctrl_fn)(OSSL_STORE_LOADER_CTX *ctx, int cmd,
                                   va_list args);
 int OSSL_STORE_LOADER_set_ctrl(OSSL_STORE_LOADER *loader,
@@ -230,7 +264,7 @@ typedef int (*OSSL_STORE_expect_fn)(OSSL_STORE_LOADER_CTX *ctx, int expected);
 int OSSL_STORE_LOADER_set_expect(OSSL_STORE_LOADER *loader,
                                  OSSL_STORE_expect_fn expect_function);
 typedef int (*OSSL_STORE_find_fn)(OSSL_STORE_LOADER_CTX *ctx,
-                                  OSSL_STORE_SEARCH *criteria);
+                                  const OSSL_STORE_SEARCH *criteria);
 int OSSL_STORE_LOADER_set_find(OSSL_STORE_LOADER *loader,
                                OSSL_STORE_find_fn find_function);
 typedef OSSL_STORE_INFO *(*OSSL_STORE_load_fn)(OSSL_STORE_LOADER_CTX *ctx,
