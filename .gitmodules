@@ -1,0 +1,3 @@
+[submodule "CertificateKit/build/openssl-ios"]
+	path = CertificateKit/build/openssl-ios
+	url = https://github.com/certificate-helper/openssl-ios.git
