@@ -29,7 +29,7 @@ reports private until we can determine the scope of the issue.
 Instructions on how to report vulnerabilities to us are provided on our website:
 https://tlsinspector.com/vulnerability.html
 
-We prefer that you use Signal to report issues instead of regular email. We do provide a PGP public
+We prefer that you use Signal to report issues instead of regular email. We do not provide a PGP public
 key and do not support responding to PGP encrypted emails.
 
 # Q & A
