@@ -1,7 +1,8 @@
 # TLS Inspector
 
 [![Download](https://img.shields.io/itunes/v/1100539810.svg?label=iTunes%20App%20Store&style=flat-square)](https://tlsinspector.com/dl.html)
-[![LICENSE](https://img.shields.io/github/license/certificate-helper/TLS-Inspector.svg?style=flat-square)](https://github.com/ecnepsnai/ds/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/github/license/tls-inspector/tls-inspector.svg?style=flat-square)](https://github.com/ecnepsnai/ds/blob/master/LICENSE)
+[![Follow](https://img.shields.io/twitter/follow/tlsinspector?style=flat-square)](https://twitter.com/tlsinspector)
 
 <img src="https://tlsinspector.com/static/img/screenshots.png" alt="TLS Inspector Screenshots" />
 
