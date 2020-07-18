@@ -15,10 +15,6 @@ App Store. Older versions are not supported and may contain unfixed security vul
 We provide limited support to pre-release "Test Flight" versions of the app. These versions may
 contain security vulnerabilities and use of pre-release software is at your own risk.
 
-We do not provide support for any version of the app on modified iOS devices, commonly known as
-"Jailbreaking". While we will not prevent you from running the app on modified devices, you are
-using the app entirely at your own risk.
-
 ## Reporting a Vulnerability
 
 Please do not report security vulnerabilities as issues on Github as these are visible to the
