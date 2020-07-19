@@ -12,13 +12,13 @@ OPENSSL_WANT_VERSION=$(grep 'VERSION' openssl.want | cut -d '=' -f 2)
 echo "OpenSSL version wanted: ${OPENSSL_WANT_VERSION}"
 
 if [ -f ../openssl.framework/Headers/opensslv.h ]; then
-    CURRENT_VERSION=$(grep 'OPENSSL_FULL_VERSION_STR' ../openssl.framework/Headers/opensslv.h | egrep -o '"[a-zA-Z0-9\.\-]+"' | tr -d '"')
+    CURRENT_VERSION=$(grep 'OPENSSL_VERSION_TEXT' ../openssl.framework/Headers/opensslv.h | egrep -o '\d\.\d\.\d[a-z]')
     if [ "${CURRENT_VERSION}" == "${OPENSSL_WANT_VERSION}" ]; then
         echo "OpenSSL already built, nothing to do"
         exit 0
     else
         echo "warning: OpenSSL version did not match. recompiling version ${OPENSSL_WANT_VERSION}"
-        rm -r ../openssl.framework
+        #rm -r ../openssl.framework
     fi
 fi
 
@@ -30,11 +30,10 @@ mv openssl.framework ../../
 cd ../
 
 if [ -f ../openssl.framework/Headers/opensslv.h ]; then
-    CURRENT_VERSION=$(grep 'OPENSSL_FULL_VERSION_STR' ../openssl.framework/Headers/opensslv.h | egrep -o '"[a-zA-Z0-9\.\-]+"' | tr -d '"')
+    CURRENT_VERSION=$(grep 'OPENSSL_VERSION_TEXT' ../openssl.framework/Headers/opensslv.h | egrep -o '\d\.\d\.\d[a-z]')
     if [ "${CURRENT_VERSION}" == "${OPENSSL_WANT_VERSION}" ]; then
         exit 0
     fi
 fi
 
-echo "error: OpenSSL version did not match after building version ${OPENSSL_WANT_VERSION}"
-exit 1
+echo "error: OpenSSL version did not match after building. Wanted: ${OPENSSL_WANT_VERSION} Got: ${CURRENT_VERSION}"

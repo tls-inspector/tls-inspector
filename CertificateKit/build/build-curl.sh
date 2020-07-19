@@ -36,5 +36,5 @@ if [ -f ../curl.framework/Headers/curlver.h ]; then
     fi
 fi
 
-echo "error: cURL version did not match after building version ${CURL_WANT_VERSION}"
+echo "error: cURL version did not match after building. Wanted: ${CURL_WANT_VERSION} Got: ${CURRENT_VERSION}"
 exit 1
