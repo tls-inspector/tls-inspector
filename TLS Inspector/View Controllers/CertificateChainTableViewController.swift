@@ -53,7 +53,7 @@ class CertificateChainTableViewController: UITableViewController {
                                         ])
         { (index) in
             if index == 0 {
-                self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain)
+                self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain + "&hideResults=on")
             } else if index == 1 {
                 self.openURL("https://www.shodan.io/host/" + chain.remoteAddress)
             } else if index == 2 {
