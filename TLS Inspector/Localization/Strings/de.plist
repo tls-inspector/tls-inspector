@@ -29,7 +29,7 @@
 	<key>Basic</key>
 	<string>Einfach</string>
 	<key>Build</key>
-	<string>TODO</string>
+	<string>Build-Nummer</string>
 	<key>Cancel</key>
 	<string>Abbrechen</string>
 	<key>CertAlgorithm::ecdsa-with-SHA1</key>
@@ -101,7 +101,7 @@
 	<key>Did You Know:</key>
 	<string>Wusstest du schon:</string>
 	<key>Dismiss</key>
-	<string>TODO</string>
+	<string>Verwerfen</string>
 	<key>Do not contact support for issues with your iOS Device or to report unsafe websites.</key>
 	<string>Kontaktiere den Support nicht bezüglich Fehler des iOS-Geräts oder unsicheren Webseiten.</string>
 	<key>Domain Name or IP Address</key>
@@ -113,9 +113,9 @@
 	<key>Enable Debug Logging</key>
 	<string>Protokollierung aktivieren</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
-	<string>TODO</string>
+	<string>Fully Qualified Domain Name oder IP-Adresse des zu inspizierenden Hosts angeben. Es kann auch eine Port-Nummer angegeben werden.</string>
 	<key>Enter the value to verify</key>
-	<string>TODO</string>
+	<string>Wert zur Verifizierung eingeben</string>
 	<key>Errors</key>
 	<string>Fehler</string>
 	<key>Extended</key>
@@ -139,9 +139,9 @@
 	<key>IDN Not Supported</key>
 	<string>IDN nicht unterstützt</string>
 	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
-	<string>TODO</string>
+	<string>Wenn du glaubst, es handelt sich um einen Fehler, kontaktiere den Support über die TLS Inspector-App.</string>
 	<key>Inspect</key>
-	<string>TODO</string>
+	<string>Inspizieren</string>
 	<key>Internal error.</key>
 	<string>Interner Fehler.</string>
 	<key>Invalid Date</key>
@@ -171,7 +171,7 @@
 	<key>More</key>
 	<string>Mehr</string>
 	<key>More Info</key>
-	<string>TODO</string>
+	<string>Mehr Information</string>
 	<key>Negotiated Ciphersuite</key>
 	<string>Verhandelte Ciphersuite</string>
 	<key>Negotiated Version</key>
@@ -193,7 +193,7 @@
 	<key>Not Verified</key>
 	<string>Nicht verifiziert</string>
 	<key>Notice</key>
-	<string>TODO</string>
+	<string>Meldung</string>
 	<key>Notification Date</key>
 	<string>Erinnerungsdatum</string>
 	<key>Only HTTPS URLs can be inspected</key>
@@ -205,9 +205,9 @@
 	<key>Please describe the problem in at least 5 words.</key>
 	<string>Bitte beschreibe das Problem in mehr als 5 Worten.</string>
 	<key>Provide Feedback</key>
-	<string>TODO</string>
+	<string>Feedback geben</string>
 	<key>Proxy Detected</key>
-	<string>TODO</string>
+	<string>Proxy erkannt</string>
 	<key>Public Key</key>
 	<string>Öffentlicher Schlüssel</string>
 	<key>Query OCSP Responder</key>
@@ -219,13 +219,13 @@
 	<key>Remember Recent Lookups</key>
 	<string>Kürzliche Anfragen im Verlauf zeigen</string>
 	<key>Reminder Added</key>
-	<string>Erinnerung hinzugefügr</string>
+	<string>Erinnerung hinzugefügt</string>
 	<key>Remote Address</key>
-	<string>TODO</string>
+	<string>Entfernte Adresse</string>
 	<key>Renew Certificate for {domain}</key>
-	<string>TODO</string>
+	<string>Erneuere Zertifikat für {domain}</string>
 	<key>Report Issue on GitHub</key>
-	<string>TODO</string>
+	<string>Melde Fehler auf GitHub</string>
 	<key>Report a Bug</key>
 	<string>Fehler melden</string>
 	<key>Request a Feature</key>
@@ -363,35 +363,35 @@
 	<key>crypto_engine_footer</key>
 	<string>Änderungen an der Crypto-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als jene, die von diesem iOS-Gerät verwendet werden.</string>
 	<key>explanation::invalid_date</key>
-	<string>TODO</string>
+	<string>Dem Server-Zertifikat wird nicht vertraut, da mindestens ein Zertifikat in der Kette abgelaufen oder noch nicht gültig ist.</string>
 	<key>explanation::issue_date_too_long</key>
-	<string>TODO</string>
+	<string>Das Server-Zertifikat ist länger als 825 Tage gültig. Zertifikaten mit übermäßig langer Gültigkeitsdauer gelten als nicht sicher, da sie im Laufe der Zeit unsicher werden können.</string>
 	<key>explanation::leaf_keyusage</key>
-	<string>TODO</string>
+	<string>Das Server-Zertifikat ist nicht gültig, da der Key Usage-Parameter &quot;Server Authentication&quot; fehlt.</string>
 	<key>explanation::local_trust</key>
-	<string>TODO</string>
+	<string>Dem Server-Zertifikat wird vertraut, da das Zertifikat selbst oder das Zertifikat der Zertifizierungsstelle als lokal vertrauenswürdig installiert wurde.</string>
 	<key>explanation::revoked</key>
-	<string>TODO</string>
+	<string>Dem Server-Zertifikat wird nicht vertraut, da es durch die Zertifizierungsstelle annulliert wurde.</string>
 	<key>explanation::self_signed</key>
-	<string>TODO</string>
+	<string>Dem Server-Zertifikat wird nicht vertraut, da die Zertifizierungsstelle unbekannt ist.</string>
 	<key>explanation::sha1_int</key>
-	<string>TODO</string>
+	<string>Das Intermediate-Zertifikat wurde mit SHA-1 signiert, dieser Algorithmus wird nicht mehr als sicher betrachtet.</string>
 	<key>explanation::sha1_leaf</key>
-	<string>TODO</string>
+	<string>Das Server-Zertifikat wurde mit SHA-1 signiert, dieser Algorithmus wird nicht mehr als sicher betrachtet.</string>
 	<key>explanation::trust</key>
-	<string>TODO</string>
+	<string>Dem Server-Zertifikat wird vertraut, da der Zertifizierungsstelle vertraut wird.</string>
 	<key>explanation::untrusted</key>
-	<string>TODO</string>
+	<string>Dem Server-Zertifikat wird nicht vertraut, da es inkorrekt ist.</string>
 	<key>explanation::weak_rsa</key>
-	<string>TODO</string>
+	<string>Mindestens ein Zertifikat in der Kette wurde mit einem schwachen RSA-Schlüssel signiert (weniger als 2048 bits).</string>
 	<key>explanation::wrong_host</key>
-	<string>TODO</string>
+	<string>Das Server-Zertifikat wurde für eine andere Webseite ausgestellt.</string>
 	<key>first_run_notice</key>
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
 If you&apos;re concerned about the security of your device; contact Apple Support.</string>
 	<key>idn_warning</key>
-	<string>TODO</string>
+	<string>Derzeit unterstützt TLS Inspector noch keine Internationalen Domain Names (IDN). Wir bitten um Entschuldigung für diese Unannehmlichkeit.</string>
 	<key>keyUsage::OCSPSigning</key>
 	<string>OCSP-Signatur</string>
 	<key>keyUsage::anyExtendedKeyUsage</key>
@@ -437,47 +437,59 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<key>sanType::Unknown</key>
 	<string>Unbekannt</string>
 	<key>secure::invalid_date</key>
-	<string>TODO</string>
+	<string>Wahrscheinlich. Ein abgelaufenes oder noch nicht gültiges Zertifikat ist nicht zwingend ungültig, aber oft ein Fehler des Site-Administrators, oder die Uhrzeit auf deinem iOS-Gerät stimmt nicht.</string>
 	<key>secure::issue_date_too_long</key>
-	<string>TODO</string>
+	<string>Wahrscheinlich. Apple hat die Anforderungen für Zertifikate in iOS 13 geändert, um eine kürzere Gültigkeitsperiode vorzuschreiben.</string>
 	<key>secure::leaf_keyusage</key>
-	<string>TODO</string>
+	<string>Wahrscheinlich. Ein Zertifikat, dem der Key Usage-Parameter fehlt, ist wahrscheinlich dennoch gültig.</string>
 	<key>secure::local_trust</key>
-	<string>TODO</string>
+	<string>Ja. Deinem Gerät wurde vorgeschrieben, diesem Zertifikat zu vertrauen, selbst wenn es nicht vertrauenswürdig ist.
+
+Üblicherweise private oder interne Websites, wie die im Enterprise-Gebrauch, benutzen diese Arten von Zertifikaten. Wenn es sich um eine öffentliche Webseite wie die einer Bank oder eines Social Networks handelt, besuche die Webseite nicht und hole dir Unterstützung von Apple.</string>
 	<key>secure::revoked</key>
-	<string>TODO</string>
+	<string>Nein. Eines oder mehrere Zertifikate dieser Webseite wurden annulliert, was bedeutet, dass den Zertifikaten nicht mehr vertraut werden kann.
+
+Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>secure::self_signed</key>
-	<string>TODO</string>
+	<string>Nein. Die Zertifikate für diese Webseite wurde nicht von einer bekannten Zertifizierungsstelle zertifiziert, deshalb hat dein Gerät keine Möglichkeit zu überprüfen, ob es sich tatsächlich um die richtige Webseite und nicht einen Angreifer handelt.
+
+Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>secure::sha1_int</key>
-	<string>TODO</string>
+	<string>Nein. Wenn auch unwahrscheinlich, ist es für einen Angreifer möglich, ein gefälschtes Zertifikat zu erstellen, das die Schwäche von SHA-1 ausnutzt.
+
+Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>secure::sha1_leaf</key>
-	<string>TODO</string>
+	<string>Nein. Wenn auch unwahrscheinlich, ist es für einen Angreifer möglich, ein gefälschtes Zertifikat zu erstellen, das die Schwäche von SHA-1 ausnutzt.
+
+Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>secure::trust</key>
-	<string>TODO</string>
+	<string>Ja. Dein Gerät vertraut der Verbindung zu dieser Webseite.</string>
 	<key>secure::untrusted</key>
-	<string>TODO</string>
+	<string>Nein. Deinem Gerät ist es nicht möglich, die Echtheit des Zertifikats der Webseite festzustellen.
+
+Sei extrem vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>secure::weak_rsa</key>
-	<string>TODO</string>
+	<string>Nein. Mindestens ein Zertifikat dieser Webseite benutzt schwache Kryptographie und wird daher als unsicher betrachtet.</string>
 	<key>secure::wrong_host</key>
-	<string>TODO</string>
+	<string>Nein. Da das Zertifikat für eine andere Webseite ausgestellt wurde, kann nicht überprüft werden, ob die Verbindung sicher ist.
+
+Womöglich wurde die Anfrage umgeleitet auf eine andere Webseite, wie zum Beispiel eine WLAN-Anmelde-Seite.
+
+Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>server_error_footer</key>
-	<string>TODO</string>
-	<key>tls_feature_status_request</key>
-	<string>TODO</string>
-	<key>tls_feature_status_request_v2</key>
-	<string>TODO</string>
+	<string>HTTP Header konnten aufgrund des folgenden Fehlers nicht abgefragt werden: {0}</string>
 	<key>tlstip1</key>
-	<string>TODO</string>
+	<string>Sieh dir Zertifikate direkt über Safari an, indem du im Teilen-Menü &quot;Zertifikat anzeigen&quot; wählst.</string>
 	<key>tlstip2</key>
-	<string>TODO</string>
+	<string>Sieh dir mehr Informationen über diesen Server auf Shodan an über das &quot;Teilen&quot;-Menü beim Ansehen eines Zertifikats.</string>
 	<key>tlstip3</key>
-	<string>TODO</string>
+	<string>Du kannst dir eine Erinnerung vor Ablauf des Zertifikats erstellen über das &quot;Teilen&quot;-Menü beim Ansehen eines Zertifikats.</string>
 	<key>tlstip5</key>
-	<string>TODO</string>
+	<string>Du kannst das Zertifikat exportieren oder teilen &quot;Teilen&quot;-Menü beim Ansehen eines Zertifikats.</string>
 	<key>tlstip6</key>
-	<string>TODO</string>
+	<string>Du kannst die Seriennummer oder den Fingerabdruck des Zertifikats überprüfen über das &quot;Teilen&quot;-Menü beim Ansehen des Wertes.</string>
 	<key>tlstip7</key>
-	<string>TODO</string>
+	<string>Du kannst Werte von Parametern kopieren, indem du sie gedrückt hältst und &quot;Kopieren&quot; auswählst.</string>
 	<key>verbose_logging_footer</key>
 	<string>Wenn ein Problem mit TLS Inspector auftritt, bitten wir, Protokollierung zu aktivieren und uns ein Protokoll zu schicken, damit wir das Problem besser analysieren können. Es werden keine personenbezogenen Daten gesammelt, jedoch sind die analysierten Domains im Protokoll enthalten. Wir sehen niemals das Protokoll, es sei denn, es wird uns über die Zusende-Funktion oben geschickt.</string>
 	<key>{commonName} (Expired)</key>
