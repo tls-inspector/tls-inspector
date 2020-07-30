@@ -30,6 +30,7 @@
 		3C599F6923EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */; };
 		3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
 		3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
+		3C5A84F724D25F6100A1917E /* de.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A84F624D25F6100A1917E /* de.plist */; };
 		3C5F4654239A169400B3A727 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */; };
 		3C5F4656239D77CA00B3A727 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4655239D77CA00B3A727 /* SplitViewController.swift */; };
 		3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */; };
@@ -221,6 +222,7 @@
 		3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKSocketUtils.m; sourceTree = "<group>"; };
 		3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrateAssistant.swift; sourceTree = "<group>"; };
 		3C599F6A23EA8D8200791DF1 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		3C5A84F624D25F6100A1917E /* de.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = de.plist; sourceTree = "<group>"; };
 		3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		3C5F4655239D77CA00B3A727 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeadersTableViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		3C5F465E239DAE8400B3A727 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				3C5A84F624D25F6100A1917E /* de.plist */,
 				3C5F465F239DAE9900B3A727 /* en.plist */,
 			);
 			path = Strings;
@@ -812,6 +815,7 @@
 				3CCD0299239DDE68009364D0 /* Main.storyboard in Resources */,
 				3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */,
 				3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */,
+				3C5A84F724D25F6100A1917E /* de.plist in Resources */,
 				3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */,
 				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
 				3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */,
