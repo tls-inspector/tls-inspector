@@ -24,7 +24,7 @@ fi
 
 echo "warning: cURL needs to be compiled. This will take a while..."
 
-cd curl-ios
+cd tiny-curl-ios
 ./build-ios.sh ${CURL_WANT_VERSION}
 mv curl.framework ../../
 cd ../
