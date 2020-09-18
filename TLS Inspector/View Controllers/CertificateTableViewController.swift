@@ -113,6 +113,7 @@ class CertificateTableViewController: UITableViewController {
         self.sections.maybeAppend(makePublicKeySection())
         self.sections.maybeAppend(makeFingerprintsSection())
         self.sections.maybeAppend(makeKeyIdentifierSection())
+        self.sections.maybeAppend(makeStatusProvidersSection())
         self.sections.maybeAppend(makeMetadataSection())
         self.sections.maybeAppend(makeSubjectAltNameSection())
 
@@ -326,6 +327,30 @@ class CertificateTableViewController: UITableViewController {
             return nil
         }
         return keyIdentifierSection
+    }
+    
+    func makeStatusProvidersSection() -> TableViewSection? {
+        let providersSection = TableViewSection()
+        providersSection.title = lang(key: "Status Providers")
+        
+        if let crls = self.certificate.crlDistributionPoints {
+            for crl_url in crls {
+                providersSection.cells.append(TitleValueTableViewCell.Cell(title: "CRL",
+                                                                           value: crl_url.absoluteString,
+                                                                           useFixedWidthFont: true))
+            }
+        }
+        
+        if let ocspURL = self.certificate.ocspURL {
+            providersSection.cells.append(TitleValueTableViewCell.Cell(title: "OCSP",
+                                                                       value: ocspURL.absoluteString,
+                                                                       useFixedWidthFont: true))
+        }
+
+        if providersSection.cells.count == 0 {
+            return nil
+        }
+        return providersSection
     }
 
     func makeMetadataSection() -> TableViewSection? {
