@@ -9,7 +9,8 @@ class CertificateChainTableViewController: UITableViewController {
     var securityHeadersSorted: [String]?
 
     let certificatesSectionTag = 1
-    let headersSectionTag = 2
+    let redirectSectionTag = 2
+    let headersSectionTag = 3
 
     var sections: [TableViewSection] = []
 
@@ -156,6 +157,7 @@ class CertificateChainTableViewController: UITableViewController {
 
         self.sections.maybeAppend(makeCertificateSection())
         self.sections.maybeAppend(makeConnectionInfoSection())
+        self.sections.maybeAppend(makeRedirectSection())
         self.sections.maybeAppend(makeHeadersSection())
 
         self.tableView.reloadData()
@@ -221,6 +223,26 @@ class CertificateChainTableViewController: UITableViewController {
                                                                     useFixedWidthFont: true))
 
         return connectionSection
+    }
+    
+    func makeRedirectSection() -> TableViewSection? {
+        guard let redirectedTo = self.serverInfo?.redirectedTo?.host else {
+            return nil
+        }
+        
+        let redirectSection = TableViewSection()
+        redirectSection.tag = redirectSectionTag
+        let cell = TitleValueTableViewCell.Cell(title: lang(key: "Server Redirected To"), value: redirectedTo, useFixedWidthFont: true)
+        
+        // Only make the redirect cell tappable if we can actually reload
+        // (which we can't do in the extension)
+        if AppState.getterViewController != nil {
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            cell.selectionStyle = UITableViewCell.SelectionStyle.default
+        }
+
+        redirectSection.cells.append(cell)
+        return redirectSection
     }
 
     func makeHeadersSection() -> TableViewSection? {
@@ -293,6 +315,15 @@ class CertificateChainTableViewController: UITableViewController {
                 return
             }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
+        } else if sectionTag == redirectSectionTag {
+            guard let controller = AppState.getterViewController else {
+                return
+            }
+            guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else {
+                return
+            }
+            
+            controller.reloadWithQuery(query: redirectedTo)
         } else if sectionTag == headersSectionTag && indexPath.row == self.sections[indexPath.section].cells.count-1 {
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else {
                 return

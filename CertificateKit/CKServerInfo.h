@@ -34,11 +34,11 @@
 /**
  A dictionary of all response headers recieved when querying the domain
  */
-@property (strong, nonatomic) NSDictionary<NSString *, NSString *> * headers;
+@property (strong, nonatomic, nonnull) NSDictionary<NSString *, NSString *> * headers;
 /**
  A dictionary of all security response headers mapped to a (NSNumber)BOOL of if the header was present
  */
-@property (strong, nonatomic) NSDictionary<NSString *, id> * securityHeaders;
+@property (strong, nonatomic, nonnull) NSDictionary<NSString *, id> * securityHeaders;
 /**
  The HTTP status code seen when querying the domain
  */
@@ -47,6 +47,6 @@
 /**
  The URL that the server redirected to, if any.
  */
-@property (strong, nonatomic) NSURL * redirectedTo;
+@property (strong, nonatomic, nullable) NSURL * redirectedTo;
 
 @end

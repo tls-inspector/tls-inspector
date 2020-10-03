@@ -1,7 +1,7 @@
 import UIKit
 import CertificateKit
 
-class InputTableViewController: UITableViewController, CKGetterDelegate, UITextFieldDelegate {
+class InputTableViewController: UITableViewController, CKGetterDelegate, UITextFieldDelegate, ChainGetterViewController {
     enum PendingCellStates {
         case none
         case loading
@@ -24,6 +24,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     @IBOutlet weak var tipTextView: UILabel!
 
     override func viewDidLoad() {
+        AppState.getterViewController = self
+        
         if let domains = loadPlaceholderDomains() {
             self.placeholderDomains = domains
         }
@@ -171,6 +173,14 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
         }
+    }
+    
+    func reloadWithQuery(query: String) {
+        self.presentedViewController?.dismiss(animated: true, completion: {
+            RunOnMain {
+                self.inspectDomain(text: query)
+            }
+        })
     }
 
     // MARK: Getter Delegate Methods
