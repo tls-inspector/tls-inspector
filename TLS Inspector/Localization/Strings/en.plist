@@ -755,6 +755,8 @@
 	<string>Share TLS Inspector</string>
 	<key>Show Certificate Fingerprint</key>
 	<string>Show Certificate Fingerprint</string>
+	<key>Show Certificate on crt.sh</key>
+	<string>Show Certificate on crt.sh</string>
 	<key>Show HTTP Headers</key>
 	<string>Show HTTP Headers</string>
 	<key>Show Tips</key>

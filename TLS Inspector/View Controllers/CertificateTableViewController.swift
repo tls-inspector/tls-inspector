@@ -1,5 +1,6 @@
 import UIKit
 import CertificateKit
+import SafariServices
 
 class CertificateTableViewController: UITableViewController {
     var certificate: CKCertificate!
@@ -17,14 +18,24 @@ class CertificateTableViewController: UITableViewController {
                                           items: [
                                             lang(key: "Share Certificate"),
                                             lang(key: "Add Certificate Expiry Reminder"),
+                                            lang(key: "Show Certificate on crt.sh"),
                                         ])
         { (index) in
             if index == 0 {
                 self.shareCertificate(sender)
             } else if index == 1 {
                 self.addCertificateReminder(sender)
+            } else if index == 2 {
+                self.openURL("https://crt.sh/?q=" + (self.certificate.sha256Fingerprint ?? ""))
             }
         }
+    }
+    
+    func openURL(_ urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
     func addCertificateReminder(_ sender: UIBarButtonItem) {
