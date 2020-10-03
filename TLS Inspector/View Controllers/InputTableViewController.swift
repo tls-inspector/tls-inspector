@@ -304,6 +304,10 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
         return ""
     }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section != 0
+    }
 
     override func tableView(_ tableView: UITableView,
                             editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
