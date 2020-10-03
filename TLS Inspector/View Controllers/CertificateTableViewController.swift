@@ -42,6 +42,10 @@ class CertificateTableViewController: UITableViewController {
                                             lang(key: "6 months"),
                                         ])
         { (index) in
+            if index < 0 {
+                return
+            }
+
             var days = 0
             if index == 0 {
                 days = 2 * 7
