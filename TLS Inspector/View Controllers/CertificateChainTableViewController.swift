@@ -47,19 +47,48 @@ class CertificateChainTableViewController: UITableViewController {
                                           title: self.certificateChain?.domain,
                                           subtitle: nil,
                                           items: [
+                                            lang(key: "Share Certificate Chain"),
                                             lang(key: "View on SSL Labs"),
                                             lang(key: "Search on Shodan"),
                                             lang(key: "Search on crt.sh")
                                         ])
         { (index) in
             if index == 0 {
-                self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain + "&hideResults=on")
+                self.shareCertificateChain(sender)
             } else if index == 1 {
-                self.openURL("https://www.shodan.io/host/" + chain.remoteAddress)
+                self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain + "&hideResults=on")
             } else if index == 2 {
+                self.openURL("https://www.shodan.io/host/" + chain.remoteAddress)
+            } else if index == 3 {
                 self.openURL("https://crt.sh/?q=" + chain.domain)
             }
         }
+    }
+    
+    func shareCertificateChain(_ sender: UIBarButtonItem) {
+        guard let certificates = self.certificateChain?.certificates else {
+            return
+        }
+        
+        let pemChain = NSMutableData()
+        for certificate in certificates {
+            guard let pem = certificate.publicKeyAsPEM else {
+                return
+            }
+            pemChain.append(pem)
+        }
+        
+        let fileName = (self.certificateChain?.domain ?? "chain") + ".pem"
+        let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        do {
+            try pemChain.write(to: fileURL)
+        } catch {
+            UIHelper(self).presentError(error: error, dismissed: nil)
+            return
+        }
+        let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+        ActionTipTarget(barButtonItem: sender).attach(to: activityController.popoverPresentationController)
+        self.present(activityController, animated: true, completion: nil)
     }
 
     func openURL(_ urlString: String) {

@@ -751,6 +751,8 @@
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Share Certificate Chain</key>
+	<string>Share Certificate Chain</string>
 	<key>Share TLS Inspector</key>
 	<string>Share TLS Inspector</string>
 	<key>Show Certificate Fingerprint</key>
