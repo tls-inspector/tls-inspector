@@ -109,7 +109,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
             ActionTipTarget(view: cell).attach(to: activityController.popoverPresentationController)
             self.present(activityController, animated: true, completion: nil)
         } else if indexPath.section == 0 && indexPath.row == 1 {
-            AppLinks().showAppStore(self, dismissed: nil)
+            AppLinks.current.showAppStore(self, dismissed: nil)
         } else if indexPath.section == 0 && indexPath.row == 2 {
             ContactTableViewController.show(self) { (support) in
                 AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: false, dismissed: nil)
