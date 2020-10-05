@@ -55,6 +55,7 @@ extension UIDevice {
             "iPhone12,1": "iPhone 11",
             "iPhone12,3": "iPhone 11 Pro",
             "iPhone12,5": "iPhone 11 Pro Max",
+            "iPhone12,8": "iPhone SE Gen. 2",
 
             // iPod Touch
             "iPod1,1": "iPod Touch Gen. 1",
@@ -83,6 +84,8 @@ extension UIDevice {
             "iPad7,6": "iPad 6 (Cellular)",
             "iPad7,11": "iPad 7 (WiFi)",
             "iPad7,12": "iPad 7 (Cellular)",
+            "iPad11,6": "iPad 8 (WiFi)",
+            "iPad11,7": "iPad 8 (Cellular)",
 
             // iPad Mini
             "iPad2,5": "iPad Mini (WiFi)",
@@ -107,6 +110,8 @@ extension UIDevice {
             "iPad5,4": "iPad Air 2 (Cellular)",
             "iPad11,3": "iPad Air 3 (WiFi)",
             "iPad11,4": "iPad Air 3 (Cellular)",
+            "iPad13,1": "iPad Air 4 (WiFi)",
+            "iPad13,2": "iPad Air 4 (Cellular)",
 
             // iPad Pro
             "iPad6,7": "iPad Pro (12.9\" WiFi)",
@@ -123,6 +128,10 @@ extension UIDevice {
             "iPad8,6": "iPad Pro (12.9\" Gen. 2 WiFi)",
             "iPad8,7": "iPad Pro (12.9\" Gen. 2 Cellular)",
             "iPad8,8": "iPad Pro (12.9\" Gen. 2 Cellular)",
+            "iPad8,9": "iPad Pro (11\" Gen. 2 WiFi)",
+            "iPad8,10": "iPad Pro (11\" Gen. 2 Cellular)",
+            "iPad8,11": "iPad Pro (12.9\" Gen. 4 WiFi)",
+            "iPad8,12": "iPad Pro (12.9\" Gen. 4 Cellular)",
 
             "i386": "Simulator",
             "x86_64": "Simulator",
