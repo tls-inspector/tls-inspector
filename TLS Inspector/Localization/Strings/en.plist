@@ -729,12 +729,12 @@
 	<string>Request a Feature</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
-	<key>SHA-128</key>
-	<string>SHA-128</string>
 	<key>SHA-256</key>
 	<string>SHA-256</string>
 	<key>SHA-512</key>
 	<string>SHA-512</string>
+	<key>SHA1</key>
+	<string>SHA1</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
 	<key>Search on crt.sh</key>
