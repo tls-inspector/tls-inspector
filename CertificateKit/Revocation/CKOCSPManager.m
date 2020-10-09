@@ -227,6 +227,13 @@ static CKOCSPManager * _instance;
 }
 
 size_t ocsp_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
+    if (userp == NULL) {
+        return 0;
+    }
+    if (size * nmemb == 0 || buffer == NULL) {
+        return 0;
+    }
+
     [((__bridge NSMutableData *)userp) appendBytes:buffer length:size * nmemb];
     return size * nmemb;
 }

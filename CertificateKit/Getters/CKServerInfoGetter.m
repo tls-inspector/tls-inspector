@@ -99,9 +99,11 @@
         curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &urlstr);
         if (urlstr != NULL) {
             NSURL * redirectURL = [NSURL URLWithString:[NSString stringWithCString:urlstr encoding:NSASCIIStringEncoding]];
-            PWarn(@"Server redirected to: '%@'", redirectURL.absoluteString);
             if (![url.host isEqualToString:redirectURL.host]) {
+                PWarn(@"Server redirected to different host: '%@'", redirectURL.absoluteString);
                 self.redirectedTo = redirectURL;
+            } else {
+                PDebug(@"Server redirected to same host: '%@'", redirectURL.absoluteString);
             }
         }
     } else {
