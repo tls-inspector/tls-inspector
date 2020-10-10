@@ -21,6 +21,7 @@ class SupportType {
     private(set) var deviceVersion: String = ""
     private(set) var appIdentifier: String = ""
     private(set) var appVersion: String = ""
+    private(set) var deviceLanguage: String = ""
 
     init(type: RequestType, comments: String) {
         self.type = type
@@ -29,17 +30,24 @@ class SupportType {
         self.deviceVersion = UIDevice.current.systemVersion
         self.appIdentifier = AppInfo.bundleName()
         self.appVersion = AppInfo.version() + " (" + AppInfo.build() + ")"
+        if Locale.preferredLanguages.count > 0 {
+            self.deviceLanguage = Locale.preferredLanguages[0]
+        }
     }
 
     public func body() -> String {
+        var commentsHtml = self.comments
+        commentsHtml = commentsHtml.replacingOccurrences(of: "\n", with: "<br>")
+        
         var body = ""
         body += "<p>Type: <strong>" + self.type.rawValue + "</strong><br>"
         body += "Device: <strong>" + self.device + "</strong><br>"
         body += "Device Version: <strong>" + self.deviceVersion + "</strong><br>"
+        body += "Device Language: <strong>" + self.deviceLanguage + "</strong><br>"
         body += "App Identifier: <strong>" + self.appIdentifier + "</strong><br>"
         body += "App Version: <strong>" + self.appVersion + "</strong><br>"
         body += "Comments:<br></p>"
-        body += "<p>" + self.comments + "</p>"
+        body += "<p>" + commentsHtml + "</p>"
         return body
     }
 }

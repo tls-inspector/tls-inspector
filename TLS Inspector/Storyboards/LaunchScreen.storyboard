@@ -20,8 +20,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPo-64-L6G">
                                 <rect key="frame" x="0.0" y="408" width="414" height="90"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TLS Inspector" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPX-N0-Po4">
-                                        <rect key="frame" x="110" y="58" width="194" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TLS Inspector" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPX-N0-Po4">
+                                        <rect key="frame" x="8" y="58" width="398" height="36"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -36,7 +36,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="JPX-N0-Po4" secondAttribute="trailing" constant="8" id="2Yy-Uj-eqd"/>
                                     <constraint firstItem="bpZ-PQ-ZQi" firstAttribute="centerX" secondItem="OPo-64-L6G" secondAttribute="centerX" id="CS9-9D-oRy"/>
+                                    <constraint firstItem="JPX-N0-Po4" firstAttribute="leading" secondItem="OPo-64-L6G" secondAttribute="leading" constant="8" id="EL6-3F-35K"/>
                                     <constraint firstItem="bpZ-PQ-ZQi" firstAttribute="top" secondItem="OPo-64-L6G" secondAttribute="top" id="Qp6-bD-Rcd"/>
                                     <constraint firstAttribute="height" constant="90" id="lmA-qp-5Zt"/>
                                     <constraint firstItem="JPX-N0-Po4" firstAttribute="centerX" secondItem="OPo-64-L6G" secondAttribute="centerX" id="qip-Qd-A58"/>

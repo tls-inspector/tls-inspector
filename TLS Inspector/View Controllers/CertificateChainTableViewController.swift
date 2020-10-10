@@ -9,7 +9,8 @@ class CertificateChainTableViewController: UITableViewController {
     var securityHeadersSorted: [String]?
 
     let certificatesSectionTag = 1
-    let headersSectionTag = 2
+    let redirectSectionTag = 2
+    let headersSectionTag = 3
 
     var sections: [TableViewSection] = []
 
@@ -47,19 +48,48 @@ class CertificateChainTableViewController: UITableViewController {
                                           title: self.certificateChain?.domain,
                                           subtitle: nil,
                                           items: [
+                                            lang(key: "Share Certificate Chain"),
                                             lang(key: "View on SSL Labs"),
                                             lang(key: "Search on Shodan"),
                                             lang(key: "Search on crt.sh")
                                         ])
         { (index) in
             if index == 0 {
-                self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain + "&hideResults=on")
+                self.shareCertificateChain(sender)
             } else if index == 1 {
-                self.openURL("https://www.shodan.io/host/" + chain.remoteAddress)
+                self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain + "&hideResults=on")
             } else if index == 2 {
+                self.openURL("https://www.shodan.io/host/" + chain.remoteAddress)
+            } else if index == 3 {
                 self.openURL("https://crt.sh/?q=" + chain.domain)
             }
         }
+    }
+    
+    func shareCertificateChain(_ sender: UIBarButtonItem) {
+        guard let certificates = self.certificateChain?.certificates else {
+            return
+        }
+        
+        let pemChain = NSMutableData()
+        for certificate in certificates {
+            guard let pem = certificate.publicKeyAsPEM else {
+                return
+            }
+            pemChain.append(pem)
+        }
+        
+        let fileName = (self.certificateChain?.domain ?? "chain") + ".pem"
+        let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        do {
+            try pemChain.write(to: fileURL)
+        } catch {
+            UIHelper(self).presentError(error: error, dismissed: nil)
+            return
+        }
+        let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+        ActionTipTarget(barButtonItem: sender).attach(to: activityController.popoverPresentationController)
+        self.present(activityController, animated: true, completion: nil)
     }
 
     func openURL(_ urlString: String) {
@@ -127,6 +157,7 @@ class CertificateChainTableViewController: UITableViewController {
 
         self.sections.maybeAppend(makeCertificateSection())
         self.sections.maybeAppend(makeConnectionInfoSection())
+        self.sections.maybeAppend(makeRedirectSection())
         self.sections.maybeAppend(makeHeadersSection())
 
         self.tableView.reloadData()
@@ -192,6 +223,26 @@ class CertificateChainTableViewController: UITableViewController {
                                                                     useFixedWidthFont: true))
 
         return connectionSection
+    }
+    
+    func makeRedirectSection() -> TableViewSection? {
+        guard let redirectedTo = self.serverInfo?.redirectedTo?.host else {
+            return nil
+        }
+        
+        let redirectSection = TableViewSection()
+        redirectSection.tag = redirectSectionTag
+        let cell = TitleValueTableViewCell.Cell(title: lang(key: "Server Redirected To"), value: redirectedTo, useFixedWidthFont: true)
+        
+        // Only make the redirect cell tappable if we can actually reload
+        // (which we can't do in the extension)
+        if AppState.getterViewController != nil {
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            cell.selectionStyle = UITableViewCell.SelectionStyle.default
+        }
+
+        redirectSection.cells.append(cell)
+        return redirectSection
     }
 
     func makeHeadersSection() -> TableViewSection? {
@@ -264,6 +315,15 @@ class CertificateChainTableViewController: UITableViewController {
                 return
             }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
+        } else if sectionTag == redirectSectionTag {
+            guard let controller = AppState.getterViewController else {
+                return
+            }
+            guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else {
+                return
+            }
+            
+            controller.reloadWithQuery(query: redirectedTo)
         } else if sectionTag == headersSectionTag && indexPath.row == self.sections[indexPath.section].cells.count-1 {
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else {
                 return

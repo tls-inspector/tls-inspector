@@ -40,8 +40,8 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        let words = textView.text?.split(separator: " ")
-        self.doneButton.isEnabled = words?.count ?? 0 >= 5
+        let words = textView.text?.split(separator: " ").joined(separator: "\n").split(separator: "\n")
+        self.doneButton.isEnabled = (words?.count ?? 0) >= 5
         self.comments = textView.text
     }
 

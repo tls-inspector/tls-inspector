@@ -78,6 +78,10 @@
 		3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */; platformFilter = ios; };
 		3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */; platformFilter = ios; };
 		3CB4F159200451D000A9CF51 /* CKGetterTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686E31FC8FAA200BB7AE8 /* CKGetterTask.m */; platformFilter = ios; };
+		3CB784A225293E4D009ECE20 /* ChainGetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB784A125293E4D009ECE20 /* ChainGetterViewController.swift */; };
+		3CB784A625293E56009ECE20 /* ChainGetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB784A125293E4D009ECE20 /* ChainGetterViewController.swift */; };
+		3CB784AB25293FD8009ECE20 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB784AA25293FD8009ECE20 /* AppState.swift */; };
+		3CB784AC25293FD8009ECE20 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB784AA25293FD8009ECE20 /* AppState.swift */; };
 		3CB940392250353B0055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
 		3CB9403D225035E80055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
 		3CB94044225036FC0055C067 /* CKAppleCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94040225036FB0055C067 /* CKAppleCertificateChainGetter.h */; };
@@ -264,6 +268,8 @@
 		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
 		3CA2006023974F710027D1C1 /* fa-solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid.ttf"; sourceTree = "<group>"; };
 		3CB483FC2058BA0400322723 /* CertificateKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKit.m; sourceTree = "<group>"; };
+		3CB784A125293E4D009ECE20 /* ChainGetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGetterViewController.swift; sourceTree = "<group>"; };
+		3CB784AA25293FD8009ECE20 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		3CB94040225036FB0055C067 /* CKAppleCertificateChainGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKAppleCertificateChainGetter.h; sourceTree = "<group>"; };
 		3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKOpenSSLCertificateChainGetter.m; sourceTree = "<group>"; };
 		3CB94042225036FC0055C067 /* CKAppleCertificateChainGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKAppleCertificateChainGetter.m; sourceTree = "<group>"; };
@@ -491,9 +497,11 @@
 		3CCD0289239DC072009364D0 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				3CB784A125293E4D009ECE20 /* ChainGetterViewController.swift */,
 				3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */,
 				3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */,
 				3CA2005E23974F160027D1C1 /* FontAwesome */,
+				3CB784AA25293FD8009ECE20 /* AppState.swift */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -965,6 +973,7 @@
 				3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */,
 				3C57F4A323B02B0700DCCB54 /* AppLinks.swift in Sources */,
 				3C57F4A123B0243300DCCB54 /* UIDevicePlatform.swift in Sources */,
+				3CB784AB25293FD8009ECE20 /* AppState.swift in Sources */,
 				3C72693A2394BC1D002A0B19 /* InputTableViewController.swift in Sources */,
 				3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */,
 				3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */,
@@ -990,6 +999,7 @@
 				3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */,
 				3C7B09FF23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift in Sources */,
 				3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */,
+				3CB784A225293E4D009ECE20 /* ChainGetterViewController.swift in Sources */,
 				3C5F4654239A169400B3A727 /* UIView+RoundedCorners.swift in Sources */,
 				3C7269662394C916002A0B19 /* CertificateChainTableViewController.swift in Sources */,
 				3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */,
@@ -1027,6 +1037,8 @@
 				3CDC14CD23B046000053932F /* UserOptions.swift in Sources */,
 				3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
+				3CB784A625293E56009ECE20 /* ChainGetterViewController.swift in Sources */,
+				3CB784AC25293FD8009ECE20 /* AppState.swift in Sources */,
 				3CDC14BA23B045B20053932F /* TableViewSection.swift in Sources */,
 				3C6FF89C23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,
 				3CDC14CB23B045E10053932F /* FontAwesome.swift in Sources */,
@@ -1160,7 +1172,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 88;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
@@ -1169,7 +1181,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
@@ -1194,7 +1206,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 88;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1204,7 +1216,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1227,7 +1239,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 88;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
@@ -1237,7 +1249,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
@@ -1262,7 +1274,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 88;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1273,7 +1285,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "Show Certificate";

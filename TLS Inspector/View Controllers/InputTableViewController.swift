@@ -1,7 +1,7 @@
 import UIKit
 import CertificateKit
 
-class InputTableViewController: UITableViewController, CKGetterDelegate, UITextFieldDelegate {
+class InputTableViewController: UITableViewController, CKGetterDelegate, UITextFieldDelegate, ChainGetterViewController {
     enum PendingCellStates {
         case none
         case loading
@@ -24,6 +24,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     @IBOutlet weak var tipTextView: UILabel!
 
     override func viewDidLoad() {
+        AppState.getterViewController = self
+        
         if let domains = loadPlaceholderDomains() {
             self.placeholderDomains = domains
         }
@@ -124,18 +126,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
 
         self.domainInput?.isEnabled = false
-        var insertRow = false
-        if self.pendingCellState == .none {
-            insertRow = true
-        }
-        self.pendingCellState = .loading
-
-        if insertRow {
-            self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-        } else {
-            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-        }
-
+        self.updatePendingCell(state: .loading)
         self.inspectButton.isEnabled = false
 
         var domainText = text
@@ -156,7 +147,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         self.getter = CKGetter(options: UserOptions.getterOptions())
         self.getter?.delegate = self
         if let url = URL(string: domainText) {
-            print("Inspecting domain")
+            LogDebug("Inspecting domain")
             self.getter?.getInfoFor(url)
         } else {
             showInputError()
@@ -164,31 +155,66 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func showInputError() {
+        self.updatePendingCell(state: .none)
+        self.domainInput?.text = ""
         UIHelper(self).presentAlert(title: "Unable to Inspect Domain",
                                     body: "The URL or IP Address inputted is not valid") {
-            self.pendingCellState = .none
-            self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             self.domainInput?.isEnabled = true
-            self.domainInput?.text = ""
+        }
+    }
+    
+    func reloadWithQuery(query: String) {
+        self.presentedViewController?.dismiss(animated: true, completion: {
+            RunOnMain {
+                self.inspectDomain(text: query)
+            }
+        })
+    }
+    
+    func updatePendingCell(state: PendingCellStates) {
+        if self.pendingCellState == state {
+            return
+        }
+        let stateBefore = self.pendingCellState
+        self.pendingCellState = state
+        
+        // This is kinda verbose, but because Apple decided it is THE BEST IDEA
+        // for the ENTIRE APP TO CRASH just because you tried to reload a cell
+        // that isn't there, we do things this way to try and be safe.
+        //
+        // THANKS TIM 🍎
+        if state == .none {
+            self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        } else if state == .loading && stateBefore == .none {
+            self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        } else if state == .loading && stateBefore == .error {
+            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        } else if state == .error && stateBefore == .loading {
+            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        } else if state == .error && stateBefore == .none {
+            self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        } else {
+            LogError("Unknown pending cell state: new=\(state) before=\(stateBefore)")
         }
     }
 
     // MARK: Getter Delegate Methods
     func finishedGetter(_ getter: CKGetter, successful success: Bool) {
-        print("Getter finished, success: \(success)")
+        LogInfo("Getter finished, success: \(success)")
         RunOnMain {
             if !success && self.certificateChain == nil {
                 return
             }
-            CKLogging.sharedInstance().writeWarn("Chain suceeded but Server failed - Ignoring error")
+            if self.serverError != nil {
+                LogWarn("Chain suceeded but Server failed - Ignoring error")
+            }
 
             UserOptions.inspectionsWithVerboseLogging += 1
             CERTIFICATE_CHAIN = self.certificateChain
             SERVER_INFO = self.serverInfo
 
             self.performSegue(withIdentifier: "Inspect", sender: nil)
-            self.pendingCellState = .none
-            self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            self.updatePendingCell(state: .none)
             self.domainInput?.isEnabled = true
             self.domainInput?.text = ""
             let domainsBefore = RecentLookups.GetRecentLookups().count
@@ -205,31 +231,30 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func getter(_ getter: CKGetter, gotCertificateChain chain: CKCertificateChain) {
-        print("Got certificate chain")
+        LogDebug("Got certificate chain")
         RunOnMain {
             self.certificateChain = chain
         }
     }
 
     func getter(_ getter: CKGetter, gotServerInfo serverInfo: CKServerInfo) {
-        print("Got server info")
+        LogDebug("Got server info")
         RunOnMain {
             self.serverInfo = serverInfo
         }
     }
 
     func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {
-        print("Error getting certificate chain: \(error)")
+        LogError("Error getting certificate chain: \(error)")
         RunOnMain {
             self.chainError = error
-            self.pendingCellState = .error
-            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            self.updatePendingCell(state: .error)
             self.domainInput?.isEnabled = true
         }
     }
 
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
-        print("Error getting server info: \(error)")
+        LogError("Error getting server info: \(error)")
         self.serverError = error
         SERVER_ERROR = error
     }
@@ -303,6 +328,10 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return lang(key: "Recent Lookups")
         }
         return ""
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section != 0
     }
 
     override func tableView(_ tableView: UITableView,

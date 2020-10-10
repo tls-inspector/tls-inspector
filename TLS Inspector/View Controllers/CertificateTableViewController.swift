@@ -1,5 +1,6 @@
 import UIKit
 import CertificateKit
+import SafariServices
 
 class CertificateTableViewController: UITableViewController {
     var certificate: CKCertificate!
@@ -17,14 +18,24 @@ class CertificateTableViewController: UITableViewController {
                                           items: [
                                             lang(key: "Share Certificate"),
                                             lang(key: "Add Certificate Expiry Reminder"),
+                                            lang(key: "Show Certificate on crt.sh"),
                                         ])
         { (index) in
             if index == 0 {
                 self.shareCertificate(sender)
             } else if index == 1 {
                 self.addCertificateReminder(sender)
+            } else if index == 2 {
+                self.openURL("https://crt.sh/?q=" + (self.certificate.sha256Fingerprint ?? ""))
             }
         }
+    }
+    
+    func openURL(_ urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
     func addCertificateReminder(_ sender: UIBarButtonItem) {
@@ -42,6 +53,10 @@ class CertificateTableViewController: UITableViewController {
                                             lang(key: "6 months"),
                                         ])
         { (index) in
+            if index < 0 {
+                return
+            }
+
             var days = 0
             if index == 0 {
                 days = 2 * 7
@@ -249,7 +264,7 @@ class CertificateTableViewController: UITableViewController {
                                                                           useFixedWidthFont: true))
         }
         if UserOptions.showFingerprintSHA128, let s128 = self.certificate.sha1Fingerprint {
-            fingerprintsSection.cells.append(TitleValueTableViewCell.Cell(title: "SHA-128",
+            fingerprintsSection.cells.append(TitleValueTableViewCell.Cell(title: "SHA1",
                                                                           value: s128,
                                                                           useFixedWidthFont: true))
         }

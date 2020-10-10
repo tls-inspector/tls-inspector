@@ -77,7 +77,7 @@ class OptionsTableViewController: UITableViewController {
                                     changed: #selector(changeShowFingerprintMD5(sender:))) {
             fingerprintSection.cells.append(cell)
         }
-        if let cell = newSwitchCell(labelText: lang(key: "SHA-128"),
+        if let cell = newSwitchCell(labelText: lang(key: "SHA1"),
                                     initialValue: UserOptions.showFingerprintSHA128,
                                     changed: #selector(changeShowFingerprintSHA128(sender:))) {
             fingerprintSection.cells.append(cell)

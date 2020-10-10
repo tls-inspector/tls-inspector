@@ -729,12 +729,12 @@
 	<string>Request a Feature</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
-	<key>SHA-128</key>
-	<string>SHA-128</string>
 	<key>SHA-256</key>
 	<string>SHA-256</string>
 	<key>SHA-512</key>
 	<string>SHA-512</string>
+	<key>SHA1</key>
+	<string>SHA1</string>
 	<key>Search on Shodan</key>
 	<string>Search on Shodan</string>
 	<key>Search on crt.sh</key>
@@ -751,10 +751,14 @@
 	<string>Share &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Share Certificate</string>
+	<key>Share Certificate Chain</key>
+	<string>Share Certificate Chain</string>
 	<key>Share TLS Inspector</key>
 	<string>Share TLS Inspector</string>
 	<key>Show Certificate Fingerprint</key>
 	<string>Show Certificate Fingerprint</string>
+	<key>Show Certificate on crt.sh</key>
+	<string>Show Certificate on crt.sh</string>
 	<key>Show HTTP Headers</key>
 	<string>Show HTTP Headers</string>
 	<key>Show Tips</key>
