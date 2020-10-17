@@ -12,11 +12,25 @@ private let KEY_FINGEPRINT_MD5 = "fingerprint_md5"
 private let KEY_FINGEPRINT_SHA128 = "fingerprint_sha128"
 private let KEY_FINGEPRINT_SHA256 = "fingerprint_sha256"
 private let KEY_FINGEPRINT_SHA512 = "fingerprint_sha512"
-private let KEY_USE_OPENSSL = "use_openssl"
 private let KEY_PREFERRED_CIPHERS = "preferred_ciphers"
 private let KEY_CONTACT_NAG_DISMISSED = "contact_nag_dismissed"
 private let KEY_ADVANCED_SETTINGS_NAG_DISMISSED = "advanced_settings_nag_dismissed"
+private let KEY_CRYPTO_ENGINE = "crypto_engine"
 // swiftlint:enable identifier_name
+
+public enum CryptoEngine: String {
+    case NetworkFramework = "network_framework"
+    case SecureTransport = "secure_transport"
+    case OpenSSL = "openssl"
+
+    static func allValues() -> [CryptoEngine] {
+        return [
+            .NetworkFramework,
+            .SecureTransport,
+            .OpenSSL,
+        ]
+    }
+}
 
 class UserOptions {
     private static let defaultOpenSSLCiphers = "HIGH:!aNULL:!MD5:!RC4"
@@ -31,7 +45,7 @@ class UserOptions {
         KEY_FINGEPRINT_SHA128: true,
         KEY_FINGEPRINT_SHA256: true,
         KEY_FINGEPRINT_SHA512: false,
-        KEY_USE_OPENSSL: false,
+        KEY_CRYPTO_ENGINE: CryptoEngine.NetworkFramework.rawValue,
         KEY_PREFERRED_CIPHERS: defaultOpenSSLCiphers,
         KEY_CONTACT_NAG_DISMISSED: false,
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
@@ -135,12 +149,15 @@ class UserOptions {
             AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_SHA512)
         }
     }
-    static var useOpenSSL: Bool {
+    static var cryptoEngine: CryptoEngine {
         get {
-            return AppDefaults.bool(forKey: KEY_USE_OPENSSL)
+            guard let str = AppDefaults.string(forKey: KEY_CRYPTO_ENGINE) else {
+                return CryptoEngine.NetworkFramework
+            }
+            return CryptoEngine.init(rawValue: str) ?? .NetworkFramework
         }
         set {
-            AppDefaults.set(newValue, forKey: KEY_USE_OPENSSL)
+            AppDefaults.set(newValue.rawValue, forKey: KEY_CRYPTO_ENGINE)
         }
     }
     static var preferredCiphers: String {

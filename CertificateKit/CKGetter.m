@@ -23,7 +23,7 @@
 #import "CKServerInfoGetter.h"
 #import "CKCertificateChainGetter.h"
 #import "CKOpenSSLCertificateChainGetter.h"
-#import "CKAppleCertificateChainGetter.h"
+#import "CKSecureTransportCertificateChainGetter.h"
 
 @interface CKGetter () <NSStreamDelegate, CKGetterTaskDelegate> {
     BOOL gotChain;
@@ -56,10 +56,16 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
     self.url = URL;
 
-    if (self.options.useOpenSSL) {
-        self.chainGetter = [CKOpenSSLCertificateChainGetter new];
-    } else {
-        self.chainGetter = [CKAppleCertificateChainGetter new];
+    switch (self.options.cryptoEngine) {
+        case CRYPTO_ENGINE_SECURE_TRANSPORT:
+            self.chainGetter = [CKSecureTransportCertificateChainGetter new];
+            break;
+        case CRYPTO_ENGINE_OPENSSL:
+            self.chainGetter = [CKOpenSSLCertificateChainGetter new];
+            break;
+        default:
+            PError(@"Unknown crypto engine %i", self.options.cryptoEngine);
+            return;
     }
 
     self.chainGetter.delegate = self;

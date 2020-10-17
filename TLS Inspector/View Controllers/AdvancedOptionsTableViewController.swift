@@ -1,8 +1,6 @@
 import UIKit
 
 class AdvancedOptionsTableViewController: UITableViewController {
-    var segmentControl: UISegmentedControl?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -14,11 +12,22 @@ class AdvancedOptionsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return UserOptions.useOpenSSL ? 2 : 1
+        return UserOptions.cryptoEngine == .OpenSSL ? 2 : 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return CryptoEngine.allValues().count
+        }
         return 1
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return lang(key: "Crypto Engine")
+        }
+
+        return nil
     }
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -33,15 +42,24 @@ class AdvancedOptionsTableViewController: UITableViewController {
         var cell: UITableViewCell!
 
         if indexPath.section == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Segment", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
+            let type = CryptoEngine.allValues()[indexPath.row]
+
             if let label = cell.viewWithTag(1) as? UILabel {
-                label.text = lang(key: "Crypto Engine")
+                label.text = lang(key: "crypto_engine::" + type.rawValue)
             }
-            self.segmentControl = cell.viewWithTag(2) as? UISegmentedControl
-            self.segmentControl?.setTitle("iOS", forSegmentAt: 0)
-            self.segmentControl?.setTitle("OpenSSL", forSegmentAt: 1)
-            self.segmentControl?.selectedSegmentIndex = UserOptions.useOpenSSL ? 1 : 0
-            self.segmentControl?.addTarget(self, action: #selector(self.changeCryptoEngine(sender:)), for: .valueChanged)
+
+            if let iconLabel = cell.viewWithTag(2) as? UILabel {
+                if UserOptions.cryptoEngine == type {
+                    iconLabel.font = FAIcon.FACheckCircleSolid.font(size: 20.0)
+                    iconLabel.text = FAIcon.FACheckCircleSolid.string()
+                    iconLabel.textColor = UIColor.systemBlue
+                } else {
+                    iconLabel.font = FAIcon.FACircleRegular.font(size: 20.0)
+                    iconLabel.text = FAIcon.FACircleRegular.string()
+                    iconLabel.textColor = UIColor.gray
+                }
+            }
         } else if indexPath.section == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "Input", for: indexPath)
             if let label = cell.viewWithTag(1) as? UILabel {
@@ -57,13 +75,22 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return cell
     }
 
-    @objc func changeCryptoEngine(sender: UISegmentedControl) {
-        UserOptions.useOpenSSL = sender.selectedSegmentIndex == 1
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let before = UserOptions.cryptoEngine
+            let after = CryptoEngine.allValues()[indexPath.row]
+            if before == after {
+                self.tableView.reloadSections([0], with: .automatic)
+                return
+            }
+            UserOptions.cryptoEngine = after
 
-        if sender.selectedSegmentIndex == 1 {
-            self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .fade)
-        } else {
-            self.tableView.deleteSections(IndexSet(arrayLiteral: 1), with: .fade)
+            if UserOptions.cryptoEngine == .OpenSSL {
+                self.tableView.insertSections([1], with: .fade)
+            } else if before == .OpenSSL {
+                self.tableView.deleteSections([1], with: .fade)
+            }
+            self.tableView.reloadSections([0], with: .automatic)
         }
     }
 

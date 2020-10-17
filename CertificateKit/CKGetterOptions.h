@@ -41,7 +41,28 @@
  */
 @property (nonatomic) BOOL checkCRL;
 
-@property (nonatomic) BOOL useOpenSSL;
+/**
+ Possible options for the crypto engine used to chain getters
+ */
+typedef enum __CRYPTO_ENGINE {
+    /**
+     The modern Network freamework getter.
+     */
+    CRYPTO_ENGINE_NETWORK_FRAMEWORK = 0,
+    /**
+     The legacy Apple SecureTransport getter.
+     */
+    CRYPTO_ENGINE_SECURE_TRANSPORT = 1,
+    /**
+     The OpenSSL getter.
+     */
+    CRYPTO_ENGINE_OPENSSL = 2,
+} CRYPTO_ENGINE;
+
+/**
+ The engine used to fetch certificates
+ */
+@property (nonatomic) UInt32 cryptoEngine;
 
 @property (strong, nonatomic, nullable) NSString * ciphers;
 

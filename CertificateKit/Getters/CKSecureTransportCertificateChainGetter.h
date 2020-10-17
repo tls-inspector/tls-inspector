@@ -1,5 +1,5 @@
 //
-//  CKAppleCertificateChainGetter.h
+//  CKSecureTransportCertificateChainGetter.h
 //
 //  LGPLv3
 //
@@ -23,6 +23,6 @@
 #import "CKGetterOptions.h"
 #import "CKCertificateChainGetter.h"
 
-@interface CKAppleCertificateChainGetter : CKCertificateChainGetter
+@interface CKSecureTransportCertificateChainGetter : CKCertificateChainGetter
 
 @end

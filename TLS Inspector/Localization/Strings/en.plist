@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>crypto_engine::network_framework</key>
+	<string>iOS - Modern</string>
+	<key>crypto_engine::secure_transport</key>
+	<string>iOS - Legacy</string>
+	<key>crypto_engine::openssl</key>
+	<string>OpenSSL</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>2 weeks</key>

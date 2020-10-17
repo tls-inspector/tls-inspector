@@ -65,12 +65,12 @@ class CertificateChainTableViewController: UITableViewController {
             }
         }
     }
-    
+
     func shareCertificateChain(_ sender: UIBarButtonItem) {
         guard let certificates = self.certificateChain?.certificates else {
             return
         }
-        
+
         let pemChain = NSMutableData()
         for certificate in certificates {
             guard let pem = certificate.publicKeyAsPEM else {
@@ -78,7 +78,7 @@ class CertificateChainTableViewController: UITableViewController {
             }
             pemChain.append(pem)
         }
-        
+
         let fileName = (self.certificateChain?.domain ?? "chain") + ".pem"
         let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
         do {
@@ -224,16 +224,16 @@ class CertificateChainTableViewController: UITableViewController {
 
         return connectionSection
     }
-    
+
     func makeRedirectSection() -> TableViewSection? {
         guard let redirectedTo = self.serverInfo?.redirectedTo?.host else {
             return nil
         }
-        
+
         let redirectSection = TableViewSection()
         redirectSection.tag = redirectSectionTag
         let cell = TitleValueTableViewCell.Cell(title: lang(key: "Server Redirected To"), value: redirectedTo, useFixedWidthFont: true)
-        
+
         // Only make the redirect cell tappable if we can actually reload
         // (which we can't do in the extension)
         if AppState.getterViewController != nil {
@@ -322,7 +322,7 @@ class CertificateChainTableViewController: UITableViewController {
             guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else {
                 return
             }
-            
+
             controller.reloadWithQuery(query: redirectedTo)
         } else if sectionTag == headersSectionTag && indexPath.row == self.sections[indexPath.section].cells.count-1 {
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else {

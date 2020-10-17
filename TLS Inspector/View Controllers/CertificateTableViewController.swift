@@ -30,7 +30,7 @@ class CertificateTableViewController: UITableViewController {
             }
         }
     }
-    
+
     func openURL(_ urlString: String) {
         guard let url = URL(string: urlString) else {
             return
@@ -343,11 +343,11 @@ class CertificateTableViewController: UITableViewController {
         }
         return keyIdentifierSection
     }
-    
+
     func makeStatusProvidersSection() -> TableViewSection? {
         let providersSection = TableViewSection()
         providersSection.title = lang(key: "Status Providers")
-        
+
         if let crls = self.certificate.crlDistributionPoints {
             for crl_url in crls {
                 providersSection.cells.append(TitleValueTableViewCell.Cell(title: "CRL",
@@ -355,7 +355,7 @@ class CertificateTableViewController: UITableViewController {
                                                                            useFixedWidthFont: true))
             }
         }
-        
+
         if let ocspURL = self.certificate.ocspURL {
             providersSection.cells.append(TitleValueTableViewCell.Cell(title: "OCSP",
                                                                        value: ocspURL.absoluteString,

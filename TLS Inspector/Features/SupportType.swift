@@ -38,7 +38,7 @@ class SupportType {
     public func body() -> String {
         var commentsHtml = self.comments
         commentsHtml = commentsHtml.replacingOccurrences(of: "\n", with: "<br>")
-        
+
         var body = ""
         body += "<p>Type: <strong>" + self.type.rawValue + "</strong><br>"
         body += "Device: <strong>" + self.device + "</strong><br>"

@@ -102,7 +102,7 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
         if indexPath.section == 0 {
             let type = SupportType.RequestType.allValues()[indexPath.row]
             self.contactType = type
-            tableView.reloadSections(IndexSet(arrayLiteral: 0), with: .none)
+            tableView.reloadSections([0], with: .none)
         }
     }
 

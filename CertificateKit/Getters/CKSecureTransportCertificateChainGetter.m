@@ -1,5 +1,5 @@
 //
-//  CKOpenSSLCertificateChainGetter.m
+//  CKSecureTransportCertificateChainGetter.m
 //
 //  LGPLv3
 //
@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKAppleCertificateChainGetter.h"
+#import "CKSecureTransportCertificateChainGetter.h"
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
 #import "CKOCSPManager.h"
@@ -29,7 +29,7 @@
 #include <openssl/x509.h>
 #include <arpa/inet.h>
 
-@interface CKAppleCertificateChainGetter () <NSStreamDelegate> {
+@interface CKSecureTransportCertificateChainGetter () <NSStreamDelegate> {
     CFReadStreamRef   readStream;
     CFWriteStreamRef  writeStream;
     NSInputStream   * inputStream;
@@ -50,7 +50,7 @@
 
 @end
 
-@implementation CKAppleCertificateChainGetter
+@implementation CKSecureTransportCertificateChainGetter
 
 - (void) performTaskForURL:(NSURL *)url {
     PDebug(@"Getting certificate chain");
@@ -67,6 +67,12 @@
     [outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [inputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 
+    NSDictionary *settings = @{
+        (__bridge NSString *)kCFStreamSSLValidatesCertificateChain: (__bridge NSNumber *)kCFBooleanFalse
+    };
+    CFReadStreamSetProperty((CFReadStreamRef)inputStream, kCFStreamPropertySSLSettings, (CFTypeRef)settings);
+    CFWriteStreamSetProperty((CFWriteStreamRef)outputStream, kCFStreamPropertySSLSettings, (CFTypeRef)settings);
+    
     [outputStream open];
     [inputStream open];
 }
@@ -74,7 +80,6 @@
 - (void) stream:(NSStream *)stream handleEvent:(NSStreamEvent)event {
     switch (event) {
         case NSStreamEventOpenCompleted: {
-            [self streamOpened:stream];
             break;
         }
         case NSStreamEventHasSpaceAvailable: {
@@ -97,14 +102,6 @@
             break;
         }
     }
-}
-
-- (void) streamOpened:(NSStream *)stream {
-    NSDictionary *settings = @{
-                               (__bridge NSString *)kCFStreamSSLValidatesCertificateChain: (__bridge NSNumber *)kCFBooleanFalse
-                               };
-    CFReadStreamSetProperty((CFReadStreamRef)inputStream, kCFStreamPropertySSLSettings, (CFTypeRef)settings);
-    CFWriteStreamSetProperty((CFWriteStreamRef)outputStream, kCFStreamPropertySSLSettings, (CFTypeRef)settings);
 }
 
 - (void) streamHasSpaceAvailable:(NSStream *)stream {
