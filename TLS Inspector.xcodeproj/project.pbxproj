@@ -88,6 +88,8 @@
 		3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */; platformFilter = ios; };
 		3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94042225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m */; platformFilter = ios; };
 		3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */; };
+		3CBF85BF253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CBF85BD253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h */; };
+		3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */; };
 		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; platformFilter = ios; };
 		3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */; platformFilter = ios; };
@@ -274,6 +276,8 @@
 		3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKOpenSSLCertificateChainGetter.m; sourceTree = "<group>"; };
 		3CB94042225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKSecureTransportCertificateChainGetter.m; sourceTree = "<group>"; };
 		3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKOpenSSLCertificateChainGetter.h; sourceTree = "<group>"; };
+		3CBF85BD253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkCertificateChainGetter.h; sourceTree = "<group>"; };
+		3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkCertificateChainGetter.m; sourceTree = "<group>"; };
 		3CC1E9321F035A3400ED9BAA /* curl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = curl.framework; sourceTree = "<group>"; };
 		3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKServerInfo.h; sourceTree = "<group>"; };
 		3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKServerInfo.m; sourceTree = "<group>"; };
@@ -626,6 +630,8 @@
 				3CB94042225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m */,
 				3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */,
 				3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */,
+				3CBF85BD253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h */,
+				3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */,
 			);
 			path = Getters;
 			sourceTree = "<group>";
@@ -661,6 +667,7 @@
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C36B3B82041310E005C66E8 /* CKGetterOptions.h in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
+				3CBF85BF253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h in Headers */,
 				3CB9403D225035E80055C067 /* (null) in Headers */,
 				3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
@@ -939,6 +946,7 @@
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3CF3482823A56CA1000382CE /* CKEVOIDList.m in Sources */,
 				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
+				3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */,
 				3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */,
 				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
 				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,

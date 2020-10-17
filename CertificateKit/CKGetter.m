@@ -23,6 +23,7 @@
 #import "CKServerInfoGetter.h"
 #import "CKCertificateChainGetter.h"
 #import "CKOpenSSLCertificateChainGetter.h"
+#import "CKNetworkCertificateChainGetter.h"
 #import "CKSecureTransportCertificateChainGetter.h"
 
 @interface CKGetter () <NSStreamDelegate, CKGetterTaskDelegate> {
@@ -57,6 +58,9 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     self.url = URL;
 
     switch (self.options.cryptoEngine) {
+        case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
+            self.chainGetter = [CKNetworkCertificateChainGetter new];
+            break;
         case CRYPTO_ENGINE_SECURE_TRANSPORT:
             self.chainGetter = [CKSecureTransportCertificateChainGetter new];
             break;
