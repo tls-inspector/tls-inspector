@@ -878,7 +878,7 @@
 	<key>copyright_license_footer</key>
 	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2020 Ian Spence.</string>
 	<key>crypto_engine_footer</key>
-	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
+	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device. The modern Apple engine requires iOS 12 or later. TLS 1.3 is not available on the legacy Apple engine.</string>
 	<key>explanation::invalid_date</key>
 	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
 	<key>explanation::issue_date_too_long</key>
