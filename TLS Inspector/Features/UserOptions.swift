@@ -16,6 +16,7 @@ private let KEY_PREFERRED_CIPHERS = "preferred_ciphers"
 private let KEY_CONTACT_NAG_DISMISSED = "contact_nag_dismissed"
 private let KEY_ADVANCED_SETTINGS_NAG_DISMISSED = "advanced_settings_nag_dismissed"
 private let KEY_CRYPTO_ENGINE = "crypto_engine"
+private let KEY_OPTIONS_SCHEMA_VERSION = "options_schema_version"
 // swiftlint:enable identifier_name
 
 public enum CryptoEngine: String {
@@ -56,8 +57,33 @@ class UserOptions {
     static func loadDefaults() {
         for key in defaults.keys {
             if AppDefaults.value(forKey: key) == nil {
+                print("Setting default value for '\(key)' to '\(defaults[key]!)'")
                 AppDefaults.set(defaults[key], forKey: key)
             }
+        }
+        
+        let wantedVersion = 1
+        let currentVersion = (AppDefaults.value(forKey: KEY_OPTIONS_SCHEMA_VERSION) as? NSNumber)?.intValue ?? 0
+        
+        if currentVersion < wantedVersion {
+            // #1 Automatically migrate eligable users to the new Network framework crypto engine
+            if currentVersion < 1 {
+                if AppDefaults.bool(forKey: "use_openssl") {
+                    print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.OpenSSL.rawValue)")
+                    AppDefaults.setValue(CryptoEngine.OpenSSL.rawValue, forKey: KEY_CRYPTO_ENGINE)
+                } else {
+                    if #available(iOS 13, *) {
+                        print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.NetworkFramework.rawValue)")
+                        AppDefaults.setValue(CryptoEngine.NetworkFramework.rawValue, forKey: KEY_CRYPTO_ENGINE)
+                    } else {
+                        print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.SecureTransport.rawValue)")
+                        AppDefaults.setValue(CryptoEngine.SecureTransport.rawValue, forKey: KEY_CRYPTO_ENGINE)
+                    }
+                }
+                AppDefaults.removeObject(forKey: "use_openssl")
+            }
+
+            AppDefaults.setValue(NSNumber.init(value: wantedVersion), forKey: KEY_OPTIONS_SCHEMA_VERSION)
         }
     }
 
