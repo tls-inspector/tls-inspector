@@ -304,8 +304,7 @@ class CertificateTableViewController: UITableViewController {
             return nil
         }
         signatureCell.textLabel?.text = lang(key: "Signature")
-        let key = "CertAlgorithm::" + (self.certificate.signatureAlgorithm ?? "Unknown")
-        signatureCell.detailTextLabel?.text = lang(key: key)
+        signatureCell.detailTextLabel?.text = self.certificate.signatureAlgorithm ?? "Unknown"
         pubKeySection.cells.append(signatureCell)
 
         guard let sizeCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
