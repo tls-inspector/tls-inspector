@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>hack</key>
+	<string>warn</string>
+	<key>breach</key>
+	<string>warn</string>
+	<key>stole</key>
+	<string>warn</string>
+	<key>fuck</key>
+	<string>prohibit</string>
+	<key>shit</key>
+	<string>prohibit</string>
+	<key>nigger</key>
+	<string>prohibit</string>
+	<key>cunt</key>
+	<string>prohibit</string>
+</dict>
+</plist>

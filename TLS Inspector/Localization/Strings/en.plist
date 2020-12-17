@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Feedback Sent</key>
+	<string>Feedback Sent</string>
+	<key>fake_feedback_recieved_message</key>
+	<string>Thank you for providing feedback about TLS Inspector. While we take time to read all feedback, we may not reply to all messages we get.</string>
 	<key>crypto_engine::network_framework</key>
 	<string>iOS - Modern</string>
 	<key>crypto_engine::secure_transport</key>
