@@ -10,6 +10,12 @@ extension UIDevice {
     }
 
     public func platformName() -> String {
+        if #available(iOS 14.0, *) {
+            if ProcessInfo.processInfo.isiOSAppOnMac {
+                return "M1 macOS"
+            }
+        }
+        
         let platform = self.platform()
 
         // https://www.theiphonewiki.com/wiki/Models
