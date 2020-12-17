@@ -79,6 +79,9 @@
     // Since we're only concerned with getting the HTTP servers
     // info, we don't do any verification
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+    curl_easy_setopt(curl, CURLOPT_CAINFO, "");
 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, server_info_write_callback);
     curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, server_info_header_callback);

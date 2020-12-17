@@ -48,4 +48,10 @@
 
     return remoteAddressString;
 }
+
++ (NSString * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint {
+    // TODO: This also returns the port, need to strip that out
+    return endpoint.debugDescription;
+}
+
 @end
