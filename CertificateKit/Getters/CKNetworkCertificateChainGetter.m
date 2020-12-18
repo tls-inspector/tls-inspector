@@ -39,18 +39,21 @@
     self.chain.url = url;
 
     // TODO: Figure out if we can not have this entire thing be wrapped in an availability block
-    if (@available(iOS 13, *)) { // TODO: Change this to 12
+    if (@available(iOS 12, *)) {
         const char * host = url.host.UTF8String;
         unsigned int port = url.port != nil ? [url.port unsignedIntValue] : 443;
         const char * portStr = [[NSString alloc] initWithFormat:@"%i", port].UTF8String;
         nw_endpoint_t endpoint = nw_endpoint_create_host(host, portStr);
 
         dispatch_queue_t nw_dispatch_queue = dispatch_queue_create("com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter", NULL);
-        
-        // TODO: A lot of the methods called here are for iOS 13+, but have iOS 12 equlivilants - add those too
+
         nw_parameters_configure_protocol_block_t configure_tls = ^(nw_protocol_options_t tls_options) {
             sec_protocol_options_t sec_options = nw_tls_copy_sec_protocol_options(tls_options);
-            sec_protocol_options_append_tls_ciphersuite(sec_options, (SSLCipherSuite)TLS_CHACHA20_POLY1305_SHA256);
+
+            if (@available(iOS 13, *)) {
+                sec_protocol_options_append_tls_ciphersuite(sec_options, (SSLCipherSuite)TLS_CHACHA20_POLY1305_SHA256);
+            }
+
             sec_protocol_options_set_verify_block(sec_options, ^(sec_protocol_metadata_t  _Nonnull metadata, sec_trust_t  _Nonnull trust_ref, sec_protocol_verify_complete_t  _Nonnull complete) {
                 // Determine trust and get the root certificate
                 SecTrustRef trust = sec_trust_copy_ref(trust_ref);
@@ -72,9 +75,17 @@
                 } else {
                     [self.chain determineTrustFailureReason];
                 }
-                
-                tls_protocol_version_t proto_v = sec_protocol_metadata_get_negotiated_tls_protocol_version(metadata);
-                tls_ciphersuite_t suite = sec_protocol_metadata_get_negotiated_tls_ciphersuite(metadata);
+
+                tls_protocol_version_t proto_v;
+                tls_ciphersuite_t suite;
+
+                if (@available(iOS 13, *)) {
+                    proto_v = sec_protocol_metadata_get_negotiated_tls_protocol_version(metadata);
+                    suite = sec_protocol_metadata_get_negotiated_tls_ciphersuite(metadata);
+                } else {
+                    proto_v = sec_protocol_metadata_get_negotiated_protocol_version(metadata);
+                    suite = sec_protocol_metadata_get_negotiated_ciphersuite(metadata);
+                }
                 self.chain.protocol = [self tlsVersionToString:proto_v];
                 self.chain.cipherSuite = [self tlsCipherSuiteToString:suite];
 
