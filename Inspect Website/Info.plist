@@ -48,7 +48,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>FontAwesome.ttf</string>
+		<string>fa-regular.ttf</string>
+		<string>fa-solid.ttf</string>
 	</array>
 </dict>
 </plist>
