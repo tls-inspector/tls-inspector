@@ -2,18 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Locally Trusted</key>
-	<string>Locally Trusted</string>
-	<key>Important</key>
-	<string>Important</string>
-	<key>Send Anyways</key>
-	<string>Send Anyways</string>
-	<key>Discard</key>
-	<string>Discard</string>
-	<key>feedback_warn_message</key>
-	<string>TLS Inspector does not provide you or your iOS device with active protection against viruses or malware.
-
-If you&apos;re concerned about the security of your device; contact Apple Support.</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>2 weeks</key>
@@ -567,6 +555,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Delete</string>
 	<key>Did You Know:</key>
 	<string>Did You Know:</string>
+	<key>Discard</key>
+	<string>Discard</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
 	<key>Do not contact support for issues with your iOS Device or to report unsafe websites.</key>
@@ -597,6 +587,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Fingerprints</string>
 	<key>Finished</key>
 	<string>Finished</string>
+	<key>Follow @tlsinspector on Twitter</key>
+	<string>Follow @tlsinspector on Twitter</string>
 	<key>General</key>
 	<string>General</string>
 	<key>Get Involed</key>
@@ -613,6 +605,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>IDN Not Supported</string>
 	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
 	<string>If you believe this to be in error, contact support from within the TLS Inspector app.</string>
+	<key>Important</key>
+	<string>Important</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
 	<key>Internal error.</key>
@@ -641,6 +635,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>RSA</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
+	<key>Locally Trusted</key>
+	<string>Locally Trusted</string>
 	<key>Locally Trusted Chain</key>
 	<string>Locally Trusted Chain</string>
 	<key>Logging</key>
@@ -683,6 +679,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Only HTTPS URLs can be inspected</string>
 	<key>OpenSSL</key>
 	<string>OpenSSL</string>
+	<key>OpenSSL Settings</key>
+	<string>OpenSSL Settings</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
 	<key>Options</key>
@@ -731,6 +729,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Security HTTP Headers</string>
 	<key>Select Feedback Type</key>
 	<string>Select Feedback Type</string>
+	<key>Send Anyways</key>
+	<string>Send Anyways</string>
 	<key>Server Info</key>
 	<string>Server Info</string>
 	<key>Server Redirected To</key>
@@ -893,6 +893,10 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>The server certificate is for a different host than the one connected to.</string>
 	<key>fake_feedback_recieved_message</key>
 	<string>Thank you for providing feedback about TLS Inspector. While we take time to read all feedback, we may not reply to all messages we get.</string>
+	<key>feedback_warn_message</key>
+	<string>TLS Inspector does not provide you or your iOS device with active protection against viruses or malware.
+
+If you&apos;re concerned about the security of your device; contact Apple Support.</string>
 	<key>first_run_notice</key>
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 

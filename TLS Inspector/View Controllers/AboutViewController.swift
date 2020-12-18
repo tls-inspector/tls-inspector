@@ -6,6 +6,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     let projectURL = "https://tlsinspector.com/"
     let projectContributeURL = "https://tlsinspector.com/contribute.html"
     let testflightURL = "https://tlsinspector.com/beta.html"
+    let twitterURL = "https://twitter.com/tlsinspector"
     @IBOutlet weak var lockCircle: UIImageView!
     var quotes: [String] = []
     var taps = 0
@@ -54,7 +55,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         if section == 0 {
             return 3
         } else if section == 1 {
-            return 2
+            return 3
         }
 
         return 0
@@ -72,6 +73,8 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
             cell.textLabel?.text = lang(key: "Contribute to TLS Inspector")
         } else if indexPath.section == 1 && indexPath.row == 1 {
             cell.textLabel?.text = lang(key: "Test New Features")
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            return tableView.dequeueReusableCell(withIdentifier: "Twitter", for: indexPath)
         }
         return cell
     }
@@ -118,6 +121,8 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
             OpenURLInSafari(projectContributeURL)
         } else if indexPath.section == 1 && indexPath.row == 1 {
             OpenURLInSafari(testflightURL)
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            OpenURLInSafari(twitterURL)
         }
     }
 }
