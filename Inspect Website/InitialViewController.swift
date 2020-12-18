@@ -16,8 +16,6 @@ class InitialViewController: UIViewController, CKGetterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        MigrateAssistant.AppLaunch()
-
         if #available(iOS 13, *) {
             self.activityIndicator.style = .large
         }

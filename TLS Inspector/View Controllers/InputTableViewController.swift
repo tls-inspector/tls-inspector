@@ -38,8 +38,6 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             UserOptions.firstRunCompleted = true
         }
 
-        MigrateAssistant.AppLaunch()
-
         // swiftlint:disable discarded_notification_center_observer
         NotificationCenter.default.addObserver(forName: RELOAD_RECENT_NOTIFICATION, object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
