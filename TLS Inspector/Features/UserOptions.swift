@@ -31,6 +31,30 @@ public enum CryptoEngine: String {
             .OpenSSL,
         ]
     }
+
+    func intValue() -> Int {
+        switch self {
+        case .NetworkFramework:
+            return 1
+        case .SecureTransport:
+            return 2
+        case .OpenSSL:
+            return 3
+        }
+    }
+
+    static func from(int: Int) -> CryptoEngine? {
+        switch int {
+        case 1:
+            return .NetworkFramework
+        case 2:
+            return .SecureTransport
+        case 3:
+            return .OpenSSL
+        default:
+            return nil
+        }
+    }
 }
 
 class UserOptions {
@@ -93,6 +117,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_FIRST_RUN_COMPLETE)
+            LogDebug("Setting AppDefault: \(KEY_FIRST_RUN_COMPLETE) = \(newValue)")
         }
     }
     static var rememberRecentLookups: Bool {
@@ -101,6 +126,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_REMEMBER_RECENT_LOOKUPS)
+            LogDebug("Setting AppDefault: \(KEY_REMEMBER_RECENT_LOOKUPS) = \(newValue)")
         }
     }
     static var useLightTheme: Bool {
@@ -109,6 +135,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_USE_LIGHT_THEME)
+            LogDebug("Setting AppDefault: \(KEY_USE_LIGHT_THEME) = \(newValue)")
         }
     }
     static var showTips: Bool {
@@ -117,6 +144,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_SHOW_TIPS)
+            LogDebug("Setting AppDefault: \(KEY_SHOW_TIPS) = \(newValue)")
         }
     }
     static var getHTTPHeaders: Bool {
@@ -125,6 +153,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_GET_HTTP_HEADERS)
+            LogDebug("Setting AppDefault: \(KEY_GET_HTTP_HEADERS) = \(newValue)")
         }
     }
     static var queryOCSP: Bool {
@@ -133,6 +162,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_QUERY_OCSP)
+            LogDebug("Setting AppDefault: \(KEY_QUERY_OCSP) = \(newValue)")
         }
     }
     static var checkCRL: Bool {
@@ -141,6 +171,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_CHECK_CRL)
+            LogDebug("Setting AppDefault: \(KEY_CHECK_CRL) = \(newValue)")
         }
     }
     static var showFingerprintMD5: Bool {
@@ -149,6 +180,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_MD5)
+            LogDebug("Setting AppDefault: \(KEY_FINGEPRINT_MD5) = \(newValue)")
         }
     }
     static var showFingerprintSHA128: Bool {
@@ -157,6 +189,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_SHA128)
+            LogDebug("Setting AppDefault: \(KEY_FINGEPRINT_SHA128) = \(newValue)")
         }
     }
     static var showFingerprintSHA256: Bool {
@@ -165,6 +198,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_SHA256)
+            LogDebug("Setting AppDefault: \(KEY_FINGEPRINT_SHA256) = \(newValue)")
         }
     }
     static var showFingerprintSHA512: Bool {
@@ -173,6 +207,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_FINGEPRINT_SHA512)
+            LogDebug("Setting AppDefault: \(KEY_FINGEPRINT_SHA512) = \(newValue)")
         }
     }
     static var cryptoEngine: CryptoEngine {
@@ -184,6 +219,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue.rawValue, forKey: KEY_CRYPTO_ENGINE)
+            LogDebug("Setting AppDefault: \(KEY_CRYPTO_ENGINE) = \(newValue)")
         }
     }
     static var preferredCiphers: String {
@@ -192,6 +228,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_PREFERRED_CIPHERS)
+            LogDebug("Setting AppDefault: \(KEY_PREFERRED_CIPHERS) = \(newValue)")
         }
     }
     static var contactNagDismissed: Bool {
@@ -200,6 +237,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_CONTACT_NAG_DISMISSED)
+            LogDebug("Setting AppDefault: \(KEY_CONTACT_NAG_DISMISSED) = \(newValue)")
         }
     }
     static var advancedSettingsNagDismissed: Bool {
@@ -208,6 +246,7 @@ class UserOptions {
         }
         set {
             AppDefaults.set(newValue, forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED)
+            LogDebug("Setting AppDefault: \(KEY_ADVANCED_SETTINGS_NAG_DISMISSED) = \(newValue)")
         }
     }
 
@@ -218,6 +257,7 @@ class UserOptions {
         }
         set {
             _verboseLogging = newValue
+            LogDebug("Setting AppDefault: \(newValue) = \(newValue)")
         }
     }
     static var inspectionsWithVerboseLogging: Int {
@@ -226,6 +266,7 @@ class UserOptions {
         }
         set {
             _inspectionsWithVerboseLogging = newValue
+            LogDebug("Setting AppDefault: \(newValue) = \(newValue)")
         }
     }
 }

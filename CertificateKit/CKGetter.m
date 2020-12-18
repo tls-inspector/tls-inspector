@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             self.chainGetter = [CKOpenSSLCertificateChainGetter new];
             break;
         default:
-            PError(@"Unknown crypto engine %i", self.options.cryptoEngine);
+            PError(@"Unknown crypto engine %u", (unsigned int)self.options.cryptoEngine);
             return;
     }
 
