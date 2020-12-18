@@ -72,7 +72,7 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
     @IBAction func doneButtonPushed(_ sender: Any) {
         let results = validateFeedbackMessage(message: self.comments)
         if results == .warn {
-            UIHelper(self).presentConfirm(title: lang(key: "Important"), body: lang(key: "first_run_notice"), trueLabel: lang(key: "Send Anyways"), falseLabel: lang(key: "Discard")) { (confirm) in
+            UIHelper(self).presentConfirm(title: lang(key: "Important"), body: lang(key: "feedback_warn_message"), trueLabel: lang(key: "Send Anyways"), falseLabel: lang(key: "Discard")) { (confirm) in
                 if confirm {
                     self.finishFeedback()
                 }

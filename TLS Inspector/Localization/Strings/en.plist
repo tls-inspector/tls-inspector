@@ -2,6 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Locally Trusted</key>
+	<string>Locally Trusted</string>
+	<key>Important</key>
+	<string>Important</string>
+	<key>Send Anyways</key>
+	<string>Send Anyways</string>
+	<key>Discard</key>
+	<string>Discard</string>
+	<key>feedback_warn_message</key>
+	<string>TLS Inspector does not provide you or your iOS device with active protection against viruses or malware.
+
+If you&apos;re concerned about the security of your device; contact Apple Support.</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>2 weeks</key>

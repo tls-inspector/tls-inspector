@@ -65,7 +65,7 @@ func lang(key: String) -> String {
     }
 
     guard let translated = LOCALIZATION_DICTIONARY?[key] else {
-        print("Unrecognized localization key " + key)
+        print("Unrecognized localization key: '\(key)'")
         return key
     }
 
@@ -81,7 +81,7 @@ func lang(key: String, args: [String]) -> String {
     }
 
     guard var translated = LOCALIZATION_DICTIONARY?[key] else {
-        print("Unrecognized localization key " + key)
+        print("Unrecognized localization key: '\(key)'")
         return key
     }
 

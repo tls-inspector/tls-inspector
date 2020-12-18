@@ -603,7 +603,7 @@
             </objects>
             <point key="canvasLocation" x="2680" y="580"/>
         </scene>
-        <!--Headers Table View Controller-->
+        <!--HTTP Headers-->
         <scene sceneID="WoS-r2-VXF">
             <objects>
                 <tableViewController id="fQO-vT-fgD" customClass="HTTPHeadersTableViewController" customModule="Show_Certificate" customModuleProvider="target" sceneMemberID="viewController">
@@ -616,7 +616,11 @@
                             <outlet property="delegate" destination="fQO-vT-fgD" id="wdy-lS-Uxu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="da2-mB-LSY"/>
+                    <navigationItem key="navigationItem" title="HTTP Headers" id="da2-mB-LSY">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="HTTP Headers"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8E-Wq-Cwq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -638,7 +642,7 @@
             </objects>
             <point key="canvasLocation" x="2680" y="1337"/>
         </scene>
-        <!--List Table View Controller-->
+        <!--Alternate Names-->
         <scene sceneID="Kgs-Yq-6Fp">
             <objects>
                 <tableViewController id="iIF-qS-Rbw" customClass="SANListTableViewController" customModule="Show_Certificate" customModuleProvider="target" sceneMemberID="viewController">
@@ -651,7 +655,11 @@
                             <outlet property="delegate" destination="iIF-qS-Rbw" id="xHB-OA-J67"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="LNp-V9-m3b"/>
+                    <navigationItem key="navigationItem" title="Alternate Names" id="LNp-V9-m3b">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="Alternate Names"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8q-fr-3kV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
