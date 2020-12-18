@@ -15,7 +15,7 @@ extension UIDevice {
                 return "M1 macOS"
             }
         }
-        
+
         let platform = self.platform()
 
         // https://www.theiphonewiki.com/wiki/Models

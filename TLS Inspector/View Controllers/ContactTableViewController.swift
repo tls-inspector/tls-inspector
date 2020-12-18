@@ -28,26 +28,27 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
         }
     }
 
-    enum validationResult {
+    enum ValidationResult {
         case prohibited
         case warn
         case allowed
     }
-    
-    func validateFeedbackMessage(message: String) -> validationResult {
-        /**
-         The TLS Inspector feedback mailbox recieves a surprising amount of spam, but also an unacceptible amount of vitrol and hate
-         As a result, we've flagged some key-words that are common in these messages and will take two paths based on if they are found:
-         "warn" words will generate a warning when you try to submit feedback with them. These are words such as "hack", "stole", etc, which are common among users who are confused as to what TLS Inspector is
-         "prohibit" words are highly offensive, duragotory words that when found in the users comments will generate a "fake" feedback sent alert, without actually sending anything.
-         */
+
+    /**
+     The TLS Inspector feedback mailbox recieves a surprising amount of spam, but also an unacceptible amount of vitrol and hate
+     As a result, we've flagged some key-words that are common in these messages and will take two paths based on if they are found:
+     "warn" words will generate a warning when you try to submit feedback with them. These are words such as "hack", "stole", etc, which are common among users who are confused as to what TLS Inspector is
+     "prohibit" words are highly offensive, duragotory words that when found in the users comments will generate a "fake" feedback sent alert, without actually sending anything.
+     */
+    func validateFeedbackMessage(message: String) -> ValidationResult {
+
         guard let wordsPath = Bundle.main.path(forResource: "offensive_words", ofType: "plist") else {
             return .allowed
         }
         guard let offensiveWords = NSDictionary.init(contentsOfFile: wordsPath) as? [String: String] else {
             return .allowed
         }
-        
+
         let lcm = message.lowercased()
         for word in offensiveWords.keys {
             if lcm.contains(word) {
@@ -60,7 +61,7 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
         }
         return .allowed
     }
-    
+
     func finishFeedback() {
         let type = SupportType(type: self.contactType, comments: self.comments)
         self.dismiss(animated: true) {
@@ -88,7 +89,7 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
             }
             return
         }
-        
+
         self.finishFeedback()
     }
 

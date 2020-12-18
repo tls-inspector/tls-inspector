@@ -22,7 +22,7 @@ class UIHelper {
             self.viewController.present(alertController, animated: true, completion: nil)
         }
     }
-    
+
     /// Present a confirmation alert in the given view controller.
     /// - Parameters:
     ///   - title: The title of the alert

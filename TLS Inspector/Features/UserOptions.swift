@@ -61,10 +61,10 @@ class UserOptions {
                 AppDefaults.set(defaults[key], forKey: key)
             }
         }
-        
+
         let wantedVersion = 1
         let currentVersion = (AppDefaults.value(forKey: KEY_OPTIONS_SCHEMA_VERSION) as? NSNumber)?.intValue ?? 0
-        
+
         if currentVersion < wantedVersion {
             // #1 Automatically migrate eligable users to the new Network framework crypto engine
             if currentVersion < 1 {
