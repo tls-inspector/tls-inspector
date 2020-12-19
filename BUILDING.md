@@ -4,14 +4,32 @@ This document will describe the process for building TLS Inspector.
 
 # Requirements
 
-- A computer running macOS Catalina (10.15.2 or later)
-- Xcode 11.4.1 or later
+- The latest release of Xcode
 - Git (1.8 or later)
-- An Apple Developer Membership (only required for distribution)
+- An Apple Developer Membership (only required for distribution or installing on physical devices)
+- Swiftlint
 
 *Note: while it may be possible to build the project on a virtual machine or "hackintosh", it is untested
 and not supported. Furthermore, it may violate the Apple Developer rules to submit apps from unauthorized copies
 of macOS.*
+
+# Downloading the Source Code
+
+TLS Inspector makes use of two git submodules that are required to build the project.
+
+When cloning the source code, you need to tell git to also initialize these submodules.
+
+If you are using git 2.13 or later, use:
+
+```bash
+git clone --recurse-submodules https://github.com/tls-inspector/tls-inspector.git
+```
+
+For older versions of git, use:
+
+```bash
+git clone --recursive https://github.com/tls-inspector/tls-inspector.git
+```
 
 # Configuring the Project
 
@@ -24,8 +42,8 @@ This requires that you have an Apple Developer Membership, which can be purchase
 
 # Building the Project
 
-TLS Inspector requires OpenSSL and cURL, both of which will be compiled the first time you build the project in Xcode.
+TLS Inspector requires OpenSSL and tiny-curl, both of which will be compiled the first time you build the project in Xcode.
 
-**The first time you build the project in Xcode it will take a while (5-15 minutes).**
+**The first time you build the project in Xcode it will take a while (5-15 minutes depending on hardware).**
 
-You can change the version of OpenSSL or cURL used by altering the associated `.want` file in `CertificateKit/build/`
+You can change the version of OpenSSL or tiny-curl used by altering the associated `.want` file in `CertificateKit/build/`
