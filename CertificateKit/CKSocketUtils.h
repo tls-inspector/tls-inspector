@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Get the servers (peer) IP address in human-readable format for the given endpoint
 /// @param endpoint The remote endpoint
-+ (NSString * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint;
++ (NSString * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint API_AVAILABLE(ios(12.0));
 
 @end
 

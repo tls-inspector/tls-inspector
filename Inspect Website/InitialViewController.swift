@@ -163,4 +163,10 @@ class InitialViewController: UIViewController, CKGetterDelegate {
         print("Error server info: " + error.localizedDescription)
         SERVER_ERROR = error
     }
+
+    func getter(_ getter: CKGetter, unexpectedError error: Error) {
+        UIHelper(self).presentError(error: error) {
+            self.closeExtension()
+        }
+    }
 }

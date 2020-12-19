@@ -53,6 +53,16 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 }
 
 - (void) getInfoForURL:(NSURL *)URL; {
+    if (@available(iOS 12, *)) {} else {
+        if (self.options.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
+            PError(@"NetworkFramework crypto engine selected on incompatible iOS version - aborting");
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
+                [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported crypto engine"}]];
+            }
+            return;
+        }
+    }
+
     PDebug(@"Starting getter for: %@", URL.absoluteString);
 
     self.url = URL;
@@ -69,6 +79,9 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             break;
         default:
             PError(@"Unknown crypto engine %u", (unsigned int)self.options.cryptoEngine);
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
+                [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unknown crypto engine"}]];
+            }
             return;
     }
 

@@ -50,8 +50,23 @@
 }
 
 + (NSString * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint {
-    // TODO: This also returns the port, need to strip that out
-    return endpoint.debugDescription;
+    struct sockaddr_storage * addr = (struct sockaddr_storage *)nw_endpoint_get_address(endpoint);
+
+    NSString * remoteAddressString;
+    if (addr->ss_family == AF_INET) {
+        char addressString[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &((struct sockaddr_in *)addr)->sin_addr, addressString, INET_ADDRSTRLEN);
+        remoteAddressString = [[NSString alloc] initWithUTF8String:addressString];
+    } else if (addr->ss_family == AF_INET6) {
+        char addressString[INET6_ADDRSTRLEN];
+        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
+        remoteAddressString = [[NSString alloc] initWithUTF8String:addressString];
+    } else {
+        PError(@"Unknown address family from endpoint: %@", endpoint.description);
+        return nil;
+    }
+
+    return remoteAddressString;
 }
 
 @end

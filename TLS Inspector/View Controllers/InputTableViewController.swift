@@ -257,6 +257,16 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         SERVER_ERROR = error
     }
 
+    func getter(_ getter: CKGetter, unexpectedError error: Error) {
+        UIHelper(self).presentError(error: error) {
+            self.serverInfo = nil
+            self.certificateChain = nil
+            self.chainError = nil
+            self.serverError = nil
+            self.updatePendingCell(state: .none)
+        }
+    }
+
     // MARK: Table View Delegate Methods
     override func numberOfSections(in tableView: UITableView) -> Int {
         if UserOptions.rememberRecentLookups && RecentLookups.GetRecentLookups().count > 0 {
