@@ -29,6 +29,7 @@
 #include <openssl/x509.h>
 #include <openssl/err.h>
 #include <arpa/inet.h>
+#include <mach/mach_time.h>
 
 @interface CKOpenSSLCertificateChainGetter () {
     NSURL * queryURL;
@@ -64,7 +65,9 @@ INSERT_OPENSSL_ERROR_METHOD
 }
 
 - (void) performTaskForURL:(NSURL *)url {
-    PDebug(@"Getting certificate chain");
+    uint64_t startTime = mach_absolute_time();
+    PDebug(@"Getting certificate chain with OpenSSL");
+
     queryURL = url;
     unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
 
@@ -288,6 +291,19 @@ INSERT_OPENSSL_ERROR_METHOD
     self.finished = YES;
     self.successful = YES;
     [self.delegate getter:self finishedTaskWithResult:self.chain];
+
+    uint64_t endTime = mach_absolute_time();
+    if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
+        uint64_t elapsedTime = endTime - startTime;
+        static double ticksToNanoseconds = 0.0;
+        if (0.0 == ticksToNanoseconds) {
+            mach_timebase_info_data_t timebase;
+            mach_timebase_info(&timebase);
+            ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+        }
+        double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+        PDebug(@"OpenSSL getter collected certificate information in %fns", elapsedTimeInNanoseconds);
+    }
 }
 
 int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {

@@ -28,6 +28,7 @@
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <arpa/inet.h>
+#include <mach/mach_time.h>
 
 @interface CKSecureTransportCertificateChainGetter () <NSStreamDelegate> {
     CFReadStreamRef   readStream;
@@ -35,6 +36,7 @@
     NSInputStream   * inputStream;
     NSOutputStream  * outputStream;
     NSURL * queryURL;
+    uint64_t startTime;
 }
 
 @property (strong, nonatomic, readwrite) NSString * domain;
@@ -53,7 +55,9 @@
 @implementation CKSecureTransportCertificateChainGetter
 
 - (void) performTaskForURL:(NSURL *)url {
-    PDebug(@"Getting certificate chain");
+    startTime = mach_absolute_time();
+    PDebug(@"Getting certificate chain with SecureTransport");
+
     queryURL = url;
     unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)url.host, port, &readStream, &writeStream);
@@ -210,6 +214,19 @@
     self.finished = YES;
     self.successful = YES;
     [self.delegate getter:self finishedTaskWithResult:self.chain];
+
+    uint64_t endTime = mach_absolute_time();
+    if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
+        uint64_t elapsedTime = endTime - startTime;
+        static double ticksToNanoseconds = 0.0;
+        if (0.0 == ticksToNanoseconds) {
+            mach_timebase_info_data_t timebase;
+            mach_timebase_info(&timebase);
+            ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+        }
+        double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+        PDebug(@"SecureTransport getter collected certificate information in %fns", elapsedTimeInNanoseconds);
+    }
 }
 
 - (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {
