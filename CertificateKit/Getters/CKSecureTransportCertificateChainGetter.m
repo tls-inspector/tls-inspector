@@ -119,17 +119,18 @@
     }
 
     long count = SecTrustGetCertificateCount(trust);
+    if (count > CERTIFICATE_CHAIN_MAXIMUM) {
+        PError(@"Server returned too many certificates. Count: %li, Max: %i", count, CERTIFICATE_CHAIN_MAXIMUM);
+        self.finished = YES;
+        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
+        return;
+    }
 
     NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
 
     for (long i = 0; i < count; i ++) {
         SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
-        NSData * certificateData = (NSData *)CFBridgingRelease(SecCertificateCopyData(certificateRef));
-        const unsigned char * bytes = (const unsigned char *)[certificateData bytes];
-        // This will leak
-        X509 * cert = d2i_X509(NULL, &bytes, [certificateData length]);
-        certificateData = nil;
-        [certs setObject:[CKCertificate fromX509:cert] atIndexedSubscript:i];
+        [certs setObject:[CKCertificate fromSecCertificateRef:certificateRef] atIndexedSubscript:i];
     }
 
     CFDataRef handleData = (CFDataRef)CFReadStreamCopyProperty((__bridge CFReadStreamRef) inputStream, kCFStreamPropertySocketNativeHandle);
@@ -142,7 +143,7 @@
     if (remoteAddr == nil) {
         PError(@"No remote address from socket");
         self.finished = YES;
-        [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"CKCertificate" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to get remote address of peer"}]];
+        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Unable to get remote address of peer")];
         return;
     }
 
@@ -169,7 +170,7 @@
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
         self.finished = YES;
-        [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"CKCertificate" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"No certificates presented by server."}]];
+        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"No certificates presented by server.")];
         return;
     }
 
@@ -198,8 +199,7 @@
         [self.chain determineTrustFailureReason];
     }
 
-    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@", queryURL.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite);
-    PDebug(@"Server returned %lu certificates during handshake", (unsigned long)certs.count);
+    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", queryURL.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite, count);
 
     self.chain.cipherSuite = [self CiphersuiteToString:ciphers[0]];
     self.chain.protocol = [self protocolString:protocol];

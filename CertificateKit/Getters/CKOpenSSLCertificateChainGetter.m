@@ -50,7 +50,6 @@
 
 @implementation CKOpenSSLCertificateChainGetter
 
-static const int CERTIFICATE_CHAIN_MAXIMUM = 10;
 static X509 * certificateChain[CERTIFICATE_CHAIN_MAXIMUM];
 static int numberOfCerts = 0;
 
@@ -61,7 +60,7 @@ INSERT_OPENSSL_ERROR_METHOD
 - (void) failWithError:(CKCertificateError)code description:(NSString *)description {
     PError(@"Failing with error (%ld): %@", (long)code, description);
     self.finished = YES;
-    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.certificatekit" code:code userInfo:@{NSLocalizedDescriptionKey: description}]];
+    [self.delegate getter:self failedTaskWithError:MAKE_ERROR(code, description)];
 }
 
 - (void) performTaskForURL:(NSURL *)url {
@@ -168,6 +167,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     if (numberOfCerts > CERTIFICATE_CHAIN_MAXIMUM) {
+        PError(@"Server returned too many certificates. Count: %i, Max: %i", numberOfCerts, CERTIFICATE_CHAIN_MAXIMUM);
         [self failWithError:CKCertificateErrorConnection description:@"Too many certificates from server"];
         SSL_CLEANUP
         return;
@@ -185,8 +185,7 @@ INSERT_OPENSSL_ERROR_METHOD
     self.chain.protocol = [self protocolString:SSL_version(ssl)];
     self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];
     self.chain.remoteAddress = remoteAddr;
-    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@", url.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite);
-    PDebug(@"Server returned %d certificates during handshake", numberOfCerts);
+    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", url.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
     SSL_CLEANUP
 

@@ -22,6 +22,8 @@
 @import Network;
 #import "CKNetworkCertificateChainGetter.h"
 #import "CKSocketUtils.h"
+#import "CKCRLManager.h"
+#import "CKOCSPManager.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <mach/mach_time.h>
@@ -46,6 +48,7 @@
     unsigned int port = url.port != nil ? [url.port unsignedIntValue] : 443;
     const char * portStr = [[NSString alloc] initWithFormat:@"%i", port].UTF8String;
     nw_endpoint_t endpoint = nw_endpoint_create_host(host, portStr);
+    long __block numberOfCertificates = 0L;
 
     dispatch_queue_t nw_dispatch_queue = dispatch_queue_create("com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter", NULL);
 
@@ -57,14 +60,38 @@
             SecTrustRef trust = sec_trust_copy_ref(trust_ref);
             SecTrustResultType trustStatus;
             SecTrustEvaluate(trust, &trustStatus);
-            long count = SecTrustGetCertificateCount(trust);
-            NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:count];
-            for (int i = 0; i < count; i++) {
+            numberOfCertificates = SecTrustGetCertificateCount(trust);
+            if (numberOfCertificates > CERTIFICATE_CHAIN_MAXIMUM) {
+                PError(@"Server returned too many certificates. Count: %li, Max: %i", numberOfCertificates, CERTIFICATE_CHAIN_MAXIMUM);
+                self.finished = YES;
+                [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
+                return;
+            }
+
+            NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:numberOfCertificates];
+            for (int i = 0; i < numberOfCertificates; i++) {
                 SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
                 CKCertificate * certificate = [CKCertificate fromSecCertificateRef:certificateRef];
                 [certificates addObject:certificate];
             }
             self.chain.certificates = certificates;
+
+            self.chain.server = certificates[0];
+            if (certificates.count > 2) {
+                self.chain.rootCA = [certificates lastObject];
+                self.chain.rootCA.isRootCA = YES;
+                self.chain.intermediateCA = [certificates objectAtIndex:1];
+            } else if (certificates.count == 2) {
+                self.chain.rootCA = [certificates lastObject];
+                self.chain.rootCA.isRootCA = YES;
+            }
+
+            if (certificates.count > 1) {
+                self.chain.server.revoked = [self getRevokedInformationForCertificate:certificates[0] issuer:certificates[1]];
+            }
+            if (certificates.count > 2) {
+                self.chain.intermediateCA.revoked = [self getRevokedInformationForCertificate:certificates[1] issuer:certificates[2]];
+            }
 
             if (trustStatus == kSecTrustResultUnspecified) {
                 self.chain.trusted = CKCertificateChainTrustStatusTrusted;
@@ -109,6 +136,7 @@
                 PDebug(@"Event: nw_connection_state_ready");
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 PDebug(@"NetworkFramework getter successful");
+                PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", url.host, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
 
                 self.finished = YES;
                 self.successful = YES;
@@ -146,6 +174,27 @@
         }
     });
     nw_connection_start(connection);
+}
+
+- (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {
+    CKOCSPResponse * ocspResponse;
+    CKCRLResponse * crlResponse;
+    NSError * ocspError;
+    NSError * crlError;
+
+    if (self.options.checkOCSP) {
+        [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
+        if (ocspError != nil) {
+            PError(@"OCSP Error: %@", ocspError.description);
+        }
+    }
+    if (self.options.checkCRL) {
+        [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
+        if (crlError != nil) {
+            PError(@"CRL Error: %@", crlError.description);
+        }
+    }
+    return [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
 }
 
 - (NSString *) tlsVersionToString:(tls_protocol_version_t)version API_AVAILABLE(ios(12.0)) {

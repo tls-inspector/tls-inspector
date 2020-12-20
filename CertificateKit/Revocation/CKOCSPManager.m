@@ -154,13 +154,21 @@ static CKOCSPManager * _instance;
         return;
     }
 
+    // Prepare curl verbose logging but only use it if in debugg level
+    // We have to use an in-memory file since curl expects a file pointer for STDERR
+    static char *buf;
+    static size_t len;
+    FILE * curlout = NULL;
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            curlout = open_memstream(&buf, &len);
+            curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+            curl_easy_setopt(curl, CURLOPT_STDERR, stderr);
+        }
+    }
+
     self.responseDataBuffer = [NSMutableData new];
-    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
-    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
-    
     curl_easy_setopt(curl, CURLOPT_URL, responder.absoluteString.UTF8String);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ocsp_write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, self.responseDataBuffer);
     
@@ -219,6 +227,16 @@ static CKOCSPManager * _instance;
     *resp = basicResp;
     
     curl_easy_cleanup(curl);
+
+    // Dump curls output to the log file
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            fflush(curlout);
+            fclose(curlout);
+            PDebug(@"curl output:\n%s", buf);
+            free(buf);
+        }
+    }
 }
 
 size_t ocsp_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {

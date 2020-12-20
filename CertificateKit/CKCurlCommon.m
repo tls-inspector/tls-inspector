@@ -41,20 +41,12 @@ static id _instance;
         return nil;
     }
 
-    if (Console.level == CKLoggingLevelDebug) {
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, libcurl_write_callback);
-    } else {
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
-    }
+    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
+    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
 
     return curl;
-}
-
-size_t libcurl_write_callback(char *ptr, size_t size, size_t nmemb, void *userdata) {
-    NSString * string = [[NSString alloc] initWithUTF8String:ptr];
-    [Console writeDebug:string];
-    return size * nmemb;
 }
 
 @end

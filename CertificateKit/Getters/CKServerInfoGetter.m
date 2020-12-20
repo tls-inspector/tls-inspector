@@ -61,26 +61,32 @@
     if (!curl) {
         PError(@"Unable to create curl session (this shouldn't happen!)");
         curl_global_cleanup();
-        finished([NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to create curl session."}]);
+        finished(MAKE_ERROR(-1, @"Unable to initalize libcurl"));
         return;
     }
 
     self.headers = [NSMutableDictionary new];
     NSError * error;
-    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
-    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
 
     PDebug(@"Server Info Request: HTTP GET %@", url.absoluteString);
-
     const char * urlString = url.absoluteString.UTF8String;
     curl_easy_setopt(curl, CURLOPT_URL, urlString);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
     // Since we're only concerned with getting the HTTP servers
     // info, we don't do any verification
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-    //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L); See: https://github.com/curl/curl/issues/6347
-    curl_easy_setopt(curl, CURLOPT_CAINFO, "");
+
+    // Prepare curl verbose logging but only use it if in debugg level
+    // We have to use an in-memory file since curl expects a file pointer for STDERR
+    static char *buf;
+    static size_t len;
+    FILE * curlout = NULL;
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            curlout = open_memstream(&buf, &len);
+            curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+            curl_easy_setopt(curl, CURLOPT_STDERR, stderr);
+        }
+    }
 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, server_info_write_callback);
     curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, server_info_header_callback);
@@ -107,7 +113,7 @@
         // Check for errors
         NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
         PError(@"Error getting server info: %@", errString);
-        error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
+        error = MAKE_ERROR(-1, errString);
     }
 
     long http_code = 0;
@@ -115,9 +121,18 @@
     self.statusCode = http_code;
     PDebug(@"Server Info HTTP Response: %ld", http_code);
 
-    // always cleanup
     curl_easy_cleanup(curl);
     curl_global_cleanup();
+
+    // Dump curls output to the log file
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            fflush(curlout);
+            fclose(curlout);
+            PDebug(@"curl output:\n%s", buf);
+            free(buf);
+        }
+    }
     finished(error);
 }
 
