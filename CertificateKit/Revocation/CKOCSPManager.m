@@ -241,14 +241,22 @@ static CKOCSPManager * _instance;
 
 size_t ocsp_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
     if (userp == NULL) {
+        PError(@"ocsp_write_callback - userdata pointer was NULL");
         return 0;
     }
-    if (size * nmemb == 0 || buffer == NULL) {
+    NSUInteger length = size * nmemb;
+    if (length == 0 || buffer == NULL) {
+        PError(@"ocsp_write_callback - data size was 0 or buffer NULL");
         return 0;
     }
+    NSMutableData * userData = (__bridge NSMutableData *)userp;
+    if (![userData respondsToSelector:@selector(appendBytes:length:)]) {
+        PError(@"ocsp_write_callback - userdata did not respond to selector");
+        return 0;
+    }
+    [userData appendBytes:buffer length:length];
 
-    [((__bridge NSMutableData *)userp) appendBytes:buffer length:size * nmemb];
-    return size * nmemb;
+    return length;
 }
 
 INSERT_OPENSSL_ERROR_METHOD

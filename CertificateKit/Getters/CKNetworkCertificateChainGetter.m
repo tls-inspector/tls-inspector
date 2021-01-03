@@ -52,6 +52,12 @@
 
     dispatch_queue_t nw_dispatch_queue = dispatch_queue_create("com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter", NULL);
 
+    // TCP configuration
+    nw_parameters_configure_protocol_block_t configure_tcp = ^(nw_protocol_options_t tcp_options) {
+        nw_tcp_options_set_connection_timeout(tcp_options, 5);
+    };
+
+    // TLS configuration
     nw_parameters_configure_protocol_block_t configure_tls = ^(nw_protocol_options_t tls_options) {
         sec_protocol_options_t sec_options = nw_tls_copy_sec_protocol_options(tls_options);
         sec_protocol_options_set_tls_ocsp_enabled(sec_options, false); // Don't do OCSP because we do it ourselves
@@ -118,7 +124,15 @@
         }, nw_dispatch_queue);
     };
 
-    nw_parameters_t parameters = nw_parameters_create_secure_tcp(configure_tls, NW_PARAMETERS_DEFAULT_CONFIGURATION);
+    nw_parameters_t parameters = nw_parameters_create_secure_tcp(configure_tls, configure_tcp);
+    nw_protocol_stack_t protocol_stack = nw_parameters_copy_default_protocol_stack(parameters);
+    nw_protocol_options_t ip_options = nw_protocol_stack_copy_internet_protocol(protocol_stack);
+    if (self.options.ipVersion == IP_VERSION_IPV4) {
+        nw_ip_options_set_version(ip_options, nw_ip_version_4);
+    } else if (self.options.ipVersion == IP_VERSION_IPV6) {
+        nw_ip_options_set_version(ip_options, nw_ip_version_6);
+    }
+
     nw_connection_t connection = nw_connection_create(endpoint, parameters);
     nw_connection_set_queue(connection, nw_dispatch_queue);
     nw_connection_set_state_changed_handler(connection, ^(nw_connection_state_t state, nw_error_t error) {

@@ -91,6 +91,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
+    self.serverInfoGetter.options = self.options;
     self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
     self.finishedMutex = [NSObject new];
 

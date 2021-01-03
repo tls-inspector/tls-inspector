@@ -56,7 +56,11 @@ static dispatch_queue_t queue;
     self.file = [documentsDirectory stringByAppendingPathComponent:file];
     [self createQueue];
     [self open];
+#if DEBUG
+    self.level = CKLoggingLevelDebug;
+#else
     self.level = CKLoggingLevelWarning;
+#endif
     return self;
 }
 
@@ -134,8 +138,10 @@ static dispatch_queue_t queue;
 }
 
 - (void) setLevel:(CKLoggingLevel)level {
+#ifndef DEBUG
     _level = level;
     [self writeDebug:[NSString stringWithFormat:@"Setting log level to: %@ (%lu)", [self stringForLevel:level], (unsigned long)level]];
+#endif
 }
 
 @end

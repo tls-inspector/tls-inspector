@@ -111,6 +111,8 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
+    BIO_set_conn_ip_family(web, BIO_FAMILY_IPV4);
+
     BIO_get_ssl(web, &ssl);
     if (ssl == NULL) {
         [self openSSLError];

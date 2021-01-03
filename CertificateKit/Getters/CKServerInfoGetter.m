@@ -75,6 +75,12 @@
     // info, we don't do any verification
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
+    if (self.options.ipVersion == IP_VERSION_IPV4) {
+        curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+    } else if (self.options.ipVersion == IP_VERSION_IPV6) {
+        curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6);
+    }
+
     // Prepare curl verbose logging but only use it if in debugg level
     // We have to use an in-memory file since curl expects a file pointer for STDERR
     static char *buf;

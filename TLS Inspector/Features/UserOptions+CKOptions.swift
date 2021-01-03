@@ -18,6 +18,15 @@ extension UserOptions {
         }
         options.ciphers = UserOptions.preferredCiphers
 
+        switch UserOptions.ipVersion {
+        case .Automatic:
+            options.ipVersion = IP_VERSION_AUTOMATIC.rawValue
+        case .IPv4:
+            options.ipVersion = IP_VERSION_IPV4.rawValue
+        case .IPv6:
+            options.ipVersion = IP_VERSION_IPV6.rawValue
+        }
+
         return options
     }
 }

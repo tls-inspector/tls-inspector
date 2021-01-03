@@ -1,6 +1,12 @@
 import UIKit
 
 class AdvancedOptionsTableViewController: UITableViewController {
+    private enum SectionTags: Int {
+        case Engine = 1
+        case OpenSSL = 2
+        case IPVersion = 3
+    }
+
     var sections: [TableViewSection] = []
 
     override func viewDidLoad() {
@@ -32,6 +38,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         let engineSection = TableViewSection()
         engineSection.title = lang(key: "Crypto Engine")
         engineSection.footer = lang(key: "crypto_engine_footer")
+        engineSection.tag = SectionTags.Engine.rawValue
 
         if #available(iOS 12, *) {
             engineSection.cells.maybeAppend(engineCell(engine: .NetworkFramework))
@@ -49,6 +56,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
 
         let opensslSection = TableViewSection()
         opensslSection.title = lang(key: "OpenSSL Settings")
+        opensslSection.tag = SectionTags.OpenSSL.rawValue
 
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") else {
             LogError("No cell named 'Input' found")
@@ -74,8 +82,47 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return opensslSection
     }
 
+    func ipVersionCell(version: IPVersion) -> UITableViewCell? {
+        let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
+
+        switch version {
+        case .Automatic:
+            cell.textLabel?.text = lang(key: "Automatic")
+        case .IPv4:
+            cell.textLabel?.text = "IPv4"
+        case .IPv6:
+            cell.textLabel?.text = "IPv6"
+        }
+
+        if UserOptions.ipVersion == version {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+
+        cell.tag = version.intValue()
+        return cell
+    }
+
+    func buildIPVersionSection() -> TableViewSection? {
+        if UserOptions.cryptoEngine == .SecureTransport {
+            return nil
+        }
+
+        let ipVersionSection = TableViewSection()
+        ipVersionSection.title = lang(key: "Use IP Version")
+        ipVersionSection.tag = SectionTags.IPVersion.rawValue
+
+        for version in IPVersion.allValues() {
+            ipVersionSection.cells.maybeAppend(ipVersionCell(version: version))
+        }
+
+        return ipVersionSection
+    }
+
     func buildTable() {
         self.sections = [self.buildEngineSection()]
+        self.sections.maybeAppend(buildIPVersionSection())
         self.sections.maybeAppend(buildOpenSSLSection())
     }
 
@@ -101,7 +148,9 @@ class AdvancedOptionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        let tag = self.sections[indexPath.section].tag
+
+        if tag == SectionTags.Engine.rawValue {
             guard let cell = tableView.cellForRow(at: indexPath) else {
                 return
             }
@@ -117,12 +166,48 @@ class AdvancedOptionsTableViewController: UITableViewController {
             UserOptions.cryptoEngine = after
             self.buildTable()
 
-            if UserOptions.cryptoEngine == .OpenSSL {
-                self.tableView.insertSections([1], with: .fade)
-            } else if before == .OpenSSL {
-                self.tableView.deleteSections([1], with: .fade)
+            // TODO: This is terrible
+            var sectionsToInsert: IndexSet = []
+            var sectionsToRemove: IndexSet = []
+            if after == .SecureTransport && before != .SecureTransport {
+                if before == .OpenSSL {
+                    sectionsToRemove.insert(1)
+                    sectionsToRemove.insert(2)
+                } else {
+                    sectionsToRemove.insert(1)
+                }
+            } else if after == .NetworkFramework && before != .NetworkFramework {
+                if before == .OpenSSL {
+                    sectionsToRemove.insert(2)
+                } else if before == .SecureTransport {
+                    sectionsToInsert.insert(1)
+                }
+            } else if after == .OpenSSL && before != .OpenSSL {
+                sectionsToInsert.insert(2)
+                if before == .SecureTransport {
+                    sectionsToInsert.insert(1)
+                }
+            }
+
+            if sectionsToInsert.count > 0 {
+                self.tableView.insertSections(sectionsToInsert, with: .fade)
+            }
+            if sectionsToRemove.count > 0 {
+                self.tableView.deleteSections(sectionsToRemove, with: .fade)
             }
             self.tableView.reloadSections([0], with: .none)
+        } else if tag == SectionTags.IPVersion.rawValue {
+            guard let cell = tableView.cellForRow(at: indexPath) else {
+                return
+            }
+
+            guard let version = IPVersion.from(int: cell.tag) else {
+                return
+            }
+
+            UserOptions.ipVersion = version
+            self.buildTable()
+            self.tableView.reloadSections([indexPath.section], with: .none)
         }
     }
 

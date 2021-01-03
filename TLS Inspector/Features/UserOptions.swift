@@ -16,6 +16,7 @@ private let KEY_PREFERRED_CIPHERS = "preferred_ciphers"
 private let KEY_CONTACT_NAG_DISMISSED = "contact_nag_dismissed"
 private let KEY_ADVANCED_SETTINGS_NAG_DISMISSED = "advanced_settings_nag_dismissed"
 private let KEY_CRYPTO_ENGINE = "crypto_engine"
+private let KEY_IP_VERSION = "use_ip_version"
 private let KEY_OPTIONS_SCHEMA_VERSION = "options_schema_version"
 // swiftlint:enable identifier_name
 
@@ -57,6 +58,44 @@ public enum CryptoEngine: String {
     }
 }
 
+public enum IPVersion: String {
+    case Automatic = "automatic"
+    case IPv4 = "ipv4"
+    case IPv6 = "ipv6"
+
+    static func allValues() -> [IPVersion] {
+        return [
+            .Automatic,
+            .IPv4,
+            .IPv6,
+        ]
+    }
+
+    func intValue() -> Int {
+        switch self {
+        case .Automatic:
+            return 1
+        case .IPv4:
+            return 2
+        case .IPv6:
+            return 3
+        }
+    }
+
+    static func from(int: Int) -> IPVersion? {
+        switch int {
+        case 1:
+            return .Automatic
+        case 2:
+            return .IPv4
+        case 3:
+            return .IPv6
+        default:
+            return nil
+        }
+    }
+}
+
 class UserOptions {
     private static let defaultOpenSSLCiphers = "HIGH:!aNULL:!MD5:!RC4"
     private static let defaults: [String:Any] = [
@@ -71,6 +110,7 @@ class UserOptions {
         KEY_FINGEPRINT_SHA256: true,
         KEY_FINGEPRINT_SHA512: false,
         KEY_CRYPTO_ENGINE: CryptoEngine.NetworkFramework.rawValue,
+        KEY_IP_VERSION: IPVersion.Automatic.rawValue,
         KEY_PREFERRED_CIPHERS: defaultOpenSSLCiphers,
         KEY_CONTACT_NAG_DISMISSED: false,
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
@@ -220,6 +260,18 @@ class UserOptions {
         set {
             AppDefaults.set(newValue.rawValue, forKey: KEY_CRYPTO_ENGINE)
             LogDebug("Setting AppDefault: \(KEY_CRYPTO_ENGINE) = \(newValue)")
+        }
+    }
+    static var ipVersion: IPVersion {
+        get {
+            guard let str = AppDefaults.string(forKey: KEY_IP_VERSION) else {
+                return IPVersion.Automatic
+            }
+            return IPVersion.init(rawValue: str) ?? .Automatic
+        }
+        set {
+            AppDefaults.set(newValue.rawValue, forKey: KEY_IP_VERSION)
+            LogDebug("Setting AppDefault: \(KEY_IP_VERSION) = \(newValue)")
         }
     }
     static var preferredCiphers: String {

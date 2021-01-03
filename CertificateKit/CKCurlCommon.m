@@ -45,6 +45,7 @@ static id _instance;
     NSString * version = infoDictionary[@"CFBundleShortVersionString"];
     NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
     curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
+    curl_easy_setopt(curl, CURLOPT_FORBID_REUSE, 1L);
 
     return curl;
 }

@@ -64,6 +64,14 @@ typedef enum __CRYPTO_ENGINE {
  */
 @property (nonatomic) UInt32 cryptoEngine;
 
+typedef enum __IP_VERSIONS {
+    IP_VERSION_AUTOMATIC = 0,
+    IP_VERSION_IPV4 = 1,
+    IP_VERSION_IPV6 = 2,
+} IP_VERSION;
+
+@property (nonatomic) UInt32 ipVersion;
+
 @property (strong, nonatomic, nullable) NSString * ciphers;
 
 @end

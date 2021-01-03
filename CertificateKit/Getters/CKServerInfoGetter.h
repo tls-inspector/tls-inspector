@@ -23,4 +23,6 @@
 
 @interface CKServerInfoGetter : CKGetterTask
 
+@property (strong, nonatomic, nonnull) CKGetterOptions * options;
+
 @end

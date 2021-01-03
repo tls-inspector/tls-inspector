@@ -28,6 +28,8 @@
 	<string>Apple Support</string>
 	<key>Authority</key>
 	<string>Authority</string>
+	<key>Automatic</key>
+	<string>Automatic</string>
 	<key>Basic</key>
 	<string>Basic</string>
 	<key>Build</key>
@@ -819,6 +821,8 @@
 	<string>Unknown</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
+	<key>Use IP Version</key>
+	<string>Use IP Version</string>
 	<key>Use the Reminders app to customize the reminder</key>
 	<string>Use the Reminders app to customize the reminder</string>
 	<key>Valid From</key>
