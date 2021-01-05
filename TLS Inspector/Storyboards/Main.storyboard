@@ -71,7 +71,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxA-AZ-Jfg">
-                                        <rect key="frame" x="28" y="0.0" width="346" height="652"/>
+                                        <rect key="frame" x="28" y="0.0" width="346" height="639"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <attributedString key="attributedText">
                                             <fragment>
@@ -85,15 +85,15 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3P-e5-64m">
-                                        <rect key="frame" x="8" y="660" width="358" height="34"/>
+                                        <rect key="frame" x="8" y="647" width="358" height="39"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Understood"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="defaultTitleKey" value="Understood"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="6"/>
+                                                <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -110,7 +110,7 @@
                                     <constraint firstItem="A3P-e5-64m" firstAttribute="top" secondItem="fxA-AZ-Jfg" secondAttribute="bottom" constant="8" id="ZB8-D7-b8B"/>
                                     <constraint firstItem="A3P-e5-64m" firstAttribute="leading" secondItem="8Ca-7L-lQX" secondAttribute="leading" constant="8" id="chD-3L-FQx"/>
                                     <constraint firstAttribute="trailing" secondItem="fxA-AZ-Jfg" secondAttribute="trailing" id="qN3-u3-dF1"/>
-                                    <constraint firstAttribute="bottom" secondItem="A3P-e5-64m" secondAttribute="bottom" constant="8" id="tpq-ee-7Su"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="A3P-e5-64m" secondAttribute="bottom" constant="8" id="tpq-ee-7Su"/>
                                     <constraint firstItem="onL-g6-TjA" firstAttribute="leading" secondItem="8Ca-7L-lQX" secondAttribute="leading" id="whv-eJ-0ZK"/>
                                 </constraints>
                             </view>
@@ -504,10 +504,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RFc-gA-ubw">
-                                            <rect key="frame" x="327" y="8.5" width="48" height="27"/>
+                                            <rect key="frame" x="325" y="8.5" width="50" height="27"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjH-An-38E">
-                                                    <rect key="frame" x="3" y="3" width="42" height="21"/>
+                                                    <rect key="frame" x="4" y="3" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -515,14 +515,14 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="mjH-An-38E" secondAttribute="trailing" constant="3" id="DBa-9E-lY7"/>
-                                                <constraint firstItem="mjH-An-38E" firstAttribute="leading" secondItem="RFc-gA-ubw" secondAttribute="leading" constant="3" id="gaV-2i-NUR"/>
+                                                <constraint firstAttribute="trailing" secondItem="mjH-An-38E" secondAttribute="trailing" constant="4" id="DBa-9E-lY7"/>
+                                                <constraint firstItem="mjH-An-38E" firstAttribute="leading" secondItem="RFc-gA-ubw" secondAttribute="leading" constant="4" id="gaV-2i-NUR"/>
                                                 <constraint firstItem="mjH-An-38E" firstAttribute="top" secondItem="RFc-gA-ubw" secondAttribute="top" constant="3" id="ltL-Gs-KVO"/>
                                                 <constraint firstAttribute="bottom" secondItem="mjH-An-38E" secondAttribute="bottom" constant="3" id="mcz-eq-1JI"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="5"/>
+                                                    <real key="value" value="8"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
