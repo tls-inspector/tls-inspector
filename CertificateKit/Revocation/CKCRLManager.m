@@ -189,8 +189,23 @@ static CKCRLManager * _instance;
 }
 
 size_t crl_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
-    [((__bridge NSMutableData *)userp) appendBytes:buffer length:size * nmemb];
-    return size * nmemb;
+    if (userp == NULL) {
+        PError(@"crl_write_callback - userdata pointer was NULL");
+        return 0;
+    }
+    NSUInteger length = size * nmemb;
+    if (length == 0 || buffer == NULL) {
+        PError(@"crl_write_callback - data size was 0 or buffer NULL");
+        return 0;
+    }
+    NSMutableData * userData = (__bridge NSMutableData *)userp;
+    if (![userData respondsToSelector:@selector(appendBytes:length:)]) {
+        PError(@"crl_write_callback - userdata did not respond to selector");
+        return 0;
+    }
+    [userData appendBytes:buffer length:length];
+
+    return length;
 }
 
 - (NSString *) reasonString:(long)reason {
