@@ -142,6 +142,11 @@
                 break;
             case nw_connection_state_waiting:
                 PDebug(@"Event: nw_connection_state_waiting");
+                PError(@"nw_connection failed: %@", error.description);
+                self.finished = YES;
+                self.successful = NO;
+                [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]];
+                nw_connection_cancel(connection);
                 break;
             case nw_connection_state_preparing:
                 PDebug(@"Event: nw_connection_state_preparing");
