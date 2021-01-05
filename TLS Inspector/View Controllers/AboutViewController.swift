@@ -93,7 +93,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         if section == 0 {
             let opensslVersion = CertificateKit.opensslVersion()
             let libcurlVersion = CertificateKit.libcurlVersion()
-            return "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), tiny-cURL: \(libcurlVersion)"
+            return "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), tiny-curl: \(libcurlVersion)"
         } else if section == 1 {
             return lang(key: "copyright_license_footer")
         }
