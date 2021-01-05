@@ -122,7 +122,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
 
     func buildTable() {
         self.sections = [self.buildEngineSection()]
-        self.sections.maybeAppend(buildIPVersionSection())
+        // self.sections.maybeAppend(buildIPVersionSection()) Restore at some point
         self.sections.maybeAppend(buildOpenSSLSection())
     }
 
@@ -166,27 +166,12 @@ class AdvancedOptionsTableViewController: UITableViewController {
             UserOptions.cryptoEngine = after
             self.buildTable()
 
-            // TODO: This is terrible
             var sectionsToInsert: IndexSet = []
             var sectionsToRemove: IndexSet = []
-            if after == .SecureTransport && before != .SecureTransport {
-                if before == .OpenSSL {
-                    sectionsToRemove.insert(1)
-                    sectionsToRemove.insert(2)
-                } else {
-                    sectionsToRemove.insert(1)
-                }
-            } else if after == .NetworkFramework && before != .NetworkFramework {
-                if before == .OpenSSL {
-                    sectionsToRemove.insert(2)
-                } else if before == .SecureTransport {
-                    sectionsToInsert.insert(1)
-                }
-            } else if after == .OpenSSL && before != .OpenSSL {
-                sectionsToInsert.insert(2)
-                if before == .SecureTransport {
-                    sectionsToInsert.insert(1)
-                }
+            if after == .OpenSSL && before != .OpenSSL {
+                sectionsToInsert.insert(1)
+            } else if after != .OpenSSL && before == .OpenSSL {
+                sectionsToRemove.insert(1)
             }
 
             if sectionsToInsert.count > 0 {
