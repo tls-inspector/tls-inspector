@@ -88,7 +88,7 @@
 		3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94042225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m */; platformFilter = ios; };
 		3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */; };
 		3CBF85BF253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CBF85BD253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h */; };
-		3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */; };
+		3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */; platformFilter = ios; };
 		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; };
 		3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */; platformFilter = ios; };

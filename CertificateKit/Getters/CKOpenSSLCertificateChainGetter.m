@@ -231,7 +231,7 @@ INSERT_OPENSSL_ERROR_METHOD
     SecTrustCreateWithCertificates((__bridge CFTypeRef)secCertificates, policy, &trust);
 
     SecTrustResultType trustStatus;
-    SecTrustEvaluate(trust, &trustStatus);
+    SecTrustGetTrustResult(trust, &trustStatus);
     if ([CKLogging sharedInstance].level == CKLoggingLevelDebug) {
         CFDictionaryRef trustResultDictionary = SecTrustCopyResult(trust);
         PDebug(@"Trust result details: %@", [(__bridge NSDictionary *)trustResultDictionary description]);

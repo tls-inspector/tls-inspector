@@ -111,7 +111,7 @@
 - (void) streamHasSpaceAvailable:(NSStream *)stream {
     SecTrustRef trust = (__bridge SecTrustRef)[stream propertyForKey: (__bridge NSString *)kCFStreamPropertySSLPeerTrust];
     SecTrustResultType trustStatus;
-    SecTrustEvaluate(trust, &trustStatus);
+    SecTrustGetTrustResult(trust, &trustStatus);
     if ([CKLogging sharedInstance].level == CKLoggingLevelDebug) {
         CFDictionaryRef trustResultDictionary = SecTrustCopyResult(trust);
         PDebug(@"Trust result details: %@", [(__bridge NSDictionary *)trustResultDictionary description]);

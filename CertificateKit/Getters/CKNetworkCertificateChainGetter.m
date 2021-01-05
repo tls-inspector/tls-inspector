@@ -65,7 +65,7 @@
             // Determine trust and get the root certificate
             SecTrustRef trust = sec_trust_copy_ref(trust_ref);
             SecTrustResultType trustStatus;
-            SecTrustEvaluate(trust, &trustStatus);
+            SecTrustGetTrustResult(trust, &trustStatus);
             numberOfCertificates = SecTrustGetCertificateCount(trust);
             if (numberOfCertificates > CERTIFICATE_CHAIN_MAXIMUM) {
                 PError(@"Server returned too many certificates. Count: %li, Max: %i", numberOfCertificates, CERTIFICATE_CHAIN_MAXIMUM);
