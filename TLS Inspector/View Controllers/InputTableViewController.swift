@@ -73,6 +73,10 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         self.inspectDomain(text: text)
     }
 
+    @IBAction func advancedButtonPressed(_ sender: OptionsButton) {
+        //
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if self.inputIsValid() {
             textField.resignFirstResponder()

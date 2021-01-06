@@ -196,12 +196,24 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="go" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="url"/>
                                         </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xii-cx-wD1" userLabel="Advanced Button" customClass="OptionsButton" customModule="TLS_Inspector">
+                                            <rect key="frame" x="374" y="18.5" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="670-cV-Idj"/>
+                                                <constraint firstAttribute="width" constant="20" id="vgk-8R-qM7"/>
+                                            </constraints>
+                                            <connections>
+                                                <action selector="advancedButtonPressed:" destination="cY4-Ck-Oam" eventType="touchUpInside" id="A2e-gE-4FY"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="kRM-Rn-3D1" secondAttribute="bottom" id="2Ug-9M-pBL"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="kRM-Rn-3D1" secondAttribute="trailing" id="LQR-gi-xqN"/>
                                         <constraint firstItem="kRM-Rn-3D1" firstAttribute="leading" secondItem="GR3-gZ-O2E" secondAttribute="leadingMargin" id="MKr-Ud-EUb"/>
                                         <constraint firstItem="kRM-Rn-3D1" firstAttribute="top" secondItem="GR3-gZ-O2E" secondAttribute="top" id="RNb-bl-Ci8"/>
+                                        <constraint firstItem="Xii-cx-wD1" firstAttribute="centerY" secondItem="GR3-gZ-O2E" secondAttribute="centerY" id="YM8-J4-mpW"/>
+                                        <constraint firstItem="Xii-cx-wD1" firstAttribute="trailing" secondItem="GR3-gZ-O2E" secondAttribute="trailingMargin" id="ixj-GZ-Rkj"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -751,6 +763,11 @@
             <point key="canvasLocation" x="4645" y="-181"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Xii-cx-wD1">
+            <size key="intrinsicContentSize" width="30" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ArrowRight" width="25" height="25"/>
         <image name="Options" width="25" height="25"/>
