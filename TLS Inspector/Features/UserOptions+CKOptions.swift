@@ -2,31 +2,32 @@ import UIKit
 import CertificateKit
 
 extension UserOptions {
-    public static func getterOptions() -> CKGetterOptions {
-        let options = CKGetterOptions()
+    public static func getterParameters(queryURL: URL) -> CKGetterParameters {
+        let parameters = CKGetterParameters()
 
-        options.queryServerInfo = UserOptions.getHTTPHeaders
-        options.checkOCSP = UserOptions.queryOCSP
-        options.checkCRL = UserOptions.checkCRL
+        parameters.queryURL = queryURL
+        parameters.queryServerInfo = UserOptions.getHTTPHeaders
+        parameters.checkOCSP = UserOptions.queryOCSP
+        parameters.checkCRL = UserOptions.checkCRL
         switch UserOptions.cryptoEngine {
         case .NetworkFramework:
-            options.cryptoEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK.rawValue
+            parameters.cryptoEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK
         case .SecureTransport:
-            options.cryptoEngine = CRYPTO_ENGINE_SECURE_TRANSPORT.rawValue
+            parameters.cryptoEngine = CRYPTO_ENGINE_SECURE_TRANSPORT
         case .OpenSSL:
-            options.cryptoEngine = CRYPTO_ENGINE_OPENSSL.rawValue
+            parameters.cryptoEngine = CRYPTO_ENGINE_OPENSSL
         }
-        options.ciphers = UserOptions.preferredCiphers
+        parameters.ciphers = UserOptions.preferredCiphers
 
         switch UserOptions.ipVersion {
         case .Automatic:
-            options.ipVersion = IP_VERSION_AUTOMATIC.rawValue
+            parameters.ipVersion = IP_VERSION_AUTOMATIC
         case .IPv4:
-            options.ipVersion = IP_VERSION_IPV4.rawValue
+            parameters.ipVersion = IP_VERSION_IPV4
         case .IPv6:
-            options.ipVersion = IP_VERSION_IPV6.rawValue
+            parameters.ipVersion = IP_VERSION_IPV6
         }
 
-        return options
+        return parameters
     }
 }

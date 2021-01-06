@@ -36,7 +36,7 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKRevoked.h>
 #import <CertificateKit/CKOCSPResponse.h>
 #import <CertificateKit/CKCRLResponse.h>
-#import <CertificateKit/CKGetterOptions.h>
+#import <CertificateKit/CKGetterParameters.h>
 #import <CertificateKit/CKLogging.h>
 
 /**

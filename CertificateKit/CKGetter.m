@@ -46,15 +46,9 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     CKGetterTaskTagServerInfo,
 };
 
-+ (CKGetter *) getterWithOptions:(CKGetterOptions *)options {
-    CKGetter * getter = [CKGetter new];
-    getter.options = options;
-    return getter;
-}
-
-- (void) getInfoForURL:(NSURL *)URL; {
+- (void) getInfo:(CKGetterParameters * _Nonnull)parameters {
     if (@available(iOS 12, *)) {} else {
-        if (self.options.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
+        if (self.parameters.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
             PError(@"NetworkFramework crypto engine selected on incompatible iOS version - aborting");
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
                 [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported crypto engine"}]];
@@ -63,11 +57,11 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         }
     }
 
-    PDebug(@"Starting getter for: %@", URL.absoluteString);
+    PDebug(@"Starting getter for: %@", parameters.queryURL.absoluteURL);
 
-    self.url = URL;
+    self.url = parameters.queryURL;
 
-    switch (self.options.cryptoEngine) {
+    switch (self.parameters.cryptoEngine) {
         case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
             self.chainGetter = [CKNetworkCertificateChainGetter new];
             break;
@@ -78,7 +72,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             self.chainGetter = [CKOpenSSLCertificateChainGetter new];
             break;
         default:
-            PError(@"Unknown crypto engine %u", (unsigned int)self.options.cryptoEngine);
+            PError(@"Unknown crypto engine %u", (unsigned int)self.parameters.cryptoEngine);
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
                 [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unknown crypto engine"}]];
             }
@@ -87,23 +81,23 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
     self.chainGetter.delegate = self;
     self.chainGetter.tag = CKGetterTaskTagChain;
-    self.chainGetter.options = self.options;
+    self.chainGetter.parameters = self.parameters;
 
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
-    self.serverInfoGetter.options = self.options;
+    self.serverInfoGetter.parameters = self.parameters;
     self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
     self.finishedMutex = [NSObject new];
 
     NSMutableArray<CKGetterTask *> * tasks = [NSMutableArray arrayWithCapacity:2];
     [tasks addObject:self.chainGetter];
-    if (self.options.queryServerInfo) {
+    if (self.parameters.queryServerInfo) {
         [tasks addObject:self.serverInfoGetter];
     }
     self.tasks = tasks;
 
     for (CKGetterTask * task in self.tasks) {
-        [NSThread detachNewThreadSelector:@selector(performTaskForURL:) toTarget:task withObject:URL];
+        [NSThread detachNewThreadSelector:@selector(performTaskForURL:) toTarget:task withObject:self.url];
     }
 }
 

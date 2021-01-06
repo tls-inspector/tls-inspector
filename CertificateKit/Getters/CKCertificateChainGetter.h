@@ -20,10 +20,9 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKGetterTask.h"
-#import "CKGetterOptions.h"
 
 @interface CKCertificateChainGetter : CKGetterTask
 
-@property (strong, nonatomic, nonnull) CKGetterOptions * options;
+@property (strong, nonatomic, nonnull) CKGetterParameters * parameters;
 
 @end

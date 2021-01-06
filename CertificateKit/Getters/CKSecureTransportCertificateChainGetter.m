@@ -235,13 +235,13 @@
     NSError * ocspError;
     NSError * crlError;
 
-    if (self.options.checkOCSP) {
+    if (self.parameters.checkOCSP) {
         [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
         if (ocspError != nil) {
             PError(@"OCSP Error: %@", ocspError.description);
         }
     }
-    if (self.options.checkCRL) {
+    if (self.parameters.checkCRL) {
         [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
         if (crlError != nil) {
             PError(@"CRL Error: %@", crlError.description);

@@ -75,9 +75,9 @@
     // info, we don't do any verification
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
-    if (self.options.ipVersion == IP_VERSION_IPV4) {
+    if (self.parameters.ipVersion == IP_VERSION_IPV4) {
         curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-    } else if (self.options.ipVersion == IP_VERSION_IPV6) {
+    } else if (self.parameters.ipVersion == IP_VERSION_IPV6) {
         curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6);
     }
 

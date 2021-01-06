@@ -20,7 +20,6 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKGetterTask.h"
-#import "CKGetterOptions.h"
 #import "CKCertificateChainGetter.h"
 
 @interface CKOpenSSLCertificateChainGetter : CKCertificateChainGetter

@@ -146,11 +146,11 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             CKLogging.sharedInstance().level = .warning
         }
 
-        self.getter = CKGetter(options: UserOptions.getterOptions())
+        self.getter = CKGetter()
         self.getter?.delegate = self
         if let url = URL(string: domainText) {
             LogDebug("Inspecting domain")
-            self.getter?.getInfoFor(url)
+            self.getter?.getInfo(UserOptions.getterParameters(queryURL: url))
         } else {
             showInputError()
         }

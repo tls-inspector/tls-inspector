@@ -122,8 +122,8 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     const char * PREFERRED_CIPHERS = "HIGH:!aNULL:!MD5:!RC4";
-    if (self.options.ciphers != nil && self.options.ciphers.length > 0) {
-        PREFERRED_CIPHERS = [self.options.ciphers UTF8String];
+    if (self.parameters.ciphers != nil && self.parameters.ciphers.length > 0) {
+        PREFERRED_CIPHERS = [self.parameters.ciphers UTF8String];
     }
     PDebug(@"Requesting ciphers: %s", PREFERRED_CIPHERS);
     if (SSL_set_cipher_list(ssl, PREFERRED_CIPHERS) < 0) {
@@ -334,13 +334,13 @@ int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {
     NSError * ocspError;
     NSError * crlError;
 
-    if (self.options.checkOCSP) {
+    if (self.parameters.checkOCSP) {
         [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
         if (ocspError != nil) {
             PError(@"OCSP Error: %@", ocspError.description);
         }
     }
-    if (self.options.checkCRL) {
+    if (self.parameters.checkCRL) {
         [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
         if (crlError != nil) {
             PError(@"CRL Error: %@", crlError.description);

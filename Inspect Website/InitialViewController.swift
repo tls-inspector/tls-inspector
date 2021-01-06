@@ -5,7 +5,7 @@ import CertificateKit
 class InitialViewController: UIViewController, CKGetterDelegate {
     var values: [URL] = []
     let latch = AtomicInt(defaultValue: 0)
-    let getter = CKGetter(options: UserOptions.getterOptions())
+    let getter = CKGetter()
     var certificateChain: CKCertificateChain?
     var serverInfo: CKServerInfo?
     var observer: NSObjectProtocol?
@@ -124,7 +124,7 @@ class InitialViewController: UIViewController, CKGetterDelegate {
 
     func inspectURL(url: URL) {
         self.getter.delegate = self
-        self.getter.getInfoFor(url)
+        self.getter.getInfo(UserOptions.getterParameters(queryURL: url))
     }
 
     // MARK: CKGetterDelegate Methods

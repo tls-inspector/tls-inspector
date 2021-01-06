@@ -127,9 +127,9 @@
     nw_parameters_t parameters = nw_parameters_create_secure_tcp(configure_tls, configure_tcp);
     nw_protocol_stack_t protocol_stack = nw_parameters_copy_default_protocol_stack(parameters);
     nw_protocol_options_t ip_options = nw_protocol_stack_copy_internet_protocol(protocol_stack);
-    if (self.options.ipVersion == IP_VERSION_IPV4) {
+    if (self.parameters.ipVersion == IP_VERSION_IPV4) {
         nw_ip_options_set_version(ip_options, nw_ip_version_4);
-    } else if (self.options.ipVersion == IP_VERSION_IPV6) {
+    } else if (self.parameters.ipVersion == IP_VERSION_IPV6) {
         nw_ip_options_set_version(ip_options, nw_ip_version_6);
     }
 
@@ -201,13 +201,13 @@
     NSError * ocspError;
     NSError * crlError;
 
-    if (self.options.checkOCSP) {
+    if (self.parameters.checkOCSP) {
         [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
         if (ocspError != nil) {
             PError(@"OCSP Error: %@", ocspError.description);
         }
     }
-    if (self.options.checkCRL) {
+    if (self.parameters.checkCRL) {
         [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
         if (crlError != nil) {
             PError(@"CRL Error: %@", crlError.description);

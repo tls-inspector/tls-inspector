@@ -1,9 +1,9 @@
 //
-//  CKGetterOptions.m
+//  CKGetterParameters.m
 //
 //  LGPLv3
 //
-//  Copyright (c) 2018 Ian Spence
+//  Copyright (c) 2021 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -19,8 +19,8 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKGetterOptions.h"
+#import "CKGetterParameters.h"
 
-@implementation CKGetterOptions
+@implementation CKGetterParameters
 
 @end

@@ -22,7 +22,7 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificateChain.h"
 #import "CKServerInfo.h"
-#import "CKGetterOptions.h"
+#import "CKGetterParameters.h"
 
 /**
  CKGetter is the interface used to get all information about a specific domain. Used to track progress
@@ -31,21 +31,11 @@
 @interface CKGetter : NSObject
 
 /**
- Initalize a new CKGetter with specified options
+ Begin the process of inspecting the URL specified in the parameters.
 
- @param options options for the CKGetter
- @return A CKGetter instance
+ @param parameters The parameters for the getter.
  */
-+ (CKGetter * _Nonnull) getterWithOptions:(CKGetterOptions * _Nonnull)options;
-
-/**
- Get information for the given URL. This will start the getter process and make all required requests for
- certificate, server information, and potentially more.
-
- @param URL The URL to query. Does not have to start with https:// and any path will be ignored.
-            Can contain a port number.
- */
-- (void) getInfoForURL:(NSURL * _Nonnull)URL;
+- (void) getInfo:(CKGetterParameters * _Nonnull)parameters;
 
 /**
  The object that conforms to the CKGetterDelegate protocol
@@ -59,7 +49,7 @@
 /**
  Options for the getter
  */
-@property (strong, nonatomic, nonnull) CKGetterOptions * options;
+@property (strong, nonatomic, nonnull) CKGetterParameters * parameters;
 
 /**
  The certificate chain for the URL
