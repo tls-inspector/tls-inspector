@@ -66,6 +66,8 @@
 		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
 		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
+		3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */; };
+		3C99C7C925A57231002ABA15 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */; };
 		3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */; };
 		3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005C23974A660027D1C1 /* FontAwesome.swift */; };
 		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
@@ -263,6 +265,8 @@
 		3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateReminder.swift; sourceTree = "<group>"; };
 		3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTipTarget.swift; sourceTree = "<group>"; };
 		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
+		3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInspectTableViewController.swift; sourceTree = "<group>"; };
+		3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+MaterialColors.swift"; sourceTree = "<group>"; };
 		3CA2005C23974A660027D1C1 /* FontAwesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
 		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
 				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
 				3CCD0291239DD412009364D0 /* AboutViewController.swift */,
+				3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */,
 				3CCD028F239DD0D5009364D0 /* GradientView.swift */,
 				3CD4933825A56721002AC7BD /* OptionsButton.swift */,
+				3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1010,8 +1016,10 @@
 				3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */,
 				3CCD0294239DD966009364D0 /* MoreTableViewController.swift in Sources */,
 				3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */,
+				3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */,
 				3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */,
 				3CCD0292239DD412009364D0 /* AboutViewController.swift in Sources */,
+				3C99C7C925A57231002ABA15 /* InputTableViewCell.swift in Sources */,
 				3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */,
 				3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */,
 				3C72695C2394BDF0002A0B19 /* SceneDelegate.swift in Sources */,

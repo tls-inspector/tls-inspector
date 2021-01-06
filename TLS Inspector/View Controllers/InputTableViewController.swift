@@ -19,6 +19,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     var serverError: Error?
 
     var domainInput: UITextField?
+    var advancedButton: UIButton?
     @IBOutlet weak var inspectButton: UIBarButtonItem!
     @IBOutlet weak var tipView: UIView!
     @IBOutlet weak var tipTextView: UILabel!
@@ -74,7 +75,18 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     @IBAction func advancedButtonPressed(_ sender: OptionsButton) {
-        //
+        guard let advancedInspect = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedInspect") as? AdvancedInspectTableViewController else {
+            return
+        }
+
+        advancedInspect.donePressed = { (parameters: CKGetterParameters) -> Void in
+            self.doInspect(parameters: parameters)
+        }
+
+        let navigationController = UINavigationController(rootViewController: advancedInspect)
+        navigationController.modalPresentationStyle = .popover
+        navigationController.popoverPresentationController?.sourceView = sender
+        self.present(navigationController, animated: true, completion: nil)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -99,13 +111,28 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     @objc func domainInputChanged(sender: UITextField) {
         self.inspectButton.isEnabled = self.inputIsValid()
+
+        guard let advancedButton = self.advancedButton else {
+            return
+        }
+
+        let length = sender.text?.count ?? 0
+        if length > 0 {
+            UIView.animate(withDuration: 0.1) {
+                advancedButton.alpha = 0.0
+            }
+        } else {
+            UIView.animate(withDuration: 0.1) {
+                advancedButton.alpha = 1.0
+            }
+        }
     }
 
     func inputIsValid() -> Bool {
         return (self.domainInput?.text ?? "").count > 0
     }
 
-    func inspectDomain(text: String) {
+    func doInspect(parameters: CKGetterParameters) {
         // Reset
         self.certificateChain = nil
         self.serverInfo = nil
@@ -115,6 +142,22 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         SERVER_INFO = nil
         SERVER_ERROR = nil
 
+        if UserOptions.verboseLogging {
+            CKLogging.sharedInstance().level = .debug
+        } else {
+            CKLogging.sharedInstance().level = .warning
+        }
+
+        self.domainInput?.isEnabled = false
+        self.updatePendingCell(state: .loading)
+        self.inspectButton.isEnabled = false
+        self.getter = CKGetter()
+        self.getter?.delegate = self
+        LogDebug("Inspecting domain")
+        self.getter?.getInfo(parameters)
+    }
+
+    func inspectDomain(text: String) {
         if CertificateKit.isProxyConfigured() {
             UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
             return
@@ -127,33 +170,22 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
-        self.domainInput?.isEnabled = false
-        self.updatePendingCell(state: .loading)
-        self.inspectButton.isEnabled = false
-
         var domainText = text
         if domainText.hasPrefix("http://") {
             showInputError()
+            return
         }
 
         if !domainText.hasPrefix("https://") {
             domainText = "https://" + domainText
         }
 
-        if UserOptions.verboseLogging {
-            CKLogging.sharedInstance().level = .debug
-        } else {
-            CKLogging.sharedInstance().level = .warning
+        guard let url = URL(string: domainText) else {
+            showInputError()
+            return
         }
 
-        self.getter = CKGetter()
-        self.getter?.delegate = self
-        if let url = URL(string: domainText) {
-            LogDebug("Inspecting domain")
-            self.getter?.getInfo(UserOptions.getterParameters(queryURL: url))
-        } else {
-            showInputError()
-        }
+        self.doInspect(parameters: UserOptions.getterParameters(queryURL: url))
     }
 
     func showInputError() {
@@ -321,6 +353,11 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
                 textField.delegate = self
                 textField.placeholder = placeholderDomains.randomElement()
                 textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
+            }
+
+            if let advancedButton = cell.viewWithTag(2) as? UIButton {
+                self.advancedButton = advancedButton
+                advancedButton.addTarget(self, action: #selector(self.advancedButtonPressed(_:)), for: .touchUpInside)
             }
 
             return cell
