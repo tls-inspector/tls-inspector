@@ -14,10 +14,32 @@ class UIHelper {
     ///   - dismissed: Optional closure to call when the alert is dismissed
     public func presentAlert(title: String, body: String, dismissed: (() -> Void)?) {
         let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
-        let dismissButton = UIAlertAction(title: "Dismiss", style: .default) { (_) in
+        let dismissButton = UIAlertAction(title: lang(key: "Dismiss"), style: .default) { (_) in
             dismissed?()
         }
         alertController.addAction(dismissButton)
+        RunOnMain {
+            self.viewController.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+    /// Present a confirmation alert in the given view controller.
+    /// - Parameters:
+    ///   - title: The title of the alert
+    ///   - body: The body of the alert
+    ///   - trueLabel: The label of the button that returns a "true" result
+    ///   - falseLabel: The label of the button that returns a "false" result
+    ///   - dismissed: Optional closure to call when the alert is dismissed
+    public func presentConfirm(title: String, body: String, trueLabel: String, falseLabel: String, dismissed: ((Bool) -> Void)?) {
+        let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
+        let trueButton = UIAlertAction(title: trueLabel, style: .default) { (_) in
+            dismissed?(true)
+        }
+        let falseButton = UIAlertAction(title: falseLabel, style: .default) { (_) in
+            dismissed?(false)
+        }
+        alertController.addAction(trueButton)
+        alertController.addAction(falseButton)
         RunOnMain {
             self.viewController.present(alertController, animated: true, completion: nil)
         }

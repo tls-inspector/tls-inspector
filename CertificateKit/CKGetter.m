@@ -1,34 +1,30 @@
 //
 //  CKGetter.m
 //
-//  MIT License
+//  LGPLv3
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/certificate-helper/CertificateKit
+//  https://tlsinspector.com/github.html
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This library is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU Lesser Public License
+//  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKGetter.h"
 #import "CKServerInfoGetter.h"
 #import "CKCertificateChainGetter.h"
 #import "CKOpenSSLCertificateChainGetter.h"
-#import "CKAppleCertificateChainGetter.h"
+#import "CKNetworkCertificateChainGetter.h"
+#import "CKSecureTransportCertificateChainGetter.h"
 
 @interface CKGetter () <NSStreamDelegate, CKGetterTaskDelegate> {
     BOOL gotChain;
@@ -57,14 +53,36 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 }
 
 - (void) getInfoForURL:(NSURL *)URL; {
+    if (@available(iOS 12, *)) {} else {
+        if (self.options.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
+            PError(@"NetworkFramework crypto engine selected on incompatible iOS version - aborting");
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
+                [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported crypto engine"}]];
+            }
+            return;
+        }
+    }
+
     PDebug(@"Starting getter for: %@", URL.absoluteString);
 
     self.url = URL;
 
-    if (self.options.useOpenSSL) {
-        self.chainGetter = [CKOpenSSLCertificateChainGetter new];
-    } else {
-        self.chainGetter = [CKAppleCertificateChainGetter new];
+    switch (self.options.cryptoEngine) {
+        case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
+            self.chainGetter = [CKNetworkCertificateChainGetter new];
+            break;
+        case CRYPTO_ENGINE_SECURE_TRANSPORT:
+            self.chainGetter = [CKSecureTransportCertificateChainGetter new];
+            break;
+        case CRYPTO_ENGINE_OPENSSL:
+            self.chainGetter = [CKOpenSSLCertificateChainGetter new];
+            break;
+        default:
+            PError(@"Unknown crypto engine %u", (unsigned int)self.options.cryptoEngine);
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
+                [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unknown crypto engine"}]];
+            }
+            return;
     }
 
     self.chainGetter.delegate = self;
@@ -73,6 +91,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
+    self.serverInfoGetter.options = self.options;
     self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
     self.finishedMutex = [NSObject new];
 

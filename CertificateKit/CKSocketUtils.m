@@ -1,28 +1,23 @@
 //
 //  CKSocketUtils.m
 //
-//  MIT License
+//  LGPLv3
 //
 //  Copyright (c) 2020 Ian Spence
-//  https://github.com/certificate-helper/CertificateKit
+//  https://tlsinspector.com/github.html
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This library is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU Lesser Public License
+//  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKSocketUtils.h"
 #include <arpa/inet.h>
@@ -53,4 +48,25 @@
 
     return remoteAddressString;
 }
+
++ (NSString * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint {
+    struct sockaddr_storage * addr = (struct sockaddr_storage *)nw_endpoint_get_address(endpoint);
+
+    NSString * remoteAddressString;
+    if (addr->ss_family == AF_INET) {
+        char addressString[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &((struct sockaddr_in *)addr)->sin_addr, addressString, INET_ADDRSTRLEN);
+        remoteAddressString = [[NSString alloc] initWithUTF8String:addressString];
+    } else if (addr->ss_family == AF_INET6) {
+        char addressString[INET6_ADDRSTRLEN];
+        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
+        remoteAddressString = [[NSString alloc] initWithUTF8String:addressString];
+    } else {
+        PError(@"Unknown address family from endpoint: %@", endpoint.description);
+        return nil;
+    }
+
+    return remoteAddressString;
+}
+
 @end

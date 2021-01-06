@@ -28,38 +28,14 @@
 	<string>Apple Support</string>
 	<key>Authority</key>
 	<string>Authority</string>
+	<key>Automatic</key>
+	<string>Automatic</string>
 	<key>Basic</key>
 	<string>Basic</string>
 	<key>Build</key>
 	<string>Build</string>
 	<key>Cancel</key>
 	<string>Cancel</string>
-	<key>CertAlgorithm::ecdsa-with-SHA1</key>
-	<string>ECDSA with SHA1</string>
-	<key>CertAlgorithm::ecdsa-with-SHA224</key>
-	<string>ECDSA with SHA224</string>
-	<key>CertAlgorithm::ecdsa-with-SHA256</key>
-	<string>ECDSA with SHA256</string>
-	<key>CertAlgorithm::ecdsa-with-SHA384</key>
-	<string>ECDSA with SHA384</string>
-	<key>CertAlgorithm::ecdsa-with-SHA512</key>
-	<string>ECDSA with SHA512</string>
-	<key>CertAlgorithm::md2WithRSAEncryption</key>
-	<string>RSA with MD2</string>
-	<key>CertAlgorithm::md4WithRSAEncryption</key>
-	<string>RSA with MD4</string>
-	<key>CertAlgorithm::md5WithRSAEncryption</key>
-	<string>RSA with MD5</string>
-	<key>CertAlgorithm::sha1WithRSAEncryption</key>
-	<string>RSA with SHA1</string>
-	<key>CertAlgorithm::sha224WithRSAEncryption</key>
-	<string>RSA with SHA224</string>
-	<key>CertAlgorithm::sha256WithRSAEncryption</key>
-	<string>RSA with SHA256</string>
-	<key>CertAlgorithm::sha384WithRSAEncryption</key>
-	<string>RSA with SHA384</string>
-	<key>CertAlgorithm::sha512WithRSAEncryption</key>
-	<string>RSA with SHA512</string>
 	<key>Certificate Authority</key>
 	<string>Certificate Authority</string>
 	<key>Certificate Chain</key>
@@ -581,6 +557,8 @@
 	<string>Delete</string>
 	<key>Did You Know:</key>
 	<string>Did You Know:</string>
+	<key>Discard</key>
+	<string>Discard</string>
 	<key>Dismiss</key>
 	<string>Dismiss</string>
 	<key>Do not contact support for issues with your iOS Device or to report unsafe websites.</key>
@@ -605,10 +583,14 @@
 	<string>Features</string>
 	<key>Feedback</key>
 	<string>Feedback</string>
+	<key>Feedback Sent</key>
+	<string>Feedback Sent</string>
 	<key>Fingerprints</key>
 	<string>Fingerprints</string>
 	<key>Finished</key>
 	<string>Finished</string>
+	<key>Follow @tlsinspector on Twitter</key>
+	<string>Follow @tlsinspector on Twitter</string>
 	<key>General</key>
 	<string>General</string>
 	<key>Get Involed</key>
@@ -625,6 +607,8 @@
 	<string>IDN Not Supported</string>
 	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
 	<string>If you believe this to be in error, contact support from within the TLS Inspector app.</string>
+	<key>Important</key>
+	<string>Important</string>
 	<key>Inspect</key>
 	<string>Inspect</string>
 	<key>Internal error.</key>
@@ -653,6 +637,8 @@
 	<string>RSA</string>
 	<key>Loading...</key>
 	<string>Loading...</string>
+	<key>Locally Trusted</key>
+	<string>Locally Trusted</string>
 	<key>Locally Trusted Chain</key>
 	<string>Locally Trusted Chain</string>
 	<key>Logging</key>
@@ -695,6 +681,8 @@
 	<string>Only HTTPS URLs can be inspected</string>
 	<key>OpenSSL</key>
 	<string>OpenSSL</string>
+	<key>OpenSSL Settings</key>
+	<string>OpenSSL Settings</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
 	<key>Options</key>
@@ -743,6 +731,8 @@
 	<string>Security HTTP Headers</string>
 	<key>Select Feedback Type</key>
 	<string>Select Feedback Type</string>
+	<key>Send Anyways</key>
+	<string>Send Anyways</string>
 	<key>Server Info</key>
 	<string>Server Info</string>
 	<key>Server Redirected To</key>
@@ -831,6 +821,8 @@
 	<string>Unknown</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
+	<key>Use IP Version</key>
+	<string>Use IP Version</string>
 	<key>Use the Reminders app to customize the reminder</key>
 	<string>Use the Reminders app to customize the reminder</string>
 	<key>Valid From</key>
@@ -868,11 +860,17 @@
 	<key>advanced_settings_nag</key>
 	<string>These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.</string>
 	<key>certificate_status_footer</key>
-	<string>Disabling OCSP querying may improve privacy but reduce result quality. Enabling CRL checking may result in longer processing times and more data usage.</string>
+	<string>Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy crypto engine.</string>
 	<key>copyright_license_footer</key>
-	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2020 Ian Spence.</string>
+	<string>TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2021 Ian Spence.</string>
+	<key>crypto_engine::network_framework</key>
+	<string>Apple - Modern</string>
+	<key>crypto_engine::openssl</key>
+	<string>OpenSSL</string>
+	<key>crypto_engine::secure_transport</key>
+	<string>Apple - Legacy</string>
 	<key>crypto_engine_footer</key>
-	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device.</string>
+	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device. The modern Apple engine requires iOS 12 or later. TLS 1.3 is not available on the legacy Apple engine.</string>
 	<key>explanation::invalid_date</key>
 	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
 	<key>explanation::issue_date_too_long</key>
@@ -897,6 +895,12 @@
 	<string>The server or issuing certificate is signed using a weak RSA key (contains less than 2048 bits of data).</string>
 	<key>explanation::wrong_host</key>
 	<string>The server certificate is for a different host than the one connected to.</string>
+	<key>fake_feedback_recieved_message</key>
+	<string>Thank you for providing feedback about TLS Inspector. While we take time to read all feedback, we may not reply to all messages we get.</string>
+	<key>feedback_warn_message</key>
+	<string>TLS Inspector does not provide you or your iOS device with active protection against viruses or malware.
+
+If you&apos;re concerned about the security of your device; contact Apple Support.</string>
 	<key>first_run_notice</key>
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
@@ -958,7 +962,7 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<key>secure::leaf_keyusage</key>
 	<string>Most likely. A certificate that is missing the key usage parameter is likely still valid otherwise.</string>
 	<key>secure::local_trust</key>
-	<string>Yes. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
+	<string>Potentially. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
 
 Typically private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance from Apple.</string>
 	<key>secure::revoked</key>

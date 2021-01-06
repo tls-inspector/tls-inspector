@@ -1,28 +1,23 @@
 //
 //  CKServerInfoGetter.m
 //
-//  MIT License
+//  LGPLv3
 //
 //  Copyright (c) 2016 Ian Spence
-//  https://github.com/certificate-helper/CertificateKit
+//  https://tlsinspector.com/github.html
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This library is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU Lesser Public License
+//  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKServerInfoGetter.h"
 #import "CKServerInfo.h"
@@ -66,24 +61,38 @@
     if (!curl) {
         PError(@"Unable to create curl session (this shouldn't happen!)");
         curl_global_cleanup();
-        finished([NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Unable to create curl session."}]);
+        finished(MAKE_ERROR(-1, @"Unable to initalize libcurl"));
         return;
     }
 
     self.headers = [NSMutableDictionary new];
     NSError * error;
-    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
-    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
 
     PDebug(@"Server Info Request: HTTP GET %@", url.absoluteString);
-
     const char * urlString = url.absoluteString.UTF8String;
     curl_easy_setopt(curl, CURLOPT_URL, urlString);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
     // Since we're only concerned with getting the HTTP servers
     // info, we don't do any verification
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+    if (self.options.ipVersion == IP_VERSION_IPV4) {
+        curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+    } else if (self.options.ipVersion == IP_VERSION_IPV6) {
+        curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6);
+    }
+
+    // Prepare curl verbose logging but only use it if in debugg level
+    // We have to use an in-memory file since curl expects a file pointer for STDERR
+    static char *buf;
+    static size_t len;
+    FILE * curlout = NULL;
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            curlout = open_memstream(&buf, &len);
+            curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+            curl_easy_setopt(curl, CURLOPT_STDERR, stderr);
+        }
+    }
 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, server_info_write_callback);
     curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, server_info_header_callback);
@@ -110,7 +119,7 @@
         // Check for errors
         NSString * errString = [[NSString alloc] initWithUTF8String:curl_easy_strerror(response)];
         PError(@"Error getting server info: %@", errString);
-        error = [NSError errorWithDomain:@"libcurl" code:-1 userInfo:@{NSLocalizedDescriptionKey: errString}];
+        error = MAKE_ERROR(-1, errString);
     }
 
     long http_code = 0;
@@ -118,9 +127,18 @@
     self.statusCode = http_code;
     PDebug(@"Server Info HTTP Response: %ld", http_code);
 
-    // always cleanup
     curl_easy_cleanup(curl);
     curl_global_cleanup();
+
+    // Dump curls output to the log file
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            fflush(curlout);
+            fclose(curlout);
+            PDebug(@"curl output:\n%s", buf);
+            free(buf);
+        }
+    }
     finished(error);
 }
 

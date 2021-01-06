@@ -1,28 +1,23 @@
 //
 //  CKCRLManager.m
 //
-//  MIT License
+//  LGPLv3
 //
 //  Copyright (c) 2017 Ian Spence
-//  https://github.com/certificate-helper/CertificateKit
+//  https://tlsinspector.com/github.html
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This library is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU Lesser Public License
+//  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKCRLManager.h"
 #import "CKCurlCommon.h"
@@ -123,13 +118,22 @@ static CKCRLManager * _instance;
         return;
     }
 
+    // Prepare curl verbose logging but only use it if in debugg level
+    // We have to use an in-memory file since curl expects a file pointer for STDERR
+    static char *buf;
+    static size_t len;
+    FILE * curlout = NULL;
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            curlout = open_memstream(&buf, &len);
+            curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+            curl_easy_setopt(curl, CURLOPT_STDERR, stderr);
+        }
+    }
+
     self.responseDataBuffer = [NSMutableData new];
-    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
-    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
     
     curl_easy_setopt(curl, CURLOPT_URL, url.absoluteString.UTF8String);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, crl_write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, self.responseDataBuffer);
     
@@ -170,12 +174,38 @@ static CKCRLManager * _instance;
     }
     *crlResponse = crl;
     curl_easy_cleanup(curl);
+
+    // Dump curls output to the log file
+    if (@available(iOS 11, *)) {
+        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+            fflush(curlout);
+            fclose(curlout);
+            PDebug(@"curl output:\n%s", buf);
+            free(buf);
+        }
+    }
+
     return;
 }
 
 size_t crl_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
-    [((__bridge NSMutableData *)userp) appendBytes:buffer length:size * nmemb];
-    return size * nmemb;
+    if (userp == NULL) {
+        PError(@"crl_write_callback - userdata pointer was NULL");
+        return 0;
+    }
+    NSUInteger length = size * nmemb;
+    if (length == 0 || buffer == NULL) {
+        PError(@"crl_write_callback - data size was 0 or buffer NULL");
+        return 0;
+    }
+    NSMutableData * userData = (__bridge NSMutableData *)userp;
+    if (![userData respondsToSelector:@selector(appendBytes:length:)]) {
+        PError(@"crl_write_callback - userdata did not respond to selector");
+        return 0;
+    }
+    [userData appendBytes:buffer length:length];
+
+    return length;
 }
 
 - (NSString *) reasonString:(long)reason {

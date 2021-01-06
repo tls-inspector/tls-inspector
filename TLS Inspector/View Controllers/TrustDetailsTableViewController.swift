@@ -79,7 +79,7 @@ class TrustDetailsTableViewController: UITableViewController {
         self.trustIconLabel.text = trustIcon.string()
     }
 
-    //swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable cyclomatic_complexity
     func buildTrustSection() -> TableViewSection? {
         let trustSection = TableViewSection()
         trustSection.title = lang(key: "Trust Details")
@@ -138,7 +138,7 @@ class TrustDetailsTableViewController: UITableViewController {
 
         return trustSection
     }
-    //swiftlint:enable cyclomatic_complexity
+    // swiftlint:enable cyclomatic_complexity
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {

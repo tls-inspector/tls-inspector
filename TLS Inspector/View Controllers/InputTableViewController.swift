@@ -25,7 +25,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     override func viewDidLoad() {
         AppState.getterViewController = self
-        
+
         if let domains = loadPlaceholderDomains() {
             self.placeholderDomains = domains
         }
@@ -37,8 +37,6 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             }
             UserOptions.firstRunCompleted = true
         }
-
-        MigrateAssistant.AppLaunch()
 
         // swiftlint:disable discarded_notification_center_observer
         NotificationCenter.default.addObserver(forName: RELOAD_RECENT_NOTIFICATION, object: nil, queue: nil) { (_) in
@@ -162,7 +160,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.domainInput?.isEnabled = true
         }
     }
-    
+
     func reloadWithQuery(query: String) {
         self.presentedViewController?.dismiss(animated: true, completion: {
             RunOnMain {
@@ -170,14 +168,14 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             }
         })
     }
-    
+
     func updatePendingCell(state: PendingCellStates) {
         if self.pendingCellState == state {
             return
         }
         let stateBefore = self.pendingCellState
         self.pendingCellState = state
-        
+
         // This is kinda verbose, but because Apple decided it is THE BEST IDEA
         // for the ENTIRE APP TO CRASH just because you tried to reload a cell
         // that isn't there, we do things this way to try and be safe.
@@ -222,9 +220,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             let recentLookups = RecentLookups.GetRecentLookups()
             if UserOptions.rememberRecentLookups && recentLookups.count > 0 {
                 if recentLookups.count == 1 && domainsBefore == 0 {
-                    self.tableView.insertSections(IndexSet(arrayLiteral: 1), with: .automatic)
+                    self.tableView.insertSections([1], with: .automatic)
                 } else {
-                    self.tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
+                    self.tableView.reloadSections([1], with: .automatic)
                 }
             }
         }
@@ -257,6 +255,16 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         LogError("Error getting server info: \(error)")
         self.serverError = error
         SERVER_ERROR = error
+    }
+
+    func getter(_ getter: CKGetter, unexpectedError error: Error) {
+        UIHelper(self).presentError(error: error) {
+            self.serverInfo = nil
+            self.certificateChain = nil
+            self.chainError = nil
+            self.serverError = nil
+            self.updatePendingCell(state: .none)
+        }
     }
 
     // MARK: Table View Delegate Methods
@@ -329,7 +337,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
         return ""
     }
-    
+
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section != 0
     }
@@ -343,7 +351,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         let delete = UITableViewRowAction(style: .destructive, title: lang(key: "Delete")) { (_, _) in
             RecentLookups.RemoveLookup(index: indexPath.row)
             if RecentLookups.GetRecentLookups().count == 0 {
-                tableView.deleteSections(IndexSet(arrayLiteral: 1), with: .automatic)
+                tableView.deleteSections([1], with: .automatic)
             } else {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }

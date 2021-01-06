@@ -28,11 +28,69 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
         }
     }
 
-    @IBAction func doneButtonPushed(_ sender: Any) {
+    enum ValidationResult {
+        case prohibited
+        case warn
+        case allowed
+    }
+
+    /**
+     The TLS Inspector feedback mailbox recieves a surprising amount of spam, but also an unacceptible amount of vitrol and hate
+     As a result, we've flagged some key-words that are common in these messages and will take two paths based on if they are found:
+     "warn" words will generate a warning when you try to submit feedback with them. These are words such as "hack", "stole", etc, which are common among users who are confused as to what TLS Inspector is
+     "prohibit" words are highly offensive, duragotory words that when found in the users comments will generate a "fake" feedback sent alert, without actually sending anything.
+     */
+    func validateFeedbackMessage(message: String) -> ValidationResult {
+
+        guard let wordsPath = Bundle.main.path(forResource: "offensive_words", ofType: "plist") else {
+            return .allowed
+        }
+        guard let offensiveWords = NSDictionary.init(contentsOfFile: wordsPath) as? [String: String] else {
+            return .allowed
+        }
+
+        let lcm = message.lowercased()
+        for word in offensiveWords.keys {
+            if lcm.contains(word) {
+                if offensiveWords[word] == "warn" {
+                    return .warn
+                } else if offensiveWords[word] == "prohibit" {
+                    return .prohibited
+                }
+            }
+        }
+        return .allowed
+    }
+
+    func finishFeedback() {
         let type = SupportType(type: self.contactType, comments: self.comments)
         self.dismiss(animated: true) {
             self.finishedBlock(type)
         }
+    }
+
+    @IBAction func doneButtonPushed(_ sender: Any) {
+        let results = validateFeedbackMessage(message: self.comments)
+        if results == .warn {
+            UIHelper(self).presentConfirm(title: lang(key: "Important"), body: lang(key: "feedback_warn_message"), trueLabel: lang(key: "Send Anyways"), falseLabel: lang(key: "Discard")) { (confirm) in
+                if confirm {
+                    self.finishFeedback()
+                }
+            }
+            return
+        } else if results == .prohibited {
+            // Fake a delay while we "send" the feedback
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            sleep(1)
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+
+            UIHelper(self).presentAlert(title: lang(key: "Feedback Sent"), body: lang(key: "fake_feedback_recieved_message")) {
+                self.dismiss(animated: true, completion: nil)
+            }
+            return
+        }
+
+        self.finishFeedback()
     }
 
     @IBAction func cancelButtonPushed(_ sender: Any) {
@@ -102,7 +160,7 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
         if indexPath.section == 0 {
             let type = SupportType.RequestType.allValues()[indexPath.row]
             self.contactType = type
-            tableView.reloadSections(IndexSet(arrayLiteral: 0), with: .none)
+            tableView.reloadSections([0], with: .none)
         }
     }
 

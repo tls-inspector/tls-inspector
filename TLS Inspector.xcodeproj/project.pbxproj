@@ -26,8 +26,6 @@
 		3C57F4A323B02B0700DCCB54 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F4A223B02B0700DCCB54 /* AppLinks.swift */; };
 		3C58E67723F8B7D800B622C6 /* CKSocketUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */; };
 		3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */; platformFilter = ios; };
-		3C599F6823EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */; };
-		3C599F6923EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */; };
 		3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
 		3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
 		3C5A84F724D25F6100A1917E /* de.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A84F624D25F6100A1917E /* de.plist */; };
@@ -43,7 +41,7 @@
 		3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE91E836C15004AD96D /* CKCertificateChain.m */; platformFilter = ios; };
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
-		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; platformFilter = ios; };
+		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; };
 		3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */; };
 		3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
 		3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
@@ -74,6 +72,7 @@
 		3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005C23974A660027D1C1 /* FontAwesome.swift */; };
 		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
 		3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2006023974F710027D1C1 /* fa-solid.ttf */; };
+		3CB1192925465BB20015750C /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1192825465BB20015750C /* Network.framework */; };
 		3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB483FC2058BA0400322723 /* CertificateKit.m */; platformFilter = ios; };
 		3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */; platformFilter = ios; };
 		3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */; platformFilter = ios; };
@@ -84,11 +83,13 @@
 		3CB784AC25293FD8009ECE20 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB784AA25293FD8009ECE20 /* AppState.swift */; };
 		3CB940392250353B0055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
 		3CB9403D225035E80055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
-		3CB94044225036FC0055C067 /* CKAppleCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94040225036FB0055C067 /* CKAppleCertificateChainGetter.h */; };
+		3CB94044225036FC0055C067 /* CKSecureTransportCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94040225036FB0055C067 /* CKSecureTransportCertificateChainGetter.h */; };
 		3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */; platformFilter = ios; };
-		3CB94046225036FC0055C067 /* CKAppleCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94042225036FC0055C067 /* CKAppleCertificateChainGetter.m */; platformFilter = ios; };
+		3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94042225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m */; platformFilter = ios; };
 		3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */; };
-		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; platformFilter = ios; };
+		3CBF85BF253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CBF85BD253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h */; };
+		3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */; platformFilter = ios; };
+		3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC1E9321F035A3400ED9BAA /* curl.framework */; };
 		3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */; platformFilter = ios; };
 		3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028A239DC64C009364D0 /* RecentLookups.swift */; };
@@ -107,6 +108,7 @@
 		3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */; };
 		3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B32398BC1700B2C8FC /* Lang.swift */; };
 		3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */; };
+		3CD74669258C1406003D609E /* offensive_words.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CD74668258C1406003D609E /* offensive_words.plist */; };
 		3CDC14AD23B0453B0053932F /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC14AB23B0453B0053932F /* Extension.storyboard */; };
 		3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3CDC14A723B0453B0053932F /* Show Certificate.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CDC14B723B045B20053932F /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
@@ -224,7 +226,6 @@
 		3C57F4A223B02B0700DCCB54 /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
 		3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKSocketUtils.h; sourceTree = "<group>"; };
 		3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKSocketUtils.m; sourceTree = "<group>"; };
-		3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrateAssistant.swift; sourceTree = "<group>"; };
 		3C599F6A23EA8D8200791DF1 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		3C5A84F624D25F6100A1917E /* de.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = de.plist; sourceTree = "<group>"; };
 		3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
@@ -267,13 +268,16 @@
 		3CA2005C23974A660027D1C1 /* FontAwesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
 		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
 		3CA2006023974F710027D1C1 /* fa-solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid.ttf"; sourceTree = "<group>"; };
+		3CB1192825465BB20015750C /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
 		3CB483FC2058BA0400322723 /* CertificateKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKit.m; sourceTree = "<group>"; };
 		3CB784A125293E4D009ECE20 /* ChainGetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGetterViewController.swift; sourceTree = "<group>"; };
 		3CB784AA25293FD8009ECE20 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		3CB94040225036FB0055C067 /* CKAppleCertificateChainGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKAppleCertificateChainGetter.h; sourceTree = "<group>"; };
+		3CB94040225036FB0055C067 /* CKSecureTransportCertificateChainGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKSecureTransportCertificateChainGetter.h; sourceTree = "<group>"; };
 		3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKOpenSSLCertificateChainGetter.m; sourceTree = "<group>"; };
-		3CB94042225036FC0055C067 /* CKAppleCertificateChainGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKAppleCertificateChainGetter.m; sourceTree = "<group>"; };
+		3CB94042225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKSecureTransportCertificateChainGetter.m; sourceTree = "<group>"; };
 		3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKOpenSSLCertificateChainGetter.h; sourceTree = "<group>"; };
+		3CBF85BD253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkCertificateChainGetter.h; sourceTree = "<group>"; };
+		3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkCertificateChainGetter.m; sourceTree = "<group>"; };
 		3CC1E9321F035A3400ED9BAA /* curl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = curl.framework; sourceTree = "<group>"; };
 		3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKServerInfo.h; sourceTree = "<group>"; };
 		3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKServerInfo.m; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 		3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		3CD4A7B32398BC1700B2C8FC /* Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lang.swift; sourceTree = "<group>"; };
 		3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptions.swift; sourceTree = "<group>"; };
+		3CD74668258C1406003D609E /* offensive_words.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = offensive_words.plist; sourceTree = "<group>"; };
 		3CDC14A723B0453B0053932F /* Show Certificate.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Show Certificate.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDC14AC23B0453B0053932F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Extension.storyboard; sourceTree = "<group>"; };
 		3CDC14AE23B0453B0053932F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -331,6 +336,7 @@
 			files = (
 				3CC1E9331F035A3400ED9BAA /* curl.framework in Frameworks */,
 				3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */,
+				3CB1192925465BB20015750C /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,10 +535,17 @@
 				3C57F4A223B02B0700DCCB54 /* AppLinks.swift */,
 				3C6FF89723B1A420008DC981 /* AtomicInt.swift */,
 				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
-				3C599F6723EA8B4D00791DF1 /* MigrateAssistant.swift */,
 				3C599F6A23EA8D8200791DF1 /* AppInfo.swift */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		3CD74667258C13DA003D609E /* OffensiveWords */ = {
+			isa = PBXGroup;
+			children = (
+				3CD74668258C1406003D609E /* offensive_words.plist */,
+			);
+			path = OffensiveWords;
 			sourceTree = "<group>";
 		};
 		3CDC14A823B0453B0053932F /* Inspect Website */ = {
@@ -576,6 +589,7 @@
 		3CF9CC9423A4802400535173 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3CD74667258C13DA003D609E /* OffensiveWords */,
 				3CF9CC9523A4804600535173 /* DomainList.plist */,
 				3C8B1AEB23CBD0050093E65D /* QuoteList.plist */,
 			);
@@ -622,10 +636,12 @@
 				67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */,
 				67F686E21FC8FAA200BB7AE8 /* CKGetterTask.h */,
 				67F686E31FC8FAA200BB7AE8 /* CKGetterTask.m */,
-				3CB94040225036FB0055C067 /* CKAppleCertificateChainGetter.h */,
-				3CB94042225036FC0055C067 /* CKAppleCertificateChainGetter.m */,
+				3CB94040225036FB0055C067 /* CKSecureTransportCertificateChainGetter.h */,
+				3CB94042225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m */,
 				3CB94043225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h */,
 				3CB94041225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m */,
+				3CBF85BD253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h */,
+				3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */,
 			);
 			path = Getters;
 			sourceTree = "<group>";
@@ -633,6 +649,7 @@
 		A1BA8BE21E8EB2B30004FB0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CB1192825465BB20015750C /* Network.framework */,
 				A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */,
 			);
 			name = Frameworks;
@@ -661,6 +678,7 @@
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C36B3B82041310E005C66E8 /* CKGetterOptions.h in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
+				3CBF85BF253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h in Headers */,
 				3CB9403D225035E80055C067 /* (null) in Headers */,
 				3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
@@ -670,7 +688,7 @@
 				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
 				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
-				3CB94044225036FC0055C067 /* CKAppleCertificateChainGetter.h in Headers */,
+				3CB94044225036FC0055C067 /* CKSecureTransportCertificateChainGetter.h in Headers */,
 				3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -763,7 +781,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
 					3C65DAD91E836BE9004AD96D = {
@@ -772,13 +790,9 @@
 					};
 					3C72692323949ABD002A0B19 = {
 						CreatedOnToolsVersion = 11.2.1;
-						DevelopmentTeam = WCW84NC7Y8;
-						ProvisioningStyle = Automatic;
 					};
 					3CDC14A623B0453B0053932F = {
 						CreatedOnToolsVersion = 11.3;
-						DevelopmentTeam = WCW84NC7Y8;
-						ProvisioningStyle = Automatic;
 					};
 					3CF397401EB50E0900E8DBF4 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -828,6 +842,7 @@
 				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
 				3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */,
 				3C5F4660239DAE9900B3A727 /* en.plist in Resources */,
+				3CD74669258C1406003D609E /* offensive_words.plist in Resources */,
 				3CF9CC9623A4804600535173 /* DomainList.plist in Resources */,
 				3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */,
 			);
@@ -939,6 +954,7 @@
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3CF3482823A56CA1000382CE /* CKEVOIDList.m in Sources */,
 				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
+				3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */,
 				3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */,
 				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
 				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,
@@ -955,7 +971,7 @@
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 				3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
-				3CB94046225036FC0055C067 /* CKAppleCertificateChainGetter.m in Sources */,
+				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
 				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,
 				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,
 				3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */,
@@ -985,7 +1001,6 @@
 				3CCEB4D823DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
 				3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */,
 				3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */,
-				3C599F6823EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */,
 				3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */,
 				3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */,
 				3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */,
@@ -1033,7 +1048,6 @@
 				3CDC14BC23B045B20053932F /* GradientView.swift in Sources */,
 				3CDC14C523B045DA0053932F /* UIObject+Lang.swift in Sources */,
 				3C6FF89923B1A420008DC981 /* AtomicInt.swift in Sources */,
-				3C599F6923EA8B4D00791DF1 /* MigrateAssistant.swift in Sources */,
 				3CDC14CD23B046000053932F /* UserOptions.swift in Sources */,
 				3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
@@ -1171,8 +1185,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
@@ -1181,11 +1196,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1205,8 +1221,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1216,10 +1233,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
@@ -1238,8 +1256,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
@@ -1249,11 +1268,12 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "Show Certificate";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1273,8 +1293,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1285,10 +1306,11 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "Show Certificate";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;

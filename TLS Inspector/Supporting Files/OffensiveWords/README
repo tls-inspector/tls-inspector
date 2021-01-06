@@ -1,0 +1,7 @@
+Please be advised that the `offensive_words.plist` file contains highly offensive, derogatory words.
+It is used by the application as an abuse-prevention mechanism to try and stem the tide of unwarranted hate-mail we
+receive through the feedback system.
+
+We apologize in advanced - and ask for your understanding that the inclusion of these words is meant to try and prevent
+hateful messages, not promote or encourage them. If you have any feedback or suggestions regarding this, please do not
+hesitate to file a bug.

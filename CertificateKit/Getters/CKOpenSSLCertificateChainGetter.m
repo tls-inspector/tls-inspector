@@ -1,28 +1,23 @@
 //
 //  CKOpenSSLCertificateChainGetter.m
 //
-//  MIT License
+//  LGPLv3
 //
 //  Copyright (c) 2019 Ian Spence
-//  https://github.com/certificate-helper/CertificateKit
+//  https://tlsinspector.com/github.html
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This library is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU Lesser Public License
+//  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKOpenSSLCertificateChainGetter.h"
 #import "CKCertificate.h"
@@ -34,6 +29,7 @@
 #include <openssl/x509.h>
 #include <openssl/err.h>
 #include <arpa/inet.h>
+#include <mach/mach_time.h>
 
 @interface CKOpenSSLCertificateChainGetter () {
     NSURL * queryURL;
@@ -54,7 +50,6 @@
 
 @implementation CKOpenSSLCertificateChainGetter
 
-static const int CERTIFICATE_CHAIN_MAXIMUM = 10;
 static X509 * certificateChain[CERTIFICATE_CHAIN_MAXIMUM];
 static int numberOfCerts = 0;
 
@@ -65,11 +60,13 @@ INSERT_OPENSSL_ERROR_METHOD
 - (void) failWithError:(CKCertificateError)code description:(NSString *)description {
     PError(@"Failing with error (%ld): %@", (long)code, description);
     self.finished = YES;
-    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.certificatekit" code:code userInfo:@{NSLocalizedDescriptionKey: description}]];
+    [self.delegate getter:self failedTaskWithError:MAKE_ERROR(code, description)];
 }
 
 - (void) performTaskForURL:(NSURL *)url {
-    PDebug(@"Getting certificate chain");
+    uint64_t startTime = mach_absolute_time();
+    PDebug(@"Getting certificate chain with OpenSSL");
+
     queryURL = url;
     unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
 
@@ -113,6 +110,8 @@ INSERT_OPENSSL_ERROR_METHOD
         SSL_CLEANUP
         return;
     }
+
+    BIO_set_conn_ip_family(web, BIO_FAMILY_IPV4);
 
     BIO_get_ssl(web, &ssl);
     if (ssl == NULL) {
@@ -170,6 +169,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     if (numberOfCerts > CERTIFICATE_CHAIN_MAXIMUM) {
+        PError(@"Server returned too many certificates. Count: %i, Max: %i", numberOfCerts, CERTIFICATE_CHAIN_MAXIMUM);
         [self failWithError:CKCertificateErrorConnection description:@"Too many certificates from server"];
         SSL_CLEANUP
         return;
@@ -187,8 +187,7 @@ INSERT_OPENSSL_ERROR_METHOD
     self.chain.protocol = [self protocolString:SSL_version(ssl)];
     self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];
     self.chain.remoteAddress = remoteAddr;
-    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@", url.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite);
-    PDebug(@"Server returned %d certificates during handshake", numberOfCerts);
+    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", url.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
     SSL_CLEANUP
 
@@ -232,7 +231,7 @@ INSERT_OPENSSL_ERROR_METHOD
     SecTrustCreateWithCertificates((__bridge CFTypeRef)secCertificates, policy, &trust);
 
     SecTrustResultType trustStatus;
-    SecTrustEvaluate(trust, &trustStatus);
+    SecTrustGetTrustResult(trust, &trustStatus);
     if ([CKLogging sharedInstance].level == CKLoggingLevelDebug) {
         CFDictionaryRef trustResultDictionary = SecTrustCopyResult(trust);
         PDebug(@"Trust result details: %@", [(__bridge NSDictionary *)trustResultDictionary description]);
@@ -293,6 +292,19 @@ INSERT_OPENSSL_ERROR_METHOD
     self.finished = YES;
     self.successful = YES;
     [self.delegate getter:self finishedTaskWithResult:self.chain];
+
+    uint64_t endTime = mach_absolute_time();
+    if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
+        uint64_t elapsedTime = endTime - startTime;
+        static double ticksToNanoseconds = 0.0;
+        if (0.0 == ticksToNanoseconds) {
+            mach_timebase_info_data_t timebase;
+            mach_timebase_info(&timebase);
+            ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+        }
+        double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+        PDebug(@"OpenSSL getter collected certificate information in %fns", elapsedTimeInNanoseconds);
+    }
 }
 
 int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {

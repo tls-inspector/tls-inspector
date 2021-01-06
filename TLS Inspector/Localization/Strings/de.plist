@@ -32,32 +32,6 @@
 	<string>Build-Nummer</string>
 	<key>Cancel</key>
 	<string>Abbrechen</string>
-	<key>CertAlgorithm::ecdsa-with-SHA1</key>
-	<string>ECDSA mit SHA1</string>
-	<key>CertAlgorithm::ecdsa-with-SHA224</key>
-	<string>ECDSA mit SHA224</string>
-	<key>CertAlgorithm::ecdsa-with-SHA256</key>
-	<string>ECDSA mit SHA256</string>
-	<key>CertAlgorithm::ecdsa-with-SHA384</key>
-	<string>ECDSA mit SHA384</string>
-	<key>CertAlgorithm::ecdsa-with-SHA512</key>
-	<string>ECDSA mit SHA512</string>
-	<key>CertAlgorithm::md2WithRSAEncryption</key>
-	<string>RSA mit MD2</string>
-	<key>CertAlgorithm::md4WithRSAEncryption</key>
-	<string>RSA mit MD4</string>
-	<key>CertAlgorithm::md5WithRSAEncryption</key>
-	<string>RSA mit MD5</string>
-	<key>CertAlgorithm::sha1WithRSAEncryption</key>
-	<string>RSA mit SHA1</string>
-	<key>CertAlgorithm::sha224WithRSAEncryption</key>
-	<string>RSA mit SHA224</string>
-	<key>CertAlgorithm::sha256WithRSAEncryption</key>
-	<string>RSA mit SHA256</string>
-	<key>CertAlgorithm::sha384WithRSAEncryption</key>
-	<string>RSA mit SHA384</string>
-	<key>CertAlgorithm::sha512WithRSAEncryption</key>
-	<string>RSA mit SHA512</string>
 	<key>Certificate Authority</key>
 	<string>Zertifizierungsstelle</string>
 	<key>Certificate Chain</key>
@@ -359,7 +333,7 @@
 	<key>certificate_status_footer</key>
 	<string>OCSP-Abfragen deaktivieren kann die Privatsphäre erhöhen, verringert jedoch die Datenqualität. CRL-Überprüfung aktivieren kann zu langsameren Abfragen und erhöhtem Datenverbrauch führen.</string>
 	<key>copyright_license_footer</key>
-	<string>TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2020 Ian Spence.</string>
+	<string>TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2021 Ian Spence.</string>
 	<key>crypto_engine_footer</key>
 	<string>Änderungen an der Crypto-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als jene, die von diesem iOS-Gerät verwendet werden.</string>
 	<key>explanation::invalid_date</key>

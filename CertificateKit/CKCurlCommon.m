@@ -1,28 +1,23 @@
 //
 //  CKCurlCommon.h
 //
-//  MIT License
+//  LGPLv3
 //
 //  Copyright (c) 2020 Ian Spence
-//  https://github.com/certificate-helper/CertificateKit
+//  https://tlsinspector.com/github.html
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+//  This library is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
 //
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser Public License for more details.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  You should have received a copy of the GNU Lesser Public License
+//  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKCurlCommon.h"
 
@@ -46,20 +41,13 @@ static id _instance;
         return nil;
     }
 
-    if (Console.level == CKLoggingLevelDebug) {
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, libcurl_write_callback);
-    } else {
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
-    }
+    NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString * version = infoDictionary[@"CFBundleShortVersionString"];
+    NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, userAgent.UTF8String);
+    curl_easy_setopt(curl, CURLOPT_FORBID_REUSE, 1L);
 
     return curl;
-}
-
-size_t libcurl_write_callback(char *ptr, size_t size, size_t nmemb, void *userdata) {
-    NSString * string = [[NSString alloc] initWithUTF8String:ptr];
-    [Console writeDebug:string];
-    return size * nmemb;
 }
 
 @end

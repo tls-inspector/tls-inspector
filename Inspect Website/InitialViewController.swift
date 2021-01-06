@@ -16,8 +16,6 @@ class InitialViewController: UIViewController, CKGetterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        MigrateAssistant.AppLaunch()
-
         if #available(iOS 13, *) {
             self.activityIndicator.style = .large
         }
@@ -164,5 +162,11 @@ class InitialViewController: UIViewController, CKGetterDelegate {
     func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
         print("Error server info: " + error.localizedDescription)
         SERVER_ERROR = error
+    }
+
+    func getter(_ getter: CKGetter, unexpectedError error: Error) {
+        UIHelper(self).presentError(error: error) {
+            self.closeExtension()
+        }
     }
 }
