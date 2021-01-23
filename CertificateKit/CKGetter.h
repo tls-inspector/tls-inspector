@@ -76,6 +76,9 @@
  Protocol for visibility into the status of the getter
  */
 @protocol CKGetterDelegate
+
+@required
+
 /**
  Called when the getter has finished all of its tasks
 

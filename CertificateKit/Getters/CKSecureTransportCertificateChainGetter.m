@@ -100,7 +100,9 @@
         case NSStreamEventEndEncountered: {
             PError(@"NSStream error occured: %@", stream.streamError.description);
             self.finished = YES;
-            [self.delegate getter:self failedTaskWithError:[stream streamError]];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+                [self.delegate getter:self failedTaskWithError:[stream streamError]];
+            }
             [inputStream close];
             [outputStream close];
             break;
@@ -122,7 +124,9 @@
     if (count > CERTIFICATE_CHAIN_MAXIMUM) {
         PError(@"Server returned too many certificates. Count: %li, Max: %i", count, CERTIFICATE_CHAIN_MAXIMUM);
         self.finished = YES;
-        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+            [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
+        }
         return;
     }
 
@@ -143,7 +147,9 @@
     if (remoteAddr == nil) {
         PError(@"No remote address from socket");
         self.finished = YES;
-        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Unable to get remote address of peer")];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+            [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Unable to get remote address of peer")];
+        }
         return;
     }
 
@@ -170,7 +176,9 @@
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
         self.finished = YES;
-        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"No certificates presented by server.")];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+            [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"No certificates presented by server.")];
+        }
         return;
     }
 
@@ -213,7 +221,9 @@
     PDebug(@"Finished getting certificate chain");
     self.finished = YES;
     self.successful = YES;
-    [self.delegate getter:self finishedTaskWithResult:self.chain];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
+        [self.delegate getter:self finishedTaskWithResult:self.chain];
+    }
 
     uint64_t endTime = mach_absolute_time();
     if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {

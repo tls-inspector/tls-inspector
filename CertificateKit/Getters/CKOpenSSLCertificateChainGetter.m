@@ -60,7 +60,9 @@ INSERT_OPENSSL_ERROR_METHOD
 - (void) failWithError:(CKCertificateError)code description:(NSString *)description {
     PError(@"Failing with error (%ld): %@", (long)code, description);
     self.finished = YES;
-    [self.delegate getter:self failedTaskWithError:MAKE_ERROR(code, description)];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(code, description)];
+    }
 }
 
 - (void) performTaskForURL:(NSURL *)url {
@@ -291,7 +293,9 @@ INSERT_OPENSSL_ERROR_METHOD
     PDebug(@"Finished getting certificate chain");
     self.finished = YES;
     self.successful = YES;
-    [self.delegate getter:self finishedTaskWithResult:self.chain];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
+        [self.delegate getter:self finishedTaskWithResult:self.chain];
+    }
 
     uint64_t endTime = mach_absolute_time();
     if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {

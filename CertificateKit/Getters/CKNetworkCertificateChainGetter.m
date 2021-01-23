@@ -70,7 +70,9 @@
             if (numberOfCertificates > CERTIFICATE_CHAIN_MAXIMUM) {
                 PError(@"Server returned too many certificates. Count: %li, Max: %i", numberOfCertificates, CERTIFICATE_CHAIN_MAXIMUM);
                 self.finished = YES;
-                [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+                    [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
+                }
                 return;
             }
 
@@ -145,7 +147,9 @@
                 PError(@"nw_connection failed: %@", error.description);
                 self.finished = YES;
                 self.successful = NO;
-                [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+                    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]];
+                }
                 nw_connection_cancel(connection);
                 break;
             case nw_connection_state_preparing:
@@ -159,7 +163,9 @@
 
                 self.finished = YES;
                 self.successful = YES;
-                [self.delegate getter:self finishedTaskWithResult:self.chain];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
+                    [self.delegate getter:self finishedTaskWithResult:self.chain];
+                }
 
                 uint64_t endTime = mach_absolute_time();
                 if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
@@ -182,7 +188,9 @@
                 PError(@"nw_connection failed: %@", error.description);
                 self.finished = YES;
                 self.successful = NO;
-                [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+                    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]];
+                }
                 break;
             case nw_connection_state_cancelled:
                 PDebug(@"Event: nw_connection_state_cancelled");
