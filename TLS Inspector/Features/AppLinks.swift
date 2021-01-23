@@ -1,6 +1,7 @@
 import UIKit
 import StoreKit
 import MessageUI
+import CertificateKit
 
 class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeViewControllerDelegate {
     // Settings key to track the number of times the application has been launched
@@ -10,11 +11,12 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
     // App Store ID number for TLS Inspector. Not secret.
     private let appID = "1100539810"
     private let appName = "TLS Inspector"
-    private let appEmail = "'TLS Inspector Project Manager' <hello@tlsinspector.com>"
+    private let appEmail = "'TLS Inspector' <hello@tlsinspector.com>"
     // Used to track which app store views come from the app v.s. which come from our website
     // not used to track you or your device.
     private let appCampaignToken = "acid-burn"
     private var dimissedBlock: (() -> Void)?
+    private var shouldPurgeLogs = false
     public static var current = AppLinks()
 
     public func showAppStore(_ viewController: UIViewController, dismissed: (() -> Void)?) {
@@ -66,6 +68,7 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         if includeLogs {
             self.attachLogFile(actualName: "CertificateKit.log", attachmentName: "TLS Inspector.log", mailController: mailController)
             self.attachLogFile(actualName: "exceptions.log", attachmentName: "Exceptions.log", mailController: mailController)
+            self.shouldPurgeLogs = true
         }
 
         self.dimissedBlock = dismissed
@@ -73,6 +76,11 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if result == .sent && self.shouldPurgeLogs {
+            CKLogging.sharedInstance().truncateLogs()
+            self.shouldPurgeLogs = false
+        }
+
         controller.dismiss(animated: true) {
             self.dimissedBlock?()
         }

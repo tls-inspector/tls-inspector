@@ -92,6 +92,14 @@ static dispatch_queue_t queue;
     [self.handle closeFile];
 }
 
+- (void) truncateLogs {
+    dispatch_async(queue, ^{
+        [self.handle closeFile];
+        [[NSFileManager defaultManager] removeItemAtPath:self.file error:nil];
+        [self open];
+    });
+}
+
 - (NSString *) stringForLevel:(CKLoggingLevel)level {
     switch (level) {
         case CKLoggingLevelDebug:
