@@ -571,6 +571,10 @@
 	<string>EV Authority</string>
 	<key>Enable Debug Logging</key>
 	<string>Enable Debug Logging</string>
+	<key>Engine Settings</key>
+	<string>Engine Settings</string>
+	<key>Engine has no options</key>
+	<string>Engine has no options</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
 	<string>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</string>
 	<key>Enter the value to verify</key>
