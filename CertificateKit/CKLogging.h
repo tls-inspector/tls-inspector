@@ -48,6 +48,9 @@ typedef NS_ENUM(NSUInteger, CKLoggingLevel) {
 /// The filepath of the log file
 @property (strong, nonatomic, nonnull) NSString * file;
 
+/// Purge all log files
+- (void) truncateLogs;
+
 /// Write a DEBUG level message
 /// @param message The message to write
 - (void) writeDebug:(NSString * _Nonnull)message;

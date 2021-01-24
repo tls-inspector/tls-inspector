@@ -2,9 +2,9 @@ import UIKit
 
 class AdvancedOptionsTableViewController: UITableViewController {
     private enum SectionTags: Int {
-        case Engine = 1
-        case OpenSSL = 2
-        case IPVersion = 3
+        case Engine = 0
+        case EngineOptions = 1
+        case Logs = 2
     }
 
     var sections: [TableViewSection] = []
@@ -49,28 +49,33 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return engineSection
     }
 
-    func buildOpenSSLSection() -> TableViewSection? {
-        if UserOptions.cryptoEngine != .OpenSSL {
-            return nil
-        }
+    func buildEngineOptionsSection() -> TableViewSection {
+        let engineOptionsSection = TableViewSection()
+        engineOptionsSection.title = lang(key: "Engine Settings")
+        engineOptionsSection.tag = SectionTags.EngineOptions.rawValue
 
-        let opensslSection = TableViewSection()
-        opensslSection.title = lang(key: "OpenSSL Settings")
-        opensslSection.tag = SectionTags.OpenSSL.rawValue
+        if UserOptions.cryptoEngine != .OpenSSL {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "DisabledLabel")
+            cell.textLabel?.text = lang(key: "Engine has no options")
+            cell.textLabel?.textColor = UIColor.darkGray
+            cell.selectionStyle = .none
+            engineOptionsSection.cells = [cell]
+            return engineOptionsSection
+        }
 
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") else {
             LogError("No cell named 'Input' found")
-            return opensslSection
+            return engineOptionsSection
         }
 
         guard let label = cell.viewWithTag(1) as? UILabel else {
             LogError("No label with tag 1 on cell")
-            return opensslSection
+            return engineOptionsSection
         }
 
         guard let input = cell.viewWithTag(2) as? UITextField else {
             LogError("No input with tag 1 on cell")
-            return opensslSection
+            return engineOptionsSection
         }
 
         label.text = lang(key: "Ciphers")
@@ -78,8 +83,49 @@ class AdvancedOptionsTableViewController: UITableViewController {
         input.removeTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
         input.addTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
 
-        opensslSection.cells = [cell]
-        return opensslSection
+        engineOptionsSection.cells = [cell]
+        return engineOptionsSection
+    }
+
+    func buildLogsSection() -> TableViewSection {
+        let loggingSection = TableViewSection()
+        loggingSection.title = lang(key: "Logging")
+        loggingSection.footer = lang(key: "verbose_logging_footer")
+        loggingSection.tag = SectionTags.Logs.rawValue
+
+        if let debugLoggingCell = self.tableView.dequeueReusableCell(withIdentifier: "Switch") {
+            guard let debugLabel = debugLoggingCell.viewWithTag(1) as? UILabel else {
+                return loggingSection
+            }
+
+            guard let debugSwitch = debugLoggingCell.viewWithTag(2) as? UISwitch else {
+                return loggingSection
+            }
+
+            debugLabel.text = lang(key: "Enable Debug Logging")
+            debugSwitch.isOn = UserOptions.verboseLogging
+            debugSwitch.addTarget(self, action: #selector(self.toggleDebugMode(_:)), for: .valueChanged)
+            loggingSection.cells.append(debugLoggingCell)
+        }
+
+        if let submitLogsCell = self.tableView.dequeueReusableCell(withIdentifier: "Icon") {
+            guard let textLabel = submitLogsCell.viewWithTag(1) as? UILabel else {
+                return loggingSection
+            }
+
+            guard let iconLabel = submitLogsCell.viewWithTag(2) as? UILabel else {
+                return loggingSection
+            }
+
+            textLabel.text = lang(key: "Submit Logs")
+            iconLabel.font = FAIcon.FABugSolid.font(size: iconLabel.font.pointSize)
+            iconLabel.textColor = UIColor.red
+            iconLabel.text = FAIcon.FABugSolid.string()
+
+            loggingSection.cells.append(submitLogsCell)
+        }
+
+        return loggingSection
     }
 
     func ipVersionCell(version: IPVersion) -> UITableViewCell? {
@@ -104,26 +150,12 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return cell
     }
 
-    func buildIPVersionSection() -> TableViewSection? {
-        if UserOptions.cryptoEngine == .SecureTransport {
-            return nil
-        }
-
-        let ipVersionSection = TableViewSection()
-        ipVersionSection.title = lang(key: "Use IP Version")
-        ipVersionSection.tag = SectionTags.IPVersion.rawValue
-
-        for version in IPVersion.allValues() {
-            ipVersionSection.cells.maybeAppend(ipVersionCell(version: version))
-        }
-
-        return ipVersionSection
-    }
-
     func buildTable() {
-        self.sections = [self.buildEngineSection()]
-        // self.sections.maybeAppend(buildIPVersionSection()) Restore at some point
-        self.sections.maybeAppend(buildOpenSSLSection())
+        self.sections = [
+            self.buildEngineSection(),
+            self.buildEngineOptionsSection(),
+            self.buildLogsSection()
+        ]
     }
 
     // MARK: - Table view data source
@@ -151,52 +183,47 @@ class AdvancedOptionsTableViewController: UITableViewController {
         let tag = self.sections[indexPath.section].tag
 
         if tag == SectionTags.Engine.rawValue {
-            guard let cell = tableView.cellForRow(at: indexPath) else {
-                return
-            }
+            self.didTapEngineCell(indexPath: indexPath)
+        } else if tag == SectionTags.Logs.rawValue && indexPath.row == 1 {
+            self.didTapSubmitLogs(indexPath: indexPath)
+        }
+    }
 
-            let before = UserOptions.cryptoEngine
-            guard let after = CryptoEngine.from(int: cell.tag) else {
-                return
-            }
-            if before == after {
-                return
-            }
+    func didTapEngineCell(indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
 
-            UserOptions.cryptoEngine = after
-            self.buildTable()
+        let before = UserOptions.cryptoEngine
+        guard let after = CryptoEngine.from(int: cell.tag) else {
+            return
+        }
+        if before == after {
+            return
+        }
 
-            var sectionsToInsert: IndexSet = []
-            var sectionsToRemove: IndexSet = []
-            if after == .OpenSSL && before != .OpenSSL {
-                sectionsToInsert.insert(1)
-            } else if after != .OpenSSL && before == .OpenSSL {
-                sectionsToRemove.insert(1)
-            }
+        UserOptions.cryptoEngine = after
+        self.buildTable()
+        self.tableView.reloadSections([SectionTags.Engine.rawValue, SectionTags.EngineOptions.rawValue], with: .none)
+    }
 
-            if sectionsToInsert.count > 0 {
-                self.tableView.insertSections(sectionsToInsert, with: .fade)
-            }
-            if sectionsToRemove.count > 0 {
-                self.tableView.deleteSections(sectionsToRemove, with: .fade)
-            }
-            self.tableView.reloadSections([0], with: .none)
-        } else if tag == SectionTags.IPVersion.rawValue {
-            guard let cell = tableView.cellForRow(at: indexPath) else {
-                return
-            }
-
-            guard let version = IPVersion.from(int: cell.tag) else {
-                return
-            }
-
-            UserOptions.ipVersion = version
-            self.buildTable()
-            self.tableView.reloadSections([indexPath.section], with: .none)
+    func didTapSubmitLogs(indexPath: IndexPath) {
+        if UserOptions.verboseLogging && UserOptions.inspectionsWithVerboseLogging == 0 {
+            UIHelper(self).presentAlert(title: lang(key: "Debug Logging Enabled"),
+                                        body: lang(key: "You must inspect at least one site with debug logging enabled before you can submit logs."),
+                                        dismissed: nil)
+            return
+        }
+        ContactTableViewController.show(self) { (support) in
+            AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: true, dismissed: nil)
         }
     }
 
     @objc func changeCiphers(_ sender: UITextField) {
         UserOptions.preferredCiphers = sender.text ?? ""
+    }
+
+    @objc func toggleDebugMode(_ sender: UISwitch) {
+        UserOptions.verboseLogging = sender.isOn
     }
 }

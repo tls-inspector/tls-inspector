@@ -4,7 +4,6 @@ class OptionsTableViewController: UITableViewController {
 
     var sections: [TableViewSection] = []
     let advancedOptionsCellTag = 101
-    let submitLogsCellTag = 100
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,7 +11,7 @@ class OptionsTableViewController: UITableViewController {
         self.sections.maybeAppend(makeGeneralSection())
         self.sections.maybeAppend(makeStatusSection())
         self.sections.maybeAppend(makeFingerprintSection())
-        self.sections.maybeAppend(makeDebugSection())
+        self.sections.maybeAppend(makeAdvancedSection())
     }
 
     func makeGeneralSection() -> TableViewSection? {
@@ -31,12 +30,6 @@ class OptionsTableViewController: UITableViewController {
         if let cell = newSwitchCell(labelText: lang(key: "Show Tips"),
                                     initialValue: UserOptions.showTips,
                                     changed: #selector(changeShowTips(sender:))) {
-            generalSection.cells.append(cell)
-        }
-        if let cell = newIconCell(labelText: lang(key: "Advanced Options"),
-                                  icon: .FACogSolid,
-                                  iconColor: UIColor.systemBlue) {
-            cell.tag = advancedOptionsCellTag
             generalSection.cells.append(cell)
         }
 
@@ -100,24 +93,17 @@ class OptionsTableViewController: UITableViewController {
         return nil
     }
 
-    func makeDebugSection() -> TableViewSection? {
-        let loggingSection = TableViewSection()
-        loggingSection.title = lang(key: "Logging")
-        loggingSection.footer = lang(key: "verbose_logging_footer")
-        if let cell = newSwitchCell(labelText: lang(key: "Enable Debug Logging"),
-                                    initialValue: UserOptions.verboseLogging,
-                                    changed: #selector(changeVerboseLogging(sender:))) {
-            loggingSection.cells.append(cell)
-        }
-        if let cell = newIconCell(labelText: lang(key: "Submit Logs"),
-                                  icon: .FABugSolid,
-                                  iconColor: UIColor.systemRed) {
-            cell.tag = submitLogsCellTag
-            loggingSection.cells.append(cell)
+    func makeAdvancedSection() -> TableViewSection? {
+        let generalSection = TableViewSection()
+        if let cell = newIconCell(labelText: lang(key: "Advanced Options"),
+                                  icon: .FACogSolid,
+                                  iconColor: UIColor.systemBlue) {
+            cell.tag = advancedOptionsCellTag
+            generalSection.cells.append(cell)
         }
 
-        if loggingSection.cells.count > 0 {
-            return loggingSection
+        if generalSection.cells.count > 0 {
+            return generalSection
         }
 
         return nil
@@ -193,16 +179,6 @@ class OptionsTableViewController: UITableViewController {
         let cellTag = self.sections[indexPath.section].cells[indexPath.row].tag
         if cellTag == advancedOptionsCellTag {
             self.performSegue(withIdentifier: "Advanced", sender: nil)
-        } else if cellTag == submitLogsCellTag {
-            if UserOptions.verboseLogging && UserOptions.inspectionsWithVerboseLogging == 0 {
-                UIHelper(self).presentAlert(title: lang(key: "Debug Logging Enabled"),
-                                            body: lang(key: "You must inspect at least one site with debug logging enabled before you can submit logs."),
-                                            dismissed: nil)
-                return
-            }
-            ContactTableViewController.show(self) { (support) in
-                AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: true, dismissed: nil)
-            }
         }
     }
 
