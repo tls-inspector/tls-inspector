@@ -142,6 +142,10 @@
 		3CDC14CE23B046000053932F /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
 		3CDC14D023B046410053932F /* AppOnlyGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */; };
 		3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14D123B0479B0053932F /* InitialViewController.swift */; };
+		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
+		3CE3B21225BE2066008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B21125BE2066008527A1 /* IDNA */; };
+		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
+		3CE3B21825BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
 		3CF3482723A56CA1000382CE /* CKEVOIDList.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF3482523A56CA1000382CE /* CKEVOIDList.h */; };
 		3CF3482823A56CA1000382CE /* CKEVOIDList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3482623A56CA1000382CE /* CKEVOIDList.m */; platformFilter = ios; };
 		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
@@ -313,6 +317,7 @@
 		3CDC14B523B045460053932F /* Show Certificate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Show Certificate.entitlements"; sourceTree = "<group>"; };
 		3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnlyGlobals.swift; sourceTree = "<group>"; };
 		3CDC14D123B0479B0053932F /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		3CE3B21625BE2186008527A1 /* URL+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Encode.swift"; sourceTree = "<group>"; };
 		3CF3482523A56CA1000382CE /* CKEVOIDList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKEVOIDList.h; sourceTree = "<group>"; };
 		3CF3482623A56CA1000382CE /* CKEVOIDList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKEVOIDList.m; sourceTree = "<group>"; };
 		3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,6 +359,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */,
 				3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */,
 				3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */,
 			);
@@ -363,6 +369,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE3B21225BE2066008527A1 /* IDNA in Frameworks */,
 				3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */,
 				3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */,
 			);
@@ -551,6 +558,7 @@
 				3C6FF89723B1A420008DC981 /* AtomicInt.swift */,
 				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
 				3C599F6A23EA8D8200791DF1 /* AppInfo.swift */,
+				3CE3B21625BE2186008527A1 /* URL+Encode.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -750,6 +758,9 @@
 				3CDC14B023B0453B0053932F /* PBXTargetDependency */,
 			);
 			name = "TLS Inspector";
+			packageProductDependencies = (
+				3CE3B20C25BE2054008527A1 /* IDNA */,
+			);
 			productName = "TLS Inspector";
 			productReference = 3C72692423949ABD002A0B19 /* TLS Inspector.app */;
 			productType = "com.apple.product-type.application";
@@ -769,6 +780,9 @@
 				3C6FF89523B1A280008DC981 /* PBXTargetDependency */,
 			);
 			name = "Inspect Website";
+			packageProductDependencies = (
+				3CE3B21125BE2066008527A1 /* IDNA */,
+			);
 			productName = "Inspect Website";
 			productReference = 3CDC14A723B0453B0053932F /* Show Certificate.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -826,6 +840,9 @@
 				Base,
 			);
 			mainGroup = 3CFAE6CD1CA8440400CD946B;
+			packageReferences = (
+				3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */,
+			);
 			productRefGroup = 3CFAE6D71CA8440400CD946B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1011,6 +1028,7 @@
 				3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */,
 				3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */,
 				3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */,
+				3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */,
 				3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */,
 				3C72692723949ABD002A0B19 /* AppDelegate.swift in Sources */,
 				3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */,
@@ -1061,6 +1079,7 @@
 				3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */,
 				3CDC14C623B045DA0053932F /* Lang.swift in Sources */,
 				3CDC14BB23B045B20053932F /* UIView+RoundedCorners.swift in Sources */,
+				3CE3B21825BE2186008527A1 /* URL+Encode.swift in Sources */,
 				3CDC14C023B045C50053932F /* CertificateTableViewController.swift in Sources */,
 				3CDC14BF23B045C50053932F /* HTTPHeadersTableViewController.swift in Sources */,
 				3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */,
@@ -1542,6 +1561,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Wevah/IDNA-Cocoa";
+			requirement = {
+				kind = revision;
+				revision = 3f769fdec30d63b72588acfefd596ca2324942d7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3CE3B20C25BE2054008527A1 /* IDNA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */;
+			productName = IDNA;
+		};
+		3CE3B21125BE2066008527A1 /* IDNA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */;
+			productName = IDNA;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3CFAE6CE1CA8440400CD946B /* Project object */;
 }

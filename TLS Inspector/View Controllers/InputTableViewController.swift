@@ -163,13 +163,6 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
-        // Show a non-generic error for hosts containing unicode as we don't
-        // support them (GH Issue #43)
-        if !text.canBeConverted(to: .ascii) {
-            UIHelper(self).presentAlert(title: lang(key: "IDN Not Supported"), body: lang(key: "idn_warning"), dismissed: nil)
-            return
-        }
-
         var domainText = text
         if domainText.hasPrefix("http://") {
             showInputError()
@@ -180,7 +173,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             domainText = "https://" + domainText
         }
 
-        guard let url = URL(string: domainText) else {
+        guard let url = URL.fromString(str: domainText) else {
             showInputError()
             return
         }
