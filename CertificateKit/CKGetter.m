@@ -105,7 +105,6 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
     self.chainGetter.delegate = self;
     self.chainGetter.tag = CKGetterTaskTagChain;
-    self.chainGetter.parameters = self.parameters;
 
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
@@ -121,7 +120,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     self.tasks = tasks;
 
     for (CKGetterTask * task in self.tasks) {
-        [NSThread detachNewThreadSelector:@selector(performTaskForURL:) toTarget:task withObject:self.url];
+        [NSThread detachNewThreadSelector:@selector(performTaskWithParameters:) toTarget:task withObject:parameters];
     }
 }
 

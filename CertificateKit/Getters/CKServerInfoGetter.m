@@ -37,9 +37,9 @@
 
 @synthesize headers;
 
-- (void) performTaskForURL:(NSURL *)url {
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters {
     PDebug(@"Getting HTTP server info");
-    [self getServerInfoForURL:url finished:^(NSError *error) {
+    [self getServerInfoForURL:parameters.queryURL finished:^(NSError *error) {
         PDebug(@"Finished getting HTTP server info");
         self.finished = YES;
         if (error) {

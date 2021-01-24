@@ -23,7 +23,8 @@
 
 @interface CKGetterTask : NSObject
 
-- (void) performTaskForURL:(NSURL *)url;
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters;
+
 @property (strong, nonatomic) id delegate;
 @property (nonatomic) NSUInteger tag;
 @property (nonatomic) BOOL finished;

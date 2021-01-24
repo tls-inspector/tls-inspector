@@ -35,10 +35,10 @@
     CFWriteStreamRef  writeStream;
     NSInputStream   * inputStream;
     NSOutputStream  * outputStream;
-    NSURL * queryURL;
     uint64_t startTime;
 }
 
+@property (strong, nonatomic) CKGetterParameters * parameters;
 @property (strong, nonatomic, readwrite) NSString * domain;
 @property (strong, nonatomic, readwrite) NSArray<CKCertificate *> * certificates;
 @property (strong, nonatomic, readwrite) CKCertificate * rootCA;
@@ -54,13 +54,14 @@
 
 @implementation CKSecureTransportCertificateChainGetter
 
-- (void) performTaskForURL:(NSURL *)url {
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters {
     startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with SecureTransport");
 
-    queryURL = url;
-    unsigned int port = queryURL.port != nil ? [queryURL.port unsignedIntValue] : 443;
-    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)url.host, port, &readStream, &writeStream);
+    self.parameters = parameters;
+
+    unsigned int port = parameters.queryURL.port != nil ? [parameters.queryURL.port unsignedIntValue] : 443;
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)parameters.ipAddress, port, &readStream, &writeStream);
 
     outputStream = (__bridge NSOutputStream *)writeStream;
     inputStream = (__bridge NSInputStream *)readStream;
@@ -72,6 +73,7 @@
     [inputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 
     NSDictionary *settings = @{
+        (__bridge NSString *)kCFStreamSSLPeerName: parameters.queryURL.host,
         (__bridge NSString *)kCFStreamSSLValidatesCertificateChain: (__bridge NSNumber *)kCFBooleanFalse,
     };
     CFReadStreamSetProperty((CFReadStreamRef)inputStream, kCFStreamPropertySSLSettings, (CFTypeRef)settings);
@@ -165,13 +167,13 @@
     [inputStream close];
     [outputStream close];
 
-    PDebug(@"Domain: '%@' trust result: '%@' (%d)", queryURL, [self trustResultToString:trustStatus], trustStatus);
+    PDebug(@"Domain: '%@' trust result: '%@' (%d)", self.parameters.queryURL, [self trustResultToString:trustStatus], trustStatus);
 
     self.chain = [CKCertificateChain new];
     self.chain.certificates = certs;
 
-    self.chain.domain = queryURL.host;
-    self.chain.url = queryURL;
+    self.chain.domain = self.parameters.queryURL.host;
+    self.chain.url = self.parameters.queryURL;
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
@@ -207,7 +209,7 @@
         [self.chain determineTrustFailureReason];
     }
 
-    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", queryURL.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite, count);
+    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", self.parameters.queryURL.host, remoteAddr, self.chain.protocol, self.chain.cipherSuite, count);
 
     self.chain.cipherSuite = [self CiphersuiteToString:ciphers[0]];
     self.chain.protocol = [self protocolString:protocol];

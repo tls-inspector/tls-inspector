@@ -31,23 +31,24 @@
 @interface CKNetworkCertificateChainGetter ()
 
 @property (strong, nonatomic) CKCertificateChain * chain;
+@property (strong, nonatomic) CKGetterParameters * parameters;
 
 @end
 
 @implementation CKNetworkCertificateChainGetter
 
-- (void) performTaskForURL:(NSURL *)url API_AVAILABLE(ios(12.0)) {
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters API_AVAILABLE(ios(12.0)) {
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with NetworkFramework");
 
+    self.parameters = parameters;
     self.chain = [CKCertificateChain new];
-    self.chain.domain = url.host;
-    self.chain.url = url;
+    self.chain.domain = parameters.queryURL.host;
+    self.chain.url = parameters.queryURL;
 
-    const char * host = url.host.UTF8String;
-    unsigned int port = url.port != nil ? [url.port unsignedIntValue] : 443;
+    unsigned int port = parameters.queryURL.port != nil ? [parameters.queryURL.port unsignedIntValue] : 443;
     const char * portStr = [[NSString alloc] initWithFormat:@"%i", port].UTF8String;
-    nw_endpoint_t endpoint = nw_endpoint_create_host(host, portStr);
+    nw_endpoint_t endpoint = nw_endpoint_create_host(parameters.ipAddress.UTF8String, portStr);
     long __block numberOfCertificates = 0L;
 
     dispatch_queue_t nw_dispatch_queue = dispatch_queue_create("com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter", NULL);
@@ -61,6 +62,7 @@
     nw_parameters_configure_protocol_block_t configure_tls = ^(nw_protocol_options_t tls_options) {
         sec_protocol_options_t sec_options = nw_tls_copy_sec_protocol_options(tls_options);
         sec_protocol_options_set_tls_ocsp_enabled(sec_options, false); // Don't do OCSP because we do it ourselves
+        sec_protocol_options_set_tls_server_name(sec_options, parameters.queryURL.host.UTF8String);
         sec_protocol_options_set_verify_block(sec_options, ^(sec_protocol_metadata_t  _Nonnull metadata, sec_trust_t  _Nonnull trust_ref, sec_protocol_verify_complete_t  _Nonnull complete) {
             // Determine trust and get the root certificate
             SecTrustRef trust = sec_trust_copy_ref(trust_ref);
@@ -126,16 +128,16 @@
         }, nw_dispatch_queue);
     };
 
-    nw_parameters_t parameters = nw_parameters_create_secure_tcp(configure_tls, configure_tcp);
-    nw_protocol_stack_t protocol_stack = nw_parameters_copy_default_protocol_stack(parameters);
+    nw_parameters_t nwparameters = nw_parameters_create_secure_tcp(configure_tls, configure_tcp);
+    nw_protocol_stack_t protocol_stack = nw_parameters_copy_default_protocol_stack(nwparameters);
     nw_protocol_options_t ip_options = nw_protocol_stack_copy_internet_protocol(protocol_stack);
-    if (self.parameters.ipVersion == IP_VERSION_IPV4) {
+    if (parameters.ipVersion == IP_VERSION_IPV4) {
         nw_ip_options_set_version(ip_options, nw_ip_version_4);
-    } else if (self.parameters.ipVersion == IP_VERSION_IPV6) {
+    } else if (parameters.ipVersion == IP_VERSION_IPV6) {
         nw_ip_options_set_version(ip_options, nw_ip_version_6);
     }
 
-    nw_connection_t connection = nw_connection_create(endpoint, parameters);
+    nw_connection_t connection = nw_connection_create(endpoint, nwparameters);
     nw_connection_set_queue(connection, nw_dispatch_queue);
     nw_connection_set_state_changed_handler(connection, ^(nw_connection_state_t state, nw_error_t error) {
         switch (state) {
@@ -159,7 +161,7 @@
                 PDebug(@"Event: nw_connection_state_ready");
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 PDebug(@"NetworkFramework getter successful");
-                PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", url.host, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
+                PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.queryURL.host, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
 
                 self.finished = YES;
                 self.successful = YES;

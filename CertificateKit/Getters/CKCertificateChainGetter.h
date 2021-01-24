@@ -23,6 +23,4 @@
 
 @interface CKCertificateChainGetter : CKGetterTask
 
-@property (strong, nonatomic, nonnull) CKGetterParameters * parameters;
-
 @end

@@ -23,7 +23,7 @@
 
 @implementation CKGetterTask
 
-- (void) performTaskForURL:(NSURL *)url {}
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters {}
 - (BOOL) isFinished { return NO; }
 
 @end
