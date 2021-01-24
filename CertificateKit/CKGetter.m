@@ -25,6 +25,7 @@
 #import "CKOpenSSLCertificateChainGetter.h"
 #import "CKNetworkCertificateChainGetter.h"
 #import "CKSecureTransportCertificateChainGetter.h"
+#import "CKResolver.h"
 
 @interface CKGetter () <NSStreamDelegate, CKGetterTaskDelegate> {
     BOOL gotChain;
@@ -57,7 +58,30 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         }
     }
 
-    PDebug(@"Starting getter for: %@", parameters.queryURL.absoluteURL);
+    if (parameters.ipAddress == nil || parameters.ipAddress.length == 0) {
+        NSString * ipAddress;
+        NSError * resolveError;
+        switch (parameters.ipVersion) {
+            case IP_VERSION_AUTOMATIC:
+                ipAddress = [[CKResolver sharedResolver] getAddressFromDomain:parameters.queryURL.host withError:&resolveError];
+                break;
+            case IP_VERSION_IPV4:
+                ipAddress = [[CKResolver sharedResolver] getIPv4AddressFromDomain:parameters.queryURL.host withError:&resolveError];
+                break;
+            case IP_VERSION_IPV6:
+                ipAddress = [[CKResolver sharedResolver] getIPv6AddressFromDomain:parameters.queryURL.host withError:&resolveError];
+                break;
+        }
+        if (resolveError != nil) {
+            PError(@"Error resolving query URL: %@", resolveError.localizedDescription);
+            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
+                [self.delegate getter:self unexpectedError:resolveError];
+            }
+        }
+        parameters.ipAddress = ipAddress;
+    }
+
+    PDebug(@"Starting getter for: %@", parameters.description);
 
     self.url = parameters.queryURL;
 

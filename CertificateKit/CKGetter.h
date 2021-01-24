@@ -91,6 +91,13 @@
  */
 - (void) getter:(CKGetter * _Nonnull)getter gotServerInfo:(CKServerInfo * _Nonnull)serverInfo;
 /**
+ Called when the getter experienced an unexpected error outside of the context of getting the certificate chain or server info
+
+ @param getter The getter
+ @param error The error
+ */
+- (void) getter:(CKGetter * _Nonnull)getter unexpectedError:(NSError * _Nonnull)error;
+/**
  Called when the getter experienced an error getting the certificate chain
 
  @param getter The getter
@@ -104,12 +111,5 @@
  @param error The error
  */
 - (void) getter:(CKGetter * _Nonnull)getter errorGettingServerInfo:(NSError * _Nonnull)error;
-/**
- Called when the getter experienced an unexpected error outside of the context of getting the certificate chain or server info
-
- @param getter The getter
- @param error The error
- */
-- (void) getter:(CKGetter * _Nonnull)getter unexpectedError:(NSError * _Nonnull)error;
 
 @end

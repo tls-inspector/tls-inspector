@@ -32,6 +32,8 @@
 		3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */; };
 		3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */; };
 		3C5F4660239DAE9900B3A727 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5F465F239DAE9900B3A727 /* en.plist */; };
+		3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */; };
 		3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DADC1E836BE9004AD96D /* CertificateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAE61E836C15004AD96D /* CKCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE71E836C15004AD96D /* CKCertificate.m */; platformFilter = ios; };
@@ -234,6 +236,8 @@
 		3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeadersTableViewController.swift; sourceTree = "<group>"; };
 		3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANListTableViewController.swift; sourceTree = "<group>"; };
 		3C5F465F239DAE9900B3A727 /* en.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolver.h; sourceTree = "<group>"; };
+		3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKResolver.m; sourceTree = "<group>"; };
 		3C65DADA1E836BE9004AD96D /* CertificateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CertificateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C65DADC1E836BE9004AD96D /* CertificateKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKit.h; sourceTree = "<group>"; };
 		3C65DADD1E836BE9004AD96D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -400,36 +404,38 @@
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				67F686EF1FC8FAE400BB7AE8 /* Getters */,
 				3CF6773420464A9E00A3B4C1 /* Revocation */,
+				3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */,
+				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
+				3CB483FC2058BA0400322723 /* CertificateKit.m */,
+				3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */,
+				3C7CEE6120A15BD500DCC770 /* CKAlternateNameObject.m */,
+				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
+				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
+				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
+				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
+				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
+				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
+				3C45AD5823D831A900E541EC /* CKCurlCommon.h */,
+				3C45AD5923D831A900E541EC /* CKCurlCommon.m */,
+				3CF3482523A56CA1000382CE /* CKEVOIDList.h */,
+				3CF3482623A56CA1000382CE /* CKEVOIDList.m */,
 				3C2A7A511F284DC700AA12B4 /* CKGetter.h */,
 				3C2A7A521F284DC700AA12B4 /* CKGetter.m */,
 				3CD4932825A56198002AC7BD /* CKGetterParameters.h */,
 				3CD4932925A56198002AC7BD /* CKGetterParameters.m */,
-				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
-				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
-				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
-				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
-				3C1D28AA2009677300A606BB /* CKNameObject.h */,
-				3C1D28AB2009677300A606BB /* CKNameObject.m */,
-				3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */,
-				3C7CEE6120A15BD500DCC770 /* CKAlternateNameObject.m */,
-				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
-				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
-				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
-				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
-				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
-				3CB483FC2058BA0400322723 /* CertificateKit.m */,
 				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
-				3CF3482523A56CA1000382CE /* CKEVOIDList.h */,
-				3CF3482623A56CA1000382CE /* CKEVOIDList.m */,
-				3C45AD5823D831A900E541EC /* CKCurlCommon.h */,
-				3C45AD5923D831A900E541EC /* CKCurlCommon.m */,
+				3C1D28AA2009677300A606BB /* CKNameObject.h */,
+				3C1D28AB2009677300A606BB /* CKNameObject.m */,
+				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
+				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
+				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
+				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
 				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
 				3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */,
-				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3CC1E9321F035A3400ED9BAA /* curl.framework */,
+				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
-				3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */,
 			);
 			path = CertificateKit;
 			sourceTree = "<group>";
@@ -693,6 +699,7 @@
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
 				3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */,
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
+				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
 				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
@@ -983,6 +990,7 @@
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
 				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,
+				3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */,
 				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,
 				3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */,
 			);
