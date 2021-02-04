@@ -52,6 +52,7 @@ static id _instance;
     hints.ai_socktype = SOCK_DGRAM;
     hints.ai_flags = 0;
     hints.ai_protocol = 0;
+    PDebug(@"Resolving domain: domain='%@' address_family='%i'", domain, aiFamily);
     err = getaddrinfo(domain.UTF8String, NULL, &hints, &result);
     if (err != 0) {
         if (error != NULL) {

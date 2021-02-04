@@ -26,31 +26,88 @@ class AdvancedInspectTableViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
+    @objc func changeIPVersion(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            parameters.ipVersion = IP_VERSION_AUTOMATIC
+        case 1:
+            parameters.ipVersion = IP_VERSION_IPV4
+        case 2:
+            parameters.ipVersion = IP_VERSION_IPV6
+        default:
+            break
+        }
+    }
+
     // MARK: - Table view data source
     func buildTable() {
         self.sections = []
         self.sections.maybeAppend(self.buildTargetSection())
+        self.sections.maybeAppend(self.buildNetworkSection())
     }
 
     func buildTargetSection() -> TableViewSection? {
         let section = TableViewSection()
         section.title = lang(key: "Target")
+        section.footer = lang(key: "Specify an IP address to bypass name resolution")
 
         let hostInput = InputTableViewCell.Cell(title: lang(key: "Domain name or IP Address")) { (input: UITextField) in
             input.placeholder = lang(key: "www.nsa.gov")
+            input.keyboardType = .URL
+            input.autocorrectionType = .no
+            input.spellCheckingType = .no
         } valueDidChange: { (value: String) in
-            if let url = URL(string: value) {
+            var urlStr = value
+            if !urlStr.hasPrefix("https://") {
+                urlStr = "https://" + urlStr
+            }
+
+            if let url = URL(string: urlStr) {
                 self.parameters.queryURL = url
             }
         }
 
         let ipAddressInput = InputTableViewCell.Cell(title: lang(key: "Host IP Address")) { (input: UITextField) in
             input.placeholder = lang(key: "Optional")
+            input.keyboardType = .asciiCapable
+            input.autocorrectionType = .no
+            input.spellCheckingType = .no
         } valueDidChange: { (value: String) in
             self.parameters.ipAddress = value
         }
 
         section.cells = [hostInput, ipAddressInput]
+
+        return section
+    }
+
+    func buildNetworkSection() -> TableViewSection? {
+        let section = TableViewSection()
+        section.title = lang(key: "Network")
+
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment") else {
+            return nil
+        }
+
+        cell.selectionStyle = .none
+
+        guard let segment = cell.viewWithTag(1) as? UISegmentedControl else {
+            return nil
+        }
+
+        switch self.parameters.ipVersion {
+        case IP_VERSION_AUTOMATIC:
+            segment.selectedSegmentIndex = 0
+        case IP_VERSION_IPV4:
+            segment.selectedSegmentIndex = 1
+        case IP_VERSION_IPV6:
+            segment.selectedSegmentIndex = 2
+        default:
+            break
+        }
+        segment.addTarget(self, action: #selector(changeIPVersion(sender:)), for: .valueChanged)
+
+        section.cells = [cell]
 
         return section
     }

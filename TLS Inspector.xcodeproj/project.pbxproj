@@ -143,9 +143,7 @@
 		3CDC14D023B046410053932F /* AppOnlyGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */; };
 		3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14D123B0479B0053932F /* InitialViewController.swift */; };
 		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
-		3CE3B21225BE2066008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B21125BE2066008527A1 /* IDNA */; };
 		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
-		3CE3B21825BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
 		3CF3482723A56CA1000382CE /* CKEVOIDList.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF3482523A56CA1000382CE /* CKEVOIDList.h */; };
 		3CF3482823A56CA1000382CE /* CKEVOIDList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3482623A56CA1000382CE /* CKEVOIDList.m */; platformFilter = ios; };
 		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
@@ -369,7 +367,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CE3B21225BE2066008527A1 /* IDNA in Frameworks */,
 				3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */,
 				3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */,
 			);
@@ -781,7 +778,6 @@
 			);
 			name = "Inspect Website";
 			packageProductDependencies = (
-				3CE3B21125BE2066008527A1 /* IDNA */,
 			);
 			productName = "Inspect Website";
 			productReference = 3CDC14A723B0453B0053932F /* Show Certificate.appex */;
@@ -1079,7 +1075,6 @@
 				3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */,
 				3CDC14C623B045DA0053932F /* Lang.swift in Sources */,
 				3CDC14BB23B045B20053932F /* UIView+RoundedCorners.swift in Sources */,
-				3CE3B21825BE2186008527A1 /* URL+Encode.swift in Sources */,
 				3CDC14C023B045C50053932F /* CertificateTableViewController.swift in Sources */,
 				3CDC14BF23B045C50053932F /* HTTPHeadersTableViewController.swift in Sources */,
 				3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */,
@@ -1575,11 +1570,6 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		3CE3B20C25BE2054008527A1 /* IDNA */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */;
-			productName = IDNA;
-		};
-		3CE3B21125BE2066008527A1 /* IDNA */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */;
 			productName = IDNA;

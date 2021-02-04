@@ -77,6 +77,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
                 [self.delegate getter:self unexpectedError:resolveError];
             }
+            return;
         }
         parameters.ipAddress = ipAddress;
     }
