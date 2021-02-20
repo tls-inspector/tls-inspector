@@ -49,7 +49,7 @@ class AdvancedInspectTableViewController: UITableViewController {
     func buildTargetSection() -> TableViewSection? {
         let section = TableViewSection()
         section.title = lang(key: "Target")
-        section.footer = lang(key: "Specify an IP address to bypass name resolution")
+        section.footer = lang(key: "Specifying a host IP address will bypass name resolution.")
 
         let hostInput = InputTableViewCell.Cell(title: lang(key: "Domain name or IP Address")) { (input: UITextField) in
             input.placeholder = lang(key: "www.nsa.gov")
@@ -84,6 +84,7 @@ class AdvancedInspectTableViewController: UITableViewController {
     func buildNetworkSection() -> TableViewSection? {
         let section = TableViewSection()
         section.title = lang(key: "Network")
+        section.footer = lang(key: "Automatic will choose IPv6 if available.")
 
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment") else {
             return nil
