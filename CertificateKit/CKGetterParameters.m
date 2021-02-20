@@ -23,4 +23,16 @@
 
 @implementation CKGetterParameters
 
+- (NSString *) description {
+    return [NSString stringWithFormat:@"queryURL='%@' ipAddress='%@' queryServerInfo='%@' checkOCSP='%@' checkCRL='%@' cryptoEngine='%i' ipVersion='%i' ciphers='%@'",
+            self.queryURL.description,
+            self.ipAddress.description,
+            self.queryServerInfo ? @"YES" : @"NO",
+            self.checkOCSP ? @"YES" : @"NO",
+            self.checkCRL ? @"YES" : @"NO",
+            self.cryptoEngine,
+            self.ipVersion,
+            self.ciphers.description];
+}
+
 @end

@@ -48,6 +48,8 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 };
 
 - (void) getInfo:(CKGetterParameters * _Nonnull)parameters {
+    self.parameters = parameters;
+
     if (@available(iOS 12, *)) {} else {
         if (self.parameters.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
             PError(@"NetworkFramework crypto engine selected on incompatible iOS version - aborting");

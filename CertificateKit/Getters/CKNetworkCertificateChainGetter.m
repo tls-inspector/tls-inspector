@@ -60,10 +60,13 @@
 
     // TLS configuration
     nw_parameters_configure_protocol_block_t configure_tls = ^(nw_protocol_options_t tls_options) {
+        PDebug(@"Starting TLS configuration");
         sec_protocol_options_t sec_options = nw_tls_copy_sec_protocol_options(tls_options);
         sec_protocol_options_set_tls_ocsp_enabled(sec_options, false); // Don't do OCSP because we do it ourselves
         sec_protocol_options_set_tls_server_name(sec_options, parameters.queryURL.host.UTF8String);
+        sec_protocol_options_set_tls_resumption_enabled(sec_options, false); // Don't reuse sessions otherwise the verify block is not called
         sec_protocol_options_set_verify_block(sec_options, ^(sec_protocol_metadata_t  _Nonnull metadata, sec_trust_t  _Nonnull trust_ref, sec_protocol_verify_complete_t  _Nonnull complete) {
+            PDebug(@"Starting TLS verification");
             // Determine trust and get the root certificate
             SecTrustRef trust = sec_trust_copy_ref(trust_ref);
             SecTrustResultType trustStatus;
@@ -159,6 +162,17 @@
                 break;
             case nw_connection_state_ready:
                 PDebug(@"Event: nw_connection_state_ready");
+                if (numberOfCertificates <= 0) {
+                    PError(@"No certificates returned");
+                    self.finished = YES;
+                    self.successful = NO;
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
+                        [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:500 userInfo:@{NSLocalizedDescriptionKey: @"No certificates returned"}]];
+                    }
+                    nw_connection_cancel(connection);
+                    break;
+                }
+
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 PDebug(@"NetworkFramework getter successful");
                 PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.queryURL.host, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
