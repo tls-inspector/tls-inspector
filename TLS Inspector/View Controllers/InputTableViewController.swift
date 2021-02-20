@@ -224,10 +224,21 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
             self.performSegue(withIdentifier: "Inspect", sender: nil)
             self.updatePendingCell(state: .none)
-            self.domainInput?.isEnabled = true
-            self.domainInput?.text = ""
+            if let domainInput = self.domainInput {
+                domainInput.isEnabled = true
+                domainInput.text = ""
+                self.domainInputChanged(sender: domainInput)
+            }
             let domainsBefore = RecentLookups.GetRecentLookups().count
-            RecentLookups.AddLookup(getter.url)
+
+            var ipVersion = IPVersion.Automatic
+            if getter.parameters.ipVersion == IP_VERSION_IPV4 {
+                ipVersion = .IPv4
+            } else if getter.parameters.ipVersion == IP_VERSION_IPV6 {
+                ipVersion = .IPv6
+            }
+
+            RecentLookups.Add(Lookup(Host: getter.url, Address: getter.parameters.ipAddress ?? "", IPversion: ipVersion))
             let recentLookups = RecentLookups.GetRecentLookups()
             if UserOptions.rememberRecentLookups && recentLookups.count > 0 {
                 if recentLookups.count == 1 && domainsBefore == 0 {
@@ -275,6 +286,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.chainError = nil
             self.serverError = nil
             self.updatePendingCell(state: .none)
+            self.domainInput?.isEnabled = true
         }
     }
 
@@ -338,7 +350,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
-            cell.textLabel?.text = RecentLookups.GetRecentLookups()[indexPath.row]
+            let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
+            cell.textLabel?.text = lookup.toString()
             return cell
         }
 
@@ -374,8 +387,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
 
         let inspect = UITableViewRowAction(style: .normal, title: lang(key: "Inspect")) { (_, _) in
-            let query = RecentLookups.GetRecentLookups()[indexPath.row]
-            self.inspectDomain(text: query)
+            let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
+            self.inspectDomain(text: lookup.toString())
         }
         inspect.backgroundColor = UIColor.systemBlue
 
@@ -387,8 +400,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
-        let query = RecentLookups.GetRecentLookups()[indexPath.row]
-        self.inspectDomain(text: query)
+        let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
+        self.doInspect(parameters: lookup.parameters())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

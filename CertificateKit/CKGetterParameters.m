@@ -23,6 +23,19 @@
 
 @implementation CKGetterParameters
 
+- (id) copy {
+    CKGetterParameters * parameters = [CKGetterParameters new];
+    parameters.queryURL = [self.queryURL copy];
+    parameters.ipAddress = [self.ipAddress copy];
+    parameters.queryServerInfo = self.queryServerInfo;
+    parameters.checkOCSP = self.checkOCSP;
+    parameters.checkCRL = self.checkCRL;
+    parameters.cryptoEngine = self.cryptoEngine;
+    parameters.ipVersion = self.ipVersion;
+    parameters.ciphers = [self.ciphers copy];
+    return parameters;
+}
+
 - (NSString *) description {
     return [NSString stringWithFormat:@"queryURL='%@' ipAddress='%@' queryServerInfo='%@' checkOCSP='%@' checkCRL='%@' cryptoEngine='%i' ipVersion='%i' ciphers='%@'",
             self.queryURL.description,

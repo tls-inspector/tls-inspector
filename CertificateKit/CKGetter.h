@@ -49,7 +49,7 @@
 /**
  Options for the getter
  */
-@property (strong, nonatomic, nonnull) CKGetterParameters * parameters;
+@property (strong, nonatomic, readonly, nonnull) CKGetterParameters * parameters;
 
 /**
  The certificate chain for the URL
