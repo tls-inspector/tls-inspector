@@ -10,7 +10,6 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     var getter: CKGetter?
     var pendingCellState: PendingCellStates = .none
-    var placeholderDomains: [String] = []
     let tipKeys: [String] = ["tlstip1", "tlstip2", "tlstip3", "tlstip5", "tlstip6", "tlstip7"]
 
     var certificateChain: CKCertificateChain?
@@ -26,10 +25,6 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     override func viewDidLoad() {
         AppState.getterViewController = self
-
-        if let domains = loadPlaceholderDomains() {
-            self.placeholderDomains = domains
-        }
 
         if !UserOptions.firstRunCompleted {
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Notice") {
@@ -57,10 +52,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             self.tipTextView.text = lang(key: tip)
         }
 
-        if let placeholder = placeholderDomains.randomElement() {
-            domainInput?.placeholder = placeholder
-        }
-
+        domainInput?.placeholder = RandomDomainName.get()
         super.viewWillAppear(animated)
     }
 
@@ -97,16 +89,6 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         } else {
             return false
         }
-    }
-
-    func loadPlaceholderDomains() -> [String]? {
-        guard let domainListPath = Bundle.main.path(forResource: "DomainList", ofType: "plist") else {
-            return nil
-        }
-        guard let domains = NSArray.init(contentsOfFile: domainListPath) as? [String] else {
-            return nil
-        }
-        return domains
     }
 
     @objc func domainInputChanged(sender: UITextField) {
@@ -344,7 +326,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             if let textField = cell.viewWithTag(1) as? UITextField {
                 self.domainInput = textField
                 textField.delegate = self
-                textField.placeholder = placeholderDomains.randomElement()
+                textField.placeholder = RandomDomainName.get()
                 textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
             }
 
