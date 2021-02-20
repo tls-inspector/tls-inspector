@@ -14,7 +14,6 @@ class RandomDomainName {
         RandomDomainName.placeholderDomains = domains
     }
 
-
     /// Get a random domain name. Will lazily load the domain list on first call.
     /// - Returns: A domain name. Will always return a domain name, even if the list fails to load.
     public static func get() -> String? {

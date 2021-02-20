@@ -16,6 +16,8 @@
 	<string>About TLS Inspector</string>
 	<key>Add Certificate Expiry Reminder</key>
 	<string>Add Certificate Expiry Reminder</string>
+	<key>Advanced Inspect</key>
+	<string>Advanced Inspect</string>
 	<key>Advanced Options</key>
 	<string>Advanced Options</string>
 	<key>Algorithm</key>
@@ -28,8 +30,12 @@
 	<string>Apple Support</string>
 	<key>Authority</key>
 	<string>Authority</string>
+	<key>Auto</key>
+	<string>Auto</string>
 	<key>Automatic</key>
 	<string>Automatic</string>
+	<key>Automatic will choose IPv6 if available.</key>
+	<string>Automatic will choose IPv6 if available.</string>
 	<key>Basic</key>
 	<string>Basic</string>
 	<key>Build</key>
@@ -565,6 +571,8 @@
 	<string>Do not contact support for issues with your iOS Device or to report unsafe websites.</string>
 	<key>Domain Name or IP Address</key>
 	<string>Domain Name or IP Address</string>
+	<key>Domain name or IP Address</key>
+	<string>Domain name or IP Address</string>
 	<key>Download &amp; Check CRL</key>
 	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
@@ -603,6 +611,8 @@
 	<string>Get Involved</string>
 	<key>HTTP Headers</key>
 	<string>HTTP Headers</string>
+	<key>Host IP Address</key>
+	<string>Host IP Address</string>
 	<key>Host was not found or invalid.</key>
 	<string>Host was not found or invalid.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
@@ -661,6 +671,8 @@
 	<string>Negotiated Ciphersuite</string>
 	<key>Negotiated Version</key>
 	<string>Negotiated Version</string>
+	<key>Network</key>
+	<string>Network</string>
 	<key>Next</key>
 	<string>Next</string>
 	<key>No</key>
@@ -689,6 +701,8 @@
 	<string>OpenSSL Settings</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
+	<key>Optional</key>
+	<string>Optional</string>
 	<key>Options</key>
 	<string>Options</string>
 	<key>Please describe the problem in at least 5 words.</key>
@@ -765,6 +779,8 @@
 	<string>Size</string>
 	<key>Something Else</key>
 	<string>Something Else</string>
+	<key>Specifying a host IP address will bypass name resolution.</key>
+	<string>Specifying a host IP address will bypass name resolution.</string>
 	<key>Status Providers</key>
 	<string>Status Providers</string>
 	<key>Subject</key>
@@ -799,6 +815,8 @@
 	<string>TLS Inspector</string>
 	<key>TLS Inspector Issues Only</key>
 	<string>TLS Inspector Issues Only</string>
+	<key>Target</key>
+	<string>Target</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Tell Friends About TLS Inspector</string>
 	<key>Test New Features</key>

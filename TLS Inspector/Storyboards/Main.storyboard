@@ -173,8 +173,6 @@
                                             </segments>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleKey0" value="Auto"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="titleKey1" value="IPv4"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="titleKey2" value="IPv6"/>
                                             </userDefinedRuntimeAttributes>
                                         </segmentedControl>
                                     </subviews>
