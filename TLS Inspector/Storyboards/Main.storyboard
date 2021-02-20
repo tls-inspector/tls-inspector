@@ -268,11 +268,13 @@
                                     <subviews>
                                         <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="www.nsa.gov" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRM-Rn-3D1">
                                             <rect key="frame" x="20" y="0.0" width="374" height="56.5"/>
+                                            <accessibility key="accessibilityConfiguration" label="Domain name or IP address input"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="go" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="url"/>
                                         </textField>
                                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xii-cx-wD1" userLabel="Advanced Button" customClass="OptionsButton" customModule="TLS_Inspector">
                                             <rect key="frame" x="374" y="18.5" width="20" height="20"/>
+                                            <accessibility key="accessibilityConfiguration" label="Advanced Inspect Options Button"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="670-cV-Idj"/>
                                                 <constraint firstAttribute="width" constant="20" id="vgk-8R-qM7"/>
@@ -369,11 +371,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="TLS Inspector" id="XJW-xh-YEf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="Menu" id="jS6-Fj-Gad">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="Options and About"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="moreButtonPressed:" destination="cY4-Ck-Oam" id="595-4H-tPu"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="ArrowRight" id="0qx-qm-eb4">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="ArrowRight" largeContentSizeImage="Inspect" id="0qx-qm-eb4">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="Inspect Domain"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="inspectButtonPressed:" destination="cY4-Ck-Oam" id="zrs-GJ-rT5"/>
                             </connections>
@@ -800,6 +808,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Trust Details" id="2dW-jP-01K">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="GLB-dG-pWi">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="Close"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="closeButton:" destination="jEW-bB-iw7" id="RGH-0k-mqH"/>
                             </connections>
@@ -842,6 +853,7 @@
     </designables>
     <resources>
         <image name="ArrowRight" width="25" height="25"/>
+        <image name="Inspect" width="128" height="128"/>
         <image name="Menu" width="25" height="25"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

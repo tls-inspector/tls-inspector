@@ -68,6 +68,7 @@
 		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
 		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
+		3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */; };
 		3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */; };
 		3C99C7C925A57231002ABA15 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */; };
 		3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */; };
@@ -271,6 +272,7 @@
 		3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateReminder.swift; sourceTree = "<group>"; };
 		3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTipTarget.swift; sourceTree = "<group>"; };
 		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
+		3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAccessabilityHints.swift; sourceTree = "<group>"; };
 		3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInspectTableViewController.swift; sourceTree = "<group>"; };
 		3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+MaterialColors.swift"; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
 				3C599F6A23EA8D8200791DF1 /* AppInfo.swift */,
 				3CE3B21625BE2186008527A1 /* URL+Encode.swift */,
+				3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -1049,6 +1052,7 @@
 				3C7B09FF23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift in Sources */,
 				3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */,
 				3CB784A225293E4D009ECE20 /* ChainGetterViewController.swift in Sources */,
+				3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */,
 				3C5F4654239A169400B3A727 /* UIView+RoundedCorners.swift in Sources */,
 				3C7269662394C916002A0B19 /* CertificateChainTableViewController.swift in Sources */,
 				3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */,

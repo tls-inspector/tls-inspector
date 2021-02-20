@@ -42,6 +42,8 @@ class InputTableViewCell: UITableViewCell {
         cell.setNeedsLayout()
         cell.selectionStyle = .none
 
+        cell.accessibilityLabel = cell.titleLabel.text
+
         return cell
     }
 
