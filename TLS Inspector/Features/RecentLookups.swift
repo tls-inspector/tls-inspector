@@ -3,126 +3,63 @@ import CertificateKit
 
 private let LIST_KEY = "RECENT_DOMAINS"
 
-struct Lookup {
-    var Host: URL
-    var Address: String
-    var IPversion: IPVersion
-
-    static func decode(_ lookupstr: String) -> Lookup? {
-        let parts = lookupstr.components(separatedBy: ",")
-        if parts.count != 3 {
-            return nil
-        }
-        guard let host = URL.fromString(str: parts[0]) else {
-            return nil
-        }
-        guard let version = IPVersion.init(rawValue: parts[2]) else {
-            return nil
-        }
-
-        return Lookup(Host: host, Address: parts[1], IPversion: version)
-    }
-
-    func encode() -> String {
-        let versionStr = self.IPversion.rawValue
-        return "\(self.Host.absoluteURL),\(self.Address),\(versionStr)".lowercased()
-    }
-
-    func toString() -> String {
-        var port = 443
-        if let urlPort = self.Host.port {
-            port = urlPort
-        }
-
-        var domain = self.Host.host ?? ""
-        if port != 443 {
-            domain += ":\(port)"
-        }
-
-        if self.Address != "" || self.IPversion != .Automatic {
-            domain += "*"
-        }
-
-        return domain
-    }
-
-    func parameters() -> CKGetterParameters {
-        let parameters = CKGetterParameters()
-        parameters.queryURL = self.Host
-        if self.Address != "" {
-            parameters.ipAddress = self.Address
-        }
-        switch self.IPversion {
-        case .Automatic:
-            break
-        case .IPv4:
-            parameters.ipVersion = IP_VERSION_IPV4
-        case .IPv6:
-            parameters.ipVersion = IP_VERSION_IPV6
-        }
-
-        return parameters
-    }
-}
-
 /// Class for managing recently inspected domains
 class RecentLookups {
     /// Return all recently inspected domains
-    public static func GetRecentLookups() -> [Lookup] {
-        guard let list = AppDefaults.array(forKey: LIST_KEY) as? [String] else {
+    public static func GetRecentLookups() -> [CKGetterParameters] {
+        guard let list = AppDefaults.array(forKey: LIST_KEY) as? [[String: Any]] else {
             return []
         }
 
-        var lookups: [Lookup] = []
-        for entry in list {
-            guard let lookup = Lookup.decode(entry) else {
+        var lookups: [CKGetterParameters] = []
+        for (i, l) in list.enumerated() {
+            guard let parameters = CKGetterParameters.fromDictionary(l) else {
+                RemoveLookup(index: i)
                 continue
             }
-            lookups.append(lookup)
+            lookups.append(parameters)
         }
 
         return lookups
     }
 
     /// Add a new recently inspected domain. If the domain was already in the list, it is moved to index 0.
-    /// - Parameter domain: The domain to add. Case insensitive.
-    public static func Add(_ lookup: Lookup) {
-        var list: [String] = []
-        if let savedList = AppDefaults.array(forKey: LIST_KEY) as? [String] {
-            list = savedList
+    public static func Add(_ parameters: CKGetterParameters) {
+        let dict = parameters.dictionaryValue()
+        var list = AppDefaults.array(forKey: LIST_KEY) as? [[String: Any]] ?? []
+
+        var index = -1
+        for (i, d) in list.enumerated() {
+            guard let p = CKGetterParameters.fromDictionary(d) else {
+                continue
+            }
+            if p.isEqual(parameters) {
+                index = i
+                break
+            }
         }
-
-        if lookup.Host.host == nil {
-            LogError("Unable to add host to lookup list as URL is nil")
-            return
-        }
-
-        let lookupStr = lookup.encode()
-
-        if let index = list.firstIndex(of: lookupStr) {
+        if index >= 0 {
             list.remove(at: index)
         }
 
         if list.count >= 5 {
             list.remove(at: 4)
         }
-        LogDebug("Adding query '\(lookupStr)' to recent lookup list")
-        list.insert(lookupStr, at: 0)
 
-        AppDefaults.set(list, forKey: LIST_KEY)
+        list.insert(dict, at: 0)
+        AppDefaults.setValue(list, forKey: LIST_KEY)
     }
 
     /// Remove the recently inspected domain at the specified index.
     /// - Parameter index: The index to remove.
     public static func RemoveLookup(index: Int) {
-        guard var list = AppDefaults.array(forKey: LIST_KEY) as? [String] else {
+        guard var list = AppDefaults.array(forKey: LIST_KEY) as? [[String: Any]] else {
             return
         }
         if index > list.count || index < 0 {
             return
         }
         list.remove(at: index)
-
         AppDefaults.set(list, forKey: LIST_KEY)
     }
 

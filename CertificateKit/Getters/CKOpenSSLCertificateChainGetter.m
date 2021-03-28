@@ -69,7 +69,6 @@ INSERT_OPENSSL_ERROR_METHOD
     PDebug(@"Getting certificate chain with OpenSSL");
 
     self.parameters = parameters;
-    unsigned int port = self.parameters.queryURL.port != nil ? [self.parameters.queryURL.port unsignedIntValue] : 443;
 
     for (int i = 0; i < CERTIFICATE_CHAIN_MAXIMUM; i++) {
         certificateChain[i] = NULL;
@@ -104,7 +103,7 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    const char * host = [[NSString stringWithFormat:@"%@:%i", self.parameters.ipAddress, port] UTF8String];
+    const char * host = [[NSString stringWithFormat:@"%@:%i", self.parameters.ipAddress, self.parameters.port] UTF8String];
     if (BIO_set_conn_hostname(web, host) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorInvalidParameter description:@"Invalid hostname"];
@@ -134,7 +133,7 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    if (SSL_set_tlsext_host_name(ssl, [self.parameters.queryURL.host UTF8String]) < 0) {
+    if (SSL_set_tlsext_host_name(ssl, [self.parameters.hostAddress UTF8String]) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorConnection description:@"Could not resolve hostname"];
         SSL_CLEANUP
@@ -188,7 +187,7 @@ INSERT_OPENSSL_ERROR_METHOD
     self.chain.protocol = [self protocolString:SSL_version(ssl)];
     self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];
     self.chain.remoteAddress = remoteAddr;
-    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.queryURL, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
+    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
     SSL_CLEANUP
 
@@ -227,7 +226,7 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    SecPolicyRef policy = SecPolicyCreateSSL(true, (__bridge CFStringRef)self.parameters.queryURL.host);
+    SecPolicyRef policy = SecPolicyCreateSSL(true, (__bridge CFStringRef)self.parameters.hostAddress);
     SecTrustRef trust;
     SecTrustCreateWithCertificates((__bridge CFTypeRef)secCertificates, policy, &trust);
 
@@ -249,8 +248,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     self.chain.certificates = certs;
 
-    self.chain.domain = self.parameters.queryURL.host;
-    self.chain.url = self.parameters.queryURL;
+    self.chain.domain = self.parameters.hostAddress;
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");

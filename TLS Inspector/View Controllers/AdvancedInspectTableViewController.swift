@@ -9,6 +9,7 @@ class AdvancedInspectTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buildTable()
+        self.parameters = UserOptions.getterParameters(hostAddress: "")
     }
 
     // MARK: - Title bar buttons
@@ -56,15 +57,22 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.keyboardType = .URL
             input.autocorrectionType = .no
             input.spellCheckingType = .no
+            input.autocapitalizationType = .none
         } valueDidChange: { (value: String) in
-            var urlStr = value
-            if !urlStr.hasPrefix("https://") {
-                urlStr = "https://" + urlStr
+            self.parameters.hostAddress = value
+        }
+
+        let portInput = InputTableViewCell.Cell(title: lang(key: "Port")) { (input: UITextField) in
+            input.placeholder = "443"
+            input.keyboardType = .numberPad
+            input.autocorrectionType = .no
+            input.spellCheckingType = .no
+        } valueDidChange: { (value: String) in
+            guard let port = UInt16.init(value) else {
+                return
             }
 
-            if let url = URL(string: urlStr) {
-                self.parameters.queryURL = url
-            }
+            self.parameters.port = port
         }
 
         let ipAddressInput = InputTableViewCell.Cell(title: lang(key: "Host IP Address")) { (input: UITextField) in
@@ -76,7 +84,7 @@ class AdvancedInspectTableViewController: UITableViewController {
             self.parameters.ipAddress = value
         }
 
-        section.cells = [hostInput, ipAddressInput]
+        section.cells = [hostInput, portInput, ipAddressInput]
 
         return section
     }

@@ -43,11 +43,9 @@
 
     self.parameters = parameters;
     self.chain = [CKCertificateChain new];
-    self.chain.domain = parameters.queryURL.host;
-    self.chain.url = parameters.queryURL;
+    self.chain.domain = parameters.hostAddress;
 
-    unsigned int port = parameters.queryURL.port != nil ? [parameters.queryURL.port unsignedIntValue] : 443;
-    const char * portStr = [[NSString alloc] initWithFormat:@"%i", port].UTF8String;
+    const char * portStr = [[NSString alloc] initWithFormat:@"%i", parameters.port].UTF8String;
     nw_endpoint_t endpoint = nw_endpoint_create_host(parameters.ipAddress.UTF8String, portStr);
     long __block numberOfCertificates = 0L;
 
@@ -63,7 +61,7 @@
         PDebug(@"Starting TLS configuration");
         sec_protocol_options_t sec_options = nw_tls_copy_sec_protocol_options(tls_options);
         sec_protocol_options_set_tls_ocsp_enabled(sec_options, false); // Don't do OCSP because we do it ourselves
-        sec_protocol_options_set_tls_server_name(sec_options, parameters.queryURL.host.UTF8String);
+        sec_protocol_options_set_tls_server_name(sec_options, parameters.hostAddress.UTF8String);
         sec_protocol_options_set_tls_resumption_enabled(sec_options, false); // Don't reuse sessions otherwise the verify block is not called
         sec_protocol_options_set_verify_block(sec_options, ^(sec_protocol_metadata_t  _Nonnull metadata, sec_trust_t  _Nonnull trust_ref, sec_protocol_verify_complete_t  _Nonnull complete) {
             PDebug(@"Starting TLS verification");
@@ -175,7 +173,7 @@
 
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 PDebug(@"NetworkFramework getter successful");
-                PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.queryURL.host, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
+                PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.hostAddress, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
 
                 self.finished = YES;
                 self.successful = YES;

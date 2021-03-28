@@ -39,7 +39,7 @@
 
 - (void) performTaskWithParameters:(CKGetterParameters *)parameters {
     PDebug(@"Getting HTTP server info");
-    [self getServerInfoForURL:parameters.queryURL finished:^(NSError *error) {
+    [self getServerInfoWithParameters:parameters finished:^(NSError *error) {
         PDebug(@"Finished getting HTTP server info");
         self.finished = YES;
         if (error) {
@@ -55,8 +55,7 @@
     }];
 }
 
-- (void) getServerInfoForURL:(NSURL *)url finished:(void (^)(NSError * error))finished {
-    CURLcode response;
+- (void) getServerInfoWithParameters:(CKGetterParameters *)parameters finished:(void (^)(NSError * error))finished {
     CURL * curl = [[CKCurlCommon sharedInstance] curlHandle];
     if (!curl) {
         PError(@"Unable to create curl session (this shouldn't happen!)");
@@ -68,8 +67,11 @@
     self.headers = [NSMutableDictionary new];
     NSError * error;
 
-    PDebug(@"Server Info Request: HTTP GET %@", url.absoluteString);
-    const char * urlString = url.absoluteString.UTF8String;
+    PDebug(@"Server Info Request: HTTP GET %@", parameters.hostAddress);
+    const char * hostString = [NSString stringWithFormat:@"%@:%i:%@", parameters.hostAddress, parameters.port, parameters.ipAddress].UTF8String;
+    const char * urlString = [NSString stringWithFormat:@"https://%@:%i", parameters.hostAddress, parameters.port].UTF8String;
+    struct curl_slist * hostList = curl_slist_append(NULL, hostString);
+    curl_easy_setopt(curl, CURLOPT_RESOLVE, hostList);
     curl_easy_setopt(curl, CURLOPT_URL, urlString);
     // Since we're only concerned with getting the HTTP servers
     // info, we don't do any verification
@@ -102,13 +104,13 @@
     curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L); // Give up after 5 seconds
     curl_easy_setopt(curl, CURLOPT_COOKIEFILE, ""); // Start the cookie engile (but don't save cookies)
     // Perform the request, res will get the return code
-    response = curl_easy_perform(curl);
+    CURLcode response = curl_easy_perform(curl);
     if (response == CURLE_OK) {
         char *urlstr = NULL;
         curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &urlstr);
         if (urlstr != NULL) {
             NSURL * redirectURL = [NSURL URLWithString:[NSString stringWithCString:urlstr encoding:NSASCIIStringEncoding]];
-            if (![url.host isEqualToString:redirectURL.host]) {
+            if (![parameters.hostAddress isEqualToString:redirectURL.host]) {
                 PWarn(@"Server redirected to different host: '%@'", redirectURL.absoluteString);
                 self.redirectedTo = redirectURL;
             } else {

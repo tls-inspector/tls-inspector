@@ -51,7 +51,8 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
 - (void) getInfo:(CKGetterParameters * _Nonnull)parameters {
     self.parameters = [parameters copy];
-    self.updatedParameters = [parameters copy];
+    [self.parameters prepare];
+    self.updatedParameters = [self.parameters copy];
 
     if (@available(iOS 12, *)) {} else {
         if (self.updatedParameters.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
@@ -68,13 +69,13 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         NSError * resolveError;
         switch (self.updatedParameters.ipVersion) {
             case IP_VERSION_AUTOMATIC:
-                ipAddress = [[CKResolver sharedResolver] getAddressFromDomain:self.updatedParameters.queryURL.host withError:&resolveError];
+                ipAddress = [[CKResolver sharedResolver] getAddressFromDomain:self.updatedParameters.hostAddress withError:&resolveError];
                 break;
             case IP_VERSION_IPV4:
-                ipAddress = [[CKResolver sharedResolver] getIPv4AddressFromDomain:self.updatedParameters.queryURL.host withError:&resolveError];
+                ipAddress = [[CKResolver sharedResolver] getIPv4AddressFromDomain:self.updatedParameters.hostAddress withError:&resolveError];
                 break;
             case IP_VERSION_IPV6:
-                ipAddress = [[CKResolver sharedResolver] getIPv6AddressFromDomain:self.updatedParameters.queryURL.host withError:&resolveError];
+                ipAddress = [[CKResolver sharedResolver] getIPv6AddressFromDomain:self.updatedParameters.hostAddress withError:&resolveError];
                 break;
         }
         if (resolveError != nil) {
@@ -88,8 +89,6 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     }
 
     PDebug(@"Starting getter for: %@", self.updatedParameters.description);
-
-    self.url = self.updatedParameters.queryURL;
 
     switch (self.updatedParameters.cryptoEngine) {
         case CRYPTO_ENGINE_NETWORK_FRAMEWORK:

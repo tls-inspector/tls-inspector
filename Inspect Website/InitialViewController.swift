@@ -110,7 +110,7 @@ class InitialViewController: UIViewController, CKGetterDelegate {
             }
 
             foundURL = true
-            inspectURL(url: url)
+            inspectHostAddress(url.host ?? "")
         }
 
         if !foundURL {
@@ -122,9 +122,9 @@ class InitialViewController: UIViewController, CKGetterDelegate {
         }
     }
 
-    func inspectURL(url: URL) {
+    func inspectHostAddress(_ hostAddress: String) {
         self.getter.delegate = self
-        self.getter.getInfo(UserOptions.getterParameters(queryURL: url))
+        self.getter.getInfo(UserOptions.getterParameters(hostAddress: hostAddress))
     }
 
     // MARK: CKGetterDelegate Methods

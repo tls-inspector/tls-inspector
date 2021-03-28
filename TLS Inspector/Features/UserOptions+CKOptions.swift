@@ -2,10 +2,10 @@ import UIKit
 import CertificateKit
 
 extension UserOptions {
-    public static func getterParameters(queryURL: URL) -> CKGetterParameters {
+    public static func getterParameters(hostAddress: String) -> CKGetterParameters {
         let parameters = CKGetterParameters()
 
-        parameters.queryURL = queryURL
+        parameters.hostAddress = hostAddress
         parameters.queryServerInfo = UserOptions.getHTTPHeaders
         parameters.checkOCSP = UserOptions.queryOCSP
         parameters.checkCRL = UserOptions.checkCRL

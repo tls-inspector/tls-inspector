@@ -62,9 +62,14 @@ typedef enum __IP_VERSIONS {
 @interface CKGetterParameters : NSObject
 
 /**
- The URL to query
+ The host address. Can be either a domain name or an IP address. If the ipAddress property is nil, will connect to this address.
  */
-@property (strong, nonatomic, nonnull) NSURL * queryURL;
+@property (strong, nonatomic, nonnull) NSString * hostAddress;
+
+/**
+ The port to connect to. If 0 will use 443.
+ */
+@property (nonatomic) UInt16 port;
 
 /**
  The IP address of the host to connect to. If null, will use queryURL.
@@ -100,6 +105,26 @@ typedef enum __IP_VERSIONS {
  (OpenSSL only) The cipherstring used with OpenSSL
  */
 @property (strong, nonatomic, nullable) NSString * ciphers;
+
+/**
+ Prepare will clean up any of the inputs and make them ready for use within certificatekit
+ */
+- (void) prepare;
+
+/**
+ Compare this instance of CKGetterParameters with the provided other.
+ */
+- (BOOL) isEqual:(CKGetterParameters * _Nonnull)other;
+
+/**
+ Return a dictionary representation of these parameters.
+ */
+- (NSDictionary<NSString *, id> *) dictionaryValue;
+
+/**
+ Parse the given dictionary into a parameters object. Will return nil if any values are missing or incorrect.
+ */
++ (CKGetterParameters * _Nullable) fromDictionary:(NSDictionary<NSString *, id> * _Nonnull)d;
 
 @end
 

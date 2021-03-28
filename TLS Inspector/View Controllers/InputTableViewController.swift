@@ -155,12 +155,12 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             domainText = "https://" + domainText
         }
 
-        guard let url = URL.fromString(str: domainText) else {
+        if URL.fromString(str: domainText) == nil {
             showInputError()
             return
         }
 
-        self.doInspect(parameters: UserOptions.getterParameters(queryURL: url))
+        self.doInspect(parameters: UserOptions.getterParameters(hostAddress: domainText))
     }
 
     func showInputError() {
@@ -230,15 +230,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
                 self.domainInputChanged(sender: domainInput)
             }
             let domainsBefore = RecentLookups.GetRecentLookups().count
-
-            var ipVersion = IPVersion.Automatic
-            if getter.parameters.ipVersion == IP_VERSION_IPV4 {
-                ipVersion = .IPv4
-            } else if getter.parameters.ipVersion == IP_VERSION_IPV6 {
-                ipVersion = .IPv6
-            }
-
-            RecentLookups.Add(Lookup(Host: getter.url, Address: getter.parameters.ipAddress ?? "", IPversion: ipVersion))
+            RecentLookups.Add(getter.parameters)
             let recentLookups = RecentLookups.GetRecentLookups()
             if UserOptions.rememberRecentLookups && recentLookups.count > 0 {
                 if recentLookups.count == 1 && domainsBefore == 0 {
@@ -351,7 +343,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
             let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
-            cell.textLabel?.text = lookup.toString()
+            cell.textLabel?.text = lookup.hostAddress
             return cell
         }
 
@@ -378,8 +370,16 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
 
         let delete = UITableViewRowAction(style: .destructive, title: lang(key: "Delete")) { (_, _) in
+            let countBefore = RecentLookups.GetRecentLookups().count
             RecentLookups.RemoveLookup(index: indexPath.row)
-            if RecentLookups.GetRecentLookups().count == 0 {
+            let countAfter = RecentLookups.GetRecentLookups().count
+
+            if countBefore == countAfter {
+                // Don't update the table to avoid a potential crash
+                return
+            }
+
+            if countAfter == 0 {
                 tableView.deleteSections([1], with: .automatic)
             } else {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -388,7 +388,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
         let inspect = UITableViewRowAction(style: .normal, title: lang(key: "Inspect")) { (_, _) in
             let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
-            self.inspectDomain(text: lookup.toString())
+            self.doInspect(parameters: lookup)
         }
         inspect.backgroundColor = UIColor.systemBlue
 
@@ -401,7 +401,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         }
 
         let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
-        self.doInspect(parameters: lookup.parameters())
+        self.doInspect(parameters: lookup)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

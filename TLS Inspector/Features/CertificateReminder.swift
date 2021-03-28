@@ -10,7 +10,7 @@ class CertificateReminder {
     ///   - daysBeforeExpire: The number of days before expiry
     ///   - completed: Called when added or on error
     static func addReminder(certificate: CKCertificate,
-                            domain: URL,
+                            domain: String,
                             daysBeforeExpire: Int,
                             completed: @escaping (Error?) -> Void) {
         let completedBlock = completed
@@ -32,11 +32,10 @@ class CertificateReminder {
             formatter.dateFormat = "MMM d, yyyy"
 
             let reminder = EKReminder(eventStore: store)
-            reminder.title = lang(key: "Renew Certificate for {domain}", args: [domain.host ?? ""])
+            reminder.title = lang(key: "Renew Certificate for {domain}", args: [domain])
             let expiry = formatter.string(from: notAfter)
 
-            reminder.notes = lang(key: "The certificate for {domain} expires on {date}", args: [domain.host ?? "", expiry])
-            reminder.url = domain
+            reminder.notes = lang(key: "The certificate for {domain} expires on {date}", args: [domain, expiry])
             let days = daysBeforeExpire - (daysBeforeExpire * 2)
             if let alarmDate = Calendar.current.date(byAdding: .day, value: days, to: notAfter) {
                 reminder.addAlarm(EKAlarm(absoluteDate: alarmDate))

@@ -43,10 +43,6 @@
 @property (weak, nonatomic, nullable) id delegate;
 
 /**
- The inspected URL
- */
-@property (strong, nonatomic, nonnull) NSURL * url;
-/**
  Options for the getter
  */
 @property (strong, nonatomic, readonly, nonnull) CKGetterParameters * parameters;
