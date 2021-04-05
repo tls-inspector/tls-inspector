@@ -15,6 +15,29 @@ App Store. Older versions are not supported and may contain unfixed security vul
 We provide limited support to pre-release "Test Flight" versions of the app. These versions may
 contain security vulnerabilities and use of pre-release software is at your own risk.
 
+## Upstream Vulnerabilities
+
+TLS Inspector relies on open source third-party software packages, most notably OpenSSL and cURL.
+
+We require that software packages that are extensively used through the app to have an existing
+security policy.
+
+### OpenSSL
+
+When a vulnerability for OpenSSL is announced, we must determine the impact of the issue on
+TLS Inspector.
+
+TLS Inspector does not implement all features of OpenSSL and therefor might not be impacted by a
+vulnerability.
+
+### cURL
+
+When a vulnerability for cURL is announced, we must determine the impact of the issue on
+TLS Inspector.
+
+TLS Inspector does not implement all features of cURL and therefor might not be impacted by a
+vulnerability.
+
 ## Reporting a Vulnerability
 
 Please do not report security vulnerabilities as issues on Github as these are visible to the
@@ -25,8 +48,8 @@ reports private until we can determine the scope of the issue.
 Instructions on how to report vulnerabilities to us are provided on our website:
 https://tlsinspector.com/vulnerability.html
 
-We prefer that you use Signal to report issues instead of regular email. We do not provide a PGP public
-key and do not support responding to PGP encrypted emails.
+We prefer that you use the Google Form or Signal to report issues instead of regular email.
+We do not provide a PGP public key and do not support responding to PGP encrypted emails.
 
 # Q & A
 

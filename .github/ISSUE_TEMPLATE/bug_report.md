@@ -1,7 +1,6 @@
 ---
 name: Bug report
-about: Found an issue with TLS Inspector? Let us know and we'll do our best to resolve
-  it.
+about: Found an issue with TLS Inspector? Let us know and we'll do our best to resolve it.
 
 ---
 
