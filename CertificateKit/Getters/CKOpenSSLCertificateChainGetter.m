@@ -103,7 +103,7 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    const char * host = [[NSString stringWithFormat:@"%@:%i", self.parameters.ipAddress, self.parameters.port] UTF8String];
+    const char * host = [self.parameters.socketAddress UTF8String];
     if (BIO_set_conn_hostname(web, host) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorInvalidParameter description:@"Invalid hostname"];
@@ -111,7 +111,14 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    BIO_set_conn_ip_family(web, BIO_FAMILY_IPV4);
+    switch (parameters.ipVersion) {
+        case IP_VERSION_AUTOMATIC:
+            BIO_set_conn_ip_family(web, BIO_FAMILY_IPANY);
+        case IP_VERSION_IPV4:
+            BIO_set_conn_ip_family(web, BIO_FAMILY_IPV4);
+        case IP_VERSION_IPV6:
+            BIO_set_conn_ip_family(web, BIO_FAMILY_IPV6);
+    }
 
     BIO_get_ssl(web, &ssl);
     if (ssl == NULL) {

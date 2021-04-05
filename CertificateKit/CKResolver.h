@@ -20,15 +20,16 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
+#import "CKResolvedAddress.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CKResolver : NSObject
 
 + (CKResolver * _Nonnull) sharedResolver;
-- (NSString * _Nullable) getAddressFromDomain:(NSString * _Nonnull)domain withError:(NSError * _Nullable *)error;
-- (NSString * _Nullable) getIPv4AddressFromDomain:(NSString * _Nonnull)domain withError:(NSError * _Nullable *)error;
-- (NSString * _Nullable) getIPv6AddressFromDomain:(NSString * _Nonnull)domain withError:(NSError * _Nullable *)error;
+- (CKResolvedAddress * _Nullable) getAddressFromDomain:(NSString * _Nonnull)domain withError:(NSError * _Nullable *)error;
+- (CKResolvedAddress * _Nullable) getIPv4AddressFromDomain:(NSString * _Nonnull)domain withError:(NSError * _Nullable *)error;
+- (CKResolvedAddress * _Nullable) getIPv6AddressFromDomain:(NSString * _Nonnull)domain withError:(NSError * _Nullable *)error;
 
 @end
 

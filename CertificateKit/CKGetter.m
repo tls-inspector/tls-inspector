@@ -32,8 +32,8 @@
     BOOL gotServerInfo;
 }
 
-@property (strong, nonatomic, readwrite, nonnull) CKGetterParameters * parameters;
-@property (strong, nonatomic, nonnull) CKGetterParameters * updatedParameters;
+@property (strong, nonatomic, nonnull, readwrite) CKInspectParameters * parameters;
+@property (strong, nonatomic, nonnull) CKGetterParameters * getterParameters;
 @property (strong, nonatomic, nonnull) CKCertificateChainGetter * chainGetter;
 @property (strong, nonatomic, nonnull) CKServerInfoGetter * serverInfoGetter;
 @property (strong, nonatomic, nonnull) NSArray<CKGetterTask *> * tasks;
@@ -49,13 +49,12 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     CKGetterTaskTagServerInfo,
 };
 
-- (void) getInfo:(CKGetterParameters * _Nonnull)parameters {
-    self.parameters = [parameters copy];
-    [self.parameters prepare];
-    self.updatedParameters = [self.parameters copy];
+- (void) getInfo:(CKInspectParameters * _Nonnull)parameters {
+    self.parameters = parameters;
+    self.getterParameters = [CKGetterParameters fromInspectParameters:parameters];
 
     if (@available(iOS 12, *)) {} else {
-        if (self.updatedParameters.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
+        if (self.getterParameters.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
             PError(@"NetworkFramework crypto engine selected on incompatible iOS version - aborting");
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
                 [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported crypto engine"}]];
@@ -64,18 +63,18 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
         }
     }
 
-    if (self.updatedParameters.ipAddress == nil || self.updatedParameters.ipAddress.length == 0) {
-        NSString * ipAddress;
+    if (self.getterParameters.ipAddress == nil || self.getterParameters.ipAddress.length == 0) {
+        CKResolvedAddress * resovledAddress;
         NSError * resolveError;
-        switch (self.updatedParameters.ipVersion) {
+        switch (self.getterParameters.ipVersion) {
             case IP_VERSION_AUTOMATIC:
-                ipAddress = [[CKResolver sharedResolver] getAddressFromDomain:self.updatedParameters.hostAddress withError:&resolveError];
+                resovledAddress = [[CKResolver sharedResolver] getAddressFromDomain:self.getterParameters.hostAddress withError:&resolveError];
                 break;
             case IP_VERSION_IPV4:
-                ipAddress = [[CKResolver sharedResolver] getIPv4AddressFromDomain:self.updatedParameters.hostAddress withError:&resolveError];
+                resovledAddress = [[CKResolver sharedResolver] getIPv4AddressFromDomain:self.getterParameters.hostAddress withError:&resolveError];
                 break;
             case IP_VERSION_IPV6:
-                ipAddress = [[CKResolver sharedResolver] getIPv6AddressFromDomain:self.updatedParameters.hostAddress withError:&resolveError];
+                resovledAddress = [[CKResolver sharedResolver] getIPv6AddressFromDomain:self.getterParameters.hostAddress withError:&resolveError];
                 break;
         }
         if (resolveError != nil) {
@@ -85,12 +84,13 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             }
             return;
         }
-        self.updatedParameters.ipAddress = ipAddress;
+        self.getterParameters.ipAddress = resovledAddress.address;
+        self.getterParameters.resolvedAddress = resovledAddress;
     }
 
-    PDebug(@"Starting getter for: %@", self.updatedParameters.description);
+    PDebug(@"Starting getter for: %@", self.getterParameters.description);
 
-    switch (self.updatedParameters.cryptoEngine) {
+    switch (self.getterParameters.cryptoEngine) {
         case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
             self.chainGetter = [CKNetworkCertificateChainGetter new];
             break;
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
             self.chainGetter = [CKOpenSSLCertificateChainGetter new];
             break;
         default:
-            PError(@"Unknown crypto engine %u", (unsigned int)self.updatedParameters.cryptoEngine);
+            PError(@"Unknown crypto engine %u", (unsigned int)self.getterParameters.cryptoEngine);
             if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
                 [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unknown crypto engine"}]];
             }
@@ -113,19 +113,19 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
 
     self.serverInfoGetter = [CKServerInfoGetter new];
     self.serverInfoGetter.delegate = self;
-    self.serverInfoGetter.parameters = self.updatedParameters;
+    self.serverInfoGetter.parameters = self.getterParameters;
     self.serverInfoGetter.tag = CKGetterTaskTagServerInfo;
     self.finishedMutex = [NSObject new];
 
     NSMutableArray<CKGetterTask *> * tasks = [NSMutableArray arrayWithCapacity:2];
     [tasks addObject:self.chainGetter];
-    if (self.updatedParameters.queryServerInfo) {
+    if (self.getterParameters.queryServerInfo) {
         [tasks addObject:self.serverInfoGetter];
     }
     self.tasks = tasks;
 
     for (CKGetterTask * task in self.tasks) {
-        [NSThread detachNewThreadSelector:@selector(performTaskWithParameters:) toTarget:task withObject:self.updatedParameters];
+        [NSThread detachNewThreadSelector:@selector(performTaskWithParameters:) toTarget:task withObject:self.getterParameters];
     }
 }
 

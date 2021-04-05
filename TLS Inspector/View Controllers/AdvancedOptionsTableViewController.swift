@@ -54,36 +54,64 @@ class AdvancedOptionsTableViewController: UITableViewController {
         engineOptionsSection.title = lang(key: "Engine Settings")
         engineOptionsSection.tag = SectionTags.EngineOptions.rawValue
 
-        if UserOptions.cryptoEngine != .OpenSSL {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "DisabledLabel")
-            cell.textLabel?.text = lang(key: "Engine has no options")
-            cell.textLabel?.textColor = UIColor.darkGray
-            cell.selectionStyle = .none
+        if UserOptions.cryptoEngine == .OpenSSL {
+            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") else {
+                LogError("No cell named 'Input' found")
+                return engineOptionsSection
+            }
+
+            guard let label = cell.viewWithTag(1) as? UILabel else {
+                LogError("No label with tag 1 on cell")
+                return engineOptionsSection
+            }
+
+            guard let input = cell.viewWithTag(2) as? UITextField else {
+                LogError("No input with tag 1 on cell")
+                return engineOptionsSection
+            }
+
+            label.text = lang(key: "Ciphers")
+            input.text = UserOptions.preferredCiphers
+            input.removeTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
+            input.addTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
+
             engineOptionsSection.cells = [cell]
+        }
+
+        guard let ipVersionCell = self.tableView.dequeueReusableCell(withIdentifier: "Segment") else {
+            LogError("No cell named 'Segment' found")
             return engineOptionsSection
         }
 
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") else {
-            LogError("No cell named 'Input' found")
-            return engineOptionsSection
-        }
-
-        guard let label = cell.viewWithTag(1) as? UILabel else {
+        guard let label = ipVersionCell.viewWithTag(1) as? UILabel else {
             LogError("No label with tag 1 on cell")
             return engineOptionsSection
         }
 
-        guard let input = cell.viewWithTag(2) as? UITextField else {
-            LogError("No input with tag 1 on cell")
+        guard let segmentControl = ipVersionCell.viewWithTag(2) as? UISegmentedControl else {
+            LogError("No segment control with tag 2 on cell")
             return engineOptionsSection
         }
+        segmentControl.setTitle(lang(key: "Auto"), forSegmentAt: 0)
+        segmentControl.setTitle("IPv4", forSegmentAt: 1)
+        if segmentControl.numberOfSegments == 2 {
+            segmentControl.insertSegment(withTitle: "IPv6", at: 2, animated: false)
+        } else {
+            segmentControl.setTitle("IPv6", forSegmentAt: 2)
+        }
+        switch UserOptions.ipVersion {
+        case .Automatic:
+            segmentControl.selectedSegmentIndex = 0
+        case .IPv4:
+            segmentControl.selectedSegmentIndex = 1
+        case .IPv6:
+            segmentControl.selectedSegmentIndex = 2
+        }
+        segmentControl.removeTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
+        segmentControl.addTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
+        label.text = lang(key: "IP Version")
+        engineOptionsSection.cells.append(ipVersionCell)
 
-        label.text = lang(key: "Ciphers")
-        input.text = UserOptions.preferredCiphers
-        input.removeTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
-        input.addTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
-
-        engineOptionsSection.cells = [cell]
         return engineOptionsSection
     }
 
@@ -126,28 +154,6 @@ class AdvancedOptionsTableViewController: UITableViewController {
         }
 
         return loggingSection
-    }
-
-    func ipVersionCell(version: IPVersion) -> UITableViewCell? {
-        let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
-
-        switch version {
-        case .Automatic:
-            cell.textLabel?.text = lang(key: "Automatic")
-        case .IPv4:
-            cell.textLabel?.text = "IPv4"
-        case .IPv6:
-            cell.textLabel?.text = "IPv6"
-        }
-
-        if UserOptions.ipVersion == version {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-
-        cell.tag = version.intValue()
-        return cell
     }
 
     func buildTable() {
@@ -221,6 +227,16 @@ class AdvancedOptionsTableViewController: UITableViewController {
 
     @objc func changeCiphers(_ sender: UITextField) {
         UserOptions.preferredCiphers = sender.text ?? ""
+    }
+
+    @objc func changeVersion(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            UserOptions.ipVersion = .Automatic
+        } else if sender.selectedSegmentIndex == 1 {
+            UserOptions.ipVersion = .IPv4
+        } else if sender.selectedSegmentIndex == 2 {
+            UserOptions.ipVersion = .IPv6
+        }
     }
 
     @objc func toggleDebugMode(_ sender: UISwitch) {

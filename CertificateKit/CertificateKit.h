@@ -28,6 +28,7 @@ FOUNDATION_EXPORT double CertificateKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <CertificateKit/PublicHeader.h>
+#import <CertificateKit/CKTypes.h>
 #import <CertificateKit/CKCertificate.h>
 #import <CertificateKit/CKCertificatePublicKey.h>
 #import <CertificateKit/CKCertificateChain.h>
@@ -36,7 +37,7 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKRevoked.h>
 #import <CertificateKit/CKOCSPResponse.h>
 #import <CertificateKit/CKCRLResponse.h>
-#import <CertificateKit/CKGetterParameters.h>
+#import <CertificateKit/CKInspectParameters.h>
 #import <CertificateKit/CKLogging.h>
 
 /**

@@ -124,7 +124,7 @@ class InitialViewController: UIViewController, CKGetterDelegate {
 
     func inspectHostAddress(_ hostAddress: String) {
         self.getter.delegate = self
-        self.getter.getInfo(UserOptions.getterParameters(hostAddress: hostAddress))
+        self.getter.getInfo(UserOptions.inspectParameters(hostAddress: hostAddress))
     }
 
     // MARK: CKGetterDelegate Methods

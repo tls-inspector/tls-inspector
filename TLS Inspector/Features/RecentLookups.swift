@@ -6,14 +6,14 @@ private let LIST_KEY = "RECENT_DOMAINS"
 /// Class for managing recently inspected domains
 class RecentLookups {
     /// Return all recently inspected domains
-    public static func GetRecentLookups() -> [CKGetterParameters] {
+    public static func GetRecentLookups() -> [CKInspectParameters] {
         guard let list = AppDefaults.array(forKey: LIST_KEY) as? [[String: Any]] else {
             return []
         }
 
-        var lookups: [CKGetterParameters] = []
+        var lookups: [CKInspectParameters] = []
         for (i, l) in list.enumerated() {
-            guard let parameters = CKGetterParameters.fromDictionary(l) else {
+            guard let parameters = CKInspectParameters.fromDictionary(l) else {
                 RemoveLookup(index: i)
                 continue
             }
@@ -24,13 +24,13 @@ class RecentLookups {
     }
 
     /// Add a new recently inspected domain. If the domain was already in the list, it is moved to index 0.
-    public static func Add(_ parameters: CKGetterParameters) {
+    public static func Add(_ parameters: CKInspectParameters) {
         let dict = parameters.dictionaryValue()
         var list = AppDefaults.array(forKey: LIST_KEY) as? [[String: Any]] ?? []
 
         var index = -1
         for (i, d) in list.enumerated() {
-            guard let p = CKGetterParameters.fromDictionary(d) else {
+            guard let p = CKInspectParameters.fromDictionary(d) else {
                 continue
             }
             if p.isEqual(parameters) {

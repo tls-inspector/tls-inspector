@@ -22,7 +22,7 @@
 #import <Foundation/Foundation.h>
 #import "CKCertificateChain.h"
 #import "CKServerInfo.h"
-#import "CKGetterParameters.h"
+#import "CKInspectParameters.h"
 
 /**
  CKGetter is the interface used to get all information about a specific domain. Used to track progress
@@ -35,7 +35,7 @@
 
  @param parameters The parameters for the getter.
  */
-- (void) getInfo:(CKGetterParameters * _Nonnull)parameters;
+- (void) getInfo:(CKInspectParameters * _Nonnull)parameters;
 
 /**
  The object that conforms to the CKGetterDelegate protocol
@@ -45,7 +45,7 @@
 /**
  Options for the getter
  */
-@property (strong, nonatomic, readonly, nonnull) CKGetterParameters * parameters;
+@property (strong, nonatomic, readonly, nonnull) CKInspectParameters * parameters;
 
 /**
  The certificate chain for the URL

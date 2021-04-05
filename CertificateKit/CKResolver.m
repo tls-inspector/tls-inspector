@@ -43,7 +43,7 @@ static id _instance;
     return _instance;
 }
 
-- (NSString *) getAddressFromDomain:(NSString *)domain withAddressFamily:(int)aiFamily withError:(NSError **)error {
+- (CKResolvedAddress *) getAddressFromDomain:(NSString *)domain withAddressFamily:(int)aiFamily withError:(NSError **)error {
     int err;
     struct addrinfo hints;
     struct addrinfo *result;
@@ -72,20 +72,30 @@ static id _instance;
         inet_ntop(AF_INET6, &((struct sockaddr_in6 *)result->ai_addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
         address = [[NSString alloc] initWithUTF8String:addressString];
     }
+
+    CKResolvedAddress * resolvedAddress = [CKResolvedAddress new];
+    resolvedAddress.address = address;
+    resolvedAddress.query = domain;
+    if (result->ai_family == AF_INET) {
+        resolvedAddress.version = IP_VERSION_IPV4;
+    } else if (result->ai_family == AF_INET6) {
+        resolvedAddress.version = IP_VERSION_IPV6;
+    }
+
     free(result);
 
-    return address;
+    return resolvedAddress;
 }
 
-- (NSString *) getAddressFromDomain:(NSString *)domain withError:(NSError **)error {
+- (CKResolvedAddress *) getAddressFromDomain:(NSString *)domain withError:(NSError **)error {
     return [self getAddressFromDomain:domain withAddressFamily:AF_UNSPEC withError:error];
 }
 
-- (NSString *) getIPv4AddressFromDomain:(NSString *)domain withError:(NSError **)error {
+- (CKResolvedAddress *) getIPv4AddressFromDomain:(NSString *)domain withError:(NSError **)error {
     return [self getAddressFromDomain:domain withAddressFamily:AF_INET withError:error];
 }
 
-- (NSString *) getIPv6AddressFromDomain:(NSString *)domain withError:(NSError * _Nullable __autoreleasing *)error {
+- (CKResolvedAddress *) getIPv6AddressFromDomain:(NSString *)domain withError:(NSError * _Nullable __autoreleasing *)error {
     return [self getAddressFromDomain:domain withAddressFamily:AF_INET6 withError:error];
 }
 

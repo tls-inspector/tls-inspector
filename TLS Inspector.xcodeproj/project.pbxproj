@@ -107,7 +107,7 @@
 		3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */; };
 		3CCEB4D823DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
 		3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
-		3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD4932825A56198002AC7BD /* CKGetterParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD4932825A56198002AC7BD /* CKGetterParameters.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3CD4932B25A56198002AC7BD /* CKGetterParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4932925A56198002AC7BD /* CKGetterParameters.m */; };
 		3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4933825A56721002AC7BD /* OptionsButton.swift */; };
 		3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */; };
@@ -146,6 +146,11 @@
 		3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14D123B0479B0053932F /* InitialViewController.swift */; };
 		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
 		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
+		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */; };
+		3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A693261BBC5900460B7F /* CKInspectParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A694261BBC5900460B7F /* CKInspectParameters.m */; };
+		3CF0A69E261BBCA300460B7F /* CKTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A69D261BBCA300460B7F /* CKTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF3482723A56CA1000382CE /* CKEVOIDList.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF3482523A56CA1000382CE /* CKEVOIDList.h */; };
 		3CF3482823A56CA1000382CE /* CKEVOIDList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3482623A56CA1000382CE /* CKEVOIDList.m */; platformFilter = ios; };
 		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
@@ -320,6 +325,11 @@
 		3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnlyGlobals.swift; sourceTree = "<group>"; };
 		3CDC14D123B0479B0053932F /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		3CE3B21625BE2186008527A1 /* URL+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Encode.swift"; sourceTree = "<group>"; };
+		3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolvedAddress.h; sourceTree = "<group>"; };
+		3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKResolvedAddress.m; sourceTree = "<group>"; };
+		3CF0A693261BBC5900460B7F /* CKInspectParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectParameters.h; sourceTree = "<group>"; };
+		3CF0A694261BBC5900460B7F /* CKInspectParameters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectParameters.m; sourceTree = "<group>"; };
+		3CF0A69D261BBCA300460B7F /* CKTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTypes.h; sourceTree = "<group>"; };
 		3CF3482523A56CA1000382CE /* CKEVOIDList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKEVOIDList.h; sourceTree = "<group>"; };
 		3CF3482623A56CA1000382CE /* CKEVOIDList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKEVOIDList.m; sourceTree = "<group>"; };
 		3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -413,6 +423,7 @@
 				67F686EF1FC8FAE400BB7AE8 /* Getters */,
 				3CF6773420464A9E00A3B4C1 /* Revocation */,
 				3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */,
+				3CF0A69D261BBCA300460B7F /* CKTypes.h */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3CB483FC2058BA0400322723 /* CertificateKit.m */,
 				3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */,
@@ -427,6 +438,8 @@
 				3C45AD5923D831A900E541EC /* CKCurlCommon.m */,
 				3CF3482523A56CA1000382CE /* CKEVOIDList.h */,
 				3CF3482623A56CA1000382CE /* CKEVOIDList.m */,
+				3CF0A693261BBC5900460B7F /* CKInspectParameters.h */,
+				3CF0A694261BBC5900460B7F /* CKInspectParameters.m */,
 				3C2A7A511F284DC700AA12B4 /* CKGetter.h */,
 				3C2A7A521F284DC700AA12B4 /* CKGetter.m */,
 				3CD4932825A56198002AC7BD /* CKGetterParameters.h */,
@@ -437,6 +450,8 @@
 				3C1D28AB2009677300A606BB /* CKNameObject.m */,
 				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
 				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
+				3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */,
+				3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */,
 				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
 				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
 				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
@@ -690,6 +705,7 @@
 			files = (
 				67F686E41FC8FAA200BB7AE8 /* CKGetterTask.h in Headers */,
 				3CF6772A2046335D00A3B4C1 /* CKCRLManager.h in Headers */,
+				3CF0A69E261BBCA300460B7F /* CKTypes.h in Headers */,
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
 				3C7CEE6220A15BD500DCC770 /* CKAlternateNameObject.h in Headers */,
 				3C58E67723F8B7D800B622C6 /* CKSocketUtils.h in Headers */,
@@ -701,6 +717,7 @@
 				3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
 				3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */,
+				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CF3482723A56CA1000382CE /* CKEVOIDList.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
@@ -709,6 +726,7 @@
 				3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */,
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
 				3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */,
+				3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */,
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
@@ -1002,9 +1020,11 @@
 				3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */,
 				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
 				3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */,
+				3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
 				3CB4F159200451D000A9CF51 /* CKGetterTask.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
+				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
 				3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,

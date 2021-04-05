@@ -71,7 +71,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
-        advancedInspect.donePressed = { (parameters: CKGetterParameters) -> Void in
+        advancedInspect.donePressed = { (parameters: CKInspectParameters) -> Void in
             self.doInspect(parameters: parameters)
         }
 
@@ -114,7 +114,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         return (self.domainInput?.text ?? "").count > 0
     }
 
-    func doInspect(parameters: CKGetterParameters) {
+    func doInspect(parameters: CKInspectParameters) {
         // Reset
         self.certificateChain = nil
         self.serverInfo = nil
@@ -124,11 +124,11 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         SERVER_INFO = nil
         SERVER_ERROR = nil
 
-        if UserOptions.verboseLogging {
-            CKLogging.sharedInstance().level = .debug
-        } else {
-            CKLogging.sharedInstance().level = .warning
-        }
+//        if UserOptions.verboseLogging {
+//            CKLogging.sharedInstance().level = .debug
+//        } else {
+//            CKLogging.sharedInstance().level = .warning
+//        }
 
         self.domainInput?.isEnabled = false
         self.updatePendingCell(state: .loading)
@@ -160,7 +160,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
-        self.doInspect(parameters: UserOptions.getterParameters(hostAddress: domainText))
+        self.doInspect(parameters: UserOptions.inspectParameters(hostAddress: domainText))
     }
 
     func showInputError() {

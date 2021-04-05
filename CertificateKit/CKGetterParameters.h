@@ -20,111 +20,27 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
+#import "CKResolvedAddress.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Possible options for the crypto engine used to chain getters
+ Backend parameters that are sutible for the getters. This should be derived from the user-specified inspect parameters.
  */
-typedef enum __CRYPTO_ENGINE {
-    /**
-     The modern Apple getter using the Network Framework
-     */
-    CRYPTO_ENGINE_NETWORK_FRAMEWORK = 0,
-    /**
-     The legacy Apple getter using SecureTransport
-     */
-    CRYPTO_ENGINE_SECURE_TRANSPORT = 1,
-    /**
-     The OpenSSL getter
-     */
-    CRYPTO_ENGINE_OPENSSL = 2,
-} CRYPTO_ENGINE;
-
-/**
- Possible options for IP versions
- */
-typedef enum __IP_VERSIONS {
-    /**
-     Let the system choose which IP version to use
-     */
-    IP_VERSION_AUTOMATIC = 0,
-    /**
-     Prefer IPv4 connections
-     */
-    IP_VERSION_IPV4 = 1,
-    /**
-     Prefer IPv6 connections
-     */
-    IP_VERSION_IPV6 = 2,
-} IP_VERSION;
-
 @interface CKGetterParameters : NSObject
 
-/**
- The host address. Can be either a domain name or an IP address. If the ipAddress property is nil, will connect to this address.
- */
 @property (strong, nonatomic, nonnull) NSString * hostAddress;
-
-/**
- The port to connect to. If 0 will use 443.
- */
 @property (nonatomic) UInt16 port;
-
-/**
- The IP address of the host to connect to. If null, will use queryURL.
- */
 @property (strong, nonatomic, nullable) NSString * ipAddress;
-
-/**
- Should HTTP server information be collected for the domain.
- */
+@property (strong, nonatomic, nullable) CKResolvedAddress * resolvedAddress;
 @property (nonatomic) BOOL queryServerInfo;
-
-/**
- Should the OCSP responder be checked for certificates in the chain.
- */
 @property (nonatomic) BOOL checkOCSP;
-
-/**
- Should any CRLs be downloaded and checked.
- */
 @property (nonatomic) BOOL checkCRL;
-
-/**
- The engine used to fetch certificates.
- */
 @property (nonatomic) CRYPTO_ENGINE cryptoEngine;
-
-/**
- Which IP version should be used for the connection.
- */
 @property (nonatomic) IP_VERSION ipVersion;
-
-/**
- (OpenSSL only) The cipherstring used with OpenSSL
- */
 @property (strong, nonatomic, nullable) NSString * ciphers;
-
-/**
- Prepare will clean up any of the inputs and make them ready for use within certificatekit
- */
-- (void) prepare;
-
-/**
- Compare this instance of CKGetterParameters with the provided other.
- */
-- (BOOL) isEqual:(CKGetterParameters * _Nonnull)other;
-
-/**
- Return a dictionary representation of these parameters.
- */
-- (NSDictionary<NSString *, id> *) dictionaryValue;
-
-/**
- Parse the given dictionary into a parameters object. Will return nil if any values are missing or incorrect.
- */
-+ (CKGetterParameters * _Nullable) fromDictionary:(NSDictionary<NSString *, id> * _Nonnull)d;
++ (CKGetterParameters * _Nonnull) fromInspectParameters:(CKInspectParameters * _Nonnull)parameters;
+@property (strong, nonatomic, nonnull, readonly) NSString * socketAddress;
 
 @end
 

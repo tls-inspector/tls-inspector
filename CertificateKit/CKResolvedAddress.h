@@ -1,9 +1,9 @@
 //
-//  CKGetterTask.h
+//  CKResolvedAddress.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2021 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -20,24 +20,27 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKGetterParameters.h"
+#import "CKTypes.h"
 
-@interface CKGetterTask : NSObject
+NS_ASSUME_NONNULL_BEGIN
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters;
+@interface CKResolvedAddress : NSObject
 
-@property (strong, nonatomic) id delegate;
-@property (nonatomic) NSUInteger tag;
-@property (nonatomic) BOOL finished;
-@property (nonatomic) BOOL successful;
+/**
+ The original query that was sent to the resolver.
+ */
+@property (strong, nonatomic, nonnull) NSString * query;
+
+/**
+ The result address (IPv4 or IPv6) that the query resolved to.
+ */
+@property (strong, nonatomic, nonnull) NSString * address;
+
+/**
+ The IP version for the resolved address.
+ */
+@property (nonatomic) IP_VERSION version;
 
 @end
 
-@protocol CKGetterTaskDelegate
-
-@required
-
-- (void) getter:(CKGetterTask *)getter finishedTaskWithResult:(id)data;
-- (void) getter:(CKGetterTask *)getter failedTaskWithError:(NSError *)error;
-
-@end
+NS_ASSUME_NONNULL_END

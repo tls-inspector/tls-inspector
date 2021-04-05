@@ -33,28 +33,27 @@
 #define KEY_IP_VERSION @"ip_version"
 #define KEY_CIPHERS @"ciphers"
 
-- (id) copy {
-    CKGetterParameters * parameters = [CKGetterParameters new];
-    parameters.hostAddress = [self.hostAddress copy];
-    parameters.port = self.port + 0;
-    parameters.ipAddress = [self.ipAddress copy];
-    parameters.queryServerInfo = self.queryServerInfo;
-    parameters.checkOCSP = self.checkOCSP;
-    parameters.checkCRL = self.checkCRL;
-    parameters.cryptoEngine = self.cryptoEngine;
-    parameters.ipVersion = self.ipVersion;
-    parameters.ciphers = [self.ciphers copy];
-    return parameters;
-}
++ (CKGetterParameters *) fromInspectParameters:(CKInspectParameters *)parameters {
+    CKGetterParameters * getParams = [CKGetterParameters new];
+    getParams.hostAddress = [parameters.hostAddress copy];
+    getParams.port = parameters.port + 0;
+    getParams.ipAddress = [parameters.ipAddress copy];
+    getParams.queryServerInfo = parameters.queryServerInfo;
+    getParams.checkOCSP = parameters.checkOCSP;
+    getParams.checkCRL = parameters.checkCRL;
+    getParams.cryptoEngine = parameters.cryptoEngine;
+    getParams.ipVersion = parameters.ipVersion;
+    getParams.ciphers = [parameters.ciphers copy];
 
-- (void) prepare {
     NSRegularExpression * protocolPattern = [NSRegularExpression regularExpressionWithPattern:@"^[a-z]+://" options:NSRegularExpressionCaseInsensitive error:nil];
-    NSMutableString * hostAddress = [NSMutableString stringWithString:self.hostAddress];
-    [protocolPattern replaceMatchesInString:hostAddress options:0 range:NSMakeRange(0, [self.hostAddress length]) withTemplate:@""];
-    self.hostAddress = hostAddress;
-    if (self.port == 0) {
-        self.port = 443;
+    NSMutableString * hostAddress = [NSMutableString stringWithString:parameters.hostAddress];
+    [protocolPattern replaceMatchesInString:hostAddress options:0 range:NSMakeRange(0, [parameters.hostAddress length]) withTemplate:@""];
+    getParams.hostAddress = hostAddress;
+    if (getParams.port == 0) {
+        getParams.port = 443;
     }
+
+    return getParams;
 }
 
 - (NSString *) description {
@@ -70,81 +69,11 @@
             self.ciphers.description];
 }
 
-- (BOOL) isEqual:(CKGetterParameters *)other {
-    BOOL hostAddressEquals = [self.hostAddress isEqualToString:other.hostAddress];
-    BOOL portEquals = self.port == other.port;
-    BOOL ipAddressEquals;
-    if (self.ipAddress == nil && other.ipAddress == nil) {
-        ipAddressEquals = YES;
-    } else {
-        ipAddressEquals = [self.ipAddress isEqualToString:other.ipAddress];
+- (NSString *) socketAddress {
+    if (self.resolvedAddress.version == IP_VERSION_IPV6) {
+        return [NSString stringWithFormat:@"[%@]:%i", self.ipAddress, self.port];
     }
-    BOOL queryServerInfoEquals = self.queryServerInfo == other.queryServerInfo;
-    BOOL checkOCSPEquals = self.checkOCSP == other.checkOCSP;
-    BOOL checkCRLEquals = self.checkCRL == other.checkCRL;
-    BOOL cryptoEngineEquals = self.cryptoEngine == other.cryptoEngine;
-    BOOL ipVersionEquals = self.ipVersion == other.ipVersion;
-    BOOL ciphersEquals = [self.ciphers isEqualToString:other.ciphers];
-
-    return hostAddressEquals &&
-        portEquals &&
-        ipAddressEquals &&
-        queryServerInfoEquals &&
-        checkOCSPEquals &&
-        checkCRLEquals &&
-        cryptoEngineEquals &&
-        ipVersionEquals &&
-        ciphersEquals;
-}
-
-- (NSDictionary<NSString *, id> *) dictionaryValue {
-    return @{
-        KEY_HOST_ADDRESS: self.hostAddress,
-        KEY_PORT: [NSNumber numberWithUnsignedInt:self.port],
-        KEY_IP_ADDRESS: self.ipAddress == nil ? @"" : self.ipAddress,
-        KEY_QUERY_SERVER_INFO: [NSNumber numberWithBool:self.queryServerInfo],
-        KEY_CHECK_OCSP: [NSNumber numberWithBool:self.checkOCSP],
-        KEY_CHECK_CRL: [NSNumber numberWithBool:self.checkCRL],
-        KEY_CRYPTO_ENGINE: [NSNumber numberWithInt:self.cryptoEngine],
-        KEY_IP_VERSION: [NSNumber numberWithInt:self.ipVersion],
-        KEY_CIPHERS: self.ciphers,
-    };
-}
-
-+ (CKGetterParameters *) fromDictionary:(NSDictionary<NSString *, id> *)d {
-    NSString * hostAddress = d[KEY_HOST_ADDRESS];
-    NSNumber * portNumber = d[KEY_PORT];
-    NSString * ipAddress = d[KEY_IP_ADDRESS];
-    NSNumber * queryServerInfoNumber = d[KEY_QUERY_SERVER_INFO];
-    NSNumber * checkOCSPNumber = d[KEY_CHECK_OCSP];
-    NSNumber * checkCRLNumber = d[KEY_CHECK_CRL];
-    NSNumber * cryptoEngineNumber = d[KEY_CRYPTO_ENGINE];
-    NSNumber * ipVersionNumber = d[KEY_IP_VERSION];
-    NSString * ciphers = d[KEY_CIPHERS];
-
-    if (hostAddress == nil ||
-        portNumber == nil ||
-        ipAddress == nil ||
-        queryServerInfoNumber == nil ||
-        checkOCSPNumber == nil ||
-        checkCRLNumber == nil ||
-        cryptoEngineNumber == nil ||
-        ipVersionNumber == nil ||
-        ciphers == nil) {
-        return nil;
-    }
-
-    CKGetterParameters * parameters = [CKGetterParameters new];
-    parameters.hostAddress = hostAddress;
-    parameters.port = portNumber.unsignedIntValue;
-    parameters.ipAddress = ipAddress.length == 0 ? nil : ipAddress;
-    parameters.queryServerInfo = queryServerInfoNumber.boolValue;
-    parameters.checkOCSP = checkOCSPNumber.boolValue;
-    parameters.checkCRL = checkCRLNumber.boolValue;
-    parameters.cryptoEngine = (CRYPTO_ENGINE)cryptoEngineNumber.intValue;
-    parameters.ipVersion = (IP_VERSION)ipVersionNumber.intValue;
-    parameters.ciphers = ciphers;
-    return parameters;
+    return [NSString stringWithFormat:@"%@:%i", self.ipAddress, self.port];
 }
 
 @end

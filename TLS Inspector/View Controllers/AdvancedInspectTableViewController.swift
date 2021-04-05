@@ -2,14 +2,14 @@ import UIKit
 import CertificateKit
 
 class AdvancedInspectTableViewController: UITableViewController {
-    private var parameters: CKGetterParameters = CKGetterParameters()
-    public var donePressed: ((_ parameters: CKGetterParameters) -> Void)?
+    private var parameters: CKInspectParameters = CKInspectParameters()
+    public var donePressed: ((_ parameters: CKInspectParameters) -> Void)?
     private var sections: [TableViewSection] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buildTable()
-        self.parameters = UserOptions.getterParameters(hostAddress: "")
+        self.parameters = UserOptions.inspectParameters(hostAddress: "")
     }
 
     // MARK: - Title bar buttons

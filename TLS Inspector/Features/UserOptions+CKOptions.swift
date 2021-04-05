@@ -2,8 +2,8 @@ import UIKit
 import CertificateKit
 
 extension UserOptions {
-    public static func getterParameters(hostAddress: String) -> CKGetterParameters {
-        let parameters = CKGetterParameters()
+    public static func inspectParameters(hostAddress: String) -> CKInspectParameters {
+        let parameters = CKInspectParameters()
 
         parameters.hostAddress = hostAddress
         parameters.queryServerInfo = UserOptions.getHTTPHeaders
