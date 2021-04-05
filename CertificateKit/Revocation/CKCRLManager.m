@@ -27,20 +27,26 @@
 #import <curl/curl.h>
 #import "NSDate+ASN1_TIME.h"
 
-@interface CKCRLManager ()
-
-@property (strong, nonatomic) NSMutableData * responseDataBuffer;
+@interface CKCRLManager () {
+    dispatch_queue_t queue;
+}
 
 @end
 
 @implementation CKCRLManager
 
+static CKCRLManager * _instance;
+
+struct httpResponseBlock {
+    char * response;
+    size_t size;
+};
+static struct httpResponseBlock * curldata;
+
 #define CRL_ERROR_CURL_LIBRARY -1
 #define CRL_ERROR_HTTP_ERROR -2
 #define CRL_ERROR_DECODE_ERROR -3
 #define CRL_ERROR_CRL_ERROR -4
-
-static CKCRLManager * _instance;
 
 + (CKCRLManager * _Nonnull) sharedManager {
     if (!_instance) {
@@ -118,7 +124,7 @@ static CKCRLManager * _instance;
         return;
     }
 
-    // Prepare curl verbose logging but only use it if in debugg level
+    // Prepare curl verbose logging but only use it if in debug level
     // We have to use an in-memory file since curl expects a file pointer for STDERR
     static char *buf;
     static size_t len;
@@ -131,11 +137,10 @@ static CKCRLManager * _instance;
         }
     }
 
-    self.responseDataBuffer = [NSMutableData new];
-    
+    curldata = malloc(sizeof(struct httpResponseBlock));
     curl_easy_setopt(curl, CURLOPT_URL, url.absoluteString.UTF8String);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, crl_write_callback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, self.responseDataBuffer);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)curldata);
     
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "Accept: application/pkix-crl");
@@ -159,19 +164,20 @@ static CKCRLManager * _instance;
         PError(@"CRL HTTP Response: %ld", response_code);
         
         curl_easy_cleanup(curl);
+        free(curldata);
         return;
     }
     
     PDebug(@"CRL HTTP Response: 200");
     
     X509_CRL * crl = NULL;
-    const unsigned char * bytes = self.responseDataBuffer.bytes;
-    crl = d2i_X509_CRL(NULL, &bytes, self.responseDataBuffer.length);
+    crl = d2i_X509_CRL(NULL, (const unsigned char **)&curldata->response, curldata->size);
     if (crl == NULL) {
         [self openSSLError];
         *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding CRL response"}];
         PError(@"Error decoding CRL response");
     }
+    free(curldata);
     *crlResponse = crl;
     curl_easy_cleanup(curl);
 
@@ -188,24 +194,21 @@ static CKCRLManager * _instance;
     return;
 }
 
-size_t crl_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
-    if (userp == NULL) {
-        PError(@"crl_write_callback - userdata pointer was NULL");
-        return 0;
-    }
-    NSUInteger length = size * nmemb;
-    if (length == 0 || buffer == NULL) {
-        PError(@"crl_write_callback - data size was 0 or buffer NULL");
-        return 0;
-    }
-    NSMutableData * userData = (__bridge NSMutableData *)userp;
-    if (![userData respondsToSelector:@selector(appendBytes:length:)]) {
-        PError(@"crl_write_callback - userdata did not respond to selector");
-        return 0;
-    }
-    [userData appendBytes:buffer length:length];
+size_t crl_write_callback(void * data, size_t size, size_t nmemb, void * userp) {
+    size_t realsize = size * nmemb;
+    struct httpResponseBlock *block = (struct httpResponseBlock *)userp;
 
-    return length;
+    char * ptr = realloc(block->response, block->size + realsize + 1);
+    if (ptr == NULL) {
+        return 0;
+    }
+
+    block->response = ptr;
+    memcpy(&(block->response[block->size]), data, realsize);
+    block->size += realsize;
+    block->response[block->size] = 0;
+
+    return realsize;
 }
 
 - (NSString *) reasonString:(long)reason {

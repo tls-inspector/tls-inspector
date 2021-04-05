@@ -31,13 +31,17 @@
     dispatch_queue_t queue;
 }
 
-@property (strong, nonatomic) NSMutableData * responseDataBuffer;
-
 @end
 
 @implementation CKOCSPManager
 
 static CKOCSPManager * _instance;
+
+struct httpResponseBlock {
+    char * response;
+    size_t size;
+};
+static struct httpResponseBlock * curldata;
 
 #define OCSP_ERROR_INVALID_RESPONSE -1
 #define OCSP_ERROR_CURL_LIBRARY -2
@@ -128,8 +132,7 @@ static CKOCSPManager * _instance;
             response.reasonString = [NSString stringWithUTF8String:OCSP_crl_reason_str(reason)];
             break;
     }
-    
-    [self.responseDataBuffer setLength:0];
+
     OCSP_REQUEST_free(request);
     OCSP_BASICRESP_free(resp);
 }
@@ -154,7 +157,7 @@ static CKOCSPManager * _instance;
         return;
     }
 
-    // Prepare curl verbose logging but only use it if in debugg level
+    // Prepare curl verbose logging but only use it if in debug level
     // We have to use an in-memory file since curl expects a file pointer for STDERR
     static char *buf;
     static size_t len;
@@ -167,10 +170,10 @@ static CKOCSPManager * _instance;
         }
     }
 
-    self.responseDataBuffer = [NSMutableData new];
+    curldata = malloc(sizeof(struct httpResponseBlock));
     curl_easy_setopt(curl, CURLOPT_URL, responder.absoluteString.UTF8String);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ocsp_write_callback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, self.responseDataBuffer);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)curldata);
     
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "Content-Type: application/ocsp-request");
@@ -197,12 +200,13 @@ static CKOCSPManager * _instance;
         PError(@"OCSP HTTP Response: %ld", response_code);
         
         curl_easy_cleanup(curl);
+        free(curldata);
         return;
     }
     
     PDebug(@"OCSP HTTP Response: 200");
-    
-    OCSP_RESPONSE * ocspResponse = [self decodeResponse:self.responseDataBuffer];
+    OCSP_RESPONSE * ocspResponse = [self decodeResponse:[[NSData alloc] initWithBytes:curldata->response length:curldata->size]];
+    free(curldata);
     if (ocspResponse == NULL) {
         [self openSSLError];
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];
@@ -239,24 +243,21 @@ static CKOCSPManager * _instance;
     }
 }
 
-size_t ocsp_write_callback(void *buffer, size_t size, size_t nmemb, void *userp) {
-    if (userp == NULL) {
-        PError(@"ocsp_write_callback - userdata pointer was NULL");
-        return 0;
-    }
-    NSUInteger length = size * nmemb;
-    if (length == 0 || buffer == NULL) {
-        PError(@"ocsp_write_callback - data size was 0 or buffer NULL");
-        return 0;
-    }
-    NSMutableData * userData = (__bridge NSMutableData *)userp;
-    if (![userData respondsToSelector:@selector(appendBytes:length:)]) {
-        PError(@"ocsp_write_callback - userdata did not respond to selector");
-        return 0;
-    }
-    [userData appendBytes:buffer length:length];
+size_t ocsp_write_callback(void * data, size_t size, size_t nmemb, void * userp) {
+    size_t realsize = size * nmemb;
+    struct httpResponseBlock *block = (struct httpResponseBlock *)userp;
 
-    return length;
+    char * ptr = realloc(block->response, block->size + realsize + 1);
+    if (ptr == NULL) {
+        return 0;
+    }
+
+    block->response = ptr;
+    memcpy(&(block->response[block->size]), data, realsize);
+    block->size += realsize;
+    block->response[block->size] = 0;
+
+    return realsize;
 }
 
 INSERT_OPENSSL_ERROR_METHOD
