@@ -151,7 +151,15 @@
                 self.finished = YES;
                 self.successful = NO;
                 if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-                    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]];
+                    int errorCode = -1;
+                    NSString * errorDescription = @"timed out";
+                    if (error != nil) {
+                        errorCode = nw_error_get_error_code(error);
+                        errorDescription = error.debugDescription;
+                    } else {
+                        PError(@"nw_connection_state_waiting with no error");
+                    }
+                    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDescription}]];
                 }
                 nw_connection_cancel(connection);
                 break;
