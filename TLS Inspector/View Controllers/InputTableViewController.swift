@@ -124,11 +124,11 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         SERVER_INFO = nil
         SERVER_ERROR = nil
 
-//        if UserOptions.verboseLogging {
-//            CKLogging.sharedInstance().level = .debug
-//        } else {
-//            CKLogging.sharedInstance().level = .warning
-//        }
+        if UserOptions.verboseLogging {
+            CKLogging.sharedInstance().level = .debug
+        } else {
+            CKLogging.sharedInstance().level = .warning
+        }
 
         self.domainInput?.isEnabled = false
         self.updatePendingCell(state: .loading)
@@ -151,8 +151,8 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             return
         }
 
-        if !domainText.hasPrefix("https://") {
-            domainText = "https://" + domainText
+        if domainText.hasPrefix("https://") {
+            domainText = domainText.replacingOccurrences(of: "https://", with: "")
         }
 
         if URL.fromString(str: domainText) == nil {
