@@ -118,7 +118,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         }
         segmentControl.removeTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
         segmentControl.addTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
-        label.text = lang(key: "IP Version")
+        label.text = lang(key: "Use IP Version")
 
         return cell
     }

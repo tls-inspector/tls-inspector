@@ -8,6 +8,8 @@
 	<string>warn</string>
 	<key>stole</key>
 	<string>warn</string>
+	<key>password</key>
+	<string>warn</string>
 	<key>fuck</key>
 	<string>prohibit</string>
 	<key>shit</key>
