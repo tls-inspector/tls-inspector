@@ -155,11 +155,6 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             domainText = domainText.replacingOccurrences(of: "https://", with: "")
         }
 
-        if URL.fromString(str: domainText) == nil {
-            showInputError()
-            return
-        }
-
         self.doInspect(parameters: UserOptions.inspectParameters(hostAddress: domainText))
     }
 

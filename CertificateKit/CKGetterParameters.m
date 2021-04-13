@@ -46,9 +46,25 @@
     getParams.ciphers = [parameters.ciphers copy];
 
     NSRegularExpression * protocolPattern = [NSRegularExpression regularExpressionWithPattern:@"^[a-z]+://" options:NSRegularExpressionCaseInsensitive error:nil];
+    NSRegularExpression * portPattern = [NSRegularExpression regularExpressionWithPattern:@":[0-9]+$" options:NSRegularExpressionCaseInsensitive error:nil];
     NSMutableString * hostAddress = [NSMutableString stringWithString:parameters.hostAddress];
     [protocolPattern replaceMatchesInString:hostAddress options:0 range:NSMakeRange(0, [parameters.hostAddress length]) withTemplate:@""];
     getParams.hostAddress = hostAddress;
+
+    // Look for a port suffix
+    NSArray<NSTextCheckingResult *> * portMatches = [portPattern matchesInString:hostAddress options:0 range:NSMakeRange(0, hostAddress.length)];
+    if (portMatches.count == 1) {
+        NSString * portString = [[hostAddress substringWithRange:portMatches[0].range] substringFromIndex:1];
+        [hostAddress replaceCharactersInRange:portMatches[0].range withString:@""];
+        getParams.port = [portString intValue];
+
+        // IPv6 addresses may be wrapped in brackets when a port is included
+        if ([hostAddress characterAtIndex:0] == 91 && [hostAddress characterAtIndex:hostAddress.length-1] == 93) {
+            [hostAddress replaceCharactersInRange:NSMakeRange(0, 1) withString:@""];
+            [hostAddress replaceCharactersInRange:NSMakeRange(hostAddress.length-1, 1) withString:@""];
+        }
+    }
+
     if (getParams.port == 0) {
         getParams.port = 443;
     }
