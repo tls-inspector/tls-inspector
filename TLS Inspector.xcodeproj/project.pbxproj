@@ -1249,7 +1249,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
@@ -1285,7 +1285,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1320,7 +1320,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
@@ -1357,7 +1357,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
