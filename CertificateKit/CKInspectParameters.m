@@ -47,6 +47,10 @@
 }
 
 - (BOOL) isEqual:(CKInspectParameters *)other {
+    if (other == nil) {
+        return NO;
+    }
+
     BOOL hostAddressEquals = [self.hostAddress isEqualToString:other.hostAddress];
     BOOL portEquals = self.port == other.port;
     BOOL ipAddressEquals;

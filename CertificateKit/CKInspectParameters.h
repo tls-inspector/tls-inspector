@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Compare this instance of CKGetterParameters with the provided other.
  */
-- (BOOL) isEqual:(CKInspectParameters * _Nonnull)other;
+- (BOOL) isEqual:(CKInspectParameters * _Nullable)other;
 
 /**
  Return a dictionary representation of these parameters.
