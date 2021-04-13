@@ -53,44 +53,53 @@ class AdvancedOptionsTableViewController: UITableViewController {
         let engineOptionsSection = TableViewSection()
         engineOptionsSection.title = lang(key: "Engine Settings")
         engineOptionsSection.tag = SectionTags.EngineOptions.rawValue
+        engineOptionsSection.cells.maybeAppend(buildCiphersCell())
+        engineOptionsSection.cells.maybeAppend(buildIPVersionCell())
+        return engineOptionsSection
+    }
 
-        if UserOptions.cryptoEngine == .OpenSSL {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") else {
-                LogError("No cell named 'Input' found")
-                return engineOptionsSection
-            }
-
-            guard let label = cell.viewWithTag(1) as? UILabel else {
-                LogError("No label with tag 1 on cell")
-                return engineOptionsSection
-            }
-
-            guard let input = cell.viewWithTag(2) as? UITextField else {
-                LogError("No input with tag 1 on cell")
-                return engineOptionsSection
-            }
-
-            label.text = lang(key: "Ciphers")
-            input.text = UserOptions.preferredCiphers
-            input.removeTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
-            input.addTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
-
-            engineOptionsSection.cells = [cell]
+    func buildCiphersCell() -> UITableViewCell? {
+        if UserOptions.cryptoEngine != .OpenSSL {
+            return nil
         }
 
-        guard let ipVersionCell = self.tableView.dequeueReusableCell(withIdentifier: "Segment") else {
-            LogError("No cell named 'Segment' found")
-            return engineOptionsSection
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") else {
+            LogError("No cell named 'Input' found")
+            return nil
         }
 
-        guard let label = ipVersionCell.viewWithTag(1) as? UILabel else {
+        guard let label = cell.viewWithTag(1) as? UILabel else {
             LogError("No label with tag 1 on cell")
-            return engineOptionsSection
+            return nil
         }
 
-        guard let segmentControl = ipVersionCell.viewWithTag(2) as? UISegmentedControl else {
+        guard let input = cell.viewWithTag(2) as? UITextField else {
+            LogError("No input with tag 1 on cell")
+            return nil
+        }
+
+        label.text = lang(key: "Ciphers")
+        input.text = UserOptions.preferredCiphers
+        input.removeTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
+        input.addTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
+
+        return cell
+    }
+
+    func buildIPVersionCell() -> UITableViewCell? {
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Segment") else {
+            LogError("No cell named 'Segment' found")
+            return nil
+        }
+
+        guard let label = cell.viewWithTag(1) as? UILabel else {
+            LogError("No label with tag 1 on cell")
+            return nil
+        }
+
+        guard let segmentControl = cell.viewWithTag(2) as? UISegmentedControl else {
             LogError("No segment control with tag 2 on cell")
-            return engineOptionsSection
+            return nil
         }
         segmentControl.setTitle(lang(key: "Auto"), forSegmentAt: 0)
         segmentControl.setTitle("IPv4", forSegmentAt: 1)
@@ -110,9 +119,8 @@ class AdvancedOptionsTableViewController: UITableViewController {
         segmentControl.removeTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
         segmentControl.addTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
         label.text = lang(key: "IP Version")
-        engineOptionsSection.cells.append(ipVersionCell)
 
-        return engineOptionsSection
+        return cell
     }
 
     func buildLogsSection() -> TableViewSection {
@@ -210,7 +218,10 @@ class AdvancedOptionsTableViewController: UITableViewController {
 
         UserOptions.cryptoEngine = after
         self.buildTable()
-        self.tableView.reloadSections([SectionTags.Engine.rawValue, SectionTags.EngineOptions.rawValue], with: .none)
+        self.tableView.beginUpdates()
+        self.tableView.reloadSections([SectionTags.Engine.rawValue], with: .none)
+        self.tableView.reloadSections([SectionTags.EngineOptions.rawValue], with: .fade)
+        self.tableView.endUpdates()
     }
 
     func didTapSubmitLogs(indexPath: IndexPath) {
