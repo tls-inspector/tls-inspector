@@ -41,13 +41,13 @@ struct httpResponseBlock {
     char * response;
     size_t size;
 };
-static struct httpResponseBlock * curldata;
 
 #define OCSP_ERROR_INVALID_RESPONSE -1
 #define OCSP_ERROR_CURL_LIBRARY -2
 #define OCSP_ERROR_HTTP_ERROR -3
 #define OCSP_ERROR_DECODE_ERROR -4
 #define OCSP_ERROR_REQUEST_ERROR -5
+#define OCSP_ERROR_NO_BODY -6
 
 + (CKOCSPManager *) sharedManager {
     if (_instance != nil) {
@@ -170,10 +170,12 @@ static struct httpResponseBlock * curldata;
         }
     }
 
-    curldata = malloc(sizeof(struct httpResponseBlock));
+    struct httpResponseBlock curldata;
+    curldata.response = malloc(0);
+    curldata.size = 0;
     curl_easy_setopt(curl, CURLOPT_URL, responder.absoluteString.UTF8String);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ocsp_write_callback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)curldata);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&curldata);
     
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "Content-Type: application/ocsp-request");
@@ -193,20 +195,30 @@ static struct httpResponseBlock * curldata;
     
     CURLcode response = curl_easy_perform(curl);
     if (response != CURLE_OK) {
+        PError(@"OCSP Request error: %s (%i)", curl_easy_strerror(response), response);
         long response_code;
         curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
         
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
         PError(@"OCSP HTTP Response: %ld", response_code);
+        PDebug(@"OCSP HTTP %@ response %ld", responder.absoluteString, response_code);
         
         curl_easy_cleanup(curl);
-        free(curldata);
+        free(curldata.response);
+        return;
+    }
+    if (curldata.size == 0) {
+        PError(@"Empty response for OCSP request");
+        PDebug(@"OCSP HTTP %@ empty response", responder.absoluteString);
+        *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty OCSP response"}];
+        curl_easy_cleanup(curl);
+        free(curldata.response);
         return;
     }
     
     PDebug(@"OCSP HTTP Response: 200");
-    OCSP_RESPONSE * ocspResponse = [self decodeResponse:[[NSData alloc] initWithBytes:curldata->response length:curldata->size]];
-    free(curldata);
+    OCSP_RESPONSE * ocspResponse = [self decodeResponse:[[NSData alloc] initWithBytes:curldata.response length:curldata.size]];
+    free(curldata.response);
     if (ocspResponse == NULL) {
         [self openSSLError];
         *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];
@@ -246,9 +258,11 @@ static struct httpResponseBlock * curldata;
 size_t ocsp_write_callback(void * data, size_t size, size_t nmemb, void * userp) {
     size_t realsize = size * nmemb;
     struct httpResponseBlock *block = (struct httpResponseBlock *)userp;
+    PDebug(@"OCSP write callback: realsize=%lu blockSize=%lu", realsize, block->size);
 
     char * ptr = realloc(block->response, block->size + realsize + 1);
     if (ptr == NULL) {
+        PError(@"OCSP unable to realloc response memory during write callback");
         return 0;
     }
 

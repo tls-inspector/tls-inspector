@@ -41,12 +41,12 @@ struct httpResponseBlock {
     char * response;
     size_t size;
 };
-static struct httpResponseBlock * curldata;
 
 #define CRL_ERROR_CURL_LIBRARY -1
 #define CRL_ERROR_HTTP_ERROR -2
 #define CRL_ERROR_DECODE_ERROR -3
 #define CRL_ERROR_CRL_ERROR -4
+#define CRL_ERROR_NO_BODY -5
 
 + (CKCRLManager * _Nonnull) sharedManager {
     if (!_instance) {
@@ -137,10 +137,12 @@ static struct httpResponseBlock * curldata;
         }
     }
 
-    curldata = malloc(sizeof(struct httpResponseBlock));
+    struct httpResponseBlock curldata;
+    curldata.response = malloc(0);
+    curldata.size = 0;
     curl_easy_setopt(curl, CURLOPT_URL, url.absoluteString.UTF8String);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, crl_write_callback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)curldata);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&curldata);
     
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "Accept: application/pkix-crl");
@@ -157,27 +159,37 @@ static struct httpResponseBlock * curldata;
     
     CURLcode response = curl_easy_perform(curl);
     if (response != CURLE_OK) {
+        PError(@"CRL Request error: %s (%i)", curl_easy_strerror(response), response);
         long response_code;
         curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
         
         *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
         PError(@"CRL HTTP Response: %ld", response_code);
+        PDebug(@"CRL HTTP %@ response %ld", url.absoluteString, response_code);
         
         curl_easy_cleanup(curl);
-        free(curldata);
+        free(curldata.response);
+        return;
+    }
+    if (curldata.size == 0) {
+        PError(@"Empty response for CRL request");
+        PDebug(@"CRL HTTP %@ empty response", url.absoluteString);
+        *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty CRL response"}];
+        curl_easy_cleanup(curl);
+        free(curldata.response);
         return;
     }
     
     PDebug(@"CRL HTTP Response: 200");
     
     X509_CRL * crl = NULL;
-    crl = d2i_X509_CRL(NULL, (const unsigned char **)&curldata->response, curldata->size);
+    crl = d2i_X509_CRL(NULL, (const unsigned char **)&curldata.response, curldata.size);
     if (crl == NULL) {
         [self openSSLError];
         *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding CRL response"}];
         PError(@"Error decoding CRL response");
+        return;
     }
-    free(curldata);
     *crlResponse = crl;
     curl_easy_cleanup(curl);
 
@@ -197,9 +209,11 @@ static struct httpResponseBlock * curldata;
 size_t crl_write_callback(void * data, size_t size, size_t nmemb, void * userp) {
     size_t realsize = size * nmemb;
     struct httpResponseBlock *block = (struct httpResponseBlock *)userp;
+    PDebug(@"CRL write callback: realsize=%lu blockSize=%lu", realsize, block->size);
 
     char * ptr = realloc(block->response, block->size + realsize + 1);
     if (ptr == NULL) {
+        PError(@"CRL unable to realloc response memory during write callback");
         return 0;
     }
 
