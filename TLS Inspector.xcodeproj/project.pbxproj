@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1A0D0D263914C200267CF9 /* CKRegex.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -108,7 +110,7 @@
 		3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */; };
 		3CCEB4D823DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
 		3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
-		3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD4932825A56198002AC7BD /* CKGetterParameters.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD4932825A56198002AC7BD /* CKGetterParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CD4932B25A56198002AC7BD /* CKGetterParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4932925A56198002AC7BD /* CKGetterParameters.m */; };
 		3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4933825A56721002AC7BD /* OptionsButton.swift */; };
 		3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */; };
@@ -147,7 +149,7 @@
 		3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14D123B0479B0053932F /* InitialViewController.swift */; };
 		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
 		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
-		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */; };
 		3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A693261BBC5900460B7F /* CKInspectParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A694261BBC5900460B7F /* CKInspectParameters.m */; };
@@ -173,6 +175,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3C1A0D132639222B00267CF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C72692323949ABD002A0B19;
+			remoteInfo = "TLS Inspector";
+		};
 		3C6FF89423B1A280008DC981 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
@@ -222,6 +231,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C1A0D0D263914C200267CF9 /* CKRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRegex.h; sourceTree = "<group>"; };
+		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
 		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
 		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
@@ -421,11 +432,7 @@
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXGroup;
 			children = (
-				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
-				67F686EF1FC8FAE400BB7AE8 /* Getters */,
-				3CF6773420464A9E00A3B4C1 /* Revocation */,
 				3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */,
-				3CF0A69D261BBCA300460B7F /* CKTypes.h */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3CB483FC2058BA0400322723 /* CertificateKit.m */,
 				3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */,
@@ -440,27 +447,33 @@
 				3C45AD5923D831A900E541EC /* CKCurlCommon.m */,
 				3CF3482523A56CA1000382CE /* CKEVOIDList.h */,
 				3CF3482623A56CA1000382CE /* CKEVOIDList.m */,
-				3CF0A693261BBC5900460B7F /* CKInspectParameters.h */,
-				3CF0A694261BBC5900460B7F /* CKInspectParameters.m */,
 				3C2A7A511F284DC700AA12B4 /* CKGetter.h */,
 				3C2A7A521F284DC700AA12B4 /* CKGetter.m */,
 				3CD4932825A56198002AC7BD /* CKGetterParameters.h */,
 				3CD4932925A56198002AC7BD /* CKGetterParameters.m */,
+				3CF0A693261BBC5900460B7F /* CKInspectParameters.h */,
+				3CF0A694261BBC5900460B7F /* CKInspectParameters.m */,
 				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
 				3C1D28AA2009677300A606BB /* CKNameObject.h */,
 				3C1D28AB2009677300A606BB /* CKNameObject.m */,
-				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
-				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
+				3C1A0D0D263914C200267CF9 /* CKRegex.h */,
+				3C1A0D0E263914C300267CF9 /* CKRegex.m */,
 				3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */,
 				3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */,
+				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
+				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
 				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
 				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
 				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
 				3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */,
+				3CF0A69D261BBCA300460B7F /* CKTypes.h */,
 				3CC1E9321F035A3400ED9BAA /* curl.framework */,
+				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
+				67F686EF1FC8FAE400BB7AE8 /* Getters */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
+				3CF6773420464A9E00A3B4C1 /* Revocation */,
 			);
 			path = CertificateKit;
 			sourceTree = "<group>";
@@ -717,6 +730,7 @@
 				3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */,
 				3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
+				3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */,
 				3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
 				3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */,
@@ -821,6 +835,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3C1A0D142639222B00267CF9 /* PBXTargetDependency */,
 			);
 			name = CertificateKitTests;
 			productName = CertificateKitTests;
@@ -849,8 +864,7 @@
 					};
 					3CF397401EB50E0900E8DBF4 = {
 						CreatedOnToolsVersion = 8.3.2;
-						ProvisioningStyle = Manual;
-						TestTargetID = 3CFAE6D51CA8440400CD946B;
+						TestTargetID = 3C72692323949ABD002A0B19;
 					};
 				};
 			};
@@ -1022,6 +1036,7 @@
 				3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */,
 				3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */,
 				3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */,
+				3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */,
 				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
 				3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */,
 				3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */,
@@ -1137,6 +1152,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3C1A0D142639222B00267CF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C72692323949ABD002A0B19 /* TLS Inspector */;
+			targetProxy = 3C1A0D132639222B00267CF9 /* PBXContainerItemProxy */;
+		};
 		3C6FF89523B1A280008DC981 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
@@ -1387,11 +1407,14 @@
 		3CF397491EB50E0900E8DBF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				INFOPLIST_FILE = CertificateKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1402,6 +1425,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
 			};
 			name = Debug;
@@ -1409,11 +1433,14 @@
 		3CF3974A1EB50E0900E8DBF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				INFOPLIST_FILE = CertificateKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1424,6 +1451,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
 			};
 			name = Release;

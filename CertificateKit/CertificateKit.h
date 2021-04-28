@@ -38,6 +38,7 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKOCSPResponse.h>
 #import <CertificateKit/CKCRLResponse.h>
 #import <CertificateKit/CKInspectParameters.h>
+#import <CertificateKit/CKGetterParameters.h>
 #import <CertificateKit/CKLogging.h>
 
 /**
