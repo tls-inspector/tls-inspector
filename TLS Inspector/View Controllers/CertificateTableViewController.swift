@@ -147,12 +147,12 @@ class CertificateTableViewController: UITableViewController {
                                                               value: lang(key: "Country::" + country),
                                                               useFixedWidthFont: false))
         }
-        for locale in name.states {
+        for city in name.cities {
             section.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Subject::L"),
-                                                              value: locale,
+                                                              value: city,
                                                               useFixedWidthFont: false))
         }
-        for state in name.cities {
+        for state in name.states {
             section.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Subject::S"),
                                                               value: state,
                                                               useFixedWidthFont: false))
