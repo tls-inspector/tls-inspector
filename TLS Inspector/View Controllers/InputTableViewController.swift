@@ -216,6 +216,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
             UserOptions.inspectionsWithVerboseLogging += 1
             CERTIFICATE_CHAIN = self.certificateChain
             SERVER_INFO = self.serverInfo
+            CURRENT_CERTIFICATE = 0
 
             self.performSegue(withIdentifier: "Inspect", sender: nil)
             self.updatePendingCell(state: .none)

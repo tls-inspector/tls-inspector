@@ -68,6 +68,8 @@
 		3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */; };
 		3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
 		3C84A98623AD9FCD003B76D3 /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
+		3C84F3132644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
+		3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
 		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
 		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
@@ -290,6 +292,7 @@
 		3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterErrorTableViewController.swift; sourceTree = "<group>"; };
 		3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateReminder.swift; sourceTree = "<group>"; };
 		3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTipTarget.swift; sourceTree = "<group>"; };
+		3C84F3122644C275003E6A66 /* Date+DurationString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DurationString.swift"; sourceTree = "<group>"; };
 		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
 		3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAccessabilityHints.swift; sourceTree = "<group>"; };
 		3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDomainName.swift; sourceTree = "<group>"; };
@@ -593,6 +596,7 @@
 				3CE3B21625BE2186008527A1 /* URL+Encode.swift */,
 				3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */,
 				3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */,
+				3C84F3122644C275003E6A66 /* Date+DurationString.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -1089,6 +1093,7 @@
 				3CCD0292239DD412009364D0 /* AboutViewController.swift in Sources */,
 				3C99C7C925A57231002ABA15 /* InputTableViewCell.swift in Sources */,
 				3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */,
+				3C84F3132644C275003E6A66 /* Date+DurationString.swift in Sources */,
 				3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */,
 				3C72695C2394BDF0002A0B19 /* SceneDelegate.swift in Sources */,
 				3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */,
@@ -1129,6 +1134,7 @@
 				3CDC14BC23B045B20053932F /* GradientView.swift in Sources */,
 				3CDC14C523B045DA0053932F /* UIObject+Lang.swift in Sources */,
 				3C6FF89923B1A420008DC981 /* AtomicInt.swift in Sources */,
+				3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */,
 				3CDC14CD23B046000053932F /* UserOptions.swift in Sources */,
 				3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,

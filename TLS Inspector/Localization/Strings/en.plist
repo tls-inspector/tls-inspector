@@ -841,12 +841,16 @@
 	<string>Understood</string>
 	<key>Unknown</key>
 	<string>Unknown</string>
+	<key>Untrusted</key>
+	<string>Untrusted</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
 	<key>Use IP Version</key>
 	<string>Use IP Version</string>
 	<key>Use the Reminders app to customize the reminder</key>
 	<string>Use the Reminders app to customize the reminder</string>
+	<key>Valid For</key>
+	<string>Valid For</string>
 	<key>Valid From</key>
 	<string>Valid From</string>
 	<key>Valid To</key>
@@ -873,6 +877,8 @@
 	<string>What does this mean?</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>What kind of feedback would you like to submit?</string>
+	<key>Will Expire In</key>
+	<string>Will Expire In</string>
 	<key>Yes</key>
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
@@ -893,6 +899,26 @@
 	<string>Apple - Legacy</string>
 	<key>crypto_engine_footer</key>
 	<string>Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device. The modern Apple engine requires iOS 12 or later. TLS 1.3 is not available on the legacy Apple engine.</string>
+	<key>date_unit_plural::day</key>
+	<string>days</string>
+	<key>date_unit_plural::hour</key>
+	<string>hours</string>
+	<key>date_unit_plural::minute</key>
+	<string>minutes</string>
+	<key>date_unit_plural::month</key>
+	<string>months</string>
+	<key>date_unit_plural::year</key>
+	<string>years</string>
+	<key>date_unit_singular::day</key>
+	<string>day</string>
+	<key>date_unit_singular::hour</key>
+	<string>hour</string>
+	<key>date_unit_singular::minute</key>
+	<string>minute</string>
+	<key>date_unit_singular::month</key>
+	<string>month</string>
+	<key>date_unit_singular::year</key>
+	<string>year</string>
 	<key>explanation::invalid_date</key>
 	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
 	<key>explanation::issue_date_too_long</key>
@@ -1039,6 +1065,8 @@ Exercise caution if continuing to this website.</string>
 	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
 	<key>{alg}, {len} bits</key>
 	<string>{0}, {1} bits</string>
+	<key>{amount} {date_unit}</key>
+	<string>{0} {1}</string>
 	<key>{commonName} (Expired)</key>
 	<string>{0} (Expired)</string>
 	<key>{commonName} (Insecure)</key>

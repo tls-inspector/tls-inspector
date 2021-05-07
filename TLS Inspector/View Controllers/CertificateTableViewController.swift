@@ -198,6 +198,16 @@ class CertificateTableViewController: UITableViewController {
             cell.textLabel?.text = lang(key: "Not After")
             validitySection.cells.append(cell)
         }
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
+            cell.detailTextLabel?.text = DateDuration.between(first: notBefore, second: notAfter)
+            cell.textLabel?.text = lang(key: "Valid For")
+            validitySection.cells.append(cell)
+        }
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
+            cell.detailTextLabel?.text = DateDuration.between(first: Date(), second: notAfter)
+            cell.textLabel?.text = lang(key: "Will Expire In")
+            validitySection.cells.append(cell)
+        }
 
         return validitySection
     }
