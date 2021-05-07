@@ -38,6 +38,7 @@
 
         ASN1_GENERALIZEDTIME_free(certificateExpiryASN1Generalized);
         NSCalendar *calendar = [NSCalendar currentCalendar];
+        [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
         return [calendar dateFromComponents:expiryDateComponents];
     }
     return nil;

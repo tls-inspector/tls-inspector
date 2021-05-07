@@ -94,12 +94,12 @@ INSERT_OPENSSL_ERROR_METHOD
 
     xcert.notAfter = [NSDate fromASN1_TIME:X509_get0_notAfter(cert)];
     xcert.notBefore = [NSDate fromASN1_TIME:X509_get0_notBefore(cert)];
-    NSDateComponents * components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:xcert.notBefore toDate:xcert.notAfter options:0];
-    xcert.validDays = [components day] + 1;
-
-    // Don't consider certs expired/notyetvalid if they're just hours away from the date.
-    xcert.isExpired = [xcert.notAfter timeIntervalSinceNow] < 86400;
-    xcert.isNotYetValid = [xcert.notBefore timeIntervalSinceNow] > 86400;
+    NSCalendar * calendar = [NSCalendar currentCalendar];
+    calendar.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSDateComponents * components = [calendar components:NSCalendarUnitDay fromDate:xcert.notBefore toDate:xcert.notAfter options:0];
+    xcert.validDays = [components day];
+    xcert.isExpired = [xcert.notAfter timeIntervalSinceNow] < 0;
+    xcert.isNotYetValid = [xcert.notBefore timeIntervalSinceNow] > 0;
     xcert.isValidDate = !xcert.isExpired && !xcert.isNotYetValid;
 
     // Get the OCSP URL

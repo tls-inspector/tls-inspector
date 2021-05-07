@@ -179,7 +179,7 @@ class CertificateTableViewController: UITableViewController {
         let validitySection = TableViewSection()
         validitySection.title = lang(key: "Validity Period")
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm 'UTC'"
 
         guard let notBefore = self.certificate.notBefore else {
             return nil
