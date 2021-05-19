@@ -2,6 +2,8 @@ import UIKit
 import MobileCoreServices
 import CertificateKit
 
+/// The initial view controller is responsible for bootstrapping the rest of the application and acting as the getter delegate.
+/// This extension can be used in a number of places, and each can report the host URL in a different way.
 class InitialViewController: UIViewController, CKGetterDelegate {
     var values: [URL] = []
     let latch = AtomicInt(defaultValue: 0)
@@ -45,7 +47,7 @@ class InitialViewController: UIViewController, CKGetterDelegate {
 
             for provider in item.attachments ?? [] {
                 let contentText = item.attributedContentText?.string
-                // Share page from within Safari
+                // Share page from within Safari 🧭
                 if provider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
                     self.latch.increment()
                     provider.loadItem(forTypeIdentifier: (kUTTypeURL as String), options: nil) { (urlObj, _) in
@@ -61,7 +63,7 @@ class InitialViewController: UIViewController, CKGetterDelegate {
                         self.values.append(url)
                         RunOnMain { self.checkValues() }
                     }
-                // Long-press on URL in Safari or share from other app
+                // Long-press on URL in Safari or share from other app 👆
                 } else if provider.hasItemConformingToTypeIdentifier(kUTTypePlainText as String) {
                     self.latch.increment()
                     provider.loadItem(forTypeIdentifier: (kUTTypePlainText as String), options: nil) { (text, _) in
@@ -109,8 +111,14 @@ class InitialViewController: UIViewController, CKGetterDelegate {
                 continue
             }
 
+            guard let host = url.host else {
+                continue
+            }
+
+            let port = UInt16(url.port ?? 443)
+
             foundURL = true
-            inspectHostAddress(url.host ?? "")
+            doInspect(hostAddress: host, port: port)
         }
 
         if !foundURL {
@@ -122,9 +130,11 @@ class InitialViewController: UIViewController, CKGetterDelegate {
         }
     }
 
-    func inspectHostAddress(_ hostAddress: String) {
+    func doInspect(hostAddress: String, port: UInt16) {
         self.getter.delegate = self
-        self.getter.getInfo(UserOptions.inspectParameters(hostAddress: hostAddress))
+        let parameters = UserOptions.inspectParameters(hostAddress: hostAddress)
+        parameters.port = port
+        self.getter.getInfo(parameters)
     }
 
     // MARK: CKGetterDelegate Methods

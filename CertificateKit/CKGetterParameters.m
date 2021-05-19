@@ -64,7 +64,12 @@
             hostAddress = [[wrappedAddress substringFromIndex:1] substringToIndex:wrappedAddress.length-2];
         } else {
             // Not a valid IP address and not a wrapped IPv6 address
-            getParams.port = [CKGetterParameters getAndStripPortFrom:&hostAddress];
+            UInt16 port = [CKGetterParameters getAndStripPortFrom:&hostAddress];
+            // Note: If the user specified a port in both the host address and in the port property then we
+            // ignore the port in the host address and use the specified value.
+            if (getParams.port == 0) {
+                getParams.port = port;
+            }
         }
     }
 
