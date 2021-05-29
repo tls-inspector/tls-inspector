@@ -42,11 +42,16 @@ struct httpResponseBlock {
     size_t size;
 };
 
+#define CRL_MAX_SIZE_EXT 5 * (1024 * 1024)
+#define CRL_MAX_SIZE_APP 20 * (1024 * 1024)
+#define IS_EXTENSION ([NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.ecnepsnai.Certificate-Inspector.Inspect-Website"])
+
 #define CRL_ERROR_CURL_LIBRARY -1
 #define CRL_ERROR_HTTP_ERROR -2
 #define CRL_ERROR_DECODE_ERROR -3
 #define CRL_ERROR_CRL_ERROR -4
 #define CRL_ERROR_NO_BODY -5
+#define CRL_ERROR_TOO_LARGE -6
 
 + (CKCRLManager * _Nonnull) sharedManager {
     if (!_instance) {
@@ -137,10 +142,13 @@ struct httpResponseBlock {
         }
     }
 
+    unsigned long contentLength;
     struct httpResponseBlock curldata;
     curldata.response = malloc(0);
     curldata.size = 0;
     curl_easy_setopt(curl, CURLOPT_URL, url.absoluteString.UTF8String);
+    curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, crl_header_callback);
+    curl_easy_setopt(curl, CURLOPT_HEADERDATA, &contentLength);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, crl_write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&curldata);
     
@@ -160,13 +168,20 @@ struct httpResponseBlock {
     CURLcode response = curl_easy_perform(curl);
     if (response != CURLE_OK) {
         PError(@"CRL Request error: %s (%i)", curl_easy_strerror(response), response);
-        long response_code;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
-        
-        *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
-        PError(@"CRL HTTP Response: %ld", response_code);
-        PDebug(@"CRL HTTP %@ response %ld", url.absoluteString, response_code);
-        
+
+        // ContentLength is only set if we rejected this response because it was too large
+        if (contentLength > 0) {
+            PError(@"CRL content length exeeced limit. AppLimit=%i ExtLimit=%i Length=%lu", CRL_MAX_SIZE_APP, CRL_MAX_SIZE_EXT, contentLength);
+            *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_TOO_LARGE userInfo:@{NSLocalizedDescriptionKey: @"CRL too large"}];
+        } else {
+            long response_code;
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+
+            *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
+            PError(@"CRL HTTP Response: %ld", response_code);
+            PDebug(@"CRL HTTP %@ response %ld", url.absoluteString, response_code);
+        }
+
         curl_easy_cleanup(curl);
         free(curldata.response);
         return;
@@ -204,6 +219,31 @@ struct httpResponseBlock {
     }
 
     return;
+}
+
+size_t crl_header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
+    unsigned long * contentLength = (unsigned long *)userdata;
+    unsigned long len = nitems * size;
+    if (len > 2) {
+        NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
+        NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray<NSString *> * components = [headerValue.lowercaseString componentsSeparatedByString:@": "];
+        if (components.count < 2) {
+            return len;
+        }
+        if ([components[0] isEqualToString:@"content-length"]) {
+            NSNumberFormatter * formatter = [NSNumberFormatter new];
+            unsigned long cl = [formatter numberFromString:components[1]].unsignedLongValue;
+            if (IS_EXTENSION && cl > CRL_MAX_SIZE_EXT) {
+                *contentLength = cl;
+                return 0;
+            } else if (!IS_EXTENSION && cl > CRL_MAX_SIZE_APP) {
+                *contentLength = cl;
+                return 0;
+            }
+        }
+    }
+    return len;
 }
 
 size_t crl_write_callback(void * data, size_t size, size_t nmemb, void * userp) {
