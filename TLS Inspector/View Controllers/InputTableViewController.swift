@@ -63,7 +63,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     @IBAction func inspectButtonPressed(_ sender: UIBarButtonItem) {
         let text = self.domainInput?.text ?? ""
-        self.inspectDomain(text: text)
+        self.inspectDomain(text)
     }
 
     @IBAction func advancedButtonPressed(_ sender: OptionsButton) {
@@ -84,7 +84,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if self.inputIsValid() {
             textField.resignFirstResponder()
-            self.inspectDomain(text: textField.text!)
+            self.inspectDomain(textField.text!)
             return true
         } else {
             return false
@@ -139,38 +139,19 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         self.getter?.getInfo(parameters)
     }
 
-    func inspectDomain(text: String) {
+    func inspectDomain(_ query: String) {
         if CertificateKit.isProxyConfigured() {
             UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
             return
         }
 
-        var domainText = text
-        if domainText.hasPrefix("http://") {
-            showInputError()
-            return
-        }
-
-        if domainText.hasPrefix("https://") {
-            domainText = domainText.replacingOccurrences(of: "https://", with: "")
-        }
-
-        self.doInspect(parameters: UserOptions.inspectParameters(hostAddress: domainText))
-    }
-
-    func showInputError() {
-        self.updatePendingCell(state: .none)
-        self.domainInput?.text = ""
-        UIHelper(self).presentAlert(title: "Unable to Inspect Domain",
-                                    body: "The URL or IP Address inputted is not valid") {
-            self.domainInput?.isEnabled = true
-        }
+        self.doInspect(parameters: UserOptions.inspectParameters(hostAddress: query))
     }
 
     func reloadWithQuery(query: String) {
         self.presentedViewController?.dismiss(animated: true, completion: {
             RunOnMain {
-                self.inspectDomain(text: query)
+                self.inspectDomain(query)
             }
         })
     }

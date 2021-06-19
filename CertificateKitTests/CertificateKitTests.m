@@ -92,4 +92,12 @@
     XCTAssertTrue(getterParameters.port == 7443);
 }
 
+- (void) testGetterParseURLNameWithPort {
+    CKInspectParameters * inspectParameters = [CKInspectParameters new];
+    inspectParameters.hostAddress = @"https://www.google.com:7443/something/else.html?query=param#value";
+    CKGetterParameters * getterParameters = [CKGetterParameters fromInspectParameters:inspectParameters];
+    XCTAssertTrue([getterParameters.hostAddress isEqualToString:@"www.google.com"]);
+    XCTAssertTrue(getterParameters.port == 7443);
+}
+
 @end

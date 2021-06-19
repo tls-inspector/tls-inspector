@@ -53,6 +53,11 @@
     // Strip any protocol prefix
     NSString * hostAddress = [protocolPattern replaceAllMatchesIn:parameters.hostAddress with:@""];
 
+    // Remove any path components (if present)
+    if ([hostAddress containsString:@"/"]) {
+        hostAddress = [hostAddress componentsSeparatedByString:@"/"][0];
+    }
+
     // Valid IP addresses can't contain a port, so no need to try and find and strip it
     if (![CKGetterParameters isValidIPAddress:hostAddress]) {
         // Catch IPv6 addresses that are wrapped in [] and contain a port
