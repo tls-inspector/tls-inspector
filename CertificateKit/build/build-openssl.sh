@@ -18,7 +18,7 @@ if [ -f ../openssl.framework/Headers/opensslv.h ]; then
         exit 0
     else
         echo "warning: OpenSSL version did not match. recompiling version ${OPENSSL_WANT_VERSION}"
-        #rm -r ../openssl.framework
+        rm -r ../openssl.framework
     fi
 fi
 
