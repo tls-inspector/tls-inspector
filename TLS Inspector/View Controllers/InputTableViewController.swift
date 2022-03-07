@@ -82,7 +82,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if self.inputIsValid() {
+        if self.inputIsValid() && textField.text != nil {
             textField.resignFirstResponder()
             self.inspectDomain(textField.text!)
             return true

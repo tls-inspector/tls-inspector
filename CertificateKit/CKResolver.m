@@ -52,8 +52,9 @@ static id _instance;
     hints.ai_socktype = SOCK_DGRAM;
     hints.ai_flags = 0;
     hints.ai_protocol = 0;
-    PDebug(@"Resolving domain: domain='%@' address_family='%i'", domain, aiFamily);
-    err = getaddrinfo(domain.UTF8String, NULL, &hints, &result);
+    const char * query = [domain UTF8String];
+    PDebug(@"Resolving domain: query='%s' address_family='%i'", query, aiFamily);
+    err = getaddrinfo(query, NULL, &hints, &result);
     if (err != 0) {
         if (error != NULL) {
             NSError * connectError = [[NSError alloc] initWithDomain:@"com.tlsinspector.CKResolver" code:err userInfo:@{NSLocalizedDescriptionKey: [self gaiErrorMessage:err]}];
@@ -102,21 +103,21 @@ static id _instance;
 - (NSString *) gaiErrorMessage:(int)code {
     switch (code) {
     case EAI_ADDRFAMILY:
-        return @"EAI::ADDRFAMILY";
+        return @"Address family for hostname not supported (EAI::ADDRFAMILY)";
     case EAI_AGAIN:
-        return @"EAI::AGAIN";
+        return @"Temporary failure in name resolution (EAI::AGAIN)";
     case EAI_BADFLAGS:
         return @"EAI::BADFLAGS";
     case EAI_FAIL:
-        return @"EAI::FAIL";
+        return @"Non-recoverable failure in name resolution (EAI::FAIL)";
     case EAI_FAMILY:
         return @"EAI::FAMILY";
     case EAI_MEMORY:
         return @"EAI::MEMORY";
     case EAI_NODATA:
-        return @"EAI::NODATA";
+        return @"No address associated with hostname (EAI::NODATA)";
     case EAI_NONAME:
-        return @"EAI::NONAME";
+        return @"Hostname nor servname provided, or not known (EAI::NONAME)";
     case EAI_SERVICE:
         return @"EAI::SERVICE";
     case EAI_SOCKTYPE:
