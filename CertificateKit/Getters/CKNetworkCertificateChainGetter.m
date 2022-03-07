@@ -112,18 +112,32 @@
                 [self.chain determineTrustFailureReason];
             }
 
-            tls_protocol_version_t proto_v;
-            tls_ciphersuite_t suite;
+            NSString * protoVersionStr;
+            NSString * suiteStr;
 
             if (@available(iOS 13, *)) {
-                proto_v = sec_protocol_metadata_get_negotiated_tls_protocol_version(metadata);
-                suite = sec_protocol_metadata_get_negotiated_tls_ciphersuite(metadata);
+                tls_protocol_version_t proto_v = sec_protocol_metadata_get_negotiated_tls_protocol_version(metadata);
+                tls_ciphersuite_t suite = sec_protocol_metadata_get_negotiated_tls_ciphersuite(metadata);
+
+                protoVersionStr = [self tlsVersionToString:proto_v];
+                suiteStr = [self tlsCipherSuiteToString:suite];
             } else {
-                proto_v = sec_protocol_metadata_get_negotiated_protocol_version(metadata);
-                suite = sec_protocol_metadata_get_negotiated_ciphersuite(metadata);
+                SSLProtocol proto_v = sec_protocol_metadata_get_negotiated_protocol_version(metadata);
+                SSLCipherSuite suite = sec_protocol_metadata_get_negotiated_ciphersuite(metadata);
+
+                protoVersionStr = [self sslVersionToString:proto_v];
+                suiteStr = [self sslCipherSuiteToString:suite];
             }
-            self.chain.protocol = [self tlsVersionToString:proto_v];
-            self.chain.cipherSuite = [self tlsCipherSuiteToString:suite];
+
+            if (protoVersionStr == nil) {
+                protoVersionStr = @"Unknown";
+            }
+            if (suiteStr == nil) {
+                suiteStr = @"Unknown";
+            }
+
+            self.chain.protocol = protoVersionStr;
+            self.chain.cipherSuite = suiteStr;
 
             complete(true);
         }, nw_dispatch_queue);
@@ -246,7 +260,33 @@
     return [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
 }
 
-- (NSString *) tlsVersionToString:(tls_protocol_version_t)version API_AVAILABLE(ios(12.0)) {
+- (NSString *) sslVersionToString:(SSLProtocol)version API_AVAILABLE(ios(12.0)) {
+    switch (version) {
+        case kTLSProtocol1:
+            return @"TLS 1.0";
+        case kTLSProtocol11:
+            return @"TLS 1.1";
+        case kTLSProtocol12:
+            return @"TLS 1.2";
+        case kDTLSProtocol1:
+            return @"DTLS 1.0";
+        case kTLSProtocol13:
+            return @"TLS 1.3";
+        case kDTLSProtocol12:
+            return @"DTLS 1.2";
+        case kSSLProtocol2:
+            return @"SSL 2.0";
+        case kSSLProtocol3:
+            return @"SSL 3.0";
+        default:
+            break;
+    };
+
+    PError(@"Unknown SSLProtocol: %u", version);
+    return @"Unknown";
+}
+
+- (NSString *) tlsVersionToString:(tls_protocol_version_t)version API_AVAILABLE(ios(13.0)) {
     switch (version) {
         case tls_protocol_version_TLSv10:
             return @"TLS 1.0";
@@ -266,7 +306,67 @@
     return @"Unknown";
 }
 
-- (NSString *) tlsCipherSuiteToString:(tls_ciphersuite_t)suite API_AVAILABLE(ios(12.0)) {
+- (NSString *) sslCipherSuiteToString:(SSLCipherSuite)suite API_AVAILABLE(ios(12.0)) {
+    switch (suite) {
+        case TLS_RSA_WITH_3DES_EDE_CBC_SHA:
+            return @"RSA_WITH_3DES_EDE_CBC_SHA";
+        case TLS_RSA_WITH_AES_128_CBC_SHA:
+            return @"RSA_WITH_AES_128_CBC_SHA";
+        case TLS_RSA_WITH_AES_256_CBC_SHA:
+            return @"RSA_WITH_AES_256_CBC_SHA";
+        case TLS_RSA_WITH_AES_128_GCM_SHA256:
+            return @"RSA_WITH_AES_128_GCM_SHA256";
+        case TLS_RSA_WITH_AES_256_GCM_SHA384:
+            return @"RSA_WITH_AES_256_GCM_SHA384";
+        case TLS_RSA_WITH_AES_128_CBC_SHA256:
+            return @"RSA_WITH_AES_128_CBC_SHA256";
+        case TLS_RSA_WITH_AES_256_CBC_SHA256:
+            return @"RSA_WITH_AES_256_CBC_SHA256";
+        case TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA:
+            return @"ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA";
+        case TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA:
+            return @"ECDHE_ECDSA_WITH_AES_128_CBC_SHA";
+        case TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:
+            return @"ECDHE_ECDSA_WITH_AES_256_CBC_SHA";
+        case TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA:
+            return @"ECDHE_RSA_WITH_3DES_EDE_CBC_SHA";
+        case TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA:
+            return @"ECDHE_RSA_WITH_AES_128_CBC_SHA";
+        case TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA:
+            return @"ECDHE_RSA_WITH_AES_256_CBC_SHA";
+        case TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:
+            return @"ECDHE_ECDSA_WITH_AES_128_CBC_SHA256";
+        case TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384:
+            return @"ECDHE_ECDSA_WITH_AES_256_CBC_SHA384";
+        case TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256:
+            return @"ECDHE_RSA_WITH_AES_128_CBC_SHA256";
+        case TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384:
+            return @"ECDHE_RSA_WITH_AES_256_CBC_SHA384";
+        case TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:
+            return @"ECDHE_ECDSA_WITH_AES_128_GCM_SHA256";
+        case TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:
+            return @"ECDHE_ECDSA_WITH_AES_256_GCM_SHA384";
+        case TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:
+            return @"ECDHE_RSA_WITH_AES_128_GCM_SHA256";
+        case TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:
+            return @"ECDHE_RSA_WITH_AES_256_GCM_SHA384";
+        case TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:
+            return @"ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256";
+        case TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:
+            return @"ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256";
+        case TLS_AES_128_GCM_SHA256:
+            return @"AES_128_GCM_SHA256";
+        case TLS_AES_256_GCM_SHA384:
+            return @"AES_256_GCM_SHA384";
+        case TLS_CHACHA20_POLY1305_SHA256:
+            return @"CHACHA20_POLY1305_SHA256";
+    }
+
+    PError(@"Unknown SSLCipherSuite: %u", suite);
+    return @"Unknown";
+}
+
+- (NSString *) tlsCipherSuiteToString:(tls_ciphersuite_t)suite API_AVAILABLE(ios(13.0)) {
     switch (suite) {
         case tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA:
             return @"RSA_WITH_3DES_EDE_CBC_SHA";

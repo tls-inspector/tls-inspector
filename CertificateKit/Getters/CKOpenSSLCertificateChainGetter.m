@@ -77,7 +77,6 @@ INSERT_OPENSSL_ERROR_METHOD
 
     OPENSSL_init_ssl(0, NULL);
     OPENSSL_init_crypto(0, NULL);
-    ERR_load_SSL_strings();
 
     SSL_CTX * ctx = NULL;
     BIO * web = NULL;
