@@ -493,19 +493,19 @@
 		3C72692523949ABD002A0B19 /* TLS Inspector */ = {
 			isa = PBXGroup;
 			children = (
-				3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */,
-				3CCD028C239DCEA7009364D0 /* Storyboards */,
+				3C72692623949ABD002A0B19 /* AppDelegate.swift */,
+				3C72692F23949ABD002A0B19 /* Assets.xcassets */,
 				3CCD0289239DC072009364D0 /* External */,
-				3C5F465D239DAE7D00B3A727 /* Localization */,
 				3CD4A7B62398C2F100B2C8FC /* Features */,
+				3C72693423949ABD002A0B19 /* Info.plist */,
+				3C5F465D239DAE7D00B3A727 /* Localization */,
+				3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */,
+				3C6B0B41262E2977001B99DF /* Settings.bundle */,
+				3CCD028C239DCEA7009364D0 /* Storyboards */,
+				3CF9CC9423A4802400535173 /* Supporting Files */,
+				3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */,
 				3C7269622394C2D3002A0B19 /* User Interface */,
 				3C7269382394BC0F002A0B19 /* View Controllers */,
-				3CF9CC9423A4802400535173 /* Supporting Files */,
-				3C72692623949ABD002A0B19 /* AppDelegate.swift */,
-				3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */,
-				3C72692F23949ABD002A0B19 /* Assets.xcassets */,
-				3C72693423949ABD002A0B19 /* Info.plist */,
-				3C6B0B41262E2977001B99DF /* Settings.bundle */,
 			);
 			path = "TLS Inspector";
 			sourceTree = "<group>";
@@ -612,11 +612,11 @@
 		3CDC14A823B0453B0053932F /* Inspect Website */ = {
 			isa = PBXGroup;
 			children = (
-				3CDC14B523B045460053932F /* Show Certificate.entitlements */,
 				3CDC14AB23B0453B0053932F /* Extension.storyboard */,
-				3CDC14D123B0479B0053932F /* InitialViewController.swift */,
-				3CDC14AE23B0453B0053932F /* Info.plist */,
 				3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */,
+				3CDC14AE23B0453B0053932F /* Info.plist */,
+				3CDC14D123B0479B0053932F /* InitialViewController.swift */,
+				3CDC14B523B045460053932F /* Show Certificate.entitlements */,
 			);
 			path = "Inspect Website";
 			sourceTree = "<group>";
@@ -853,7 +853,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
 					3C65DAD91E836BE9004AD96D = {
