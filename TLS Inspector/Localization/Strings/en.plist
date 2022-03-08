@@ -172,8 +172,6 @@
 	<string>Colombia, Republic of</string>
 	<key>Country::CR</key>
 	<string>Costa Rica, Republic of</string>
-	<key>Country::CS</key>
-	<string>Serbia and Montenegro</string>
 	<key>Country::CU</key>
 	<string>Cuba, Republic of</string>
 	<key>Country::CV</key>
@@ -317,7 +315,7 @@
 	<key>Country::KZ</key>
 	<string>Kazakhstan, Republic of</string>
 	<key>Country::LA</key>
-	<string>Lao People&apos;s Democratic Republic</string>
+	<string>Lao, People&apos;s Democratic Republic</string>
 	<key>Country::LB</key>
 	<string>Lebanon, Lebanese Republic</string>
 	<key>Country::LC</key>
@@ -337,25 +335,27 @@
 	<key>Country::LV</key>
 	<string>Latvia</string>
 	<key>Country::LY</key>
-	<string>Libyan Arab Jamahiriya</string>
+	<string>Libya, State of</string>
 	<key>Country::MA</key>
 	<string>Morocco, Kingdom of</string>
 	<key>Country::MC</key>
 	<string>Monaco, Principality of</string>
 	<key>Country::MD</key>
 	<string>Moldova, Republic of</string>
+	<key>Country::ME</key>
+	<string>Montenegro</string>
 	<key>Country::MG</key>
 	<string>Madagascar, Republic of</string>
 	<key>Country::MH</key>
 	<string>Marshall Islands</string>
 	<key>Country::MK</key>
-	<string>Macedonia, the former Yugoslav Republic of</string>
+	<string>North Macedonia, Republic of</string>
 	<key>Country::ML</key>
 	<string>Mali, Republic of</string>
 	<key>Country::MM</key>
 	<string>Myanmar</string>
 	<key>Country::MN</key>
-	<string>Mongolia, Mongolian People&apos;s Republic</string>
+	<string>Mongolia, State of</string>
 	<key>Country::MO</key>
 	<string>Macao, Special Administrative Region of China</string>
 	<key>Country::MP</key>
@@ -437,9 +437,11 @@
 	<key>Country::QA</key>
 	<string>Qatar, State of</string>
 	<key>Country::RE</key>
-	<string>Reunion</string>
+	<string>Réunion</string>
 	<key>Country::RO</key>
 	<string>Romania, Socialist Republic of</string>
+	<key>Country::RS</key>
+	<string>Serbia, Republic of</string>
 	<key>Country::RU</key>
 	<string>Russian Federation</string>
 	<key>Country::RW</key>
@@ -487,7 +489,7 @@
 	<key>Country::TD</key>
 	<string>Chad, Republic of</string>
 	<key>Country::TF</key>
-	<string>French Southern Territories</string>
+	<string>French Southern and Antarctic Lands</string>
 	<key>Country::TG</key>
 	<string>Togo, Togolese Republic</string>
 	<key>Country::TH</key>
@@ -571,8 +573,6 @@
 	<string>Do not contact support for issues with your iOS Device or to report unsafe websites.</string>
 	<key>Domain Name or IP Address</key>
 	<string>Domain Name or IP Address</string>
-	<key>Domain name or IP Address</key>
-	<string>Domain name or IP Address</string>
 	<key>Download &amp; Check CRL</key>
 	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
@@ -605,8 +605,6 @@
 	<string>Follow @tlsinspector on Twitter</string>
 	<key>General</key>
 	<string>General</string>
-	<key>Get Involed</key>
-	<string>Get Involved</string>
 	<key>Get Involved</key>
 	<string>Get Involved</string>
 	<key>HTTP Headers</key>
@@ -650,7 +648,7 @@
 	<key>KeyAlgorithm::rsaEncryption</key>
 	<string>RSA</string>
 	<key>Loading...</key>
-	<string>Loading...</string>
+	<string>Loading…</string>
 	<key>Locally Trusted</key>
 	<string>Locally Trusted</string>
 	<key>Locally Trusted Chain</key>

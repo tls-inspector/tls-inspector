@@ -52,7 +52,7 @@ class AdvancedInspectTableViewController: UITableViewController {
         section.title = lang(key: "Target")
         section.footer = lang(key: "Specifying a host IP address will bypass name resolution.")
 
-        let hostInput = InputTableViewCell.Cell(title: lang(key: "Domain name or IP Address")) { (input: UITextField) in
+        let hostInput = InputTableViewCell.Cell(title: lang(key: "Domain Name or IP Address")) { (input: UITextField) in
             input.placeholder = RandomDomainName.get()
             input.keyboardType = .URL
             input.autocorrectionType = .no
