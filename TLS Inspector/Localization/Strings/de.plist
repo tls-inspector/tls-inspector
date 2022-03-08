@@ -201,7 +201,7 @@
 	<key>Country::EG</key>
 	<string>Ägypten</string>
 	<key>Country::EH</key>
-	<string>Demokratische Arabische Republik Sahara</string><!-- VERIFY -->
+	<string>Demokratische Arabische Republik Sahara</string>
 	<key>Country::ER</key>
 	<string>Eritrea</string>
 	<key>Country::ES</key>
@@ -281,7 +281,7 @@
 	<key>Country::IQ</key>
 	<string>Irak</string>
 	<key>Country::IR</key>
-	<string>Iran</string><!--ABOVE ALREADY TRANSLATED-->
+	<string>Iran</string>
 	<key>Country::IS</key>
 	<string>Island</string>
 	<key>Country::IT</key>
@@ -305,9 +305,9 @@
 	<key>Country::KN</key>
 	<string>St. Kitts und Nevis</string>
 	<key>Country::KP</key>
-	<string>Nordkorea</string><!-- VERIFY -->
+	<string>Demokratische Volksrepublik Korea (Nordkorea)</string>
 	<key>Country::KR</key>
-	<string>Südkorea</string><!-- VERIFY -->
+	<string>Republik Korea (Südkorea)</string>
 	<key>Country::KW</key>
 	<string>Kuwait</string>
 	<key>Country::KY</key>
