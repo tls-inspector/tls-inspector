@@ -287,6 +287,8 @@ INSERT_OPENSSL_ERROR_METHOD
         [self.chain determineTrustFailureReason];
     }
 
+    [self.chain checkAuthorityTrust];
+
     if (certs.count > 1) {
         self.chain.rootCA = [self.chain.certificates lastObject];
         self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];

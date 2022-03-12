@@ -23,6 +23,31 @@
 
 @implementation CKCertificateChain
 
+- (void) checkAuthorityTrust {
+    NSArray<NSString *> * knownBadCertificates = @[
+        // Version: 3 (0x2)
+        // Serial Number: 4096 (0x1000)
+        // Signature Algorithm: sha256WithRSAEncryption
+        // Issuer: C = RU, O = The Ministry of Digital Development and Communications, CN = Russian Trusted Root CA
+        // Validity
+        //     Not Before: Mar  1 21:04:15 2022 GMT
+        //     Not After : Feb 27 21:04:15 2032 GMT
+        // Subject: C = RU, O = The Ministry of Digital Development and Communications, CN = Russian Trusted Root CA
+        @"D26D2D0231B7C39F92CC738512BA54103519E4405D68B5BD703E9788CA8ECF31",
+    ];
+
+    for (NSString * badFingerprint in knownBadCertificates) {
+        for (CKCertificate * cert in self.certificates) {
+            NSString * fingerprint = [[cert SHA256Fingerprint] uppercaseString];
+            if ([fingerprint isEqualToString:badFingerprint]) {
+                PWarn(@"Certificate: '%@' matches known bad certificate '%@'", cert.subject.description, badFingerprint);
+                self.trusted = CKCertificateChainTrustStatusBadAuthority;
+                return;
+            }
+        }
+    }
+}
+
 // Apple does not provide (as far as I am aware) detailed information as to why a certificate chain
 // failed evalulation. Therefor we have to made some deductions based off of information we do know.
 // Expired (Any)

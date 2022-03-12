@@ -557,6 +557,8 @@
 	<string>Zimbabwe</string>
 	<key>Crypto Engine</key>
 	<string>Crypto Engine</string>
+	<key>Dangerous</key>
+	<string>Dangerous</string>
 	<key>Debug Logging Enabled</key>
 	<string>Debug Logging Enabled</string>
 	<key>Delete</key>
@@ -919,6 +921,8 @@
 	<string>month</string>
 	<key>date_unit_singular::year</key>
 	<string>year</string>
+	<key>explanation::bad_authority</key>
+	<string>The certificate for this host was issued by a known dangerous certificate authority.</string>
 	<key>explanation::invalid_date</key>
 	<string>The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.</string>
 	<key>explanation::issue_date_too_long</key>
@@ -1003,6 +1007,10 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>URI</string>
 	<key>sanType::Unknown</key>
 	<string>Unknown</string>
+	<key>secure::bad_authority</key>
+	<string>No. Certificate authorities need to adhere to internationally accepted standards. The authority that issued the certificate for this host is known to be in violation of these standards
+
+EXERCISE EXTREME CAUTION. VISITING WEBSITES THAT USE KNOWN BAD CERTIFICATE AUTHORITIES EXPOSES YOUR PRIVACY AND SECURITY TO EXTREME DANGER.</string>
 	<key>secure::invalid_date</key>
 	<string>Most likely. An expired or not-yet-valid certificate isn&apos;t necessarily invalid, but often a mistake by the site administrator, or your phone&apos;s time settings being incorrect.</string>
 	<key>secure::issue_date_too_long</key>

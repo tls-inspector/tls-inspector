@@ -112,6 +112,8 @@
                 [self.chain determineTrustFailureReason];
             }
 
+            [self.chain checkAuthorityTrust];
+
             NSString * protoVersionStr;
             NSString * suiteStr;
 

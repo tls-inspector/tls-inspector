@@ -68,6 +68,8 @@
 	<string>Zertifikate können nicht geladen werden</string>
 	<key>Crypto Engine</key>
 	<string>Crypto-Engine</string>
+	<key>Dangerous</key>
+	<string>Dangerous</string>
 	<key>Debug Logging Enabled</key>
 	<string>Protokollierung aktiviert</string>
 	<key>Delete</key>
@@ -336,6 +338,8 @@
 	<string>TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2021 Ian Spence.</string>
 	<key>crypto_engine_footer</key>
 	<string>Änderungen an der Crypto-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als jene, die von diesem iOS-Gerät verwendet werden.</string>
+	<key>explanation::bad_authority</key>
+	<string>The certificate for this host was issued by a known dangerous certificate authority.</string>
 	<key>explanation::invalid_date</key>
 	<string>Dem Server-Zertifikat wird nicht vertraut, da mindestens ein Zertifikat in der Kette abgelaufen oder noch nicht gültig ist.</string>
 	<key>explanation::issue_date_too_long</key>
@@ -410,6 +414,10 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Anderer Typ</string>
 	<key>sanType::Unknown</key>
 	<string>Unbekannt</string>
+	<key>secure::bad_authority</key>
+	<string>No. Certificate authorities need to adhere to internationally accepted standards. The authority that issued the certificate for this host is known to be in violation of these standards
+
+EXERCISE EXTREME CAUTION. VISITING WEBSITES THAT USE KNOWN BAD CERTIFICATE AUTHORITIES EXPOSES YOUR PRIVACY AND SECURITY TO EXTREME DANGER.</string>
 	<key>secure::invalid_date</key>
 	<string>Wahrscheinlich. Ein abgelaufenes oder noch nicht gültiges Zertifikat ist nicht zwingend ungültig, aber oft ein Fehler des Site-Administrators, oder die Uhrzeit auf deinem iOS-Gerät stimmt nicht.</string>
 	<key>secure::issue_date_too_long</key>
