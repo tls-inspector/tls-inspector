@@ -207,6 +207,8 @@
         [self.chain determineTrustFailureReason];
     }
 
+    [self.chain checkAuthorityTrust];
+
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, count);
 
     self.chain.cipherSuite = [self CiphersuiteToString:ciphers[0]];

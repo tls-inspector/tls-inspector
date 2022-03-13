@@ -66,6 +66,10 @@ class TrustDetailsTableViewController: UITableViewController {
             trustColor = UIColor.materialAmber()
             trustText = lang(key: "Untrusted")
             trustIcon = FAIcon.FAExclamationCircleSolid
+        case .badAuthority:
+            trustColor = UIColor.materialRed(level: 900) ?? UIColor.materialRed()
+            trustText = lang(key: "Dangerous")
+            trustIcon = FAIcon.FAExclamationTriangleSolid
         @unknown default:
             // Default already set
             break
@@ -126,6 +130,9 @@ class TrustDetailsTableViewController: UITableViewController {
         case .issueDateTooLong:
             explanation = lang(key: "explanation::issue_date_too_long")
             isSecure = lang(key: "secure::issue_date_too_long")
+        case .badAuthority:
+            explanation = lang(key: "explanation::bad_authority")
+            isSecure = lang(key: "secure::bad_authority")
         @unknown default:
             explanation = lang(key: "Unknown")
             isSecure = lang(key: "Unknown")

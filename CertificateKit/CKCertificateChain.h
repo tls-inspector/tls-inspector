@@ -86,6 +86,10 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
      The leaf certificate is missing require key usage permissions
      */
     CKCertificateChainTrustStatusLeafMissingRequiredKeyUsage,
+    /**
+     The root or intermediate authority is known to violate internationally accepted rules
+     */
+    CKCertificateChainTrustStatusBadAuthority,
 };
 
 /**
@@ -133,6 +137,14 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
  */
 @property (strong, nonatomic, nonnull) NSString * protocol;
 
+/**
+ Check if one or more certificates in the chain are known bad certificates
+ */
+- (void) checkAuthorityTrust;
+
+/**
+ Attempt to determine why the trust failed
+ */
 - (void) determineTrustFailureReason;
 
 -(NSString * _Nonnull) description;
