@@ -11,11 +11,13 @@
 	<key>6 months</key>
 	<string>6 Monate</string>
 	<key>About</key>
-	<string>Über</string>
+	<string>Info</string>
 	<key>About TLS Inspector</key>
 	<string>Über TLS Inspector</string>
 	<key>Add Certificate Expiry Reminder</key>
 	<string>Ablauf-Erinnerung hinzufügen</string>
+	<key>Advanced Inspect</key>
+	<string>Erweiterte Inspektion</string>
 	<key>Advanced Options</key>
 	<string>Erweiterte Optionen</string>
 	<key>Algorithm</key>
@@ -24,8 +26,16 @@
 	<string>Algorithmen</string>
 	<key>Alternate Names</key>
 	<string>Alternative Namen</string>
+	<key>Apple Support</key>
+	<string>Apple Support</string>
 	<key>Authority</key>
 	<string>Zertifizierungsstelle</string>
+	<key>Auto</key>
+	<string>Auto</string>
+	<key>Automatic</key>
+	<string>Automatisch</string>
+	<key>Automatic will choose IPv6 if available.</key>
+	<string>Automatisch nutzt IPv6 wenn verfügbar.</string>
 	<key>Basic</key>
 	<string>Einfach</string>
 	<key>Build</key>
@@ -59,13 +69,494 @@
 	<key>Contact Us</key>
 	<string>Kontaktiere uns</string>
 	<key>Contacting support requires that at least one email account be configured on this device.</key>
-	<string>Den Support zu kontaktieren setzt voraus, dass zumindest ein E-Mail-Account am Gerät konfiguriert ist.</string>
+	<string>Um den Support zu kontaktieren, muss zumindest ein E-Mail-Account am Gerät konfiguriert sein.</string>
 	<key>Contribute to TLS Inspector</key>
 	<string>Trage zu TLS Inspector bei</string>
 	<key>Copy</key>
 	<string>Kopieren</string>
 	<key>Could not get certificates</key>
 	<string>Zertifikate können nicht geladen werden</string>
+	<key>Country::AD</key>
+	<string>Andorra</string>
+	<key>Country::AE</key>
+	<string>Vereinigte Arabische Emirate</string>
+	<key>Country::AF</key>
+	<string>Afghanistan</string>
+	<key>Country::AG</key>
+	<string>Antigua und Barbuda</string>
+	<key>Country::AI</key>
+	<string>Anguilla</string>
+	<key>Country::AL</key>
+	<string>Albanien</string>
+	<key>Country::AM</key>
+	<string>Armenien</string>
+	<key>Country::AN</key>
+	<string>Niederländische Antillen</string>
+	<key>Country::AO</key>
+	<string>Angola</string>
+	<key>Country::AQ</key>
+	<string>Antarktis (Territorium südlich des 60. Breitengrades)</string>
+	<key>Country::AR</key>
+	<string>Argentinien</string>
+	<key>Country::AS</key>
+	<string>Amerikanisch-Samoa</string>
+	<key>Country::AT</key>
+	<string>Österreich</string>
+	<key>Country::AU</key>
+	<string>Australien</string>
+	<key>Country::AW</key>
+	<string>Aruba</string>
+	<key>Country::AZ</key>
+	<string>Aserbaidschan</string>
+	<key>Country::BA</key>
+	<string>Bosnien und Herzegowina</string>
+	<key>Country::BB</key>
+	<string>Barbados</string>
+	<key>Country::BD</key>
+	<string>Bangladesch</string>
+	<key>Country::BE</key>
+	<string>Belgien</string>
+	<key>Country::BF</key>
+	<string>Burkina Faso</string>
+	<key>Country::BG</key>
+	<string>Bulgarien</string>
+	<key>Country::BH</key>
+	<string>Bahrain</string>
+	<key>Country::BI</key>
+	<string>Burundi</string>
+	<key>Country::BJ</key>
+	<string>Benin</string>
+	<key>Country::BM</key>
+	<string>Bermuda</string>
+	<key>Country::BN</key>
+	<string>Brunei Darussalam</string>
+	<key>Country::BO</key>
+	<string>Bolivien</string>
+	<key>Country::BR</key>
+	<string>Brasilien</string>
+	<key>Country::BS</key>
+	<string>Bahamas</string>
+	<key>Country::BT</key>
+	<string>Bhutan</string>
+	<key>Country::BV</key>
+	<string>Bouvetinsel</string>
+	<key>Country::BW</key>
+	<string>Botsuana</string>
+	<key>Country::BY</key>
+	<string>Belarus (Weißrussland)</string>
+	<key>Country::BZ</key>
+	<string>Belize</string>
+	<key>Country::CA</key>
+	<string>Kanada</string>
+	<key>Country::CC</key>
+	<string>Kokosinseln (Keelinginseln)</string>
+	<key>Country::CD</key>
+	<string>Kongo (Demokratische Republik)</string>
+	<key>Country::CF</key>
+	<string>Zentralafrikanische Republik</string>
+	<key>Country::CG</key>
+	<string>Kongo (Republik)</string>
+	<key>Country::CH</key>
+	<string>Schweiz</string>
+	<key>Country::CI</key>
+	<string>Elfenbeinküste (Côte d&apos;Ivoire)</string>
+	<key>Country::CK</key>
+	<string>Cookinseln</string>
+	<key>Country::CL</key>
+	<string>Chile</string>
+	<key>Country::CM</key>
+	<string>Kamerun</string>
+	<key>Country::CN</key>
+	<string>China</string>
+	<key>Country::CO</key>
+	<string>Kolumbien</string>
+	<key>Country::CR</key>
+	<string>Costa Rica</string>
+	<key>Country::CU</key>
+	<string>Kuba</string>
+	<key>Country::CV</key>
+	<string>Cabo Verde (Kap Verde)</string>
+	<key>Country::CX</key>
+	<string>Weihnachtsinsel</string>
+	<key>Country::CY</key>
+	<string>Zypern</string>
+	<key>Country::CZ</key>
+	<string>Tschechien</string>
+	<key>Country::DE</key>
+	<string>Deutschland</string>
+	<key>Country::DJ</key>
+	<string>Dschibuti</string>
+	<key>Country::DK</key>
+	<string>Dänemark</string>
+	<key>Country::DM</key>
+	<string>Dominica</string>
+	<key>Country::DO</key>
+	<string>Dominikanische Republik</string>
+	<key>Country::DZ</key>
+	<string>Algerien</string>
+	<key>Country::EC</key>
+	<string>Ecuador</string>
+	<key>Country::EE</key>
+	<string>Estland</string>
+	<key>Country::EG</key>
+	<string>Ägypten</string>
+	<key>Country::EH</key>
+	<string>Demokratische Arabische Republik Sahara</string>
+	<key>Country::ER</key>
+	<string>Eritrea</string>
+	<key>Country::ES</key>
+	<string>Spanien</string>
+	<key>Country::ET</key>
+	<string>Äthiopien</string>
+	<key>Country::FI</key>
+	<string>Finnland</string>
+	<key>Country::FJ</key>
+	<string>Fidschi</string>
+	<key>Country::FK</key>
+	<string>Falklandinseln (Malwinen)</string>
+	<key>Country::FM</key>
+	<string>Mikronesien</string>
+	<key>Country::FO</key>
+	<string>Färöer</string>
+	<key>Country::FR</key>
+	<string>Frankreich</string>
+	<key>Country::GA</key>
+	<string>Gabun</string>
+	<key>Country::GB</key>
+	<string>Vereinigtes Königreich Großbritannien und Nordirland</string>
+	<key>Country::GD</key>
+	<string>Grenada</string>
+	<key>Country::GE</key>
+	<string>Georgien</string>
+	<key>Country::GF</key>
+	<string>Französisch-Guayana</string>
+	<key>Country::GH</key>
+	<string>Ghana</string>
+	<key>Country::GI</key>
+	<string>Gibraltar</string>
+	<key>Country::GL</key>
+	<string>Grönland</string>
+	<key>Country::GM</key>
+	<string>Gambia</string>
+	<key>Country::GN</key>
+	<string>Guinea</string>
+	<key>Country::GP</key>
+	<string>Guadeloupe</string>
+	<key>Country::GQ</key>
+	<string>Äquatorialguinea</string>
+	<key>Country::GR</key>
+	<string>Griechenland</string>
+	<key>Country::GS</key>
+	<string>Südgeorgien und die Südlichen Sandwichinseln</string>
+	<key>Country::GT</key>
+	<string>Guatemala</string>
+	<key>Country::GU</key>
+	<string>Guam</string>
+	<key>Country::GW</key>
+	<string>Guinea-Bissau</string>
+	<key>Country::GY</key>
+	<string>Guyana</string>
+	<key>Country::HK</key>
+	<string>Hongkong (Sonderverwaltungszone der Volksrepublik China)</string>
+	<key>Country::HM</key>
+	<string>Heard und McDonaldinseln</string>
+	<key>Country::HN</key>
+	<string>Honduras</string>
+	<key>Country::HR</key>
+	<string>Kroatien</string>
+	<key>Country::HT</key>
+	<string>Haiti</string>
+	<key>Country::HU</key>
+	<string>Ungarn</string>
+	<key>Country::ID</key>
+	<string>Indonesien</string>
+	<key>Country::IE</key>
+	<string>Irland</string>
+	<key>Country::IL</key>
+	<string>Israel</string>
+	<key>Country::IN</key>
+	<string>Indien</string>
+	<key>Country::IO</key>
+	<string>Britisches Territorium im Indischen Ozean (Chagos-Archipel)</string>
+	<key>Country::IQ</key>
+	<string>Irak</string>
+	<key>Country::IR</key>
+	<string>Iran</string>
+	<key>Country::IS</key>
+	<string>Island</string>
+	<key>Country::IT</key>
+	<string>Italien</string>
+	<key>Country::JM</key>
+	<string>Jamaika</string>
+	<key>Country::JO</key>
+	<string>Jordanien</string>
+	<key>Country::JP</key>
+	<string>Japan</string>
+	<key>Country::KE</key>
+	<string>Kenia</string>
+	<key>Country::KG</key>
+	<string>Kirgisistan</string>
+	<key>Country::KH</key>
+	<string>Kambodscha</string>
+	<key>Country::KI</key>
+	<string>Kiribati</string>
+	<key>Country::KM</key>
+	<string>Komoren</string>
+	<key>Country::KN</key>
+	<string>St. Kitts und Nevis</string>
+	<key>Country::KP</key>
+	<string>Demokratische Volksrepublik Korea (Nordkorea)</string>
+	<key>Country::KR</key>
+	<string>Republik Korea (Südkorea)</string>
+	<key>Country::KW</key>
+	<string>Kuwait</string>
+	<key>Country::KY</key>
+	<string>Kaimaninseln (Cayman Islands)</string>
+	<key>Country::KZ</key>
+	<string>Kasachstan</string>
+	<key>Country::LA</key>
+	<string>Laos</string>
+	<key>Country::LB</key>
+	<string>Libanon</string>
+	<key>Country::LC</key>
+	<string>St. Lucia</string>
+	<key>Country::LI</key>
+	<string>Liechtenstein</string>
+	<key>Country::LK</key>
+	<string>Sri Lanka</string>
+	<key>Country::LR</key>
+	<string>Liberia</string>
+	<key>Country::LS</key>
+	<string>Lesotho</string>
+	<key>Country::LT</key>
+	<string>Litauen</string>
+	<key>Country::LU</key>
+	<string>Luxemburg</string>
+	<key>Country::LV</key>
+	<string>Lettland</string>
+	<key>Country::LY</key>
+	<string>Libyen</string>
+	<key>Country::MA</key>
+	<string>Marokko</string>
+	<key>Country::MC</key>
+	<string>Monaco</string>
+	<key>Country::MD</key>
+	<string>Moldau</string>
+	<key>Country::ME</key>
+	<string>Montenegro</string>
+	<key>Country::MG</key>
+	<string>Madagaskar</string>
+	<key>Country::MH</key>
+	<string>Marshallinseln</string>
+	<key>Country::MK</key>
+	<string>Nordmazedonien</string>
+	<key>Country::ML</key>
+	<string>Mali</string>
+	<key>Country::MM</key>
+	<string>Myanmar</string>
+	<key>Country::MN</key>
+	<string>Mongolei</string>
+	<key>Country::MO</key>
+	<string>Macau (Sonderverwaltungszone der Volksrepublik China)</string>
+	<key>Country::MP</key>
+	<string>Nördliche Marianen</string>
+	<key>Country::MQ</key>
+	<string>Martinique</string>
+	<key>Country::MR</key>
+	<string>Mauretanien</string>
+	<key>Country::MS</key>
+	<string>Montserrat</string>
+	<key>Country::MT</key>
+	<string>Malta</string>
+	<key>Country::MU</key>
+	<string>Mauritius</string>
+	<key>Country::MV</key>
+	<string>Malediven</string>
+	<key>Country::MW</key>
+	<string>Malawi</string>
+	<key>Country::MX</key>
+	<string>Mexiko</string>
+	<key>Country::MY</key>
+	<string>Malaysia</string>
+	<key>Country::MZ</key>
+	<string>Mosambik</string>
+	<key>Country::NA</key>
+	<string>Namibia</string>
+	<key>Country::NC</key>
+	<string>Neukaledonien</string>
+	<key>Country::NE</key>
+	<string>Niger</string>
+	<key>Country::NF</key>
+	<string>Norfolkinsel</string>
+	<key>Country::NG</key>
+	<string>Nigeria</string>
+	<key>Country::NI</key>
+	<string>Nicaragua</string>
+	<key>Country::NL</key>
+	<string>Niederlande</string>
+	<key>Country::NO</key>
+	<string>Norwegen</string>
+	<key>Country::NP</key>
+	<string>Nepal</string>
+	<key>Country::NR</key>
+	<string>Nauru</string>
+	<key>Country::NU</key>
+	<string>Niue</string>
+	<key>Country::NZ</key>
+	<string>Neuseeland</string>
+	<key>Country::OM</key>
+	<string>Oman</string>
+	<key>Country::PA</key>
+	<string>Panama</string>
+	<key>Country::PE</key>
+	<string>Peru</string>
+	<key>Country::PF</key>
+	<string>Französisch-Polynesien</string>
+	<key>Country::PG</key>
+	<string>Papua-Neuguinea</string>
+	<key>Country::PH</key>
+	<string>Philippinen</string>
+	<key>Country::PK</key>
+	<string>Pakistan</string>
+	<key>Country::PL</key>
+	<string>Polen</string>
+	<key>Country::PM</key>
+	<string>St. Pierre und Miquelon</string>
+	<key>Country::PN</key>
+	<string>Pitcairninseln</string>
+	<key>Country::PR</key>
+	<string>Puerto Rico</string>
+	<key>Country::PS</key>
+	<string>Palästina</string>
+	<key>Country::PT</key>
+	<string>Portugal</string>
+	<key>Country::PW</key>
+	<string>Palau</string>
+	<key>Country::PY</key>
+	<string>Paraguay</string>
+	<key>Country::QA</key>
+	<string>Katar</string>
+	<key>Country::RE</key>
+	<string>Réunion</string>
+	<key>Country::RO</key>
+	<string>Rumänien</string>
+	<key>Country::RS</key>
+	<string>Serbien</string>
+	<key>Country::RU</key>
+	<string>Russland</string>
+	<key>Country::RW</key>
+	<string>Ruanda</string>
+	<key>Country::SA</key>
+	<string>Saudi-Arabien</string>
+	<key>Country::SB</key>
+	<string>Salomonen</string>
+	<key>Country::SC</key>
+	<string>Seychellen</string>
+	<key>Country::SD</key>
+	<string>Sudan</string>
+	<key>Country::SE</key>
+	<string>Schweden</string>
+	<key>Country::SG</key>
+	<string>Singapur</string>
+	<key>Country::SH</key>
+	<string>St. Helena</string>
+	<key>Country::SI</key>
+	<string>Slowenien</string>
+	<key>Country::SJ</key>
+	<string>Spitzbergen &amp; Jan Mayen</string>
+	<key>Country::SK</key>
+	<string>Slowakei</string>
+	<key>Country::SL</key>
+	<string>Sierra Leone</string>
+	<key>Country::SM</key>
+	<string>San Marino</string>
+	<key>Country::SN</key>
+	<string>Senegal</string>
+	<key>Country::SO</key>
+	<string>Somalia</string>
+	<key>Country::SR</key>
+	<string>Suriname</string>
+	<key>Country::ST</key>
+	<string>São Tomé und Príncipe</string>
+	<key>Country::SV</key>
+	<string>El Salvador</string>
+	<key>Country::SY</key>
+	<string>Syrien</string>
+	<key>Country::SZ</key>
+	<string>Eswatini (Swasiland)</string>
+	<key>Country::TC</key>
+	<string>Turks- und Caicosinseln</string>
+	<key>Country::TD</key>
+	<string>Tschad</string>
+	<key>Country::TF</key>
+	<string>Französische Süd- und Antarktisgebiete</string>
+	<key>Country::TG</key>
+	<string>Togo</string>
+	<key>Country::TH</key>
+	<string>Thailand</string>
+	<key>Country::TJ</key>
+	<string>Tadschikistan</string>
+	<key>Country::TK</key>
+	<string>Tokelau</string>
+	<key>Country::TL</key>
+	<string>Osttimor</string>
+	<key>Country::TM</key>
+	<string>Turkmenistan</string>
+	<key>Country::TN</key>
+	<string>Tunesien</string>
+	<key>Country::TO</key>
+	<string>Tonga</string>
+	<key>Country::TR</key>
+	<string>Türkei</string>
+	<key>Country::TT</key>
+	<string>Trinidad und Tobago</string>
+	<key>Country::TV</key>
+	<string>Tuvalu</string>
+	<key>Country::TW</key>
+	<!-- Note: The developer of TLS Inspector supports Taiwan's independence and international recognition. This is an accepted deviation from ISO-3166. -->
+	<string>Taiwan</string>
+	<key>Country::TZ</key>
+	<string>Tansania</string>
+	<key>Country::UA</key>
+	<string>Ukraine</string>
+	<key>Country::UG</key>
+	<string>Uganda</string>
+	<key>Country::UM</key>
+	<string>United States Minor Outlying Islands</string>
+	<key>Country::US</key>
+	<string>Vereinigte Staaten von Amerika</string>
+	<key>Country::UY</key>
+	<string>Uruguay</string>
+	<key>Country::UZ</key>
+	<string>Usbekistan</string>
+	<key>Country::VA</key>
+	<string>Vatikanstadt</string>
+	<key>Country::VC</key>
+	<string>St. Vincent und die Grenadinen</string>
+	<key>Country::VE</key>
+	<string>Venezuela</string>
+	<key>Country::VG</key>
+	<string>Britische Jungferninseln</string>
+	<key>Country::VI</key>
+	<string>Amerikanische Jungferninseln</string>
+	<key>Country::VN</key>
+	<string>Vietnam</string>
+	<key>Country::VU</key>
+	<string>Vanuatu</string>
+	<key>Country::WF</key>
+	<string>Wallis und Futuna</string>
+	<key>Country::WS</key>
+	<string>Samoa</string>
+	<key>Country::YE</key>
+	<string>Jemen</string>
+	<key>Country::YT</key>
+	<string>Mayotte</string>
+	<key>Country::ZA</key>
+	<string>Südafrika</string>
+	<key>Country::ZM</key>
+	<string>Sambia</string>
+	<key>Country::ZW</key>
+	<string>Simbabwe</string>
 	<key>Crypto Engine</key>
 	<string>Crypto-Engine</string>
 	<key>Dangerous</key>
@@ -76,6 +567,8 @@
 	<string>Löschen</string>
 	<key>Did You Know:</key>
 	<string>Wusstest du schon:</string>
+	<key>Discard</key>
+	<string>Löschen</string>
 	<key>Dismiss</key>
 	<string>Verwerfen</string>
 	<key>Do not contact support for issues with your iOS Device or to report unsafe websites.</key>
@@ -88,6 +581,10 @@
 	<string>EV-Zertifizierungsstelle</string>
 	<key>Enable Debug Logging</key>
 	<string>Protokollierung aktivieren</string>
+	<key>Engine Settings</key>
+	<string>Engine-Einstellungen</string>
+	<key>Engine has no options</key>
+	<string>Engine hat keine Einstellungsmöglichkeiten</string>
 	<key>Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.</key>
 	<string>Fully Qualified Domain Name oder IP-Adresse des zu inspizierenden Hosts angeben. Es kann auch eine Port-Nummer angegeben werden.</string>
 	<key>Enter the value to verify</key>
@@ -98,16 +595,24 @@
 	<string>Erweitert</string>
 	<key>Features</key>
 	<string>Funtionen</string>
+	<key>Feedback</key>
+	<string>Feedback</string>
+	<key>Feedback Sent</key>
+	<string>Feedback gesendet</string>
 	<key>Fingerprints</key>
 	<string>Fingerabdrücke</string>
 	<key>Finished</key>
 	<string>Fertig</string>
+	<key>Follow @tlsinspector on Twitter</key>
+	<string>Folge @tlsinspector auf Twitter</string>
 	<key>General</key>
 	<string>Allgemein</string>
 	<key>Get Involved</key>
 	<string>Mach mit</string>
 	<key>HTTP Headers</key>
 	<string>HTTP-Header</string>
+	<key>Host IP Address</key>
+	<string>IP-Adresse des Hosts</string>
 	<key>Host was not found or invalid.</key>
 	<string>Host nicht gefunden oder ungültig.</string>
 	<key>How soon before the certificate expires should we notify you?</key>
@@ -116,6 +621,8 @@
 	<string>IDN nicht unterstützt</string>
 	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
 	<string>Wenn du glaubst, es handelt sich um einen Fehler, kontaktiere den Support über die TLS Inspector-App.</string>
+	<key>Important</key>
+	<string>Wichtig</string>
 	<key>Inspect</key>
 	<string>Inspizieren</string>
 	<key>Internal error.</key>
@@ -136,10 +643,22 @@
 	<string>Schlüssel-ID</string>
 	<key>Key Usage</key>
 	<string>Verwendungszweck</string>
+	<key>KeyAlgorithm::dsaEncryption</key>
+	<string>DSA</string>
+	<key>KeyAlgorithm::id-ecPublicKey</key>
+	<string>ECDSA</string>
+	<key>KeyAlgorithm::rsaEncryption</key>
+	<string>RSA</string>
 	<key>Loading...</key>
 	<string>Laden…</string>
+	<key>Locally Trusted</key>
+	<string>Lokal vertrauenswürdig</string>
 	<key>Locally Trusted Chain</key>
 	<string>Lokal vertrauenswürdige Kette</string>
+	<key>Logging</key>
+	<string>Protokollierung</string>
+	<key>MD5</key>
+	<string>MD5</string>
 	<key>Mail Account Required</key>
 	<string>E-Mail-Account erforderlich</string>
 	<key>Metadata</key>
@@ -152,6 +671,8 @@
 	<string>Verhandelte Ciphersuite</string>
 	<key>Negotiated Version</key>
 	<string>Verhandelte Version</string>
+	<key>Network</key>
+	<string>Netzwerk</string>
 	<key>Next</key>
 	<string>Weiter</string>
 	<key>No</key>
@@ -174,8 +695,14 @@
 	<string>Erinnerungsdatum</string>
 	<key>Only HTTPS URLs can be inspected</key>
 	<string>Nur HTTPS URLs können analysiert werden</string>
+	<key>OpenSSL</key>
+	<string>OpenSSL</string>
+	<key>OpenSSL Settings</key>
+	<string>OpenSSL-Optionen</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL-Version</string>
+	<key>Optional</key>
+	<string>Optional</string>
 	<key>Options</key>
 	<string>Optionen</string>
 	<key>Please describe the problem in at least 5 words.</key>
@@ -199,7 +726,7 @@
 	<key>Remote Address</key>
 	<string>Entfernte Adresse</string>
 	<key>Renew Certificate for {domain}</key>
-	<string>Erneuere Zertifikat für {domain}</string>
+	<string>Erneuere Zertifikat für {0}</string>
 	<key>Report Issue on GitHub</key>
 	<string>Melde Fehler auf GitHub</string>
 	<key>Report a Bug</key>
@@ -208,6 +735,12 @@
 	<string>Feature anfragen</string>
 	<key>Revoked On</key>
 	<string>Annulliert am</string>
+	<key>SHA-256</key>
+	<string>SHA-256</string>
+	<key>SHA-512</key>
+	<string>SHA-512</string>
+	<key>SHA1</key>
+	<string>SHA1</string>
 	<key>Search on Shodan</key>
 	<string>Auf Shodan suchen</string>
 	<key>Search on crt.sh</key>
@@ -216,6 +749,8 @@
 	<string>HTTP-Sicherheit</string>
 	<key>Select Feedback Type</key>
 	<string>Art des Feedbacks auswählen</string>
+	<key>Send Anyways</key>
+	<string>Trotzdem senden</string>
 	<key>Server Info</key>
 	<string>Server-Information</string>
 	<key>Server Redirected To</key>
@@ -224,10 +759,14 @@
 	<string>Teilen &amp; Feedback</string>
 	<key>Share Certificate</key>
 	<string>Zertifikat teilen</string>
+	<key>Share Certificate Chain</key>
+	<string>Zertifikatskette teilen</string>
 	<key>Share TLS Inspector</key>
 	<string>Teile TLS Inspector</string>
 	<key>Show Certificate Fingerprint</key>
 	<string>Zeige Fingerabdruck des Zertifikats</string>
+	<key>Show Certificate on crt.sh</key>
+	<string>Zeige Zertifikat auf crt.sh</string>
 	<key>Show HTTP Headers</key>
 	<string>HTTP Header anzeigen</string>
 	<key>Show Tips</key>
@@ -240,6 +779,10 @@
 	<string>Größe</string>
 	<key>Something Else</key>
 	<string>Andere Anfrage</string>
+	<key>Specifying a host IP address will bypass name resolution.</key>
+	<string>Bei Angabe einer IP-Adresse wird die Namensauflösung übersprungen.</string>
+	<key>Status Providers</key>
+	<string>Status-Provider</string>
 	<key>Subject</key>
 	<string>Subjekt</string>
 	<key>Subject Alternate Names</key>
@@ -268,14 +811,18 @@
 	<string>Protokoll schicken</string>
 	<key>TLS Features</key>
 	<string>TLS-Funktionen</string>
+	<key>TLS Inspector</key>
+	<string>TLS Inspector</string>
 	<key>TLS Inspector Issues Only</key>
 	<string>Nur Feedback zu TLS Inspector</string>
+	<key>Target</key>
+	<string>Ziel</string>
 	<key>Tell Friends About TLS Inspector</key>
 	<string>Erzähle Freunden von TLS Inspector</string>
 	<key>Test New Features</key>
 	<string>Teste neue Funktionen</string>
 	<key>The certificate for {domain} expires on {date}</key>
-	<string>Das Zertifikat für {0} läuft ab am {1}</string>
+	<string>Das Zertifikat für {0} läuft am {1} ab</string>
 	<key>The host you provided is not valid</key>
 	<string>Der angegebene Host ist ungültig</string>
 	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
@@ -294,10 +841,16 @@
 	<string>Verstanden</string>
 	<key>Unknown</key>
 	<string>Unbekannt</string>
+	<key>Untrusted</key>
+	<string>Nicht vertrauenswürdig</string>
 	<key>Untrusted Chain</key>
 	<string>Nicht vertrauenswürdige Kette</string>
+	<key>Use IP Version</key>
+	<string>Verwende IP-Version</string>
 	<key>Use the Reminders app to customize the reminder</key>
 	<string>Bearbeite die Erinnerung in der Erinnerungen-App</string>
+	<key>Valid For</key>
+	<string>Gültig für</string>
 	<key>Valid From</key>
 	<string>Gültig ab</string>
 	<key>Valid To</key>
@@ -324,6 +877,8 @@
 	<string>Was bedeutet das?</string>
 	<key>What kind of feedback would you like to submit?</key>
 	<string>Welche Art an Feedback möchtest du schicken?</string>
+	<key>Will Expire In</key>
+	<string>Wird ablaufen in</string>
 	<key>Yes</key>
 	<string>Ja</string>
 	<key>You can modify the reminder in the reminders app.</key>
@@ -336,8 +891,34 @@
 	<string>OCSP-Abfragen deaktivieren kann die Privatsphäre erhöhen, verringert jedoch die Datenqualität. CRL-Überprüfung aktivieren kann zu langsameren Abfragen und erhöhtem Datenverbrauch führen.</string>
 	<key>copyright_license_footer</key>
 	<string>TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2021 Ian Spence.</string>
+	<key>crypto_engine::network_framework</key>
+	<string>Apple - Modern</string>
+	<key>crypto_engine::openssl</key>
+	<string>OpenSSL</string>
+	<key>crypto_engine::secure_transport</key>
+	<string>Apple - Veraltet</string>
 	<key>crypto_engine_footer</key>
 	<string>Änderungen an der Crypto-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als jene, die von diesem iOS-Gerät verwendet werden.</string>
+	<key>date_unit_plural::day</key>
+	<string>Tage</string>
+	<key>date_unit_plural::hour</key>
+	<string>Stunden</string>
+	<key>date_unit_plural::minute</key>
+	<string>Minuten</string>
+	<key>date_unit_plural::month</key>
+	<string>Monate</string>
+	<key>date_unit_plural::year</key>
+	<string>Jahre</string>
+	<key>date_unit_singular::day</key>
+	<string>Tag</string>
+	<key>date_unit_singular::hour</key>
+	<string>Stunde</string>
+	<key>date_unit_singular::minute</key>
+	<string>Minute</string>
+	<key>date_unit_singular::month</key>
+	<string>Monat</string>
+	<key>date_unit_singular::year</key>
+	<string>Jahr</string>
 	<key>explanation::bad_authority</key>
 	<string>The certificate for this host was issued by a known dangerous certificate authority.</string>
 	<key>explanation::invalid_date</key>
@@ -364,6 +945,12 @@
 	<string>Mindestens ein Zertifikat in der Kette wurde mit einem schwachen RSA-Schlüssel signiert (weniger als 2048 bits).</string>
 	<key>explanation::wrong_host</key>
 	<string>Das Server-Zertifikat wurde für eine andere Webseite ausgestellt.</string>
+	<key>fake_feedback_recieved_message</key>
+	<string>Danke für dein Feedback zu TLS Inspector. Obwohl wir jedes Feedback sorgfältig lesen, kann es sein, dass wir nicht darauf antworten.</string>
+	<key>feedback_warn_message</key>
+	<string>TLS Inspector schützt nicht vor Viren oder Malware.
+
+Wenn du Sorgen um die Sicherheit deines Gerätes hast, kontaktiere den Apple Support.</string>
 	<key>first_run_notice</key>
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
@@ -404,6 +991,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Zeitstempel</string>
 	<key>proxy_warning</key>
 	<string>Ein HTTP-Proxy ist konfiguriert. TLS Inspector ist nicht mit mit HTTP-Proxies kompatibel, der Proxy muss in den WLAN-Einstellungen des Systems deaktiviert werden.</string>
+	<key>sanType::DNS</key>
+	<string>DNS</string>
 	<key>sanType::Directory</key>
 	<string>Verzeichnis</string>
 	<key>sanType::Email</key>
@@ -412,6 +1001,8 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>IP-Adresse</string>
 	<key>sanType::Other</key>
 	<string>Anderer Typ</string>
+	<key>sanType::URI</key>
+	<string>URI</string>
 	<key>sanType::Unknown</key>
 	<string>Unbekannt</string>
 	<key>secure::bad_authority</key>
@@ -460,6 +1051,10 @@ Womöglich wurde die Anfrage umgeleitet auf eine andere Webseite, wie zum Beispi
 Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>server_error_footer</key>
 	<string>HTTP Header konnten aufgrund des folgenden Fehlers nicht abgefragt werden: {0}</string>
+	<key>tls_feature_status_request</key>
+	<string>Statusabfrage</string>
+	<key>tls_feature_status_request_v2</key>
+	<string>Statusabfrage (2.0)</string>
 	<key>tlstip1</key>
 	<string>Sieh dir Zertifikate direkt über Safari an, indem du im Teilen-Menü &quot;Zertifikat anzeigen&quot; wählst.</string>
 	<key>tlstip2</key>
@@ -474,6 +1069,10 @@ Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<string>Du kannst Werte von Parametern kopieren, indem du sie gedrückt hältst und &quot;Kopieren&quot; auswählst.</string>
 	<key>verbose_logging_footer</key>
 	<string>Wenn ein Problem mit TLS Inspector auftritt, bitten wir, Protokollierung zu aktivieren und uns ein Protokoll zu schicken, damit wir das Problem besser analysieren können. Es werden keine personenbezogenen Daten gesammelt, jedoch sind die analysierten Domains im Protokoll enthalten. Wir sehen niemals das Protokoll, es sei denn, es wird uns über die Zusende-Funktion oben geschickt.</string>
+	<key>{alg}, {len} bits</key>
+	<string>{0}, {1} bits</string>
+	<key>{amount} {date_unit}</key>
+	<string>{0} {1}</string>
 	<key>{commonName} (Expired)</key>
 	<string>{0} (Abgelaufen)</string>
 	<key>{commonName} (Insecure)</key>
@@ -482,6 +1081,8 @@ Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<string>{0} (Noch nicht gültig)</string>
 	<key>{commonName} (Revoked)</key>
 	<string>{0} (Annulliert)</string>
+	<key>{commonName} ({orgName} {countryName})</key>
+	<string>{0} ({1} {2})</string>
 	<key>{count} months</key>
 	<string>{0} Monate</string>
 	<key>{count} weeks</key>
