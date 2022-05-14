@@ -623,6 +623,8 @@
 	<string>How soon before the certificate expires should we notify you?</string>
 	<key>IDN Not Supported</key>
 	<string>IDN Not Supported</string>
+	<key>IP version: {version}</key>
+	<string>IP version: {0}</string>
 	<key>If you believe this to be in error, contact support from within the TLS Inspector app.</key>
 	<string>If you believe this to be in error, contact support from within the TLS Inspector app.</string>
 	<key>Important</key>

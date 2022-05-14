@@ -285,46 +285,88 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            if indexPath.row == 1 {
-                var cell: UITableViewCell!
-                if self.pendingCellState == .loading {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
-                    if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
-                        activity.startAnimating()
-
-                        if #available(iOS 13, *) {
-                            activity.style = .medium
-                        }
-                    }
-                } else if self.pendingCellState == .error {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "Error", for: indexPath)
-                }
-                return cell
-            }
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Input", for: indexPath)
-
-            if let textField = cell.viewWithTag(1) as? UITextField {
-                self.domainInput = textField
-                textField.delegate = self
-                textField.placeholder = RandomDomainName.get()
-                textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
-            }
-
-            if let advancedButton = cell.viewWithTag(2) as? UIButton {
-                self.advancedButton = advancedButton
-                advancedButton.addTarget(self, action: #selector(self.advancedButtonPressed(_:)), for: .touchUpInside)
-            }
-
-            return cell
+            return cellForInputSection(indexPath)
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
-            let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
-            cell.textLabel?.text = lookup.hostAddress
-            return cell
+            return cellForRecentSection(indexPath)
         }
 
         return UITableViewCell()
+    }
+
+    func cellForInputSection(_ indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 1 {
+            var cell: UITableViewCell!
+            if self.pendingCellState == .loading {
+                cell = tableView.dequeueReusableCell(withIdentifier: "Loading", for: indexPath)
+                if let activity = cell.viewWithTag(1) as? UIActivityIndicatorView {
+                    activity.startAnimating()
+
+                    if #available(iOS 13, *) {
+                        activity.style = .medium
+                    }
+                }
+            } else if self.pendingCellState == .error {
+                cell = tableView.dequeueReusableCell(withIdentifier: "Error", for: indexPath)
+            }
+            return cell
+        }
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Input", for: indexPath)
+
+        if let textField = cell.viewWithTag(1) as? UITextField {
+            self.domainInput = textField
+            textField.delegate = self
+            textField.placeholder = RandomDomainName.get()
+            textField.addTarget(self, action: #selector(self.domainInputChanged(sender:)), for: .editingChanged)
+        }
+
+        if let advancedButton = cell.viewWithTag(2) as? UIButton {
+            self.advancedButton = advancedButton
+            advancedButton.addTarget(self, action: #selector(self.advancedButtonPressed(_:)), for: .touchUpInside)
+        }
+
+        return cell
+    }
+
+    func recentDetails(_ parameters: CKInspectParameters) -> String? {
+        var details: [String] = []
+        let defaultParameters = UserOptions.inspectParameters(hostAddress: parameters.hostAddress)
+
+        if parameters.cryptoEngine != defaultParameters.cryptoEngine {
+            details.append(lang(key: parameters.cryptoEngineString))
+        }
+        if let ipAddress = parameters.ipAddress {
+            details.append(String(format: "IP: %@", ipAddress))
+        }
+        if parameters.port != 0 && parameters.port != 443 {
+            details.append(String(format: "Port: %u", parameters.port))
+        }
+        if parameters.ipVersion != defaultParameters.ipVersion {
+            details.append(lang(key: "IP version: {version}", args: [parameters.ipVersionString]))
+        }
+
+        if details.count == 0 {
+            return nil
+        }
+        return details.joined(separator: ", ")
+    }
+
+    func cellForRecentSection(_ indexPath: IndexPath) -> UITableViewCell {
+        let lookup = RecentLookups.GetRecentLookups()[indexPath.row]
+        let details = recentDetails(lookup)
+
+        let cell = details == nil ? tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath) : tableView.dequeueReusableCell(withIdentifier: "Subtitle", for: indexPath)
+
+        guard let titleLabel = cell.viewWithTag(1) as? UILabel else {
+            return cell
+        }
+        titleLabel.text = lookup.hostAddress
+
+        if let subtitleLabel = cell.viewWithTag(2) as? UILabel {
+            subtitleLabel.text = details ?? ""
+        }
+
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

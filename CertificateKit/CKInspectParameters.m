@@ -127,4 +127,30 @@
     return parameters;
 }
 
+- (NSString *) cryptoEngineString {
+    switch (self.cryptoEngine) {
+        case CRYPTO_ENGINE_OPENSSL:
+            return @"crypto_engine::openssl";
+        case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
+            return @"crypto_engine::network_framework";
+        case CRYPTO_ENGINE_SECURE_TRANSPORT:
+            return @"crypto_engine::secure_transport";
+    }
+
+    return @"Unknown";
+}
+
+- (NSString *) ipVersionString {
+    switch (self.ipVersion) {
+        case IP_VERSION_AUTOMATIC:
+            return @"Auto";
+        case IP_VERSION_IPV4:
+            return @"IPv4";
+        case IP_VERSION_IPV6:
+            return @"IPv6";
+    }
+
+    return @"Unknown";
+}
+
 @end
