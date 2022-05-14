@@ -10,7 +10,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
 
     var getter: CKGetter?
     var pendingCellState: PendingCellStates = .none
-    let tipKeys: [String] = ["tlstip1", "tlstip2", "tlstip3", "tlstip5", "tlstip6", "tlstip7"]
+    let tipKeys: [String] = ["tip_1", "tip_2", "tip_3", "tip_4", "tip_5", "tip_6"]
 
     var certificateChain: CKCertificateChain?
     var serverInfo: CKServerInfo?
