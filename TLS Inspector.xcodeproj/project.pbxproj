@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
+		3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
 		3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1A0D0D263914C200267CF9 /* CKRegex.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -233,6 +235,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyingMaterialTableViewController.swift; sourceTree = "<group>"; };
 		3C1A0D0D263914C200267CF9 /* CKRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRegex.h; sourceTree = "<group>"; };
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
@@ -528,6 +531,7 @@
 				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
 				3CCD0291239DD412009364D0 /* AboutViewController.swift */,
 				3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */,
+				3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1063,6 +1067,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */,
+				3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
 				3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */,
 				3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */,
 				3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */,
@@ -1137,6 +1142,7 @@
 				3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */,
 				3CDC14CD23B046000053932F /* UserOptions.swift in Sources */,
 				3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
+				3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
 				3CB784A625293E56009ECE20 /* ChainGetterViewController.swift in Sources */,
 				3CB784AC25293FD8009ECE20 /* AppState.swift in Sources */,

@@ -138,6 +138,11 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (strong, nonatomic, nonnull) NSString * protocol;
 
 /**
+ The NSS keylog data. Only available when using OpenSSL.
+ */
+@property (strong, nonatomic, nullable) NSString * keyLog;
+
+/**
  Check if one or more certificates in the chain are known bad certificates
  */
 - (void) checkAuthorityTrust;

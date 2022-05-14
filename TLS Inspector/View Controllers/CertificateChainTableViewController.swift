@@ -9,8 +9,9 @@ class CertificateChainTableViewController: UITableViewController {
     var securityHeadersSorted: [String]?
 
     let certificatesSectionTag = 1
-    let redirectSectionTag = 2
-    let headersSectionTag = 3
+    let connectionSectionTag = 2
+    let redirectSectionTag = 3
+    let headersSectionTag = 4
 
     var sections: [TableViewSection] = []
 
@@ -208,6 +209,7 @@ class CertificateChainTableViewController: UITableViewController {
     func makeConnectionInfoSection() -> TableViewSection? {
         let connectionSection = TableViewSection()
         connectionSection.title = lang(key: "Connection Information")
+        connectionSection.tag = connectionSectionTag
         if let serverError = SERVER_ERROR {
             connectionSection.footer = lang(key: "server_error_footer", args: [serverError.localizedDescription])
         }
@@ -225,6 +227,14 @@ class CertificateChainTableViewController: UITableViewController {
         connectionSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Remote Address"),
                                                                     value: chain.remoteAddress,
                                                                     useFixedWidthFont: true))
+
+        if chain.keyLog != nil {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
+                return nil
+            }
+            cell.textLabel?.text = lang(key: "View Keying Material")
+            connectionSection.cells.append(cell)
+        }
 
         return connectionSection
     }
@@ -316,6 +326,11 @@ class CertificateChainTableViewController: UITableViewController {
         if sectionTag == certificatesSectionTag {
             CURRENT_CERTIFICATE = indexPath.row
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Certificate") else {
+                return
+            }
+            SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
+        } else if sectionTag == connectionSectionTag {
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else {
                 return
             }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)

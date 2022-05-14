@@ -51,6 +51,7 @@
 
 static X509 * certificateChain[CERTIFICATE_CHAIN_MAXIMUM];
 static int numberOfCerts = 0;
+static CFMutableStringRef keyLog = NULL;
 
 INSERT_OPENSSL_ERROR_METHOD
 
@@ -93,6 +94,7 @@ INSERT_OPENSSL_ERROR_METHOD
     SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, verify_callback);
     SSL_CTX_set_verify_depth(ctx, CERTIFICATE_CHAIN_MAXIMUM);
     SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_COMPRESSION);
+    SSL_CTX_set_keylog_callback(ctx, key_callback);
 
     web = BIO_new_ssl_connect(ctx);
     if (web == NULL) {
@@ -196,6 +198,10 @@ INSERT_OPENSSL_ERROR_METHOD
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
     SSL_CLEANUP
+
+    if (keyLog != NULL) {
+        self.chain.keyLog = (__bridge NSString*)keyLog;
+    }
 
     // For security purposes, regular iOS applications are not allowed to access the root CA store
     // for the device. This means that OpenSSL will not be able to determine if a certificate is
@@ -335,6 +341,14 @@ int verify_callback(int preverify, X509_STORE_CTX* x509_ctx) {
     }
 
     return preverify;
+}
+
+void key_callback(const SSL *ssl, const char *line) {
+    PDebug(@"[NSS_KEYLOG] %s", line);
+    if (keyLog == NULL) {
+        keyLog = CFStringCreateMutable(NULL, 0);
+    }
+    CFStringAppendFormat(keyLog, NULL, CFSTR("%s\n"), line);
 }
 
 - (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {

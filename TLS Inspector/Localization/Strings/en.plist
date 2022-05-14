@@ -62,6 +62,8 @@
 	<string>Chain</string>
 	<key>Ciphers</key>
 	<string>Ciphers</string>
+	<key>Client Random</key>
+	<string>Client Random</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
 	<key>Contact Support</key>
@@ -591,6 +593,8 @@
 	<string>Enter the value to verify</string>
 	<key>Errors</key>
 	<string>Errors</string>
+	<key>Export NSS Keylog</key>
+	<string>Export NSS Keylog</string>
 	<key>Extended</key>
 	<string>Extended</string>
 	<key>Features</key>
@@ -649,6 +653,8 @@
 	<string>ECDSA</string>
 	<key>KeyAlgorithm::rsaEncryption</key>
 	<string>RSA</string>
+	<key>Keying Material</key>
+	<string>Keying Material</string>
 	<key>Loading...</key>
 	<string>Loading…</string>
 	<key>Locally Trusted</key>
@@ -745,6 +751,8 @@
 	<string>Search on Shodan</string>
 	<key>Search on crt.sh</key>
 	<string>Search on crt.sh</string>
+	<key>Secret</key>
+	<string>Secret</string>
 	<key>Security HTTP Headers</key>
 	<string>Security HTTP Headers</string>
 	<key>Select Feedback Type</key>
