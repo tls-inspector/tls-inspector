@@ -83,7 +83,7 @@
 		3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005C23974A660027D1C1 /* FontAwesome.swift */; };
 		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
 		3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2006023974F710027D1C1 /* fa-solid.ttf */; };
-		3CB1192925465BB20015750C /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1192825465BB20015750C /* Network.framework */; };
+		3CB1192925465BB20015750C /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1192825465BB20015750C /* Network.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB483FC2058BA0400322723 /* CertificateKit.m */; platformFilter = ios; };
 		3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */; platformFilter = ios; };
 		3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */; platformFilter = ios; };
@@ -857,7 +857,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
 					3C65DAD91E836BE9004AD96D = {
