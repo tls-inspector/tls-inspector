@@ -55,7 +55,7 @@ static CFMutableStringRef keyLog = NULL;
 
 INSERT_OPENSSL_ERROR_METHOD
 
-#define SSL_CLEANUP if (web != NULL) { BIO_free_all(web); }; if (ctx != NULL) { SSL_CTX_free(ctx); };
+#define SSL_CLEANUP if (conn != NULL) { BIO_free_all(conn); }; if (ctx != NULL) { SSL_CTX_free(ctx); };
 
 - (void) failWithError:(CKCertificateError)code description:(NSString *)description {
     PError(@"Failing with error (%ld): %@", (long)code, description);
@@ -80,7 +80,7 @@ INSERT_OPENSSL_ERROR_METHOD
     OPENSSL_init_crypto(0, NULL);
 
     SSL_CTX * ctx = NULL;
-    BIO * web = NULL;
+    BIO * conn = NULL;
     SSL * ssl = NULL;
 
     ctx = SSL_CTX_new(TLS_client_method());
@@ -96,8 +96,8 @@ INSERT_OPENSSL_ERROR_METHOD
     SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_COMPRESSION);
     SSL_CTX_set_keylog_callback(ctx, key_callback);
 
-    web = BIO_new_ssl_connect(ctx);
-    if (web == NULL) {
+    conn = BIO_new_ssl_connect(ctx);
+    if (conn == NULL) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorConnection description:@"Connection setup failed"];
         SSL_CLEANUP
@@ -105,7 +105,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     const char * host = [self.parameters.socketAddress UTF8String];
-    if (BIO_set_conn_hostname(web, host) < 0) {
+    if (BIO_set_conn_hostname(conn, host) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorInvalidParameter description:@"Invalid hostname"];
         SSL_CLEANUP
@@ -114,14 +114,14 @@ INSERT_OPENSSL_ERROR_METHOD
 
     switch (parameters.ipVersion) {
         case IP_VERSION_AUTOMATIC:
-            BIO_set_conn_ip_family(web, BIO_FAMILY_IPANY);
+            BIO_set_conn_ip_family(conn, BIO_FAMILY_IPANY);
         case IP_VERSION_IPV4:
-            BIO_set_conn_ip_family(web, BIO_FAMILY_IPV4);
+            BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV4);
         case IP_VERSION_IPV6:
-            BIO_set_conn_ip_family(web, BIO_FAMILY_IPV6);
+            BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV6);
     }
 
-    BIO_get_ssl(web, &ssl);
+    BIO_get_ssl(conn, &ssl);
     if (ssl == NULL) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorCrypto description:@"SSL/TLS connection failure"];
@@ -148,7 +148,7 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    if (BIO_do_connect(web) < 0) {
+    if (BIO_do_connect(conn) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorConnection description:@"Connection failed"];
         SSL_CLEANUP
@@ -156,7 +156,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     int sock_fd;
-    if (BIO_get_fd(web, &sock_fd) == -1) {
+    if (BIO_get_fd(conn, &sock_fd) == -1) {
         [self failWithError:CKCertificateErrorInvalidParameter description:@"Internal Error"];
         SSL_CLEANUP
         return;
@@ -169,7 +169,7 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    if (BIO_do_handshake(web) < 0) {
+    if (BIO_do_handshake(conn) < 0) {
         [self openSSLError];
         [self failWithError:CKCertificateErrorConnection description:@"Connection failed"];
         SSL_CLEANUP
