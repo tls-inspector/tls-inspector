@@ -115,10 +115,13 @@ INSERT_OPENSSL_ERROR_METHOD
     switch (parameters.ipVersion) {
         case IP_VERSION_AUTOMATIC:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPANY);
+            break;
         case IP_VERSION_IPV4:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV4);
+            break;
         case IP_VERSION_IPV6:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV6);
+            break;
     }
 
     BIO_get_ssl(conn, &ssl);
