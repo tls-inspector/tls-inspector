@@ -44,6 +44,19 @@ class TitleValueTableViewCell: TableViewCell {
         cell.valueLabel.setNeedsLayout()
         cell.cell.setNeedsLayout()
         cell.cell.selectionStyle = .none
+
+        cell.shouldShowMenu = { (_: UITableView, _: IndexPath) -> Bool in
+            return true
+        }
+        cell.canPerformAction = { (tableView: UITableView, selector: Selector, _: IndexPath, _: Any?) -> Bool in
+            return selector == #selector(tableView.copy(_:))
+        }
+        cell.performAction = { (tableView: UITableView, selector: Selector, _: IndexPath, _: Any?) -> Void in
+            if selector == #selector(tableView.copy(_:)) {
+                UIPasteboard.general.string = value
+            }
+        }
+
         return cell
     }
 

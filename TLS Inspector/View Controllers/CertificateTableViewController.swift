@@ -432,23 +432,23 @@ class CertificateTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if let shouldShowMenu = self.sections[indexPath.section].cells[indexPath.row].shouldShowMenu {
+            return shouldShowMenu(tableView, indexPath)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(copy(_:))
+        if let canPerformAction = self.sections[indexPath.section].cells[indexPath.row].canPerformAction {
+            return canPerformAction(tableView, action, indexPath, sender)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
-            var data: String?
-            let tableCell = self.sections[indexPath.section].cells[indexPath.row].cell
-            if let titleValueCell = tableCell as? TitleValueTableViewCell {
-                data = titleValueCell.valueLabel.text
-            } else {
-                data = tableCell.textLabel?.text
-            }
-            UIPasteboard.general.string = data
+        if let performAction = self.sections[indexPath.section].cells[indexPath.row].performAction {
+            return performAction(tableView, action, indexPath, sender)
         }
+        return
     }
 }
