@@ -50,13 +50,11 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
         }
 
         let lcm = message.lowercased()
-        for word in offensiveWords.keys {
-            if lcm.contains(word) {
-                if offensiveWords[word] == "warn" {
-                    return .warn
-                } else if offensiveWords[word] == "prohibit" {
-                    return .prohibited
-                }
+        for word in offensiveWords.keys where lcm.contains(word) {
+            if offensiveWords[word] == "warn" {
+                return .warn
+            } else if offensiveWords[word] == "prohibit" {
+                return .prohibited
             }
         }
         return .allowed

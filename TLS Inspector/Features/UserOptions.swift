@@ -119,11 +119,9 @@ class UserOptions {
     private static var _inspectionsWithVerboseLogging = 0
 
     static func loadDefaults() {
-        for key in defaults.keys {
-            if AppDefaults.value(forKey: key) == nil {
-                print("Setting default value for '\(key)' to '\(defaults[key]!)'")
-                AppDefaults.set(defaults[key], forKey: key)
-            }
+        for key in defaults.keys where AppDefaults.value(forKey: key) == nil {
+            print("Setting default value for '\(key)' to '\(defaults[key]!)'")
+            AppDefaults.set(defaults[key], forKey: key)
         }
 
         let wantedVersion = 1
