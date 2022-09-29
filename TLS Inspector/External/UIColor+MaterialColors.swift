@@ -1,5 +1,6 @@
 import UIKit
 
+// swiftlint:disable cyclomatic_complexity
 extension UIColor {
     static func materialRed(level: Int) -> UIColor? {
         switch level {
