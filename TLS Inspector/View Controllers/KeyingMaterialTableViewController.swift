@@ -73,9 +73,9 @@ class KeyingMaterialTableViewController: UITableViewController {
         let secret = key[2]
 
         if indexPath.row == 0 {
-            return TitleValueTableViewCell.Cell(title: lang(key: "Client Random"), value: clientRandom, useFixedWidthFont: true)
+            return TitleValueTableViewCell.Cell(title: lang(key: "Client Random"), value: clientRandom, useFixedWidthFont: true).cell
         }
-        return TitleValueTableViewCell.Cell(title: lang(key: "Secret"), value: secret, useFixedWidthFont: true)
+        return TitleValueTableViewCell.Cell(title: lang(key: "Secret"), value: secret, useFixedWidthFont: true).cell
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {

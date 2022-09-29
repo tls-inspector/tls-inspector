@@ -42,7 +42,7 @@ class SANListTableViewController: UITableViewController {
         @unknown default:
             break
         }
-        return TitleValueTableViewCell.Cell(title: type, value: altName.value, useFixedWidthFont: true)
+        return TitleValueTableViewCell.Cell(title: type, value: altName.value, useFixedWidthFont: true).cell
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {

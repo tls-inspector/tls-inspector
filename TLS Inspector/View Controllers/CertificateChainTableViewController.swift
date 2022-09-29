@@ -168,24 +168,24 @@ class CertificateChainTableViewController: UITableViewController {
         guard let certificates = self.certificateChain?.certificates else { return nil }
 
         for certificate in certificates {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else { return nil }
+            guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
 
             if certificate.isExpired {
-                cell.textLabel?.text = lang(key: "{commonName} (Expired)", args: [certificate.summary])
-                cell.textLabel?.textColor = UIColor.systemRed
+                cell.cell.textLabel?.text = lang(key: "{commonName} (Expired)", args: [certificate.summary])
+                cell.cell.textLabel?.textColor = UIColor.systemRed
             } else if certificate.isNotYetValid {
-                cell.textLabel?.text = lang(key: "{commonName} (Not Yet Valid)", args: [certificate.summary])
-                cell.textLabel?.textColor = UIColor.systemRed
+                cell.cell.textLabel?.text = lang(key: "{commonName} (Not Yet Valid)", args: [certificate.summary])
+                cell.cell.textLabel?.textColor = UIColor.systemRed
             } else if let ev = certificate.extendedValidationAuthority {
                 let country = certificate.subject.countryCodes.first ?? ""
-                cell.textLabel?.text = lang(key: "{commonName} ({orgName} {countryName})",
+                cell.cell.textLabel?.text = lang(key: "{commonName} ({orgName} {countryName})",
                                             args: [certificate.summary, ev, country])
-                cell.textLabel?.textColor = UIColor.systemGreen
+                cell.cell.textLabel?.textColor = UIColor.systemGreen
             } else if certificate.revoked.isRevoked {
-                cell.textLabel?.text = lang(key: "{commonName} (Revoked)", args: [certificate.summary])
-                cell.textLabel?.textColor = UIColor.systemRed
+                cell.cell.textLabel?.text = lang(key: "{commonName} (Revoked)", args: [certificate.summary])
+                cell.cell.textLabel?.textColor = UIColor.systemRed
             } else {
-                cell.textLabel?.text = certificate.summary
+                cell.cell.textLabel?.text = certificate.summary
             }
 
             certificateSection.cells.append(cell)
@@ -215,8 +215,8 @@ class CertificateChainTableViewController: UITableViewController {
                                                                     useFixedWidthFont: true))
 
         if chain.keyLog != nil {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else { return nil }
-            cell.textLabel?.text = lang(key: "View Keying Material")
+            guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
+            cell.cell.textLabel?.text = lang(key: "View Keying Material")
             connectionSection.cells.append(cell)
         }
 
@@ -233,8 +233,8 @@ class CertificateChainTableViewController: UITableViewController {
         // Only make the redirect cell tappable if we can actually reload
         // (which we can't do in the extension)
         if AppState.getterViewController != nil {
-            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-            cell.selectionStyle = UITableViewCell.SelectionStyle.default
+            cell.cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            cell.cell.selectionStyle = UITableViewCell.SelectionStyle.default
         }
 
         redirectSection.cells.append(cell)
@@ -249,9 +249,9 @@ class CertificateChainTableViewController: UITableViewController {
         guard let serverInfo = self.serverInfo else { return nil }
 
         for header in serverInfo.securityHeaders.keys.sorted() {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Icon") else { return nil }
-            guard let titleLabel = cell.viewWithTag(1) as? UILabel else { return nil }
-            guard let iconLabel = cell.viewWithTag(2) as? UILabel else { return nil }
+            guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Icon")) else { return nil }
+            guard let titleLabel = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+            guard let iconLabel = cell.cell.viewWithTag(2) as? UILabel else { return nil }
             titleLabel.text = header
             let hasHeader = (self.serverInfo?.securityHeaders[header] ?? nil) is String
             if hasHeader {
@@ -264,8 +264,8 @@ class CertificateChainTableViewController: UITableViewController {
             headersSection.cells.append(cell)
         }
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else { return nil }
-        cell.textLabel?.text = lang(key: "View All")
+        guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
+        cell.cell.textLabel?.text = lang(key: "View All")
         headersSection.cells.append(cell)
 
         return headersSection
@@ -281,7 +281,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.sections[indexPath.section].cells[indexPath.row]
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -329,7 +329,7 @@ class CertificateChainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         if action == #selector(copy(_:)) {
             var data: String?
-            let tableCell = self.sections[indexPath.section].cells[indexPath.row]
+            let tableCell = self.sections[indexPath.section].cells[indexPath.row].cell
             if let titleValueCell = tableCell as? TitleValueTableViewCell {
                 data = titleValueCell.valueLabel.text
             } else {

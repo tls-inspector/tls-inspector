@@ -98,7 +98,7 @@ class OptionsTableViewController: UITableViewController {
         if let cell = newIconCell(labelText: lang(key: "Advanced Options"),
                                   icon: .FACogSolid,
                                   iconColor: UIColor.systemBlue) {
-            cell.tag = advancedOptionsCellTag
+            cell.cell.tag = advancedOptionsCellTag
             generalSection.cells.append(cell)
         }
 
@@ -164,7 +164,7 @@ class OptionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.sections[indexPath.section].cells[indexPath.row]
+        self.sections[indexPath.section].cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -176,16 +176,16 @@ class OptionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellTag = self.sections[indexPath.section].cells[indexPath.row].tag
+        let cellTag = self.sections[indexPath.section].cells[indexPath.row].cell.tag
         if cellTag == advancedOptionsCellTag {
             self.performSegue(withIdentifier: "Advanced", sender: nil)
         }
     }
 
-    func newSwitchCell(labelText: String, initialValue: Bool, changed: Selector) -> UITableViewCell? {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Switch") else { return nil }
-        guard let label = cell.viewWithTag(1) as? UILabel else { return nil }
-        guard let toggle = cell.viewWithTag(2) as? UISwitch else { return nil }
+    func newSwitchCell(labelText: String, initialValue: Bool, changed: Selector) -> TableViewCell? {
+        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Switch")) else { return nil }
+        guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+        guard let toggle = cell.cell.viewWithTag(2) as? UISwitch else { return nil }
 
         label.text = labelText
         toggle.setOn(initialValue, animated: false)
@@ -194,10 +194,10 @@ class OptionsTableViewController: UITableViewController {
         return cell
     }
 
-    func newIconCell(labelText: String, icon: FAIcon, iconColor: UIColor) -> UITableViewCell? {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Icon") else { return nil }
-        guard let label = cell.viewWithTag(1) as? UILabel else { return nil }
-        guard let iconLabel = cell.viewWithTag(2) as? UILabel else { return nil }
+    func newIconCell(labelText: String, icon: FAIcon, iconColor: UIColor) -> TableViewCell? {
+        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) else { return nil }
+        guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+        guard let iconLabel = cell.cell.viewWithTag(2) as? UILabel else { return nil }
         label.text = labelText
         iconLabel.font = icon.font(size: iconLabel.font.pointSize)
         iconLabel.textColor = iconColor

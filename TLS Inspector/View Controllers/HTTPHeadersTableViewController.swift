@@ -28,7 +28,7 @@ class HTTPHeadersTableViewController: UITableViewController {
         let key = self.headerKeysSorted[indexPath.row]
         let value = self.headers[key] ?? ""
 
-        return TitleValueTableViewCell.Cell(title: key, value: value, useFixedWidthFont: true)
+        return TitleValueTableViewCell.Cell(title: key, value: value, useFixedWidthFont: true).cell
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {

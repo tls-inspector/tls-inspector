@@ -90,11 +90,11 @@ class AdvancedInspectTableViewController: UITableViewController {
         section.title = lang(key: "Network")
         section.footer = lang(key: "Automatic will choose IPv6 if available.")
 
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment") else { return nil }
+        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment")) else { return nil }
 
-        cell.selectionStyle = .none
+        cell.cell.selectionStyle = .none
 
-        guard let segment = cell.viewWithTag(1) as? UISegmentedControl else { return nil }
+        guard let segment = cell.cell.viewWithTag(1) as? UISegmentedControl else { return nil }
 
         switch self.parameters.ipVersion {
         case IP_VERSION_AUTOMATIC:
@@ -130,6 +130,6 @@ class AdvancedInspectTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.sections[indexPath.section].cells[indexPath.row]
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 }

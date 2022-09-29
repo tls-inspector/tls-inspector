@@ -20,7 +20,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         self.buildTable()
     }
 
-    func engineCell(engine: CryptoEngine) -> UITableViewCell? {
+    func engineCell(engine: CryptoEngine) -> TableViewCell? {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
 
         cell.textLabel?.text = lang(key: "crypto_engine::" + engine.rawValue)
@@ -31,7 +31,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         }
 
         cell.tag = engine.intValue()
-        return cell
+        return TableViewCell(cell)
     }
 
     func buildEngineSection() -> TableViewSection {
@@ -56,22 +56,22 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return engineOptionsSection
     }
 
-    func buildCiphersCell() -> UITableViewCell? {
+    func buildCiphersCell() -> TableViewCell? {
         if UserOptions.cryptoEngine != .OpenSSL {
             return nil
         }
 
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") else {
+        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Input")) else {
             LogError("No cell named 'Input' found")
             return nil
         }
 
-        guard let label = cell.viewWithTag(1) as? UILabel else {
+        guard let label = cell.cell.viewWithTag(1) as? UILabel else {
             LogError("No label with tag 1 on cell")
             return nil
         }
 
-        guard let input = cell.viewWithTag(2) as? UITextField else {
+        guard let input = cell.cell.viewWithTag(2) as? UITextField else {
             LogError("No input with tag 1 on cell")
             return nil
         }
@@ -84,18 +84,18 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return cell
     }
 
-    func buildIPVersionCell() -> UITableViewCell? {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Segment") else {
+    func buildIPVersionCell() -> TableViewCell? {
+        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Segment")) else {
             LogError("No cell named 'Segment' found")
             return nil
         }
 
-        guard let label = cell.viewWithTag(1) as? UILabel else {
+        guard let label = cell.cell.viewWithTag(1) as? UILabel else {
             LogError("No label with tag 1 on cell")
             return nil
         }
 
-        guard let segmentControl = cell.viewWithTag(2) as? UISegmentedControl else {
+        guard let segmentControl = cell.cell.viewWithTag(2) as? UISegmentedControl else {
             LogError("No segment control with tag 2 on cell")
             return nil
         }
@@ -127,12 +127,12 @@ class AdvancedOptionsTableViewController: UITableViewController {
         loggingSection.footer = lang(key: "verbose_logging_footer")
         loggingSection.tag = SectionTags.Logs.rawValue
 
-        if let debugLoggingCell = self.tableView.dequeueReusableCell(withIdentifier: "Switch") {
-            guard let debugLabel = debugLoggingCell.viewWithTag(1) as? UILabel else {
+        if let debugLoggingCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Switch")) {
+            guard let debugLabel = debugLoggingCell.cell.viewWithTag(1) as? UILabel else {
                 return loggingSection
             }
 
-            guard let debugSwitch = debugLoggingCell.viewWithTag(2) as? UISwitch else {
+            guard let debugSwitch = debugLoggingCell.cell.viewWithTag(2) as? UISwitch else {
                 return loggingSection
             }
 
@@ -142,12 +142,12 @@ class AdvancedOptionsTableViewController: UITableViewController {
             loggingSection.cells.append(debugLoggingCell)
         }
 
-        if let submitLogsCell = self.tableView.dequeueReusableCell(withIdentifier: "Icon") {
-            guard let textLabel = submitLogsCell.viewWithTag(1) as? UILabel else {
+        if let submitLogsCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) {
+            guard let textLabel = submitLogsCell.cell.viewWithTag(1) as? UILabel else {
                 return loggingSection
             }
 
-            guard let iconLabel = submitLogsCell.viewWithTag(2) as? UILabel else {
+            guard let iconLabel = submitLogsCell.cell.viewWithTag(2) as? UILabel else {
                 return loggingSection
             }
 
@@ -188,7 +188,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.sections[indexPath.section].cells[indexPath.row]
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
