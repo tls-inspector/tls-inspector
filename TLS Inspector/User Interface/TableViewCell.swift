@@ -12,4 +12,12 @@ class TableViewCell {
     init(_ cell: UITableViewCell) {
         self.cell = cell
     }
+
+    public class func from(_ cell: UITableViewCell?) -> TableViewCell? {
+        if let c = cell {
+            return TableViewCell(c)
+        }
+
+        return nil
+    }
 }

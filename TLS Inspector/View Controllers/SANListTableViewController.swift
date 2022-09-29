@@ -7,13 +7,9 @@ class SANListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else {
-            return
-        }
+        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else { return }
 
-        guard let altNames = certificate.alternateNames else {
-            return
-        }
+        guard let altNames = certificate.alternateNames else { return }
 
         self.altrnateNames = altNames
     }

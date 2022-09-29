@@ -183,15 +183,9 @@ class OptionsTableViewController: UITableViewController {
     }
 
     func newSwitchCell(labelText: String, initialValue: Bool, changed: Selector) -> UITableViewCell? {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Switch") else {
-            return nil
-        }
-        guard let label = cell.viewWithTag(1) as? UILabel else {
-            return nil
-        }
-        guard let toggle = cell.viewWithTag(2) as? UISwitch else {
-            return nil
-        }
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Switch") else { return nil }
+        guard let label = cell.viewWithTag(1) as? UILabel else { return nil }
+        guard let toggle = cell.viewWithTag(2) as? UISwitch else { return nil }
 
         label.text = labelText
         toggle.setOn(initialValue, animated: false)
@@ -201,15 +195,9 @@ class OptionsTableViewController: UITableViewController {
     }
 
     func newIconCell(labelText: String, icon: FAIcon, iconColor: UIColor) -> UITableViewCell? {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Icon") else {
-            return nil
-        }
-        guard let label = cell.viewWithTag(1) as? UILabel else {
-            return nil
-        }
-        guard let iconLabel = cell.viewWithTag(2) as? UILabel else {
-            return nil
-        }
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Icon") else { return nil }
+        guard let label = cell.viewWithTag(1) as? UILabel else { return nil }
+        guard let iconLabel = cell.viewWithTag(2) as? UILabel else { return nil }
         label.text = labelText
         iconLabel.font = icon.font(size: iconLabel.font.pointSize)
         iconLabel.textColor = iconColor

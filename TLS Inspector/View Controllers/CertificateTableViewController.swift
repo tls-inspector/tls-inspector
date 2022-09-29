@@ -32,16 +32,12 @@ class CertificateTableViewController: UITableViewController {
     }
 
     func openURL(_ urlString: String) {
-        guard let url = URL(string: urlString) else {
-            return
-        }
+        guard let url = URL(string: urlString) else { return }
         self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
     func addCertificateReminder(_ sender: UIBarButtonItem) {
-        guard let chain = CERTIFICATE_CHAIN else {
-            return
-        }
+        guard let chain = CERTIFICATE_CHAIN else { return }
 
         UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
                                           title: lang(key: "Notification Date"),
@@ -104,9 +100,7 @@ class CertificateTableViewController: UITableViewController {
     }
 
     func buildTable() {
-        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else {
-            return
-        }
+        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else { return }
 
         self.sections = []
         self.certificate = certificate
@@ -181,12 +175,8 @@ class CertificateTableViewController: UITableViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm 'UTC'"
 
-        guard let notBefore = self.certificate.notBefore else {
-            return nil
-        }
-        guard let notAfter = self.certificate.notAfter else {
-            return nil
-        }
+        guard let notBefore = self.certificate.notBefore else { return nil }
+        guard let notAfter = self.certificate.notAfter else { return nil }
 
         if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
             cell.detailTextLabel?.text = formatter.string(from: notBefore)
@@ -245,9 +235,7 @@ class CertificateTableViewController: UITableViewController {
         let featureSection = TableViewSection()
         featureSection.title = lang(key: "Features")
 
-        guard let features = self.certificate.tlsFeatures else {
-            return nil
-        }
+        guard let features = self.certificate.tlsFeatures else { return nil }
 
         for feature in features {
             guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Basic") else {
@@ -299,27 +287,19 @@ class CertificateTableViewController: UITableViewController {
         let pubKeySection = TableViewSection()
         pubKeySection.title = lang(key: "Public Key")
 
-        guard let publicKey = self.certificate.publicKey else {
-            return nil
-        }
+        guard let publicKey = self.certificate.publicKey else { return nil }
 
-        guard let algorithmCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-            return nil
-        }
+        guard let algorithmCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else { return nil }
         algorithmCell.textLabel?.text = lang(key: "Algorithm")
         algorithmCell.detailTextLabel?.text = lang(key: "KeyAlgorithm::" + publicKey.algroithm)
         pubKeySection.cells.append(algorithmCell)
 
-        guard let signatureCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-            return nil
-        }
+        guard let signatureCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else { return nil }
         signatureCell.textLabel?.text = lang(key: "Signature")
         signatureCell.detailTextLabel?.text = self.certificate.signatureAlgorithm ?? "Unknown"
         pubKeySection.cells.append(signatureCell)
 
-        guard let sizeCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-            return nil
-        }
+        guard let sizeCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else { return nil }
         sizeCell.textLabel?.text = lang(key: "Size")
         sizeCell.detailTextLabel?.text = String.init(format: "%ld", publicKey.bitLength)
         pubKeySection.cells.append(sizeCell)
@@ -331,9 +311,7 @@ class CertificateTableViewController: UITableViewController {
         let keyIdentifierSection = TableViewSection()
         keyIdentifierSection.title = lang(key: "Key Identifier")
 
-        guard let identifiers = self.certificate.keyIdentifiers else {
-            return nil
-        }
+        guard let identifiers = self.certificate.keyIdentifiers else { return nil }
 
         if let subject = identifiers["subject"] {
             keyIdentifierSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Subject"),
@@ -394,9 +372,7 @@ class CertificateTableViewController: UITableViewController {
         }
 
         if let version = self.certificate.version {
-            guard let versionCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-                return nil
-            }
+            guard let versionCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else { return nil }
             versionCell.textLabel?.text = lang(key: "Version")
             versionCell.detailTextLabel?.text = version.stringValue
             metadataSection.cells.append(versionCell)
@@ -413,21 +389,13 @@ class CertificateTableViewController: UITableViewController {
         sanSection.title = lang(key: "Subject Alternate Names")
         sanSection.tag = 1
 
-        guard let alternateNames = self.certificate.alternateNames else {
-            return nil
-        }
+        guard let alternateNames = self.certificate.alternateNames else { return nil }
         if alternateNames.count == 0 {
             return nil
         }
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Count") else {
-            return nil
-        }
-        guard let label = cell.viewWithTag(1) as? UILabel else {
-            return nil
-        }
-        guard let count = cell.viewWithTag(2) as? UILabel else {
-            return nil
-        }
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Count") else { return nil }
+        guard let label = cell.viewWithTag(1) as? UILabel else { return nil }
+        guard let count = cell.viewWithTag(2) as? UILabel else { return nil }
         label.text = lang(key: "View All")
         count.text = String.init(format: "%ld", alternateNames.count)
         sanSection.cells.append(cell)

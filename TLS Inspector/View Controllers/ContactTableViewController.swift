@@ -10,9 +10,7 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
 
     static func show(_ viewController: UIViewController, finished: @escaping (SupportType) -> Void) {
         let storyboard = UIStoryboard.init(name: "More", bundle: Bundle.main)
-        guard let contactViewController = storyboard.instantiateViewController(withIdentifier: "Contact") as? ContactTableViewController else {
-            return
-        }
+        guard let contactViewController = storyboard.instantiateViewController(withIdentifier: "Contact") as? ContactTableViewController else { return }
         contactViewController.finishedBlock = finished
         viewController.present(UINavigationController(rootViewController: contactViewController), animated: true, completion: nil)
     }

@@ -24,12 +24,8 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func loadQuotes() -> [String]? {
-        guard let quotesPath = Bundle.main.path(forResource: "QuoteList", ofType: "plist") else {
-            return nil
-        }
-        guard let quotes = NSArray.init(contentsOfFile: quotesPath) as? [String] else {
-            return nil
-        }
+        guard let quotesPath = Bundle.main.path(forResource: "QuoteList", ofType: "plist") else { return nil }
+        guard let quotes = NSArray.init(contentsOfFile: quotesPath) as? [String] else { return nil }
         return quotes
     }
 
@@ -102,9 +98,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else {
-            return
-        }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
         if indexPath.section == 0 && indexPath.row == 0 {
             let blub = lang(key: "Trust & Safety On-The-Go with TLS Inspector: {url}", args: [projectURL])

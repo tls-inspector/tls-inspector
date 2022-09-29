@@ -5,12 +5,8 @@ class KeyingMaterialTableViewController: UITableViewController {
     var keys: [[String]] = []
 
     override func viewDidLoad() {
-        guard let chain = CERTIFICATE_CHAIN else {
-            return
-        }
-        guard let keyLog = chain.keyLog else {
-            return
-        }
+        guard let chain = CERTIFICATE_CHAIN else { return }
+        guard let keyLog = chain.keyLog else { return }
 
         let lines = keyLog.split(separator: "\n")
         for line in lines {
@@ -36,18 +32,12 @@ class KeyingMaterialTableViewController: UITableViewController {
     }
 
     func exportKeylog(_ sender: UIBarButtonItem) {
-        guard let chain = CERTIFICATE_CHAIN else {
-            return
-        }
-        guard let keyLog = chain.keyLog?.data(using: .utf8) else {
-            return
-        }
+        guard let chain = CERTIFICATE_CHAIN else { return }
+        guard let keyLog = chain.keyLog?.data(using: .utf8) else { return }
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let header = String(format: "# Generated on %@ by TLS Inspector v%@ (%@) using OpenSSL %@\n", formatter.string(from: Date()), AppInfo.version(), AppInfo.build(), CertificateKit.opensslVersion())
-        guard var keylogFileData = header.data(using: .utf8) else {
-            return
-        }
+        guard var keylogFileData = header.data(using: .utf8) else { return }
         keylogFileData.append(keyLog)
 
         let fileName = "keylog.txt"

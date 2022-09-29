@@ -53,9 +53,7 @@ class RecentLookups {
     /// Remove the recently inspected domain at the specified index.
     /// - Parameter index: The index to remove.
     public static func RemoveLookup(index: Int) {
-        guard var list = AppDefaults.array(forKey: LIST_KEY) as? [[String: Any]] else {
-            return
-        }
+        guard var list = AppDefaults.array(forKey: LIST_KEY) as? [[String: Any]] else { return }
         if index > list.count || index < 0 {
             return
         }

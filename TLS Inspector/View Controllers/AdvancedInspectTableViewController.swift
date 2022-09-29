@@ -15,9 +15,7 @@ class AdvancedInspectTableViewController: UITableViewController {
     // MARK: - Title bar buttons
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true) {
-            guard let done = self.donePressed else {
-                return
-            }
+            guard let done = self.donePressed else { return }
 
             done(self.parameters)
         }
@@ -68,9 +66,7 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.autocorrectionType = .no
             input.spellCheckingType = .no
         } valueDidChange: { (value: String) in
-            guard let port = UInt16.init(value) else {
-                return
-            }
+            guard let port = UInt16.init(value) else { return }
 
             self.parameters.port = port
         }
@@ -94,15 +90,11 @@ class AdvancedInspectTableViewController: UITableViewController {
         section.title = lang(key: "Network")
         section.footer = lang(key: "Automatic will choose IPv6 if available.")
 
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment") else {
-            return nil
-        }
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment") else { return nil }
 
         cell.selectionStyle = .none
 
-        guard let segment = cell.viewWithTag(1) as? UISegmentedControl else {
-            return nil
-        }
+        guard let segment = cell.viewWithTag(1) as? UISegmentedControl else { return nil }
 
         switch self.parameters.ipVersion {
         case IP_VERSION_AUTOMATIC:

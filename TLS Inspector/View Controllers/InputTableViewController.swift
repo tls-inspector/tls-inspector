@@ -67,9 +67,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     @IBAction func advancedButtonPressed(_ sender: OptionsButton) {
-        guard let advancedInspect = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedInspect") as? AdvancedInspectTableViewController else {
-            return
-        }
+        guard let advancedInspect = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedInspect") as? AdvancedInspectTableViewController else { return }
 
         advancedInspect.donePressed = { (parameters: CKInspectParameters) -> Void in
             self.doInspect(parameters: parameters)
@@ -94,9 +92,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     @objc func domainInputChanged(sender: UITextField) {
         self.inspectButton.isEnabled = self.inputIsValid()
 
-        guard let advancedButton = self.advancedButton else {
-            return
-        }
+        guard let advancedButton = self.advancedButton else { return }
 
         let length = sender.text?.count ?? 0
         if length > 0 {

@@ -41,9 +41,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     @IBAction func actionButton(_ sender: UIBarButtonItem) {
-        guard let chain = self.certificateChain else {
-            return
-        }
+        guard let chain = self.certificateChain else { return }
 
         UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
                                           title: self.certificateChain?.domain,
@@ -68,15 +66,11 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func shareCertificateChain(_ sender: UIBarButtonItem) {
-        guard let certificates = self.certificateChain?.certificates else {
-            return
-        }
+        guard let certificates = self.certificateChain?.certificates else { return }
 
         let pemChain = NSMutableData()
         for certificate in certificates {
-            guard let pem = certificate.publicKeyAsPEM else {
-                return
-            }
+            guard let pem = certificate.publicKeyAsPEM else { return }
             pemChain.append(pem)
         }
 
@@ -94,9 +88,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func openURL(_ urlString: String) {
-        guard let url = URL(string: urlString) else {
-            return
-        }
+        guard let url = URL(string: urlString) else { return }
         self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
@@ -173,14 +165,10 @@ class CertificateChainTableViewController: UITableViewController {
         certificateSection.title = lang(key: "Certificates")
         certificateSection.tag = certificatesSectionTag
 
-        guard let certificates = self.certificateChain?.certificates else {
-            return nil
-        }
+        guard let certificates = self.certificateChain?.certificates else { return nil }
 
         for certificate in certificates {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
-                return nil
-            }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else { return nil }
 
             if certificate.isExpired {
                 cell.textLabel?.text = lang(key: "{commonName} (Expired)", args: [certificate.summary])
@@ -214,9 +202,7 @@ class CertificateChainTableViewController: UITableViewController {
             connectionSection.footer = lang(key: "server_error_footer", args: [serverError.localizedDescription])
         }
 
-        guard let chain = self.certificateChain else {
-            return nil
-        }
+        guard let chain = self.certificateChain else { return nil }
 
         connectionSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Negotiated Ciphersuite"),
                                                                     value: chain.cipherSuite,
@@ -229,9 +215,7 @@ class CertificateChainTableViewController: UITableViewController {
                                                                     useFixedWidthFont: true))
 
         if chain.keyLog != nil {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
-                return nil
-            }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else { return nil }
             cell.textLabel?.text = lang(key: "View Keying Material")
             connectionSection.cells.append(cell)
         }
@@ -240,9 +224,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func makeRedirectSection() -> TableViewSection? {
-        guard let redirectedTo = self.serverInfo?.redirectedTo?.host else {
-            return nil
-        }
+        guard let redirectedTo = self.serverInfo?.redirectedTo?.host else { return nil }
 
         let redirectSection = TableViewSection()
         redirectSection.tag = redirectSectionTag
@@ -264,20 +246,12 @@ class CertificateChainTableViewController: UITableViewController {
         headersSection.title = lang(key: "Security HTTP Headers")
         headersSection.tag = headersSectionTag
 
-        guard let serverInfo = self.serverInfo else {
-            return nil
-        }
+        guard let serverInfo = self.serverInfo else { return nil }
 
         for header in serverInfo.securityHeaders.keys.sorted() {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Icon") else {
-                return nil
-            }
-            guard let titleLabel = cell.viewWithTag(1) as? UILabel else {
-                return nil
-            }
-            guard let iconLabel = cell.viewWithTag(2) as? UILabel else {
-                return nil
-            }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Icon") else { return nil }
+            guard let titleLabel = cell.viewWithTag(1) as? UILabel else { return nil }
+            guard let iconLabel = cell.viewWithTag(2) as? UILabel else { return nil }
             titleLabel.text = header
             let hasHeader = (self.serverInfo?.securityHeaders[header] ?? nil) is String
             if hasHeader {
@@ -290,9 +264,7 @@ class CertificateChainTableViewController: UITableViewController {
             headersSection.cells.append(cell)
         }
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
-            return nil
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else { return nil }
         cell.textLabel?.text = lang(key: "View All")
         headersSection.cells.append(cell)
 
@@ -325,28 +297,18 @@ class CertificateChainTableViewController: UITableViewController {
 
         if sectionTag == certificatesSectionTag {
             CURRENT_CERTIFICATE = indexPath.row
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Certificate") else {
-                return
-            }
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Certificate") else { return }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
         } else if sectionTag == connectionSectionTag {
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else {
-                return
-            }
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else { return }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
         } else if sectionTag == redirectSectionTag {
-            guard let controller = AppState.getterViewController else {
-                return
-            }
-            guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else {
-                return
-            }
+            guard let controller = AppState.getterViewController else { return }
+            guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else { return }
 
             controller.reloadWithQuery(query: redirectedTo)
         } else if sectionTag == headersSectionTag && indexPath.row == self.sections[indexPath.section].cells.count-1 {
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else {
-                return
-            }
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else { return }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
         }
     }

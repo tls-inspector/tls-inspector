@@ -4,12 +4,8 @@ class RandomDomainName {
     private static var placeholderDomains: [String]?
 
     private static func loadDomains() {
-        guard let domainListPath = Bundle.main.path(forResource: "DomainList", ofType: "plist") else {
-            return
-        }
-        guard let domains = NSArray.init(contentsOfFile: domainListPath) as? [String] else {
-            return
-        }
+        guard let domainListPath = Bundle.main.path(forResource: "DomainList", ofType: "plist") else { return }
+        guard let domains = NSArray.init(contentsOfFile: domainListPath) as? [String] else { return }
 
         RandomDomainName.placeholderDomains = domains
     }

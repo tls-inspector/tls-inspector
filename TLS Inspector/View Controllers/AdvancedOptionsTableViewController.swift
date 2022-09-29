@@ -202,14 +202,10 @@ class AdvancedOptionsTableViewController: UITableViewController {
     }
 
     func didTapEngineCell(indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else {
-            return
-        }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
         let before = UserOptions.cryptoEngine
-        guard let after = CryptoEngine.from(int: cell.tag) else {
-            return
-        }
+        guard let after = CryptoEngine.from(int: cell.tag) else { return }
         if before == after {
             return
         }
