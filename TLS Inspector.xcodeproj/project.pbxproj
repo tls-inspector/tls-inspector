@@ -13,6 +13,8 @@
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
+		3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
+		3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C28D0B3204209E8004C260F /* CKRevoked.m */; platformFilter = ios; };
 		3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C2A7A511F284DC700AA12B4 /* CKGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -240,6 +242,7 @@
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
 		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
+		3C2556AB28E60C430057FE4D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
 		3C2A7A511F284DC700AA12B4 /* CKGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGetter.h; sourceTree = "<group>"; };
@@ -540,13 +543,14 @@
 			isa = PBXGroup;
 			children = (
 				3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */,
-				3C7269632394C2E1002A0B19 /* UIHelper.swift */,
-				3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */,
-				3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */,
-				3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */,
 				3CCD028F239DD0D5009364D0 /* GradientView.swift */,
-				3CD4933825A56721002AC7BD /* OptionsButton.swift */,
 				3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */,
+				3CD4933825A56721002AC7BD /* OptionsButton.swift */,
+				3C2556AB28E60C430057FE4D /* TableViewCell.swift */,
+				3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */,
+				3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */,
+				3C7269632394C2E1002A0B19 /* UIHelper.swift */,
+				3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1117,6 +1121,7 @@
 				3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */,
 				3C5F4656239D77CA00B3A727 /* SplitViewController.swift in Sources */,
 				3C6FF89B23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,
+				3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */,
 				3C84A98623AD9FCD003B76D3 /* ActionTipTarget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1140,6 +1145,7 @@
 				3CDC14BF23B045C50053932F /* HTTPHeadersTableViewController.swift in Sources */,
 				3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */,
 				3CDC14C223B045C50053932F /* SplitViewController.swift in Sources */,
+				3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */,
 				3CDC14BC23B045B20053932F /* GradientView.swift in Sources */,
 				3CDC14C523B045DA0053932F /* UIObject+Lang.swift in Sources */,
 				3C6FF89923B1A420008DC981 /* AtomicInt.swift in Sources */,
