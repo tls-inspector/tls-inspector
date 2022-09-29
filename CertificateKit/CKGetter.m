@@ -53,16 +53,6 @@ typedef NS_ENUM(NSUInteger, CKGetterTaskTag) {
     self.parameters = parameters;
     self.getterParameters = [CKGetterParameters fromInspectParameters:parameters];
 
-    if (@available(iOS 12, *)) {} else {
-        if (self.getterParameters.cryptoEngine == CRYPTO_ENGINE_NETWORK_FRAMEWORK) {
-            PError(@"NetworkFramework crypto engine selected on incompatible iOS version - aborting");
-            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:unexpectedError:)]) {
-                [self.delegate getter:self unexpectedError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKGetter" code:200 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported crypto engine"}]];
-            }
-            return;
-        }
-    }
-
     if (self.getterParameters.ipAddress == nil || self.getterParameters.ipAddress.length == 0) {
         CKResolvedAddress * resovledAddress;
         NSError * resolveError;

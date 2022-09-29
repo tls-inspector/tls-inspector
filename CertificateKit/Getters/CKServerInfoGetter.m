@@ -88,12 +88,10 @@
     static char *buf;
     static size_t len;
     FILE * curlout = NULL;
-    if (@available(iOS 11, *)) {
-        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
-            curlout = open_memstream(&buf, &len);
-            curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-            curl_easy_setopt(curl, CURLOPT_STDERR, stderr);
-        }
+    if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+        curlout = open_memstream(&buf, &len);
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+        curl_easy_setopt(curl, CURLOPT_STDERR, stderr);
     }
 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, server_info_write_callback);
@@ -133,13 +131,11 @@
     curl_global_cleanup();
 
     // Dump curls output to the log file
-    if (@available(iOS 11, *)) {
-        if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
-            fflush(curlout);
-            fclose(curlout);
-            PDebug(@"curl output:\n%s", buf);
-            free(buf);
-        }
+    if (CKLogging.sharedInstance.level == CKLoggingLevelDebug) {
+        fflush(curlout);
+        fclose(curlout);
+        PDebug(@"curl output:\n%s", buf);
+        free(buf);
     }
     finished(error);
 }

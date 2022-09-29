@@ -40,9 +40,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         engineSection.footer = lang(key: "crypto_engine_footer")
         engineSection.tag = SectionTags.Engine.rawValue
 
-        if #available(iOS 12, *) {
-            engineSection.cells.maybeAppend(engineCell(engine: .NetworkFramework))
-        }
+        engineSection.cells.maybeAppend(engineCell(engine: .NetworkFramework))
         engineSection.cells.maybeAppend(engineCell(engine: .SecureTransport))
         engineSection.cells.maybeAppend(engineCell(engine: .OpenSSL))
 
