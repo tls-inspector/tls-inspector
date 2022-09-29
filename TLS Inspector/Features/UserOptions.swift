@@ -136,25 +136,13 @@ class UserOptions {
                     print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.OpenSSL.rawValue)")
                     AppDefaults.setValue(CryptoEngine.OpenSSL.rawValue, forKey: KEY_CRYPTO_ENGINE)
                 } else {
-                    if #available(iOS 12, *) {
-                        print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.NetworkFramework.rawValue)")
-                        AppDefaults.setValue(CryptoEngine.NetworkFramework.rawValue, forKey: KEY_CRYPTO_ENGINE)
-                    } else {
-                        print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.SecureTransport.rawValue)")
-                        AppDefaults.setValue(CryptoEngine.SecureTransport.rawValue, forKey: KEY_CRYPTO_ENGINE)
-                    }
+                    print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.NetworkFramework.rawValue)")
+                    AppDefaults.setValue(CryptoEngine.NetworkFramework.rawValue, forKey: KEY_CRYPTO_ENGINE)
                 }
                 AppDefaults.removeObject(forKey: "use_openssl")
             }
 
             AppDefaults.setValue(NSNumber.init(value: wantedVersion), forKey: KEY_OPTIONS_SCHEMA_VERSION)
-        }
-
-        if #available(iOS 12, *) {} else {
-            if UserOptions.cryptoEngine == .NetworkFramework {
-                print("Incompatible crypto engine. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.SecureTransport.rawValue)")
-                AppDefaults.setValue(CryptoEngine.SecureTransport.rawValue, forKey: KEY_CRYPTO_ENGINE)
-            }
         }
     }
 
