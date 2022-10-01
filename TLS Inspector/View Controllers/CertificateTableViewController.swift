@@ -12,14 +12,18 @@ class CertificateTableViewController: UITableViewController {
     }
 
     @IBAction func actionButton(_ sender: UIBarButtonItem) {
+        var items = [
+            lang(key: "Share Certificate"),
+            lang(key: "Add Certificate Expiry Reminder")
+        ]
+        if #available(iOS 12, *) {
+            items.append(lang(key: "Show Certificate on crt.sh"))
+        }
+
         UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
                                           title: self.certificate.summary,
                                           subtitle: nil,
-                                          items: [
-                                            lang(key: "Share Certificate"),
-                                            lang(key: "Add Certificate Expiry Reminder"),
-                                            lang(key: "Show Certificate on crt.sh"),
-                                        ])
+                                          items: items)
         { (index) in
             if index == 0 {
                 self.shareCertificate(sender)

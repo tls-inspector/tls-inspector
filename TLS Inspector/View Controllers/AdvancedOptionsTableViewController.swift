@@ -123,7 +123,11 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return cell
     }
 
-    func buildLogsSection() -> TableViewSection {
+    func buildLogsSection() -> TableViewSection? {
+        if #unavailable(iOS 12) {
+            return nil;
+        }
+
         let loggingSection = TableViewSection()
         loggingSection.title = lang(key: "Logging")
         loggingSection.footer = lang(key: "verbose_logging_footer")
@@ -167,9 +171,9 @@ class AdvancedOptionsTableViewController: UITableViewController {
     func buildTable() {
         self.sections = [
             self.buildEngineSection(),
-            self.buildEngineOptionsSection(),
-            self.buildLogsSection()
+            self.buildEngineOptionsSection()
         ]
+        self.sections.maybeAppend(self.buildLogsSection())
     }
 
     // MARK: - Table view data source

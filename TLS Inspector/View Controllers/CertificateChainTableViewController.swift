@@ -45,15 +45,19 @@ class CertificateChainTableViewController: UITableViewController {
             return
         }
 
+        var items = [
+            lang(key: "Share Certificate Chain")
+        ]
+        if #available(iOS 12, *) {
+            items.append(lang(key: "View on SSL Labs"))
+            items.append(lang(key: "Search on Shodan"))
+            items.append(lang(key: "Search on crt.sh"))
+        }
+
         UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
                                           title: self.certificateChain?.domain,
                                           subtitle: nil,
-                                          items: [
-                                            lang(key: "Share Certificate Chain"),
-                                            lang(key: "View on SSL Labs"),
-                                            lang(key: "Search on Shodan"),
-                                            lang(key: "Search on crt.sh")
-                                        ])
+                                          items: items)
         { (index) in
             if index == 0 {
                 self.shareCertificateChain(sender)

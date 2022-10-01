@@ -52,6 +52,10 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if #unavailable(iOS 12) {
+            return 0;
+        }
+
         if section == 0 {
             return 3
         } else if section == 1 {
@@ -80,6 +84,10 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if #unavailable(iOS 12) {
+            return nil;
+        }
+
         if section == 0 {
             return lang(key: "Share & Feedback")
         } else if section == 1 {
