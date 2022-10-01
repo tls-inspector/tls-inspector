@@ -8,8 +8,10 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     let testflightURL = "https://tlsinspector.com/beta.html"
     let twitterURL = "https://twitter.com/tlsinspector"
     @IBOutlet weak var lockCircle: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
     var quotes: [String] = []
     var taps = 0
+    var sections: [TableViewSection] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,29 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapPicture(target:)))
         self.lockCircle.isUserInteractionEnabled = true
         self.lockCircle.addGestureRecognizer(tap)
+
+        self.sections = [
+            buildShareSection(),
+            buildGetInvolvedSection()
+        ]
+    }
+
+    func buildShareSection() -> TableViewSection {
+        let section = TableViewSection()
+        section.title = lang(key: "Share & Feedback")
+        let opensslVersion = CertificateKit.opensslVersion()
+        let libcurlVersion = CertificateKit.libcurlVersion()
+        section.footer = "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), tiny-curl: \(libcurlVersion)"
+
+        return section
+    }
+
+    func buildGetInvolvedSection() -> TableViewSection {
+        let section = TableViewSection()
+        section.title = lang(key: "Get Involved")
+        section.footer = lang(key: "copyright_license_footer")
+
+        return section
     }
 
     func loadQuotes() -> [String]? {
