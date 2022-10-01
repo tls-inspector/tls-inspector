@@ -78,11 +78,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nonnull, readonly) NSString * summary;
 
 /**
- *  If the certificate is an EV certificate. See `extendedValidationAuthority` for more.
- */
-@property (nonatomic, readonly) BOOL extendedValidation;
-
-/**
  *  Returns the SHA512 fingerprint for the certificate
  */
 @property (strong, nonatomic, nullable, readonly) NSString * SHA512Fingerprint;
@@ -200,11 +195,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  Returns the public key encoded using Privacy-Enhanced Electronic Mail (PEM) includes header and footer.
  */
 @property (strong, nonatomic, nullable, readonly) NSData * publicKeyAsPEM;
-
-/**
- *  Returns the authority that manages the extended validation for this certificate.
- */
-@property (strong, nonatomic, nullable, readonly) NSString * extendedValidationAuthority;
 
 /**
  *  Returns the URL for which OCSP queries can be performed for this certificate.
