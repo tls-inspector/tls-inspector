@@ -25,6 +25,7 @@
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #import "CKSocketUtils.h"
+#import "CKMozillaRootStore.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/err.h>
@@ -66,6 +67,7 @@ INSERT_OPENSSL_ERROR_METHOD
 }
 
 - (void) performTaskWithParameters:(CKGetterParameters *)parameters {
+    [CKMozillaRootStore blah];
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with OpenSSL");
 

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
 		3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
+		3C105D2328E8D87700617378 /* CKMozillaRootStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C105D2128E8D87700617378 /* CKMozillaRootStore.h */; };
+		3C105D2428E8D87700617378 /* CKMozillaRootStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C105D2228E8D87700617378 /* CKMozillaRootStore.m */; };
+		3C105D2628E8E2B300617378 /* mozilla_ca_bundle.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C105D2528E8E2B300617378 /* mozilla_ca_bundle.txt */; };
 		3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1A0D0D263914C200267CF9 /* CKRegex.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -238,6 +241,9 @@
 
 /* Begin PBXFileReference section */
 		3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyingMaterialTableViewController.swift; sourceTree = "<group>"; };
+		3C105D2128E8D87700617378 /* CKMozillaRootStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKMozillaRootStore.h; sourceTree = "<group>"; };
+		3C105D2228E8D87700617378 /* CKMozillaRootStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKMozillaRootStore.m; sourceTree = "<group>"; };
+		3C105D2528E8E2B300617378 /* mozilla_ca_bundle.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = mozilla_ca_bundle.txt; sourceTree = "<group>"; };
 		3C1A0D0D263914C200267CF9 /* CKRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRegex.h; sourceTree = "<group>"; };
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
@@ -464,6 +470,8 @@
 				3CF0A694261BBC5900460B7F /* CKInspectParameters.m */,
 				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
+				3C105D2128E8D87700617378 /* CKMozillaRootStore.h */,
+				3C105D2228E8D87700617378 /* CKMozillaRootStore.m */,
 				3C1D28AA2009677300A606BB /* CKNameObject.h */,
 				3C1D28AB2009677300A606BB /* CKNameObject.m */,
 				3C1A0D0D263914C200267CF9 /* CKRegex.h */,
@@ -483,6 +491,7 @@
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
 				3CF6773420464A9E00A3B4C1 /* Revocation */,
+				3C105D2528E8E2B300617378 /* mozilla_ca_bundle.txt */,
 			);
 			path = CertificateKit;
 			sourceTree = "<group>";
@@ -742,6 +751,7 @@
 				3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */,
 				3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
+				3C105D2328E8D87700617378 /* CKMozillaRootStore.h in Headers */,
 				3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */,
 				3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
@@ -909,6 +919,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C105D2628E8E2B300617378 /* mozilla_ca_bundle.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1071,7 @@
 				3CB4F159200451D000A9CF51 /* CKGetterTask.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
+				3C105D2428E8D87700617378 /* CKMozillaRootStore.m in Sources */,
 				3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
