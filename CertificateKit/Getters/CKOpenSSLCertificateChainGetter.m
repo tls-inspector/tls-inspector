@@ -77,9 +77,6 @@ INSERT_OPENSSL_ERROR_METHOD
     }
     numberOfCerts = 0;
 
-    OPENSSL_init_ssl(0, NULL);
-    OPENSSL_init_crypto(0, NULL);
-
     SSL_CTX * ctx = NULL;
     BIO * conn = NULL;
     SSL * ssl = NULL;

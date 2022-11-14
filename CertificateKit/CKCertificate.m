@@ -21,7 +21,6 @@
 
 #import "CKCertificate.h"
 #import "NSDate+ASN1_TIME.h"
-#import "CKEVOIDList.h"
 
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
@@ -398,32 +397,6 @@ INSERT_OPENSSL_ERROR_METHOD
     return names;
 }
 
-- (NSString *) extendedValidationAuthority {
-    CKEVOIDList * evOIDlist = [CKEVOIDList new];
-    CERTIFICATEPOLICIES * policies = X509_get_ext_d2i(self.certificate, NID_certificate_policies, NULL, NULL);
-    int numberOfPolicies = sk_POLICYINFO_num(policies);
-
-    const POLICYINFO * policy;
-    NSString * oid;
-    NSString * evAgency;
-    for (int i = 0; i < numberOfPolicies; i++) {
-        policy = sk_POLICYINFO_value(policies, i);
-
-#define POLICY_BUFF_MAX 32
-        char buff[POLICY_BUFF_MAX];
-        OBJ_obj2txt(buff, POLICY_BUFF_MAX, policy->policyid, 0);
-        oid = [NSString stringWithUTF8String:buff];
-        evAgency = [evOIDlist.oidMap objectForKey:oid];
-        if (evAgency) {
-            sk_POLICYINFO_free(policies);
-            return evAgency;
-        }
-    }
-
-    sk_POLICYINFO_free(policies);
-    return nil;
-}
-
 - (BOOL) isSelfSigned {
     return X509_self_signed((X509 *)self.X509Certificate, 0) == 1;
 }
@@ -437,10 +410,6 @@ INSERT_OPENSSL_ERROR_METHOD
     } else {
         return NO;
     }
-}
-
-- (BOOL) extendedValidation {
-    return [self extendedValidationAuthority] != nil;
 }
 
 - (NSArray<NSString *> *) keyUsage {

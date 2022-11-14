@@ -56,6 +56,11 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
 };
 
 /**
+ * Initialize OpenSSL. Call this at application launch and only once.
+ */
++ (void) OpenSSLInit;
+
+/**
  *  Get the OpenSSL version used by CKCertificate
  *
  *  @return (NSString *) The OpenSSL version E.G. "1.1.0e"

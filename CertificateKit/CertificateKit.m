@@ -1,9 +1,15 @@
 #import "CertificateKit.h"
 #import "CKMozillaRootStore.h"
 #import <openssl/opensslv.h>
+#import <openssl/ssl.h>
 #import <curl/curlver.h>
 
 @implementation CertificateKit
+
++ (void) OpenSSLInit {
+    OPENSSL_init_ssl(0, NULL);
+    OPENSSL_init_crypto(0, NULL);
+}
 
 + (NSString *) opensslVersion {
     NSString * version = [NSString stringWithUTF8String:OPENSSL_VERSION_TEXT]; // OpenSSL <version> ...
