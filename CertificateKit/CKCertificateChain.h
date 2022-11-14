@@ -128,6 +128,11 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (nonatomic) CKCertificateChainTrustStatus trusted;
 
 /**
+ If the system trusts the certificate chain
+ */
+@property (nonatomic) BOOL trustedByMozilla;
+
+/**
  Get the negotiated ciphersuite used to retrieve the chain.
  */
 @property (strong, nonatomic, nonnull) NSString * cipherSuite;

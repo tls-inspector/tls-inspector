@@ -20,12 +20,17 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
+#include <openssl/x509.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CKMozillaRootStore : NSObject
 
-+ (void) blah;
+@property (strong, nonatomic, readonly, nullable) NSDate * bundleDate;
+@property (strong, nonatomic, readonly, nullable) NSString * bundleSHA256;
+
++ (CKMozillaRootStore *) sharedInstance;
+- (BOOL) validateCertificates:(NSArray<CKCertificate *> *)certificates;
 
 @end
 

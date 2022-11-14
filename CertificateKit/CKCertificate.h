@@ -177,6 +177,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nonnull, readonly) CKNameObject * issuer;
 
 /**
+ * Is this certificate self signed
+ */
+@property (nonatomic) BOOL isSelfSigned;
+
+/**
  *  Information about the certificates revocation status.
  */
 @property (strong, nonatomic, nonnull) CKRevoked * revoked;

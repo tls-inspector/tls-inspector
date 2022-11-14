@@ -67,7 +67,6 @@ INSERT_OPENSSL_ERROR_METHOD
 }
 
 - (void) performTaskWithParameters:(CKGetterParameters *)parameters {
-    [CKMozillaRootStore blah];
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with OpenSSL");
 
@@ -264,6 +263,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     self.chain.certificates = certs;
+    self.chain.trustedByMozilla = [[CKMozillaRootStore sharedInstance] validateCertificates:certs];
 
     self.chain.domain = self.parameters.hostAddress;
 

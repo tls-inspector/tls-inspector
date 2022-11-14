@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Root CA Bundle</key>
+	<string>Root CA Bundle</string>
+	<key>moz_ca_footer</key>
+	<string>TLS Inspector makes use of the root CA bundle included with the Mozilla Firefox web browser. The bundle is available under the MPL 2.0 license.</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>2 weeks</key>

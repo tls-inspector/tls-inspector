@@ -1,4 +1,5 @@
 #import "CertificateKit.h"
+#import "CKMozillaRootStore.h"
 #import <openssl/opensslv.h>
 #import <curl/curlver.h>
 
@@ -19,6 +20,14 @@
     const CFStringRef proxyCFString = (const CFStringRef)CFDictionaryGetValue(proxySettings, (const void*)kCFNetworkProxiesHTTPProxy);
     NSString * proxyString = (__bridge NSString *)(proxyCFString);
     return proxyString != nil && proxyString.length > 0;
+}
+
++ (NSDate * _Nullable) mozillaBundleDate {
+    return CKMozillaRootStore.sharedInstance.bundleDate;
+}
+
++ (NSString * _Nullable) mozillaBundleSHA256 {
+    return CKMozillaRootStore.sharedInstance.bundleSHA256;
 }
 
 @end

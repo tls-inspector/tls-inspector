@@ -74,4 +74,14 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  */
 + (BOOL) isProxyConfigured;
 
+/**
+ * Returns the date for which the Mozilla CA bundle was created
+ */
++ (NSDate * _Nullable) mozillaBundleDate;
+
+/**
+ * Returns the SHA256 hash of the Mozilla CA bundle
+ */
++ (NSString * _Nullable) mozillaBundleSHA256;
+
 @end

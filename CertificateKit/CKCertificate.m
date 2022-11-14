@@ -424,6 +424,10 @@ INSERT_OPENSSL_ERROR_METHOD
     return nil;
 }
 
+- (BOOL) isSelfSigned {
+    return X509_self_signed((X509 *)self.X509Certificate, 0) == 1;
+}
+
 - (BOOL) isCA {
     BASIC_CONSTRAINTS * constraints = X509_get_ext_d2i(self.certificate, NID_basic_constraints, NULL, NULL);
     if (constraints) {

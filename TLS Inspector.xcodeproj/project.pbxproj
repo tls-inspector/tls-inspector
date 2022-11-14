@@ -11,7 +11,6 @@
 		3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
 		3C105D2328E8D87700617378 /* CKMozillaRootStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C105D2128E8D87700617378 /* CKMozillaRootStore.h */; };
 		3C105D2428E8D87700617378 /* CKMozillaRootStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C105D2228E8D87700617378 /* CKMozillaRootStore.m */; };
-		3C105D2628E8E2B300617378 /* mozilla_ca_bundle.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C105D2528E8E2B300617378 /* mozilla_ca_bundle.txt */; };
 		3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1A0D0D263914C200267CF9 /* CKRegex.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,6 +51,8 @@
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
 		3C65DAFB1E836C15004AD96D /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DAF01E836C15004AD96D /* openssl.framework */; };
 		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
+		3C6E51392921BDD20006DD68 /* moz_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E51382921BDD20006DD68 /* moz_ca_bundle.p7b */; };
+		3C6E513F2921F0E50006DD68 /* BundleMetadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E513E2921F0E50006DD68 /* BundleMetadata.plist */; };
 		3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */; };
 		3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
 		3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
@@ -243,7 +244,6 @@
 		3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyingMaterialTableViewController.swift; sourceTree = "<group>"; };
 		3C105D2128E8D87700617378 /* CKMozillaRootStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKMozillaRootStore.h; sourceTree = "<group>"; };
 		3C105D2228E8D87700617378 /* CKMozillaRootStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKMozillaRootStore.m; sourceTree = "<group>"; };
-		3C105D2528E8E2B300617378 /* mozilla_ca_bundle.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = mozilla_ca_bundle.txt; sourceTree = "<group>"; };
 		3C1A0D0D263914C200267CF9 /* CKRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRegex.h; sourceTree = "<group>"; };
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
@@ -284,6 +284,8 @@
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C65DAF01E836C15004AD96D /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
 		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		3C6E51382921BDD20006DD68 /* moz_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = moz_ca_bundle.p7b; sourceTree = "<group>"; };
+		3C6E513E2921F0E50006DD68 /* BundleMetadata.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BundleMetadata.plist; sourceTree = "<group>"; };
 		3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		3C6FF89723B1A420008DC981 /* AtomicInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
 		3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserOptions+CKOptions.swift"; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXGroup;
 			children = (
+				3C6E513D2921F0D20006DD68 /* Mozilla CA */,
 				3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3CB483FC2058BA0400322723 /* CertificateKit.m */,
@@ -491,9 +494,17 @@
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3C65DAF01E836C15004AD96D /* openssl.framework */,
 				3CF6773420464A9E00A3B4C1 /* Revocation */,
-				3C105D2528E8E2B300617378 /* mozilla_ca_bundle.txt */,
 			);
 			path = CertificateKit;
+			sourceTree = "<group>";
+		};
+		3C6E513D2921F0D20006DD68 /* Mozilla CA */ = {
+			isa = PBXGroup;
+			children = (
+				3C6E51382921BDD20006DD68 /* moz_ca_bundle.p7b */,
+				3C6E513E2921F0E50006DD68 /* BundleMetadata.plist */,
+			);
+			path = "Mozilla CA";
 			sourceTree = "<group>";
 		};
 		3C6FE49D1EF4C0EF002021E3 /* Extensions */ = {
@@ -786,6 +797,7 @@
 			buildPhases = (
 				3C000AB22471D154009BC68A /* Compile OpenSSL */,
 				3C5AE3E22471D9B00004292C /* Compile cURL */,
+				3C9AF82A2921F996008121D2 /* Update Mozilla CA Bundle */,
 				3C65DAD51E836BE9004AD96D /* Sources */,
 				3C65DAD61E836BE9004AD96D /* Frameworks */,
 				3C65DAD71E836BE9004AD96D /* Headers */,
@@ -919,7 +931,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C105D2628E8E2B300617378 /* mozilla_ca_bundle.txt in Resources */,
+				3C6E51392921BDD20006DD68 /* moz_ca_bundle.p7b in Resources */,
+				3C6E513F2921F0E50006DD68 /* BundleMetadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,6 +1016,25 @@
 			shellPath = /bin/bash;
 			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\nenv -i ./build-curl.sh\n";
 			showEnvVarsInLog = 0;
+		};
+		3C9AF82A2921F996008121D2 /* Update Mozilla CA Bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Mozilla CA Bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]; then\n    cd \"${SOURCE_ROOT}/CertificateKit/Mozilla CA\"\n    /usr/bin/python3 build_moz_bundle.py\nfi\n";
 		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;

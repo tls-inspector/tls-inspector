@@ -25,6 +25,7 @@
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #import "CKSocketUtils.h"
+#import "CKMozillaRootStore.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <arpa/inet.h>
@@ -137,6 +138,8 @@
         SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
         [certs setObject:[CKCertificate fromSecCertificateRef:certificateRef] atIndexedSubscript:i];
     }
+
+    self.chain.trustedByMozilla = [[CKMozillaRootStore sharedInstance] validateCertificates:certs];
 
     CFDataRef handleData = (CFDataRef)CFReadStreamCopyProperty((__bridge CFReadStreamRef) inputStream, kCFStreamPropertySocketNativeHandle);
     long length = CFDataGetLength(handleData);
