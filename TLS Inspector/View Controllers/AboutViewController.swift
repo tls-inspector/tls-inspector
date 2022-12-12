@@ -74,7 +74,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if #unavailable(iOS 12) {
-            return 0;
+            return 0
         }
 
         if section == 0 {
@@ -106,7 +106,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if #unavailable(iOS 12) {
-            return nil;
+            return nil
         }
 
         if section == 0 {

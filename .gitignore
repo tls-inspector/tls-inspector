@@ -57,8 +57,8 @@ defines.pch
 /TLS Inspector.xcodeproj/project.xcworkspace
 
 # OpenSSL and cURL Frameworks
-/CertificateKit/openssl.framework
-/CertificateKit/curl.framework
+/CertificateKit/openssl.xcframework
+/CertificateKit/curl.xcframework
 
 # Mozilla CA Bundle
 /CertificateKit/moz_ca_bundle.p7b
