@@ -59,6 +59,3 @@ defines.pch
 # OpenSSL and cURL Frameworks
 /CertificateKit/openssl.xcframework
 /CertificateKit/curl.xcframework
-
-# Mozilla CA Bundle
-/CertificateKit/moz_ca_bundle.p7b

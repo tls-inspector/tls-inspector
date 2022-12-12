@@ -2,10 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Root CA Bundle</key>
-	<string>Root CA Bundle</string>
-	<key>moz_ca_footer</key>
-	<string>TLS Inspector makes use of the root CA bundle included with the Mozilla Firefox web browser. The bundle is available under the MPL 2.0 license.</string>
+	<key>Bundle Date</key>
+	<string>Bundle Date</string>
+	<key>Embedded</key>
+	<string>Embedded</string>
+	<key>Microsoft</key>
+	<string>Microsoft</string>
+	<key>Mozilla</key>
+	<string>Mozilla</string>
+	<key>rootca_footer</key>
+	<string>Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.</string>
+	<key>rootca_error</key>
+	<string>Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.</string>
+	<key>Check for updates</key>
+	<string>Check for updates</string>
+	<key>Root CA Certificates</key>
+	<string>Root CA Certificates</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>2 weeks</key>

@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
 		3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
-		3C105D2328E8D87700617378 /* CKMozillaRootStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C105D2128E8D87700617378 /* CKMozillaRootStore.h */; };
-		3C105D2428E8D87700617378 /* CKMozillaRootStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C105D2228E8D87700617378 /* CKMozillaRootStore.m */; };
 		3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1A0D0D263914C200267CF9 /* CKRegex.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +38,16 @@
 		3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */; };
 		3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */; };
 		3C5F4660239DAE9900B3A727 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5F465F239DAE9900B3A727 /* en.plist */; };
+		3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036302947BEBE00981444 /* bundle_metadata.json */; };
+		3C6036362947BEBE00981444 /* signing_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036312947BEBE00981444 /* signing_key.pem */; };
+		3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */; };
+		3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */; };
+		3C6036392947BEBE00981444 /* bundle_version.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036342947BEBE00981444 /* bundle_version.txt */; };
+		3C60363C2947C01300981444 /* CKRootCACertificateBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363A2947C01300981444 /* CKRootCACertificateBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C60363D2947C01300981444 /* CKRootCACertificateBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363B2947C01300981444 /* CKRootCACertificateBundle.m */; };
+		3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363E2947C0A000981444 /* CKCertificateBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363F2947C0A000981444 /* CKCertificateBundle.m */; };
+		3C6036432947C7A000981444 /* RootCACertificatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */; };
 		3C6242702947B10200A7814A /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
 		3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
 		3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -52,8 +60,6 @@
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
 		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
-		3C6E51392921BDD20006DD68 /* moz_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E51382921BDD20006DD68 /* moz_ca_bundle.p7b */; };
-		3C6E513F2921F0E50006DD68 /* BundleMetadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E513E2921F0E50006DD68 /* BundleMetadata.plist */; };
 		3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */; };
 		3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
 		3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
@@ -240,8 +246,6 @@
 
 /* Begin PBXFileReference section */
 		3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyingMaterialTableViewController.swift; sourceTree = "<group>"; };
-		3C105D2128E8D87700617378 /* CKMozillaRootStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKMozillaRootStore.h; sourceTree = "<group>"; };
-		3C105D2228E8D87700617378 /* CKMozillaRootStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKMozillaRootStore.m; sourceTree = "<group>"; };
 		3C1A0D0D263914C200267CF9 /* CKRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRegex.h; sourceTree = "<group>"; };
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
@@ -269,6 +273,16 @@
 		3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeadersTableViewController.swift; sourceTree = "<group>"; };
 		3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANListTableViewController.swift; sourceTree = "<group>"; };
 		3C5F465F239DAE9900B3A727 /* en.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		3C6036302947BEBE00981444 /* bundle_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bundle_metadata.json; sourceTree = "<group>"; };
+		3C6036312947BEBE00981444 /* signing_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = signing_key.pem; sourceTree = "<group>"; };
+		3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mozilla_ca_bundle.p7b; sourceTree = "<group>"; };
+		3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = microsoft_ca_bundle.p7b; sourceTree = "<group>"; };
+		3C6036342947BEBE00981444 /* bundle_version.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bundle_version.txt; sourceTree = "<group>"; };
+		3C60363A2947C01300981444 /* CKRootCACertificateBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRootCACertificateBundle.h; sourceTree = "<group>"; };
+		3C60363B2947C01300981444 /* CKRootCACertificateBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRootCACertificateBundle.m; sourceTree = "<group>"; };
+		3C60363E2947C0A000981444 /* CKCertificateBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundle.h; sourceTree = "<group>"; };
+		3C60363F2947C0A000981444 /* CKCertificateBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundle.m; sourceTree = "<group>"; };
+		3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCACertificatesTableViewController.swift; sourceTree = "<group>"; };
 		3C62426F2947B10200A7814A /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = curl.xcframework; sourceTree = "<group>"; };
 		3C6242712947B12C00A7814A /* openssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = openssl.xcframework; sourceTree = "<group>"; };
 		3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolver.h; sourceTree = "<group>"; };
@@ -283,8 +297,6 @@
 		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		3C6E51382921BDD20006DD68 /* moz_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = moz_ca_bundle.p7b; sourceTree = "<group>"; };
-		3C6E513E2921F0E50006DD68 /* BundleMetadata.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BundleMetadata.plist; sourceTree = "<group>"; };
 		3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		3C6FF89723B1A420008DC981 /* AtomicInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
 		3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserOptions+CKOptions.swift"; sourceTree = "<group>"; };
@@ -442,10 +454,21 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
+		3C60362F2947B88700981444 /* Root CA Certificate Bundles */ = {
+			isa = PBXGroup;
+			children = (
+				3C6036302947BEBE00981444 /* bundle_metadata.json */,
+				3C6036342947BEBE00981444 /* bundle_version.txt */,
+				3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */,
+				3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */,
+				3C6036312947BEBE00981444 /* signing_key.pem */,
+			);
+			path = "Root CA Certificate Bundles";
+			sourceTree = "<group>";
+		};
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXGroup;
 			children = (
-				3C6E513D2921F0D20006DD68 /* Mozilla CA */,
 				3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */,
 				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
 				3CB483FC2058BA0400322723 /* CertificateKit.m */,
@@ -453,6 +476,8 @@
 				3C7CEE6120A15BD500DCC770 /* CKAlternateNameObject.m */,
 				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
 				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
+				3C60363E2947C0A000981444 /* CKCertificateBundle.h */,
+				3C60363F2947C0A000981444 /* CKCertificateBundle.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
 				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
@@ -467,8 +492,6 @@
 				3CF0A694261BBC5900460B7F /* CKInspectParameters.m */,
 				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
-				3C105D2128E8D87700617378 /* CKMozillaRootStore.h */,
-				3C105D2228E8D87700617378 /* CKMozillaRootStore.m */,
 				3C1D28AA2009677300A606BB /* CKNameObject.h */,
 				3C1D28AB2009677300A606BB /* CKNameObject.m */,
 				3C1A0D0D263914C200267CF9 /* CKRegex.h */,
@@ -477,6 +500,8 @@
 				3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */,
 				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
 				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
+				3C60363A2947C01300981444 /* CKRootCACertificateBundle.h */,
+				3C60363B2947C01300981444 /* CKRootCACertificateBundle.m */,
 				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
 				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
 				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
@@ -486,20 +511,11 @@
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				67F686EF1FC8FAE400BB7AE8 /* Getters */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
-				3C65DAF01E836C15004AD96D /* openssl.framework */,
 				3C6242712947B12C00A7814A /* openssl.xcframework */,
 				3CF6773420464A9E00A3B4C1 /* Revocation */,
+				3C60362F2947B88700981444 /* Root CA Certificate Bundles */,
 			);
 			path = CertificateKit;
-			sourceTree = "<group>";
-		};
-		3C6E513D2921F0D20006DD68 /* Mozilla CA */ = {
-			isa = PBXGroup;
-			children = (
-				3C6E51382921BDD20006DD68 /* moz_ca_bundle.p7b */,
-				3C6E513E2921F0E50006DD68 /* BundleMetadata.plist */,
-			);
-			path = "Mozilla CA";
 			sourceTree = "<group>";
 		};
 		3C6FE49D1EF4C0EF002021E3 /* Extensions */ = {
@@ -550,6 +566,7 @@
 				3CCD0291239DD412009364D0 /* AboutViewController.swift */,
 				3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */,
 				3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */,
+				3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -757,10 +774,10 @@
 				3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */,
 				3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
-				3C105D2328E8D87700617378 /* CKMozillaRootStore.h in Headers */,
 				3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */,
 				3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
+				3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */,
 				3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */,
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
@@ -774,6 +791,7 @@
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
+				3C60363C2947C01300981444 /* CKRootCACertificateBundle.h in Headers */,
 				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
 				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
@@ -791,10 +809,10 @@
 			buildPhases = (
 				3C000AB22471D154009BC68A /* Compile OpenSSL */,
 				3C5AE3E22471D9B00004292C /* Compile cURL */,
-				3C9AF82A2921F996008121D2 /* Update Mozilla CA Bundle */,
 				3C65DAD51E836BE9004AD96D /* Sources */,
 				3C65DAD61E836BE9004AD96D /* Frameworks */,
 				3C65DAD71E836BE9004AD96D /* Headers */,
+				3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */,
 				3C65DAD81E836BE9004AD96D /* Resources */,
 			);
 			buildRules = (
@@ -882,6 +900,7 @@
 				TargetAttributes = {
 					3C65DAD91E836BE9004AD96D = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1410;
 						ProvisioningStyle = Manual;
 					};
 					3C72692323949ABD002A0B19 = {
@@ -925,8 +944,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6E51392921BDD20006DD68 /* moz_ca_bundle.p7b in Resources */,
-				3C6E513F2921F0E50006DD68 /* BundleMetadata.plist in Resources */,
+				3C6036392947BEBE00981444 /* bundle_version.txt in Resources */,
+				3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */,
+				3C6036362947BEBE00981444 /* signing_key.pem in Resources */,
+				3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */,
+				3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,6 +1013,25 @@
 			shellPath = /bin/bash;
 			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\nenv -i ./build-openssl.sh\n";
 		};
+		3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Root CA Certificates (Release Only)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\n\nif [ ${CONFIGURATION} == \"DEBUG\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/Root CA Certificate Bundles\"\n./update.sh\n";
+		};
 		3C5AE3E22471D9B00004292C /* Compile cURL */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1010,25 +1051,6 @@
 			shellPath = /bin/bash;
 			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\nenv -i ./build-curl.sh\n";
 			showEnvVarsInLog = 0;
-		};
-		3C9AF82A2921F996008121D2 /* Update Mozilla CA Bundle */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Mozilla CA Bundle";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]; then\n    cd \"${SOURCE_ROOT}/CertificateKit/Mozilla CA\"\n    /usr/bin/python3 build_moz_bundle.py\nfi\n";
 		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1082,6 +1104,7 @@
 				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
 				3CD4932B25A56198002AC7BD /* CKGetterParameters.m in Sources */,
 				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,
+				3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */,
 				3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */,
 				3C7CEE6320A15BD500DCC770 /* CKAlternateNameObject.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
@@ -1096,8 +1119,8 @@
 				3CB4F159200451D000A9CF51 /* CKGetterTask.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
-				3C105D2428E8D87700617378 /* CKMozillaRootStore.m in Sources */,
 				3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */,
+				3C60363D2947C01300981444 /* CKRootCACertificateBundle.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
 				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,
@@ -1156,6 +1179,7 @@
 				3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */,
 				3CDC14D023B046410053932F /* AppOnlyGlobals.swift in Sources */,
 				3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */,
+				3C6036432947C7A000981444 /* RootCACertificatesTableViewController.swift in Sources */,
 				3C5F4656239D77CA00B3A727 /* SplitViewController.swift in Sources */,
 				3C6FF89B23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,
 				3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */,
@@ -1249,6 +1273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1276,6 +1301,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1286,6 +1313,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1314,6 +1342,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1550,7 +1579,6 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1608,7 +1636,6 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
@@ -1684,7 +1711,7 @@
 			repositoryURL = "https://github.com/Wevah/IDNA-Cocoa";
 			requirement = {
 				kind = revision;
-				revision = 3f769fdec30d63b72588acfefd596ca2324942d7;
+				revision = f41c84c2f97c6de137aa36f450defdefd229360e;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

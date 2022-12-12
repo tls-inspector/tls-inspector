@@ -25,7 +25,6 @@
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #import "CKSocketUtils.h"
-#import "CKMozillaRootStore.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/err.h>
@@ -260,7 +259,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     self.chain.certificates = certs;
-    self.chain.trustedByMozilla = [[CKMozillaRootStore sharedInstance] validateCertificates:certs];
+    self.chain.trustedByMozilla = [CKRootCACertificateBundle.sharedInstance.mozillaBundle validateCertificates:certs];
 
     self.chain.domain = self.parameters.hostAddress;
 

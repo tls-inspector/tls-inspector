@@ -40,6 +40,8 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKInspectParameters.h>
 #import <CertificateKit/CKGetterParameters.h>
 #import <CertificateKit/CKLogging.h>
+#import <CertificateKit/CKCertificateBundle.h>
+#import <CertificateKit/CKRootCACertificateBundle.h>
 
 /**
  Interface for global CertificateKit methods.
@@ -78,15 +80,5 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  Is a HTTP proxy configured on the device
  */
 + (BOOL) isProxyConfigured;
-
-/**
- * Returns the date for which the Mozilla CA bundle was created
- */
-+ (NSDate * _Nullable) mozillaBundleDate;
-
-/**
- * Returns the SHA256 hash of the Mozilla CA bundle
- */
-+ (NSString * _Nullable) mozillaBundleSHA256;
 
 @end

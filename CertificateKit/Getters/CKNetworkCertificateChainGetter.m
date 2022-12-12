@@ -24,7 +24,6 @@
 #import "CKSocketUtils.h"
 #import "CKCRLManager.h"
 #import "CKOCSPManager.h"
-#import "CKMozillaRootStore.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <mach/mach_time.h>
@@ -87,7 +86,7 @@
                 [certificates addObject:certificate];
             }
             self.chain.certificates = certificates;
-            self.chain.trustedByMozilla = [[CKMozillaRootStore sharedInstance] validateCertificates:certificates];
+            self.chain.trustedByMozilla = [CKRootCACertificateBundle.sharedInstance.mozillaBundle validateCertificates:certificates];
 
             self.chain.server = certificates[0];
             if (certificates.count > 2) {

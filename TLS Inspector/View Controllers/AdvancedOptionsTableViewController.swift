@@ -6,7 +6,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         case Engine = 0
         case EngineOptions = 1
         case Logs = 2
-        case Mozilla = 3
+        case RootCA = 3
     }
 
     var sections: [TableViewSection] = []
@@ -58,26 +58,16 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return engineOptionsSection
     }
 
-    func buildMozillaSection() -> TableViewSection {
-        let mozillaSection = TableViewSection()
+    func buildRootCASection() -> TableViewSection {
+        let rootCASection = TableViewSection()
+        rootCASection.tag = SectionTags.RootCA.rawValue
 
-        mozillaSection.title = lang(key: "Root CA Bundle")
-        mozillaSection.tag = SectionTags.Mozilla.rawValue
-
-        if let date = CertificateKit.mozillaBundleDate() {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .medium
-            mozillaSection.cells.maybeAppend(TitleValueTableViewCell.Cell(title: "Date", value: formatter.string(from: date)))
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) {
+            cell.cell.textLabel?.text = lang(key: "Root CA Certificates")
+            rootCASection.cells.append(cell)
         }
 
-        if let sha256 = CertificateKit.mozillaBundleSHA256() {
-            mozillaSection.cells.maybeAppend(TitleValueTableViewCell.Cell(title: "SHA256", value: sha256, useFixedWidthFont: true))
-        }
-
-        mozillaSection.footer = lang(key: "moz_ca_footer")
-
-        return mozillaSection
+        return rootCASection
     }
 
     func buildCiphersCell() -> TableViewCell? {
@@ -191,7 +181,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
             self.buildEngineSection(),
             self.buildEngineOptionsSection(),
             self.buildLogsSection(),
-            self.buildMozillaSection()
+            self.buildRootCASection()
         ]
     }
 
@@ -223,6 +213,8 @@ class AdvancedOptionsTableViewController: UITableViewController {
             self.didTapEngineCell(indexPath: indexPath)
         } else if tag == SectionTags.Logs.rawValue && indexPath.row == 1 {
             self.didTapSubmitLogs(indexPath: indexPath)
+        } else if tag == SectionTags.RootCA.rawValue {
+            self.performSegue(withIdentifier: "RootCACertificates", sender: self)
         }
     }
 
