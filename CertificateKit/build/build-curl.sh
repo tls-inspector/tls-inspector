@@ -11,8 +11,8 @@ CURL_WANT_VERSION=$(grep 'VERSION' curl.want | cut -d '=' -f 2)
 
 echo "cURL version wanted: ${CURL_WANT_VERSION}"
 
-if [ -f ../curl.framework/Headers/curlver.h ]; then
-    CURRENT_VERSION=$(grep 'LIBCURL_VERSION' ../curl.framework/Headers/curlver.h | egrep -o '"[a-zA-Z0-9\.\-]+"' | tr -d '"')
+if [ -f ../curl.xcframework/Info.plist ]; then
+    CURRENT_VERSION=$(plutil -extract CFBundleVersion raw -o - ../curl.xcframework/Info.plist)
     if [ "${CURRENT_VERSION}" == "${CURL_WANT_VERSION}" ]; then
         echo "cURL already built, nothing to do"
         exit 0
@@ -26,11 +26,11 @@ echo "warning: cURL needs to be compiled. This will take a while..."
 
 cd tiny-curl-ios
 ./build-ios.sh ${CURL_WANT_VERSION}
-mv curl.framework ../../
+mv curl.xcframework ../../
 cd ../
 
-if [ -f ../curl.framework/Headers/curlver.h ]; then
-    CURRENT_VERSION=$(grep 'LIBCURL_VERSION' ../curl.framework/Headers/curlver.h | egrep -o '"[a-zA-Z0-9\.\-]+"' | tr -d '"')
+if [ -f ../curl.xcframework/Info.plist ]; then
+    CURRENT_VERSION=$(plutil -extract CFBundleVersion raw -o - ../curl.xcframework/Info.plist)
     if [ "${CURRENT_VERSION}" == "${CURL_WANT_VERSION}" ]; then
         exit 0
     fi

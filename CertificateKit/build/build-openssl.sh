@@ -11,8 +11,8 @@ OPENSSL_WANT_VERSION=$(grep 'VERSION' openssl.want | cut -d '=' -f 2)
 
 echo "OpenSSL version wanted: ${OPENSSL_WANT_VERSION}"
 
-if [ -f ../openssl.framework/Headers/opensslv.h ]; then
-    CURRENT_VERSION=$(grep 'OPENSSL_VERSION_TEXT' ../openssl.framework/Headers/opensslv.h | egrep -o '\d\.\d\.\d')
+if [ -f ../openssl.xcframework/Info.plist ]; then
+    CURRENT_VERSION=$(plutil -extract CFBundleVersion raw -o - ../openssl.xcframework/Info.plist)
     if [ "${CURRENT_VERSION}" == "${OPENSSL_WANT_VERSION}" ]; then
         echo "OpenSSL already built, nothing to do"
         exit 0
@@ -26,11 +26,11 @@ echo "warning: OpenSSL needs to be compiled. This will take a while..."
 
 cd openssl-ios
 ./build-ios.sh ${OPENSSL_WANT_VERSION}
-mv openssl.framework ../../
+mv openssl.xcframework ../../
 cd ../
 
-if [ -f ../openssl.framework/Headers/opensslv.h ]; then
-    CURRENT_VERSION=$(grep 'OPENSSL_VERSION_TEXT' ../openssl.framework/Headers/opensslv.h | egrep -o '\d\.\d\.\d')
+if [ -f ../openssl.xcframework/Info.plist ]; then
+    CURRENT_VERSION=$(plutil -extract CFBundleVersion raw -o - ../openssl.xcframework/Info.plist)
     if [ "${CURRENT_VERSION}" == "${OPENSSL_WANT_VERSION}" ]; then
         exit 0
     fi
