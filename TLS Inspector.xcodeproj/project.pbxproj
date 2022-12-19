@@ -43,8 +43,8 @@
 		3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */; };
 		3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */; };
 		3C6036392947BEBE00981444 /* bundle_version.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036342947BEBE00981444 /* bundle_version.txt */; };
-		3C60363C2947C01300981444 /* CKRootCACertificateBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363A2947C01300981444 /* CKRootCACertificateBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C60363D2947C01300981444 /* CKRootCACertificateBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363B2947C01300981444 /* CKRootCACertificateBundle.m */; };
+		3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363A2947C01300981444 /* CKRootCACertificateBundleManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */; };
 		3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363E2947C0A000981444 /* CKCertificateBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363F2947C0A000981444 /* CKCertificateBundle.m */; };
 		3C6036432947C7A000981444 /* RootCACertificatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */; };
@@ -115,6 +115,9 @@
 		3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */; platformFilter = ios; };
 		3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */; platformFilter = ios; };
+		3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CCBE2D7294FF81600E0DD6D /* CKCertificateBundleMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */; };
+		3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */; };
 		3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028A239DC64C009364D0 /* RecentLookups.swift */; };
 		3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD028D239DCEB6009364D0 /* More.storyboard */; };
 		3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028F239DD0D5009364D0 /* GradientView.swift */; };
@@ -278,8 +281,8 @@
 		3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mozilla_ca_bundle.p7b; sourceTree = "<group>"; };
 		3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = microsoft_ca_bundle.p7b; sourceTree = "<group>"; };
 		3C6036342947BEBE00981444 /* bundle_version.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bundle_version.txt; sourceTree = "<group>"; };
-		3C60363A2947C01300981444 /* CKRootCACertificateBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRootCACertificateBundle.h; sourceTree = "<group>"; };
-		3C60363B2947C01300981444 /* CKRootCACertificateBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRootCACertificateBundle.m; sourceTree = "<group>"; };
+		3C60363A2947C01300981444 /* CKRootCACertificateBundleManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRootCACertificateBundleManager.h; sourceTree = "<group>"; };
+		3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRootCACertificateBundleManager.m; sourceTree = "<group>"; };
 		3C60363E2947C0A000981444 /* CKCertificateBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundle.h; sourceTree = "<group>"; };
 		3C60363F2947C0A000981444 /* CKCertificateBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundle.m; sourceTree = "<group>"; };
 		3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCACertificatesTableViewController.swift; sourceTree = "<group>"; };
@@ -339,6 +342,9 @@
 		3CBF85BE253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkCertificateChainGetter.m; sourceTree = "<group>"; };
 		3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKServerInfo.h; sourceTree = "<group>"; };
 		3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKServerInfo.m; sourceTree = "<group>"; };
+		3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundleMetadata.h; sourceTree = "<group>"; };
+		3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundleMetadata.m; sourceTree = "<group>"; };
+		3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = google_ca_bundle.p7b; sourceTree = "<group>"; };
 		3CCD028A239DC64C009364D0 /* RecentLookups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentLookups.swift; sourceTree = "<group>"; };
 		3CCD028D239DCEB6009364D0 /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		3CCD028F239DD0D5009364D0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -459,6 +465,7 @@
 			children = (
 				3C6036302947BEBE00981444 /* bundle_metadata.json */,
 				3C6036342947BEBE00981444 /* bundle_version.txt */,
+				3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */,
 				3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */,
 				3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */,
 				3C6036312947BEBE00981444 /* signing_key.pem */,
@@ -478,6 +485,8 @@
 				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
 				3C60363E2947C0A000981444 /* CKCertificateBundle.h */,
 				3C60363F2947C0A000981444 /* CKCertificateBundle.m */,
+				3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */,
+				3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
 				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
@@ -500,8 +509,8 @@
 				3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */,
 				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
 				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
-				3C60363A2947C01300981444 /* CKRootCACertificateBundle.h */,
-				3C60363B2947C01300981444 /* CKRootCACertificateBundle.m */,
+				3C60363A2947C01300981444 /* CKRootCACertificateBundleManager.h */,
+				3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */,
 				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
 				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
 				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
@@ -791,7 +800,8 @@
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
-				3C60363C2947C01300981444 /* CKRootCACertificateBundle.h in Headers */,
+				3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */,
+				3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */,
 				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
 				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
@@ -946,6 +956,7 @@
 			files = (
 				3C6036392947BEBE00981444 /* bundle_version.txt in Resources */,
 				3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */,
+				3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */,
 				3C6036362947BEBE00981444 /* signing_key.pem in Resources */,
 				3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */,
 				3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */,
@@ -1030,7 +1041,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\n\nif [ ${CONFIGURATION} == \"DEBUG\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/Root CA Certificate Bundles\"\n./update.sh\n";
+			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/Root CA Certificate Bundles\"\n./update.sh\n";
 		};
 		3C5AE3E22471D9B00004292C /* Compile cURL */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1111,6 +1122,7 @@
 				3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */,
 				3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */,
 				3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */,
+				3CCBE2D7294FF81600E0DD6D /* CKCertificateBundleMetadata.m in Sources */,
 				3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */,
 				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
 				3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */,
@@ -1120,7 +1132,7 @@
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
 				3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */,
-				3C60363D2947C01300981444 /* CKRootCACertificateBundle.m in Sources */,
+				3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
 				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,

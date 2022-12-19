@@ -30,9 +30,8 @@
 }
 
 @property (strong, nonatomic, nonnull) NSString * bundlePath;
-@property (strong, nonatomic, readwrite, nullable) NSDate * bundleDate;
-@property (strong, nonatomic, readwrite, nullable) NSString * bundleSHA256;
-@property (strong, nonatomic, readwrite, nullable) NSNumber * certificateCount;
+@property (strong, nonatomic, readwrite, nonnull) NSString * name;
+@property (strong, nonatomic, readwrite, nonnull) CKCertificateBundleMetadata * metadata;
 
 @end
 
@@ -40,9 +39,11 @@
 
 INSERT_OPENSSL_ERROR_METHOD
 
-- (CKCertificateBundle *) initWithWithContentsOfFile:(NSString *)filePath metadata:(NSDictionary<NSString *, id> *)metadata {
+- (CKCertificateBundle *)initWithWithContentsOfFile:(NSString *)filePath name:(NSString *)name metadata:(CKCertificateBundleMetadata *)metadata {
     self = [super init];
     self.bundlePath = filePath;
+    self.name = name;
+    self.metadata = metadata;
 
     NSString * pemData = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     BIO * pemBio = BIO_new_mem_buf(pemData.UTF8String, (int)pemData.length);
@@ -50,13 +51,13 @@ INSERT_OPENSSL_ERROR_METHOD
     PKCS7 *p7 = NULL, *p7i;
     p7 = PKCS7_new();
     if (p7 == NULL) {
-        PError(@"Error loading ca bundle: %@", filePath);
+        PError(@"Error loading ca bundle: %@", name);
         [self openSSLError];
         return nil;
     }
     p7i = PEM_read_bio_PKCS7(pemBio, &p7, NULL, NULL);
     if (p7i == NULL) {
-        PError(@"Error loading ca bundle: %@", filePath);
+        PError(@"Error loading ca bundle: %@", name);
         [self openSSLError];
         return nil;
     }
@@ -65,7 +66,7 @@ INSERT_OPENSSL_ERROR_METHOD
     BIO_free(pemBio);
 
     if (p7->d.sign == NULL) {
-        PError(@"Error loading ca bundle: %@", filePath);
+        PError(@"Error loading ca bundle: %@", name);
         return nil;
     }
 
@@ -91,7 +92,7 @@ INSERT_OPENSSL_ERROR_METHOD
     count = sk_X509_num(certs);
 
     if (count <= 0) {
-        PError(@"No certificates in bundle: %@", filePath);
+        PError(@"No certificates in bundle: %@", name);
         return nil;
     }
 
@@ -101,24 +102,13 @@ INSERT_OPENSSL_ERROR_METHOD
     for (i = 0; i < count; i++) {
         x = sk_X509_value(certs, i);
         if (!X509_STORE_add_cert(caStore, x)) {
-            PError(@"Error adding certificate from bundle to store: %@", filePath);
+            PError(@"Error adding certificate from bundle to store: %@", name);
             [self openSSLError];
             return nil;
         }
     }
 
-    PDebug(@"Loaded %i certificates from bundle %@", count, filePath);
-
-    if ([metadata valueForKey:@"date"] != nil) {
-        NSDateFormatter * formatter = [NSDateFormatter new];
-        formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
-        self.bundleDate = [formatter dateFromString:metadata[@"date"]];
-    } else {
-        PWarn(@"No date found in metadata for bundle %@", filePath);
-    }
-    self.bundleSHA256 = metadata[@"sha_256"];
-    self.certificateCount = metadata[@"num_certs"];
-
+    PDebug(@"Loaded %i certificates from bundle %@", count, name);
     return self;
 }
 

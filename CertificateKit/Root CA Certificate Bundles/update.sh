@@ -34,6 +34,17 @@ else
     NEEDS_UPDATE=1
 fi
 
+if [ -f google_ca_bundle.p7b ]; then
+    if [ -f google_ca_bundle.p7b.sig ]; then
+        if ! openssl dgst -sha256 -verify signing_key.pem -signature google_ca_bundle.p7b.sig google_ca_bundle.p7b > /dev/null 2>&1; then
+            echo "warning: google_ca_bundle.p7b signature verification failed"
+            NEEDS_UPDATE=1
+        fi
+    fi
+else
+    NEEDS_UPDATE=1
+fi
+
 if [ -f bundle_metadata.json ]; then
     if [ -f bundle_metadata.json.sig ]; then
         if ! openssl dgst -sha256 -verify signing_key.pem -signature bundle_metadata.json.sig bundle_metadata.json > /dev/null 2>&1; then
@@ -63,5 +74,6 @@ function download_github_asset() {
 
 download_github_asset mozilla_ca_bundle.p7b
 download_github_asset microsoft_ca_bundle.p7b
+download_github_asset google_ca_bundle.p7b
 download_github_asset bundle_metadata.json
 echo ${LATEST_BUNDLE_TAG} > bundle_version.txt

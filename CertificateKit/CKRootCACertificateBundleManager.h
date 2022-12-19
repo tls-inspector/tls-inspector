@@ -1,5 +1,5 @@
 //
-//  CKRootCACertificateBundle.m
+//  CKRootCACertificateBundleManager.m
 //
 //  LGPLv3
 //
@@ -25,10 +25,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// The manager for the root CA certificate bundles
-@interface CKRootCACertificateBundle : NSObject
+@interface CKRootCACertificateBundleManager : NSObject
 
 /// The shared instance of the manager
-+ (CKRootCACertificateBundle *) sharedInstance;
++ (CKRootCACertificateBundleManager *) sharedInstance;
 
 /// Check for newer versions of root CA certificate bundles
 /// - Parameter error: Any update error. Nil indicates newer bundles were downloaded. An error with code 200 means no updates were needed.
@@ -45,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The Microsoft root CA certificate bundle
 @property (strong, nonatomic, readonly, nullable) CKCertificateBundle * microsoftBundle;
+
+/// The Google root CA certificate bundle
+@property (strong, nonatomic, readonly, nullable) CKCertificateBundle * googleBundle;
 
 @end
 

@@ -1,5 +1,5 @@
 //
-//  CKRootCACertificateBundle.m
+//  CKRootCACertificateBundleManager.m
 //
 //  LGPLv3
 //
@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKRootCACertificateBundle.h"
+#import "CKRootCACertificateBundleManager.h"
 #import <openssl/evp.h>
 #import <openssl/pem.h>
 #import <openssl/bio.h>
@@ -27,7 +27,7 @@
 
 static id _instance;
 
-@interface CKRootCACertificateBundle () <NSURLSessionDataDelegate, NSURLSessionDelegate>
+@interface CKRootCACertificateBundleManager () <NSURLSessionDataDelegate, NSURLSessionDelegate>
 
 @property (strong, nonatomic, nonnull) NSString * bundleDirectory;
 @property (strong, nonatomic, nonnull) NSArray<NSString *> * bundleFiles;
@@ -37,12 +37,14 @@ static id _instance;
 @property (strong, nonatomic, nonnull) NSDictionary<NSString *, id> * embeddedBundleMetadata;
 @property (strong, nonatomic, nonnull) NSData * signingKey;
 @property (nonatomic, readwrite) BOOL usingDownloadedBundles;
+
 @property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * mozillaBundle;
 @property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * microsoftBundle;
+@property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * googleBundle;
 
 @end
 
-@implementation CKRootCACertificateBundle
+@implementation CKRootCACertificateBundleManager
 
 INSERT_OPENSSL_ERROR_METHOD
 
@@ -54,14 +56,15 @@ INSERT_OPENSSL_ERROR_METHOD
     self.bundleFiles = @[
         @"bundle_metadata.json",
         @"microsoft_ca_bundle.p7b",
-        @"mozilla_ca_bundle.p7b"
+        @"mozilla_ca_bundle.p7b",
+        @"google_ca_bundle.p7b"
     ];
     return self;
 }
 
-+ (CKRootCACertificateBundle *) sharedInstance {
++ (CKRootCACertificateBundleManager *) sharedInstance {
     if (!_instance) {
-        _instance = [CKRootCACertificateBundle new];
+        _instance = [CKRootCACertificateBundleManager new];
         [_instance loadBundles];
     }
     return _instance;
@@ -121,7 +124,7 @@ INSERT_OPENSSL_ERROR_METHOD
     NSDateFormatter * formatter = [NSDateFormatter new];
     formatter.dateFormat = @"yyyy-MM-ddTHH:mm:ssZ"; // 2022-10-11T03:12:05Z
 
-    for (NSString * key in @[@"mozilla", @"microsoft"]) {
+    for (NSString * key in @[@"mozilla", @"microsoft", @"google"]) {
         NSDate * downloadDate = [formatter dateFromString:metadata[key][@"date"]];
         NSDate * embedDate = [formatter dateFromString:self.embeddedBundleMetadata[key][@"date"]];
         if (embedDate > downloadDate) {
@@ -139,15 +142,19 @@ INSERT_OPENSSL_ERROR_METHOD
 
     NSString * mozillaBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"mozilla_ca_bundle.p7b"];
     NSString * microsoftBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"microsoft_ca_bundle.p7b"];
-    self.mozillaBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:mozillaBundlePath metadata:metadata[@"mozilla"]];
-    self.microsoftBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:microsoftBundlePath metadata:metadata[@"microsoft"]];
+    NSString * googleBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"google_ca_bundle.p7b"];
+    self.mozillaBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:mozillaBundlePath name:@"mozilla" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:metadata[@"mozilla"]]];
+    self.microsoftBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:microsoftBundlePath name:@"microsoft" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:metadata[@"microsoft"]]];
+    self.googleBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:googleBundlePath name:@"google" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:metadata[@"google"]]];
 }
 
 - (void) loadEmbeddedBundles {
     NSString * mozillaBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"mozilla_ca_bundle" ofType:@"p7b"];
     NSString * microsoftBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"microsoft_ca_bundle" ofType:@"p7b"];
-    self.mozillaBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:mozillaBundlePath metadata:self.embeddedBundleMetadata[@"mozilla"]];
-    self.microsoftBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:microsoftBundlePath metadata:self.embeddedBundleMetadata[@"microsoft"]];
+    NSString * googleBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"google_ca_bundle" ofType:@"p7b"];
+    self.mozillaBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:mozillaBundlePath name:@"mozilla" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:self.embeddedBundleMetadata[@"mozilla"]]];
+    self.microsoftBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:microsoftBundlePath name:@"microsoft" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:self.embeddedBundleMetadata[@"microsoft"]]];
+    self.googleBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:googleBundlePath name:@"google" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:self.embeddedBundleMetadata[@"google"]]];
 }
 
 - (void) updateNow:(NSError **)errorPtr {

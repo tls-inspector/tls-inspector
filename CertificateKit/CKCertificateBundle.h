@@ -20,20 +20,18 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
+#import "CKCertificateBundleMetadata.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// A root CA certificate bundle
 @interface CKCertificateBundle : NSObject
 
-/// The date when the bundle was created
-@property (strong, nonatomic, readonly, nullable) NSDate * bundleDate;
+/// Bundle metadata
+@property (strong, nonatomic, readonly, nonnull) NSString * name;
 
-/// The SHA256 sum of the bundle file
-@property (strong, nonatomic, readonly, nullable) NSString * bundleSHA256;
-
-/// The number of certificates in the bundle
-@property (strong, nonatomic, readonly, nullable) NSNumber * certificateCount;
+/// Bundle metadata
+@property (strong, nonatomic, readonly, nonnull) CKCertificateBundleMetadata * metadata;
 
 /// If the bundle is embedded within the app
 @property (nonatomic, readonly) BOOL embedded;
@@ -41,8 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Create a new bundle with the given file path
 /// - Parameters:
 ///   - filePath: A path pointing to a PKCS#7 archive of certificates
-///   - metadata: A dictionary containing metadata about the bundle
-- (CKCertificateBundle * _Nullable) initWithWithContentsOfFile:(NSString * _Nonnull)filePath metadata:(NSDictionary<NSString *, id> * _Nonnull)metadata;
+///   - name:     The name of this bundle
+///   - metadata: The bundle metadata
+- (CKCertificateBundle * _Nullable) initWithWithContentsOfFile:(NSString * _Nonnull)filePath name:(NSString * _Nonnull)name metadata:(CKCertificateBundleMetadata * _Nonnull)metadata;
 
 /// Validate the chain of certificates using this bundle.
 /// - Parameter certificates: The certificate chain, with the server/leaf certificate being index 0. If a root certificate is included, it is ignored.

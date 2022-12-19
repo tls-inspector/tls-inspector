@@ -10,6 +10,10 @@
 	<string>Microsoft</string>
 	<key>Mozilla</key>
 	<string>Mozilla</string>
+	<key>Google</key>
+	<string>Google</string>
+	<key>Updating</key>
+	<string>Updating</string>
 	<key>rootca_footer</key>
 	<string>Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.</string>
 	<key>rootca_error</key>

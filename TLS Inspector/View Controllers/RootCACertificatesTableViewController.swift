@@ -33,7 +33,7 @@ class RootCACertificatesTableViewController: UITableViewController {
 
         updateQueue.async {
             var updateErr: NSError?
-            CKRootCACertificateBundle.sharedInstance().updateNow(&updateErr)
+            CKRootCACertificateBundleManager.sharedInstance().updateNow(&updateErr)
             if let error = updateErr {
                 if error.code == 200 {
                     UIHelper(self).presentAlert(title: "Root CA Certificates", body: "You have the latest root CA certificate bundles", dismissed: nil)
@@ -57,7 +57,7 @@ class RootCACertificatesTableViewController: UITableViewController {
             return section
         }
 
-        if let bundleDate = bundle.bundleDate {
+        if let bundleDate = bundle.metadata.bundleDate {
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
             formatter.timeStyle = .none
@@ -68,14 +68,14 @@ class RootCACertificatesTableViewController: UITableViewController {
             section.cells.append(TableViewCell(dateCell))
         }
 
-        if let count = bundle.certificateCount {
+        if let count = bundle.metadata.certificateCount {
             let countCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             countCell.textLabel?.text = lang(key: "Certificates")
             countCell.detailTextLabel?.text = count.stringValue
             section.cells.append(TableViewCell(countCell))
         }
 
-        if let sha256 = bundle.bundleSHA256 {
+        if let sha256 = bundle.metadata.bundleSHA256 {
             section.cells.append(TitleValueTableViewCell.Cell(title: "SHA-256", value: sha256, useFixedWidthFont: true))
         }
 
@@ -117,12 +117,12 @@ class RootCACertificatesTableViewController: UITableViewController {
         }
         section.cells.append(updateCell)
 
-        if CKRootCACertificateBundle.sharedInstance().usingDownloadedBundles {
+        if CKRootCACertificateBundleManager.sharedInstance().usingDownloadedBundles {
             let clearCell = TableViewCell(UITableViewCell(style: .default, reuseIdentifier: nil))
             clearCell.cell.textLabel?.text = lang(key: "Clear downloaded bundles")
             clearCell.cell.textLabel?.textColor = UIColor.systemRed
             clearCell.didSelect = { (_, _) in
-                CKRootCACertificateBundle.sharedInstance().clearDownloadedBundles()
+                CKRootCACertificateBundleManager.sharedInstance().clearDownloadedBundles()
                 self.buildTable()
             }
             section.cells.append(clearCell)
@@ -133,8 +133,9 @@ class RootCACertificatesTableViewController: UITableViewController {
 
     func buildTable() {
         self.sections = [
-            self.buildBundleSection(lang(key: "Mozilla"), certificateBundle: CKRootCACertificateBundle.sharedInstance().mozillaBundle),
-            self.buildBundleSection(lang(key: "Microsoft"), certificateBundle: CKRootCACertificateBundle.sharedInstance().microsoftBundle),
+            self.buildBundleSection(lang(key: "Mozilla"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().mozillaBundle),
+            self.buildBundleSection(lang(key: "Microsoft"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().microsoftBundle),
+            self.buildBundleSection(lang(key: "Google"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().googleBundle),
             self.buildUpdateSection()
         ]
         self.tableView.reloadData()
