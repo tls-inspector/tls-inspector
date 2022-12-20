@@ -37,14 +37,7 @@
 
 @implementation CKCertificateBundle
 
-INSERT_OPENSSL_ERROR_METHOD
-
-- (CKCertificateBundle *)initWithWithContentsOfFile:(NSString *)filePath name:(NSString *)name metadata:(CKCertificateBundleMetadata *)metadata {
-    self = [super init];
-    self.bundlePath = filePath;
-    self.name = name;
-    self.metadata = metadata;
-
++ (CKCertificateBundle *) bundleWithName:(NSString *)name bundlePath:(NSString *)filePath metadata:(CKCertificateBundleMetadata *)metadata error:(NSError **)errPtr {
     NSString * pemData = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     BIO * pemBio = BIO_new_mem_buf(pemData.UTF8String, (int)pemData.length);
 
@@ -52,13 +45,15 @@ INSERT_OPENSSL_ERROR_METHOD
     p7 = PKCS7_new();
     if (p7 == NULL) {
         PError(@"Error loading ca bundle: %@", name);
-        [self openSSLError];
+        PRINT_OPENSSL_ERROR
+        *errPtr = MAKE_ERROR(100, @"Error initalizing PKCS7 object");
         return nil;
     }
     p7i = PEM_read_bio_PKCS7(pemBio, &p7, NULL, NULL);
     if (p7i == NULL) {
         PError(@"Error loading ca bundle: %@", name);
-        [self openSSLError];
+        PRINT_OPENSSL_ERROR
+        *errPtr = MAKE_ERROR(100, @"Error reading PKCS7 file");
         return nil;
     }
 
@@ -67,6 +62,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     if (p7->d.sign == NULL) {
         PError(@"Error loading ca bundle: %@", name);
+        *errPtr = MAKE_ERROR(100, @"PKCS7 file does not contain expected object");
         return nil;
     }
 
@@ -93,22 +89,33 @@ INSERT_OPENSSL_ERROR_METHOD
 
     if (count <= 0) {
         PError(@"No certificates in bundle: %@", name);
+        *errPtr = MAKE_ERROR(100, @"No certificates found in PKCS7 bundle");
         return nil;
     }
 
     X509 *x;
-    caStore = X509_STORE_new();
+    X509_STORE * caStore = X509_STORE_new();
 
     for (i = 0; i < count; i++) {
         x = sk_X509_value(certs, i);
         if (!X509_STORE_add_cert(caStore, x)) {
             PError(@"Error adding certificate from bundle to store: %@", name);
-            [self openSSLError];
+            PRINT_OPENSSL_ERROR
+            *errPtr = MAKE_ERROR(100, @"Error adding certificate from PKCS7 bundle");
             return nil;
         }
     }
 
     PDebug(@"Loaded %i certificates from bundle %@", count, name);
+    return [[CKCertificateBundle alloc] initWithName:name x509Store:caStore bundlePath:filePath metadata:metadata];
+}
+
+- (CKCertificateBundle *) initWithName:(NSString *)name x509Store:(X509_STORE *)store bundlePath:(NSString *)bundlePath metadata:(CKCertificateBundleMetadata *)metadata {
+    self = [super init];
+    self.bundlePath = bundlePath;
+    self.name = name;
+    self.metadata = metadata;
+    caStore = store;
     return self;
 }
 
@@ -118,13 +125,11 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     X509 * target = (X509 *)certificates[0].X509Certificate;
-    PDebug(@"[MOZ] Target: %@", certificates[0].summary);
     STACK_OF(X509) * intermediates = sk_X509_new(NULL);
     for (int i = 1; i < certificates.count; i++) {
         CKCertificate * certificate = certificates[i];
         if (!certificate.isSelfSigned) {
             sk_X509_push(intermediates, (X509 *)certificate.X509Certificate);
-            PDebug(@"[MOZ] Add: %@", certificate.summary);
         }
     }
 
@@ -135,7 +140,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     STACK_OF(X509) * chain = X509_build_chain(target, intermediates, caStore, 0, NULL, NULL);
     if (chain == NULL) {
-        [self openSSLError];
+        PRINT_OPENSSL_ERROR
     }
     return chain != NULL;
 }

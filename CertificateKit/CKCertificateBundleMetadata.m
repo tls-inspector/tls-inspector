@@ -31,7 +31,7 @@
 
 @implementation CKCertificateBundleMetadata
 
-- (CKCertificateBundleMetadata *) initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
++ (CKCertificateBundleMetadata *) metadataFrom:(NSDictionary<NSString *,id> *)dictionary {
     NSDate * bundleDate;
     NSString * bundleSHA256;
     NSNumber * certificateCount;
@@ -46,7 +46,7 @@
     bundleSHA256 = dictionary[@"sha_256"];
     certificateCount = dictionary[@"num_certs"];
 
-    return [self initWithDate:bundleDate bundleSHA256:bundleSHA256 certificateCount:certificateCount];
+    return [[CKCertificateBundleMetadata alloc] initWithDate:bundleDate bundleSHA256:bundleSHA256 certificateCount:certificateCount];
 }
 
 - (CKCertificateBundleMetadata *) initWithDate:(NSDate *)date bundleSHA256:(NSString *)bundleSHA256 certificateCount:(NSNumber *)certificateCount {

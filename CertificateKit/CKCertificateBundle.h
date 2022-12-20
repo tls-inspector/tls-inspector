@@ -36,12 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// If the bundle is embedded within the app
 @property (nonatomic, readonly) BOOL embedded;
 
-/// Create a new bundle with the given file path
+/// Create a new bundle
 /// - Parameters:
-///   - filePath: A path pointing to a PKCS#7 archive of certificates
-///   - name:     The name of this bundle
-///   - metadata: The bundle metadata
-- (CKCertificateBundle * _Nullable) initWithWithContentsOfFile:(NSString * _Nonnull)filePath name:(NSString * _Nonnull)name metadata:(CKCertificateBundleMetadata * _Nonnull)metadata;
+///   - name: Name of the bundle
+///   - filePath: file path of the bundle
+///   - metadata: metadata for the bundle
+///   - errPtr: return error
++ (CKCertificateBundle * _Nullable) bundleWithName:(NSString * _Nonnull)name bundlePath:(NSString * _Nonnull)filePath metadata:(CKCertificateBundleMetadata * _Nonnull)metadata error:(NSError * _Nullable * _Nullable)errPtr;
 
 /// Validate the chain of certificates using this bundle.
 /// - Parameter certificates: The certificate chain, with the server/leaf certificate being index 0. If a root certificate is included, it is ignored.

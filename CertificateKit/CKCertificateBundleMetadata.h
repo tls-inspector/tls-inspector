@@ -34,7 +34,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The number of certificates in the bundle
 @property (strong, nonatomic, readonly, nullable) NSNumber * certificateCount;
 
-- (CKCertificateBundleMetadata * _Nullable) initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)dictionary;
+/// Create a new metadata object from the given dictionary
+/// - Parameter dictionary: dictionary containing metadata
++ (CKCertificateBundleMetadata * _Nullable) metadataFrom:(NSDictionary<NSString *, id> * _Nonnull)dictionary;
+
+/// Create a new bundle metadata object
+/// - Parameters:
+///   - date: bundle date
+///   - bundleSHA256: bundle SHA256 sum
+///   - certificateCount: number of certificates
 - (CKCertificateBundleMetadata * _Nonnull) initWithDate:(NSDate * _Nonnull)date bundleSHA256:(NSString * _Nonnull)bundleSHA256 certificateCount:(NSNumber * _Nonnull)certificateCount;
 
 @end

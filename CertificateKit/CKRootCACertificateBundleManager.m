@@ -59,6 +59,7 @@ INSERT_OPENSSL_ERROR_METHOD
         @"mozilla_ca_bundle.p7b",
         @"google_ca_bundle.p7b"
     ];
+    self.signingKey = [NSData dataWithBytes:ROOTCA_SIGNING_PUBLICKEY1_BYTES length:ROOTCA_SIGNING_PUBLICKEY1_LEN];
     return self;
 }
 
@@ -82,9 +83,10 @@ INSERT_OPENSSL_ERROR_METHOD
 
     if ([self shouldUseDownloadedBundles]) {
         PDebug(@"[rootca] loading downloaded bundles");
-        [self loadDownloadedBundles];
-        self.usingDownloadedBundles = YES;
-    } else {
+        self.usingDownloadedBundles = [self loadDownloadedBundles];
+    }
+
+    if (!self.usingDownloadedBundles) {
         PDebug(@"[rootca] loading embedded bundles");
         [self loadEmbeddedBundles];
         self.usingDownloadedBundles = NO;
@@ -111,16 +113,23 @@ INSERT_OPENSSL_ERROR_METHOD
             return NO; // file does not exist
         }
         if (![NSFileManager.defaultManager fileExistsAtPath:signaturePath]) {
+            PError(@"[rootca] Downloaded file does not have associated signature file");
             return NO; // signature does not exist
         }
 
         if (![self verifyFile:filePath withSignature:signaturePath]) {
+            PError(@"[rootca] Downloaded file has bad signature %@", filePath);
             return NO; // bad signature
         }
     }
 
     NSData * bundleData = [NSData dataWithContentsOfFile:[self.bundleDirectory stringByAppendingPathComponent:@"bundle_metadata.json"]];
-    NSDictionary<NSString *, id> * metadata = [NSJSONSerialization JSONObjectWithData:bundleData options:kNilOptions error:nil];
+    NSError * jsonError;
+    NSDictionary<NSString *, id> * metadata = [NSJSONSerialization JSONObjectWithData:bundleData options:kNilOptions error:&jsonError];
+    if (jsonError) {
+        PError(@"[rootca] Downloaded metadata file is invalid: %@", jsonError.localizedDescription);
+        return NO;
+    }
     NSDateFormatter * formatter = [NSDateFormatter new];
     formatter.dateFormat = @"yyyy-MM-ddTHH:mm:ssZ"; // 2022-10-11T03:12:05Z
 
@@ -135,26 +144,64 @@ INSERT_OPENSSL_ERROR_METHOD
     return YES;
 }
 
-- (void) loadDownloadedBundles {
+- (BOOL) loadDownloadedBundles {
     NSString * bundleMetadataPath = [self.bundleDirectory stringByAppendingPathComponent:@"bundle_metadata.json"];
     NSData * bundleData = [NSData dataWithContentsOfFile:bundleMetadataPath];
     NSDictionary<NSString *, id> * metadata = [NSJSONSerialization JSONObjectWithData:bundleData options:kNilOptions error:nil];
 
+    NSError * bundleError;
+
     NSString * mozillaBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"mozilla_ca_bundle.p7b"];
+    CKCertificateBundle * mozillaBundle = [CKCertificateBundle bundleWithName:@"mozilla" bundlePath:mozillaBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"mozilla"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading downloaded mozilla bundle: %@", bundleError.localizedDescription);
+        return NO;
+    }
+
     NSString * microsoftBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"microsoft_ca_bundle.p7b"];
+    CKCertificateBundle * microsoftBundle = [CKCertificateBundle bundleWithName:@"microsoft" bundlePath:microsoftBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"microsoft"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading downloaded microsoft bundle: %@", bundleError.localizedDescription);
+        return NO;
+    }
+
     NSString * googleBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"google_ca_bundle.p7b"];
-    self.mozillaBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:mozillaBundlePath name:@"mozilla" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:metadata[@"mozilla"]]];
-    self.microsoftBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:microsoftBundlePath name:@"microsoft" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:metadata[@"microsoft"]]];
-    self.googleBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:googleBundlePath name:@"google" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:metadata[@"google"]]];
+    CKCertificateBundle * googleBundle = [CKCertificateBundle bundleWithName:@"google" bundlePath:googleBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"google"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading downloaded google bundle: %@", bundleError.localizedDescription);
+        return NO;
+    }
+
+    self.mozillaBundle = mozillaBundle;
+    self.microsoftBundle = microsoftBundle;
+    self.googleBundle = googleBundle;
+    PDebug(@"[rootca] Loaded downloaded bundles");
+    return YES;
 }
 
 - (void) loadEmbeddedBundles {
+    NSError * bundleError;
+
     NSString * mozillaBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"mozilla_ca_bundle" ofType:@"p7b"];
+    self.mozillaBundle = [CKCertificateBundle bundleWithName:@"mozilla" bundlePath:mozillaBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"mozilla"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading embedded mozilla bundle: %@", bundleError.localizedDescription);
+        return;
+    }
+
     NSString * microsoftBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"microsoft_ca_bundle" ofType:@"p7b"];
+    self.microsoftBundle = [CKCertificateBundle bundleWithName:@"microsoft" bundlePath:microsoftBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"microsoft"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading embedded microsoft bundle: %@", bundleError.localizedDescription);
+        return;
+    }
+
     NSString * googleBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"google_ca_bundle" ofType:@"p7b"];
-    self.mozillaBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:mozillaBundlePath name:@"mozilla" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:self.embeddedBundleMetadata[@"mozilla"]]];
-    self.microsoftBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:microsoftBundlePath name:@"microsoft" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:self.embeddedBundleMetadata[@"microsoft"]]];
-    self.googleBundle = [[CKCertificateBundle alloc] initWithWithContentsOfFile:googleBundlePath name:@"google" metadata:[[CKCertificateBundleMetadata alloc] initWithDictionary:self.embeddedBundleMetadata[@"google"]]];
+    self.googleBundle = [CKCertificateBundle bundleWithName:@"google" bundlePath:googleBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"google"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading embedded google bundle: %@", bundleError.localizedDescription);
+        return;
+    }
 }
 
 - (void) updateNow:(NSError **)errorPtr {
@@ -376,14 +423,6 @@ CLEANUP:
     EVP_MD_CTX_free(mctx);
     BIO_free(pubKeyBio);
     return ret == 1;
-}
-
-- (NSData *) signingKey {
-    if (_signingKey == nil) {
-        _signingKey = [NSData dataWithContentsOfFile:[[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"signing_key" ofType:@"pem"]];
-    }
-
-    return _signingKey;
 }
 
 @end

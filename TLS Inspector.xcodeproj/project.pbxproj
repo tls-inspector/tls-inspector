@@ -39,7 +39,6 @@
 		3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */; };
 		3C5F4660239DAE9900B3A727 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5F465F239DAE9900B3A727 /* en.plist */; };
 		3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036302947BEBE00981444 /* bundle_metadata.json */; };
-		3C6036362947BEBE00981444 /* signing_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036312947BEBE00981444 /* signing_key.pem */; };
 		3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */; };
 		3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */; };
 		3C6036392947BEBE00981444 /* bundle_version.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036342947BEBE00981444 /* bundle_version.txt */; };
@@ -277,7 +276,6 @@
 		3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANListTableViewController.swift; sourceTree = "<group>"; };
 		3C5F465F239DAE9900B3A727 /* en.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
 		3C6036302947BEBE00981444 /* bundle_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bundle_metadata.json; sourceTree = "<group>"; };
-		3C6036312947BEBE00981444 /* signing_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = signing_key.pem; sourceTree = "<group>"; };
 		3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mozilla_ca_bundle.p7b; sourceTree = "<group>"; };
 		3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = microsoft_ca_bundle.p7b; sourceTree = "<group>"; };
 		3C6036342947BEBE00981444 /* bundle_version.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bundle_version.txt; sourceTree = "<group>"; };
@@ -468,7 +466,6 @@
 				3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */,
 				3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */,
 				3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */,
-				3C6036312947BEBE00981444 /* signing_key.pem */,
 			);
 			path = "Root CA Certificate Bundles";
 			sourceTree = "<group>";
@@ -957,7 +954,6 @@
 				3C6036392947BEBE00981444 /* bundle_version.txt in Resources */,
 				3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */,
 				3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */,
-				3C6036362947BEBE00981444 /* signing_key.pem in Resources */,
 				3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */,
 				3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */,
 			);
