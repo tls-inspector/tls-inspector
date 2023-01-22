@@ -200,6 +200,26 @@ INSERT_OPENSSL_ERROR_METHOD
         }
     }
 
+    if ([xcert isSelfSigned]) {
+        NSNumber * mozillaTrusted = @NO;
+        NSNumber * microsoftTrusted = @NO;
+        NSNumber * googleTrusted = @NO;
+        if ([CKRootCACertificateBundleManager sharedInstance].mozillaBundle != nil && [[CKRootCACertificateBundleManager sharedInstance].mozillaBundle containsCertificate:xcert]) {
+            mozillaTrusted = @YES;
+        }
+        if ([CKRootCACertificateBundleManager sharedInstance].microsoftBundle != nil && [[CKRootCACertificateBundleManager sharedInstance].microsoftBundle containsCertificate:xcert]) {
+            microsoftTrusted = @YES;
+        }
+        if ([CKRootCACertificateBundleManager sharedInstance].googleBundle != nil && [[CKRootCACertificateBundleManager sharedInstance].googleBundle containsCertificate:xcert]) {
+            googleTrusted = @YES;
+        }
+        xcert.vendorTrustStatus = @{
+            @"mozilla": mozillaTrusted,
+            @"microsoft": microsoftTrusted,
+            @"google": googleTrusted,
+        };
+    }
+
     return xcert;
 }
 

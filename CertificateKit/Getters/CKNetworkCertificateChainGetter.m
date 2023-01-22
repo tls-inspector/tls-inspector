@@ -86,8 +86,6 @@
                 [certificates addObject:certificate];
             }
             self.chain.certificates = certificates;
-            self.chain.trustedByMozilla = [CKRootCACertificateBundleManager.sharedInstance.mozillaBundle validateCertificates:certificates];
-
             self.chain.server = certificates[0];
             if (certificates.count > 2) {
                 self.chain.rootCA = [certificates lastObject];

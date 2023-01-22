@@ -99,6 +99,7 @@ class CertificateChainTableViewController: UITableViewController {
     func buildTrustHeader() {
         self.trustView.layer.cornerRadius = 5.0
 
+        var trustSolid = true
         var trustColor = UIColor.materialPink()
         var trustText = lang(key: "Unknown")
         var trustIcon = FAIcon.FAQuestionCircleSolid
@@ -108,8 +109,9 @@ class CertificateChainTableViewController: UITableViewController {
             trustText = lang(key: "Trusted")
             trustIcon = FAIcon.FACheckCircleSolid
         case .locallyTrusted:
+            trustSolid = false
             trustColor = UIColor.materialLightGreen()
-            trustText = lang(key: "Locally Trusted")
+            trustText = lang(key: "Unrecognized")
             trustIcon = FAIcon.FACheckCircleRegular
         case .untrusted, .invalidDate, .wrongHost:
             trustColor = UIColor.materialAmber()
@@ -144,7 +146,12 @@ class CertificateChainTableViewController: UITableViewController {
             break
         }
 
-        self.trustView.backgroundColor = trustColor
+        if trustSolid {
+            self.trustView.backgroundColor = trustColor
+        } else {
+            self.trustView.layer.borderColor = trustColor.cgColor
+            self.trustView.layer.borderWidth = 2.0
+        }
         self.trustResultLabel.textColor = UIColor.white
         self.trustResultLabel.text = trustText
         self.trustIconLabel.textColor = UIColor.white

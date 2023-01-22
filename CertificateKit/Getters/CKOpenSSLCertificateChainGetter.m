@@ -259,8 +259,6 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     self.chain.certificates = certs;
-    self.chain.trustedByMozilla = [CKRootCACertificateBundleManager.sharedInstance.mozillaBundle validateCertificates:certs];
-
     self.chain.domain = self.parameters.hostAddress;
 
     if (certs.count == 0) {

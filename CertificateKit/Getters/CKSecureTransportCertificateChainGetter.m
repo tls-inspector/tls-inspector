@@ -138,8 +138,6 @@
         [certs setObject:[CKCertificate fromSecCertificateRef:certificateRef] atIndexedSubscript:i];
     }
 
-    self.chain.trustedByMozilla = [CKRootCACertificateBundleManager.sharedInstance.mozillaBundle validateCertificates:certs];
-
     CFDataRef handleData = (CFDataRef)CFReadStreamCopyProperty((__bridge CFReadStreamRef) inputStream, kCFStreamPropertySocketNativeHandle);
     long length = CFDataGetLength(handleData);
     uint8_t * buffer = malloc(length);

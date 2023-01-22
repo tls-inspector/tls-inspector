@@ -129,6 +129,7 @@ class CertificateTableViewController: UITableViewController {
         self.sections.maybeAppend(makeStatusProvidersSection())
         self.sections.maybeAppend(makeMetadataSection())
         self.sections.maybeAppend(makeSubjectAltNameSection())
+        self.sections.maybeAppend(makeVendorTrustStatusSection())
 
         self.tableView.reloadData()
     }
@@ -405,6 +406,36 @@ class CertificateTableViewController: UITableViewController {
         sanSection.cells.append(cell)
 
         return sanSection
+    }
+
+    func makeVendorTrustStatusSection() -> TableViewSection? {
+        let vendorTrustSection = TableViewSection()
+        vendorTrustSection.title = lang(key: "Certificate Trust")
+
+        guard let vendorTrustStatus = self.certificate.vendorTrustStatus else {
+            return nil
+        }
+
+        for key in ["mozilla", "microsoft", "google"] {
+            let isTrusted = vendorTrustStatus[key] as? Bool ?? false
+            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Status") else {
+                continue
+            }
+            guard let iconLabel = cell.viewWithTag(1) as? UILabel else {
+                continue
+            }
+            let icon = isTrusted ? FAIcon.FACheckCircleSolid : FAIcon.FATimesCircleSolid
+            iconLabel.text = icon.string()
+            iconLabel.font = icon.font(size: iconLabel.font.pointSize)
+            iconLabel.textColor = isTrusted ? UIColor.materialGreen() : UIColor.materialRed()
+            guard let statusLabel = cell.viewWithTag(2) as? UILabel else {
+                continue
+            }
+            statusLabel.text = lang(key: key)
+            vendorTrustSection.cells.append(TableViewCell(cell))
+        }
+
+        return vendorTrustSection
     }
 
     // MARK: - Table view data source

@@ -232,6 +232,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * keyIdentifiers;
 
 /**
+ *  Dictionary mapping the vendor name (e.g. mozilla) to if the certificate is present in their root ca bundle. Only populated on self-signed certificates.
+ */
+@property (strong, nonatomic, nullable) NSDictionary<NSString *, NSNumber *> * vendorTrustStatus;
+
+/**
  *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
  */
 @property (nonatomic, nullable, readonly) void * X509Certificate;
