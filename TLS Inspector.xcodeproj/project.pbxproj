@@ -21,6 +21,9 @@
 		3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A521F284DC700AA12B4 /* CKGetter.m */; platformFilter = ios; };
 		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; platformFilter = ios; };
+		3C3C9533297DFD110084B7D9 /* BasicInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */; };
+		3C3C9535297E01460084B7D9 /* AdvancedInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9534297E01460084B7D9 /* AdvancedInspectTest.swift */; };
+		3C3C9537297E04BD0084B7D9 /* CryptoEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */; };
 		3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C45AD5823D831A900E541EC /* CKCurlCommon.h */; };
 		3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45AD5923D831A900E541EC /* CKCurlCommon.m */; platformFilter = ios; };
 		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
@@ -198,6 +201,13 @@
 			remoteGlobalIDString = 3C72692323949ABD002A0B19;
 			remoteInfo = "TLS Inspector";
 		};
+		3C3C952B297DFA730084B7D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C72692323949ABD002A0B19;
+			remoteInfo = "TLS Inspector";
+		};
 		3C6FF89423B1A280008DC981 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
@@ -259,6 +269,10 @@
 		3C2A7A521F284DC700AA12B4 /* CKGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGetter.m; sourceTree = "<group>"; };
 		3C36B3B220412564005C66E8 /* CKOCSPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPResponse.h; sourceTree = "<group>"; };
 		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
+		3C3C9525297DFA730084B7D9 /* TLS InspectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TLS InspectorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInspectTest.swift; sourceTree = "<group>"; };
+		3C3C9534297E01460084B7D9 /* AdvancedInspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInspectTest.swift; sourceTree = "<group>"; };
+		3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoEngineTest.swift; sourceTree = "<group>"; };
 		3C45AD5823D831A900E541EC /* CKCurlCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCurlCommon.h; sourceTree = "<group>"; };
 		3C45AD5923D831A900E541EC /* CKCurlCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCurlCommon.m; sourceTree = "<group>"; };
 		3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
@@ -399,6 +413,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C3C9522297DFA730084B7D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C65DAD61E836BE9004AD96D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -439,6 +460,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C3C9526297DFA730084B7D9 /* TLS InspectorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */,
+				3C3C9534297E01460084B7D9 /* AdvancedInspectTest.swift */,
+				3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */,
+			);
+			path = "TLS InspectorUITests";
+			sourceTree = "<group>";
+		};
 		3C5F465D239DAE7D00B3A727 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,6 +749,7 @@
 				3CDC14A823B0453B0053932F /* Inspect Website */,
 				3C65DADB1E836BE9004AD96D /* CertificateKit */,
 				3CF397421EB50E0900E8DBF4 /* CertificateKitTests */,
+				3C3C9526297DFA730084B7D9 /* TLS InspectorUITests */,
 				3CFAE6D71CA8440400CD946B /* Products */,
 				A1BA8BE21E8EB2B30004FB0F /* Frameworks */,
 			);
@@ -730,6 +762,7 @@
 				3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */,
 				3C72692423949ABD002A0B19 /* TLS Inspector.app */,
 				3CDC14A723B0453B0053932F /* Show Certificate.appex */,
+				3C3C9525297DFA730084B7D9 /* TLS InspectorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -810,6 +843,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3C3C9524297DFA730084B7D9 /* TLS InspectorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C3C952F297DFA730084B7D9 /* Build configuration list for PBXNativeTarget "TLS InspectorUITests" */;
+			buildPhases = (
+				3C3C9521297DFA730084B7D9 /* Sources */,
+				3C3C9522297DFA730084B7D9 /* Frameworks */,
+				3C3C9523297DFA730084B7D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C3C952C297DFA730084B7D9 /* PBXTargetDependency */,
+			);
+			name = "TLS InspectorUITests";
+			productName = "TLS InspectorUITests";
+			productReference = 3C3C9525297DFA730084B7D9 /* TLS InspectorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		3C65DAD91E836BE9004AD96D /* CertificateKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */;
@@ -901,10 +952,14 @@
 		3CFAE6CE1CA8440400CD946B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
+					3C3C9524297DFA730084B7D9 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 3C72692323949ABD002A0B19;
+					};
 					3C65DAD91E836BE9004AD96D = {
 						CreatedOnToolsVersion = 8.2.1;
 						LastSwiftMigration = 1410;
@@ -942,11 +997,19 @@
 				3CDC14A623B0453B0053932F /* Inspect Website */,
 				3C65DAD91E836BE9004AD96D /* CertificateKit */,
 				3CF397401EB50E0900E8DBF4 /* CertificateKitTests */,
+				3C3C9524297DFA730084B7D9 /* TLS InspectorUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3C3C9523297DFA730084B7D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C65DAD81E836BE9004AD96D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1100,6 +1163,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3C3C9521297DFA730084B7D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C3C9535297E01460084B7D9 /* AdvancedInspectTest.swift in Sources */,
+				3C3C9533297DFD110084B7D9 /* BasicInspectTest.swift in Sources */,
+				3C3C9537297E04BD0084B7D9 /* CryptoEngineTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C65DAD51E836BE9004AD96D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1248,6 +1321,11 @@
 			target = 3C72692323949ABD002A0B19 /* TLS Inspector */;
 			targetProxy = 3C1A0D132639222B00267CF9 /* PBXContainerItemProxy */;
 		};
+		3C3C952C297DFA730084B7D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C72692323949ABD002A0B19 /* TLS Inspector */;
+			targetProxy = 3C3C952B297DFA730084B7D9 /* PBXContainerItemProxy */;
+		};
 		3C6FF89523B1A280008DC981 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
@@ -1277,6 +1355,62 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3C3C952D297DFA730084B7D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.ecn.TLS-InspectorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "TLS Inspector";
+			};
+			name = Debug;
+		};
+		3C3C952E297DFA730084B7D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.ecn.TLS-InspectorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "TLS Inspector";
+			};
+			name = Release;
+		};
 		3C65DAE41E836BE9004AD96D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1666,6 +1800,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C3C952F297DFA730084B7D9 /* Build configuration list for PBXNativeTarget "TLS InspectorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C3C952D297DFA730084B7D9 /* Debug */,
+				3C3C952E297DFA730084B7D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -56,6 +56,7 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.autocorrectionType = .no
             input.spellCheckingType = .no
             input.autocapitalizationType = .none
+            input.accessibilityLabel = "Domain Name or IP Address"
         } valueDidChange: { (value: String) in
             self.parameters.hostAddress = value
         }
@@ -65,6 +66,7 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.keyboardType = .numberPad
             input.autocorrectionType = .no
             input.spellCheckingType = .no
+            input.accessibilityLabel = "Port"
         } valueDidChange: { (value: String) in
             guard let port = UInt16.init(value) else { return }
 
@@ -76,6 +78,7 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.keyboardType = .asciiCapable
             input.autocorrectionType = .no
             input.spellCheckingType = .no
+            input.accessibilityLabel = "Host IP Address"
         } valueDidChange: { (value: String) in
             self.parameters.ipAddress = value
         }

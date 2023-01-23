@@ -47,6 +47,17 @@
                ReferencedContainer = "container:TLS Inspector.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3C3C9524297DFA730084B7D9"
+               BuildableName = "TLS InspectorUITests.xctest"
+               BlueprintName = "TLS InspectorUITests"
+               ReferencedContainer = "container:TLS Inspector.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

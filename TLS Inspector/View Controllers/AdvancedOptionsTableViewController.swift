@@ -26,6 +26,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
 
         cell.textLabel?.text = lang(key: "crypto_engine::" + engine.rawValue)
+        cell.accessibilityLabel = engine.rawValue
         if UserOptions.cryptoEngine == engine {
             cell.accessoryType = .checkmark
         } else {

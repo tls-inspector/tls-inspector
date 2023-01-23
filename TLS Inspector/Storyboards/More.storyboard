@@ -18,7 +18,7 @@
         <scene sceneID="W8Z-6b-XpZ">
             <objects>
                 <tableViewController id="SAS-dU-fSF" customClass="MoreTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="UyB-P3-mNi">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="UyB-P3-mNi" userLabel="MoreTable">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
@@ -51,6 +51,9 @@
                                                 <constraint firstItem="i9m-kD-Uxi" firstAttribute="leading" secondItem="P6x-tp-bhw" secondAttribute="leadingMargin" id="stk-Eu-MrS"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="About TLS Inspector"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="geb-Kz-ZRO" kind="show" id="UAx-KF-loB"/>
                                         </connections>
@@ -82,6 +85,9 @@
                                                 <constraint firstItem="YpY-29-nxj" firstAttribute="leading" secondItem="Ywz-6W-KoY" secondAttribute="trailing" constant="8" id="pgp-zk-WOK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="Options"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="CDR-e3-isx" kind="show" id="qOJ-P5-Fm4"/>
                                         </connections>
@@ -89,6 +95,9 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="More Table"/>
+                        </userDefinedRuntimeAttributes>
                     </tableView>
                     <navigationItem key="navigationItem" title="More" id="ThL-DV-nbt">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Ubi-r5-m9m">
@@ -171,6 +180,9 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="Options Table"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="dataSource" destination="CDR-e3-isx" id="Xfa-ku-Rq3"/>
                             <outlet property="delegate" destination="CDR-e3-isx" id="hT8-4z-P9Y"/>
@@ -327,6 +339,9 @@
                             </tableViewCell>
                         </prototypes>
                         <sections/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="Advanced Options Table"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="dataSource" destination="Bem-Gj-gOM" id="Z9b-tw-J6l"/>
                             <outlet property="delegate" destination="Bem-Gj-gOM" id="TGa-pO-L5K"/>

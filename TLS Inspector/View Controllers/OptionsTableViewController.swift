@@ -17,17 +17,17 @@ class OptionsTableViewController: UITableViewController {
     func makeGeneralSection() -> TableViewSection? {
         let generalSection = TableViewSection()
         generalSection.title = lang(key: "General")
-        if let cell = newSwitchCell(labelText: lang(key: "Remember Recent Lookups"),
+        if let cell = newSwitchCell(labelText: "Remember Recent Lookups",
                                     initialValue: UserOptions.rememberRecentLookups,
                                     changed: #selector(changeRememberLookups(sender:))) {
             generalSection.cells.append(cell)
         }
-        if let cell = newSwitchCell(labelText: lang(key: "Show HTTP Headers"),
+        if let cell = newSwitchCell(labelText: "Show HTTP Headers",
                                     initialValue: UserOptions.getHTTPHeaders,
                                     changed: #selector(changeShowHTTPHeaders(sender:))) {
             generalSection.cells.append(cell)
         }
-        if let cell = newSwitchCell(labelText: lang(key: "Show Tips"),
+        if let cell = newSwitchCell(labelText: "Show Tips",
                                     initialValue: UserOptions.showTips,
                                     changed: #selector(changeShowTips(sender:))) {
             generalSection.cells.append(cell)
@@ -44,12 +44,12 @@ class OptionsTableViewController: UITableViewController {
         let statusSection = TableViewSection()
         statusSection.title = lang(key: "Certificate Status")
         statusSection.footer = lang(key: "certificate_status_footer")
-        if let cell = newSwitchCell(labelText: lang(key: "Query OCSP Responder"),
+        if let cell = newSwitchCell(labelText: "Query OCSP Responder",
                                     initialValue: UserOptions.queryOCSP,
                                     changed: #selector(changeQueryOCSP(sender:))) {
             statusSection.cells.append(cell)
         }
-        if let cell = newSwitchCell(labelText: lang(key: "Download & Check CRL"),
+        if let cell = newSwitchCell(labelText: "Download & Check CRL",
                                     initialValue: UserOptions.checkCRL,
                                     changed: #selector(changeCheckCRL(sender:))) {
             statusSection.cells.append(cell)
@@ -65,22 +65,22 @@ class OptionsTableViewController: UITableViewController {
     func makeFingerprintSection() -> TableViewSection? {
         let fingerprintSection = TableViewSection()
         fingerprintSection.title = lang(key: "Fingerprints")
-        if let cell = newSwitchCell(labelText: lang(key: "MD5"),
+        if let cell = newSwitchCell(labelText: "MD5",
                                     initialValue: UserOptions.showFingerprintMD5,
                                     changed: #selector(changeShowFingerprintMD5(sender:))) {
             fingerprintSection.cells.append(cell)
         }
-        if let cell = newSwitchCell(labelText: lang(key: "SHA1"),
+        if let cell = newSwitchCell(labelText: "SHA1",
                                     initialValue: UserOptions.showFingerprintSHA128,
                                     changed: #selector(changeShowFingerprintSHA128(sender:))) {
             fingerprintSection.cells.append(cell)
         }
-        if let cell = newSwitchCell(labelText: lang(key: "SHA-256"),
+        if let cell = newSwitchCell(labelText: "SHA-256",
                                     initialValue: UserOptions.showFingerprintSHA256,
                                     changed: #selector(changeShowFingerprintSHA256(sender:))) {
             fingerprintSection.cells.append(cell)
         }
-        if let cell = newSwitchCell(labelText: lang(key: "SHA-512"),
+        if let cell = newSwitchCell(labelText: "SHA-512",
                                     initialValue: UserOptions.showFingerprintSHA512,
                                     changed: #selector(changeShowFingerprintSHA512(sender:))) {
             fingerprintSection.cells.append(cell)
@@ -95,7 +95,7 @@ class OptionsTableViewController: UITableViewController {
 
     func makeAdvancedSection() -> TableViewSection? {
         let generalSection = TableViewSection()
-        if let cell = newIconCell(labelText: lang(key: "Advanced Options"),
+        if let cell = newIconCell(labelText: "Advanced Options",
                                   icon: .FACogSolid,
                                   iconColor: UIColor.systemBlue) {
             cell.cell.tag = advancedOptionsCellTag
@@ -187,9 +187,10 @@ class OptionsTableViewController: UITableViewController {
         guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
         guard let toggle = cell.cell.viewWithTag(2) as? UISwitch else { return nil }
 
-        label.text = labelText
+        label.text = lang(key: labelText)
         toggle.setOn(initialValue, animated: false)
         toggle.addTarget(self, action: changed, for: .valueChanged)
+        cell.cell.accessibilityLabel = labelText
 
         return cell
     }
@@ -198,10 +199,11 @@ class OptionsTableViewController: UITableViewController {
         guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) else { return nil }
         guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
         guard let iconLabel = cell.cell.viewWithTag(2) as? UILabel else { return nil }
-        label.text = labelText
+        label.text = lang(key: labelText)
         iconLabel.font = icon.font(size: iconLabel.font.pointSize)
         iconLabel.textColor = iconColor
         iconLabel.text = icon.string()
+        cell.cell.accessibilityLabel = labelText
 
         return cell
     }
