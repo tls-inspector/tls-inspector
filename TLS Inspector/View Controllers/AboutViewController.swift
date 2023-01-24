@@ -6,7 +6,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     let projectURL = "https://tlsinspector.com/"
     let projectContributeURL = "https://tlsinspector.com/contribute.html"
     let testflightURL = "https://tlsinspector.com/beta.html"
-    let twitterURL = "https://twitter.com/tlsinspector"
+    let mastodonURL = "https://infosec.exchange/@tlsinspector"
     @IBOutlet weak var lockCircle: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     var quotes: [String] = []
@@ -99,7 +99,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         } else if indexPath.section == 1 && indexPath.row == 1 {
             cell.textLabel?.text = lang(key: "Test New Features")
         } else if indexPath.section == 1 && indexPath.row == 2 {
-            return tableView.dequeueReusableCell(withIdentifier: "Twitter", for: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "Mastodon", for: indexPath)
         }
         return cell
     }
@@ -149,7 +149,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         } else if indexPath.section == 1 && indexPath.row == 1 {
             OpenURLInSafari(testflightURL)
         } else if indexPath.section == 1 && indexPath.row == 2 {
-            OpenURLInSafari(twitterURL)
+            OpenURLInSafari(mastodonURL)
         }
     }
 }

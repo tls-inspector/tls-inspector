@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Twitter.png",
+      "filename" : "Mastodon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Twitter@2x.png",
+      "filename" : "Mastodon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Twitter@3x.png",
+      "filename" : "Mastodon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
