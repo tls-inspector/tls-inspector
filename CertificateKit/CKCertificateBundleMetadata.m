@@ -43,8 +43,15 @@
     } else {
         return nil;
     }
-    bundleSHA256 = dictionary[@"sha_256"];
     certificateCount = dictionary[@"num_certs"];
+
+    NSDictionary<NSString *, id> * bundles = dictionary[@"bundles"];
+    for (NSString * bundleName in bundles.allKeys) {
+        if ([bundleName containsString:@".p7b"]) {
+            bundleSHA256 = bundles[bundleName][@"sha256"];
+            break;
+        }
+    }
 
     return [[CKCertificateBundleMetadata alloc] initWithDate:bundleDate bundleSHA256:bundleSHA256 certificateCount:certificateCount];
 }

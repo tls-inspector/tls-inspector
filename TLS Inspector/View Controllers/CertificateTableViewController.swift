@@ -416,7 +416,7 @@ class CertificateTableViewController: UITableViewController {
             return nil
         }
 
-        for key in ["mozilla", "microsoft", "google"] {
+        for key in ["apple", "google", "microsoft", "mozilla"] {
             let isTrusted = vendorTrustStatus[key] as? Bool ?? false
             guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Status") else {
                 continue
@@ -424,7 +424,7 @@ class CertificateTableViewController: UITableViewController {
             guard let iconLabel = cell.viewWithTag(1) as? UILabel else {
                 continue
             }
-            let icon = isTrusted ? FAIcon.FACheckCircleSolid : FAIcon.FATimesCircleSolid
+            let icon = isTrusted ? FAIcon.FACheckCircleRegular : FAIcon.FATimesCircleRegular
             iconLabel.text = icon.string()
             iconLabel.font = icon.font(size: iconLabel.font.pointSize)
             iconLabel.textColor = isTrusted ? UIColor.materialGreen() : UIColor.materialRed()

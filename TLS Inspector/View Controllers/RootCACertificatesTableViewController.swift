@@ -19,7 +19,7 @@ class RootCACertificatesTableViewController: UITableViewController {
         self.buildTable()
 
         // Timeout
-        DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
             if !self.isUpdating {
                 return
             }
@@ -124,6 +124,7 @@ class RootCACertificatesTableViewController: UITableViewController {
             clearCell.didSelect = { (_, _) in
                 CKRootCACertificateBundleManager.sharedInstance().clearDownloadedBundles()
                 self.buildTable()
+                self.tableView.reloadData()
             }
             section.cells.append(clearCell)
         }
@@ -133,9 +134,10 @@ class RootCACertificatesTableViewController: UITableViewController {
 
     func buildTable() {
         self.sections = [
-            self.buildBundleSection(lang(key: "Mozilla"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().mozillaBundle),
-            self.buildBundleSection(lang(key: "Microsoft"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().microsoftBundle),
-            self.buildBundleSection(lang(key: "Google"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().googleBundle),
+            self.buildBundleSection(lang(key: "apple"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().appleBundle),
+            self.buildBundleSection(lang(key: "google"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().googleBundle),
+            self.buildBundleSection(lang(key: "microsoft"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().microsoftBundle),
+            self.buildBundleSection(lang(key: "mozilla"), certificateBundle: CKRootCACertificateBundleManager.sharedInstance().mozillaBundle),
             self.buildUpdateSection()
         ]
         self.tableView.reloadData()

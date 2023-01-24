@@ -2,15 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>apple</key>
+	<string>Apple</string>
+	<key>Updating...</key>
+	<string>Updating...</string>
 	<key>Bundle Date</key>
 	<string>Bundle Date</string>
 	<key>Embedded</key>
 	<string>Embedded</string>
-	<key>Microsoft</key>
+	<key>microsoft</key>
 	<string>Microsoft</string>
-	<key>Mozilla</key>
+	<key>mozilla</key>
 	<string>Mozilla</string>
-	<key>Google</key>
+	<key>google</key>
 	<string>Google</string>
 	<key>Updating</key>
 	<string>Updating</string>

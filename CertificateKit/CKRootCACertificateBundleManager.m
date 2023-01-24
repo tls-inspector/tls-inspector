@@ -20,6 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKRootCACertificateBundleManager.h"
+#import <CommonCrypto/CommonDigest.h>
 #import <openssl/evp.h>
 #import <openssl/pem.h>
 #import <openssl/bio.h>
@@ -38,9 +39,10 @@ static id _instance;
 @property (strong, nonatomic, nonnull) NSData * signingKey;
 @property (nonatomic, readwrite) BOOL usingDownloadedBundles;
 
-@property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * mozillaBundle;
-@property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * microsoftBundle;
+@property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * appleBundle;
 @property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * googleBundle;
+@property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * microsoftBundle;
+@property (strong, nonatomic, readwrite, nullable) CKCertificateBundle * mozillaBundle;
 
 @end
 
@@ -55,9 +57,10 @@ INSERT_OPENSSL_ERROR_METHOD
     self.bundleDirectory = [documentsDirectory stringByAppendingPathComponent:@"rootca"];
     self.bundleFiles = @[
         @"bundle_metadata.json",
+        @"apple_ca_bundle.p7b",
+        @"google_ca_bundle.p7b",
         @"microsoft_ca_bundle.p7b",
         @"mozilla_ca_bundle.p7b",
-        @"google_ca_bundle.p7b"
     ];
     self.signingKey = [NSData dataWithBytes:ROOTCA_SIGNING_PUBLICKEY1_BYTES length:ROOTCA_SIGNING_PUBLICKEY1_LEN];
     return self;
@@ -117,7 +120,7 @@ INSERT_OPENSSL_ERROR_METHOD
             return NO; // signature does not exist
         }
 
-        if (![self verifyFile:filePath withSignature:signaturePath]) {
+        if (![self verifyFileSignature:filePath signature:signaturePath]) {
             PError(@"[rootca] Downloaded file has bad signature %@", filePath);
             return NO; // bad signature
         }
@@ -133,11 +136,24 @@ INSERT_OPENSSL_ERROR_METHOD
     NSDateFormatter * formatter = [NSDateFormatter new];
     formatter.dateFormat = @"yyyy-MM-ddTHH:mm:ssZ"; // 2022-10-11T03:12:05Z
 
-    for (NSString * key in @[@"mozilla", @"microsoft", @"google"]) {
+    for (NSString * key in @[@"apple", @"google", @"microsoft", @"mozilla"]) {
         NSDate * downloadDate = [formatter dateFromString:metadata[key][@"date"]];
         NSDate * embedDate = [formatter dateFromString:self.embeddedBundleMetadata[key][@"date"]];
         if (embedDate > downloadDate) {
             return NO; // embedded bundle is newer
+        }
+
+        NSString * fileName = [NSString stringWithFormat:@"%@_ca_bundle.p7b", key];
+        NSString * filePath = [self.bundleDirectory stringByAppendingPathComponent:fileName];
+        NSString * expectedChecksum = [metadata[key][@"bundles"][fileName][@"sha256"] uppercaseString];
+        NSString * actualChecksum = [self getFileChecksum:filePath];
+        if (actualChecksum == nil) {
+            return NO;
+        }
+        if (![expectedChecksum isEqualToString:actualChecksum]) {
+            PDebug(@"[rootca] Checksum result for %@:\r- Expected: %@\r- Actual: %@", fileName, expectedChecksum, actualChecksum);
+            PError(@"[rootca] Downloaded bundle file failed checksum validation: %@", fileName);
+            return NO;
         }
     }
 
@@ -151,17 +167,10 @@ INSERT_OPENSSL_ERROR_METHOD
 
     NSError * bundleError;
 
-    NSString * mozillaBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"mozilla_ca_bundle.p7b"];
-    CKCertificateBundle * mozillaBundle = [CKCertificateBundle bundleWithName:@"mozilla" bundlePath:mozillaBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"mozilla"]] error:&bundleError];
+    NSString * appleBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"apple_ca_bundle.p7b"];
+    CKCertificateBundle * appleBundle = [CKCertificateBundle bundleWithName:@"apple" bundlePath:appleBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"apple"]] error:&bundleError];
     if (bundleError != nil) {
-        PError(@"[rootca] Error loading downloaded mozilla bundle: %@", bundleError.localizedDescription);
-        return NO;
-    }
-
-    NSString * microsoftBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"microsoft_ca_bundle.p7b"];
-    CKCertificateBundle * microsoftBundle = [CKCertificateBundle bundleWithName:@"microsoft" bundlePath:microsoftBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"microsoft"]] error:&bundleError];
-    if (bundleError != nil) {
-        PError(@"[rootca] Error loading downloaded microsoft bundle: %@", bundleError.localizedDescription);
+        PError(@"[rootca] Error loading downloaded apple bundle: %@", bundleError.localizedDescription);
         return NO;
     }
 
@@ -172,6 +181,21 @@ INSERT_OPENSSL_ERROR_METHOD
         return NO;
     }
 
+    NSString * microsoftBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"microsoft_ca_bundle.p7b"];
+    CKCertificateBundle * microsoftBundle = [CKCertificateBundle bundleWithName:@"microsoft" bundlePath:microsoftBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"microsoft"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading downloaded microsoft bundle: %@", bundleError.localizedDescription);
+        return NO;
+    }
+
+    NSString * mozillaBundlePath = [self.bundleDirectory stringByAppendingPathComponent:@"mozilla_ca_bundle.p7b"];
+    CKCertificateBundle * mozillaBundle = [CKCertificateBundle bundleWithName:@"mozilla" bundlePath:mozillaBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:metadata[@"mozilla"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading downloaded mozilla bundle: %@", bundleError.localizedDescription);
+        return NO;
+    }
+
+    self.appleBundle = appleBundle;
     self.mozillaBundle = mozillaBundle;
     self.microsoftBundle = microsoftBundle;
     self.googleBundle = googleBundle;
@@ -182,10 +206,17 @@ INSERT_OPENSSL_ERROR_METHOD
 - (void) loadEmbeddedBundles {
     NSError * bundleError;
 
-    NSString * mozillaBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"mozilla_ca_bundle" ofType:@"p7b"];
-    self.mozillaBundle = [CKCertificateBundle bundleWithName:@"mozilla" bundlePath:mozillaBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"mozilla"]] error:&bundleError];
+    NSString * appleBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"apple_ca_bundle" ofType:@"p7b"];
+    self.appleBundle = [CKCertificateBundle bundleWithName:@"apple" bundlePath:appleBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"apple"]] error:&bundleError];
     if (bundleError != nil) {
-        PError(@"[rootca] Error loading embedded mozilla bundle: %@", bundleError.localizedDescription);
+        PError(@"[rootca] Error loading embedded apple bundle: %@", bundleError.localizedDescription);
+        return;
+    }
+
+    NSString * googleBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"google_ca_bundle" ofType:@"p7b"];
+    self.googleBundle = [CKCertificateBundle bundleWithName:@"google" bundlePath:googleBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"google"]] error:&bundleError];
+    if (bundleError != nil) {
+        PError(@"[rootca] Error loading embedded google bundle: %@", bundleError.localizedDescription);
         return;
     }
 
@@ -196,10 +227,10 @@ INSERT_OPENSSL_ERROR_METHOD
         return;
     }
 
-    NSString * googleBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"google_ca_bundle" ofType:@"p7b"];
-    self.googleBundle = [CKCertificateBundle bundleWithName:@"google" bundlePath:googleBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"google"]] error:&bundleError];
+    NSString * mozillaBundlePath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"mozilla_ca_bundle" ofType:@"p7b"];
+    self.mozillaBundle = [CKCertificateBundle bundleWithName:@"mozilla" bundlePath:mozillaBundlePath metadata:[CKCertificateBundleMetadata metadataFrom:self.embeddedBundleMetadata[@"mozilla"]] error:&bundleError];
     if (bundleError != nil) {
-        PError(@"[rootca] Error loading embedded google bundle: %@", bundleError.localizedDescription);
+        PError(@"[rootca] Error loading embedded mozilla bundle: %@", bundleError.localizedDescription);
         return;
     }
 }
@@ -253,7 +284,7 @@ INSERT_OPENSSL_ERROR_METHOD
             goto CLEANUP;
         }
 
-        BOOL verifyResult = [self verifyFile:filePath withSignature:signaturePath];
+        BOOL verifyResult = [self verifyFileSignature:filePath signature:signaturePath];
         if (!verifyResult) {
             PError(@"[rootca] verification failed %@", fileName);
             *errorPtr = MAKE_ERROR(500, @"File signature verification failed");
@@ -393,7 +424,7 @@ CLEANUP:
 
 # pragma mark - Signature validation
 
-- (BOOL) verifyFile:(NSString *)filePath withSignature:(NSString *)signaturePath {
+- (BOOL) verifyFileSignature:(NSString *)filePath signature:(NSString *)signaturePath {
     int ret = -1;
     NSData * fileData = [NSData dataWithContentsOfFile:filePath];
     NSData * signatureData = [NSData dataWithContentsOfFile:signaturePath];
@@ -423,6 +454,22 @@ CLEANUP:
     EVP_MD_CTX_free(mctx);
     BIO_free(pubKeyBio);
     return ret == 1;
+}
+
+- (NSString *) getFileChecksum:(NSString *)filePath {
+    NSData * fileData = [NSData dataWithContentsOfFile:filePath];
+    if (fileData == nil) {
+        PError(@"[rootca] Error loading file data");
+        return nil;
+    }
+
+    unsigned char hashBytes[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(fileData.bytes, (unsigned int)fileData.length, hashBytes);
+    NSMutableString * computedHash = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH*2];
+    for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
+        [computedHash appendFormat:@"%02X", hashBytes[i]];
+    }
+    return computedHash;
 }
 
 @end

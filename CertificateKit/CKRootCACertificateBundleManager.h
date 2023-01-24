@@ -40,14 +40,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// Is the manager using downloaded bundles
 @property (nonatomic, readonly) BOOL usingDownloadedBundles;
 
-/// The Mozilla root CA certificate bundle
-@property (strong, nonatomic, readonly, nullable) CKCertificateBundle * mozillaBundle;
+/// The Apple root CA certificate bundle
+@property (strong, nonatomic, readonly, nullable) CKCertificateBundle * appleBundle;
+
+/// The Google root CA certificate bundle
+@property (strong, nonatomic, readonly, nullable) CKCertificateBundle * googleBundle;
 
 /// The Microsoft root CA certificate bundle
 @property (strong, nonatomic, readonly, nullable) CKCertificateBundle * microsoftBundle;
 
-/// The Google root CA certificate bundle
-@property (strong, nonatomic, readonly, nullable) CKCertificateBundle * googleBundle;
+/// The Mozilla root CA certificate bundle
+@property (strong, nonatomic, readonly, nullable) CKCertificateBundle * mozillaBundle;
 
 @end
 
