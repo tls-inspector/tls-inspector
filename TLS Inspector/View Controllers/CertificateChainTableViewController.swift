@@ -177,6 +177,10 @@ class CertificateChainTableViewController: UITableViewController {
         if chain.keyLog != nil {
             guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
             cell.cell.textLabel?.text = lang(key: "View Keying Material")
+            cell.didSelect = { (_, _) in
+                guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else { return }
+                SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
+            }
             connectionSection.cells.append(cell)
         }
 
@@ -260,8 +264,10 @@ class CertificateChainTableViewController: UITableViewController {
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Certificate") else { return }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
         } else if sectionTag == connectionSectionTag {
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else { return }
-            SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
+            let cell = self.sections[indexPath.section].cells[indexPath.row]
+            if let didSelect = cell.didSelect {
+                didSelect(tableView, indexPath)
+            }
         } else if sectionTag == redirectSectionTag {
             guard let controller = AppState.getterViewController else { return }
             guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else { return }
