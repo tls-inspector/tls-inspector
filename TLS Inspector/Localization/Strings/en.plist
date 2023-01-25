@@ -54,6 +54,8 @@
 	<string>Certificate Information</string>
 	<key>Certificate Status</key>
 	<string>Certificate Status</string>
+	<key>Certificate Timestamps</key>
+	<string>Certificate Timestamps</string>
 	<key>Certificate Trust</key>
 	<string>Certificate Trust</string>
 	<key>Certificate is expired or not valid yet.</key>
@@ -693,6 +695,8 @@
 	<string>Locally Trusted</string>
 	<key>Locally Trusted Chain</key>
 	<string>Locally Trusted Chain</string>
+	<key>Log ID</key>
+	<string>Log ID</string>
 	<key>Logging</key>
 	<string>Logging</string>
 	<key>MD5</key>
@@ -819,6 +823,8 @@
 	<string>Signature</string>
 	<key>Signature Algorithm</key>
 	<string>Signature Algorithm</string>
+	<key>Signature Type</key>
+	<string>Signature Type</string>
 	<key>Size</key>
 	<string>Size</string>
 	<key>Something Else</key>
@@ -869,6 +875,10 @@
 	<string>The certificate for {0} expires on {1}</string>
 	<key>The host you provided is not valid</key>
 	<string>The host you provided is not valid</string>
+	<key>Timestamps</key>
+	<string>Timestamps</string>
+	<key>Timestamps</key>
+	<string>Timestamps</string>
 	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
 	<string>Trust &amp; Safety On-The-Go with TLS Inspector: {0}</string>
 	<key>Trust Details</key>

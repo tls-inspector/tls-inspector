@@ -21,6 +21,12 @@
 		3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A521F284DC700AA12B4 /* CKGetter.m */; platformFilter = ios; };
 		3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */; };
 		3C30025C2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */; };
+		3C30025F2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C30025D2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C3002602980E13500F8B2F0 /* CKSignedCertificateTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025E2980E13500F8B2F0 /* CKSignedCertificateTimestamp.m */; };
+		3C3002622980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */; };
+		3C3002632980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */; };
+		3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */; };
+		3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */; };
 		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; platformFilter = ios; };
 		3C3C9533297DFD110084B7D9 /* BasicInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */; };
@@ -272,6 +278,11 @@
 		3C2A7A511F284DC700AA12B4 /* CKGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGetter.h; sourceTree = "<group>"; };
 		3C2A7A521F284DC700AA12B4 /* CKGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGetter.m; sourceTree = "<group>"; };
 		3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustBannerParameters.swift; sourceTree = "<group>"; };
+		3C30025D2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKSignedCertificateTimestamp.h; sourceTree = "<group>"; };
+		3C30025E2980E13500F8B2F0 /* CKSignedCertificateTimestamp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKSignedCertificateTimestamp.m; sourceTree = "<group>"; };
+		3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateTimestampsTableViewController.swift; sourceTree = "<group>"; };
+		3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+HexString.h"; sourceTree = "<group>"; };
+		3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+HexString.m"; sourceTree = "<group>"; };
 		3C36B3B220412564005C66E8 /* CKOCSPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPResponse.h; sourceTree = "<group>"; };
 		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
 		3C3C9525297DFA730084B7D9 /* TLS InspectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TLS InspectorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -550,6 +561,8 @@
 				3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */,
 				3CC1E9341F035AFB00ED9BAA /* CKServerInfo.h */,
 				3CC1E9351F035AFB00ED9BAA /* CKServerInfo.m */,
+				3C30025D2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h */,
+				3C30025E2980E13500F8B2F0 /* CKSignedCertificateTimestamp.m */,
 				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
 				3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */,
 				3CF0A69D261BBCA300460B7F /* CKTypes.h */,
@@ -569,6 +582,8 @@
 			children = (
 				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
 				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
+				3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */,
+				3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -596,23 +611,24 @@
 		3C7269382394BC0F002A0B19 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */,
-				3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */,
-				3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */,
-				3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */,
-				3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */,
-				3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */,
-				3CCD0293239DD966009364D0 /* MoreTableViewController.swift */,
-				3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */,
-				3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */,
-				3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */,
-				3C7269392394BC1D002A0B19 /* InputTableViewController.swift */,
-				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
-				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
 				3CCD0291239DD412009364D0 /* AboutViewController.swift */,
 				3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */,
+				3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */,
+				3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */,
+				3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */,
+				3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */,
+				3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */,
+				3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */,
+				3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */,
+				3C7269392394BC1D002A0B19 /* InputTableViewController.swift */,
 				3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */,
+				3CCD0293239DD966009364D0 /* MoreTableViewController.swift */,
+				3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */,
+				3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */,
 				3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */,
+				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
+				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
+				3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -830,6 +846,7 @@
 				3CB94047225036FC0055C067 /* CKOpenSSLCertificateChainGetter.h in Headers */,
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
+				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
 				3CBF85BF253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h in Headers */,
 				3CB9403D225035E80055C067 /* (null) in Headers */,
@@ -839,6 +856,7 @@
 				3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */,
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
+				3C30025F2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
 				3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */,
 				3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */,
@@ -1196,6 +1214,7 @@
 				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
 				3CD4932B25A56198002AC7BD /* CKGetterParameters.m in Sources */,
 				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,
+				3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */,
 				3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */,
 				3CC1E9371F035AFB00ED9BAA /* CKServerInfo.m in Sources */,
 				3C7CEE6320A15BD500DCC770 /* CKAlternateNameObject.m in Sources */,
@@ -1213,6 +1232,7 @@
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
 				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
 				3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */,
+				3C3002602980E13500F8B2F0 /* CKSignedCertificateTimestamp.m in Sources */,
 				3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
@@ -1229,6 +1249,7 @@
 			files = (
 				3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */,
 				3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
+				3C3002622980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */,
 				3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */,
 				3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */,
 				3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */,
@@ -1311,6 +1332,7 @@
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
 				3CB784A625293E56009ECE20 /* ChainGetterViewController.swift in Sources */,
 				3CB784AC25293FD8009ECE20 /* AppState.swift in Sources */,
+				3C3002632980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */,
 				3C30025C2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
 				3CDC14BA23B045B20053932F /* TableViewSection.swift in Sources */,
 				3C6FF89C23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,

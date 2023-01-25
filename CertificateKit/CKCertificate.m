@@ -147,6 +147,49 @@ INSERT_OPENSSL_ERROR_METHOD
         CRL_DIST_POINTS_free(points);
     }
 
+    {
+        struct stack_st_SCT * sct_list = X509_get_ext_d2i(cert, NID_ct_precert_scts, NULL, NULL);
+        int numberOfSct = sk_SCT_num(sct_list);
+        NSMutableArray<CKSignedCertificateTimestamp *> * timestampList = [NSMutableArray new];
+        for (int i = 0; i < numberOfSct; i++) {
+            SCT * sct =  sk_SCT_value(sct_list, i);
+            unsigned char * logidb;
+            size_t logIdLength = SCT_get0_log_id(sct, &logidb);
+            if (logIdLength == 0) {
+                continue;
+            }
+            NSData * logId = [[NSData alloc] initWithBytes:logidb length:logIdLength];
+            int64_t ts = SCT_get_timestamp(sct); // milliseconds
+            NSDate * timestamp = [[NSDate alloc] initWithTimeIntervalSince1970:ts/1000];
+
+            unsigned char * sigb;
+            size_t sigLength = SCT_get0_signature(sct, &sigb);
+            if (sigLength == 0) {
+                continue;
+            }
+            NSData * signature = [[NSData alloc] initWithBytes:sigb length:sigLength];
+
+            NSString * sigAlg;
+            int nid = SCT_get_signature_nid(sct);
+            switch (nid) {
+                case NID_ecdsa_with_SHA256:
+                    sigAlg = @"ECDSA with SHA-256";
+                    break;
+                case NID_sha256WithRSAEncryption:
+                    sigAlg = @"RSA with SHA-256";
+                    break;
+                default:
+                    sigAlg = @"Unknown";
+                    break;
+            }
+
+            [timestampList addObject:[[CKSignedCertificateTimestamp alloc] initWithLogId:logId timestamp:timestamp signatureType:sigAlg signature:signature]];
+        }
+        if (numberOfSct) {
+            xcert.signedTimestamps = timestampList;
+        }
+    }
+
     // Get any TLS features
     {
         TLS_FEATURE * tlsFeatures = X509_get_ext_d2i(cert, NID_tlsfeature, NULL, NULL);
