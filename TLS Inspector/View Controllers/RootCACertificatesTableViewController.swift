@@ -105,7 +105,12 @@ class RootCACertificatesTableViewController: UITableViewController {
         section.footer = lang(key: "rootca_footer")
 
         if isUpdating {
-            section.cells.maybeAppend(TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Loading")))
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Loading")
+            if #available(iOS 13, *) {
+                let activityIndicator = cell?.viewWithTag(1) as? UIActivityIndicatorView
+                activityIndicator?.style = .medium
+            }
+            section.cells.maybeAppend(TableViewCell.from(cell))
             return section
         }
 

@@ -263,6 +263,9 @@ class AdvancedOptionsTableViewController: UITableViewController {
     }
 
     @objc func toggleDebugMode(_ sender: UISwitch) {
+        if !UserOptions.verboseLogging && sender.isOn {
+            UserOptions.inspectionsWithVerboseLogging = 0
+        }
         UserOptions.verboseLogging = sender.isOn
     }
 }

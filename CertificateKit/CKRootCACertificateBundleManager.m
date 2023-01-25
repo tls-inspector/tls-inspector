@@ -87,9 +87,7 @@ INSERT_OPENSSL_ERROR_METHOD
     if ([self shouldUseDownloadedBundles]) {
         PDebug(@"[rootca] loading downloaded bundles");
         self.usingDownloadedBundles = [self loadDownloadedBundles];
-    }
-
-    if (!self.usingDownloadedBundles) {
+    } else {
         PDebug(@"[rootca] loading embedded bundles");
         [self loadEmbeddedBundles];
         self.usingDownloadedBundles = NO;
