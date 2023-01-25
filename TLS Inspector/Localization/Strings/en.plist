@@ -89,7 +89,7 @@
 	<key>Could not get certificates</key>
 	<string>Could not get certificates</string>
 	<key>Country::AD</key>
-	<string>Andorra, Principality of</string>
+	<string>Andorra</string>
 	<key>Country::AE</key>
 	<string>United Arab Emirates</string>
 	<key>Country::AF</key>
@@ -99,61 +99,65 @@
 	<key>Country::AI</key>
 	<string>Anguilla</string>
 	<key>Country::AL</key>
-	<string>Albania, People&apos;s Socialist Republic of</string>
+	<string>Albania</string>
 	<key>Country::AM</key>
 	<string>Armenia</string>
-	<key>Country::AN</key>
-	<string>Netherlands Antilles</string>
 	<key>Country::AO</key>
-	<string>Angola, Republic of</string>
+	<string>Angola</string>
 	<key>Country::AQ</key>
-	<string>Antarctica (the territory South of 60 deg S)</string>
+	<string>Antarctica</string>
 	<key>Country::AR</key>
-	<string>Argentina, Argentine Republic</string>
+	<string>Argentina</string>
 	<key>Country::AS</key>
 	<string>American Samoa</string>
 	<key>Country::AT</key>
-	<string>Austria, Republic of</string>
+	<string>Austria</string>
 	<key>Country::AU</key>
-	<string>Australia, Commonwealth of</string>
+	<string>Australia</string>
 	<key>Country::AW</key>
 	<string>Aruba</string>
+	<key>Country::AX</key>
+	<string>Åland Islands</string>
 	<key>Country::AZ</key>
-	<string>Azerbaijan, Republic of</string>
+	<string>Azerbaijan</string>
 	<key>Country::BA</key>
 	<string>Bosnia and Herzegovina</string>
 	<key>Country::BB</key>
 	<string>Barbados</string>
 	<key>Country::BD</key>
-	<string>Bangladesh, People&apos;s Republic of</string>
+	<string>Bangladesh</string>
 	<key>Country::BE</key>
-	<string>Belgium, Kingdom of</string>
+	<string>Belgium</string>
 	<key>Country::BF</key>
 	<string>Burkina Faso</string>
 	<key>Country::BG</key>
-	<string>Bulgaria, People&apos;s Republic of</string>
+	<string>Bulgaria</string>
 	<key>Country::BH</key>
-	<string>Bahrain, Kingdom of</string>
+	<string>Bahrain</string>
 	<key>Country::BI</key>
-	<string>Burundi, Republic of</string>
+	<string>Burundi</string>
 	<key>Country::BJ</key>
-	<string>Benin, People&apos;s Republic of</string>
+	<string>Benin</string>
+	<key>Country::BL</key>
+	<string>Saint Barthélemy</string>
 	<key>Country::BM</key>
 	<string>Bermuda</string>
 	<key>Country::BN</key>
 	<string>Brunei Darussalam</string>
 	<key>Country::BO</key>
-	<string>Bolivia, Republic of</string>
+	<string>Bolivia</string>
+	<key>Country::BQ</key>
+	<string>Bonaire, Sint Eustatius and Saba</string>
 	<key>Country::BR</key>
-	<string>Brazil, Federative Republic of</string>
+	<string>Brazil</string>
 	<key>Country::BS</key>
-	<string>Bahamas, Commonwealth of the</string>
+	<string>Bahamas</string>
 	<key>Country::BT</key>
-	<string>Bhutan, Kingdom of</string>
+	<string>Bhutan</string>
 	<key>Country::BV</key>
-	<string>Bouvet Island (Bouvetoya)</string>
+	<string>Bouvet Island</string>
 	<key>Country::BW</key>
-	<string>Botswana, Republic of</string>
+	<string>Botswana</string>
 	<key>Country::BY</key>
 	<string>Belarus</string>
 	<key>Country::BZ</key>
@@ -163,365 +167,379 @@
 	<key>Country::CC</key>
 	<string>Cocos (Keeling) Islands</string>
 	<key>Country::CD</key>
-	<string>Congo, Democratic Republic of</string>
+	<string>Congo</string>
 	<key>Country::CF</key>
 	<string>Central African Republic</string>
 	<key>Country::CG</key>
-	<string>Congo, People&apos;s Republic of</string>
+	<string>Congo</string>
 	<key>Country::CH</key>
-	<string>Switzerland, Swiss Confederation</string>
+	<string>Switzerland</string>
 	<key>Country::CI</key>
-	<string>Cote D&apos;Ivoire, Ivory Coast, Republic of the</string>
+	<string>Côte d&apos;Ivoire</string>
 	<key>Country::CK</key>
 	<string>Cook Islands</string>
 	<key>Country::CL</key>
-	<string>Chile, Republic of</string>
+	<string>Chile</string>
 	<key>Country::CM</key>
-	<string>Cameroon, United Republic of</string>
+	<string>Cameroon</string>
 	<key>Country::CN</key>
-	<string>China, People&apos;s Republic of</string>
+	<string>China</string>
 	<key>Country::CO</key>
-	<string>Colombia, Republic of</string>
+	<string>Colombia</string>
 	<key>Country::CR</key>
-	<string>Costa Rica, Republic of</string>
+	<string>Costa Rica</string>
 	<key>Country::CU</key>
-	<string>Cuba, Republic of</string>
+	<string>Cuba</string>
 	<key>Country::CV</key>
-	<string>Cape Verde, Republic of</string>
+	<string>Cabo Verde</string>
+	<key>Country::CW</key>
+	<string>Curaçao</string>
 	<key>Country::CX</key>
 	<string>Christmas Island</string>
 	<key>Country::CY</key>
-	<string>Cyprus, Republic of</string>
+	<string>Cyprus</string>
 	<key>Country::CZ</key>
-	<string>Czech Republic</string>
+	<string>Czechia</string>
 	<key>Country::DE</key>
 	<string>Germany</string>
 	<key>Country::DJ</key>
-	<string>Djibouti, Republic of</string>
+	<string>Djibouti</string>
 	<key>Country::DK</key>
-	<string>Denmark, Kingdom of</string>
+	<string>Denmark</string>
 	<key>Country::DM</key>
-	<string>Dominica, Commonwealth of</string>
+	<string>Dominica</string>
 	<key>Country::DO</key>
 	<string>Dominican Republic</string>
 	<key>Country::DZ</key>
-	<string>Algeria, People&apos;s Democratic Republic of</string>
+	<string>Algeria</string>
 	<key>Country::EC</key>
-	<string>Ecuador, Republic of</string>
+	<string>Ecuador</string>
 	<key>Country::EE</key>
 	<string>Estonia</string>
 	<key>Country::EG</key>
-	<string>Egypt, Arab Republic of</string>
+	<string>Egypt</string>
 	<key>Country::EH</key>
 	<string>Western Sahara</string>
 	<key>Country::ER</key>
 	<string>Eritrea</string>
 	<key>Country::ES</key>
-	<string>Spain, Spanish State</string>
+	<string>Spain</string>
 	<key>Country::ET</key>
 	<string>Ethiopia</string>
 	<key>Country::FI</key>
-	<string>Finland, Republic of</string>
+	<string>Finland</string>
 	<key>Country::FJ</key>
-	<string>Fiji, Republic of the Fiji Islands</string>
+	<string>Fiji</string>
 	<key>Country::FK</key>
-	<string>Falkland Islands (Malvinas)</string>
+	<string>Falkland Islands [Malvinas]</string>
 	<key>Country::FM</key>
-	<string>Micronesia, Federated States of</string>
+	<string>Micronesia</string>
 	<key>Country::FO</key>
-	<string>Faeroe Islands</string>
+	<string>Faroe Islands</string>
 	<key>Country::FR</key>
-	<string>France, French Republic</string>
+	<string>France</string>
 	<key>Country::GA</key>
-	<string>Gabon, Gabonese Republic</string>
+	<string>Gabon</string>
 	<key>Country::GB</key>
-	<string>United Kingdom of Great Britain &amp; N. Ireland</string>
+	<string>United Kingdom of Great Britain and Northern Ireland</string>
 	<key>Country::GD</key>
 	<string>Grenada</string>
 	<key>Country::GE</key>
 	<string>Georgia</string>
 	<key>Country::GF</key>
 	<string>French Guiana</string>
+	<key>Country::GG</key>
+	<string>Guernsey</string>
 	<key>Country::GH</key>
-	<string>Ghana, Republic of</string>
+	<string>Ghana</string>
 	<key>Country::GI</key>
 	<string>Gibraltar</string>
 	<key>Country::GL</key>
 	<string>Greenland</string>
 	<key>Country::GM</key>
-	<string>Gambia, Republic of the</string>
+	<string>Gambia</string>
 	<key>Country::GN</key>
-	<string>Guinea, Revolutionary People&apos;s Rep&apos;c of</string>
+	<string>Guinea</string>
 	<key>Country::GP</key>
-	<string>Guadaloupe</string>
+	<string>Guadeloupe</string>
 	<key>Country::GQ</key>
-	<string>Equatorial Guinea, Republic of</string>
+	<string>Equatorial Guinea</string>
 	<key>Country::GR</key>
-	<string>Greece, Hellenic Republic</string>
+	<string>Greece</string>
 	<key>Country::GS</key>
 	<string>South Georgia and the South Sandwich Islands</string>
 	<key>Country::GT</key>
-	<string>Guatemala, Republic of</string>
+	<string>Guatemala</string>
 	<key>Country::GU</key>
 	<string>Guam</string>
 	<key>Country::GW</key>
-	<string>Guinea-Bissau, Republic of</string>
+	<string>Guinea-Bissau</string>
 	<key>Country::GY</key>
-	<string>Guyana, Republic of</string>
+	<string>Guyana</string>
 	<key>Country::HK</key>
-	<string>Hong Kong, Special Administrative Region of China</string>
+	<string>Hong Kong</string>
 	<key>Country::HM</key>
-	<string>Heard and McDonald Islands</string>
+	<string>Heard Island and McDonald Islands</string>
 	<key>Country::HN</key>
-	<string>Honduras, Republic of</string>
+	<string>Honduras</string>
 	<key>Country::HR</key>
-	<string>Hrvatska (Croatia)</string>
+	<string>Croatia</string>
 	<key>Country::HT</key>
-	<string>Haiti, Republic of</string>
+	<string>Haiti</string>
 	<key>Country::HU</key>
-	<string>Hungary, Hungarian People&apos;s Republic</string>
+	<string>Hungary</string>
 	<key>Country::ID</key>
-	<string>Indonesia, Republic of</string>
+	<string>Indonesia</string>
 	<key>Country::IE</key>
 	<string>Ireland</string>
 	<key>Country::IL</key>
-	<string>Israel, State of</string>
+	<string>Israel</string>
+	<key>Country::IM</key>
+	<string>Isle of Man</string>
 	<key>Country::IN</key>
-	<string>India, Republic of</string>
+	<string>India</string>
 	<key>Country::IO</key>
-	<string>British Indian Ocean Territory (Chagos Archipelago)</string>
+	<string>British Indian Ocean Territory</string>
 	<key>Country::IQ</key>
-	<string>Iraq, Republic of</string>
+	<string>Iraq</string>
 	<key>Country::IR</key>
-	<string>Iran, Islamic Republic of</string>
+	<string>Iran</string>
 	<key>Country::IS</key>
-	<string>Iceland, Republic of</string>
+	<string>Iceland</string>
 	<key>Country::IT</key>
-	<string>Italy, Italian Republic</string>
+	<string>Italy</string>
+	<key>Country::JE</key>
+	<string>Jersey</string>
 	<key>Country::JM</key>
 	<string>Jamaica</string>
 	<key>Country::JO</key>
-	<string>Jordan, Hashemite Kingdom of</string>
+	<string>Jordan</string>
 	<key>Country::JP</key>
 	<string>Japan</string>
 	<key>Country::KE</key>
-	<string>Kenya, Republic of</string>
+	<string>Kenya</string>
 	<key>Country::KG</key>
-	<string>Kyrgyz Republic</string>
+	<string>Kyrgyzstan</string>
 	<key>Country::KH</key>
-	<string>Cambodia, Kingdom of</string>
+	<string>Cambodia</string>
 	<key>Country::KI</key>
-	<string>Kiribati, Republic of</string>
+	<string>Kiribati</string>
 	<key>Country::KM</key>
-	<string>Comoros, Union of the</string>
+	<string>Comoros</string>
 	<key>Country::KN</key>
-	<string>St. Kitts and Nevis</string>
+	<string>Saint Kitts and Nevis</string>
 	<key>Country::KP</key>
-	<string>Korea, Democratic People&apos;s Republic of</string>
+	<string>North Korea</string>
 	<key>Country::KR</key>
-	<string>Korea, Republic of</string>
+	<string>South Korea</string>
 	<key>Country::KW</key>
-	<string>Kuwait, State of</string>
+	<string>Kuwait</string>
 	<key>Country::KY</key>
 	<string>Cayman Islands</string>
 	<key>Country::KZ</key>
-	<string>Kazakhstan, Republic of</string>
+	<string>Kazakhstan</string>
 	<key>Country::LA</key>
-	<string>Lao, People&apos;s Democratic Republic</string>
+	<string>Lao People&apos;s Democratic Republic</string>
 	<key>Country::LB</key>
-	<string>Lebanon, Lebanese Republic</string>
+	<string>Lebanon</string>
 	<key>Country::LC</key>
-	<string>St. Lucia</string>
+	<string>Saint Lucia</string>
 	<key>Country::LI</key>
-	<string>Liechtenstein, Principality of</string>
+	<string>Liechtenstein</string>
 	<key>Country::LK</key>
-	<string>Sri Lanka, Democratic Socialist Republic of</string>
+	<string>Sri Lanka</string>
 	<key>Country::LR</key>
-	<string>Liberia, Republic of</string>
+	<string>Liberia</string>
 	<key>Country::LS</key>
-	<string>Lesotho, Kingdom of</string>
+	<string>Lesotho</string>
 	<key>Country::LT</key>
 	<string>Lithuania</string>
 	<key>Country::LU</key>
-	<string>Luxembourg, Grand Duchy of</string>
+	<string>Luxembourg</string>
 	<key>Country::LV</key>
 	<string>Latvia</string>
 	<key>Country::LY</key>
-	<string>Libya, State of</string>
+	<string>Libya</string>
 	<key>Country::MA</key>
-	<string>Morocco, Kingdom of</string>
+	<string>Morocco</string>
 	<key>Country::MC</key>
-	<string>Monaco, Principality of</string>
+	<string>Monaco</string>
 	<key>Country::MD</key>
-	<string>Moldova, Republic of</string>
+	<string>Moldova</string>
 	<key>Country::ME</key>
 	<string>Montenegro</string>
+	<key>Country::MF</key>
+	<string>Saint Martin</string>
 	<key>Country::MG</key>
-	<string>Madagascar, Republic of</string>
+	<string>Madagascar</string>
 	<key>Country::MH</key>
 	<string>Marshall Islands</string>
 	<key>Country::MK</key>
-	<string>North Macedonia, Republic of</string>
+	<string>Republic of North Macedonia</string>
 	<key>Country::ML</key>
-	<string>Mali, Republic of</string>
+	<string>Mali</string>
 	<key>Country::MM</key>
 	<string>Myanmar</string>
 	<key>Country::MN</key>
-	<string>Mongolia, State of</string>
+	<string>Mongolia</string>
 	<key>Country::MO</key>
-	<string>Macao, Special Administrative Region of China</string>
+	<string>Macao</string>
 	<key>Country::MP</key>
 	<string>Northern Mariana Islands</string>
 	<key>Country::MQ</key>
 	<string>Martinique</string>
 	<key>Country::MR</key>
-	<string>Mauritania, Islamic Republic of</string>
+	<string>Mauritania</string>
 	<key>Country::MS</key>
 	<string>Montserrat</string>
 	<key>Country::MT</key>
-	<string>Malta, Republic of</string>
+	<string>Malta</string>
 	<key>Country::MU</key>
 	<string>Mauritius</string>
 	<key>Country::MV</key>
-	<string>Maldives, Republic of</string>
+	<string>Maldives</string>
 	<key>Country::MW</key>
-	<string>Malawi, Republic of</string>
+	<string>Malawi</string>
 	<key>Country::MX</key>
-	<string>Mexico, United Mexican States</string>
+	<string>Mexico</string>
 	<key>Country::MY</key>
 	<string>Malaysia</string>
 	<key>Country::MZ</key>
-	<string>Mozambique, People&apos;s Republic of</string>
+	<string>Mozambique</string>
 	<key>Country::NA</key>
 	<string>Namibia</string>
 	<key>Country::NC</key>
 	<string>New Caledonia</string>
 	<key>Country::NE</key>
-	<string>Niger, Republic of the</string>
+	<string>Niger</string>
 	<key>Country::NF</key>
 	<string>Norfolk Island</string>
 	<key>Country::NG</key>
-	<string>Nigeria, Federal Republic of</string>
+	<string>Nigeria</string>
 	<key>Country::NI</key>
-	<string>Nicaragua, Republic of</string>
+	<string>Nicaragua</string>
 	<key>Country::NL</key>
-	<string>Netherlands, Kingdom of the</string>
+	<string>Netherlands</string>
 	<key>Country::NO</key>
-	<string>Norway, Kingdom of</string>
+	<string>Norway</string>
 	<key>Country::NP</key>
-	<string>Nepal, Kingdom of</string>
+	<string>Nepal</string>
 	<key>Country::NR</key>
-	<string>Nauru, Republic of</string>
+	<string>Nauru</string>
 	<key>Country::NU</key>
-	<string>Niue, Republic of</string>
+	<string>Niue</string>
 	<key>Country::NZ</key>
 	<string>New Zealand</string>
 	<key>Country::OM</key>
-	<string>Oman, Sultanate of</string>
+	<string>Oman</string>
 	<key>Country::PA</key>
-	<string>Panama, Republic of</string>
+	<string>Panama</string>
 	<key>Country::PE</key>
-	<string>Peru, Republic of</string>
+	<string>Peru</string>
 	<key>Country::PF</key>
 	<string>French Polynesia</string>
 	<key>Country::PG</key>
 	<string>Papua New Guinea</string>
 	<key>Country::PH</key>
-	<string>Philippines, Republic of the</string>
+	<string>Philippines</string>
 	<key>Country::PK</key>
-	<string>Pakistan, Islamic Republic of</string>
+	<string>Pakistan</string>
 	<key>Country::PL</key>
-	<string>Poland, Polish People&apos;s Republic</string>
+	<string>Poland</string>
 	<key>Country::PM</key>
-	<string>St. Pierre and Miquelon</string>
+	<string>Saint Pierre and Miquelon</string>
 	<key>Country::PN</key>
-	<string>Pitcairn Island</string>
+	<string>Pitcairn</string>
 	<key>Country::PR</key>
 	<string>Puerto Rico</string>
 	<key>Country::PS</key>
-	<string>Palestinian Territory, Occupied</string>
+	<string>Palestine, State of</string>
 	<key>Country::PT</key>
-	<string>Portugal, Portuguese Republic</string>
+	<string>Portugal</string>
 	<key>Country::PW</key>
 	<string>Palau</string>
 	<key>Country::PY</key>
-	<string>Paraguay, Republic of</string>
+	<string>Paraguay</string>
 	<key>Country::QA</key>
-	<string>Qatar, State of</string>
+	<string>Qatar</string>
 	<key>Country::RE</key>
 	<string>Réunion</string>
 	<key>Country::RO</key>
-	<string>Romania, Socialist Republic of</string>
+	<string>Romania</string>
 	<key>Country::RS</key>
-	<string>Serbia, Republic of</string>
+	<string>Serbia</string>
 	<key>Country::RU</key>
 	<string>Russian Federation</string>
 	<key>Country::RW</key>
-	<string>Rwanda, Rwandese Republic</string>
+	<string>Rwanda</string>
 	<key>Country::SA</key>
-	<string>Saudi Arabia, Kingdom of</string>
+	<string>Saudi Arabia</string>
 	<key>Country::SB</key>
 	<string>Solomon Islands</string>
 	<key>Country::SC</key>
-	<string>Seychelles, Republic of</string>
+	<string>Seychelles</string>
 	<key>Country::SD</key>
-	<string>Sudan, Democratic Republic of the</string>
+	<string>Sudan</string>
 	<key>Country::SE</key>
-	<string>Sweden, Kingdom of</string>
+	<string>Sweden</string>
 	<key>Country::SG</key>
-	<string>Singapore, Republic of</string>
+	<string>Singapore</string>
 	<key>Country::SH</key>
-	<string>St. Helena</string>
+	<string>Saint Helena, Ascension and Tristan da Cunha</string>
 	<key>Country::SI</key>
 	<string>Slovenia</string>
 	<key>Country::SJ</key>
-	<string>Svalbard &amp; Jan Mayen Islands</string>
+	<string>Svalbard and Jan Mayen</string>
 	<key>Country::SK</key>
-	<string>Slovakia (Slovak Republic)</string>
+	<string>Slovakia</string>
 	<key>Country::SL</key>
-	<string>Sierra Leone, Republic of</string>
+	<string>Sierra Leone</string>
 	<key>Country::SM</key>
-	<string>San Marino, Republic of</string>
+	<string>San Marino</string>
 	<key>Country::SN</key>
-	<string>Senegal, Republic of</string>
+	<string>Senegal</string>
 	<key>Country::SO</key>
-	<string>Somalia, Somali Republic</string>
+	<string>Somalia</string>
 	<key>Country::SR</key>
-	<string>Suriname, Republic of</string>
+	<string>Suriname</string>
+	<key>Country::SS</key>
+	<string>South Sudan</string>
 	<key>Country::ST</key>
-	<string>Sao Tome and Principe, Democratic Republic of</string>
+	<string>Sao Tome and Principe</string>
 	<key>Country::SV</key>
-	<string>El Salvador, Republic of</string>
+	<string>El Salvador</string>
+	<key>Country::SX</key>
+	<string>Sint Maarten</string>
 	<key>Country::SY</key>
 	<string>Syrian Arab Republic</string>
 	<key>Country::SZ</key>
-	<string>Swaziland, Kingdom of</string>
+	<string>Eswatini</string>
 	<key>Country::TC</key>
 	<string>Turks and Caicos Islands</string>
 	<key>Country::TD</key>
-	<string>Chad, Republic of</string>
+	<string>Chad</string>
 	<key>Country::TF</key>
-	<string>French Southern and Antarctic Lands</string>
+	<string>French Southern Territories</string>
 	<key>Country::TG</key>
-	<string>Togo, Togolese Republic</string>
+	<string>Togo</string>
 	<key>Country::TH</key>
-	<string>Thailand, Kingdom of</string>
+	<string>Thailand</string>
 	<key>Country::TJ</key>
 	<string>Tajikistan</string>
 	<key>Country::TK</key>
-	<string>Tokelau (Tokelau Islands)</string>
+	<string>Tokelau</string>
 	<key>Country::TL</key>
-	<string>Timor-Leste, Democratic Republic of</string>
+	<string>Timor-Leste</string>
 	<key>Country::TM</key>
 	<string>Turkmenistan</string>
 	<key>Country::TN</key>
-	<string>Tunisia, Republic of</string>
+	<string>Tunisia</string>
 	<key>Country::TO</key>
-	<string>Tonga, Kingdom of</string>
+	<string>Tonga</string>
 	<key>Country::TR</key>
-	<string>Turkey, Republic of</string>
+	<string>Turkey</string>
 	<key>Country::TT</key>
-	<string>Trinidad and Tobago, Republic of</string>
+	<string>Trinidad and Tobago</string>
 	<key>Country::TV</key>
 	<string>Tuvalu</string>
 	<key>Country::TW</key>
@@ -532,41 +550,41 @@
 	<key>Country::UA</key>
 	<string>Ukraine</string>
 	<key>Country::UG</key>
-	<string>Uganda, Republic of</string>
+	<string>Uganda</string>
 	<key>Country::UM</key>
 	<string>United States Minor Outlying Islands</string>
 	<key>Country::US</key>
 	<string>United States of America</string>
 	<key>Country::UY</key>
-	<string>Uruguay, Eastern Republic of</string>
+	<string>Uruguay</string>
 	<key>Country::UZ</key>
 	<string>Uzbekistan</string>
 	<key>Country::VA</key>
-	<string>Holy See (Vatican City State)</string>
+	<string>Holy See</string>
 	<key>Country::VC</key>
-	<string>St. Vincent and the Grenadines</string>
+	<string>Saint Vincent and the Grenadines</string>
 	<key>Country::VE</key>
-	<string>Venezuela, Bolivarian Republic of</string>
+	<string>Venezuela</string>
 	<key>Country::VG</key>
-	<string>British Virgin Islands</string>
+	<string>Virgin Islands (British)</string>
 	<key>Country::VI</key>
-	<string>US Virgin Islands</string>
+	<string>Virgin Islands (U.S.)</string>
 	<key>Country::VN</key>
-	<string>Viet Nam, Socialist Republic of</string>
+	<string>Viet Nam</string>
 	<key>Country::VU</key>
 	<string>Vanuatu</string>
 	<key>Country::WF</key>
-	<string>Wallis and Futuna Islands</string>
+	<string>Wallis and Futuna</string>
 	<key>Country::WS</key>
-	<string>Samoa, Independent State of</string>
+	<string>Samoa</string>
 	<key>Country::YE</key>
 	<string>Yemen</string>
 	<key>Country::YT</key>
 	<string>Mayotte</string>
 	<key>Country::ZA</key>
-	<string>South Africa, Republic of</string>
+	<string>South Africa</string>
 	<key>Country::ZM</key>
-	<string>Zambia, Republic of</string>
+	<string>Zambia</string>
 	<key>Country::ZW</key>
 	<string>Zimbabwe</string>
 	<key>Crypto Engine</key>
