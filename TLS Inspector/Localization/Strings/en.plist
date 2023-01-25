@@ -2,30 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>apple</key>
-	<string>Apple</string>
-	<key>Updating...</key>
-	<string>Updating...</string>
-	<key>Bundle Date</key>
-	<string>Bundle Date</string>
-	<key>Embedded</key>
-	<string>Embedded</string>
-	<key>microsoft</key>
-	<string>Microsoft</string>
-	<key>mozilla</key>
-	<string>Mozilla</string>
-	<key>google</key>
-	<string>Google</string>
-	<key>Updating</key>
-	<string>Updating</string>
-	<key>rootca_footer</key>
-	<string>Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.</string>
-	<key>rootca_error</key>
-	<string>Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.</string>
-	<key>Check for updates</key>
-	<string>Check for updates</string>
-	<key>Root CA Certificates</key>
-	<string>Root CA Certificates</string>
 	<key>1 month</key>
 	<string>1 month</string>
 	<key>2 weeks</key>
@@ -64,6 +40,8 @@
 	<string>Basic</string>
 	<key>Build</key>
 	<string>Build</string>
+	<key>Bundle Date</key>
+	<string>Bundle Date</string>
 	<key>Cancel</key>
 	<string>Cancel</string>
 	<key>Certificate Authority</key>
@@ -76,6 +54,8 @@
 	<string>Certificate Information</string>
 	<key>Certificate Status</key>
 	<string>Certificate Status</string>
+	<key>Certificate Trust</key>
+	<string>Certificate Trust</string>
 	<key>Certificate is expired or not valid yet.</key>
 	<string>Certificate is expired or not valid yet.</string>
 	<key>Certificate uses insecure SHA1 algorithm.</key>
@@ -84,10 +64,16 @@
 	<string>Certificates</string>
 	<key>Chain</key>
 	<string>Chain</string>
+	<key>Check for updates</key>
+	<string>Check for updates</string>
 	<key>Ciphers</key>
 	<string>Ciphers</string>
+	<key>Clear downloaded bundles</key>
+	<string>Clear downloaded bundles</string>
 	<key>Client Random</key>
 	<string>Client Random</string>
+	<key>Close</key>
+	<string>Close</string>
 	<key>Connection Information</key>
 	<string>Connection Information</string>
 	<key>Contact Support</key>
@@ -605,6 +591,8 @@
 	<string>Download &amp; Check CRL</string>
 	<key>EV Authority</key>
 	<string>EV Authority</string>
+	<key>Embedded</key>
+	<string>Embedded</string>
 	<key>Enable Debug Logging</key>
 	<string>Enable Debug Logging</string>
 	<key>Engine Settings</key>
@@ -733,6 +721,8 @@
 	<string>OpenSSL Settings</string>
 	<key>OpenSSL Version</key>
 	<string>OpenSSL Version</string>
+	<key>Operation timed out</key>
+	<string>Operation timed out</string>
 	<key>Optional</key>
 	<string>Optional</string>
 	<key>Options</key>
@@ -767,6 +757,8 @@
 	<string>Request a Feature</string>
 	<key>Revoked On</key>
 	<string>Revoked On</string>
+	<key>Root CA Certificates</key>
+	<string>Root CA Certificates</string>
 	<key>SHA-256</key>
 	<string>SHA-256</string>
 	<key>SHA-512</key>
@@ -875,10 +867,16 @@
 	<string>Understood</string>
 	<key>Unknown</key>
 	<string>Unknown</string>
+	<key>Unrecognized</key>
+	<string>Unrecognized</string>
 	<key>Untrusted</key>
 	<string>Untrusted</string>
 	<key>Untrusted Chain</key>
 	<string>Untrusted Chain</string>
+	<key>Updating</key>
+	<string>Updating</string>
+	<key>Updating...</key>
+	<string>Updating...</string>
 	<key>Use IP Version</key>
 	<string>Use IP Version</string>
 	<key>Use the Reminders app to customize the reminder</key>
@@ -899,6 +897,8 @@
 	<string>Version</string>
 	<key>View All</key>
 	<string>View All</string>
+	<key>View Keying Material</key>
+	<string>View Keying Material</string>
 	<key>View all alternate names</key>
 	<string>View all alternate names</string>
 	<key>View on SSL Labs</key>
@@ -921,6 +921,8 @@
 	<string>You must inspect at least one site with debug logging enabled before you can submit logs.</string>
 	<key>advanced_settings_nag</key>
 	<string>These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.</string>
+	<key>apple</key>
+	<string>Apple</string>
 	<key>certificate_status_footer</key>
 	<string>Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy crypto engine.</string>
 	<key>copyright_license_footer</key>
@@ -962,7 +964,7 @@
 	<key>explanation::leaf_keyusage</key>
 	<string>The server certificate for this site is invalid and is missing the required Server Authentication key usage.</string>
 	<key>explanation::local_trust</key>
-	<string>The server certificate for this site is trusted because it, or the issuing certificate, has been locally installed and trusted on your device.</string>
+	<string>Your device has been configured to trust this certificate, even if it wouldn&apos;t have otherwise.</string>
 	<key>explanation::revoked</key>
 	<string>The server certificate for this site is not trusted by the system because is has been revoked by the certificate authority.</string>
 	<key>explanation::self_signed</key>
@@ -989,6 +991,10 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.
 
 If you&apos;re concerned about the security of your device; contact Apple Support.</string>
+	<key>google</key>
+	<string>Google</string>
+	<key>guidance_warning</key>
+	<string>If you are seeing this on social media, public email, banks, or other popular websites do not continue and seek assistance from Apple Support.</string>
 	<key>idn_warning</key>
 	<string>At this time TLS Inspector does not support international domain names (IDN). We apologize for this inconvenience.</string>
 	<key>keyUsage::OCSPSigning</key>
@@ -1023,8 +1029,16 @@ If you&apos;re concerned about the security of your device; contact Apple Suppor
 	<string>Server Auth</string>
 	<key>keyUsage::timeStamping</key>
 	<string>Time Stamping</string>
+	<key>microsoft</key>
+	<string>Microsoft</string>
+	<key>mozilla</key>
+	<string>Mozilla</string>
 	<key>proxy_warning</key>
 	<string>An HTTP Proxy is configured. TLS Inspector is not compatible with HTTP Proxies and it must be disabled from the systems WiFi settings.</string>
+	<key>rootca_error</key>
+	<string>Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.</string>
+	<key>rootca_footer</key>
+	<string>Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.</string>
 	<key>sanType::DNS</key>
 	<string>DNS</string>
 	<key>sanType::Directory</key>
@@ -1050,9 +1064,7 @@ EXERCISE EXTREME CAUTION. VISITING WEBSITES THAT USE KNOWN BAD CERTIFICATE AUTHO
 	<key>secure::leaf_keyusage</key>
 	<string>Most likely. A certificate that is missing the key usage parameter is likely still valid otherwise.</string>
 	<key>secure::local_trust</key>
-	<string>Potentially. Your device has been told to trust this certificate, even if it wouldn&apos;t otherwise.
-
-Typically private or internal websites, such as those used in an enterprise, use these types of certificates. If you&apos;re seeing this on a public website such as a bank or social network do not continue to that site and seek assistance from Apple.</string>
+	<string>Unlikely. Some enterprise or corporate networks may use these types of certificates for internal or private websites. However, it may also be an indication of a compromised device or network.</string>
 	<key>secure::revoked</key>
 	<string>No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.
 
@@ -1085,10 +1097,6 @@ It&apos;s likely that the request to this site was redirected to another site, s
 Exercise caution if continuing to this website.</string>
 	<key>server_error_footer</key>
 	<string>HTTP Headers could not be fetched from this server due to the following error: {0}</string>
-	<key>tls_feature_status_request</key>
-	<string>Status Request</string>
-	<key>tls_feature_status_request_v2</key>
-	<string>Status Request (2.0)</string>
 	<key>tip_1</key>
 	<string>You can view the certificate of a website in Safari or other web browser by tapping the &quot;Share&quot; button and selecting &quot;Show Certificate&quot;.</string>
 	<key>tip_2</key>
@@ -1101,6 +1109,10 @@ Exercise caution if continuing to this website.</string>
 	<string>You can inspect other TLS servers aside from websites, such as mail or directory servers.</string>
 	<key>tip_6</key>
 	<string>You can copy a parameters value by long-pressing on it and tapping &quot;Copy&quot;.</string>
+	<key>tls_feature_status_request</key>
+	<string>Status Request</string>
+	<key>tls_feature_status_request_v2</key>
+	<string>Status Request (2.0)</string>
 	<key>verbose_logging_footer</key>
 	<string>If you&apos;re having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the domains you inspect are included. We never collect these logs unless you send them to us using the above button.</string>
 	<key>{alg}, {len} bits</key>

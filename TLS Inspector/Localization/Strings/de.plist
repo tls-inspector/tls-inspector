@@ -1051,10 +1051,6 @@ Womöglich wurde die Anfrage umgeleitet auf eine andere Webseite, wie zum Beispi
 Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<key>server_error_footer</key>
 	<string>HTTP Header konnten aufgrund des folgenden Fehlers nicht abgefragt werden: {0}</string>
-	<key>tls_feature_status_request</key>
-	<string>Statusabfrage</string>
-	<key>tls_feature_status_request_v2</key>
-	<string>Statusabfrage (2.0)</string>
 	<key>tip_1</key>
 	<string>Sieh dir Zertifikate direkt über Safari an, indem du im Teilen-Menü &quot;Zertifikat anzeigen&quot; wählst.</string>
 	<key>tip_2</key>
@@ -1067,6 +1063,10 @@ Sei vorsichtig, wenn du diese Webseite besuchst.</string>
 	<string>Du kannst die Seriennummer oder den Fingerabdruck des Zertifikats überprüfen über das &quot;Teilen&quot;-Menü beim Ansehen des Wertes.</string>
 	<key>tip_6</key>
 	<string>Du kannst Werte von Parametern kopieren, indem du sie gedrückt hältst und &quot;Kopieren&quot; auswählst.</string>
+	<key>tls_feature_status_request</key>
+	<string>Statusabfrage</string>
+	<key>tls_feature_status_request_v2</key>
+	<string>Statusabfrage (2.0)</string>
 	<key>verbose_logging_footer</key>
 	<string>Wenn ein Problem mit TLS Inspector auftritt, bitten wir, Protokollierung zu aktivieren und uns ein Protokoll zu schicken, damit wir das Problem besser analysieren können. Es werden keine personenbezogenen Daten gesammelt, jedoch sind die analysierten Domains im Protokoll enthalten. Wir sehen niemals das Protokoll, es sei denn, es wird uns über die Zusende-Funktion oben geschickt.</string>
 	<key>{alg}, {len} bits</key>

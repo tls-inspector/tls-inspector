@@ -19,6 +19,8 @@
 		3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C28D0B3204209E8004C260F /* CKRevoked.m */; platformFilter = ios; };
 		3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C2A7A511F284DC700AA12B4 /* CKGetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C2A7A541F284DC700AA12B4 /* CKGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A7A521F284DC700AA12B4 /* CKGetter.m */; platformFilter = ios; };
+		3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */; };
+		3C30025C2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */; };
 		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; platformFilter = ios; };
 		3C3C9533297DFD110084B7D9 /* BasicInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */; };
@@ -269,6 +271,7 @@
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
 		3C2A7A511F284DC700AA12B4 /* CKGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGetter.h; sourceTree = "<group>"; };
 		3C2A7A521F284DC700AA12B4 /* CKGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGetter.m; sourceTree = "<group>"; };
+		3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustBannerParameters.swift; sourceTree = "<group>"; };
 		3C36B3B220412564005C66E8 /* CKOCSPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPResponse.h; sourceTree = "<group>"; };
 		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
 		3C3C9525297DFA730084B7D9 /* TLS InspectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TLS InspectorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -680,6 +683,7 @@
 				3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */,
 				3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */,
 				3C84F3122644C275003E6A66 /* Date+DurationString.swift */,
+				3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -1237,6 +1241,7 @@
 				3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */,
 				3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */,
 				3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */,
+				3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
 				3C72692723949ABD002A0B19 /* AppDelegate.swift in Sources */,
 				3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */,
 				3C7269642394C2E1002A0B19 /* UIHelper.swift in Sources */,
@@ -1306,6 +1311,7 @@
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
 				3CB784A625293E56009ECE20 /* ChainGetterViewController.swift in Sources */,
 				3CB784AC25293FD8009ECE20 /* AppState.swift in Sources */,
+				3C30025C2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
 				3CDC14BA23B045B20053932F /* TableViewSection.swift in Sources */,
 				3C6FF89C23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,
 				3CDC14CB23B045E10053932F /* FontAwesome.swift in Sources */,

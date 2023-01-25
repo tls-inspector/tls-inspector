@@ -99,64 +99,18 @@ class CertificateChainTableViewController: UITableViewController {
     func buildTrustHeader() {
         self.trustView.layer.cornerRadius = 5.0
 
-        var trustSolid = true
-        var trustColor = UIColor.materialPink()
-        var trustText = lang(key: "Unknown")
-        var trustIcon = FAIcon.FAQuestionCircleSolid
-        switch self.certificateChain!.trusted {
-        case .trusted:
-            trustColor = UIColor.materialGreen()
-            trustText = lang(key: "Trusted")
-            trustIcon = FAIcon.FACheckCircleSolid
-        case .locallyTrusted:
-            trustSolid = false
-            trustColor = UIColor.materialLightGreen()
-            trustText = lang(key: "Unrecognized")
-            trustIcon = FAIcon.FACheckCircleRegular
-        case .untrusted, .invalidDate, .wrongHost:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .sha1Leaf, .sha1Intermediate:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Insecure")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .selfSigned, .revokedLeaf, .revokedIntermediate:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .leafMissingRequiredKeyUsage:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .weakRSAKey:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Insecure")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .issueDateTooLong:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .badAuthority:
-            trustColor = UIColor.materialRed(level: 900) ?? UIColor.materialRed()
-            trustText = lang(key: "Dangerous")
-            trustIcon = FAIcon.FAExclamationTriangleSolid
-        @unknown default:
-            // Default already set
-            break
-        }
-
-        if trustSolid {
-            self.trustView.backgroundColor = trustColor
+        let parameters = TrustBannerParameters(trust: self.certificateChain!.trusted)
+        if parameters.solid {
+            self.trustView.backgroundColor = parameters.color
         } else {
-            self.trustView.layer.borderColor = trustColor.cgColor
+            self.trustView.layer.borderColor = parameters.color.cgColor
             self.trustView.layer.borderWidth = 2.0
         }
         self.trustResultLabel.textColor = UIColor.white
-        self.trustResultLabel.text = trustText
+        self.trustResultLabel.text = parameters.text
         self.trustIconLabel.textColor = UIColor.white
-        self.trustIconLabel.font = trustIcon.font(size: self.trustIconLabel.font.pointSize)
-        self.trustIconLabel.text = trustIcon.string()
+        self.trustIconLabel.font = parameters.icon.font(size: self.trustIconLabel.font.pointSize)
+        self.trustIconLabel.text = parameters.icon.string()
         self.trustDetailsButton.tintColor = UIColor.white
     }
 

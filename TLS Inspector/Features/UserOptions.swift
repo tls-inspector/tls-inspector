@@ -18,6 +18,7 @@ private let KEY_ADVANCED_SETTINGS_NAG_DISMISSED = "advanced_settings_nag_dismiss
 private let KEY_CRYPTO_ENGINE = "crypto_engine"
 private let KEY_IP_VERSION = "use_ip_version"
 private let KEY_OPTIONS_SCHEMA_VERSION = "options_schema_version"
+private let KEY_TREAT_UNRECOGNIZED_AS_TRUSTED = "treat_unrecognized_as_trusted"
 // swiftlint:enable identifier_name
 
 public enum CryptoEngine: String {
@@ -114,6 +115,7 @@ class UserOptions {
         KEY_PREFERRED_CIPHERS: defaultOpenSSLCiphers,
         KEY_CONTACT_NAG_DISMISSED: false,
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
+        KEY_TREAT_UNRECOGNIZED_AS_TRUSTED: false,
     ]
     private static var _verboseLogging = false
     private static var _inspectionsWithVerboseLogging = 0
@@ -292,6 +294,15 @@ class UserOptions {
         set {
             AppDefaults.set(newValue, forKey: KEY_ADVANCED_SETTINGS_NAG_DISMISSED)
             LogDebug("Setting AppDefault: \(KEY_ADVANCED_SETTINGS_NAG_DISMISSED) = \(newValue)")
+        }
+    }
+    static var treatUnrecognizedAsTrusted: Bool {
+        get {
+            return AppDefaults.bool(forKey: KEY_TREAT_UNRECOGNIZED_AS_TRUSTED)
+        }
+        set {
+            AppDefaults.set(newValue, forKey: KEY_TREAT_UNRECOGNIZED_AS_TRUSTED)
+            LogDebug("Setting AppDefault: \(KEY_TREAT_UNRECOGNIZED_AS_TRUSTED) = \(newValue)")
         }
     }
 

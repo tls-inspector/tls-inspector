@@ -32,6 +32,11 @@ class OptionsTableViewController: UITableViewController {
                                     changed: #selector(changeShowTips(sender:))) {
             generalSection.cells.append(cell)
         }
+        if let cell = newSwitchCell(labelText: "Treat Unrecognized as Trusted",
+                                    initialValue: UserOptions.treatUnrecognizedAsTrusted,
+                                    changed: #selector(changeTreatUnrecognizedAsTrusted(sender:))) {
+            generalSection.cells.append(cell)
+        }
 
         if generalSection.cells.count > 0 {
             return generalSection
@@ -126,6 +131,10 @@ class OptionsTableViewController: UITableViewController {
         NotificationCenter.default.post(name: SHOW_TIPS_NOTIFICATION, object: nil)
     }
 
+    @objc func changeTreatUnrecognizedAsTrusted(sender: UISwitch) {
+        UserOptions.treatUnrecognizedAsTrusted = sender.isOn
+    }
+
     @objc func changeQueryOCSP(sender: UISwitch) {
         UserOptions.queryOCSP = sender.isOn
     }
@@ -183,16 +192,17 @@ class OptionsTableViewController: UITableViewController {
     }
 
     func newSwitchCell(labelText: String, initialValue: Bool, changed: Selector) -> TableViewCell? {
-        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Switch")) else { return nil }
-        guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
-        guard let toggle = cell.cell.viewWithTag(2) as? UISwitch else { return nil }
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Switch") else { return nil }
+        guard let label = cell.viewWithTag(1) as? UILabel else { return nil }
+        guard let toggle = cell.viewWithTag(2) as? UISwitch else { return nil }
 
         label.text = lang(key: labelText)
         toggle.setOn(initialValue, animated: false)
         toggle.addTarget(self, action: changed, for: .valueChanged)
-        cell.cell.accessibilityLabel = labelText
+        cell.accessibilityLabel = labelText
+        cell.selectionStyle = .none
 
-        return cell
+        return TableViewCell(cell)
     }
 
     func newIconCell(labelText: String, icon: FAIcon, iconColor: UIColor) -> TableViewCell? {
