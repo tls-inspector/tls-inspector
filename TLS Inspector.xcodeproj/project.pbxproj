@@ -145,7 +145,7 @@
 		3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */; };
 		3CD74669258C1406003D609E /* offensive_words.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CD74668258C1406003D609E /* offensive_words.plist */; };
 		3CDC14AD23B0453B0053932F /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC14AB23B0453B0053932F /* Extension.storyboard */; };
-		3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3CDC14A723B0453B0053932F /* Show Certificate.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CDC14A723B0453B0053932F /* Show Certificate.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CDC14B723B045B20053932F /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
 		3CDC14B823B045B20053932F /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269632394C2E1002A0B19 /* UIHelper.swift */; };
 		3CDC14B923B045B20053932F /* TitleValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */; };
@@ -247,15 +247,15 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CCD029F239DDF4D009364D0 /* Embed App Extensions */ = {
+		3CCD029F239DDF4D009364D0 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed App Extensions */,
+				3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -901,7 +901,7 @@
 				3C72692123949ABD002A0B19 /* Frameworks */,
 				3C72692223949ABD002A0B19 /* Resources */,
 				3C7269612394C16F002A0B19 /* Embed Frameworks */,
-				3CCD029F239DDF4D009364D0 /* Embed App Extensions */,
+				3CCD029F239DDF4D009364D0 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -963,7 +963,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
 					3C3C9524297DFA730084B7D9 = {
