@@ -508,7 +508,7 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
-		3C60362F2947B88700981444 /* Root CA Certificate Bundles */ = {
+		3C60362F2947B88700981444 /* RootCACerts */ = {
 			isa = PBXGroup;
 			children = (
 				3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */,
@@ -518,7 +518,7 @@
 				3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */,
 				3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */,
 			);
-			path = "Root CA Certificate Bundles";
+			path = "RootCACerts";
 			sourceTree = "<group>";
 		};
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
@@ -572,7 +572,7 @@
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3C6242712947B12C00A7814A /* openssl.xcframework */,
 				3CF6773420464A9E00A3B4C1 /* Revocation */,
-				3C60362F2947B88700981444 /* Root CA Certificate Bundles */,
+				3C60362F2947B88700981444 /* RootCACerts */,
 			);
 			path = CertificateKit;
 			sourceTree = "<group>";
@@ -1129,7 +1129,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/Root CA Certificate Bundles\"\n./update.sh\n";
+			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/RootCACerts\"\n./update.sh\n";
 		};
 		3C5AE3E22471D9B00004292C /* Compile cURL */ = {
 			isa = PBXShellScriptBuildPhase;
