@@ -29,8 +29,8 @@ cd openssl-ios
 mv openssl.xcframework ../../
 cd ../
 
-if [ -f ../curl.xcframework/Info.plist ]; then
-    CURRENT_VERSION=$(plutil -extract CFBundleVersion raw -o - ../curl.xcframework/Info.plist)
+if [ -f ../openssl.xcframework/Info.plist ]; then
+    CURRENT_VERSION=$(plutil -extract CFBundleVersion raw -o - ../openssl.xcframework/Info.plist)
     if [ "${CURRENT_VERSION}" == "${OPENSSL_WANT_VERSION}" ]; then
         exit 0
     fi
