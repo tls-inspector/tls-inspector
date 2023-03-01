@@ -96,6 +96,13 @@ class CertificateChainTableViewController: UITableViewController {
         self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ChainSCTSegue" {
+            guard let destination = segue.destination as? CertificateTimestampsTableViewController else { return }
+            destination.timestamps = self.certificateChain?.signedTimestamps ?? []
+        }
+    }
+
     func buildTrustHeader() {
         self.trustView.layer.cornerRadius = 5.0
 
@@ -180,6 +187,19 @@ class CertificateChainTableViewController: UITableViewController {
             cell.didSelect = { (_, _) in
                 guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else { return }
                 SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
+            }
+            connectionSection.cells.append(cell)
+        }
+
+        let timestamps = chain.signedTimestamps ?? []
+        if timestamps.count > 0 {
+            guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Count")) else { return nil }
+            guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+            guard let count = cell.cell.viewWithTag(2) as? UILabel else { return nil }
+            label.text = lang(key: "Certificate Timestamps")
+            count.text = String.init(format: "%ld", timestamps.count)
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "ChainSCTSegue", sender: nil)
             }
             connectionSection.cells.append(cell)
         }

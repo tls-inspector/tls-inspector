@@ -197,6 +197,21 @@ INSERT_OPENSSL_ERROR_METHOD
     self.chain.remoteAddress = remoteAddr;
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
+    const STACK_OF(SCT) * sct_list = SSL_get0_peer_scts(ssl);
+    int numberOfSct = sk_SCT_num(sct_list);
+    NSMutableArray<CKSignedCertificateTimestamp *> * timestampList = [NSMutableArray new];
+    for (int i = 0; i < numberOfSct; i++) {
+        CKSignedCertificateTimestamp * sct = [CKSignedCertificateTimestamp fromSCT:sk_SCT_value(sct_list, i)];
+        if (sct == nil) {
+            continue;
+        }
+        [timestampList addObject:sct];
+    }
+    if (numberOfSct > 0 && timestampList.count > 0) {
+        PDebug(@"Got %lu sct from handshake", (unsigned long)timestampList.count);
+        self.chain.signedTimestamps = timestampList;
+    }
+
     SSL_CLEANUP
 
     if (keyLog != NULL) {

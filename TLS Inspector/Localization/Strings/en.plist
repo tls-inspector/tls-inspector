@@ -591,6 +591,8 @@
 	<string>Zimbabwe</string>
 	<key>Crypto Engine</key>
 	<string>Crypto Engine</string>
+	<key>Danger</key>
+	<string>Danger</string>
 	<key>Dangerous</key>
 	<string>Dangerous</string>
 	<key>Debug Logging Enabled</key>
@@ -639,8 +641,8 @@
 	<string>Fingerprints</string>
 	<key>Finished</key>
 	<string>Finished</string>
-	<key>Follow @tlsinspector on Twitter</key>
-	<string>Follow @tlsinspector on Twitter</string>
+	<key>Follow @tlsinspector on Mastodon</key>
+	<string>Follow @tlsinspector on Mastodon</string>
 	<key>General</key>
 	<string>General</string>
 	<key>Get Involved</key>
@@ -697,6 +699,8 @@
 	<string>Locally Trusted Chain</string>
 	<key>Log ID</key>
 	<string>Log ID</string>
+	<key>Log Name</key>
+	<string>Log Name</string>
 	<key>Logging</key>
 	<string>Logging</string>
 	<key>MD5</key>
@@ -875,10 +879,12 @@
 	<string>The certificate for {0} expires on {1}</string>
 	<key>The host you provided is not valid</key>
 	<string>The host you provided is not valid</string>
+	<key>Timestamp</key>
+	<string>Timestamp</string>
 	<key>Timestamps</key>
 	<string>Timestamps</string>
-	<key>Timestamps</key>
-	<string>Timestamps</string>
+	<key>Treat Unrecognized as Trusted</key>
+	<string>Treat Unrecognized as Trusted</string>
 	<key>Trust &amp; Safety On-The-Go with TLS Inspector: {url}</key>
 	<string>Trust &amp; Safety On-The-Go with TLS Inspector: {0}</string>
 	<key>Trust Details</key>

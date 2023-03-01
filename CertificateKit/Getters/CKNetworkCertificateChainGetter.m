@@ -37,7 +37,7 @@
 
 @implementation CKNetworkCertificateChainGetter
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters API_AVAILABLE(ios(12.0)) {
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters API_AVAILABLE(ios(12.4)) {
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with NetworkFramework");
 

@@ -103,6 +103,13 @@ class CertificateTableViewController: UITableViewController {
         self.present(activityController, animated: true, completion: nil)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CertSCTSegue" {
+            guard let destination = segue.destination as? CertificateTimestampsTableViewController else { return }
+            destination.timestamps = self.certificate.signedTimestamps ?? []
+        }
+    }
+
     func buildTable() {
         guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else { return }
 
@@ -405,7 +412,7 @@ class CertificateTableViewController: UITableViewController {
             label.text = lang(key: "Certificate Timestamps")
             count.text = String.init(format: "%ld", timestamps.count)
             cell.didSelect = { (_, _) in
-                self.performSegue(withIdentifier: "SCTSegure", sender: nil)
+                self.performSegue(withIdentifier: "CertSCTSegue", sender: nil)
             }
             metadataSection.cells.append(cell)
         }

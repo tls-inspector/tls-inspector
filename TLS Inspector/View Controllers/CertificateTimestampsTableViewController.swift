@@ -1,17 +1,19 @@
 import UIKit
+import CertificateKit
 
 class CertificateTimestampsTableViewController: UITableViewController {
     var sections: [TableViewSection] = []
+    public var timestamps: [CKSignedCertificateTimestamp] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else { return }
-        guard let timestamps = certificate.signedTimestamps else { return }
-
         for timestamp in timestamps {
             let section = TableViewSection()
             section.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Log ID"), value: timestamp.logId, useFixedWidthFont: true))
+            if let logName = timestamp.logName {
+                section.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Log Name"), value: logName))
+            }
 
             if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
                 cell.textLabel?.text = lang(key: "Timestamp")

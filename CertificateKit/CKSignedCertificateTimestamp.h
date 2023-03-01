@@ -25,12 +25,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CKSignedCertificateTimestamp : NSObject
 
-@property (strong, nonatomic, readonly, nonnull) NSString * logId;
-@property (strong, nonatomic, readonly, nonnull) NSDate * timestamp;
-@property (strong, nonatomic, readonly, nonnull) NSString * signatureType;
-@property (strong, nonatomic, readonly, nonnull) NSString * signature;
+/// The log ID
+@property (strong, nonatomic, readonly, nonnull)  NSString * logId;
 
+/// The friendly log name if matched against log ID
+@property (strong, nonatomic, readonly, nullable) NSString * logName;
+
+/// The timestamp date
+@property (strong, nonatomic, readonly, nonnull)  NSDate   * timestamp;
+
+/// The signature type
+@property (strong, nonatomic, readonly, nonnull)  NSString * signatureType;
+
+/// The signature
+@property (strong, nonatomic, readonly, nonnull)  NSString * signature;
+
+
+/// Create a new timestamp
+/// - Parameters:
+///   - logId: The log ID
+///   - timestamp: The timestamp date
+///   - signatureType: The signature type
+///   - signature: The signature data
 - (CKSignedCertificateTimestamp * _Nonnull) initWithLogId:(NSData * _Nonnull)logId timestamp:(NSDate * _Nonnull)timestamp signatureType:(NSString * _Nonnull)signatureType signature:(NSData * _Nonnull)signature;
+
++ (CKSignedCertificateTimestamp * _Nonnull) fromSCT:(void *)sct;
 
 @end
 

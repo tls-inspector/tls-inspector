@@ -13,6 +13,7 @@
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
+		3C218DBD29AEF2E7000D84BC /* ct_log_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C218DBC29AEF2E7000D84BC /* ct_log_list.json */; };
 		3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -272,6 +273,7 @@
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
 		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
+		3C218DBC29AEF2E7000D84BC /* ct_log_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ct_log_list.json; sourceTree = "<group>"; };
 		3C2556AB28E60C430057FE4D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
@@ -478,6 +480,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C218DB929AEF12F000D84BC /* CTLogs */ = {
+			isa = PBXGroup;
+			children = (
+				3C218DBC29AEF2E7000D84BC /* ct_log_list.json */,
+			);
+			path = CTLogs;
+			sourceTree = "<group>";
+		};
 		3C3C9526297DFA730084B7D9 /* TLS InspectorUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,7 +528,7 @@
 				3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */,
 				3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */,
 			);
-			path = "RootCACerts";
+			path = RootCACerts;
 			sourceTree = "<group>";
 		};
 		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
@@ -566,6 +576,7 @@
 				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
 				3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */,
 				3CF0A69D261BBCA300460B7F /* CKTypes.h */,
+				3C218DB929AEF12F000D84BC /* CTLogs */,
 				3C62426F2947B10200A7814A /* curl.xcframework */,
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				67F686EF1FC8FAE400BB7AE8 /* Getters */,
@@ -899,6 +910,7 @@
 				3C65DAD61E836BE9004AD96D /* Frameworks */,
 				3C65DAD71E836BE9004AD96D /* Headers */,
 				3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */,
+				3C218DBE29AEF6A0000D84BC /* Update CT Logs (Release Only) */,
 				3C65DAD81E836BE9004AD96D /* Resources */,
 			);
 			buildRules = (
@@ -1047,6 +1059,7 @@
 				3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */,
 				3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */,
 				3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */,
+				3C218DBD29AEF2E7000D84BC /* ct_log_list.json in Resources */,
 				3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1111,6 +1124,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\nenv -i ./build-openssl.sh\n";
+		};
+		3C218DBE29AEF6A0000D84BC /* Update CT Logs (Release Only) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update CT Logs (Release Only)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/CTLogs\"\n./update.sh\n";
 		};
 		3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */ = {
 			isa = PBXShellScriptBuildPhase;

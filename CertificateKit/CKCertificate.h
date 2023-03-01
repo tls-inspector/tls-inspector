@@ -238,7 +238,7 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable) NSDictionary<NSString *, NSNumber *> * vendorTrustStatus;
 
 /**
- *  List of signed certificate timestamps
+ *  List of signed certificate timestamps embedded in the certificate
  */
 @property (strong, nonatomic, nullable) NSArray<CKSignedCertificateTimestamp *> * signedTimestamps;
 
