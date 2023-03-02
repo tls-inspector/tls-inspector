@@ -561,8 +561,6 @@
 	<string>Crypto-Engine</string>
 	<key>Dangerous</key>
 	<string>Dangerous</string>
-	<key>Debug Logging Enabled</key>
-	<string>Protokollierung aktiviert</string>
 	<key>Delete</key>
 	<string>Löschen</string>
 	<key>Did You Know?</key>
@@ -579,7 +577,7 @@
 	<string>CRL herunterladen &amp; überprüfen</string>
 	<key>EV Authority</key>
 	<string>EV-Zertifizierungsstelle</string>
-	<key>Enable Debug Logging</key>
+	<key>Enable Verbose Logging</key>
 	<string>Protokollierung aktivieren</string>
 	<key>Engine Settings</key>
 	<string>Engine-Einstellungen</string>
@@ -859,6 +857,8 @@
 	<string>Gültigkeitsperiode</string>
 	<key>Value</key>
 	<string>Wert</string>
+	<key>Verbose Logging Enabled</key>
+	<string>Protokollierung aktiviert</string>
 	<key>Verified</key>
 	<string>Verifiziert</string>
 	<key>Version</key>
@@ -883,7 +883,7 @@
 	<string>Ja</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>Du kannst die Erinnerung in der Erinnerungen-App bearbeiten.</string>
-	<key>You must inspect at least one site with debug logging enabled before you can submit logs.</key>
+	<key>You must inspect at least one site with verbose logging enabled before you can submit logs.</key>
 	<string>Du musst mindestens eine Analyse mit Protokollierung durchgeführt haben, um ein Protokoll zu schicken.</string>
 	<key>advanced_settings_nag</key>
 	<string>Diese Einstellungen sind für erweiterte Fehlerbehebung gedacht. Falsche Einstellungen können TLS Inspector an einer korrekten Funktionsweise hindern.</string>

@@ -12,31 +12,31 @@ class OptionsTableViewController: UITableViewController {
         self.sections.maybeAppend(makeStatusSection())
         self.sections.maybeAppend(makeFingerprintSection())
         self.sections.maybeAppend(makeAdvancedSection())
+
+        self.tableView.estimatedRowHeight = 44.0
+        self.tableView.rowHeight = UITableView.automaticDimension
     }
 
     func makeGeneralSection() -> TableViewSection? {
         let generalSection = TableViewSection()
         generalSection.title = lang(key: "General")
-        if let cell = newSwitchCell(labelText: "Remember Recent Lookups",
-                                    initialValue: UserOptions.rememberRecentLookups,
-                                    changed: #selector(changeRememberLookups(sender:))) {
-            generalSection.cells.append(cell)
-        }
-        if let cell = newSwitchCell(labelText: "Show HTTP Headers",
-                                    initialValue: UserOptions.getHTTPHeaders,
-                                    changed: #selector(changeShowHTTPHeaders(sender:))) {
-            generalSection.cells.append(cell)
-        }
-        if let cell = newSwitchCell(labelText: "Show Tips",
-                                    initialValue: UserOptions.showTips,
-                                    changed: #selector(changeShowTips(sender:))) {
-            generalSection.cells.append(cell)
-        }
-        if let cell = newSwitchCell(labelText: "Treat Unrecognized as Trusted",
-                                    initialValue: UserOptions.treatUnrecognizedAsTrusted,
-                                    changed: #selector(changeTreatUnrecognizedAsTrusted(sender:))) {
-            generalSection.cells.append(cell)
-        }
+        generalSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Remember Recent Lookups"), defaultChecked: UserOptions.rememberRecentLookups, didChange: { checked in
+            UserOptions.rememberRecentLookups = checked
+            if !checked {
+                RecentLookups.RemoveAllLookups()
+            }
+            NotificationCenter.default.post(name: RELOAD_RECENT_NOTIFICATION, object: nil)
+        }))
+        generalSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Show HTTP Headers"), defaultChecked: UserOptions.getHTTPHeaders, didChange: { checked in
+            UserOptions.getHTTPHeaders = checked
+        }))
+        generalSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Show Tips"), defaultChecked: UserOptions.showTips, didChange: { checked in
+            UserOptions.showTips = checked
+            NotificationCenter.default.post(name: SHOW_TIPS_NOTIFICATION, object: nil)
+        }))
+        generalSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Treat Unrecognized as Trusted"), defaultChecked: UserOptions.treatUnrecognizedAsTrusted, didChange: { checked in
+            UserOptions.treatUnrecognizedAsTrusted = checked
+        }))
 
         if generalSection.cells.count > 0 {
             return generalSection
@@ -49,16 +49,12 @@ class OptionsTableViewController: UITableViewController {
         let statusSection = TableViewSection()
         statusSection.title = lang(key: "Certificate Status")
         statusSection.footer = lang(key: "certificate_status_footer")
-        if let cell = newSwitchCell(labelText: "Query OCSP Responder",
-                                    initialValue: UserOptions.queryOCSP,
-                                    changed: #selector(changeQueryOCSP(sender:))) {
-            statusSection.cells.append(cell)
-        }
-        if let cell = newSwitchCell(labelText: "Download & Check CRL",
-                                    initialValue: UserOptions.checkCRL,
-                                    changed: #selector(changeCheckCRL(sender:))) {
-            statusSection.cells.append(cell)
-        }
+        statusSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Query OCSP Responder"), defaultChecked: UserOptions.queryOCSP, didChange: { checked in
+            UserOptions.queryOCSP = checked
+        }))
+        statusSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Download & Check CRL"), defaultChecked: UserOptions.checkCRL, didChange: { checked in
+            UserOptions.checkCRL = checked
+        }))
 
         if statusSection.cells.count > 0 {
             return statusSection
@@ -70,26 +66,18 @@ class OptionsTableViewController: UITableViewController {
     func makeFingerprintSection() -> TableViewSection? {
         let fingerprintSection = TableViewSection()
         fingerprintSection.title = lang(key: "Fingerprints")
-        if let cell = newSwitchCell(labelText: "MD5",
-                                    initialValue: UserOptions.showFingerprintMD5,
-                                    changed: #selector(changeShowFingerprintMD5(sender:))) {
-            fingerprintSection.cells.append(cell)
-        }
-        if let cell = newSwitchCell(labelText: "SHA1",
-                                    initialValue: UserOptions.showFingerprintSHA128,
-                                    changed: #selector(changeShowFingerprintSHA128(sender:))) {
-            fingerprintSection.cells.append(cell)
-        }
-        if let cell = newSwitchCell(labelText: "SHA-256",
-                                    initialValue: UserOptions.showFingerprintSHA256,
-                                    changed: #selector(changeShowFingerprintSHA256(sender:))) {
-            fingerprintSection.cells.append(cell)
-        }
-        if let cell = newSwitchCell(labelText: "SHA-512",
-                                    initialValue: UserOptions.showFingerprintSHA512,
-                                    changed: #selector(changeShowFingerprintSHA512(sender:))) {
-            fingerprintSection.cells.append(cell)
-        }
+        fingerprintSection.cells.append(SwitchTableViewCell(labelText: lang(key: "MD5"), defaultChecked: UserOptions.showFingerprintMD5, didChange: { checked in
+            UserOptions.showFingerprintMD5 = checked
+        }))
+        fingerprintSection.cells.append(SwitchTableViewCell(labelText: lang(key: "SHA1"), defaultChecked: UserOptions.showFingerprintSHA128, didChange: { checked in
+            UserOptions.showFingerprintSHA128 = checked
+        }))
+        fingerprintSection.cells.append(SwitchTableViewCell(labelText: lang(key: "SHA-256"), defaultChecked: UserOptions.showFingerprintSHA256, didChange: { checked in
+            UserOptions.showFingerprintSHA256 = checked
+        }))
+        fingerprintSection.cells.append(SwitchTableViewCell(labelText: lang(key: "SHA-512"), defaultChecked: UserOptions.showFingerprintSHA512, didChange: { checked in
+            UserOptions.showFingerprintSHA512 = checked
+        }))
 
         if fingerprintSection.cells.count > 0 {
             return fingerprintSection
@@ -112,55 +100,6 @@ class OptionsTableViewController: UITableViewController {
         }
 
         return nil
-    }
-
-    @objc func changeRememberLookups(sender: UISwitch) {
-        UserOptions.rememberRecentLookups = sender.isOn
-        if !sender.isOn {
-            RecentLookups.RemoveAllLookups()
-        }
-        NotificationCenter.default.post(name: RELOAD_RECENT_NOTIFICATION, object: nil)
-    }
-
-    @objc func changeShowHTTPHeaders(sender: UISwitch) {
-        UserOptions.getHTTPHeaders = sender.isOn
-    }
-
-    @objc func changeShowTips(sender: UISwitch) {
-        UserOptions.showTips = sender.isOn
-        NotificationCenter.default.post(name: SHOW_TIPS_NOTIFICATION, object: nil)
-    }
-
-    @objc func changeTreatUnrecognizedAsTrusted(sender: UISwitch) {
-        UserOptions.treatUnrecognizedAsTrusted = sender.isOn
-    }
-
-    @objc func changeQueryOCSP(sender: UISwitch) {
-        UserOptions.queryOCSP = sender.isOn
-    }
-
-    @objc func changeCheckCRL(sender: UISwitch) {
-        UserOptions.checkCRL = sender.isOn
-    }
-
-    @objc func changeShowFingerprintMD5(sender: UISwitch) {
-        UserOptions.showFingerprintMD5 = sender.isOn
-    }
-
-    @objc func changeShowFingerprintSHA128(sender: UISwitch) {
-        UserOptions.showFingerprintSHA128 = sender.isOn
-    }
-
-    @objc func changeShowFingerprintSHA256(sender: UISwitch) {
-        UserOptions.showFingerprintSHA256 = sender.isOn
-    }
-
-    @objc func changeShowFingerprintSHA512(sender: UISwitch) {
-        UserOptions.showFingerprintSHA512 = sender.isOn
-    }
-
-    @objc func changeVerboseLogging(sender: UISwitch) {
-        UserOptions.verboseLogging = sender.isOn
     }
 
     // MARK: - Table view data source

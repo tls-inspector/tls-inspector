@@ -142,20 +142,12 @@ class AdvancedOptionsTableViewController: UITableViewController {
         loggingSection.footer = lang(key: "verbose_logging_footer")
         loggingSection.tag = SectionTags.Logs.rawValue
 
-        if let debugLoggingCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Switch")) {
-            guard let debugLabel = debugLoggingCell.cell.viewWithTag(1) as? UILabel else {
-                return loggingSection
+        loggingSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Enable Verbose Logging"), defaultChecked: UserOptions.verboseLogging, didChange: { checked in
+            if !UserOptions.verboseLogging && checked {
+                UserOptions.inspectionsWithVerboseLogging = 0
             }
-
-            guard let debugSwitch = debugLoggingCell.cell.viewWithTag(2) as? UISwitch else {
-                return loggingSection
-            }
-
-            debugLabel.text = lang(key: "Enable Debug Logging")
-            debugSwitch.isOn = UserOptions.verboseLogging
-            debugSwitch.addTarget(self, action: #selector(self.toggleDebugMode(_:)), for: .valueChanged)
-            loggingSection.cells.append(debugLoggingCell)
-        }
+            UserOptions.verboseLogging = checked
+        }))
 
         if let submitLogsCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) {
             guard let textLabel = submitLogsCell.cell.viewWithTag(1) as? UILabel else {
@@ -234,12 +226,13 @@ class AdvancedOptionsTableViewController: UITableViewController {
         self.tableView.reloadSections([SectionTags.Engine.rawValue], with: .none)
         self.tableView.reloadSections([SectionTags.EngineOptions.rawValue], with: .fade)
         self.tableView.endUpdates()
+        NotificationCenter.default.post(name: CHANGE_CRYPTO_NOTIFICATION, object: nil)
     }
 
     func didTapSubmitLogs(indexPath: IndexPath) {
         if UserOptions.verboseLogging && UserOptions.inspectionsWithVerboseLogging == 0 {
-            UIHelper(self).presentAlert(title: lang(key: "Debug Logging Enabled"),
-                                        body: lang(key: "You must inspect at least one site with debug logging enabled before you can submit logs."),
+            UIHelper(self).presentAlert(title: lang(key: "Verbose Logging Enabled"),
+                                        body: lang(key: "You must inspect at least one site with verbose logging enabled before you can submit logs."),
                                         dismissed: nil)
             return
         }

@@ -7,9 +7,10 @@ var SERVER_INFO: CKServerInfo?
 var SERVER_ERROR: Error?
 var CURRENT_CERTIFICATE: Int = 0
 var SPLIT_VIEW_CONTROLLER: UISplitViewController?
-var VIEW_CLOSE_NOTIFICATION: Notification.Name = Notification.Name("🏳️‍🌈")
-var RELOAD_RECENT_NOTIFICATION: Notification.Name = Notification.Name("🇹🇼")
-var SHOW_TIPS_NOTIFICATION: Notification.Name = Notification.Name("🇭🇰")
+var VIEW_CLOSE_NOTIFICATION: Notification.Name = Notification.Name("view_close")
+var RELOAD_RECENT_NOTIFICATION: Notification.Name = Notification.Name("reload_recent")
+var SHOW_TIPS_NOTIFICATION: Notification.Name = Notification.Name("show_tips")
+var CHANGE_CRYPTO_NOTIFICATION: Notification.Name = Notification.Name("change_crypto")
 // swiftlint:enable identifier_name
 
 let AppDefaults = UserDefaults(suiteName: "group.com.ecnepsnai.TLS-Inspector")!

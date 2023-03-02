@@ -109,6 +109,7 @@
 		3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005C23974A660027D1C1 /* FontAwesome.swift */; };
 		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
 		3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2006023974F710027D1C1 /* fa-solid.ttf */; };
+		3CA6EAEA29AFD22A00BFB6E2 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */; };
 		3CB1192925465BB20015750C /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1192825465BB20015750C /* Network.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB483FC2058BA0400322723 /* CertificateKit.m */; platformFilter = ios; };
 		3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */; platformFilter = ios; };
@@ -362,6 +363,7 @@
 		3CA2005C23974A660027D1C1 /* FontAwesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
 		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
 		3CA2006023974F710027D1C1 /* fa-solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid.ttf"; sourceTree = "<group>"; };
+		3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		3CB1192825465BB20015750C /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
 		3CB483FC2058BA0400322723 /* CertificateKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKit.m; sourceTree = "<group>"; };
 		3CB784A125293E4D009ECE20 /* ChainGetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGetterViewController.swift; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */,
 				3C7269632394C2E1002A0B19 /* UIHelper.swift */,
 				3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */,
+				3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1316,6 +1319,7 @@
 				3C84F3132644C275003E6A66 /* Date+DurationString.swift in Sources */,
 				3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */,
 				3C72695C2394BDF0002A0B19 /* SceneDelegate.swift in Sources */,
+				3CA6EAEA29AFD22A00BFB6E2 /* SwitchTableViewCell.swift in Sources */,
 				3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */,
 				3C7B09FF23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift in Sources */,
 				3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */,

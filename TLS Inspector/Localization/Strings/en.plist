@@ -595,8 +595,6 @@
 	<string>Danger</string>
 	<key>Dangerous</key>
 	<string>Dangerous</string>
-	<key>Debug Logging Enabled</key>
-	<string>Debug Logging Enabled</string>
 	<key>Delete</key>
 	<string>Delete</string>
 	<key>Did You Know?</key>
@@ -615,8 +613,8 @@
 	<string>EV Authority</string>
 	<key>Embedded</key>
 	<string>Embedded</string>
-	<key>Enable Debug Logging</key>
-	<string>Enable Debug Logging</string>
+	<key>Enable Verbose Logging</key>
+	<string>Enable Verbose Logging</string>
 	<key>Engine Settings</key>
 	<string>Engine Settings</string>
 	<key>Engine has no options</key>
@@ -925,6 +923,8 @@
 	<string>Validity Period</string>
 	<key>Value</key>
 	<string>Value</string>
+	<key>Verbose Logging Enabled</key>
+	<string>Verbose Logging Enabled</string>
 	<key>Verified</key>
 	<string>Verified</string>
 	<key>Version</key>
@@ -951,8 +951,8 @@
 	<string>Yes</string>
 	<key>You can modify the reminder in the reminders app.</key>
 	<string>You can modify the reminder in the reminders app.</string>
-	<key>You must inspect at least one site with debug logging enabled before you can submit logs.</key>
-	<string>You must inspect at least one site with debug logging enabled before you can submit logs.</string>
+	<key>You must inspect at least one site with verbose logging enabled before you can submit logs.</key>
+	<string>You must inspect at least one site with verbose logging enabled before you can submit logs.</string>
 	<key>advanced_settings_nag</key>
 	<string>These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.</string>
 	<key>apple</key>
