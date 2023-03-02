@@ -6,6 +6,7 @@ class TrustBannerParameters {
     let color: UIColor
     let text: String
     let icon: FAIcon
+    let cornerRadius: CGFloat
 
     init(trust: CKCertificateChainTrustStatus) {
         switch trust {
@@ -67,5 +68,6 @@ class TrustBannerParameters {
             self.text = lang(key: "Unknown")
             self.icon = FAIcon.FAQuestionCircleSolid
         }
+        self.cornerRadius = 10.0
     }
 }

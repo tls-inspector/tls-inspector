@@ -104,8 +104,6 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func buildTrustHeader() {
-        self.trustView.layer.cornerRadius = 5.0
-
         let parameters = TrustBannerParameters(trust: self.certificateChain!.trusted)
         if parameters.solid {
             self.trustView.backgroundColor = parameters.color
@@ -113,6 +111,7 @@ class CertificateChainTableViewController: UITableViewController {
             self.trustView.layer.borderColor = parameters.color.cgColor
             self.trustView.layer.borderWidth = 2.0
         }
+        self.trustView.layer.cornerRadius = parameters.cornerRadius
         self.trustResultLabel.textColor = UIColor.white
         self.trustResultLabel.text = parameters.text
         self.trustIconLabel.textColor = UIColor.white
