@@ -932,7 +932,6 @@
 				3CCD0288239DB79B009364D0 /* SwiftLint */,
 				3C72692023949ABD002A0B19 /* Sources */,
 				3C72692123949ABD002A0B19 /* Frameworks */,
-				3CA6EAEB29AFEA9B00BFB6E2 /* Generate Localization */,
 				3C72692223949ABD002A0B19 /* Resources */,
 				3C7269612394C16F002A0B19 /* Embed Frameworks */,
 				3CCD029F239DDF4D009364D0 /* Embed Foundation Extensions */,
@@ -1202,29 +1201,12 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${PROJECT_DIR}/TLS Inspector/Localization/Strings/en.plist",
+				"${PROJECT_DIR}/TLS Inspector/Localization/Strings/de.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd ${PROJECT_DIR}\npython3 ./lang.py\n";
-		};
-		3CA6EAEB29AFEA9B00BFB6E2 /* Generate Localization */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Localization";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd ${PROJECT_DIR}\npython3 ./lang.py\n";
+			shellScript = "python3 ./lang.py\n\nmkdir -p \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings\"\ncp -v \"${PROJECT_DIR}/TLS Inspector/Localization/Strings/en.plist\" \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\"\ncp -v \"${PROJECT_DIR}/TLS Inspector/Localization/Strings/de.plist\" \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\"\n";
 		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
