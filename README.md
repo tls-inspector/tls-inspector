@@ -2,15 +2,15 @@
 
 [![Download](https://img.shields.io/itunes/v/1100539810.svg?label=iTunes%20App%20Store&style=flat-square)](https://tlsinspector.com/download.html)
 [![LICENSE](https://img.shields.io/github/license/tls-inspector/tls-inspector.svg?style=flat-square)](https://github.com/ecnepsnai/ds/blob/app-store/LICENSE)
-[![Follow](https://img.shields.io/twitter/follow/tlsinspector?style=flat-square)](https://twitter.com/tlsinspector)
+[![Follow](https://img.shields.io/mastodon/follow/109742126529751070?domain=https%3A%2F%2Finfosec.exchange&style=flat-square)](https://infosec.exchange/@tlsinspector)
 
-<img src="https://tlsinspector.com/assets/img/screenshots.png" alt="TLS Inspector Screenshots" />
+<img src="https://tlsinspector.com/assets/img/screenshots.webp" alt="TLS Inspector Screenshots" />
 
 **[Learn More about TLS Inspector »](https://tlsinspector.com/about.html)**
 
 # Project Structure
 
-This is the Git repository for the TLS Inspector iOS application. You will find the source code for the application's front-end interface in `TLS Inspector/`. The share-extension is located in `Inspect Website/`. The back-end source used for fetching and examining certificate data is located in `CertificateKit/`.
+This is the Git repository for the TLS Inspector application. You will find the source code for the application's front-end interface in `TLS Inspector/`. The share-extension is located in `Inspect Website/`. The back-end source used for fetching and examining certificate data is located in `CertificateKit/`.
 
 # Building
 
