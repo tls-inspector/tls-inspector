@@ -62,6 +62,7 @@ def generate_plist(lang):
         pass
 
     os.rename(plist_atomic_path, plist_path)
+    print("Generated %s" % plist_path)
 
 
 for lang in ['en', 'de']:

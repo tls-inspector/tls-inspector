@@ -958,6 +958,7 @@
 				3CDC14B623B045730053932F /* SwiftLint */,
 				3CDC14A323B0453B0053932F /* Sources */,
 				3CDC14A423B0453B0053932F /* Frameworks */,
+				3C777D3429AFF7710090F5B8 /* Generate Localization */,
 				3CDC14A523B0453B0053932F /* Resources */,
 			);
 			buildRules = (
@@ -1186,6 +1187,25 @@
 			shellPath = /bin/bash;
 			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\nenv -i ./build-curl.sh\n";
 			showEnvVarsInLog = 0;
+		};
+		3C777D3429AFF7710090F5B8 /* Generate Localization */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Localization";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd ${PROJECT_DIR}\npython3 ./lang.py\n";
 		};
 		3CA6EAEB29AFEA9B00BFB6E2 /* Generate Localization */ = {
 			isa = PBXShellScriptBuildPhase;
