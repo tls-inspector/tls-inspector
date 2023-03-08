@@ -12,7 +12,7 @@ extension UIDevice {
     public func platformName() -> String {
         if #available(iOS 14.0, *) {
             if ProcessInfo.processInfo.isiOSAppOnMac {
-                return "M1 macOS"
+                return "Apple Silicon-based Macintosh"
             }
         }
 
@@ -21,11 +21,12 @@ extension UIDevice {
         // https://www.theiphonewiki.com/wiki/Models
         let mapping = [
             // Apple TV
-            "AppleTV2,1": "Apple TV Gen. 2",
-            "AppleTV3,1": "Apple TV Gen. 3",
-            "AppleTV3,2": "Apple TV Gen. 3 (Rev 2)",
-            "AppleTV5,3": "Apple TV Gen. 4",
-            "AppleTV6,2": "Apple TV 4K",
+            "AppleTV2,1":  "Apple TV Gen. 2",
+            "AppleTV3,1":  "Apple TV Gen. 3",
+            "AppleTV3,2":  "Apple TV Gen. 3 (Rev 2)",
+            "AppleTV5,3":  "Apple TV Gen. 4",
+            "AppleTV6,2":  "Apple TV 4K",
+            "AppleTV11,1": "Apple TV 4K Gen. 2",
 
             // iPhone
             "iPhone1,1": "iPhone",
@@ -62,6 +63,19 @@ extension UIDevice {
             "iPhone12,3": "iPhone 11 Pro",
             "iPhone12,5": "iPhone 11 Pro Max",
             "iPhone12,8": "iPhone SE Gen. 2",
+            "iPhone13,1": "iPhone 12 mini",
+            "iPhone13,2": "iPhone 12",
+            "iPhone13,3": "iPhone 12 Pro",
+            "iPhone13,4": "iPhone 12 Pro Max",
+            "iPhone14,4": "iPhone 13 mini",
+            "iPhone14,5": "iPhone 13",
+            "iPhone14,2": "iPhone 13 Pro",
+            "iPhone14,3": "iPhone 13 Pro Max",
+            "iPhone14,6": "iPhone SE Gen. 3",
+            "iPhone14,7": "iPhone 14",
+            "iPhone14,8": "iPhone 14 Plus",
+            "iPhone15,2": "iPhone 14 Pro",
+            "iPhone15,3": "iPhone 14 Pro Max",
 
             // iPod Touch
             "iPod1,1": "iPod Touch Gen. 1",
@@ -92,6 +106,8 @@ extension UIDevice {
             "iPad7,12": "iPad 7 (Cellular)",
             "iPad11,6": "iPad 8 (WiFi)",
             "iPad11,7": "iPad 8 (Cellular)",
+            "iPad12,1": "iPad 9 (WiFi)",
+            "iPad12,2": "iPad 9 (Cellular)",
 
             // iPad Mini
             "iPad2,5": "iPad Mini (WiFi)",
@@ -107,17 +123,21 @@ extension UIDevice {
             "iPad5,2": "iPad Mini Gen. 4 (Cellular)",
             "iPad11,1": "iPad Mini Gen. 5 (WiFi)",
             "iPad11,2": "iPad Mini Gen. 5 (Cellular)",
+            "iPad14,1": "iPad Mini Gen. 6 (WiFi)",
+            "iPad14,2": "iPad Mini Gen. 6 (Cellular)",
 
             // iPad Air
             "iPad4,1": "iPad Air (WiFi)",
             "iPad4,2": "iPad Air (Cellular)",
             "iPad4,3": "iPad Air (Cellular - China)",
-            "iPad5,3": "iPad Air 2 (WiFi)",
-            "iPad5,4": "iPad Air 2 (Cellular)",
-            "iPad11,3": "iPad Air 3 (WiFi)",
-            "iPad11,4": "iPad Air 3 (Cellular)",
-            "iPad13,1": "iPad Air 4 (WiFi)",
-            "iPad13,2": "iPad Air 4 (Cellular)",
+            "iPad5,3": "iPad Air Gen. 2 (WiFi)",
+            "iPad5,4": "iPad Air Gen. 2 (Cellular)",
+            "iPad11,3": "iPad Air Gen. 3 (WiFi)",
+            "iPad11,4": "iPad Air Gen. 3 (Cellular)",
+            "iPad13,1": "iPad Air Gen. 4 (WiFi)",
+            "iPad13,2": "iPad Air Gen. 4 (Cellular)",
+            "iPad13,16": "iPad Air Gen. 5 (WiFi)",
+            "iPad13,17": "iPad Air Gen. 5 (Cellular)",
 
             // iPad Pro
             "iPad6,7": "iPad Pro (12.9\" WiFi)",
@@ -138,6 +158,14 @@ extension UIDevice {
             "iPad8,10": "iPad Pro (11\" Gen. 2 Cellular)",
             "iPad8,11": "iPad Pro (12.9\" Gen. 4 WiFi)",
             "iPad8,12": "iPad Pro (12.9\" Gen. 4 Cellular)",
+            "iPad13,4": "iPad Pro (11\" Gen. 3 WiFi)",
+            "iPad13,5": "iPad Pro (11\" Gen. 3 WiFi)",
+            "iPad13,6": "iPad Pro (11\" Gen. 3 Cellular)",
+            "iPad13,7": "iPad Pro (11\" Gen. 3 Cellular)",
+            "iPad13,8": "iPad Pro (12.9\" Gen. 5 WiFi)",
+            "iPad13,9": "iPad Pro (12.9\" Gen. 5 WiFi)",
+            "iPad13,10": "iPad Pro (12.9\" Gen. 5 Cellular)",
+            "iPad13,11": "iPad Pro (12.9\" Gen. 5 Cellular)",
 
             "i386": "Simulator",
             "x86_64": "Simulator",
