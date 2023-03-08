@@ -41,6 +41,9 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         NotificationCenter.default.addObserver(forName: SHOW_TIPS_NOTIFICATION, object: nil, queue: nil) { (_) in
             self.tipView.isHidden = !UserOptions.showTips
         }
+        NotificationCenter.default.addObserver(forName: CHANGE_CRYPTO_NOTIFICATION, object: nil, queue: nil) { (_) in
+            self.tableView.reloadData()
+        }
         // swiftlint:enable discarded_notification_center_observer
 
         self.tipView.isHidden = !UserOptions.showTips
@@ -67,9 +70,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     }
 
     @IBAction func advancedButtonPressed(_ sender: OptionsButton) {
-        guard let advancedInspect = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedInspect") as? AdvancedInspectTableViewController else {
-            return
-        }
+        guard let advancedInspect = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedInspect") as? AdvancedInspectTableViewController else { return }
 
         advancedInspect.donePressed = { (parameters: CKInspectParameters) -> Void in
             self.doInspect(parameters: parameters)
@@ -94,9 +95,7 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
     @objc func domainInputChanged(sender: UITextField) {
         self.inspectButton.isEnabled = self.inputIsValid()
 
-        guard let advancedButton = self.advancedButton else {
-            return
-        }
+        guard let advancedButton = self.advancedButton else { return }
 
         let length = sender.text?.count ?? 0
         if length > 0 {

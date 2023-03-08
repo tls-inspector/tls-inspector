@@ -2,14 +2,14 @@ import UIKit
 import CertificateKit
 
 class HTTPHeadersTableViewController: UITableViewController {
-
-    var headers: [String:String] = [:]
-    var headerKeysSorted: [String] = []
+    var cells: [TableViewCell] = []
 
     override func viewDidLoad() {
-        if let serverInfo = SERVER_INFO {
-            self.headerKeysSorted = serverInfo.headers.keys.sorted()
-            self.headers = serverInfo.headers
+        guard let serverInfo = SERVER_INFO else { return }
+        let headerKeysSorted = serverInfo.headers.keys.sorted()
+
+        for key in headerKeysSorted {
+            self.cells.append(TitleValueTableViewCell.Cell(title: key, value: serverInfo.headers[key] ?? "", useFixedWidthFont: true))
         }
 
         super.viewDidLoad()
@@ -21,34 +21,31 @@ class HTTPHeadersTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.headerKeysSorted.count
+        return self.cells.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let key = self.headerKeysSorted[indexPath.row]
-        let value = self.headers[key] ?? ""
-
-        return TitleValueTableViewCell.Cell(title: key, value: value, useFixedWidthFont: true)
+        return self.cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if let shouldShowMenu = self.cells[indexPath.row].shouldShowMenu {
+            return shouldShowMenu(tableView, indexPath)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(copy(_:))
+        if let canPerformAction = self.cells[indexPath.row].canPerformAction {
+            return canPerformAction(tableView, action, indexPath, sender)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
-            var data: String?
-            let tableCell = tableView.cellForRow(at: indexPath)!
-            if let titleValueCell = tableCell as? TitleValueTableViewCell {
-                data = titleValueCell.valueLabel.text
-            } else {
-                data = tableCell.textLabel?.text
-            }
-            UIPasteboard.general.string = data
+        if let performAction = self.cells[indexPath.row].performAction {
+            return performAction(tableView, action, indexPath, sender)
         }
+        return
     }
 }

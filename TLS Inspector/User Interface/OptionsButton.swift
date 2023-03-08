@@ -12,9 +12,7 @@ class OptionsButton: UIButton {
     }
 
     func updateImage() {
-        guard let image = UIImage(named: "Options") else {
-            return
-        }
+        guard let image = UIImage(named: "Options") else { return }
         self.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
         self.imageView?.tintColor = UIColor.systemBlue
     }

@@ -7,7 +7,5 @@ disabled_rules:
     - opening_brace
     - line_length
     - file_length
-excluded:
-    - 'AppDelegate.swift'
-    - 'SceneDelegate.swift'
-    - 'External/'
+
+cyclomatic_complexity: 12

@@ -41,9 +41,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     @IBAction func actionButton(_ sender: UIBarButtonItem) {
-        guard let chain = self.certificateChain else {
-            return
-        }
+        guard let chain = self.certificateChain else { return }
 
         var items = [
             lang(key: "Share Certificate Chain")
@@ -72,15 +70,11 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func shareCertificateChain(_ sender: UIBarButtonItem) {
-        guard let certificates = self.certificateChain?.certificates else {
-            return
-        }
+        guard let certificates = self.certificateChain?.certificates else { return }
 
         let pemChain = NSMutableData()
         for certificate in certificates {
-            guard let pem = certificate.publicKeyAsPEM else {
-                return
-            }
+            guard let pem = certificate.publicKeyAsPEM else { return }
             pemChain.append(pem)
         }
 
@@ -98,66 +92,31 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func openURL(_ urlString: String) {
-        guard let url = URL(string: urlString) else {
-            return
-        }
+        guard let url = URL(string: urlString) else { return }
         self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
-    func buildTrustHeader() {
-        self.trustView.layer.cornerRadius = 5.0
-
-        var trustColor = UIColor.materialPink()
-        var trustText = lang(key: "Unknown")
-        var trustIcon = FAIcon.FAQuestionCircleSolid
-        switch self.certificateChain!.trusted {
-        case .trusted:
-            trustColor = UIColor.materialGreen()
-            trustText = lang(key: "Trusted")
-            trustIcon = FAIcon.FACheckCircleSolid
-        case .locallyTrusted:
-            trustColor = UIColor.materialLightGreen()
-            trustText = lang(key: "Locally Trusted")
-            trustIcon = FAIcon.FACheckCircleRegular
-        case .untrusted, .invalidDate, .wrongHost:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .sha1Leaf, .sha1Intermediate:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Insecure")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .selfSigned, .revokedLeaf, .revokedIntermediate:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .leafMissingRequiredKeyUsage:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .weakRSAKey:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Insecure")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .issueDateTooLong:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .badAuthority:
-            trustColor = UIColor.materialRed(level: 900) ?? UIColor.materialRed()
-            trustText = lang(key: "Dangerous")
-            trustIcon = FAIcon.FAExclamationTriangleSolid
-        @unknown default:
-            // Default already set
-            break
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ChainSCTSegue" {
+            guard let destination = segue.destination as? CertificateTimestampsTableViewController else { return }
+            destination.timestamps = self.certificateChain?.signedTimestamps ?? []
         }
+    }
 
-        self.trustView.backgroundColor = trustColor
+    func buildTrustHeader() {
+        let parameters = TrustBannerParameters(trust: self.certificateChain!.trusted)
+        if parameters.solid {
+            self.trustView.backgroundColor = parameters.color
+        } else {
+            self.trustView.layer.borderColor = parameters.color.cgColor
+            self.trustView.layer.borderWidth = 2.0
+        }
+        self.trustView.layer.cornerRadius = parameters.cornerRadius
         self.trustResultLabel.textColor = UIColor.white
-        self.trustResultLabel.text = trustText
+        self.trustResultLabel.text = parameters.text
         self.trustIconLabel.textColor = UIColor.white
-        self.trustIconLabel.font = trustIcon.font(size: self.trustIconLabel.font.pointSize)
-        self.trustIconLabel.text = trustIcon.string()
+        self.trustIconLabel.font = parameters.icon.font(size: self.trustIconLabel.font.pointSize)
+        self.trustIconLabel.text = parameters.icon.string()
         self.trustDetailsButton.tintColor = UIColor.white
     }
 
@@ -177,26 +136,22 @@ class CertificateChainTableViewController: UITableViewController {
         certificateSection.title = lang(key: "Certificates")
         certificateSection.tag = certificatesSectionTag
 
-        guard let certificates = self.certificateChain?.certificates else {
-            return nil
-        }
+        guard let certificates = self.certificateChain?.certificates else { return nil }
 
         for certificate in certificates {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
-                return nil
-            }
+            guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
 
             if certificate.isExpired {
-                cell.textLabel?.text = lang(key: "{commonName} (Expired)", args: [certificate.summary])
-                cell.textLabel?.textColor = UIColor.systemRed
+                cell.cell.textLabel?.text = lang(key: "{commonName} (Expired)", args: [certificate.summary])
+                cell.cell.textLabel?.textColor = UIColor.systemRed
             } else if certificate.isNotYetValid {
-                cell.textLabel?.text = lang(key: "{commonName} (Not Yet Valid)", args: [certificate.summary])
-                cell.textLabel?.textColor = UIColor.systemRed
+                cell.cell.textLabel?.text = lang(key: "{commonName} (Not Yet Valid)", args: [certificate.summary])
+                cell.cell.textLabel?.textColor = UIColor.systemRed
             } else if certificate.revoked.isRevoked {
-                cell.textLabel?.text = lang(key: "{commonName} (Revoked)", args: [certificate.summary])
-                cell.textLabel?.textColor = UIColor.systemRed
+                cell.cell.textLabel?.text = lang(key: "{commonName} (Revoked)", args: [certificate.summary])
+                cell.cell.textLabel?.textColor = UIColor.systemRed
             } else {
-                cell.textLabel?.text = certificate.summary
+                cell.cell.textLabel?.text = certificate.summary
             }
 
             certificateSection.cells.append(cell)
@@ -213,9 +168,7 @@ class CertificateChainTableViewController: UITableViewController {
             connectionSection.footer = lang(key: "server_error_footer", args: [serverError.localizedDescription])
         }
 
-        guard let chain = self.certificateChain else {
-            return nil
-        }
+        guard let chain = self.certificateChain else { return nil }
 
         connectionSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Negotiated Ciphersuite"),
                                                                     value: chain.cipherSuite,
@@ -228,10 +181,25 @@ class CertificateChainTableViewController: UITableViewController {
                                                                     useFixedWidthFont: true))
 
         if chain.keyLog != nil {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
-                return nil
+            guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
+            cell.cell.textLabel?.text = lang(key: "View Keying Material")
+            cell.didSelect = { (_, _) in
+                guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else { return }
+                SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
             }
-            cell.textLabel?.text = lang(key: "View Keying Material")
+            connectionSection.cells.append(cell)
+        }
+
+        let timestamps = chain.signedTimestamps ?? []
+        if timestamps.count > 0 {
+            guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Count")) else { return nil }
+            guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+            guard let count = cell.cell.viewWithTag(2) as? UILabel else { return nil }
+            label.text = lang(key: "Certificate Timestamps")
+            count.text = String.init(format: "%ld", timestamps.count)
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "ChainSCTSegue", sender: nil)
+            }
             connectionSection.cells.append(cell)
         }
 
@@ -239,9 +207,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func makeRedirectSection() -> TableViewSection? {
-        guard let redirectedTo = self.serverInfo?.redirectedTo?.host else {
-            return nil
-        }
+        guard let redirectedTo = self.serverInfo?.redirectedTo?.host else { return nil }
 
         let redirectSection = TableViewSection()
         redirectSection.tag = redirectSectionTag
@@ -250,8 +216,8 @@ class CertificateChainTableViewController: UITableViewController {
         // Only make the redirect cell tappable if we can actually reload
         // (which we can't do in the extension)
         if AppState.getterViewController != nil {
-            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-            cell.selectionStyle = UITableViewCell.SelectionStyle.default
+            cell.cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            cell.cell.selectionStyle = UITableViewCell.SelectionStyle.default
         }
 
         redirectSection.cells.append(cell)
@@ -263,20 +229,12 @@ class CertificateChainTableViewController: UITableViewController {
         headersSection.title = lang(key: "Security HTTP Headers")
         headersSection.tag = headersSectionTag
 
-        guard let serverInfo = self.serverInfo else {
-            return nil
-        }
+        guard let serverInfo = self.serverInfo else { return nil }
 
         for header in serverInfo.securityHeaders.keys.sorted() {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Icon") else {
-                return nil
-            }
-            guard let titleLabel = cell.viewWithTag(1) as? UILabel else {
-                return nil
-            }
-            guard let iconLabel = cell.viewWithTag(2) as? UILabel else {
-                return nil
-            }
+            guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Icon")) else { return nil }
+            guard let titleLabel = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+            guard let iconLabel = cell.cell.viewWithTag(2) as? UILabel else { return nil }
             titleLabel.text = header
             let hasHeader = (self.serverInfo?.securityHeaders[header] ?? nil) is String
             if hasHeader {
@@ -289,10 +247,8 @@ class CertificateChainTableViewController: UITableViewController {
             headersSection.cells.append(cell)
         }
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Basic") else {
-            return nil
-        }
-        cell.textLabel?.text = lang(key: "View All")
+        guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
+        cell.cell.textLabel?.text = lang(key: "View All")
         headersSection.cells.append(cell)
 
         return headersSection
@@ -308,7 +264,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.sections[indexPath.section].cells[indexPath.row]
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -324,55 +280,42 @@ class CertificateChainTableViewController: UITableViewController {
 
         if sectionTag == certificatesSectionTag {
             CURRENT_CERTIFICATE = indexPath.row
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Certificate") else {
-                return
-            }
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Certificate") else { return }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
         } else if sectionTag == connectionSectionTag {
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Keying") else {
-                return
+            let cell = self.sections[indexPath.section].cells[indexPath.row]
+            if let didSelect = cell.didSelect {
+                didSelect(tableView, indexPath)
             }
-            SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
         } else if sectionTag == redirectSectionTag {
-            guard let controller = AppState.getterViewController else {
-                return
-            }
-            guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else {
-                return
-            }
+            guard let controller = AppState.getterViewController else { return }
+            guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else { return }
 
             controller.reloadWithQuery(query: redirectedTo)
         } else if sectionTag == headersSectionTag && indexPath.row == self.sections[indexPath.section].cells.count-1 {
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else {
-                return
-            }
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Headers") else { return }
             SPLIT_VIEW_CONTROLLER?.showDetailViewController(controller, sender: nil)
         }
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        let sectionTag = self.sections[indexPath.section].tag
-        if sectionTag == headersSectionTag {
-            return false
+        if let shouldShowMenu = self.sections[indexPath.section].cells[indexPath.row].shouldShowMenu {
+            return shouldShowMenu(tableView, indexPath)
         }
-
-        return true
+        return false
     }
 
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(copy(_:))
+        if let canPerformAction = self.sections[indexPath.section].cells[indexPath.row].canPerformAction {
+            return canPerformAction(tableView, action, indexPath, sender)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
-            var data: String?
-            let tableCell = self.sections[indexPath.section].cells[indexPath.row]
-            if let titleValueCell = tableCell as? TitleValueTableViewCell {
-                data = titleValueCell.valueLabel.text
-            } else {
-                data = tableCell.textLabel?.text
-            }
-            UIPasteboard.general.string = data
+        if let performAction = self.sections[indexPath.section].cells[indexPath.row].performAction {
+            return performAction(tableView, action, indexPath, sender)
         }
+        return
     }
 }

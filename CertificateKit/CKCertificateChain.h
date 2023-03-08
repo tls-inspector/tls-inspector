@@ -143,6 +143,11 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (strong, nonatomic, nullable) NSString * keyLog;
 
 /**
+ *  List of signed certificate timestamps included in the handshake
+ */
+@property (strong, nonatomic, nullable) NSArray<CKSignedCertificateTimestamp *> * signedTimestamps;
+
+/**
  Check if one or more certificates in the chain are known bad certificates
  */
 - (void) checkAuthorityTrust;

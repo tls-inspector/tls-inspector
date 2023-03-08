@@ -40,6 +40,9 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKInspectParameters.h>
 #import <CertificateKit/CKGetterParameters.h>
 #import <CertificateKit/CKLogging.h>
+#import <CertificateKit/CKCertificateBundle.h>
+#import <CertificateKit/CKRootCACertificateBundleManager.h>
+#import <CertificateKit/CKSignedCertificateTimestamp.h>
 
 /**
  Interface for global CertificateKit methods.

@@ -2,20 +2,34 @@ import UIKit
 import CertificateKit
 
 class SANListTableViewController: UITableViewController {
-    var altrnateNames: [CKAlternateNameObject] = []
+    var cells: [TableViewCell] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else {
-            return
-        }
+        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else { return }
+        guard let altNames = certificate.alternateNames else { return }
 
-        guard let altNames = certificate.alternateNames else {
-            return
+        for altName in altNames {
+            var type: String = lang(key: "sanType::Unknown")
+            switch altName.type {
+            case .directory:
+                type = lang(key: "sanType::Directory")
+            case .DNS:
+                type = lang(key: "sanType::DNS")
+            case .other:
+                type = lang(key: "sanType::Other")
+            case .email:
+                type = lang(key: "sanType::Email")
+            case .IP:
+                type = lang(key: "sanType::IP")
+            case .URI:
+                type = lang(key: "sanType::URI")
+            @unknown default:
+                break
+            }
+            self.cells.append(TitleValueTableViewCell.Cell(title: type, value: altName.value, useFixedWidthFont: true))
         }
-
-        self.altrnateNames = altNames
     }
 
     // MARK: - Table view data source
@@ -24,49 +38,31 @@ class SANListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.altrnateNames.count
+        return self.cells.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let altName = self.altrnateNames[indexPath.row]
-        var type: String = lang(key: "sanType::Unknown")
-        switch altName.type {
-        case .directory:
-            type = lang(key: "sanType::Directory")
-        case .DNS:
-            type = lang(key: "sanType::DNS")
-        case .other:
-            type = lang(key: "sanType::Other")
-        case .email:
-            type = lang(key: "sanType::Email")
-        case .IP:
-            type = lang(key: "sanType::IP")
-        case .URI:
-            type = lang(key: "sanType::URI")
-        @unknown default:
-            break
-        }
-        return TitleValueTableViewCell.Cell(title: type, value: altName.value, useFixedWidthFont: true)
+        return self.cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if let shouldShowMenu = self.cells[indexPath.row].shouldShowMenu {
+            return shouldShowMenu(tableView, indexPath)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(copy(_:))
+        if let canPerformAction = self.cells[indexPath.row].canPerformAction {
+            return canPerformAction(tableView, action, indexPath, sender)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
-            var data: String?
-            let tableCell = tableView.cellForRow(at: indexPath)!
-            if let titleValueCell = tableCell as? TitleValueTableViewCell {
-                data = titleValueCell.valueLabel.text
-            } else {
-                data = tableCell.textLabel?.text
-            }
-            UIPasteboard.general.string = data
+        if let performAction = self.cells[indexPath.row].performAction {
+            return performAction(tableView, action, indexPath, sender)
         }
+        return
     }
 }

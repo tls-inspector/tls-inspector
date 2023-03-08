@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1330"
+   LastUpgradeVersion = "1420"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -59,6 +59,17 @@
                BlueprintIdentifier = "3CF397401EB50E0900E8DBF4"
                BuildableName = "CertificateKitTests.xctest"
                BlueprintName = "CertificateKitTests"
+               ReferencedContainer = "container:TLS Inspector.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3C3C9524297DFA730084B7D9"
+               BuildableName = "TLS InspectorUITests.xctest"
+               BlueprintName = "TLS InspectorUITests"
                ReferencedContainer = "container:TLS Inspector.xcodeproj">
             </BuildableReference>
          </TestableReference>

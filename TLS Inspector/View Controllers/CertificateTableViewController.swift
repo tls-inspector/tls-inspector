@@ -36,16 +36,12 @@ class CertificateTableViewController: UITableViewController {
     }
 
     func openURL(_ urlString: String) {
-        guard let url = URL(string: urlString) else {
-            return
-        }
+        guard let url = URL(string: urlString) else { return }
         self.present(SFSafariViewController(url: url), animated: true, completion: nil)
     }
 
     func addCertificateReminder(_ sender: UIBarButtonItem) {
-        guard let chain = CERTIFICATE_CHAIN else {
-            return
-        }
+        guard let chain = CERTIFICATE_CHAIN else { return }
 
         UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: sender),
                                           title: lang(key: "Notification Date"),
@@ -107,25 +103,21 @@ class CertificateTableViewController: UITableViewController {
         self.present(activityController, animated: true, completion: nil)
     }
 
-    func buildTable() {
-        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else {
-            return
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CertSCTSegue" {
+            guard let destination = segue.destination as? CertificateTimestampsTableViewController else { return }
+            destination.timestamps = self.certificate.signedTimestamps ?? []
         }
+    }
+
+    func buildTable() {
+        guard let certificate = CERTIFICATE_CHAIN?.certificates[CURRENT_CERTIFICATE] else { return }
 
         self.sections = []
         self.certificate = certificate
         self.title = self.certificate.summary
-
-        if let subjectSection = makeNameSection(name: self.certificate.subject) {
-            subjectSection.title = lang(key: "Subject")
-            self.sections.append(subjectSection)
-        }
-
-        if let issuerSection = makeNameSection(name: self.certificate.issuer) {
-            issuerSection.title = lang(key: "Issuer")
-            self.sections.append(issuerSection)
-        }
-
+        self.sections.maybeAppend(makeSubjectNameSection())
+        self.sections.maybeAppend(makeIssuerNameSection())
         self.sections.maybeAppend(makeValidityPeriodSection())
         self.sections.maybeAppend(makeKeyUsageSection())
         self.sections.maybeAppend(makeFeatureSection())
@@ -134,9 +126,33 @@ class CertificateTableViewController: UITableViewController {
         self.sections.maybeAppend(makeKeyIdentifierSection())
         self.sections.maybeAppend(makeStatusProvidersSection())
         self.sections.maybeAppend(makeMetadataSection())
-        self.sections.maybeAppend(makeSubjectAltNameSection())
+        self.sections.maybeAppend(makeVendorTrustStatusSection())
 
         self.tableView.reloadData()
+    }
+
+    func makeSubjectNameSection() -> TableViewSection? {
+        guard let section = makeNameSection(name: self.certificate.subject) else { return nil }
+        section.title = lang(key: "Subject")
+        let alternateNames = self.certificate.alternateNames ?? []
+        if alternateNames.count > 0 {
+            guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Count")) else { return nil }
+            guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+            guard let count = cell.cell.viewWithTag(2) as? UILabel else { return nil }
+            label.text = lang(key: "Alternate Names")
+            count.text = String.init(format: "%ld", alternateNames.count)
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "SANSUNDERTALE", sender: nil)
+            }
+            section.cells.append(cell)
+        }
+        return section
+    }
+
+    func makeIssuerNameSection() -> TableViewSection? {
+        guard let section = makeNameSection(name: self.certificate.issuer) else { return nil }
+        section.title = lang(key: "Issuer")
+        return section
     }
 
     func makeNameSection(name: CKNameObject) -> TableViewSection? {
@@ -185,31 +201,27 @@ class CertificateTableViewController: UITableViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm 'UTC'"
 
-        guard let notBefore = self.certificate.notBefore else {
-            return nil
-        }
-        guard let notAfter = self.certificate.notAfter else {
-            return nil
-        }
+        guard let notBefore = self.certificate.notBefore else { return nil }
+        guard let notAfter = self.certificate.notAfter else { return nil }
 
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
-            cell.detailTextLabel?.text = formatter.string(from: notBefore)
-            cell.textLabel?.text = lang(key: "Not Before")
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) {
+            cell.cell.detailTextLabel?.text = formatter.string(from: notBefore)
+            cell.cell.textLabel?.text = lang(key: "Not Before")
             validitySection.cells.append(cell)
         }
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
-            cell.detailTextLabel?.text = formatter.string(from: notAfter)
-            cell.textLabel?.text = lang(key: "Not After")
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) {
+            cell.cell.detailTextLabel?.text = formatter.string(from: notAfter)
+            cell.cell.textLabel?.text = lang(key: "Not After")
             validitySection.cells.append(cell)
         }
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
-            cell.detailTextLabel?.text = DateDuration.between(first: notBefore, second: notAfter)
-            cell.textLabel?.text = lang(key: "Valid For")
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) {
+            cell.cell.detailTextLabel?.text = DateDuration.between(first: notBefore, second: notAfter)
+            cell.cell.textLabel?.text = lang(key: "Valid For")
             validitySection.cells.append(cell)
         }
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
-            cell.detailTextLabel?.text = DateDuration.between(first: Date(), second: notAfter)
-            cell.textLabel?.text = lang(key: "Will Expire In")
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) {
+            cell.cell.detailTextLabel?.text = DateDuration.between(first: Date(), second: notAfter)
+            cell.cell.textLabel?.text = lang(key: "Will Expire In")
             validitySection.cells.append(cell)
         }
 
@@ -249,15 +261,13 @@ class CertificateTableViewController: UITableViewController {
         let featureSection = TableViewSection()
         featureSection.title = lang(key: "Features")
 
-        guard let features = self.certificate.tlsFeatures else {
-            return nil
-        }
+        guard let features = self.certificate.tlsFeatures else { return nil }
 
         for feature in features {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Basic") else {
+            guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) else {
                 continue
             }
-            cell.textLabel?.text = lang(key: feature)
+            cell.cell.textLabel?.text = lang(key: feature)
             featureSection.cells.append(cell)
         }
 
@@ -303,29 +313,21 @@ class CertificateTableViewController: UITableViewController {
         let pubKeySection = TableViewSection()
         pubKeySection.title = lang(key: "Public Key")
 
-        guard let publicKey = self.certificate.publicKey else {
-            return nil
-        }
+        guard let publicKey = self.certificate.publicKey else { return nil }
 
-        guard let algorithmCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-            return nil
-        }
-        algorithmCell.textLabel?.text = lang(key: "Algorithm")
-        algorithmCell.detailTextLabel?.text = lang(key: "KeyAlgorithm::" + publicKey.algroithm)
+        guard let algorithmCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) else { return nil }
+        algorithmCell.cell.textLabel?.text = lang(key: "Algorithm")
+        algorithmCell.cell.detailTextLabel?.text = lang(key: "KeyAlgorithm::" + publicKey.algroithm)
         pubKeySection.cells.append(algorithmCell)
 
-        guard let signatureCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-            return nil
-        }
-        signatureCell.textLabel?.text = lang(key: "Signature")
-        signatureCell.detailTextLabel?.text = self.certificate.signatureAlgorithm ?? "Unknown"
+        guard let signatureCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) else { return nil }
+        signatureCell.cell.textLabel?.text = lang(key: "Signature")
+        signatureCell.cell.detailTextLabel?.text = self.certificate.signatureAlgorithm ?? "Unknown"
         pubKeySection.cells.append(signatureCell)
 
-        guard let sizeCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-            return nil
-        }
-        sizeCell.textLabel?.text = lang(key: "Size")
-        sizeCell.detailTextLabel?.text = String.init(format: "%ld", publicKey.bitLength)
+        guard let sizeCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) else { return nil }
+        sizeCell.cell.textLabel?.text = lang(key: "Size")
+        sizeCell.cell.detailTextLabel?.text = String.init(format: "%ld", publicKey.bitLength)
         pubKeySection.cells.append(sizeCell)
 
         return pubKeySection
@@ -335,9 +337,7 @@ class CertificateTableViewController: UITableViewController {
         let keyIdentifierSection = TableViewSection()
         keyIdentifierSection.title = lang(key: "Key Identifier")
 
-        guard let identifiers = self.certificate.keyIdentifiers else {
-            return nil
-        }
+        guard let identifiers = self.certificate.keyIdentifiers else { return nil }
 
         if let subject = identifiers["subject"] {
             keyIdentifierSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Subject"),
@@ -391,19 +391,30 @@ class CertificateTableViewController: UITableViewController {
                                                                       useFixedWidthFont: true))
         }
 
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") {
-            cell.textLabel?.text = lang(key: "Certificate Authority")
-            cell.detailTextLabel?.text = self.certificate.isCA ? lang(key: "Yes") : lang(key: "No")
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) {
+            cell.cell.textLabel?.text = lang(key: "Certificate Authority")
+            cell.cell.detailTextLabel?.text = self.certificate.isCA ? lang(key: "Yes") : lang(key: "No")
             metadataSection.cells.append(cell)
         }
 
         if let version = self.certificate.version {
-            guard let versionCell = self.tableView.dequeueReusableCell(withIdentifier: "Detail") else {
-                return nil
-            }
-            versionCell.textLabel?.text = lang(key: "Version")
-            versionCell.detailTextLabel?.text = version.stringValue
+            guard let versionCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Detail")) else { return nil }
+            versionCell.cell.textLabel?.text = lang(key: "Version")
+            versionCell.cell.detailTextLabel?.text = version.stringValue
             metadataSection.cells.append(versionCell)
+        }
+
+        let timestamps = self.certificate.signedTimestamps ?? []
+        if timestamps.count > 0 {
+            guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Count")) else { return nil }
+            guard let label = cell.cell.viewWithTag(1) as? UILabel else { return nil }
+            guard let count = cell.cell.viewWithTag(2) as? UILabel else { return nil }
+            label.text = lang(key: "Certificate Timestamps")
+            count.text = String.init(format: "%ld", timestamps.count)
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "CertSCTSegue", sender: nil)
+            }
+            metadataSection.cells.append(cell)
         }
 
         if metadataSection.cells.count == 0 {
@@ -412,31 +423,34 @@ class CertificateTableViewController: UITableViewController {
         return metadataSection
     }
 
-    func makeSubjectAltNameSection() -> TableViewSection? {
-        let sanSection = TableViewSection()
-        sanSection.title = lang(key: "Subject Alternate Names")
-        sanSection.tag = 1
+    func makeVendorTrustStatusSection() -> TableViewSection? {
+        let vendorTrustSection = TableViewSection()
+        vendorTrustSection.title = lang(key: "Certificate Trust")
 
-        guard let alternateNames = self.certificate.alternateNames else {
+        guard let vendorTrustStatus = self.certificate.vendorTrustStatus else {
             return nil
         }
-        if alternateNames.count == 0 {
-            return nil
-        }
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Count") else {
-            return nil
-        }
-        guard let label = cell.viewWithTag(1) as? UILabel else {
-            return nil
-        }
-        guard let count = cell.viewWithTag(2) as? UILabel else {
-            return nil
-        }
-        label.text = lang(key: "View All")
-        count.text = String.init(format: "%ld", alternateNames.count)
-        sanSection.cells.append(cell)
 
-        return sanSection
+        for key in ["apple", "google", "microsoft", "mozilla"] {
+            let isTrusted = vendorTrustStatus[key] as? Bool ?? false
+            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Status") else {
+                continue
+            }
+            guard let iconLabel = cell.viewWithTag(1) as? UILabel else {
+                continue
+            }
+            let icon = isTrusted ? FAIcon.FACheckCircleRegular : FAIcon.FATimesCircleRegular
+            iconLabel.text = icon.string()
+            iconLabel.font = icon.font(size: iconLabel.font.pointSize)
+            iconLabel.textColor = isTrusted ? UIColor.materialGreen() : UIColor.materialRed()
+            guard let statusLabel = cell.viewWithTag(2) as? UILabel else {
+                continue
+            }
+            statusLabel.text = lang(key: key)
+            vendorTrustSection.cells.append(TableViewCell(cell))
+        }
+
+        return vendorTrustSection
     }
 
     // MARK: - Table view data source
@@ -457,34 +471,33 @@ class CertificateTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.sections[indexPath.section].cells[indexPath.row]
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = self.sections[indexPath.section]
-        if section.tag == 1 {
-            self.performSegue(withIdentifier: "SANSUNDERTALE", sender: nil)
-        }
+        let cell = self.sections[indexPath.section].cells[indexPath.row]
+        guard let didSelect = cell.didSelect else { return }
+        didSelect(tableView, indexPath)
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if let shouldShowMenu = self.sections[indexPath.section].cells[indexPath.row].shouldShowMenu {
+            return shouldShowMenu(tableView, indexPath)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(copy(_:))
+        if let canPerformAction = self.sections[indexPath.section].cells[indexPath.row].canPerformAction {
+            return canPerformAction(tableView, action, indexPath, sender)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
-            var data: String?
-            let tableCell = self.sections[indexPath.section].cells[indexPath.row]
-            if let titleValueCell = tableCell as? TitleValueTableViewCell {
-                data = titleValueCell.valueLabel.text
-            } else {
-                data = tableCell.textLabel?.text
-            }
-            UIPasteboard.general.string = data
+        if let performAction = self.sections[indexPath.section].cells[indexPath.row].performAction {
+            return performAction(tableView, action, indexPath, sender)
         }
+        return
     }
 }

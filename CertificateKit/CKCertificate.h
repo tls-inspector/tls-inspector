@@ -24,6 +24,7 @@
 #import "CKNameObject.h"
 #import "CKAlternateNameObject.h"
 #import "CKRevoked.h"
+#import "CKSignedCertificateTimestamp.h"
 
 @class CKCertificatePublicKey;
 
@@ -172,6 +173,11 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nonnull, readonly) CKNameObject * issuer;
 
 /**
+ * Is this certificate self signed
+ */
+@property (nonatomic) BOOL isSelfSigned;
+
+/**
  *  Information about the certificates revocation status.
  */
 @property (strong, nonatomic, nonnull) CKRevoked * revoked;
@@ -225,6 +231,16 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  Get a dictionary of all key identifiers
  */
 @property (strong, nonatomic, nullable, readonly) NSDictionary<NSString *, NSString *> * keyIdentifiers;
+
+/**
+ *  Dictionary mapping the vendor name (e.g. mozilla) to if the certificate is present in their root ca bundle. Only populated on self-signed certificates.
+ */
+@property (strong, nonatomic, nullable) NSDictionary<NSString *, NSNumber *> * vendorTrustStatus;
+
+/**
+ *  List of signed certificate timestamps embedded in the certificate
+ */
+@property (strong, nonatomic, nullable) NSArray<CKSignedCertificateTimestamp *> * signedTimestamps;
 
 /**
  *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.

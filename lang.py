@@ -1,29 +1,69 @@
 import os
-import subprocess
 
-langs = ['en', 'de']
+def cleanup(v):
+    r = v.replace("&", "&amp;")
+    r = r.replace("\"", "&quot;")
+    r = r.replace("'", "&apos;")
+    r = r.replace("\\n", "\n")
+    return r
 
-for lang in langs:
-    strings_path = "TLS Inspector/Localization/Strings/" + lang + ".plist"
-    atomic_path = "TLS Inspector/Localization/Strings/._" + lang + ".plist"
+def generate_plist(lang):
+    strings_path = "TLS Inspector/Localization/Strings/" + lang + ".strings"
+    plist_path = "TLS Inspector/Localization/Strings/" + lang + ".plist"
+    plist_atomic_path = "TLS Inspector/Localization/Strings/" + lang + ".plist_atomic"
 
-    subprocess.call(["plutil", "-convert", "binary1", strings_path])
-    subprocess.call(["plutil", "-convert", "xml1", strings_path])
+    pairs = {}
 
-    line_num = 0
     with open(strings_path, 'r') as r:
-        with open(atomic_path, 'w') as w:
+        line_n = 0
+        while True:
+            line_n += 1
             line = r.readline()
-            while line:
-                # Ignore the first 4 lines of the file (the schema declaration)
-                if line_num <= 4:
-                    w.write(line)
-                else:
-                    line = line.replace("'", "&apos;")
-                    line = line.replace('"', "&quot;")
-                    w.write(line)
-                line_num += 1
-                line = r.readline()
+            if not line:
+                break
 
-    os.remove(strings_path)
-    os.rename(atomic_path, strings_path)
+            if line[0] == "#":
+                continue
+
+            parts = line.split('\t')
+            if len(parts) != 2:
+                print("error: Invalid string entry in %s:%d" % (lang+".strings", line_n))
+                os.exit(1)
+
+            key = cleanup(parts[0].rstrip())
+            value = cleanup(parts[1].rstrip())
+            pairs[key] = value
+
+    plist_head = """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+"""
+
+    plist_footer = """</dict>
+</plist>
+"""
+
+    try:
+        os.remove(plist_atomic_path)
+    except Exception as e:
+        pass
+
+    with open(plist_atomic_path, 'w') as w:
+        w.write(plist_head)
+        for key, value in pairs.items():
+            line = """\t<key>%s</key>\n\t<string>%s</string>\n""" % (key, value)
+            w.write(line)
+        w.write(plist_footer)
+
+    try:
+        os.remove(plist_path)
+    except Exception as e:
+        pass
+
+    os.rename(plist_atomic_path, plist_path)
+    print("Generated %s" % plist_path)
+
+
+for lang in ['en', 'de']:
+    generate_plist(lang)

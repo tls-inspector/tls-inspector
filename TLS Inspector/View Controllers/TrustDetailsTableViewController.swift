@@ -5,6 +5,7 @@ class TrustDetailsTableViewController: UITableViewController {
     @IBOutlet weak var trustView: UIView!
     @IBOutlet weak var trustIconLabel: UILabel!
     @IBOutlet weak var trustResultLabel: UILabel!
+    @IBOutlet weak var warningView: UIView!
     var certificateChain: CKCertificateChain!
     var sections: [TableViewSection] = []
 
@@ -17,6 +18,7 @@ class TrustDetailsTableViewController: UITableViewController {
         }
         self.certificateChain = chain
         self.buildTrustHeader()
+        self.buildTrustFooter()
 
         if let section = buildTrustSection() {
             self.sections.append(section)
@@ -28,59 +30,28 @@ class TrustDetailsTableViewController: UITableViewController {
     }
 
     func buildTrustHeader() {
-        self.trustView.layer.cornerRadius = 5.0
-
-        var trustColor = UIColor.materialPink()
-        var trustText = lang(key: "Unknown")
-        var trustIcon = FAIcon.FAQuestionCircleSolid
-        switch self.certificateChain.trusted {
-        case .trusted:
-            trustColor = UIColor.materialGreen()
-            trustText = lang(key: "Trusted")
-            trustIcon = FAIcon.FACheckCircleSolid
-        case .locallyTrusted:
-            trustColor = UIColor.materialLightGreen()
-            trustText = lang(key: "Locally Trusted")
-            trustIcon = FAIcon.FACheckCircleRegular
-        case .untrusted, .invalidDate, .wrongHost:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .sha1Leaf, .sha1Intermediate:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Insecure")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .selfSigned, .revokedLeaf, .revokedIntermediate:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .leafMissingRequiredKeyUsage:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .weakRSAKey:
-            trustColor = UIColor.materialRed()
-            trustText = lang(key: "Insecure")
-            trustIcon = FAIcon.FATimesCircleSolid
-        case .issueDateTooLong:
-            trustColor = UIColor.materialAmber()
-            trustText = lang(key: "Untrusted")
-            trustIcon = FAIcon.FAExclamationCircleSolid
-        case .badAuthority:
-            trustColor = UIColor.materialRed(level: 900) ?? UIColor.materialRed()
-            trustText = lang(key: "Dangerous")
-            trustIcon = FAIcon.FAExclamationTriangleSolid
-        @unknown default:
-            // Default already set
-            break
+        let parameters = TrustBannerParameters(trust: self.certificateChain!.trusted)
+        if parameters.solid {
+            self.trustView.backgroundColor = parameters.color
+        } else {
+            self.trustView.layer.borderColor = parameters.color.cgColor
+            self.trustView.layer.borderWidth = 2.0
         }
-
-        self.trustView.backgroundColor = trustColor
+        self.trustView.layer.cornerRadius = parameters.cornerRadius
         self.trustResultLabel.textColor = UIColor.white
-        self.trustResultLabel.text = trustText
+        self.trustResultLabel.text = parameters.text
         self.trustIconLabel.textColor = UIColor.white
-        self.trustIconLabel.font = trustIcon.font(size: self.trustIconLabel.font.pointSize)
-        self.trustIconLabel.text = trustIcon.string()
+        self.trustIconLabel.font = parameters.icon.font(size: self.trustIconLabel.font.pointSize)
+        self.trustIconLabel.text = parameters.icon.string()
+    }
+
+    func buildTrustFooter() {
+        switch self.certificateChain.trusted {
+        case .locallyTrusted, .untrusted, .wrongHost, .sha1Leaf, .selfSigned, .revokedLeaf, .weakRSAKey, .badAuthority:
+            self.warningView.isHidden = false
+        default:
+            self.warningView.isHidden = true
+        }
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -161,6 +132,6 @@ class TrustDetailsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.sections[indexPath.section].cells[indexPath.row]
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 }

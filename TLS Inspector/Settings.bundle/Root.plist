@@ -42,6 +42,14 @@
 			<key>File</key>
 			<string>idnacocoa</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Mozilla CA Certificate Store</string>
+			<key>File</key>
+			<string>mozillaca</string>
+		</dict>
 	</array>
 </dict>
 </plist>

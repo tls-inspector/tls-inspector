@@ -147,6 +147,22 @@ INSERT_OPENSSL_ERROR_METHOD
         CRL_DIST_POINTS_free(points);
     }
 
+    {
+        struct stack_st_SCT * sct_list = X509_get_ext_d2i(cert, NID_ct_precert_scts, NULL, NULL);
+        int numberOfSct = sk_SCT_num(sct_list);
+        NSMutableArray<CKSignedCertificateTimestamp *> * timestampList = [NSMutableArray new];
+        for (int i = 0; i < numberOfSct; i++) {
+            CKSignedCertificateTimestamp * sct = [CKSignedCertificateTimestamp fromSCT:sk_SCT_value(sct_list, i)];
+            if (sct == nil) {
+                continue;
+            }
+            [timestampList addObject:sct];
+        }
+        if (numberOfSct) {
+            xcert.signedTimestamps = timestampList;
+        }
+    }
+
     // Get any TLS features
     {
         TLS_FEATURE * tlsFeatures = X509_get_ext_d2i(cert, NID_tlsfeature, NULL, NULL);
@@ -198,6 +214,31 @@ INSERT_OPENSSL_ERROR_METHOD
         if (identifiers.allKeys.count > 0) {
             xcert.keyIdentifiers = identifiers;
         }
+    }
+
+    if ([xcert isSelfSigned]) {
+        NSNumber * appleTrusted = @NO;
+        NSNumber * googleTrusted = @NO;
+        NSNumber * microsoftTrusted = @NO;
+        NSNumber * mozillaTrusted = @NO;
+        if ([CKRootCACertificateBundleManager sharedInstance].appleBundle != nil && [[CKRootCACertificateBundleManager sharedInstance].appleBundle containsCertificate:xcert]) {
+            appleTrusted = @YES;
+        }
+        if ([CKRootCACertificateBundleManager sharedInstance].googleBundle != nil && [[CKRootCACertificateBundleManager sharedInstance].googleBundle containsCertificate:xcert]) {
+            googleTrusted = @YES;
+        }
+        if ([CKRootCACertificateBundleManager sharedInstance].microsoftBundle != nil && [[CKRootCACertificateBundleManager sharedInstance].microsoftBundle containsCertificate:xcert]) {
+            microsoftTrusted = @YES;
+        }
+        if ([CKRootCACertificateBundleManager sharedInstance].mozillaBundle != nil && [[CKRootCACertificateBundleManager sharedInstance].mozillaBundle containsCertificate:xcert]) {
+            mozillaTrusted = @YES;
+        }
+        xcert.vendorTrustStatus = @{
+            @"apple": appleTrusted,
+            @"google": googleTrusted,
+            @"microsoft": microsoftTrusted,
+            @"mozilla": mozillaTrusted,
+        };
     }
 
     return xcert;
@@ -395,6 +436,10 @@ INSERT_OPENSSL_ERROR_METHOD
     sk_GENERAL_NAME_free(sans);
 
     return names;
+}
+
+- (BOOL) isSelfSigned {
+    return X509_self_signed((X509 *)self.X509Certificate, 0) == 1;
 }
 
 - (BOOL) isCA {

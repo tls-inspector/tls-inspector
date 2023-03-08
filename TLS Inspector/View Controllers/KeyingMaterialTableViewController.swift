@@ -2,15 +2,11 @@ import UIKit
 import CertificateKit
 
 class KeyingMaterialTableViewController: UITableViewController {
-    var keys: [[String]] = []
+    var sections: [TableViewSection] = []
 
     override func viewDidLoad() {
-        guard let chain = CERTIFICATE_CHAIN else {
-            return
-        }
-        guard let keyLog = chain.keyLog else {
-            return
-        }
+        guard let chain = CERTIFICATE_CHAIN else { return }
+        guard let keyLog = chain.keyLog else { return }
 
         let lines = keyLog.split(separator: "\n")
         for line in lines {
@@ -21,7 +17,15 @@ class KeyingMaterialTableViewController: UITableViewController {
             let label = String(parts[0])
             let clientRandom = String(parts[1])
             let secret = String(parts[2])
-            keys.append([label, clientRandom, secret])
+
+            let section = TableViewSection()
+            section.title = label
+            section.cells = [
+                TitleValueTableViewCell.Cell(title: lang(key: "Client Random"), value: clientRandom, useFixedWidthFont: true),
+                TitleValueTableViewCell.Cell(title: lang(key: "Secret"), value: secret, useFixedWidthFont: true)
+            ]
+
+            sections.append(section)
         }
 
         super.viewDidLoad()
@@ -36,18 +40,12 @@ class KeyingMaterialTableViewController: UITableViewController {
     }
 
     func exportKeylog(_ sender: UIBarButtonItem) {
-        guard let chain = CERTIFICATE_CHAIN else {
-            return
-        }
-        guard let keyLog = chain.keyLog?.data(using: .utf8) else {
-            return
-        }
+        guard let chain = CERTIFICATE_CHAIN else { return }
+        guard let keyLog = chain.keyLog?.data(using: .utf8) else { return }
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let header = String(format: "# Generated on %@ by TLS Inspector v%@ (%@) using OpenSSL %@\n", formatter.string(from: Date()), AppInfo.version(), AppInfo.build(), CertificateKit.opensslVersion())
-        guard var keylogFileData = header.data(using: .utf8) else {
-            return
-        }
+        guard var keylogFileData = header.data(using: .utf8) else { return }
         keylogFileData.append(keyLog)
 
         let fileName = "keylog.txt"
@@ -65,47 +63,39 @@ class KeyingMaterialTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return keys.count
+        return self.sections.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let key = self.keys[section]
-        return key[0]
+        return self.sections[section].title
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.sections[section].cells.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let key = self.keys[indexPath.section]
-        let clientRandom = key[1]
-        let secret = key[2]
-
-        if indexPath.row == 0 {
-            return TitleValueTableViewCell.Cell(title: lang(key: "Client Random"), value: clientRandom, useFixedWidthFont: true)
-        }
-        return TitleValueTableViewCell.Cell(title: lang(key: "Secret"), value: secret, useFixedWidthFont: true)
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if let shouldShowMenu = self.sections[indexPath.section].cells[indexPath.row].shouldShowMenu {
+            return shouldShowMenu(tableView, indexPath)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(copy(_:))
+        if let canPerformAction = self.sections[indexPath.section].cells[indexPath.row].canPerformAction {
+            return canPerformAction(tableView, action, indexPath, sender)
+        }
+        return false
     }
 
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
-            var data: String?
-            let tableCell = tableView.cellForRow(at: indexPath)!
-            if let titleValueCell = tableCell as? TitleValueTableViewCell {
-                data = titleValueCell.valueLabel.text
-            } else {
-                data = tableCell.textLabel?.text
-            }
-            UIPasteboard.general.string = data
+        if let performAction = self.sections[indexPath.section].cells[indexPath.row].performAction {
+            return performAction(tableView, action, indexPath, sender)
         }
+        return
     }
 }

@@ -6,10 +6,12 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     let projectURL = "https://tlsinspector.com/"
     let projectContributeURL = "https://tlsinspector.com/contribute.html"
     let testflightURL = "https://tlsinspector.com/beta.html"
-    let twitterURL = "https://twitter.com/tlsinspector"
+    let mastodonURL = "https://infosec.exchange/@tlsinspector"
     @IBOutlet weak var lockCircle: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
     var quotes: [String] = []
     var taps = 0
+    var sections: [TableViewSection] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +23,34 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapPicture(target:)))
         self.lockCircle.isUserInteractionEnabled = true
         self.lockCircle.addGestureRecognizer(tap)
+
+        self.sections = [
+            buildShareSection(),
+            buildGetInvolvedSection()
+        ]
+    }
+
+    func buildShareSection() -> TableViewSection {
+        let section = TableViewSection()
+        section.title = lang(key: "Share & Feedback")
+        let opensslVersion = CertificateKit.opensslVersion()
+        let libcurlVersion = CertificateKit.libcurlVersion()
+        section.footer = "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), tiny-curl: \(libcurlVersion)"
+
+        return section
+    }
+
+    func buildGetInvolvedSection() -> TableViewSection {
+        let section = TableViewSection()
+        section.title = lang(key: "Get Involved")
+        section.footer = lang(key: "copyright_license_footer")
+
+        return section
     }
 
     func loadQuotes() -> [String]? {
-        guard let quotesPath = Bundle.main.path(forResource: "QuoteList", ofType: "plist") else {
-            return nil
-        }
-        guard let quotes = NSArray.init(contentsOfFile: quotesPath) as? [String] else {
-            return nil
-        }
+        guard let quotesPath = Bundle.main.path(forResource: "QuoteList", ofType: "plist") else { return nil }
+        guard let quotes = NSArray.init(contentsOfFile: quotesPath) as? [String] else { return nil }
         return quotes
     }
 
@@ -78,7 +99,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         } else if indexPath.section == 1 && indexPath.row == 1 {
             cell.textLabel?.text = lang(key: "Test New Features")
         } else if indexPath.section == 1 && indexPath.row == 2 {
-            return tableView.dequeueReusableCell(withIdentifier: "Twitter", for: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "Mastodon", for: indexPath)
         }
         return cell
     }
@@ -110,9 +131,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else {
-            return
-        }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
         if indexPath.section == 0 && indexPath.row == 0 {
             let blub = lang(key: "Trust & Safety On-The-Go with TLS Inspector: {url}", args: [projectURL])
@@ -130,7 +149,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         } else if indexPath.section == 1 && indexPath.row == 1 {
             OpenURLInSafari(testflightURL)
         } else if indexPath.section == 1 && indexPath.row == 2 {
-            OpenURLInSafari(twitterURL)
+            OpenURLInSafari(mastodonURL)
         }
     }
 }

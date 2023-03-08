@@ -23,6 +23,6 @@
 
 @interface CKNetworkCertificateChainGetter : CKCertificateChainGetter
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters API_AVAILABLE(ios(12.0));
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters API_AVAILABLE(ios(12.4));
 
 @end

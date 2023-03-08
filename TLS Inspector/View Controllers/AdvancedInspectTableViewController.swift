@@ -15,9 +15,7 @@ class AdvancedInspectTableViewController: UITableViewController {
     // MARK: - Title bar buttons
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true) {
-            guard let done = self.donePressed else {
-                return
-            }
+            guard let done = self.donePressed else { return }
 
             done(self.parameters)
         }
@@ -58,6 +56,7 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.autocorrectionType = .no
             input.spellCheckingType = .no
             input.autocapitalizationType = .none
+            input.accessibilityLabel = "Domain Name or IP Address"
         } valueDidChange: { (value: String) in
             self.parameters.hostAddress = value
         }
@@ -67,10 +66,9 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.keyboardType = .numberPad
             input.autocorrectionType = .no
             input.spellCheckingType = .no
+            input.accessibilityLabel = "Port"
         } valueDidChange: { (value: String) in
-            guard let port = UInt16.init(value) else {
-                return
-            }
+            guard let port = UInt16.init(value) else { return }
 
             self.parameters.port = port
         }
@@ -80,6 +78,7 @@ class AdvancedInspectTableViewController: UITableViewController {
             input.keyboardType = .asciiCapable
             input.autocorrectionType = .no
             input.spellCheckingType = .no
+            input.accessibilityLabel = "Host IP Address"
         } valueDidChange: { (value: String) in
             self.parameters.ipAddress = value
         }
@@ -94,15 +93,11 @@ class AdvancedInspectTableViewController: UITableViewController {
         section.title = lang(key: "Network")
         section.footer = lang(key: "Automatic will choose IPv6 if available.")
 
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment") else {
-            return nil
-        }
+        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "IPVSegment")) else { return nil }
 
-        cell.selectionStyle = .none
+        cell.cell.selectionStyle = .none
 
-        guard let segment = cell.viewWithTag(1) as? UISegmentedControl else {
-            return nil
-        }
+        guard let segment = cell.cell.viewWithTag(1) as? UISegmentedControl else { return nil }
 
         switch self.parameters.ipVersion {
         case IP_VERSION_AUTOMATIC:
@@ -138,6 +133,6 @@ class AdvancedInspectTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.sections[indexPath.section].cells[indexPath.row]
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 }
