@@ -49,7 +49,6 @@
 @property (nonatomic, readwrite) SSLProtocol protocol;
 @property (nonatomic, readwrite) BOOL crlVerified;
 @property (strong, nonatomic) CKCertificateChain * chain;
-
 @end
 
 @implementation CKSecureTransportCertificateChainGetter
@@ -88,7 +87,7 @@
             break;
         }
         case NSStreamEventHasSpaceAvailable: {
-            [self streamHasSpaceAvailable:stream];
+            [self performSelectorInBackground:@selector(streamHasSpaceAvailable:) withObject:stream];
             break;
         }
 
@@ -143,6 +142,7 @@
     uint8_t * buffer = malloc(length);
     CFDataGetBytes(handleData, CFRangeMake(0, length), buffer);
     int sock_fd = (int)*buffer;
+    CFRelease(handleData);
     NSString * remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
     free(buffer);
     if (remoteAddr == nil) {
@@ -159,9 +159,12 @@
     SSLGetNumberEnabledCiphers(context, &numCiphers);
     SSLCipherSuite * ciphers = malloc(numCiphers);
     SSLGetNegotiatedCipher(context, ciphers);
-
     SSLProtocol protocol = 0;
     SSLGetNegotiatedProtocolVersion(context, &protocol);
+    NSString * cipherString = [self CiphersuiteToString:ciphers[0]];
+    NSString * protocolString = [self protocolString:protocol];
+    CFRelease(context);
+    free(ciphers);
 
     [inputStream close];
     [outputStream close];
@@ -211,8 +214,8 @@
 
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, count);
 
-    self.chain.cipherSuite = [self CiphersuiteToString:ciphers[0]];
-    self.chain.protocol = [self protocolString:protocol];
+    self.chain.cipherSuite = cipherString;
+    self.chain.protocol = protocolString;
     self.chain.remoteAddress = remoteAddr;
     if (certs.count > 1) {
         self.chain.rootCA = [self.chain.certificates lastObject];
@@ -244,19 +247,17 @@
 - (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {
     CKOCSPResponse * ocspResponse;
     CKCRLResponse * crlResponse;
-    NSError * ocspError;
-    NSError * crlError;
 
     if (self.parameters.checkOCSP) {
-        [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
-        if (ocspError != nil) {
-            PError(@"OCSP Error: %@", ocspError.description);
+        NSError * err = [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse];
+        if (err != nil) {
+            PError(@"OCSP Error: %@", err.description);
         }
     }
     if (self.parameters.checkCRL) {
-        [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
-        if (crlError != nil) {
-            PError(@"CRL Error: %@", crlError.description);
+        NSError * err = [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse];
+        if (err != nil) {
+            PError(@"CRL Error: %@", err.description);
         }
     }
     return [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];

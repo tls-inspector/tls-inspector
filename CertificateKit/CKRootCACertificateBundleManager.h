@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (CKRootCACertificateBundleManager *) sharedInstance;
 
 /// Check for newer versions of root CA certificate bundles
-/// - Parameter error: Any update error. Nil indicates newer bundles were downloaded. An error with code 200 means no updates were needed.
-- (void) updateNow:(NSError * _Nullable * _Nullable)error;
+/// Returns: Any update error. Nil indicates newer bundles were downloaded. An error with code 200 means no updates were needed.
+- (NSError * _Nullable) updateNow;
 
 /// Clears any downloaded bundles and reloads using the embedded bundles
 - (void) clearDownloadedBundles;

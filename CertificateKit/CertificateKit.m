@@ -24,7 +24,10 @@
     CFDictionaryRef proxySettings = CFNetworkCopySystemProxySettings();
     const CFStringRef proxyCFString = (const CFStringRef)CFDictionaryGetValue(proxySettings, (const void*)kCFNetworkProxiesHTTPProxy);
     NSString * proxyString = (__bridge NSString *)(proxyCFString);
-    return proxyString != nil && proxyString.length > 0;
+    BOOL usingProxy = proxyString != nil && proxyString.length > 0;
+
+    CFRelease(proxySettings);
+    return usingProxy;
 }
 
 @end

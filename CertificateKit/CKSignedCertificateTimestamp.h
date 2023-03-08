@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - signature: The signature data
 - (CKSignedCertificateTimestamp * _Nonnull) initWithLogId:(NSData * _Nonnull)logId timestamp:(NSDate * _Nonnull)timestamp signatureType:(NSString * _Nonnull)signatureType signature:(NSData * _Nonnull)signature;
 
-+ (CKSignedCertificateTimestamp * _Nonnull) fromSCT:(void *)sct;
++ (CKSignedCertificateTimestamp * _Nullable) fromSCT:(void *)sct;
 
 @end
 

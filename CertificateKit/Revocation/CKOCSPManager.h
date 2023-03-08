@@ -26,6 +26,6 @@
 @interface CKOCSPManager : NSObject
 
 + (CKOCSPManager * _Nonnull) sharedManager;
-- (void) queryCertificate:(CKCertificate * _Nonnull)certificate issuer:(CKCertificate * _Nonnull)issuer response:(CKOCSPResponse * _Nullable * _Nonnull)response error:(NSError * _Nullable * _Nonnull)error;
+- (NSError * _Nullable) queryCertificate:(CKCertificate * _Nonnull)certificate issuer:(CKCertificate * _Nonnull)issuer response:(CKOCSPResponse * _Nullable * _Nonnull)response;
 
 @end

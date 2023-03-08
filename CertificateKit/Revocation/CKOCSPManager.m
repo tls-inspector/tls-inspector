@@ -59,16 +59,17 @@ struct httpResponseBlock {
 
 - (instancetype) init {
     if (_instance == nil) {
-        _instance = [super init];
+        self = [super init];
         queue = dispatch_queue_create("com.tlsinspector.OCSPManager", NULL);
+        _instance = self;
     }
     return _instance;
 }
 
-- (void) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKOCSPResponse * __autoreleasing *)rtresponse error:(NSError **)rterror {
+- (NSError *) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKOCSPResponse * __autoreleasing *)rtresponse {
     NSURL * ocspURL = certificate.ocspURL;
     if (ocspURL == nil) {
-        return;
+        return nil;
     }
     
     OCSP_CERTID * certID = OCSP_cert_to_id(NULL, certificate.X509Certificate, issuer.X509Certificate);
@@ -78,18 +79,15 @@ struct httpResponseBlock {
     unsigned char * request_data = NULL;
     int len = i2d_OCSP_REQUEST(request, &request_data);
     if (len == 0) {
-        *rterror = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Unable to create OCSP request"}];
         PError(@"Error getting ASN bytes from OCSP request object");
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Unable to create OCSP request"}];;
     }
     NSData * requestData = [[NSData alloc] initWithBytes:request_data length:len];
     
     OCSP_BASICRESP * resp;
-    NSError * queryError;
-    [self queryOCSPResponder:ocspURL withRequest:requestData resp:&resp error:&queryError];
+    NSError * queryError = [self queryOCSPResponder:ocspURL withRequest:requestData resp:&resp];
     if (queryError != nil) {
-        *rterror = queryError;
-        return;
+        return queryError;
     }
     CKOCSPResponse * response = [CKOCSPResponse new];
     *rtresponse = response;
@@ -98,10 +96,9 @@ struct httpResponseBlock {
         if (queryError.code == OCSP_ERROR_REQUEST_ERROR) {
             response.status = CKOCSPResponseStatusUnknown;
             PDebug(@"OCSP request status: Unknown");
-            return;
+            return nil;
         }
-        *rterror = queryError;
-        return;
+        return queryError;
     }
     
     int status;
@@ -110,10 +107,9 @@ struct httpResponseBlock {
     ASN1_GENERALIZEDTIME * thisUP;
     ASN1_GENERALIZEDTIME * nextUP;
     if (!OCSP_resp_find_status(resp, certID, &status, &reason, &time, &thisUP, &nextUP)) {
-        *rterror = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid OCSP response."}];
         [self openSSLError];
         PError(@"Unable to from status in OCSP response");
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid OCSP response."}];;
     }
     
     switch (status) {
@@ -135,6 +131,7 @@ struct httpResponseBlock {
 
     OCSP_REQUEST_free(request);
     OCSP_BASICRESP_free(resp);
+    return nil;
 }
 
 - (OCSP_REQUEST *) generateOCSPRequestForCertificate:(OCSP_CERTID *)certid {
@@ -149,12 +146,11 @@ struct httpResponseBlock {
     return response;
 }
 
-- (void) queryOCSPResponder:(NSURL *)responder withRequest:(NSData *)request resp:(OCSP_BASICRESP **)resp error:(NSError **)error {
+- (NSError *) queryOCSPResponder:(NSURL *)responder withRequest:(NSData *)request resp:(OCSP_BASICRESP **)resp {
     CURL * curl = [[CKCurlCommon sharedInstance] curlHandle];
     if (!curl) {
-        *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_CURL_LIBRARY userInfo:@{NSLocalizedDescriptionKey: @"Error initalizing CURL library"}];
         PError(@"Error initalizing the CURL library. This shouldn't happen!");
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_CURL_LIBRARY userInfo:@{NSLocalizedDescriptionKey: @"Error initalizing CURL library"}];
     }
 
     // Prepare curl verbose logging but only use it if in debug level
@@ -196,22 +192,20 @@ struct httpResponseBlock {
         PError(@"OCSP Request error: %s (%i)", curl_easy_strerror(response), response);
         long response_code;
         curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
-        
-        *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
+
         PError(@"OCSP HTTP Response: %ld", response_code);
         PDebug(@"OCSP HTTP %@ response %ld", responder.absoluteString, response_code);
         
         curl_easy_cleanup(curl);
         free(curldata.response);
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];;
     }
     if (curldata.size == 0) {
         PError(@"Empty response for OCSP request");
         PDebug(@"OCSP HTTP %@ empty response", responder.absoluteString);
-        *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty OCSP response"}];
         curl_easy_cleanup(curl);
         free(curldata.response);
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty OCSP response"}];;
     }
     
     PDebug(@"OCSP HTTP Response: 200");
@@ -219,23 +213,20 @@ struct httpResponseBlock {
     free(curldata.response);
     if (ocspResponse == NULL) {
         [self openSSLError];
-        *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];
         PError(@"Error decoding OCSP response");
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];;
     }
     int requestResponse = OCSP_response_status(ocspResponse);
     if (requestResponse != OCSP_RESPONSE_STATUS_SUCCESSFUL) {
-        *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_REQUEST_ERROR userInfo:@{NSLocalizedDescriptionKey: @"OCSP request error."}];
         PError(@"OCSP Response status: %i", requestResponse);
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_REQUEST_ERROR userInfo:@{NSLocalizedDescriptionKey: @"OCSP request error."}];;
     }
     
     OCSP_BASICRESP * basicResp = OCSP_response_get1_basic(ocspResponse);
     if (basicResp == NULL) {
         [self openSSLError];
-        *error = [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];
         PError(@"Error getting basic OCSP response from OCSP response object");
-        return;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];;
     }
     
     *resp = basicResp;
@@ -249,6 +240,8 @@ struct httpResponseBlock {
         PDebug(@"curl output:\n%s", buf);
         free(buf);
     }
+
+    return nil;
 }
 
 size_t ocsp_write_callback(void * data, size_t size, size_t nmemb, void * userp) {

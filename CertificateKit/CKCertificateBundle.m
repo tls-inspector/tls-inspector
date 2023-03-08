@@ -42,31 +42,34 @@
 @implementation CKCertificateBundle
 
 + (CKCertificateBundle *) bundleWithName:(NSString *)name bundlePath:(NSString *)filePath metadata:(CKCertificateBundleMetadata *)metadata error:(NSError **)errPtr {
-    NSString * pemData = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    BIO * pemBio = BIO_new_mem_buf(pemData.UTF8String, (int)pemData.length);
+    NSData * pemData = [NSData dataWithContentsOfFile:filePath];
+    BIO * pemBio = BIO_new_mem_buf(pemData.bytes, (int)pemData.length);
 
     PKCS7 *p7 = NULL, *p7i;
     p7 = PKCS7_new();
     if (p7 == NULL) {
         PError(@"Error loading ca bundle: %@", name);
         PRINT_OPENSSL_ERROR
-        *errPtr = MAKE_ERROR(100, @"Error initalizing PKCS7 object");
+        if (errPtr != nil)
+            *errPtr = MAKE_ERROR(100, @"Error initalizing PKCS7 object");
         return nil;
     }
     p7i = PEM_read_bio_PKCS7(pemBio, &p7, NULL, NULL);
     if (p7i == NULL) {
         PError(@"Error loading ca bundle: %@", name);
         PRINT_OPENSSL_ERROR
-        *errPtr = MAKE_ERROR(100, @"Error reading PKCS7 file");
+        if (errPtr != nil)
+            *errPtr = MAKE_ERROR(100, @"Error reading PKCS7 file");
         return nil;
     }
 
-    pemData = @"";
+
     BIO_free(pemBio);
 
     if (p7->d.sign == NULL) {
         PError(@"Error loading ca bundle: %@", name);
-        *errPtr = MAKE_ERROR(100, @"PKCS7 file does not contain expected object");
+        if (errPtr != nil)
+            *errPtr = MAKE_ERROR(100, @"PKCS7 file does not contain expected object");
         return nil;
     }
 
@@ -93,7 +96,8 @@
 
     if (count <= 0) {
         PError(@"No certificates in bundle: %@", name);
-        *errPtr = MAKE_ERROR(100, @"No certificates found in PKCS7 bundle");
+        if (errPtr != nil)
+            *errPtr = MAKE_ERROR(100, @"No certificates found in PKCS7 bundle");
         return nil;
     }
 
@@ -107,7 +111,8 @@
         if (!X509_STORE_add_cert(caStore, x)) {
             PError(@"Error adding certificate from bundle to store: %@", name);
             PRINT_OPENSSL_ERROR
-            *errPtr = MAKE_ERROR(100, @"Error adding certificate from PKCS7 bundle");
+            if (errPtr != nil)
+                *errPtr = MAKE_ERROR(100, @"Error adding certificate from PKCS7 bundle");
             return nil;
         }
 

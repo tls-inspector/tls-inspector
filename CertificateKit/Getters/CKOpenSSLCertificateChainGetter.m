@@ -368,19 +368,17 @@ void key_callback(const SSL *ssl, const char *line) {
 - (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {
     CKOCSPResponse * ocspResponse;
     CKCRLResponse * crlResponse;
-    NSError * ocspError;
-    NSError * crlError;
 
     if (self.parameters.checkOCSP) {
-        [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse error:&ocspError];
-        if (ocspError != nil) {
-            PError(@"OCSP Error: %@", ocspError.description);
+        NSError * err = [[CKOCSPManager sharedManager] queryCertificate:certificate issuer:issuer response:&ocspResponse];
+        if (err != nil) {
+            PError(@"OCSP Error: %@", err.description);
         }
     }
     if (self.parameters.checkCRL) {
-        [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse error:&crlError];
-        if (crlError != nil) {
-            PError(@"CRL Error: %@", crlError.description);
+        NSError * err = [[CKCRLManager sharedManager] queryCertificate:certificate issuer:issuer response:&crlResponse];
+        if (err != nil) {
+            PError(@"CRL Error: %@", err.description);
         }
     }
     return [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];

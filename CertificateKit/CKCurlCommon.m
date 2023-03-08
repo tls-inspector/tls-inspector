@@ -33,13 +33,8 @@ static id _instance;
 }
 
 - (CURL *) curlHandle {
-    CURL * curl;
-
     curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
-    if (!curl) {
-        return nil;
-    }
+    CURL * curl = curl_easy_init();
 
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString * version = infoDictionary[@"CFBundleShortVersionString"];

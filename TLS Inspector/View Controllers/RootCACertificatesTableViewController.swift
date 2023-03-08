@@ -32,9 +32,7 @@ class RootCACertificatesTableViewController: UITableViewController {
         }
 
         updateQueue.async {
-            var updateErr: NSError?
-            CKRootCACertificateBundleManager.sharedInstance().updateNow(&updateErr)
-            if let error = updateErr {
+            if let error = CKRootCACertificateBundleManager.sharedInstance().updateNow() as? NSError {
                 if error.code == 200 {
                     UIHelper(self).presentAlert(title: "Root CA Certificates", body: "You have the latest root CA certificate bundles", dismissed: nil)
                 } else {

@@ -233,14 +233,12 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 }
 
-- (void) updateNow:(NSError **)errorPtr {
+- (NSError *) updateNow {
     NSDictionary<NSString *, id> * release;
-    NSError * error;
-    [self getLatestRootcaRelease:&release error:&error];
+    NSError * error = [self getLatestRootcaRelease:&release];
     if (error != nil) {
-        *errorPtr = error;
         PError(@"[rootca] error getting latest release: %@", error.localizedDescription);
-        return;
+        return error;
     }
 
     NSString * tagName = release[@"tag_name"];
@@ -248,8 +246,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     if ([tagName isEqualToString:self.embeddedBundleTag] || (self.downloadedBundleTag != nil && [tagName isEqualToString:self.downloadedBundleTag])) {
         PDebug(@"[rootca] no updates needed");
-        *errorPtr = MAKE_ERROR(200, @"success");
-        return;
+        return MAKE_ERROR(200, @"success");
     }
 
     if ([NSFileManager.defaultManager fileExistsAtPath:self.bundleDirectory]) {
@@ -258,26 +255,23 @@ INSERT_OPENSSL_ERROR_METHOD
     NSError * mkdirError;
     [NSFileManager.defaultManager createDirectoryAtPath:self.bundleDirectory withIntermediateDirectories:YES attributes:nil error:&mkdirError];
     if (mkdirError != nil) {
-        *errorPtr = mkdirError;
         PError(@"[rootca] error making working directory: %@", self.bundleDirectory);
-        return;
+        return mkdirError;
     }
 
     for (NSString * fileName in self.bundleFiles) {
         NSString * filePath = [self.bundleDirectory stringByAppendingPathComponent:fileName];
         NSString * fileURL = [NSString stringWithFormat:@"https://tlsinspector.com/ca/download/%@/%@", tagName, fileName];
-        [self downloadFile:fileURL toFile:filePath error:&error];
+        error = [self downloadFile:fileURL toFile:filePath];
         if (error != nil) {
-            *errorPtr = error;
             PError(@"[rootca] error downloading asset %@: %@", fileURL, error.localizedDescription);
             goto CLEANUP;
         }
         NSString * signatureName = [NSString stringWithFormat:@"%@.sig", fileName];
         NSString * signaturePath = [self.bundleDirectory stringByAppendingPathComponent:signatureName];
         NSString * signatureURL = [NSString stringWithFormat:@"https://tlsinspector.com/ca/download/%@/%@", tagName, signatureName];
-        [self downloadFile:signatureURL toFile:signaturePath error:&error];
+        error = [self downloadFile:signatureURL toFile:signaturePath];
         if (error != nil) {
-            *errorPtr = error;
             PError(@"[rootca] error downloading asset %@: %@", signatureURL, error.localizedDescription);
             goto CLEANUP;
         }
@@ -285,7 +279,7 @@ INSERT_OPENSSL_ERROR_METHOD
         BOOL verifyResult = [self verifyFileSignature:filePath signature:signaturePath];
         if (!verifyResult) {
             PError(@"[rootca] verification failed %@", fileName);
-            *errorPtr = MAKE_ERROR(500, @"File signature verification failed");
+            error = MAKE_ERROR(500, @"File signature verification failed");
             goto CLEANUP;
         }
         PDebug(@"[rootca] verification OK %@", fileName);
@@ -294,17 +288,17 @@ INSERT_OPENSSL_ERROR_METHOD
     // Confidence check
     if (![self shouldUseDownloadedBundles]) {
         PDebug(@"[rootca] download validation failed");
-        *errorPtr = MAKE_ERROR(500, @"Valid validation failed");
+        error = MAKE_ERROR(500, @"Valid validation failed");
         goto CLEANUP;
     }
 
     [self loadDownloadedBundles];
     self.usingDownloadedBundles = YES;
     PDebug(@"[rootca] update successful");
-    return;
+    return nil;
 CLEANUP:
     [NSFileManager.defaultManager removeItemAtPath:self.bundleDirectory error:nil];
-    return;
+    return error;
 }
 
 - (void) clearDownloadedBundles {
@@ -314,55 +308,50 @@ CLEANUP:
 
 #pragma mark - Network Requests
 
-- (void) getLatestRootcaRelease:(NSDictionary<NSString *, id> **)releasePtr error:(NSError **)errorPtr {
+- (NSError *) getLatestRootcaRelease:(NSDictionary<NSString *, id> **)releasePtr {
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://tlsinspector.com/ca/latest"]];
 
     NSData * data;
     NSURLResponse * urlResponse;
-    NSError * error;
 
-    [self sendURLRequest:request withData:&data urlResponse:&urlResponse error:&error];
+    NSError * error = [self sendURLRequest:request withData:&data urlResponse:&urlResponse];
     if (error != nil) {
-        *errorPtr = error;
-        return;
+        return error;
     }
     if (((NSHTTPURLResponse *)urlResponse).statusCode != 200) {
         NSString * errDescription = [NSString stringWithFormat:@"HTTP %ld", (long)((NSHTTPURLResponse *)urlResponse).statusCode];
-        *errorPtr = MAKE_ERROR(1, errDescription);
-        return;
+        return MAKE_ERROR(1, errDescription);
     }
 
     NSError * jsonError;
     NSDictionary<NSString *, id> * result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
     *releasePtr = result;
+    return nil;
 }
 
-- (void) downloadFile:(NSString *)fileURL toFile:(NSString *)filePath error:(NSError **)errorPtr {
+- (NSError *) downloadFile:(NSString *)fileURL toFile:(NSString *)filePath {
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:fileURL]];
 
     NSData * data;
     NSURLResponse * urlResponse;
-    NSError * error;
 
-    [self sendURLRequest:request withData:&data urlResponse:&urlResponse error:&error];
+    NSError * error = [self sendURLRequest:request withData:&data urlResponse:&urlResponse];
     if (error != nil) {
-        *errorPtr = error;
-        return;
+        return error;
     }
     if (((NSHTTPURLResponse *)urlResponse).statusCode != 200) {
         NSString * errDescription = [NSString stringWithFormat:@"HTTP %ld", (long)((NSHTTPURLResponse *)urlResponse).statusCode];
-        *errorPtr = MAKE_ERROR(1, errDescription);
-        return;
+        return MAKE_ERROR(1, errDescription);
     }
 
     NSError * writeError;
     if (![data writeToFile:filePath options:NSDataWritingAtomic error:&writeError]) {
         PError(@"[rootca] unable to write to file %@: %@", filePath, writeError.localizedDescription);
         NSString * description = [NSString stringWithFormat:@"Unable to write to file: %@", writeError.localizedDescription];
-        *errorPtr = MAKE_ERROR(1, description);
-        return;
+        return MAKE_ERROR(1, description);
     }
     PDebug(@"[rootca] downloaded %@ to file %@", fileURL, filePath);
+    return nil;
 }
 
 #pragma mark - URL Session Delegate
@@ -399,7 +388,7 @@ CLEANUP:
     completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:serverTrust]);
 }
 
-- (void) sendURLRequest:(NSURLRequest *)request withData:(NSData **)dataPtr urlResponse:(NSURLResponse **)urlResponsePtr error:(NSError **)errorPtr {
+- (NSError *) sendURLRequest:(NSURLRequest *)request withData:(NSData **)dataPtr urlResponse:(NSURLResponse **)urlResponsePtr {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
     NSData * __block data;
@@ -417,7 +406,7 @@ CLEANUP:
 
     *dataPtr = data;
     *urlResponsePtr = urlResponse;
-    *errorPtr = error;
+    return error;
 }
 
 # pragma mark - Signature validation

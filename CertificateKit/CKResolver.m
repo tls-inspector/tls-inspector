@@ -56,10 +56,8 @@ static id _instance;
     PDebug(@"Resolving domain: query='%s' address_family='%i'", query, aiFamily);
     err = getaddrinfo(query, NULL, &hints, &result);
     if (err != 0) {
-        if (error != NULL) {
-            NSError * connectError = [[NSError alloc] initWithDomain:@"com.tlsinspector.CKResolver" code:err userInfo:@{NSLocalizedDescriptionKey: [self gaiErrorMessage:err]}];
-            *error = connectError;
-        }
+        if (error != nil)
+            *error = [[NSError alloc] initWithDomain:@"com.tlsinspector.CKResolver" code:err userInfo:@{NSLocalizedDescriptionKey: [self gaiErrorMessage:err]}];
         return nil;
     }
 
@@ -72,6 +70,10 @@ static id _instance;
         char addressString[INET6_ADDRSTRLEN];
         inet_ntop(AF_INET6, &((struct sockaddr_in6 *)result->ai_addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
         address = [[NSString alloc] initWithUTF8String:addressString];
+    } else {
+        if (error != nil)
+            *error = [[NSError alloc] initWithDomain:@"com.tlsinspector.CKResolver" code:err userInfo:@{NSLocalizedDescriptionKey: @"Unknown address family"}];
+        return nil;
     }
 
     CKResolvedAddress * resolvedAddress = [CKResolvedAddress new];

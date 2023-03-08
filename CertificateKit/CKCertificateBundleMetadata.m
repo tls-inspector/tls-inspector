@@ -52,6 +52,9 @@
             break;
         }
     }
+    if (bundleDate == nil || bundleSHA256 == nil || certificateCount == nil) {
+        return nil;
+    }
 
     return [[CKCertificateBundleMetadata alloc] initWithDate:bundleDate bundleSHA256:bundleSHA256 certificateCount:certificateCount];
 }

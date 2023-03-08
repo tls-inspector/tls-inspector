@@ -67,36 +67,32 @@ struct httpResponseBlock {
     return _instance;
 }
 
-- (void) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKCRLResponse **)rtResponse error:(NSError **)rtError {
+- (NSError *) queryCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer response:(CKCRLResponse **)rtResponse {
     if (certificate.crlDistributionPoints.count <= 0) {
-        return;
+        return nil;
     }
 
     NSURL * crlURL = certificate.crlDistributionPoints[0];
-    
-    NSError * crlError;
+
     X509_CRL * crl;
-    [self getCRL:crlURL response:&crl error:&crlError];
+    NSError * crlError = [self getCRL:crlURL response:&crl];
     if (crlError != nil) {
-        *rtError = crlError;
-        return;
+        return crlError;
     }
     
     EVP_PKEY * issuerKey = X509_get_pubkey(issuer.X509Certificate);
-    
-    int rv;
-    if ((rv = X509_CRL_verify(crl, issuerKey)) != 1) {
+
+    if (X509_CRL_verify(crl, issuerKey) != 1) {
         // CRL Verification failure
-        *rtError = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CRL_ERROR userInfo:@{NSLocalizedDescriptionKey: @"CRL verification failed"}];
         PError(@"CRL verification error");
-        return;
+        return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CRL_ERROR userInfo:@{NSLocalizedDescriptionKey: @"CRL verification failed"}];
     }
     
     CKCRLResponse * crlResponse = [CKCRLResponse new];
     *rtResponse = crlResponse;
     
     X509_REVOKED * revoked;
-    rv = X509_CRL_get0_by_cert(crl, &revoked, certificate.X509Certificate);
+    int rv = X509_CRL_get0_by_cert(crl, &revoked, certificate.X509Certificate);
     if (rv > 0) {
         // Certificate is revoked
         PDebug(@"CRL Status: Revoked");
@@ -116,17 +112,16 @@ struct httpResponseBlock {
     } else {
         // CRL parsing failure
         PDebug(@"CRL Status: Unknown");
-        *rtError = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CRL_ERROR userInfo:@{NSLocalizedDescriptionKey: @"CRL parsing failed"}];
-        return;
+        return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CRL_ERROR userInfo:@{NSLocalizedDescriptionKey: @"CRL parsing failed"}];
     }
     X509_CRL_free(crl);
+    return nil;
 }
 
-- (void) getCRL:(NSURL *)url response:(X509_CRL **)crlResponse error:(NSError **)error {
+- (NSError *) getCRL:(NSURL *)url response:(X509_CRL **)crlResponse {
     CURL * curl = [[CKCurlCommon sharedInstance] curlHandle];
     if (!curl) {
-        *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CURL_LIBRARY userInfo:@{NSLocalizedDescriptionKey: @"Error initalizing CURL library"}];
-        return;
+        return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CURL_LIBRARY userInfo:@{NSLocalizedDescriptionKey: @"Error initalizing CURL library"}];
     }
 
     // Prepare curl verbose logging but only use it if in debug level
@@ -166,31 +161,31 @@ struct httpResponseBlock {
     CURLcode response = curl_easy_perform(curl);
     if (response != CURLE_OK) {
         PError(@"CRL Request error: %s (%i)", curl_easy_strerror(response), response);
+        NSError * error;
 
         // ContentLength is only set if we rejected this response because it was too large
         if (contentLength > 0) {
             PError(@"CRL content length exeeced limit. AppLimit=%i ExtLimit=%i Length=%lu", CRL_MAX_SIZE_APP, CRL_MAX_SIZE_EXT, contentLength);
-            *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_TOO_LARGE userInfo:@{NSLocalizedDescriptionKey: @"CRL too large"}];
+            error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_TOO_LARGE userInfo:@{NSLocalizedDescriptionKey: @"CRL too large"}];
         } else {
             long response_code;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
 
-            *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
             PError(@"CRL HTTP Response: %ld", response_code);
             PDebug(@"CRL HTTP %@ response %ld", url.absoluteString, response_code);
+            error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
         }
 
         curl_easy_cleanup(curl);
         free(curldata.response);
-        return;
+        return error;
     }
     if (curldata.size == 0) {
         PError(@"Empty response for CRL request");
         PDebug(@"CRL HTTP %@ empty response", url.absoluteString);
-        *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty CRL response"}];
         curl_easy_cleanup(curl);
         free(curldata.response);
-        return;
+        return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty CRL response"}];
     }
     
     PDebug(@"CRL HTTP Response: 200");
@@ -199,9 +194,8 @@ struct httpResponseBlock {
     crl = d2i_X509_CRL(NULL, (const unsigned char **)&curldata.response, curldata.size);
     if (crl == NULL) {
         [self openSSLError];
-        *error = [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding CRL response"}];
         PError(@"Error decoding CRL response");
-        return;
+        return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding CRL response"}];;
     }
     *crlResponse = crl;
     curl_easy_cleanup(curl);
@@ -214,7 +208,7 @@ struct httpResponseBlock {
         free(buf);
     }
 
-    return;
+    return nil;
 }
 
 size_t crl_header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
