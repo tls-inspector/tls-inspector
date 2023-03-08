@@ -20,6 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKCertificateBundle.h"
+#import "NSString+ASN1OctetString.h"
+#import "NSData+HexString.h"
 #include <openssl/x509.h>
 #include <openssl/pem.h>
 #include <openssl/bio.h>
@@ -32,6 +34,8 @@
 @property (strong, nonatomic, nonnull) NSString * bundlePath;
 @property (strong, nonatomic, readwrite, nonnull) NSString * name;
 @property (strong, nonatomic, readwrite, nonnull) CKCertificateBundleMetadata * metadata;
+@property (strong, nonatomic) NSDictionary<NSString *, NSNumber *> * keyIdMap;
+@property (strong, nonatomic) NSDictionary<NSString *, NSNumber *> * subjectHashMap;
 
 @end
 
@@ -95,6 +99,8 @@
 
     X509 *x;
     X509_STORE * caStore = X509_STORE_new();
+    NSMutableDictionary<NSString *, NSNumber *> * keyIdMap = [NSMutableDictionary new];
+    NSMutableDictionary<NSString *, NSNumber *> * subjectHashMap = [NSMutableDictionary new];
 
     for (i = 0; i < count; i++) {
         x = sk_X509_value(certs, i);
@@ -104,17 +110,32 @@
             *errPtr = MAKE_ERROR(100, @"Error adding certificate from PKCS7 bundle");
             return nil;
         }
+
+        ASN1_OCTET_STRING * subjectIdEx = X509_get_ext_d2i(x, NID_subject_key_identifier, NULL, NULL);
+        if (subjectIdEx != NULL && subjectIdEx->data != NULL) {
+            NSString * subjectId = [NSString asn1OctetStringToHexString:subjectIdEx];
+            if (subjectId != nil) {
+                keyIdMap[subjectId] = [NSNumber numberWithInt:i];
+            }
+        }
+
+        char * nameStr = X509_NAME_oneline(X509_get_subject_name(x), 0, 0);
+        NSString * nameHex = [[NSData dataWithBytes:nameStr length:strlen(nameStr)] hexString];
+        free(nameStr);
+        subjectHashMap[nameHex] = [NSNumber numberWithInt:i];
     }
 
     PDebug(@"Loaded %i certificates from bundle %@", count, name);
-    return [[CKCertificateBundle alloc] initWithName:name x509Store:caStore bundlePath:filePath metadata:metadata];
+    return [[CKCertificateBundle alloc] initWithName:name x509Store:caStore bundlePath:filePath metadata:metadata keyIdMap:keyIdMap subjectHashMap:subjectHashMap];
 }
 
-- (CKCertificateBundle *) initWithName:(NSString *)name x509Store:(X509_STORE *)store bundlePath:(NSString *)bundlePath metadata:(CKCertificateBundleMetadata *)metadata {
+- (CKCertificateBundle *) initWithName:(NSString *)name x509Store:(X509_STORE *)store bundlePath:(NSString *)bundlePath metadata:(CKCertificateBundleMetadata *)metadata keyIdMap:(NSDictionary<NSString *, NSNumber *> *)keyIdMap subjectHashMap:(NSDictionary<NSString *, NSNumber *> *)subjectHashMap {
     self = [super init];
     self.bundlePath = bundlePath;
     self.name = name;
     self.metadata = metadata;
+    self.keyIdMap = keyIdMap;
+    self.subjectHashMap = subjectHashMap;
     caStore = store;
     return self;
 }
@@ -150,6 +171,31 @@
         return false;
     }
 
+    // First, look for a matching certificate using the key ID
+    if (certificate.keyIdentifiers != nil && certificate.keyIdentifiers[@"subject"] != nil) {
+        NSString * keyId = certificate.keyIdentifiers[@"subject"];
+        NSNumber * idxNum = self.keyIdMap[keyId];
+        if (idxNum == nil) {
+            return NO;
+        }
+
+        STACK_OF(X509) * certificates = X509_STORE_get1_all_certs(caStore);
+        X509 * checkCertificate = sk_X509_value(certificates, idxNum.intValue);
+        return (X509_cmp(certificate.X509Certificate, checkCertificate));
+    }
+
+    // Next, look for a matching certificate using a hash of the subject
+    char * nameStr = X509_NAME_oneline(X509_get_subject_name(certificate.X509Certificate), 0, 0);
+    NSString * nameHex = [[NSData dataWithBytes:nameStr length:strlen(nameStr)] hexString];
+    free(nameStr);
+    NSNumber * idxNum = self.subjectHashMap[nameHex];
+    if (idxNum != nil) {
+        STACK_OF(X509) * certificates = X509_STORE_get1_all_certs(caStore);
+        X509 * checkCertificate = sk_X509_value(certificates, idxNum.intValue);
+        return (X509_cmp(certificate.X509Certificate, checkCertificate));
+    }
+
+    // Failing that, iterate through the certificates in the store
     STACK_OF(X509) * certificates = X509_STORE_get1_all_certs(caStore);
     int count = sk_X509_num(certificates);
     BOOL found = NO;

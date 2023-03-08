@@ -21,6 +21,7 @@
 
 #import "CKCertificate.h"
 #import "NSDate+ASN1_TIME.h"
+#import "NSString+ASN1OctetString.h"
 
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
@@ -198,14 +199,14 @@ INSERT_OPENSSL_ERROR_METHOD
         AUTHORITY_KEYID * authorityIdentifier = X509_get_ext_d2i(cert, NID_authority_key_identifier, NULL, NULL);
 
         if (subjectIdentifier != NULL && subjectIdentifier->data != NULL) {
-            NSString * subject = [CKCertificate asn1OctetStringToHexString:subjectIdentifier];
+            NSString * subject = [NSString asn1OctetStringToHexString:subjectIdentifier];
             if (subject != nil) {
                 identifiers[@"subject"] = subject;
             }
         }
 
         if (authorityIdentifier != NULL && authorityIdentifier->keyid != NULL) {
-            NSString * authority = [CKCertificate asn1OctetStringToHexString:authorityIdentifier->keyid];
+            NSString * authority = [NSString asn1OctetStringToHexString:authorityIdentifier->keyid];
             if (authority != nil) {
                 identifiers[@"authority"] = authority;
             }
@@ -508,32 +509,6 @@ INSERT_OPENSSL_ERROR_METHOD
     }
     sk_ASN1_OBJECT_pop_free(eku, ASN1_OBJECT_free);
     return usages;
-}
-
-+ (NSString *) asn1OctetStringToHexString:(ASN1_OCTET_STRING *)str {
-    unsigned char * buffer = str->data;
-    int len = str->length;
-
-    char *tmp, *q;
-    const unsigned char *p;
-    int i;
-    static const char hexdig[] = "0123456789ABCDEF";
-    if (!buffer || !len)
-        return nil;
-    if (!(tmp = malloc(len * 3 + 1))) {
-        return nil;
-    }
-    q = tmp;
-    for (i = 0, p = buffer; i < len; i++, p++) {
-        *q++ = hexdig[(*p >> 4) & 0xf];
-        *q++ = hexdig[*p & 0xf];
-        *q++ = ':';
-    }
-    q[-1] = 0;
-
-    NSString * string = [[NSString alloc] initWithUTF8String:tmp];
-    free(tmp);
-    return string;
 }
 
 - (NSString *) description {
