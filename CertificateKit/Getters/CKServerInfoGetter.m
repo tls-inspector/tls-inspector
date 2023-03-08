@@ -142,24 +142,32 @@
 
 static size_t server_info_header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
     unsigned long len = nitems * size;
-    if (len > 2) {
-        NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
-        NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSArray<NSString *> * components = [headerValue componentsSeparatedByString:@": "];
-        if (components.count < 2) {
-            return len;
-        }
-
-        NSString * key = components[0];
-        NSInteger keyLength = key.length + 1; // Chop off the ":"
-        if ((NSInteger)headerValue.length - keyLength < 0) {
-            return len;
-        }
-        NSString * value = [headerValue substringWithRange:NSMakeRange(keyLength, headerValue.length - keyLength)];
-        [((__bridge NSMutableDictionary<NSString *, NSString *> *)userdata)
-         setObject:value
-         forKey:key];
+    if (len <= 2) {
+        return len;
     }
+
+    NSString * fullHeader = [[NSString alloc] initWithBytes:buffer length:len-2 encoding:NSUTF8StringEncoding];
+
+    NSUInteger headerKeyEnd = 0;
+    for (NSUInteger i = 0; i < fullHeader.length; i++) {
+        unichar c = [fullHeader characterAtIndex:i];
+        if (c == ':') {
+            headerKeyEnd = i;
+            break;
+        }
+    }
+    if (headerKeyEnd == 0) {
+        return len;
+    }
+
+    NSString * headerKey = [fullHeader substringToIndex:headerKeyEnd];
+    NSString * headerValue = [fullHeader substringFromIndex:headerKeyEnd+1];
+    if ([headerValue characterAtIndex:0] == ' ') {
+        headerValue = [headerValue substringFromIndex:1];
+    }
+    [((__bridge NSMutableDictionary<NSString *, NSString *> *)userdata)
+     setObject:headerValue
+     forKey:headerKey];
 
     return len;
 }
