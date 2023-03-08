@@ -265,7 +265,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     for (NSString * fileName in self.bundleFiles) {
         NSString * filePath = [self.bundleDirectory stringByAppendingPathComponent:fileName];
-        NSString * fileURL = [NSString stringWithFormat:@"https://github.com/tls-inspector/rootca/releases/download/%@/%@", tagName, fileName];
+        NSString * fileURL = [NSString stringWithFormat:@"https://tlsinspector.com/ca/download/%@/%@", tagName, fileName];
         [self downloadFile:fileURL toFile:filePath error:&error];
         if (error != nil) {
             *errorPtr = error;
@@ -274,7 +274,7 @@ INSERT_OPENSSL_ERROR_METHOD
         }
         NSString * signatureName = [NSString stringWithFormat:@"%@.sig", fileName];
         NSString * signaturePath = [self.bundleDirectory stringByAppendingPathComponent:signatureName];
-        NSString * signatureURL = [NSString stringWithFormat:@"https://github.com/tls-inspector/rootca/releases/download/%@/%@", tagName, signatureName];
+        NSString * signatureURL = [NSString stringWithFormat:@"https://tlsinspector.com/ca/download/%@/%@", tagName, signatureName];
         [self downloadFile:signatureURL toFile:signaturePath error:&error];
         if (error != nil) {
             *errorPtr = error;
@@ -315,7 +315,7 @@ CLEANUP:
 #pragma mark - Network Requests
 
 - (void) getLatestRootcaRelease:(NSDictionary<NSString *, id> **)releasePtr error:(NSError **)errorPtr {
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://api.github.com/repos/tls-inspector/rootca/releases/latest"]];
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://tlsinspector.com/ca/latest"]];
 
     NSData * data;
     NSURLResponse * urlResponse;
