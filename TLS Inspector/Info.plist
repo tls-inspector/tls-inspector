@@ -69,5 +69,56 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>CFBundleIcons</key>
+    <dict>
+        <key>CFBundlePrimaryIcon</key>
+        <dict>
+            <key>CFBundleIconFiles</key>
+            <array>
+                <string>IconDefault</string>
+            </array>
+            <key>UIPrerenderedIcon</key>
+            <false/>
+        </dict>
+        <key>CFBundleAlternateIcons</key>
+        <dict>
+            <key>IconLight</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>IconLight</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+            <key>IconDark</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>IconDark</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+            <key>IconPride</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>IconPride</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+            <key>IconTrans</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>IconTrans</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+        </dict>
+    </dict>
 </dict>
 </plist>

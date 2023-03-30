@@ -3,7 +3,6 @@ import UIKit
 class OptionsTableViewController: UITableViewController {
 
     var sections: [TableViewSection] = []
-    let advancedOptionsCellTag = 101
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +36,14 @@ class OptionsTableViewController: UITableViewController {
         generalSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Treat Unrecognized as Trusted"), defaultChecked: UserOptions.treatUnrecognizedAsTrusted, didChange: { checked in
             UserOptions.treatUnrecognizedAsTrusted = checked
         }))
+        if let tableCell = self.tableView.dequeueReusableCell(withIdentifier: "Basic") {
+            tableCell.textLabel?.text = lang(key: "App Icons")
+            let cell = TableViewCell(tableCell)
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "AppIconSegue", sender: nil)
+            }
+            generalSection.cells.append(cell)
+        }
 
         if generalSection.cells.count > 0 {
             return generalSection
@@ -91,7 +98,9 @@ class OptionsTableViewController: UITableViewController {
         if let cell = newIconCell(labelText: "Advanced Options",
                                   icon: .FACogSolid,
                                   iconColor: UIColor.systemBlue) {
-            cell.cell.tag = advancedOptionsCellTag
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "Advanced", sender: nil)
+            }
             generalSection.cells.append(cell)
         }
 
@@ -124,9 +133,9 @@ class OptionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellTag = self.sections[indexPath.section].cells[indexPath.row].cell.tag
-        if cellTag == advancedOptionsCellTag {
-            self.performSegue(withIdentifier: "Advanced", sender: nil)
+        let cell = self.sections[indexPath.section].cells[indexPath.row]
+        if let didSelect = cell.didSelect {
+            didSelect(tableView, indexPath)
         }
     }
 

@@ -101,6 +101,7 @@
 		3C84F3132644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
 		3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
 		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
+		3C922C0329D613630064274F /* AppIconTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C922C0229D613630064274F /* AppIconTableViewController.swift */; };
 		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */; };
@@ -359,6 +360,7 @@
 		3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTipTarget.swift; sourceTree = "<group>"; };
 		3C84F3122644C275003E6A66 /* Date+DurationString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DurationString.swift"; sourceTree = "<group>"; };
 		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
+		3C922C0229D613630064274F /* AppIconTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconTableViewController.swift; sourceTree = "<group>"; };
 		3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAccessabilityHints.swift; sourceTree = "<group>"; };
 		3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDomainName.swift; sourceTree = "<group>"; };
 		3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInspectTableViewController.swift; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
 				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
 				3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */,
+				3C922C0229D613630064274F /* AppIconTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1336,6 +1339,7 @@
 				3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */,
 				3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */,
 				3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */,
+				3C922C0329D613630064274F /* AppIconTableViewController.swift in Sources */,
 				3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */,
 				3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */,
 				3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */,
@@ -1597,7 +1601,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1611,6 +1616,8 @@
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1633,7 +1640,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1648,6 +1656,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

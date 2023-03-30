@@ -153,6 +153,23 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Basic" textLabel="zCp-52-G6Z" style="IBUITableViewCellStyleDefault" id="U4H-jQ-SRd">
+                                <rect key="frame" x="20" y="99" width="374" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4H-jQ-SRd" id="DMk-c5-CmO">
+                                    <rect key="frame" x="0.0" y="0.0" width="343.5" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zCp-52-G6Z">
+                                            <rect key="frame" x="20" y="0.0" width="315.5" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="accessibilityUse" value="Options Table"/>
@@ -169,6 +186,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Bem-Gj-gOM" kind="show" identifier="Advanced" id="rmq-5E-8s3"/>
+                        <segue destination="Efu-qQ-cqJ" kind="show" identifier="AppIconSegue" id="Ggh-fK-ubR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7b-mp-JKY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -411,6 +429,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfq-Mm-d6K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3243" y="499"/>
+        </scene>
+        <!--App Icons-->
+        <scene sceneID="aIi-z9-cQf">
+            <objects>
+                <tableViewController title="App Icons" id="Efu-qQ-cqJ" customClass="AppIconTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="2ty-FS-1Ct">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IconCell" rowHeight="75" id="cix-7b-y04">
+                                <rect key="frame" x="20" y="55.5" width="374" height="75"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cix-7b-y04" id="J2y-hy-uNp">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="75"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMQ-3D-yGP">
+                                            <rect key="frame" x="20" y="7.5" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="4P0-HH-j9g"/>
+                                                <constraint firstAttribute="height" constant="60" id="WEN-Hu-9vI"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paP-dg-V8y">
+                                            <rect key="frame" x="88" y="27" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="paP-dg-V8y" firstAttribute="centerY" secondItem="J2y-hy-uNp" secondAttribute="centerY" id="2Ch-Nk-ahS"/>
+                                        <constraint firstItem="paP-dg-V8y" firstAttribute="leading" secondItem="dMQ-3D-yGP" secondAttribute="trailing" constant="8" symbolic="YES" id="YNc-Zm-b8f"/>
+                                        <constraint firstItem="dMQ-3D-yGP" firstAttribute="leading" secondItem="J2y-hy-uNp" secondAttribute="leadingMargin" id="cdO-X0-87L"/>
+                                        <constraint firstItem="dMQ-3D-yGP" firstAttribute="centerY" secondItem="J2y-hy-uNp" secondAttribute="centerY" id="nqT-Xx-ECZ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Efu-qQ-cqJ" id="Jzg-6X-He1"/>
+                            <outlet property="delegate" destination="Efu-qQ-cqJ" id="xUZ-OP-dTJ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="App Icons" id="OBo-LF-lMh">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="App Icons"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="App Icons"/>
+                    </userDefinedRuntimeAttributes>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cga-jx-cUH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1496" y="1252"/>
         </scene>
         <!--Contact Support-->
         <scene sceneID="ZNw-BX-83f">
