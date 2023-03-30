@@ -2,72 +2,76 @@ import UIKit
 import CertificateKit
 
 class TrustBannerParameters {
-    let solid: Bool
     let color: UIColor
-    let text: String
-    let icon: FAIcon
     let cornerRadius: CGFloat
+    let icon: FAIcon
+    let solid: Bool
+    let text: String
+    let textColor: UIColor
 
     init(trust: CKCertificateChainTrustStatus) {
+        var color = UIColor.materialPink()
+        var icon = FAIcon.FAQuestionCircleSolid
+        var solid = true
+        var text = lang(key: "Unknown")
+        var textColor = UIColor.white
+
         switch trust {
         case .trusted:
-            self.solid = true
-            self.color = UIColor.materialGreen()
-            self.text = lang(key: "Trusted")
-            self.icon = FAIcon.FACheckCircleSolid
+            color = UIColor.materialGreen()
+            text = lang(key: "Trusted")
+            icon = FAIcon.FACheckCircleSolid
         case .locallyTrusted:
             if UserOptions.treatUnrecognizedAsTrusted {
-                self.solid = true
-                self.color = UIColor.materialLightGreen()
-                self.text = lang(key: "Locally Trusted")
-                self.icon = FAIcon.FACheckCircleRegular
+                color = UIColor.materialLightGreen()
+                text = lang(key: "Locally Trusted")
+                icon = FAIcon.FACheckCircleRegular
             } else {
-                self.solid = false
-                self.color = UIColor.materialAmber()
-                self.text = lang(key: "Unrecognized")
-                self.icon = FAIcon.FACheckCircleRegular
+                solid = false
+                color = UIColor.materialAmber()
+                text = lang(key: "Unrecognized")
+                icon = FAIcon.FACheckCircleRegular
+                textColor = SPLIT_VIEW_CONTROLLER?.traitCollection.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
             }
         case .untrusted, .invalidDate, .wrongHost:
-            self.solid = true
-            self.color = UIColor.materialAmber()
-            self.text = lang(key: "Untrusted")
-            self.icon = FAIcon.FAExclamationCircleSolid
+            color = UIColor.materialAmber()
+            text = lang(key: "Untrusted")
+            icon = FAIcon.FAExclamationCircleSolid
         case .sha1Leaf, .sha1Intermediate:
-            self.solid = true
-            self.color = UIColor.materialRed()
-            self.text = lang(key: "Insecure")
-            self.icon = FAIcon.FATimesCircleSolid
+            color = UIColor.materialRed()
+            text = lang(key: "Insecure")
+            icon = FAIcon.FATimesCircleSolid
         case .selfSigned, .revokedLeaf, .revokedIntermediate:
-            self.solid = true
-            self.color = UIColor.materialRed()
-            self.text = lang(key: "Untrusted")
-            self.icon = FAIcon.FATimesCircleSolid
+            color = UIColor.materialRed()
+            text = lang(key: "Untrusted")
+            icon = FAIcon.FATimesCircleSolid
         case .leafMissingRequiredKeyUsage:
-            self.solid = true
-            self.color = UIColor.materialAmber()
-            self.text = lang(key: "Untrusted")
-            self.icon = FAIcon.FAExclamationCircleSolid
+            color = UIColor.materialAmber()
+            text = lang(key: "Untrusted")
+            icon = FAIcon.FAExclamationCircleSolid
         case .weakRSAKey:
-            self.solid = true
-            self.color = UIColor.materialRed()
-            self.text = lang(key: "Insecure")
-            self.icon = FAIcon.FATimesCircleSolid
+            color = UIColor.materialRed()
+            text = lang(key: "Insecure")
+            icon = FAIcon.FATimesCircleSolid
         case .issueDateTooLong:
-            self.solid = true
-            self.color = UIColor.materialAmber()
-            self.text = lang(key: "Untrusted")
-            self.icon = FAIcon.FAExclamationCircleSolid
+            color = UIColor.materialAmber()
+            text = lang(key: "Untrusted")
+            icon = FAIcon.FAExclamationCircleSolid
         case .badAuthority:
-            self.solid = true
-            self.color = UIColor.materialRed(level: 900) ?? UIColor.materialRed()
-            self.text = lang(key: "Dangerous")
-            self.icon = FAIcon.FAExclamationTriangleSolid
+            color = UIColor.materialRed(level: 900) ?? UIColor.materialRed()
+            text = lang(key: "Dangerous")
+            icon = FAIcon.FAExclamationTriangleSolid
         @unknown default:
-            self.solid = true
-            self.color = UIColor.materialPink()
-            self.text = lang(key: "Unknown")
-            self.icon = FAIcon.FAQuestionCircleSolid
+            color = UIColor.materialPink()
+            text = lang(key: "Unknown")
+            icon = FAIcon.FAQuestionCircleSolid
         }
+
+        self.color = color
         self.cornerRadius = 10.0
+        self.icon = icon
+        self.solid = solid
+        self.text = text
+        self.textColor = textColor
     }
 }

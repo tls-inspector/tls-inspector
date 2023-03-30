@@ -34,13 +34,14 @@ class TrustDetailsTableViewController: UITableViewController {
         if parameters.solid {
             self.trustView.backgroundColor = parameters.color
         } else {
+            self.trustView.backgroundColor = nil
             self.trustView.layer.borderColor = parameters.color.cgColor
             self.trustView.layer.borderWidth = 2.0
         }
         self.trustView.layer.cornerRadius = parameters.cornerRadius
-        self.trustResultLabel.textColor = UIColor.white
+        self.trustResultLabel.textColor = parameters.textColor
         self.trustResultLabel.text = parameters.text
-        self.trustIconLabel.textColor = UIColor.white
+        self.trustIconLabel.textColor = parameters.textColor
         self.trustIconLabel.font = parameters.icon.font(size: self.trustIconLabel.font.pointSize)
         self.trustIconLabel.text = parameters.icon.string()
     }
