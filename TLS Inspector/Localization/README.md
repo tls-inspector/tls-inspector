@@ -21,9 +21,19 @@ index matches that of the array. For example, this is perfectly valid:
 # Strings Files
 
 TLS Inspector's localized strings are stored in so-called `.strings` files. These files contain
-one entry per line in the format of `key TAB value`. Lines that begin with a `#` are ignored and can
-be used for comments. Values that contain line brakes should use literal `\n`. The file should be
-alphabetically sorted by key.
+one entry per line in the format of `key TAB value` (without spaces). Lines that begin with a `#`
+are ignored and can be used for comments. Values that contain line brakes should use literal `\n`.
+The file should be alphabetically sorted by key.
+
+English is the primary language, as that is the language best known by the developer. The English
+strings file is used as a reference for what strings needs to be present in the other string files.
+
+Keys that are in need of translation will have a preceding `TODO` comment above the entry. Please
+remove this comment when the translation has been completed.
 
 As build time, these strings files are used to generate a Apple property list file, which is
 embedded in TLS Inspector.
+
+**Important** within the strings are a mapping of ISO Alpha 2 codes to locale names. Please use
+whatever name is appropriate for the culture or language being used. However, with one exception,
+TW must always be "Taiwan", and never listed as a province of China.

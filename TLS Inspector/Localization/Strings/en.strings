@@ -10,6 +10,12 @@ Advanced Options	Advanced Options
 Algorithm	Algorithm
 Algorithms	Algorithms
 Alternate Names	Alternate Names
+App Icons	App Icons
+AppIcon::Dark	Dark
+AppIcon::Default	Default
+AppIcon::Light	Light
+AppIcon::Pride	Pride
+AppIcon::Trans	Trans
 Apple Support	Apple Support
 Authority	Authority
 Auto	Auto

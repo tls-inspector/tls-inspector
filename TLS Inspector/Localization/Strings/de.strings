@@ -10,6 +10,18 @@ Advanced Options	Erweiterte Optionen
 Algorithm	Algorithmus
 Algorithms	Algorithmen
 Alternate Names	Alternative Namen
+# TODO
+App Icons	App Icons
+# TODO
+AppIcon::Dark	Dark
+# TODO
+AppIcon::Default	Default
+# TODO
+AppIcon::Light	Light
+# TODO
+AppIcon::Pride	Pride
+# TODO
+AppIcon::Trans	Trans
 Apple Support	Apple Support
 Authority	Zertifizierungsstelle
 Auto	Auto
@@ -17,17 +29,31 @@ Automatic	Automatisch
 Automatic will choose IPv6 if available.	Automatisch nutzt IPv6 wenn verfügbar.
 Basic	Einfach
 Build	Build-Nummer
+# TODO
+Bundle Date	Bundle Date
 Cancel	Abbrechen
 Certificate Authority	Zertifizierungsstelle
 Certificate Chain	Zertifikatskette
 Certificate Errors	Zertifikatsfehler
 Certificate Information	Zertifikatsinformationen
 Certificate Status	Zertifikatsstatus
+# TODO
+Certificate Timestamps	Certificate Timestamps
+# TODO
+Certificate Trust	Certificate Trust
 Certificate is expired or not valid yet.	Zertifikat ist abgelaufen oder noch nicht gültig.
 Certificate uses insecure SHA1 algorithm.	Zertifikat verwendet unsicheren SHA1-Algorithmus.
 Certificates	Zertifikate
 Chain	Kette
+# TODO
+Check for updates	Check for updates
 Ciphers	Verschlüsselungsverfahren
+# TODO
+Clear downloaded bundles	Clear downloaded bundles
+# TODO
+Client Random	Client Random
+# TODO
+Close	Close
 Connection Information	Verbindungsinformationen
 Contact Support	Support kontaktieren
 Contact Us	Kontaktiere uns
@@ -42,7 +68,6 @@ Country::AG	Antigua und Barbuda
 Country::AI	Anguilla
 Country::AL	Albanien
 Country::AM	Armenien
-Country::AN	Niederländische Antillen
 Country::AO	Angola
 Country::AQ	Antarktis (Territorium südlich des 60. Breitengrades)
 Country::AR	Argentinien
@@ -50,6 +75,8 @@ Country::AS	Amerikanisch-Samoa
 Country::AT	Österreich
 Country::AU	Australien
 Country::AW	Aruba
+# TODO
+Country::AX	Åland Islands
 Country::AZ	Aserbaidschan
 Country::BA	Bosnien und Herzegowina
 Country::BB	Barbados
@@ -60,9 +87,13 @@ Country::BG	Bulgarien
 Country::BH	Bahrain
 Country::BI	Burundi
 Country::BJ	Benin
+# TODO
+Country::BL	Saint Barthélemy
 Country::BM	Bermuda
 Country::BN	Brunei Darussalam
 Country::BO	Bolivien
+# TODO
+Country::BQ	Bonaire, Sint Eustatius and Saba
 Country::BR	Brasilien
 Country::BS	Bahamas
 Country::BT	Bhutan
@@ -85,6 +116,8 @@ Country::CO	Kolumbien
 Country::CR	Costa Rica
 Country::CU	Kuba
 Country::CV	Cabo Verde (Kap Verde)
+# TODO
+Country::CW	Curaçao
 Country::CX	Weihnachtsinsel
 Country::CY	Zypern
 Country::CZ	Tschechien
@@ -112,6 +145,8 @@ Country::GB	Vereinigtes Königreich Großbritannien und Nordirland
 Country::GD	Grenada
 Country::GE	Georgien
 Country::GF	Französisch-Guayana
+# TODO
+Country::GG	Guernsey
 Country::GH	Ghana
 Country::GI	Gibraltar
 Country::GL	Grönland
@@ -134,12 +169,16 @@ Country::HU	Ungarn
 Country::ID	Indonesien
 Country::IE	Irland
 Country::IL	Israel
+# TODO
+Country::IM	Isle of Man
 Country::IN	Indien
 Country::IO	Britisches Territorium im Indischen Ozean (Chagos-Archipel)
 Country::IQ	Irak
 Country::IR	Iran
 Country::IS	Island
 Country::IT	Italien
+# TODO
+Country::JE	Jersey
 Country::JM	Jamaika
 Country::JO	Jordanien
 Country::JP	Japan
@@ -169,6 +208,8 @@ Country::MA	Marokko
 Country::MC	Monaco
 Country::MD	Moldau
 Country::ME	Montenegro
+# TODO
+Country::MF	Saint Martin
 Country::MG	Madagaskar
 Country::MH	Marshallinseln
 Country::MK	Nordmazedonien
@@ -235,8 +276,12 @@ Country::SM	San Marino
 Country::SN	Senegal
 Country::SO	Somalia
 Country::SR	Suriname
+# TODO
+Country::SS	South Sudan
 Country::ST	São Tomé und Príncipe
 Country::SV	El Salvador
+# TODO
+Country::SX	Sint Maarten
 Country::SY	Syrien
 Country::SZ	Eswatini (Swasiland)
 Country::TC	Turks- und Caicosinseln
@@ -276,6 +321,8 @@ Country::ZA	Südafrika
 Country::ZM	Sambia
 Country::ZW	Simbabwe
 Crypto Engine	Crypto-Engine
+# TODO
+Danger	Danger
 Dangerous	Dangerous
 Delete	Löschen
 Did You Know?	Wusstest du schon?
@@ -285,12 +332,16 @@ Do not contact support for issues with your iOS Device or to report unsafe websi
 Domain Name or IP Address	Domainname oder IP-Adresse
 Download & Check CRL	CRL herunterladen & überprüfen
 EV Authority	EV-Zertifizierungsstelle
+# TODO
+Embedded	Embedded
 Enable Verbose Logging	Protokollierung aktivieren
 Engine Settings	Engine-Einstellungen
 Engine has no options	Engine hat keine Einstellungsmöglichkeiten
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Fully Qualified Domain Name oder IP-Adresse des zu inspizierenden Hosts angeben. Es kann auch eine Port-Nummer angegeben werden.
 Enter the value to verify	Wert zur Verifizierung eingeben
 Errors	Fehler
+# TODO
+Export NSS Keylog	Export NSS Keylog
 Extended	Erweitert
 Features	Funtionen
 Feedback	Feedback
@@ -305,6 +356,8 @@ Host IP Address	IP-Adresse des Hosts
 Host was not found or invalid.	Host nicht gefunden oder ungültig.
 How soon before the certificate expires should we notify you?	Wie knapp vor Ablauf des Zertifikats möchtest du erinnert werden?
 IDN Not Supported	IDN nicht unterstützt
+# TODO
+IP version: {version}	IP version: {0}
 If you believe this to be in error, contact support from within the TLS Inspector app.	Wenn du glaubst, es handelt sich um einen Fehler, kontaktiere den Support über die TLS Inspector-App.
 Important	Wichtig
 Inspect	Inspizieren
@@ -320,9 +373,15 @@ Key Usage	Verwendungszweck
 KeyAlgorithm::dsaEncryption	DSA
 KeyAlgorithm::id-ecPublicKey	ECDSA
 KeyAlgorithm::rsaEncryption	RSA
+# TODO
+Keying Material	Keying Material
 Loading...	Laden…
 Locally Trusted	Lokal vertrauenswürdig
 Locally Trusted Chain	Lokal vertrauenswürdige Kette
+# TODO
+Log ID	Log ID
+# TODO
+Log Name	Log Name
 Logging	Protokollierung
 MD5	MD5
 Mail Account Required	E-Mail-Account erforderlich
@@ -346,6 +405,8 @@ Only HTTPS URLs can be inspected	Nur HTTPS URLs können analysiert werden
 OpenSSL	OpenSSL
 OpenSSL Settings	OpenSSL-Optionen
 OpenSSL Version	OpenSSL-Version
+# TODO
+Operation timed out	Operation timed out
 Optional	Optional
 Options	Optionen
 Please describe the problem in at least 5 words.	Bitte beschreibe das Problem in mehr als 5 Worten.
@@ -363,11 +424,15 @@ Report Issue on GitHub	Melde Fehler auf GitHub
 Report a Bug	Fehler melden
 Request a Feature	Feature anfragen
 Revoked On	Annulliert am
+# TODO
+Root CA Certificates	Root CA Certificates
 SHA-256	SHA-256
 SHA-512	SHA-512
 SHA1	SHA1
 Search on Shodan	Auf Shodan suchen
 Search on crt.sh	Auf crt.sh suchen
+# TODO
+Secret	Secret
 Security HTTP Headers	HTTP-Sicherheit
 Select Feedback Type	Art des Feedbacks auswählen
 Send Anyways	Trotzdem senden
@@ -383,6 +448,8 @@ Show HTTP Headers	HTTP Header anzeigen
 Show Tips	Hinweise anzeigen
 Signature	Signatur
 Signature Algorithm	Signatur-Algorithmus
+# TODO
+Signature Type	Signature Type
 Size	Größe
 Something Else	Andere Anfrage
 Specifying a host IP address will bypass name resolution.	Bei Angabe einer IP-Adresse wird die Namensauflösung übersprungen.
@@ -408,6 +475,12 @@ Tell Friends About TLS Inspector	Erzähle Freunden von TLS Inspector
 Test New Features	Teste neue Funktionen
 The certificate for {domain} expires on {date}	Das Zertifikat für {0} läuft am {1} ab
 The host you provided is not valid	Der angegebene Host ist ungültig
+# TODO
+Timestamp	Timestamp
+# TODO
+Timestamps	Timestamps
+# TODO
+Treat Unrecognized as Trusted	Treat Unrecognized as Trusted
 # This is not a 1:1 translation. Instead of "On-The-Go", it is translated as "always with you"
 Trust & Safety On-The-Go with TLS Inspector: {url}	Vertrauen & Sicherheit immer dabei mit TLS Inspector: {0}
 Trust Details	Vertrauens-Details
@@ -417,8 +490,14 @@ Unable to Inspect	Kann nicht analysiert werden
 Unable to export certificate	Zertifikat kann nicht exportiert werden
 Understood	Verstanden
 Unknown	Unbekannt
+# TODO
+Unrecognized	Unrecognized
 Untrusted	Nicht vertrauenswürdig
 Untrusted Chain	Nicht vertrauenswürdige Kette
+# TODO
+Updating	Updating
+# TODO
+Updating...	Updating...
 Use IP Version	Verwende IP-Version
 Use the Reminders app to customize the reminder	Bearbeite die Erinnerung in der Erinnerungen-App
 Valid For	Gültig für
@@ -430,6 +509,8 @@ Verbose Logging Enabled	Protokollierung aktiviert
 Verified	Verifiziert
 Version	Version
 View All	Alle anzeigen
+# TODO
+View Keying Material	View Keying Material
 View all alternate names	Alle alternativen Namen anzeigen
 View on SSL Labs	In SSL Labs anzeigen
 Warning	Achtung
@@ -441,6 +522,8 @@ Yes	Ja
 You can modify the reminder in the reminders app.	Du kannst die Erinnerung in der Erinnerungen-App bearbeiten.
 You must inspect at least one site with verbose logging enabled before you can submit logs.	Du musst mindestens eine Analyse mit Protokollierung durchgeführt haben, um ein Protokoll zu schicken.
 advanced_settings_nag	Diese Einstellungen sind für erweiterte Fehlerbehebung gedacht. Falsche Einstellungen können TLS Inspector an einer korrekten Funktionsweise hindern.
+# TODO
+apple	Apple
 certificate_status_footer	OCSP-Abfragen deaktivieren kann die Privatsphäre erhöhen, verringert jedoch die Datenqualität. CRL-Überprüfung aktivieren kann zu langsameren Abfragen und erhöhtem Datenverbrauch führen.
 copyright_license_footer	TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2022 Ian Spence.
 crypto_engine::network_framework	Apple - Modern
@@ -473,6 +556,10 @@ explanation::wrong_host	Das Server-Zertifikat wurde für eine andere Webseite au
 fake_feedback_recieved_message	Danke für dein Feedback zu TLS Inspector. Obwohl wir jedes Feedback sorgfältig lesen, kann es sein, dass wir nicht darauf antworten.
 feedback_warn_message	TLS Inspector schützt nicht vor Viren oder Malware.\n\nWenn du Sorgen um die Sicherheit deines Gerätes hast, kontaktiere den Apple Support.
 first_run_notice	TLS Inspector is designed to help you make informed and safe choices while browsing the web. It does not provide you or your iOS device with active protection against viruses or malware.\n\nIf you're concerned about the security of your device; contact Apple Support.
+# TODO
+google	Google
+# TODO
+guidance_warning	If you are seeing this on social media, public email, banks, or other popular websites do not continue and seek assistance from Apple Support.
 idn_warning	Derzeit unterstützt TLS Inspector noch keine Internationalen Domain Names (IDN). Wir bitten um Entschuldigung für diese Unannehmlichkeit.
 keyUsage::OCSPSigning	OCSP-Signatur
 keyUsage::anyExtendedKeyUsage	Alle Verwendungszwecke
@@ -490,7 +577,15 @@ keyUsage::keyEncipherment	Schlüssel-Verschlüsselung
 keyUsage::nonRepudiation	Herkunftsverifikation
 keyUsage::serverAuth	Server-Authentifizierung
 keyUsage::timeStamping	Zeitstempel
+# TODO
+microsoft	Microsoft
+# TODO
+mozilla	Mozilla
 proxy_warning	Ein HTTP-Proxy ist konfiguriert. TLS Inspector ist nicht mit mit HTTP-Proxies kompatibel, der Proxy muss in den WLAN-Einstellungen des Systems deaktiviert werden.
+# TODO
+rootca_error	Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.
+# TODO
+rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.
 sanType::DNS	DNS
 sanType::Directory	Verzeichnis
 sanType::Email	E-Mail

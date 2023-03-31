@@ -38,7 +38,7 @@ class AppIconTableViewController: UITableViewController {
         }
 
         imageView.image = image
-        label.text = iconName
+        label.text = lang(key: "AppIcon::\(iconName)")
 
         return cell
     }
