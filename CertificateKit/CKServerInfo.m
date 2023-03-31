@@ -42,11 +42,11 @@
     // https://securityheaders.io, https://scotthelme.co.uk/
     NSArray<NSString *> * SECURE_HEADERS = @[
         @"Content-Security-Policy",
+        @"Permissions-Policy",
+        @"Referrer-Policy",
         @"Strict-Transport-Security",
-        @"X-Frame-Options",
-        @"X-XSS-Protection",
         @"X-Content-Type-Options",
-        @"Referrer-Policy"
+        @"X-Frame-Options",
     ];
 
     NSArray<NSString *> * headerKeys = self.headers.allKeys;

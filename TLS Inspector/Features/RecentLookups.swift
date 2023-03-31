@@ -63,6 +63,7 @@ class RecentLookups {
 
     /// Remove all recently inspected domains.
     public static func RemoveAllLookups() {
-        AppDefaults.set([], forKey: LIST_KEY)
+        let lookups: [String] = []
+        AppDefaults.set(lookups, forKey: LIST_KEY)
     }
 }
