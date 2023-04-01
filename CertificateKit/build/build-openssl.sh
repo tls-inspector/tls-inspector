@@ -25,7 +25,7 @@ fi
 echo "warning: OpenSSL needs to be compiled. This will take a while..."
 
 cd openssl-ios
-./build-ios.sh ${OPENSSL_WANT_VERSION}
+./build-ios.sh ${OPENSSL_WANT_VERSION} -no-psk -no-srp
 mv openssl.xcframework ../../
 cd ../
 

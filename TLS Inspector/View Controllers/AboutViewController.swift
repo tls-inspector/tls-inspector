@@ -35,7 +35,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         section.title = lang(key: "Share & Feedback")
         let opensslVersion = CertificateKit.opensslVersion()
         let libcurlVersion = CertificateKit.libcurlVersion()
-        section.footer = "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), tiny-curl: \(libcurlVersion)"
+        section.footer = "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), curl: \(libcurlVersion)"
 
         return section
     }
@@ -105,29 +105,11 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if #unavailable(iOS 12) {
-            return nil
-        }
-
-        if section == 0 {
-            return lang(key: "Share & Feedback")
-        } else if section == 1 {
-            return lang(key: "Get Involved")
-        }
-
-        return nil
+        return self.sections[section].title
     }
 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if section == 0 {
-            let opensslVersion = CertificateKit.opensslVersion()
-            let libcurlVersion = CertificateKit.libcurlVersion()
-            return "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), tiny-curl: \(libcurlVersion)"
-        } else if section == 1 {
-            return lang(key: "copyright_license_footer")
-        }
-
-        return nil
+        return self.sections[section].footer
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

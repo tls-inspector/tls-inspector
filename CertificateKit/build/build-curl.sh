@@ -18,14 +18,47 @@ if [ -f ../curl.xcframework/Info.plist ]; then
         exit 0
     else
         echo "warning: cURL version did not match. recompiling version ${CURL_WANT_VERSION}"
-        rm -r ../curl.framework
+        rm -r ../curl.xcframework
     fi
 fi
 
 echo "warning: cURL needs to be compiled. This will take a while..."
 
-cd tiny-curl-ios
-./build-ios.sh ${CURL_WANT_VERSION}
+cd curl-ios
+./build-ios.sh ${CURL_WANT_VERSION} --disable-ftp \
+    --disable-file \
+    --disable-ldap \
+    --disable-ldaps \
+    --disable-rtsp \
+    --disable-proxy \
+    --disable-dict \
+    --disable-telnet \
+    --disable-tftp \
+    --disable-pop3 \
+    --disable-imap \
+    --disable-smb \
+    --disable-smtp \
+    --disable-gopher \
+    --disable-mqtt \
+    --disable-manual \
+    --disable-sspi \
+    --disable-ntlm \
+    --disable-ntlm-wb \
+    --disable-unix-sockets \
+    --disable-doh \
+    --disable-progress-meter \
+    --disable-websockets \
+    --without-nghttp2 \
+    --without-nghttp3 \
+    --without-quiche \
+    --without-brotli \
+    --without-zstd \
+    --without-libpsl \
+    --without-libgsasl \
+    --without-nghttp2 \
+    --without-ngtcp2 \
+    --without-nghttp3 \
+    --without-quiche
 mv curl.xcframework ../../
 cd ../
 

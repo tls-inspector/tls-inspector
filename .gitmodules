@@ -1,6 +1,6 @@
 [submodule "CertificateKit/build/openssl-ios"]
 	path = CertificateKit/build/openssl-ios
 	url = https://github.com/tls-inspector/openssl-ios.git
-[submodule "CertificateKit/build/tiny-curl-ios"]
-	path = CertificateKit/build/tiny-curl-ios
-	url = https://github.com/tls-inspector/tiny-curl-ios
+[submodule "CertificateKit/build/curl-ios"]
+	path = CertificateKit/build/curl-ios
+	url = https://github.com/tls-inspector/curl-ios
