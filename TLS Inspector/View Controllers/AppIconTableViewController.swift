@@ -13,10 +13,6 @@ class AppIconTableViewController: UITableViewController {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.iconNames.count
     }
@@ -55,5 +51,9 @@ class AppIconTableViewController: UITableViewController {
                 }
             }
         }
+    }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return lang(key: "AppIconFooter")
     }
 }
