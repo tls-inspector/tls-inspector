@@ -30,9 +30,9 @@
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
-			<string>tiny-curl</string>
+			<string>curl</string>
 			<key>File</key>
-			<string>tinycurl</string>
+			<string>curl</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -46,9 +46,9 @@
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
-			<string>Mozilla CA Certificate Store</string>
+			<string>Root CA Certificates</string>
 			<key>File</key>
-			<string>mozillaca</string>
+			<string>rootca</string>
 		</dict>
 	</array>
 </dict>
