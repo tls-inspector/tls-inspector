@@ -49,7 +49,7 @@
 }
 
 - (NSString *) findLogName:(NSData *)logId {
-    NSString * logListPath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"ct_log_list" ofType:@"json"];
+    NSString * logListPath = [[NSBundle bundleWithIdentifier:@"com.tlsinspector.CertificateKit"] pathForResource:@"ct_log_list.min" ofType:@"json"];
     NSDictionary<NSString *, id> * logList = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:logListPath] options:0 error:nil];
     if ([logList valueForKey:@"operators"] == nil) {
         return nil;

@@ -13,7 +13,6 @@
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
-		3C218DBD29AEF2E7000D84BC /* ct_log_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C218DBC29AEF2E7000D84BC /* ct_log_list.json */; };
 		3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -185,6 +184,7 @@
 		3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14D123B0479B0053932F /* InitialViewController.swift */; };
 		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
 		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
+		3CE5EE8C29E21CE7009F7026 /* ct_log_list.min.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */; };
 		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */; };
 		3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A693261BBC5900460B7F /* CKInspectParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -277,7 +277,6 @@
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
 		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
-		3C218DBC29AEF2E7000D84BC /* ct_log_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ct_log_list.json; sourceTree = "<group>"; };
 		3C2556AB28E60C430057FE4D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
@@ -411,6 +410,7 @@
 		3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnlyGlobals.swift; sourceTree = "<group>"; };
 		3CDC14D123B0479B0053932F /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		3CE3B21625BE2186008527A1 /* URL+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Encode.swift"; sourceTree = "<group>"; };
+		3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ct_log_list.min.json; sourceTree = "<group>"; };
 		3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolvedAddress.h; sourceTree = "<group>"; };
 		3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKResolvedAddress.m; sourceTree = "<group>"; };
 		3CF0A693261BBC5900460B7F /* CKInspectParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectParameters.h; sourceTree = "<group>"; };
@@ -491,7 +491,7 @@
 		3C218DB929AEF12F000D84BC /* CTLogs */ = {
 			isa = PBXGroup;
 			children = (
-				3C218DBC29AEF2E7000D84BC /* ct_log_list.json */,
+				3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */,
 			);
 			path = CTLogs;
 			sourceTree = "<group>";
@@ -1069,11 +1069,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */,
+				3CE5EE8C29E21CE7009F7026 /* ct_log_list.min.json in Resources */,
 				3C6036392947BEBE00981444 /* bundle_version.txt in Resources */,
 				3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */,
 				3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */,
 				3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */,
-				3C218DBD29AEF2E7000D84BC /* ct_log_list.json in Resources */,
 				3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
