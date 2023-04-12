@@ -1,0 +1,580 @@
+1 month	1 mes
+2 weeks	2 semanas
+3 months	3 meses
+6 months	6 meses
+About	Acerca de
+About TLS Inspector	Acerca de TLS Inspector
+Add Certificate Expiry Reminder	Agregar recordatorio de caducidad de certificado
+Advanced Inspect	Inspección avanzada
+Advanced Options	Opciones avanzadas
+Algorithm	Algoritmo
+Algorithms	Algoritmos
+Alternate Names	Nombres alternativos
+App Icons	Iconos de la app
+AppIcon::Dark	Oscuro
+AppIcon::Default	Por defecto
+AppIcon::Light	Claro
+AppIcon::Pride	Orgullo
+AppIcon::Trans	Trans
+Apple Support	Soporte de Apple
+Authority	Autoridad
+Auto	Auto
+Automatic	Automático
+Automatic will choose IPv6 if available.	Automático elegirá IPv6 si está disponible.
+Basic	Básico
+Build	Compilación
+Bundle Date	Fecha del paquete
+Cancel	Cancelar
+Certificate Authority	Autoridad de certificación
+Certificate Chain	Cadena de certificados
+Certificate Errors	Errores del certificado
+Certificate Information	Información del certificado
+Certificate Status	Estado del certificado
+Certificate Timestamps	Marcas de tiempo del certificado
+Certificate Trust	Confianza en el certificado
+Certificate is expired or not valid yet.	El certificado caducó o no es válido aún.
+Certificate uses insecure SHA1 algorithm.	El certificado usa el algoritmo SHA1 inseguro.
+Certificates	Certificados
+Chain	Cadena
+Check for updates	Buscar actualizaciones
+Ciphers	Algoritmos de cifrado
+Clear downloaded bundles	Limpiar paquetes descargados
+Client Random	Aleatorio del cliente
+Close	Cerrar
+Connection Information	Información de la conexión
+Contact Support	Contactar a soporte
+Contact Us	Contáctanos
+Contacting support requires that at least one email account be configured on this device.	Se requiere una cuenta de correo configurada en este dispositivo para contactar a soporte.
+Contribute to TLS Inspector	Contribuir a TLS Inspector
+Copy	Copiar
+Could not get certificates	No se pudieron obtener los certificados
+Country::AD	Andorra
+Country::AE	Emiratos Árabes Unidos
+Country::AF	Afganistán
+Country::AG	Antigua y Barbuda
+Country::AI	Anguila
+Country::AL	Albania
+Country::AM	Armenia
+Country::AO	Angola
+Country::AQ	Antártida
+Country::AR	Argentina
+Country::AS	Samoa Americana
+Country::AT	Austria
+Country::AU	Australia
+Country::AW	Aruba
+Country::AX	Islas Áland
+Country::AZ	Azerbaiyán
+Country::BA	Bosnia y Herzegovina
+Country::BB	Barbados
+Country::BD	Bangladés
+Country::BE	Bélgica
+Country::BF	Burkina Faso
+Country::BG	Bulgaria
+Country::BH	Baréin
+Country::BI	Burundi
+Country::BJ	Benin
+Country::BL	San Bartolomé
+Country::BM	Bermudas
+Country::BN	Brunéi
+Country::BO	Bolivia
+Country::BQ	Bonaire, San Eustaquio y Saba; Caribe Neerlandés
+Country::BR	Brasil
+Country::BS	Bahamas
+Country::BT	Bután
+Country::BV	Isla Bouvet
+Country::BW	Botsuana
+Country::BY	Bielorrusia
+Country::BZ	Belice
+Country::CA	Canadá
+Country::CC	Islas Cocos (Keeling)
+Country::CD	Congo Kinsasa
+Country::CF	República Centroafricana
+Country::CG	Congo Brazzaville
+Country::CH	Suiza
+Country::CI	Costa de Marfil
+Country::CK	Islas Cook
+Country::CL	Chile
+Country::CM	Camerún
+Country::CN	China
+Country::CO	Colombia
+Country::CR	Costa Rica
+Country::CU	Cuba
+Country::CV	Cabo Verde
+Country::CW	Curazao
+Country::CX	Isla de Navidad
+Country::CY	Chipre
+Country::CZ	República Checa
+Country::DE	Alemania
+Country::DJ	Yibuti
+Country::DK	Dinamarca
+Country::DM	Domínica
+Country::DO	República Dominicana
+Country::DZ	Argelia
+Country::EC	Ecuador
+Country::EE	Estonia
+Country::EG	Egipto
+Country::EH	Sahara Occidental
+Country::ER	Eritrea
+Country::ES	España
+Country::ET	Etiopía
+Country::FI	Finlandia
+Country::FJ	Fiyi
+Country::FK	Islas Malvinas
+Country::FM	Micronesia
+Country::FO	Islas Feroe
+Country::FR	Francia
+Country::GA	Gabón
+Country::GB	Reino Unido
+Country::GD	Granada
+Country::GE	Georgia
+Country::GF	Guayana Francesa
+Country::GG	Guernsey
+Country::GH	Ghana
+Country::GI	Gibraltar
+Country::GL	Groenlandia
+Country::GM	Gambia
+Country::GN	Guinea
+Country::GP	Guadalupe
+Country::GQ	Guinea Ecuatorial
+Country::GR	Grecia
+Country::GS	Islas Georgias del Sur y Sandwich del Sur
+Country::GT	Guatemala
+Country::GU	Guam
+Country::GW	Guinea-Bissau
+Country::GY	Guayana
+Country::HK	Hong Kong
+Country::HM	Islas Heard y McDonald
+Country::HN	Honduras
+Country::HR	Croacia
+Country::HT	Haití
+Country::HU	Hungría
+Country::ID	Indonesia
+Country::IE	Irlanda
+Country::IL	Israel
+Country::IM	Isla de Man
+Country::IN	India
+Country::IO	Territorio Británico del Océano Índico
+Country::IQ	Irak
+Country::IR	Irán
+Country::IS	Islandia
+Country::IT	Italia
+Country::JE	Jersey
+Country::JM	Jamaica
+Country::JO	Jordania
+Country::JP	Japón
+Country::KE	Kenia
+Country::KG	Kirguistán
+Country::KH	Camboya
+Country::KI	Kiribati
+Country::KM	Comoros
+Country::KN	San Cristóbal y Nieves
+Country::KP	Corea del Norte
+Country::KR	Corea del Sur
+Country::KW	Kuwait
+Country::KY	Islas Caimán
+Country::KZ	Kazajstán
+Country::LA	Laos
+Country::LB	Líbano
+Country::LC	Santa Lucía
+Country::LI	Liechtenstein
+Country::LK	Sri Lanka
+Country::LR	Liberia
+Country::LS	Lesotho
+Country::LT	Lituania
+Country::LU	Luxemburgo
+Country::LV	Letonia
+Country::LY	Libia
+Country::MA	Marruecos
+Country::MC	Mónaco
+Country::MD	Moldova
+Country::ME	Montenegro
+Country::MF	San Martín
+Country::MG	Madagascar
+Country::MH	Islas Marshall
+Country::MK	Macedonia del Norte
+Country::ML	Mali
+Country::MM	Birmania
+Country::MN	Mongolia
+Country::MO	Macao
+Country::MP	Islas Marianas del Norte
+Country::MQ	Martinica
+Country::MR	Mauritania
+Country::MS	Montserrat
+Country::MT	Malta
+Country::MU	Mauricio
+Country::MV	Maldivas
+Country::MW	Malawi
+Country::MX	México
+Country::MY	Malasia
+Country::MZ	Mozambique
+Country::NA	Namibia
+Country::NC	Nueva Caledonia
+Country::NE	Níger
+Country::NF	Isla Norfolk
+Country::NG	Nigeria
+Country::NI	Nicaragua
+Country::NL	Países Bajos
+Country::NO	Noruega
+Country::NP	Nepal
+Country::NR	Nauru
+Country::NU	Niue
+Country::NZ	Nueva Zelanda
+Country::OM	Omán
+Country::PA	Panamá
+Country::PE	Perú
+Country::PF	Polinesia Francesa
+Country::PG	Papúa Nueva Guinea
+Country::PH	Filipinas
+Country::PK	Pakistán
+Country::PL	Polonia
+Country::PM	San Pedro y Miquelón
+Country::PN	Islas Pitcairn
+Country::PR	Puerto Rico
+Country::PS	Estado de Palestina
+Country::PT	Portugal
+Country::PW	Palaos
+Country::PY	Paraguay
+Country::QA	Catar
+Country::RE	La Reunión
+Country::RO	Rumanía
+Country::RS	Serbia y Montenegro
+Country::RU	Rusia
+Country::RW	Ruanda
+Country::SA	Arabia Saudita
+Country::SB	Islas Salomón
+Country::SC	Seychelles
+Country::SD	Sudán
+Country::SE	Suecia
+Country::SG	Singapur
+Country::SH	Santa Elena, Ascensión y Tristán de Acuña
+Country::SI	Eslovenia
+Country::SJ	Svalbard
+Country::SK	Eslovaquia
+Country::SL	Sierra Leona
+Country::SM	San Marino
+Country::SN	Senegal
+Country::SO	Somalia
+Country::SR	Surinam
+Country::SS	Sudán del Sur
+Country::ST	Santo Tomé y Príncipe
+Country::SV	El Salvador
+Country::SX	San Martín, reino de Países Bajos
+Country::SY	Siria
+Country::SZ	Esuatini
+Country::TC	Islas Turcas y Caicos
+Country::TD	Chad
+Country::TF	Territorios Australes Franceses
+Country::TG	Togo
+Country::TH	Tailandia
+Country::TJ	Tayikistán
+Country::TK	Tokelau
+Country::TL	Timor-Leste
+Country::TM	Turkmenistán
+Country::TN	Túnez
+Country::TO	Tonga
+Country::TR	Turquía
+Country::TT	Trinidad y Tobago
+Country::TV	Tuvalu
+# Note: The developer of TLS Inspector supports Taiwan's independence and international recognition. This is an accepted deviation from ISO-3166.   
+Country::TW	Taiwán
+Country::TZ	Tanzania
+Country::UA	Ucrania
+Country::UG	Uganda
+Country::UM	Islas Ultramarinas Menores de los Estados Unidos de América
+Country::US	Estados Unidos de América
+Country::UY	Uruguay
+Country::UZ	Uzbekistán
+Country::VA	Santa Sede
+Country::VC	San Vicente y las Granadinas
+Country::VE	Venezuela
+Country::VG	Islas Vírgenes Británicas
+Country::VI	Islas Vírgenes de los Estados Unidos de América
+Country::VN	Vietnam
+Country::VU	Vanuatu
+Country::WF	Wallis y Futuna
+Country::WS	Samoa
+Country::YE	Yemen
+Country::YT	Mayotte
+Country::ZA	Sudáfrica
+Country::ZM	Zambia
+Country::ZW	Zimbabwe
+Crypto Engine	Motor de criptografía
+Danger	Peligro
+Dangerous	Peligroso
+Delete	Eliminar
+Did You Know?	¿Sabías que?
+Discard	Descartar
+Dismiss	Cerrar
+Do not contact support for issues with your iOS Device or to report unsafe websites.	No te pongas en contacto con soporte para problemas con tu dispositivo iOS o para informar de sitios web inseguros.
+Domain Name or IP Address	Nombre de dominio o dirección IP
+Download & Check CRL	Descargar y comprobar CRL
+EV Authority	Autoridad EV
+Embedded	Incrustado
+Enable Verbose Logging	Activar registro detallado
+Engine Settings	Configuración del motor
+Engine has no options	El motor no tiene opciones
+Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Introduce el nombre de dominio totalmente calificado o la dirección IP del host que deseas inspeccionar. También puedes especificar un número de puerto aquí.
+Enter the value to verify	Introduce el valor a verificar
+Errors	Errores
+Export NSS Keylog	Exportar registro de claves NSS (NSS Keylog)
+Extended	Extendido
+Features	Características
+Feedback	Comentarios
+Feedback Sent	Comentarios enviados
+Fingerprints	Huellas digitales
+Finished	Finalizado
+Follow @tlsinspector on Mastodon	Sigue a @tlsinspector en Mastodon
+General	General
+Get Involved	Participa
+HTTP Headers	Encabezados HTTP
+Host IP Address	Dirección IP del host
+Host was not found or invalid.	No se encontró el host o no es válido.
+How soon before the certificate expires should we notify you?	¿Cuánto tiempo quieres que te avisemos antes de que caduque el certificado?
+IDN Not Supported	IDN no compatible
+IP version: {version}	Versión de IP: {0}
+If you believe this to be in error, contact support from within the TLS Inspector app.	Si crees que esto es un error, ponte en contacto con soporte desde la aplicación TLS Inspector.
+Important	Importante
+Inspect	Inspeccionar
+Internal error.	Error interno.
+Invalid Date	Fecha no válida
+Invalid host	Host no válido
+Is the connection to this site secure?	¿Es segura la conexión a este sitio?
+Issuer	Emisora
+Key	Clave
+Key Algorithm	Algoritmo de la clave
+Key Identifier	Identificador de la clave
+Key Usage	Uso de la clave
+KeyAlgorithm::dsaEncryption	DSA
+KeyAlgorithm::id-ecPublicKey	ECDSA
+KeyAlgorithm::rsaEncryption	RSA
+Keying Material	Material de clave
+Loading...	Cargando...
+Locally Trusted	Marcado como de confianza local
+Locally Trusted Chain	Cadena marcada como de confianza local
+Log ID	ID del registro
+Log Name	Nombre del registro
+Logging	Registro
+MD5	MD5
+Mail Account Required	Se requiere una cuenta de correo
+Metadata	Metadatos
+More	Más
+More Info	Más info
+Negotiated Ciphersuite	Conjunto de algoritmos de cifrado negociado
+Negotiated Version	Versión negociada
+Network	Red
+Next	Siguiente
+No	No
+No Supported URL Found	No se encontró ninguna URL compatible
+Not After	No después de
+Not Before	No antes de
+Not Valid After	No es válido después de
+Not Valid Before	No es válido antes de
+Not Verified	No verificado
+Notice	Aviso
+Notification Date	Fecha de la notificación
+Only HTTPS URLs can be inspected	Solo se pueden inspeccionar las URL HTTPS
+OpenSSL	OpenSSL
+OpenSSL Settings	Configuración de OpenSSL
+OpenSSL Version	Versión de OpenSSL
+Operation timed out	La operación ha caducado
+Optional	Opcional
+Options	Opciones
+Please describe the problem in at least 5 words.	Describe el problema con al menos 5 palabras.
+Provide Feedback	Enviar comentarios
+Proxy Detected	Proxy detectado
+Public Key	Clave pública
+Query OCSP Responder	Servidor de consulta OCSP
+Rate in App Store	Calificar en la App Store
+Recent Lookups	Búsquedas recientes
+Remember Recent Lookups	Recordar búsquedas recientes
+Reminder Added	Recordatorio añadido
+Remote Address	Dirección remota
+Renew Certificate for {domain}	Renovar certificado para {0}
+Report Issue on GitHub	Reportar incidencia en GitHub
+Report a Bug	Reportar un error
+Request a Feature	Pedir una característica
+Revoked On	Revocado el
+Root CA Certificates	Certificados de CA raíz
+SHA-256	SHA-256
+SHA-512	SHA-512
+SHA1	SHA1
+Search on Shodan	Buscar en Shodan
+Search on crt.sh	Buscar en crt.sh
+Secret	Secreto
+Security HTTP Headers	Encabezados HTTP de seguridad
+Select Feedback Type	Selecciona el tipo de comentarios
+Send Anyways	Enviar de todos modos
+Server Info	Info del servidor
+Server Redirected To	El servidor redirigió a
+Share & Feedback	Compartir y comentarios
+Share Certificate	Compartir certificado
+Share Certificate Chain	Compartir cadena de certificados
+Share TLS Inspector	Compartir TLS Inspector
+Show Certificate Fingerprint	Mostrar huella digital del certificado
+Show Certificate on crt.sh	Mostrar certificado en crt.sh
+Show HTTP Headers	Mostrar encabezados HTTP
+Show Tips	Mostrar consejos
+Signature	Firma
+Signature Algorithm	Algoritmo de firma
+Signature Type	Tipo de firma
+Size	Tamaño
+Something Else	Otra cosa
+Specifying a host IP address will bypass name resolution.	Si especificas una dirección IP de host, se omitirá la resolución de nombres.
+Status Providers	Proveedores de estado
+Subject	Firmante
+Subject Alternate Names	Nombres alternativos del firmante
+Subject Names	Nombres del firmante
+Subject::C	País
+Subject::CN	Nombre común
+Subject::E	Correo electrónico
+Subject::L	Ciudad
+Subject::O	Organización
+Subject::OU	Unidad organizativa
+Subject::S	Estado
+Subject::ST	Estado
+Submit Feedback	Enviar comentarios
+Submit Logs	Enviar registros
+TLS Features	Características de TLS
+TLS Inspector	TLS Inspector
+TLS Inspector Issues Only	Solo incidencias de TLS Inspector
+Target	Destino
+Tell Friends About TLS Inspector	Cuéntale a tus amigos sobre TLS Inspector
+Test New Features	Prueba nuevas características
+The certificate for {domain} expires on {date}	El certificado para {0} caduca el {1}
+The host you provided is not valid	El host que has proporcionado no es válido
+Timestamp	Marca de tiempo
+Timestamps	Marcas de tiempo
+Treat Unrecognized as Trusted	Tratar los no reconocidos como de confianza
+Trust & Safety On-The-Go with TLS Inspector: {url}	Confianza y seguridad en cualquier lugar con TLS Inspector: {0}
+Trust Details	Detalles de confianza
+Trusted	De confianza
+Trusted Chain	Cadena de confianza
+Unable to Inspect	No se puede inspeccionar
+Unable to export certificate	No se puede exportar el certificado
+Understood	Entendido
+Unknown	Desconocido
+Unrecognized	No reconocido
+Untrusted	No es de confianza
+Untrusted Chain	Cadena no es de confianza
+Updating	Actualizando
+Updating...	Actualizando...
+Use IP Version	Usar versión de IP
+Use the Reminders app to customize the reminder	Usa la app Recordatorios para personalizar el recordatorio
+Valid For	Válido por
+Valid From	Válido desde
+Valid To	Válido hasta
+Validity Period	Periodo de validez
+Value	Valor
+Verbose Logging Enabled	Se ha habilitado el registro detallado
+Verified	Verificado
+Version	Versión
+View All	Ver todo
+View Keying Material	Ver material de clave
+View all alternate names	Ver todos los nombres alternativos
+View on SSL Labs	Ver en SSL Labs
+Warning	Advertencia
+We were unable to export the certificate in PEM format.	No pudimos exportar el certificado en formato PEM.
+What does this mean?	¿Qué significa esto?
+What kind of feedback would you like to submit?	¿Qué tipo de comentarios quieres enviar?
+Will Expire In	Caducará en
+Yes	Sí
+You can modify the reminder in the reminders app.	Puedes modificar el recordatorio en la app Recordatorios.
+You must inspect at least one site with verbose logging enabled before you can submit logs.	Debes inspeccionar al menos un sitio con el registro detallado habilitado antes de poder enviar los registros.
+advanced_settings_nag	Estas configuraciones son para depuración avanzada. Los valores incorrectos pueden impedir que TLS Inspector funcione correctamente.
+apple	Apple
+certificate_status_footer	El desactivar la consulta OCSP puede producir resultados de confianza incorrectos. Al activar la comprobación de CRL puede resultar en tiempos de procesamiento más largos y un mayor uso de datos. La consulta OCSP puede ocurrir aún cuando está desactivada mientras se usa el motor de cifrado legado.
+copyright_license_footer	TLS Inspector es software libre y gratuito bajo licencia GNU GPLv3. Derechos de autor de TLS Inspector © 2016-2022 Ian Spence.
+crypto_engine::network_framework	Apple - moderno
+crypto_engine::openssl	OpenSSL
+crypto_engine::secure_transport	Apple - legado
+crypto_engine_footer	Cambiar el motor de cifrado puede hacer que TLS Inspector muestre información de conexión diferente a la que usa tu dispositivo iOS. El motor moderno de Apple requiere iOS 12 o posterior. TLS 1.3 no está disponible en el motor legado de Apple. 
+date_unit_plural::day	días
+date_unit_plural::hour	horas
+date_unit_plural::minute	minutos
+date_unit_plural::month	meses
+date_unit_plural::year	años
+date_unit_singular::day	día
+date_unit_singular::hour	hora
+date_unit_singular::minute	minuto
+date_unit_singular::month	mes
+date_unit_singular::year	año
+explanation::bad_authority	El certificado para este host fue emitido por una autoridad de certificación con mala reputación.
+explanation::invalid_date	El certificado del servidor para este sitio no es de confianza porque uno o más certificados en la cadena están caducados o no son válidos todavía.
+explanation::issue_date_too_long	El certificado del servidor es válido durante más de 825 días. Los certificados con períodos de validez excesivos no se consideran seguros porque pueden volverse débiles a medida que envejecen.
+explanation::leaf_keyusage	El certificado del servidor para este sitio no es válido y no tiene el uso de clave de autenticación de servidor requerido.
+explanation::local_trust	Tu dispositivo ha sido configurado para confiar en este certificado, incluso si no lo haría de otra manera.
+explanation::revoked	El certificado del servidor para este sitio no es de confianza porque ha sido revocado por la autoridad de certificación.
+explanation::self_signed	El certificado del servidor para este sitio no es de confianza porque la autoridad de certificación raíz es desconocida o no está presente.
+explanation::sha1_int	El certificado intermedio para este sitio está firmado con SHA-1, que ya no se considera seguro.
+explanation::sha1_leaf	El certificado del servidor para este sitio está firmado con SHA-1, que ya no se considera seguro.
+explanation::trust	El certificado del servidor para este sitio es de confianza porque la autoridad de certificación raíz es de confianza.
+explanation::untrusted	El certificado del servidor para este sitio no es de confianza porque el certificado del servidor es incorrecto.
+explanation::weak_rsa	El certificado del servidor o el emisor está firmado con una clave RSA débil (contiene menos de 2048 bits de datos).
+explanation::wrong_host	El certificado del servidor es para un host diferente al que está conectado.
+fake_feedback_recieved_message	Gracias por proporcionar comentarios sobre TLS Inspector. Aunque tomamos tiempo para leer todos los comentarios, es posible que no respondamos a todos los mensajes que recibimos.
+feedback_warn_message	TLS Inspector no te proporciona ni a ti ni a tu dispositivo iOS protección activa contra virus o malware.\n\nSi estás preocupado por la seguridad de tu dispositivo, contacta con soporte de Apple.
+first_run_notice	TLS Inspector está diseñado para ayudarte a tomar decisiones informadas y seguras mientras navegas por la web. No te proporciona ni a ti ni a tu dispositivo iOS protección activa contra virus o malware.\n\nSi estás preocupado por la seguridad de tu dispositivo, contacta con soporte de Apple.
+google	Google
+guidance_warning	Si ves esto en redes sociales, correo electrónico público, bancos u otros sitios web populares, no continúes y busca asistencia en el soporte de Apple.
+idn_warning	En estos momentos TLS Inspector no admite nombres de dominio internacionales (IDN). Lamentamos las molestias.
+keyUsage::OCSPSigning	Firma OCSP
+keyUsage::anyExtendedKeyUsage	Cualquier uso
+keyUsage::cRLSign	Firma CRL
+keyUsage::clientAuth	Autenticación de cliente
+keyUsage::codeSigning	Firma de código
+keyUsage::dataEncipherment	Cifrado de datos
+keyUsage::decipherOnly	Solo descifrado
+keyUsage::digitalSignature	Firma digital
+keyUsage::emailProtection	Protector de correo electrónico
+keyUsage::encipherOnly	Solo cifrado
+keyUsage::keyAgreement	Acuerdo de clave
+keyUsage::keyCertSign	Firma de clave de certificado
+keyUsage::keyEncipherment	Cifrado de clave
+keyUsage::nonRepudiation	No repudio
+keyUsage::serverAuth	Autenticación de servidor
+keyUsage::timeStamping	Marcado de tiempo
+microsoft	Microsoft
+mozilla	Mozilla
+proxy_warning	Hay un proxy HTTP configurado. TLS Inspector no es compatible con los proxies HTTP y debe desactivarse desde la configuración Wi-Fi del sistema.
+rootca_error	No se puede comprobar de forma segura si hay actualizaciones de los paquetes raíz. Comprueba si hay actualizaciones pendientes de TLS Inspector en la App Store.
+rootca_footer	Las actualizaciones de los paquetes raíz de certificados de autoridad son infrecuentes y se incluyen con las actualizaciones de TLS Inspector. Los datos de actualización se sirven desde GitHub y están firmados digitalmente.
+sanType::DNS	DNS
+sanType::Directory	Directorio
+sanType::Email	Correo electrónico
+sanType::IP	Dirección IP
+sanType::Other	Otros
+sanType::URI	URI
+sanType::Unknown	Desconocido
+secure::bad_authority	No. Las autoridades de certificación deben cumplir con estándares internacionales aceptados. La autoridad que emitió el certificado para este host es conocida por violar estos estándares.\n\EXTREMA LAS PRECAUCIONES. VISITAR SITIOS WEB QUE UTILIZAN AUTORIDADES DE CERTIFICACIÓN CONOCIDAS POR SU MALA REPUTACIÓN EXPONE TU PRIVACIDAD Y SEGURIDAD A UN RIESGO EXTREMO.
+secure::invalid_date	Lo más probable es que sí. Un certificado caducado o no válido todavía no es necesariamente inválido, pero a menudo es un error del administrador del sitio, o tu dispositivo tiene la hora incorrecta.
+secure::issue_date_too_long	Lo más probable es que sí. Apple cambió los requisitos para los certificados en iOS 13 para aplicar períodos de validez más cortos.
+secure::leaf_keyusage	Lo más probable es que sí. Un certificado que no tiene el parámetro de uso de clave probablemente sea válido de otra manera.
+secure::local_trust	Lo más probable es que no. Algunas redes empresariales o corporativas pueden utilizar estos tipos de certificados para sitios web internos o privados. Sin embargo, también puede ser una indicación de un dispositivo o red comprometidos.
+secure::revoked	No. Uno o más certificados para este sitio han sido revocados, lo que significa que los certificados ya no son de confianza.\n\nTen precaución si continúas visitando este sitio web.
+secure::self_signed	No. El certificado para este sitio no fue emitido por ninguna autoridad de certificación conocida y, por lo tanto, tu dispositivo no tiene forma de comprobar si el certificado es realmente para el sitio web y no sea de un atacante.\n\nTen precaución extrema si continúas visitando este sitio web.
+secure::sha1_int	No. Aunque sea poco probable, es posible que un atacante pueda crear un certificado falso que aproveche la debilidad de SHA-1.\n\nTen precaución si continúas visitando este sitio web.
+secure::sha1_leaf	No. Aunque sea poco probable, es posible que un atacante pueda crear un certificado falso que aproveche la debilidad de SHA-1.\n\nTen precaución si continúas visitando este sitio web.
+secure::trust	Sí. Tu dispositivo ha determinado que la conexión a este sitio es segura.
+secure::untrusted	No. Tu dispositivo no ha podido comprobar si el certificado presentado por el sitio web realmente pertenece al sitio web y no a alguien más.\n\nTen precaución extrema si continúas visitando este sitio web.
+secure::weak_rsa	No. Uno o más certificados para este sitio están utilizando criptografía débil y no se consideran seguros.\n\nTen precaución si continúas visitando este sitio web.
+secure::wrong_host	No. Porque el certificado presentado por el servidor era para otro sitio no hay forma de estar seguro de que este certificado no es peligroso.\n\nEs probable que la solicitud a este sitio se haya redirigido a otro sitio, como una página de inicio de sesión Wi-Fi.\n\nTen precaución si continúas con este sitio web.
+server_error_footer	No se pudieron obtener los encabezados HTTP de este servidor debido al siguiente error: {0}
+tip_1	Puedes ver el certificado de un sitio web en Safari o cualquier otro navegador web pulsando el botón "Compartir" y seleccionando "Mostrar certificado".
+tip_2	Puedes ver más información sobre el servidor en Shodan pulsando el botón "Compartir" cuando se muestra una cadena de certificados.
+tip_3	Puedes crear un recordatorio cuando un certificado esté a punto de caducar pulsando el botón "Compartir" cuando se muestra una cadena de certificados.
+tip_4	Puedes exportar la cadena de certificados pulsando el botón "Compartir" cuando se muestra una cadena de certificados.
+tip_5	Puedes inspeccionar otros servidores TLS además de sitios web, como servidores de correo o de  directorio.
+tip_6	Puedes copiar el valor de un parámetro pulsando, manteniendo pulsado sobre él y seleccionando "Copiar".
+tls_feature_status_request	Petición de estado
+tls_feature_status_request_v2	Petición de estado (2.0)
+verbose_logging_footer	Si estás teniendo un problema con TLS Inspector, podemos pedirte que actives el registro de depuración y nos envíes los registros para que podamos identificar mejor el problema. No se recopila información personal, pero cuando está activado, se incluyen los dominios que inspeccionas. Nunca recopilamos estos registros a menos que nos los envíes usando el botón anterior.
+{alg}, {len} bits	{0}, {1} bits
+{amount} {date_unit}	{0} {1}
+{commonName} (Expired)	{0} (caducado)
+{commonName} (Insecure)	{0} (inseguro)
+{commonName} (Not Yet Valid)	{0} (no válido aún)
+{commonName} (Revoked)	{0} (revocado)
+{commonName} ({orgName} {countryName})	{0} ({1} {2})
+{count} months	{0} meses
+{count} weeks	{0} semanas
+{summary} (Revoked)	{0} (revocado)
