@@ -8,7 +8,7 @@ def cleanup(v):
     return r
 
 def read_strings(lang):
-    strings_path = "TLS Inspector/Localization/Strings/" + lang + ".strings"
+    strings_path = "Strings/" + lang + ".strings"
     entries = []
 
     with open(strings_path, 'r') as r:
@@ -39,7 +39,7 @@ def read_strings(lang):
     return sorted(entries, key=lambda x: x["key"])
 
 def process_strings(lang):
-    strings_path = "TLS Inspector/Localization/Strings/" + lang + ".strings"
+    strings_path = "Strings/" + lang + ".strings"
     atomic_path = strings_path + ".atomic"
     lang_entries = read_strings(lang)
     en_entries = read_strings("en")
@@ -108,7 +108,7 @@ def process_strings(lang):
 
 
 def generate_plist(lang):
-    plist_path = "TLS Inspector/Localization/Strings/" + lang + ".plist"
+    plist_path = "Strings/" + lang + ".plist"
     plist_atomic_path = plist_path + ".atomic"
 
     entries = read_strings(lang)
