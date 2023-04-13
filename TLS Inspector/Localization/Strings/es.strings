@@ -16,6 +16,8 @@ AppIcon::Default	Por defecto
 AppIcon::Light	Claro
 AppIcon::Pride	Orgullo
 AppIcon::Trans	Trans
+# TODO
+AppIconFooter	The "Progress" pride flag was created by Daniel Quasar and is licensed under Create Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
 Apple Support	Soporte de Apple
 Authority	Autoridad
 Auto	Auto

@@ -1,10 +1,6 @@
 name: "Localization validation"
 
-on:
-  push:
-    branches: ["app-store"]
-  pull_request:
-    branches: ["app-store"]
+on: [push, pull_request]
 
 permissions:
   packages: read
