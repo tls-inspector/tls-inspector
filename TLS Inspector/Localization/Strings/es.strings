@@ -16,6 +16,8 @@ AppIcon::Default	Por defecto
 AppIcon::Light	Claro
 AppIcon::Pride	Orgullo
 AppIcon::Trans	Trans
+# TODO
+AppIconFooter	The "Progress" pride flag was created by Daniel Quasar and is licensed under Create Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
 Apple Support	Soporte de Apple
 Authority	Autoridad
 Auto	Auto
@@ -275,7 +277,7 @@ Country::TO	Tonga
 Country::TR	Turquía
 Country::TT	Trinidad y Tobago
 Country::TV	Tuvalu
-# Note: The developer of TLS Inspector supports Taiwan's independence and international recognition. This is an accepted deviation from ISO-3166.   
+# Note: The developer of TLS Inspector supports Taiwan's independence and international recognition. This is an accepted deviation from ISO-3166.
 Country::TW	Taiwán
 Country::TZ	Tanzania
 Country::UA	Ucrania
@@ -487,7 +489,7 @@ copyright_license_footer	TLS Inspector es software libre y gratuito bajo licenci
 crypto_engine::network_framework	Apple - moderno
 crypto_engine::openssl	OpenSSL
 crypto_engine::secure_transport	Apple - legado
-crypto_engine_footer	Cambiar el motor de cifrado puede hacer que TLS Inspector muestre información de conexión diferente a la que usa tu dispositivo iOS. El motor moderno de Apple requiere iOS 12 o posterior. TLS 1.3 no está disponible en el motor legado de Apple. 
+crypto_engine_footer	Cambiar el motor de cifrado puede hacer que TLS Inspector muestre información de conexión diferente a la que usa tu dispositivo iOS. El motor moderno de Apple requiere iOS 12 o posterior. TLS 1.3 no está disponible en el motor legado de Apple.
 date_unit_plural::day	días
 date_unit_plural::hour	horas
 date_unit_plural::minute	minutos
