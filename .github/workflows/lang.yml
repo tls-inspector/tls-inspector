@@ -26,4 +26,6 @@ jobs:
             echo "::error ::Untracked changes to localization detected!"
             git status
             exit 1
+          else
+            echo "No untracked changes to localization detected"
           fi
