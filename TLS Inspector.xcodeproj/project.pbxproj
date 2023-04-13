@@ -1156,7 +1156,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/CTLogs\"\n./update.sh\n";
+			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/CTLogs\"\nexport PATH=$PATH:/opt/homebrew/bin\n./update.sh\n";
 		};
 		3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */ = {
 			isa = PBXShellScriptBuildPhase;
