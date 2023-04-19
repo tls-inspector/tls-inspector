@@ -50,6 +50,14 @@
 			<key>File</key>
 			<string>rootca</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Thanks</string>
+			<key>File</key>
+			<string>thanks</string>
+		</dict>
 	</array>
 </dict>
 </plist>
