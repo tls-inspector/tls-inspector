@@ -434,7 +434,7 @@
         <scene sceneID="aIi-z9-cQf">
             <objects>
                 <tableViewController title="App Icons" id="Efu-qQ-cqJ" customClass="AppIconTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="45" estimatedSectionFooterHeight="-1" id="2ty-FS-1Ct">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="18" sectionFooterHeight="45" id="2ty-FS-1Ct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
