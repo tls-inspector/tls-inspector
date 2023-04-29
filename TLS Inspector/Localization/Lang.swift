@@ -28,7 +28,8 @@ class Localization {
         let supportedLanguages = [
             "en": 1,
             "de": 1,
-            "es": 1
+            "es": 1,
+            "nl": 1
         ]
         if supportedLanguages[preferredLang] == nil {
             print("Unsupported system language '\(preferredLang)'")

@@ -182,6 +182,11 @@
 		3CDC14CE23B046000053932F /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
 		3CDC14D023B046410053932F /* AppOnlyGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */; };
 		3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14D123B0479B0053932F /* InitialViewController.swift */; };
+		3CE11BE629FCA097009673A2 /* es.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE429FCA097009673A2 /* es.plist */; };
+		3CE11BE729FCA097009673A2 /* es.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE429FCA097009673A2 /* es.plist */; };
+		3CE11BE829FCA097009673A2 /* nl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE529FCA097009673A2 /* nl.plist */; };
+		3CE11BE929FCA097009673A2 /* nl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE529FCA097009673A2 /* nl.plist */; };
+		3CE11BEA29FCA09D009673A2 /* de.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A84F624D25F6100A1917E /* de.plist */; };
 		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
 		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
 		3CE5EE8C29E21CE7009F7026 /* ct_log_list.min.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */; };
@@ -409,6 +414,8 @@
 		3CDC14B523B045460053932F /* Show Certificate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Show Certificate.entitlements"; sourceTree = "<group>"; };
 		3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnlyGlobals.swift; sourceTree = "<group>"; };
 		3CDC14D123B0479B0053932F /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		3CE11BE429FCA097009673A2 /* es.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = es.plist; sourceTree = "<group>"; };
+		3CE11BE529FCA097009673A2 /* nl.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nl.plist; sourceTree = "<group>"; };
 		3CE3B21625BE2186008527A1 /* URL+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Encode.swift"; sourceTree = "<group>"; };
 		3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ct_log_list.min.json; sourceTree = "<group>"; };
 		3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolvedAddress.h; sourceTree = "<group>"; };
@@ -520,6 +527,8 @@
 		3C5F465E239DAE8400B3A727 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				3CE11BE429FCA097009673A2 /* es.plist */,
+				3CE11BE529FCA097009673A2 /* nl.plist */,
 				3C5A84F624D25F6100A1917E /* de.plist */,
 				3C5F465F239DAE9900B3A727 /* en.plist */,
 			);
@@ -1082,6 +1091,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE11BE629FCA097009673A2 /* es.plist in Resources */,
 				3CCD0299239DDE68009364D0 /* Main.storyboard in Resources */,
 				3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */,
 				3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */,
@@ -1089,6 +1099,7 @@
 				3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */,
 				3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */,
 				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
+				3CE11BE829FCA097009673A2 /* nl.plist in Resources */,
 				3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */,
 				3C5F4660239DAE9900B3A727 /* en.plist in Resources */,
 				3CD74669258C1406003D609E /* offensive_words.plist in Resources */,
@@ -1103,8 +1114,11 @@
 			files = (
 				3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */,
 				3CDC14C923B045E10053932F /* fa-regular.ttf in Resources */,
+				3CE11BE729FCA097009673A2 /* es.plist in Resources */,
 				3CDC14C723B045DA0053932F /* en.plist in Resources */,
+				3CE11BE929FCA097009673A2 /* nl.plist in Resources */,
 				3CDC14AD23B0453B0053932F /* Extension.storyboard in Resources */,
+				3CE11BEA29FCA09D009673A2 /* de.plist in Resources */,
 				3CDC14CA23B045E10053932F /* fa-solid.ttf in Resources */,
 				3CDC14C423B045CF0053932F /* Main.storyboard in Resources */,
 			);

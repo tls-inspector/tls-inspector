@@ -1,0 +1,589 @@
+# 20230427 15:30 +0200 by Erik van Straten
+# Dutch (Nederlands, Netherlands) translation of:
+# https://github.com/tls-inspector/tls-inspector/blob/566f74a05c1ef106618814afaa7f65acf54e803f/TLS%20Inspector/Localization/Strings/en.stringsgs
+# Committed on Apr 13, 2023 by ecnepsnai, "App attribution for flag icons"
+# 
+# Please note a couple of entries preceded by ##: you may want to add or replace with the suggested text
+# 
+1 month	1 maand
+2 weeks	2 weken
+3 months	3 maanden
+6 months	6 maanden
+About	Over
+About TLS Inspector	Over TLS Inspector
+Add Certificate Expiry Reminder	Voeg Verlopen Cert. Herinnering Toe
+Advanced Inspect	Geavanceerde Inspectie
+Advanced Options	Geavanceerde Opties
+Algorithm	Algoritme
+Algorithms	Algoritmes
+Alternate Names	Alternatieve Namen
+App Icons	App Icons
+AppIcon::Dark	Donker
+AppIcon::Default	Standaard
+AppIcon::Light	Licht
+AppIcon::Pride	Pride
+AppIcon::Trans	Trans
+AppIconFooter	De "Progress" pride vlag is gemaakt door Daniel Quasar en is gelicenseerd onder Create Commons BY-NC-SA. De trans vlag is gemaakt door Monica Helms en gepubliceerd als public domain.
+Apple Support	Apple Support
+Authority	Autoriteit
+Auto	Auto
+Automatic	Automatisch
+Automatic will choose IPv6 if available.	Auto kiest IPv6 indien beschikbaar.
+Basic	Basis
+Build	Build
+Bundle Date	Bundel Datum
+Cancel	Annuleren
+Certificate Authority	Certificaatautoriteit
+Certificate Chain	Certificaatketen
+Certificate Errors	Certificaatfouten
+Certificate Information	Certificaatinformatie
+Certificate Status	Certificaatstatus
+Certificate Timestamps	Certificaat-tijdstempels
+Certificate Trust	Certificaatvertrouwen
+Certificate is expired or not valid yet.	Certificaat is verlopen of nog niet geldig.
+Certificate uses insecure SHA1 algorithm.	Certificaat gebruikt onveilig SHA1 algoritme.
+Certificates	Certificaten
+Chain	Keten
+Check for updates	Check op updates
+Ciphers	Ciphers
+Clear downloaded bundles	Wis gedownloade bundels
+Client Random	Client Random
+Close	Sluiten
+Connection Information	Verbindingsinformatie
+Contact Support	Contacteer Support
+Contact Us	Contacteer Ons
+Contacting support requires that at least one email account be configured on this device.	Support contacteren vereist minstens ?n geconfigureerd e-mail account op dit apparaat.
+Contribute to TLS Inspector	Draag bij aan TLS Inspector
+Copy	Kopieer
+Could not get certificates	Kon geen certificaten ophalen
+Country::AD	Andorra
+Country::AE	Verenigde Arabische Emiraten
+Country::AF	Afghanistan
+Country::AG	Antigua en Barbuda
+Country::AI	Anguilla
+Country::AL	Albani?
+Country::AM	Armeni?
+Country::AO	Angola
+Country::AQ	Antarctica
+Country::AR	Argentini?
+Country::AS	American Samoa
+Country::AT	Oostenrijk
+Country::AU	Australi?
+Country::AW	Aruba
+Country::AX	?and Eilanden
+Country::AZ	Azerbeidzjan
+Country::BA	Bosni? en Herzegovina
+Country::BB	Barbados
+Country::BD	Bangladesh
+Country::BE	Belgi?
+Country::BF	Burkina Faso
+Country::BG	Bulgari?
+Country::BH	Bahrein
+Country::BI	Burundi
+Country::BJ	Benin
+Country::BL	Saint-Barth?emy
+Country::BM	Bermuda
+Country::BN	Brunei Darussalam
+Country::BO	Bolivi?
+Country::BQ	Bonaire, Sint Eustatius en Saba
+Country::BR	Brazili?
+Country::BS	Bahamas
+Country::BT	Bhutan
+Country::BV	Bouvet Eiland
+Country::BW	Botswana
+Country::BY	Belarus
+Country::BZ	Belize
+Country::CA	Canada
+Country::CC	Cocos (Keeling) Eilanden
+Country::CD	Congo
+Country::CF	Centraal Africaanse Republiek
+Country::CG	Congo
+Country::CH	Zwitserland
+Country::CI	Ivoorkust
+Country::CK	Cook Eilanden
+Country::CL	Chili
+Country::CM	Kameroen
+Country::CN	China
+Country::CO	Colombia
+Country::CR	Costa Rica
+Country::CU	Cuba
+Country::CV	Cabo Verde
+Country::CW	Cura?o
+Country::CX	Christmaseiland
+Country::CY	Cyprus
+Country::CZ	Tsjechi?
+Country::DE	Duitsland
+Country::DJ	Djibouti
+Country::DK	Denemarken
+Country::DM	Dominica
+Country::DO	Dominicaanse Republiek
+Country::DZ	Algerij?
+Country::EC	Ecuador
+Country::EE	Estland
+Country::EG	Egypte
+Country::EH	Westerse Sahara
+Country::ER	Eritrea
+Country::ES	Spanje
+Country::ET	Ethiopi?
+Country::FI	Finland
+Country::FJ	Fiji
+Country::FK	Falkland Eilanden [Malvinas]
+Country::FM	Micronesi?
+Country::FO	Faer?er
+Country::FR	Frankrijk
+Country::GA	Gabon
+Country::GB	Verenigd Koninkrijk van Groot Britanni? en Noord Ierland
+Country::GD	Grenada
+Country::GE	Georgia
+Country::GF	Frans Guiana
+Country::GG	Guernsey
+Country::GH	Ghana
+Country::GI	Gibraltar
+Country::GL	Groenland
+Country::GM	Gambia
+Country::GN	Guinea
+Country::GP	Guadeloupe
+Country::GQ	Equatoriaal Guinea
+Country::GR	Griekenland
+Country::GS	Zuid Georgia en de Zuidelijke Sandwicheilanden
+Country::GT	Guatemala
+Country::GU	Guam
+Country::GW	Guinea-Bissau
+Country::GY	Guyana
+Country::HK	Hong Kong
+Country::HM	Heardeiland en McDonaldeilanden
+Country::HN	Honduras
+Country::HR	Kroati?
+Country::HT	Haiti
+Country::HU	Hongarij?
+Country::ID	Indonesi?
+Country::IE	Ierland
+Country::IL	Israel
+Country::IM	Eiland Man
+Country::IN	India
+Country::IO	Brits-Indi?
+Country::IQ	Irak
+Country::IR	Iran
+Country::IS	IJsland
+Country::IT	Itali?
+Country::JE	Jersey
+Country::JM	Jamaica
+Country::JO	Jordani?
+Country::JP	Japan
+Country::KE	Kenia
+Country::KG	Kyrgyzstan
+Country::KH	Cambodja
+Country::KI	Kiribati
+Country::KM	Comoros
+Country::KN	Saint Kitts en Nevis
+Country::KP	Noord Korea
+Country::KR	Zuid Korea
+Country::KW	Kuweit
+Country::KY	Kaaiman Eilanden
+Country::KZ	Kazakhstan
+Country::LA	Lao People's Democratic Republic
+Country::LB	Libanon
+Country::LC	Saint Lucia
+Country::LI	Liechtenstein
+Country::LK	Sri Lanka
+Country::LR	Liberia
+Country::LS	Lesotho
+Country::LT	Litouwen
+Country::LU	Luxemburg
+Country::LV	Letland
+Country::LY	Libi?
+Country::MA	Marokko
+Country::MC	Monaco
+Country::MD	Moldovi?
+Country::ME	Montenegro
+Country::MF	Sint Maarten (Franse deel)
+Country::MG	Madagascar
+Country::MH	Marshall Eilanden
+Country::MK	Republiek van Noord Macedoni?
+Country::ML	Mali
+Country::MM	Myanmar
+Country::MN	Mongoli?
+Country::MO	Macao
+Country::MP	Noordelijke Marianen
+Country::MQ	Martinique
+Country::MR	Mauritani?
+Country::MS	Montserrat
+Country::MT	Malta
+Country::MU	Mauritius
+Country::MV	Maladiven
+Country::MW	Malawi
+Country::MX	Mexico
+Country::MY	Maleisi?
+Country::MZ	Mozambique
+Country::NA	Namibi?
+Country::NC	Nieuw Caledoni?
+Country::NE	Niger
+Country::NF	Norfolk Eilanden
+Country::NG	Nigeria
+Country::NI	Nicaragua
+Country::NL	Nederland
+Country::NO	Noorwegen
+Country::NP	Nepal
+Country::NR	Nauru
+Country::NU	Niue
+Country::NZ	Nieuw Zeeland
+Country::OM	Oman
+Country::PA	Panama
+Country::PE	Peru
+Country::PF	Frans Polynesi?
+Country::PG	Papua Nieuw Guinea
+Country::PH	Philippijnen
+Country::PK	Pakistan
+Country::PL	Polen
+Country::PM	Saint-Pierre en Miquelon
+Country::PN	Pitcairneilanden
+Country::PR	Puerto Rico
+Country::PS	Palestina
+Country::PT	Portugal
+Country::PW	Palau
+Country::PY	Paraguay
+Country::QA	Qatar
+Country::RE	R?nion
+Country::RO	Roemeni?
+Country::RS	Servi?
+Country::RU	Russische Federatie
+Country::RW	Rwanda
+Country::SA	Saudi Arabi?
+Country::SB	Solomon Eilanden
+Country::SC	Seychellen
+Country::SD	Sudan
+Country::SE	Zweden
+Country::SG	Singapore
+Country::SH	Sint-Helena, Ascension en Tristan da Cunha
+Country::SI	Sloveni?
+Country::SJ	Spitsbergen en Jan Mayen
+Country::SK	Slowakije
+Country::SL	Sierra Leone
+Country::SM	San Marino
+Country::SN	Senegal
+Country::SO	Somali?
+Country::SR	Suriname
+Country::SS	Zuid Sudan
+Country::ST	Sao Tom? en Principe
+Country::SV	El Salvador
+Country::SX	Sint Maarten
+Country::SY	Arabische Republiek Syri?
+Country::SZ	Swaziland (Eswatini)
+Country::TC	Turks- en Caicoseilanden
+Country::TD	Tsjaad
+Country::TF	Franse Zuidelijke en Antarctische Gebieden
+Country::TG	Togo
+Country::TH	Thailand
+Country::TJ	Tadzjikistan
+Country::TK	Tokelau
+Country::TL	Oost-Timor
+Country::TM	Turkmenistan
+Country::TN	Tunesi?
+Country::TO	Tonga
+Country::TR	Turkije
+Country::TT	Trinidad en Tobago
+Country::TV	Tuvalu
+# Note: The developer of TLS Inspector supports Taiwan's independence and international recognition. This is an accepted deviation from ISO-3166.
+Country::TW	Taiwan
+Country::TZ	Verenigde Republiek Tanzania
+Country::UA	Oekra?e
+Country::UG	Uganda
+Country::UM	Amerikaanse Kleinere Afgelegen Eilanden
+Country::US	Verenigde Staten van Amerika
+Country::UY	Uruguay
+Country::UZ	Oezbekistan
+Country::VA	Vaticaanstad
+Country::VC	Saint Vincent en de Grenadines
+Country::VE	Venezuela
+Country::VG	Maagdeneilanden (Brits)
+Country::VI	Maagdeneilanden (V.S.)
+Country::VN	Vietnam
+Country::VU	Vanuatu
+Country::WF	Wallis en Futuna
+Country::WS	Samoa
+Country::YE	Jemen
+Country::YT	Mayotte
+Country::ZA	Zuid Afrika
+Country::ZM	Zambia
+Country::ZW	Zimbabwe
+Crypto Engine	Crypto Driver
+Danger	Gevaar
+Dangerous	Gevaarlijk
+Delete	Wissen
+Did You Know?	Wist u dit?
+Discard	Verwijderen
+Dismiss	Sluiten
+Do not contact support for issues with your iOS Device or to report unsafe websites.	Contacteer support niet over problemen met uw iOS apparaat of om onveilige websites te melden.
+Domain Name or IP Address	Domeinnaam of IP-Adres
+Download & Check CRL	Download & Check CRL
+EV Authority	EV Autoriteit
+Embedded	Embedded
+Enable Verbose Logging	Zet Uitgebreide Logging Aan
+Engine Settings	Crypto Driver Instellingen
+Engine has no options	Crypto Driver heeft geen opties
+Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Voer de volledig gekwalificeerde domeinnaam of het IP-adres van de server in die u wilt inspecteren.  U kunt hier ook een poortnummer opgeven.
+Enter the value to verify	Voer de waarde om te verifi?en in
+Errors	Fouten
+Export NSS Keylog	Exporteer NSS Keylog
+Extended	Uitgebreid
+Features	Eigenschappen
+Feedback	Terugkoppeling
+Feedback Sent	Terugkoppeling is verstuurd
+Fingerprints	Vingerafdrukken
+Finished	Be?ndigd
+Follow @tlsinspector on Mastodon	Volg @tlsinspector op Mastodon
+General	Algemeen
+Get Involved	Draag eraan bij
+HTTP Headers	HTTP Kopregels
+Host IP Address	Server IP-Adres
+Host was not found or invalid.	Server niet gevonden of ongeldig.
+How soon before the certificate expires should we notify you?	Hoe lang voor het verlopen van het certificaat moeten wij u waarschuwen?
+IDN Not Supported	IDN Niet Ondersteund
+IP version: {version}	IP versie: {0}
+If you believe this to be in error, contact support from within the TLS Inspector app.	Als u denkt dat dit onjuist is, contacteer dan support vanuit de TLS Inspector app.
+Important	Belangrijk
+Inspect	Inspecteren
+Internal error.	Interne fout.
+Invalid Date	Ongeldige Datum
+Invalid host	Ongeldige server
+Is the connection to this site secure?	Is de verbinding naar deze site veilig?
+Issuer	Uitgever
+Key	Sleutel
+Key Algorithm	Sleutelalgoritme
+Key Identifier	Sleutel Identificator
+Key Usage	Sleutelgebruik
+KeyAlgorithm::dsaEncryption	DSA
+KeyAlgorithm::id-ecPublicKey	ECDSA
+KeyAlgorithm::rsaEncryption	RSA
+Keying Material	Versleutelingsmateriaal
+Loading...	Laden...
+Locally Trusted	Lokaal Vertrouwd
+Locally Trusted Chain	Lokaal Vertrouwde Keten
+Log ID	Log ID
+Log Name	Log Naam
+Logging	Logging
+MD5	MD5
+Mail Account Required	E-mail Account Vereist
+Metadata	Metadata
+More	Meer
+More Info	Meer Info
+Negotiated Ciphersuite	Overeengekomen Ciphersuite
+Negotiated Version	Overeengekomen Versie
+Network	Netwerk
+Next	Volgende
+No	Nee
+No Supported URL Found	Geen Ondersteunde URL Gevonden
+Not After	Niet Na
+Not Before	Niet V?r
+Not Valid After	Niet Geldig Na
+Not Valid Before	Niet Geldig V?r
+Not Verified	Niet Geverifieerd
+Notice	Merk Op
+Notification Date	Notificatiedatum
+Only HTTPS URLs can be inspected	Alleen HTTPS URLs kunnen worden ge?specteerd
+OpenSSL	OpenSSL
+OpenSSL Settings	OpenSSL Instellingen
+OpenSSL Version	OpenSSL Versie
+Operation timed out	Operatie duurde te lang
+Optional	Optioneel
+Options	Opties
+Please describe the problem in at least 5 words.	Beschrijf het probleem AUB in ten minste 5 woorden.
+Provide Feedback	Geef Terugkoppeling
+Proxy Detected	Proxy Gedetecteerd
+Public Key	Publieke Sleutel
+Query OCSP Responder	Raadpleeg OCSP Responder
+Rate in App Store	Waardeer in App Store
+Recent Lookups	Recente Opdrachten
+Remember Recent Lookups	Onthoud Recente Opdrachten
+Reminder Added	Herinnering toegevoegd
+Remote Address	Serveradres
+Renew Certificate for {domain}	Vernieuw Certificaat voor {0}
+Report Issue on GitHub	Meld Probleem op GitHub
+Report a Bug	Meld een Bug
+Request a Feature	Verzoek om een Uitbreiding
+Revoked On	Ingetrokken Op
+Root CA Certificates	Root CA Certificaten
+SHA-256	SHA-256
+SHA-512	SHA-512
+SHA1	SHA1
+Search on Shodan	Zoek op Shodan
+Search on crt.sh	Zoek op crt.sh
+Secret	Geheim
+Security HTTP Headers	Security HTTP Headers
+Select Feedback Type	Selecteer Soort Terugkoppeling
+Send Anyways	Stuur Sowieso
+Server Info	Server Info
+Server Redirected To	Server Stuurde Door Naar
+Share & Feedback	Delen & Terugkoppeling
+Share Certificate	Deel Certificaat
+Share Certificate Chain	Deel Certificaatketen
+Share TLS Inspector	Deel TLS Inspector
+Show Certificate Fingerprint	Toon Certificaat Vingerafdruk
+Show Certificate on crt.sh	Toon Certificaat op crt.sh
+Show HTTP Headers	Toon HTTP Kopregels
+Show Tips	Toon Tips
+Signature	Handtekening
+Signature Algorithm	Handtekening Algoritme
+Signature Type	Handtekening Soort
+Size	Grootte
+Something Else	Iets Anders
+Specifying a host IP address will bypass name resolution.	Met een IP-adres wordt DNS naamresolutie overgeslagen.
+Status Providers	Status Providers
+Subject	Subject (Onderwerp)
+Subject Alternate Names	Subject Alternatieve Namen
+Subject Names	Subject Names
+Subject::C	Land
+Subject::CN	Algemene Naam
+Subject::E	E-mail
+Subject::L	Stad
+Subject::O	Organisatie
+Subject::OU	Afdeling
+Subject::S	Staat
+Subject::ST	Staat
+Submit Feedback	Geef Terugkoppeling
+Submit Logs	Verstrek Logs
+TLS Features	TLS Eigenschappen
+TLS Inspector	TLS Inspector
+TLS Inspector Issues Only	Alleen TLS Inspector Problemen
+Target	Doel
+Tell Friends About TLS Inspector	Vertel Vrienden Over TLS Inspector
+Test New Features	Test Nieuwe Eigenschappen
+The certificate for {domain} expires on {date}	Het certificaat voor {0} verloopt op {1}
+The host you provided is not valid	De door u opgegeven server is ongeldig
+Timestamp	Tijdstempel
+Timestamps	Tijdstempels
+Treat Unrecognized as Trusted	Behandel Niet Herkend als Vertrouwd
+Trust & Safety On-The-Go with TLS Inspector: {url}	Vertrouwen & Veiligheid On-The-Go met TLS Inspector: {0}
+Trust Details	Vertrouwen Details
+Trusted	Vertrouwd
+Trusted Chain	Vertrouwde Keten
+Unable to Inspect	Kan Niet Inspecteren
+Unable to export certificate	Certificaat exporteren lukt niet
+Understood	Begrepen
+Unknown	Onbekend
+Unrecognized	Niet Herkend
+Untrusted	Niet Vertrouwd
+Untrusted Chain	Niet Vertrouwde Keten
+Updating	Updating
+Updating...	Updating...
+Use IP Version	Gebruik IP Versie
+Use the Reminders app to customize the reminder	Gebruik de Reminders app om de herinnering aan te passen
+Valid For	Geldig voor
+Valid From	Geldig Vanaf
+Valid To	Geldig Tot
+Validity Period	Geldigheidsduur
+Value	Waarde
+Verbose Logging Enabled	Uitgebreide Logging Aangezet
+Verified	Geverifieerd
+Version	Versie
+View All	Bekijk Alles
+View Keying Material	Bekijk Sleutelmateriaal
+View all alternate names	Bekijk alle alternatieve namen
+View on SSL Labs	Bekijk op SSL Labs
+Warning	Waarschuwing
+We were unable to export the certificate in PEM format.	Exporteren van het certificaat naar PEM formaat lukte ons niet.
+What does this mean?	Wat betekent dit?
+What kind of feedback would you like to submit?	Wat voor soort terugkoppeling wilt u geven?
+Will Expire In	Verloopt in
+Yes	Ja
+You can modify the reminder in the reminders app.	U kunt de herinnering wijzigen in de Reminders app.
+You must inspect at least one site with verbose logging enabled before you can submit logs.	U dient ten minste ?n site met uitgebreide logging te inspecteren voordat u logs kunt opsturen.
+advanced_settings_nag	Deze instellingen zijn voor geavanceerd probleemherstel. Onjuiste waardes kunnen TLS Inspector niet goed laten werken.
+apple	Apple
+certificate_status_footer	OCSP-raadpleging uitzetten kan leiden tot onjuist vertrouwen. CRL-raadpleging kan meer tijd kosten en meer data ophalen. Als OCSP-raadpleging is uitgezet kan dit nog steeds plaatsvinden bij gebruik van de oude Apple crypto driver.
+copyright_license_footer	TLS Inspector is vrij beschikbare software met een GNU GPLv3 licentie. TLS Inspector is copyright ? 2016-2023 Ian Spence.
+crypto_engine::network_framework	Apple - Modern
+crypto_engine::openssl	OpenSSL
+crypto_engine::secure_transport	Apple - Oud
+crypto_engine_footer	Wijzigen van de crypto driver kan ertoe leiden dat TLS Inspector andere verbindingsgegevens vermeldt dan gebruikelijk bij uw iOS apparaat. De moderne Apple crypto driver is beschikbaar vanaf iOS 12. TLS 1.3 is niet beschikbaar in de oude Apple crypto driver.
+date_unit_plural::day	dagen
+date_unit_plural::hour	uren
+date_unit_plural::minute	minuten
+date_unit_plural::month	maanden
+date_unit_plural::year	jaren
+date_unit_singular::day	dag
+date_unit_singular::hour	uur
+date_unit_singular::minute	minuut
+date_unit_singular::month	maand
+date_unit_singular::year	jaar
+explanation::bad_authority	Het certificaat voor deze site is uitgegeven door een als gevaarlijk bekend staande certificaatuitgever.
+explanation::invalid_date	Het servercertificaat voor deze site is niet vertrouwd omdat ?n of meer certificaten in de keten zijn verlopen of nog niet geldig zijn.
+explanation::issue_date_too_long	Het servercertificaat is langer geldig dan 825 dagen. Certificaten met zeer lange geldigheidsduur worden als onveilig beschouwd omdat zij zwakker kunnen worden met de tijd.
+explanation::leaf_keyusage	Het servercertificaat voor deze site is ongeldig en de vereiste sleutelgebruik-waarde Server Authenticatie ontbreekt.
+explanation::local_trust	Uw apparaat is geconfigureerd om dit certificaat te vertrouwen, ook als dat anders niet zo zou zijn.
+explanation::revoked	Het servercertificaat voor deze site is niet vertrouwd door het systeem omdat het is ingetrokken door de certificaatuitgever.
+explanation::self_signed	Het servercertificaat voor deze site is niet vertrouwd door het systeem omdat het zelf-ondertekend is en/of omdat het niet door een bekende en vertrouwde uitgever is verstrekt.
+explanation::sha1_int	Een tussenliggend ketencertificaat voor deze site is ondertekend gebruikmakend van SHA1, wat onveilig is.
+# TODO
+explanation::sha1_leaf	The server certificate for this site is signed using SHA-1, which is no longer considered secure.
+explanation::trust	Het servercertificaat voor deze site is vertrouwd door het systeem omdat het rootcertificaat vertrouwd wordt.
+explanation::untrusted	Het servercertificaat voor deze site is niet vertrouwd door het systeem omdat het certificaat onjuist is.
+explanation::weak_rsa	Een certificaat in de keten gebruikt een zwakke RSA-sleutel (bestaande uit minder dan 2048 bits).
+explanation::wrong_host	Het servercertificaat is voor een andere server dan waar verbinding mee gemaakt is.
+fake_feedback_recieved_message	Dank voor uw terugkoppeling over TLS Inspector. Hoewel wij ons inspannen om alle reacties te lezen, kan het voorkomen dat wij niet elk bericht beantwoorden.
+feedback_warn_message	TLS Inspector beschermt uw iOS apparaat niet actief tegen viruses of malware.\n\nContacteer Apple support als u bezorgd bent over de beveiliging van uw apparaat.
+first_run_notice	TLS Inspector is ontworpen om u te helpen om veilige keuzes te maken terwijl u surft op het web. Deze app beschermt uw iOS apparaat niet actief tegen viruses of malware.\n\nContacteer Apple support als u bezorgd bent over de beveiliging van uw apparaat.
+google	Google
+guidance_warning	Als u dit ziet op publieke servers voor social media, e-mail, banken, of andere populaire websites, ga dan niet verder maar zoek contact met Apple Support.
+idn_warning	Deze versie van TLS Inspector ondersteunt nog geen internationale domeinnamen (IDN). Onze excuses voor het ongemak.
+keyUsage::OCSPSigning	OCSP Ondertekenen
+keyUsage::anyExtendedKeyUsage	Alle
+keyUsage::cRLSign	CRL Ondertekenen
+keyUsage::clientAuth	Client Auth
+keyUsage::codeSigning	Code Ondertekenen
+keyUsage::dataEncipherment	Data Versleutelen
+keyUsage::decipherOnly	Uitsluitend Decryptie
+keyUsage::digitalSignature	Digitale Handtekening
+keyUsage::emailProtection	E-mail Beveiliging
+keyUsage::encipherOnly	Uitsluitend Versleutelen
+keyUsage::keyAgreement	Sleutelovereenkomst
+keyUsage::keyCertSign	Key Cert Ondertekenen
+keyUsage::keyEncipherment	Sleutel Versleuteling
+keyUsage::nonRepudiation	Non-Repudiatie (onweerlegbaarheid)
+keyUsage::serverAuth	Server Auth
+keyUsage::timeStamping	Tijdstempel
+microsoft	Microsoft
+mozilla	Mozilla
+proxy_warning	Er is een HTTP Proxy geconfigureerd. TLS Inspector kan niet met HTTP Proxies overweg, deze moet worden uitgezet in de Wi-Fi systeeminstellingen.
+rootca_error	Veilig checken van bundelupdates lukt niet. Controleer of er een update voor TLS Inspector beschikbaar is in de App Store.
+rootca_footer	Updates van root CA certificaatbundels komen niet vaak voor en zijn sowieso onderdeel van TLS Inspector updates. Bundelupdates worden aangeboden via GitHub en zijn digitaal ondertekend.
+sanType::DNS	DNS
+sanType::Directory	Directory
+sanType::Email	E-mail
+sanType::IP	IP-Adres
+sanType::Other	Anders
+sanType::URI	URI
+sanType::Unknown	Onbekend
+secure::bad_authority	Nee. Certificaatuitgevers moeten zich conformeren aan internationale standaarden. De uitgever van het certificaat voor deze server staat erom bekend zich niet aan deze standaarden te houden.\n\nWEES VOORZICHTIG. HET BEZOEKEN VAN WEBSITES MET CERTIFICATEN VAN KWAADAARDIGE UITGEVERS BRENGT UW PRIVACY EN VEILIGHEID ERNSTIG IN GEVAAR.
+secure::invalid_date	Mogelijk. Een verlopen of nog-niet-geldig certificaat is vaak een fout van de site-beheerder; een onjuiste datum en tijd op uw apparaat kunnen dit echter ook veroorzaken.
+secure::issue_date_too_long	Waarschijnlijk. Apple vereist sinds iOS 13 een kortere geldigheidsduur van certificaten.
+secure::leaf_keyusage	Waarschijnlijk. Een certificaat zonder de parameter Sleutelgebruik is verder mogelijk wel geldig.
+secure::local_trust	Onwaarschijnlijk. Sommige organisaties zouden dit soort certificaten voor interne of private websites kunnen gebruiken. Echter, het zou ook om een gecompromitteerd apparaat of netwerk kunnen gaan.
+secure::revoked	Nee. E? of meer certificaten voor deze site zijn ingetrokken, waardoor de cerificaten niet betrouwbaar meer zijn.\n\nWees zeer voorzichtig als u verder gaat met deze website.
+secure::self_signed	Nee. Het certificaat voor deze site is niet uitgegeven door een bekende certificaatuitgever, waardoor uw apparaat geen mogelijkheid heeft om te verifi?en dat het certificaat authentiek is of van een aanvaller.\n\nWees zeer voorzichtig als u verder gaat met deze website.
+secure::sha1_int	Nee. Hoewel momenteel onwaarschijnlijk, kunnen aanvallers een nepcertificaat maken waarbij misbruik wordt gemaakt van een kwetsbaarheid in SHA1.\n\nWees voorzichtig als u verder gaat met deze website.
+secure::sha1_leaf	Nee. Hoewel momenteel onwaarschijnlijk, kunnen aanvallers een nepcertificaat maken waarbij misbruik wordt gemaakt van een kwetsbaarheid in SHA1.\n\nWees voorzichtig als u verder gaat met deze website.
+secure::trust	Ja. Uw apparaat heeft vastgesteld dat de verbinding met deze site veilig is.
+secure::untrusted	Nee. Uw apparaat kon niet vaststellen dat het aangeboden certificaat daadwerkelijk deze website identificeert en niet een andere.\n\nWees zeer voorzichtig als u verder gaat met deze website.
+secure::weak_rsa	Nee. E? of meer certificaten voor deze site gebruiken zwakke cryptografie en zijn omvoldoende veilig.
+secure::wrong_host	Nee. Het certificaat aangeboden door de server is voor een andere site; een kwaadaardig certificaat kan niet worden uitgesloten.\n\nHet lijkt erop dat het verbindingsverzoek is omgeleid naar een andere site, zoals een Wi-Fi inlogpagina.\n\nWees voorzichtig als u verder gaat met deze website.
+server_error_footer	HTTP Kopregels konden niet worden opgehaald van deze server vanwege fout: {0}
+tip_1	U kunt het servercertificaat bekijken door in Safari of een andere web browser op "Delen" te drukken en "Toon Certificaat" te kiezen.
+tip_2	Meer informatie over de server kunt u zien op Shodan door in de app, na het laden van een site, op de "Delen"-knop te drukken.
+tip_3	Als u een certificaat inspecteert kunt u een herinnering aanmaken voor het moment dat het certificaat bijna verloopt door op de "Delen" knop te drukken.
+tip_4	U kunt de certificaatketen exporteren door te tikken op de "Delen" knop als u een certificaat inspecteert.
+tip_5	Naast webservers kunt u andere TLS servers inspecteren, zoals e-mail of directory-servers.
+tip_6	U kunt een parameterwaarde kopi?en door er lang op te drukken en "Kopi?en" te kiezen.
+tls_feature_status_request	Status Verzoek
+tls_feature_status_request_v2	Status Verzoek (2.0)
+verbose_logging_footer	Als u problemen heeft met TLS Inspector, kunnen wij u vragen om debug logging aan te zetten en de logs naar ons te sturen, zodat wij het probleem beter kunnen begrijpen. Er wordt geen persoonlijke informatie verzameld, echter -indien aangezet- worden domeinnamen die u inspecteert wel opgenomen. Wij verzamelen deze logs nooit tenzij u ze naar ons stuurt middels bovenstaande knop.
+{alg}, {len} bits	{0}, {1} bits
+{amount} {date_unit}	{0} {1}
+{commonName} (Expired)	{0} (Verlopen)
+{commonName} (Insecure)	{0} (Onveilig)
+{commonName} (Not Yet Valid)	{0} (Nog Niet Geldig)
+{commonName} (Revoked)	{0} (Ingetrokken)
+{commonName} ({orgName} {countryName})	{0} ({1} {2})
+{count} months	{0} maanden
+{count} weeks	{0} weken
+{summary} (Revoked)	{0} (Ingetrokken)

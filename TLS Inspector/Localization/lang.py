@@ -13,7 +13,7 @@ def read_strings(lang):
 
     with open(strings_path, 'r') as r:
         line_n = 0
-        last_comment = ""
+        last_comment = []
         while True:
             line_n += 1
             line = r.readline()
@@ -21,7 +21,7 @@ def read_strings(lang):
                 break
 
             if line[0] == "#":
-                last_comment += line[1:].rstrip().lstrip()
+                last_comment.append(line[1:].rstrip().lstrip())
                 continue
 
             parts = line.split('\t')
@@ -32,9 +32,9 @@ def read_strings(lang):
             entries.append({
                 "key": parts[0].rstrip(),
                 "value": parts[1].rstrip(),
-                "comment": last_comment,
+                "comments": last_comment,
             })
-            last_comment = ""
+            last_comment = []
 
     return sorted(entries, key=lambda x: x["key"])
 
@@ -76,10 +76,10 @@ def process_strings(lang):
         new_entry = {
             "key": key,
             "value": entry["value"],
-            "comment": "TODO",
+            "comments": ["TODO"],
         }
-        if entry["comment"] != "":
-            new_entry["comment"] += " " + entry["comment"]
+        if len(entry["comments"]) > 0:
+            new_entry["comments"].extend(entry["comments"])
 
         i = i + 1
         lang_entries.append(new_entry)
@@ -92,11 +92,10 @@ def process_strings(lang):
         for entry in lang_entries:
             key = entry['key']
             value = entry['value']
-            comment = entry['comment']
+            comments = entry['comments']
 
-            if comment != "":
-                for line in comment.split("\n"):
-                    w.write("# " + line + "\n")
+            for comment in comments:
+                w.write("# " + comment + "\n")
             w.write(key + "\t" + value + "\n")
 
     try:
@@ -146,7 +145,7 @@ def generate_plist(lang):
     print("Generated %s" % plist_path)
 
 
-for lang in ['en', 'de', 'es']:
+for lang in ['en', 'de', 'es', 'nl']:
     process_strings(lang)
     generate_plist(lang)
 
