@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function show_help {
-    echo "One of: -M (major), -m (minor), or -p (patch)"
+    echo "One of: -M (major), -m (minor), -p (patch), or -b (build)"
 }
 
 MODE="major"
