@@ -43,8 +43,13 @@ class ContactTableViewController: UITableViewController, UITextViewDelegate {
         guard let wordsPath = Bundle.main.path(forResource: "offensive_words", ofType: "plist") else {
             return .allowed
         }
-        guard let offensiveWords = NSDictionary.init(contentsOfFile: wordsPath) as? [String: String] else {
+        guard let encodedOffensiveWords = NSDictionary.init(contentsOfFile: wordsPath) as? [String: String] else {
             return .allowed
+        }
+        var offensiveWords: [String: String] = [:]
+        encodedOffensiveWords.forEach { (key: String, value: String) in
+            let word = String(data: Data.init(base64Encoded: key)!, encoding: .utf8)!
+            offensiveWords[word] = value
         }
 
         let lcm = message.lowercased()

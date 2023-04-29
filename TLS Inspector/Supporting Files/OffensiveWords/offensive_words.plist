@@ -2,21 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>hack</key>
+	<key>YXV0aG9yaXplZA==</key>
 	<string>warn</string>
-	<key>breach</key>
+	<key>YmxvY2s=</key>
 	<string>warn</string>
-	<key>stole</key>
+	<key>aGFjaw==</key>
 	<string>warn</string>
-	<key>password</key>
+	<key>YnJlYWNo</key>
 	<string>warn</string>
-	<key>fuck</key>
+	<key>c3RvbGU=</key>
+	<string>warn</string>
+	<key>cGFzc3dvcmQ=</key>
+	<string>warn</string>
+	<key>ZnVjaw==</key>
 	<string>prohibit</string>
-	<key>shit</key>
+	<key>c2hpdA==</key>
 	<string>prohibit</string>
-	<key>nigger</key>
+	<key>bmlnZ2Vy</key>
 	<string>prohibit</string>
-	<key>cunt</key>
+	<key>Y3VudA==</key>
 	<string>prohibit</string>
 </dict>
 </plist>
