@@ -18,7 +18,7 @@ if [ -f ../openssl.xcframework/Info.plist ]; then
         exit 0
     else
         echo "warning: OpenSSL version did not match. recompiling version ${OPENSSL_WANT_VERSION}"
-        rm -r ../openssl.framework
+        rm -r ../openssl.xcframework
     fi
 fi
 
