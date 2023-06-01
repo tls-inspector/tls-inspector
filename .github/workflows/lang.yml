@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   lang_validate:
-    name: "Update"
+    name: "Localization validation"
     runs-on: macos-latest
     steps:
       - name: Checkout Source

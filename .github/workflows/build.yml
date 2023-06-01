@@ -1,0 +1,34 @@
+name: "Compile"
+
+on: [push, pull_request]
+
+permissions:
+  packages: read
+
+jobs:
+  lang_validate:
+    name: Compile
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Source
+        id: checkout
+        uses: actions/checkout@v3
+      - name: Install Profile and Certificates
+        id: install
+        run: |
+          echo '${{ secrets.TLS_INSPECTOR_DEVELOPMENT_PROVISIONING_PROFILE }}' > TLS_Inspector.mobileprovision.base64
+          echo '${{ secrets.INSPECT_CERTIFICATE_DEVELOPMENT_PROVISIONING_PROFILE }}' > Inspect_Website.mobileprovision.base64
+          base64 -i TLS_Inspector.mobileprovision.base64 -o TLS_Inspector.mobileprovision --decode
+          base64 -i Inspect_Website.mobileprovision.base64 -o Inspect_Website.mobileprovision --decode
+          rm TLS_Inspector.mobileprovision.base64 Inspect_Website.mobileprovision.base64
+          mv TLS_Inspector.mobileprovision "~/Library/MobileDevice/Provisioning Profiles/0772352f-a056-453c-a9f8-e79bae67a3ac.mobileprovision"
+          mv Inspect_Website.mobileprovision "~/Library/MobileDevice/Provisioning Profiles/47a88c2a-162b-461a-a9fe-e05f088dbe81.mobileprovision"
+          echo '-----BEGIN CERTIFICATE-----' > dev.crt
+          echo '${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE }}' >> dev.crt
+          echo '-----END CERTIFICATE-----' >> dev.crt
+          echo '${{ secrets.APPLE_DEVELOPMENT_PRIVATE_KEY }}' > dev.key.base64
+          base64 -i dev.key.base64 -o dev.key --decode
+          rm dev.key.base64
+          security import dev.crt -t cert -k ~/Library/Keychains/login.keychain-db -f pemseq -A
+          security import dev.key -t priv -k ~/Library/Keychains/login.keychain-db -f openssl -A
+          rm dev.key dev.crt
