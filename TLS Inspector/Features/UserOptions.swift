@@ -325,4 +325,38 @@ class UserOptions {
             LogDebug("Setting AppDefault: \(newValue) = \(newValue)")
         }
     }
+
+    static func writeToFile() -> String? {
+        var contents = ""
+        for key in defaults.keys {
+            let value = String(describing: AppDefaults.value(forKey: key) ?? "MISSING_VALUE")
+            contents += "\(key) = \(value)\n"
+        }
+
+        guard let data = contents.data(using: .utf8) else {
+            return nil
+        }
+
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        if paths.count == 0 {
+            return nil
+        }
+
+        let fileName = "settings_\(Int.random(in: 1000..<9999)).txt"
+
+        var settingsFile: URL
+        if #available(iOS 16, *) {
+            settingsFile = paths[0].appending(path: fileName)
+        } else {
+            settingsFile = paths[0].appendingPathComponent(fileName)
+        }
+
+        do {
+            try data.write(to: settingsFile)
+            return fileName
+        } catch {
+            LogError("Error writing settings file \(settingsFile.absoluteString): \(error.localizedDescription)")
+            return nil
+        }
+    }
 }

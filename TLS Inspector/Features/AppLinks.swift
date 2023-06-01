@@ -66,8 +66,11 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         mailController.setMessageBody(object.body(), isHTML: true)
 
         if includeLogs {
-            self.attachLogFile(actualName: "CertificateKit.log", attachmentName: "TLS Inspector.log", mailController: mailController)
-            self.attachLogFile(actualName: "exceptions.log", attachmentName: "Exceptions.log", mailController: mailController)
+            self.attachTextFile(actualName: "CertificateKit.log", attachmentName: "TLS Inspector Log.txt", mailController: mailController)
+            self.attachTextFile(actualName: "exceptions.log", attachmentName: "Exceptions.txt", mailController: mailController)
+            if let fileName = UserOptions.writeToFile() {
+                self.attachTextFile(actualName: fileName, attachmentName: "Settings.txt", mailController: mailController)
+            }
             self.shouldPurgeLogs = true
         }
 
@@ -86,7 +89,7 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         }
     }
 
-    private func attachLogFile(actualName: String, attachmentName: String, mailController: MFMailComposeViewController) {
+    private func attachTextFile(actualName: String, attachmentName: String, mailController: MFMailComposeViewController) {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         if paths.count == 0 {
             LogError("Error getting documents directory")
@@ -94,15 +97,15 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
         }
         let documentsDirectory = URL(fileURLWithPath: paths[0])
 
-        let ckLogPath = documentsDirectory.appendingPathComponent(actualName)
-        if !FileManager.default.fileExists(atPath: ckLogPath.path) {
-            LogError("Error getting CertificateKit.log")
+        let filePath = documentsDirectory.appendingPathComponent(actualName)
+        if !FileManager.default.fileExists(atPath: filePath.path) {
+            LogError("Error getting \(filePath)")
             return
         }
 
         var data: Data?
         do {
-            try data = Data(contentsOf: ckLogPath)
+            try data = Data(contentsOf: filePath)
         } catch {
             LogError("Error reading log file: \(error.localizedDescription)")
             return

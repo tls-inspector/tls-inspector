@@ -39,15 +39,17 @@ class SupportType {
         var commentsHtml = self.comments
         commentsHtml = commentsHtml.replacingOccurrences(of: "\n", with: "<br>")
 
-        var body = ""
-        body += "<p>Type: <strong>" + self.type.rawValue + "</strong><br>"
-        body += "Device: <strong>" + self.device + "</strong><br>"
-        body += "Device Version: <strong>" + self.deviceVersion + "</strong><br>"
-        body += "Device Language: <strong>" + self.deviceLanguage + "</strong><br>"
-        body += "App Identifier: <strong>" + self.appIdentifier + "</strong><br>"
-        body += "App Version: <strong>" + self.appVersion + "</strong><br>"
-        body += "Comments:<br></p>"
-        body += "<p>" + commentsHtml + "</p>"
+        var body = """
+<p>Type: <strong>\(self.type.rawValue)</strong><br>
+Device: <strong>\(self.device)</strong><br>
+Device Version: <strong>\(self.deviceVersion)</strong><br>
+Device Language: <strong>\(self.deviceLanguage)</strong><br>
+App Identifier: <strong>\(self.appIdentifier)</strong><br>
+App Version: <strong>\(self.appVersion)</strong><br>
+<br><strong>Comments:</strong><br></p>
+<p>\(commentsHtml)</p>
+"""
+
         return body
     }
 }
