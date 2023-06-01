@@ -42,12 +42,16 @@ struct httpResponseBlock {
     size_t size;
 };
 
+
+#define OCSP_MAX_SIZE 5 * 1024 // 5KiB
+
 #define OCSP_ERROR_INVALID_RESPONSE -1
 #define OCSP_ERROR_CURL_LIBRARY -2
 #define OCSP_ERROR_HTTP_ERROR -3
 #define OCSP_ERROR_DECODE_ERROR -4
 #define OCSP_ERROR_REQUEST_ERROR -5
 #define OCSP_ERROR_NO_BODY -6
+#define OCSP_ERROR_TOO_LARGE -7
 
 + (CKOCSPManager *) sharedManager {
     if (_instance != nil) {
@@ -108,7 +112,7 @@ struct httpResponseBlock {
     ASN1_GENERALIZEDTIME * nextUP;
     if (!OCSP_resp_find_status(resp, certID, &status, &reason, &time, &thisUP, &nextUP)) {
         [self openSSLError];
-        PError(@"Unable to from status in OCSP response");
+        PError(@"Unable to find status in OCSP response");
         return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid OCSP response."}];;
     }
     
@@ -164,10 +168,13 @@ struct httpResponseBlock {
         curl_easy_setopt(curl, CURLOPT_STDERR, stderr);
     }
 
+    unsigned long contentLength;
     struct httpResponseBlock curldata;
     curldata.response = malloc(0);
     curldata.size = 0;
     curl_easy_setopt(curl, CURLOPT_URL, responder.absoluteString.UTF8String);
+    curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, ocsp_header_callback);
+    curl_easy_setopt(curl, CURLOPT_HEADERDATA, &contentLength);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ocsp_write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&curldata);
     
@@ -190,15 +197,23 @@ struct httpResponseBlock {
     CURLcode response = curl_easy_perform(curl);
     if (response != CURLE_OK) {
         PError(@"OCSP Request error: %s (%i)", curl_easy_strerror(response), response);
-        long response_code;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+        // ContentLength is only set if we rejected this response because it was too large
+        if (contentLength > 0) {
+            PError(@"OCSP content length exeeced limit. Limit=%i Length=%lu", OCSP_MAX_SIZE, contentLength);
+            curl_easy_cleanup(curl);
+            free(curldata.response);
+            return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_TOO_LARGE userInfo:@{NSLocalizedDescriptionKey: @"OCSP too large"}];
+        } else {
+            long response_code;
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
 
-        PError(@"OCSP HTTP Response: %ld", response_code);
-        PDebug(@"OCSP HTTP %@ response %ld", responder.absoluteString, response_code);
-        
-        curl_easy_cleanup(curl);
-        free(curldata.response);
-        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];;
+            PError(@"OCSP HTTP Response: %ld", response_code);
+            PDebug(@"OCSP HTTP %@ response %ld", responder.absoluteString, response_code);
+
+            curl_easy_cleanup(curl);
+            free(curldata.response);
+            return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP Error %ld", response_code]}];
+        }
     }
     if (curldata.size == 0) {
         PError(@"Empty response for OCSP request");
@@ -242,6 +257,28 @@ struct httpResponseBlock {
     }
 
     return nil;
+}
+
+size_t ocsp_header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
+    unsigned long * contentLength = (unsigned long *)userdata;
+    unsigned long len = nitems * size;
+    if (len > 2) {
+        NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
+        NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray<NSString *> * components = [headerValue.lowercaseString componentsSeparatedByString:@": "];
+        if (components.count < 2) {
+            return len;
+        }
+        if ([components[0] isEqualToString:@"content-length"]) {
+            NSNumberFormatter * formatter = [NSNumberFormatter new];
+            unsigned long cl = [formatter numberFromString:components[1]].unsignedLongValue;
+            if (cl > OCSP_MAX_SIZE) {
+                *contentLength = cl;
+                return 0;
+            }
+        }
+    }
+    return len;
 }
 
 size_t ocsp_write_callback(void * data, size_t size, size_t nmemb, void * userp) {

@@ -40,7 +40,7 @@
         for (CKCertificate * cert in self.certificates) {
             NSString * fingerprint = [[cert SHA256Fingerprint] uppercaseString];
             if ([fingerprint isEqualToString:badFingerprint]) {
-                PWarn(@"Certificate: '%@' matches known bad certificate '%@'", cert.subject.description, badFingerprint);
+                PError(@"Certificate: '%@' matches known bad certificate '%@'", cert.subject.description, badFingerprint);
                 self.trusted = CKCertificateChainTrustStatusBadAuthority;
                 return;
             }
@@ -118,10 +118,15 @@
     BOOL match = NO;
     NSArray<NSString *> * domainComponents = [self.domain.lowercaseString componentsSeparatedByString:@"."];
     for (CKAlternateNameObject * name in self.server.alternateNames) {
+        if (name.type != AlternateNameTypeDNS) {
+            PWarn(@"Skipping non-DNS alternate name type: %lu = %@", (unsigned long)name.type, name.value);
+            continue;
+        }
+
         NSArray<NSString *> * nameComponents = [name.value.lowercaseString componentsSeparatedByString:@"."];
         if (domainComponents.count != nameComponents.count) {
             // Invalid
-            PWarn(@"Domain components does not match name components");
+            PWarn(@"Domain components does not match name components. domain='%@' name='%@'", self.domain.lowercaseString, name.value.lowercaseString);
             continue;
         }
 

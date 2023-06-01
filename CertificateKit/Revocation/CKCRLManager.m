@@ -42,9 +42,8 @@ struct httpResponseBlock {
     size_t size;
 };
 
-#define CRL_MAX_SIZE_EXT 5 * (1024 * 1024)
-#define CRL_MAX_SIZE_APP 20 * (1024 * 1024)
-#define IS_EXTENSION ([NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.ecnepsnai.Certificate-Inspector.Inspect-Website"])
+#define CRL_MAX_SIZE_EXT 5 * (1024 * 1024) // 5MiB
+#define CRL_MAX_SIZE_APP 20 * (1024 * 1024) // 20MiB
 
 #define CRL_ERROR_CURL_LIBRARY -1
 #define CRL_ERROR_HTTP_ERROR -2
