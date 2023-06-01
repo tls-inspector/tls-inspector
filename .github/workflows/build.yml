@@ -13,6 +13,19 @@ jobs:
       - name: Checkout Source
         id: checkout
         uses: actions/checkout@v3
+      - name: Validate localization
+        id: validate
+        run: |
+          cd "TLS Inspector/Localization"
+          python3 lang.py
+          if [[ $(git diff --stat) != '' ]]; then
+            echo "::error ::Untracked changes to localization detected!"
+            git status
+            exit 1
+          else
+            echo "No untracked changes to localization detected"
+          fi
+          cd ../../
       - name: Install Profile and Certificates
         id: install
         run: |
@@ -33,3 +46,7 @@ jobs:
           security import dev.crt -t cert -k ~/Library/Keychains/login.keychain-db -f pemseq -A
           security import dev.key -t priv -k ~/Library/Keychains/login.keychain-db -f openssl -A
           rm dev.key dev.crt
+      - name: Build
+        id: build
+        run: |
+          xcodebuild -scheme "TLS Inspector" -target iOS build
