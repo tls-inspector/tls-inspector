@@ -25,7 +25,7 @@ fi
 echo "warning: cURL needs to be compiled. This will take a while..."
 
 cd curl-ios
-./build-ios.sh ${CURL_WANT_VERSION} --disable-ftp \
+GPG_VERIFY=1 ./build-ios.sh ${CURL_WANT_VERSION} --disable-ftp \
     --disable-file \
     --disable-ldap \
     --disable-ldaps \

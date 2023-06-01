@@ -8,6 +8,7 @@ This document will describe the process for building TLS Inspector.
 - Git (1.8 or later)
 - An Apple Developer Membership (only required for distribution or installing on physical devices)
 - Swiftlint
+- gpg
 
 *Note: while it may be possible to build the project on a virtual machine or "hackintosh", it is untested
 and not supported. Furthermore, it may violate the Apple Developer rules to submit apps from unauthorized copies
