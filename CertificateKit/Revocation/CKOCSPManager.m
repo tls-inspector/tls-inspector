@@ -26,6 +26,7 @@
 #import <openssl/ocsp.h>
 #import <openssl/err.h>
 #import <curl/curl.h>
+#import "NSString+SplitFirst.h"
 
 @interface CKOCSPManager () {
     dispatch_queue_t queue;
@@ -220,7 +221,21 @@ struct httpResponseBlock {
         PDebug(@"OCSP HTTP %@ empty response", responder.absoluteString);
         curl_easy_cleanup(curl);
         free(curldata.response);
-        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty OCSP response"}];;
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty OCSP response"}];
+    }
+
+    struct curl_header *contentType;
+    if (curl_easy_header(curl, "Content-Type", 0, CURLH_HEADER, -1, &contentType) != CURLHE_OK) {
+        PError(@"No content type header found on OCSP response");
+        curl_easy_cleanup(curl);
+        free(curldata.response);
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Missing content type"}];
+    }
+    if (![[[NSString stringWithUTF8String:contentType->value] lowercaseString] isEqualToString:@"application/ocsp-response"]) {
+        PError(@"Invalid content type for OCSP response %s", contentType->value);
+        curl_easy_cleanup(curl);
+        free(curldata.response);
+        return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid content type"}];
     }
     
     PDebug(@"OCSP HTTP Response: 200");
@@ -264,14 +279,17 @@ size_t ocsp_header_callback(char *buffer, size_t size, size_t nitems, void *user
     unsigned long len = nitems * size;
     if (len > 2) {
         NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
-        NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSArray<NSString *> * components = [headerValue.lowercaseString componentsSeparatedByString:@": "];
-        if (components.count < 2) {
+        NSString * fullHeader = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray<NSString *> * headerComponents = [fullHeader splitFirst:@": "];
+        if (headerComponents.count != 2) {
             return len;
         }
-        if ([components[0] isEqualToString:@"content-length"]) {
+        NSString * headerKey = headerComponents[0].lowercaseString;
+        NSString * headerValue = headerComponents[1];
+
+        if ([headerKey isEqualToString:@"content-length"]) {
             NSNumberFormatter * formatter = [NSNumberFormatter new];
-            unsigned long cl = [formatter numberFromString:components[1]].unsignedLongValue;
+            unsigned long cl = [formatter numberFromString:headerValue].unsignedLongValue;
             if (cl > OCSP_MAX_SIZE) {
                 *contentLength = cl;
                 return 0;

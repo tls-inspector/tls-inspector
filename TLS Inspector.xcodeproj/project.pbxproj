@@ -36,6 +36,8 @@
 		3C3DE1FF29B823A90025DA94 /* NSString+ASN1OctetString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */; };
 		3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C45AD5823D831A900E541EC /* CKCurlCommon.h */; };
 		3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45AD5923D831A900E541EC /* CKCurlCommon.m */; platformFilter = ios; };
+		3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */; };
+		3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */; };
 		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
 		3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */; };
 		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
@@ -303,6 +305,8 @@
 		3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+ASN1OctetString.m"; sourceTree = "<group>"; };
 		3C45AD5823D831A900E541EC /* CKCurlCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCurlCommon.h; sourceTree = "<group>"; };
 		3C45AD5923D831A900E541EC /* CKCurlCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCurlCommon.m; sourceTree = "<group>"; };
+		3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+SplitFirst.h"; sourceTree = "<group>"; };
+		3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+SplitFirst.m"; sourceTree = "<group>"; };
 		3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 		3C57F49E23B0220300DCCB54 /* SupportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportType.swift; sourceTree = "<group>"; };
@@ -614,6 +618,8 @@
 				3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */,
 				3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */,
 				3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */,
+				3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */,
+				3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -879,6 +885,7 @@
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
+				3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
 				3C3DE1FE29B823A90025DA94 /* NSString+ASN1OctetString.h in Headers */,
 				3CBF85BF253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.h in Headers */,
@@ -1320,6 +1327,7 @@
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
 				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,
 				3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */,
+				3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */,
 				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,
 				3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */,
 			);

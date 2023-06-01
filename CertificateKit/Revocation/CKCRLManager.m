@@ -26,6 +26,7 @@
 #import <openssl/x509v3.h>
 #import <curl/curl.h>
 #import "NSDate+ASN1_TIME.h"
+#import "NSString+SplitFirst.h"
 
 @interface CKCRLManager () {
     dispatch_queue_t queue;
@@ -51,6 +52,7 @@ struct httpResponseBlock {
 #define CRL_ERROR_CRL_ERROR -4
 #define CRL_ERROR_NO_BODY -5
 #define CRL_ERROR_TOO_LARGE -6
+#define CRL_ERROR_INVALID_RESPONSE -7
 
 + (CKCRLManager * _Nonnull) sharedManager {
     if (!_instance) {
@@ -186,6 +188,20 @@ struct httpResponseBlock {
         free(curldata.response);
         return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_NO_BODY userInfo:@{NSLocalizedDescriptionKey: @"Empty CRL response"}];
     }
+
+    struct curl_header *contentType;
+    if (curl_easy_header(curl, "Content-Type", 0, CURLH_HEADER, -1, &contentType) != CURLHE_OK) {
+        PError(@"No content type header found on CRL response");
+        curl_easy_cleanup(curl);
+        free(curldata.response);
+        return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Missing content type"}];
+    }
+    if (![[[NSString stringWithUTF8String:contentType->value] lowercaseString] isEqualToString:@"application/pkix-crl"]) {
+        PError(@"Invalid content type for OCSP response %s", contentType->value);
+        curl_easy_cleanup(curl);
+        free(curldata.response);
+        return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid content type"}];
+    }
     
     PDebug(@"CRL HTTP Response: 200");
     
@@ -215,14 +231,17 @@ size_t crl_header_callback(char *buffer, size_t size, size_t nitems, void *userd
     unsigned long len = nitems * size;
     if (len > 2) {
         NSData * data = [NSData dataWithBytes:buffer length:len - 2]; // Trim the \r\n from the end of the header
-        NSString * headerValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSArray<NSString *> * components = [headerValue.lowercaseString componentsSeparatedByString:@": "];
-        if (components.count < 2) {
+        NSString * fullHeader = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray<NSString *> * headerComponents = [fullHeader splitFirst:@": "];
+        if (headerComponents.count != 2) {
             return len;
         }
-        if ([components[0] isEqualToString:@"content-length"]) {
+        NSString * headerKey = headerComponents[0].lowercaseString;
+        NSString * headerValue = headerComponents[1];
+
+        if ([headerKey isEqualToString:@"content-length"]) {
             NSNumberFormatter * formatter = [NSNumberFormatter new];
-            unsigned long cl = [formatter numberFromString:components[1]].unsignedLongValue;
+            unsigned long cl = [formatter numberFromString:headerValue].unsignedLongValue;
             if (IS_EXTENSION && cl > CRL_MAX_SIZE_EXT) {
                 *contentLength = cl;
                 return 0;
