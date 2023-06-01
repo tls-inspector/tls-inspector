@@ -39,7 +39,7 @@ class SupportType {
         var commentsHtml = self.comments
         commentsHtml = commentsHtml.replacingOccurrences(of: "\n", with: "<br>")
 
-        var body = """
+        return """
 <p>Type: <strong>\(self.type.rawValue)</strong><br>
 Device: <strong>\(self.device)</strong><br>
 Device Version: <strong>\(self.deviceVersion)</strong><br>
@@ -49,7 +49,5 @@ App Version: <strong>\(self.appVersion)</strong><br>
 <br><strong>Comments:</strong><br></p>
 <p>\(commentsHtml)</p>
 """
-
-        return body
     }
 }

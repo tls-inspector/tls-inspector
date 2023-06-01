@@ -7,5 +7,6 @@ disabled_rules:
     - opening_brace
     - line_length
     - file_length
+    - todo
 
 cyclomatic_complexity: 12
