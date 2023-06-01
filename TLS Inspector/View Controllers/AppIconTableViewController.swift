@@ -10,6 +10,8 @@ class AppIconTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // FIXME(ian): I fought for like an hour to try and get the footer text to not be cut off from the cells, and I give up. UITableView is the worst. I hate it.
+        // Insert a blank section just to space it out. It looks dumb but better than being cut off.
         return 2
     }
 

@@ -485,7 +485,7 @@ You must inspect at least one site with verbose logging enabled before you can s
 advanced_settings_nag	Estas configuraciones son para depuración avanzada. Los valores incorrectos pueden impedir que TLS Inspector funcione correctamente.
 apple	Apple
 certificate_status_footer	El desactivar la consulta OCSP puede producir resultados de confianza incorrectos. Al activar la comprobación de CRL puede resultar en tiempos de procesamiento más largos y un mayor uso de datos. La consulta OCSP puede ocurrir aún cuando está desactivada mientras se usa el motor de cifrado legado.
-copyright_license_footer	TLS Inspector es software libre y gratuito bajo licencia GNU GPLv3. Derechos de autor de TLS Inspector © 2016-2022 Ian Spence.
+copyright_license_footer	TLS Inspector es software libre y gratuito bajo licencia GNU GPLv3. Derechos de autor de TLS Inspector © 2016-2023 Ian Spence.
 crypto_engine::network_framework	Apple - moderno
 crypto_engine::openssl	OpenSSL
 crypto_engine::secure_transport	Apple - legado

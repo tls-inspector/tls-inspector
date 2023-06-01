@@ -527,7 +527,7 @@ advanced_settings_nag	Diese Einstellungen sind für erweiterte Fehlerbehebung ge
 # TODO
 apple	Apple
 certificate_status_footer	OCSP-Abfragen deaktivieren kann die Privatsphäre erhöhen, verringert jedoch die Datenqualität. CRL-Überprüfung aktivieren kann zu langsameren Abfragen und erhöhtem Datenverbrauch führen.
-copyright_license_footer	TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2022 Ian Spence.
+copyright_license_footer	TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2023 Ian Spence.
 crypto_engine::network_framework	Apple - Modern
 crypto_engine::openssl	OpenSSL
 crypto_engine::secure_transport	Apple - Veraltet

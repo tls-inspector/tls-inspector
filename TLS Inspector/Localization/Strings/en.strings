@@ -484,7 +484,7 @@ You must inspect at least one site with verbose logging enabled before you can s
 advanced_settings_nag	These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.
 apple	Apple
 certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy crypto engine.
-copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2022 Ian Spence.
+copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2023 Ian Spence.
 crypto_engine::network_framework	Apple - Modern
 crypto_engine::openssl	OpenSSL
 crypto_engine::secure_transport	Apple - Legacy
