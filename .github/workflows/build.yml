@@ -47,6 +47,15 @@ jobs:
           security import dev.crt -t cert -k ~/Library/Keychains/login.keychain-db -f pemseq -A
           security import dev.key -t priv -k ~/Library/Keychains/login.keychain-db -f openssl -A
           rm dev.key dev.crt
+          gpg --import CertificateKit/build/curl-ios/curl.asc
+          echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key 914C533DF9B2ADA2204F586D78E11C6B279D5C91 trust
+          echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key 4461EAF0F8E9097F48AF0555F9FEAFF9D34A1BDB trust
+          echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key 27EDEAF22F3ABCEB50DB9A125CC908FDB71E12C2 trust
+          gpg --import CertificateKit/build/openssl-ios/openssl.asc
+          echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key 7953AC1FBC3DC8B3B292393ED5E9E43F7DF9EE8C trust
+          echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key 8657ABB260F056B1E5190839D9C4D26D0E604491 trust
+          echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key A21FAB74B0088AA361152586B8EF1A6BA9DA2D5C trust
+          echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key B7C1C14360F353A36862E4D5231C84CDDCC69C45 trust
       - name: Build Dependencies
         id: build_depend
         run: |
