@@ -34,13 +34,13 @@ jobs:
           echo '${{ secrets.INSPECT_CERTIFICATE_DEVELOPMENT_PROVISIONING_PROFILE }}' > Inspect_Website.mobileprovision.base64
           base64 -i TLS_Inspector.mobileprovision.base64 -o TLS_Inspector.mobileprovision --decode && rm TLS_Inspector.mobileprovision.base64
           base64 -i Inspect_Website.mobileprovision.base64 -o Inspect_Website.mobileprovision --decode && rm Inspect_Website.mobileprovision.base64
-          mkdir -p "~/Library/MobileDevice/Provisioning Profiles/"
-          mv -v TLS_Inspector.mobileprovision "~/Library/MobileDevice/Provisioning Profiles/0772352f-a056-453c-a9f8-e79bae67a3ac.mobileprovision"
-          mv -v Inspect_Website.mobileprovision "~/Library/MobileDevice/Provisioning Profiles/47a88c2a-162b-461a-a9fe-e05f088dbe81.mobileprovision"
-          cd "~/Library/MobileDevice/Provisioning Profiles"
-          ls -al
-          shasum -a 256 *.mobileprovision
-          cd -
+          open TLS_Inspector.mobileprovision
+          sleep 10
+          pkill Xcode
+          open Inspect_Website.mobileprovision
+          sleep 10
+          pkill Xcode
+          ls -al "~/Library/MobileDevice/Provisioning Profiles"
           echo '-----BEGIN CERTIFICATE-----' > dev.crt
           echo '${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE }}' >> dev.crt
           echo '-----END CERTIFICATE-----' >> dev.crt
