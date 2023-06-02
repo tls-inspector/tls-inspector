@@ -90,10 +90,12 @@ jobs:
           echo "::notice ::Compiling curl"
           cd CertificateKit/build
           ./build-curl.sh
-      - name: Update Root CA Certificate Bundles
+      - name: Update Assets
         id: rootca
         run: |
-          cd CertificateKit/RootCACerts
+          cd CertificateKit/CTLogs
+          ./update.sh
+          cd ../RootCACerts
           ./update.sh
       - name: Build
         id: build
