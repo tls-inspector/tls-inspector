@@ -56,13 +56,38 @@ jobs:
           echo 'trusted-key 0xD9C4D26D0E604491' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0xB8EF1A6BA9DA2D5C' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0x231C84CDDCC69C45' >> ~/.gnupg/gpg.conf
-      - name: Build Dependencies
-        id: build_depend
+      - name: Generate Cache Key
+        id: cache_key
+        run: |
+          echo "OPENSSL_CACHE_KEY=openssl_$(cat CertificateKit/build/openssl.want | cut -d '=' -f2)" >> $GITHUB_ENV
+          echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> $GITHUB_ENV
+      - name: Restore Cached OpenSSL
+        id: restore_openssl
+        uses: actions/cache@v3
+        with:
+          key: ${{ env.OPENSSL_CACHE_KEY }}
+          path: |
+            CertificateKit/openssl.xcframework
+      - name: Build OpenSSL
+        id: build_openssl
+        if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
         run: |
           cd CertificateKit/build
           ./build-openssl.sh
-          ./build-curl.sh
-      - name: Build
-        id: build
+      - name: Restore Cached curl
+        id: restore_curl
+        uses: actions/cache@v3
+        with:
+          key: ${{ env.CURL_CACHE_KEY }}
+          path: |
+            CertificateKit/curl.xcframework
+      - name: Build curl
+        id: build_curl
+        if: ${{ steps.restore_curl.outputs.cache-hit != 'true' }}
         run: |
-          xcodebuild -scheme "TLS Inspector" -target iOS build
+          cd CertificateKit/build
+          ./build-curl.sh
+      # - name: Build
+      #   id: build
+      #   run: |
+      #     xcodebuild -scheme "TLS Inspector" -target iOS build

@@ -1,7 +1,7 @@
 {
   "is_all_logs": true,
-  "version": "21.15",
-  "log_list_timestamp": "2023-05-31T12:56:43Z",
+  "version": "21.16",
+  "log_list_timestamp": "2023-06-01T12:55:43Z",
   "operators": [
     {
       "name": "Google",
