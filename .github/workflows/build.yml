@@ -37,8 +37,10 @@ jobs:
           mkdir -p "~/Library/MobileDevice/Provisioning Profiles/"
           mv -v TLS_Inspector.mobileprovision "~/Library/MobileDevice/Provisioning Profiles/0772352f-a056-453c-a9f8-e79bae67a3ac.mobileprovision"
           mv -v Inspect_Website.mobileprovision "~/Library/MobileDevice/Provisioning Profiles/47a88c2a-162b-461a-a9fe-e05f088dbe81.mobileprovision"
-          ls -al "~/Library/MobileDevice/Provisioning Profiles"
-          shasum -a 256 "~/Library/MobileDevice/Provisioning Profiles/*.mobileprovision"
+          cd "~/Library/MobileDevice/Provisioning Profiles"
+          ls -al
+          shasum -a 256 *.mobileprovision
+          cd -
           echo '-----BEGIN CERTIFICATE-----' > dev.crt
           echo '${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE }}' >> dev.crt
           echo '-----END CERTIFICATE-----' >> dev.crt
