@@ -40,7 +40,6 @@ jobs:
           open Inspect_Website.mobileprovision
           sleep 10
           pkill Xcode
-          ls -al "~/Library/MobileDevice/Provisioning Profiles"
           echo '-----BEGIN CERTIFICATE-----' > dev.crt
           echo '${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE }}' >> dev.crt
           echo '-----END CERTIFICATE-----' >> dev.crt
