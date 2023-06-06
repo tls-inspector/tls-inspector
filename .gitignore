@@ -59,4 +59,3 @@ defines.pch
 # OpenSSL and cURL Frameworks
 /CertificateKit/openssl.xcframework
 /CertificateKit/curl.xcframework
-/CertificateKit/CTLogs/*.min.json

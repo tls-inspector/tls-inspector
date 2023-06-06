@@ -72,7 +72,7 @@ if [ $NEEDS_UPDATE == 0 ]; then
     exit 0
 fi
 
-echo "warning: Root CA Certificate Bundles need to updated"
+echo "warning: Root CA Certificate Bundles need to be updated"
 
 function download_github_asset() {
     ASSET_NAME=${1}
@@ -88,4 +88,4 @@ download_github_asset google_ca_bundle.p7b
 download_github_asset microsoft_ca_bundle.p7b
 download_github_asset mozilla_ca_bundle.p7b
 download_github_asset bundle_metadata.json
-echo ${LATEST_BUNDLE_TAG} > bundle_version.txt
+echo "${LATEST_BUNDLE_TAG}" > bundle_version.txt

@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
+      
       - name: Validate localization
         id: validate_localization
         run: |
@@ -33,6 +34,7 @@ jobs:
           else
             echo "No untracked changes to localization detected"
           fi
+      
       - name: Install Profile and Certificates
         id: install_credentials
         run: |
@@ -63,18 +65,23 @@ jobs:
           echo 'trusted-key 0xD9C4D26D0E604491' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0xB8EF1A6BA9DA2D5C' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0x231C84CDDCC69C45' >> ~/.gnupg/gpg.conf
-      - name: Generate Cache Key
+      
+      - name: Generate Cache Keys
         id: cache_key
         run: |
-          echo "OPENSSL_CACHE_KEY=openssl_$(cat CertificateKit/build/openssl.want | cut -d '=' -f2)" >> $GITHUB_ENV
-          echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> $GITHUB_ENV
+          echo "OPENSSL_CACHE_KEY=openssl_$(cat CertificateKit/build/openssl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
+          echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
+          echo "CTLOG_CACHE_KEY=ctlog_$(cat CertificateKit/CTLogs/ct_log_version.txt)" >> "$GITHUB_OUTPUT"
+          echo "ROOTCA_CACHE_KEY=rootca_$(cat CertificateKit/RootCACerts/bundle_version.txt)" >> "$GITHUB_OUTPUT"
+      
       - name: Restore Cached OpenSSL
         id: restore_openssl
         uses: actions/cache@v3
         with:
-          key: ${{ env.OPENSSL_CACHE_KEY }}
+          key: ${{ steps.cache_key.outputs.OPENSSL_CACHE_KEY }}
           path: |
             CertificateKit/openssl.xcframework
+      
       - name: Build OpenSSL
         id: build_openssl
         if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
@@ -82,13 +89,15 @@ jobs:
           echo "::notice ::Compiling OpenSSL"
           cd CertificateKit/build
           ./build-openssl.sh
+      
       - name: Restore Cached curl
         id: restore_curl
         uses: actions/cache@v3
         with:
-          key: ${{ env.CURL_CACHE_KEY }}
+          key: ${{ steps.cache_key.outputs.CURL_CACHE_KEY }}
           path: |
             CertificateKit/curl.xcframework
+      
       - name: Build curl
         id: build_curl
         if: ${{ steps.restore_curl.outputs.cache-hit != 'true' }}
@@ -96,13 +105,40 @@ jobs:
           echo "::notice ::Compiling curl"
           cd CertificateKit/build
           ./build-curl.sh
-      - name: Update Assets
-        id: rootca
+      
+      - name: Restore CT Logs
+        id: restore_ctlogs
+        uses: actions/cache@v3
+        with:
+          key: ${{ steps.cache_key.outputs.CTLOG_CACHE_KEY }}
+          path: |
+            CertificateKit/CTLogs/ct_log_list.min.json
+
+      - name: Update CT Logs
+        id: update_ctlogs
+        if: ${{ steps.restore_ctlogs.outputs.cache-hit != 'true' }}
         run: |
           cd CertificateKit/CTLogs
           ./update.sh
-          cd ../RootCACerts
+
+      - name: Restore Root CA Certs
+        id: restore_rootca
+        uses: actions/cache@v3
+        with:
+          key: ${{ steps.cache_key.outputs.ROOTCA_CACHE_KEY }}
+          path: |
+            CertificateKit/RootCACerts/*.p7b
+            CertificateKit/RootCACerts/*.p7b.sig
+            CertificateKit/RootCACerts/*.json
+            CertificateKit/RootCACerts/*.json.sig
+
+      - name: Update Root CA Certs
+        id: uodate_rootca
+        if: ${{ steps.restore_rootca.outputs.cache-hit != 'true' }}
+        run: |
+          cd CertificateKit/RootCACerts
           ./update.sh
+
       - name: Build
         id: build
         run: |
