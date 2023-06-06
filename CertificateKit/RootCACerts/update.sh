@@ -5,7 +5,7 @@ NEEDS_UPDATE=0
 
 if [ -f bundle_version.txt ]; then
     CURRENT_VERSION=$(cat bundle_version.txt)
-    if [ $CURRENT_VERSION != $LATEST_BUNDLE_TAG ]; then
+    if [ "$CURRENT_VERSION" != "$LATEST_BUNDLE_TAG" ]; then
         NEEDS_UPDATE=1
     fi
 else
