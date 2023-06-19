@@ -25,6 +25,7 @@
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #import "CKSocketUtils.h"
+#import "CKHTTPClient.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/err.h>
@@ -196,6 +197,10 @@ INSERT_OPENSSL_ERROR_METHOD
     self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];
     self.chain.remoteAddress = remoteAddr;
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
+
+    NSData * httpRequest = [CKHTTPClient requestForHost:parameters.hostAddress];
+    BIO_write(conn, httpRequest.bytes, (int)httpRequest.length);
+    [CKHTTPClient responseFromBIO:conn];
 
     const STACK_OF(SCT) * sct_list = SSL_get0_peer_scts(ssl);
     int numberOfSct = sk_SCT_num(sct_list);

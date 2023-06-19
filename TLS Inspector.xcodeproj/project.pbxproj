@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C091B7F2A2EAE3E00A8BE92 /* Network.framework */; };
+		3C091B842A2EB88000A8BE92 /* CKHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */; };
+		3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */; };
+		3C091B882A2EB9E400A8BE92 /* CKHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C091B862A2EB9E400A8BE92 /* CKHTTPResponse.h */; };
+		3C091B892A2EB9E400A8BE92 /* CKHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C091B872A2EB9E400A8BE92 /* CKHTTPResponse.m */; };
+		3C091B8C2A2EB9EE00A8BE92 /* CKHTTPHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C091B8A2A2EB9EE00A8BE92 /* CKHTTPHeaders.h */; };
+		3C091B8D2A2EB9EE00A8BE92 /* CKHTTPHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C091B8B2A2EB9EE00A8BE92 /* CKHTTPHeaders.m */; };
 		3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
 		3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
 		3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1A0D0D263914C200267CF9 /* CKRegex.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -114,7 +121,6 @@
 		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
 		3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2006023974F710027D1C1 /* fa-solid.ttf */; };
 		3CA6EAEA29AFD22A00BFB6E2 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */; };
-		3CB1192925465BB20015750C /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1192825465BB20015750C /* Network.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB483FC2058BA0400322723 /* CertificateKit.m */; platformFilter = ios; };
 		3CB4F157200451C800A9CF51 /* CKServerInfoGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686EB1FC8FACD00BB7AE8 /* CKServerInfoGetter.m */; platformFilter = ios; };
 		3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F686E71FC8FAB800BB7AE8 /* CKCertificateChainGetter.m */; platformFilter = ios; };
@@ -279,6 +285,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C091B7F2A2EAE3E00A8BE92 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/PrivateFrameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
+		3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPClient.h; sourceTree = "<group>"; };
+		3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPClient.m; sourceTree = "<group>"; };
+		3C091B862A2EB9E400A8BE92 /* CKHTTPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPResponse.h; sourceTree = "<group>"; };
+		3C091B872A2EB9E400A8BE92 /* CKHTTPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPResponse.m; sourceTree = "<group>"; };
+		3C091B8A2A2EB9EE00A8BE92 /* CKHTTPHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPHeaders.h; sourceTree = "<group>"; };
+		3C091B8B2A2EB9EE00A8BE92 /* CKHTTPHeaders.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPHeaders.m; sourceTree = "<group>"; };
 		3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyingMaterialTableViewController.swift; sourceTree = "<group>"; };
 		3C1A0D0D263914C200267CF9 /* CKRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRegex.h; sourceTree = "<group>"; };
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
@@ -378,7 +391,6 @@
 		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
 		3CA2006023974F710027D1C1 /* fa-solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid.ttf"; sourceTree = "<group>"; };
 		3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
-		3CB1192825465BB20015750C /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
 		3CB483FC2058BA0400322723 /* CertificateKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKit.m; sourceTree = "<group>"; };
 		3CB784A125293E4D009ECE20 /* ChainGetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGetterViewController.swift; sourceTree = "<group>"; };
 		3CB784AA25293FD8009ECE20 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -465,7 +477,7 @@
 			files = (
 				3C6242702947B10200A7814A /* curl.xcframework in Frameworks */,
 				3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */,
-				3CB1192925465BB20015750C /* Network.framework in Frameworks */,
+				3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +511,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C091B812A2EB84900A8BE92 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */,
+				3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */,
+				3C091B8A2A2EB9EE00A8BE92 /* CKHTTPHeaders.h */,
+				3C091B8B2A2EB9EE00A8BE92 /* CKHTTPHeaders.m */,
+				3C091B862A2EB9E400A8BE92 /* CKHTTPResponse.h */,
+				3C091B872A2EB9E400A8BE92 /* CKHTTPResponse.m */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
 		3C218DB929AEF12F000D84BC /* CTLogs */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +626,7 @@
 				3C62426F2947B10200A7814A /* curl.xcframework */,
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				67F686EF1FC8FAE400BB7AE8 /* Getters */,
+				3C091B812A2EB84900A8BE92 /* HTTP */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				3C6242712947B12C00A7814A /* openssl.xcframework */,
 				3CF6773420464A9E00A3B4C1 /* Revocation */,
@@ -853,7 +879,7 @@
 		A1BA8BE21E8EB2B30004FB0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3CB1192825465BB20015750C /* Network.framework */,
+				3C091B7F2A2EAE3E00A8BE92 /* Network.framework */,
 				A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */,
 			);
 			name = Frameworks;
@@ -867,6 +893,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67F686E41FC8FAA200BB7AE8 /* CKGetterTask.h in Headers */,
+				3C091B882A2EB9E400A8BE92 /* CKHTTPResponse.h in Headers */,
 				3CF6772A2046335D00A3B4C1 /* CKCRLManager.h in Headers */,
 				3CF0A69E261BBCA300460B7F /* CKTypes.h in Headers */,
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
@@ -894,11 +921,13 @@
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
 				3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */,
 				3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */,
+				3C091B8C2A2EB9EE00A8BE92 /* CKHTTPHeaders.h in Headers */,
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
 				3C30025F2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h in Headers */,
 				3CC1E9361F035AFB00ED9BAA /* CKServerInfo.h in Headers */,
 				3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */,
+				3C091B842A2EB88000A8BE92 /* CKHTTPClient.h in Headers */,
 				3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */,
 				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
@@ -1297,10 +1326,12 @@
 			files = (
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
+				3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */,
 				3CBF85C0253AA7DD0025FF16 /* CKNetworkCertificateChainGetter.m in Sources */,
 				3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */,
 				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
 				3CD4932B25A56198002AC7BD /* CKGetterParameters.m in Sources */,
+				3C091B892A2EB9E400A8BE92 /* CKHTTPResponse.m in Sources */,
 				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,
 				3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */,
 				3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */,
@@ -1313,6 +1344,7 @@
 				3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */,
 				3CCBE2D7294FF81600E0DD6D /* CKCertificateBundleMetadata.m in Sources */,
 				3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */,
+				3C091B8D2A2EB9EE00A8BE92 /* CKHTTPHeaders.m in Sources */,
 				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
 				3CB94045225036FC0055C067 /* CKOpenSSLCertificateChainGetter.m in Sources */,
 				3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */,
