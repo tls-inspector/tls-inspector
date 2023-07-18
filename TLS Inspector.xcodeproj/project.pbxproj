@@ -161,6 +161,8 @@
 		3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */; };
 		3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B32398BC1700B2C8FC /* Lang.swift */; };
 		3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */; };
+		3CD6DE432A661BE0004A54F5 /* NSData+ByteAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */; };
+		3CD6DE442A661BE0004A54F5 /* NSData+ByteAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */; };
 		3CD74669258C1406003D609E /* offensive_words.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CD74668258C1406003D609E /* offensive_words.plist */; };
 		3CDC14AD23B0453B0053932F /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC14AB23B0453B0053932F /* Extension.storyboard */; };
 		3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CDC14A723B0453B0053932F /* Show Certificate.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -423,6 +425,8 @@
 		3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		3CD4A7B32398BC1700B2C8FC /* Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lang.swift; sourceTree = "<group>"; };
 		3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptions.swift; sourceTree = "<group>"; };
+		3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+ByteAtIndex.h"; sourceTree = "<group>"; };
+		3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+ByteAtIndex.m"; sourceTree = "<group>"; };
 		3CD74668258C1406003D609E /* offensive_words.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = offensive_words.plist; sourceTree = "<group>"; };
 		3CDC14A723B0453B0053932F /* Show Certificate.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Show Certificate.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDC14AC23B0453B0053932F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Extension.storyboard; sourceTree = "<group>"; };
@@ -646,6 +650,8 @@
 				3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */,
 				3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */,
 				3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */,
+				3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */,
+				3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -904,6 +910,7 @@
 				3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */,
 				3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */,
 				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
+				3CD6DE432A661BE0004A54F5 /* NSData+ByteAtIndex.h in Headers */,
 				3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */,
 				3CD4932A25A56198002AC7BD /* CKGetterParameters.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
@@ -1061,7 +1068,7 @@
 					};
 					3C65DAD91E836BE9004AD96D = {
 						CreatedOnToolsVersion = 8.2.1;
-						LastSwiftMigration = 1410;
+						LastSwiftMigration = 1430;
 						ProvisioningStyle = Manual;
 					};
 					3C72692323949ABD002A0B19 = {
@@ -1361,6 +1368,7 @@
 				3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */,
 				3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */,
 				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,
+				3CD6DE442A661BE0004A54F5 /* NSData+ByteAtIndex.m in Sources */,
 				3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1654,6 +1662,7 @@
 		3C72693523949ABD002A0B19 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
@@ -1692,6 +1701,7 @@
 		3C72693623949ABD002A0B19 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = space;

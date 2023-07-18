@@ -1,5 +1,5 @@
 //
-//  CKHTTPClient.h
+//  NSData+ByteAtIndex.h
 //
 //  LGPLv3
 //
@@ -20,25 +20,12 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKHTTPResponse.h"
-#import <openssl/bio.h>
-@import Network;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CKHTTPClient : NSObject
+@interface NSData (ByteAtIndex)
 
-/// Return the bytes associated with an HTTP GET request to the given host
-+ (NSData * _Nonnull) requestForHost:(NSString * _Nonnull)host;
-
-/// Parse the response from this network connection
-+ (void) responseFromNetworkConnection:(nw_connection_t _Nonnull)connection completed:(void (^)(CKHTTPResponse * _Nullable))completed;
-
-/// Parse the response from this OpenSSL BIO
-+ (CKHTTPResponse * _Nullable) responseFromBIO:(BIO * _Nonnull)bio;
-
-/// Parse the response from this NSInputStream
-+ (CKHTTPResponse * _Nullable) responseFromStream:(NSInputStream * _Nonnull)stream;
+- (char) byteAtIndex:(NSUInteger)index;
 
 @end
 

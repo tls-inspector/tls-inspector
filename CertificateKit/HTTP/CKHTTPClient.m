@@ -21,6 +21,7 @@
 
 #import "CKHTTPClient.h"
 #import "CKHTTPHeaders.h"
+#import "NSData+ByteAtIndex.h"
 
 @implementation CKHTTPClient
 
@@ -30,6 +31,55 @@
     NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
     NSString * request = [NSString stringWithFormat:@"GET / HTTP/1.1\r\nHost: %@\r\nUser-Agent: %@\r\n\r\n", host, userAgent];
     return [request dataUsingEncoding:NSASCIIStringEncoding];
+}
+
++ (void) responseFromNetworkConnection:(nw_connection_t)connection completed:(void (^)(CKHTTPResponse *))completed {
+    NSNumber * __block statusCodeN;
+
+    nw_connection_receive(connection, 12, 12, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
+        NSData * httpVersion = [(NSData*)content subdataWithRange:NSMakeRange(0, 8)];
+        if (![httpVersion isEqualToData:[@"HTTP/1.1" dataUsingEncoding:NSUTF8StringEncoding]] && ![httpVersion isEqualToData:[@"http/1.1" dataUsingEncoding:NSUTF8StringEncoding]]) {
+            return;
+        }
+
+        NSData * statusCodeBytes = [(NSData*)content subdataWithRange:NSMakeRange(9, 3)];
+        int statusCode = atoi(statusCodeBytes.bytes);
+        if (statusCode < 100 || statusCode > 599) {
+            return;
+        }
+        statusCodeN = [NSNumber numberWithInt:statusCode];
+    });
+
+    NSMutableData * __block headerData = [NSMutableData new];
+
+    nw_connection_receive(connection, 1, 102400, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
+        bool hasAllHeaders = NO;
+        int headersEndIdx = -1;
+        while (!hasAllHeaders) {
+            NSData * headerBuf = (NSData*)content;
+            if (headerBuf == nil || headerBuf.length == 0) {
+                return;
+            }
+
+            for (int i = 0; i < headerBuf.length-3;) {
+                if ([headerBuf byteAtIndex:i] == '\r' &&
+                    [headerBuf byteAtIndex:i+1] == '\n' &&
+                    [headerBuf byteAtIndex:i+2] == '\r' &&
+                    [headerBuf byteAtIndex:i+3] == '\n') {
+                    headersEndIdx = i;
+                    hasAllHeaders = YES;
+                    break;
+                }
+                i++;
+            }
+
+            [headerData appendData:headerBuf];
+        }
+
+        CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
+        CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:statusCodeN.unsignedIntegerValue headers:headers];
+        completed(response);
+    });
 }
 
 + (CKHTTPResponse *) responseFromBIO:(BIO *)bio {

@@ -24,6 +24,7 @@
 #import "CKSocketUtils.h"
 #import "CKCRLManager.h"
 #import "CKOCSPManager.h"
+#import "CKHTTPClient.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <mach/mach_time.h>
@@ -154,6 +155,31 @@
     }
 
     nw_connection_t connection = nw_connection_create(endpoint, nwparameters);
+
+    void (^connectionComplete)(CKHTTPResponse *) = ^void(CKHTTPResponse * response) {
+        self.finished = YES;
+        self.successful = YES;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
+            [self.delegate getter:self finishedTaskWithResult:self.chain];
+        }
+
+        uint64_t endTime = mach_absolute_time();
+        if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
+            uint64_t elapsedTime = endTime - startTime;
+            static double ticksToNanoseconds = 0.0;
+            if (0.0 == ticksToNanoseconds) {
+                mach_timebase_info_data_t timebase;
+                mach_timebase_info(&timebase);
+                ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+            }
+            double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+            PDebug(@"NetworkFramework getter collected certificate information in %fns", elapsedTimeInNanoseconds);
+        }
+
+        nw_connection_cancel(connection);
+        PDebug(@"Cancelling connection - goodbye!");
+    };
+
     nw_connection_set_queue(connection, nw_dispatch_queue);
     nw_connection_set_state_changed_handler(connection, ^(nw_connection_state_t state, nw_error_t error) {
         switch (state) {
@@ -197,28 +223,7 @@
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 PDebug(@"NetworkFramework getter successful");
                 PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.hostAddress, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
-
-                self.finished = YES;
-                self.successful = YES;
-                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
-                    [self.delegate getter:self finishedTaskWithResult:self.chain];
-                }
-
-                uint64_t endTime = mach_absolute_time();
-                if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
-                    uint64_t elapsedTime = endTime - startTime;
-                    static double ticksToNanoseconds = 0.0;
-                    if (0.0 == ticksToNanoseconds) {
-                        mach_timebase_info_data_t timebase;
-                        mach_timebase_info(&timebase);
-                        ticksToNanoseconds = (double)timebase.numer / timebase.denom;
-                    }
-                    double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
-                    PDebug(@"NetworkFramework getter collected certificate information in %fns", elapsedTimeInNanoseconds);
-                }
-
-                nw_connection_cancel(connection);
-                PDebug(@"Cancelling connection - goodbye!");
+                [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:connectionComplete];
                 break;
             case nw_connection_state_failed:
                 PDebug(@"Event: nw_connection_state_failed");
@@ -238,6 +243,19 @@
         }
     });
     nw_connection_start(connection);
+}
+
+- (void) getHeadersForConnection:(nw_connection_t)connection queue:(dispatch_queue_t)queue completed:(void (^)(CKHTTPResponse *))completed; {
+    NSData * requestData = [CKHTTPClient requestForHost:self.parameters.hostAddress];
+    dispatch_data_t data = dispatch_data_create(requestData.bytes, requestData.length, dispatch_get_main_queue(), DISPATCH_DATA_DESTRUCTOR_DEFAULT);
+
+    [CKHTTPClient responseFromNetworkConnection:connection completed:^(CKHTTPResponse * response) {
+        completed(response);
+    }];
+
+    nw_connection_send(connection, data, NW_CONNECTION_DEFAULT_MESSAGE_CONTEXT, false, ^(nw_error_t error) {
+        //
+    });
 }
 
 - (CKRevoked *) getRevokedInformationForCertificate:(CKCertificate *)certificate issuer:(CKCertificate *)issuer {
