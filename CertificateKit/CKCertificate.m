@@ -109,13 +109,21 @@ INSERT_OPENSSL_ERROR_METHOD
         for (int i = 0; i < len; i++) {
             // Look for the OCSP entry
             ACCESS_DESCRIPTION * description = sk_ACCESS_DESCRIPTION_value(info, i);
-            if (OBJ_obj2nid(description->method) == NID_ad_OCSP) {
-                if (description->location->type == GEN_URI) {
-                    char * ocspurlchar = i2s_ASN1_IA5STRING(NULL, description->location->d.ia5);
-                    NSString * ocspurlString = [[NSString alloc] initWithUTF8String:ocspurlchar];
-                    xcert.ocspURL = [NSURL URLWithString:ocspurlString];
-                }
+            if (OBJ_obj2nid(description->method) != NID_ad_OCSP) {
+                PDebug(@"Ingoring not OCSP access info");
+                continue;
             }
+            if (description->location->type != GEN_URI) {
+                PDebug(@"Ingoring not URL type OCSP access info");
+                continue;
+            }
+            char * ocspurlchar = i2s_ASN1_IA5STRING(NULL, description->location->d.ia5);
+            if (ocspurlchar == NULL) {
+                PError(@"Unable to extract URL from OCSP access info");
+                continue;
+            }
+            NSString * ocspurlString = [[NSString alloc] initWithUTF8String:ocspurlchar];
+            xcert.ocspURL = [NSURL URLWithString:ocspurlString];
         }
         AUTHORITY_INFO_ACCESS_free(info);
     }
@@ -135,7 +143,15 @@ INSERT_OPENSSL_ERROR_METHOD
                 point = sk_DIST_POINT_value(points, i);
                 fullNames = point->distpoint->name.fullname;
                 fullName = sk_GENERAL_NAME_value(fullNames, 0);
+                if (fullName->type != GEN_URI) {
+                    PDebug(@"Ignoring non-URI type CRL entry");
+                    continue;
+                }
                 const unsigned char * url = ASN1_STRING_get0_data(fullName->d.uniformResourceIdentifier);
+                if (url == NULL) {
+                    PError(@"Unable to extract URI from CRL dist point");
+                    continue;
+                }
                 NSURL * crlURL = [NSURL URLWithString:[NSString stringWithUTF8String:(const char *)url]];
                 if (crlURL != nil && [crlURL.absoluteString hasPrefix:@"http"]) {
                     [urls addObject:crlURL];
