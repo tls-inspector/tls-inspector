@@ -82,4 +82,54 @@
     return response;
 }
 
++ (CKHTTPResponse *) responseFromStream:(NSInputStream *)stream {
+    char responseGreetingB[12];
+    NSInteger read = [stream read:(unsigned char *)&responseGreetingB maxLength:12];
+    if (read < 12) {
+        return nil;
+    }
+
+    NSData * responseGreeting = [NSData dataWithBytes:responseGreetingB length:read];
+    NSData * httpVersion = [responseGreeting subdataWithRange:NSMakeRange(0, 8)];
+    if (![httpVersion isEqualToData:[@"HTTP/1.1" dataUsingEncoding:NSUTF8StringEncoding]] && ![httpVersion isEqualToData:[@"http/1.1" dataUsingEncoding:NSUTF8StringEncoding]]) {
+        return nil;
+    }
+
+    NSData * statusCodeBytes = [responseGreeting subdataWithRange:NSMakeRange(9, 3)];
+    int statusCode = atoi(statusCodeBytes.bytes);
+    if (statusCode < 100 || statusCode > 599) {
+        return nil;
+    }
+
+    NSMutableData * headerData = [NSMutableData new];
+    char headerBuf[102400]; // 100KiB
+    bool hasAllHeaders = NO;
+    int headersEndIdx = -1;
+    while (!hasAllHeaders) {
+        read = [stream read:(unsigned char *)&headerBuf maxLength:102400];
+        if (read <= 0) {
+            return 0;
+        }
+
+        for (int i = 0; i < read-3;) {
+            if (headerBuf[i] == '\r' &&
+                headerBuf[i+1] == '\n' &&
+                headerBuf[i+2] == '\r' &&
+                headerBuf[i+3] == '\n') {
+                headersEndIdx = i;
+                hasAllHeaders = YES;
+                break;
+            }
+            i++;
+        }
+
+        [headerData appendBytes:headerBuf length:read];
+    }
+
+    CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
+    CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:(NSUInteger)statusCode headers:headers];
+
+    return response;
+}
+
 @end

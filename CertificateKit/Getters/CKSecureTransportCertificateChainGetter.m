@@ -25,6 +25,7 @@
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #import "CKSocketUtils.h"
+#import "CKHTTPClient.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <arpa/inet.h>
@@ -165,6 +166,10 @@
     NSString * protocolString = [self protocolString:protocol];
     CFRelease(context);
     free(ciphers);
+
+    NSData * httpRequest = [CKHTTPClient requestForHost:self.parameters.hostAddress];
+    [outputStream write:httpRequest.bytes maxLength:httpRequest.length];
+    [CKHTTPClient responseFromStream:inputStream];
 
     [inputStream close];
     [outputStream close];

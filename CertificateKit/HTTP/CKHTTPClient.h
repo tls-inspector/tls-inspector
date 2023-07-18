@@ -33,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Parse the response from this OpenSSL BIO
 + (CKHTTPResponse * _Nullable) responseFromBIO:(BIO * _Nonnull)bio;
 
+/// Parse the response from this NSInputStream
++ (CKHTTPResponse * _Nullable) responseFromStream:(NSInputStream * _Nonnull)stream;
+
 @end
 
 NS_ASSUME_NONNULL_END
