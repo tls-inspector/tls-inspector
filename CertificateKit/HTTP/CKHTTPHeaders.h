@@ -36,6 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Return all headers
 - (NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull) allHeaders;
 
+/// Description
+- (NSString * _Nonnull) description;
+
 @end
 
 NS_ASSUME_NONNULL_END

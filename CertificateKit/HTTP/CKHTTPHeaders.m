@@ -72,4 +72,17 @@
     return self.values;
 }
 
+- (NSString *) description {
+    NSMutableString * desc = [NSMutableString new];
+
+    for (NSString * key in self.values.allKeys) {
+        NSArray<NSString *> * values = self.values[key];
+        for (NSString * value in values) {
+            [desc appendFormat:@"%@: %@\n", key, value];
+        }
+    }
+
+    return desc;
+}
+
 @end
