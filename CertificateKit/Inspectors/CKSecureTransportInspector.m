@@ -1,5 +1,5 @@
 //
-//  CKSecureTransportCertificateChainGetter.m
+//  CKSecureTransportInspector.m
 //
 //  LGPLv3
 //
@@ -19,27 +19,30 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKSecureTransportCertificateChainGetter.h"
+#import "CKSecureTransportInspector.h"
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #import "CKSocketUtils.h"
 #import "CKHTTPClient.h"
+#import "CKInspectParameters+Private.h"
+#import "CKHTTPServerInfo+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <arpa/inet.h>
 #include <mach/mach_time.h>
 
-@interface CKSecureTransportCertificateChainGetter () <NSStreamDelegate> {
+@interface CKSecureTransportInspector () <NSStreamDelegate> {
     CFReadStreamRef   readStream;
     CFWriteStreamRef  writeStream;
     NSInputStream   * inputStream;
     NSOutputStream  * outputStream;
     uint64_t startTime;
+    void (^executeCompleted)(CKInspectResponse *, NSError *);
 }
 
-@property (strong, nonatomic) CKGetterParameters * parameters;
+@property (strong, nonatomic) CKInspectParameters * parameters;
 @property (strong, nonatomic, readwrite) NSString * domain;
 @property (strong, nonatomic, readwrite) NSArray<CKCertificate *> * certificates;
 @property (strong, nonatomic, readwrite) CKCertificate * rootCA;
@@ -52,9 +55,10 @@
 @property (strong, nonatomic) CKCertificateChain * chain;
 @end
 
-@implementation CKSecureTransportCertificateChainGetter
+@implementation CKSecureTransportInspector
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters {
+- (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
+    executeCompleted = completed;
     startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with SecureTransport");
 
@@ -100,10 +104,7 @@
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered: {
             PError(@"NSStream error occured: %@", stream.streamError.description);
-            self.finished = YES;
-            if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-                [self.delegate getter:self failedTaskWithError:[stream streamError]];
-            }
+            executeCompleted(nil, [stream streamError]);
             [inputStream close];
             [outputStream close];
             break;
@@ -124,10 +125,7 @@
     long count = SecTrustGetCertificateCount(trust);
     if (count > CERTIFICATE_CHAIN_MAXIMUM) {
         PError(@"Server returned too many certificates. Count: %li, Max: %i", count, CERTIFICATE_CHAIN_MAXIMUM);
-        self.finished = YES;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-            [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
-        }
+        executeCompleted(nil, MAKE_ERROR(-1, @"Too many certificates from server"));
         return;
     }
 
@@ -148,10 +146,7 @@
     free(buffer);
     if (remoteAddr == nil) {
         PError(@"No remote address from socket");
-        self.finished = YES;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-            [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Unable to get remote address of peer")];
-        }
+        executeCompleted(nil, MAKE_ERROR(-1, @"Unable to get remote address of peer"));
         return;
     }
 
@@ -169,7 +164,7 @@
 
     NSData * httpRequest = [CKHTTPClient requestForHost:self.parameters.hostAddress];
     [outputStream write:httpRequest.bytes maxLength:httpRequest.length];
-    [CKHTTPClient responseFromStream:inputStream];
+    CKHTTPResponse * httpResponse = [CKHTTPClient responseFromStream:inputStream];
 
     [inputStream close];
     [outputStream close];
@@ -183,10 +178,7 @@
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
-        self.finished = YES;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-            [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"No certificates presented by server.")];
-        }
+        executeCompleted(nil, MAKE_ERROR(-1, @"No certificates presented by server."));
         return;
     }
 
@@ -229,11 +221,7 @@
 
     PDebug(@"Certificate chain: %@", [self.chain description]);
     PDebug(@"Finished getting certificate chain");
-    self.finished = YES;
-    self.successful = YES;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
-        [self.delegate getter:self finishedTaskWithResult:self.chain];
-    }
+    executeCompleted([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:[CKHTTPServerInfo fromHTTPResponse:httpResponse]], nil);
 
     uint64_t endTime = mach_absolute_time();
     if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {

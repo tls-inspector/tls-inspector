@@ -1,5 +1,5 @@
 //
-//  CKOpenSSLCertificateChainGetter.m
+//  CKOpenSSLInspector.m
 //
 //  LGPLv3
 //
@@ -19,22 +19,24 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKOpenSSLCertificateChainGetter.h"
+#import "CKOpenSSLInspector.h"
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
 #import "CKOCSPManager.h"
 #import "CKCRLManager.h"
 #import "CKSocketUtils.h"
 #import "CKHTTPClient.h"
+#import "CKInspectParameters+Private.h"
+#import "CKHTTPServerInfo+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/err.h>
 #include <arpa/inet.h>
 #include <mach/mach_time.h>
 
-@interface CKOpenSSLCertificateChainGetter ()
+@interface CKOpenSSLInspector ()
 
-@property (strong, nonatomic) CKGetterParameters * parameters;
+@property (strong, nonatomic) CKInspectParameters * parameters;
 @property (strong, nonatomic, readwrite) NSString * domain;
 @property (strong, nonatomic, readwrite) NSArray<CKCertificate *> * certificates;
 @property (strong, nonatomic, readwrite) CKCertificate * rootCA;
@@ -48,7 +50,7 @@
 
 @end
 
-@implementation CKOpenSSLCertificateChainGetter
+@implementation CKOpenSSLInspector
 
 static X509 * certificateChain[CERTIFICATE_CHAIN_MAXIMUM];
 static int numberOfCerts = 0;
@@ -58,15 +60,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
 #define SSL_CLEANUP if (conn != NULL) { BIO_free_all(conn); }; if (ctx != NULL) { SSL_CTX_free(ctx); };
 
-- (void) failWithError:(CKCertificateError)code description:(NSString *)description {
-    PError(@"Failing with error (%ld): %@", (long)code, description);
-    self.finished = YES;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-        [self.delegate getter:self failedTaskWithError:MAKE_ERROR(code, description)];
-    }
-}
-
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters {
+- (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with OpenSSL");
 
@@ -84,7 +78,7 @@ INSERT_OPENSSL_ERROR_METHOD
     ctx = SSL_CTX_new(TLS_client_method());
     if (ctx == NULL) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorCrypto description:@"Unsupported client method"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorCrypto, @"Unsupported client method"));
         SSL_CLEANUP
         return;
     }
@@ -97,7 +91,7 @@ INSERT_OPENSSL_ERROR_METHOD
     conn = BIO_new_ssl_connect(ctx);
     if (conn == NULL) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorConnection description:@"Connection setup failed"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Connection setup failed"));
         SSL_CLEANUP
         return;
     }
@@ -105,7 +99,7 @@ INSERT_OPENSSL_ERROR_METHOD
     const char * host = [self.parameters.socketAddress UTF8String];
     if (BIO_set_conn_hostname(conn, host) < 0) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorInvalidParameter description:@"Invalid hostname"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"Invalid hostname"));
         SSL_CLEANUP
         return;
     }
@@ -125,7 +119,7 @@ INSERT_OPENSSL_ERROR_METHOD
     BIO_get_ssl(conn, &ssl);
     if (ssl == NULL) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorCrypto description:@"SSL/TLS connection failure"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorCrypto, @"SSL/TLS connection failure"));
         SSL_CLEANUP
         return;
     }
@@ -137,56 +131,56 @@ INSERT_OPENSSL_ERROR_METHOD
     PDebug(@"Requesting ciphers: %s", PREFERRED_CIPHERS);
     if (SSL_set_cipher_list(ssl, PREFERRED_CIPHERS) < 0) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorCrypto description:@"Unsupported client ciphersuite"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorCrypto, @"Unsupported client ciphersuite"));
         SSL_CLEANUP
         return;
     }
 
     if (SSL_set_tlsext_host_name(ssl, [self.parameters.hostAddress UTF8String]) < 0) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorConnection description:@"Could not resolve hostname"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Could not resolve hostname"));
         SSL_CLEANUP
         return;
     }
 
     if (BIO_do_connect(conn) < 0) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorConnection description:@"Connection failed"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Connection failed"));
         SSL_CLEANUP
         return;
     }
 
     int sock_fd;
     if (BIO_get_fd(conn, &sock_fd) == -1) {
-        [self failWithError:CKCertificateErrorInvalidParameter description:@"Internal Error"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"Internal Error"));
         SSL_CLEANUP
         return;
     }
 
     NSString * remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
     if (remoteAddr == nil) {
-        [self failWithError:CKCertificateErrorInvalidParameter description:@"No Peer Address"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"No Peer Address"));
         SSL_CLEANUP
         return;
     }
 
     if (BIO_do_handshake(conn) < 0) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorConnection description:@"Connection failed"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Connection failed"));
         SSL_CLEANUP
         return;
     }
 
     if (numberOfCerts > CERTIFICATE_CHAIN_MAXIMUM) {
         PError(@"Server returned too many certificates. Count: %i, Max: %i", numberOfCerts, CERTIFICATE_CHAIN_MAXIMUM);
-        [self failWithError:CKCertificateErrorConnection description:@"Too many certificates from server"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Too many certificates from server"));
         SSL_CLEANUP
         return;
     }
 
     if (numberOfCerts < 1) {
         [self openSSLError];
-        [self failWithError:CKCertificateErrorConnection description:@"Unsupported server configuration"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Unsupported server configuration"));
         SSL_CLEANUP
         return;
     }
@@ -200,7 +194,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     NSData * httpRequest = [CKHTTPClient requestForHost:parameters.hostAddress];
     BIO_write(conn, httpRequest.bytes, (int)httpRequest.length);
-    [CKHTTPClient responseFromBIO:conn];
+    CKHTTPResponse * httpResponse = [CKHTTPClient responseFromBIO:conn];
 
     const STACK_OF(SCT) * sct_list = SSL_get0_peer_scts(ssl);
     int numberOfSct = sk_SCT_num(sct_list);
@@ -254,7 +248,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     if (secCertificates.count == 0) {
         PError(@"SecCertificateCreateWithData refused to parse any certificates presented by the server");
-        [self failWithError:CKCertificateErrorInvalidParameter description:@"No valid certificates presented by server"];
+        completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"No valid certificates presented by server"));
         return;
     }
 
@@ -283,7 +277,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
-        [self failWithError:CKCertificateErrorInvalidParameter description:@"No certificates presented by server."];
+        completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"No certificates presented by server."));
         return;
     }
 
@@ -321,11 +315,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     PDebug(@"Certificate chain: %@", [self.chain description]);
     PDebug(@"Finished getting certificate chain");
-    self.finished = YES;
-    self.successful = YES;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
-        [self.delegate getter:self finishedTaskWithResult:self.chain];
-    }
+    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:[CKHTTPServerInfo fromHTTPResponse:httpResponse]], nil);
 
     uint64_t endTime = mach_absolute_time();
     if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {

@@ -1,9 +1,9 @@
 //
-//  CKCertificateChainGetter.m
+//  CKInspectParameters+Private.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2021 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -19,8 +19,17 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKCertificateChainGetter.h"
+#import <Foundation/Foundation.h>
+#import "CKResolvedAddress.h"
 
-@implementation CKCertificateChainGetter
+NS_ASSUME_NONNULL_BEGIN
+
+@interface CKInspectParameters (Private)
+
+@property (strong, nonatomic, nullable) CKResolvedAddress * resolvedAddress;
+@property (strong, nonatomic, nullable) NSString * socketAddress;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

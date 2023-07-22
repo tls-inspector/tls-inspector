@@ -243,11 +243,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (strong, nonatomic, nullable) NSArray<CKSignedCertificateTimestamp *> * signedTimestamps;
 
 /**
- *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
- */
-@property (nonatomic, nullable, readonly) void * X509Certificate;
-
-/**
  *  Return a detailed description of the certificate
  */
 - (NSString * _Nonnull) description;

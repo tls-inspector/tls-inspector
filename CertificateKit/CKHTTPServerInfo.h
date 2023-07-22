@@ -25,6 +25,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CKHTTPServerInfo : NSObject
 
+/**
+ A dictionary of all response headers recieved when querying the domain
+ */
+@property (strong, nonatomic, nonnull, readonly) NSDictionary<NSString *, NSArray<NSString *> *> * headers;
+/**
+ A dictionary of all security response headers mapped to a (NSNumber)BOOL of if the header was present
+ */
+@property (strong, nonatomic, nonnull, readonly) NSDictionary<NSString *, id> * securityHeaders;
+/**
+ The HTTP status code seen when querying the domain
+ */
+@property (nonatomic) NSUInteger statusCode;
+
+/**
+ The URL that the server redirected to, if any.
+ */
+@property (strong, nonatomic, nullable, readonly) NSURL * redirectedTo;
+
 @end
 
 NS_ASSUME_NONNULL_END

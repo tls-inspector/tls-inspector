@@ -1,9 +1,9 @@
 //
-//  CKCertificateChainGetter.h
+//  CKHTTPServerInfo+Private.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2023 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -19,8 +19,15 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKGetterTask.h"
+#import <Foundation/Foundation.h>
+#import "CKHTTPResponse.h"
 
-@interface CKCertificateChainGetter : CKGetterTask
+NS_ASSUME_NONNULL_BEGIN
+
+@interface CKHTTPServerInfo (Private)
+
++ (CKHTTPServerInfo * _Nonnull) fromHTTPResponse:(CKHTTPResponse * _Nonnull)response;
 
 @end
+
+NS_ASSUME_NONNULL_END

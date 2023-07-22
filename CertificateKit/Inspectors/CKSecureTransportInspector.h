@@ -1,5 +1,5 @@
 //
-//  CKOpenSSLCertificateChainGetter.h
+//  CKSecureTransportInspector.h
 //
 //  LGPLv3
 //
@@ -19,9 +19,9 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKGetterTask.h"
-#import "CKCertificateChainGetter.h"
+#import <Foundation/Foundation.h>
+#import "CKInspector.h"
 
-@interface CKOpenSSLCertificateChainGetter : CKCertificateChainGetter
+@interface CKSecureTransportInspector : NSObject <CKInspector>
 
 @end

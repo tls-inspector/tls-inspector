@@ -21,6 +21,7 @@
 
 #import "CKCRLManager.h"
 #import "CKCurlCommon.h"
+#import "CKCertificate+Private.h"
 #import <openssl/err.h>
 #import <openssl/x509.h>
 #import <openssl/x509v3.h>

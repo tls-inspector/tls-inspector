@@ -22,6 +22,7 @@
 #import "CertificateKit.h"
 #import "CKOCSPManager.h"
 #import "CKCurlCommon.h"
+#import "CKCertificate+Private.h"
 #import <openssl/x509.h>
 #import <openssl/ocsp.h>
 #import <openssl/err.h>

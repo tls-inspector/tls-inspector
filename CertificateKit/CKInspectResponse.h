@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable, readonly) CKHTTPServerInfo * httpServer;
 @property (nonatomic) double elapsed;
 
-+ (CKInspectResponse * _Nonnull) responseWithCertificateChain:(CKCertificateChain * _Nonnull)certificateChain;
++ (CKInspectResponse * _Nonnull) responseWithCertificateChain:(CKCertificateChain * _Nonnull)certificateChain httpServerInfo:(CKHTTPServerInfo * _Nullable)httpServer;
 
 @end
 

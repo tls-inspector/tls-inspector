@@ -21,7 +21,6 @@
 
 #import <Foundation/Foundation.h>
 #import "CKCertificate.h"
-#import "CKServerInfo.h"
 
 /**
  A chain of CKCertificate objects and metadata about the chain

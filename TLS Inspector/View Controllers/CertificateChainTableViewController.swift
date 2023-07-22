@@ -5,7 +5,7 @@ import SafariServices
 class CertificateChainTableViewController: UITableViewController {
 
     var certificateChain: CKCertificateChain?
-    var serverInfo: CKServerInfo?
+    var httpServerInfo: CKHTTPServerInfo?
     var securityHeadersSorted: [String]?
 
     let certificatesSectionTag = 1
@@ -24,7 +24,7 @@ class CertificateChainTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.certificateChain = CERTIFICATE_CHAIN
-        self.serverInfo = SERVER_INFO
+        self.httpServerInfo = HTTP_SERVER_INFO
 
         if self.certificateChain != nil {
             self.title = self.certificateChain!.domain
@@ -208,7 +208,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func makeRedirectSection() -> TableViewSection? {
-        guard let redirectedTo = self.serverInfo?.redirectedTo?.host else { return nil }
+        guard let redirectedTo = self.httpServerInfo?.redirectedTo?.host else { return nil }
 
         let redirectSection = TableViewSection()
         redirectSection.tag = redirectSectionTag
@@ -216,7 +216,7 @@ class CertificateChainTableViewController: UITableViewController {
 
         // Only make the redirect cell tappable if we can actually reload
         // (which we can't do in the extension)
-        if AppState.getterViewController != nil {
+        if !IsExtension() {
             cell.cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             cell.cell.selectionStyle = UITableViewCell.SelectionStyle.default
         }
@@ -230,14 +230,14 @@ class CertificateChainTableViewController: UITableViewController {
         headersSection.title = lang(key: "Security HTTP Headers")
         headersSection.tag = headersSectionTag
 
-        guard let serverInfo = self.serverInfo else { return nil }
+        guard let serverInfo = self.httpServerInfo else { return nil }
 
         for header in serverInfo.securityHeaders.keys.sorted() {
             guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Icon")) else { return nil }
             guard let titleLabel = cell.cell.viewWithTag(1) as? UILabel else { return nil }
             guard let iconLabel = cell.cell.viewWithTag(2) as? UILabel else { return nil }
             titleLabel.text = header
-            let hasHeader = (self.serverInfo?.securityHeaders[header] ?? nil) is String
+            let hasHeader = (self.httpServerInfo?.securityHeaders[header] ?? nil) is String
 
             let icon = hasHeader ? FAIcon.FACheckCircleRegular : FAIcon.FAQuestionCircleRegular
             let color = hasHeader ? UIColor.materialGreen() : UIColor.materialAmber()
@@ -288,8 +288,8 @@ class CertificateChainTableViewController: UITableViewController {
                 didSelect(tableView, indexPath)
             }
         } else if sectionTag == redirectSectionTag {
-            guard let controller = AppState.getterViewController else { return }
-            guard let redirectedTo = self.serverInfo?.redirectedTo?.absoluteString else { return }
+            guard let controller = reloadInspectionTarget else { return }
+            guard let redirectedTo = self.httpServerInfo?.redirectedTo?.absoluteString else { return }
 
             controller.reloadWithQuery(query: redirectedTo)
         } else if sectionTag == headersSectionTag && indexPath.row == self.sections[indexPath.section].cells.count-1 {

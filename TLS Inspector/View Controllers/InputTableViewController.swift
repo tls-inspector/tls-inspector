@@ -1,7 +1,7 @@
 import UIKit
 import CertificateKit
 
-class InputTableViewController: UITableViewController, UITextFieldDelegate, ChainGetterViewController {
+class InputTableViewController: UITableViewController, UITextFieldDelegate, ReloadableInspectTarget {
     enum PendingCellStates {
         case none
         case loading
@@ -13,7 +13,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Chai
     let requestQueue = DispatchQueue(label: "com.ecnepsnai.Certificate-Inspector.RequestQueue")
 
     var certificateChain: CKCertificateChain?
-    var serverInfo: CKServerInfo?
+    var httpServerInfo: CKHTTPServerInfo?
     var chainError: Error?
     var serverError: Error?
 
@@ -24,7 +24,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Chai
     @IBOutlet weak var tipTextView: UILabel!
 
     override func viewDidLoad() {
-        AppState.getterViewController = self
+        reloadInspectionTarget = self
 
         if !UserOptions.firstRunCompleted {
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Notice") {
@@ -116,11 +116,11 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Chai
     func doInspect(parameters: CKInspectParameters) {
         // Reset
         self.certificateChain = nil
-        self.serverInfo = nil
+        self.httpServerInfo = nil
         self.chainError = nil
         self.serverError = nil
         CERTIFICATE_CHAIN = nil
-        SERVER_INFO = nil
+        HTTP_SERVER_INFO = nil
         SERVER_ERROR = nil
 
         if UserOptions.verboseLogging {
@@ -144,7 +144,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Chai
                 if let response = oResponse {
                     UserOptions.inspectionsWithVerboseLogging += 1
                     CERTIFICATE_CHAIN = response.certificateChain
-                    SERVER_INFO = nil
+                    HTTP_SERVER_INFO = response.httpServer
                     CURRENT_CERTIFICATE = 0
 
                     self.performSegue(withIdentifier: "Inspect", sender: nil)
@@ -210,82 +210,6 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Chai
             self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
         } else {
             LogError("Unknown pending cell state: new=\(state) before=\(stateBefore)")
-        }
-    }
-
-    // MARK: Getter Delegate Methods
-    func finishedGetter(_ getter: CKGetter, successful success: Bool) {
-        LogInfo("Getter finished, success: \(success)")
-        RunOnMain {
-            if !success && self.certificateChain == nil {
-                return
-            }
-            if self.serverError != nil {
-                LogWarn("Chain suceeded but Server failed - Ignoring error")
-            }
-
-            UserOptions.inspectionsWithVerboseLogging += 1
-            CERTIFICATE_CHAIN = self.certificateChain
-            SERVER_INFO = self.serverInfo
-            CURRENT_CERTIFICATE = 0
-
-            self.performSegue(withIdentifier: "Inspect", sender: nil)
-            self.updatePendingCell(state: .none)
-            if let domainInput = self.domainInput {
-                domainInput.isEnabled = true
-                domainInput.text = ""
-                self.domainInputChanged(sender: domainInput)
-            }
-            let domainsBefore = RecentLookups.GetRecentLookups().count
-            RecentLookups.Add(getter.parameters)
-            let recentLookups = RecentLookups.GetRecentLookups()
-            if UserOptions.rememberRecentLookups && recentLookups.count > 0 {
-                if recentLookups.count == 1 && domainsBefore == 0 {
-                    self.tableView.insertSections([1], with: .automatic)
-                } else {
-                    self.tableView.reloadSections([1], with: .automatic)
-                }
-            }
-        }
-    }
-
-    func getter(_ getter: CKGetter, gotCertificateChain chain: CKCertificateChain) {
-        LogDebug("Got certificate chain")
-        RunOnMain {
-            self.certificateChain = chain
-        }
-    }
-
-    func getter(_ getter: CKGetter, gotServerInfo serverInfo: CKServerInfo) {
-        LogDebug("Got server info")
-        RunOnMain {
-            self.serverInfo = serverInfo
-        }
-    }
-
-    func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {
-        LogError("Error getting certificate chain: \(error)")
-        RunOnMain {
-            self.chainError = error
-            self.updatePendingCell(state: .error)
-            self.domainInput?.isEnabled = true
-        }
-    }
-
-    func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
-        LogError("Error getting server info: \(error)")
-        self.serverError = error
-        SERVER_ERROR = error
-    }
-
-    func getter(_ getter: CKGetter, unexpectedError error: Error) {
-        UIHelper(self).presentError(error: error) {
-            self.serverInfo = nil
-            self.certificateChain = nil
-            self.chainError = nil
-            self.serverError = nil
-            self.updatePendingCell(state: .none)
-            self.domainInput?.isEnabled = true
         }
     }
 

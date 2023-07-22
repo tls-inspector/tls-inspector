@@ -1,9 +1,9 @@
 //
-//  CKGetterTask.h
+//  CKOpenSSLInspector.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2019 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -20,24 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKGetterParameters.h"
+#import "CKInspector.h"
 
-@interface CKGetterTask : NSObject
-
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters;
-
-@property (strong, nonatomic) id delegate;
-@property (nonatomic) NSUInteger tag;
-@property (nonatomic) BOOL finished;
-@property (nonatomic) BOOL successful;
-
-@end
-
-@protocol CKGetterTaskDelegate
-
-@required
-
-- (void) getter:(CKGetterTask *)getter finishedTaskWithResult:(id)data;
-- (void) getter:(CKGetterTask *)getter failedTaskWithError:(NSError *)error;
+@interface CKOpenSSLInspector : NSObject <CKInspector>
 
 @end

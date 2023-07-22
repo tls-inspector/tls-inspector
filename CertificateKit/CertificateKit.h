@@ -32,16 +32,14 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKCertificate.h>
 #import <CertificateKit/CKCertificatePublicKey.h>
 #import <CertificateKit/CKCertificateChain.h>
-#import <CertificateKit/CKServerInfo.h>
 #import <CertificateKit/CKHTTPServerInfo.h>
-#import <CertificateKit/CKGetter.h>
 #import <CertificateKit/CKRevoked.h>
 #import <CertificateKit/CKOCSPResponse.h>
 #import <CertificateKit/CKCRLResponse.h>
 #import <CertificateKit/CKInspectParameters.h>
 #import <CertificateKit/CKInspectResponse.h>
 #import <CertificateKit/CKInspectRequest.h>
-#import <CertificateKit/CKGetterParameters.h>
+#import <CertificateKit/CKInspectParameters.h>
 #import <CertificateKit/CKLogging.h>
 #import <CertificateKit/CKCertificateBundle.h>
 #import <CertificateKit/CKRootCACertificateBundleManager.h>

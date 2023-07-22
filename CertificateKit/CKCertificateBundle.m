@@ -22,6 +22,7 @@
 #import "CKCertificateBundle.h"
 #import "NSString+ASN1OctetString.h"
 #import "NSData+HexString.h"
+#import "CKCertificate+Private.h"
 #include <openssl/x509.h>
 #include <openssl/pem.h>
 #include <openssl/bio.h>
@@ -150,7 +151,7 @@
         return false;
     }
 
-    X509 * target = (X509 *)certificates[0].X509Certificate;
+    X509 * target = certificates[0].X509Certificate;
     STACK_OF(X509) * intermediates = sk_X509_new(NULL);
     for (int i = 1; i < certificates.count; i++) {
         CKCertificate * certificate = certificates[i];

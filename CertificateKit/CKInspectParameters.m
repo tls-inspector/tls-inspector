@@ -20,6 +20,14 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKInspectParameters.h"
+#import "CKResolvedAddress.h"
+
+@interface CKInspectParameters ()
+
+@property (strong, nonatomic, nullable) CKResolvedAddress * resolvedAddress;
+@property (strong, nonatomic, nullable) NSString * socketAddress;
+
+@end
 
 @implementation CKInspectParameters
 
@@ -151,6 +159,10 @@
     }
 
     return @"Unknown";
+}
+
+- (CKInspectParameters *) copy {
+    return [CKInspectParameters fromDictionary:[self dictionaryValue]];
 }
 
 @end

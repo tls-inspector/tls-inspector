@@ -1,9 +1,9 @@
 //
-//  CKGetterTask.m
+//  CKInspector.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2016 Ian Spence
+//  Copyright (c) 2023 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -19,11 +19,14 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKGetterTask.h"
+#import <Foundation/Foundation.h>
+#import "CKInspectParameters.h"
+#import "CKInspectResponse.h"
 
-@implementation CKGetterTask
+@protocol CKInspector
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters {}
-- (BOOL) isFinished { return NO; }
+@required
+
+- (void) executeWithParameters:(CKInspectParameters * _Nonnull)parameters completed:(void (^ _Nonnull)(CKInspectResponse * _Nullable, NSError * _Nullable))completed;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  CKNetworkCertificateChainGetter.m
+//  CKNetworkFrameworkInspector.m
 //
 //  LGPLv3
 //
@@ -20,27 +20,28 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 @import Network;
-#import "CKNetworkCertificateChainGetter.h"
+#import "CKNetworkFrameworkInspector.h"
 #import "CKSocketUtils.h"
 #import "CKCRLManager.h"
 #import "CKOCSPManager.h"
 #import "CKHTTPClient.h"
+#import "CKHTTPServerInfo+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <mach/mach_time.h>
 
-@interface CKNetworkCertificateChainGetter ()
+@interface CKNetworkFrameworkInspector ()
 
 @property (strong, nonatomic) CKCertificateChain * chain;
-@property (strong, nonatomic) CKGetterParameters * parameters;
+@property (strong, nonatomic) CKInspectParameters * parameters;
 
 @end
 
-@implementation CKNetworkCertificateChainGetter
+@implementation CKNetworkFrameworkInspector
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters {}
+- (void) performTaskWithParameters:(CKInspectParameters *)parameters {}
 
-- (void) executeWithParameters:(CKGetterParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
+- (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with NetworkFramework");
 
@@ -52,7 +53,7 @@
     nw_endpoint_t endpoint = nw_endpoint_create_host(parameters.ipAddress.UTF8String, portStr);
     long __block numberOfCertificates = 0L;
 
-    dispatch_queue_t nw_dispatch_queue = dispatch_queue_create("com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter", NULL);
+    dispatch_queue_t nw_dispatch_queue = dispatch_queue_create("com.tlsinspector.CertificateKit.CKNetworkFrameworkInspector", NULL);
 
     // TCP configuration
     nw_parameters_configure_protocol_block_t configure_tcp = ^(nw_protocol_options_t tcp_options) {
@@ -75,7 +76,6 @@
             numberOfCertificates = SecTrustGetCertificateCount(trust);
             if (numberOfCertificates > CERTIFICATE_CHAIN_MAXIMUM) {
                 PError(@"Server returned too many certificates. Count: %li, Max: %i", numberOfCertificates, CERTIFICATE_CHAIN_MAXIMUM);
-                self.finished = YES;
                 completed(nil, MAKE_ERROR(-1, @"Too many certificates from server"));
                 return;
             }
@@ -157,9 +157,7 @@
     nw_connection_t connection = nw_connection_create(endpoint, nwparameters);
 
     void (^connectionComplete)(CKHTTPResponse *) = ^void(CKHTTPResponse * response) {
-        self.finished = YES;
-        self.successful = YES;
-        completed([CKInspectResponse responseWithCertificateChain:self.chain], nil);
+        completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:[CKHTTPServerInfo fromHTTPResponse:response]], nil);
 
         uint64_t endTime = mach_absolute_time();
         if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
@@ -188,8 +186,6 @@
             case nw_connection_state_waiting: {
                 PDebug(@"Event: nw_connection_state_waiting");
                 PError(@"nw_connection failed: %@", error.description);
-                self.finished = YES;
-                self.successful = NO;
                 int errorCode = -1;
                 NSString * errorDescription = @"timed out";
                 if (error != nil) {
@@ -198,7 +194,7 @@
                 } else {
                     PError(@"nw_connection_state_waiting with no error");
                 }
-                completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDescription}]);
+                completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkFrameworkInspector" code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDescription}]);
                 nw_connection_cancel(connection);
                 break;
             }
@@ -210,9 +206,7 @@
                 PDebug(@"Event: nw_connection_state_ready");
                 if (numberOfCertificates <= 0) {
                     PError(@"No certificates returned");
-                    self.finished = YES;
-                    self.successful = NO;
-                    completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:500 userInfo:@{NSLocalizedDescriptionKey: @"No certificates returned"}]);
+                    completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkFrameworkInspector" code:500 userInfo:@{NSLocalizedDescriptionKey: @"No certificates returned"}]);
                     nw_connection_cancel(connection);
                     break;
                 }
@@ -226,9 +220,7 @@
             case nw_connection_state_failed: {
                 PDebug(@"Event: nw_connection_state_failed");
                 PError(@"nw_connection failed: %@", error.description);
-                self.finished = YES;
-                self.successful = NO;
-                completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]);
+                completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkFrameworkInspector" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]);
                 break;
             }
             case nw_connection_state_cancelled: {

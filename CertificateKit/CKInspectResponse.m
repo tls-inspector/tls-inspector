@@ -30,9 +30,10 @@
 
 @implementation CKInspectResponse
 
-+ (CKInspectResponse *) responseWithCertificateChain:(CKCertificateChain *)certificateChain {
++ (CKInspectResponse *) responseWithCertificateChain:(CKCertificateChain *)certificateChain httpServerInfo:(CKHTTPServerInfo *)httpServer {
     CKInspectResponse * response = [CKInspectResponse new];
     response.certificateChain = certificateChain;
+    response.httpServer = httpServer;
     return response;
 }
 

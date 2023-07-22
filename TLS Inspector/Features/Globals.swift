@@ -3,7 +3,7 @@ import CertificateKit
 
 // swiftlint:disable identifier_name
 var CERTIFICATE_CHAIN: CKCertificateChain?
-var SERVER_INFO: CKServerInfo?
+var HTTP_SERVER_INFO: CKHTTPServerInfo?
 var SERVER_ERROR: Error?
 var CURRENT_CERTIFICATE: Int = 0
 var SPLIT_VIEW_CONTROLLER: UISplitViewController?
@@ -14,6 +14,10 @@ var CHANGE_CRYPTO_NOTIFICATION: Notification.Name = Notification.Name("change_cr
 // swiftlint:enable identifier_name
 
 let AppDefaults = UserDefaults(suiteName: "group.com.ecnepsnai.TLS-Inspector")!
+
+func IsExtension() -> Bool {
+    return Bundle.main.bundleIdentifier == "com.ecnepsnai.Certificate-Inspector.Inspect-Website"
+}
 
 func RunOnMain(_ closure: @escaping () -> Void) {
     DispatchQueue.main.async(execute: closure)
@@ -39,3 +43,9 @@ func LogInfo(_ message: String) {
 func LogDebug(_ message: String) {
     CKLogging.sharedInstance().writeDebug(message)
 }
+
+protocol ReloadableInspectTarget {
+    func reloadWithQuery(query: String)
+}
+
+var reloadInspectionTarget: ReloadableInspectTarget?

@@ -4,12 +4,12 @@ import CertificateKit
 
 /// The initial view controller is responsible for bootstrapping the rest of the application and acting as the getter delegate.
 /// This extension can be used in a number of places, and each can report the host URL in a different way.
-class InitialViewController: UIViewController, CKGetterDelegate {
+class InitialViewController: UIViewController {
     var values: [URL] = []
     let latch = AtomicInt(defaultValue: 0)
-    let getter = CKGetter()
+    let requestQueue = DispatchQueue(label: "com.ecnepsnai.Inspect-Website.RequestQueue")
     var certificateChain: CKCertificateChain?
-    var serverInfo: CKServerInfo?
+    var httpServerInfo: CKHTTPServerInfo?
     var observer: NSObjectProtocol?
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -130,52 +130,24 @@ class InitialViewController: UIViewController, CKGetterDelegate {
     }
 
     func doInspect(hostAddress: String, port: UInt16) {
-        self.getter.delegate = self
         let parameters = UserOptions.inspectParameters(hostAddress: hostAddress)
         parameters.port = port
-        self.getter.getInfo(parameters)
-    }
 
-    // MARK: CKGetterDelegate Methods
-    func finishedGetter(_ getter: CKGetter, successful success: Bool) {
-        print("Getter finished, success: \(success)")
-        RunOnMain {
-            if !success && self.certificateChain == nil {
-                return
+        let request = CKInspectRequest(parameters: parameters)
+        request.execute(on: requestQueue) { oResponse, oError in
+            RunOnMain {
+                if let error = oError {
+                    UIHelper(self).presentError(error: error) {
+                        self.closeExtension()
+                    }
+                    return
+                }
+                if let response = oResponse {
+                    CERTIFICATE_CHAIN = response.certificateChain
+                    HTTP_SERVER_INFO = response.httpServer
+                    self.performSegue(withIdentifier: "Inspect", sender: nil)
+                }
             }
-            CKLogging.sharedInstance().writeWarn("Chain suceeded but Server failed - Ignoring error")
-
-            CERTIFICATE_CHAIN = self.certificateChain
-            SERVER_INFO = self.serverInfo
-            self.performSegue(withIdentifier: "Inspect", sender: nil)
-        }
-    }
-
-    func getter(_ getter: CKGetter, gotCertificateChain chain: CKCertificateChain) {
-        self.certificateChain = chain
-        print("Got certificate chain")
-    }
-
-    func getter(_ getter: CKGetter, gotServerInfo serverInfo: CKServerInfo) {
-        self.serverInfo = serverInfo
-        print("Got server info")
-    }
-
-    func getter(_ getter: CKGetter, errorGettingCertificateChain error: Error) {
-        print("Error getting certificate chain: " + error.localizedDescription)
-        UIHelper(self).presentError(error: error) {
-            self.closeExtension()
-        }
-    }
-
-    func getter(_ getter: CKGetter, errorGettingServerInfo error: Error) {
-        print("Error server info: " + error.localizedDescription)
-        SERVER_ERROR = error
-    }
-
-    func getter(_ getter: CKGetter, unexpectedError error: Error) {
-        UIHelper(self).presentError(error: error) {
-            self.closeExtension()
         }
     }
 }
