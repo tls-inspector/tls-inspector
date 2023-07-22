@@ -34,7 +34,12 @@ jobs:
           else
             echo "No untracked changes to localization detected"
           fi
-      
+
+      - name: Validate license
+        id: validate_license
+        run: |
+          ./validate_license_header.sh
+
       - name: Install Profile and Certificates
         id: install_credentials
         run: |
