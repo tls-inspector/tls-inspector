@@ -1,9 +1,9 @@
 //
-//  CKNetworkCertificateChainGetter.h
+//  CKInspectRequest.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2020 Ian Spence
+//  Copyright (c) 2023 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -19,11 +19,19 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKCertificateChainGetter.h"
+#import <Foundation/Foundation.h>
+#import "CKInspectParameters.h"
+#import "CKInspectResponse.h"
 
-@interface CKNetworkCertificateChainGetter : CKCertificateChainGetter
+NS_ASSUME_NONNULL_BEGIN
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters;
-- (void) executeWithParameters:(CKGetterParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed;
+@interface CKInspectRequest : NSObject
+
+@property (strong, nonatomic, nonnull, readonly) CKInspectParameters * parameters;
+
++ (CKInspectRequest * _Nonnull) requestWithParameters:(CKInspectParameters * _Nonnull)parameters;
+- (void) executeOn:(dispatch_queue_t)queue completed:(void (^)(CKInspectResponse * _Nullable, NSError * _Nullable))completed;
 
 @end
+
+NS_ASSUME_NONNULL_END

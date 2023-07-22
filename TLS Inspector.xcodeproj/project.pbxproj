@@ -83,6 +83,8 @@
 		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
 		3C6E6B38297F71AD007BF8E8 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E6B37297F71AD007BF8E8 /* TestUtils.swift */; };
 		3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */; };
+		3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */; };
 		3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */; };
 		3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
 		3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
@@ -163,6 +165,10 @@
 		3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */; };
 		3CD6DE432A661BE0004A54F5 /* NSData+ByteAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */; };
 		3CD6DE442A661BE0004A54F5 /* NSData+ByteAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */; };
+		3CD6DE472A662C37004A54F5 /* CKInspectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD6DE452A662C37004A54F5 /* CKInspectRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD6DE482A662C37004A54F5 /* CKInspectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6DE462A662C37004A54F5 /* CKInspectRequest.m */; };
+		3CD6DE4B2A662D88004A54F5 /* CKInspectResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD6DE492A662D88004A54F5 /* CKInspectResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD6DE4C2A662D88004A54F5 /* CKInspectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */; };
 		3CD74669258C1406003D609E /* offensive_words.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CD74668258C1406003D609E /* offensive_words.plist */; };
 		3CDC14AD23B0453B0053932F /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC14AB23B0453B0053932F /* Extension.storyboard */; };
 		3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CDC14A723B0453B0053932F /* Show Certificate.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -361,6 +367,8 @@
 		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3C6E6B37297F71AD007BF8E8 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple_ca_bundle.p7b; sourceTree = "<group>"; };
+		3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPServerInfo.h; sourceTree = "<group>"; };
+		3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPServerInfo.m; sourceTree = "<group>"; };
 		3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		3C6FF89723B1A420008DC981 /* AtomicInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
 		3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserOptions+CKOptions.swift"; sourceTree = "<group>"; };
@@ -427,6 +435,10 @@
 		3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptions.swift; sourceTree = "<group>"; };
 		3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+ByteAtIndex.h"; sourceTree = "<group>"; };
 		3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+ByteAtIndex.m"; sourceTree = "<group>"; };
+		3CD6DE452A662C37004A54F5 /* CKInspectRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectRequest.h; sourceTree = "<group>"; };
+		3CD6DE462A662C37004A54F5 /* CKInspectRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectRequest.m; sourceTree = "<group>"; };
+		3CD6DE492A662D88004A54F5 /* CKInspectResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectResponse.h; sourceTree = "<group>"; };
+		3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectResponse.m; sourceTree = "<group>"; };
 		3CD74668258C1406003D609E /* offensive_words.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = offensive_words.plist; sourceTree = "<group>"; };
 		3CDC14A723B0453B0053932F /* Show Certificate.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Show Certificate.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDC14AC23B0453B0053932F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Extension.storyboard; sourceTree = "<group>"; };
@@ -605,8 +617,14 @@
 				3C2A7A521F284DC700AA12B4 /* CKGetter.m */,
 				3CD4932825A56198002AC7BD /* CKGetterParameters.h */,
 				3CD4932925A56198002AC7BD /* CKGetterParameters.m */,
+				3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */,
+				3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */,
 				3CF0A693261BBC5900460B7F /* CKInspectParameters.h */,
 				3CF0A694261BBC5900460B7F /* CKInspectParameters.m */,
+				3CD6DE452A662C37004A54F5 /* CKInspectRequest.h */,
+				3CD6DE462A662C37004A54F5 /* CKInspectRequest.m */,
+				3CD6DE492A662D88004A54F5 /* CKInspectResponse.h */,
+				3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */,
 				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
 				3C1D28AA2009677300A606BB /* CKNameObject.h */,
@@ -919,6 +937,7 @@
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
+				3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */,
 				3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */,
 				67F686EC1FC8FACD00BB7AE8 /* CKServerInfoGetter.h in Headers */,
 				3C3DE1FE29B823A90025DA94 /* NSString+ASN1OctetString.h in Headers */,
@@ -928,6 +947,7 @@
 				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
 				3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */,
 				3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */,
+				3CD6DE4B2A662D88004A54F5 /* CKInspectResponse.h in Headers */,
 				3C091B8C2A2EB9EE00A8BE92 /* CKHTTPHeaders.h in Headers */,
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
@@ -939,6 +959,7 @@
 				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C2A7A531F284DC700AA12B4 /* CKGetter.h in Headers */,
 				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
+				3CD6DE472A662C37004A54F5 /* CKInspectRequest.h in Headers */,
 				3CB94044225036FC0055C067 /* CKSecureTransportCertificateChainGetter.h in Headers */,
 				3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */,
 			);
@@ -1331,6 +1352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */,
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3CB4F158200451CD00A9CF51 /* CKCertificateChainGetter.m in Sources */,
 				3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */,
@@ -1364,7 +1386,9 @@
 				3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportCertificateChainGetter.m in Sources */,
+				3CD6DE4C2A662D88004A54F5 /* CKInspectResponse.m in Sources */,
 				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,
+				3CD6DE482A662C37004A54F5 /* CKInspectRequest.m in Sources */,
 				3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */,
 				3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */,
 				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,

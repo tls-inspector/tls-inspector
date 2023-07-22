@@ -1,16 +1,16 @@
 import UIKit
 import CertificateKit
 
-class InputTableViewController: UITableViewController, CKGetterDelegate, UITextFieldDelegate, ChainGetterViewController {
+class InputTableViewController: UITableViewController, UITextFieldDelegate, ChainGetterViewController {
     enum PendingCellStates {
         case none
         case loading
         case error
     }
 
-    var getter: CKGetter?
     var pendingCellState: PendingCellStates = .none
     let tipKeys: [String] = ["tip_1", "tip_2", "tip_3", "tip_4", "tip_5", "tip_6"]
+    let requestQueue = DispatchQueue(label: "com.ecnepsnai.Certificate-Inspector.RequestQueue")
 
     var certificateChain: CKCertificateChain?
     var serverInfo: CKServerInfo?
@@ -132,10 +132,41 @@ class InputTableViewController: UITableViewController, CKGetterDelegate, UITextF
         self.domainInput?.isEnabled = false
         self.updatePendingCell(state: .loading)
         self.inspectButton.isEnabled = false
-        self.getter = CKGetter()
-        self.getter?.delegate = self
-        LogDebug("Inspecting domain")
-        self.getter?.getInfo(parameters)
+
+        let request = CKInspectRequest(parameters: parameters)
+        request.execute(on: requestQueue) { oResponse, oError in
+            RunOnMain {
+                if let error = oError {
+                    self.chainError = error
+                    self.updatePendingCell(state: .error)
+                    self.domainInput?.isEnabled = true
+                }
+                if let response = oResponse {
+                    UserOptions.inspectionsWithVerboseLogging += 1
+                    CERTIFICATE_CHAIN = response.certificateChain
+                    SERVER_INFO = nil
+                    CURRENT_CERTIFICATE = 0
+
+                    self.performSegue(withIdentifier: "Inspect", sender: nil)
+                    self.updatePendingCell(state: .none)
+                    if let domainInput = self.domainInput {
+                        domainInput.isEnabled = true
+                        domainInput.text = ""
+                        self.domainInputChanged(sender: domainInput)
+                    }
+                    let domainsBefore = RecentLookups.GetRecentLookups().count
+                    RecentLookups.Add(parameters)
+                    let recentLookups = RecentLookups.GetRecentLookups()
+                    if UserOptions.rememberRecentLookups && recentLookups.count > 0 {
+                        if recentLookups.count == 1 && domainsBefore == 0 {
+                            self.tableView.insertSections([1], with: .automatic)
+                        } else {
+                            self.tableView.reloadSections([1], with: .automatic)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     func inspectDomain(_ query: String) {

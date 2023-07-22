@@ -38,7 +38,9 @@
 
 @implementation CKNetworkCertificateChainGetter
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters API_AVAILABLE(ios(12.4)) {
+- (void) performTaskWithParameters:(CKGetterParameters *)parameters {}
+
+- (void) executeWithParameters:(CKGetterParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with NetworkFramework");
 
@@ -74,9 +76,7 @@
             if (numberOfCertificates > CERTIFICATE_CHAIN_MAXIMUM) {
                 PError(@"Server returned too many certificates. Count: %li, Max: %i", numberOfCertificates, CERTIFICATE_CHAIN_MAXIMUM);
                 self.finished = YES;
-                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-                    [self.delegate getter:self failedTaskWithError:MAKE_ERROR(-1, @"Too many certificates from server")];
-                }
+                completed(nil, MAKE_ERROR(-1, @"Too many certificates from server"));
                 return;
             }
 
@@ -159,9 +159,7 @@
     void (^connectionComplete)(CKHTTPResponse *) = ^void(CKHTTPResponse * response) {
         self.finished = YES;
         self.successful = YES;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(getter:finishedTaskWithResult:)]) {
-            [self.delegate getter:self finishedTaskWithResult:self.chain];
-        }
+        completed([CKInspectResponse responseWithCertificateChain:self.chain], nil);
 
         uint64_t endTime = mach_absolute_time();
         if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
@@ -183,39 +181,38 @@
     nw_connection_set_queue(connection, nw_dispatch_queue);
     nw_connection_set_state_changed_handler(connection, ^(nw_connection_state_t state, nw_error_t error) {
         switch (state) {
-            case nw_connection_state_invalid:
+            case nw_connection_state_invalid: {
                 PDebug(@"Event: nw_connection_state_invalid");
                 break;
-            case nw_connection_state_waiting:
+            }
+            case nw_connection_state_waiting: {
                 PDebug(@"Event: nw_connection_state_waiting");
                 PError(@"nw_connection failed: %@", error.description);
                 self.finished = YES;
                 self.successful = NO;
-                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-                    int errorCode = -1;
-                    NSString * errorDescription = @"timed out";
-                    if (error != nil) {
-                        errorCode = nw_error_get_error_code(error);
-                        errorDescription = error.debugDescription;
-                    } else {
-                        PError(@"nw_connection_state_waiting with no error");
-                    }
-                    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDescription}]];
+                int errorCode = -1;
+                NSString * errorDescription = @"timed out";
+                if (error != nil) {
+                    errorCode = nw_error_get_error_code(error);
+                    errorDescription = error.debugDescription;
+                } else {
+                    PError(@"nw_connection_state_waiting with no error");
                 }
+                completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDescription}]);
                 nw_connection_cancel(connection);
                 break;
-            case nw_connection_state_preparing:
+            }
+            case nw_connection_state_preparing: {
                 PDebug(@"Event: nw_connection_state_preparing");
                 break;
-            case nw_connection_state_ready:
+            }
+            case nw_connection_state_ready: {
                 PDebug(@"Event: nw_connection_state_ready");
                 if (numberOfCertificates <= 0) {
                     PError(@"No certificates returned");
                     self.finished = YES;
                     self.successful = NO;
-                    if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-                        [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:500 userInfo:@{NSLocalizedDescriptionKey: @"No certificates returned"}]];
-                    }
+                    completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:500 userInfo:@{NSLocalizedDescriptionKey: @"No certificates returned"}]);
                     nw_connection_cancel(connection);
                     break;
                 }
@@ -225,27 +222,29 @@
                 PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.hostAddress, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
                 [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:connectionComplete];
                 break;
-            case nw_connection_state_failed:
+            }
+            case nw_connection_state_failed: {
                 PDebug(@"Event: nw_connection_state_failed");
                 PError(@"nw_connection failed: %@", error.description);
                 self.finished = YES;
                 self.successful = NO;
-                if (self.delegate && [self.delegate respondsToSelector:@selector(getter:failedTaskWithError:)]) {
-                    [self.delegate getter:self failedTaskWithError:[NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]];
-                }
+                completed(nil, [NSError errorWithDomain:@"com.tlsinspector.CertificateKit.CKNetworkCertificateChainGetter" code:nw_error_get_error_code(error) userInfo:@{NSLocalizedDescriptionKey: error.debugDescription}]);
                 break;
-            case nw_connection_state_cancelled:
+            }
+            case nw_connection_state_cancelled: {
                 PDebug(@"Event: nw_connection_state_cancelled");
                 break;
-            default:
+            }
+            default: {
                 PError(@"Unknown nw_connection_state: %u", state);
                 break;
+            }
         }
     });
     nw_connection_start(connection);
 }
 
-- (void) getHeadersForConnection:(nw_connection_t)connection queue:(dispatch_queue_t)queue completed:(void (^)(CKHTTPResponse *))completed; {
+- (void) getHeadersForConnection:(nw_connection_t)connection queue:(dispatch_queue_t)queue completed:(void (^)(CKHTTPResponse *))completed {
     NSData * requestData = [CKHTTPClient requestForHost:self.parameters.hostAddress];
     dispatch_data_t data = dispatch_data_create(requestData.bytes, requestData.length, dispatch_get_main_queue(), DISPATCH_DATA_DESTRUCTOR_DEFAULT);
 

@@ -1,9 +1,9 @@
 //
-//  CKNetworkCertificateChainGetter.h
+//  CKInspectResponse.m
 //
 //  LGPLv3
 //
-//  Copyright (c) 2020 Ian Spence
+//  Copyright (c) 2023 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -19,11 +19,21 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKCertificateChainGetter.h"
+#import "CKInspectResponse.h"
 
-@interface CKNetworkCertificateChainGetter : CKCertificateChainGetter
+@interface CKInspectResponse ()
 
-- (void) performTaskWithParameters:(CKGetterParameters *)parameters;
-- (void) executeWithParameters:(CKGetterParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed;
+@property (strong, nonatomic, nonnull, readwrite) CKCertificateChain * certificateChain;
+@property (strong, nonatomic, nullable, readwrite) CKHTTPServerInfo * httpServer;
+
+@end
+
+@implementation CKInspectResponse
+
++ (CKInspectResponse *) responseWithCertificateChain:(CKCertificateChain *)certificateChain {
+    CKInspectResponse * response = [CKInspectResponse new];
+    response.certificateChain = certificateChain;
+    return response;
+}
 
 @end
