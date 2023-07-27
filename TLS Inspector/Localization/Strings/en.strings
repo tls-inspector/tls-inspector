@@ -11,6 +11,7 @@ Algorithm	Algorithm
 Algorithms	Algorithms
 Alternate Names	Alternate Names
 App Icons	App Icons
+App Language	App Language
 AppIcon::Dark	Dark
 AppIcon::Default	Default
 AppIcon::Light	Light
@@ -349,6 +350,11 @@ KeyAlgorithm::dsaEncryption	DSA
 KeyAlgorithm::id-ecPublicKey	ECDSA
 KeyAlgorithm::rsaEncryption	RSA
 Keying Material	Keying Material
+Language Updated	Language Updated
+Language::de	German
+Language::en	English
+Language::es	Spanish
+Language::nl	Dutch
 Loading...	Loading…
 Locally Trusted	Locally Trusted
 Locally Trusted Chain	Locally Trusted Chain
@@ -460,6 +466,7 @@ Untrusted Chain	Untrusted Chain
 Updating	Updating
 Updating...	Updating...
 Use IP Version	Use IP Version
+Use system language	Use system language
 Use the Reminders app to customize the reminder	Use the Reminders app to customize the reminder
 Valid For	Valid For
 Valid From	Valid From
@@ -480,8 +487,10 @@ What kind of feedback would you like to submit?	What kind of feedback would you 
 Will Expire In	Will Expire In
 Yes	Yes
 You can modify the reminder in the reminders app.	You can modify the reminder in the reminders app.
+You must fully close and reopen the app for the new language to take effect.	You must fully close and reopen the app for the new language to take effect.
 You must inspect at least one site with verbose logging enabled before you can submit logs.	You must inspect at least one site with verbose logging enabled before you can submit logs.
 advanced_settings_nag	These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.
+app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
 certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy crypto engine.
 copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2023 Ian Spence.

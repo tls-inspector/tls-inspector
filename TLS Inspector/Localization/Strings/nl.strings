@@ -18,6 +18,8 @@ Algorithm	Algoritme
 Algorithms	Algoritmes
 Alternate Names	Alternatieve Namen
 App Icons	App Icons
+# TODO
+App Language	App Language
 AppIcon::Dark	Donker
 AppIcon::Default	Standaard
 AppIcon::Light	Licht
@@ -356,6 +358,16 @@ KeyAlgorithm::dsaEncryption	DSA
 KeyAlgorithm::id-ecPublicKey	ECDSA
 KeyAlgorithm::rsaEncryption	RSA
 Keying Material	Versleutelingsmateriaal
+# TODO
+Language Updated	Language Updated
+# TODO
+Language::de	German
+# TODO
+Language::en	English
+# TODO
+Language::es	Spanish
+# TODO
+Language::nl	Dutch
 Loading...	Laden...
 Locally Trusted	Lokaal Vertrouwd
 Locally Trusted Chain	Lokaal Vertrouwde Keten
@@ -467,6 +479,8 @@ Untrusted Chain	Niet Vertrouwde Keten
 Updating	Updating
 Updating...	Updating...
 Use IP Version	Gebruik IP Versie
+# TODO
+Use system language	Use system language
 Use the Reminders app to customize the reminder	Gebruik de Reminders app om de herinnering aan te passen
 Valid For	Geldig voor
 Valid From	Geldig Vanaf
@@ -487,8 +501,12 @@ What kind of feedback would you like to submit?	Wat voor soort terugkoppeling wi
 Will Expire In	Verloopt in
 Yes	Ja
 You can modify the reminder in the reminders app.	U kunt de herinnering wijzigen in de Reminders app.
+# TODO
+You must fully close and reopen the app for the new language to take effect.	You must fully close and reopen the app for the new language to take effect.
 You must inspect at least one site with verbose logging enabled before you can submit logs.	U dient ten minste ?n site met uitgebreide logging te inspecteren voordat u logs kunt opsturen.
 advanced_settings_nag	Deze instellingen zijn voor geavanceerd probleemherstel. Onjuiste waardes kunnen TLS Inspector niet goed laten werken.
+# TODO
+app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
 certificate_status_footer	OCSP-raadpleging uitzetten kan leiden tot onjuist vertrouwen. CRL-raadpleging kan meer tijd kosten en meer data ophalen. Als OCSP-raadpleging is uitgezet kan dit nog steeds plaatsvinden bij gebruik van de oude Apple crypto driver.
 copyright_license_footer	TLS Inspector is vrij beschikbare software met een GNU GPLv3 licentie. TLS Inspector is copyright ? 2016-2023 Ian Spence.

@@ -19,6 +19,7 @@ private let KEY_CRYPTO_ENGINE = "crypto_engine"
 private let KEY_IP_VERSION = "use_ip_version"
 private let KEY_OPTIONS_SCHEMA_VERSION = "options_schema_version"
 private let KEY_TREAT_UNRECOGNIZED_AS_TRUSTED = "treat_unrecognized_as_trusted"
+private let KEY_APP_LANGUAGE = "app_language"
 // swiftlint:enable identifier_name
 
 public enum CryptoEngine: String {
@@ -116,6 +117,7 @@ class UserOptions {
         KEY_CONTACT_NAG_DISMISSED: false,
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
         KEY_TREAT_UNRECOGNIZED_AS_TRUSTED: false,
+        KEY_APP_LANGUAGE: "",
     ]
     private static var _verboseLogging = false
     private static var _inspectionsWithVerboseLogging = 0
@@ -303,6 +305,18 @@ class UserOptions {
         set {
             AppDefaults.set(newValue, forKey: KEY_TREAT_UNRECOGNIZED_AS_TRUSTED)
             LogDebug("Setting AppDefault: \(KEY_TREAT_UNRECOGNIZED_AS_TRUSTED) = \(newValue)")
+        }
+    }
+    static var appLanguage: SupportedLanguages? {
+        get {
+            return SupportedLanguages(rawValue: AppDefaults.string(forKey: KEY_APP_LANGUAGE) ?? "")
+        }
+        set {
+            if let value = newValue {
+                AppDefaults.set(value.rawValue, forKey: KEY_APP_LANGUAGE)
+            } else {
+                AppDefaults.set("", forKey: KEY_APP_LANGUAGE)
+            }
         }
     }
 

@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -42,6 +42,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="About TLS Inspector"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -76,6 +79,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="textKey" value="Options"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -187,6 +193,7 @@
                     <connections>
                         <segue destination="Bem-Gj-gOM" kind="show" identifier="Advanced" id="rmq-5E-8s3"/>
                         <segue destination="Efu-qQ-cqJ" kind="show" identifier="AppIconSegue" id="Ggh-fK-ubR"/>
+                        <segue destination="IVp-sG-B6c" kind="show" identifier="AppLanguageSegue" id="pe5-Th-BYX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7b-mp-JKY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -490,6 +497,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cga-jx-cUH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1496" y="1252"/>
+        </scene>
+        <!--App Language-->
+        <scene sceneID="YcN-im-G6V">
+            <objects>
+                <tableViewController id="IVp-sG-B6c" customClass="AppLanguageTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Edx-GK-Q7D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="IVp-sG-B6c" id="gTH-io-53B"/>
+                            <outlet property="delegate" destination="IVp-sG-B6c" id="w5C-0k-eFw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="App Language" id="hPK-KP-a34">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="titleKey" value="App Language"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7fD-8y-QJ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2390" y="1252"/>
         </scene>
         <!--Contact Support-->
         <scene sceneID="ZNw-BX-83f">

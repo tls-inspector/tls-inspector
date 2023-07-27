@@ -73,6 +73,7 @@
 		3C6220942A6C56C1008F822E /* CKCertificate+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220932A6C56C1008F822E /* CKCertificate+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6242702947B10200A7814A /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
 		3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
+		3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */; };
 		3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */; };
 		3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DADC1E836BE9004AD96D /* CertificateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -343,6 +344,7 @@
 		3C6220932A6C56C1008F822E /* CKCertificate+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKCertificate+Private.h"; sourceTree = "<group>"; };
 		3C62426F2947B10200A7814A /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = curl.xcframework; sourceTree = "<group>"; };
 		3C6242712947B12C00A7814A /* openssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = openssl.xcframework; sourceTree = "<group>"; };
+		3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageTableViewController.swift; sourceTree = "<group>"; };
 		3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolver.h; sourceTree = "<group>"; };
 		3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKResolver.m; sourceTree = "<group>"; };
 		3C65DADA1E836BE9004AD96D /* CertificateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CertificateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -676,6 +678,8 @@
 				3CCD0291239DD412009364D0 /* AboutViewController.swift */,
 				3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */,
 				3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */,
+				3C922C0229D613630064274F /* AppIconTableViewController.swift */,
+				3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */,
 				3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */,
 				3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */,
 				3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */,
@@ -691,7 +695,6 @@
 				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
 				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
 				3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */,
-				3C922C0229D613630064274F /* AppIconTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1374,6 +1377,7 @@
 				3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */,
 				3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */,
 				3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */,
+				3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */,
 				3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */,
 				3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
 				3C72692723949ABD002A0B19 /* AppDelegate.swift in Sources */,
