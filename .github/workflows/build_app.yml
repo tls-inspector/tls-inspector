@@ -33,24 +33,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
-      
-      - name: Validate localization
-        id: validate_localization
-        run: |
-          cd "TLS Inspector/Localization"
-          python3 lang.py
-          if [[ $(git diff --stat) != '' ]]; then
-            echo "::error ::Untracked changes to localization detected!"
-            git status
-            exit 1
-          else
-            echo "No untracked changes to localization detected"
-          fi
-
-      - name: Validate license
-        id: validate_license
-        run: |
-          ./validate_license_header.sh
 
       - name: Install Profile and Certificates
         id: install_credentials

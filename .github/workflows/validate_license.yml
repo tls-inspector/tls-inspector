@@ -1,0 +1,30 @@
+name: "Validate License"
+
+on:
+  push:
+    paths:
+      - '**/*.m'
+      - '**/*.h'
+      - '**/*.c'
+  pull_request:
+    paths:
+      - '**/*.m'
+      - '**/*.h'
+      - '**/*.c'
+
+permissions:
+  packages: read
+
+jobs:
+  build:
+    name: "Validate License"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        id: checkout
+        uses: actions/checkout@v3
+      
+      - name: Validate license
+        id: validate_license
+        run: |
+          ./validate_license_header.sh
