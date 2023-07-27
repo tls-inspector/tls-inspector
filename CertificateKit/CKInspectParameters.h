@@ -100,6 +100,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (CKInspectParameters * _Nullable) fromDictionary:(NSDictionary<NSString *, id> * _Nonnull)d;
 
 /**
+ Create a new parameter object from the given query
+ */
++ (CKInspectParameters * _Nonnull) fromQuery:(NSString * _Nonnull)query;
+
+/**
  Returns a copy of the parameters object
  */
 - (CKInspectParameters * _Nonnull) copy;

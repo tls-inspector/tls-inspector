@@ -749,22 +749,22 @@
 		3CD4A7B62398C2F100B2C8FC /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */,
-				3CD4A7AD2398B40800B2C8FC /* Globals.swift */,
-				3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */,
-				3CCD028A239DC64C009364D0 /* RecentLookups.swift */,
-				3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */,
-				3C57F49E23B0220300DCCB54 /* SupportType.swift */,
-				3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */,
-				3C57F4A223B02B0700DCCB54 /* AppLinks.swift */,
-				3C6FF89723B1A420008DC981 /* AtomicInt.swift */,
-				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
 				3C599F6A23EA8D8200791DF1 /* AppInfo.swift */,
-				3CE3B21625BE2186008527A1 /* URL+Encode.swift */,
-				3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */,
-				3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */,
+				3C57F4A223B02B0700DCCB54 /* AppLinks.swift */,
+				3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */,
+				3C6FF89723B1A420008DC981 /* AtomicInt.swift */,
+				3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */,
 				3C84F3122644C275003E6A66 /* Date+DurationString.swift */,
+				3CD4A7AD2398B40800B2C8FC /* Globals.swift */,
+				3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */,
+				3CCD028A239DC64C009364D0 /* RecentLookups.swift */,
+				3C57F49E23B0220300DCCB54 /* SupportType.swift */,
 				3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */,
+				3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */,
+				3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */,
+				3CE3B21625BE2186008527A1 /* URL+Encode.swift */,
+				3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */,
+				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";

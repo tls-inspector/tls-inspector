@@ -3,9 +3,8 @@ import CertificateKit
 
 extension UserOptions {
     public static func inspectParameters(hostAddress: String) -> CKInspectParameters {
-        let parameters = CKInspectParameters()
+        let parameters = CKInspectParameters.fromQuery(hostAddress)
 
-        parameters.hostAddress = hostAddress
         parameters.queryServerInfo = UserOptions.getHTTPHeaders
         parameters.checkOCSP = UserOptions.queryOCSP
         parameters.checkCRL = UserOptions.checkCRL

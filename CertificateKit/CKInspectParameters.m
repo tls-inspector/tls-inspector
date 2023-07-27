@@ -21,6 +21,8 @@
 
 #import "CKInspectParameters.h"
 #import "CKResolvedAddress.h"
+#import "CKRegex.h"
+#import <arpa/inet.h>
 
 @interface CKInspectParameters ()
 
@@ -40,6 +42,88 @@
 #define KEY_CRYPTO_ENGINE @"crypto_engine"
 #define KEY_IP_VERSION @"ip_version"
 #define KEY_CIPHERS @"ciphers"
+
++ (CKInspectParameters *) fromQuery:(NSString *)query {
+    CKInspectParameters * parameters = [CKInspectParameters new];
+
+    CKRegex * protocolPattern = [CKRegex compile:@"^[a-z]+://"];
+    CKRegex * wrappedIPv6AddressPattern = [CKRegex compile:@"\\[[0-9a-f\\:]+\\]"];
+
+    // Strip any protocol prefix
+    NSString * hostAddress = [[protocolPattern replaceAllMatchesIn:query with:@""] lowercaseString];
+
+    // Remove any path components (if present)
+    if ([hostAddress containsString:@"/"]) {
+        hostAddress = [hostAddress componentsSeparatedByString:@"/"][0];
+    }
+
+    // Valid IP addresses can't contain a port, so no need to try and find and strip it
+    if (![CKInspectParameters isValidIPAddress:hostAddress]) {
+        // Catch IPv6 addresses that are wrapped in [] and contain a port
+        if ([wrappedIPv6AddressPattern matches:hostAddress]) {
+            // Get the address out of the brackets
+            NSString * wrappedAddress = [wrappedIPv6AddressPattern firstMatch:hostAddress];
+            parameters.port = [CKInspectParameters getAndStripPortFrom:&hostAddress];
+            // hostAddress gets updated by getAndStripPortFrom, repalce it with the value from wrappedAddress
+            hostAddress = [[wrappedAddress substringFromIndex:1] substringToIndex:wrappedAddress.length-2];
+        } else {
+            // Not a valid IP address and not a wrapped IPv6 address
+            UInt16 port = [CKInspectParameters getAndStripPortFrom:&hostAddress];
+            // Note: If the user specified a port in both the host address and in the port property then we
+            // ignore the port in the host address and use the specified value.
+            if (parameters.port == 0) {
+                parameters.port = port;
+            }
+        }
+    }
+
+    parameters.hostAddress = hostAddress;
+    if (parameters.port == 0) {
+        parameters.port = 443;
+    }
+
+    return parameters;
+}
+
++ (BOOL) isValidIPv4Address:(NSString *)hostAddress {
+    unsigned char buf[sizeof(struct in_addr)];
+    if (inet_pton(AF_INET, hostAddress.UTF8String, buf) != 0) {
+        return YES;
+    }
+    return NO;
+}
+
++ (BOOL) isValidIPv6Address:(NSString *)hostAddress {
+    unsigned char buf[sizeof(struct in6_addr)];
+    if (inet_pton(AF_INET6, hostAddress.UTF8String, buf) != 0) {
+        return YES;
+    }
+    return NO;
+}
+
++ (BOOL) isValidIPAddress:(NSString *)hostAddress {
+    return ([CKInspectParameters isValidIPv4Address:hostAddress] || [CKInspectParameters isValidIPv6Address:hostAddress]);
+}
+
+/// Find a valid port suffix (e.g. :443) from hostAddress, remove it from hostAddress and return the port number
+/// Will return either a valid port number or 0.
+/// If no port suffix exists or the port number isn't valid it does nothing to hostAddress and returns 0.
++ (UInt16) getAndStripPortFrom:(NSString **)hostAddress {
+    CKRegex * portPattern = [CKRegex compile:@":[0-9]+$"];
+
+    NSString * portString = [portPattern firstMatch:*hostAddress];
+    if (portString == nil) {
+        return 0;
+    }
+
+    NSInteger rawPort = [[portString substringFromIndex:1] integerValue];
+    if (rawPort < 0 || rawPort > 65535) {
+        return 0;
+    }
+
+    *hostAddress = [*hostAddress substringToIndex:(*hostAddress).length-portString.length];
+    return (UInt16)rawPort;
+}
 
 - (NSString *) description {
     return [NSString stringWithFormat:@"hostAddress='%@' port=%i ipAddress='%@' queryServerInfo='%@' checkOCSP='%@' checkCRL='%@' cryptoEngine='%i' ipVersion='%i' ciphers='%@'",

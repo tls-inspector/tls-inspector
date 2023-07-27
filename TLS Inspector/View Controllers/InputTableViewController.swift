@@ -66,7 +66,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
 
     @IBAction func inspectButtonPressed(_ sender: UIBarButtonItem) {
         let text = self.domainInput?.text ?? ""
-        self.inspectDomain(text)
+        self.inspectWithQuery(text)
     }
 
     @IBAction func advancedButtonPressed(_ sender: OptionsButton) {
@@ -85,7 +85,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if self.inputIsValid() && textField.text != nil {
             textField.resignFirstResponder()
-            self.inspectDomain(textField.text!)
+            self.inspectWithQuery(textField.text!)
             return true
         } else {
             return false
@@ -169,7 +169,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
         }
     }
 
-    func inspectDomain(_ query: String) {
+    func inspectWithQuery(_ query: String) {
         if CertificateKit.isProxyConfigured() {
             UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
             return
@@ -181,7 +181,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
     func reloadWithQuery(query: String) {
         self.presentedViewController?.dismiss(animated: true, completion: {
             RunOnMain {
-                self.inspectDomain(query)
+                self.inspectWithQuery(query)
             }
         })
     }
