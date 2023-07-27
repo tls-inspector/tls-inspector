@@ -1,0 +1,36 @@
+name: "Validate Localization"
+
+on:
+  push:
+    paths:
+      - 'TLS Inspector/Localization/**'
+  pull_request:
+    paths:
+      - 'TLS Inspector/Localization/**'
+
+permissions:
+  packages: read
+
+jobs:
+  build:
+    name: "Validate Localization"
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Source
+        id: checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+      
+      - name: Validate localization
+        id: validate_localization
+        run: |
+          cd "TLS Inspector/Localization"
+          python3 lang.py
+          if [[ $(git diff --stat) != '' ]]; then
+            echo "::error ::Untracked changes to localization detected!"
+            git status
+            exit 1
+          else
+            echo "No untracked changes to localization detected"
+          fi

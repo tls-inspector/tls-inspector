@@ -1,0 +1,48 @@
+name: Bug Report
+description: "Found an issue with TLS Inspector? Let us know and we'll do our best to resolve it."
+labels: ["bug"]
+assignees:
+  - ecnepsnai
+body:
+  - type: input
+    id: version
+    attributes:
+      label: "Affected versions:"
+    validations:
+      required: true
+  - type: checkboxes
+    id: testflight
+    attributes:
+      label: "Release type"
+      options:
+        - label: "This issue applies only to a TestFlight release"
+  - type: input
+    id: device
+    attributes:
+      label: "Device Type and iOS Version:"
+    validations:
+      required: true
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: "What steps will reproduce the problem?"
+    validations:
+      required: true
+  - type: textarea
+    id: expect-outcome
+    attributes:
+      label: "What is the expected output?"
+    validations:
+      required: true
+  - type: textarea
+    id: actual-outcome
+    attributes:
+      label: "What do you see instead?"
+    validations:
+      required: true
+  - type: textarea
+    id: other
+    attributes:
+      label: "Any other information to provide?"
+    validations:
+      required: false
