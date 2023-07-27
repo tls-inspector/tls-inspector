@@ -1,6 +1,5 @@
 name: Bug Report
 description: "Found an issue with TLS Inspector? Let us know and we'll do our best to resolve it."
-title: ""
 labels: ["bug"]
 assignees:
   - ecnepsnai
@@ -14,6 +13,7 @@ body:
   - type: checkboxes
     id: testflight
     attributes:
+      label: "Release type"
       options:
         - label: "This issue applies only to a TestFlight release"
   - type: input

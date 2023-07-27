@@ -1,6 +1,5 @@
 name: Feature Request
 description: "Have an idea to make TLS Inspector even better? Let us know and we'll talk!"
-title: ""
 labels: ["enhancement"]
 assignees:
   - ecnepsnai

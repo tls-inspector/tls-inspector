@@ -1,5 +1,1 @@
 blank_issues_enabled: true
-contact_links:
-  - name: Report a Security Vulnerability
-    url: https://tlsinspector.com/vulnerability.html
-    about: If you encounter a security vulnerability with TLS Inspector please do not file an issue here on GitHub, please report it privately.
