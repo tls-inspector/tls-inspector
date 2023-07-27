@@ -1,0 +1,31 @@
+name: Feature Request
+description: "Have an idea to make TLS Inspector even better? Let us know and we'll talk!"
+title: ""
+labels: ["enhancement"]
+assignees:
+  - ecnepsnai
+body:
+  - type: textarea
+    id: short-desc
+    attributes:
+      label: "A short description of the feature you're requesting"
+    validations:
+      required: true
+  - type: textarea
+    id: impl
+    attributes:
+      label: "How do you imagine this feature looking? Are there any examples of other implementations?"
+    validations:
+      required: true
+  - type: textarea
+    id: ben
+    attributes:
+      label: "How do you feel this feature will benefit TLS Inspector?"
+    validations:
+      required: true
+  - type: textarea
+    id: other
+    attributes:
+      label: "Anything else you would like to add?"
+    validations:
+      required: false
