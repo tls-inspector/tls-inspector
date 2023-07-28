@@ -41,6 +41,10 @@
 
 - (void) performTaskWithParameters:(CKInspectParameters *)parameters {}
 
+- (void)extracted:(nw_connection_t)connection connectionComplete:(void (^)(CKHTTPResponse *))connectionComplete nw_dispatch_queue:(dispatch_queue_t)nw_dispatch_queue {
+    [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:connectionComplete];
+}
+
 - (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with NetworkFramework");
@@ -214,7 +218,7 @@
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 PDebug(@"NetworkFramework getter successful");
                 PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.hostAddress, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
-                [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:connectionComplete];
+                [self extracted:connection connectionComplete:connectionComplete nw_dispatch_queue:nw_dispatch_queue];
                 break;
             }
             case nw_connection_state_failed: {

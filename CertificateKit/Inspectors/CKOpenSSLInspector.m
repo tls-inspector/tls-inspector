@@ -28,9 +28,9 @@
 #import "CKHTTPClient.h"
 #import "CKInspectParameters+Private.h"
 #import "CKHTTPServerInfo+Private.h"
+#import "CKLogging+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
-#include <openssl/err.h>
 #include <arpa/inet.h>
 #include <mach/mach_time.h>
 
@@ -56,8 +56,6 @@ static X509 * certificateChain[CERTIFICATE_CHAIN_MAXIMUM];
 static int numberOfCerts = 0;
 static CFMutableStringRef keyLog = NULL;
 
-INSERT_OPENSSL_ERROR_METHOD
-
 #define SSL_CLEANUP if (conn != NULL) { BIO_free_all(conn); }; if (ctx != NULL) { SSL_CTX_free(ctx); };
 
 - (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
@@ -77,7 +75,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     ctx = SSL_CTX_new(TLS_client_method());
     if (ctx == NULL) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorCrypto, @"Unsupported client method"));
         SSL_CLEANUP
         return;
@@ -90,7 +88,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     conn = BIO_new_ssl_connect(ctx);
     if (conn == NULL) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Connection setup failed"));
         SSL_CLEANUP
         return;
@@ -98,7 +96,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     const char * host = [self.parameters.socketAddress UTF8String];
     if (BIO_set_conn_hostname(conn, host) < 0) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"Invalid hostname"));
         SSL_CLEANUP
         return;
@@ -118,7 +116,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     BIO_get_ssl(conn, &ssl);
     if (ssl == NULL) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorCrypto, @"SSL/TLS connection failure"));
         SSL_CLEANUP
         return;
@@ -130,21 +128,21 @@ INSERT_OPENSSL_ERROR_METHOD
     }
     PDebug(@"Requesting ciphers: %s", PREFERRED_CIPHERS);
     if (SSL_set_cipher_list(ssl, PREFERRED_CIPHERS) < 0) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorCrypto, @"Unsupported client ciphersuite"));
         SSL_CLEANUP
         return;
     }
 
     if (SSL_set_tlsext_host_name(ssl, [self.parameters.hostAddress UTF8String]) < 0) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Could not resolve hostname"));
         SSL_CLEANUP
         return;
     }
 
     if (BIO_do_connect(conn) < 0) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Connection failed"));
         SSL_CLEANUP
         return;
@@ -165,7 +163,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     if (BIO_do_handshake(conn) < 0) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Connection failed"));
         SSL_CLEANUP
         return;
@@ -179,7 +177,7 @@ INSERT_OPENSSL_ERROR_METHOD
     }
 
     if (numberOfCerts < 1) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         completed(nil, MAKE_ERROR(CKCertificateErrorConnection, @"Unsupported server configuration"));
         SSL_CLEANUP
         return;
@@ -192,9 +190,12 @@ INSERT_OPENSSL_ERROR_METHOD
     self.chain.remoteAddress = remoteAddr;
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
-    NSData * httpRequest = [CKHTTPClient requestForHost:parameters.hostAddress];
-    BIO_write(conn, httpRequest.bytes, (int)httpRequest.length);
-    CKHTTPResponse * httpResponse = [CKHTTPClient responseFromBIO:conn];
+    CKHTTPResponse * __block httpResponse;
+    dispatch_block_wait(^{
+        NSData * httpRequest = [CKHTTPClient requestForHost:parameters.hostAddress];
+        BIO_write(conn, httpRequest.bytes, (int)httpRequest.length);
+        httpResponse = [CKHTTPClient responseFromBIO:conn];
+    }, 5*NSEC_PER_SEC);
 
     const STACK_OF(SCT) * sct_list = SSL_get0_peer_scts(ssl);
     int numberOfSct = sk_SCT_num(sct_list);
@@ -233,7 +234,7 @@ INSERT_OPENSSL_ERROR_METHOD
             int len = i2d_X509(cert, &bytes);
             if (len == 0) {
                 PError(@"Error converting libssl.X509* to DER bytes");
-                [self openSSLError];
+                [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
                 continue;
             }
             NSData * certData = [NSData dataWithBytes:bytes length:len];

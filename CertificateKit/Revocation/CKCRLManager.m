@@ -22,7 +22,7 @@
 #import "CKCRLManager.h"
 #import "CKCurlCommon.h"
 #import "CKCertificate+Private.h"
-#import <openssl/err.h>
+#import "CKLogging+Private.h"
 #import <openssl/x509.h>
 #import <openssl/x509v3.h>
 #import <curl/curl.h>
@@ -209,7 +209,7 @@ struct httpResponseBlock {
     X509_CRL * crl = NULL;
     crl = d2i_X509_CRL(NULL, (const unsigned char **)&curldata.response, curldata.size);
     if (crl == NULL) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Error decoding CRL response");
         return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding CRL response"}];;
     }
@@ -302,7 +302,5 @@ size_t crl_write_callback(void * data, size_t size, size_t nmemb, void * userp) 
             return @"Unknown";
     }
 }
-
-INSERT_OPENSSL_ERROR_METHOD
 
 @end

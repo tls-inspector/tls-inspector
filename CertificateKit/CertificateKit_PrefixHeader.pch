@@ -10,8 +10,6 @@
 
 #define IS_EXTENSION ([NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.ecnepsnai.Certificate-Inspector.Inspect-Website"])
 
-#define PRINT_OPENSSL_ERROR { const char * file = NULL; int line; ERR_peek_last_error_line(&file, &line); if (file != NULL) { NSLog(@"OpenSSL error in file: %s:%i", file, line); PError(@"OpenSSL error in file: %s:%i", file, line); } else { NSLog(@"OpenSSL error but no line or file found"); PError(@"OpenSSL error but no line or file found"); } }
-#define INSERT_OPENSSL_ERROR_METHOD - (void) openSSLError { PRINT_OPENSSL_ERROR }
 #define MAKE_ERROR(ECODE, EDESCRIPTION) [NSError errorWithDomain:@"com.tlsinspector.CertificateKit" code:ECODE userInfo:@{NSLocalizedDescriptionKey: EDESCRIPTION}]
 
 #define CERTIFICATE_CHAIN_MAXIMUM 10

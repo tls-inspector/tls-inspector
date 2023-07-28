@@ -20,9 +20,9 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKLogging.h"
-
 #include <mach/mach.h>
 #include <mach/mach_time.h>
+#include <openssl/err.h>
 
 @interface CKLogging ()
 
@@ -150,6 +150,17 @@ static dispatch_queue_t queue;
     _level = level;
     [self writeDebug:[NSString stringWithFormat:@"Setting log level to: %@ (%lu)", [self stringForLevel:level], (unsigned long)level]];
 #endif
+}
+
++ (void) captureOpenSSLErrorInFile:(const char *)file line:(int)line {
+    const char * opensslFile = NULL;
+    int opensslLine;
+    ERR_peek_last_error_line(&opensslFile, &opensslLine);
+    if (file != NULL) {
+        [CKLogging.sharedInstance writeError:[NSString stringWithFormat:@"%s:%i OpenSSL error occurred in file %s:%i", file, line, opensslFile, opensslLine]];
+    } else {
+        [CKLogging.sharedInstance writeError:[NSString stringWithFormat:@"%s:%i OpenSSL error occurred but no file found", file, line]];
+    }
 }
 
 @end

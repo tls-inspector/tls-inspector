@@ -83,6 +83,7 @@
 		3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE91E836C15004AD96D /* CKCertificateChain.m */; platformFilter = ios; };
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
+		3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C66083D2A735171008B58E8 /* CKLogging+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
 		3C6E6B38297F71AD007BF8E8 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E6B37297F71AD007BF8E8 /* TestUtils.swift */; };
 		3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */; };
@@ -356,6 +357,7 @@
 		3C65DAE91E836C15004AD96D /* CKCertificateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificateChain.m; sourceTree = "<group>"; };
 		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
+		3C66083D2A735171008B58E8 /* CKLogging+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKLogging+Private.h"; sourceTree = "<group>"; };
 		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3C6E6B37297F71AD007BF8E8 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple_ca_bundle.p7b; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */,
 				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
+				3C66083D2A735171008B58E8 /* CKLogging+Private.h */,
 				3C1D28AA2009677300A606BB /* CKNameObject.h */,
 				3C1D28AB2009677300A606BB /* CKNameObject.m */,
 				3C1A0D0D263914C200267CF9 /* CKRegex.h */,
@@ -907,6 +910,7 @@
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
+				3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */,
 				3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */,
 				3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */,
 				3C3DE1FE29B823A90025DA94 /* NSString+ASN1OctetString.h in Headers */,

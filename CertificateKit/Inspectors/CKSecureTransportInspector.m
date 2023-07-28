@@ -162,9 +162,12 @@
     CFRelease(context);
     free(ciphers);
 
-    NSData * httpRequest = [CKHTTPClient requestForHost:self.parameters.hostAddress];
-    [outputStream write:httpRequest.bytes maxLength:httpRequest.length];
-    CKHTTPResponse * httpResponse = [CKHTTPClient responseFromStream:inputStream];
+    CKHTTPResponse * __block httpResponse;
+    dispatch_block_wait(^{
+        NSData * httpRequest = [CKHTTPClient requestForHost:self.parameters.hostAddress];
+        [self->outputStream write:httpRequest.bytes maxLength:httpRequest.length];
+        httpResponse = [CKHTTPClient responseFromStream:self->inputStream];
+    }, 5*NSEC_PER_SEC);
 
     [inputStream close];
     [outputStream close];
