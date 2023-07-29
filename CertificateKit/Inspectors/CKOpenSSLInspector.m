@@ -20,6 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKOpenSSLInspector.h"
+#import "CKOpenSSLInspector+EnumValues.h"
 #import "CKCertificate.h"
 #import "CKCertificateChain.h"
 #import "CKOCSPManager.h"
@@ -385,59 +386,6 @@ void key_callback(const SSL *ssl, const char *line) {
         }
     }
     return [CKRevoked fromOCSPResponse:ocspResponse andCRLResponse:crlResponse];
-}
-
-- (NSString *) trustResultToString:(SecTrustResultType)result {
-    switch (result) {
-        case kSecTrustResultInvalid:
-            return @"Invalid";
-            break;
-        case kSecTrustResultProceed:
-            return @"Proceed";
-            break;
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-        case kSecTrustResultConfirm:
-            return @"Confirm";
-            break;
-#pragma clang diagnostic pop
-        case kSecTrustResultDeny:
-            return @"Deny";
-            break;
-        case kSecTrustResultUnspecified:
-            return @"Unspecified";
-            break;
-        case kSecTrustResultRecoverableTrustFailure:
-            return @"Recoverable Trust Failure";
-            break;
-        case kSecTrustResultFatalTrustFailure:
-            return @"Fatal Trust Failure";
-            break;
-        case kSecTrustResultOtherError:
-            return @"Other Error";
-            break;
-    }
-
-    return @"Unknown";
-}
-
-- (NSString *) protocolString:(int)protocol {
-    switch (protocol) {
-        case TLS1_3_VERSION:
-            return @"TLS 1.3";
-        case TLS1_2_VERSION:
-            return @"TLS 1.2";
-        case TLS1_1_VERSION:
-            return @"TLS 1.1";
-        case TLS1_VERSION:
-            return @"TLS 1.0";
-        case SSL3_VERSION:
-            return @"SSL 3.0";
-        case SSL2_VERSION:
-            return @"SSL 2.0";
-    }
-
-    return @"Unknown";
 }
 
 @end

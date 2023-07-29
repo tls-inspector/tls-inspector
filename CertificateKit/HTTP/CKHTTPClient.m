@@ -98,9 +98,11 @@
             return;
         }
 
+        PDebug(@"HTTP response from server: '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         NSMutableData * headerData = [NSMutableData new];
         [CKHTTPClient connectionReadLoop:connection statusCode:[NSNumber numberWithInt:statusCode] mutableData:headerData completed:completed];
     });
+    PDebug(@"Scheduled recieve of 12 bytes for HTTP status");
 }
 
 + (CKHTTPResponse *) responseFromBIO:(BIO *)bio {

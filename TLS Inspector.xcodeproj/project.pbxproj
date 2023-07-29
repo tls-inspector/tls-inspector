@@ -114,6 +114,12 @@
 		3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */; };
 		3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
 		3C84A98623AD9FCD003B76D3 /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
+		3C84C9F72A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C84C9F52A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h */; };
+		3C84C9F82A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C84C9F62A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m */; };
+		3C84C9FB2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C84C9F92A75D6520037A902 /* CKSecureTransportInspector+EnumValues.m */; };
+		3C84C9FC2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C84C9FA2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.h */; };
+		3C84C9FF2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C84C9FD2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m */; };
+		3C84CA002A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C84C9FE2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h */; };
 		3C84F3132644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
 		3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
 		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
@@ -388,6 +394,12 @@
 		3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterErrorTableViewController.swift; sourceTree = "<group>"; };
 		3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateReminder.swift; sourceTree = "<group>"; };
 		3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTipTarget.swift; sourceTree = "<group>"; };
+		3C84C9F52A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKNetworkFrameworkInspector+EnumValues.h"; sourceTree = "<group>"; };
+		3C84C9F62A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CKNetworkFrameworkInspector+EnumValues.m"; sourceTree = "<group>"; };
+		3C84C9F92A75D6520037A902 /* CKSecureTransportInspector+EnumValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKSecureTransportInspector+EnumValues.m"; sourceTree = "<group>"; };
+		3C84C9FA2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKSecureTransportInspector+EnumValues.h"; sourceTree = "<group>"; };
+		3C84C9FD2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKOpenSSLInspector+EnumValues.m"; sourceTree = "<group>"; };
+		3C84C9FE2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKOpenSSLInspector+EnumValues.h"; sourceTree = "<group>"; };
 		3C84F3122644C275003E6A66 /* Date+DurationString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DurationString.swift"; sourceTree = "<group>"; };
 		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
 		3C922C0229D613630064274F /* AppIconTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconTableViewController.swift; sourceTree = "<group>"; };
@@ -646,16 +658,22 @@
 		3C6FE49D1EF4C0EF002021E3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
-				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
+				3C84C9F52A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h */,
+				3C84C9F62A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m */,
+				3C84C9FE2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h */,
+				3C84C9FD2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m */,
+				3C84C9FA2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.h */,
+				3C84C9F92A75D6520037A902 /* CKSecureTransportInspector+EnumValues.m */,
+				3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */,
+				3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */,
 				3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */,
 				3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */,
+				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
+				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
 				3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */,
 				3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */,
 				3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */,
 				3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */,
-				3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */,
-				3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -898,6 +916,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C84C9FC2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.h in Headers */,
 				3C6220902A6C5324008F822E /* CKInspector.h in Headers */,
 				3C6220922A6C55AC008F822E /* CKInspectParameters+Private.h in Headers */,
 				3C091B882A2EB9E400A8BE92 /* CKHTTPResponse.h in Headers */,
@@ -943,6 +962,8 @@
 				3CD6DE472A662C37004A54F5 /* CKInspectRequest.h in Headers */,
 				3CB94044225036FC0055C067 /* CKSecureTransportInspector.h in Headers */,
 				3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */,
+				3C84CA002A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h in Headers */,
+				3C84C9F72A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1352,6 +1373,7 @@
 				3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */,
 				3C091B8D2A2EB9EE00A8BE92 /* CKHTTPHeaders.m in Sources */,
 				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
+				3C84C9F82A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m in Sources */,
 				3CB94045225036FC0055C067 /* CKOpenSSLInspector.m in Sources */,
 				3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
@@ -1359,6 +1381,7 @@
 				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
 				3C3002602980E13500F8B2F0 /* CKSignedCertificateTimestamp.m in Sources */,
 				3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */,
+				3C84C9FB2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportInspector.m in Sources */,
 				3CD6DE4C2A662D88004A54F5 /* CKInspectResponse.m in Sources */,
@@ -1368,6 +1391,7 @@
 				3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */,
 				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,
 				3CD6DE442A661BE0004A54F5 /* NSData+ByteAtIndex.m in Sources */,
+				3C84C9FF2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m in Sources */,
 				3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
