@@ -81,13 +81,14 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 			Issuer:                lastIssuer.Subject,
 			NotBefore:             time.Now().UTC().AddDate(-1, 0, 0),
 			NotAfter:              time.Now().UTC().AddDate(1, 0, 0),
-			KeyUsage:              x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign | x509.KeyUsageCRLSign,
+			KeyUsage:              x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
 			ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
 			BasicConstraintsValid: true,
 			SubjectKeyId:          intSubjectKeyId[:],
 			AuthorityKeyId:        lastIssuer.SubjectKeyId,
 			SignatureAlgorithm:    signatureAlgorithm,
-			IsCA:                  false,
+			MaxPathLenZero:        true,
+			IsCA:                  true,
 		}
 
 		intCertBytes, err := x509.CreateCertificate(rand.Reader, intTpl, lastIssuer, intPubKey, lastSigner)
