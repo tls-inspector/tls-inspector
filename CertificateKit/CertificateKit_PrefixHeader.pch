@@ -9,6 +9,7 @@
 #define PError(format, ...) [Console writeError:[NSString stringWithFormat:(format), ##__VA_ARGS__]]
 
 #define IS_EXTENSION ([NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.ecnepsnai.Certificate-Inspector.Inspect-Website"])
+#define IS_XCODE_TEST ([[NSProcessInfo processInfo] environment][@"XCTestConfigurationFilePath"] != nil)
 
 #define MAKE_ERROR(ECODE, EDESCRIPTION) [NSError errorWithDomain:@"com.tlsinspector.CertificateKit" code:ECODE userInfo:@{NSLocalizedDescriptionKey: EDESCRIPTION}]
 

@@ -23,13 +23,15 @@
 #import "CKHTTPHeaders.h"
 #import "NSData+ByteAtIndex.h"
 
+#define HTTP_MAX_HEADER_SIZE 102400 // 100KiB - same as libcurl
+
 @implementation CKHTTPClient
 
 + (NSData *) requestForHost:(NSString *)host {
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString * version = infoDictionary[@"CFBundleShortVersionString"];
     NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
-    NSString * request = [NSString stringWithFormat:@"GET / HTTP/1.1\r\nHost: %@\r\nUser-Agent: %@\r\n\r\n", host, userAgent];
+    NSString * request = [NSString stringWithFormat:@"GET / HTTP/1.1\r\nHost: %@\r\nUser-Agent: %@\r\nAccept: */*\r\n", host, userAgent];
     return [request dataUsingEncoding:NSASCIIStringEncoding];
 }
 
@@ -58,9 +60,10 @@
             [headerData appendData:[headerBuf subdataWithRange:NSMakeRange(0, headersEndIdx)]];
             CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
             CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:statusCode.unsignedIntegerValue headers:headers];
+            PDebug(@"Fetched %lu headers from HTTP server", headers.allHeaders.count);
             completed(response);
             return;
-        } else if (headerData.length+headerBuf.length > 102400) {
+        } else if (headerData.length+headerBuf.length > HTTP_MAX_HEADER_SIZE) {
             PError(@"HTTP header data exceeded maximum size");
             completed(nil);
             return;
@@ -90,7 +93,7 @@
         NSData * statusCodeBytes = [data subdataWithRange:NSMakeRange(9, 3)];
         int statusCode = atoi(statusCodeBytes.bytes);
         if (statusCode < 100 || statusCode > 599) {
-            PDebug(@"Unknown HTTP response from server");
+            PError(@"Unknown HTTP status code %i", statusCode);
             completed(nil);
             return;
         }
@@ -104,33 +107,37 @@
     char responseGreetingB[12];
     int read = BIO_read(bio, &responseGreetingB, 12);
     if (read < 12) {
+        PDebug(@"Unknown HTTP response from server");
         return nil;
     }
 
     NSData * responseGreeting = [NSData dataWithBytes:responseGreetingB length:read];
     NSData * httpVersion = [responseGreeting subdataWithRange:NSMakeRange(0, 8)];
     if (![httpVersion isEqualToData:[@"HTTP/1.1" dataUsingEncoding:NSUTF8StringEncoding]] && ![httpVersion isEqualToData:[@"http/1.1" dataUsingEncoding:NSUTF8StringEncoding]]) {
+        PDebug(@"Unknown HTTP response from server");
         return nil;
     }
 
     NSData * statusCodeBytes = [responseGreeting subdataWithRange:NSMakeRange(9, 3)];
     int statusCode = atoi(statusCodeBytes.bytes);
     if (statusCode < 100 || statusCode > 599) {
+        PError(@"Unknown HTTP status code %i", statusCode);
         return nil;
     }
 
     NSMutableData * headerData = [NSMutableData new];
-    char headerBuf[102400]; // 100KiB
+    char headerBuf[HTTP_MAX_HEADER_SIZE];
     bool hasAllHeaders = NO;
     int headersEndIdx = -1;
-    int totalRead = 0;
+    size_t totalRead = 0;
     while (!hasAllHeaders) {
-        read = BIO_read(bio, headerBuf, 102400);
+        read = BIO_read(bio, headerBuf, HTTP_MAX_HEADER_SIZE);
         if (read <= 0) {
             return nil;
         }
         totalRead += read;
-        if (totalRead >= 102400) {
+        if (totalRead >= HTTP_MAX_HEADER_SIZE) {
+            PError(@"HTTP header data exceeded maximum size");
             return nil;
         }
 
@@ -151,7 +158,7 @@
 
     CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
     CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:(NSUInteger)statusCode headers:headers];
-
+    PDebug(@"Fetched %lu headers from HTTP server", headers.allHeaders.count);
     return response;
 }
 
@@ -159,29 +166,38 @@
     char responseGreetingB[12];
     NSInteger read = [stream read:(unsigned char *)&responseGreetingB maxLength:12];
     if (read < 12) {
+        PDebug(@"Unknown HTTP response from server");
         return nil;
     }
 
     NSData * responseGreeting = [NSData dataWithBytes:responseGreetingB length:read];
     NSData * httpVersion = [responseGreeting subdataWithRange:NSMakeRange(0, 8)];
     if (![httpVersion isEqualToData:[@"HTTP/1.1" dataUsingEncoding:NSUTF8StringEncoding]] && ![httpVersion isEqualToData:[@"http/1.1" dataUsingEncoding:NSUTF8StringEncoding]]) {
+        PDebug(@"Unknown HTTP response from server");
         return nil;
     }
 
     NSData * statusCodeBytes = [responseGreeting subdataWithRange:NSMakeRange(9, 3)];
     int statusCode = atoi(statusCodeBytes.bytes);
     if (statusCode < 100 || statusCode > 599) {
+        PError(@"Unknown HTTP status code %i", statusCode);
         return nil;
     }
 
     NSMutableData * headerData = [NSMutableData new];
-    char headerBuf[102400]; // 100KiB
+    char headerBuf[HTTP_MAX_HEADER_SIZE];
     bool hasAllHeaders = NO;
     int headersEndIdx = -1;
+    size_t totalRead = 0;
     while (!hasAllHeaders) {
-        read = [stream read:(unsigned char *)&headerBuf maxLength:102400];
+        read = [stream read:(unsigned char *)&headerBuf maxLength:HTTP_MAX_HEADER_SIZE];
         if (read <= 0) {
             return 0;
+        }
+        totalRead += read;
+        if (totalRead >= HTTP_MAX_HEADER_SIZE) {
+            PError(@"HTTP header data exceeded maximum size");
+            return nil;
         }
 
         for (int i = 0; i < read-3;) {
@@ -201,7 +217,7 @@
 
     CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
     CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:(NSUInteger)statusCode headers:headers];
-
+    PDebug(@"Fetched %lu headers from HTTP server", headers.allHeaders.count);
     return response;
 }
 

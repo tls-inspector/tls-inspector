@@ -46,7 +46,6 @@
 
 - (void) executeOn:(dispatch_queue_t)queue completed:(void (^)(CKInspectResponse *, NSError *))completed {
     dispatch_async(queue, ^{
-
         if (self.internalParameters.ipAddress == nil || self.internalParameters.ipAddress.length == 0) {
             CKResolvedAddress * resovledAddress;
             NSError * resolveError;
