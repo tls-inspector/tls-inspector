@@ -41,10 +41,6 @@
 
 - (void) performTaskWithParameters:(CKInspectParameters *)parameters {}
 
-- (void)extracted:(nw_connection_t)connection connectionComplete:(void (^)(CKHTTPResponse *))connectionComplete nw_dispatch_queue:(dispatch_queue_t)nw_dispatch_queue {
-    [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:connectionComplete];
-}
-
 - (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
     uint64_t startTime = mach_absolute_time();
     PDebug(@"Getting certificate chain with NetworkFramework");
@@ -160,26 +156,6 @@
 
     nw_connection_t connection = nw_connection_create(endpoint, nwparameters);
 
-    void (^connectionComplete)(CKHTTPResponse *) = ^void(CKHTTPResponse * response) {
-        completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:[CKHTTPServerInfo fromHTTPResponse:response]], nil);
-
-        uint64_t endTime = mach_absolute_time();
-        if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
-            uint64_t elapsedTime = endTime - startTime;
-            static double ticksToNanoseconds = 0.0;
-            if (0.0 == ticksToNanoseconds) {
-                mach_timebase_info_data_t timebase;
-                mach_timebase_info(&timebase);
-                ticksToNanoseconds = (double)timebase.numer / timebase.denom;
-            }
-            double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
-            PDebug(@"NetworkFramework getter collected certificate information in %fns", elapsedTimeInNanoseconds);
-        }
-
-        nw_connection_cancel(connection);
-        PDebug(@"Cancelling connection - goodbye!");
-    };
-
     nw_connection_set_queue(connection, nw_dispatch_queue);
     nw_connection_set_state_changed_handler(connection, ^(nw_connection_state_t state, nw_error_t error) {
         switch (state) {
@@ -218,7 +194,29 @@
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 PDebug(@"NetworkFramework getter successful");
                 PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.hostAddress, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
-                [self extracted:connection connectionComplete:connectionComplete nw_dispatch_queue:nw_dispatch_queue];
+                [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:^(CKHTTPResponse * response) {
+                    CKHTTPServerInfo * serverInfo;
+                    if (response != nil) {
+                        serverInfo = [CKHTTPServerInfo fromHTTPResponse:response];
+                    }
+                    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:serverInfo], nil);
+
+                    uint64_t endTime = mach_absolute_time();
+                    if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
+                        uint64_t elapsedTime = endTime - startTime;
+                        static double ticksToNanoseconds = 0.0;
+                        if (0.0 == ticksToNanoseconds) {
+                            mach_timebase_info_data_t timebase;
+                            mach_timebase_info(&timebase);
+                            ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+                        }
+                        double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+                        PDebug(@"NetworkFramework getter collected certificate information in %fns", elapsedTimeInNanoseconds);
+                    }
+
+                    nw_connection_cancel(connection);
+                    PDebug(@"Cancelling connection - goodbye!");
+                }];
                 break;
             }
             case nw_connection_state_failed: {
@@ -249,7 +247,9 @@
     }];
 
     nw_connection_send(connection, data, NW_CONNECTION_DEFAULT_MESSAGE_CONTEXT, false, ^(nw_error_t error) {
-        //
+        if (error != nil) {
+            PError(@"Error writing HTTP request: %@", error.description);
+        }
     });
 }
 

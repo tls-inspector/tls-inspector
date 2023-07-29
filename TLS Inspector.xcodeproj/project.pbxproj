@@ -39,6 +39,8 @@
 		3C3C9537297E04BD0084B7D9 /* CryptoEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */; };
 		3C3DE1FE29B823A90025DA94 /* NSString+ASN1OctetString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */; };
 		3C3DE1FF29B823A90025DA94 /* NSString+ASN1OctetString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */; };
+		3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */; };
+		3C4572302A74ADAA009EF7BB /* SecureTransportInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45722F2A74ADAA009EF7BB /* SecureTransportInspectorTests.m */; };
 		3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C45AD5823D831A900E541EC /* CKCurlCommon.h */; };
 		3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45AD5923D831A900E541EC /* CKCurlCommon.m */; platformFilter = ios; };
 		3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */; };
@@ -199,13 +201,13 @@
 		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
 		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
 		3CE5EE8C29E21CE7009F7026 /* ct_log_list.min.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */; };
-		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */; };
 		3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A693261BBC5900460B7F /* CKInspectParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A694261BBC5900460B7F /* CKInspectParameters.m */; };
 		3CF0A69E261BBCA300460B7F /* CKTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A69D261BBCA300460B7F /* CKTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */; };
-		3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
+		3CF397441EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */; };
+		3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; platformFilter = ios; };
 		3CF6772A2046335D00A3B4C1 /* CKCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677282046335D00A3B4C1 /* CKCRLManager.h */; };
 		3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF677292046335D00A3B4C1 /* CKCRLManager.m */; platformFilter = ios; };
 		3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -312,6 +314,9 @@
 		3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoEngineTest.swift; sourceTree = "<group>"; };
 		3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+ASN1OctetString.h"; sourceTree = "<group>"; };
 		3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+ASN1OctetString.m"; sourceTree = "<group>"; };
+		3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKitTests.h; sourceTree = "<group>"; };
+		3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenSSLInspectorTests.m; sourceTree = "<group>"; };
+		3C45722F2A74ADAA009EF7BB /* SecureTransportInspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecureTransportInspectorTests.m; sourceTree = "<group>"; };
 		3C45AD5823D831A900E541EC /* CKCurlCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCurlCommon.h; sourceTree = "<group>"; };
 		3C45AD5923D831A900E541EC /* CKCurlCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCurlCommon.m; sourceTree = "<group>"; };
 		3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+SplitFirst.h"; sourceTree = "<group>"; };
@@ -444,7 +449,7 @@
 		3CF0A694261BBC5900460B7F /* CKInspectParameters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectParameters.m; sourceTree = "<group>"; };
 		3CF0A69D261BBCA300460B7F /* CKTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTypes.h; sourceTree = "<group>"; };
 		3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKitTests.m; sourceTree = "<group>"; };
+		3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkFrameworkInspectorTests.m; sourceTree = "<group>"; };
 		3CF397451EB50E0900E8DBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CF677282046335D00A3B4C1 /* CKCRLManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCRLManager.h; sourceTree = "<group>"; };
 		3CF677292046335D00A3B4C1 /* CKCRLManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCRLManager.m; sourceTree = "<group>"; };
@@ -795,8 +800,11 @@
 		3CF397421EB50E0900E8DBF4 /* CertificateKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				3CF397431EB50E0900E8DBF4 /* CertificateKitTests.m */,
+				3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */,
 				3CF397451EB50E0900E8DBF4 /* Info.plist */,
+				3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */,
+				3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */,
+				3C45722F2A74ADAA009EF7BB /* SecureTransportInspectorTests.m */,
 			);
 			path = CertificateKitTests;
 			sourceTree = "<group>";
@@ -1465,7 +1473,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CF397441EB50E0900E8DBF4 /* CertificateKitTests.m in Sources */,
+				3C4572302A74ADAA009EF7BB /* SecureTransportInspectorTests.m in Sources */,
+				3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */,
+				3CF397441EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1820,6 +1830,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
 			};
 			name = Debug;
@@ -1846,6 +1860,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
 			};
 			name = Release;

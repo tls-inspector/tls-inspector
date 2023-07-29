@@ -27,7 +27,7 @@
 @interface CKInspectParameters ()
 
 @property (strong, nonatomic, nullable) CKResolvedAddress * resolvedAddress;
-@property (strong, nonatomic, nullable) NSString * socketAddress;
+@property (strong, nonatomic, nullable, readonly) NSString * socketAddress;
 
 @end
 
@@ -45,6 +45,12 @@
 
 + (CKInspectParameters *) fromQuery:(NSString *)query {
     CKInspectParameters * parameters = [CKInspectParameters new];
+    parameters.queryServerInfo = true;
+    parameters.checkOCSP = true;
+    parameters.checkCRL = false;
+    parameters.cryptoEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK;
+    parameters.ipVersion = IP_VERSION_AUTOMATIC;
+    parameters.ciphers = [CertificateKit defaultCiphersuite];
 
     CKRegex * protocolPattern = [CKRegex compile:@"^[a-z]+://"];
     CKRegex * wrappedIPv6AddressPattern = [CKRegex compile:@"\\[[0-9a-f\\:]+\\]"];
@@ -247,6 +253,13 @@
 
 - (CKInspectParameters *) copy {
     return [CKInspectParameters fromDictionary:[self dictionaryValue]];
+}
+
+- (NSString *) socketAddress {
+    if (self.resolvedAddress.version == IP_VERSION_IPV6) {
+        return [NSString stringWithFormat:@"[%@]:%i", self.ipAddress, self.port];
+    }
+    return [NSString stringWithFormat:@"%@:%i", self.ipAddress, self.port];
 }
 
 @end

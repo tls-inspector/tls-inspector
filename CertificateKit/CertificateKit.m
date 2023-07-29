@@ -30,4 +30,8 @@
     return usingProxy;
 }
 
++ (NSString *) defaultCiphersuite {
+    return @"HIGH:!aNULL:!MD5:!RC4";
+}
+
 @end

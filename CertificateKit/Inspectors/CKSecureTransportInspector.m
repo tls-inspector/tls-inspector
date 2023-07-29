@@ -60,7 +60,7 @@
 - (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
     executeCompleted = completed;
     startTime = mach_absolute_time();
-    PDebug(@"Getting certificate chain with SecureTransport");
+    PDebug(@"Getting certificate chain with SecureTransport %@:%d", parameters.ipAddress, parameters.port);
 
     self.parameters = parameters;
 
@@ -72,8 +72,8 @@
     inputStream.delegate = self;
     outputStream.delegate = self;
 
-    [outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [inputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 
     NSDictionary *settings = @{
         (__bridge NSString *)kCFStreamSSLPeerName: parameters.hostAddress,
@@ -89,15 +89,22 @@
 - (void) stream:(NSStream *)stream handleEvent:(NSStreamEvent)event {
     switch (event) {
         case NSStreamEventOpenCompleted: {
+            PError(@"stream event NSStreamEventOpenCompleted");
             break;
         }
         case NSStreamEventHasSpaceAvailable: {
+            PError(@"stream event NSStreamEventHasSpaceAvailable");
             [self performSelectorInBackground:@selector(streamHasSpaceAvailable:) withObject:stream];
             break;
         }
 
-        case NSStreamEventHasBytesAvailable:
+        case NSStreamEventHasBytesAvailable: {
+            PError(@"stream event NSStreamEventHasBytesAvailable");
+            break;
+        }
+
         case NSStreamEventNone: {
+            PError(@"stream event NSStreamEventNone");
             break;
         }
 
@@ -162,12 +169,15 @@
     CFRelease(context);
     free(ciphers);
 
+    dispatch_queue_t httpQueue = dispatch_queue_create("com.ecnepsnai.CertificateKit.CKSecureTransportInspector.httpQueue", NULL);
     CKHTTPResponse * __block httpResponse;
-    dispatch_block_wait(^{
+    dispatch_block_t getHttpResponse = dispatch_block_create(0, ^{
         NSData * httpRequest = [CKHTTPClient requestForHost:self.parameters.hostAddress];
         [self->outputStream write:httpRequest.bytes maxLength:httpRequest.length];
         httpResponse = [CKHTTPClient responseFromStream:self->inputStream];
-    }, 5*NSEC_PER_SEC);
+    });
+    dispatch_barrier_async(httpQueue, getHttpResponse);
+    dispatch_block_wait(getHttpResponse, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)));
 
     [inputStream close];
     [outputStream close];

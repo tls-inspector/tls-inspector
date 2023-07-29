@@ -29,6 +29,7 @@
 
 @interface CKInspectRequest ()
 
+@property (strong, nonatomic) NSObject<CKInspector> * inspector;
 @property (strong, nonatomic, readwrite) CKInspectParameters * parameters;
 @property (strong, nonatomic) CKInspectParameters * internalParameters;
 
@@ -71,17 +72,15 @@
 
         PDebug(@"Starting getter for: %@", self.internalParameters.description);
 
-        NSObject<CKInspector> * inspector;
-
         switch (self.internalParameters.cryptoEngine) {
             case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
-                inspector = [CKNetworkFrameworkInspector new];
+                self.inspector = [CKNetworkFrameworkInspector new];
                 break;
             case CRYPTO_ENGINE_SECURE_TRANSPORT:
-                inspector = [CKSecureTransportInspector new];
+                self.inspector = [CKSecureTransportInspector new];
                 break;
             case CRYPTO_ENGINE_OPENSSL:
-                inspector = [CKOpenSSLInspector new];
+                self.inspector = [CKOpenSSLInspector new];
                 break;
             default:
                 PError(@"Unknown crypto engine %u", (unsigned int)self.internalParameters.cryptoEngine);
@@ -89,7 +88,7 @@
                 return;
         }
 
-        [inspector executeWithParameters:self.internalParameters completed:^(CKInspectResponse * response, NSError * error) {
+        [self.inspector executeWithParameters:self.internalParameters completed:^(CKInspectResponse * response, NSError * error) {
             completed(response, error);
         }];
     });

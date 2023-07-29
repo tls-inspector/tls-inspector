@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CKInspectParameters (Private)
 
 @property (strong, nonatomic, nullable) CKResolvedAddress * resolvedAddress;
-@property (strong, nonatomic, nullable) NSString * socketAddress;
+@property (strong, nonatomic, nullable, readonly) NSString * socketAddress;
 
 @end
 

@@ -190,12 +190,19 @@ static CFMutableStringRef keyLog = NULL;
     self.chain.remoteAddress = remoteAddr;
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
+    dispatch_queue_t httpQueue = dispatch_queue_create("com.ecnepsnai.CertificateKit.CKOpenSSLInspector.httpQueue", NULL);
     CKHTTPResponse * __block httpResponse;
-    dispatch_block_wait(^{
+    dispatch_block_t getHttpResponse = dispatch_block_create(0, ^{
         NSData * httpRequest = [CKHTTPClient requestForHost:parameters.hostAddress];
         BIO_write(conn, httpRequest.bytes, (int)httpRequest.length);
         httpResponse = [CKHTTPClient responseFromBIO:conn];
-    }, 5*NSEC_PER_SEC);
+    });
+    dispatch_barrier_async(httpQueue, getHttpResponse);
+    dispatch_block_wait(getHttpResponse, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)));
+    CKHTTPServerInfo * httpServerInfo;
+    if (httpResponse != nil) {
+        httpServerInfo = [CKHTTPServerInfo fromHTTPResponse:httpResponse];
+    }
 
     const STACK_OF(SCT) * sct_list = SSL_get0_peer_scts(ssl);
     int numberOfSct = sk_SCT_num(sct_list);
@@ -316,7 +323,7 @@ static CFMutableStringRef keyLog = NULL;
 
     PDebug(@"Certificate chain: %@", [self.chain description]);
     PDebug(@"Finished getting certificate chain");
-    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:[CKHTTPServerInfo fromHTTPResponse:httpResponse]], nil);
+    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:httpServerInfo], nil);
 
     uint64_t endTime = mach_absolute_time();
     if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {

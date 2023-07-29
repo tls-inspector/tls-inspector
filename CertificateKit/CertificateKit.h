@@ -79,6 +79,11 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
 + (NSString * _Nonnull) libcurlVersion;
 
 /**
+ The default ciphersuite for OpenSSL
+ */
++ (NSString * _Nonnull) defaultCiphersuite;
+
+/**
  Is a HTTP proxy configured on the device
  */
 + (BOOL) isProxyConfigured;

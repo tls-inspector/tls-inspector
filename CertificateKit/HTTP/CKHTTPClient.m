@@ -33,52 +33,70 @@
     return [request dataUsingEncoding:NSASCIIStringEncoding];
 }
 
-+ (void) responseFromNetworkConnection:(nw_connection_t)connection completed:(void (^)(CKHTTPResponse *))completed {
-    NSNumber * __block statusCodeN;
-
-    nw_connection_receive(connection, 12, 12, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
-        NSData * httpVersion = [(NSData*)content subdataWithRange:NSMakeRange(0, 8)];
-        if (![httpVersion isEqualToData:[@"HTTP/1.1" dataUsingEncoding:NSUTF8StringEncoding]] && ![httpVersion isEqualToData:[@"http/1.1" dataUsingEncoding:NSUTF8StringEncoding]]) {
-            return;
-        }
-
-        NSData * statusCodeBytes = [(NSData*)content subdataWithRange:NSMakeRange(9, 3)];
-        int statusCode = atoi(statusCodeBytes.bytes);
-        if (statusCode < 100 || statusCode > 599) {
-            return;
-        }
-        statusCodeN = [NSNumber numberWithInt:statusCode];
-    });
-
-    NSMutableData * __block headerData = [NSMutableData new];
-
-    nw_connection_receive(connection, 1, 102400, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
++ (void) connectionReadLoop:(nw_connection_t)connection statusCode:(NSNumber *)statusCode mutableData:(NSMutableData *)headerData completed:(void (^)(CKHTTPResponse *))completed {
+    nw_connection_receive(connection, 1, 1024, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
         bool hasAllHeaders = NO;
         int headersEndIdx = -1;
-        while (!hasAllHeaders) {
-            NSData * headerBuf = (NSData*)content;
-            if (headerBuf == nil || headerBuf.length == 0) {
-                return;
-            }
-
-            for (int i = 0; i < headerBuf.length-3;) {
-                if ([headerBuf byteAtIndex:i] == '\r' &&
-                    [headerBuf byteAtIndex:i+1] == '\n' &&
-                    [headerBuf byteAtIndex:i+2] == '\r' &&
-                    [headerBuf byteAtIndex:i+3] == '\n') {
-                    headersEndIdx = i;
-                    hasAllHeaders = YES;
-                    break;
-                }
-                i++;
-            }
-
-            [headerData appendData:headerBuf];
+        NSData * headerBuf = (NSData*)content;
+        if (headerBuf == nil || headerBuf.length == 0) {
+            return;
         }
 
-        CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
-        CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:statusCodeN.unsignedIntegerValue headers:headers];
-        completed(response);
+        for (int i = 0; i < headerBuf.length-3;) {
+            if ([headerBuf byteAtIndex:i] == '\r' &&
+                [headerBuf byteAtIndex:i+1] == '\n' &&
+                [headerBuf byteAtIndex:i+2] == '\r' &&
+                [headerBuf byteAtIndex:i+3] == '\n') {
+                headersEndIdx = i;
+                hasAllHeaders = YES;
+                break;
+            }
+            i++;
+        }
+
+        if (hasAllHeaders) {
+            [headerData appendData:[headerBuf subdataWithRange:NSMakeRange(0, headersEndIdx)]];
+            CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
+            CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:statusCode.unsignedIntegerValue headers:headers];
+            completed(response);
+            return;
+        } else if (headerData.length+headerBuf.length > 102400) {
+            PError(@"HTTP header data exceeded maximum size");
+            completed(nil);
+            return;
+        } else {
+            [headerData appendData:headerBuf];
+            [CKHTTPClient connectionReadLoop:connection statusCode:statusCode mutableData:headerData completed:completed];
+        }
+    });
+}
+
++ (void) responseFromNetworkConnection:(nw_connection_t)connection completed:(void (^)(CKHTTPResponse *))completed {
+    nw_connection_receive(connection, 12, 12, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
+        NSData * data = (NSData*)content;
+        if (data.length < 8) {
+            PDebug(@"Unknown HTTP response from server");
+            completed(nil);
+            return;
+        }
+
+        NSData * httpVersion = [data subdataWithRange:NSMakeRange(0, 8)];
+        if (![httpVersion isEqualToData:[@"HTTP/1.1" dataUsingEncoding:NSUTF8StringEncoding]] && ![httpVersion isEqualToData:[@"http/1.1" dataUsingEncoding:NSUTF8StringEncoding]]) {
+            PDebug(@"Unknown HTTP response from server");
+            completed(nil);
+            return;
+        }
+
+        NSData * statusCodeBytes = [data subdataWithRange:NSMakeRange(9, 3)];
+        int statusCode = atoi(statusCodeBytes.bytes);
+        if (statusCode < 100 || statusCode > 599) {
+            PDebug(@"Unknown HTTP response from server");
+            completed(nil);
+            return;
+        }
+
+        NSMutableData * headerData = [NSMutableData new];
+        [CKHTTPClient connectionReadLoop:connection statusCode:[NSNumber numberWithInt:statusCode] mutableData:headerData completed:completed];
     });
 }
 
@@ -105,9 +123,14 @@
     char headerBuf[102400]; // 100KiB
     bool hasAllHeaders = NO;
     int headersEndIdx = -1;
+    int totalRead = 0;
     while (!hasAllHeaders) {
         read = BIO_read(bio, headerBuf, 102400);
         if (read <= 0) {
+            return nil;
+        }
+        totalRead += read;
+        if (totalRead >= 102400) {
             return nil;
         }
 
