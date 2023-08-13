@@ -21,6 +21,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CKCertificate.h"
+#import "CKIPAddress.h"
 
 /**
  A chain of CKCertificate objects and metadata about the chain
@@ -99,7 +100,7 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 /**
  The remote address for the server
  */
-@property (strong, nonatomic, nonnull) NSString * remoteAddress;
+@property (strong, nonatomic, nonnull) CKIPAddress * remoteAddress;
 
 /**
  The array of certificates belonging to the chain

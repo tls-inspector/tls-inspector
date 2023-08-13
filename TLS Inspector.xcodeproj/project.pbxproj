@@ -223,6 +223,9 @@
 		3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */; };
 		3CF9CC9623A4804600535173 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9523A4804600535173 /* DomainList.plist */; };
 		3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9823A482F500535173 /* UIObject+Lang.swift */; };
+		9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AFD2BEB2A883CEA00FFF40F /* CKIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */; };
+		9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */; };
 		A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */; platformFilter = ios; };
 /* End PBXBuildFile section */
@@ -473,6 +476,9 @@
 		3CF9CC9523A4804600535173 /* DomainList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DomainList.plist; sourceTree = "<group>"; };
 		3CF9CC9823A482F500535173 /* UIObject+Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIObject+Lang.swift"; sourceTree = "<group>"; };
 		3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TLS Inspector.entitlements"; sourceTree = "<group>"; };
+		9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKIPAddress.h; sourceTree = "<group>"; };
+		9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddress.m; sourceTree = "<group>"; };
+		9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddressTests.m; sourceTree = "<group>"; };
 		A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificatePublicKey.h; sourceTree = "<group>"; };
 		A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificatePublicKey.m; sourceTree = "<group>"; };
 		A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -624,6 +630,8 @@
 				3CD6DE462A662C37004A54F5 /* CKInspectRequest.m */,
 				3CD6DE492A662D88004A54F5 /* CKInspectResponse.h */,
 				3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */,
+				9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */,
+				9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */,
 				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
 				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
 				3C66083D2A735171008B58E8 /* CKLogging+Private.h */,
@@ -819,6 +827,7 @@
 			isa = PBXGroup;
 			children = (
 				3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */,
+				9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */,
 				3CF397451EB50E0900E8DBF4 /* Info.plist */,
 				3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */,
 				3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */,
@@ -960,6 +969,7 @@
 				3C4E23772A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h in Headers */,
 				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
 				3CD6DE472A662C37004A54F5 /* CKInspectRequest.h in Headers */,
+				9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */,
 				3CB94044225036FC0055C067 /* CKSecureTransportInspector.h in Headers */,
 				3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */,
 				3C84CA002A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h in Headers */,
@@ -1296,7 +1306,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "python3 ./lang.py\n\nmkdir -p \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings\"\ncp -v \"${PROJECT_DIR}/TLS Inspector/Localization/Strings/en.plist\" \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\"\ncp -v \"${PROJECT_DIR}/TLS Inspector/Localization/Strings/de.plist\" \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\"\n";
+			shellScript = "mkdir -p \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings\"\ncp -v \"${PROJECT_DIR}/TLS Inspector/Localization/Strings/en.plist\" \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\"\ncp -v \"${PROJECT_DIR}/TLS Inspector/Localization/Strings/de.plist\" \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\"\n";
 		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1375,6 +1385,7 @@
 				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
 				3C84C9F82A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m in Sources */,
 				3CB94045225036FC0055C067 /* CKOpenSSLInspector.m in Sources */,
+				9AFD2BEB2A883CEA00FFF40F /* CKIPAddress.m in Sources */,
 				3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
@@ -1498,6 +1509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C4572302A74ADAA009EF7BB /* SecureTransportInspectorTests.m in Sources */,
+				9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */,
 				3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */,
 				3CF397441EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m in Sources */,
 			);

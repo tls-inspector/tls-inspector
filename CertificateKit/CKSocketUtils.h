@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Get the servers (peer) IP address in human-readable format for the given socket
 /// @param socket The sockets file descriptor
-+ (NSString * _Nullable) remoteAddressForSocket:(int)socket;
++ (CKIPAddress * _Nullable) remoteAddressForSocket:(int)socket;
 
 
 /// Get the servers (peer) IP address in human-readable format for the given endpoint
 /// @param endpoint The remote endpoint
-+ (NSString * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint API_AVAILABLE(ios(12.0));
++ (CKIPAddress * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint API_AVAILABLE(ios(12.0));
 
 @end
 

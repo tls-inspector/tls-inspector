@@ -156,7 +156,7 @@ static CFMutableStringRef keyLog = NULL;
         return;
     }
 
-    NSString * remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
+    CKIPAddress * remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
     if (remoteAddr == nil) {
         completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"No Peer Address"));
         SSL_CLEANUP

@@ -166,12 +166,12 @@
         [certs setObject:[CKCertificate fromSecCertificateRef:certificateRef] atIndexedSubscript:i];
     }
 
-    NSString * remoteAddr;
+    CKIPAddress * remoteAddr;
     if (IS_XCODE_TEST) {
         // For some reason we can't get the socket handle from a stream while running in a Xcode test.
         // Because the SecureTransport inspector is already ancient and legacy as-is, I'm not that
         // worried about not testing this specific part of the code
-        remoteAddr = @"";
+        remoteAddr = nil;
     } else {
         CFDataRef handleData = (CFDataRef)CFReadStreamCopyProperty(readStream, kCFStreamPropertySocketNativeHandle);
         if (handleData == nil) {

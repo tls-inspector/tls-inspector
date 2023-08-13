@@ -62,7 +62,7 @@ class CertificateChainTableViewController: UITableViewController {
             } else if index == 1 {
                 self.openURL("https://www.ssllabs.com/ssltest/analyze.html?d=" + chain.domain + "&hideResults=on")
             } else if index == 2 {
-                self.openURL("https://www.shodan.io/host/" + chain.remoteAddress)
+                self.openURL("https://www.shodan.io/host/" + chain.remoteAddress.full)
             } else if index == 3 {
                 self.openURL("https://crt.sh/?q=" + chain.domain)
             }
@@ -178,7 +178,7 @@ class CertificateChainTableViewController: UITableViewController {
                                                                     value: chain.protocol,
                                                                     useFixedWidthFont: false))
         connectionSection.cells.append(TitleValueTableViewCell.Cell(title: lang(key: "Remote Address"),
-                                                                    value: chain.remoteAddress,
+                                                                    value: chain.remoteAddress.address,
                                                                     useFixedWidthFont: true))
 
         if chain.keyLog != nil {

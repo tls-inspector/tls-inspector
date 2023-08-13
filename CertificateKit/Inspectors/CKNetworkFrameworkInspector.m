@@ -109,8 +109,6 @@
                 self.chain.trusted = CKCertificateChainTrustStatusTrusted;
             } else if (trustStatus == kSecTrustResultProceed) {
                 self.chain.trusted = CKCertificateChainTrustStatusLocallyTrusted;
-            } else {
-                [self.chain determineTrustFailureReason];
             }
 
             [self.chain checkAuthorityTrust];
@@ -193,6 +191,9 @@
                 }
 
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
+                if (self.chain.trusted == 0) {
+                    [self.chain determineTrustFailureReason];
+                }
                 PDebug(@"NetworkFramework getter successful");
                 PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.hostAddress, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
                 [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:^(CKHTTPResponse * response) {

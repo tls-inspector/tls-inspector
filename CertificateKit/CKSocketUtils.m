@@ -24,7 +24,7 @@
 
 @implementation CKSocketUtils
 
-+ (NSString *) remoteAddressForSocket:(int)socket {
++ (CKIPAddress *) remoteAddressForSocket:(int)socket {
     struct sockaddr_storage addr;
     socklen_t addr_len = sizeof(addr);
     if (getpeername(socket, (struct sockaddr *)&addr, &addr_len) != 0) {
@@ -46,10 +46,10 @@
         return nil;
     }
 
-    return remoteAddressString;
+    return [CKIPAddress fromString:remoteAddressString];
 }
 
-+ (NSString * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint {
++ (CKIPAddress * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint {
     struct sockaddr_storage * addr = (struct sockaddr_storage *)nw_endpoint_get_address(endpoint);
 
     NSString * remoteAddressString;
@@ -66,7 +66,7 @@
         return nil;
     }
 
-    return remoteAddressString;
+    return [CKIPAddress fromString:remoteAddressString];
 }
 
 @end

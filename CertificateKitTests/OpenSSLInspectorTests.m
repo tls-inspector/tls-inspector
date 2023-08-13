@@ -74,6 +74,62 @@
     }
 }
 
+- (void) testBareTLSIPv4 {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"127.0.0.1:8402"];
+    parameters.cryptoEngine = engine;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testBareTLS", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        XCTAssertTrue(response.httpServer == nil);
+        NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        XCTAssertTrue(certificates.count >= 2);
+        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
+        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
+        XCTStringEqual(response.certificateChain.remoteAddress.full, @"127.0.0.1");
+        if (certificates.count == 3) {
+            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+        }
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
+- (void) testBareTLSIPv6 {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"[0:0:0:0:0:0:0:1]:8402"];
+    parameters.cryptoEngine = engine;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testBareTLS", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        XCTAssertTrue(response.httpServer == nil);
+        NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        XCTAssertTrue(certificates.count >= 2);
+        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
+        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
+        XCTStringEqual(response.certificateChain.remoteAddress.full, @"0000:0000:0000:0000:0000:0000:0000:0001");
+        if (certificates.count == 3) {
+            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+        }
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
 - (void) testTooManyCerts {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8403"];
     parameters.cryptoEngine = engine;

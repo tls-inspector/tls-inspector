@@ -20,6 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKCertificateChain.h"
+#import <arpa/inet.h>
 
 @implementation CKCertificateChain
 
@@ -118,50 +119,62 @@
     BOOL match = NO;
     NSArray<NSString *> * domainComponents = [self.domain.lowercaseString componentsSeparatedByString:@"."];
     for (CKAlternateNameObject * name in self.server.alternateNames) {
-        if (name.type != AlternateNameTypeDNS) {
-            PWarn(@"Skipping non-DNS alternate name type: %lu = %@", (unsigned long)name.type, name.value);
-            continue;
-        }
+        if (name.type == AlternateNameTypeDNS) {
+            NSArray<NSString *> * nameComponents = [name.value.lowercaseString componentsSeparatedByString:@"."];
+            if (domainComponents.count != nameComponents.count) {
+                // Invalid
+                PWarn(@"Domain components does not match name components. domain='%@' name='%@'", self.domain.lowercaseString, name.value.lowercaseString);
+                continue;
+            }
 
-        NSArray<NSString *> * nameComponents = [name.value.lowercaseString componentsSeparatedByString:@"."];
-        if (domainComponents.count != nameComponents.count) {
-            // Invalid
-            PWarn(@"Domain components does not match name components. domain='%@' name='%@'", self.domain.lowercaseString, name.value.lowercaseString);
-            continue;
-        }
-
-        // SAN Rules:
-        //
-        // Only the first component of the SAN can be a wildcard
-        // Valid: *.google.com
-        // Invalid: mail.*.google.com
-        //
-        // Wildcards only match the same-level of the domain. I.E. *.google.com:
-        // Match: mail.google.com
-        // Match: calendar.google.com
-        // Doesn't match: beta.mail.google.com
-        BOOL hasWildcard = [nameComponents[0] isEqualToString:@"*"];
-        BOOL validComponents = YES;
-        for (int i = 0; i < nameComponents.count; i++) {
-            if (i == 0) {
-                if (![domainComponents[i] isEqualToString:nameComponents[i]] && !hasWildcard) {
-                    validComponents = NO;
-                    break;
-                }
-            } else {
-                if (![domainComponents[i] isEqualToString:nameComponents[i]]) {
-                    validComponents = NO;
-                    break;
+            // SAN Rules:
+            //
+            // Only the first component of the SAN can be a wildcard
+            // Valid: *.google.com
+            // Invalid: mail.*.google.com
+            //
+            // Wildcards only match the same-level of the domain. I.E. *.google.com:
+            // Match: mail.google.com
+            // Match: calendar.google.com
+            // Doesn't match: beta.mail.google.com
+            BOOL hasWildcard = [nameComponents[0] isEqualToString:@"*"];
+            BOOL validComponents = YES;
+            for (int i = 0; i < nameComponents.count; i++) {
+                if (i == 0) {
+                    if (![domainComponents[i] isEqualToString:nameComponents[i]] && !hasWildcard) {
+                        validComponents = NO;
+                        break;
+                    }
+                } else {
+                    if (![domainComponents[i] isEqualToString:nameComponents[i]]) {
+                        validComponents = NO;
+                        break;
+                    }
                 }
             }
-        }
-        if (validComponents) {
-            match = YES;
-            break;
+            if (validComponents) {
+                match = YES;
+                break;
+            }
+        } else if (name.type == AlternateNameTypeIP) {
+            // SAN rules don't require that IP addresses be in their fully-expanded form, (i.e. 127.1 is valid and should match 127.0.0.1)
+            CKIPAddress * nameValue = [CKIPAddress fromString:name.value];
+            if (nameValue == nil) {
+                PError(@"Invalid IP address value for IP SAN: '%@'", name.value);
+                continue;
+            }
+            if ([nameValue.full isEqualToString:self.remoteAddress.full]) {
+                PDebug(@"Found matching IP address SAN %@", nameValue.description);
+                match = YES;
+                break;
+            }
+        } else {
+            PWarn(@"Skipping unsupported alternate name type: %lu = %@", (unsigned long)name.type, name.value);
+            continue;
         }
     }
     if (!match) {
-        PWarn(@"Certificate: '%@' has no subject alternate names that match: '%@'", self.server.subject.commonNames, self.domain);
+        PWarn(@"Certificate: '%@' has no subject alternate names that match: '%@' or '%@'", self.server.subject.commonNames, self.domain, self.remoteAddress);
         self.trusted = CKCertificateChainTrustStatusWrongHost;
         return;
     }
