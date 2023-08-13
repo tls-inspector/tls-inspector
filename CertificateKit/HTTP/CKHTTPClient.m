@@ -31,7 +31,7 @@
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString * version = infoDictionary[@"CFBundleShortVersionString"];
     NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
-    NSString * request = [NSString stringWithFormat:@"GET / HTTP/1.1\r\nHost: %@\r\nUser-Agent: %@\r\nAccept: */*\r\n", host, userAgent];
+    NSString * request = [NSString stringWithFormat:@"GET / HTTP/1.1\r\nHost: %@\r\nUser-Agent: %@\r\nAccept: */*\r\n\r\n", host, userAgent];
     return [request dataUsingEncoding:NSASCIIStringEncoding];
 }
 
