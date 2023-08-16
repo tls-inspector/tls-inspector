@@ -26,12 +26,12 @@
 
 @interface CKLogging ()
 
+@property (strong, nonatomic) NSObject * lock;
 @property (strong, nonatomic) NSFileHandle * handle;
 
 @end
 
 static id _instance;
-static dispatch_queue_t queue;
 
 @implementation CKLogging
 
@@ -45,6 +45,7 @@ static dispatch_queue_t queue;
 - (id) init {
     if (_instance == nil) {
         _instance = [[CKLogging alloc] initWithLogFile:@"CertificateKit.log"];
+        self.lock = [NSObject new];
     }
     return _instance;
 }
@@ -54,7 +55,6 @@ static dispatch_queue_t queue;
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentsDirectory = [paths objectAtIndex:0];
     self.file = [documentsDirectory stringByAppendingPathComponent:file];
-    [self createQueue];
     [self open];
 #if DEBUG
     self.level = CKLoggingLevelDebug;
@@ -62,12 +62,6 @@ static dispatch_queue_t queue;
     self.level = CKLoggingLevelWarning;
 #endif
     return self;
-}
-
-- (void) createQueue {
-    if (!queue) {
-        queue = dispatch_queue_create("com.tlsinspector.CKCertificate.CKLogging", NULL);
-    }
 }
 
 - (void) open {
@@ -93,11 +87,11 @@ static dispatch_queue_t queue;
 }
 
 - (void) truncateLogs {
-    dispatch_async(queue, ^{
+    @synchronized (self.lock) {
         [self.handle closeFile];
         [[NSFileManager defaultManager] removeItemAtPath:self.file error:nil];
         [self open];
-    });
+    }
 }
 
 - (NSString *) stringForLevel:(CKLoggingLevel)level {
@@ -115,12 +109,12 @@ static dispatch_queue_t queue;
 
 - (void) write:(NSString *)string forLevel:(CKLoggingLevel)level {
     NSString * thread = [NSString stringWithFormat:@"%p", NSThread.currentThread];
-    dispatch_async(queue, ^{
+    @synchronized (self.lock) {
         NSString * writeString = [NSString stringWithFormat:@"[%@][%ld][%@] %@",
                                   [self stringForLevel:level], time(0), thread, string];
         [self.handle writeData:[writeString dataUsingEncoding:NSUTF8StringEncoding]];
         printf("%s", [writeString UTF8String]);
-    });
+    }
 }
 
 - (void) writeLine:(NSString *)string forLevel:(CKLoggingLevel)level {

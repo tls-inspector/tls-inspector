@@ -94,18 +94,20 @@
 - (void) stream:(NSStream *)stream handleEvent:(NSStreamEvent)event {
     switch (event) {
         case NSStreamEventOpenCompleted: {
-            PError(@"stream event NSStreamEventOpenCompleted");
+            PDebug(@"stream event NSStreamEventOpenCompleted");
             break;
         }
         case NSStreamEventHasSpaceAvailable: {
-            PError(@"stream event NSStreamEventHasSpaceAvailable");
+            PDebug(@"stream event NSStreamEventHasSpaceAvailable");
             [self streamHasSpaceAvailable:stream];
             self.didCollectCertificates = @YES;
             break;
         }
 
         case NSStreamEventHasBytesAvailable: {
-            PError(@"stream event NSStreamEventHasBytesAvailable");
+            PDebug(@"stream event NSStreamEventHasBytesAvailable");
+            [self streamHasSpaceAvailable:stream];
+            self.didCollectCertificates = @YES;
             break;
         }
 

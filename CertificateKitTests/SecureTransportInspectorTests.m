@@ -74,6 +74,8 @@
     }
 }
 
+// Note: testBareTLSIPv4 and v6 are intentionally skipped as socket address logic is broken within XCode tests for CFStreams
+
 - (void) testTooManyCerts {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8403"];
     parameters.cryptoEngine = engine;

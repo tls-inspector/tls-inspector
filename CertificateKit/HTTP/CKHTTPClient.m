@@ -109,14 +109,14 @@
     char responseGreetingB[12];
     int read = BIO_read(bio, &responseGreetingB, 12);
     if (read < 12) {
-        PDebug(@"Unknown HTTP response from server");
+        PDebug(@"Unknown HTTP response from server: Unexpected EOF");
         return nil;
     }
 
     NSData * responseGreeting = [NSData dataWithBytes:responseGreetingB length:read];
     NSData * httpVersion = [responseGreeting subdataWithRange:NSMakeRange(0, 8)];
     if (![httpVersion isEqualToData:[@"HTTP/1.1" dataUsingEncoding:NSUTF8StringEncoding]] && ![httpVersion isEqualToData:[@"http/1.1" dataUsingEncoding:NSUTF8StringEncoding]]) {
-        PDebug(@"Unknown HTTP response from server");
+        PDebug(@"Unknown HTTP response from server: Unrecognized or unsupported HTTP version");
         return nil;
     }
 

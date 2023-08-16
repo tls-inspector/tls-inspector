@@ -57,7 +57,7 @@ static X509 * certificateChain[CERTIFICATE_CHAIN_MAXIMUM];
 static int numberOfCerts = 0;
 static CFMutableStringRef keyLog = NULL;
 
-#define SSL_CLEANUP if (conn != NULL) { BIO_free_all(conn); }; if (ctx != NULL) { SSL_CTX_free(ctx); };
+#define SSL_CLEANUP if (ctx != NULL) { SSL_CTX_free(ctx); };
 
 - (void) executeWithParameters:(CKInspectParameters *)parameters completed:(void (^)(CKInspectResponse *, NSError *))completed {
     uint64_t startTime = mach_absolute_time();
@@ -220,8 +220,6 @@ static CFMutableStringRef keyLog = NULL;
         self.chain.signedTimestamps = timestampList;
     }
 
-    SSL_CLEANUP
-
     if (keyLog != NULL) {
         self.chain.keyLog = (__bridge NSString*)keyLog;
     }
@@ -236,6 +234,7 @@ static CFMutableStringRef keyLog = NULL;
     X509 * cert;
     NSMutableArray * secCertificates = [NSMutableArray arrayWithCapacity:numberOfCerts];
     for (int i = 0; i < numberOfCerts; i++) {
+        PDebug(@"Processing certificate %i/%i", i+1, numberOfCerts);
         cert = certificateChain[i];
         if (cert) {
             unsigned char * bytes = NULL;
@@ -252,6 +251,7 @@ static CFMutableStringRef keyLog = NULL;
                 continue;
             }
             [secCertificates addObject:(__bridge id)secCert];
+            PDebug(@"Processed certificate successfully");
         }
     }
 
@@ -283,6 +283,8 @@ static CFMutableStringRef keyLog = NULL;
 
     self.chain.certificates = certs;
     self.chain.domain = self.parameters.hostAddress;
+
+    SSL_CLEANUP
 
     if (certs.count == 0) {
         PError(@"No certificates presented by server");
