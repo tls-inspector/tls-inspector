@@ -132,11 +132,17 @@ jobs:
             CertificateKit/RootCACerts/*.json.sig
 
       - name: Update Root CA Certs
-        id: uodate_rootca
+        id: update_rootca
         if: ${{ steps.restore_rootca.outputs.cache-hit != 'true' }}
         run: |
           cd CertificateKit/RootCACerts
           ./update.sh
+
+      - name: Generate Strings
+        id: generate_strings
+        run: |
+          cd "TLS Inspector/Localization"
+          python3 lang.py
 
       - name: Build
         id: build
