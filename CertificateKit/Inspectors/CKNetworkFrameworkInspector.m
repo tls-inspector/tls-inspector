@@ -90,6 +90,7 @@
                 }
                 [certificates addObject:certificate];
             }
+            self.chain.certificates = certificates;
 
             if (trustStatus == kSecTrustResultUnspecified) {
                 self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
