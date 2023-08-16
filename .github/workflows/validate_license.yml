@@ -3,6 +3,7 @@ name: "Validate License"
 on:
   push:
     paths:
+      - '.github/workflows/validate_license.yml'
       - '**/*.m'
       - '**/*.h'
       - '**/*.c'

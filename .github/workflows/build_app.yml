@@ -3,6 +3,7 @@ name: "Build App"
 on:
   push:
     paths:
+      - '.github/workflows/build_app.yml'
       - 'CertificateKit/**'
       - 'CertificateKitTests/**'
       - 'Inspect Website/**'

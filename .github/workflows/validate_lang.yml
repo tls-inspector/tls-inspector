@@ -3,6 +3,7 @@ name: "Validate Localization"
 on:
   push:
     paths:
+      - '.github/workflows/validate_lang.yml'
       - 'TLS Inspector/Localization/**'
   pull_request:
     paths:
