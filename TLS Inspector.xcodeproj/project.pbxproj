@@ -1301,12 +1301,10 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${PROJECT_DIR}/TLS Inspector/Localization/Strings/en.plist",
-				"${PROJECT_DIR}/TLS Inspector/Localization/Strings/de.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings\"\ncp -v \"${PROJECT_DIR}/TLS Inspector/Localization/Strings/*.plist\" \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\"\n";
+			shellScript = "mkdir -p \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings\"\nfind \"${PROJECT_DIR}/TLS Inspector/Localization/Strings\" -name '*.plist' -exec cp {} \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\" \\;\n";
 		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
