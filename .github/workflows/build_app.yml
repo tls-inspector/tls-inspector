@@ -141,4 +141,25 @@ jobs:
       - name: Build
         id: build
         run: |
+          xcodebuild -scheme "CertificateKit" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator build
           xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator build
+
+      - name: Install Go
+        id: install_go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "stable"
+
+      - name: Prepare Test Server
+        id: testserver_prepare
+        run: |
+          cd CertificateKit/TestServer
+          CGO_ENABLED=0 go build
+          ./TestServer -g
+          sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./root.crt
+          nohup ./TestServer -c root.crt -k root.key &
+
+      - name: Run Automated Tests
+        id: certificatekit_tests
+        run: |
+          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro' test
