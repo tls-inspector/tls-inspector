@@ -104,7 +104,7 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func buildTrustHeader() {
-        let parameters = TrustBannerParameters(trust: self.certificateChain!.trusted)
+        let parameters = TrustBannerParameters(trust: self.certificateChain!.trustStatus)
         if parameters.solid {
             self.trustView.backgroundColor = parameters.color
         } else {

@@ -278,7 +278,11 @@ static CFMutableStringRef keyLog = NULL;
 
     NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:trustCount];
     for (int i = 0; i < trustCount; i++) {
-        [certs addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
+        CKCertificate * certificate = [CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)];
+        if (i > 0) {
+            certificate.revoked = [self getRevokedInformationForCertificate:certificate issuer:certs[i-1]];
+        }
+        [certs addObject:certificate];
     }
 
     self.chain.certificates = certs;
@@ -292,37 +296,15 @@ static CFMutableStringRef keyLog = NULL;
         return;
     }
 
-    self.chain.server = certs[0];
-    if (certs.count > 2) {
-        self.chain.rootCA = [certs lastObject];
-        self.chain.rootCA.isRootCA = YES;
-        self.chain.intermediateCA = [certs objectAtIndex:1];
-    } else if (certs.count == 2) {
-        self.chain.rootCA = [certs lastObject];
-        self.chain.rootCA.isRootCA = YES;
-    }
-
-    if (certs.count > 1) {
-        self.chain.server.revoked = [self getRevokedInformationForCertificate:certs[0] issuer:certs[1]];
-    }
-    if (certs.count > 2) {
-        self.chain.intermediateCA.revoked = [self getRevokedInformationForCertificate:certs[1] issuer:certs[2]];
-    }
-
     if (trustStatus == kSecTrustResultUnspecified) {
-        self.chain.trusted = CKCertificateChainTrustStatusTrusted;
+        self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
     } else if (trustStatus == kSecTrustResultProceed) {
-        self.chain.trusted = CKCertificateChainTrustStatusLocallyTrusted;
+        self.chain.trustStatus = CKCertificateChainTrustStatusLocallyTrusted;
     } else {
         [self.chain determineTrustFailureReason];
     }
 
     [self.chain checkAuthorityTrust];
-
-    if (certs.count > 1) {
-        self.chain.rootCA = [self.chain.certificates lastObject];
-        self.chain.intermediateCA = [self.chain.certificates objectAtIndex:1];
-    }
 
     PDebug(@"Certificate chain: %@", [self.chain description]);
     PDebug(@"Finished getting certificate chain");

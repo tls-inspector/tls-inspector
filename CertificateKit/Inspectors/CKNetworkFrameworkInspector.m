@@ -85,30 +85,16 @@
             for (int i = 0; i < numberOfCertificates; i++) {
                 SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
                 CKCertificate * certificate = [CKCertificate fromSecCertificateRef:certificateRef];
+                if (i > 0) {
+                    certificate.revoked = [self getRevokedInformationForCertificate:certificate issuer:certificates[i-1]];
+                }
                 [certificates addObject:certificate];
-            }
-            self.chain.certificates = certificates;
-            self.chain.server = certificates[0];
-            if (certificates.count > 2) {
-                self.chain.rootCA = [certificates lastObject];
-                self.chain.rootCA.isRootCA = YES;
-                self.chain.intermediateCA = [certificates objectAtIndex:1];
-            } else if (certificates.count == 2) {
-                self.chain.rootCA = [certificates lastObject];
-                self.chain.rootCA.isRootCA = YES;
-            }
-
-            if (certificates.count > 1) {
-                self.chain.server.revoked = [self getRevokedInformationForCertificate:certificates[0] issuer:certificates[1]];
-            }
-            if (certificates.count > 2) {
-                self.chain.intermediateCA.revoked = [self getRevokedInformationForCertificate:certificates[1] issuer:certificates[2]];
             }
 
             if (trustStatus == kSecTrustResultUnspecified) {
-                self.chain.trusted = CKCertificateChainTrustStatusTrusted;
+                self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
             } else if (trustStatus == kSecTrustResultProceed) {
-                self.chain.trusted = CKCertificateChainTrustStatusLocallyTrusted;
+                self.chain.trustStatus = CKCertificateChainTrustStatusLocallyTrusted;
             }
 
             [self.chain checkAuthorityTrust];
@@ -191,7 +177,7 @@
                 }
 
                 self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
-                if (self.chain.trusted == 0) {
+                if (self.chain.trustStatus == 0) {
                     [self.chain determineTrustFailureReason];
                 }
                 PDebug(@"NetworkFramework getter successful");

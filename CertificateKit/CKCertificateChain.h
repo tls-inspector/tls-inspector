@@ -103,29 +103,15 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (strong, nonatomic, nonnull) CKIPAddress * remoteAddress;
 
 /**
- The array of certificates belonging to the chain
+ The array of certificates belonging to the chain in the order of least to most specific.
+ For example, 0 = root, 1 = intermediate, 2 = leaf/server
  */
 @property (strong, nonatomic, nonnull) NSArray<CKCertificate *> * certificates;
 
 /**
- The root of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
- */
-@property (strong, nonatomic, nullable) CKCertificate * rootCA;
-
-/**
- The intermediate CA of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
- */
-@property (strong, nonatomic, nullable) CKCertificate * intermediateCA;
-
-/**
- The server certificate in the chain.
- */
-@property (strong, nonatomic, nullable) CKCertificate * server;
-
-/**
  If the system trusts the certificate chain
  */
-@property (nonatomic) CKCertificateChainTrustStatus trusted;
+@property (nonatomic) CKCertificateChainTrustStatus trustStatus;
 
 /**
  Get the negotiated ciphersuite used to retrieve the chain.
