@@ -158,15 +158,13 @@ jobs:
 
       - name: Prepare Test Server
         id: testserver_prepare
-        shell: bash
         run: |
-          set -x
           cd CertificateKit/TestServer
           echo "Compiling test server"
           CGO_ENABLED=0 go build
           echo "Generating certifiate & key"
           ./TestServer -g
-          sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./root.crt
+          # sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./root.crt
 
       - name: Start Test Server
         id: testserver_start
