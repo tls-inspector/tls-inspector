@@ -29,6 +29,7 @@
 #import "CKHTTPClient.h"
 #import "CKInspectParameters+Private.h"
 #import "CKHTTPServerInfo+Private.h"
+#import "CKRevoked+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <arpa/inet.h>
@@ -154,22 +155,25 @@
         CFRelease(trustResultDictionary);
     }
 
-    long count = SecTrustGetCertificateCount(trust);
-    if (count > CERTIFICATE_CHAIN_MAXIMUM) {
-        PError(@"Server returned too many certificates. Count: %li, Max: %i", count, CERTIFICATE_CHAIN_MAXIMUM);
+    long numberOfCertificates = SecTrustGetCertificateCount(trust);
+    if (numberOfCertificates > CERTIFICATE_CHAIN_MAXIMUM) {
+        PError(@"Server returned too many certificates. Count: %li, Max: %i", numberOfCertificates, CERTIFICATE_CHAIN_MAXIMUM);
         executeCompleted(nil, MAKE_ERROR(-1, @"Too many certificates from server"));
         return;
     }
+    if (numberOfCertificates == 0) {
+        PError(@"No certificates presented by server");
+        executeCompleted(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"No certificates presented by server."));
+        return;
+    }
+    PDebug(@"Trust returned %ld certificates", numberOfCertificates);
 
-    NSMutableArray<CKCertificate *> * certs = [NSMutableArray arrayWithCapacity:count];
-
-    for (long i = 0; i < count; i ++) {
-        SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
-        CKCertificate * certificate = [CKCertificate fromSecCertificateRef:certificateRef];
-        if (i > 0) {
-            certificate.revoked = [self getRevokedInformationForCertificate:certificate issuer:certs[i-1]];
-        }
-        [certs addObject:certificate];
+    NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:numberOfCertificates];
+    for (long i = 0; i < numberOfCertificates; i ++) {
+        [certificates addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
+    }
+    for (int i = 0; i < certificates.count-1; i++) {
+        certificates[i].revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
     }
 
     CKIPAddress * remoteAddr;
@@ -230,15 +234,8 @@
     PDebug(@"Domain: '%@' trust result: '%@' (%d)", self.parameters.hostAddress, [self trustResultToString:trustStatus], trustStatus);
 
     self.chain = [CKCertificateChain new];
-    self.chain.certificates = certs;
-
+    self.chain.certificates = certificates;
     self.chain.domain = self.parameters.hostAddress;
-
-    if (certs.count == 0) {
-        PError(@"No certificates presented by server");
-        executeCompleted(nil, MAKE_ERROR(-1, @"No certificates presented by server."));
-        return;
-    }
 
     if (trustStatus == kSecTrustResultUnspecified) {
         self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
@@ -250,7 +247,7 @@
 
     [self.chain checkAuthorityTrust];
 
-    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, count);
+    PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
 
     self.chain.cipherSuite = cipherString;
     self.chain.protocol = protocolString;

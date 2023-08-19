@@ -15,7 +15,7 @@ func (s *tserverBigHTTPHeader) Start(port uint16, ipv4 string, ipv6 string, serv
 	headerData := hex.EncodeToString(bytes.Repeat([]byte{uint8('1')}, 204800))
 	body := []byte("<html><body><h1>It worked!</h1></body></html>")
 
-	chain, err := generateCertificateChain("BigHTTPHeader", 1, port, ipv4, ipv6, servername)
+	chain, _, err := generateCertificateChain("BigHTTPHeader", 1, port, ipv4, ipv6, servername, nil)
 	if err != nil {
 		return err
 	}

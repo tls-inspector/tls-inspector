@@ -27,6 +27,7 @@
 #import "CKOCSPManager.h"
 #import "CKHTTPClient.h"
 #import "CKHTTPServerInfo+Private.h"
+#import "CKRevoked+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <mach/mach_time.h>
@@ -74,21 +75,31 @@
             SecTrustRef trust = sec_trust_copy_ref(trust_ref);
             SecTrustResultType trustStatus;
             SecTrustGetTrustResult(trust, &trustStatus);
+            if ([CKLogging sharedInstance].level == CKLoggingLevelDebug) {
+                CFDictionaryRef trustResultDictionary = SecTrustCopyResult(trust);
+                PDebug(@"Trust result details: %@", [(__bridge NSDictionary *)trustResultDictionary description]);
+                CFRelease(trustResultDictionary);
+            }
+
             numberOfCertificates = SecTrustGetCertificateCount(trust);
             if (numberOfCertificates > CERTIFICATE_CHAIN_MAXIMUM) {
                 PError(@"Server returned too many certificates. Count: %li, Max: %i", numberOfCertificates, CERTIFICATE_CHAIN_MAXIMUM);
                 completed(nil, MAKE_ERROR(-1, @"Too many certificates from server"));
                 return;
             }
+            if (numberOfCertificates == 0) {
+                PError(@"No certificates presented by server");
+                completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"No certificates presented by server."));
+                return;
+            }
+            PDebug(@"Trust returned %ld certificates", numberOfCertificates);
 
             NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:numberOfCertificates];
             for (int i = 0; i < numberOfCertificates; i++) {
-                SecCertificateRef certificateRef = SecTrustGetCertificateAtIndex(trust, i);
-                CKCertificate * certificate = [CKCertificate fromSecCertificateRef:certificateRef];
-                if (i > 0) {
-                    certificate.revoked = [self getRevokedInformationForCertificate:certificate issuer:certificates[i-1]];
-                }
-                [certificates addObject:certificate];
+                [certificates addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
+            }
+            for (int i = 0; i < certificates.count-1; i++) {
+                certificates[i].revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
             }
             self.chain.certificates = certificates;
 

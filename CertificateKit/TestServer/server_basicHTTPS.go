@@ -10,7 +10,7 @@ import (
 type tserverBasicHTTPS struct{}
 
 func (s *tserverBasicHTTPS) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
-	chain, err := generateCertificateChain("BasicHTTPS", 1, port, ipv4, ipv6, servername)
+	chain, _, err := generateCertificateChain("BasicHTTPS", 1, port, ipv4, ipv6, servername, nil)
 	if err != nil {
 		return err
 	}

@@ -9,7 +9,7 @@ import (
 type tserverBareTLS struct{}
 
 func (s *tserverBareTLS) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
-	chain, err := generateCertificateChain("BareTLS", 1, port, ipv4, ipv6, servername)
+	chain, _, err := generateCertificateChain("BareTLS", 1, port, ipv4, ipv6, servername, nil)
 	if err != nil {
 		return err
 	}

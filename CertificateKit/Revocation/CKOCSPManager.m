@@ -85,6 +85,7 @@ struct httpResponseBlock {
     unsigned char * request_data = NULL;
     int len = i2d_OCSP_REQUEST(request, &request_data);
     if (len == 0) {
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Error getting ASN bytes from OCSP request object");
         return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Unable to create OCSP request"}];;
     }
@@ -131,7 +132,6 @@ struct httpResponseBlock {
             response.status = CKOCSPResponseStatusRevoked;
             PDebug(@"OCSP certificate status REVOKED");
             response.reason = reason;
-            response.reasonString = [NSString stringWithUTF8String:OCSP_crl_reason_str(reason)];
             break;
     }
 

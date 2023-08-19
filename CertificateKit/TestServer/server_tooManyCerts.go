@@ -10,7 +10,7 @@ import (
 type tserverTooManyCerts struct{}
 
 func (s *tserverTooManyCerts) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
-	chain, err := generateCertificateChain("TooManyCerts", 50, port, ipv4, ipv6, servername)
+	chain, _, err := generateCertificateChain("TooManyCerts", 50, port, ipv4, ipv6, servername, nil)
 	if err != nil {
 		return err
 	}

@@ -250,4 +250,68 @@
     }
 }
 
+- (void) testRevokedCRL {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8408"];
+    parameters.cryptoEngine = engine;
+    parameters.checkCRL = true;
+    parameters.checkOCSP = false;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testRevokedCRL", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        XCTAssertTrue(certificates.count >= 2);
+        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (RevokedCert)");
+        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (RevokedCert)");
+        CKRevoked * status = certificates[0].revoked;
+        XCTAssertNotNil(status);
+        XCTAssertTrue(status.isRevoked);
+        XCTAssertEqual(status.reason, CKRevokedReasonKeyCompromise);
+        if (certificates.count == 3) {
+            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+        }
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
+- (void) testRevokedOCSP {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8408"];
+    parameters.cryptoEngine = engine;
+    parameters.checkCRL = false;
+    parameters.checkOCSP = true;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testRevokedCRL", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        XCTAssertTrue(certificates.count >= 2);
+        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (RevokedCert)");
+        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (RevokedCert)");
+        CKRevoked * status = certificates[0].revoked;
+        XCTAssertNotNil(status);
+        XCTAssertTrue(status.isRevoked);
+        XCTAssertEqual(status.reason, CKRevokedReasonKeyCompromise);
+        if (certificates.count == 3) {
+            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+        }
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
 @end

@@ -18,6 +18,11 @@ import (
 	"time"
 )
 
+type Certificate struct {
+	Certificate *x509.Certificate
+	PrivateKey  *ecdsa.PrivateKey
+}
+
 var rootCAPool *x509.CertPool
 var rootCertificate *x509.Certificate
 var rootKey *ecdsa.PrivateKey
@@ -57,18 +62,26 @@ func loadRoot(certPath, keyPath string) error {
 	return nil
 }
 
-func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv6, servername string) (*tls.Certificate, error) {
+type extraCertificateParameters struct {
+	CRL               *string
+	OCSP              *string
+	LastIntPrivateKey *ecdsa.PrivateKey
+}
+
+func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv6, servername string, extraParams *extraCertificateParameters) (*tls.Certificate, []Certificate, error) {
 	certificates := make([][]byte, nInts+1)
 
 	var lastIssuer = rootCertificate
 	var lastSigner = rootKey
 
+	var certObjects = make([]Certificate, nInts+1)
+
 	for i := 0; i < nInts; i++ {
-		intPrivKey := generateKey()
+		intPrivKey := generateEcKey()
 		intPubKey := intPrivKey.Public()
 		intPublicKeyBytes, err := x509.MarshalPKIXPublicKey(intPubKey)
 		if err != nil {
-			return nil, err
+			return nil, nil, err
 		}
 
 		intSubjectKeyId := sha1.Sum(intPublicKeyBytes)
@@ -81,8 +94,8 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 			Issuer:                lastIssuer.Subject,
 			NotBefore:             time.Now().UTC().AddDate(-1, 0, 0),
 			NotAfter:              time.Now().UTC().AddDate(1, 0, 0),
-			KeyUsage:              x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
-			ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
+			KeyUsage:              x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign | x509.KeyUsageCRLSign,
+			ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth, x509.ExtKeyUsageOCSPSigning},
 			BasicConstraintsValid: true,
 			SubjectKeyId:          intSubjectKeyId[:],
 			AuthorityKeyId:        lastIssuer.SubjectKeyId,
@@ -93,20 +106,25 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 
 		intCertBytes, err := x509.CreateCertificate(rand.Reader, intTpl, lastIssuer, intPubKey, lastSigner)
 		if err != nil {
-			return nil, err
+			return nil, nil, err
 		}
+		intCert, _ := x509.ParseCertificate(intCertBytes)
 
 		certificates[i] = intCertBytes
 
 		lastIssuer = intTpl
 		lastSigner = intPrivKey
+		certObjects[i] = Certificate{
+			Certificate: intCert,
+			PrivateKey:  intPrivKey,
+		}
 	}
 
-	serverPrivKey := generateKey()
+	serverPrivKey := generateEcKey()
 	serverPubKey := serverPrivKey.Public()
 	serverPublicKeyBytes, err := x509.MarshalPKIXPublicKey(serverPubKey)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	serverSubjectKeyId := sha1.Sum(serverPublicKeyBytes)
@@ -138,11 +156,18 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 			mustParseURI(fmt.Sprintf("https://%s:%d/", servername, port)),
 		},
 	}
+	if extraParams != nil && extraParams.CRL != nil {
+		serverTpl.CRLDistributionPoints = []string{*extraParams.CRL}
+	}
+	if extraParams != nil && extraParams.OCSP != nil {
+		serverTpl.OCSPServer = []string{*extraParams.OCSP}
+	}
 
 	certBytes, err := x509.CreateCertificate(rand.Reader, serverTpl, lastIssuer, serverPubKey, lastSigner)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
+	serverCert, _ := x509.ParseCertificate(certBytes)
 	certificates[nInts] = certBytes
 
 	certsAsPem := [][]byte{}
@@ -161,13 +186,17 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 
 	ts, err := tls.X509KeyPair(certsPem, keyPem)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return &ts, nil
+	certObjects[nInts] = Certificate{
+		Certificate: serverCert,
+		PrivateKey:  serverPrivKey,
+	}
+	return &ts, certObjects, nil
 }
 
 func generateRoot() error {
-	privKey := generateKey()
+	privKey := generateEcKey()
 	pubKey := privKey.Public()
 	privKeyBytes := mustMarshalPrivateKey(privKey)
 	publicKeyBytes, err := x509.MarshalPKIXPublicKey(pubKey)
@@ -215,7 +244,7 @@ func generateRoot() error {
 	return nil
 }
 
-func generateKey() *ecdsa.PrivateKey {
+func generateEcKey() *ecdsa.PrivateKey {
 	key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
 		panic(err)

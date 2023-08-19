@@ -32,7 +32,7 @@
 		3C3002632980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */; };
 		3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */; };
 		3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */; };
-		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; platformFilter = ios; };
 		3C3C9533297DFD110084B7D9 /* BasicInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */; };
 		3C3C9535297E01460084B7D9 /* AdvancedInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9534297E01460084B7D9 /* AdvancedInspectTest.swift */; };
@@ -216,13 +216,14 @@
 		3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; platformFilter = ios; };
 		3CF6772A2046335D00A3B4C1 /* CKCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677282046335D00A3B4C1 /* CKCRLManager.h */; };
 		3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF677292046335D00A3B4C1 /* CKCRLManager.m */; platformFilter = ios; };
-		3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */; platformFilter = ios; };
 		3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6773520464C7E00A3B4C1 /* CKLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6773620464C7E00A3B4C1 /* CKLogging.m */; platformFilter = ios; };
 		3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */; };
 		3CF9CC9623A4804600535173 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9523A4804600535173 /* DomainList.plist */; };
 		3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9823A482F500535173 /* UIObject+Lang.swift */; };
+		9A31DECB2A917EAE0095857D /* CKRevoked+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AFD2BEB2A883CEA00FFF40F /* CKIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */; };
 		9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */; };
@@ -476,6 +477,7 @@
 		3CF9CC9523A4804600535173 /* DomainList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DomainList.plist; sourceTree = "<group>"; };
 		3CF9CC9823A482F500535173 /* UIObject+Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIObject+Lang.swift"; sourceTree = "<group>"; };
 		3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TLS Inspector.entitlements"; sourceTree = "<group>"; };
+		9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKRevoked+Private.h"; sourceTree = "<group>"; };
 		9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKIPAddress.h; sourceTree = "<group>"; };
 		9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddress.m; sourceTree = "<group>"; };
 		9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddressTests.m; sourceTree = "<group>"; };
@@ -839,16 +841,17 @@
 		3CF6773420464A9E00A3B4C1 /* Revocation */ = {
 			isa = PBXGroup;
 			children = (
-				3C28D0B2204209E8004C260F /* CKRevoked.h */,
-				3C28D0B3204209E8004C260F /* CKRevoked.m */,
-				3C70425020100CA900BE941A /* CKOCSPManager.h */,
-				3C70425120100CA900BE941A /* CKOCSPManager.m */,
-				3C36B3B220412564005C66E8 /* CKOCSPResponse.h */,
-				3C36B3B320412564005C66E8 /* CKOCSPResponse.m */,
 				3CF677282046335D00A3B4C1 /* CKCRLManager.h */,
 				3CF677292046335D00A3B4C1 /* CKCRLManager.m */,
 				3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */,
 				3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */,
+				3C70425020100CA900BE941A /* CKOCSPManager.h */,
+				3C70425120100CA900BE941A /* CKOCSPManager.m */,
+				3C36B3B220412564005C66E8 /* CKOCSPResponse.h */,
+				3C36B3B320412564005C66E8 /* CKOCSPResponse.m */,
+				3C28D0B2204209E8004C260F /* CKRevoked.h */,
+				3C28D0B3204209E8004C260F /* CKRevoked.m */,
+				9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */,
 			);
 			path = Revocation;
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
+				9A31DECB2A917EAE0095857D /* CKRevoked+Private.h in Headers */,
 				3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */,
 				3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */,
 				3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */,

@@ -9,7 +9,7 @@ import (
 type tserverNaughtyHTTP struct{}
 
 func (s *tserverNaughtyHTTP) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
-	chain, err := generateCertificateChain("NaughtyHTTP", 1, port, ipv4, ipv6, servername)
+	chain, _, err := generateCertificateChain("NaughtyHTTP", 1, port, ipv4, ipv6, servername, nil)
 	if err != nil {
 		return err
 	}
