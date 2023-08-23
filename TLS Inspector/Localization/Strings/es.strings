@@ -302,7 +302,6 @@ Country::YT	Mayotte
 Country::ZA	Sudáfrica
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
-Crypto Engine	Motor de criptografía
 Danger	Peligro
 Dangerous	Peligroso
 Delete	Eliminar
@@ -376,6 +375,7 @@ More Info	Más info
 Negotiated Ciphersuite	Conjunto de algoritmos de cifrado negociado
 Negotiated Version	Versión negociada
 Network	Red
+Network Engine	Motor de red
 Next	Siguiente
 No	No
 No Supported URL Found	No se encontró ninguna URL compatible

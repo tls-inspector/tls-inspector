@@ -300,7 +300,6 @@ Country::YT	Mayotte
 Country::ZA	South Africa
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
-Crypto Engine	Crypto Engine
 Danger	Danger
 Dangerous	Dangerous
 Delete	Delete
@@ -369,6 +368,7 @@ More Info	More Info
 Negotiated Ciphersuite	Negotiated Ciphersuite
 Negotiated Version	Negotiated Version
 Network	Network
+Network Engine	Network Engine
 Next	Next
 No	No
 No Supported URL Found	No Supported URL Found
@@ -492,12 +492,12 @@ You must inspect at least one site with verbose logging enabled before you can s
 advanced_settings_nag	These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.
 app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
-certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy crypto engine.
+certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy network engine.
 copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2023 Ian Spence.
 crypto_engine::network_framework	Apple - Modern
 crypto_engine::openssl	OpenSSL
 crypto_engine::secure_transport	Apple - Legacy
-crypto_engine_footer	Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device. The modern Apple engine requires iOS 12 or later. TLS 1.3 is not available on the legacy Apple engine.
+crypto_engine_footer	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device. TLS 1.3 is not available on the legacy Apple engine.
 date_unit_plural::day	days
 date_unit_plural::hour	hours
 date_unit_plural::minute	minutes

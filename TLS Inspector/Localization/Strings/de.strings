@@ -324,7 +324,6 @@ Country::YT	Mayotte
 Country::ZA	Südafrika
 Country::ZM	Sambia
 Country::ZW	Simbabwe
-Crypto Engine	Crypto-Engine
 # TODO
 Danger	Danger
 Dangerous	Dangerous
@@ -405,6 +404,7 @@ More Info	Mehr Information
 Negotiated Ciphersuite	Verhandelte Ciphersuite
 Negotiated Version	Verhandelte Version
 Network	Netzwerk
+Network Engine	Netzwerk-Engine
 Next	Weiter
 No	Nein
 No Supported URL Found	Keine unterstützte URL gefunden

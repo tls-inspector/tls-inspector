@@ -308,7 +308,6 @@ Country::YT	Mayotte
 Country::ZA	Zuid Afrika
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
-Crypto Engine	Crypto Driver
 Danger	Gevaar
 Dangerous	Gevaarlijk
 Delete	Wissen
@@ -382,6 +381,7 @@ More Info	Meer Info
 Negotiated Ciphersuite	Overeengekomen Ciphersuite
 Negotiated Version	Overeengekomen Versie
 Network	Netwerk
+Network Engine	Netwerk Driver
 Next	Volgende
 No	Nee
 No Supported URL Found	Geen Ondersteunde URL Gevonden

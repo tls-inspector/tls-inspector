@@ -39,7 +39,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
 
     func buildEngineSection() -> TableViewSection {
         let engineSection = TableViewSection()
-        engineSection.title = lang(key: "Crypto Engine")
+        engineSection.title = lang(key: "Network Engine")
         engineSection.footer = lang(key: "crypto_engine_footer")
         engineSection.tag = SectionTags.Engine.rawValue
 
