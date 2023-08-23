@@ -50,6 +50,7 @@
                 [headerBuf byteAtIndex:i+2] == '\r' &&
                 [headerBuf byteAtIndex:i+3] == '\n') {
                 headersEndIdx = i;
+                printf("FIXME: headersEndIdx %i\n", headersEndIdx);
                 hasAllHeaders = YES;
                 break;
             }
@@ -57,8 +58,11 @@
         }
 
         if (hasAllHeaders) {
+            printf("FIXME: 1\n");
             [headerData appendData:[headerBuf subdataWithRange:NSMakeRange(0, headersEndIdx)]];
+            printf("FIXME: 2\n");
             CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
+            printf("FIXME: 3\n");
             CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:statusCode.unsignedIntegerValue headers:headers];
             PDebug(@"Fetched %lu headers from HTTP server", headers.allHeaders.count);
             completed(response);
