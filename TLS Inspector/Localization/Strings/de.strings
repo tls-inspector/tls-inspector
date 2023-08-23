@@ -605,7 +605,7 @@ proxy_warning	Ein HTTP-Proxy ist konfiguriert. TLS Inspector ist nicht mit mit H
 # TODO
 rootca_error	Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.
 # TODO
-rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.
+rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by tlsinspector.com and is digitally signed.
 sanType::DNS	DNS
 sanType::Directory	Verzeichnis
 sanType::Email	E-Mail

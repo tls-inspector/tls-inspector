@@ -547,7 +547,7 @@ microsoft	Microsoft
 mozilla	Mozilla
 proxy_warning	An HTTP Proxy is configured. TLS Inspector is not compatible with HTTP Proxies and it must be disabled from the systems WiFi settings.
 rootca_error	Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.
-rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.
+rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by tlsinspector.com and is digitally signed.
 sanType::DNS	DNS
 sanType::Directory	Directory
 sanType::Email	Email

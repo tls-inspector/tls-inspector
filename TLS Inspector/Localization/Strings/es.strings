@@ -557,7 +557,7 @@ microsoft	Microsoft
 mozilla	Mozilla
 proxy_warning	Hay un proxy HTTP configurado. TLS Inspector no es compatible con los proxies HTTP y debe desactivarse desde la configuración Wi-Fi del sistema.
 rootca_error	No se puede comprobar de forma segura si hay actualizaciones de los paquetes raíz. Comprueba si hay actualizaciones pendientes de TLS Inspector en la App Store.
-rootca_footer	Las actualizaciones de los paquetes raíz de certificados de autoridad son infrecuentes y se incluyen con las actualizaciones de TLS Inspector. Los datos de actualización se sirven desde GitHub y están firmados digitalmente.
+rootca_footer	Las actualizaciones de los paquetes raíz de certificados de autoridad son infrecuentes y se incluyen con las actualizaciones de TLS Inspector. Los datos de actualización se sirven desde tlsinspector.com y están firmados digitalmente.
 sanType::DNS	DNS
 sanType::Directory	Directorio
 sanType::Email	Correo electrónico
