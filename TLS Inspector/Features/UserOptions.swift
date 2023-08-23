@@ -148,6 +148,13 @@ class UserOptions {
         }
     }
 
+    static func reset() {
+        UserOptions.cryptoEngine = CryptoEngine.NetworkFramework
+        UserOptions.ipVersion = IPVersion.Automatic
+        UserOptions.preferredCiphers = defaultOpenSSLCiphers
+        UserOptions.advancedSettingsNagDismissed = false
+    }
+
     static var firstRunCompleted: Bool {
         get {
             return AppDefaults.bool(forKey: KEY_FIRST_RUN_COMPLETE)

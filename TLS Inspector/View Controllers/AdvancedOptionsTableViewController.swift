@@ -7,6 +7,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         case EngineOptions = 1
         case Logs = 2
         case RootCA = 3
+        case Reset = 4
     }
 
     var sections: [TableViewSection] = []
@@ -69,6 +70,19 @@ class AdvancedOptionsTableViewController: UITableViewController {
         }
 
         return rootCASection
+    }
+
+    func buildResetSection() -> TableViewSection {
+        let resetSection = TableViewSection()
+        resetSection.tag = SectionTags.Reset.rawValue
+
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) {
+            cell.cell.textLabel?.text = lang(key: "Reset to Default Settings")
+            cell.cell.textLabel?.textColor = UIColor.systemRed
+            resetSection.cells.append(cell)
+        }
+
+        return resetSection
     }
 
     func buildCiphersCell() -> TableViewCell? {
@@ -174,7 +188,8 @@ class AdvancedOptionsTableViewController: UITableViewController {
             self.buildEngineSection(),
             self.buildEngineOptionsSection(),
             self.buildLogsSection(),
-            self.buildRootCASection()
+            self.buildRootCASection(),
+            self.buildResetSection()
         ]
     }
 
@@ -208,6 +223,9 @@ class AdvancedOptionsTableViewController: UITableViewController {
             self.didTapSubmitLogs(indexPath: indexPath)
         } else if tag == SectionTags.RootCA.rawValue {
             self.performSegue(withIdentifier: "RootCACertificates", sender: self)
+        } else if tag == SectionTags.Reset.rawValue {
+            UserOptions.reset()
+            _ = navigationController?.popViewController(animated: true)
         }
     }
 

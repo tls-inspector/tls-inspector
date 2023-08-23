@@ -407,6 +407,8 @@ Renew Certificate for {domain}	Renovar certificado para {0}
 Report Issue on GitHub	Reportar incidencia en GitHub
 Report a Bug	Reportar un error
 Request a Feature	Pedir una característica
+# TODO
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Revocado el
 Root CA Certificates	Certificados de CA raíz
 SHA-256	SHA-256

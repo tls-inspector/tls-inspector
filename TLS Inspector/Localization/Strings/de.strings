@@ -437,6 +437,8 @@ Renew Certificate for {domain}	Erneuere Zertifikat für {0}
 Report Issue on GitHub	Melde Fehler auf GitHub
 Report a Bug	Fehler melden
 Request a Feature	Feature anfragen
+# TODO
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Annulliert am
 # TODO
 Root CA Certificates	Root CA Certificates

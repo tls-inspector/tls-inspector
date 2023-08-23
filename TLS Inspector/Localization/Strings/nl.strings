@@ -413,6 +413,8 @@ Renew Certificate for {domain}	Vernieuw Certificaat voor {0}
 Report Issue on GitHub	Meld Probleem op GitHub
 Report a Bug	Meld een Bug
 Request a Feature	Verzoek om een Uitbreiding
+# TODO
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Ingetrokken Op
 Root CA Certificates	Root CA Certificaten
 SHA-256	SHA-256

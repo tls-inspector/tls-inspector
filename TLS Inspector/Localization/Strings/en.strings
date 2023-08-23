@@ -400,6 +400,7 @@ Renew Certificate for {domain}	Renew Certificate for {0}
 Report Issue on GitHub	Report Issue on GitHub
 Report a Bug	Report a Bug
 Request a Feature	Request a Feature
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Revoked On
 Root CA Certificates	Root CA Certificates
 SHA-256	SHA-256
