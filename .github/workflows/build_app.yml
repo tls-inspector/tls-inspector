@@ -73,7 +73,28 @@ jobs:
           echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
           echo "CTLOG_CACHE_KEY=ctlog_$(cat CertificateKit/CTLogs/ct_log_version.txt)" >> "$GITHUB_OUTPUT"
           echo "ROOTCA_CACHE_KEY=rootca_$(cat CertificateKit/RootCACerts/bundle_version.txt)" >> "$GITHUB_OUTPUT"
+          echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
+
+      - name: Restore Cached SwiftLint
+        id: restore_swiftlint
+        uses: actions/cache@v3
+        with:
+          key: ${{ steps.cache_key.outputs.SWIFTLINT_CACHE_KEY }}
+          path: |
+            /opt/homebrew/bin/swiftlint
       
+      - name: Install SwiftLint
+        id: install_swiftlint
+        if: ${{ steps.restore_swiftlint.outputs.cache-hit != 'true' }}
+        run: |
+          mkdir -p /opt/homebrew/bin
+          SWIFTLINT_URL=$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .browser_download_url')
+          cd /opt/homebrew/bin
+          curl -L -o swiftlint.zip "${SWIFTLINT_URL}"
+          unzip swiftlint.zip
+          rm swiftlint.zip LICENSE
+          chmod a+x swiftlint
+
       - name: Restore Cached OpenSSL
         id: restore_openssl
         uses: actions/cache@v3
