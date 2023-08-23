@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
     /**
      The system trusts this certificate.
      */
-    CKCertificateChainTrustStatusTrusted,
+    CKCertificateChainTrustStatusTrusted = 1,
     /**
      The system trusts this certificate chain because one or more of the certificates
      are locally installed and marked as trusted.
