@@ -287,25 +287,30 @@ static CFMutableStringRef keyLog = NULL;
     }
     PDebug(@"Trust returned %ld certificates", numberOfCertificates);
 
+    if (trustStatus == kSecTrustResultUnspecified) {
+        self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
+    } else if (trustStatus == kSecTrustResultProceed) {
+        self.chain.trustStatus = CKCertificateChainTrustStatusLocallyTrusted;
+    }
+
     NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:numberOfCertificates];
     for (int i = 0; i < numberOfCertificates; i++) {
         [certificates addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
     }
     for (int i = 0; i < certificates.count-1; i++) {
-        certificates[i].revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
+        CKRevoked * revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
+        certificates[i].revoked = revoked;
+        if (revoked != nil && revoked.isRevoked) {
+            self.chain.trustStatus = i == 0 ? CKCertificateChainTrustStatusRevokedLeaf : CKCertificateChainTrustStatusRevokedIntermediate;
+        }
     }
     self.chain.certificates = certificates;
     self.chain.domain = self.parameters.hostAddress;
-
-    SSL_CLEANUP
-
-    if (trustStatus == kSecTrustResultUnspecified) {
-        self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
-    } else if (trustStatus == kSecTrustResultProceed) {
-        self.chain.trustStatus = CKCertificateChainTrustStatusLocallyTrusted;
-    } else {
+    if (self.chain.trustStatus == 0) {
         [self.chain determineTrustFailureReason];
     }
+
+    SSL_CLEANUP
 
     [self.chain checkAuthorityTrust];
 

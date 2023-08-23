@@ -94,20 +94,24 @@
             }
             PDebug(@"Trust returned %ld certificates", numberOfCertificates);
 
-            NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:numberOfCertificates];
-            for (int i = 0; i < numberOfCertificates; i++) {
-                [certificates addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
-            }
-            for (int i = 0; i < certificates.count-1; i++) {
-                certificates[i].revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
-            }
-            self.chain.certificates = certificates;
-
             if (trustStatus == kSecTrustResultUnspecified) {
                 self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
             } else if (trustStatus == kSecTrustResultProceed) {
                 self.chain.trustStatus = CKCertificateChainTrustStatusLocallyTrusted;
             }
+
+            NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:numberOfCertificates];
+            for (int i = 0; i < numberOfCertificates; i++) {
+                [certificates addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
+            }
+            for (int i = 0; i < certificates.count-1; i++) {
+                CKRevoked * revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
+                certificates[i].revoked = revoked;
+                if (revoked != nil && revoked.isRevoked) {
+                    self.chain.trustStatus = i == 0 ? CKCertificateChainTrustStatusRevokedLeaf : CKCertificateChainTrustStatusRevokedIntermediate;
+                }
+            }
+            self.chain.certificates = certificates;
 
             [self.chain checkAuthorityTrust];
 

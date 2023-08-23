@@ -168,12 +168,23 @@
     }
     PDebug(@"Trust returned %ld certificates", numberOfCertificates);
 
+    self.chain = [CKCertificateChain new];
+    if (trustStatus == kSecTrustResultUnspecified) {
+        self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
+    } else if (trustStatus == kSecTrustResultProceed) {
+        self.chain.trustStatus = CKCertificateChainTrustStatusLocallyTrusted;
+    }
+
     NSMutableArray<CKCertificate *> * certificates = [NSMutableArray arrayWithCapacity:numberOfCertificates];
     for (long i = 0; i < numberOfCertificates; i ++) {
         [certificates addObject:[CKCertificate fromSecCertificateRef:SecTrustGetCertificateAtIndex(trust, i)]];
     }
     for (int i = 0; i < certificates.count-1; i++) {
-        certificates[i].revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
+        CKRevoked * revoked = [self getRevokedInformationForCertificate:certificates[i] issuer:certificates[i+1]];
+        certificates[i].revoked = revoked;
+        if (revoked != nil && revoked.isRevoked) {
+            self.chain.trustStatus = i == 0 ? CKCertificateChainTrustStatusRevokedLeaf : CKCertificateChainTrustStatusRevokedIntermediate;
+        }
     }
 
     CKIPAddress * remoteAddr;
@@ -233,17 +244,8 @@
 
     PDebug(@"Domain: '%@' trust result: '%@' (%d)", self.parameters.hostAddress, [self trustResultToString:trustStatus], trustStatus);
 
-    self.chain = [CKCertificateChain new];
     self.chain.certificates = certificates;
     self.chain.domain = self.parameters.hostAddress;
-
-    if (trustStatus == kSecTrustResultUnspecified) {
-        self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
-    } else if (trustStatus == kSecTrustResultProceed) {
-        self.chain.trustStatus = CKCertificateChainTrustStatusLocallyTrusted;
-    } else {
-        [self.chain determineTrustFailureReason];
-    }
 
     [self.chain checkAuthorityTrust];
 
@@ -252,6 +254,9 @@
     self.chain.cipherSuite = cipherString;
     self.chain.protocol = protocolString;
     self.chain.remoteAddress = remoteAddr;
+    if (self.chain.trustStatus == 0) {
+        [self.chain determineTrustFailureReason];
+    }
 
     PDebug(@"Certificate chain: %@", [self.chain description]);
     PDebug(@"Finished getting certificate chain");

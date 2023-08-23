@@ -135,6 +135,7 @@
 		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
 		3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2006023974F710027D1C1 /* fa-solid.ttf */; };
 		3CA6EAEA29AFD22A00BFB6E2 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */; };
+		3CB1080C2A95A53700CFE080 /* CKInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */; };
 		3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB483FC2058BA0400322723 /* CertificateKit.m */; platformFilter = ios; };
 		3CB940392250353B0055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
 		3CB9403D225035E80055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
@@ -416,6 +417,8 @@
 		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
 		3CA2006023974F710027D1C1 /* fa-solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid.ttf"; sourceTree = "<group>"; };
 		3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectorTests.h; sourceTree = "<group>"; };
+		3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectorTests.m; sourceTree = "<group>"; };
 		3CB483FC2058BA0400322723 /* CertificateKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKit.m; sourceTree = "<group>"; };
 		3CB94040225036FB0055C067 /* CKSecureTransportInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKSecureTransportInspector.h; sourceTree = "<group>"; };
 		3CB94041225036FC0055C067 /* CKOpenSSLInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKOpenSSLInspector.m; sourceTree = "<group>"; };
@@ -834,6 +837,8 @@
 				3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */,
 				3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */,
 				3C45722F2A74ADAA009EF7BB /* SecureTransportInspectorTests.m */,
+				3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */,
+				3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */,
 			);
 			path = CertificateKitTests;
 			sourceTree = "<group>";
@@ -1510,6 +1515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB1080C2A95A53700CFE080 /* CKInspectorTests.m in Sources */,
 				3C4572302A74ADAA009EF7BB /* SecureTransportInspectorTests.m in Sources */,
 				9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */,
 				3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */,

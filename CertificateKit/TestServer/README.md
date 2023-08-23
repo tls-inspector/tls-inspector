@@ -79,3 +79,7 @@ This server accepts any HTTP request, invalid or otherwise, and responds with a 
 This is the same as the Basic HTTPS server, however the leaf certificate contains a CRL distribution point and a OCSP responder, both of which will report that the certificate is revoked.
 
 Server #9 is reserved for the CRL & OCSP providers for this certificate.
+
+**10 & 11. Expired Leaf / Intermediate**
+
+These servers provide a basic HTTPS server, expect that the leaf or intermediate certificates are expired.

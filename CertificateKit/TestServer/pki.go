@@ -62,10 +62,17 @@ func loadRoot(certPath, keyPath string) error {
 	return nil
 }
 
+type pkiDateRange struct {
+	NotBefore time.Time
+	NotAfter  time.Time
+}
+
 type extraCertificateParameters struct {
 	CRL               *string
 	OCSP              *string
 	LastIntPrivateKey *ecdsa.PrivateKey
+	LeafDateRange     *pkiDateRange
+	IntDateRange      *pkiDateRange
 }
 
 func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv6, servername string, extraParams *extraCertificateParameters) (*tls.Certificate, []Certificate, error) {
@@ -102,6 +109,10 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 			SignatureAlgorithm:    signatureAlgorithm,
 			MaxPathLenZero:        true,
 			IsCA:                  true,
+		}
+		if extraParams != nil && extraParams.IntDateRange != nil {
+			intTpl.NotBefore = extraParams.IntDateRange.NotBefore
+			intTpl.NotAfter = extraParams.IntDateRange.NotAfter
 		}
 
 		intCertBytes, err := x509.CreateCertificate(rand.Reader, intTpl, lastIssuer, intPubKey, lastSigner)
@@ -161,6 +172,10 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 	}
 	if extraParams != nil && extraParams.OCSP != nil {
 		serverTpl.OCSPServer = []string{*extraParams.OCSP}
+	}
+	if extraParams != nil && extraParams.LeafDateRange != nil {
+		serverTpl.NotBefore = extraParams.LeafDateRange.NotBefore
+		serverTpl.NotAfter = extraParams.LeafDateRange.NotAfter
 	}
 
 	certBytes, err := x509.CreateCertificate(rand.Reader, serverTpl, lastIssuer, serverPubKey, lastSigner)
