@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/rand"
+	"crypto/tls"
 	"fmt"
 	"net"
 	"sync"
@@ -23,6 +24,15 @@ func (s *tserverFuzzTLS) Start(port uint16, ipv4 string, ipv6 string, servername
 	wg.Add(1)
 	var acceptErr error
 
+	vers := uint16(tls.VersionTLS12)
+	msgBytes := make([]byte, 6)
+	msgBytes[0] = byte(uint8(22))
+	msgBytes[1] = byte(vers >> 8)
+	msgBytes[2] = byte(vers)
+	msgBytes[3] = byte(80 >> 8)
+	msgBytes[4] = byte(80)
+	msgBytes[5] = byte(2)
+
 	go func() {
 		for {
 			conn, err := t4l.Accept()
@@ -31,11 +41,12 @@ func (s *tserverFuzzTLS) Start(port uint16, ipv4 string, ipv6 string, servername
 				wg.Done()
 				return
 			}
-			buf := make([]byte, 1024)
+			buf := make([]byte, 8192)
 			conn.Read(buf)
-			resp := make([]byte, 255)
-			rand.Read(resp)
-			conn.Write(resp)
+			randBytes := make([]byte, 100)
+			rand.Read(randBytes)
+			tlsHello := append(msgBytes, randBytes...)
+			conn.Write(tlsHello)
 			conn.Close()
 		}
 	}()
@@ -47,11 +58,12 @@ func (s *tserverFuzzTLS) Start(port uint16, ipv4 string, ipv6 string, servername
 				wg.Done()
 				return
 			}
-			buf := make([]byte, 1024)
+			buf := make([]byte, 8192)
 			conn.Read(buf)
-			resp := make([]byte, 255)
-			rand.Read(resp)
-			conn.Write(resp)
+			randBytes := make([]byte, 100)
+			rand.Read(randBytes)
+			tlsHello := append(msgBytes, randBytes...)
+			conn.Write(tlsHello)
 			conn.Close()
 		}
 	}()

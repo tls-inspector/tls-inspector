@@ -68,13 +68,13 @@ This server accepts any HTTP request, invalid or otherwise, but always returns 2
 
 **6. Fuzz TLS**
 
-This server accepts any TLS client hello, but instead of returning a TLS server hello it responds with 255 random binary bytes.
+This server accepts any TLS client hello and returns a TLS handshake record with 100 random binary bytes. The handshake record intentionally incorrectly reports the length as 80 bytes.
 
 **7. Big HTTP Header**
 
 This server accepts any HTTP request, invalid or otherwise, and responds with a valid HTTP response of a HTML document. However, this response includes a HTTP header `A-Large-Header` which has a value of 200KiB of ASCII `1`'s.
 
-**8 & 9 Revoked Certificate**
+**8 & 9. Revoked Certificate**
 
 This is the same as the Basic HTTPS server, however the leaf certificate contains a CRL distribution point and a OCSP responder, both of which will report that the certificate is revoked.
 
