@@ -54,6 +54,12 @@ func (s *tserverBasicHTTPS) Start(port uint16, ipv4 string, ipv6 string, servern
 func (s *tserverBasicHTTPS) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Add("Content-Type", "text/html")
 	rw.Header().Add("X-CertificateKit-Test-Name", "BasicHTTPS")
+	rw.Header().Add("Content-Security-Policy", "default-src * localhost:8401")
+	rw.Header().Add("Permissions-Policy", "geolocation ()")
+	rw.Header().Add("Referrer-Policy", "no-referrer")
+	rw.Header().Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+	rw.Header().Add("X-Content-Type-Options", "nosniff")
+	rw.Header().Add("X-Frame-Options", "DENY")
 	rw.WriteHeader(200)
 	rw.Write([]byte("<html><body><h1>It worked!</h1></body></html>"))
 }

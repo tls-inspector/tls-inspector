@@ -39,12 +39,12 @@
     return r;
 }
 
-- (NSDictionary<NSString *, id> *)securityHeaders {
+- (NSDictionary<NSString *, NSNumber *> *) securityHeaders {
     if (self.cachedSecurityHeaders != nil) {
         return self.cachedSecurityHeaders;
     }
 
-    NSMutableDictionary<NSString *, id> * sHeaders = [NSMutableDictionary new];
+    NSMutableDictionary<NSString *, NSNumber *> * sHeaders = [NSMutableDictionary new];
 
     // Shoutout to Scott Helme for putting together this list! 🇬🇧
     // https://securityheaders.io, https://scotthelme.co.uk/
@@ -60,12 +60,7 @@
     NSArray<NSString *> * headerKeys = self.headers.allKeys;
     for (NSString * secureHeaderKey in SECURE_HEADERS) {
         NSString * actualHeaderKey = [self array:headerKeys ContainsCaseInsensitiveString:secureHeaderKey];
-        if (actualHeaderKey != nil) {
-            NSArray<NSString *> * values = [self.headers objectForKey:actualHeaderKey];
-            [sHeaders setValue:values forKey:secureHeaderKey];
-        } else {
-            [sHeaders setValue:@NO forKey:secureHeaderKey];
-        }
+        [sHeaders setValue:[NSNumber numberWithBool:(actualHeaderKey != nil)] forKey:secureHeaderKey];
     }
 
     self.cachedSecurityHeaders = sHeaders;

@@ -237,8 +237,7 @@ class CertificateChainTableViewController: UITableViewController {
             guard let titleLabel = cell.cell.viewWithTag(1) as? UILabel else { return nil }
             guard let iconLabel = cell.cell.viewWithTag(2) as? UILabel else { return nil }
             titleLabel.text = header
-            let hasHeader = (self.httpServerInfo?.securityHeaders[header] ?? nil) is String
-
+            let hasHeader = serverInfo.securityHeaders[header]?.boolValue ?? false
             let icon = hasHeader ? FAIcon.FACheckCircleRegular : FAIcon.FAQuestionCircleRegular
             let color = hasHeader ? UIColor.materialGreen() : UIColor.materialAmber()
             iconLabel.font = icon.font(size: iconLabel.font.pointSize)

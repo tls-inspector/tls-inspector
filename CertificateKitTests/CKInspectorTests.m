@@ -23,6 +23,11 @@
         if (certificates.count == 3) {
             XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
+        CKHTTPServerInfo * serverInfo = response.httpServer;
+        XCTAssertNotNil(serverInfo);
+        for (NSString * headerKey in serverInfo.securityHeaders.allKeys) {
+            XCTAssertTrue(serverInfo.securityHeaders[headerKey].boolValue);
+        }
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
