@@ -34,9 +34,6 @@
 		3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */; };
 		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; platformFilter = ios; };
-		3C3C9533297DFD110084B7D9 /* BasicInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */; };
-		3C3C9535297E01460084B7D9 /* AdvancedInspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9534297E01460084B7D9 /* AdvancedInspectTest.swift */; };
-		3C3C9537297E04BD0084B7D9 /* CryptoEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */; };
 		3C3DE1FE29B823A90025DA94 /* NSString+ASN1OctetString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */; };
 		3C3DE1FF29B823A90025DA94 /* NSString+ASN1OctetString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */; };
 		3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */; };
@@ -87,7 +84,6 @@
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
 		3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C66083D2A735171008B58E8 /* CKLogging+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
-		3C6E6B38297F71AD007BF8E8 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E6B37297F71AD007BF8E8 /* TestUtils.swift */; };
 		3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */; };
 		3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */; };
@@ -320,9 +316,6 @@
 		3C36B3B220412564005C66E8 /* CKOCSPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPResponse.h; sourceTree = "<group>"; };
 		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
 		3C3C9525297DFA730084B7D9 /* TLS InspectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TLS InspectorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInspectTest.swift; sourceTree = "<group>"; };
-		3C3C9534297E01460084B7D9 /* AdvancedInspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInspectTest.swift; sourceTree = "<group>"; };
-		3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoEngineTest.swift; sourceTree = "<group>"; };
 		3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+ASN1OctetString.h"; sourceTree = "<group>"; };
 		3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+ASN1OctetString.m"; sourceTree = "<group>"; };
 		3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKitTests.h; sourceTree = "<group>"; };
@@ -375,7 +368,6 @@
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C66083D2A735171008B58E8 /* CKLogging+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKLogging+Private.h"; sourceTree = "<group>"; };
 		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		3C6E6B37297F71AD007BF8E8 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple_ca_bundle.p7b; sourceTree = "<group>"; };
 		3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPServerInfo.h; sourceTree = "<group>"; };
 		3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPServerInfo.m; sourceTree = "<group>"; };
@@ -556,17 +548,6 @@
 				3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */,
 			);
 			path = CTLogs;
-			sourceTree = "<group>";
-		};
-		3C3C9526297DFA730084B7D9 /* TLS InspectorUITests */ = {
-			isa = PBXGroup;
-			children = (
-				3C3C9532297DFD110084B7D9 /* BasicInspectTest.swift */,
-				3C3C9534297E01460084B7D9 /* AdvancedInspectTest.swift */,
-				3C3C9536297E04BD0084B7D9 /* CryptoEngineTest.swift */,
-				3C6E6B37297F71AD007BF8E8 /* TestUtils.swift */,
-			);
-			path = "TLS InspectorUITests";
 			sourceTree = "<group>";
 		};
 		3C5F465D239DAE7D00B3A727 /* Localization */ = {
@@ -886,7 +867,6 @@
 				3CDC14A823B0453B0053932F /* Inspect Website */,
 				3C65DADB1E836BE9004AD96D /* CertificateKit */,
 				3CF397421EB50E0900E8DBF4 /* CertificateKitTests */,
-				3C3C9526297DFA730084B7D9 /* TLS InspectorUITests */,
 				3CFAE6D71CA8440400CD946B /* Products */,
 				A1BA8BE21E8EB2B30004FB0F /* Frameworks */,
 			);
@@ -1360,10 +1340,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C3C9535297E01460084B7D9 /* AdvancedInspectTest.swift in Sources */,
-				3C3C9533297DFD110084B7D9 /* BasicInspectTest.swift in Sources */,
-				3C3C9537297E04BD0084B7D9 /* CryptoEngineTest.swift in Sources */,
-				3C6E6B38297F71AD007BF8E8 /* TestUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
