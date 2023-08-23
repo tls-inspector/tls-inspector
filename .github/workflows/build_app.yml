@@ -87,6 +87,7 @@ jobs:
         id: install_swiftlint
         if: ${{ steps.restore_swiftlint.outputs.cache-hit != 'true' }}
         run: |
+          echo ${PATH}
           mkdir -p /opt/homebrew/bin
           SWIFTLINT_URL=$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .browser_download_url')
           cd /opt/homebrew/bin
