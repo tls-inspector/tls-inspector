@@ -133,6 +133,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "OPENSSL_CACHE_KEY=openssl_$(cat CertificateKit/build/openssl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
+          echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
           echo "CTLOG_CACHE_KEY=ctlog_$(cat CertificateKit/CTLogs/ct_log_version.txt)" >> "$GITHUB_OUTPUT"
           echo "ROOTCA_CACHE_KEY=rootca_$(cat CertificateKit/RootCACerts/bundle_version.txt)" >> "$GITHUB_OUTPUT"
           echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
@@ -197,6 +199,22 @@ jobs:
         run: |
           cd "TLS Inspector/Localization"
           python3 lang.py
+
+      - name: Restore Cached OpenSSL
+        id: restore_openssl
+        uses: actions/cache@v3
+        with:
+          key: ${{ steps.cache_key.outputs.OPENSSL_CACHE_KEY }}
+          path: |
+            CertificateKit/openssl.xcframework
+
+      - name: Restore Cached curl
+        id: restore_curl
+        uses: actions/cache@v3
+        with:
+          key: ${{ steps.cache_key.outputs.CURL_CACHE_KEY }}
+          path: |
+            CertificateKit/curl.xcframework
 
       - name: Build
         id: build
