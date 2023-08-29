@@ -4,6 +4,8 @@
 
 @implementation CKInspectorTests
 
+#define TEST_TIMEOUT 10 // Seconds
+
 + (void) testBasicHTTPSWithEngine:(CRYPTO_ENGINE)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8401"];
     parameters.cryptoEngine = engine;
@@ -34,7 +36,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -64,7 +66,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -74,7 +76,7 @@
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"127.0.0.1:8402"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
-    dispatch_queue_t inspectQueue = dispatch_queue_create("testBareTLS", NULL);
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testBareTLSIPv4", NULL);
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
@@ -95,7 +97,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -105,7 +107,7 @@
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"[0:0:0:0:0:0:0:1]:8402"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
-    dispatch_queue_t inspectQueue = dispatch_queue_create("testBareTLS", NULL);
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testBareTLSIPv6", NULL);
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
@@ -126,7 +128,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -146,7 +148,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -176,7 +178,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -206,7 +208,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -225,7 +227,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -255,7 +257,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -291,7 +293,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -303,7 +305,7 @@
     parameters.checkCRL = false;
     parameters.checkOCSP = true;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
-    dispatch_queue_t inspectQueue = dispatch_queue_create("testRevokedCRL", NULL);
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testRevokedOCSP", NULL);
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
@@ -327,7 +329,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -336,10 +338,8 @@
 + (void) testExpiredLeafWithEngine:(CRYPTO_ENGINE)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8410"];
     parameters.cryptoEngine = engine;
-    parameters.checkCRL = false;
-    parameters.checkOCSP = true;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
-    dispatch_queue_t inspectQueue = dispatch_queue_create("testRevokedCRL", NULL);
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testExpiredLeaf", NULL);
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
@@ -360,7 +360,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
@@ -369,10 +369,8 @@
 + (void) testExpiredIntWithEngine:(CRYPTO_ENGINE)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8411"];
     parameters.cryptoEngine = engine;
-    parameters.checkCRL = false;
-    parameters.checkOCSP = true;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
-    dispatch_queue_t inspectQueue = dispatch_queue_create("testRevokedCRL", NULL);
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testExpiredInt", NULL);
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
@@ -395,7 +393,7 @@
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
-    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)));
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
     if (!passed.boolValue) {
         XCTFail("Timeout without error");
     }
