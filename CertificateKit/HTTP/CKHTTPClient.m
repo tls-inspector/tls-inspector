@@ -41,18 +41,15 @@
         int headersEndIdx = -1;
         NSData * headerBuf = (NSData*)content;
         if (headerBuf == nil || headerBuf.length == 0) {
-            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             return;
         }
 
         for (int i = 0; i < headerBuf.length-3;) {
-            printf("FIXME: i=%i length=%lu max=%lu\n", i, (unsigned long)headerBuf.length, headerBuf.length-3);
             if ([headerBuf byteAtIndex:i] == '\r' &&
                 [headerBuf byteAtIndex:i+1] == '\n' &&
                 [headerBuf byteAtIndex:i+2] == '\r' &&
                 [headerBuf byteAtIndex:i+3] == '\n') {
                 headersEndIdx = i;
-                printf("FIXME: headersEndIdx %i\n", headersEndIdx);
                 hasAllHeaders = YES;
                 break;
             }
@@ -60,22 +57,17 @@
         }
 
         if (hasAllHeaders) {
-            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             [headerData appendData:[headerBuf subdataWithRange:NSMakeRange(0, headersEndIdx)]];
-            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
-            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:statusCode.unsignedIntegerValue headers:headers];
             PDebug(@"[nw_connection] Fetched %lu headers from HTTP server", headers.allHeaders.count);
             completed(response);
             return;
         } else if (headerData.length+headerBuf.length > HTTP_MAX_HEADER_SIZE) {
-            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             PError(@"HTTP header data exceeded maximum size");
             completed(nil);
             return;
         } else {
-            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             [headerData appendData:headerBuf];
             [CKHTTPClient connectionReadLoop:connection statusCode:statusCode mutableData:headerData completed:completed];
         }

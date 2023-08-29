@@ -87,9 +87,7 @@
                 return;
         }
 
-        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         [self.inspector executeWithParameters:self.internalParameters completed:^(CKInspectResponse * response, NSError * error) {
-            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             completed(response, error);
         }];
     });
