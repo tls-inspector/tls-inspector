@@ -217,9 +217,9 @@
                         PDebug(@"NetworkFramework getter collected certificate information in %fns", elapsedTimeInNanoseconds);
                     }
 
-                    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:serverInfo], nil);
                     nw_connection_cancel(connection);
                     PDebug(@"Cancelling connection - goodbye!");
+                    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:serverInfo], nil);
                 }];
                 break;
             }

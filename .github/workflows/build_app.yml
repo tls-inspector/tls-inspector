@@ -35,7 +35,7 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - name: "Prepare Environment"
+      - name: "Prepare Build Environment"
         id: prepare
         run: |
           gpg --import CertificateKit/build/openssl-ios/openssl.asc
@@ -72,7 +72,7 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - name: "Prepare Environment"
+      - name: "Prepare Build Environment"
         id: prepare
         run: |
           gpg --import CertificateKit/build/curl-ios/curl.asc
@@ -128,8 +128,8 @@ jobs:
           security import dev.key -t priv -k ~/Library/Keychains/login.keychain-db -f openssl -A
           rm dev.key dev.crt
       
-      - name: Generate Cache Keys
-        id: cache_key
+      - name: "Prepare Build Environment"
+        id: prepare
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -138,12 +138,14 @@ jobs:
           echo "CTLOG_CACHE_KEY=ctlog_$(cat CertificateKit/CTLogs/ct_log_version.txt)" >> "$GITHUB_OUTPUT"
           echo "ROOTCA_CACHE_KEY=rootca_$(cat CertificateKit/RootCACerts/bundle_version.txt)" >> "$GITHUB_OUTPUT"
           echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
+          echo "IDNACOCOA_CACHE_KEY=idnacocoa_$(grep -a5 "Wevah/IDNA-Cocoa" TLS\ Inspector.xcodeproj/project.pbxproj | grep 'revision =' | cut -d '=' -f2 | awk '{$1=$1};1' | cut -c 1-8)" >> "$GITHUB_OUTPUT"
+          echo "DERIVEDDATA_PATH=$(xcodebuild -project TLS\ Inspector.xcodeproj -showBuildSettings -configuration Debug 2>/dev/null | grep " BUILD_DIR = " | cut -d '=' -f2 | awk '{$1=$1};1' | sed 's%/Build/Products%%g')" >> "$GITHUB_OUTPUT"
 
       - name: Restore Cached SwiftLint
         id: restore_swiftlint
         uses: actions/cache@v3
         with:
-          key: ${{ steps.cache_key.outputs.SWIFTLINT_CACHE_KEY }}
+          key: ${{ steps.prepare.outputs.SWIFTLINT_CACHE_KEY }}
           path: |
             /Users/runner/bin/swiftlint
       
@@ -165,7 +167,7 @@ jobs:
         id: restore_ctlogs
         uses: actions/cache@v3
         with:
-          key: ${{ steps.cache_key.outputs.CTLOG_CACHE_KEY }}
+          key: ${{ steps.prepare.outputs.CTLOG_CACHE_KEY }}
           path: |
             CertificateKit/CTLogs/ct_log_list.min.json
 
@@ -180,7 +182,7 @@ jobs:
         id: restore_rootca
         uses: actions/cache@v3
         with:
-          key: ${{ steps.cache_key.outputs.ROOTCA_CACHE_KEY }}
+          key: ${{ steps.prepare.outputs.ROOTCA_CACHE_KEY }}
           path: |
             CertificateKit/RootCACerts/*.p7b
             CertificateKit/RootCACerts/*.p7b.sig
@@ -204,7 +206,7 @@ jobs:
         id: restore_openssl
         uses: actions/cache@v3
         with:
-          key: ${{ steps.cache_key.outputs.OPENSSL_CACHE_KEY }}
+          key: ${{ steps.prepare.outputs.OPENSSL_CACHE_KEY }}
           path: |
             CertificateKit/openssl.xcframework
 
@@ -212,9 +214,17 @@ jobs:
         id: restore_curl
         uses: actions/cache@v3
         with:
-          key: ${{ steps.cache_key.outputs.CURL_CACHE_KEY }}
+          key: ${{ steps.prepare.outputs.CURL_CACHE_KEY }}
           path: |
             CertificateKit/curl.xcframework
+
+      - name: Restore Swift Packages
+        id: restore_swift_packages
+        uses: actions/cache@v3
+        with:
+          key: ${{ steps.prepare.outputs.IDNACOCOA_CACHE_KEY }}
+          path: |
+            ${{ steps.prepare.outputs.DERIVEDDATA_PATH }}/SourcePackages
 
       - name: Build
         id: build

@@ -46,6 +46,8 @@
 
 - (void) executeOn:(dispatch_queue_t)queue completed:(void (^)(CKInspectResponse *, NSError *))completed {
     dispatch_async(queue, ^{
+        PDebug(@"Executing inspection request on queue %s: %@", dispatch_queue_get_label(queue), self.internalParameters.description);
+
         if (self.internalParameters.ipAddress == nil || self.internalParameters.ipAddress.length == 0) {
             CKResolvedAddress * resovledAddress;
             NSError * resolveError;
@@ -68,8 +70,6 @@
             self.internalParameters.ipAddress = resovledAddress.address;
             self.internalParameters.resolvedAddress = resovledAddress;
         }
-
-        PDebug(@"Starting getter for: %@", self.internalParameters.description);
 
         switch (self.internalParameters.cryptoEngine) {
             case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
