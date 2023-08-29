@@ -226,6 +226,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: "stable"
+          cache-dependency-path: CertificateKit/TestServer/go.sum
 
       - name: Prepare Test Server
         id: testserver_prepare

@@ -206,7 +206,6 @@
                         serverInfo = [CKHTTPServerInfo fromHTTPResponse:response];
                         printf("FIXME: %s:%i\n", __FILE__, __LINE__);
                     }
-                    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:serverInfo], nil);
                     printf("FIXME: %s:%i\n", __FILE__, __LINE__);
 
                     uint64_t endTime = mach_absolute_time();
@@ -222,6 +221,7 @@
                         PDebug(@"NetworkFramework getter collected certificate information in %fns", elapsedTimeInNanoseconds);
                     }
 
+                    completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:serverInfo], nil);
                     nw_connection_cancel(connection);
                     PDebug(@"Cancelling connection - goodbye!");
                 }];

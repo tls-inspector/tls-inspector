@@ -345,7 +345,9 @@
     dispatch_queue_t inspectQueue = dispatch_queue_create("testRevokedCRL", NULL);
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
+    printf("FIXME: %s:%i\n", __FILE__, __LINE__);
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         XCTAssertNil(error);
         XCTAssertNotNil(response);
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
