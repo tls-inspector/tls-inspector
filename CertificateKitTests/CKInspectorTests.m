@@ -349,16 +349,25 @@
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
         printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         XCTAssertNil(error);
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         XCTAssertNotNil(response);
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         XCTAssertTrue(certificates.count >= 2);
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (ExpiredInt)");
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (ExpiredInt)");
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         if (certificates.count == 3) {
+            printf("FIXME: %s:%i\n", __FILE__, __LINE__);
             XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         XCTAssertTrue(certificates[1].isExpired);
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         XCTAssertEqual(response.certificateChain.trustStatus, CKCertificateChainTrustStatusInvalidDate);
+        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
