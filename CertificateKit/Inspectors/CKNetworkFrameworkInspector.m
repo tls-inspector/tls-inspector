@@ -199,11 +199,15 @@
                 PDebug(@"NetworkFramework getter successful");
                 PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %li certificates", parameters.hostAddress, self.chain.remoteAddress, self.chain.protocol, self.chain.cipherSuite, numberOfCertificates);
                 [self getHeadersForConnection:connection queue:nw_dispatch_queue completed:^(CKHTTPResponse * response) {
+                    printf("FIXME: %s:%i\n", __FILE__, __LINE__);
                     CKHTTPServerInfo * serverInfo;
                     if (response != nil) {
+                        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
                         serverInfo = [CKHTTPServerInfo fromHTTPResponse:response];
+                        printf("FIXME: %s:%i\n", __FILE__, __LINE__);
                     }
                     completed([CKInspectResponse responseWithCertificateChain:self.chain httpServerInfo:serverInfo], nil);
+                    printf("FIXME: %s:%i\n", __FILE__, __LINE__);
 
                     uint64_t endTime = mach_absolute_time();
                     if (CKLogging.sharedInstance.level <= CKLoggingLevelDebug) {
