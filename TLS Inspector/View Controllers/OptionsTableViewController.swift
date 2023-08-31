@@ -44,6 +44,14 @@ class OptionsTableViewController: UITableViewController {
             }
             generalSection.cells.append(cell)
         }
+        if let tableCell = self.tableView.dequeueReusableCell(withIdentifier: "Basic") {
+            tableCell.textLabel?.text = lang(key: "App Language")
+            let cell = TableViewCell(tableCell)
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "AppLanguageSegue", sender: nil)
+            }
+            generalSection.cells.append(cell)
+        }
 
         if generalSection.cells.count > 0 {
             return generalSection

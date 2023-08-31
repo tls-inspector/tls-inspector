@@ -21,7 +21,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CKCertificate.h"
-#import "CKServerInfo.h"
+#import "CKIPAddress.h"
 
 /**
  A chain of CKCertificate objects and metadata about the chain
@@ -35,61 +35,61 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
     /**
      The system trusts this certificate.
      */
-    CKCertificateChainTrustStatusTrusted,
+    CKCertificateChainTrustStatusTrusted = 1,
     /**
      The system trusts this certificate chain because one or more of the certificates
      are locally installed and marked as trusted.
      */
-    CKCertificateChainTrustStatusLocallyTrusted,
+    CKCertificateChainTrustStatusLocallyTrusted = 2,
     /**
      The system does not trust this certificate.
      */
-    CKCertificateChainTrustStatusUntrusted,
+    CKCertificateChainTrustStatusUntrusted = 3,
     /**
      The system does not trust this certificate because one or more certificates in the chain
      are expired or not yet valid.
      */
-    CKCertificateChainTrustStatusInvalidDate,
+    CKCertificateChainTrustStatusInvalidDate = 4,
     /**
      The system does not trust this certificate because the server certificate is for a different host.
      */
-    CKCertificateChainTrustStatusWrongHost,
+    CKCertificateChainTrustStatusWrongHost = 5,
     /**
      The system does not trust this certificate because the server certificate is signed using SHA-1.
      */
-    CKCertificateChainTrustStatusSHA1Leaf,
+    CKCertificateChainTrustStatusSHA1Leaf = 6,
     /**
      The system does not trust this certificate because the intermediate certificate is signed using SHA-1.
      */
-    CKCertificateChainTrustStatusSHA1Intermediate,
+    CKCertificateChainTrustStatusSHA1Intermediate = 7,
     /**
      The system does not trust this certificate because it is a self-signed certificate.
      */
-    CKCertificateChainTrustStatusSelfSigned,
+    CKCertificateChainTrustStatusSelfSigned = 8,
     /**
      The system does not trust this certificate because is has been revoked.
      */
-    CKCertificateChainTrustStatusRevokedLeaf,
+    CKCertificateChainTrustStatusRevokedLeaf = 9,
     /**
      The system does not trust this certificate because the intermediate CA has been revoked.
      */
-    CKCertificateChainTrustStatusRevokedIntermediate,
+    CKCertificateChainTrustStatusRevokedIntermediate = 10,
     /**
      The leaf or intermediate certificate is using an RSA bey with fewer than 2048 bits.
      */
-    CKCertificateChainTrustStatusWeakRSAKey,
+    CKCertificateChainTrustStatusWeakRSAKey = 11,
     /**
      The leaf certificate has an issue date longer than 825 days
      */
-    CKCertificateChainTrustStatusIssueDateTooLong,
+    CKCertificateChainTrustStatusIssueDateTooLong = 12,
     /**
      The leaf certificate is missing require key usage permissions
      */
-    CKCertificateChainTrustStatusLeafMissingRequiredKeyUsage,
+    CKCertificateChainTrustStatusLeafMissingRequiredKeyUsage = 13,
     /**
      The root or intermediate authority is known to violate internationally accepted rules
      */
-    CKCertificateChainTrustStatusBadAuthority,
+    CKCertificateChainTrustStatusBadAuthority = 14,
 };
 
 /**
@@ -100,32 +100,18 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 /**
  The remote address for the server
  */
-@property (strong, nonatomic, nonnull) NSString * remoteAddress;
+@property (strong, nonatomic, nonnull) CKIPAddress * remoteAddress;
 
 /**
- The array of certificates belonging to the chain
+ The array of certificates belonging to the chain in the order of least to most specific.
+ For example, 0 = root, 1 = intermediate, 2 = leaf/server
  */
 @property (strong, nonatomic, nonnull) NSArray<CKCertificate *> * certificates;
 
 /**
- The root of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
- */
-@property (strong, nonatomic, nullable) CKCertificate * rootCA;
-
-/**
- The intermediate CA of the certificate chain. Will be nil for chains with only one certificate (I.E. self signed roots)
- */
-@property (strong, nonatomic, nullable) CKCertificate * intermediateCA;
-
-/**
- The server certificate in the chain.
- */
-@property (strong, nonatomic, nullable) CKCertificate * server;
-
-/**
  If the system trusts the certificate chain
  */
-@property (nonatomic) CKCertificateChainTrustStatus trusted;
+@property (nonatomic) CKCertificateChainTrustStatus trustStatus;
 
 /**
  Get the negotiated ciphersuite used to retrieve the chain.

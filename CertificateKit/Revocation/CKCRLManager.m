@@ -21,7 +21,8 @@
 
 #import "CKCRLManager.h"
 #import "CKCurlCommon.h"
-#import <openssl/err.h>
+#import "CKCertificate+Private.h"
+#import "CKLogging+Private.h"
 #import <openssl/x509.h>
 #import <openssl/x509v3.h>
 #import <curl/curl.h>
@@ -86,6 +87,7 @@ struct httpResponseBlock {
     if (X509_CRL_verify(crl, issuerKey) != 1) {
         // CRL Verification failure
         PError(@"CRL verification error");
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_CRL_ERROR userInfo:@{NSLocalizedDescriptionKey: @"CRL verification failed"}];
     }
     
@@ -105,7 +107,6 @@ struct httpResponseBlock {
         reasonASN = X509_REVOKED_get_ext_d2i(revoked, NID_crl_reason, NULL, NULL);
         long reason = ASN1_ENUMERATED_get(reasonASN);
         crlResponse.reason = reason;
-        crlResponse.reasonString = [self reasonString:reason];
     } else if (rv == 0) {
         // Certificate not found
         PDebug(@"CRL Status: Not Found");
@@ -208,7 +209,7 @@ struct httpResponseBlock {
     X509_CRL * crl = NULL;
     crl = d2i_X509_CRL(NULL, (const unsigned char **)&curldata.response, curldata.size);
     if (crl == NULL) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Error decoding CRL response");
         return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_HTTP_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding CRL response"}];;
     }
@@ -272,36 +273,5 @@ size_t crl_write_callback(void * data, size_t size, size_t nmemb, void * userp) 
 
     return realsize;
 }
-
-- (NSString *) reasonString:(long)reason {
-    switch (reason) {
-        case CRL_REASON_NONE:
-            return @"None";
-        case CRL_REASON_UNSPECIFIED:
-            return @"Unspecified";
-        case CRL_REASON_KEY_COMPROMISE:
-            return @"Key compromise";
-        case CRL_REASON_CA_COMPROMISE:
-            return @"CA compromise";
-        case CRL_REASON_AFFILIATION_CHANGED:
-            return @"Affiliation changed";
-        case CRL_REASON_SUPERSEDED:
-            return @"Superseded";
-        case CRL_REASON_CESSATION_OF_OPERATION:
-            return @"Cessation of operation";
-        case CRL_REASON_CERTIFICATE_HOLD:
-            return @"Certificate hold";
-        case CRL_REASON_REMOVE_FROM_CRL:
-            return @"Remove from CRL";
-        case CRL_REASON_PRIVILEGE_WITHDRAWN:
-            return @"Privilege withdrawn";
-        case CRL_REASON_AA_COMPROMISE:
-            return @"AA compromise";
-        default:
-            return @"Unknown";
-    }
-}
-
-INSERT_OPENSSL_ERROR_METHOD
 
 @end

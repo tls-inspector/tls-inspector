@@ -54,11 +54,6 @@ typedef NS_ENUM(NSUInteger, CKOCSPResponseStatus) {
 @property (nonatomic) CKOCSPResponseStatus status;
 
 /**
- The reason given by the OCSP responder for a revoked certificate (if any). Only applies to revoked certificates.
- */
-@property (strong, nonatomic, nullable) NSString * reasonString;
-
-/**
  The reason code given by the OCSP responder for a revoked certificate (if any). Only applies to revoked certificates.
  */
 @property (nonatomic) NSUInteger reason;

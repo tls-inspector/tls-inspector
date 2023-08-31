@@ -20,11 +20,14 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKRevoked.h"
+#import "CKOCSPResponse.h"
+#import "CKCRLResponse.h"
+#import <openssl/x509v3.h>
 
 @interface CKRevoked ()
 
 @property (nonatomic, readwrite) BOOL isRevoked;
-@property (strong, nonatomic, nullable, readwrite) NSString * reasonString;
+@property (nonatomic, readwrite) CKRevokedReason reason;
 @property (strong, nonatomic, nullable, readwrite) NSDate * revokedOn;
 @property (nonatomic, readwrite) CKRevokedUsing revokedUsing;
 @property (strong, nonatomic, nullable, readwrite) CKOCSPResponse * ocspResponse;
@@ -50,7 +53,7 @@
         
         if (ocspResponse.status == CKOCSPResponseStatusRevoked) {
             revoked.isRevoked = YES;
-            revoked.reasonString = ocspResponse.reasonString;
+            revoked.reason = [CKRevoked reasonFromCRLReason:ocspResponse.reason];
         } else {
             revoked.isRevoked = NO;
         }
@@ -62,9 +65,39 @@
         if (crlResponse.status == CKCRLResponseStatusRevoked) {
             revoked.revokedOn = crlResponse.revokedOn;
             revoked.isRevoked = YES;
+            revoked.reason = [CKRevoked reasonFromCRLReason:crlResponse.reason];
         }
     }
     return revoked;
+}
+
++ (CKRevokedReason) reasonFromCRLReason:(NSUInteger)crlReason {
+    switch (crlReason) {
+        case CRL_REASON_NONE:
+            return CKRevokedReasonNone;
+        case CRL_REASON_UNSPECIFIED:
+            return CKRevokedReasonUnspecified;
+        case CRL_REASON_KEY_COMPROMISE:
+            return CKRevokedReasonKeyCompromise;
+        case CRL_REASON_CA_COMPROMISE:
+            return CKRevokedReasonCACompromise;
+        case CRL_REASON_AFFILIATION_CHANGED:
+            return CKRevokedReasonAffiliationChanged;
+        case CRL_REASON_SUPERSEDED:
+            return CKRevokedReasonSuperseded;
+        case CRL_REASON_CESSATION_OF_OPERATION:
+            return CKRevokedReasonCessationOfOperation;
+        case CRL_REASON_CERTIFICATE_HOLD:
+            return CKRevokedReasonCertificateHold;
+        case CRL_REASON_REMOVE_FROM_CRL:
+            return CKRevokedReasonRemoveFromCRL;
+        case CRL_REASON_PRIVILEGE_WITHDRAWN:
+            return CKRevokedReasonPrivilegeWithdrawn;
+        case CRL_REASON_AA_COMPROMISE:
+            return CKRevokedReasonAACompromise;
+        default:
+            return CKRevokedReasonUnknown;
+    }
 }
 
 @end

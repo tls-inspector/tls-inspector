@@ -19,7 +19,7 @@ class RootCACertificatesTableViewController: UITableViewController {
         self.buildTable()
 
         // Timeout
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 100) {
             if !self.isUpdating {
                 return
             }

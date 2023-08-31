@@ -20,11 +20,11 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKRootCACertificateBundleManager.h"
+#import "CKLogging+Private.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <openssl/evp.h>
 #import <openssl/pem.h>
 #import <openssl/bio.h>
-#import <openssl/err.h>
 
 static id _instance;
 
@@ -47,8 +47,6 @@ static id _instance;
 @end
 
 @implementation CKRootCACertificateBundleManager
-
-INSERT_OPENSSL_ERROR_METHOD
 
 - (id) init {
     self = [super init];
@@ -426,12 +424,12 @@ CLEANUP:
     EVP_PKEY *pubKey = PEM_read_bio_PUBKEY(pubKeyBio, NULL, NULL, NULL);
     if (pubKey == NULL) {
         PError(@"[rootca] Error loading rootca signing key");
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         goto CLEANUP;
     }
     if (!EVP_DigestVerifyInit(mctx, &pctx, EVP_sha256(), NULL, pubKey)) {
         PError(@"[rootca] Error loading EVP digest");
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         goto CLEANUP;
     }
     ret = EVP_DigestVerify(mctx, signatureData.bytes, signatureData.length, fileData.bytes, fileData.length);

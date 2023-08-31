@@ -22,6 +22,8 @@
 #import "CKCertificateBundle.h"
 #import "NSString+ASN1OctetString.h"
 #import "NSData+HexString.h"
+#import "CKCertificate+Private.h"
+#import "CKLogging+Private.h"
 #include <openssl/x509.h>
 #include <openssl/pem.h>
 #include <openssl/bio.h>
@@ -49,7 +51,7 @@
     p7 = PKCS7_new();
     if (p7 == NULL) {
         PError(@"Error loading ca bundle: %@", name);
-        PRINT_OPENSSL_ERROR
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         if (errPtr != nil)
             *errPtr = MAKE_ERROR(100, @"Error initalizing PKCS7 object");
         return nil;
@@ -57,7 +59,7 @@
     p7i = PEM_read_bio_PKCS7(pemBio, &p7, NULL, NULL);
     if (p7i == NULL) {
         PError(@"Error loading ca bundle: %@", name);
-        PRINT_OPENSSL_ERROR
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         if (errPtr != nil)
             *errPtr = MAKE_ERROR(100, @"Error reading PKCS7 file");
         return nil;
@@ -110,7 +112,7 @@
         x = sk_X509_value(certs, i);
         if (!X509_STORE_add_cert(caStore, x)) {
             PError(@"Error adding certificate from bundle to store: %@", name);
-            PRINT_OPENSSL_ERROR
+            [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
             if (errPtr != nil)
                 *errPtr = MAKE_ERROR(100, @"Error adding certificate from PKCS7 bundle");
             return nil;
@@ -150,7 +152,7 @@
         return false;
     }
 
-    X509 * target = (X509 *)certificates[0].X509Certificate;
+    X509 * target = certificates[0].X509Certificate;
     STACK_OF(X509) * intermediates = sk_X509_new(NULL);
     for (int i = 1; i < certificates.count; i++) {
         CKCertificate * certificate = certificates[i];
@@ -166,7 +168,7 @@
 
     STACK_OF(X509) * chain = X509_build_chain(target, intermediates, caStore, 0, NULL, NULL);
     if (chain == NULL) {
-        PRINT_OPENSSL_ERROR
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
     }
     return chain != NULL;
 }

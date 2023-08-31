@@ -32,17 +32,17 @@ FOUNDATION_EXPORT const unsigned char CertificateKitVersionString[];
 #import <CertificateKit/CKCertificate.h>
 #import <CertificateKit/CKCertificatePublicKey.h>
 #import <CertificateKit/CKCertificateChain.h>
-#import <CertificateKit/CKServerInfo.h>
-#import <CertificateKit/CKGetter.h>
+#import <CertificateKit/CKHTTPServerInfo.h>
 #import <CertificateKit/CKRevoked.h>
-#import <CertificateKit/CKOCSPResponse.h>
-#import <CertificateKit/CKCRLResponse.h>
 #import <CertificateKit/CKInspectParameters.h>
-#import <CertificateKit/CKGetterParameters.h>
+#import <CertificateKit/CKInspectResponse.h>
+#import <CertificateKit/CKInspectRequest.h>
+#import <CertificateKit/CKInspectParameters.h>
 #import <CertificateKit/CKLogging.h>
 #import <CertificateKit/CKCertificateBundle.h>
 #import <CertificateKit/CKRootCACertificateBundleManager.h>
 #import <CertificateKit/CKSignedCertificateTimestamp.h>
+#import <CertificateKit/CKIPAddress.h>
 
 /**
  Interface for global CertificateKit methods.
@@ -76,6 +76,11 @@ typedef NS_ENUM(NSInteger, CKCertificateError) {
  @return A string representing the libcurl version
  */
 + (NSString * _Nonnull) libcurlVersion;
+
+/**
+ The default ciphersuite for OpenSSL
+ */
++ (NSString * _Nonnull) defaultCiphersuite;
 
 /**
  Is a HTTP proxy configured on the device

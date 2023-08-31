@@ -20,6 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKCertificatePublicKey.h"
+#import "CKCertificate+Private.h"
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
 
@@ -33,7 +34,7 @@
 @implementation CKCertificatePublicKey
 
 + (CKCertificatePublicKey *) infoFromCertificate:(CKCertificate *)cert {
-    X509_PUBKEY * pubkey = X509_get_X509_PUBKEY((X509 *)cert.X509Certificate);
+    X509_PUBKEY * pubkey = X509_get_X509_PUBKEY(cert.X509Certificate);
     X509_ALGOR * keyType;
     EVP_PKEY * ppkey = X509_PUBKEY_get0(pubkey);
     int bits = EVP_PKEY_bits(ppkey);

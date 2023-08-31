@@ -22,9 +22,10 @@
 #import "CertificateKit.h"
 #import "CKOCSPManager.h"
 #import "CKCurlCommon.h"
+#import "CKCertificate+Private.h"
+#import "CKLogging+Private.h"
 #import <openssl/x509.h>
 #import <openssl/ocsp.h>
-#import <openssl/err.h>
 #import <curl/curl.h>
 #import "NSString+SplitFirst.h"
 
@@ -84,6 +85,7 @@ struct httpResponseBlock {
     unsigned char * request_data = NULL;
     int len = i2d_OCSP_REQUEST(request, &request_data);
     if (len == 0) {
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Error getting ASN bytes from OCSP request object");
         return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Unable to create OCSP request"}];;
     }
@@ -112,7 +114,7 @@ struct httpResponseBlock {
     ASN1_GENERALIZEDTIME * thisUP;
     ASN1_GENERALIZEDTIME * nextUP;
     if (!OCSP_resp_find_status(resp, certID, &status, &reason, &time, &thisUP, &nextUP)) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Unable to find status in OCSP response");
         return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid OCSP response."}];;
     }
@@ -130,7 +132,6 @@ struct httpResponseBlock {
             response.status = CKOCSPResponseStatusRevoked;
             PDebug(@"OCSP certificate status REVOKED");
             response.reason = reason;
-            response.reasonString = [NSString stringWithUTF8String:OCSP_crl_reason_str(reason)];
             break;
     }
 
@@ -242,7 +243,7 @@ struct httpResponseBlock {
     OCSP_RESPONSE * ocspResponse = [self decodeResponse:[[NSData alloc] initWithBytes:curldata.response length:curldata.size]];
     free(curldata.response);
     if (ocspResponse == NULL) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Error decoding OCSP response");
         return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];;
     }
@@ -254,7 +255,7 @@ struct httpResponseBlock {
     
     OCSP_BASICRESP * basicResp = OCSP_response_get1_basic(ocspResponse);
     if (basicResp == NULL) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Error getting basic OCSP response from OCSP response object");
         return [NSError errorWithDomain:@"CKOCSPManager" code:OCSP_ERROR_DECODE_ERROR userInfo:@{NSLocalizedDescriptionKey: @"Error decoding OCSP response."}];;
     }
@@ -317,7 +318,5 @@ size_t ocsp_write_callback(void * data, size_t size, size_t nmemb, void * userp)
 
     return realsize;
 }
-
-INSERT_OPENSSL_ERROR_METHOD
 
 @end

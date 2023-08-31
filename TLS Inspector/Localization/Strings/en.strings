@@ -11,6 +11,7 @@ Algorithm	Algorithm
 Algorithms	Algorithms
 Alternate Names	Alternate Names
 App Icons	App Icons
+App Language	App Language
 AppIcon::Dark	Dark
 AppIcon::Default	Default
 AppIcon::Light	Light
@@ -299,7 +300,6 @@ Country::YT	Mayotte
 Country::ZA	South Africa
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
-Crypto Engine	Crypto Engine
 Danger	Danger
 Dangerous	Dangerous
 Delete	Delete
@@ -349,6 +349,11 @@ KeyAlgorithm::dsaEncryption	DSA
 KeyAlgorithm::id-ecPublicKey	ECDSA
 KeyAlgorithm::rsaEncryption	RSA
 Keying Material	Keying Material
+Language Updated	Language Updated
+Language::de	German
+Language::en	English
+Language::es	Spanish
+Language::nl	Dutch
 Loading...	Loading…
 Locally Trusted	Locally Trusted
 Locally Trusted Chain	Locally Trusted Chain
@@ -363,6 +368,7 @@ More Info	More Info
 Negotiated Ciphersuite	Negotiated Ciphersuite
 Negotiated Version	Negotiated Version
 Network	Network
+Network Engine	Network Engine
 Next	Next
 No	No
 No Supported URL Found	No Supported URL Found
@@ -394,6 +400,7 @@ Renew Certificate for {domain}	Renew Certificate for {0}
 Report Issue on GitHub	Report Issue on GitHub
 Report a Bug	Report a Bug
 Request a Feature	Request a Feature
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Revoked On
 Root CA Certificates	Root CA Certificates
 SHA-256	SHA-256
@@ -460,6 +467,7 @@ Untrusted Chain	Untrusted Chain
 Updating	Updating
 Updating...	Updating...
 Use IP Version	Use IP Version
+Use system language	Use system language
 Use the Reminders app to customize the reminder	Use the Reminders app to customize the reminder
 Valid For	Valid For
 Valid From	Valid From
@@ -480,15 +488,17 @@ What kind of feedback would you like to submit?	What kind of feedback would you 
 Will Expire In	Will Expire In
 Yes	Yes
 You can modify the reminder in the reminders app.	You can modify the reminder in the reminders app.
+You must fully close and reopen the app for the new language to take effect.	You must fully close and reopen the app for the new language to take effect.
 You must inspect at least one site with verbose logging enabled before you can submit logs.	You must inspect at least one site with verbose logging enabled before you can submit logs.
 advanced_settings_nag	These settings are for advanced troubleshooting. Incorrect values can prevent TLS Inspector from working correctly.
+app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
-certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy crypto engine.
+certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy network engine.
 copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2023 Ian Spence.
 crypto_engine::network_framework	Apple - Modern
 crypto_engine::openssl	OpenSSL
 crypto_engine::secure_transport	Apple - Legacy
-crypto_engine_footer	Changing the crypto engine may result in TLS Inspector showing different connection information than what is used by your iOS device. The modern Apple engine requires iOS 12 or later. TLS 1.3 is not available on the legacy Apple engine.
+crypto_engine_footer	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device. TLS 1.3 is not available on the legacy Apple engine.
 date_unit_plural::day	days
 date_unit_plural::hour	hours
 date_unit_plural::minute	minutes
@@ -538,7 +548,7 @@ microsoft	Microsoft
 mozilla	Mozilla
 proxy_warning	An HTTP Proxy is configured. TLS Inspector is not compatible with HTTP Proxies and it must be disabled from the systems WiFi settings.
 rootca_error	Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.
-rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.
+rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by tlsinspector.com and is digitally signed.
 sanType::DNS	DNS
 sanType::Directory	Directory
 sanType::Email	Email

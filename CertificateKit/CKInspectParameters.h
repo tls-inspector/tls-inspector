@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSString * ciphers;
 
 /**
- Compare this instance of CKGetterParameters with the provided other.
+ Compare this instance of CKInspectParameters with the provided other.
  */
 - (BOOL) isEqual:(CKInspectParameters * _Nullable)other;
 
@@ -98,6 +98,16 @@ NS_ASSUME_NONNULL_BEGIN
  Parse the given dictionary into a parameters object. Will return nil if any values are missing or incorrect.
  */
 + (CKInspectParameters * _Nullable) fromDictionary:(NSDictionary<NSString *, id> * _Nonnull)d;
+
+/**
+ Create a new parameter object from the given query
+ */
++ (CKInspectParameters * _Nonnull) fromQuery:(NSString * _Nonnull)query;
+
+/**
+ Returns a copy of the parameters object
+ */
+- (CKInspectParameters * _Nonnull) copy;
 
 @end
 

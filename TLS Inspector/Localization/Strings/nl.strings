@@ -18,6 +18,8 @@ Algorithm	Algoritme
 Algorithms	Algoritmes
 Alternate Names	Alternatieve Namen
 App Icons	App Icons
+# TODO
+App Language	App Language
 AppIcon::Dark	Donker
 AppIcon::Default	Standaard
 AppIcon::Light	Licht
@@ -306,7 +308,6 @@ Country::YT	Mayotte
 Country::ZA	Zuid Afrika
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
-Crypto Engine	Crypto Driver
 Danger	Gevaar
 Dangerous	Gevaarlijk
 Delete	Wissen
@@ -356,6 +357,16 @@ KeyAlgorithm::dsaEncryption	DSA
 KeyAlgorithm::id-ecPublicKey	ECDSA
 KeyAlgorithm::rsaEncryption	RSA
 Keying Material	Versleutelingsmateriaal
+# TODO
+Language Updated	Language Updated
+# TODO
+Language::de	German
+# TODO
+Language::en	English
+# TODO
+Language::es	Spanish
+# TODO
+Language::nl	Dutch
 Loading...	Laden...
 Locally Trusted	Lokaal Vertrouwd
 Locally Trusted Chain	Lokaal Vertrouwde Keten
@@ -370,6 +381,7 @@ More Info	Meer Info
 Negotiated Ciphersuite	Overeengekomen Ciphersuite
 Negotiated Version	Overeengekomen Versie
 Network	Netwerk
+Network Engine	Netwerk Driver
 Next	Volgende
 No	Nee
 No Supported URL Found	Geen Ondersteunde URL Gevonden
@@ -401,6 +413,8 @@ Renew Certificate for {domain}	Vernieuw Certificaat voor {0}
 Report Issue on GitHub	Meld Probleem op GitHub
 Report a Bug	Meld een Bug
 Request a Feature	Verzoek om een Uitbreiding
+# TODO
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Ingetrokken Op
 Root CA Certificates	Root CA Certificaten
 SHA-256	SHA-256
@@ -467,6 +481,8 @@ Untrusted Chain	Niet Vertrouwde Keten
 Updating	Updating
 Updating...	Updating...
 Use IP Version	Gebruik IP Versie
+# TODO
+Use system language	Use system language
 Use the Reminders app to customize the reminder	Gebruik de Reminders app om de herinnering aan te passen
 Valid For	Geldig voor
 Valid From	Geldig Vanaf
@@ -487,8 +503,12 @@ What kind of feedback would you like to submit?	Wat voor soort terugkoppeling wi
 Will Expire In	Verloopt in
 Yes	Ja
 You can modify the reminder in the reminders app.	U kunt de herinnering wijzigen in de Reminders app.
+# TODO
+You must fully close and reopen the app for the new language to take effect.	You must fully close and reopen the app for the new language to take effect.
 You must inspect at least one site with verbose logging enabled before you can submit logs.	U dient ten minste ?n site met uitgebreide logging te inspecteren voordat u logs kunt opsturen.
 advanced_settings_nag	Deze instellingen zijn voor geavanceerd probleemherstel. Onjuiste waardes kunnen TLS Inspector niet goed laten werken.
+# TODO
+app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
 certificate_status_footer	OCSP-raadpleging uitzetten kan leiden tot onjuist vertrouwen. CRL-raadpleging kan meer tijd kosten en meer data ophalen. Als OCSP-raadpleging is uitgezet kan dit nog steeds plaatsvinden bij gebruik van de oude Apple crypto driver.
 copyright_license_footer	TLS Inspector is vrij beschikbare software met een GNU GPLv3 licentie. TLS Inspector is copyright ? 2016-2023 Ian Spence.
@@ -546,7 +566,7 @@ microsoft	Microsoft
 mozilla	Mozilla
 proxy_warning	Er is een HTTP Proxy geconfigureerd. TLS Inspector kan niet met HTTP Proxies overweg, deze moet worden uitgezet in de Wi-Fi systeeminstellingen.
 rootca_error	Veilig checken van bundelupdates lukt niet. Controleer of er een update voor TLS Inspector beschikbaar is in de App Store.
-rootca_footer	Updates van root CA certificaatbundels komen niet vaak voor en zijn sowieso onderdeel van TLS Inspector updates. Bundelupdates worden aangeboden via GitHub en zijn digitaal ondertekend.
+rootca_footer	Updates van root CA certificaatbundels komen niet vaak voor en zijn sowieso onderdeel van TLS Inspector updates. Bundelupdates worden aangeboden via tlsinspector.com en zijn digitaal ondertekend.
 sanType::DNS	DNS
 sanType::Directory	Directory
 sanType::Email	E-mail

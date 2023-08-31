@@ -22,11 +22,10 @@
 #import "CKCertificate.h"
 #import "NSDate+ASN1_TIME.h"
 #import "NSString+ASN1OctetString.h"
-
+#import "CKLogging+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
-#include <openssl/err.h>
 #include <openssl/bio.h>
 #include <openssl/bn.h>
 #include <CommonCrypto/CommonCrypto.h>
@@ -54,8 +53,6 @@
 @end
 
 @implementation CKCertificate
-
-INSERT_OPENSSL_ERROR_METHOD
 
 + (CKCertificate * _Nullable) fromSecCertificateRef:(SecCertificateRef _Nonnull)cert {
     NSData * certificateData = (NSData *)CFBridgingRelease(SecCertificateCopyData(cert));
@@ -301,7 +298,7 @@ INSERT_OPENSSL_ERROR_METHOD
 
     unsigned int fingerprint_size = sizeof(fingerprint);
     if (X509_digest(self.certificate, digest, fingerprint, &fingerprint_size) < 0) {
-        [self openSSLError];
+        [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
         PError(@"Unable to generate certificate fingerprint");
         return nil;
     }

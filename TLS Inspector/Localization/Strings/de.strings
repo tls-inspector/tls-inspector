@@ -13,6 +13,8 @@ Alternate Names	Alternative Namen
 # TODO
 App Icons	App Icons
 # TODO
+App Language	App Language
+# TODO
 AppIcon::Dark	Dark
 # TODO
 AppIcon::Default	Default
@@ -322,7 +324,6 @@ Country::YT	Mayotte
 Country::ZA	Südafrika
 Country::ZM	Sambia
 Country::ZW	Simbabwe
-Crypto Engine	Crypto-Engine
 # TODO
 Danger	Danger
 Dangerous	Dangerous
@@ -377,6 +378,16 @@ KeyAlgorithm::id-ecPublicKey	ECDSA
 KeyAlgorithm::rsaEncryption	RSA
 # TODO
 Keying Material	Keying Material
+# TODO
+Language Updated	Language Updated
+# TODO
+Language::de	German
+# TODO
+Language::en	English
+# TODO
+Language::es	Spanish
+# TODO
+Language::nl	Dutch
 Loading...	Laden…
 Locally Trusted	Lokal vertrauenswürdig
 Locally Trusted Chain	Lokal vertrauenswürdige Kette
@@ -393,6 +404,7 @@ More Info	Mehr Information
 Negotiated Ciphersuite	Verhandelte Ciphersuite
 Negotiated Version	Verhandelte Version
 Network	Netzwerk
+Network Engine	Netzwerk-Engine
 Next	Weiter
 No	Nein
 No Supported URL Found	Keine unterstützte URL gefunden
@@ -425,6 +437,8 @@ Renew Certificate for {domain}	Erneuere Zertifikat für {0}
 Report Issue on GitHub	Melde Fehler auf GitHub
 Report a Bug	Fehler melden
 Request a Feature	Feature anfragen
+# TODO
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Annulliert am
 # TODO
 Root CA Certificates	Root CA Certificates
@@ -501,6 +515,8 @@ Updating	Updating
 # TODO
 Updating...	Updating...
 Use IP Version	Verwende IP-Version
+# TODO
+Use system language	Use system language
 Use the Reminders app to customize the reminder	Bearbeite die Erinnerung in der Erinnerungen-App
 Valid For	Gültig für
 Valid From	Gültig ab
@@ -522,8 +538,12 @@ What kind of feedback would you like to submit?	Welche Art an Feedback möchtest
 Will Expire In	Wird ablaufen in
 Yes	Ja
 You can modify the reminder in the reminders app.	Du kannst die Erinnerung in der Erinnerungen-App bearbeiten.
+# TODO
+You must fully close and reopen the app for the new language to take effect.	You must fully close and reopen the app for the new language to take effect.
 You must inspect at least one site with verbose logging enabled before you can submit logs.	Du musst mindestens eine Analyse mit Protokollierung durchgeführt haben, um ein Protokoll zu schicken.
 advanced_settings_nag	Diese Einstellungen sind für erweiterte Fehlerbehebung gedacht. Falsche Einstellungen können TLS Inspector an einer korrekten Funktionsweise hindern.
+# TODO
+app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 # TODO
 apple	Apple
 certificate_status_footer	OCSP-Abfragen deaktivieren kann die Privatsphäre erhöhen, verringert jedoch die Datenqualität. CRL-Überprüfung aktivieren kann zu langsameren Abfragen und erhöhtem Datenverbrauch führen.
@@ -587,7 +607,7 @@ proxy_warning	Ein HTTP-Proxy ist konfiguriert. TLS Inspector ist nicht mit mit H
 # TODO
 rootca_error	Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.
 # TODO
-rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by GitHub and is digitally signed.
+rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by tlsinspector.com and is digitally signed.
 sanType::DNS	DNS
 sanType::Directory	Verzeichnis
 sanType::Email	E-Mail

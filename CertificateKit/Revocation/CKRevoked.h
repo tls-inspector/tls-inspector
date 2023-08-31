@@ -20,13 +20,29 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKOCSPResponse.h"
-#import "CKCRLResponse.h"
 
 /**
  An object describing information about a certificates revocation status.
  */
 @interface CKRevoked : NSObject
+
+/**
+ Possible reasons why a certificate can be revoked
+ */
+typedef NS_ENUM(NSUInteger, CKRevokedReason) {
+    CKRevokedReasonNone,
+    CKRevokedReasonUnspecified,
+    CKRevokedReasonKeyCompromise,
+    CKRevokedReasonCACompromise,
+    CKRevokedReasonAffiliationChanged,
+    CKRevokedReasonSuperseded,
+    CKRevokedReasonCessationOfOperation,
+    CKRevokedReasonCertificateHold,
+    CKRevokedReasonRemoveFromCRL,
+    CKRevokedReasonPrivilegeWithdrawn,
+    CKRevokedReasonAACompromise,
+    CKRevokedReasonUnknown,
+};
 
 /**
  Possible ways a certificate could be revoked.
@@ -43,30 +59,20 @@ typedef NS_ENUM(NSUInteger, CKRevokedUsing) {
  Is this certificate revoked.
  */
 @property (nonatomic, readonly) BOOL isRevoked;
+
 /**
- If revoked, what is the reason it was revoked.
+ If revoked, what is the reason why it was revoked.
  */
-@property (strong, nonatomic, nullable, readonly) NSString * reasonString;
+@property (nonatomic, readonly) CKRevokedReason reason;
+
 /**
  If revoked, what was the date it was revoked (CRL only).
  */
 @property (strong, nonatomic, nullable, readonly) NSDate * revokedOn;
+
 /**
  Which method was used to determine the certificate was revoked. Bitflag.
  */
 @property (nonatomic, readonly) CKRevokedUsing revokedUsing;
-
-/**
- The OCSP response information, if OCSP was used.
- */
-@property (strong, nonatomic, nullable, readonly) CKOCSPResponse * ocspResponse;
-/**
- The CRL response information, if CRL was used.
- */
-@property (strong, nonatomic, nullable, readonly) CKCRLResponse * crlResponse;
-
-+ (CKRevoked * _Nonnull) fromOCSPResponse:(CKOCSPResponse * _Nonnull)response;
-+ (CKRevoked * _Nonnull) fromCRLResponse:(CKCRLResponse * _Nonnull)response;
-+ (CKRevoked * _Nonnull) fromOCSPResponse:(CKOCSPResponse * _Nullable)ocspResponse andCRLResponse:(CKCRLResponse * _Nullable)crlResponse;
 
 @end

@@ -5,11 +5,13 @@ class HTTPHeadersTableViewController: UITableViewController {
     var cells: [TableViewCell] = []
 
     override func viewDidLoad() {
-        guard let serverInfo = SERVER_INFO else { return }
+        guard let serverInfo = HTTP_SERVER_INFO else { return }
         let headerKeysSorted = serverInfo.headers.keys.sorted()
 
         for key in headerKeysSorted {
-            self.cells.append(TitleValueTableViewCell.Cell(title: key, value: serverInfo.headers[key] ?? "", useFixedWidthFont: true))
+            for value in serverInfo.headers[key] ?? [] {
+                self.cells.append(TitleValueTableViewCell.Cell(title: key, value: value, useFixedWidthFont: true))
+            }
         }
 
         super.viewDidLoad()

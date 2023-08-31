@@ -11,6 +11,8 @@ Algorithm	Algoritmo
 Algorithms	Algoritmos
 Alternate Names	Nombres alternativos
 App Icons	Iconos de la app
+# TODO
+App Language	App Language
 AppIcon::Dark	Oscuro
 AppIcon::Default	Por defecto
 AppIcon::Light	Claro
@@ -300,7 +302,6 @@ Country::YT	Mayotte
 Country::ZA	Sudáfrica
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
-Crypto Engine	Motor de criptografía
 Danger	Peligro
 Dangerous	Peligroso
 Delete	Eliminar
@@ -350,6 +351,16 @@ KeyAlgorithm::dsaEncryption	DSA
 KeyAlgorithm::id-ecPublicKey	ECDSA
 KeyAlgorithm::rsaEncryption	RSA
 Keying Material	Material de clave
+# TODO
+Language Updated	Language Updated
+# TODO
+Language::de	German
+# TODO
+Language::en	English
+# TODO
+Language::es	Spanish
+# TODO
+Language::nl	Dutch
 Loading...	Cargando...
 Locally Trusted	Marcado como de confianza local
 Locally Trusted Chain	Cadena marcada como de confianza local
@@ -364,6 +375,7 @@ More Info	Más info
 Negotiated Ciphersuite	Conjunto de algoritmos de cifrado negociado
 Negotiated Version	Versión negociada
 Network	Red
+Network Engine	Motor de red
 Next	Siguiente
 No	No
 No Supported URL Found	No se encontró ninguna URL compatible
@@ -395,6 +407,8 @@ Renew Certificate for {domain}	Renovar certificado para {0}
 Report Issue on GitHub	Reportar incidencia en GitHub
 Report a Bug	Reportar un error
 Request a Feature	Pedir una característica
+# TODO
+Reset to Default Settings	Reset to Default Settings
 Revoked On	Revocado el
 Root CA Certificates	Certificados de CA raíz
 SHA-256	SHA-256
@@ -461,6 +475,8 @@ Untrusted Chain	Cadena no es de confianza
 Updating	Actualizando
 Updating...	Actualizando...
 Use IP Version	Usar versión de IP
+# TODO
+Use system language	Use system language
 Use the Reminders app to customize the reminder	Usa la app Recordatorios para personalizar el recordatorio
 Valid For	Válido por
 Valid From	Válido desde
@@ -481,8 +497,12 @@ What kind of feedback would you like to submit?	¿Qué tipo de comentarios quier
 Will Expire In	Caducará en
 Yes	Sí
 You can modify the reminder in the reminders app.	Puedes modificar el recordatorio en la app Recordatorios.
+# TODO
+You must fully close and reopen the app for the new language to take effect.	You must fully close and reopen the app for the new language to take effect.
 You must inspect at least one site with verbose logging enabled before you can submit logs.	Debes inspeccionar al menos un sitio con el registro detallado habilitado antes de poder enviar los registros.
 advanced_settings_nag	Estas configuraciones son para depuración avanzada. Los valores incorrectos pueden impedir que TLS Inspector funcione correctamente.
+# TODO
+app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
 certificate_status_footer	El desactivar la consulta OCSP puede producir resultados de confianza incorrectos. Al activar la comprobación de CRL puede resultar en tiempos de procesamiento más largos y un mayor uso de datos. La consulta OCSP puede ocurrir aún cuando está desactivada mientras se usa el motor de cifrado legado.
 copyright_license_footer	TLS Inspector es software libre y gratuito bajo licencia GNU GPLv3. Derechos de autor de TLS Inspector © 2016-2023 Ian Spence.
@@ -539,7 +559,7 @@ microsoft	Microsoft
 mozilla	Mozilla
 proxy_warning	Hay un proxy HTTP configurado. TLS Inspector no es compatible con los proxies HTTP y debe desactivarse desde la configuración Wi-Fi del sistema.
 rootca_error	No se puede comprobar de forma segura si hay actualizaciones de los paquetes raíz. Comprueba si hay actualizaciones pendientes de TLS Inspector en la App Store.
-rootca_footer	Las actualizaciones de los paquetes raíz de certificados de autoridad son infrecuentes y se incluyen con las actualizaciones de TLS Inspector. Los datos de actualización se sirven desde GitHub y están firmados digitalmente.
+rootca_footer	Las actualizaciones de los paquetes raíz de certificados de autoridad son infrecuentes y se incluyen con las actualizaciones de TLS Inspector. Los datos de actualización se sirven desde tlsinspector.com y están firmados digitalmente.
 sanType::DNS	DNS
 sanType::Directory	Directorio
 sanType::Email	Correo electrónico

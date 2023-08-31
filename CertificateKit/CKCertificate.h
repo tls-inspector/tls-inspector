@@ -188,11 +188,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
 @property (nonatomic, readonly) BOOL isCA;
 
 /**
- *  Is this certificate a root certificate, installed on your device.
- */
-@property (nonatomic) BOOL isRootCA;
-
-/**
  *  Returns an array of subject names applicable to the cert
  */
 @property (strong, nonatomic, nullable, readonly) NSArray<CKAlternateNameObject *> * alternateNames;
@@ -241,11 +236,6 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  List of signed certificate timestamps embedded in the certificate
  */
 @property (strong, nonatomic, nullable) NSArray<CKSignedCertificateTimestamp *> * signedTimestamps;
-
-/**
- *  Get the libssl X509 data structure for the certificate. Safe to force-cast to X509 * if not NULL.
- */
-@property (nonatomic, nullable, readonly) void * X509Certificate;
 
 /**
  *  Return a detailed description of the certificate

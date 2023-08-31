@@ -30,7 +30,7 @@ class TrustDetailsTableViewController: UITableViewController {
     }
 
     func buildTrustHeader() {
-        let parameters = TrustBannerParameters(trust: self.certificateChain!.trusted)
+        let parameters = TrustBannerParameters(trust: self.certificateChain!.trustStatus)
         if parameters.solid {
             self.trustView.backgroundColor = parameters.color
         } else {
@@ -47,7 +47,7 @@ class TrustDetailsTableViewController: UITableViewController {
     }
 
     func buildTrustFooter() {
-        switch self.certificateChain.trusted {
+        switch self.certificateChain.trustStatus {
         case .locallyTrusted, .untrusted, .wrongHost, .sha1Leaf, .selfSigned, .revokedLeaf, .weakRSAKey, .badAuthority:
             self.warningView.isHidden = false
         default:
@@ -62,7 +62,7 @@ class TrustDetailsTableViewController: UITableViewController {
         var explanation = ""
         var isSecure = ""
 
-        switch self.certificateChain.trusted {
+        switch self.certificateChain.trustStatus {
         case .trusted:
             explanation = lang(key: "explanation::trust")
             isSecure = lang(key: "secure::trust")
