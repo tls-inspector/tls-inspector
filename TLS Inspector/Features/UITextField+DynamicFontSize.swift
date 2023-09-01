@@ -11,7 +11,7 @@ extension UITextField {
                 guard let customFont = UIFont(name: newValue, size: UIFont.labelFontSize) else {
                     fatalError("Failed to load custom font name")
                 }
-                self.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: customFont)
+                self.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: customFont)
                 self.adjustsFontForContentSizeCategory = true
             }
         }
