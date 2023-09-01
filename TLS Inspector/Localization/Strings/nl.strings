@@ -526,6 +526,8 @@ date_unit_singular::hour	uur
 date_unit_singular::minute	minuut
 date_unit_singular::month	maand
 date_unit_singular::year	jaar
+# TODO
+doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
 explanation::bad_authority	Het certificaat voor deze site is uitgegeven door een als gevaarlijk bekend staande certificaatuitgever.
 explanation::invalid_date	Het servercertificaat voor deze site is niet vertrouwd omdat ?n of meer certificaten in de keten zijn verlopen of nog niet geldig zijn.
 explanation::issue_date_too_long	Het servercertificaat is langer geldig dan 825 dagen. Certificaten met zeer lange geldigheidsduur worden als onveilig beschouwd omdat zij zwakker kunnen worden met de tijd.

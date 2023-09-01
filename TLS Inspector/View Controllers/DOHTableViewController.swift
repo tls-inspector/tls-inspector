@@ -40,6 +40,7 @@ class DOHTableViewController: UITableViewController {
 
     func buildEnabledSection() -> TableViewSection {
         let section = TableViewSection()
+        section.footer = lang(key: "doh_description")
 
         let cell = SwitchTableViewCell(labelText: lang(key: "Enabled"), defaultChecked: UserOptions.dohServer != nil, didChange: { enabled in
             UserOptions.dohServer = enabled ? self.presetServers[0].server : nil
@@ -124,12 +125,12 @@ class DOHTableViewController: UITableViewController {
 
         let section = TableViewSection()
         section.title = lang(key: "Custom Server URL")
-        section.footer = lang(key: "TLS Inspector supports UDP wireformat requests.")
+        section.footer = lang(key: "TLS Inspector supports UDP wireformat servers")
 
         if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") {
             if let input = cell.viewWithTag(1) as? UITextField {
-                input.placeholder = lang(key: "https://www.example.com/dns-query")
-                input.addTarget(self, action: #selector(urlTextChanged), for: .valueChanged)
+                input.placeholder = "https://www.example.com/dns-query"
+                input.text = server.url
             }
             section.cells.append(TableViewCell(cell))
         }
@@ -162,13 +163,15 @@ class DOHTableViewController: UITableViewController {
         cell.didSelect?(tableView, indexPath)
     }
 
-    @objc func urlTextChanged(sender: UITextField) {
-        UserOptions.dohServer?.url = sender.text ?? ""
-    }
-
     @IBAction func doneButtonTap(_ sender: UIBarButtonItem) {
         if UserOptions.dohServer?.custom ?? false {
             sender.isEnabled = false
+
+            guard let urlField = self.sections[2].cells[0].cell.viewWithTag(1) as? UITextField else {
+                return
+            }
+            let url = urlField.text ?? ""
+            UserOptions.dohServer?.url = url
 
             // Validate
         }
