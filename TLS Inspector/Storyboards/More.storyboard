@@ -441,7 +441,7 @@
         <scene sceneID="aIi-z9-cQf">
             <objects>
                 <tableViewController title="App Icons" id="Efu-qQ-cqJ" customClass="AppIconTableViewController" customModule="TLS_Inspector" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="18" sectionFooterHeight="45" id="2ty-FS-1Ct">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="18" sectionFooterHeight="18" id="2ty-FS-1Ct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
@@ -460,20 +460,20 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="10"/>
+                                                    <real key="value" value="12"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paP-dg-V8y">
-                                            <rect key="frame" x="88" y="27" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paP-dg-V8y">
+                                            <rect key="frame" x="92" y="27" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="paP-dg-V8y" firstAttribute="centerY" secondItem="J2y-hy-uNp" secondAttribute="centerY" id="2Ch-Nk-ahS"/>
-                                        <constraint firstItem="paP-dg-V8y" firstAttribute="leading" secondItem="dMQ-3D-yGP" secondAttribute="trailing" constant="8" symbolic="YES" id="YNc-Zm-b8f"/>
+                                        <constraint firstItem="paP-dg-V8y" firstAttribute="leading" secondItem="dMQ-3D-yGP" secondAttribute="trailing" constant="12" id="YNc-Zm-b8f"/>
                                         <constraint firstItem="dMQ-3D-yGP" firstAttribute="leading" secondItem="J2y-hy-uNp" secondAttribute="leadingMargin" id="cdO-X0-87L"/>
                                         <constraint firstItem="dMQ-3D-yGP" firstAttribute="centerY" secondItem="J2y-hy-uNp" secondAttribute="centerY" id="nqT-Xx-ECZ"/>
                                     </constraints>
