@@ -421,7 +421,7 @@
 		3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKOpenSSLInspector.h; sourceTree = "<group>"; };
 		3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkFrameworkInspector.h; sourceTree = "<group>"; };
 		3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkFrameworkInspector.m; sourceTree = "<group>"; };
-		3CC553C82AA17B1B005ECE0D /* DOHTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DOHTableViewController.swift; path = "TLS Inspector/View Controllers/DOHTableViewController.swift"; sourceTree = "<group>"; };
+		3CC553C82AA17B1B005ECE0D /* DOHTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOHTableViewController.swift; sourceTree = "<group>"; };
 		3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundleMetadata.h; sourceTree = "<group>"; };
 		3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundleMetadata.m; sourceTree = "<group>"; };
 		3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = google_ca_bundle.p7b; sourceTree = "<group>"; };
@@ -708,6 +708,7 @@
 				3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */,
 				3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */,
 				3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */,
+				3CC553C82AA17B1B005ECE0D /* DOHTableViewController.swift */,
 				3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */,
 				3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */,
 				3C7269392394BC1D002A0B19 /* InputTableViewController.swift */,
@@ -868,7 +869,6 @@
 		3CFAE6CD1CA8440400CD946B = {
 			isa = PBXGroup;
 			children = (
-				3CC553C82AA17B1B005ECE0D /* DOHTableViewController.swift */,
 				3C72692523949ABD002A0B19 /* TLS Inspector */,
 				3CDC14A823B0453B0053932F /* Inspect Website */,
 				3C65DADB1E836BE9004AD96D /* CertificateKit */,
