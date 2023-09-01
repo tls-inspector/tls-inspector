@@ -215,6 +215,9 @@
     CKInspectParameters * parameters = [CKInspectParameters new];
     parameters.hostAddress = hostAddress;
     parameters.port = portNumber.unsignedIntValue;
+    if (parameters.port == 0) {
+        parameters.port = 443;
+    }
     parameters.ipAddress = ipAddress.length == 0 ? nil : ipAddress;
     parameters.queryServerInfo = queryServerInfoNumber.boolValue;
     parameters.checkOCSP = checkOCSPNumber.boolValue;
