@@ -6,7 +6,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         case Engine = 0
         case EngineOptions = 1
         case Logs = 2
-        case RootCA = 3
+        case RootCADOH = 3
         case Reset = 4
     }
 
@@ -27,7 +27,6 @@ class AdvancedOptionsTableViewController: UITableViewController {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
 
         cell.textLabel?.text = lang(key: "crypto_engine::" + engine.rawValue)
-        cell.accessibilityLabel = engine.rawValue
         if UserOptions.cryptoEngine == engine {
             cell.accessoryType = .checkmark
         } else {
@@ -60,16 +59,27 @@ class AdvancedOptionsTableViewController: UITableViewController {
         return engineOptionsSection
     }
 
-    func buildRootCASection() -> TableViewSection {
-        let rootCASection = TableViewSection()
-        rootCASection.tag = SectionTags.RootCA.rawValue
+    func buildRootCADOHSection() -> TableViewSection {
+        let RootCADOHSection = TableViewSection()
+        RootCADOHSection.tag = SectionTags.RootCADOH.rawValue
+
+        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) {
+            cell.cell.textLabel?.text = lang(key: "DNS over HTTPS")
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "DOH", sender: self)
+            }
+            RootCADOHSection.cells.append(cell)
+        }
 
         if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) {
             cell.cell.textLabel?.text = lang(key: "Root CA Certificates")
-            rootCASection.cells.append(cell)
+            cell.didSelect = { (_, _) in
+                self.performSegue(withIdentifier: "RootCACertificates", sender: self)
+            }
+            RootCADOHSection.cells.append(cell)
         }
 
-        return rootCASection
+        return RootCADOHSection
     }
 
     func buildResetSection() -> TableViewSection {
@@ -188,7 +198,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
             self.buildEngineSection(),
             self.buildEngineOptionsSection(),
             self.buildLogsSection(),
-            self.buildRootCASection(),
+            self.buildRootCADOHSection(),
             self.buildResetSection()
         ]
     }
@@ -221,8 +231,8 @@ class AdvancedOptionsTableViewController: UITableViewController {
             self.didTapEngineCell(indexPath: indexPath)
         } else if tag == SectionTags.Logs.rawValue && indexPath.row == 1 {
             self.didTapSubmitLogs(indexPath: indexPath)
-        } else if tag == SectionTags.RootCA.rawValue {
-            self.performSegue(withIdentifier: "RootCACertificates", sender: self)
+        } else if tag == SectionTags.RootCADOH.rawValue {
+            self.sections[indexPath.section].cells[indexPath.row].didSelect?(tableView, indexPath)
         } else if tag == SectionTags.Reset.rawValue {
             UserOptions.reset()
             _ = navigationController?.popViewController(animated: true)
