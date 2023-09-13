@@ -84,7 +84,11 @@ Server #9 is reserved for the CRL & OCSP providers for this certificate.
 
 These servers provide a basic HTTPS server, expect that the leaf or intermediate certificates are expired.
 
-**12. DNS over HTTPS**
+**12. Too Many HTTP Headers**
+
+This server accepts any HTTP request, invalid or otherwise, and responds with a valid HTTP response with 500,000 headers.
+
+**13. DNS over HTTPS**
 
 This server provides a DNS over HTTPS service, for testing purposes only (it won't actually resolve real queries).
 

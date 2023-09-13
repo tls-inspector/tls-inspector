@@ -9,7 +9,7 @@
 
 @implementation CKDNSClientTests
 
-#define DOH_SERVER @"https://localhost:8412/dns-query"
+#define DOH_SERVER @"https://localhost:8413/dns-query"
 #define TEST_TIMEOUT 10 // Seconds
 
 - (void) setUp {
@@ -260,7 +260,7 @@
 - (void) testBadContentType {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"example.com" ofType:CKDNSRecordTypeA onServer:@"https://localhost:8412/bad-content-type" completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"example.com" ofType:CKDNSRecordTypeA onServer:@"https://localhost:8413/bad-content-type" completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         passed = @YES;
@@ -275,7 +275,7 @@
 - (void) testOversizedReply {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"example.com" ofType:CKDNSRecordTypeA onServer:@"https://localhost:8412/oversize-reply" completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"example.com" ofType:CKDNSRecordTypeA onServer:@"https://localhost:8413/oversize-reply" completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         passed = @YES;
