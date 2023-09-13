@@ -399,4 +399,34 @@
     }
 }
 
++ (void) testTooManyHTTPHeadersWithEngine:(CRYPTO_ENGINE)engine {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8412"];
+    parameters.cryptoEngine = engine;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testTooManyHTTPHeaders", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        XCTAssertTrue(response.httpServer == nil);
+        NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
+        XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
+        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (TooManyHTTPHeaders)");
+        XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
+        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (TooManyHTTPHeaders)");
+        if (certificates.count == 3) {
+            XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
+            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+        }
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
 @end
