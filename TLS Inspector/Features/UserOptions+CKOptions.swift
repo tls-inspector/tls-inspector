@@ -27,6 +27,11 @@ extension UserOptions {
             parameters.ipVersion = IP_VERSION_IPV6
         }
 
+        if let server = UserOptions.dohServer {
+            parameters.dnsOverHTTPSServer = server.url
+            parameters.dohFallbackToSystemDNS = UserOptions.dohFallback
+        }
+
         return parameters
     }
 }

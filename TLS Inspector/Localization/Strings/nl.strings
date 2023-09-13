@@ -308,6 +308,10 @@ Country::YT	Mayotte
 Country::ZA	Zuid Afrika
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
+# TODO
+Custom	Custom
+# TODO
+Custom Server URL	Custom Server URL
 Danger	Gevaar
 Dangerous	Gevaarlijk
 Delete	Wissen
@@ -428,6 +432,8 @@ Select Feedback Type	Selecteer Soort Terugkoppeling
 Send Anyways	Stuur Sowieso
 Server Info	Server Info
 Server Redirected To	Server Stuurde Door Naar
+# TODO
+Servers	Servers
 Share & Feedback	Delen & Terugkoppeling
 Share Certificate	Deel Certificaat
 Share Certificate Chain	Deel Certificaatketen
@@ -459,6 +465,8 @@ Submit Logs	Verstrek Logs
 TLS Features	TLS Eigenschappen
 TLS Inspector	TLS Inspector
 TLS Inspector Issues Only	Alleen TLS Inspector Problemen
+# TODO
+TLS Inspector supports UDP wireformat servers	TLS Inspector supports UDP wireformat servers
 Target	Doel
 Tell Friends About TLS Inspector	Vertel Vrienden Over TLS Inspector
 Test New Features	Test Nieuwe Eigenschappen
@@ -481,6 +489,8 @@ Untrusted Chain	Niet Vertrouwde Keten
 Updating	Updating
 Updating...	Updating...
 Use IP Version	Gebruik IP Versie
+# TODO
+Use System DNS on Error	Use System DNS on Error
 # TODO
 Use system language	Use system language
 Use the Reminders app to customize the reminder	Gebruik de Reminders app om de herinnering aan te passen
@@ -528,6 +538,8 @@ date_unit_singular::month	maand
 date_unit_singular::year	jaar
 # TODO
 doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
+# TODO
+doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	Het certificaat voor deze site is uitgegeven door een als gevaarlijk bekend staande certificaatuitgever.
 explanation::invalid_date	Het servercertificaat voor deze site is niet vertrouwd omdat ?n of meer certificaten in de keten zijn verlopen of nog niet geldig zijn.
 explanation::issue_date_too_long	Het servercertificaat is langer geldig dan 825 dagen. Certificaten met zeer lange geldigheidsduur worden als onveilig beschouwd omdat zij zwakker kunnen worden met de tijd.

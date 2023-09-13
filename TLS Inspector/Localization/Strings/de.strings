@@ -325,6 +325,10 @@ Country::ZA	Südafrika
 Country::ZM	Sambia
 Country::ZW	Simbabwe
 # TODO
+Custom	Custom
+# TODO
+Custom Server URL	Custom Server URL
+# TODO
 Danger	Danger
 Dangerous	Dangerous
 Delete	Löschen
@@ -454,6 +458,8 @@ Select Feedback Type	Art des Feedbacks auswählen
 Send Anyways	Trotzdem senden
 Server Info	Server-Information
 Server Redirected To	Server weitergeleitet zu
+# TODO
+Servers	Servers
 Share & Feedback	Teilen & Feedback
 Share Certificate	Zertifikat teilen
 Share Certificate Chain	Zertifikatskette teilen
@@ -486,6 +492,8 @@ Submit Logs	Protokoll schicken
 TLS Features	TLS-Funktionen
 TLS Inspector	TLS Inspector
 TLS Inspector Issues Only	Nur Feedback zu TLS Inspector
+# TODO
+TLS Inspector supports UDP wireformat servers	TLS Inspector supports UDP wireformat servers
 Target	Ziel
 Tell Friends About TLS Inspector	Erzähle Freunden von TLS Inspector
 Test New Features	Teste neue Funktionen
@@ -515,6 +523,8 @@ Updating	Updating
 # TODO
 Updating...	Updating...
 Use IP Version	Verwende IP-Version
+# TODO
+Use System DNS on Error	Use System DNS on Error
 # TODO
 Use system language	Use system language
 Use the Reminders app to customize the reminder	Bearbeite die Erinnerung in der Erinnerungen-App
@@ -564,6 +574,8 @@ date_unit_singular::month	Monat
 date_unit_singular::year	Jahr
 # TODO
 doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
+# TODO
+doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	The certificate for this host was issued by a known dangerous certificate authority.
 explanation::invalid_date	Dem Server-Zertifikat wird nicht vertraut, da mindestens ein Zertifikat in der Kette abgelaufen oder noch nicht gültig ist.
 explanation::issue_date_too_long	Das Server-Zertifikat ist länger als 825 Tage gültig. Zertifikaten mit übermäßig langer Gültigkeitsdauer gelten als nicht sicher, da sie im Laufe der Zeit unsicher werden können.

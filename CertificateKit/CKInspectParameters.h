@@ -85,6 +85,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSString * ciphers;
 
 /**
+ The DNS over HTTPS server to use. If null, use system DNS.
+ */
+@property (strong, nonatomic, nullable) NSString * dnsOverHTTPSServer;
+
+/**
+ If DNS over HTTPS is used and the server cannot be reached, fallback to system DNS.
+ */
+@property (nonatomic) BOOL dohFallbackToSystemDNS;
+
+/**
  Compare this instance of CKInspectParameters with the provided other.
  */
 - (BOOL) isEqual:(CKInspectParameters * _Nullable)other;

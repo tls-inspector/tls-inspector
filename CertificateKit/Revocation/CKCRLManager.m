@@ -198,7 +198,7 @@ struct httpResponseBlock {
         return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Missing content type"}];
     }
     if (![[[NSString stringWithUTF8String:contentType->value] lowercaseString] isEqualToString:@"application/pkix-crl"]) {
-        PError(@"Invalid content type for OCSP response %s", contentType->value);
+        PError(@"Invalid content type for CRL response %s", contentType->value);
         curl_easy_cleanup(curl);
         free(curldata.response);
         return [NSError errorWithDomain:@"CKCRLManager" code:CRL_ERROR_INVALID_RESPONSE userInfo:@{NSLocalizedDescriptionKey: @"Invalid content type"}];
@@ -227,6 +227,7 @@ struct httpResponseBlock {
     return nil;
 }
 
+// Check the content length header here _before_ we accept the body of the response
 size_t crl_header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
     unsigned long * contentLength = (unsigned long *)userdata;
     unsigned long len = nitems * size;

@@ -5,7 +5,7 @@ set -e
 # environment variables, which mess with compiling the library. To get around this, we run
 # this script without any variables (env -i <script>), but need to provide a default PATH
 # so that coreutils will still work
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/bin
 
 OPENSSL_WANT_VERSION=$(grep 'VERSION' openssl.want | cut -d '=' -f 2)
 

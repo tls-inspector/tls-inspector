@@ -21,6 +21,7 @@ private let KEY_OPTIONS_SCHEMA_VERSION = "options_schema_version"
 private let KEY_TREAT_UNRECOGNIZED_AS_TRUSTED = "treat_unrecognized_as_trusted"
 private let KEY_APP_LANGUAGE = "app_language"
 private let KEY_DOH_SERVER = "doh_server"
+private let KEY_DOH_FALLBACK = "doh_fallback"
 // swiftlint:enable identifier_name
 
 public enum CryptoEngine: String {
@@ -138,6 +139,7 @@ class UserOptions {
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
         KEY_TREAT_UNRECOGNIZED_AS_TRUSTED: false,
         KEY_APP_LANGUAGE: "",
+        KEY_DOH_FALLBACK: true,
     ]
     private static var _verboseLogging = false
     private static var _inspectionsWithVerboseLogging = 0
@@ -361,6 +363,15 @@ class UserOptions {
             let v = newValue?.toString() ?? ""
             print("[Options] SET \(KEY_DOH_SERVER) = \(v)")
             AppDefaults.set(v, forKey: KEY_DOH_SERVER)
+        }
+    }
+    static var dohFallback: Bool {
+        get {
+            return AppDefaults.bool(forKey: KEY_DOH_FALLBACK)
+        }
+        set {
+            AppDefaults.set(newValue, forKey: KEY_DOH_FALLBACK)
+            LogDebug("Setting AppDefault: \(KEY_DOH_FALLBACK) = \(newValue)")
         }
     }
 

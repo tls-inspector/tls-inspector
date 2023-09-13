@@ -167,7 +167,7 @@ func (s *tserverCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 
 		data, err := x509.CreateRevocationList(rand.Reader, crl, crlocspSigningCertificate.Certificate, crlocspSigningCertificate.PrivateKey)
 		if err != nil {
-			log.Printf("Error generating CRL: %s", err.Error())
+			log.Printf("[RevokedCert] Error generating CRL: %s", err.Error())
 			rw.WriteHeader(500)
 			return
 		}
@@ -183,33 +183,33 @@ func (s *tserverCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 		}
 
 		if r.Header.Get("Content-Type") != "application/ocsp-request" {
-			log.Printf("Unknown content type '%s'", r.Header.Get("Content-Type"))
+			log.Printf("[RevokedCert] Unknown content type '%s'", r.Header.Get("Content-Type"))
 			rw.WriteHeader(400)
 			return
 		}
 
 		if r.ContentLength > 8192 {
-			log.Printf("Excessive OCSP request size")
+			log.Printf("[RevokedCert] Excessive OCSP request size")
 			rw.WriteHeader(400)
 			return
 		}
 
 		requestBytes, err := io.ReadAll(r.Body)
 		if err != nil {
-			log.Printf("Error reading HTTP request: %s", err.Error())
+			log.Printf("[RevokedCert] Error reading HTTP request: %s", err.Error())
 			rw.WriteHeader(400)
 			return
 		}
 
 		request, err := ocsp.ParseRequest(requestBytes)
 		if err != nil {
-			log.Printf("Error parsing OCSP request: %s", err.Error())
+			log.Printf("[RevokedCert] Error parsing OCSP request: %s", err.Error())
 			rw.WriteHeader(400)
 			return
 		}
 
 		if request.HashAlgorithm != crypto.SHA1 {
-			log.Printf("Unsupported OCSP hash algorithm")
+			log.Printf("[RevokedCert] Unsupported OCSP hash algorithm")
 			rw.WriteHeader(400)
 			return
 		}
@@ -230,7 +230,7 @@ func (s *tserverCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 
 		data, err := ocsp.CreateResponse(crlocspSigningCertificate.Certificate, crlocspSigningCertificate.Certificate, response, crlocspSigningCertificate.PrivateKey)
 		if err != nil {
-			log.Printf("Error generating OCSP response: %s", err.Error())
+			log.Printf("[RevokedCert] Error generating OCSP response: %s", err.Error())
 			rw.WriteHeader(500)
 			return
 		}

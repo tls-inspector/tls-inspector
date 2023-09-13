@@ -223,6 +223,17 @@
 		3CF9CC9623A4804600535173 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9523A4804600535173 /* DomainList.plist */; };
 		3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9823A482F500535173 /* UIObject+Lang.swift */; };
 		9A31DECB2A917EAE0095857D /* CKRevoked+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9A67F89E2AA407520088A750 /* CKDNSClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A67F89C2AA407520088A750 /* CKDNSClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A67F89F2AA407520088A750 /* CKDNSClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A67F89D2AA407520088A750 /* CKDNSClient.m */; };
+		9A67F8A12AA408B10088A750 /* CKDNSClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A67F8A02AA408B10088A750 /* CKDNSClientTests.m */; };
+		9AABA2A22AAD7AAF0032CAA3 /* CKDNSResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AABA2A02AAD7AAF0032CAA3 /* CKDNSResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AABA2A32AAD7AAF0032CAA3 /* CKDNSResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABA2A12AAD7AAF0032CAA3 /* CKDNSResult.m */; };
+		9AABA2A52AAD87250032CAA3 /* CKDNSRecordType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AABA2A42AAD870B0032CAA3 /* CKDNSRecordType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AABA2A72AAD8D5C0032CAA3 /* CKDNSResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AABA2A62AAD8D3B0032CAA3 /* CKDNSResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AABA2A92AAD8F440032CAA3 /* CKDNSResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABA2A82AAD8F440032CAA3 /* CKDNSResource.m */; };
+		9AABA2AB2AAE84210032CAA3 /* CKDNSResponseCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AABA2AA2AAE841B0032CAA3 /* CKDNSResponseCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AABA2AE2AAE87A20032CAA3 /* NSData+Base64URL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AABA2AC2AAE87A20032CAA3 /* NSData+Base64URL.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9AABA2AF2AAE87A20032CAA3 /* NSData+Base64URL.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABA2AD2AAE87A20032CAA3 /* NSData+Base64URL.m */; };
 		9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AFD2BEB2A883CEA00FFF40F /* CKIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */; };
 		9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */; };
@@ -477,6 +488,17 @@
 		3CF9CC9823A482F500535173 /* UIObject+Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIObject+Lang.swift"; sourceTree = "<group>"; };
 		3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TLS Inspector.entitlements"; sourceTree = "<group>"; };
 		9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKRevoked+Private.h"; sourceTree = "<group>"; };
+		9A67F89C2AA407520088A750 /* CKDNSClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSClient.h; sourceTree = "<group>"; };
+		9A67F89D2AA407520088A750 /* CKDNSClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDNSClient.m; sourceTree = "<group>"; };
+		9A67F8A02AA408B10088A750 /* CKDNSClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDNSClientTests.m; sourceTree = "<group>"; };
+		9AABA2A02AAD7AAF0032CAA3 /* CKDNSResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSResult.h; sourceTree = "<group>"; };
+		9AABA2A12AAD7AAF0032CAA3 /* CKDNSResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDNSResult.m; sourceTree = "<group>"; };
+		9AABA2A42AAD870B0032CAA3 /* CKDNSRecordType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSRecordType.h; sourceTree = "<group>"; };
+		9AABA2A62AAD8D3B0032CAA3 /* CKDNSResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSResource.h; sourceTree = "<group>"; };
+		9AABA2A82AAD8F440032CAA3 /* CKDNSResource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDNSResource.m; sourceTree = "<group>"; };
+		9AABA2AA2AAE841B0032CAA3 /* CKDNSResponseCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSResponseCode.h; sourceTree = "<group>"; };
+		9AABA2AC2AAE87A20032CAA3 /* NSData+Base64URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64URL.h"; sourceTree = "<group>"; };
+		9AABA2AD2AAE87A20032CAA3 /* NSData+Base64URL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64URL.m"; sourceTree = "<group>"; };
 		9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKIPAddress.h; sourceTree = "<group>"; };
 		9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddress.m; sourceTree = "<group>"; };
 		9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddressTests.m; sourceTree = "<group>"; };
@@ -642,6 +664,7 @@
 				3CF0A69D261BBCA300460B7F /* CKTypes.h */,
 				3C218DB929AEF12F000D84BC /* CTLogs */,
 				3C62426F2947B10200A7814A /* curl.xcframework */,
+				9A67F8AA2AA43A5B0088A750 /* DNS */,
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				3C091B812A2EB84900A8BE92 /* HTTP */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
@@ -662,6 +685,8 @@
 				3C84C9FD2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m */,
 				3C84C9FA2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.h */,
 				3C84C9F92A75D6520037A902 /* CKSecureTransportInspector+EnumValues.m */,
+				9AABA2AC2AAE87A20032CAA3 /* NSData+Base64URL.h */,
+				9AABA2AD2AAE87A20032CAA3 /* NSData+Base64URL.m */,
 				3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */,
 				3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */,
 				3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */,
@@ -819,13 +844,14 @@
 			isa = PBXGroup;
 			children = (
 				3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */,
+				9A67F8A02AA408B10088A750 /* CKDNSClientTests.m */,
+				3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */,
+				3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */,
 				9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */,
 				3CF397451EB50E0900E8DBF4 /* Info.plist */,
 				3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */,
 				3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */,
 				3C45722F2A74ADAA009EF7BB /* SecureTransportInspectorTests.m */,
-				3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */,
-				3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */,
 			);
 			path = CertificateKitTests;
 			sourceTree = "<group>";
@@ -903,6 +929,21 @@
 			path = Inspectors;
 			sourceTree = "<group>";
 		};
+		9A67F8AA2AA43A5B0088A750 /* DNS */ = {
+			isa = PBXGroup;
+			children = (
+				9A67F89C2AA407520088A750 /* CKDNSClient.h */,
+				9A67F89D2AA407520088A750 /* CKDNSClient.m */,
+				9AABA2A42AAD870B0032CAA3 /* CKDNSRecordType.h */,
+				9AABA2A62AAD8D3B0032CAA3 /* CKDNSResource.h */,
+				9AABA2A82AAD8F440032CAA3 /* CKDNSResource.m */,
+				9AABA2AA2AAE841B0032CAA3 /* CKDNSResponseCode.h */,
+				9AABA2A02AAD7AAF0032CAA3 /* CKDNSResult.h */,
+				9AABA2A12AAD7AAF0032CAA3 /* CKDNSResult.m */,
+			);
+			path = DNS;
+			sourceTree = "<group>";
+		};
 		A1BA8BE21E8EB2B30004FB0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -928,6 +969,7 @@
 				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
 				3C7CEE6220A15BD500DCC770 /* CKAlternateNameObject.h in Headers */,
 				3C58E67723F8B7D800B622C6 /* CKSocketUtils.h in Headers */,
+				9AABA2A52AAD87250032CAA3 /* CKDNSRecordType.h in Headers */,
 				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
 				3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */,
 				3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */,
@@ -936,7 +978,9 @@
 				3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */,
 				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
 				3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */,
+				9AABA2AE2AAE87A20032CAA3 /* NSData+Base64URL.h in Headers */,
 				3CB94047225036FC0055C067 /* CKOpenSSLInspector.h in Headers */,
+				9AABA2A22AAD7AAF0032CAA3 /* CKDNSResult.h in Headers */,
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
@@ -957,13 +1001,16 @@
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
 				3C30025F2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h in Headers */,
+				9AABA2A72AAD8D5C0032CAA3 /* CKDNSResource.h in Headers */,
 				3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */,
 				3C091B842A2EB88000A8BE92 /* CKHTTPClient.h in Headers */,
 				3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */,
+				9AABA2AB2AAE84210032CAA3 /* CKDNSResponseCode.h in Headers */,
 				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
 				3C4E23772A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h in Headers */,
 				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
 				3CD6DE472A662C37004A54F5 /* CKInspectRequest.h in Headers */,
+				9A67F89E2AA407520088A750 /* CKDNSClient.h in Headers */,
 				9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */,
 				3CB94044225036FC0055C067 /* CKSecureTransportInspector.h in Headers */,
 				3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */,
@@ -1358,6 +1405,7 @@
 				3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */,
 				3CBF85C0253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m in Sources */,
 				3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */,
+				9AABA2A92AAD8F440032CAA3 /* CKDNSResource.m in Sources */,
 				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
 				3C091B892A2EB9E400A8BE92 /* CKHTTPResponse.m in Sources */,
 				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,
@@ -1378,10 +1426,12 @@
 				3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */,
 				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
 				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
+				9AABA2A32AAD7AAF0032CAA3 /* CKDNSResult.m in Sources */,
 				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
 				3C3002602980E13500F8B2F0 /* CKSignedCertificateTimestamp.m in Sources */,
 				3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */,
 				3C84C9FB2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.m in Sources */,
+				9AABA2AF2AAE87A20032CAA3 /* NSData+Base64URL.m in Sources */,
 				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
 				3CB94046225036FC0055C067 /* CKSecureTransportInspector.m in Sources */,
 				3CD6DE4C2A662D88004A54F5 /* CKInspectResponse.m in Sources */,
@@ -1391,6 +1441,7 @@
 				3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */,
 				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,
 				3CD6DE442A661BE0004A54F5 /* NSData+ByteAtIndex.m in Sources */,
+				9A67F89F2AA407520088A750 /* CKDNSClient.m in Sources */,
 				3C84C9FF2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m in Sources */,
 				3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */,
 			);
@@ -1499,6 +1550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A67F8A12AA408B10088A750 /* CKDNSClientTests.m in Sources */,
 				3CB1080C2A95A53700CFE080 /* CKInspectorTests.m in Sources */,
 				3C4572302A74ADAA009EF7BB /* SecureTransportInspectorTests.m in Sources */,
 				9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */,
@@ -1624,6 +1676,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CertificateKit/CertificateKit_PrefixHeader.pch;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = CertificateKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1665,6 +1718,7 @@
 				GCC_OPTIMIZATION_LEVEL = z;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CertificateKit/CertificateKit_PrefixHeader.pch;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = CertificateKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;

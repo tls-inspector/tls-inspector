@@ -83,3 +83,26 @@ Server #9 is reserved for the CRL & OCSP providers for this certificate.
 **10 & 11. Expired Leaf / Intermediate**
 
 These servers provide a basic HTTPS server, expect that the leaf or intermediate certificates are expired.
+
+**12. DNS over HTTPS**
+
+This server provides a DNS over HTTPS service, for testing purposes only (it won't actually resolve real queries).
+
+It supports UDP Wireformat requests to `/dns-query`. All DoH tests go to this server, but the test changes depending on the query or URL.
+
+|URL|Query|Test Description|
+|-|-|-|
+|`/dns-query`|A `dns.google.`|_Control_ - Resolves to 8.8.8.8 and 8.8.4.4, used to pass validation within TLS Inspector itself.|
+|`/dns-query`|A `single.address.a.example.com.`|_Control_ - Resolves to 192.0.2.1.|
+|`/dns-query`|A `multiple.address.a.example.com.`|_Control_ - Resolves to 192.0.2.1, 192.0.2.2, and 192.0.2.3.|
+|`/dns-query`|A `cname.a.example.com.`|_Control_ - Resolves to a CNAME of `cname.target.a.example.com.`, which itself resolves to 192.0.2.1.|
+|`/dns-query`|AAAA `single.address.aaaa.example.com.`|_Control_ - Resolves to 2001:db8::1.|
+|`/dns-query`|AAAA `multiple.address.aaaa.example.com.`|_Control_ -  Resolves to 2001:db8::1,  Resolves to 2001:db8::2,  Resolves to 2001:db8::3.|
+|`/dns-query`|AAAA `cname.aaaa.example.com.`|_Control_ - Resolves to a CNAME of `cname.target.aaaa.example.com.`, which itself resolves to 2001:db8::1.|
+|`/dns-query`|A `recursive.cname.example.com.`|Returns a recursive CNAME loop where two CNAMEs point to eachother.|
+|`/dns-query`|A `infinite.loop.compression.example.com.`|Returns a malformed label that abuses DNS compression to point to itself.|
+|`/dns-query`|A `incorrect.id.example.com.`|Returns an otherwise valid DNS response but the ID will be different.|
+|`/dns-query`|A `wrong.type.example.com.`|Returns an otherwise valid DNS response, but the resource record type will be unknown.|
+|`/dns-query`|A `bad.length.example.com.`|Returns a malformed DNS response with a false data length.|
+|`/bad-content-type`|_Any_|Returns a HTTP response with the incorrect `application/dna-message` content type.|
+|`/oversize-reply`|_Any_|Returns a HTTP response with random data that exceeds the 512 byte limit of DNS messages.|

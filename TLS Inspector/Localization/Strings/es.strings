@@ -302,6 +302,10 @@ Country::YT	Mayotte
 Country::ZA	Sudáfrica
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
+# TODO
+Custom	Custom
+# TODO
+Custom Server URL	Custom Server URL
 Danger	Peligro
 Dangerous	Peligroso
 Delete	Eliminar
@@ -422,6 +426,8 @@ Select Feedback Type	Selecciona el tipo de comentarios
 Send Anyways	Enviar de todos modos
 Server Info	Info del servidor
 Server Redirected To	El servidor redirigió a
+# TODO
+Servers	Servers
 Share & Feedback	Compartir y comentarios
 Share Certificate	Compartir certificado
 Share Certificate Chain	Compartir cadena de certificados
@@ -453,6 +459,8 @@ Submit Logs	Enviar registros
 TLS Features	Características de TLS
 TLS Inspector	TLS Inspector
 TLS Inspector Issues Only	Solo incidencias de TLS Inspector
+# TODO
+TLS Inspector supports UDP wireformat servers	TLS Inspector supports UDP wireformat servers
 Target	Destino
 Tell Friends About TLS Inspector	Cuéntale a tus amigos sobre TLS Inspector
 Test New Features	Prueba nuevas características
@@ -475,6 +483,8 @@ Untrusted Chain	Cadena no es de confianza
 Updating	Actualizando
 Updating...	Actualizando...
 Use IP Version	Usar versión de IP
+# TODO
+Use System DNS on Error	Use System DNS on Error
 # TODO
 Use system language	Use system language
 Use the Reminders app to customize the reminder	Usa la app Recordatorios para personalizar el recordatorio
@@ -522,6 +532,8 @@ date_unit_singular::month	mes
 date_unit_singular::year	año
 # TODO
 doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
+# TODO
+doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	El certificado para este host fue emitido por una autoridad de certificación con mala reputación.
 explanation::invalid_date	El certificado del servidor para este sitio no es de confianza porque uno o más certificados en la cadena están caducados o no son válidos todavía.
 explanation::issue_date_too_long	El certificado del servidor es válido durante más de 825 días. Los certificados con períodos de validez excesivos no se consideran seguros porque pueden volverse débiles a medida que envejecen.

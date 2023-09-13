@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/rand"
 	"crypto/tls"
 	"fmt"
 	"net/http"
@@ -52,6 +53,16 @@ func (s *tserverBasicHTTPS) Start(port uint16, ipv4 string, ipv6 string, servern
 }
 
 func (s *tserverBasicHTTPS) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/dns-query" {
+		resp := make([]byte, 2048)
+		rand.Read(resp)
+		rw.Header().Add("Content-Type", "application/dns-message")
+		rw.Header().Add("Content-Length", "2048")
+		rw.WriteHeader(200)
+		rw.Write(resp)
+		return
+	}
+
 	rw.Header().Add("Content-Type", "text/html")
 	rw.Header().Add("X-CertificateKit-Test-Name", "BasicHTTPS")
 	rw.Header().Add("Content-Security-Policy", "default-src * localhost:8401")

@@ -42,6 +42,8 @@
 #define KEY_CRYPTO_ENGINE @"crypto_engine"
 #define KEY_IP_VERSION @"ip_version"
 #define KEY_CIPHERS @"ciphers"
+#define KEY_DOH_SERVER @"doh_server"
+#define KEY_DOH_FALLBACK @"doh_fallback"
 
 + (CKInspectParameters *) fromQuery:(NSString *)query {
     CKInspectParameters * parameters = [CKInspectParameters new];
@@ -163,6 +165,8 @@
     BOOL cryptoEngineEquals = self.cryptoEngine == other.cryptoEngine;
     BOOL ipVersionEquals = self.ipVersion == other.ipVersion;
     BOOL ciphersEquals = [self.ciphers isEqualToString:other.ciphers];
+    BOOL dohServerEquals = [self.dnsOverHTTPSServer isEqualToString:other.dnsOverHTTPSServer];
+    BOOL dohFallbackEquals = self.dohFallbackToSystemDNS == other.dohFallbackToSystemDNS;
 
     return hostAddressEquals &&
         portEquals &&
@@ -172,7 +176,9 @@
         checkCRLEquals &&
         cryptoEngineEquals &&
         ipVersionEquals &&
-        ciphersEquals;
+        ciphersEquals &&
+        dohServerEquals &&
+        dohFallbackEquals;
 }
 
 - (NSDictionary<NSString *, id> *) dictionaryValue {
@@ -186,6 +192,8 @@
         KEY_CRYPTO_ENGINE: [NSNumber numberWithInt:self.cryptoEngine],
         KEY_IP_VERSION: [NSNumber numberWithInt:self.ipVersion],
         KEY_CIPHERS: self.ciphers,
+        KEY_DOH_SERVER: self.dnsOverHTTPSServer == nil ? @"" : self.dnsOverHTTPSServer,
+        KEY_DOH_FALLBACK: [NSNumber numberWithBool:self.dohFallbackToSystemDNS],
     };
 }
 
@@ -199,6 +207,8 @@
     NSNumber * cryptoEngineNumber = d[KEY_CRYPTO_ENGINE];
     NSNumber * ipVersionNumber = d[KEY_IP_VERSION];
     NSString * ciphers = d[KEY_CIPHERS];
+    NSString * dohServer = d[KEY_DOH_SERVER];
+    NSNumber * dohFallback = d[KEY_DOH_FALLBACK];
 
     if (hostAddress == nil ||
         portNumber == nil ||
@@ -208,7 +218,9 @@
         checkCRLNumber == nil ||
         cryptoEngineNumber == nil ||
         ipVersionNumber == nil ||
-        ciphers == nil) {
+        ciphers == nil ||
+        dohServer == nil ||
+        dohFallback == nil) {
         return nil;
     }
 
@@ -225,6 +237,8 @@
     parameters.cryptoEngine = (CRYPTO_ENGINE)cryptoEngineNumber.intValue;
     parameters.ipVersion = (IP_VERSION)ipVersionNumber.intValue;
     parameters.ciphers = ciphers;
+    parameters.dnsOverHTTPSServer = dohServer.length == 0 ? nil : dohServer;
+    parameters.dohFallbackToSystemDNS = dohFallback.boolValue;
     return parameters;
 }
 

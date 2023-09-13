@@ -300,6 +300,8 @@ Country::YT	Mayotte
 Country::ZA	South Africa
 Country::ZM	Zambia
 Country::ZW	Zimbabwe
+Custom	Custom
+Custom Server URL	Custom Server URL
 Danger	Danger
 Dangerous	Dangerous
 Delete	Delete
@@ -414,6 +416,7 @@ Select Feedback Type	Select Feedback Type
 Send Anyways	Send Anyways
 Server Info	Server Info
 Server Redirected To	Server Redirected To
+Servers	Servers
 Share & Feedback	Share & Feedback
 Share Certificate	Share Certificate
 Share Certificate Chain	Share Certificate Chain
@@ -445,6 +448,7 @@ Submit Logs	Submit Logs
 TLS Features	TLS Features
 TLS Inspector	TLS Inspector
 TLS Inspector Issues Only	TLS Inspector Issues Only
+TLS Inspector supports UDP wireformat servers	TLS Inspector supports UDP wireformat servers
 Target	Target
 Tell Friends About TLS Inspector	Tell Friends About TLS Inspector
 Test New Features	Test New Features
@@ -467,6 +471,7 @@ Untrusted Chain	Untrusted Chain
 Updating	Updating
 Updating...	Updating...
 Use IP Version	Use IP Version
+Use System DNS on Error	Use System DNS on Error
 Use system language	Use system language
 Use the Reminders app to customize the reminder	Use the Reminders app to customize the reminder
 Valid For	Valid For
@@ -509,7 +514,8 @@ date_unit_singular::hour	hour
 date_unit_singular::minute	minute
 date_unit_singular::month	month
 date_unit_singular::year	year
-doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
+doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. Compared to traditional DNS, DNS over HTTPS offers inproved privacy and security at a small performance cost.
+doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	The certificate for this host was issued by a known dangerous certificate authority.
 explanation::invalid_date	The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.
 explanation::issue_date_too_long	The server certificate is valid for more than 825 days. Certificates with excessive validity periods are not considered secure as they may become weak as they age.
