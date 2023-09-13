@@ -117,6 +117,7 @@ func start(startPort uint16, ipv4 string, ipv6 string, servername string) {
 		&tserverRevokedCert{}, &tserverCRLOCSPProvider{},
 		&tserverExpiredLeaf{},
 		&tserverExpiredInt{},
+		&tserverTooManyHTTPHeaders{},
 	}
 
 	port := startPort

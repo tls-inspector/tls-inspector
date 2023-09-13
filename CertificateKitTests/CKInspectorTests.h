@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) testRevokedOCSPWithEngine:(CRYPTO_ENGINE)engine;
 + (void) testExpiredLeafWithEngine:(CRYPTO_ENGINE)engine;
 + (void) testExpiredIntWithEngine:(CRYPTO_ENGINE)engine;
++ (void) testTooManyHTTPHeadersWithEngine:(CRYPTO_ENGINE)engine;
 
 @end
 

@@ -72,4 +72,8 @@
     [CKInspectorTests testExpiredIntWithEngine:ENGINE_NAME];
 }
 
+- (void) testTooManyHTTPHeaders {
+    [CKInspectorTests testTooManyHTTPHeadersWithEngine:ENGINE_NAME];
+}
+
 @end
