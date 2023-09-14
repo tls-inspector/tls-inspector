@@ -40,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void) resolve:(NSString * _Nonnull)host ofType:(CKDNSRecordType)recordType onServer:(NSString * _Nonnull)server completed:(void (^_Nonnull)(CKDNSResult * _Nullable, NSError * _Nullable))completed;
 
+#if DEBUG
+- (void) DANGEROUS_DISABLE_SSL_VERIFY;
+#endif
+
 @end
 
 NS_ASSUME_NONNULL_END

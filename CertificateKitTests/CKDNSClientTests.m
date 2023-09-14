@@ -14,6 +14,7 @@
 
 - (void) setUp {
     [super setUp];
+    [CKDNSClient.sharedClient DANGEROUS_DISABLE_SSL_VERIFY];
 }
 
 - (void) tearDown {

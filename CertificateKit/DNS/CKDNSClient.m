@@ -32,6 +32,10 @@
     dispatch_queue_t dnsClientQueue;
 }
 
+#if DEBUG
+@property (nonatomic) BOOL _DANGEROUS_DISABLE_SSL_VERIFY;
+#endif
+
 @end
 
 @implementation CKDNSClient
@@ -71,6 +75,12 @@ typedef struct _HTTP_RESPONSE {
 
     return instance;
 }
+
+#if DEBUG
+- (void) DANGEROUS_DISABLE_SSL_VERIFY {
+    self._DANGEROUS_DISABLE_SSL_VERIFY = true;
+}
+#endif
 
 - (void) resolve:(NSString *)host ofType:(CKDNSRecordType)recordType onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
     dispatch_async(dnsClientQueue, ^{
@@ -126,6 +136,12 @@ typedef struct _HTTP_RESPONSE {
     curl_easy_setopt(curl, CURLOPT_HEADERDATA, &contentLength);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curl_doh_write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&curldata);
+#if DEBUG
+    if (self._DANGEROUS_DISABLE_SSL_VERIFY) {
+        PWarn(@"[DOH] !! DANGEROUS !! SSL peer verification disabled, this should be used for unit tests");
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+    }
+#endif
 
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "Accept: application/dns-message");
