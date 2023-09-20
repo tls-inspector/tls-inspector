@@ -19,6 +19,9 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
+#import <sys/types.h>
+#import <sys/socket.h>
+#import <netdb.h>
 #import <arpa/inet.h>
 #import "CKDNSClient.h"
 #import "CKDNSResult.h"
@@ -82,13 +85,33 @@ typedef struct _HTTP_RESPONSE {
 }
 #endif
 
-- (void) resolve:(NSString *)host ofType:(CKDNSRecordType)recordType onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
+- (void) resolve:(NSString *)host ofAddressVersion:(IP_VERSION)addressVersion onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
     dispatch_async(dnsClientQueue, ^{
-        [self doResolve:host ofType:recordType onServer:server completed:completed];
+        [self doResolve:host ofAddressVersion:addressVersion onServer:server completed:completed];
     });
 }
 
-- (void) doResolve:(NSString *)host ofType:(CKDNSRecordType)recordType onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
+- (void) doResolve:(NSString *)host ofAddressVersion:(IP_VERSION)addressVersion onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
+    CKDNSRecordType recordType;
+    switch (addressVersion) {
+        case IP_VERSION_IPV4:
+            recordType = CKDNSRecordTypeA;
+            break;
+        case IP_VERSION_IPV6:
+            recordType = CKDNSRecordTypeAAAA;
+            break;
+        case IP_VERSION_AUTOMATIC: {
+            NSError * autoError;
+            recordType = [self getPreferredRecordTypeWithError:&autoError];
+            if (autoError != nil) {
+                PError(@"[DOH] Unable to get preferred record type: %@", autoError.localizedDescription);
+                completed(nil, autoError);
+                return;
+            }
+            break;
+        }
+    }
+
     uint16_t idn = arc4random_uniform(UINT16_MAX);
     NSError * requestError;
     NSMutableString * hostToQuery = [host mutableCopy];
@@ -485,6 +508,31 @@ typedef struct _HTTP_RESPONSE {
     }
 
     return name;
+}
+
+- (CKDNSRecordType) getPreferredRecordTypeWithError:(NSError **)error {
+    struct addrinfo hints;
+    struct addrinfo *result;
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_DGRAM;
+    hints.ai_flags = 0;
+    hints.ai_protocol = 0;
+    const char * query = "dns.google.";
+    if (getaddrinfo(query, NULL, &hints, &result) != 0) {
+        *error = MAKE_ERROR(1, @"Lookup error");
+        return -1;
+    }
+
+    switch (result->ai_family) {
+        case AF_INET:
+            return CKDNSRecordTypeA;
+        case AF_INET6:
+            return CKDNSRecordTypeAAAA;
+    }
+
+    *error = MAKE_ERROR(1, @"Unknown record type");
+    return -1;
 }
 
 size_t curl_doh_header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
