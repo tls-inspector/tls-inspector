@@ -1,5 +1,5 @@
 //
-//  CKRootCACertificateBundleManager.m
+//  CKRootCACertificateBundleManager.h
 //
 //  LGPLv3
 //

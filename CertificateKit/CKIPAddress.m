@@ -1,5 +1,5 @@
 //
-//  CKInspectResponse.m
+//  CKIPAddress.m
 //
 //  LGPLv3
 //
