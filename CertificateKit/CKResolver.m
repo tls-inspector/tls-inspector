@@ -80,9 +80,9 @@ static id _instance;
     resolvedAddress.address = address;
     resolvedAddress.query = domain;
     if (result->ai_family == AF_INET) {
-        resolvedAddress.version = IP_VERSION_IPV4;
+        resolvedAddress.version = CKIPVersionIPv4;
     } else if (result->ai_family == AF_INET6) {
-        resolvedAddress.version = IP_VERSION_IPV6;
+        resolvedAddress.version = CKIPVersionIPv6;
     }
 
     free(result);

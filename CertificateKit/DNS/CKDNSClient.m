@@ -85,22 +85,22 @@ typedef struct _HTTP_RESPONSE {
 }
 #endif
 
-- (void) resolve:(NSString *)host ofAddressVersion:(IP_VERSION)addressVersion onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
+- (void) resolve:(NSString *)host ofAddressVersion:(CKIPVersion)addressVersion onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
     dispatch_async(dnsClientQueue, ^{
         [self doResolve:host ofAddressVersion:addressVersion onServer:server completed:completed];
     });
 }
 
-- (void) doResolve:(NSString *)host ofAddressVersion:(IP_VERSION)addressVersion onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
+- (void) doResolve:(NSString *)host ofAddressVersion:(CKIPVersion)addressVersion onServer:(NSString *)server completed:(void (^)(CKDNSResult *, NSError *))completed {
     CKDNSRecordType recordType;
     switch (addressVersion) {
-        case IP_VERSION_IPV4:
+        case CKIPVersionIPv4:
             recordType = CKDNSRecordTypeA;
             break;
-        case IP_VERSION_IPV6:
+        case CKIPVersionIPv6:
             recordType = CKDNSRecordTypeAAAA;
             break;
-        case IP_VERSION_AUTOMATIC: {
+        case CKIPVersionAutomatic: {
             NSError * autoError;
             recordType = [self getPreferredRecordTypeWithError:&autoError];
             if (autoError != nil) {

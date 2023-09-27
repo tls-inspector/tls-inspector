@@ -105,13 +105,13 @@ static CFMutableStringRef keyLog = NULL;
     }
 
     switch (parameters.ipVersion) {
-        case IP_VERSION_AUTOMATIC:
+        case CKIPVersionAutomatic:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPANY);
             break;
-        case IP_VERSION_IPV4:
+        case CKIPVersionIPv4:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV4);
             break;
-        case IP_VERSION_IPV6:
+        case CKIPVersionIPv6:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV6);
             break;
     }

@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Performs a DNS query against the target server for a specific record type of the host
  */
-- (void) resolve:(NSString * _Nonnull)host ofAddressVersion:(IP_VERSION)addressVersion onServer:(NSString * _Nonnull)server completed:(void (^_Nonnull)(CKDNSResult * _Nullable, NSError * _Nullable))completed;
+- (void) resolve:(NSString * _Nonnull)host ofAddressVersion:(CKIPVersion)addressVersion onServer:(NSString * _Nonnull)server completed:(void (^_Nonnull)(CKDNSResult * _Nullable, NSError * _Nullable))completed;
 
 /**
  Try to determine the preferred record type for the given network environment

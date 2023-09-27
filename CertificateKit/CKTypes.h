@@ -6,43 +6,44 @@
 //  Copyright © 2021 Ian Spence. All rights reserved.
 //
 
-#ifndef CKTypes_h
-#define CKTypes_h
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
- Possible options for the crypto engine used to chain getters
+ Supported network engines for inspection requests
  */
-typedef enum __CRYPTO_ENGINE {
+typedef NS_ENUM(NSUInteger, CKNetworkEngine) {
     /**
-     The modern Apple getter using the Network Framework
+     The modern Apple engine using the Network Framework
      */
-    CRYPTO_ENGINE_NETWORK_FRAMEWORK = 0,
+    CKNetworkEngineNetworkFramework = 0,
     /**
-     The legacy Apple getter using SecureTransport
+     The legacy Apple engine using SecureTransport
      */
-    CRYPTO_ENGINE_SECURE_TRANSPORT = 1,
+    CKNetworkEngineSecureTransport = 1,
     /**
-     The OpenSSL getter
+     The OpenSSL engine
      */
-    CRYPTO_ENGINE_OPENSSL = 2,
-} CRYPTO_ENGINE;
+    CKNetworkEngineOpenSSL = 2,
+};
 
 /**
  Possible options for IP versions
  */
-typedef enum __IP_VERSIONS {
+typedef NS_ENUM(NSUInteger, CKIPVersion) {
     /**
      Let the system choose which IP version to use
      */
-    IP_VERSION_AUTOMATIC = 0,
+    CKIPVersionAutomatic = 0,
     /**
      Prefer IPv4 connections
      */
-    IP_VERSION_IPV4 = 1,
+    CKIPVersionIPv4 = 1,
     /**
      Prefer IPv6 connections
      */
-    IP_VERSION_IPV6 = 2,
-} IP_VERSION;
+    CKIPVersionIPv6 = 2,
+};
 
 #endif /* CKTypes_h */

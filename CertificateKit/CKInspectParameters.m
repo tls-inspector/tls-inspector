@@ -50,8 +50,8 @@
     parameters.queryServerInfo = true;
     parameters.checkOCSP = true;
     parameters.checkCRL = false;
-    parameters.cryptoEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK;
-    parameters.ipVersion = IP_VERSION_AUTOMATIC;
+    parameters.cryptoEngine = CKNetworkEngineNetworkFramework;
+    parameters.ipVersion = CKIPVersionAutomatic;
     parameters.ciphers = [CertificateKit defaultCiphersuite];
 
     CKRegex * protocolPattern = [CKRegex compile:@"^[a-z]+://"];
@@ -141,8 +141,8 @@
             self.queryServerInfo ? @"YES" : @"NO",
             self.checkOCSP ? @"YES" : @"NO",
             self.checkCRL ? @"YES" : @"NO",
-            self.cryptoEngine,
-            self.ipVersion,
+            (int)self.cryptoEngine,
+            (int)self.ipVersion,
             self.ciphers.description];
 }
 
@@ -189,8 +189,8 @@
         KEY_QUERY_SERVER_INFO: [NSNumber numberWithBool:self.queryServerInfo],
         KEY_CHECK_OCSP: [NSNumber numberWithBool:self.checkOCSP],
         KEY_CHECK_CRL: [NSNumber numberWithBool:self.checkCRL],
-        KEY_CRYPTO_ENGINE: [NSNumber numberWithInt:self.cryptoEngine],
-        KEY_IP_VERSION: [NSNumber numberWithInt:self.ipVersion],
+        KEY_CRYPTO_ENGINE: [NSNumber numberWithUnsignedInteger:self.cryptoEngine],
+        KEY_IP_VERSION: [NSNumber numberWithUnsignedInteger:self.ipVersion],
         KEY_CIPHERS: self.ciphers,
         KEY_DOH_SERVER: self.dnsOverHTTPSServer == nil ? @"" : self.dnsOverHTTPSServer,
         KEY_DOH_FALLBACK: [NSNumber numberWithBool:self.dohFallbackToSystemDNS],
@@ -234,8 +234,8 @@
     parameters.queryServerInfo = queryServerInfoNumber.boolValue;
     parameters.checkOCSP = checkOCSPNumber.boolValue;
     parameters.checkCRL = checkCRLNumber.boolValue;
-    parameters.cryptoEngine = (CRYPTO_ENGINE)cryptoEngineNumber.intValue;
-    parameters.ipVersion = (IP_VERSION)ipVersionNumber.intValue;
+    parameters.cryptoEngine = (CKNetworkEngine)cryptoEngineNumber.unsignedIntegerValue;
+    parameters.ipVersion = (CKIPVersion)ipVersionNumber.unsignedIntegerValue;
     parameters.ciphers = ciphers;
     parameters.dnsOverHTTPSServer = dohServer.length == 0 ? nil : dohServer;
     parameters.dohFallbackToSystemDNS = dohFallback.boolValue;
@@ -244,11 +244,11 @@
 
 - (NSString *) cryptoEngineString {
     switch (self.cryptoEngine) {
-        case CRYPTO_ENGINE_OPENSSL:
+        case CKNetworkEngineOpenSSL:
             return @"crypto_engine::openssl";
-        case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
+        case CKNetworkEngineNetworkFramework:
             return @"crypto_engine::network_framework";
-        case CRYPTO_ENGINE_SECURE_TRANSPORT:
+        case CKNetworkEngineSecureTransport:
             return @"crypto_engine::secure_transport";
     }
 
@@ -257,11 +257,11 @@
 
 - (NSString *) ipVersionString {
     switch (self.ipVersion) {
-        case IP_VERSION_AUTOMATIC:
+        case CKIPVersionAutomatic:
             return @"Auto";
-        case IP_VERSION_IPV4:
+        case CKIPVersionIPv4:
             return @"IPv4";
-        case IP_VERSION_IPV6:
+        case CKIPVersionIPv6:
             return @"IPv6";
     }
 
@@ -273,7 +273,7 @@
 }
 
 - (NSString *) socketAddress {
-    if (self.resolvedAddress.version == IP_VERSION_IPV6) {
+    if (self.resolvedAddress.version == CKIPVersionIPv6) {
         return [NSString stringWithFormat:@"[%@]:%i", self.ipAddress, self.port];
     }
     return [NSString stringWithFormat:@"%@:%i", self.ipAddress, self.port];

@@ -196,7 +196,7 @@ class DOHTableViewController: UITableViewController {
 
             // Validate
             self.doneButton.isEnabled = false
-            CKDNSClient.shared().resolve("dns.google", ofAddressVersion: IP_VERSION_AUTOMATIC, onServer: url) { res, err in
+            CKDNSClient.shared().resolve("dns.google", ofAddressVersion: .automatic, onServer: url) { res, err in
                 RunOnMain {
                     self.doneButton.isEnabled = true
                 }

@@ -62,17 +62,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The engine used to fetch certificates.
  */
-@property (nonatomic) CRYPTO_ENGINE cryptoEngine;
-
-/**
- The engine used to fetch certificates (now in string form!)
- */
-@property (strong, nonatomic, nonnull) NSString * cryptoEngineString;
+@property (nonatomic) CKNetworkEngine cryptoEngine;
 
 /**
  Which IP version should be used for the connection.
  */
-@property (nonatomic) IP_VERSION ipVersion;
+@property (nonatomic) CKIPVersion ipVersion;
 
 /**
  Which IP version should be used for the connection (now in string form!)
