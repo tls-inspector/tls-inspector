@@ -536,10 +536,6 @@ date_unit_singular::hour	uur
 date_unit_singular::minute	minuut
 date_unit_singular::month	maand
 date_unit_singular::year	jaar
-# TODO
-doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
-# TODO
-doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	Het certificaat voor deze site is uitgegeven door een als gevaarlijk bekend staande certificaatuitgever.
 explanation::invalid_date	Het servercertificaat voor deze site is niet vertrouwd omdat ?n of meer certificaten in de keten zijn verlopen of nog niet geldig zijn.
 explanation::issue_date_too_long	Het servercertificaat is langer geldig dan 825 dagen. Certificaten met zeer lange geldigheidsduur worden als onveilig beschouwd omdat zij zwakker kunnen worden met de tijd.
@@ -601,6 +597,10 @@ secure::trust	Ja. Uw apparaat heeft vastgesteld dat de verbinding met deze site 
 secure::untrusted	Nee. Uw apparaat kon niet vaststellen dat het aangeboden certificaat daadwerkelijk deze website identificeert en niet een andere.\n\nWees zeer voorzichtig als u verder gaat met deze website.
 secure::weak_rsa	Nee. E? of meer certificaten voor deze site gebruiken zwakke cryptografie en zijn omvoldoende veilig.
 secure::wrong_host	Nee. Het certificaat aangeboden door de server is voor een andere site; een kwaadaardig certificaat kan niet worden uitgesloten.\n\nHet lijkt erop dat het verbindingsverzoek is omgeleid naar een andere site, zoals een Wi-Fi inlogpagina.\n\nWees voorzichtig als u verder gaat met deze website.
+# TODO
+securedns_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. Compared to traditional DNS, DNS over HTTPS offers inproved privacy and security at a small performance cost.
+# TODO
+securedns_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 server_error_footer	HTTP Kopregels konden niet worden opgehaald van deze server vanwege fout: {0}
 tip_1	U kunt het servercertificaat bekijken door in Safari of een andere web browser op "Delen" te drukken en "Toon Certificaat" te kiezen.
 tip_2	Meer informatie over de server kunt u zien op Shodan door in de app, na het laden van een site, op de "Delen"-knop te drukken.

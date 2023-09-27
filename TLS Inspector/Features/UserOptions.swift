@@ -20,8 +20,9 @@ private let KEY_IP_VERSION = "use_ip_version"
 private let KEY_OPTIONS_SCHEMA_VERSION = "options_schema_version"
 private let KEY_TREAT_UNRECOGNIZED_AS_TRUSTED = "treat_unrecognized_as_trusted"
 private let KEY_APP_LANGUAGE = "app_language"
-private let KEY_DOH_SERVER = "doh_server"
-private let KEY_DOH_FALLBACK = "doh_fallback"
+private let KEY_SECURE_DNS_MODE = "secure_dns_mode"
+private let KEY_SECURE_DNS_SERVER = "secure_dns_server"
+private let KEY_SECURE_DNS_FALLBACK = "secure_dns_fallback"
 // swiftlint:enable identifier_name
 
 public enum CryptoEngine: String {
@@ -100,18 +101,28 @@ public enum IPVersion: String {
     }
 }
 
-public struct DOHServer {
-    var url: String
+public enum SecureDNSMode: String, CaseIterable {
+    case Disabled = "disabled"
+    case HTTPS = "https"
+}
+
+public struct SecureDNSServer {
+    var url: URL
     let custom: Bool
 
-    static func from(_ str: String) -> DOHServer? {
-        let parts = str.components(separatedBy: " ")
+    static func from(_ str: String?) -> SecureDNSServer? {
+        guard let value = str else {
+            return nil
+        }
+        let parts = value.components(separatedBy: " ")
         if parts.count != 2 {
             return nil
         }
-        let url = String(parts[1])
+        guard let url = URL(string: String(parts[1])) else {
+            return nil
+        }
         let custom = parts[0] == "1"
-        return DOHServer(url: url, custom: custom)
+        return SecureDNSServer(url: url, custom: custom)
     }
 
     func toString() -> String {
@@ -139,7 +150,8 @@ class UserOptions {
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
         KEY_TREAT_UNRECOGNIZED_AS_TRUSTED: false,
         KEY_APP_LANGUAGE: "",
-        KEY_DOH_FALLBACK: true,
+        KEY_SECURE_DNS_MODE: SecureDNSMode.Disabled.rawValue,
+        KEY_SECURE_DNS_FALLBACK: true,
     ]
     private static var _verboseLogging = false
     private static var _inspectionsWithVerboseLogging = 0
@@ -348,30 +360,36 @@ class UserOptions {
             }
         }
     }
-    static var dohServer: DOHServer? {
+    static var secureDNSMode: SecureDNSMode {
         get {
-            print("[Options] GET \(KEY_DOH_SERVER) = \(AppDefaults.string(forKey: KEY_DOH_SERVER) ?? "nil")")
-            guard let value = AppDefaults.string(forKey: KEY_DOH_SERVER) else {
-                return nil
-            }
-            guard let server = DOHServer.from(value) else {
-                return nil
-            }
-            return server
+            return SecureDNSMode(rawValue: AppDefaults.string(forKey: KEY_SECURE_DNS_MODE) ?? "") ?? .Disabled
         }
         set {
-            let v = newValue?.toString() ?? ""
-            print("[Options] SET \(KEY_DOH_SERVER) = \(v)")
-            AppDefaults.set(v, forKey: KEY_DOH_SERVER)
+            AppDefaults.set(newValue.rawValue, forKey: KEY_SECURE_DNS_MODE)
+            LogDebug("Setting AppDefault: \(KEY_SECURE_DNS_MODE) = \(newValue)")
         }
     }
-    static var dohFallback: Bool {
+    static var secureDNSServer: SecureDNSServer? {
         get {
-            return AppDefaults.bool(forKey: KEY_DOH_FALLBACK)
+            return SecureDNSServer.from(AppDefaults.string(forKey: KEY_SECURE_DNS_SERVER))
         }
         set {
-            AppDefaults.set(newValue, forKey: KEY_DOH_FALLBACK)
-            LogDebug("Setting AppDefault: \(KEY_DOH_FALLBACK) = \(newValue)")
+            if let value = newValue {
+                AppDefaults.set(value.toString(), forKey: KEY_SECURE_DNS_SERVER)
+                LogDebug("Setting AppDefault: \(KEY_SECURE_DNS_SERVER) = \(value.toString())")
+            } else {
+                AppDefaults.removeObject(forKey: KEY_SECURE_DNS_SERVER)
+                LogDebug("Delete AppDefault: \(KEY_SECURE_DNS_SERVER)")
+            }
+        }
+    }
+    static var secureDNSFallback: Bool {
+        get {
+            return AppDefaults.bool(forKey: KEY_SECURE_DNS_FALLBACK)
+        }
+        set {
+            AppDefaults.set(newValue, forKey: KEY_SECURE_DNS_FALLBACK)
+            LogDebug("Setting AppDefault: \(KEY_SECURE_DNS_FALLBACK) = \(newValue)")
         }
     }
 

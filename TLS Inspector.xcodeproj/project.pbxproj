@@ -142,7 +142,7 @@
 		3CB94047225036FC0055C067 /* CKOpenSSLInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */; };
 		3CBF85BF253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */; };
 		3CBF85C0253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */; platformFilter = ios; };
-		3CC553C92AA17B1B005ECE0D /* DOHTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC553C82AA17B1B005ECE0D /* DOHTableViewController.swift */; };
+		3CC553C92AA17B1B005ECE0D /* SecureDNSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC553C82AA17B1B005ECE0D /* SecureDNSTableViewController.swift */; };
 		3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CCBE2D7294FF81600E0DD6D /* CKCertificateBundleMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */; };
 		3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */; };
@@ -432,7 +432,7 @@
 		3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKOpenSSLInspector.h; sourceTree = "<group>"; };
 		3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkFrameworkInspector.h; sourceTree = "<group>"; };
 		3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkFrameworkInspector.m; sourceTree = "<group>"; };
-		3CC553C82AA17B1B005ECE0D /* DOHTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOHTableViewController.swift; sourceTree = "<group>"; };
+		3CC553C82AA17B1B005ECE0D /* SecureDNSTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSTableViewController.swift; sourceTree = "<group>"; };
 		3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundleMetadata.h; sourceTree = "<group>"; };
 		3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundleMetadata.m; sourceTree = "<group>"; };
 		3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = google_ca_bundle.p7b; sourceTree = "<group>"; };
@@ -733,7 +733,7 @@
 				3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */,
 				3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */,
 				3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */,
-				3CC553C82AA17B1B005ECE0D /* DOHTableViewController.swift */,
+				3CC553C82AA17B1B005ECE0D /* SecureDNSTableViewController.swift */,
 				3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */,
 				3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */,
 				3C7269392394BC1D002A0B19 /* InputTableViewController.swift */,
@@ -1464,7 +1464,7 @@
 				3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */,
 				3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */,
 				3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */,
-				3CC553C92AA17B1B005ECE0D /* DOHTableViewController.swift in Sources */,
+				3CC553C92AA17B1B005ECE0D /* SecureDNSTableViewController.swift in Sources */,
 				3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */,
 				3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */,
 				3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,

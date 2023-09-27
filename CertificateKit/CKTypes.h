@@ -59,4 +59,18 @@ typedef NS_ENUM(NSUInteger, CKIPVersion) {
     CKIPVersionIPv6 = 2,
 };
 
-#endif /* CKTypes_h */
+/**
+ Possible options for secure DNS modes
+ */
+typedef NS_ENUM(NSUInteger, CKSecureDNSMode) {
+    /**
+     Disabled
+     */
+    CKSecureDNSModeDisabled = 0,
+    /**
+     DNS over HTTPS
+     */
+    CKSecureDNSModeHTTPS = 1,
+};
+
+NS_ASSUME_NONNULL_END

@@ -70,24 +70,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CKIPVersion ipVersion;
 
 /**
- Which IP version should be used for the connection (now in string form!)
+ Secure DNS mode
  */
-@property (strong, nonatomic, nonnull) NSString * ipVersionString;
+@property (nonatomic) CKSecureDNSMode secureDNSMode;
+
+/**
+ Secure DNS server
+ */
+@property (strong, nonatomic, nullable) NSString * secureDNSServer;
+
+/**
+ If secure DNS  is used and the server cannot be reached, fallback to system DNS.
+ */
+@property (nonatomic) BOOL secureDNSFallback;
 
 /**
  (OpenSSL only) The cipherstring used with OpenSSL
  */
 @property (strong, nonatomic, nullable) NSString * ciphers;
-
-/**
- The DNS over HTTPS server to use. If null, use system DNS.
- */
-@property (strong, nonatomic, nullable) NSString * dnsOverHTTPSServer;
-
-/**
- If DNS over HTTPS is used and the server cannot be reached, fallback to system DNS.
- */
-@property (nonatomic) BOOL dohFallbackToSystemDNS;
 
 /**
  Compare this instance of CKInspectParameters with the provided other.
@@ -113,6 +113,9 @@ NS_ASSUME_NONNULL_BEGIN
  Returns a copy of the parameters object
  */
 - (CKInspectParameters * _Nonnull) copy;
+
+- (NSString * _Nonnull) cryptoEngineString;
+- (NSString * _Nonnull) ipVersionString;
 
 @end
 

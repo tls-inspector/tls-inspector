@@ -572,10 +572,6 @@ date_unit_singular::hour	Stunde
 date_unit_singular::minute	Minute
 date_unit_singular::month	Monat
 date_unit_singular::year	Jahr
-# TODO
-doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
-# TODO
-doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	The certificate for this host was issued by a known dangerous certificate authority.
 explanation::invalid_date	Dem Server-Zertifikat wird nicht vertraut, da mindestens ein Zertifikat in der Kette abgelaufen oder noch nicht gültig ist.
 explanation::issue_date_too_long	Das Server-Zertifikat ist länger als 825 Tage gültig. Zertifikaten mit übermäßig langer Gültigkeitsdauer gelten als nicht sicher, da sie im Laufe der Zeit unsicher werden können.
@@ -642,6 +638,10 @@ secure::trust	Ja. Dein Gerät vertraut der Verbindung zu dieser Webseite.
 secure::untrusted	Nein. Deinem Gerät ist es nicht möglich, die Echtheit des Zertifikats der Webseite festzustellen.\n\nSei extrem vorsichtig, wenn du diese Webseite besuchst.
 secure::weak_rsa	Nein. Mindestens ein Zertifikat dieser Webseite benutzt schwache Kryptographie und wird daher als unsicher betrachtet.
 secure::wrong_host	Nein. Da das Zertifikat für eine andere Webseite ausgestellt wurde, kann nicht überprüft werden, ob die Verbindung sicher ist.\n\nWomöglich wurde die Anfrage umgeleitet auf eine andere Webseite, wie zum Beispiel eine WLAN-Anmelde-Seite.\n\nSei vorsichtig, wenn du diese Webseite besuchst.
+# TODO
+securedns_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. Compared to traditional DNS, DNS over HTTPS offers inproved privacy and security at a small performance cost.
+# TODO
+securedns_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 server_error_footer	HTTP Header konnten aufgrund des folgenden Fehlers nicht abgefragt werden: {0}
 tip_1	Sieh dir Zertifikate direkt über Safari an, indem du im Teilen-Menü "Zertifikat anzeigen" wählst.
 tip_2	Sieh dir mehr Informationen über diesen Server auf Shodan an über das "Teilen"-Menü beim Ansehen eines Zertifikats.

@@ -27,9 +27,14 @@ extension UserOptions {
             parameters.ipVersion = .iPv6
         }
 
-        if let server = UserOptions.dohServer {
-            parameters.dnsOverHTTPSServer = server.url
-            parameters.dohFallbackToSystemDNS = UserOptions.dohFallback
+        switch UserOptions.secureDNSMode {
+        case .Disabled:
+            parameters.secureDNSMode = .disabled
+        case .HTTPS:
+            if let server = UserOptions.secureDNSServer {
+                parameters.secureDNSServer = server.url.absoluteString
+                parameters.secureDNSMode = .HTTPS
+            }
         }
 
         return parameters

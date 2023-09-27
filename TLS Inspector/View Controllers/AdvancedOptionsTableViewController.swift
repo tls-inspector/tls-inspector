@@ -66,7 +66,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) {
             cell.cell.textLabel?.text = lang(key: "DNS over HTTPS")
             cell.didSelect = { (_, _) in
-                self.performSegue(withIdentifier: "DOH", sender: self)
+                self.performSegue(withIdentifier: "SecureDNS", sender: self)
             }
             RootCADOHSection.cells.append(cell)
         }

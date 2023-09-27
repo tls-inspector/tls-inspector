@@ -530,10 +530,6 @@ date_unit_singular::hour	hora
 date_unit_singular::minute	minuto
 date_unit_singular::month	mes
 date_unit_singular::year	año
-# TODO
-doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. When enabled, TLS Inspector will prefer to use the selected server first, and use the systems DNS resolver if the first fails.
-# TODO
-doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	El certificado para este host fue emitido por una autoridad de certificación con mala reputación.
 explanation::invalid_date	El certificado del servidor para este sitio no es de confianza porque uno o más certificados en la cadena están caducados o no son válidos todavía.
 explanation::issue_date_too_long	El certificado del servidor es válido durante más de 825 días. Los certificados con períodos de validez excesivos no se consideran seguros porque pueden volverse débiles a medida que envejecen.
@@ -594,6 +590,10 @@ secure::trust	Sí. Tu dispositivo ha determinado que la conexión a este sitio e
 secure::untrusted	No. Tu dispositivo no ha podido comprobar si el certificado presentado por el sitio web realmente pertenece al sitio web y no a alguien más.\n\nTen precaución extrema si continúas visitando este sitio web.
 secure::weak_rsa	No. Uno o más certificados para este sitio están utilizando criptografía débil y no se consideran seguros.\n\nTen precaución si continúas visitando este sitio web.
 secure::wrong_host	No. Porque el certificado presentado por el servidor era para otro sitio no hay forma de estar seguro de que este certificado no es peligroso.\n\nEs probable que la solicitud a este sitio se haya redirigido a otro sitio, como una página de inicio de sesión Wi-Fi.\n\nTen precaución si continúas con este sitio web.
+# TODO
+securedns_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. Compared to traditional DNS, DNS over HTTPS offers inproved privacy and security at a small performance cost.
+# TODO
+securedns_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 server_error_footer	No se pudieron obtener los encabezados HTTP de este servidor debido al siguiente error: {0}
 tip_1	Puedes ver el certificado de un sitio web en Safari o cualquier otro navegador web pulsando el botón "Compartir" y seleccionando "Mostrar certificado".
 tip_2	Puedes ver más información sobre el servidor en Shodan pulsando el botón "Compartir" cuando se muestra una cadena de certificados.

@@ -514,8 +514,6 @@ date_unit_singular::hour	hour
 date_unit_singular::minute	minute
 date_unit_singular::month	month
 date_unit_singular::year	year
-doh_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. Compared to traditional DNS, DNS over HTTPS offers inproved privacy and security at a small performance cost.
-doh_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 explanation::bad_authority	The certificate for this host was issued by a known dangerous certificate authority.
 explanation::invalid_date	The server certificate for this site is not trusted because one or more certificates in the chain is expired or not yet valid.
 explanation::issue_date_too_long	The server certificate is valid for more than 825 days. Certificates with excessive validity periods are not considered secure as they may become weak as they age.
@@ -576,6 +574,8 @@ secure::trust	Yes. Your device has determined that the connection to this site i
 secure::untrusted	No. Your device was unable to check if the certificate presented by the website actually belongs to the website, and not somebody else.\n\nExercise extreme caution if continuing to this website.
 secure::weak_rsa	No. One or more certificates for this host are using weak cryptography and are not considered secure.
 secure::wrong_host	No. Because the certificate presented by the server was for another site there is no way to be sure that this certificate is not dangerous.\n\nIt's likely that the request to this site was redirected to another site, such as a Wi-Fi sign on page.\n\nExercise caution if continuing to this website.
+securedns_description	DNS over HTTPS is a technology that uses encrypted connections when resolving domain names to IP addresses. Compared to traditional DNS, DNS over HTTPS offers inproved privacy and security at a small performance cost.
+securedns_fallback_description	If enabled, TLS Inspector will prefer to the the selected DNS over HTTPS server. If the server is unreachable, TLS Inspector will instead use the system's DNS resolver.
 server_error_footer	HTTP Headers could not be fetched from this server due to the following error: {0}
 tip_1	You can view the certificate of a website in Safari or other web browser by tapping the "Share" button and selecting "Show Certificate".
 tip_2	You can view more information about the server on Shodan by tapping the "Share" button when viewing a certificate chain..

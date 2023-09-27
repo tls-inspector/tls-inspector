@@ -42,6 +42,9 @@
 #define KEY_CRYPTO_ENGINE @"crypto_engine"
 #define KEY_IP_VERSION @"ip_version"
 #define KEY_CIPHERS @"ciphers"
+#define KEY_SECURE_DNS_MODE @"secure_dns_mode"
+#define KEY_SECURE_DNS_SERVER @"secure_dns_server"
+#define KEY_SECURE_DNS_FALLBACK @"secure_dns_fallback"
 #define KEY_DOH_SERVER @"doh_server"
 #define KEY_DOH_FALLBACK @"doh_fallback"
 
@@ -53,6 +56,7 @@
     parameters.cryptoEngine = CKNetworkEngineNetworkFramework;
     parameters.ipVersion = CKIPVersionAutomatic;
     parameters.ciphers = [CertificateKit defaultCiphersuite];
+    parameters.secureDNSMode = CKSecureDNSModeDisabled;
 
     CKRegex * protocolPattern = [CKRegex compile:@"^[a-z]+://"];
     CKRegex * wrappedIPv6AddressPattern = [CKRegex compile:@"\\[[0-9a-f\\:]+\\]"];
@@ -165,8 +169,9 @@
     BOOL cryptoEngineEquals = self.cryptoEngine == other.cryptoEngine;
     BOOL ipVersionEquals = self.ipVersion == other.ipVersion;
     BOOL ciphersEquals = [self.ciphers isEqualToString:other.ciphers];
-    BOOL dohServerEquals = [self.dnsOverHTTPSServer isEqualToString:other.dnsOverHTTPSServer];
-    BOOL dohFallbackEquals = self.dohFallbackToSystemDNS == other.dohFallbackToSystemDNS;
+    BOOL secureDNSModeEquals = self.secureDNSMode == other.secureDNSMode;
+    BOOL secureDNSServerEquals = [self.secureDNSServer isEqualToString:other.secureDNSServer];
+    BOOL secureDNSFallbackEquals = self.secureDNSFallback = other.secureDNSFallback;
 
     return hostAddressEquals &&
         portEquals &&
@@ -177,8 +182,9 @@
         cryptoEngineEquals &&
         ipVersionEquals &&
         ciphersEquals &&
-        dohServerEquals &&
-        dohFallbackEquals;
+        secureDNSModeEquals &&
+        secureDNSServerEquals &&
+        secureDNSFallbackEquals;
 }
 
 - (NSDictionary<NSString *, id> *) dictionaryValue {
@@ -192,8 +198,9 @@
         KEY_CRYPTO_ENGINE: [NSNumber numberWithUnsignedInteger:self.cryptoEngine],
         KEY_IP_VERSION: [NSNumber numberWithUnsignedInteger:self.ipVersion],
         KEY_CIPHERS: self.ciphers,
-        KEY_DOH_SERVER: self.dnsOverHTTPSServer == nil ? @"" : self.dnsOverHTTPSServer,
-        KEY_DOH_FALLBACK: [NSNumber numberWithBool:self.dohFallbackToSystemDNS],
+        KEY_SECURE_DNS_MODE: [NSNumber numberWithUnsignedInteger:self.secureDNSMode],
+        KEY_SECURE_DNS_SERVER: self.secureDNSServer == nil ? @"" : self.secureDNSServer,
+        KEY_SECURE_DNS_FALLBACK: [NSNumber numberWithBool:self.secureDNSFallback],
     };
 }
 
@@ -207,8 +214,9 @@
     NSNumber * cryptoEngineNumber = d[KEY_CRYPTO_ENGINE];
     NSNumber * ipVersionNumber = d[KEY_IP_VERSION];
     NSString * ciphers = d[KEY_CIPHERS];
-    NSString * dohServer = d[KEY_DOH_SERVER];
-    NSNumber * dohFallback = d[KEY_DOH_FALLBACK];
+    NSNumber * secureDNSMode = d[KEY_SECURE_DNS_MODE];
+    NSString * secureDNSServer = d[KEY_SECURE_DNS_SERVER];
+    NSNumber * secureDNSFallback = d[KEY_SECURE_DNS_FALLBACK];
 
     if (hostAddress == nil ||
         portNumber == nil ||
@@ -219,8 +227,9 @@
         cryptoEngineNumber == nil ||
         ipVersionNumber == nil ||
         ciphers == nil ||
-        dohServer == nil ||
-        dohFallback == nil) {
+        secureDNSMode == nil ||
+        secureDNSServer == nil ||
+        secureDNSFallback == nil) {
         return nil;
     }
 
@@ -237,8 +246,9 @@
     parameters.cryptoEngine = (CKNetworkEngine)cryptoEngineNumber.unsignedIntegerValue;
     parameters.ipVersion = (CKIPVersion)ipVersionNumber.unsignedIntegerValue;
     parameters.ciphers = ciphers;
-    parameters.dnsOverHTTPSServer = dohServer.length == 0 ? nil : dohServer;
-    parameters.dohFallbackToSystemDNS = dohFallback.boolValue;
+    parameters.secureDNSMode = (CKSecureDNSMode)secureDNSMode.unsignedIntegerValue;
+    parameters.secureDNSServer = secureDNSServer;
+    parameters.secureDNSFallback = secureDNSFallback.boolValue;
     return parameters;
 }
 

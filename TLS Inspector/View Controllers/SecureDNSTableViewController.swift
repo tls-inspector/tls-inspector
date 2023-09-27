@@ -1,19 +1,19 @@
 import UIKit
 import CertificateKit
 
-private struct PresetDOHServer {
+private struct PresetSecureDNSServer {
     let name: String
-    let server: DOHServer
+    let server: SecureDNSServer
 }
 
-class DOHTableViewController: UITableViewController {
+class SecureDNSTableViewController: UITableViewController {
     var sections: [TableViewSection] = []
 
-    private let presetServers: [PresetDOHServer] = [
-        PresetDOHServer(name: "Wikimedia", server: DOHServer(url: "https://wikimedia-dns.org/dns-query", custom: false)),
-        PresetDOHServer(name: "Google", server: DOHServer(url: "https://dns.google/dns-query", custom: false)),
-        PresetDOHServer(name: "Cloudflare", server: DOHServer(url: "https://cloudflare-dns.com/dns-query", custom: false)),
-        PresetDOHServer(name: "Quad9", server: DOHServer(url: "https://dns10.quad9.net/dns-query", custom: false)),
+    private let presetServers: [PresetSecureDNSServer] = [
+        PresetSecureDNSServer(name: "Wikimedia", server: SecureDNSServer(url: URL(string: "https://wikimedia-dns.org/dns-query")!, custom: false)),
+        PresetSecureDNSServer(name: "Google", server: SecureDNSServer(url: URL(string: "https://dns.google/dns-query")!, custom: false)),
+        PresetSecureDNSServer(name: "Cloudflare", server: SecureDNSServer(url: URL(string: "https://cloudflare-dns.com/dns-query")!, custom: false)),
+        PresetSecureDNSServer(name: "Quad9", server: SecureDNSServer(url: URL(string: "https://dns10.quad9.net/dns-query")!, custom: false)),
     ]
 
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -46,10 +46,16 @@ class DOHTableViewController: UITableViewController {
 
     func buildEnabledSection() -> TableViewSection {
         let section = TableViewSection()
-        section.footer = lang(key: "doh_description")
+        section.footer = lang(key: "securedns_description")
 
-        let enabledCell = SwitchTableViewCell(labelText: lang(key: "Enabled"), defaultChecked: UserOptions.dohServer != nil, didChange: { enabled in
-            UserOptions.dohServer = enabled ? self.presetServers[0].server : nil
+        let enabledCell = SwitchTableViewCell(labelText: lang(key: "Enabled"), defaultChecked: UserOptions.secureDNSMode == .HTTPS, didChange: { enabled in
+            UserOptions.secureDNSMode = enabled ? .HTTPS : .Disabled
+            if enabled && UserOptions.secureDNSServer == nil {
+                UserOptions.secureDNSServer = self.presetServers[0].server
+            }
+            if !enabled {
+                UserOptions.secureDNSServer = nil
+            }
             self.buildTable()
             if enabled {
                 self.tableView.insertSections(IndexSet(1...2), with: .fade)
@@ -63,15 +69,15 @@ class DOHTableViewController: UITableViewController {
     }
 
     func buildFallbackSection() -> TableViewSection? {
-        if UserOptions.dohServer == nil {
+        if UserOptions.secureDNSMode == .Disabled {
             return nil
         }
 
         let section = TableViewSection()
-        section.footer = lang(key: "doh_fallback_description")
+        section.footer = lang(key: "securedns_fallback_description")
 
-        let fallbackCell = SwitchTableViewCell(labelText: lang(key: "Use System DNS on Error"), defaultChecked: UserOptions.dohFallback, didChange: { enabled in
-            UserOptions.dohFallback = enabled
+        let fallbackCell = SwitchTableViewCell(labelText: lang(key: "Use System DNS on Error"), defaultChecked: UserOptions.secureDNSFallback, didChange: { enabled in
+            UserOptions.secureDNSFallback = enabled
         })
         section.cells.append(fallbackCell)
 
@@ -79,7 +85,7 @@ class DOHTableViewController: UITableViewController {
     }
 
     func buildServerListSection() -> TableViewSection? {
-        guard let currentServer = UserOptions.dohServer else {
+        guard let currentServer = UserOptions.secureDNSServer else {
             return nil
         }
 
@@ -100,8 +106,8 @@ class DOHTableViewController: UITableViewController {
 
             let tvc = TableViewCell(cell)
             tvc.didSelect = { (_, _) in
-                let currentServerIsCustom = UserOptions.dohServer?.custom ?? false
-                UserOptions.dohServer = preset.server
+                let currentServerIsCustom = UserOptions.secureDNSServer?.custom ?? false
+                UserOptions.secureDNSServer = preset.server
                 self.buildTable()
                 if currentServerIsCustom {
                     self.tableView.deleteSections(IndexSet(integer: 3), with: .fade)
@@ -124,8 +130,8 @@ class DOHTableViewController: UITableViewController {
 
         let tvc = TableViewCell(cell)
         tvc.didSelect = { (_, _) in
-            let currentServerIsCustom = UserOptions.dohServer?.custom ?? false
-            UserOptions.dohServer = DOHServer(url: "", custom: true)
+            let currentServerIsCustom = UserOptions.secureDNSServer?.custom ?? false
+            UserOptions.secureDNSServer = SecureDNSServer(url: URL(string: "https://example.com/dns-query")!, custom: true)
             self.buildTable()
             if !currentServerIsCustom {
                 self.tableView.insertSections(IndexSet(integer: 3), with: .fade)
@@ -138,7 +144,7 @@ class DOHTableViewController: UITableViewController {
     }
 
     func buildCustomSection() -> TableViewSection? {
-        guard let server = UserOptions.dohServer else {
+        guard let server = UserOptions.secureDNSServer else {
             return nil
         }
         if !server.custom {
@@ -152,7 +158,7 @@ class DOHTableViewController: UITableViewController {
         if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") {
             if let input = cell.viewWithTag(1) as? UITextField {
                 input.placeholder = "https://www.example.com/dns-query"
-                input.text = server.url
+                input.text = server.url.absoluteString
             }
             section.cells.append(TableViewCell(cell))
         }
@@ -186,17 +192,20 @@ class DOHTableViewController: UITableViewController {
     }
 
     @IBAction func doneButtonTap(_ sender: UIBarButtonItem) {
-        if UserOptions.dohServer?.custom ?? false {
+        if UserOptions.secureDNSServer?.custom ?? false {
             sender.isEnabled = false
 
             guard let urlField = self.sections[2].cells[0].cell.viewWithTag(1) as? UITextField else {
                 return
             }
-            let url = urlField.text ?? ""
+
+            guard let url = URL(string: urlField.text ?? "") else {
+                return
+            }
 
             // Validate
             self.doneButton.isEnabled = false
-            CKDNSClient.shared().resolve("dns.google", ofAddressVersion: .automatic, onServer: url) { res, err in
+            CKDNSClient.shared().resolve("dns.google", ofAddressVersion: .automatic, onServer: url.absoluteString) { res, err in
                 RunOnMain {
                     self.doneButton.isEnabled = true
                 }
@@ -226,7 +235,7 @@ class DOHTableViewController: UITableViewController {
                 }
 
                 RunOnMain {
-                    UserOptions.dohServer?.url = url
+                    UserOptions.secureDNSServer?.url = url
                     self.dismiss(animated: true)
                 }
             }
