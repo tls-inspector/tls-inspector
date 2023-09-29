@@ -302,6 +302,7 @@ Country::ZM	Zambia
 Country::ZW	Zimbabwe
 Custom	Custom
 Custom Server URL	Custom Server URL
+DNS over HTTPS	DNS over HTTPS
 Danger	Danger
 Dangerous	Dangerous
 Delete	Delete
@@ -314,10 +315,12 @@ Download & Check CRL	Download & Check CRL
 EV Authority	EV Authority
 Embedded	Embedded
 Enable Verbose Logging	Enable Verbose Logging
+Enabled	Enabled
 Engine Settings	Engine Settings
 Engine has no options	Engine has no options
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.
 Enter the value to verify	Enter the value to verify
+Error Validating Server	Error Validating Server
 Errors	Errors
 Export NSS Keylog	Export NSS Keylog
 Extended	Extended
@@ -374,6 +377,7 @@ Network Engine	Network Engine
 Next	Next
 No	No
 No Supported URL Found	No Supported URL Found
+No response	No response
 Not After	Not After
 Not Before	Not Before
 Not Valid After	Not Valid After
@@ -464,8 +468,10 @@ Trusted Chain	Trusted Chain
 Unable to Inspect	Unable to Inspect
 Unable to export certificate	Unable to export certificate
 Understood	Understood
+Unexpected response	Unexpected response
 Unknown	Unknown
 Unrecognized	Unrecognized
+Unsupported protocol	Unsupported protocol
 Untrusted	Untrusted
 Untrusted Chain	Untrusted Chain
 Updating	Updating
@@ -477,6 +483,7 @@ Use the Reminders app to customize the reminder	Use the Reminders app to customi
 Valid For	Valid For
 Valid From	Valid From
 Valid To	Valid To
+Validating server	Validating server
 Validity Period	Validity Period
 Value	Value
 Verbose Logging Enabled	Verbose Logging Enabled

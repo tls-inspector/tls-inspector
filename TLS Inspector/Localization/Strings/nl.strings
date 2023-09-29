@@ -312,6 +312,8 @@ Country::ZW	Zimbabwe
 Custom	Custom
 # TODO
 Custom Server URL	Custom Server URL
+# TODO
+DNS over HTTPS	DNS over HTTPS
 Danger	Gevaar
 Dangerous	Gevaarlijk
 Delete	Wissen
@@ -324,10 +326,14 @@ Download & Check CRL	Download & Check CRL
 EV Authority	EV Autoriteit
 Embedded	Embedded
 Enable Verbose Logging	Zet Uitgebreide Logging Aan
+# TODO
+Enabled	Enabled
 Engine Settings	Crypto Driver Instellingen
 Engine has no options	Crypto Driver heeft geen opties
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Voer de volledig gekwalificeerde domeinnaam of het IP-adres van de server in die u wilt inspecteren.  U kunt hier ook een poortnummer opgeven.
 Enter the value to verify	Voer de waarde om te verifi?en in
+# TODO
+Error Validating Server	Error Validating Server
 Errors	Fouten
 Export NSS Keylog	Exporteer NSS Keylog
 Extended	Uitgebreid
@@ -389,6 +395,8 @@ Network Engine	Netwerk Driver
 Next	Volgende
 No	Nee
 No Supported URL Found	Geen Ondersteunde URL Gevonden
+# TODO
+No response	No response
 Not After	Niet Na
 Not Before	Niet V?r
 Not Valid After	Niet Geldig Na
@@ -482,8 +490,12 @@ Trusted Chain	Vertrouwde Keten
 Unable to Inspect	Kan Niet Inspecteren
 Unable to export certificate	Certificaat exporteren lukt niet
 Understood	Begrepen
+# TODO
+Unexpected response	Unexpected response
 Unknown	Onbekend
 Unrecognized	Niet Herkend
+# TODO
+Unsupported protocol	Unsupported protocol
 Untrusted	Niet Vertrouwd
 Untrusted Chain	Niet Vertrouwde Keten
 Updating	Updating
@@ -497,6 +509,8 @@ Use the Reminders app to customize the reminder	Gebruik de Reminders app om de h
 Valid For	Geldig voor
 Valid From	Geldig Vanaf
 Valid To	Geldig Tot
+# TODO
+Validating server	Validating server
 Validity Period	Geldigheidsduur
 Value	Waarde
 Verbose Logging Enabled	Uitgebreide Logging Aangezet

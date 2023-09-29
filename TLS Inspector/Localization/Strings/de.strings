@@ -329,6 +329,8 @@ Custom	Custom
 # TODO
 Custom Server URL	Custom Server URL
 # TODO
+DNS over HTTPS	DNS over HTTPS
+# TODO
 Danger	Danger
 Dangerous	Dangerous
 Delete	Löschen
@@ -342,10 +344,14 @@ EV Authority	EV-Zertifizierungsstelle
 # TODO
 Embedded	Embedded
 Enable Verbose Logging	Protokollierung aktivieren
+# TODO
+Enabled	Enabled
 Engine Settings	Engine-Einstellungen
 Engine has no options	Engine hat keine Einstellungsmöglichkeiten
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Fully Qualified Domain Name oder IP-Adresse des zu inspizierenden Hosts angeben. Es kann auch eine Port-Nummer angegeben werden.
 Enter the value to verify	Wert zur Verifizierung eingeben
+# TODO
+Error Validating Server	Error Validating Server
 Errors	Fehler
 # TODO
 Export NSS Keylog	Export NSS Keylog
@@ -412,6 +418,8 @@ Network Engine	Netzwerk-Engine
 Next	Weiter
 No	Nein
 No Supported URL Found	Keine unterstützte URL gefunden
+# TODO
+No response	No response
 Not After	Nicht nach
 Not Before	Nicht vor
 Not Valid After	Nicht gültig nach
@@ -513,9 +521,13 @@ Trusted Chain	Vertrauenswürdige Kette
 Unable to Inspect	Kann nicht analysiert werden
 Unable to export certificate	Zertifikat kann nicht exportiert werden
 Understood	Verstanden
+# TODO
+Unexpected response	Unexpected response
 Unknown	Unbekannt
 # TODO
 Unrecognized	Unrecognized
+# TODO
+Unsupported protocol	Unsupported protocol
 Untrusted	Nicht vertrauenswürdig
 Untrusted Chain	Nicht vertrauenswürdige Kette
 # TODO
@@ -531,6 +543,8 @@ Use the Reminders app to customize the reminder	Bearbeite die Erinnerung in der 
 Valid For	Gültig für
 Valid From	Gültig ab
 Valid To	Gültig bis
+# TODO
+Validating server	Validating server
 Validity Period	Gültigkeitsperiode
 Value	Wert
 Verbose Logging Enabled	Protokollierung aktiviert

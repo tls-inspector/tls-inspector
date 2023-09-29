@@ -3,20 +3,21 @@ import CertificateKit
 
 private struct PresetSecureDNSServer {
     let name: String
-    let server: SecureDNSServer
+    let host: String
 }
 
 class SecureDNSTableViewController: UITableViewController {
+    var settings = UserOptions.secureDNS
     var sections: [TableViewSection] = []
 
     private let presetServers: [PresetSecureDNSServer] = [
-        PresetSecureDNSServer(name: "Wikimedia", server: SecureDNSServer(url: URL(string: "https://wikimedia-dns.org/dns-query")!, custom: false)),
-        PresetSecureDNSServer(name: "Google", server: SecureDNSServer(url: URL(string: "https://dns.google/dns-query")!, custom: false)),
-        PresetSecureDNSServer(name: "Cloudflare", server: SecureDNSServer(url: URL(string: "https://cloudflare-dns.com/dns-query")!, custom: false)),
-        PresetSecureDNSServer(name: "Quad9", server: SecureDNSServer(url: URL(string: "https://dns10.quad9.net/dns-query")!, custom: false)),
+        PresetSecureDNSServer(name: "Wikimedia", host: "https://wikimedia-dns.org/dns-query"),
+        PresetSecureDNSServer(name: "Google", host: "https://dns.google/dns-query"),
+        PresetSecureDNSServer(name: "Cloudflare", host: "https://cloudflare-dns.com/dns-query"),
+        PresetSecureDNSServer(name: "Quad9", host: "https://dns10.quad9.net/dns-query"),
     ]
 
-    @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +49,15 @@ class SecureDNSTableViewController: UITableViewController {
         let section = TableViewSection()
         section.footer = lang(key: "securedns_description")
 
-        let enabledCell = SwitchTableViewCell(labelText: lang(key: "Enabled"), defaultChecked: UserOptions.secureDNSMode == .HTTPS, didChange: { enabled in
-            UserOptions.secureDNSMode = enabled ? .HTTPS : .Disabled
-            if enabled && UserOptions.secureDNSServer == nil {
-                UserOptions.secureDNSServer = self.presetServers[0].server
+        let enabledCell = SwitchTableViewCell(labelText: lang(key: "Enabled"), defaultChecked: self.settings.mode != .Disabled, didChange: { enabled in
+            self.settings.mode = enabled ? .HTTPS : .Disabled
+            if enabled && self.settings.host == nil {
+                self.settings.host = self.presetServers[0].host
+                self.settings.custom = false
+                self.settings.fallback = true
             }
             if !enabled {
-                UserOptions.secureDNSServer = nil
+                self.settings.host = nil
             }
             self.buildTable()
             if enabled {
@@ -69,15 +72,15 @@ class SecureDNSTableViewController: UITableViewController {
     }
 
     func buildFallbackSection() -> TableViewSection? {
-        if UserOptions.secureDNSMode == .Disabled {
+        if self.settings.mode == .Disabled {
             return nil
         }
 
         let section = TableViewSection()
         section.footer = lang(key: "securedns_fallback_description")
 
-        let fallbackCell = SwitchTableViewCell(labelText: lang(key: "Use System DNS on Error"), defaultChecked: UserOptions.secureDNSFallback, didChange: { enabled in
-            UserOptions.secureDNSFallback = enabled
+        let fallbackCell = SwitchTableViewCell(labelText: lang(key: "Use System DNS on Error"), defaultChecked: self.settings.fallback ?? false, didChange: { enabled in
+            self.settings.fallback = enabled
         })
         section.cells.append(fallbackCell)
 
@@ -85,7 +88,10 @@ class SecureDNSTableViewController: UITableViewController {
     }
 
     func buildServerListSection() -> TableViewSection? {
-        guard let currentServer = UserOptions.secureDNSServer else {
+        if self.settings.mode == .Disabled {
+            return nil
+        }
+        guard let currentServer = self.settings.host else {
             return nil
         }
 
@@ -98,7 +104,7 @@ class SecureDNSTableViewController: UITableViewController {
             }
 
             cell.textLabel?.text = preset.name
-            if currentServer.url == preset.server.url {
+            if currentServer == preset.host && !(self.settings.custom ?? false) {
                 cell.accessoryType = .checkmark
             } else {
                 cell.accessoryType = .none
@@ -106,10 +112,11 @@ class SecureDNSTableViewController: UITableViewController {
 
             let tvc = TableViewCell(cell)
             tvc.didSelect = { (_, _) in
-                let currentServerIsCustom = UserOptions.secureDNSServer?.custom ?? false
-                UserOptions.secureDNSServer = preset.server
+                self.settings.host = preset.host
+                let wasCustom = self.settings.custom ?? false
+                self.settings.custom = false
                 self.buildTable()
-                if currentServerIsCustom {
+                if wasCustom {
                     self.tableView.deleteSections(IndexSet(integer: 3), with: .fade)
                 }
                 self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
@@ -122,7 +129,7 @@ class SecureDNSTableViewController: UITableViewController {
         }
 
         cell.textLabel?.text = lang(key: "Custom")
-        if currentServer.custom {
+        if self.settings.custom ?? false {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -130,8 +137,9 @@ class SecureDNSTableViewController: UITableViewController {
 
         let tvc = TableViewCell(cell)
         tvc.didSelect = { (_, _) in
-            let currentServerIsCustom = UserOptions.secureDNSServer?.custom ?? false
-            UserOptions.secureDNSServer = SecureDNSServer(url: URL(string: "https://example.com/dns-query")!, custom: true)
+            let currentServerIsCustom = self.settings.custom ?? false
+            self.settings.host = ""
+            self.settings.custom = true
             self.buildTable()
             if !currentServerIsCustom {
                 self.tableView.insertSections(IndexSet(integer: 3), with: .fade)
@@ -144,10 +152,7 @@ class SecureDNSTableViewController: UITableViewController {
     }
 
     func buildCustomSection() -> TableViewSection? {
-        guard let server = UserOptions.secureDNSServer else {
-            return nil
-        }
-        if !server.custom {
+        if !(self.settings.custom ?? false) {
             return nil
         }
 
@@ -158,7 +163,7 @@ class SecureDNSTableViewController: UITableViewController {
         if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Input") {
             if let input = cell.viewWithTag(1) as? UITextField {
                 input.placeholder = "https://www.example.com/dns-query"
-                input.text = server.url.absoluteString
+                input.text = self.settings.host ?? ""
             }
             section.cells.append(TableViewCell(cell))
         }
@@ -191,56 +196,87 @@ class SecureDNSTableViewController: UITableViewController {
         cell.didSelect?(tableView, indexPath)
     }
 
-    @IBAction func doneButtonTap(_ sender: UIBarButtonItem) {
-        if UserOptions.secureDNSServer?.custom ?? false {
-            sender.isEnabled = false
+    func validateCustom(complete: @escaping (String?, String?) -> Void) {
+        guard let urlField = self.sections[3].cells[0].cell.viewWithTag(1) as? UITextField else {
+            complete(nil, lang(key: "Unknown"))
+            return
+        }
 
-            guard let urlField = self.sections[2].cells[0].cell.viewWithTag(1) as? UITextField else {
+        guard var url = urlField.text else {
+            complete(nil, lang(key: "Invalid host"))
+            return
+        }
+
+        if url.count == 0 {
+            complete(nil, lang(key: "Invalid host"))
+            return
+        }
+
+        if !url.hasPrefix("https://") {
+            if url.contains("://") {
+                complete(nil, lang(key: "Unsupported protocol"))
+                return
+            } else {
+                url = "https://" + url
+            }
+        }
+
+        CKDNSClient.shared().resolve("dns.google", ofAddressVersion: .iPv4, onServer: url) { res, err in
+            if let error = err {
+                complete(nil, error.localizedDescription)
                 return
             }
 
-            guard let url = URL(string: urlField.text ?? "") else {
+            guard let result = res else {
+                complete(nil, lang(key: "No response"))
                 return
             }
 
-            // Validate
-            self.doneButton.isEnabled = false
-            CKDNSClient.shared().resolve("dns.google", ofAddressVersion: .automatic, onServer: url.absoluteString) { res, err in
-                RunOnMain {
-                    self.doneButton.isEnabled = true
-                }
+            guard let addresses = try? result.addresses(forName: "dns.google") else {
+                complete(nil, lang(key: "Unexpected response"))
+                return
+            }
 
-                if let error = err {
-                    UIHelper(self).presentError(error: error, dismissed: nil)
-                    return
-                }
+            if addresses.count == 0 {
+                complete(nil, lang(key: "No response"))
+                return
+            }
 
-                guard let result = res else {
-                    return
-                }
+            if addresses[0] != "8.8.8.8" {
+                complete(nil, lang(key: "Unexpected response"))
+                return
+            }
 
-                guard let addresses = try? result.addresses(forName: "dns.google") else {
-                    UIHelper(self).presentAlert(title: lang(key: ""), body: lang(key: ""), dismissed: nil)
-                    return
-                }
+            complete(url, nil)
+        }
+    }
 
-                if addresses.count == 0 {
-                    UIHelper(self).presentAlert(title: lang(key: ""), body: lang(key: ""), dismissed: nil)
-                    return
-                }
-
-                if addresses[0] != "8.8.8.8" {
-                    UIHelper(self).presentAlert(title: lang(key: ""), body: lang(key: ""), dismissed: nil)
-                    return
-                }
-
-                RunOnMain {
-                    UserOptions.secureDNSServer?.url = url
-                    self.dismiss(animated: true)
+    @IBAction func saveButtonTap(_ sender: UIBarButtonItem) {
+        if self.settings.custom ?? false {
+            let pendingView = UIHelper.activityAlertView(title: lang(key: "Validating server"))
+            self.present(pendingView, animated: true) {
+                self.validateCustom { url, errorDescription in
+                    RunOnMain {
+                        pendingView.dismiss(animated: true) {
+                            self.saveButton.isEnabled = true
+                            if let error = errorDescription {
+                                UIHelper(self).presentAlert(title: lang(key: "Error Validating Server"), body: error, dismissed: nil)
+                                return
+                            }
+                            self.settings.host = url
+                            UserOptions.secureDNS = self.settings
+                            self.dismiss(animated: true)
+                        }
+                    }
                 }
             }
         } else {
+            UserOptions.secureDNS = self.settings
             self.dismiss(animated: true)
         }
+    }
+
+    @IBAction func cancelButtonTap(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true)
     }
 }

@@ -27,13 +27,12 @@ extension UserOptions {
             parameters.ipVersion = .iPv6
         }
 
-        switch UserOptions.secureDNSMode {
-        case .Disabled:
-            parameters.secureDNSMode = .disabled
-        case .HTTPS:
-            if let server = UserOptions.secureDNSServer {
-                parameters.secureDNSServer = server.url.absoluteString
+        parameters.secureDNSMode = .disabled
+        if UserOptions.secureDNS.mode != .HTTPS {
+            if let host = UserOptions.secureDNS.host {
                 parameters.secureDNSMode = .HTTPS
+                parameters.secureDNSServer = host
+                parameters.secureDNSFallback = UserOptions.secureDNS.fallback ?? false
             }
         }
 

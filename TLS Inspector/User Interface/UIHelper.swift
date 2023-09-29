@@ -83,4 +83,23 @@ class UIHelper {
             self.viewController.present(controller, animated: true, completion: nil)
         }
     }
+
+    /// Generate an alert view controller with a title and activity indicator. Does not present it.
+    /// - Parameters:
+    ///   - title: The title of the alert view
+    public static func activityAlertView(title: String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+
+        alert.view.addSubview(activityIndicator)
+        alert.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+
+        activityIndicator.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
+
+        return alert
+    }
 }

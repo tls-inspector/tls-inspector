@@ -480,9 +480,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="DNS over HTTPS" id="lcA-HX-OLc">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="WKm-61-0AB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EYG-Cp-MsE">
                             <connections>
-                                <action selector="doneButtonTap:" destination="27M-3H-tpa" id="4mp-WF-0kF"/>
+                                <action selector="cancelButtonTap:" destination="27M-3H-tpa" id="H9n-Y1-mJg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="WKm-61-0AB">
+                            <connections>
+                                <action selector="saveButtonTap:" destination="27M-3H-tpa" id="YcE-hn-ucc"/>
                             </connections>
                         </barButtonItem>
                         <userDefinedRuntimeAttributes>
@@ -490,7 +495,7 @@
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
-                        <outlet property="doneButton" destination="WKm-61-0AB" id="V93-c2-5Nx"/>
+                        <outlet property="saveButton" destination="WKm-61-0AB" id="ePC-J5-KTY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Orw-ff-E7G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -20,9 +20,7 @@ private let KEY_IP_VERSION = "use_ip_version"
 private let KEY_OPTIONS_SCHEMA_VERSION = "options_schema_version"
 private let KEY_TREAT_UNRECOGNIZED_AS_TRUSTED = "treat_unrecognized_as_trusted"
 private let KEY_APP_LANGUAGE = "app_language"
-private let KEY_SECURE_DNS_MODE = "secure_dns_mode"
-private let KEY_SECURE_DNS_SERVER = "secure_dns_server"
-private let KEY_SECURE_DNS_FALLBACK = "secure_dns_fallback"
+private let KEY_SECURE_DNS = "secure_dns"
 // swiftlint:enable identifier_name
 
 public enum CryptoEngine: String {
@@ -101,32 +99,41 @@ public enum IPVersion: String {
     }
 }
 
-public enum SecureDNSMode: String, CaseIterable {
+public enum SecureDNSMode: String, CaseIterable, Codable {
     case Disabled = "disabled"
     case HTTPS = "https"
 }
 
-public struct SecureDNSServer {
-    var url: URL
-    let custom: Bool
+public struct SecureDNSSettings: Codable, Equatable {
+    var mode: SecureDNSMode
+    var fallback: Bool?
+    var custom: Bool?
+    var host: String?
+    var port: UInt16?
 
-    static func from(_ str: String?) -> SecureDNSServer? {
+    static func from(_ str: String?) -> SecureDNSSettings? {
         guard let value = str else {
             return nil
         }
-        let parts = value.components(separatedBy: " ")
-        if parts.count != 2 {
+        guard let data = value.data(using: .utf8) else {
             return nil
         }
-        guard let url = URL(string: String(parts[1])) else {
+
+        guard let settings = try? JSONDecoder().decode(SecureDNSSettings.self, from: data) else {
             return nil
         }
-        let custom = parts[0] == "1"
-        return SecureDNSServer(url: url, custom: custom)
+
+        return settings
     }
 
     func toString() -> String {
-        return "\(custom ? "1" : "0") \(url)"
+        if let data = try? JSONEncoder().encode(self) {
+            if let str = String(data: data, encoding: .utf8) {
+                return str
+            }
+        }
+
+        return "{\"mode\":\"disabled\"}"
     }
 }
 
@@ -150,8 +157,7 @@ class UserOptions {
         KEY_ADVANCED_SETTINGS_NAG_DISMISSED: false,
         KEY_TREAT_UNRECOGNIZED_AS_TRUSTED: false,
         KEY_APP_LANGUAGE: "",
-        KEY_SECURE_DNS_MODE: SecureDNSMode.Disabled.rawValue,
-        KEY_SECURE_DNS_FALLBACK: true,
+        KEY_SECURE_DNS: SecureDNSSettings(mode: .Disabled).toString(),
     ]
     private static var _verboseLogging = false
     private static var _inspectionsWithVerboseLogging = 0
@@ -360,36 +366,14 @@ class UserOptions {
             }
         }
     }
-    static var secureDNSMode: SecureDNSMode {
+    static var secureDNS: SecureDNSSettings {
         get {
-            return SecureDNSMode(rawValue: AppDefaults.string(forKey: KEY_SECURE_DNS_MODE) ?? "") ?? .Disabled
+            return SecureDNSSettings.from(AppDefaults.string(forKey: KEY_SECURE_DNS)) ?? SecureDNSSettings(mode: .Disabled)
         }
         set {
-            AppDefaults.set(newValue.rawValue, forKey: KEY_SECURE_DNS_MODE)
-            LogDebug("Setting AppDefault: \(KEY_SECURE_DNS_MODE) = \(newValue)")
-        }
-    }
-    static var secureDNSServer: SecureDNSServer? {
-        get {
-            return SecureDNSServer.from(AppDefaults.string(forKey: KEY_SECURE_DNS_SERVER))
-        }
-        set {
-            if let value = newValue {
-                AppDefaults.set(value.toString(), forKey: KEY_SECURE_DNS_SERVER)
-                LogDebug("Setting AppDefault: \(KEY_SECURE_DNS_SERVER) = \(value.toString())")
-            } else {
-                AppDefaults.removeObject(forKey: KEY_SECURE_DNS_SERVER)
-                LogDebug("Delete AppDefault: \(KEY_SECURE_DNS_SERVER)")
-            }
-        }
-    }
-    static var secureDNSFallback: Bool {
-        get {
-            return AppDefaults.bool(forKey: KEY_SECURE_DNS_FALLBACK)
-        }
-        set {
-            AppDefaults.set(newValue, forKey: KEY_SECURE_DNS_FALLBACK)
-            LogDebug("Setting AppDefault: \(KEY_SECURE_DNS_FALLBACK) = \(newValue)")
+            let value = newValue.toString()
+            AppDefaults.set(value, forKey: KEY_SECURE_DNS)
+            LogDebug("Setting AppDefault: \(KEY_SECURE_DNS) = \(value)")
         }
     }
 
