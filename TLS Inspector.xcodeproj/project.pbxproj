@@ -84,6 +84,8 @@
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
 		3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C66083D2A735171008B58E8 /* CKLogging+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
+		3C6E20A32ACDFA1400D69210 /* CKNetworkEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6E20A12ACDFA1400D69210 /* CKNetworkEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C6E20A42ACDFA1400D69210 /* CKNetworkEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E20A22ACDFA1400D69210 /* CKNetworkEnvironment.m */; };
 		3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */; };
 		3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */; };
@@ -381,6 +383,8 @@
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C66083D2A735171008B58E8 /* CKLogging+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKLogging+Private.h"; sourceTree = "<group>"; };
 		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		3C6E20A12ACDFA1400D69210 /* CKNetworkEnvironment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkEnvironment.h; sourceTree = "<group>"; };
+		3C6E20A22ACDFA1400D69210 /* CKNetworkEnvironment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkEnvironment.m; sourceTree = "<group>"; };
 		3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple_ca_bundle.p7b; sourceTree = "<group>"; };
 		3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPServerInfo.h; sourceTree = "<group>"; };
 		3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPServerInfo.m; sourceTree = "<group>"; };
@@ -649,6 +653,8 @@
 				3C66083D2A735171008B58E8 /* CKLogging+Private.h */,
 				3C1D28AA2009677300A606BB /* CKNameObject.h */,
 				3C1D28AB2009677300A606BB /* CKNameObject.m */,
+				3C6E20A12ACDFA1400D69210 /* CKNetworkEnvironment.h */,
+				3C6E20A22ACDFA1400D69210 /* CKNetworkEnvironment.m */,
 				3C1A0D0D263914C200267CF9 /* CKRegex.h */,
 				3C1A0D0E263914C300267CF9 /* CKRegex.m */,
 				3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */,
@@ -1014,6 +1020,7 @@
 				9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */,
 				3CB94044225036FC0055C067 /* CKSecureTransportInspector.h in Headers */,
 				3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */,
+				3C6E20A32ACDFA1400D69210 /* CKNetworkEnvironment.h in Headers */,
 				3C84CA002A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h in Headers */,
 				3C84C9F72A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h in Headers */,
 			);
@@ -1410,6 +1417,7 @@
 				3C091B892A2EB9E400A8BE92 /* CKHTTPResponse.m in Sources */,
 				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,
 				3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */,
+				3C6E20A42ACDFA1400D69210 /* CKNetworkEnvironment.m in Sources */,
 				3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */,
 				3C7CEE6320A15BD500DCC770 /* CKAlternateNameObject.m in Sources */,
 				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
