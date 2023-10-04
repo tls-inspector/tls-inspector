@@ -657,10 +657,6 @@
 				3C6E20A22ACDFA1400D69210 /* CKNetworkEnvironment.m */,
 				3C1A0D0D263914C200267CF9 /* CKRegex.h */,
 				3C1A0D0E263914C300267CF9 /* CKRegex.m */,
-				3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */,
-				3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */,
-				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
-				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
 				3C60363A2947C01300981444 /* CKRootCACertificateBundleManager.h */,
 				3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */,
 				3C30025D2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h */,
@@ -946,6 +942,10 @@
 				9AABA2AA2AAE841B0032CAA3 /* CKDNSResponseCode.h */,
 				9AABA2A02AAD7AAF0032CAA3 /* CKDNSResult.h */,
 				9AABA2A12AAD7AAF0032CAA3 /* CKDNSResult.m */,
+				3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */,
+				3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */,
+				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
+				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
 			);
 			path = DNS;
 			sourceTree = "<group>";
