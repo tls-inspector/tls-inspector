@@ -29,10 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  A dictionary of all response headers recieved when querying the domain
  */
 @property (strong, nonatomic, nonnull, readonly) NSDictionary<NSString *, NSArray<NSString *> *> * headers;
-/**
- A dictionary of all security response headers mapped to a (NSNumber)bool of if the header was present
- */
-@property (strong, nonatomic, nonnull, readonly) NSDictionary<NSString *, NSNumber *> * securityHeaders;
+
 /**
  The HTTP status code seen when querying the domain
  */

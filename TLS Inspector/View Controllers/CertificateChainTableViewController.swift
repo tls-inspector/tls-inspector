@@ -127,7 +127,7 @@ class CertificateChainTableViewController: UITableViewController {
         self.sections.maybeAppend(makeCertificateSection())
         self.sections.maybeAppend(makeConnectionInfoSection())
         self.sections.maybeAppend(makeRedirectSection())
-        self.sections.maybeAppend(makeHeadersSection())
+        self.sections.maybeAppend(makeHTTPServerSection())
 
         self.tableView.reloadData()
     }
@@ -225,32 +225,50 @@ class CertificateChainTableViewController: UITableViewController {
         return redirectSection
     }
 
-    func makeHeadersSection() -> TableViewSection? {
-        let headersSection = TableViewSection()
-        headersSection.title = lang(key: "Security HTTP Headers")
-        headersSection.tag = headersSectionTag
-
+    func makeHTTPServerSection() -> TableViewSection? {
         guard let serverInfo = self.httpServerInfo else { return nil }
 
-        for header in serverInfo.securityHeaders.keys.sorted() {
-            guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Icon")) else { return nil }
-            guard let titleLabel = cell.cell.viewWithTag(1) as? UILabel else { return nil }
-            guard let iconLabel = cell.cell.viewWithTag(2) as? UILabel else { return nil }
-            titleLabel.text = header
-            let hasHeader = serverInfo.securityHeaders[header]?.boolValue ?? false
-            let icon = hasHeader ? FAIcon.FACheckCircleRegular : FAIcon.FAQuestionCircleRegular
-            let color = hasHeader ? UIColor.materialGreen() : UIColor.materialAmber()
-            iconLabel.font = icon.font(size: iconLabel.font.pointSize)
-            iconLabel.textColor = color
-            iconLabel.text = icon.string()
-            headersSection.cells.append(cell)
+        let httpServerSection = TableViewSection()
+        httpServerSection.title = lang(key: "HTTP Information")
+        httpServerSection.tag = headersSectionTag
+
+        guard let statusCell = self.tableView.dequeueReusableCell(withIdentifier: "HTTPStatus") else {
+            return nil
         }
 
-        guard let cell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
-        cell.cell.textLabel?.text = lang(key: "View All")
-        headersSection.cells.append(cell)
+        guard let codeBackground = statusCell.viewWithTag(1) else {
+            return nil
+        }
 
-        return headersSection
+        guard let codeLabel = codeBackground.viewWithTag(2) as? UILabel else {
+            return nil
+        }
+
+        guard let responseLabel = statusCell.viewWithTag(3) as? UILabel else {
+            return nil
+        }
+
+        if serverInfo.statusCode >= 0 && serverInfo.statusCode < 200 {
+            codeBackground.backgroundColor = UIColor.materialBlueGrey()
+        } else if serverInfo.statusCode >= 200 && serverInfo.statusCode < 300 {
+            codeBackground.backgroundColor = UIColor.materialGreen(level: 600)
+        } else if serverInfo.statusCode >= 300 && serverInfo.statusCode < 400 {
+            codeBackground.backgroundColor = UIColor.materialTeal()
+        } else if serverInfo.statusCode >= 400 && serverInfo.statusCode < 500 {
+            codeBackground.backgroundColor = UIColor.materialPink()
+        } else if serverInfo.statusCode >= 500 {
+            codeBackground.backgroundColor = UIColor.materialRed()
+        }
+
+        codeLabel.text = "\(serverInfo.statusCode)"
+        responseLabel.text = "Hi"
+        httpServerSection.cells.append(TableViewCell(statusCell))
+
+        guard let viewAllCell = TableViewCell.from(tableView.dequeueReusableCell(withIdentifier: "Basic")) else { return nil }
+        viewAllCell.cell.textLabel?.text = lang(key: "View All")
+        httpServerSection.cells.append(viewAllCell)
+
+        return httpServerSection
     }
 
     // MARK: - Table view data source

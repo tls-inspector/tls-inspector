@@ -39,34 +39,6 @@
     return r;
 }
 
-- (NSDictionary<NSString *, NSNumber *> *) securityHeaders {
-    if (self.cachedSecurityHeaders != nil) {
-        return self.cachedSecurityHeaders;
-    }
-
-    NSMutableDictionary<NSString *, NSNumber *> * sHeaders = [NSMutableDictionary new];
-
-    // Shoutout to Scott Helme for putting together this list! 🇬🇧
-    // https://securityheaders.io, https://scotthelme.co.uk/
-    NSArray<NSString *> * SECURE_HEADERS = @[
-        @"Content-Security-Policy",
-        @"Permissions-Policy",
-        @"Referrer-Policy",
-        @"Strict-Transport-Security",
-        @"X-Content-Type-Options",
-        @"X-Frame-Options",
-    ];
-
-    NSArray<NSString *> * headerKeys = self.headers.allKeys;
-    for (NSString * secureHeaderKey in SECURE_HEADERS) {
-        NSString * actualHeaderKey = [self array:headerKeys ContainsCaseInsensitiveString:secureHeaderKey];
-        [sHeaders setValue:[NSNumber numberWithBool:(actualHeaderKey != nil)] forKey:secureHeaderKey];
-    }
-
-    self.cachedSecurityHeaders = sHeaders;
-    return sHeaders;
-}
-
 - (NSString *) array:(NSArray<NSString *> *)array ContainsCaseInsensitiveString:(NSString *)needle {
     for (NSString * elm in array) {
         NSString * lowercaseHaystack = [elm lowercaseString];
