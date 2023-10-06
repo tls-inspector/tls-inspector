@@ -2,17 +2,14 @@ import UIKit
 import CertificateKit
 import EventKit
 
-class CertificateReminder {
+public class CertificateReminder {
     /// Try to add a new reminder for a certificate expiry
     /// - Parameters:
     ///   - certificate: The certificate to notify
     ///   - domain: The domain for the certificate
     ///   - daysBeforeExpire: The number of days before expiry
     ///   - completed: Called when added or on error
-    static func addReminder(certificate: CKCertificate,
-                            domain: String,
-                            daysBeforeExpire: Int,
-                            completed: @escaping (Error?) -> Void) {
+    public static func addReminder(certificate: CKCertificate, domain: String, daysBeforeExpire: Int, completed: @escaping (Error?) -> Void) {
         let completedBlock = completed
         let store = EKEventStore()
 
@@ -21,15 +18,15 @@ class CertificateReminder {
             return
         }
 
-        store.requestAccess(to: .reminder) { (granted, error) in
+        let accessCallback: ((Bool, Error?) -> Void) = { granted, error in
             if !granted || error != nil {
                 completedBlock(error ?? NewError(description: "Permission Denied"))
                 return
             }
 
             let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.dateFormat = "MMM d, yyyy"
+            formatter.dateStyle = .short
+            formatter.timeStyle = .none
 
             let reminder = EKReminder(eventStore: store)
             reminder.title = lang(key: "Renew Certificate for {domain}", args: [domain])
@@ -48,6 +45,16 @@ class CertificateReminder {
                 saveError = error
             }
             completedBlock(saveError)
+        }
+
+        if #available(iOS 17, *) {
+            store.requestFullAccessToReminders { granted, error in
+                accessCallback(granted, error)
+            }
+        } else {
+            store.requestAccess(to: .reminder) { (granted, error) in
+                accessCallback(granted, error)
+            }
         }
     }
 }
