@@ -20,6 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import "CKResolver.h"
+#import "CKNetworkEnvironment.h"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -91,7 +92,7 @@ static id _instance;
 }
 
 - (CKResolvedAddress *) getAddressFromDomain:(NSString *)domain withError:(NSError **)error {
-    return [self getAddressFromDomain:domain withAddressFamily:AF_UNSPEC withError:error];
+    return [self getAddressFromDomain:domain withAddressFamily:CKNetworkEnvironment.ipv6IsAvailable ? AF_INET6 : AF_INET withError:error];
 }
 
 - (CKResolvedAddress *) getIPv4AddressFromDomain:(NSString *)domain withError:(NSError **)error {
