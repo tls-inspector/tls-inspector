@@ -629,6 +629,8 @@ legacy_apple_engine_warning	The legacy Apple network engine will be removed from
 microsoft	Microsoft
 # TODO
 mozilla	Mozilla
+# TODO
+proxy_safety_warning	If you are unfamiliar with what a HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support immediately. Avoid using your device if possible.
 proxy_warning	Ein HTTP-Proxy ist konfiguriert. TLS Inspector ist nicht mit mit HTTP-Proxies kompatibel, der Proxy muss in den WLAN-Einstellungen des Systems deaktiviert werden.
 # TODO
 rootca_error	Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.

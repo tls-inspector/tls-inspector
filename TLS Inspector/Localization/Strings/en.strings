@@ -559,7 +559,8 @@ keyUsage::timeStamping	Time Stamping
 legacy_apple_engine_warning	The legacy Apple network engine will be removed from TLS Inspector a future update.
 microsoft	Microsoft
 mozilla	Mozilla
-proxy_warning	An HTTP Proxy is configured. TLS Inspector is not compatible with HTTP Proxies and it must be disabled from the systems WiFi settings.
+proxy_safety_warning	If you are unfamiliar with what a HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support immediately. Avoid using your device if possible.
+proxy_warning	An HTTPS Proxy is configured on your device. TLS Inspector is not compatible with HTTPS Proxies and it must be disabled from the systems WiFi settings before you can inspect a host.
 rootca_error	Unable to securely check for bundle updates. Please check for pending updates to TLS Inspector in the App Store.
 rootca_footer	Updates to the root CA certificate bundles are infrequent and included with updates to TLS Inspector itself. Update data is served by tlsinspector.com and is digitally signed.
 sanType::DNS	DNS

@@ -67,6 +67,8 @@
 		3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363E2947C0A000981444 /* CKCertificateBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363F2947C0A000981444 /* CKCertificateBundle.m */; };
 		3C6036432947C7A000981444 /* RootCACertificatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */; };
+		3C603DE42AD8DC2200B62C20 /* ProxyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C603DE32AD8DC2200B62C20 /* ProxyViewController.swift */; };
+		3C603DE52AD8DC2500B62C20 /* ProxyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C603DE32AD8DC2200B62C20 /* ProxyViewController.swift */; };
 		3C6220902A6C5324008F822E /* CKInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C62208F2A6C5324008F822E /* CKInspector.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6220922A6C55AC008F822E /* CKInspectParameters+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220912A6C55AC008F822E /* CKInspectParameters+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6220942A6C56C1008F822E /* CKCertificate+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220932A6C56C1008F822E /* CKCertificate+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -364,6 +366,7 @@
 		3C60363E2947C0A000981444 /* CKCertificateBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundle.h; sourceTree = "<group>"; };
 		3C60363F2947C0A000981444 /* CKCertificateBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundle.m; sourceTree = "<group>"; wrapsLines = 1; };
 		3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCACertificatesTableViewController.swift; sourceTree = "<group>"; };
+		3C603DE32AD8DC2200B62C20 /* ProxyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyViewController.swift; sourceTree = "<group>"; };
 		3C62208F2A6C5324008F822E /* CKInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspector.h; sourceTree = "<group>"; };
 		3C6220912A6C55AC008F822E /* CKInspectParameters+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKInspectParameters+Private.h"; sourceTree = "<group>"; };
 		3C6220932A6C56C1008F822E /* CKCertificate+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKCertificate+Private.h"; sourceTree = "<group>"; };
@@ -743,6 +746,7 @@
 				3CCD0293239DD966009364D0 /* MoreTableViewController.swift */,
 				3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */,
 				3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */,
+				3C603DE32AD8DC2200B62C20 /* ProxyViewController.swift */,
 				3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */,
 				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
 				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
@@ -1460,6 +1464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */,
+				3C603DE42AD8DC2200B62C20 /* ProxyViewController.swift in Sources */,
 				3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
 				3C3002622980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */,
 				3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */,
@@ -1544,6 +1549,7 @@
 				3CDC14CD23B046000053932F /* UserOptions.swift in Sources */,
 				3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
 				3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
+				3C603DE52AD8DC2500B62C20 /* ProxyViewController.swift in Sources */,
 				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
 				3C3002632980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */,
 				3C30025C2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
