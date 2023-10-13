@@ -36,6 +36,7 @@
 
 @property (strong, nonatomic) CKCertificateChain * chain;
 @property (strong, nonatomic) CKInspectParameters * parameters;
+@property (strong, nonatomic) CKHTTPClient * httpClient;
 
 @end
 
@@ -50,6 +51,7 @@
     self.parameters = parameters;
     self.chain = [CKCertificateChain new];
     self.chain.domain = parameters.hostAddress;
+    self.httpClient = [CKHTTPClient clientForHost:parameters.hostAddress];
 
     const char * portStr = [[NSString alloc] initWithFormat:@"%i", parameters.port].UTF8String;
     nw_endpoint_t endpoint = nw_endpoint_create_host(parameters.ipAddress.UTF8String, portStr);
@@ -243,10 +245,10 @@
 }
 
 - (void) getHeadersForConnection:(nw_connection_t)connection queue:(dispatch_queue_t)queue completed:(void (^)(CKHTTPResponse *))completed {
-    NSData * requestData = [CKHTTPClient requestForHost:self.parameters.hostAddress];
+    NSData * requestData = [self.httpClient request];
     dispatch_data_t data = dispatch_data_create(requestData.bytes, requestData.length, dispatch_get_main_queue(), DISPATCH_DATA_DESTRUCTOR_DEFAULT);
 
-    [CKHTTPClient responseFromNetworkConnection:connection completed:^(CKHTTPResponse * response) {
+    [self.httpClient responseFromNetworkConnection:connection completed:^(CKHTTPResponse * response) {
         completed(response);
     }];
 

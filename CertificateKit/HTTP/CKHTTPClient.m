@@ -25,17 +25,29 @@
 
 #define HTTP_MAX_HEADER_SIZE 102400 // 100KiB - same as libcurl
 
+@interface CKHTTPClient ()
+
+@property (strong, nonatomic) NSString * host;
+
+@end
+
 @implementation CKHTTPClient
 
-+ (NSData *) requestForHost:(NSString *)host {
++ (CKHTTPClient *) clientForHost:(NSString *)host {
+    CKHTTPClient * client = [CKHTTPClient new];
+    client.host = host;
+    return client;
+}
+
+- (NSData * _Nonnull) request {
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString * version = infoDictionary[@"CFBundleShortVersionString"];
     NSString * userAgent = [NSString stringWithFormat:@"CertificateKit TLS-Inspector/%@ +https://tlsinspector.com/", version];
-    NSString * request = [NSString stringWithFormat:@"GET / HTTP/1.1\r\nHost: %@\r\nUser-Agent: %@\r\nAccept: */*\r\n\r\n", host, userAgent];
+    NSString * request = [NSString stringWithFormat:@"GET / HTTP/1.1\r\nHost: %@\r\nUser-Agent: %@\r\nAccept: */*\r\n\r\n", self.host, userAgent];
     return [request dataUsingEncoding:NSASCIIStringEncoding];
 }
 
-+ (void) connectionReadLoop:(nw_connection_t)connection statusCode:(NSNumber *)statusCode mutableData:(NSMutableData *)headerData completed:(void (^)(CKHTTPResponse *))completed {
+- (void) connectionReadLoop:(nw_connection_t)connection statusCode:(NSNumber *)statusCode mutableData:(NSMutableData *)headerData completed:(void (^)(CKHTTPResponse *))completed {
     nw_connection_receive(connection, 1, 1024, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
         bool hasAllHeaders = NO;
         int headersEndIdx = -1;
@@ -59,7 +71,7 @@
         if (hasAllHeaders) {
             [headerData appendData:[headerBuf subdataWithRange:NSMakeRange(0, headersEndIdx)]];
             CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
-            CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:statusCode.unsignedIntegerValue headers:headers];
+            CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithHost:self.host statusCode:statusCode.unsignedIntegerValue headers:headers];
             PDebug(@"[nw_connection] Fetched %lu headers from HTTP server", headers.allHeaders.count);
             completed(response);
             return;
@@ -69,12 +81,12 @@
             return;
         } else {
             [headerData appendData:headerBuf];
-            [CKHTTPClient connectionReadLoop:connection statusCode:statusCode mutableData:headerData completed:completed];
+            [self connectionReadLoop:connection statusCode:statusCode mutableData:headerData completed:completed];
         }
     });
 }
 
-+ (void) responseFromNetworkConnection:(nw_connection_t)connection completed:(void (^)(CKHTTPResponse *))completed {
+- (void) responseFromNetworkConnection:(nw_connection_t)connection completed:(void (^)(CKHTTPResponse *))completed {
     nw_connection_receive(connection, 12, 12, ^(dispatch_data_t content, nw_content_context_t context, bool is_complete, nw_error_t error) {
         NSData * data = (NSData*)content;
         if (data.length < 8) {
@@ -100,12 +112,12 @@
 
         PDebug(@"HTTP response from server: '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         NSMutableData * headerData = [NSMutableData new];
-        [CKHTTPClient connectionReadLoop:connection statusCode:[NSNumber numberWithInt:statusCode] mutableData:headerData completed:completed];
+        [self connectionReadLoop:connection statusCode:[NSNumber numberWithInt:statusCode] mutableData:headerData completed:completed];
     });
     PDebug(@"Scheduled recieve of 12 bytes for HTTP status");
 }
 
-+ (CKHTTPResponse *) responseFromBIO:(BIO *)bio {
+- (CKHTTPResponse *) responseFromBIO:(BIO *)bio {
     char responseGreetingB[12];
     int read = BIO_read(bio, &responseGreetingB, 12);
     if (read < 12) {
@@ -159,12 +171,12 @@
     }
 
     CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
-    CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:(NSUInteger)statusCode headers:headers];
+    CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithHost:self.host statusCode:(NSUInteger)statusCode headers:headers];
     PDebug(@"[bio] Fetched %lu headers from HTTP server", headers.allHeaders.count);
     return response;
 }
 
-+ (CKHTTPResponse *) responseFromStream:(NSInputStream *)stream {
+- (CKHTTPResponse *) responseFromStream:(NSInputStream *)stream {
     char responseGreetingB[12];
     NSInteger read = [stream read:(unsigned char *)&responseGreetingB maxLength:12];
     if (read < 12) {
@@ -218,7 +230,7 @@
     }
 
     CKHTTPHeaders * headers = [[CKHTTPHeaders alloc] initWithData:[headerData subdataWithRange:NSMakeRange(0, headersEndIdx)]];
-    CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithStatusCode:(NSUInteger)statusCode headers:headers];
+    CKHTTPResponse * response = [[CKHTTPResponse alloc] initWithHost:self.host statusCode:(NSUInteger)statusCode headers:headers];
     PDebug(@"[cfstream] Fetched %lu headers from HTTP server", headers.allHeaders.count);
     return response;
 }

@@ -49,6 +49,7 @@
 @property (nonatomic, readwrite) SSLProtocol protocol;
 @property (nonatomic, readwrite) BOOL crlVerified;
 @property (strong, nonatomic) CKCertificateChain * chain;
+@property (strong, nonatomic) CKHTTPClient * httpClient;
 
 @end
 
@@ -190,14 +191,15 @@ static CFMutableStringRef keyLog = NULL;
     self.chain.protocol = [self protocolString:SSL_version(ssl)];
     self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];
     self.chain.remoteAddress = remoteAddr;
+    self.httpClient = [CKHTTPClient clientForHost:parameters.hostAddress];
     PDebug(@"Connected to '%@' (%@), Protocol version: %@, Ciphersuite: %@. Server returned %d certificates", self.parameters.hostAddress, remoteAddr, self.chain.protocol, self.chain.cipherSuite, numberOfCerts);
 
     dispatch_queue_t httpQueue = dispatch_queue_create("com.ecnepsnai.CertificateKit.CKOpenSSLInspector.httpQueue", NULL);
     CKHTTPResponse * __block httpResponse;
     dispatch_block_t getHttpResponse = dispatch_block_create(0, ^{
-        NSData * httpRequest = [CKHTTPClient requestForHost:parameters.hostAddress];
+        NSData * httpRequest = [self.httpClient request];
         BIO_write(conn, httpRequest.bytes, (int)httpRequest.length);
-        httpResponse = [CKHTTPClient responseFromBIO:conn];
+        httpResponse = [self.httpClient responseFromBIO:conn];
     });
     dispatch_barrier_async(httpQueue, getHttpResponse);
     dispatch_block_wait(getHttpResponse, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)));

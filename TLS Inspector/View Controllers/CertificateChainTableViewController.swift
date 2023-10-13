@@ -208,11 +208,17 @@ class CertificateChainTableViewController: UITableViewController {
     }
 
     func makeRedirectSection() -> TableViewSection? {
-        guard let redirectedTo = self.httpServerInfo?.redirectedTo?.host else { return nil }
+        guard let redirectedToHost = self.httpServerInfo?.redirectedTo?.host else { return nil }
+        guard let chain = self.certificateChain else { return nil }
+
+        // Only show the redirect section if the server redirected us to a different host
+        if chain.domain == redirectedToHost {
+            return nil
+        }
 
         let redirectSection = TableViewSection()
         redirectSection.tag = redirectSectionTag
-        let cell = TitleValueTableViewCell.Cell(title: lang(key: "Server Redirected To"), value: redirectedTo, useFixedWidthFont: true)
+        let cell = TitleValueTableViewCell.Cell(title: lang(key: "Server Redirected To"), value: redirectedToHost, useFixedWidthFont: true)
 
         // Only make the redirect cell tappable if we can actually reload
         // (which we can't do in the extension)

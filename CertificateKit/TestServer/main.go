@@ -118,6 +118,8 @@ func start(startPort uint16, ipv4 string, ipv6 string, servername string) {
 		&tserverExpiredLeaf{},
 		&tserverExpiredInt{},
 		&tserverTooManyHTTPHeaders{},
+		&tserverHTTPSRedirect{},
+		&tserverNaughtyHTTPSRedirect{},
 		&tserverDOH{},
 	}
 

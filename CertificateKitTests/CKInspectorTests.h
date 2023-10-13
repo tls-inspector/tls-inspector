@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) testExpiredLeafWithEngine:(CRYPTO_ENGINE)engine;
 + (void) testExpiredIntWithEngine:(CRYPTO_ENGINE)engine;
 + (void) testTooManyHTTPHeadersWithEngine:(CRYPTO_ENGINE)engine;
++ (void) testHTTPSRedirect:(CRYPTO_ENGINE)engine;
++ (void) testNaughtyHTTPSRedirect:(CRYPTO_ENGINE)engine;
 
 @end
 

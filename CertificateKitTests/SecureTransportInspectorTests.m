@@ -77,4 +77,12 @@
     // [CKInspectorTests testTooManyHTTPHeadersWithEngine:ENGINE_NAME];
 }
 
+- (void) testHTTPSRedirect {
+    [CKInspectorTests testHTTPSRedirect:ENGINE_NAME];
+}
+
+- (void) testNaughtyHTTPSRedirect {
+    [CKInspectorTests testNaughtyHTTPSRedirect:ENGINE_NAME];
+}
+
 @end

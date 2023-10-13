@@ -429,4 +429,73 @@
     }
 }
 
++ (void) testHTTPSRedirect:(CRYPTO_ENGINE)engine {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8413"];
+    parameters.cryptoEngine = engine;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testHTTPSRedirect", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        XCTAssertTrue(response.httpServer != nil);
+        XCTAssertEqual(response.httpServer.statusCode, 301);
+        NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
+        XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
+        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (HTTPSRedirect)");
+        XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
+        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (HTTPSRedirect)");
+        if (certificates.count == 3) {
+            XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
+            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+        }
+        CKHTTPServerInfo * serverInfo = response.httpServer;
+        XCTAssertNotNil(serverInfo);
+        XCTAssertNotNil(serverInfo.redirectedTo);
+        XCTStringEqual(serverInfo.redirectedTo.path, @"/other");
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
++ (void) testNaughtyHTTPSRedirect:(CRYPTO_ENGINE)engine {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8414"];
+    parameters.cryptoEngine = engine;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("testNaughtyHTTPSRedirect", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        XCTAssertTrue(response.httpServer != nil);
+        XCTAssertEqual(response.httpServer.statusCode, 301);
+        NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
+        XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
+        XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
+        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (NaughtyHTTPSRedirect)");
+        XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
+        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (NaughtyHTTPSRedirect)");
+        if (certificates.count == 3) {
+            XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
+            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+        }
+        CKHTTPServerInfo * serverInfo = response.httpServer;
+        XCTAssertNotNil(serverInfo);
+        XCTAssertNil(serverInfo.redirectedTo);
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
 @end

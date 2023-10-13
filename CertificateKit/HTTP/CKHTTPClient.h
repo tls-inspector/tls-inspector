@@ -28,17 +28,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CKHTTPClient : NSObject
 
+/// Create a client with the given host
++ (CKHTTPClient * _Nonnull) clientForHost:(NSString * _Nonnull)host;
+
 /// Return the bytes associated with an HTTP GET request to the given host
-+ (NSData * _Nonnull) requestForHost:(NSString * _Nonnull)host;
+- (NSData * _Nonnull) request;
 
 /// Parse the response from this network connection
-+ (void) responseFromNetworkConnection:(nw_connection_t _Nonnull)connection completed:(void (^)(CKHTTPResponse * _Nullable))completed;
+- (void) responseFromNetworkConnection:(nw_connection_t _Nonnull)connection completed:(void (^)(CKHTTPResponse * _Nullable))completed;
 
 /// Parse the response from this OpenSSL BIO
-+ (CKHTTPResponse * _Nullable) responseFromBIO:(BIO * _Nonnull)bio;
+- (CKHTTPResponse * _Nullable) responseFromBIO:(BIO * _Nonnull)bio;
 
 /// Parse the response from this NSInputStream
-+ (CKHTTPResponse * _Nullable) responseFromStream:(NSInputStream * _Nonnull)stream;
+- (CKHTTPResponse * _Nullable) responseFromStream:(NSInputStream * _Nonnull)stream;
 
 @end
 

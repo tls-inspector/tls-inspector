@@ -23,6 +23,7 @@
 
 @interface CKHTTPResponse ()
 
+@property (nonatomic, nonnull, readwrite) NSString * host;
 @property (nonatomic, readwrite) NSUInteger statusCode;
 @property (strong, nonatomic, nonnull, readwrite) CKHTTPHeaders * headers;
 
@@ -30,8 +31,9 @@
 
 @implementation CKHTTPResponse
 
-- (id) initWithStatusCode:(NSUInteger)statusCode headers:(CKHTTPHeaders *)headers {
+- (id) initWithHost:(NSString *)host statusCode:(NSUInteger)statusCode headers:(CKHTTPHeaders *)headers {
     self = [super init];
+    self.host = host;
     self.statusCode = statusCode;
     self.headers = headers;
     return self;

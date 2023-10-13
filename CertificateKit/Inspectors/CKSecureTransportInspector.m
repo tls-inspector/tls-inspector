@@ -56,6 +56,7 @@
 @property (nonatomic, readwrite) SSLProtocol protocol;
 @property (nonatomic, readwrite) BOOL crlVerified;
 @property (strong, nonatomic) CKCertificateChain * chain;
+@property (strong, nonatomic) CKHTTPClient * httpClient;
 @end
 
 @implementation CKSecureTransportInspector
@@ -67,6 +68,7 @@
 
     self.parameters = parameters;
     self.didCollectCertificates = @NO;
+    self.httpClient = [CKHTTPClient clientForHost:parameters.hostAddress];
 
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)parameters.ipAddress, parameters.port, &readStream, &writeStream);
 
@@ -229,9 +231,9 @@
     dispatch_queue_t httpQueue = dispatch_queue_create("com.ecnepsnai.CertificateKit.CKSecureTransportInspector.httpQueue", NULL);
     CKHTTPServerInfo * __block httpServerInfo;
     dispatch_block_t getHttpResponse = dispatch_block_create(0, ^{
-        NSData * httpRequest = [CKHTTPClient requestForHost:self.parameters.hostAddress];
+        NSData * httpRequest = [self.httpClient request];
         [self.outputStream write:httpRequest.bytes maxLength:httpRequest.length];
-        CKHTTPResponse * httpResponse = [CKHTTPClient responseFromStream:self.inputStream];
+        CKHTTPResponse * httpResponse = [self.httpClient responseFromStream:self.inputStream];
         if (httpResponse != nil) {
             httpServerInfo = [CKHTTPServerInfo fromHTTPResponse:httpResponse];
         }

@@ -26,13 +26,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CKHTTPResponse : NSObject
 
+/// The host of this HTTP server
+@property (nonatomic, nonnull, readonly) NSString * host;
+
 /// The HTTP status code
 @property (nonatomic, readonly) NSUInteger statusCode;
 
 /// Response headers
 @property (strong, nonatomic, nonnull, readonly) CKHTTPHeaders * headers;
 
-- (id) initWithStatusCode:(NSUInteger)statusCode headers:(CKHTTPHeaders *)headers;
+- (id) initWithHost:(NSString *)host statusCode:(NSUInteger)statusCode headers:(CKHTTPHeaders *)headers;
 
 @end
 

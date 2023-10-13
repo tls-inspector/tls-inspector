@@ -84,11 +84,19 @@ Server #9 is reserved for the CRL & OCSP providers for this certificate.
 
 These servers provide a basic HTTPS server, expect that the leaf or intermediate certificates are expired.
 
-**12. Too Many HTTP Headers**
+**12. Too many HTTP Headers**
 
-This server accepts any HTTP request, invalid or otherwise, and responds with a valid HTTP response with 500,000 headers.
+This server provides a basic HTTPS server where the HTTP response includes 500,000 headers.
 
-**13. DNS over HTTPS**
+**13. HTTPS Redirect**
+
+This server provides a basic HTTPS server where the HTTP response includes a `Location` header. The server will alternate between an absolute path and a relative path`
+
+**14. Naughty HTTPS Redirect**
+
+This server provides a basic HTTPS server where the HTTP response includes a `Location` header with an absolute URL. The host name in that URL is over 255 characters long, and therefor invalid.
+
+**15. DNS over HTTPS**
 
 This server provides a DNS over HTTPS service, for testing purposes only (it won't actually resolve real queries).
 
