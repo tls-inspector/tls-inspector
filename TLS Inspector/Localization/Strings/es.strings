@@ -579,6 +579,8 @@ keyUsage::keyEncipherment	Cifrado de clave
 keyUsage::nonRepudiation	No repudio
 keyUsage::serverAuth	Autenticación de servidor
 keyUsage::timeStamping	Marcado de tiempo
+# TODO
+legacy_apple_engine_warning	The legacy Apple network engine will be removed from TLS Inspector a future update.
 microsoft	Microsoft
 mozilla	Mozilla
 proxy_warning	Hay un proxy HTTP configurado. TLS Inspector no es compatible con los proxies HTTP y debe desactivarse desde la configuración Wi-Fi del sistema.
