@@ -146,6 +146,7 @@
 		3CB94047225036FC0055C067 /* CKOpenSSLInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */; };
 		3CBF85BF253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */; };
 		3CBF85C0253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */; platformFilter = ios; };
+		3CC111BC2ADB2A9C00C7220E /* CKNetworkEnvironmentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC111BB2ADB2A9C00C7220E /* CKNetworkEnvironmentTests.m */; };
 		3CC553C92AA17B1B005ECE0D /* SecureDNSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC553C82AA17B1B005ECE0D /* SecureDNSTableViewController.swift */; };
 		3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CCBE2D7294FF81600E0DD6D /* CKCertificateBundleMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */; };
@@ -439,6 +440,7 @@
 		3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKOpenSSLInspector.h; sourceTree = "<group>"; };
 		3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkFrameworkInspector.h; sourceTree = "<group>"; };
 		3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkFrameworkInspector.m; sourceTree = "<group>"; };
+		3CC111BB2ADB2A9C00C7220E /* CKNetworkEnvironmentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkEnvironmentTests.m; sourceTree = "<group>"; };
 		3CC553C82AA17B1B005ECE0D /* SecureDNSTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSTableViewController.swift; sourceTree = "<group>"; };
 		3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundleMetadata.h; sourceTree = "<group>"; };
 		3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundleMetadata.m; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */,
 				3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */,
 				9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */,
+				3CC111BB2ADB2A9C00C7220E /* CKNetworkEnvironmentTests.m */,
 				3CF397451EB50E0900E8DBF4 /* Info.plist */,
 				3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */,
 				3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */,
@@ -1566,6 +1569,7 @@
 			files = (
 				9A67F8A12AA408B10088A750 /* CKDNSClientTests.m in Sources */,
 				3CB1080C2A95A53700CFE080 /* CKInspectorTests.m in Sources */,
+				3CC111BC2ADB2A9C00C7220E /* CKNetworkEnvironmentTests.m in Sources */,
 				3C4572302A74ADAA009EF7BB /* SecureTransportInspectorTests.m in Sources */,
 				9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */,
 				3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */,

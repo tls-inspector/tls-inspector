@@ -22,8 +22,144 @@
 #import "CKNetworkEnvironment.h"
 #import <arpa/inet.h>
 #import <ifaddrs.h>
+#import <netdb.h>
+#import <mach/mach_time.h>
 
 @implementation CKNetworkEnvironment
+
++ (CKIPVersion) getPreferredIPVersionOfHost:(NSString *)host address:(NSString **)address error:(NSError **)error {
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+
+    NSString __block * ipv4Address = nil;
+    NSNumber __block * ipv4Success = @NO;
+    NSNumber __block * ipv4Failed = @NO;
+    NSNumber __block * ipv4Elapsed;
+    NSString __block * ipv6Address = nil;
+    NSNumber __block * ipv6Success = @NO;
+    NSNumber __block * ipv6Failed = @NO;
+    NSNumber __block * ipv6Elapsed;
+
+    dispatch_group_async(group, queue, ^{
+        uint64_t startTime = mach_absolute_time();
+
+        int err;
+        struct addrinfo hints;
+        struct addrinfo *result;
+        memset(&hints, 0, sizeof(struct addrinfo));
+        hints.ai_family = AF_INET;
+        hints.ai_socktype = SOCK_STREAM;
+        hints.ai_flags = 0;
+        hints.ai_protocol = 0;
+        const char * query = "example.com";
+        err = getaddrinfo(query, "80", &hints, &result);
+        if (err != 0) {
+            ipv4Failed = @YES;
+            NSLog(@"IPv4 failed %s", strerror(errno));
+            return;
+        }
+
+        if (result->ai_family != AF_INET) {
+            ipv4Failed = @YES;
+            NSLog(@"IPv4 failed %s", strerror(errno));
+            return;
+        }
+
+        char addressString[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &((struct sockaddr_in *)result->ai_addr)->sin_addr, addressString, INET_ADDRSTRLEN);
+        ipv6Address = [NSString stringWithUTF8String:addressString];
+
+        int sockfd = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+        int conSuccess = connect(sockfd, result->ai_addr, result->ai_addrlen);
+        close(sockfd);
+        if (conSuccess != 0) {
+            ipv4Failed = @YES;
+            NSLog(@"IPv4 failed %s", strerror(errno));
+            return;
+        }
+        uint64_t endTime = mach_absolute_time();
+        uint64_t elapsedTime = endTime - startTime;
+        mach_timebase_info_data_t timebase;
+        mach_timebase_info(&timebase);
+        double elapsedTimeInNanoseconds = elapsedTime * ((double)timebase.numer / timebase.denom);
+        ipv4Success = @YES;
+        ipv4Elapsed = [NSNumber numberWithDouble:elapsedTimeInNanoseconds];
+        NSLog(@"IPv4 passed");
+    });
+
+    dispatch_group_async(group, queue, ^{
+        uint64_t startTime = mach_absolute_time();
+
+        int err;
+        struct addrinfo hints;
+        struct addrinfo *result;
+        memset(&hints, 0, sizeof(struct addrinfo));
+        hints.ai_family = AF_INET6;
+        hints.ai_socktype = SOCK_STREAM;
+        hints.ai_flags = 0;
+        hints.ai_protocol = 0;
+        const char * query = "example.com";
+        err = getaddrinfo(query, "http", &hints, &result);
+        if (err != 0) {
+            ipv6Failed = @YES;
+            NSLog(@"IPv6 failed %s", strerror(errno));
+            return;
+        }
+
+        if (result->ai_family != AF_INET6) {
+            ipv6Failed = @YES;
+            NSLog(@"IPv6 failed %s", strerror(errno));
+            return;
+        }
+
+        char addressString[INET6_ADDRSTRLEN];
+        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)result->ai_addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
+        ipv6Address = [NSString stringWithUTF8String:addressString];
+
+        int sockfd = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+        int conSuccess = connect(sockfd, result->ai_addr, result->ai_addrlen);
+        close(sockfd);
+        if (conSuccess != 0) {
+            ipv6Failed = @YES;
+            NSLog(@"IPv6 failed %s", strerror(errno));
+            return;
+        }
+
+        uint64_t endTime = mach_absolute_time();
+        uint64_t elapsedTime = endTime - startTime;
+        mach_timebase_info_data_t timebase;
+        mach_timebase_info(&timebase);
+        double elapsedTimeInNanoseconds = elapsedTime * ((double)timebase.numer / timebase.denom);
+        ipv6Success = @YES;
+        ipv6Elapsed = [NSNumber numberWithDouble:elapsedTimeInNanoseconds];
+        NSLog(@"IPv6 passed");
+    });
+
+    dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)));
+
+    /// If both IPv4 and IPv6 were available: calculate the difference in elapsed time. If the difference is less than 1ms; prefer IPv6, otherwise pick the faster of the two.
+    /// If only one version is available, pick that version.
+    /// If no versions were available, then - shockingly - we return an error. Who could have perdicted this outcome?
+    if (ipv4Success.boolValue && ipv6Success.boolValue) {
+        double differenceNS = fabs(ipv4Elapsed.doubleValue - ipv6Elapsed.doubleValue);
+        if (differenceNS < 1000000 || ipv4Elapsed.doubleValue > ipv6Elapsed.doubleValue) {
+            *address = ipv6Address;
+            return CKIPVersionIPv6;
+        }
+
+        *address = ipv4Address;
+        return CKIPVersionIPv4;
+    } else if (ipv6Success.boolValue) {
+        *address = ipv6Address;
+        return CKIPVersionIPv6;
+    } else if (ipv4Success.boolValue) {
+        *address = ipv4Address;
+        return CKIPVersionIPv4;
+    }
+
+    *error = MAKE_ERROR(1, @"No network connection");
+    return CKIPVersionAutomatic;
+}
 
 + (NSDictionary<NSString *, NSArray<NSString *> *> *) getInterfaceAddresses {
     NSMutableDictionary * addresses = [NSMutableDictionary new];
