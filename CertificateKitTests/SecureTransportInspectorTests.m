@@ -8,7 +8,7 @@
 
 @implementation SecureTransportInspectorTests
 
-#define ENGINE_NAME CRYPTO_ENGINE_SECURE_TRANSPORT
+#define ENGINE_NAME CKNetworkEngineSecureTransport
 
 - (void) setUp {
     [super setUp];

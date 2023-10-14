@@ -92,7 +92,7 @@
     for (NSString * interfaceName in addresses.allKeys) {
         NSArray<CKIPAddress *> * interfaceAddresses = addresses[interfaceName];
         for (CKIPAddress * address in interfaceAddresses) {
-            if (address.version == CKIPAddressVersion6) {
+            if (address.version == CKIPVersionIPv6) {
                 return true;
             }
         }

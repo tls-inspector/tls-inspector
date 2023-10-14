@@ -5,22 +5,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CKInspectorTests : NSObject
 
-+ (void) testBasicHTTPSWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testBareTLSWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testBareTLSIPv4WithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testBareTLSIPv6WithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testTooManyCertsWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testNaughtyHTTPWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testFuzzHTTPWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testFuzzTLSWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testBigHTTPHeaderWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testRevokedCRLWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testRevokedOCSPWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testExpiredLeafWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testExpiredIntWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testTooManyHTTPHeadersWithEngine:(CRYPTO_ENGINE)engine;
-+ (void) testHTTPSRedirect:(CRYPTO_ENGINE)engine;
-+ (void) testNaughtyHTTPSRedirect:(CRYPTO_ENGINE)engine;
++ (void) testBasicHTTPSWithEngine:(CKNetworkEngine)engine;
++ (void) testBareTLSWithEngine:(CKNetworkEngine)engine;
++ (void) testBareTLSIPv4WithEngine:(CKNetworkEngine)engine;
++ (void) testBareTLSIPv6WithEngine:(CKNetworkEngine)engine;
++ (void) testTooManyCertsWithEngine:(CKNetworkEngine)engine;
++ (void) testNaughtyHTTPWithEngine:(CKNetworkEngine)engine;
++ (void) testFuzzHTTPWithEngine:(CKNetworkEngine)engine;
++ (void) testFuzzTLSWithEngine:(CKNetworkEngine)engine;
++ (void) testBigHTTPHeaderWithEngine:(CKNetworkEngine)engine;
++ (void) testRevokedCRLWithEngine:(CKNetworkEngine)engine;
++ (void) testRevokedOCSPWithEngine:(CKNetworkEngine)engine;
++ (void) testExpiredLeafWithEngine:(CKNetworkEngine)engine;
++ (void) testExpiredIntWithEngine:(CKNetworkEngine)engine;
++ (void) testTooManyHTTPHeadersWithEngine:(CKNetworkEngine)engine;
++ (void) testHTTPSRedirect:(CKNetworkEngine)engine;
++ (void) testNaughtyHTTPSRedirect:(CKNetworkEngine)engine;
 
 @end
 

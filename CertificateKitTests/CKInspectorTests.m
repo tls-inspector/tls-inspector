@@ -6,7 +6,7 @@
 
 #define TEST_TIMEOUT 10 // Seconds
 
-+ (void) testBasicHTTPSWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testBasicHTTPSWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8401"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -30,9 +30,7 @@
         }
         CKHTTPServerInfo * serverInfo = response.httpServer;
         XCTAssertNotNil(serverInfo);
-        for (NSString * headerKey in serverInfo.securityHeaders.allKeys) {
-            XCTAssertTrue(serverInfo.securityHeaders[headerKey].boolValue);
-        }
+        XCTAssertNotNil(serverInfo.headers);
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
@@ -42,7 +40,7 @@
     }
 }
 
-+ (void) testBareTLSWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testBareTLSWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8402"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -72,7 +70,7 @@
     }
 }
 
-+ (void) testBareTLSIPv4WithEngine:(CRYPTO_ENGINE)engine {
++ (void) testBareTLSIPv4WithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"127.0.0.1:8402"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -103,7 +101,7 @@
     }
 }
 
-+ (void) testBareTLSIPv6WithEngine:(CRYPTO_ENGINE)engine {
++ (void) testBareTLSIPv6WithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"[0:0:0:0:0:0:0:1]:8402"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -134,7 +132,7 @@
     }
 }
 
-+ (void) testTooManyCertsWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testTooManyCertsWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8403"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -154,7 +152,7 @@
     }
 }
 
-+ (void) testNaughtyHTTPWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testNaughtyHTTPWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8404"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -184,7 +182,7 @@
     }
 }
 
-+ (void) testFuzzHTTPWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testFuzzHTTPWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8405"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -214,7 +212,7 @@
     }
 }
 
-+ (void) testFuzzTLSWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testFuzzTLSWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8406"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -233,7 +231,7 @@
     }
 }
 
-+ (void) testBigHTTPHeaderWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testBigHTTPHeaderWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8407"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -263,7 +261,7 @@
     }
 }
 
-+ (void) testRevokedCRLWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testRevokedCRLWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8408"];
     parameters.cryptoEngine = engine;
     parameters.checkCRL = true;
@@ -299,7 +297,7 @@
     }
 }
 
-+ (void) testRevokedOCSPWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testRevokedOCSPWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8408"];
     parameters.cryptoEngine = engine;
     parameters.checkCRL = false;
@@ -335,7 +333,7 @@
     }
 }
 
-+ (void) testExpiredLeafWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testExpiredLeafWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8410"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -366,7 +364,7 @@
     }
 }
 
-+ (void) testExpiredIntWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testExpiredIntWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8411"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -399,7 +397,7 @@
     }
 }
 
-+ (void) testTooManyHTTPHeadersWithEngine:(CRYPTO_ENGINE)engine {
++ (void) testTooManyHTTPHeadersWithEngine:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8412"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -429,7 +427,7 @@
     }
 }
 
-+ (void) testHTTPSRedirect:(CRYPTO_ENGINE)engine {
++ (void) testHTTPSRedirect:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8413"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
@@ -464,7 +462,7 @@
     }
 }
 
-+ (void) testNaughtyHTTPSRedirect:(CRYPTO_ENGINE)engine {
++ (void) testNaughtyHTTPSRedirect:(CKNetworkEngine)engine {
     CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8414"];
     parameters.cryptoEngine = engine;
     CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];

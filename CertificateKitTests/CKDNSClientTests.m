@@ -24,7 +24,7 @@
 - (void) testSingleAddressA {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"single.address.a.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"single.address.a.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSError * addressError;
@@ -46,7 +46,7 @@
 - (void) testMultipleAddressA {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"multiple.address.a.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"multiple.address.a.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSError * addressError;
@@ -72,7 +72,7 @@
 - (void) testCNAMEA {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"cname.a.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"cname.a.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSError * addressError;
@@ -94,7 +94,7 @@
 - (void) testSingleAddressAAAA {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"single.address.aaaa.example.com" ofType:CKDNSRecordTypeAAAA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"single.address.aaaa.example.com" ofAddressVersion:CKIPVersionIPv6 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSError * addressError;
@@ -116,7 +116,7 @@
 - (void) testMultipleAddressAAAA {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"multiple.address.aaaa.example.com" ofType:CKDNSRecordTypeAAAA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"multiple.address.aaaa.example.com" ofAddressVersion:CKIPVersionIPv6 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSError * addressError;
@@ -142,7 +142,7 @@
 - (void) testCNAMEAAAA {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"cname.aaaa.example.com" ofType:CKDNSRecordTypeAAAA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"cname.aaaa.example.com" ofAddressVersion:CKIPVersionIPv6 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSError * addressError;
@@ -164,7 +164,7 @@
 - (void) testRecursiveCNAME {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"recursive.cname.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"recursive.cname.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSError * addressError;
@@ -183,7 +183,7 @@
 - (void) testInfiniteLoopCompression {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"infinite.loop.compression.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"infinite.loop.compression.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         passed = @YES;
@@ -198,7 +198,7 @@
 - (void) testIncorrectID {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"incorrect.id.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"incorrect.id.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         passed = @YES;
@@ -213,7 +213,7 @@
 - (void) testNXDOMAIN {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"unknown.domain.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"unknown.domain.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNotNil(result);
         XCTAssertEqual(result.responseCode, CKDNSResponseCodeNXDOMAIN);
@@ -230,7 +230,7 @@
 - (void) testWrongRType {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"wrong.type.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"wrong.type.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         XCTAssertEqual(result.resources.count, 0);
@@ -246,7 +246,7 @@
 - (void) testBadDataLength {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"bad.length.example.com" ofType:CKDNSRecordTypeA onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"bad.length.example.com" ofAddressVersion:CKIPVersionIPv4 onServer:DOH_SERVER completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         passed = @YES;
@@ -261,7 +261,7 @@
 - (void) testBadContentType {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"example.com" ofType:CKDNSRecordTypeA onServer:@"https://localhost:8413/bad-content-type" completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"example.com" ofAddressVersion:CKIPVersionIPv4 onServer:@"https://localhost:8413/bad-content-type" completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         passed = @YES;
@@ -276,7 +276,7 @@
 - (void) testOversizedReply {
     dispatch_semaphore_t sync = dispatch_semaphore_create(0);
     NSNumber * __block passed = @NO;
-    [CKDNSClient.sharedClient resolve:@"example.com" ofType:CKDNSRecordTypeA onServer:@"https://localhost:8413/oversize-reply" completed:^(CKDNSResult * result, NSError * error) {
+    [CKDNSClient.sharedClient resolve:@"example.com" ofAddressVersion:CKIPVersionIPv4 onServer:@"https://localhost:8413/oversize-reply" completed:^(CKDNSResult * result, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         passed = @YES;

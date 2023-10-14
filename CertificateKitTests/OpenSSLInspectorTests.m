@@ -8,7 +8,7 @@
 
 @implementation OpenSSLInspectorTests
 
-#define ENGINE_NAME CRYPTO_ENGINE_OPENSSL
+#define ENGINE_NAME CKNetworkEngineOpenSSL
 
 - (void) setUp {
     [super setUp];

@@ -8,7 +8,7 @@
 
 @implementation NetworkFrameworkInspectorTests
 
-#define ENGINE_NAME CRYPTO_ENGINE_NETWORK_FRAMEWORK
+#define ENGINE_NAME CKNetworkEngineNetworkFramework
 
 - (void) setUp {
     [super setUp];

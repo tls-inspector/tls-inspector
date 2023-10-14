@@ -28,7 +28,7 @@
     CKIPAddress * address = [CKIPAddress new];
 
     if ([value.lowercaseString rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@":abcdef"]].location == NSNotFound) {
-        address.version = CKIPAddressVersion4;
+        address.version = CKIPVersionIPv4;
 
         in_addr_t addr = inet_addr(value.UTF8String);
         (void)addr;
@@ -46,7 +46,7 @@
         address.address = [[NSString alloc] initWithUTF8String:str];
         address.full = [[NSString alloc] initWithUTF8String:str];
     } else {
-        address.version = CKIPAddressVersion6;
+        address.version = CKIPVersionIPv6;
 
         struct in6_addr result;
         if (inet_pton(AF_INET6, value.UTF8String, &result) != 1) {
