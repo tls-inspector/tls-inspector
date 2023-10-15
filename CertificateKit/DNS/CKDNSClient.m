@@ -161,7 +161,7 @@ typedef struct _HTTP_RESPONSE {
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&curldata);
 #if DEBUG
     if (self._DANGEROUS_DISABLE_SSL_VERIFY) {
-        PWarn(@"[DOH] !! DANGEROUS !! SSL peer verification disabled, this should be used for unit tests");
+        PWarn(@"[DOH] !! DANGEROUS !! SSL peer verification disabled, this should only be used for unit tests");
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
     }
 #endif
@@ -270,8 +270,9 @@ typedef struct _HTTP_RESPONSE {
         return;
     }
 
-    PDebug(@"[DOH] Jumping to offset %i", (int)request.length);
-    int segmentStartIdx = (int)request.length;
+    NSUInteger answerStart = [self getStartOfAnswerFromReply:responseBytes];
+    PDebug(@"[DOH] Jumping to offset %i", (int)answerStart);
+    int segmentStartIdx = (int)answerStart;
 
     NSMutableArray<CKDNSResource *> * resources = [NSMutableArray new];
     int answersRead = 0;
@@ -294,7 +295,7 @@ typedef struct _HTTP_RESPONSE {
 
         uint16_t rtype = ntohs(*(uint16_t *)[responseBytes subdataWithRange:NSMakeRange(dataIndex, 2)].bytes);
         uint16_t rclass = ntohs(*(uint16_t *)[responseBytes subdataWithRange:NSMakeRange(dataIndex+2, 2)].bytes);
-        // skip ttl, we don't read it
+        // skip ttl, we don't read it since we don't cache responses
         uint16_t dlen = ntohs(*(uint16_t *)[responseBytes subdataWithRange:NSMakeRange(dataIndex+8, 2)].bytes);
 
         if (rclass != 1) {
@@ -423,6 +424,34 @@ typedef struct _HTTP_RESPONSE {
     }
 
     return request;
+}
+
+/// Return the offset for which the answer begins in a DNS reply.
+- (NSUInteger) getStartOfAnswerFromReply:(NSData *)reply  {
+    // We've already validated the headers value, so jump to the end of it
+    int offset = sizeof(DNS_HEADER);
+
+    // DNS compression doesn't explicitly require that the uncompressed name be the first occurance of it in the reply
+    // so we can't assume that the length of the question in the reply will match the length of the question
+    // we sent to the server.
+    //
+    // We're not using readDNSName here since we're not actually concerned about consuming name, we just need to get past it to find the
+    // end of the question and the start of the answer.
+    bool finishedReadingName = false;
+    while (!finishedReadingName) {
+        NSUInteger length = [reply byteAtIndex:offset];
+        if ((length & (1 << 7)) || length == 0) {
+            // Is a pointer
+            finishedReadingName = true;
+            offset++;
+        } else {
+            // Is length
+            offset += length + 1;
+        }
+    }
+
+    offset += 4; // skip past qtype and qclass;
+    return offset;
 }
 
 // Converts [3]www[7]example[3]com[0] to 'www.example.com.', supporting compression.

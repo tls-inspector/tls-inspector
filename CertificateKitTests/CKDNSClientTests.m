@@ -9,7 +9,7 @@
 
 @implementation CKDNSClientTests
 
-#define DOH_SERVER @"https://localhost:8413/dns-query"
+#define DOH_SERVER @"https://localhost:8415/dns-query"
 #define TEST_TIMEOUT 10 // Seconds
 
 - (void) setUp {
