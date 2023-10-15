@@ -500,6 +500,7 @@
 		9A67F89C2AA407520088A750 /* CKDNSClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSClient.h; sourceTree = "<group>"; };
 		9A67F89D2AA407520088A750 /* CKDNSClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDNSClient.m; sourceTree = "<group>"; };
 		9A67F8A02AA408B10088A750 /* CKDNSClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDNSClientTests.m; sourceTree = "<group>"; };
+		9AA8C12C2ADCA69400B93E45 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9AABA2A02AAD7AAF0032CAA3 /* CKDNSResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSResult.h; sourceTree = "<group>"; };
 		9AABA2A12AAD7AAF0032CAA3 /* CKDNSResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDNSResult.m; sourceTree = "<group>"; };
 		9AABA2A42AAD870B0032CAA3 /* CKDNSRecordType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDNSRecordType.h; sourceTree = "<group>"; };
@@ -724,6 +725,7 @@
 				3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */,
 				3C7269622394C2D3002A0B19 /* User Interface */,
 				3C7269382394BC0F002A0B19 /* View Controllers */,
+				9AA8C12C2ADCA69400B93E45 /* PrivacyInfo.xcprivacy */,
 			);
 			path = "TLS Inspector";
 			sourceTree = "<group>";
