@@ -20,7 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKInspector.h"
+#import <CertificateKit/CKInspector.h>
 
 @interface CKSecureTransportInspector : NSObject <CKInspector>
 

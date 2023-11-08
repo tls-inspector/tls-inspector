@@ -19,13 +19,13 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKGetter.h"
-#import "CKServerInfoGetter.h"
-#import "CKCertificateChainGetter.h"
-#import "CKOpenSSLCertificateChainGetter.h"
-#import "CKNetworkCertificateChainGetter.h"
-#import "CKSecureTransportCertificateChainGetter.h"
-#import "CKResolver.h"
+#import <CertificateKit/CKGetter.h>
+#import <CertificateKit/CKServerInfoGetter.h>
+#import <CertificateKit/CKCertificateChainGetter.h>
+#import <CertificateKit/CKOpenSSLCertificateChainGetter.h>
+#import <CertificateKit/CKNetworkCertificateChainGetter.h>
+#import <CertificateKit/CKSecureTransportCertificateChainGetter.h>
+#import <CertificateKit/CKResolver.h>
 
 @interface CKGetter () <NSStreamDelegate, CKGetterTaskDelegate> {
     BOOL gotChain;

@@ -20,8 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKDNSResource.h"
-#import "CKDNSResponseCode.h"
+#import <CertificateKit/CKDNSResource.h>
+#import <CertificateKit/CKDNSResponseCode.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

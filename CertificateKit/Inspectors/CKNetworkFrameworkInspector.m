@@ -20,17 +20,17 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 @import Network;
-#import "CKNetworkFrameworkInspector.h"
-#import "CKNetworkFrameworkInspector+EnumValues.h"
-#import "CKSocketUtils.h"
-#import "CKCRLManager.h"
-#import "CKOCSPManager.h"
-#import "CKHTTPClient.h"
-#import "CKHTTPServerInfo+Private.h"
-#import "CKRevoked+Private.h"
-#include <openssl/ssl.h>
-#include <openssl/x509.h>
-#include <mach/mach_time.h>
+#import <CertificateKit/CKNetworkFrameworkInspector.h>
+#import <CertificateKit/CKNetworkFrameworkInspector+EnumValues.h>
+#import <CertificateKit/CKSocketUtils.h>
+#import <CertificateKit/CKCRLManager.h>
+#import <CertificateKit/CKOCSPManager.h>
+#import <CertificateKit/CKHTTPClient.h>
+#import <CertificateKit/CKHTTPServerInfo+Private.h>
+#import <CertificateKit/CKRevoked+Private.h>
+#import <openssl/ssl.h>
+#import <openssl/x509.h>
+#import <mach/mach_time.h>
 
 @interface CKNetworkFrameworkInspector ()
 

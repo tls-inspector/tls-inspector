@@ -23,13 +23,13 @@
 #import <sys/socket.h>
 #import <netdb.h>
 #import <arpa/inet.h>
-#import "CKDNSClient.h"
-#import "CKDNSResult.h"
-#import "NSData+HexString.h"
-#import "NSData+Base64URL.h"
-#import "CKCurlCommon.h"
-#import "NSString+SplitFirst.h"
-#import "NSData+ByteAtIndex.h"
+#import <CertificateKit/CKDNSClient.h>
+#import <CertificateKit/CKDNSResult.h>
+#import <CertificateKit/NSData+HexString.h>
+#import <CertificateKit/NSData+Base64URL.h>
+#import <CertificateKit/CKCurlCommon.h>
+#import <CertificateKit/NSString+SplitFirst.h>
+#import <CertificateKit/NSData+ByteAtIndex.h>
 
 @interface CKDNSClient () {
     dispatch_queue_t dnsClientQueue;

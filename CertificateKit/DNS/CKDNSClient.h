@@ -20,8 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKDNSRecordType.h"
-#import "CKDNSResult.h"
+#import <CertificateKit/CKDNSRecordType.h>
+#import <CertificateKit/CKDNSResult.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

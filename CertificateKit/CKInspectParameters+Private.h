@@ -20,7 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKResolvedAddress.h"
+#import <CertificateKit/CKResolvedAddress.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

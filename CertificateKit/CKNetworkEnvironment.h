@@ -20,7 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKIPAddress.h"
+#import <CertificateKit/CKIPAddress.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -19,9 +19,9 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKHTTPClient.h"
-#import "CKHTTPHeaders.h"
-#import "NSData+ByteAtIndex.h"
+#import <CertificateKit/CKHTTPClient.h>
+#import <CertificateKit/CKHTTPHeaders.h>
+#import <CertificateKit/NSData+ByteAtIndex.h>
 
 #define HTTP_MAX_HEADER_SIZE 102400 // 100KiB - same as libcurl
 

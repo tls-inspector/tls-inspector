@@ -19,9 +19,9 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKRevoked.h"
-#import "CKOCSPResponse.h"
-#import "CKCRLResponse.h"
+#import <CertificateKit/CKRevoked.h>
+#import <CertificateKit/CKOCSPResponse.h>
+#import <CertificateKit/CKCRLResponse.h>
 #import <openssl/x509v3.h>
 
 @interface CKRevoked ()

@@ -1,7 +1,7 @@
 #import <XCTest/XCTest.h>
 #import <CertificateKit/CertificateKit.h>
-#import "CertificateKitTests.h"
-#import "CKInspectorTests.h"
+#import <CertificateKit/CertificateKitTests.h>
+#import <CertificateKit/CKInspectorTests.h>
 
 @interface CKDNSClientTests : XCTestCase
 

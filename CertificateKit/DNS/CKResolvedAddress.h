@@ -20,7 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKTypes.h"
+#import <CertificateKit/CKTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

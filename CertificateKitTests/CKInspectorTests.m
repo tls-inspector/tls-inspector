@@ -1,6 +1,6 @@
 #import <XCTest/XCTest.h>
-#import "CertificateKitTests.h"
-#import "CKInspectorTests.h"
+#import <CertificateKit/CertificateKitTests.h>
+#import <CertificateKit/CKInspectorTests.h>
 
 @implementation CKInspectorTests
 

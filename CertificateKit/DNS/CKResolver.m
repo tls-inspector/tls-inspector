@@ -19,12 +19,12 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKResolver.h"
-#import "CKNetworkEnvironment.h"
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <arpa/inet.h>
+#import <CertificateKit/CKResolver.h>
+#import <CertificateKit/CKNetworkEnvironment.h>
+#import <sys/types.h>
+#import <sys/socket.h>
+#import <netdb.h>
+#import <arpa/inet.h>
 
 @implementation CKResolver
 

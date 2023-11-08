@@ -20,8 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificate.h"
-#import "CKCRLResponse.h"
+#import <CertificateKit/CKCertificate.h>
+#import <CertificateKit/CKCRLResponse.h>
 
 @interface CKCRLManager : NSObject
 

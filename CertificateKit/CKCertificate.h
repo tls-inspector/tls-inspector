@@ -20,11 +20,11 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificatePublicKey.h"
-#import "CKNameObject.h"
-#import "CKAlternateNameObject.h"
-#import "CKRevoked.h"
-#import "CKSignedCertificateTimestamp.h"
+#import <CertificateKit/CKCertificatePublicKey.h>
+#import <CertificateKit/CKNameObject.h>
+#import <CertificateKit/CKAlternateNameObject.h>
+#import <CertificateKit/CKRevoked.h>
+#import <CertificateKit/CKSignedCertificateTimestamp.h>
 
 @class CKCertificatePublicKey;
 

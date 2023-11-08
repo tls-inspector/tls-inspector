@@ -1,6 +1,6 @@
 #import <XCTest/XCTest.h>
 #import <CertificateKit/CertificateKit.h>
-#import "CertificateKitTests.h"
+#import <CertificateKit/CertificateKitTests.h>
 
 @interface CKIPAddressTests : XCTestCase
 

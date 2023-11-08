@@ -20,8 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificate.h"
-#import "CKIPAddress.h"
+#import <CertificateKit/CKCertificate.h>
+#import <CertificateKit/CKIPAddress.h>
 
 /**
  A chain of CKCertificate objects and metadata about the chain

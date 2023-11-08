@@ -19,9 +19,9 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "NSDate+ASN1_TIME.h"
-#include <openssl/ossl_typ.h>
-#include <openssl/asn1.h>
+#import <CertificateKit/NSDate+ASN1_TIME.h>
+#import <openssl/ossl_typ.h>
+#import <openssl/asn1.h>
 
 @implementation NSDate (ASN1_TIME)
 

@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKRevoked.h"
+#import <CertificateKit/CKRevoked.h>
 
 #ifndef CKRevoked_Private_h
 #define CKRevoked_Private_h

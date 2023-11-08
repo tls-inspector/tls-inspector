@@ -19,8 +19,8 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKHTTPServerInfo.h"
-#import "CKHTTPResponse.h"
+#import <CertificateKit/CKHTTPServerInfo.h>
+#import <CertificateKit/CKHTTPResponse.h>
 
 @interface CKHTTPServerInfo ()
 

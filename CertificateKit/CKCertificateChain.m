@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKCertificateChain.h"
+#import <CertificateKit/CKCertificateChain.h>
 #import <arpa/inet.h>
 
 @implementation CKCertificateChain

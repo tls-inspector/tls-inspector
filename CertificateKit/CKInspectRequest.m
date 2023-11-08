@@ -19,13 +19,13 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKInspectRequest.h"
-#import "CKNetworkFrameworkInspector.h"
-#import "CKSecureTransportInspector.h"
-#import "CKOpenSSLInspector.h"
-#import "CKResolver.h"
-#import "CKInspector.h"
-#import "CKInspectParameters+Private.h"
+#import <CertificateKit/CKInspectRequest.h>
+#import <CertificateKit/CKNetworkFrameworkInspector.h>
+#import <CertificateKit/CKSecureTransportInspector.h>
+#import <CertificateKit/CKOpenSSLInspector.h>
+#import <CertificateKit/CKResolver.h>
+#import <CertificateKit/CKInspector.h>
+#import <CertificateKit/CKInspectParameters+Private.h>
 
 @interface CKInspectRequest ()
 

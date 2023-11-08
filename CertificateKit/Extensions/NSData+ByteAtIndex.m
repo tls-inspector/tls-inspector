@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "NSData+ByteAtIndex.h"
+#import <CertificateKit/NSData+ByteAtIndex.h>
 
 @implementation NSData (HexString)
 

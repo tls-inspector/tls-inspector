@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKHTTPHeaders.h"
+#import <CertificateKit/CKHTTPHeaders.h>
 
 @interface CKHTTPHeaders ()
 

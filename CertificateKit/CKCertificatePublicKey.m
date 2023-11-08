@@ -19,10 +19,10 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKCertificatePublicKey.h"
-#import "CKCertificate+Private.h"
-#include <openssl/x509.h>
-#include <openssl/x509v3.h>
+#import <CertificateKit/CKCertificatePublicKey.h>
+#import <CertificateKit/CKCertificate+Private.h>
+#import <openssl/x509.h>
+#import <openssl/x509v3.h>
 
 @interface CKCertificatePublicKey ()
 

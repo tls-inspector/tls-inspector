@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKNetworkEnvironment.h"
+#import <CertificateKit/CKNetworkEnvironment.h>
 #import <arpa/inet.h>
 #import <ifaddrs.h>
 #import <netdb.h>

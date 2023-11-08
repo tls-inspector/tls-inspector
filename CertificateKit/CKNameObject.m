@@ -19,8 +19,8 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKNameObject.h"
-#include <openssl/x509.h>
+#import <CertificateKit/CKNameObject.h>
+#import <openssl/x509.h>
 
 @interface CKNameObject ()
 

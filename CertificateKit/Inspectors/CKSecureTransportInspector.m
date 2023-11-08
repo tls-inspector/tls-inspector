@@ -19,21 +19,21 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKSecureTransportInspector.h"
-#import "CKSecureTransportInspector+EnumValues.h"
-#import "CKCertificate.h"
-#import "CKCertificateChain.h"
-#import "CKOCSPManager.h"
-#import "CKCRLManager.h"
-#import "CKSocketUtils.h"
-#import "CKHTTPClient.h"
-#import "CKInspectParameters+Private.h"
-#import "CKHTTPServerInfo+Private.h"
-#import "CKRevoked+Private.h"
-#include <openssl/ssl.h>
-#include <openssl/x509.h>
-#include <arpa/inet.h>
-#include <mach/mach_time.h>
+#import <CertificateKit/CKSecureTransportInspector.h>
+#import <CertificateKit/CKSecureTransportInspector+EnumValues.h>
+#import <CertificateKit/CKCertificate.h>
+#import <CertificateKit/CKCertificateChain.h>
+#import <CertificateKit/CKOCSPManager.h>
+#import <CertificateKit/CKCRLManager.h>
+#import <CertificateKit/CKSocketUtils.h>
+#import <CertificateKit/CKHTTPClient.h>
+#import <CertificateKit/CKInspectParameters+Private.h>
+#import <CertificateKit/CKHTTPServerInfo+Private.h>
+#import <CertificateKit/CKRevoked+Private.h>
+#import <openssl/ssl.h>
+#import <openssl/x509.h>
+#import <arpa/inet.h>
+#import <mach/mach_time.h>
 
 @interface CKSecureTransportInspector () <NSStreamDelegate> {
     CFReadStreamRef   readStream;

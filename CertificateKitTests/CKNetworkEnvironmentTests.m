@@ -1,6 +1,6 @@
 #import <XCTest/XCTest.h>
 #import <CertificateKit/CertificateKit.h>
-#import "CKNetworkEnvironment.h"
+#import <CertificateKit/CKNetworkEnvironment.h>
 
 @interface CKNetworkEnvironmentTests : XCTestCase
 

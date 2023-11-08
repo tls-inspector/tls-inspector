@@ -19,8 +19,8 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKSignedCertificateTimestamp.h"
-#import "NSData+HexString.h"
+#import <CertificateKit/CKSignedCertificateTimestamp.h>
+#import <CertificateKit/NSData+HexString.h>
 #import <openssl/x509.h>
 #import <openssl/ct.h>
 

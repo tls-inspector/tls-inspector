@@ -20,7 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKHTTPResponse.h"
+#import <CertificateKit/CKHTTPResponse.h>
 #import <openssl/bio.h>
 @import Network;
 

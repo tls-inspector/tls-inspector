@@ -20,8 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKInspectParameters.h"
-#import "CKInspectResponse.h"
+#import <CertificateKit/CKInspectParameters.h>
+#import <CertificateKit/CKInspectResponse.h>
 
 @protocol CKInspector
 

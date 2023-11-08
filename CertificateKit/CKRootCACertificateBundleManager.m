@@ -19,8 +19,8 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKRootCACertificateBundleManager.h"
-#import "CKLogging+Private.h"
+#import <CertificateKit/CKRootCACertificateBundleManager.h>
+#import <CertificateKit/CKLogging+Private.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <openssl/evp.h>
 #import <openssl/pem.h>

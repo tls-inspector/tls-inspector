@@ -20,8 +20,8 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificateChain.h"
-#import "CKHTTPServerInfo.h"
+#import <CertificateKit/CKCertificateChain.h>
+#import <CertificateKit/CKHTTPServerInfo.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

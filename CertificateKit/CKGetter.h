@@ -20,9 +20,9 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#import "CKCertificateChain.h"
-#import "CKServerInfo.h"
-#import "CKInspectParameters.h"
+#import <CertificateKit/CKCertificateChain.h>
+#import <CertificateKit/CKServerInfo.h>
+#import <CertificateKit/CKInspectParameters.h>
 
 /**
  CKGetter is the interface used to get all information about a specific domain. Used to track progress

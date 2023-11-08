@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "NSData+Base64URL.h"
+#import <CertificateKit/NSData+Base64URL.h>
 
 @implementation NSData (Base64URL)
 

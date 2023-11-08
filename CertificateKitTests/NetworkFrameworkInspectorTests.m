@@ -1,6 +1,6 @@
 #import <XCTest/XCTest.h>
 #import <CertificateKit/CertificateKit.h>
-#import "CKInspectorTests.h"
+#import <CertificateKit/CKInspectorTests.h>
 
 @interface NetworkFrameworkInspectorTests : XCTestCase
 

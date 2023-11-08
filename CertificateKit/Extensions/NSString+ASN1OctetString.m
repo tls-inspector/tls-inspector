@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "NSString+ASN1OctetString.h"
+#import <CertificateKit/NSString+ASN1OctetString.h>
 
 @implementation NSString (ASN1_OCTETSTRING)
 

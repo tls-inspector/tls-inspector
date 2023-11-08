@@ -19,16 +19,16 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKCertificate.h"
-#import "NSDate+ASN1_TIME.h"
-#import "NSString+ASN1OctetString.h"
-#import "CKLogging+Private.h"
-#include <openssl/ssl.h>
-#include <openssl/x509.h>
-#include <openssl/x509v3.h>
-#include <openssl/bio.h>
-#include <openssl/bn.h>
-#include <CommonCrypto/CommonCrypto.h>
+#import <CertificateKit/CKCertificate.h>
+#import <CertificateKit/NSDate+ASN1_TIME.h>
+#import <CertificateKit/NSString+ASN1OctetString.h>
+#import <CertificateKit/CKLogging+Private.h>
+#import <openssl/ssl.h>
+#import <openssl/x509.h>
+#import <openssl/x509v3.h>
+#import <openssl/bio.h>
+#import <openssl/bn.h>
+#import <CommonCrypto/CommonCrypto.h>
 
 @interface CKCertificate()
 

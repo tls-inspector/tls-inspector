@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CKRegex.h"
+#import <CertificateKit/CKRegex.h>
 
 @interface CKRegex ()
 

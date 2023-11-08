@@ -19,15 +19,15 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
-#import "CertificateKit.h"
-#import "CKOCSPManager.h"
-#import "CKCurlCommon.h"
-#import "CKCertificate+Private.h"
-#import "CKLogging+Private.h"
+#import <CertificateKit/CertificateKit.h>
+#import <CertificateKit/CKOCSPManager.h>
+#import <CertificateKit/CKCurlCommon.h>
+#import <CertificateKit/CKCertificate+Private.h>
+#import <CertificateKit/CKLogging+Private.h>
 #import <openssl/x509.h>
 #import <openssl/ocsp.h>
 #import <curl/curl.h>
-#import "NSString+SplitFirst.h"
+#import <CertificateKit/NSString+SplitFirst.h>
 
 @interface CKOCSPManager () {
     dispatch_queue_t queue;
