@@ -30,7 +30,7 @@ env:
 jobs:
   openssl:
     name: "Build OpenSSL"
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: "Checkout Source"
         id: checkout
@@ -67,7 +67,7 @@ jobs:
 
   curl:
     name: "Build curl"
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: "Checkout Source"
         id: checkout
@@ -102,7 +102,7 @@ jobs:
 
   build:
     name: "Build App"
-    runs-on: macos-latest
+    runs-on: macos-13
     needs: [openssl, curl]
     steps:
       - name: Checkout Source
