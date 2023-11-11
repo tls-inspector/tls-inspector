@@ -109,11 +109,6 @@ jobs:
         id: checkout
         uses: actions/checkout@v3
 
-      - name: Install XCode
-        uses: maxim-lobanov/setup-xcode@v1.6.0
-        with:
-          xcode-version: "15"
-
       - name: Install Profile and Certificates
         id: install_credentials
         run: |
@@ -148,6 +143,8 @@ jobs:
           echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
           echo "IDNACOCOA_CACHE_KEY=idnacocoa_$(grep -a5 "Wevah/IDNA-Cocoa" TLS\ Inspector.xcodeproj/project.pbxproj | grep 'revision =' | cut -d '=' -f2 | awk '{$1=$1};1' | cut -c 1-8)" >> "$GITHUB_OUTPUT"
           echo "DERIVEDDATA_PATH=$(xcodebuild -project TLS\ Inspector.xcodeproj -showBuildSettings -configuration Debug 2>/dev/null | grep " BUILD_DIR = " | cut -d '=' -f2 | awk '{$1=$1};1' | sed 's%/Build/Products%%g')" >> "$GITHUB_OUTPUT"
+          sudo xcode-select -s /Applications/Xcode_15.0.1.app/Contents/Developer
+          xcode-select -p
 
       - name: Restore Cached SwiftLint
         id: restore_swiftlint
@@ -254,6 +251,7 @@ jobs:
           CGO_ENABLED=0 go build
           echo "Generating certifiate & key"
           ./TestServer -g
+          xcrun simctl boot "${{ env.TEST_DEVICE }}"
           xcrun simctl keychain "${{ env.TEST_DEVICE }}" add-root-cert ./root.crt
 
       - name: Start Test Server
@@ -266,4 +264,4 @@ jobs:
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
+          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test-without-building
