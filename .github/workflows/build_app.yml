@@ -24,6 +24,9 @@ on:
 permissions:
   packages: read
 
+env:
+  TEST_DEVICE: "iPhone 15"
+
 jobs:
   openssl:
     name: "Build OpenSSL"
@@ -105,6 +108,11 @@ jobs:
       - name: Checkout Source
         id: checkout
         uses: actions/checkout@v3
+
+      - name: Install XCode
+        uses: maxim-lobanov/setup-xcode@v1.6.0
+        with:
+          xcode-version: latest-stable
 
       - name: Install Profile and Certificates
         id: install_credentials
@@ -229,7 +237,7 @@ jobs:
       - name: Build
         id: build
         run: |
-          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro' build
+          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
 
       - name: Install Go
         id: install_go
@@ -246,6 +254,7 @@ jobs:
           CGO_ENABLED=0 go build
           echo "Generating certifiate & key"
           ./TestServer -g
+          xcrun simctl keychain "${{ env.TEST_DEVICE }}" add-root-cert ./root.crt
 
       - name: Start Test Server
         id: testserver_start
@@ -257,4 +266,4 @@ jobs:
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro' test
+          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
