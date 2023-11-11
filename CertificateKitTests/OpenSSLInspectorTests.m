@@ -1,6 +1,7 @@
 #import <XCTest/XCTest.h>
-#import <CertificateKit/CertificateKit.h>
-#import <CertificateKit/CKInspectorTests.h>
+#import "CertificateKitTests.h"
+#import "CKInspectorTests.h"
+@import CertificateKit;
 
 @interface OpenSSLInspectorTests : XCTestCase
 

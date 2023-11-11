@@ -231,11 +231,6 @@ jobs:
           path: |
             ${{ steps.prepare.outputs.DERIVEDDATA_PATH }}/SourcePackages
 
-      - name: Build
-        id: build
-        run: |
-          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-
       - name: Install Go
         id: install_go
         uses: actions/setup-go@v4
@@ -260,6 +255,11 @@ jobs:
         run: |
           cd CertificateKit/TestServer
           nohup ./TestServer -c root.crt -k root.key &
+
+      - name: Build
+        id: build
+        run: |
+          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
 
       - name: Run Automated Tests
         id: certificatekit_tests
