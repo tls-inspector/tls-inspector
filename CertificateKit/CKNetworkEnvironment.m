@@ -43,25 +43,25 @@
     dispatch_group_async(group, queue, ^{
         uint64_t startTime = mach_absolute_time();
 
-        int err;
+        int err = 0;
         struct addrinfo hints;
-        struct addrinfo *result;
+        struct addrinfo *result = NULL;
         memset(&hints, 0, sizeof(struct addrinfo));
         hints.ai_family = AF_INET;
         hints.ai_socktype = SOCK_STREAM;
         hints.ai_flags = 0;
         hints.ai_protocol = 0;
-        const char * query = "example.com";
-        err = getaddrinfo(query, "80", &hints, &result);
+        err = getaddrinfo(host.UTF8String, "80", &hints, &result);
         if (err != 0) {
+            const char * errs = gai_strerror(err);
             ipv4Failed = @YES;
-            NSLog(@"IPv4 failed %s", strerror(errno));
+            PError(@"IPv4 getaddrinfo failed %s", errs);
             return;
         }
 
         if (result->ai_family != AF_INET) {
             ipv4Failed = @YES;
-            NSLog(@"IPv4 failed %s", strerror(errno));
+            PError(@"IPv4 getaddrinfo returned incorrect address family. Wanted %i got %i", AF_INET, result->ai_family);
             return;
         }
 
@@ -74,7 +74,7 @@
         close(sockfd);
         if (conSuccess != 0) {
             ipv4Failed = @YES;
-            NSLog(@"IPv4 failed %s", strerror(errno));
+            PError(@"IPv4 connect failed %s", strerror(errno));
             return;
         }
         uint64_t endTime = mach_absolute_time();
@@ -84,7 +84,7 @@
         double elapsedTimeInNanoseconds = elapsedTime * ((double)timebase.numer / timebase.denom);
         ipv4Success = @YES;
         ipv4Elapsed = [NSNumber numberWithDouble:elapsedTimeInNanoseconds];
-        NSLog(@"IPv4 passed");
+        PDebug(@"IPv4 passed");
     });
 
     dispatch_group_async(group, queue, ^{
@@ -98,17 +98,17 @@
         hints.ai_socktype = SOCK_STREAM;
         hints.ai_flags = 0;
         hints.ai_protocol = 0;
-        const char * query = "example.com";
-        err = getaddrinfo(query, "http", &hints, &result);
+        err = getaddrinfo(host.UTF8String, "80", &hints, &result);
         if (err != 0) {
+            const char * errs = gai_strerror(err);
             ipv6Failed = @YES;
-            NSLog(@"IPv6 failed %s", strerror(errno));
+            PError(@"IPv6 getaddrinfo failed %s", errs);
             return;
         }
 
         if (result->ai_family != AF_INET6) {
             ipv6Failed = @YES;
-            NSLog(@"IPv6 failed %s", strerror(errno));
+            PError(@"IPv6 getaddrinfo returned incorrect address family. Wanted %i got %i", AF_INET6, result->ai_family);
             return;
         }
 
@@ -121,7 +121,7 @@
         close(sockfd);
         if (conSuccess != 0) {
             ipv6Failed = @YES;
-            NSLog(@"IPv6 failed %s", strerror(errno));
+            PError(@"IPv6 connect failed %s", strerror(errno));
             return;
         }
 
@@ -132,7 +132,7 @@
         double elapsedTimeInNanoseconds = elapsedTime * ((double)timebase.numer / timebase.denom);
         ipv6Success = @YES;
         ipv6Elapsed = [NSNumber numberWithDouble:elapsedTimeInNanoseconds];
-        NSLog(@"IPv6 passed");
+        PDebug(@"IPv6 passed");
     });
 
     dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)));

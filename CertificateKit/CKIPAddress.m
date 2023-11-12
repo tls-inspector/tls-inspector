@@ -21,6 +21,7 @@
 
 #import <CertificateKit/CKIPAddress.h>
 #import <arpa/inet.h>
+@import Network;
 
 @implementation CKIPAddress
 
@@ -76,6 +77,53 @@
 
     return address;
 }
+
++ (CKIPAddress *) addressFromSockaddr:(struct sockaddr_storage *)addr {
+    NSString * remoteAddressString;
+    if (addr->ss_family == AF_INET) {
+        char addressString[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &((struct sockaddr_in *)addr)->sin_addr, addressString, INET_ADDRSTRLEN);
+        remoteAddressString = [[NSString alloc] initWithUTF8String:addressString];
+    } else if (addr->ss_family == AF_INET6) {
+        if (IN6_IS_ADDR_V4MAPPED(&((struct sockaddr_in6 *)addr)->sin6_addr)) {
+            struct sockaddr_in v4_addr;
+            memcpy(&v4_addr.sin_addr, ((char*) &((struct sockaddr_in6 *)addr)->sin6_addr) + 12, 4);
+            v4_addr.sin_family = AF_INET;
+            memcpy((struct sockaddr_in6 *)addr, &v4_addr, sizeof(v4_addr));
+
+            char address4String[INET_ADDRSTRLEN];
+            inet_ntop(AF_INET, &v4_addr.sin_addr, address4String, INET_ADDRSTRLEN);
+            remoteAddressString = [[NSString alloc] initWithUTF8String:address4String];
+        } else {
+            char addressString[INET6_ADDRSTRLEN];
+            inet_ntop(AF_INET6, &((struct sockaddr_in6 *)addr)->sin6_addr, addressString, INET6_ADDRSTRLEN);
+            remoteAddressString = [[NSString alloc] initWithUTF8String:addressString];
+        }
+    } else {
+        PError(@"Unknown address family from socket (%i)", addr->ss_family);
+        return nil;
+    }
+
+    return [CKIPAddress fromString:remoteAddressString];
+}
+
++ (CKIPAddress *) remoteAddressForSocket:(int)socket {
+    struct sockaddr_storage addr;
+    socklen_t addr_len = sizeof(addr);
+    if (getpeername(socket, (struct sockaddr *)&addr, &addr_len) != 0) {
+        PError(@"Error getting peer name from socket (getpeername %s)", strerror(errno));
+        return nil;
+    }
+
+    return [CKIPAddress addressFromSockaddr:&addr];
+}
+
++ (CKIPAddress * _Nullable) remoteAddressFromEndpoint:(nw_endpoint_t)endpoint {
+    struct sockaddr_storage * addr = (struct sockaddr_storage *)nw_endpoint_get_address(endpoint);
+
+    return [CKIPAddress addressFromSockaddr:addr];
+}
+
 
 - (NSString *) description {
     return self.full;

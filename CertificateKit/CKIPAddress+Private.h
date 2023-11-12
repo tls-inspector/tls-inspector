@@ -1,9 +1,9 @@
 //
-//  CKSocketUtils.h
+//  CKIPAddress+Private.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2020 Ian Spence
+//  Copyright (c) 2023 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -20,12 +20,12 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
+#import <CertificateKit/CKIPAddress.h>
 @import Network;
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Utilities for working with sockets
-@interface CKSocketUtils : NSObject
+@interface CKIPAddress (Private)
 
 /// Get the servers (peer) IP address in human-readable format for the given socket
 /// @param socket The sockets file descriptor
@@ -39,3 +39,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+

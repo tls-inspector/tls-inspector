@@ -9,7 +9,6 @@ on:
       - 'Inspect Website/**'
       - 'TLS Inspector/**'
       - 'TLS Inspector.xcodeproj/**'
-      - 'TLS InspectorUITests/**'
   pull_request:
     paths:
       - 'CertificateKit/**'
@@ -17,7 +16,6 @@ on:
       - 'Inspect Website/**'
       - 'TLS Inspector/**'
       - 'TLS Inspector.xcodeproj/**'
-      - 'TLS InspectorUITests/**'
   schedule:
     - cron: "16 16 */2 * *"
 
@@ -264,4 +262,4 @@ jobs:
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
+          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test-without-building

@@ -25,7 +25,7 @@
 #import <CertificateKit/CKCertificateChain.h>
 #import <CertificateKit/CKOCSPManager.h>
 #import <CertificateKit/CKCRLManager.h>
-#import <CertificateKit/CKSocketUtils.h>
+#import <CertificateKit/CKIPAddress+Private.h>
 #import <CertificateKit/CKHTTPClient.h>
 #import <CertificateKit/CKInspectParameters+Private.h>
 #import <CertificateKit/CKHTTPServerInfo+Private.h>
@@ -207,7 +207,7 @@
         CFDataGetBytes(handleData, CFRangeMake(0, length), buffer);
         int sock_fd = (int)*buffer;
         CFRelease(handleData);
-        remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
+        remoteAddr = [CKIPAddress remoteAddressForSocket:sock_fd];
         free(buffer);
         if (remoteAddr == nil) {
             PError(@"No remote address from socket");

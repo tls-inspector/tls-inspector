@@ -22,7 +22,7 @@
 @import Network;
 #import <CertificateKit/CKNetworkFrameworkInspector.h>
 #import <CertificateKit/CKNetworkFrameworkInspector+EnumValues.h>
-#import <CertificateKit/CKSocketUtils.h>
+#import <CertificateKit/CKIPAddress+Private.h>
 #import <CertificateKit/CKCRLManager.h>
 #import <CertificateKit/CKOCSPManager.h>
 #import <CertificateKit/CKHTTPClient.h>
@@ -194,7 +194,7 @@
                     break;
                 }
 
-                self.chain.remoteAddress = [CKSocketUtils remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
+                self.chain.remoteAddress = [CKIPAddress remoteAddressFromEndpoint:nw_path_copy_effective_remote_endpoint(nw_connection_copy_current_path(connection))];
                 if (self.chain.trustStatus == 0) {
                     [self.chain determineTrustFailureReason];
                 }

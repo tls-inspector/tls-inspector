@@ -25,7 +25,7 @@
 #import <CertificateKit/CKCertificateChain.h>
 #import <CertificateKit/CKOCSPManager.h>
 #import <CertificateKit/CKCRLManager.h>
-#import <CertificateKit/CKSocketUtils.h>
+#import <CertificateKit/CKIPAddress+Private.h>
 #import <CertificateKit/CKHTTPClient.h>
 #import <CertificateKit/CKInspectParameters+Private.h>
 #import <CertificateKit/CKHTTPServerInfo+Private.h>
@@ -158,7 +158,7 @@ static CFMutableStringRef keyLog = NULL;
         return;
     }
 
-    CKIPAddress * remoteAddr = [CKSocketUtils remoteAddressForSocket:sock_fd];
+    CKIPAddress * remoteAddr = [CKIPAddress remoteAddressForSocket:sock_fd];
     if (remoteAddr == nil) {
         completed(nil, MAKE_ERROR(CKCertificateErrorInvalidParameter, @"No Peer Address"));
         SSL_CLEANUP
