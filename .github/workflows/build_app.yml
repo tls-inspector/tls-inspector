@@ -221,14 +221,6 @@ jobs:
           path: |
             CertificateKit/curl.xcframework
 
-      - name: Restore Swift Packages
-        id: restore_swift_packages
-        uses: actions/cache@v3
-        with:
-          key: ${{ steps.prepare.outputs.IDNACOCOA_CACHE_KEY }}
-          path: |
-            ${{ steps.prepare.outputs.DERIVEDDATA_PATH }}/SourcePackages
-
       - name: Install Go
         id: install_go
         uses: actions/setup-go@v4

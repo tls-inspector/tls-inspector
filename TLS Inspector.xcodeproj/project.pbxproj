@@ -130,6 +130,7 @@
 		3C94755A2B1A9F2000DC1637 /* UTS46+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */; };
 		3C94755B2B1A9F2000DC1637 /* Scanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */; };
 		3C94755C2B1A9F2000DC1637 /* UTS46.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475562B1A9F2000DC1637 /* UTS46.swift */; };
+		3C94755D2B1AA03300DC1637 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
 		3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */; };
 		3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */; };
 		3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */; };
@@ -209,8 +210,6 @@
 		3CE11BE829FCA097009673A2 /* nl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE529FCA097009673A2 /* nl.plist */; };
 		3CE11BE929FCA097009673A2 /* nl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE529FCA097009673A2 /* nl.plist */; };
 		3CE11BEA29FCA09D009673A2 /* de.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A84F624D25F6100A1917E /* de.plist */; };
-		3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3B20C25BE2054008527A1 /* IDNA */; };
-		3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3B21625BE2186008527A1 /* URL+Encode.swift */; };
 		3CE5EE8C29E21CE7009F7026 /* ct_log_list.min.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */; };
 		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */; };
@@ -257,6 +256,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
 			remoteInfo = CertificateKit;
+		};
+		3C94755F2B1AA03300DC1637 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
+			remoteInfo = idna;
 		};
 		3CDC14AF23B0453B0053932F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -461,7 +467,6 @@
 		3CDC14D123B0479B0053932F /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		3CE11BE429FCA097009673A2 /* es.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = es.plist; sourceTree = "<group>"; };
 		3CE11BE529FCA097009673A2 /* nl.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nl.plist; sourceTree = "<group>"; };
-		3CE3B21625BE2186008527A1 /* URL+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Encode.swift"; sourceTree = "<group>"; };
 		3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ct_log_list.min.json; sourceTree = "<group>"; };
 		3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolvedAddress.h; sourceTree = "<group>"; };
 		3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKResolvedAddress.m; sourceTree = "<group>"; };
@@ -497,6 +502,7 @@
 			files = (
 				3C6242702947B10200A7814A /* curl.xcframework in Frameworks */,
 				3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */,
+				3C94755D2B1AA03300DC1637 /* idna.framework in Frameworks */,
 				3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,7 +511,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */,
 				3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */,
 				3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */,
 			);
@@ -807,7 +812,6 @@
 				3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */,
 				3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */,
 				3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */,
-				3CE3B21625BE2186008527A1 /* URL+Encode.swift */,
 				3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */,
 				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
 			);
@@ -1018,6 +1022,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3C9475602B1AA03300DC1637 /* PBXTargetDependency */,
 			);
 			name = CertificateKit;
 			productName = CertificateKit;
@@ -1043,7 +1048,6 @@
 			);
 			name = "TLS Inspector";
 			packageProductDependencies = (
-				3CE3B20C25BE2054008527A1 /* IDNA */,
 			);
 			productName = "TLS Inspector";
 			productReference = 3C72692423949ABD002A0B19 /* TLS Inspector.app */;
@@ -1148,7 +1152,6 @@
 			);
 			mainGroup = 3CFAE6CD1CA8440400CD946B;
 			packageReferences = (
-				3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */,
 			);
 			productRefGroup = 3CFAE6D71CA8440400CD946B /* Products */;
 			projectDirPath = "";
@@ -1433,7 +1436,6 @@
 				3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */,
 				3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */,
 				3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */,
-				3CE3B21725BE2186008527A1 /* URL+Encode.swift in Sources */,
 				3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */,
 				3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */,
 				3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
@@ -1556,6 +1558,11 @@
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
 			targetProxy = 3C72695F2394C16F002A0B19 /* PBXContainerItemProxy */;
+		};
+		3C9475602B1AA03300DC1637 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C9475412B1A9E8700DC1637 /* idna */;
+			targetProxy = 3C94755F2B1AA03300DC1637 /* PBXContainerItemProxy */;
 		};
 		3CDC14B023B0453B0053932F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2139,25 +2146,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Wevah/IDNA-Cocoa";
-			requirement = {
-				kind = revision;
-				revision = f41c84c2f97c6de137aa36f450defdefd229360e;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3CE3B20C25BE2054008527A1 /* IDNA */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3CE3B20B25BE2054008527A1 /* XCRemoteSwiftPackageReference "IDNA-Cocoa" */;
-			productName = IDNA;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3CFAE6CE1CA8440400CD946B /* Project object */;
 }

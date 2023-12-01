@@ -23,6 +23,7 @@
 #import "CKResolvedAddress.h"
 #import "CKRegex.h"
 #import <arpa/inet.h>
+@import idna;
 
 @interface CKInspectParameters ()
 
@@ -61,6 +62,13 @@
     // Remove any path components (if present)
     if ([hostAddress containsString:@"/"]) {
         hostAddress = [hostAddress componentsSeparatedByString:@"/"][0];
+    }
+
+    // Check if the query needs to be IDN encoded
+    if (![hostAddress canBeConvertedToEncoding:NSASCIIStringEncoding]) {
+        NSURL * encodedURL = [NSURL URLWithUnicodeString:[NSString stringWithFormat:@"https://%@/", hostAddress]];
+        PDebug(@"Encoding IDN '%@' to '%@'", hostAddress, encodedURL.host);
+        hostAddress = encodedURL.host;
     }
 
     // Valid IP addresses can't contain a port, so no need to try and find and strip it
