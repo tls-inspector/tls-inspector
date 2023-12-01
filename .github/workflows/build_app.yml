@@ -257,7 +257,7 @@ jobs:
       - name: Build
         id: build
         run: |
-          xcodebuild -resolvePackageDependencie -project "TLS Inspector.xcodeproj"
+          xcodebuild -resolvePackageDependencies -project "TLS Inspector.xcodeproj"
           xcodebuild -scheme "CertificateKit" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
           xcodebuild -scheme "Inspect Website" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
           xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
