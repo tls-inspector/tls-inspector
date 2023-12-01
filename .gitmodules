@@ -4,3 +4,6 @@
 [submodule "CertificateKit/build/curl-ios"]
 	path = CertificateKit/build/curl-ios
 	url = https://github.com/tls-inspector/curl-ios
+[submodule "CertificateKit/build/idna-cocoa"]
+	path = CertificateKit/build/idna-cocoa
+	url = https://github.com/Wevah/IDNA-Cocoa.git

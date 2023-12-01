@@ -122,6 +122,14 @@
 		3C922C0329D613630064274F /* AppIconTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C922C0229D613630064274F /* AppIconTableViewController.swift */; };
 		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
+		3C9475452B1A9E8700DC1637 /* idna.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C9475442B1A9E8700DC1637 /* idna.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C9475502B1A9EFF00DC1637 /* NSString+IDNA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94754C2B1A9EFF00DC1637 /* NSString+IDNA.swift */; };
+		3C9475572B1A9F2000DC1637 /* String+IDNA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475512B1A9F2000DC1637 /* String+IDNA.swift */; };
+		3C9475582B1A9F2000DC1637 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475522B1A9F2000DC1637 /* Data+Extensions.swift */; };
+		3C9475592B1A9F2000DC1637 /* uts46 in Resources */ = {isa = PBXBuildFile; fileRef = 3C9475532B1A9F2000DC1637 /* uts46 */; };
+		3C94755A2B1A9F2000DC1637 /* UTS46+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */; };
+		3C94755B2B1A9F2000DC1637 /* Scanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */; };
+		3C94755C2B1A9F2000DC1637 /* UTS46.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475562B1A9F2000DC1637 /* UTS46.swift */; };
 		3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */; };
 		3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */; };
 		3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */; };
@@ -392,6 +400,15 @@
 		3C84F3122644C275003E6A66 /* Date+DurationString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DurationString.swift"; sourceTree = "<group>"; };
 		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
 		3C922C0229D613630064274F /* AppIconTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconTableViewController.swift; sourceTree = "<group>"; };
+		3C9475422B1A9E8700DC1637 /* idna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = idna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C9475442B1A9E8700DC1637 /* idna.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = idna.h; sourceTree = "<group>"; };
+		3C94754C2B1A9EFF00DC1637 /* NSString+IDNA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+IDNA.swift"; path = "CertificateKit/build/idna-cocoa/Swift/NSString+IDNA.swift"; sourceTree = SOURCE_ROOT; };
+		3C9475512B1A9F2000DC1637 /* String+IDNA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+IDNA.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/String+IDNA.swift"; sourceTree = SOURCE_ROOT; };
+		3C9475522B1A9F2000DC1637 /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Data+Extensions.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/Data+Extensions.swift"; sourceTree = SOURCE_ROOT; };
+		3C9475532B1A9F2000DC1637 /* uts46 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uts46; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/uts46"; sourceTree = SOURCE_ROOT; };
+		3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UTS46+Loading.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/UTS46+Loading.swift"; sourceTree = SOURCE_ROOT; };
+		3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Scanner+Extensions.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/Scanner+Extensions.swift"; sourceTree = SOURCE_ROOT; };
+		3C9475562B1A9F2000DC1637 /* UTS46.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UTS46.swift; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/UTS46.swift"; sourceTree = SOURCE_ROOT; };
 		3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAccessabilityHints.swift; sourceTree = "<group>"; };
 		3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDomainName.swift; sourceTree = "<group>"; };
 		3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInspectTableViewController.swift; sourceTree = "<group>"; };
@@ -491,6 +508,13 @@
 				3CE3B20D25BE2054008527A1 /* IDNA in Frameworks */,
 				3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */,
 				3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C94753F2B1A9E8700DC1637 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +649,7 @@
 				3C62426F2947B10200A7814A /* curl.xcframework */,
 				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
 				3C091B812A2EB84900A8BE92 /* HTTP */,
+				3C94753C2B1A9E3A00DC1637 /* idna */,
 				3C65DADD1E836BE9004AD96D /* Info.plist */,
 				67F686EF1FC8FAE400BB7AE8 /* Inspectors */,
 				3C6242712947B12C00A7814A /* openssl.xcframework */,
@@ -719,6 +744,21 @@
 				3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */,
 			);
 			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		3C94753C2B1A9E3A00DC1637 /* idna */ = {
+			isa = PBXGroup;
+			children = (
+				3C9475522B1A9F2000DC1637 /* Data+Extensions.swift */,
+				3C9475442B1A9E8700DC1637 /* idna.h */,
+				3C94754C2B1A9EFF00DC1637 /* NSString+IDNA.swift */,
+				3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */,
+				3C9475512B1A9F2000DC1637 /* String+IDNA.swift */,
+				3C9475532B1A9F2000DC1637 /* uts46 */,
+				3C9475562B1A9F2000DC1637 /* UTS46.swift */,
+				3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */,
+			);
+			path = idna;
 			sourceTree = "<group>";
 		};
 		3CA2005E23974F160027D1C1 /* FontAwesome */ = {
@@ -864,6 +904,7 @@
 				3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */,
 				3C72692423949ABD002A0B19 /* TLS Inspector.app */,
 				3CDC14A723B0453B0053932F /* Show Certificate.appex */,
+				3C9475422B1A9E8700DC1637 /* idna.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -950,6 +991,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C94753D2B1A9E8700DC1637 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C9475452B1A9E8700DC1637 /* idna.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -999,6 +1048,24 @@
 			productName = "TLS Inspector";
 			productReference = 3C72692423949ABD002A0B19 /* TLS Inspector.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3C9475412B1A9E8700DC1637 /* idna */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C9475462B1A9E8700DC1637 /* Build configuration list for PBXNativeTarget "idna" */;
+			buildPhases = (
+				3C94753D2B1A9E8700DC1637 /* Headers */,
+				3C94753E2B1A9E8700DC1637 /* Sources */,
+				3C94753F2B1A9E8700DC1637 /* Frameworks */,
+				3C9475402B1A9E8700DC1637 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = idna;
+			productName = idna;
+			productReference = 3C9475422B1A9E8700DC1637 /* idna.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		3CDC14A623B0453B0053932F /* Inspect Website */ = {
 			isa = PBXNativeTarget;
@@ -1058,6 +1125,10 @@
 					3C72692323949ABD002A0B19 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
+					3C9475412B1A9E8700DC1637 = {
+						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1500;
+					};
 					3CDC14A623B0453B0053932F = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -1087,6 +1158,7 @@
 				3CDC14A623B0453B0053932F /* Inspect Website */,
 				3C65DAD91E836BE9004AD96D /* CertificateKit */,
 				3CF397401EB50E0900E8DBF4 /* CertificateKitTests */,
+				3C9475412B1A9E8700DC1637 /* idna */,
 			);
 		};
 /* End PBXProject section */
@@ -1124,6 +1196,14 @@
 				3CD74669258C1406003D609E /* offensive_words.plist in Resources */,
 				3CF9CC9623A4804600535173 /* DomainList.plist in Resources */,
 				3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C9475402B1A9E8700DC1637 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C9475592B1A9F2000DC1637 /* uts46 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1397,6 +1477,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C94753E2B1A9E8700DC1637 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C94755B2B1A9F2000DC1637 /* Scanner+Extensions.swift in Sources */,
+				3C9475572B1A9F2000DC1637 /* String+IDNA.swift in Sources */,
+				3C9475502B1A9EFF00DC1637 /* NSString+IDNA.swift in Sources */,
+				3C94755C2B1A9F2000DC1637 /* UTS46.swift in Sources */,
+				3C9475582B1A9F2000DC1637 /* Data+Extensions.swift in Sources */,
+				3C94755A2B1A9F2000DC1637 /* UTS46+Loading.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CDC14A323B0453B0053932F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1642,6 +1735,107 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3C9475472B1A9E8700DC1637 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Ian Spence. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.ecn.idna;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3C9475482B1A9E8700DC1637 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Ian Spence. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.ecn.idna;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1904,6 +2098,15 @@
 			buildConfigurations = (
 				3C72693523949ABD002A0B19 /* Debug */,
 				3C72693623949ABD002A0B19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C9475462B1A9E8700DC1637 /* Build configuration list for PBXNativeTarget "idna" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C9475472B1A9E8700DC1637 /* Debug */,
+				3C9475482B1A9E8700DC1637 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
