@@ -9,7 +9,6 @@ on:
       - 'Inspect Website/**'
       - 'TLS Inspector/**'
       - 'TLS Inspector.xcodeproj/**'
-      - 'TLS InspectorUITests/**'
   pull_request:
     paths:
       - 'CertificateKit/**'
@@ -17,17 +16,19 @@ on:
       - 'Inspect Website/**'
       - 'TLS Inspector/**'
       - 'TLS Inspector.xcodeproj/**'
-      - 'TLS InspectorUITests/**'
   schedule:
     - cron: "16 16 */2 * *"
 
 permissions:
   packages: read
 
+env:
+  TEST_DEVICE: "iPhone 15 Pro"
+
 jobs:
   openssl:
     name: "Build OpenSSL"
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: "Checkout Source"
         id: checkout
@@ -64,7 +65,7 @@ jobs:
 
   curl:
     name: "Build curl"
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: "Checkout Source"
         id: checkout
@@ -99,7 +100,7 @@ jobs:
 
   build:
     name: "Build App"
-    runs-on: macos-latest
+    runs-on: macos-13
     needs: [openssl, curl]
     steps:
       - name: Checkout Source
@@ -140,6 +141,8 @@ jobs:
           echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
           echo "IDNACOCOA_CACHE_KEY=idnacocoa_$(grep -a5 "Wevah/IDNA-Cocoa" TLS\ Inspector.xcodeproj/project.pbxproj | grep 'revision =' | cut -d '=' -f2 | awk '{$1=$1};1' | cut -c 1-8)" >> "$GITHUB_OUTPUT"
           echo "DERIVEDDATA_PATH=$(xcodebuild -project TLS\ Inspector.xcodeproj -showBuildSettings -configuration Debug 2>/dev/null | grep " BUILD_DIR = " | cut -d '=' -f2 | awk '{$1=$1};1' | sed 's%/Build/Products%%g')" >> "$GITHUB_OUTPUT"
+          sudo xcode-select -s /Applications/Xcode_15.0.1.app/Contents/Developer
+          xcode-select -p
 
       - name: Restore Cached SwiftLint
         id: restore_swiftlint
@@ -226,11 +229,6 @@ jobs:
           path: |
             ${{ steps.prepare.outputs.DERIVEDDATA_PATH }}/SourcePackages
 
-      - name: Build
-        id: build
-        run: |
-          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro' build
-
       - name: Install Go
         id: install_go
         uses: actions/setup-go@v4
@@ -246,6 +244,8 @@ jobs:
           CGO_ENABLED=0 go build
           echo "Generating certifiate & key"
           ./TestServer -g
+          xcrun simctl boot "${{ env.TEST_DEVICE }}"
+          xcrun simctl keychain "${{ env.TEST_DEVICE }}" add-root-cert ./root.crt
 
       - name: Start Test Server
         id: testserver_start
@@ -254,7 +254,15 @@ jobs:
           cd CertificateKit/TestServer
           nohup ./TestServer -c root.crt -k root.key &
 
+      - name: Build
+        id: build
+        run: |
+          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -resolvePackageDependencie
+          xcodebuild -scheme "CertificateKit" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "Inspect Website" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro' test
+          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test-without-building
