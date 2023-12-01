@@ -77,7 +77,6 @@ class InitialViewController: UIViewController {
         }
         RunOnMain { self.checkValues() }
     }
-    // swiftlint:enable cyclomatic_complexity
 
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.closeExtension()

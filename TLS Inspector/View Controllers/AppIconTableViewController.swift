@@ -1,12 +1,7 @@
 import UIKit
 
 class AppIconTableViewController: UITableViewController {
-
     let iconNames = [ "Default", "Light", "Dark", "Pride", "Trans" ]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
