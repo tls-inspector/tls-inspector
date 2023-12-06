@@ -106,6 +106,8 @@ jobs:
       - name: Checkout Source
         id: checkout
         uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
 
       - name: Install Profile and Certificates
         id: install_credentials
@@ -259,4 +261,3 @@ jobs:
         id: certificatekit_tests
         run: |
           xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
-
