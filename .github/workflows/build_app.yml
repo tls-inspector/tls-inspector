@@ -250,12 +250,13 @@ jobs:
         id: build
         run: |
           xcodebuild -resolvePackageDependencies -project "TLS Inspector.xcodeproj"
-          xcodebuild -scheme "idna" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "CertificateKit" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "Inspect Website" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "idna" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "CertificateKit" -project "TLS Inspector.xcodeproj -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "Inspect Website" -project "TLS Inspector.xcodeproj -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
 
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test-without-building
+          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
+
