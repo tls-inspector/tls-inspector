@@ -260,4 +260,4 @@ jobs:
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test-without-building
+          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
