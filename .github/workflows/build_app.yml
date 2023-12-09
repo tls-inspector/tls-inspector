@@ -261,3 +261,9 @@ jobs:
         id: certificatekit_tests
         run: |
           xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: test-results
+          path: /Users/runner/derived_data/Logs/Test/Test-CertificateKitTests-*.xcresult
