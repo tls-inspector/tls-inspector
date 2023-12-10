@@ -1,0 +1,50 @@
+name: "Check for Dependency Updates"
+
+on:
+  push:
+  schedule:
+    - cron: "15 14 * * *"
+
+permissions:
+  packages: read
+  issues: write
+
+jobs:
+  build:
+    name: "Check for Dependency Updates"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        id: checkout
+        uses: actions/checkout@v3
+      
+      - name: Get release versions
+        id: query_versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LATEST_OPENSSL_RELEASE=$(gh api /repos/openssl/openssl/tags --jq '.[].name' | egrep '^openssl-[0-9\.]+$' | sort -nr | head -n1 | sed 's/openssl-//')
+          LATEST_CURL_RELEASE=$(curl -sS https://curl.se/info | grep 'Version:' | cut -d ' ' -f2)
+          CURRENT_OPENSSL_RELEASE=$(cat CertificateKit/build/openssl.want|cut -d '=' -f2)
+          CURRENT_CURL_RELEASE=$(cat CertificateKit/build/curl.want|cut -d '=' -f2)
+          echo "LATEST_OPENSSL_RELEASE=${LATEST_OPENSSL_RELEASE}" >> $GITHUB_OUTPUT
+          echo "LATEST_CURL_RELEASE=${LATEST_CURL_RELEASE}" >> $GITHUB_OUTPUT
+          echo "CURRENT_OPENSSL_RELEASE=${CURRENT_OPENSSL_RELEASE}" >> $GITHUB_OUTPUT
+          echo "CURRENT_CURL_RELEASE=${CURRENT_CURL_RELEASE}" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
+
+      - name: Update OpenSSL
+        id: openssl
+        if: ${{ env.LATEST_OPENSSL_RELEASE }} != ${{ env.CURRENT_OPENSSL_RELEASE }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create --title "Update OpenSSL to ${{ env.LATEST_OPENSSL_RELEASE }}" --assignee ecnepsnai --body "OpenSSL ${{ env.LATEST_OPENSSL_RELEASE }} is available, current version used is ${{ env.CURRENT_OPENSSL_RELEASE }}."
+
+      - name: Update curl
+        id: curl
+        if: ${{ env.LATEST_CURL_RELEASE }} != ${{ env.CURRENT_CURL_RELEASE }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create --title "Update curl to ${{ env.LATEST_CURL_RELEASE }}" --assignee ecnepsnai --body "curl ${{ env.LATEST_CURL_RELEASE }} is available, current version used is ${{ env.CURRENT_CURL_RELEASE }}."
