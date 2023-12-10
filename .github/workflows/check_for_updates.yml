@@ -1,7 +1,6 @@
 name: "Check for Dependency Updates"
 
 on:
-  push:
   schedule:
     - cron: "15 14 * * *"
 
