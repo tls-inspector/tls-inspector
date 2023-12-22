@@ -1,10 +1,6 @@
 import UIKit
 
 class AppLanguageTableViewController: UITableViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

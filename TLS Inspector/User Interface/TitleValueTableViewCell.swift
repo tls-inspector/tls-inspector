@@ -57,7 +57,7 @@ class TitleValueTableViewCell: TableViewCell {
         cell.canPerformAction = { (tableView: UITableView, selector: Selector, _: IndexPath, _: Any?) -> Bool in
             return selector == #selector(tableView.copy(_:))
         }
-        cell.performAction = { (tableView: UITableView, selector: Selector, _: IndexPath, _: Any?) -> Void in
+        cell.performAction = { (tableView: UITableView, selector: Selector, _: IndexPath, _: Any?) in
             if selector == #selector(tableView.copy(_:)) {
                 UIPasteboard.general.string = value
             }

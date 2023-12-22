@@ -72,7 +72,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
     @IBAction func advancedButtonPressed(_ sender: OptionsButton) {
         guard let advancedInspect = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedInspect") as? AdvancedInspectTableViewController else { return }
 
-        advancedInspect.donePressed = { (parameters: CKInspectParameters) -> Void in
+        advancedInspect.donePressed = { (parameters: CKInspectParameters) in
             self.doInspect(parameters: parameters)
         }
 

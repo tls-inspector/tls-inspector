@@ -10,3 +10,7 @@ disabled_rules:
     - todo
 
 cyclomatic_complexity: 12
+
+included:
+    - "TLS Inspector"
+    - "Inspect Website"
