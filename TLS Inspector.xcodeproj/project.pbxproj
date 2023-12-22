@@ -43,6 +43,12 @@
 		3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */; };
 		3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */; };
 		3C4E23772A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4E23762A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3C53FFB62B35283F00DEF55D /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
+		3C53FFB72B35283F00DEF55D /* idna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
+		3C53FFBA2B35284000DEF55D /* openssl.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
+		3C53FFBC2B35284200DEF55D /* curl.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
 		3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */; };
 		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
@@ -70,8 +76,6 @@
 		3C6220902A6C5324008F822E /* CKInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C62208F2A6C5324008F822E /* CKInspector.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6220922A6C55AC008F822E /* CKInspectParameters+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220912A6C55AC008F822E /* CKInspectParameters+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6220942A6C56C1008F822E /* CKCertificate+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220932A6C56C1008F822E /* CKCertificate+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C6242702947B10200A7814A /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
-		3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
 		3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */; };
 		3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */; };
@@ -130,7 +134,6 @@
 		3C94755A2B1A9F2000DC1637 /* UTS46+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */; };
 		3C94755B2B1A9F2000DC1637 /* Scanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */; };
 		3C94755C2B1A9F2000DC1637 /* UTS46.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475562B1A9F2000DC1637 /* UTS46.swift */; };
-		3C94755D2B1AA03300DC1637 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
 		3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */; };
 		3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */; };
 		3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */; };
@@ -274,6 +277,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		3C53FFB82B35283F00DEF55D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3C53FFBA2B35284000DEF55D /* openssl.xcframework in Embed Frameworks */,
+				3C53FFB72B35283F00DEF55D /* idna.framework in Embed Frameworks */,
+				3C53FFBC2B35284200DEF55D /* curl.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C7269612394C16F002A0B19 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -500,9 +516,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6242702947B10200A7814A /* curl.xcframework in Frameworks */,
-				3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */,
-				3C94755D2B1AA03300DC1637 /* idna.framework in Frameworks */,
+				3C53FFB62B35283F00DEF55D /* idna.framework in Frameworks */,
+				3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */,
+				3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */,
 				3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1018,6 +1034,7 @@
 				3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */,
 				3C218DBE29AEF6A0000D84BC /* Update CT Logs (Release Only) */,
 				3C65DAD81E836BE9004AD96D /* Resources */,
+				3C53FFB82B35283F00DEF55D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1589,10 +1606,12 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1631,10 +1650,12 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1756,10 +1777,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1808,10 +1831,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
