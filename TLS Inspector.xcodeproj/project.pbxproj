@@ -25,6 +25,9 @@
 		3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
 		3C1D3CFD2B352AB9003CDAE2 /* idna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C1D3D002B352ACC003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
+		3C1D3D062B353478003CDAE2 /* attr.html in Resources */ = {isa = PBXBuildFile; fileRef = 3C1D3D052B353478003CDAE2 /* attr.html */; };
+		3C1D3D0A2B353696003CDAE2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1D3D072B35353A003CDAE2 /* WebKit.framework */; };
+		3C1D3D0B2B35395C003CDAE2 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,7 +91,6 @@
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
 		3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C66083D2A735171008B58E8 /* CKLogging+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
 		3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */; };
 		3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */; };
@@ -123,7 +125,6 @@
 		3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
 		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
 		3C922C0329D613630064274F /* AppIconTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C922C0229D613630064274F /* AppIconTableViewController.swift */; };
-		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C9475452B1A9E8700DC1637 /* idna.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C9475442B1A9E8700DC1637 /* idna.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C9475502B1A9EFF00DC1637 /* NSString+IDNA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94754C2B1A9EFF00DC1637 /* NSString+IDNA.swift */; };
@@ -321,6 +322,8 @@
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
 		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
+		3C1D3D052B353478003CDAE2 /* attr.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = attr.html; sourceTree = "<group>"; };
+		3C1D3D072B35353A003CDAE2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3C2556AB28E60C430057FE4D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
@@ -383,7 +386,6 @@
 		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C66083D2A735171008B58E8 /* CKLogging+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKLogging+Private.h"; sourceTree = "<group>"; };
-		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple_ca_bundle.p7b; sourceTree = "<group>"; };
 		3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPServerInfo.h; sourceTree = "<group>"; };
 		3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPServerInfo.m; sourceTree = "<group>"; };
@@ -521,8 +523,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */,
+				3C1D3D0A2B353696003CDAE2 /* WebKit.framework in Frameworks */,
 				3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */,
+				3C1D3D0B2B35395C003CDAE2 /* SafariServices.framework in Frameworks */,
 				3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -708,7 +711,6 @@
 				3C72693423949ABD002A0B19 /* Info.plist */,
 				3C5F465D239DAE7D00B3A727 /* Localization */,
 				3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */,
-				3C6B0B41262E2977001B99DF /* Settings.bundle */,
 				3CCD028C239DCEA7009364D0 /* Storyboards */,
 				3CF9CC9423A4802400535173 /* Supporting Files */,
 				3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */,
@@ -885,8 +887,9 @@
 		3CF9CC9423A4802400535173 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3CD74667258C13DA003D609E /* OffensiveWords */,
+				3C1D3D052B353478003CDAE2 /* attr.html */,
 				3CF9CC9523A4804600535173 /* DomainList.plist */,
+				3CD74667258C13DA003D609E /* OffensiveWords */,
 				3C8B1AEB23CBD0050093E65D /* QuoteList.plist */,
 			);
 			path = "Supporting Files";
@@ -940,6 +943,7 @@
 		A1BA8BE21E8EB2B30004FB0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C1D3D072B35353A003CDAE2 /* WebKit.framework */,
 				3C091B7F2A2EAE3E00A8BE92 /* Network.framework */,
 				A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */,
 			);
@@ -1202,7 +1206,6 @@
 				3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */,
 				3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */,
 				3C5A84F724D25F6100A1917E /* de.plist in Resources */,
-				3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */,
 				3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */,
 				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
 				3CE11BE829FCA097009673A2 /* nl.plist in Resources */,
@@ -1210,6 +1213,7 @@
 				3C5F4660239DAE9900B3A727 /* en.plist in Resources */,
 				3CD74669258C1406003D609E /* offensive_words.plist in Resources */,
 				3CF9CC9623A4804600535173 /* DomainList.plist in Resources */,
+				3C1D3D062B353478003CDAE2 /* attr.html in Resources */,
 				3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
