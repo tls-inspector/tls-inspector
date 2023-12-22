@@ -20,6 +20,11 @@
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
+		3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
+		3C1D3CFA2B352A3A003CDAE2 /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
+		3C1D3CFD2B352AB9003CDAE2 /* idna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C1D3D002B352ACC003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
 		3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,12 +48,8 @@
 		3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */; };
 		3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */; };
 		3C4E23772A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4E23762A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C53FFB62B35283F00DEF55D /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
-		3C53FFB72B35283F00DEF55D /* idna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
-		3C53FFBA2B35284000DEF55D /* openssl.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
-		3C53FFBC2B35284200DEF55D /* curl.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
 		3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */; };
 		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
@@ -103,8 +104,6 @@
 		3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C72692F23949ABD002A0B19 /* Assets.xcassets */; };
 		3C72693A2394BC1D002A0B19 /* InputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269392394BC1D002A0B19 /* InputTableViewController.swift */; };
 		3C72695C2394BDF0002A0B19 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */; };
-		3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
-		3C72695E2394C16F002A0B19 /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C7269642394C2E1002A0B19 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269632394C2E1002A0B19 /* UIHelper.swift */; };
 		3C7269662394C916002A0B19 /* CertificateChainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */; };
 		3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */; };
@@ -246,6 +245,20 @@
 			remoteGlobalIDString = 3C72692323949ABD002A0B19;
 			remoteInfo = "TLS Inspector";
 		};
+		3C1D3CFE2B352AB9003CDAE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
+			remoteInfo = idna;
+		};
+		3C1D3D022B352ACC003CDAE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
+			remoteInfo = idna;
+		};
 		3C6FF89423B1A280008DC981 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
@@ -260,13 +273,6 @@
 			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
 			remoteInfo = CertificateKit;
 		};
-		3C94755F2B1AA03300DC1637 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
-			remoteInfo = idna;
-		};
 		3CDC14AF23B0453B0053932F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
@@ -277,26 +283,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3C53FFB82B35283F00DEF55D /* Embed Frameworks */ = {
+		3C1D3CFB2B352A3A003CDAE2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3C53FFBA2B35284000DEF55D /* openssl.xcframework in Embed Frameworks */,
-				3C53FFB72B35283F00DEF55D /* idna.framework in Embed Frameworks */,
-				3C53FFBC2B35284200DEF55D /* curl.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C7269612394C16F002A0B19 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3C72695E2394C16F002A0B19 /* CertificateKit.framework in Embed Frameworks */,
+				3C1D3CFD2B352AB9003CDAE2 /* idna.framework in Embed Frameworks */,
+				3C1D3CFA2B352A3A003CDAE2 /* CertificateKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,9 +510,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C53FFB62B35283F00DEF55D /* idna.framework in Frameworks */,
 				3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */,
 				3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */,
+				3C1D3D002B352ACC003CDAE2 /* idna.framework in Frameworks */,
 				3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,7 +522,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */,
-				3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */,
+				3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */,
+				3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1034,12 +1029,11 @@
 				3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */,
 				3C218DBE29AEF6A0000D84BC /* Update CT Logs (Release Only) */,
 				3C65DAD81E836BE9004AD96D /* Resources */,
-				3C53FFB82B35283F00DEF55D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3C9475602B1AA03300DC1637 /* PBXTargetDependency */,
+				3C1D3D032B352ACC003CDAE2 /* PBXTargetDependency */,
 			);
 			name = CertificateKit;
 			productName = CertificateKit;
@@ -1054,14 +1048,15 @@
 				3C72692023949ABD002A0B19 /* Sources */,
 				3C72692123949ABD002A0B19 /* Frameworks */,
 				3C72692223949ABD002A0B19 /* Resources */,
-				3C7269612394C16F002A0B19 /* Embed Frameworks */,
 				3CCD029F239DDF4D009364D0 /* Embed Foundation Extensions */,
+				3C1D3CFB2B352A3A003CDAE2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				3C7269602394C16F002A0B19 /* PBXTargetDependency */,
 				3CDC14B023B0453B0053932F /* PBXTargetDependency */,
+				3C1D3CFF2B352AB9003CDAE2 /* PBXTargetDependency */,
 			);
 			name = "TLS Inspector";
 			packageProductDependencies = (
@@ -1566,6 +1561,16 @@
 			target = 3C72692323949ABD002A0B19 /* TLS Inspector */;
 			targetProxy = 3C1A0D132639222B00267CF9 /* PBXContainerItemProxy */;
 		};
+		3C1D3CFF2B352AB9003CDAE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C9475412B1A9E8700DC1637 /* idna */;
+			targetProxy = 3C1D3CFE2B352AB9003CDAE2 /* PBXContainerItemProxy */;
+		};
+		3C1D3D032B352ACC003CDAE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C9475412B1A9E8700DC1637 /* idna */;
+			targetProxy = 3C1D3D022B352ACC003CDAE2 /* PBXContainerItemProxy */;
+		};
 		3C6FF89523B1A280008DC981 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
@@ -1575,11 +1580,6 @@
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
 			targetProxy = 3C72695F2394C16F002A0B19 /* PBXContainerItemProxy */;
-		};
-		3C9475602B1AA03300DC1637 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C9475412B1A9E8700DC1637 /* idna */;
-			targetProxy = 3C94755F2B1AA03300DC1637 /* PBXContainerItemProxy */;
 		};
 		3CDC14B023B0453B0053932F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
