@@ -568,6 +568,8 @@ keyUsage::timeStamping	Tijdstempel
 legacy_apple_engine_warning	The legacy Apple network engine will be removed from TLS Inspector a future update.
 microsoft	Microsoft
 mozilla	Mozilla
+# TODO
+proxy_safety_warning	If you are unfamiliar with what a HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support immediately. Avoid using your device if possible.
 proxy_warning	Er is een HTTP Proxy geconfigureerd. TLS Inspector kan niet met HTTP Proxies overweg, deze moet worden uitgezet in de Wi-Fi systeeminstellingen.
 rootca_error	Veilig checken van bundelupdates lukt niet. Controleer of er een update voor TLS Inspector beschikbaar is in de App Store.
 rootca_footer	Updates van root CA certificaatbundels komen niet vaak voor en zijn sowieso onderdeel van TLS Inspector updates. Bundelupdates worden aangeboden via tlsinspector.com en zijn digitaal ondertekend.

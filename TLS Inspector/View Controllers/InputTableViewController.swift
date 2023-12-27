@@ -114,6 +114,15 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
     }
 
     func doInspect(parameters: CKInspectParameters) {
+        if CertificateKit.isProxyConfigured() {
+            if let view = self.storyboard?.instantiateViewController(withIdentifier: "ProxyNotice") {
+                view.modalPresentationStyle = .fullScreen
+                self.present(view, animated: true)
+            }
+
+            return
+        }
+
         // Reset
         self.certificateChain = nil
         self.httpServerInfo = nil
@@ -170,11 +179,6 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
     }
 
     func inspectWithQuery(_ query: String) {
-        if CertificateKit.isProxyConfigured() {
-            UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"), body: lang(key: "proxy_warning"), dismissed: nil)
-            return
-        }
-
         self.doInspect(parameters: UserOptions.inspectParameters(hostAddress: query))
     }
 

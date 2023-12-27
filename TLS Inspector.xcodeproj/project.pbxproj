@@ -20,6 +20,7 @@
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
+		3C1D34472B3CDE2B001DB576 /* ProxyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D34462B3CDE2B001DB576 /* ProxyViewController.swift */; };
 		3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
 		3C1D3CFA2B352A3A003CDAE2 /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
@@ -322,6 +323,7 @@
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
 		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
+		3C1D34462B3CDE2B001DB576 /* ProxyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyViewController.swift; sourceTree = "<group>"; };
 		3C1D3D052B353478003CDAE2 /* attr.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = attr.html; sourceTree = "<group>"; };
 		3C1D3D072B35353A003CDAE2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3C2556AB28E60C430057FE4D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -743,6 +745,7 @@
 				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
 				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
 				3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */,
+				3C1D34462B3CDE2B001DB576 /* ProxyViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1443,6 +1446,7 @@
 				3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */,
 				3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
 				3C3002622980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */,
+				3C1D34472B3CDE2B001DB576 /* ProxyViewController.swift in Sources */,
 				3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */,
 				3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */,
 				3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */,
