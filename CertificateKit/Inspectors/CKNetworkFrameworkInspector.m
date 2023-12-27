@@ -49,6 +49,7 @@
 
     self.parameters = parameters;
     self.chain = [CKCertificateChain new];
+    self.chain.networkEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK;
     self.chain.domain = parameters.hostAddress;
 
     const char * portStr = [[NSString alloc] initWithFormat:@"%i", parameters.port].UTF8String;

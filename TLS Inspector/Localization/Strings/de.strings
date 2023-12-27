@@ -602,6 +602,8 @@ keyUsage::nonRepudiation	Herkunftsverifikation
 keyUsage::serverAuth	Server-Authentifizierung
 keyUsage::timeStamping	Zeitstempel
 # TODO
+legacy_apple_engine_warning	The legacy Apple network engine will be removed from TLS Inspector a future update.
+# TODO
 microsoft	Microsoft
 # TODO
 mozilla	Mozilla

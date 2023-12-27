@@ -169,6 +169,7 @@
     PDebug(@"Trust returned %ld certificates", numberOfCertificates);
 
     self.chain = [CKCertificateChain new];
+    self.chain.networkEngine = CRYPTO_ENGINE_SECURE_TRANSPORT;
     if (trustStatus == kSecTrustResultUnspecified) {
         self.chain.trustStatus = CKCertificateChainTrustStatusTrusted;
     } else if (trustStatus == kSecTrustResultProceed) {

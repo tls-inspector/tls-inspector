@@ -238,6 +238,10 @@ class AdvancedOptionsTableViewController: UITableViewController {
             return
         }
 
+        if after == .SecureTransport {
+            UIHelper(self).presentAlert(title: lang(key: "Notice"), body: lang(key: "legacy_apple_engine_warning"), dismissed: nil)
+        }
+
         UserOptions.cryptoEngine = after
         self.buildTable()
         self.tableView.beginUpdates()

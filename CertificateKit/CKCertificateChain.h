@@ -134,6 +134,11 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 @property (strong, nonatomic, nullable) NSArray<CKSignedCertificateTimestamp *> * signedTimestamps;
 
 /**
+ *  The network engine used to build this certificate chain
+ */
+@property (nonatomic) CRYPTO_ENGINE networkEngine;
+
+/**
  Check if one or more certificates in the chain are known bad certificates
  */
 - (void) checkAuthorityTrust;
