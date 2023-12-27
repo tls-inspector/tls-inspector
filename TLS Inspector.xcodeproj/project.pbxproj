@@ -20,6 +20,14 @@
 		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
 		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
+		3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
+		3C1D3CFA2B352A3A003CDAE2 /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
+		3C1D3CFD2B352AB9003CDAE2 /* idna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C1D3D002B352ACC003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
+		3C1D3D062B353478003CDAE2 /* attr.html in Resources */ = {isa = PBXBuildFile; fileRef = 3C1D3D052B353478003CDAE2 /* attr.html */; };
+		3C1D3D0A2B353696003CDAE2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1D3D072B35353A003CDAE2 /* WebKit.framework */; };
+		3C1D3D0B2B35395C003CDAE2 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
 		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,6 +51,8 @@
 		3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */; };
 		3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */; };
 		3C4E23772A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4E23762A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
+		3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
 		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
 		3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */; };
 		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
@@ -70,8 +80,6 @@
 		3C6220902A6C5324008F822E /* CKInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C62208F2A6C5324008F822E /* CKInspector.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6220922A6C55AC008F822E /* CKInspectParameters+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220912A6C55AC008F822E /* CKInspectParameters+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C6220942A6C56C1008F822E /* CKCertificate+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220932A6C56C1008F822E /* CKCertificate+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C6242702947B10200A7814A /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
-		3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
 		3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */; };
 		3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */; };
@@ -83,7 +91,6 @@
 		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
 		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
 		3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C66083D2A735171008B58E8 /* CKLogging+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B0B41262E2977001B99DF /* Settings.bundle */; };
 		3C6E20A32ACDFA1400D69210 /* CKNetworkEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6E20A12ACDFA1400D69210 /* CKNetworkEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C6E20A42ACDFA1400D69210 /* CKNetworkEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E20A22ACDFA1400D69210 /* CKNetworkEnvironment.m */; };
 		3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */; };
@@ -101,8 +108,6 @@
 		3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C72692F23949ABD002A0B19 /* Assets.xcassets */; };
 		3C72693A2394BC1D002A0B19 /* InputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269392394BC1D002A0B19 /* InputTableViewController.swift */; };
 		3C72695C2394BDF0002A0B19 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */; };
-		3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
-		3C72695E2394C16F002A0B19 /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C7269642394C2E1002A0B19 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269632394C2E1002A0B19 /* UIHelper.swift */; };
 		3C7269662394C916002A0B19 /* CertificateChainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */; };
 		3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */; };
@@ -123,7 +128,6 @@
 		3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
 		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
 		3C922C0329D613630064274F /* AppIconTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C922C0229D613630064274F /* AppIconTableViewController.swift */; };
-		3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
 		3C95B3542B004B4F00B34312 /* CKIPAddress+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C95B3532B004B4F00B34312 /* CKIPAddress+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3C9475452B1A9E8700DC1637 /* idna.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C9475442B1A9E8700DC1637 /* idna.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -134,7 +138,6 @@
 		3C94755A2B1A9F2000DC1637 /* UTS46+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */; };
 		3C94755B2B1A9F2000DC1637 /* Scanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */; };
 		3C94755C2B1A9F2000DC1637 /* UTS46.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475562B1A9F2000DC1637 /* UTS46.swift */; };
-		3C94755D2B1AA03300DC1637 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
 		3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */; };
 		3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */; };
 		3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */; };
@@ -260,6 +263,20 @@
 			remoteGlobalIDString = 3C72692323949ABD002A0B19;
 			remoteInfo = "TLS Inspector";
 		};
+		3C1D3CFE2B352AB9003CDAE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
+			remoteInfo = idna;
+		};
+		3C1D3D022B352ACC003CDAE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
+			remoteInfo = idna;
+		};
 		3C6FF89423B1A280008DC981 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
@@ -274,13 +291,6 @@
 			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
 			remoteInfo = CertificateKit;
 		};
-		3C94755F2B1AA03300DC1637 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
-			remoteInfo = idna;
-		};
 		3CDC14AF23B0453B0053932F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
@@ -291,13 +301,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3C7269612394C16F002A0B19 /* Embed Frameworks */ = {
+		3C1D3CFB2B352A3A003CDAE2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3C72695E2394C16F002A0B19 /* CertificateKit.framework in Embed Frameworks */,
+				3C1D3CFD2B352AB9003CDAE2 /* idna.framework in Embed Frameworks */,
+				3C1D3CFA2B352A3A003CDAE2 /* CertificateKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +339,8 @@
 		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
 		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
 		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
+		3C1D3D052B353478003CDAE2 /* attr.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = attr.html; sourceTree = "<group>"; };
+		3C1D3D072B35353A003CDAE2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3C2556AB28E60C430057FE4D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
 		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
@@ -389,7 +402,6 @@
 		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
 		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
 		3C66083D2A735171008B58E8 /* CKLogging+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKLogging+Private.h"; sourceTree = "<group>"; };
-		3C6B0B41262E2977001B99DF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3C6E20A12ACDFA1400D69210 /* CKNetworkEnvironment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkEnvironment.h; sourceTree = "<group>"; };
 		3C6E20A22ACDFA1400D69210 /* CKNetworkEnvironment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkEnvironment.m; sourceTree = "<group>"; };
 		3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple_ca_bundle.p7b; sourceTree = "<group>"; };
@@ -534,9 +546,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6242702947B10200A7814A /* curl.xcframework in Frameworks */,
-				3C6242722947B12C00A7814A /* openssl.xcframework in Frameworks */,
-				3C94755D2B1AA03300DC1637 /* idna.framework in Frameworks */,
+				3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */,
+				3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */,
+				3C1D3D002B352ACC003CDAE2 /* idna.framework in Frameworks */,
 				3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,8 +557,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C946E4C23C1866200013B72 /* SafariServices.framework in Frameworks */,
-				3C72695D2394C16F002A0B19 /* CertificateKit.framework in Frameworks */,
+				3C1D3D0A2B353696003CDAE2 /* WebKit.framework in Frameworks */,
+				3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */,
+				3C1D3D0B2B35395C003CDAE2 /* SafariServices.framework in Frameworks */,
+				3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +745,6 @@
 				3C72693423949ABD002A0B19 /* Info.plist */,
 				3C5F465D239DAE7D00B3A727 /* Localization */,
 				3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */,
-				3C6B0B41262E2977001B99DF /* Settings.bundle */,
 				3CCD028C239DCEA7009364D0 /* Storyboards */,
 				3CF9CC9423A4802400535173 /* Supporting Files */,
 				3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */,
@@ -915,8 +928,9 @@
 		3CF9CC9423A4802400535173 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3CD74667258C13DA003D609E /* OffensiveWords */,
+				3C1D3D052B353478003CDAE2 /* attr.html */,
 				3CF9CC9523A4804600535173 /* DomainList.plist */,
+				3CD74667258C13DA003D609E /* OffensiveWords */,
 				3C8B1AEB23CBD0050093E65D /* QuoteList.plist */,
 			);
 			path = "Supporting Files";
@@ -989,6 +1003,7 @@
 		A1BA8BE21E8EB2B30004FB0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C1D3D072B35353A003CDAE2 /* WebKit.framework */,
 				3C091B7F2A2EAE3E00A8BE92 /* Network.framework */,
 				A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */,
 			);
@@ -1089,7 +1104,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3C9475602B1AA03300DC1637 /* PBXTargetDependency */,
+				3C1D3D032B352ACC003CDAE2 /* PBXTargetDependency */,
 			);
 			name = CertificateKit;
 			productName = CertificateKit;
@@ -1104,14 +1119,15 @@
 				3C72692023949ABD002A0B19 /* Sources */,
 				3C72692123949ABD002A0B19 /* Frameworks */,
 				3C72692223949ABD002A0B19 /* Resources */,
-				3C7269612394C16F002A0B19 /* Embed Frameworks */,
 				3CCD029F239DDF4D009364D0 /* Embed Foundation Extensions */,
+				3C1D3CFB2B352A3A003CDAE2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				3C7269602394C16F002A0B19 /* PBXTargetDependency */,
 				3CDC14B023B0453B0053932F /* PBXTargetDependency */,
+				3C1D3CFF2B352AB9003CDAE2 /* PBXTargetDependency */,
 			);
 			name = "TLS Inspector";
 			packageProductDependencies = (
@@ -1258,7 +1274,6 @@
 				3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */,
 				3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */,
 				3C5A84F724D25F6100A1917E /* de.plist in Resources */,
-				3C6B0B42262E2977001B99DF /* Settings.bundle in Resources */,
 				3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */,
 				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
 				3CE11BE829FCA097009673A2 /* nl.plist in Resources */,
@@ -1266,6 +1281,7 @@
 				3C5F4660239DAE9900B3A727 /* en.plist in Resources */,
 				3CD74669258C1406003D609E /* offensive_words.plist in Resources */,
 				3CF9CC9623A4804600535173 /* DomainList.plist in Resources */,
+				3C1D3D062B353478003CDAE2 /* attr.html in Resources */,
 				3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1628,6 +1644,16 @@
 			target = 3C72692323949ABD002A0B19 /* TLS Inspector */;
 			targetProxy = 3C1A0D132639222B00267CF9 /* PBXContainerItemProxy */;
 		};
+		3C1D3CFF2B352AB9003CDAE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C9475412B1A9E8700DC1637 /* idna */;
+			targetProxy = 3C1D3CFE2B352AB9003CDAE2 /* PBXContainerItemProxy */;
+		};
+		3C1D3D032B352ACC003CDAE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C9475412B1A9E8700DC1637 /* idna */;
+			targetProxy = 3C1D3D022B352ACC003CDAE2 /* PBXContainerItemProxy */;
+		};
 		3C6FF89523B1A280008DC981 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
@@ -1637,11 +1663,6 @@
 			isa = PBXTargetDependency;
 			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
 			targetProxy = 3C72695F2394C16F002A0B19 /* PBXContainerItemProxy */;
-		};
-		3C9475602B1AA03300DC1637 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C9475412B1A9E8700DC1637 /* idna */;
-			targetProxy = 3C94755F2B1AA03300DC1637 /* PBXContainerItemProxy */;
 		};
 		3CDC14B023B0453B0053932F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1668,11 +1689,12 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1715,11 +1737,12 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1771,7 +1794,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TLS Inspector/Info.plist";
@@ -1810,7 +1833,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1845,10 +1868,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1897,10 +1922,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1948,7 +1975,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspect Website/Info.plist";
@@ -1985,7 +2012,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;

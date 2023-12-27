@@ -1,5 +1,6 @@
 import UIKit
 import CertificateKit
+import WebKit
 
 class AboutTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let projectGithubURL = "https://tlsinspector.com/github.html"
@@ -95,11 +96,11 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         } else if indexPath.section == 0 && indexPath.row == 2 {
             cell.textLabel?.text = lang(key: "Provide Feedback")
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            cell.textLabel?.text = lang(key: "Contribute to TLS Inspector")
-        } else if indexPath.section == 1 && indexPath.row == 1 {
-            cell.textLabel?.text = lang(key: "Test New Features")
-        } else if indexPath.section == 1 && indexPath.row == 2 {
             return tableView.dequeueReusableCell(withIdentifier: "Mastodon", for: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            cell.textLabel?.text = lang(key: "Contribute to TLS Inspector")
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            cell.textLabel?.text = lang(key: "Open Source Licenses & Attributions")
         }
         return cell
     }
@@ -127,11 +128,19 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
                 AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: false, dismissed: nil)
             }
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            OpenURLInSafari(projectContributeURL)
-        } else if indexPath.section == 1 && indexPath.row == 1 {
-            OpenURLInSafari(testflightURL)
-        } else if indexPath.section == 1 && indexPath.row == 2 {
             OpenURLInSafari(mastodonURL)
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            OpenURLInSafari(projectContributeURL)
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            guard let attrPath = Bundle.main.url(forResource: "attr", withExtension: "html") else { return }
+            guard let attrHtml = try? String(contentsOf: attrPath) else { return }
+
+            let viewController = UIViewController()
+            let webView = WKWebView()
+            viewController.view = webView
+            viewController.title = "Open Source Licenses & Attributions"
+            webView.loadHTMLString(attrHtml, baseURL: nil)
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }
