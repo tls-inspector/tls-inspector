@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C03BED52B3E07F100928B6E /* CKCertificateExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C03BED32B3E07F100928B6E /* CKCertificateExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C03BED62B3E07F100928B6E /* CKCertificateExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03BED42B3E07F100928B6E /* CKCertificateExtension.m */; };
+		3C03BED82B3E113800928B6E /* CKCertificateExtension+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C03BED72B3E113800928B6E /* CKCertificateExtension+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3C03BEDB2B3E5EBD00928B6E /* NSDate+GeneralizedTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C03BED92B3E5EBD00928B6E /* NSDate+GeneralizedTime.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3C03BEDC2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03BEDA2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m */; };
+		3C03BEDE2B3E609800928B6E /* NSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03BEDD2B3E609800928B6E /* NSDateTests.m */; };
 		3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C091B7F2A2EAE3E00A8BE92 /* Network.framework */; };
 		3C091B842A2EB88000A8BE92 /* CKHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */; };
 		3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */; };
@@ -311,6 +317,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C03BED32B3E07F100928B6E /* CKCertificateExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateExtension.h; sourceTree = "<group>"; };
+		3C03BED42B3E07F100928B6E /* CKCertificateExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateExtension.m; sourceTree = "<group>"; };
+		3C03BED72B3E113800928B6E /* CKCertificateExtension+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKCertificateExtension+Private.h"; sourceTree = "<group>"; };
+		3C03BED92B3E5EBD00928B6E /* NSDate+GeneralizedTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+GeneralizedTime.h"; sourceTree = "<group>"; };
+		3C03BEDA2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GeneralizedTime.m"; sourceTree = "<group>"; };
+		3C03BEDD2B3E609800928B6E /* NSDateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDateTests.m; sourceTree = "<group>"; };
 		3C091B7F2A2EAE3E00A8BE92 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/PrivateFrameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
 		3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPClient.h; sourceTree = "<group>"; };
 		3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPClient.m; sourceTree = "<group>"; };
@@ -631,6 +643,9 @@
 				3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */,
 				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
 				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
+				3C03BED32B3E07F100928B6E /* CKCertificateExtension.h */,
+				3C03BED42B3E07F100928B6E /* CKCertificateExtension.m */,
+				3C03BED72B3E113800928B6E /* CKCertificateExtension+Private.h */,
 				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
 				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
 				3C45AD5823D831A900E541EC /* CKCurlCommon.h */,
@@ -695,6 +710,8 @@
 				3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */,
 				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
 				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
+				3C03BED92B3E5EBD00928B6E /* NSDate+GeneralizedTime.h */,
+				3C03BEDA2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m */,
 				3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */,
 				3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */,
 				3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */,
@@ -858,13 +875,14 @@
 			isa = PBXGroup;
 			children = (
 				3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */,
+				3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */,
+				3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */,
 				9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */,
 				3CF397451EB50E0900E8DBF4 /* Info.plist */,
 				3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */,
+				3C03BEDD2B3E609800928B6E /* NSDateTests.m */,
 				3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */,
 				3C45722F2A74ADAA009EF7BB /* SecureTransportInspectorTests.m */,
-				3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */,
-				3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */,
 			);
 			path = CertificateKitTests;
 			sourceTree = "<group>";
@@ -961,6 +979,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C84C9FC2A75D6520037A902 /* CKSecureTransportInspector+EnumValues.h in Headers */,
+				3C03BED52B3E07F100928B6E /* CKCertificateExtension.h in Headers */,
 				3C6220902A6C5324008F822E /* CKInspector.h in Headers */,
 				3C6220922A6C55AC008F822E /* CKInspectParameters+Private.h in Headers */,
 				3C091B882A2EB9E400A8BE92 /* CKHTTPResponse.h in Headers */,
@@ -979,6 +998,7 @@
 				3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */,
 				3CB94047225036FC0055C067 /* CKOpenSSLInspector.h in Headers */,
 				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
+				3C03BED82B3E113800928B6E /* CKCertificateExtension+Private.h in Headers */,
 				3CB940392250353B0055C067 /* (null) in Headers */,
 				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
 				9A31DECB2A917EAE0095857D /* CKRevoked+Private.h in Headers */,
@@ -997,6 +1017,7 @@
 				3C091B8C2A2EB9EE00A8BE92 /* CKHTTPHeaders.h in Headers */,
 				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
 				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
+				3C03BEDB2B3E5EBD00928B6E /* NSDate+GeneralizedTime.h in Headers */,
 				3C30025F2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h in Headers */,
 				3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */,
 				3C091B842A2EB88000A8BE92 /* CKHTTPClient.h in Headers */,
@@ -1399,6 +1420,7 @@
 				3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */,
 				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
 				3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */,
+				3C03BED62B3E07F100928B6E /* CKCertificateExtension.m in Sources */,
 				3CBF85C0253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m in Sources */,
 				3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */,
 				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
@@ -1429,6 +1451,7 @@
 				3CB94046225036FC0055C067 /* CKSecureTransportInspector.m in Sources */,
 				3CD6DE4C2A662D88004A54F5 /* CKInspectResponse.m in Sources */,
 				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,
+				3C03BEDC2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m in Sources */,
 				3CD6DE482A662C37004A54F5 /* CKInspectRequest.m in Sources */,
 				3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */,
 				3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */,
@@ -1555,6 +1578,7 @@
 			files = (
 				3CB1080C2A95A53700CFE080 /* CKInspectorTests.m in Sources */,
 				3C4572302A74ADAA009EF7BB /* SecureTransportInspectorTests.m in Sources */,
+				3C03BEDE2B3E609800928B6E /* NSDateTests.m in Sources */,
 				9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */,
 				3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */,
 				3CF397441EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m in Sources */,

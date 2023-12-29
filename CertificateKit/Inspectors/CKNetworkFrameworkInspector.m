@@ -20,6 +20,7 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 @import Network;
+#import "CKCertificate+Private.h"
 #import "CKNetworkFrameworkInspector.h"
 #import "CKNetworkFrameworkInspector+EnumValues.h"
 #import "CKSocketUtils.h"

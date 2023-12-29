@@ -126,6 +126,7 @@ class CertificateTableViewController: UITableViewController {
         self.sections.maybeAppend(makeKeyIdentifierSection())
         self.sections.maybeAppend(makeStatusProvidersSection())
         self.sections.maybeAppend(makeMetadataSection())
+        self.sections.maybeAppend(makeExtensionsSection())
         self.sections.maybeAppend(makeVendorTrustStatusSection())
 
         self.tableView.reloadData()
@@ -200,6 +201,7 @@ class CertificateTableViewController: UITableViewController {
         validitySection.title = lang(key: "Validity Period")
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm 'UTC'"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
 
         guard let notBefore = self.certificate.notBefore else { return nil }
         guard let notAfter = self.certificate.notAfter else { return nil }
@@ -421,6 +423,48 @@ class CertificateTableViewController: UITableViewController {
             return nil
         }
         return metadataSection
+    }
+
+    func makeExtensionsSection() -> TableViewSection? {
+        let extensionsSection = TableViewSection()
+        extensionsSection.title = lang(key: "Extensions")
+
+        for ext in certificate.extraExtensions ?? [] {
+            let title = ext.critical ? lang(key: "{oid} (Critical)", args: [ext.oid]) : ext.oid
+            var fixedWith = false
+
+            var value = "(unknown)"
+            switch ext.valueType {
+            case .string:
+                value = ext.stringValue() ?? "(null)"
+                fixedWith = true
+            case .boolean:
+                value = ext.boolValue() ? "True" : "False"
+            case .number:
+                value = "\(ext.integerValue())"
+            case .date:
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd HH:mm 'UTC'"
+                formatter.timeZone = TimeZone(secondsFromGMT: 0)
+                if let date = ext.dateValue() {
+                    value = formatter.string(from: date)
+                } else {
+                    value = "(null)"
+                }
+            case .unknown:
+                value = ext.hexString()
+                fixedWith = true
+            @unknown default:
+                break
+            }
+            let cell = TitleValueTableViewCell.Cell(title: title, value: value, useFixedWidthFont: fixedWith)
+            extensionsSection.cells.append(cell)
+        }
+
+        if extensionsSection.cells.count == 0 {
+            return nil
+        }
+        return extensionsSection
     }
 
     func makeVendorTrustStatusSection() -> TableViewSection? {

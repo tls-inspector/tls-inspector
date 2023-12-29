@@ -63,6 +63,31 @@
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
             XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
+        XCTAssertEqual(certificates[0].extraExtensions.count, 4);
+        XCTAssertStringEqual(certificates[0].extraExtensions[0].oid, @"2.16.124.2.1");
+        XCTAssertEqual(certificates[0].extraExtensions[0].valueType, CKCertificateExtensionValueTypeString);
+        XCTAssertNotNil(certificates[0].extraExtensions[0].stringValue);
+        XCTAssertStringEqual(certificates[0].extraExtensions[0].stringValue, @"hello, world!");
+
+        XCTAssertStringEqual(certificates[0].extraExtensions[1].oid, @"2.16.124.2.2");
+        XCTAssertEqual(certificates[0].extraExtensions[1].valueType, CKCertificateExtensionValueTypeDate);
+        XCTAssertNotNil(certificates[0].extraExtensions[1].dateValue);
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        [dateFormatter setLocale:enUSPOSIXLocale];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:-28800]];
+        [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
+        XCTAssertStringEqual([dateFormatter stringFromDate:certificates[0].extraExtensions[1].dateValue], @"2023-11-29T12:34:00-08:00");
+
+        XCTAssertStringEqual(certificates[0].extraExtensions[2].oid, @"2.16.124.2.3");
+        XCTAssertEqual(certificates[0].extraExtensions[2].valueType, CKCertificateExtensionValueTypeNumber);
+        XCTAssertEqual(certificates[0].extraExtensions[2].integerValue, (NSInteger)150000);
+
+        XCTAssertStringEqual(certificates[0].extraExtensions[3].oid, @"2.16.124.2.4");
+        XCTAssertEqual(certificates[0].extraExtensions[3].valueType, CKCertificateExtensionValueTypeBoolean);
+        XCTAssertEqual(certificates[0].extraExtensions[3].boolValue, true);
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];

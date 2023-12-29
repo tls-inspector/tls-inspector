@@ -21,8 +21,10 @@
 
 #import "CKCertificate.h"
 #import "NSDate+ASN1_TIME.h"
+#import "NSDate+GeneralizedTime.h"
 #import "NSString+ASN1OctetString.h"
 #import "CKLogging+Private.h"
+#import "CKCertificateExtension+Private.h"
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
@@ -49,6 +51,7 @@
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSURL *> * crlDistributionPoints;
 @property (strong, nonatomic, nullable, readwrite) NSArray<NSString *> * tlsFeatures;
 @property (strong, nonatomic, nullable, readwrite) NSDictionary<NSString *, NSString *> * keyIdentifiers;
+@property (strong, nonatomic, nullable, readwrite) NSArray<CKCertificateExtension *> * extraExtensions;
 
 @end
 
@@ -63,7 +66,7 @@
     return [CKCertificate fromX509:xcert];
 }
 
-+ (CKCertificate *) fromX509:(void *)cert {
++ (CKCertificate *) fromX509:(X509 *)cert {
     CKCertificate * xcert = [CKCertificate new];
     xcert.certificate = (X509 *)cert;
     xcert.publicKey = [CKCertificatePublicKey infoFromCertificate:xcert];
@@ -254,6 +257,95 @@
             @"mozilla": mozillaTrusted,
         };
     }
+
+    NSMutableArray<CKCertificateExtension *> * extraExtensions = [NSMutableArray new];
+
+    X509_EXTENSIONS * extensions = (X509_EXTENSIONS *)X509_get0_extensions(cert);
+    int i, numExt;
+    numExt = sk_X509_EXTENSION_num(extensions);
+    X509_EXTENSION * extension;
+    ASN1_OBJECT * object;
+    for (i = 0; i < numExt; i++) {
+        extension = sk_X509_EXTENSION_value(extensions, i);
+        object = X509_EXTENSION_get_object(extension);
+
+        int oid = OBJ_obj2nid(object);
+        int crit = X509_EXTENSION_get_critical(extension);
+
+        // Ignore known common extensions
+        if (oid == NID_key_usage ||
+            oid == NID_ext_key_usage ||
+            oid == NID_basic_constraints ||
+            oid == NID_subject_alt_name ||
+            oid == NID_subject_key_identifier ||
+            oid == NID_authority_key_identifier ||
+            oid == NID_tlsfeature ||
+            oid == NID_ct_precert_scts ||
+            oid == NID_crl_distribution_points ||
+            oid == NID_info_access) {
+            continue;
+        }
+
+        ASN1_OCTET_STRING * extension_data = X509_EXTENSION_get_data(extension);
+        const unsigned char * octet_string_data = extension_data->data;
+        long length = extension_data->length;
+        long xlen;
+        int tag, xclass;
+        int ret = ASN1_get_object(&octet_string_data, &xlen, &tag, &xclass, length);
+        if (ret & 0x80) {
+            PError(@"Invalid value in extension %i", oid);
+            [CKLogging captureOpenSSLErrorInFile:__FILE__ line:__LINE__];
+            continue;
+        }
+
+        char buff[512];
+        OBJ_obj2txt(buff, 512, object, 1);
+        NSString * oidStr = [NSString stringWithCString:buff encoding:NSASCIIStringEncoding];
+
+        // We'll try to decode and print the value from some of the common ASN1 tags, the rest just get shown as hex.
+        switch (tag) {
+            case V_ASN1_VISIBLESTRING:
+            case V_ASN1_BIT_STRING:
+            case V_ASN1_OCTET_STRING:
+            case V_ASN1_UTF8STRING:
+            case V_ASN1_PRINTABLESTRING:
+            case V_ASN1_T61STRING:
+            case V_ASN1_IA5STRING: {
+                NSString * value = [NSString stringWithCString:(const char *)octet_string_data encoding:NSUTF8StringEncoding];
+                [extraExtensions addObject:[CKCertificateExtension withOID:oidStr stringValue:value critical:crit]];
+                break;
+            }
+            case V_ASN1_BOOLEAN: {
+                [extraExtensions addObject:[CKCertificateExtension withOID:oidStr boolValue:(BOOL)extension_data->data[0] critical:crit]];
+                break;
+            }
+            case V_ASN1_INTEGER: {
+                long num = 0;
+                for (int i = 0; i < xlen; i++) {
+                    num = (num << 8) | octet_string_data[i];
+                }
+
+                [extraExtensions addObject:[CKCertificateExtension withOID:oidStr numberValue:[NSNumber numberWithLong:num] critical:crit]];
+                break;
+            }
+            case V_ASN1_GENERALIZEDTIME: {
+                char timeBuf[xlen];
+                for (int i = 0; i < xlen; i++) {
+                    timeBuf[i] = octet_string_data[i];
+                }
+                NSString * dateStr = [[NSString alloc] initWithCString:timeBuf encoding:NSASCIIStringEncoding].uppercaseString;
+                NSDate * date = [NSDate fromASN1GeneralizedTime:dateStr];
+                if (date == nil) {
+                    continue;
+                }
+
+                [extraExtensions addObject:[CKCertificateExtension withOID:oidStr dateValue:date critical:crit]];
+                break;
+            }
+        }
+    }
+
+    xcert.extraExtensions = extraExtensions;
 
     return xcert;
 }

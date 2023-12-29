@@ -1,9 +1,9 @@
 //
-//  CKCertificate+Private.h
+//  NSDate+GeneralizedTime.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2021 Ian Spence
+//  Copyright (c) 2023 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -20,18 +20,9 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#include <openssl/x509.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@interface NSDate (GeneralizedTime)
 
-@interface CKCertificate (Private)
-
-@property (nonatomic, nullable, readonly) X509 * X509Certificate;
-
-+ (CKCertificate * _Nullable) fromX509:(X509 *)cert;
-+ (CKCertificate * _Nullable) fromSecCertificateRef:(SecCertificateRef _Nonnull)cert;
++ (NSDate * _Nullable) fromASN1GeneralizedTime:(NSString * _Nonnull)generalizedTime;
 
 @end
-
-NS_ASSUME_NONNULL_END
-

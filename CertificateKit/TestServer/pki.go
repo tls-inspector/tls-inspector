@@ -9,6 +9,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
+	"encoding/asn1"
 	"encoding/pem"
 	"fmt"
 	"math/big"
@@ -73,6 +74,7 @@ type extraCertificateParameters struct {
 	LastIntPrivateKey *ecdsa.PrivateKey
 	LeafDateRange     *pkiDateRange
 	IntDateRange      *pkiDateRange
+	IncludeExtensions bool
 }
 
 func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv6, servername string, extraParams *extraCertificateParameters) (*tls.Certificate, []Certificate, error) {
@@ -167,15 +169,62 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 			mustParseURI(fmt.Sprintf("https://%s:%d/", servername, port)),
 		},
 	}
-	if extraParams != nil && extraParams.CRL != nil {
-		serverTpl.CRLDistributionPoints = []string{*extraParams.CRL}
-	}
-	if extraParams != nil && extraParams.OCSP != nil {
-		serverTpl.OCSPServer = []string{*extraParams.OCSP}
-	}
-	if extraParams != nil && extraParams.LeafDateRange != nil {
-		serverTpl.NotBefore = extraParams.LeafDateRange.NotBefore
-		serverTpl.NotAfter = extraParams.LeafDateRange.NotAfter
+
+	if extraParams != nil {
+		if extraParams.CRL != nil {
+			serverTpl.CRLDistributionPoints = []string{*extraParams.CRL}
+		}
+		if extraParams.OCSP != nil {
+			serverTpl.OCSPServer = []string{*extraParams.OCSP}
+		}
+		if extraParams.LeafDateRange != nil {
+			serverTpl.NotBefore = extraParams.LeafDateRange.NotBefore
+			serverTpl.NotAfter = extraParams.LeafDateRange.NotAfter
+		}
+		if extraParams.IncludeExtensions {
+			stringVal, err := asn1.MarshalWithParams("hello, world!", "tag:12,utf8")
+			if err != nil {
+				panic(err)
+			}
+
+			loc, err := time.LoadLocation("America/New_York")
+			if err != nil {
+				panic(err)
+			}
+
+			// 29 Nov, 2023, 20:34 ET
+			timeVal, err := asn1.MarshalWithParams(time.Date(2023, 11, 29, 20, 34, 00, 00, loc), "tag:24,generalized") // rip, bozo
+			if err != nil {
+				panic(err)
+			}
+			intVal, err := asn1.MarshalWithParams(int64(150000), "tag:2")
+			if err != nil {
+				panic(err)
+			}
+			boolVal, err := asn1.MarshalWithParams(true, "tag:1")
+			if err != nil {
+				panic(err)
+			}
+
+			serverTpl.ExtraExtensions = []pkix.Extension{
+				{
+					Id:    asn1.ObjectIdentifier{2, 16, 124, 2, 1},
+					Value: stringVal,
+				},
+				{
+					Id:    asn1.ObjectIdentifier{2, 16, 124, 2, 2},
+					Value: timeVal,
+				},
+				{
+					Id:    asn1.ObjectIdentifier{2, 16, 124, 2, 3},
+					Value: intVal,
+				},
+				{
+					Id:    asn1.ObjectIdentifier{2, 16, 124, 2, 4},
+					Value: boolVal,
+				},
+			}
+		}
 	}
 
 	certBytes, err := x509.CreateCertificate(rand.Reader, serverTpl, lastIssuer, serverPubKey, lastSigner)

@@ -25,6 +25,7 @@
 #import "CKAlternateNameObject.h"
 #import "CKRevoked.h"
 #import "CKSignedCertificateTimestamp.h"
+#import "CKCertificateExtension.h"
 
 @class CKCertificatePublicKey;
 
@@ -32,24 +33,6 @@
  *  A CKCertificate is the front-end to a libssl X.509 certificate.
  */
 @interface CKCertificate : NSObject
-
-/**
- *  Create a CKCertificate object from a pre-existing X509 object.
- *
- *  @param cert A libssl compliant X509 cert.
- *
- *  @return A CKCertificate instance
- */
-+ (CKCertificate * _Nullable) fromX509:(void * _Nonnull)cert;
-
-/**
- *  Create a CKCertificate object from a pre-existing X509 object.
- *
- *  @param cert A SecCertificateRef certificate reference
- *
- *  @return A CKCertificate instance
- */
-+ (CKCertificate * _Nullable) fromSecCertificateRef:(SecCertificateRef _Nonnull)cert;
 
 /**
  *  Finger (thumb) print types that CKCertificate can export
@@ -236,6 +219,12 @@ typedef NS_ENUM(NSInteger, CKCertificateFingerprintType) {
  *  List of signed certificate timestamps embedded in the certificate
  */
 @property (strong, nonatomic, nullable) NSArray<CKSignedCertificateTimestamp *> * signedTimestamps;
+
+/**
+ *  List of extra X.509 certificate extensions not covered by other properties of this certificate.
+ *  Excluded extensions include: `isCA`, Alternate Names, CRL & OCSP URLs, Key Usage & Extended Key Usage, TLS Features, Key Identifieres
+ */
+@property (strong, nonatomic, nullable, readonly) NSArray<CKCertificateExtension *> * extraExtensions;
 
 /**
  *  Return a detailed description of the certificate

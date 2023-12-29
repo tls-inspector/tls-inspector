@@ -605,4 +605,6 @@ verbose_logging_footer	Si estás teniendo un problema con TLS Inspector, podemos
 {commonName} ({orgName} {countryName})	{0} ({1} {2})
 {count} months	{0} meses
 {count} weeks	{0} semanas
+# TODO
+{oid} (Critical)	{0} (Critical)
 {summary} (Revoked)	{0} (revocado)

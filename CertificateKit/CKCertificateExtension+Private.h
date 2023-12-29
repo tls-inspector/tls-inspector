@@ -1,9 +1,9 @@
 //
-//  CKCertificate+Private.h
+//  CKCertificateExtension+Private.h
 //
 //  LGPLv3
 //
-//  Copyright (c) 2021 Ian Spence
+//  Copyright (c) 2023 Ian Spence
 //  https://tlsinspector.com/github.html
 //
 //  This library is free software: you can redistribute it and/or modify
@@ -20,18 +20,17 @@
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
 #import <Foundation/Foundation.h>
-#include <openssl/x509.h>
+#import "CKHTTPResponse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CKCertificate (Private)
+@interface CKCertificateExtension (Private)
 
-@property (nonatomic, nullable, readonly) X509 * X509Certificate;
-
-+ (CKCertificate * _Nullable) fromX509:(X509 *)cert;
-+ (CKCertificate * _Nullable) fromSecCertificateRef:(SecCertificateRef _Nonnull)cert;
++ (CKCertificateExtension * _Nonnull) withOID:(NSString * _Nonnull)oid stringValue:(NSString *)stringVal critical:(BOOL)critical;
++ (CKCertificateExtension * _Nonnull) withOID:(NSString * _Nonnull)oid numberValue:(NSNumber *)numberVal critical:(BOOL)critical;
++ (CKCertificateExtension * _Nonnull) withOID:(NSString * _Nonnull)oid dateValue:(NSDate *)dateVal critical:(BOOL)critical;
++ (CKCertificateExtension * _Nonnull) withOID:(NSString * _Nonnull)oid boolValue:(BOOL)boolVal critical:(BOOL)critical;
 
 @end
 
 NS_ASSUME_NONNULL_END
-

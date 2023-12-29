@@ -19,6 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
+#import "CKCertificate+Private.h"
 #import "CKOpenSSLInspector.h"
 #import "CKOpenSSLInspector+EnumValues.h"
 #import "CKCertificate.h"

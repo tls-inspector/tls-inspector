@@ -19,6 +19,7 @@
 //  You should have received a copy of the GNU Lesser Public License
 //  along with this library.  If not, see <https://www.gnu.org/licenses/>.
 
+#import "CKCertificate+Private.h"
 #import "CKRootCACertificateBundleManager.h"
 #import "CKLogging+Private.h"
 #import <CommonCrypto/CommonDigest.h>
