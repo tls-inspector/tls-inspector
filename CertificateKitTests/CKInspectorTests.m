@@ -21,12 +21,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BasicHTTPS)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BasicHTTPS)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BasicHTTPS)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BasicHTTPS)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         CKHTTPServerInfo * serverInfo = response.httpServer;
         XCTAssertNotNil(serverInfo);
@@ -56,12 +56,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         XCTAssertEqual(certificates[0].extraExtensions.count, 4);
         XCTAssertStringEqual(certificates[0].extraExtensions[0].oid, @"2.16.124.2.1");
@@ -111,13 +111,13 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
-        XCTStringEqual(response.certificateChain.remoteAddress.full, @"127.0.0.1");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
+        XCTAssertStringEqual(response.certificateChain.remoteAddress.full, @"127.0.0.1");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         passed = @YES;
         dispatch_semaphore_signal(sync);
@@ -142,13 +142,13 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BareTLS)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
-        XCTStringEqual(response.certificateChain.remoteAddress.full, @"0000:0000:0000:0000:0000:0000:0000:0001");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BareTLS)");
+        XCTAssertStringEqual(response.certificateChain.remoteAddress.full, @"0000:0000:0000:0000:0000:0000:0000:0001");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         passed = @YES;
         dispatch_semaphore_signal(sync);
@@ -169,7 +169,7 @@
     [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
         XCTAssertNotNil(error);
         XCTAssertNil(response);
-        XCTStringEqual(error.localizedDescription, @"Too many certificates from server");
+        XCTAssertStringEqual(error.localizedDescription, @"Too many certificates from server");
         passed = @YES;
         dispatch_semaphore_signal(sync);
     }];
@@ -193,12 +193,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (NaughtyHTTP)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (NaughtyHTTP)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (NaughtyHTTP)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (NaughtyHTTP)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         passed = @YES;
         dispatch_semaphore_signal(sync);
@@ -223,12 +223,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (FuzzHTTP)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (FuzzHTTP)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (FuzzHTTP)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (FuzzHTTP)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         passed = @YES;
         dispatch_semaphore_signal(sync);
@@ -272,12 +272,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BigHTTPHeader)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (BigHTTPHeader)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BigHTTPHeader)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (BigHTTPHeader)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         passed = @YES;
         dispatch_semaphore_signal(sync);
@@ -303,12 +303,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (RevokedCert)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (RevokedCert)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (RevokedCert)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (RevokedCert)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         CKRevoked * status = certificates[0].revoked;
         XCTAssertNotNil(status);
@@ -339,12 +339,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (RevokedCert)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (RevokedCert)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (RevokedCert)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (RevokedCert)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         CKRevoked * status = certificates[0].revoked;
         XCTAssertNotNil(status);
@@ -373,12 +373,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (ExpiredLeaf)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (ExpiredLeaf)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (ExpiredLeaf)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (ExpiredLeaf)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         XCTAssertTrue(certificates[0].isExpired);
         XCTAssertEqual(response.certificateChain.trustStatus, CKCertificateChainTrustStatusInvalidDate);
@@ -405,12 +405,12 @@
         if (certificates.count >= 2) {
             // On systems where the root cert isn't trusted, the system doesn't include an expired intermediate in the chain - for some reason.
             XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (ExpiredInt)");
+            XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (ExpiredInt)");
             XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (ExpiredInt)");
+            XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (ExpiredInt)");
             if (certificates.count == 3) {
                 XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-                XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+                XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
             }
             XCTAssertTrue(certificates[1].isExpired);
             XCTAssertEqual(response.certificateChain.trustStatus, CKCertificateChainTrustStatusInvalidDate);
@@ -438,12 +438,12 @@
         NSArray<CKCertificate *> * certificates = response.certificateChain.certificates;
         XCTAssertGreaterThanOrEqual(certificates.count, 2, @"Chain must include at least 2 certificates");
         XCTAssertGreaterThan(certificates[0].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (TooManyHTTPHeaders)");
+        XCTAssertStringEqual(certificates[0].subject.commonNames[0], @"CertificateKit Leaf (TooManyHTTPHeaders)");
         XCTAssertGreaterThan(certificates[1].subject.commonNames.count, 0);
-        XCTStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (TooManyHTTPHeaders)");
+        XCTAssertStringEqual(certificates[1].subject.commonNames[0], @"CertificateKit Intermediate #1 (TooManyHTTPHeaders)");
         if (certificates.count == 3) {
             XCTAssertGreaterThan(certificates[2].subject.commonNames.count, 0);
-            XCTStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
+            XCTAssertStringEqual(certificates[2].subject.commonNames[0], @"CertificateKit Root");
         }
         passed = @YES;
         dispatch_semaphore_signal(sync);
