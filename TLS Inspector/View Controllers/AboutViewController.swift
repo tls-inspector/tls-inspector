@@ -25,10 +25,16 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         self.lockCircle.isUserInteractionEnabled = true
         self.lockCircle.addGestureRecognizer(tap)
 
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissView))
+
         self.sections = [
             buildShareSection(),
             buildGetInvolvedSection()
         ]
+    }
+
+    @objc func dismissView(_ sendor: Any?) {
+        self.dismiss(animated: true)
     }
 
     func buildShareSection() -> TableViewSection {

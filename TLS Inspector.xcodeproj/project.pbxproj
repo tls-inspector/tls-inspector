@@ -167,7 +167,6 @@
 		3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD028D239DCEB6009364D0 /* More.storyboard */; };
 		3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028F239DD0D5009364D0 /* GradientView.swift */; };
 		3CCD0292239DD412009364D0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD0291239DD412009364D0 /* AboutViewController.swift */; };
-		3CCD0294239DD966009364D0 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD0293239DD966009364D0 /* MoreTableViewController.swift */; };
 		3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */; };
 		3CCD0299239DDE68009364D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD0298239DDE68009364D0 /* Main.storyboard */; };
 		3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD029A239DDE7F009364D0 /* LaunchScreen.storyboard */; };
@@ -466,7 +465,6 @@
 		3CCD028D239DCEB6009364D0 /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		3CCD028F239DD0D5009364D0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3CCD0291239DD412009364D0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		3CCD0293239DD966009364D0 /* MoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
 		3CCD0298239DDE68009364D0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3CCD029A239DDE7F009364D0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -755,7 +753,6 @@
 				3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */,
 				3C7269392394BC1D002A0B19 /* InputTableViewController.swift */,
 				3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */,
-				3CCD0293239DD966009364D0 /* MoreTableViewController.swift */,
 				3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */,
 				3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */,
 				3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */,
@@ -1494,7 +1491,6 @@
 				3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */,
 				3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */,
 				3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */,
-				3CCD0294239DD966009364D0 /* MoreTableViewController.swift in Sources */,
 				3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */,
 				3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */,
 				3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */,

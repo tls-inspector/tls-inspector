@@ -22,6 +22,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
     @IBOutlet weak var inspectButton: UIBarButtonItem!
     @IBOutlet weak var tipView: UIView!
     @IBOutlet weak var tipTextView: UILabel!
+    @IBOutlet weak var moreButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         reloadInspectionTarget = self
@@ -46,6 +47,23 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
         }
         // swiftlint:enable discarded_notification_center_observer
 
+        if #available(iOS 14, *) {
+            let actions: [UIAction] = [
+                UIAction(title: lang(key: "About TLS Inspector"), image: UIImage(named: "info.circle.fill"), identifier: UIAction.Identifier("about")) { _ in
+                    self.showAboutView()
+                },
+                UIAction(title: lang(key: "Options"), image: UIImage(named: "gearshape.circle.fill"), identifier: UIAction.Identifier("options")) { _ in
+                    self.showOptionsView()
+                }
+            ]
+
+            let menu = UIMenu(title: "", children: actions)
+            moreButton.menu = menu
+        } else {
+            moreButton.target = self
+            moreButton.action = #selector(moreButtonTap)
+        }
+
         self.tipView.isHidden = !UserOptions.showTips
         super.viewDidLoad()
     }
@@ -59,9 +77,35 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
         super.viewWillAppear(animated)
     }
 
-    // MARK: Interface Actions
-    @IBAction func moreButtonPressed(_ sender: Any) {
-        self.present(UIStoryboard(name: "More", bundle: Bundle.main).instantiateViewController(withIdentifier: "More"), animated: true, completion: nil)
+    @objc func moreButtonTap(_ sender: Any?) { // iOS 12-13 only
+        UIHelper(self).presentActionSheet(target: ActionTipTarget(barButtonItem: self.moreButton), title: nil, subtitle: nil, items: [
+            lang(key: "About TLS Inspector"),
+            lang(key: "Options")
+        ]) { index in
+            switch index {
+            case 0:
+                self.showAboutView()
+            case 1:
+                self.showOptionsView()
+            default:
+                break
+            }
+        }
+    }
+
+    func showAboutView() {
+        let aboutView = UIStoryboard(name: "More", bundle: Bundle.main).instantiateViewController(withIdentifier: "AboutTableViewController")
+        self.showChildViewController(aboutView)
+    }
+
+    func showOptionsView() {
+        let optionsView = UIStoryboard(name: "More", bundle: Bundle.main).instantiateViewController(withIdentifier: "OptionsTableViewController")
+        self.showChildViewController(optionsView)
+    }
+
+    func showChildViewController(_ controller: UIViewController) {
+        let navigationView = UINavigationController(rootViewController: controller)
+        self.present(navigationView, animated: true)
     }
 
     @IBAction func inspectButtonPressed(_ sender: UIBarButtonItem) {

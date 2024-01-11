@@ -14,6 +14,12 @@ class OptionsTableViewController: UITableViewController {
 
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableView.automaticDimension
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissView))
+    }
+
+    @objc func dismissView(_ sendor: Any?) {
+        self.dismiss(animated: true)
     }
 
     func makeGeneralSection() -> TableViewSection? {
