@@ -42,8 +42,8 @@ class RecentLookups {
             list.remove(at: index)
         }
 
-        if list.count >= 5 {
-            list.remove(at: 4)
+        if list.count >= 10 {
+            list.remove(at: 9)
         }
 
         list.insert(dict, at: 0)
