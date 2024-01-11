@@ -27,6 +27,7 @@ extension UIDevice {
             "AppleTV5,3":  "Apple TV Gen. 4",
             "AppleTV6,2":  "Apple TV 4K",
             "AppleTV11,1": "Apple TV 4K Gen. 2",
+            "AppleTV14,1": "Apple TV 4K Gen. 3",
 
             // iPhone
             "iPhone1,1": "iPhone",
@@ -76,6 +77,10 @@ extension UIDevice {
             "iPhone14,8": "iPhone 14 Plus",
             "iPhone15,2": "iPhone 14 Pro",
             "iPhone15,3": "iPhone 14 Pro Max",
+            "iPhone15,4": "iPhone 14",
+            "iPhone15,5": "iPhone 14 Plus",
+            "iPhone16,1": "iPhone 14 Pro",
+            "iPhone16,2": "iPhone 14 Pro Max",
 
             // iPod Touch
             "iPod1,1": "iPod Touch Gen. 1",
@@ -108,6 +113,8 @@ extension UIDevice {
             "iPad11,7": "iPad 8 (Cellular)",
             "iPad12,1": "iPad 9 (WiFi)",
             "iPad12,2": "iPad 9 (Cellular)",
+            "iPad13,18": "iPad 10 (WiFi)",
+            "iPad13,19": "iPad 10 (Cellular)",
 
             // iPad Mini
             "iPad2,5": "iPad Mini (WiFi)",
