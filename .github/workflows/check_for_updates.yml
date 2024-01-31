@@ -3,6 +3,7 @@ name: "Check for Dependency Updates"
 on:
   schedule:
     - cron: "15 14 * * *"
+  workflow_dispatch:
 
 permissions:
   packages: read
@@ -39,11 +40,12 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ISSUE_TITLE="Update OpenSSL to ${{ steps.query_versions.outputs.LATEST_OPENSSL_RELEASE }}"
-          EXISTING_ISSUES=$(gh issue list --search "'$ISSUE_TITLE'" | wc -l)
+          EXISTING_ISSUES=$(gh issue list --search "'$ISSUE_TITLE'")
           if [[ "$EXISTING_ISSUES" == "" ]]; then
             gh issue create --title "$ISSUE_TITLE" --assignee ecnepsnai --label CertificateKit --body "OpenSSL ${{ steps.query_versions.outputs.LATEST_OPENSSL_RELEASE }} is available, current version used is ${{ steps.query_versions.outputs.CURRENT_OPENSSL_RELEASE }}."
           else
             echo "::notice ::Skipping new issue creation, existing issue already found for OpenSSL"
+            echo "${EXISTING_ISSUES}"
           fi
 
       - name: Update curl
@@ -53,9 +55,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ISSUE_TITLE="Update curl to ${{ steps.query_versions.outputs.LATEST_CURL_RELEASE }}"
-          EXISTING_ISSUES=$(gh issue list --search "'$ISSUE_TITLE'" | wc -l)
+          EXISTING_ISSUES=$(gh issue list --search "'$ISSUE_TITLE'")
           if [[ "$EXISTING_ISSUES" == "" ]]; then
             gh issue create --title "$ISSUE_TITLE" --assignee ecnepsnai --label CertificateKit --body "curl ${{ steps.query_versions.outputs.LATEST_CURL_RELEASE }} is available, current version used is ${{ steps.query_versions.outputs.CURRENT_CURL_RELEASE }}."
           else
             echo "::notice ::Skipping new issue creation, existing issue already found for curl"
+            echo "${EXISTING_ISSUES}"
           fi
