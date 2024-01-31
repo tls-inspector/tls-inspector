@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout Source
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Get release versions
         id: query_versions
@@ -38,7 +38,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh issue create --title "Update OpenSSL to ${{ steps.query_versions.outputs.LATEST_OPENSSL_RELEASE }}" --assignee ecnepsnai --tags CertificateKit --body "OpenSSL ${{ steps.query_versions.outputs.LATEST_OPENSSL_RELEASE }} is available, current version used is ${{ steps.query_versions.outputs.CURRENT_OPENSSL_RELEASE }}."
+          ISSUE_TITLE="Update OpenSSL to ${{ steps.query_versions.outputs.LATEST_OPENSSL_RELEASE }}"
+          EXISTING_ISSUES=$(gh issue list --search "'$ISSUE_TITLE'" | wc -l)
+          if [[ "$EXISTING_ISSUES" == "" ]]; then
+            gh issue create --title "$ISSUE_TITLE" --assignee ecnepsnai --label CertificateKit --body "OpenSSL ${{ steps.query_versions.outputs.LATEST_OPENSSL_RELEASE }} is available, current version used is ${{ steps.query_versions.outputs.CURRENT_OPENSSL_RELEASE }}."
+          else
+            echo "::notice ::Skipping new issue creation, existing issue already found for OpenSSL"
+          fi
 
       - name: Update curl
         id: curl
@@ -46,4 +52,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh issue create --title "Update curl to ${{ steps.query_versions.outputs.LATEST_CURL_RELEASE }}" --assignee ecnepsnai --tags CertificateKit --body "curl ${{ steps.query_versions.outputs.LATEST_CURL_RELEASE }} is available, current version used is ${{ steps.query_versions.outputs.CURRENT_CURL_RELEASE }}."
+          ISSUE_TITLE="Update curl to ${{ steps.query_versions.outputs.LATEST_CURL_RELEASE }}"
+          EXISTING_ISSUES=$(gh issue list --search "'$ISSUE_TITLE'" | wc -l)
+          if [[ "$EXISTING_ISSUES" == "" ]]; then
+            gh issue create --title "$ISSUE_TITLE" --assignee ecnepsnai --label CertificateKit --body "curl ${{ steps.query_versions.outputs.LATEST_CURL_RELEASE }} is available, current version used is ${{ steps.query_versions.outputs.CURRENT_CURL_RELEASE }}."
+          else
+            echo "::notice ::Skipping new issue creation, existing issue already found for curl"
+          fi
