@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
     name: "Validate Localization"
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
         id: checkout
