@@ -32,29 +32,35 @@ jobs:
     steps:
       - name: "Checkout Source"
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'recursive'
 
-      - name: "Prepare Build Environment"
-        id: prepare
+      - name: "Generate Cache Key"
+        id: cache_key
         run: |
-          gpg --import CertificateKit/build/openssl-ios/openssl.asc
-          echo 'trusted-key 0xD5E9E43F7DF9EE8C' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0xD9C4D26D0E604491' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0xB8EF1A6BA9DA2D5C' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0x231C84CDDCC69C45' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0xD894E2CE8B3D79F5' >> ~/.gnupg/gpg.conf
           echo "OPENSSL_CACHE_KEY=openssl_$(cat CertificateKit/build/openssl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
 
       - name: Restore Cached OpenSSL
         id: restore_openssl
         uses: actions/cache@v3
         with:
-          key: ${{ steps.prepare.outputs.OPENSSL_CACHE_KEY }}
+          key: ${{ steps.cache_key.outputs.OPENSSL_CACHE_KEY }}
           path: |
             CertificateKit/openssl.xcframework
       
+      - name: "Setup Verification"
+        id: gpg
+        if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
+        run: |
+          brew install gpg
+          gpg --import CertificateKit/build/openssl-ios/openssl.asc
+          echo 'trusted-key 0xD5E9E43F7DF9EE8C' >> ~/.gnupg/gpg.conf
+          echo 'trusted-key 0xD9C4D26D0E604491' >> ~/.gnupg/gpg.conf
+          echo 'trusted-key 0xB8EF1A6BA9DA2D5C' >> ~/.gnupg/gpg.conf
+          echo 'trusted-key 0x231C84CDDCC69C45' >> ~/.gnupg/gpg.conf
+          echo 'trusted-key 0xD894E2CE8B3D79F5' >> ~/.gnupg/gpg.conf
+
       - name: Build OpenSSL
         id: build_openssl
         if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
@@ -69,27 +75,33 @@ jobs:
     steps:
       - name: "Checkout Source"
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'recursive'
 
-      - name: "Prepare Build Environment"
-        id: prepare
+      - name: "Generate Cache Key"
+        id: cache_key
         run: |
-          gpg --import CertificateKit/build/curl-ios/curl.asc
-          echo 'trusted-key 0x78E11C6B279D5C91' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0xF9FEAFF9D34A1BDB' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0x5CC908FDB71E12C2' >> ~/.gnupg/gpg.conf
           echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
 
       - name: Restore Cached curl
         id: restore_curl
         uses: actions/cache@v3
         with:
-          key: ${{ steps.prepare.outputs.CURL_CACHE_KEY }}
+          key: ${{ steps.cache_key.outputs.CURL_CACHE_KEY }}
           path: |
             CertificateKit/curl.xcframework
       
+      - name: "Setup Verification"
+        id: gpg
+        if: ${{ steps.restore_curl.outputs.cache-hit != 'true' }}
+        run: |
+          brew install gpg
+          gpg --import CertificateKit/build/curl-ios/curl.asc
+          echo 'trusted-key 0x78E11C6B279D5C91' >> ~/.gnupg/gpg.conf
+          echo 'trusted-key 0xF9FEAFF9D34A1BDB' >> ~/.gnupg/gpg.conf
+          echo 'trusted-key 0x5CC908FDB71E12C2' >> ~/.gnupg/gpg.conf
+
       - name: Build curl
         id: build_curl
         if: ${{ steps.restore_curl.outputs.cache-hit != 'true' }}
@@ -105,7 +117,7 @@ jobs:
     steps:
       - name: Checkout Source
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'recursive'
 
