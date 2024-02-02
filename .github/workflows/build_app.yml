@@ -66,10 +66,7 @@ jobs:
         run: |
           echo "::notice ::Compiling OpenSSL"
           cd CertificateKit/build
-          export PATH="$PATH:/opt/homebrew/bin"
-          echo $PATH
-          which gpg
-          ./build-openssl.sh
+          $SHELL build-openssl.sh
 
   curl:
     name: "Build curl"
@@ -109,10 +106,7 @@ jobs:
         run: |
           echo "::notice ::Compiling curl"
           cd CertificateKit/build
-          export PATH="$PATH:/opt/homebrew/bin"
-          echo $PATH
-          which gpg
-          ./build-curl.sh
+          $SHELL build-curl.sh
 
   build:
     name: "Build App"
