@@ -43,7 +43,7 @@ jobs:
 
       - name: Restore Cached OpenSSL
         id: restore_openssl
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ steps.cache_key.outputs.OPENSSL_CACHE_KEY }}
           path: |
@@ -85,7 +85,7 @@ jobs:
 
       - name: Restore Cached curl
         id: restore_curl
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ steps.cache_key.outputs.CURL_CACHE_KEY }}
           path: |
@@ -158,7 +158,7 @@ jobs:
 
       - name: Restore Cached SwiftLint
         id: restore_swiftlint
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ steps.prepare.outputs.SWIFTLINT_CACHE_KEY }}
           path: |
@@ -180,7 +180,7 @@ jobs:
       
       - name: Restore CT Logs
         id: restore_ctlogs
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ steps.prepare.outputs.CTLOG_CACHE_KEY }}
           path: |
@@ -195,7 +195,7 @@ jobs:
 
       - name: Restore Root CA Certs
         id: restore_rootca
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ steps.prepare.outputs.ROOTCA_CACHE_KEY }}
           path: |
@@ -219,7 +219,7 @@ jobs:
 
       - name: Restore Cached OpenSSL
         id: restore_openssl
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ steps.prepare.outputs.OPENSSL_CACHE_KEY }}
           path: |
@@ -227,7 +227,7 @@ jobs:
 
       - name: Restore Cached curl
         id: restore_curl
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ steps.prepare.outputs.CURL_CACHE_KEY }}
           path: |
@@ -244,7 +244,7 @@ jobs:
 
       - name: Install Go
         id: install_go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: "stable"
           cache-dependency-path: CertificateKit/TestServer/go.sum
@@ -272,7 +272,7 @@ jobs:
         run: |
           xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: test-results
