@@ -53,8 +53,8 @@ jobs:
         id: gpg
         if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
         run: |
-          brew install gpg
           gpg --import CertificateKit/build/openssl-ios/openssl.asc
+          which gpg
           echo 'trusted-key 0xD5E9E43F7DF9EE8C' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0xD9C4D26D0E604491' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0xB8EF1A6BA9DA2D5C' >> ~/.gnupg/gpg.conf
@@ -96,8 +96,8 @@ jobs:
         id: gpg
         if: ${{ steps.restore_curl.outputs.cache-hit != 'true' }}
         run: |
-          brew install gpg
           gpg --import CertificateKit/build/curl-ios/curl.asc
+          which gpg
           echo 'trusted-key 0x78E11C6B279D5C91' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0xF9FEAFF9D34A1BDB' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0x5CC908FDB71E12C2' >> ~/.gnupg/gpg.conf
