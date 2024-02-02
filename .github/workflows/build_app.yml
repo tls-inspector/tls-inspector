@@ -66,7 +66,7 @@ jobs:
         run: |
           echo "::notice ::Compiling OpenSSL"
           cd CertificateKit/build
-          $SHELL build-openssl.sh
+          ./build-openssl.sh
 
   curl:
     name: "Build curl"
@@ -106,7 +106,7 @@ jobs:
         run: |
           echo "::notice ::Compiling curl"
           cd CertificateKit/build
-          $SHELL build-curl.sh
+          ./build-curl.sh
 
   build:
     name: "Build App"
