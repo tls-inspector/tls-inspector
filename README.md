@@ -12,7 +12,7 @@ TLS Inspector is a free & open-source iOS app that enables you to inspect, analy
 
 ## Project Structure
 
-This is the Git repository for the TLS Inspector application. You will find the source code for the application's front-end interface in `TLS Inspector/`. The share-extension is located in `Inspect Website/`. The back-end source used for fetching and examining certificate data is located in `CertificateKit/`.
+This is the Git repository for the TLS Inspector application. You will find the source code for the application's front-end interface in `TLS Inspector/`. The share-extension is located in `inspect-website/`. The back-end source used for fetching and examining certificate data is located in `CertificateKit/`.
 
 ## Building
 

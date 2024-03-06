@@ -6,16 +6,16 @@ on:
       - '.github/workflows/build_app.yml'
       - 'CertificateKit/**'
       - 'CertificateKitTests/**'
-      - 'Inspect Website/**'
-      - 'TLS Inspector/**'
-      - 'TLS Inspector.xcodeproj/**'
+      - 'inspect-website/**'
+      - 'tls-inspector/**'
+      - 'tls-inspector.xcodeproj/**'
   pull_request:
     paths:
       - 'CertificateKit/**'
       - 'CertificateKitTests/**'
-      - 'Inspect Website/**'
-      - 'TLS Inspector/**'
-      - 'TLS Inspector.xcodeproj/**'
+      - 'inspect-website/**'
+      - 'tls-inspector/**'
+      - 'tls-inspector.xcodeproj/**'
   schedule:
     - cron: "16 16 */2 * *"
 
@@ -214,7 +214,7 @@ jobs:
       - name: Generate Strings
         id: generate_strings
         run: |
-          cd "TLS Inspector/Localization"
+          cd "tls-inspector/Localization"
           python3 lang.py
 
       - name: Restore Cached OpenSSL
@@ -236,11 +236,11 @@ jobs:
       - name: Build
         id: build
         run: |
-          xcodebuild -resolvePackageDependencies -project "TLS Inspector.xcodeproj"
-          xcodebuild -scheme "idna" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "CertificateKit" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "Inspect Website" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "TLS Inspector" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -resolvePackageDependencies -project "tls-inspector.xcodeproj"
+          xcodebuild -scheme "idna" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "CertificateKit" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "Inspect Websote" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "TLS Inspector" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
 
       - name: Install Go
         id: install_go
@@ -270,7 +270,7 @@ jobs:
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "TLS Inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
+          xcodebuild -scheme "CertificateKitTests" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
 
       - uses: actions/upload-artifact@v4
         if: failure()

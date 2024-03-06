@@ -54,7 +54,7 @@ fastlane/screenshots
 .DS_Store
 defines.pch
 *.xcworkspacedata
-/TLS Inspector.xcodeproj/project.xcworkspace
+/tls-inspector.xcodeproj/project.xcworkspace
 
 # OpenSSL and cURL Frameworks
 /CertificateKit/openssl.xcframework

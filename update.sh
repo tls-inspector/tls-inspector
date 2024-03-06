@@ -22,7 +22,7 @@ while getopts "h?Mmpb" opt; do
   esac
 done
 
-CURRENT_VERSION=$(egrep -o 'MARKETING_VERSION = [0-9\.]+' "TLS Inspector.xcodeproj/project.pbxproj" | tail -n1 | cut -d '=' -f2 | xargs)
+CURRENT_VERSION=$(egrep -o 'MARKETING_VERSION = [0-9\.]+' "tls-inspector.xcodeproj/project.pbxproj" | tail -n1 | cut -d '=' -f2 | xargs)
 CURRENT_MAJOR=$(echo $CURRENT_VERSION | cut -d '.' -f1)
 CURRENT_MINOR=$(echo $CURRENT_VERSION | cut -d '.' -f2)
 CURRENT_PATCH=$(echo $CURRENT_VERSION | cut -d '.' -f3)
@@ -42,8 +42,8 @@ elif [[ $MODE == "patch" ]]; then
 fi
 NEW_VERSION="${NEW_MAJOR}.${NEW_MINOR}.${NEW_PATCH}"
 
-CURRENT_BUILD=$(egrep -o 'CURRENT_PROJECT_VERSION = [0-9\.]+' "TLS Inspector.xcodeproj/project.pbxproj" | tail -n1 | cut -d '=' -f2 | xargs)
+CURRENT_BUILD=$(egrep -o 'CURRENT_PROJECT_VERSION = [0-9\.]+' "tls-inspector.xcodeproj/project.pbxproj" | tail -n1 | cut -d '=' -f2 | xargs)
 NEW_BUILD=$(expr ${CURRENT_BUILD} + 1)
 
-perl -pi -e "s,MARKETING_VERSION = ${CURRENT_VERSION},MARKETING_VERSION = ${NEW_VERSION},g" "TLS Inspector.xcodeproj/project.pbxproj"
-perl -pi -e "s,CURRENT_PROJECT_VERSION = ${CURRENT_BUILD},CURRENT_PROJECT_VERSION = ${NEW_BUILD},g" "TLS Inspector.xcodeproj/project.pbxproj"
+perl -pi -e "s,MARKETING_VERSION = ${CURRENT_VERSION},MARKETING_VERSION = ${NEW_VERSION},g" "tls-inspector.xcodeproj/project.pbxproj"
+perl -pi -e "s,CURRENT_PROJECT_VERSION = ${CURRENT_BUILD},CURRENT_PROJECT_VERSION = ${NEW_BUILD},g" "tls-inspector.xcodeproj/project.pbxproj"

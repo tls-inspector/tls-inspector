@@ -13,4 +13,4 @@ cyclomatic_complexity: 12
 
 included:
     - "TLS Inspector"
-    - "Inspect Website"
+    - "inspect-website"

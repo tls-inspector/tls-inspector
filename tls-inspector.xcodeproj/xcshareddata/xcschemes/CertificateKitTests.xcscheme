@@ -19,7 +19,7 @@
                BlueprintIdentifier = "3CF397401EB50E0900E8DBF4"
                BuildableName = "CertificateKitTests.xctest"
                BlueprintName = "CertificateKitTests"
-               ReferencedContainer = "container:TLS Inspector.xcodeproj">
+               ReferencedContainer = "container:tls-inspector.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

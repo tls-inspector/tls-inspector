@@ -285,7 +285,7 @@
 			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3CDC14A623B0453B0053932F;
-			remoteInfo = "Inspect Website";
+			remoteInfo = "inspect-website";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -719,7 +719,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		3C72692523949ABD002A0B19 /* TLS Inspector */ = {
+		3C72692523949ABD002A0B19 /* tls-inspector */ = {
 			isa = PBXGroup;
 			children = (
 				3C72692623949ABD002A0B19 /* AppDelegate.swift */,
@@ -736,7 +736,7 @@
 				3C7269622394C2D3002A0B19 /* User Interface */,
 				3C7269382394BC0F002A0B19 /* View Controllers */,
 			);
-			path = "TLS Inspector";
+			path = "tls-inspector";
 			sourceTree = "<group>";
 		};
 		3C7269382394BC0F002A0B19 /* View Controllers */ = {
@@ -858,7 +858,7 @@
 			path = OffensiveWords;
 			sourceTree = "<group>";
 		};
-		3CDC14A823B0453B0053932F /* Inspect Website */ = {
+		3CDC14A823B0453B0053932F /* inspect-website */ = {
 			isa = PBXGroup;
 			children = (
 				3CDC14AB23B0453B0053932F /* Extension.storyboard */,
@@ -867,7 +867,7 @@
 				3CDC14D123B0479B0053932F /* InitialViewController.swift */,
 				3CDC14B523B045460053932F /* Show Certificate.entitlements */,
 			);
-			path = "Inspect Website";
+			path = "inspect-website";
 			sourceTree = "<group>";
 		};
 		3CF397421EB50E0900E8DBF4 /* CertificateKitTests */ = {
@@ -926,8 +926,8 @@
 		3CFAE6CD1CA8440400CD946B = {
 			isa = PBXGroup;
 			children = (
-				3C72692523949ABD002A0B19 /* TLS Inspector */,
-				3CDC14A823B0453B0053932F /* Inspect Website */,
+				3C72692523949ABD002A0B19 /* tls-inspector */,
+				3CDC14A823B0453B0053932F /* inspect-website */,
 				3C65DADB1E836BE9004AD96D /* CertificateKit */,
 				3CF397421EB50E0900E8DBF4 /* CertificateKitTests */,
 				3CFAE6D71CA8440400CD946B /* Products */,
@@ -1088,7 +1088,7 @@
 			name = "TLS Inspector";
 			packageProductDependencies = (
 			);
-			productName = "TLS Inspector";
+			productName = "tls-inspector";
 			productReference = 3C72692423949ABD002A0B19 /* TLS Inspector.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1128,7 +1128,7 @@
 			name = "Inspect Website";
 			packageProductDependencies = (
 			);
-			productName = "Inspect Website";
+			productName = "inspect-website";
 			productReference = 3CDC14A723B0453B0053932F /* Show Certificate.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
@@ -1369,7 +1369,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings\"\nfind \"${PROJECT_DIR}/TLS Inspector/Localization/Strings\" -name '*.plist' -exec cp {} \"${DERIVED_FILE_DIR}/TLS Inspector/Localization/Strings/\" \\;\n";
+			shellScript = "mkdir -p \"${DERIVED_FILE_DIR}/tls-inspector/Localization/Strings\"\nfind \"${PROJECT_DIR}/tls-inspector/Localization/Strings\" -name '*.plist' -exec cp {} \"${DERIVED_FILE_DIR}/tls-inspector/Localization/Strings/\" \\;\n";
 		};
 		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1730,13 +1730,13 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "tls-inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 130;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "TLS Inspector/Info.plist";
+				INFOPLIST_FILE = "tls-inspector/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1769,14 +1769,14 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "TLS Inspector/TLS Inspector.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "tls-inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 130;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
-				INFOPLIST_FILE = "TLS Inspector/Info.plist";
+				INFOPLIST_FILE = "tls-inspector/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1911,13 +1911,13 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "inspect-website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "Inspect Website/Info.plist";
+				INFOPLIST_FILE = "inspect-website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1948,14 +1948,14 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Show Certificate.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "inspect-website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
-				INFOPLIST_FILE = "Inspect Website/Info.plist";
+				INFOPLIST_FILE = "inspect-website/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

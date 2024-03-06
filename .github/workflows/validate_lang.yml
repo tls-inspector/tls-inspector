@@ -4,10 +4,10 @@ on:
   push:
     paths:
       - '.github/workflows/validate_lang.yml'
-      - 'TLS Inspector/Localization/**'
+      - 'tls-inspector/Localization/**'
   pull_request:
     paths:
-      - 'TLS Inspector/Localization/**'
+      - 'tls-inspector/Localization/**'
 
 permissions:
   packages: read
@@ -24,7 +24,7 @@ jobs:
       - name: Validate localization
         id: validate_localization
         run: |
-          cd "TLS Inspector/Localization"
+          cd "tls-inspector/Localization"
           python3 lang.py
           if [[ $(git diff --stat) != '' ]]; then
             echo "::error ::Untracked changes to localization detected!"
