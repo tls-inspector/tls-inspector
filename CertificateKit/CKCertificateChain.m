@@ -76,8 +76,8 @@
     }
 
     // SHA-1 Leaf
-    if ([self.certificates.lastObject.signatureAlgorithm hasPrefix:@"sha1"]) {
-        PWarn(@"Certificate: '%@' is using SHA-1: '%@'", self.certificates.lastObject.subject.commonNames, self.certificates.lastObject.signatureAlgorithm);
+    if ([self.certificates.firstObject.signatureAlgorithm hasPrefix:@"sha1"]) {
+        PWarn(@"Certificate: '%@' is using SHA-1: '%@'", self.certificates.firstObject.subject.commonNames, self.certificates.firstObject.signatureAlgorithm);
         self.trustStatus = CKCertificateChainTrustStatusSHA1Leaf;
         return;
     }
@@ -202,7 +202,6 @@
         self.trustStatus = CKCertificateChainTrustStatusIssueDateTooLong;
         return;
     }
-
 
     // Fallback (We don't know)
     PWarn(@"Unable to determine why certificate: '%@' is untrusted", self.certificates.lastObject.subject.commonNames);
