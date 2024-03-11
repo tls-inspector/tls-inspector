@@ -1156,8 +1156,9 @@
 		3CFAE6CE1CA8440400CD946B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = "Ian Spence";
 				TargetAttributes = {
 					3C65DAD91E836BE9004AD96D = {
