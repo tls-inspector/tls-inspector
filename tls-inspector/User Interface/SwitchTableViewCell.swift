@@ -9,7 +9,6 @@ class SwitchTableViewCell: TableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
         if let textLabel = cell.textLabel {
             textLabel.text = labelText
-            textLabel.font = UIFont.systemFont(ofSize: 17.0)
             textLabel.numberOfLines = 0
         }
 
@@ -17,6 +16,7 @@ class SwitchTableViewCell: TableViewCell {
         uiSwitch.onTintColor = UIColor.systemBlue
         uiSwitch.setOn(defaultChecked, animated: false)
         cell.accessoryView = uiSwitch
+        cell.selectionStyle = .none
         self.didChange = didChange
 
         super.init(cell)

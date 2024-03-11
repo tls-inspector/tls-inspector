@@ -42,22 +42,22 @@ class OptionsTableViewController: UITableViewController {
         generalSection.cells.append(SwitchTableViewCell(labelText: lang(key: "Treat Unrecognized as Trusted"), defaultChecked: UserOptions.treatUnrecognizedAsTrusted, didChange: { checked in
             UserOptions.treatUnrecognizedAsTrusted = checked
         }))
-        if let tableCell = self.tableView.dequeueReusableCell(withIdentifier: "Basic") {
-            tableCell.textLabel?.text = lang(key: "App Icons")
-            let cell = TableViewCell(tableCell)
-            cell.didSelect = { (_, _) in
-                self.performSegue(withIdentifier: "AppIconSegue", sender: nil)
-            }
-            generalSection.cells.append(cell)
+
+        let appIconCell = TableViewCell(UITableViewCell())
+        appIconCell.cell.textLabel?.text = lang(key: "App Icons")
+        appIconCell.cell.accessoryType = .disclosureIndicator
+        appIconCell.didSelect = { (_, _) in
+            self.performSegue(withIdentifier: "AppIconSegue", sender: nil)
         }
-        if let tableCell = self.tableView.dequeueReusableCell(withIdentifier: "Basic") {
-            tableCell.textLabel?.text = lang(key: "App Language")
-            let cell = TableViewCell(tableCell)
-            cell.didSelect = { (_, _) in
-                self.performSegue(withIdentifier: "AppLanguageSegue", sender: nil)
-            }
-            generalSection.cells.append(cell)
+        generalSection.cells.append(appIconCell)
+
+        let appLangCell = TableViewCell(UITableViewCell())
+        appLangCell.cell.textLabel?.text = lang(key: "App Language")
+        appLangCell.cell.accessoryType = .disclosureIndicator
+        appLangCell.didSelect = { (_, _) in
+            self.performSegue(withIdentifier: "AppLanguageSegue", sender: nil)
         }
+        generalSection.cells.append(appLangCell)
 
         if generalSection.cells.count > 0 {
             return generalSection
@@ -109,14 +109,14 @@ class OptionsTableViewController: UITableViewController {
 
     func makeAdvancedSection() -> TableViewSection? {
         let generalSection = TableViewSection()
-        if let cell = newIconCell(labelText: "Advanced Options",
-                                  icon: .FACogSolid,
-                                  iconColor: UIColor.systemBlue) {
-            cell.didSelect = { (_, _) in
-                self.performSegue(withIdentifier: "Advanced", sender: nil)
-            }
-            generalSection.cells.append(cell)
+
+        let advancedCell = TableViewCell(UITableViewCell())
+        advancedCell.cell.textLabel?.text = lang(key: "Advanced Options")
+        advancedCell.cell.accessoryType = .disclosureIndicator
+        advancedCell.didSelect = { (_, _) in
+            self.performSegue(withIdentifier: "Advanced", sender: nil)
         }
+        generalSection.cells.append(advancedCell)
 
         if generalSection.cells.count > 0 {
             return generalSection

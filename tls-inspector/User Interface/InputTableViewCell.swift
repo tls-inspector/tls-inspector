@@ -11,7 +11,7 @@ class InputTableViewCell: TableViewCell {
 
         cell.titleLabel = UILabel(frame: CGRect(x: 17, y: 11, width: 36, height: 17))
         cell.titleLabel.textAlignment = .left
-        cell.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
+        cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         cell.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         cell.titleLabel.text = title
         cell.titleLabel.textColor = UIColor.gray
@@ -20,6 +20,7 @@ class InputTableViewCell: TableViewCell {
         cell.titleLabel.topAnchor.constraint(equalTo: cell.cell.contentView.layoutMarginsGuide.topAnchor).isActive = true
 
         cell.textField = UITextField(frame: CGRect(x: 17, y: 36, width: 343, height: 21))
+        cell.textField.font = UIFont.preferredFont(forTextStyle: .body)
         cell.valueDidChange = valueDidChange
         configureInput(cell.textField)
         cell.textField.addTarget(cell, action: #selector(cell.inputValueChanged(sender:)), for: .editingChanged)

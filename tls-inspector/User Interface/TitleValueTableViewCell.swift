@@ -10,7 +10,7 @@ class TitleValueTableViewCell: TableViewCell {
 
         cell.titleLabel = UILabel(frame: CGRect(x: 17, y: 11, width: 36, height: 17))
         cell.titleLabel.textAlignment = .left
-        cell.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
+        cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         cell.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         cell.titleLabel.text = title
         cell.titleLabel.textColor = UIColor.gray
@@ -25,7 +25,9 @@ class TitleValueTableViewCell: TableViewCell {
         cell.valueLabel.translatesAutoresizingMaskIntoConstraints = false
         cell.valueLabel.text = value
         if useFixedWidthFont {
-            cell.valueLabel.font = UIFont(name: "Menlo", size: 14.0)
+            cell.valueLabel.font = UIFont(name: "Menlo", size: UIFont.preferredFont(forTextStyle: .body).pointSize)
+        } else {
+            cell.valueLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
         cell.cell.addSubview(cell.valueLabel)
         cell.valueLabel.leadingAnchor.constraint(equalTo: cell.cell.layoutMarginsGuide.leadingAnchor).isActive = true

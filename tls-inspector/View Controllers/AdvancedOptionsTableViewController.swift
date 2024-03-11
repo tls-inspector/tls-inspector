@@ -64,10 +64,10 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         let rootCASection = TableViewSection()
         rootCASection.tag = SectionTags.RootCA.rawValue
 
-        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) {
-            cell.cell.textLabel?.text = lang(key: "Root CA Certificates")
-            rootCASection.cells.append(cell)
-        }
+        let cell = UITableViewCell()
+        cell.textLabel?.text = lang(key: "Root CA Certificates")
+        cell.accessoryType = .disclosureIndicator
+        rootCASection.cells.append(TableViewCell(cell))
 
         return rootCASection
     }
@@ -76,11 +76,11 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         let resetSection = TableViewSection()
         resetSection.tag = SectionTags.Reset.rawValue
 
-        if let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Basic")) {
-            cell.cell.textLabel?.text = lang(key: "Reset to Default Settings")
-            cell.cell.textLabel?.textColor = UIColor.systemRed
-            resetSection.cells.append(cell)
-        }
+        let cell = UITableViewCell()
+        cell.textLabel?.text = lang(key: "Reset to Default Settings")
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.textColor = UIColor.systemRed
+        resetSection.cells.append(TableViewCell(cell))
 
         return resetSection
     }

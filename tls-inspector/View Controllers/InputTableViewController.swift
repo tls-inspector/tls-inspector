@@ -281,10 +281,6 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
         return 0
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56.0
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             return cellForInputSection(indexPath)
