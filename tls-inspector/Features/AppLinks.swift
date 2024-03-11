@@ -4,12 +4,14 @@ import MessageUI
 import CertificateKit
 
 class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeViewControllerDelegate {
+    // App Store ID number for TLS Inspector. Not secret.
+    public static let tlsInspectorAppId = "1100539810"
+    // App Store ID number for DNS Inspector. Not secret.
+    public static let dnsInspectorAppId = "6470965982"
     // Settings key to track the number of times the application has been launched
     private let appLaunchKey = "__APP_LAUNCH_TIMES"
     // Settings key to track if the user has been prompted to rate the app
     private let appLaunchRateKey = "__APP_LAUNCH_RATE"
-    // App Store ID number for TLS Inspector. Not secret.
-    private let appID = "1100539810"
     private let appName = "TLS Inspector"
     private let appEmail = "'TLS Inspector' <hello@tlsinspector.com>"
     // Used to track which app store views come from the app v.s. which come from our website
@@ -19,11 +21,11 @@ class AppLinks : NSObject, SKStoreProductViewControllerDelegate, MFMailComposeVi
     private var shouldPurgeLogs = false
     public static var current = AppLinks()
 
-    public func showAppStore(_ viewController: UIViewController, dismissed: (() -> Void)?) {
+    public func showAppStoreIn(_ viewController: UIViewController, appId: String, dismissed: (() -> Void)?) {
         let productViewController = SKStoreProductViewController()
         productViewController.delegate = self
         let parameters = [
-            SKStoreProductParameterITunesItemIdentifier: appID,
+            SKStoreProductParameterITunesItemIdentifier: appId,
             SKStoreProductParameterCampaignToken: appCampaignToken,
         ]
         productViewController.loadProduct(withParameters: parameters, completionBlock: nil)

@@ -29,7 +29,8 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
 
         self.sections = [
             buildShareSection(),
-            buildGetInvolvedSection()
+            buildGetInvolvedSection(),
+            buildMoreFromSection()
         ]
     }
 
@@ -44,6 +45,35 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         let libcurlVersion = CertificateKit.libcurlVersion()
         section.footer = "App: \(AppInfo.version()) (\(AppInfo.build())), OpenSSL: \(opensslVersion), curl: \(libcurlVersion)"
 
+        let shareCell = TableViewCell(UITableViewCell())
+        shareCell.cell.textLabel?.text = lang(key: "Share TLS Inspector")
+        shareCell.didSelect = { _, _ in
+            let blurb = lang(key: "Trust & Safety On-The-Go with TLS Inspector: {url}", args: [self.projectURL])
+            let activityController = UIActivityViewController(activityItems: [blurb], applicationActivities: nil)
+            ActionTipTarget(view: shareCell.cell).attach(to: activityController.popoverPresentationController)
+            self.present(activityController, animated: true, completion: nil)
+        }
+
+        let rateCell = TableViewCell(UITableViewCell())
+        rateCell.cell.textLabel?.text = lang(key: "Rate in App Store")
+        rateCell.didSelect = { _, _ in
+            AppLinks.current.showAppStoreIn(self, appId: AppLinks.tlsInspectorAppId, dismissed: nil)
+        }
+
+        let feedbackCell = TableViewCell(UITableViewCell())
+        feedbackCell.cell.textLabel?.text = lang(key: "Provide Feedback")
+        feedbackCell.didSelect = { _, _ in
+            ContactTableViewController.show(self) { (support) in
+                AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: false, dismissed: nil)
+            }
+        }
+
+        section.cells = [
+            shareCell,
+            rateCell,
+            feedbackCell,
+        ]
+
         return section
     }
 
@@ -51,6 +81,56 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         let section = TableViewSection()
         section.title = lang(key: "Get Involved")
         section.footer = lang(key: "copyright_license_footer")
+
+        let followCell = TableViewCell(UITableViewCell())
+        followCell.cell.textLabel?.text = lang(key: "Follow @tlsinspector on Mastodon")
+        followCell.cell.imageView?.image = UIImage(named: "Mastodon")
+        followCell.didSelect = { _, _ in
+            OpenURLInSafari(self.mastodonURL)
+        }
+
+        let contributeCell = TableViewCell(UITableViewCell())
+        contributeCell.cell.textLabel?.text = lang(key: "Contribute to TLS Inspector")
+        contributeCell.didSelect = { _, _ in
+            OpenURLInSafari(self.projectContributeURL)
+        }
+
+        let attributeCell = TableViewCell(UITableViewCell())
+        attributeCell.cell.textLabel?.text = lang(key: "Open Source Licenses & Attributions")
+        attributeCell.didSelect = { _, _ in
+            guard let attrPath = Bundle.main.url(forResource: "attr", withExtension: "html") else { return }
+            guard let attrHtml = try? String(contentsOf: attrPath) else { return }
+
+            let viewController = UIViewController()
+            let webView = WKWebView()
+            viewController.view = webView
+            viewController.title = "Open Source Licenses & Attributions"
+            webView.loadHTMLString(attrHtml, baseURL: nil)
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+
+        section.cells = [
+            followCell,
+            contributeCell,
+            attributeCell,
+        ]
+
+        return section
+    }
+
+    func buildMoreFromSection() -> TableViewSection {
+        let section = TableViewSection()
+
+        section.title = lang(key: "More from the developer")
+
+        let dnsInspectorCell = TableViewCell(UITableViewCell())
+        dnsInspectorCell.cell.imageView?.image = UIImage(named: "DNS Inspector Icon")
+        dnsInspectorCell.cell.textLabel?.text = "DNS Inspector"
+        dnsInspectorCell.didSelect = { _, _ in
+            AppLinks.current.showAppStoreIn(self, appId: AppLinks.dnsInspectorAppId, dismissed: nil)
+        }
+
+        section.cells.append(dnsInspectorCell)
 
         return section
     }
@@ -76,39 +156,15 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
 
     // MARK: - Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return self.sections.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if #unavailable(iOS 12) {
-            return 0
-        }
-
-        if section == 0 {
-            return 3
-        } else if section == 1 {
-            return 3
-        }
-
-        return 0
+        return self.sections[section].cells.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
-        if indexPath.section == 0 && indexPath.row == 0 {
-            cell.textLabel?.text = lang(key: "Share TLS Inspector")
-        } else if indexPath.section == 0 && indexPath.row == 1 {
-            cell.textLabel?.text = lang(key: "Rate in App Store")
-        } else if indexPath.section == 0 && indexPath.row == 2 {
-            cell.textLabel?.text = lang(key: "Provide Feedback")
-        } else if indexPath.section == 1 && indexPath.row == 0 {
-            return tableView.dequeueReusableCell(withIdentifier: "Mastodon", for: indexPath)
-        } else if indexPath.section == 1 && indexPath.row == 1 {
-            cell.textLabel?.text = lang(key: "Contribute to TLS Inspector")
-        } else if indexPath.section == 1 && indexPath.row == 2 {
-            cell.textLabel?.text = lang(key: "Open Source Licenses & Attributions")
-        }
-        return cell
+        return self.sections[indexPath.section].cells[indexPath.row].cell
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -120,33 +176,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-
-        if indexPath.section == 0 && indexPath.row == 0 {
-            let blub = lang(key: "Trust & Safety On-The-Go with TLS Inspector: {url}", args: [projectURL])
-            let activityController = UIActivityViewController(activityItems: [blub], applicationActivities: nil)
-            ActionTipTarget(view: cell).attach(to: activityController.popoverPresentationController)
-            self.present(activityController, animated: true, completion: nil)
-        } else if indexPath.section == 0 && indexPath.row == 1 {
-            AppLinks.current.showAppStore(self, dismissed: nil)
-        } else if indexPath.section == 0 && indexPath.row == 2 {
-            ContactTableViewController.show(self) { (support) in
-                AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: false, dismissed: nil)
-            }
-        } else if indexPath.section == 1 && indexPath.row == 0 {
-            OpenURLInSafari(mastodonURL)
-        } else if indexPath.section == 1 && indexPath.row == 1 {
-            OpenURLInSafari(projectContributeURL)
-        } else if indexPath.section == 1 && indexPath.row == 2 {
-            guard let attrPath = Bundle.main.url(forResource: "attr", withExtension: "html") else { return }
-            guard let attrHtml = try? String(contentsOf: attrPath) else { return }
-
-            let viewController = UIViewController()
-            let webView = WKWebView()
-            viewController.view = webView
-            viewController.title = "Open Source Licenses & Attributions"
-            webView.loadHTMLString(attrHtml, baseURL: nil)
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
+        guard let action = self.sections[indexPath.section].cells[indexPath.row].didSelect else { return }
+        action(tableView, indexPath)
     }
 }
