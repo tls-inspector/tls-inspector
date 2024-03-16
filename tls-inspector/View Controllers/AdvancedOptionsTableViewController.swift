@@ -1,7 +1,7 @@
 import UIKit
 import CertificateKit
 
-class AdvancedOptionsTableViewController: UITableViewController {
+class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDelegate {
     private enum SectionTags: Int {
         case Engine = 0
         case EngineOptions = 1
@@ -56,7 +56,7 @@ class AdvancedOptionsTableViewController: UITableViewController {
         engineOptionsSection.title = lang(key: "Engine Settings")
         engineOptionsSection.tag = SectionTags.EngineOptions.rawValue
         engineOptionsSection.cells.maybeAppend(buildCiphersCell())
-        engineOptionsSection.cells.maybeAppend(buildIPVersionCell())
+        engineOptionsSection.cells.append(buildIPVersionCell())
         return engineOptionsSection
     }
 
@@ -90,51 +90,40 @@ class AdvancedOptionsTableViewController: UITableViewController {
             return nil
         }
 
-        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Input")) else {
-            LogError("No cell named 'Input' found")
-            return nil
-        }
+        let cipherCell = TableViewCell(UITableViewCell())
+        cipherCell.cell.textLabel?.text = lang(key: "Ciphers")
 
-        guard let label = cell.cell.viewWithTag(1) as? UILabel else {
-            LogError("No label with tag 1 on cell")
-            return nil
-        }
+        let cipherText = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        cipherText.textAlignment = .right
+        cipherText.font = UIFont(name: "Menlo", size: UIFont.systemFontSize)
+        cipherText.text = UserOptions.preferredCiphers
+        cipherText.autocorrectionType = .no
+        cipherText.autocapitalizationType = .none
+        cipherText.smartQuotesType = .no
+        cipherText.smartDashesType = .no
+        cipherText.returnKeyType = .done
+        cipherText.removeTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
+        cipherText.addTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
+        cipherText.delegate = self
+        cipherText.sizeToFit()
 
-        guard let input = cell.cell.viewWithTag(2) as? UITextField else {
-            LogError("No input with tag 1 on cell")
-            return nil
-        }
+        cipherCell.cell.accessoryView = cipherText
+        cipherCell.cell.selectionStyle = .none
 
-        label.text = lang(key: "Ciphers")
-        input.text = UserOptions.preferredCiphers
-        input.removeTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
-        input.addTarget(self, action: #selector(changeCiphers(_:)), for: .editingChanged)
-
-        return cell
+        return cipherCell
     }
 
-    func buildIPVersionCell() -> TableViewCell? {
-        guard let cell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Segment")) else {
-            LogError("No cell named 'Segment' found")
-            return nil
-        }
+    func buildIPVersionCell() -> TableViewCell {
+        let ipVersionCell = TableViewCell(UITableViewCell())
+        ipVersionCell.cell.textLabel?.text = lang(key: "Use IP Version")
+        ipVersionCell.cell.selectionStyle = .none
 
-        guard let label = cell.cell.viewWithTag(1) as? UILabel else {
-            LogError("No label with tag 1 on cell")
-            return nil
-        }
-
-        guard let segmentControl = cell.cell.viewWithTag(2) as? UISegmentedControl else {
-            LogError("No segment control with tag 2 on cell")
-            return nil
-        }
-        segmentControl.setTitle(lang(key: "Auto"), forSegmentAt: 0)
-        segmentControl.setTitle("IPv4", forSegmentAt: 1)
-        if segmentControl.numberOfSegments == 2 {
-            segmentControl.insertSegment(withTitle: "IPv6", at: 2, animated: false)
-        } else {
-            segmentControl.setTitle("IPv6", forSegmentAt: 2)
-        }
+        let segmentControl = UISegmentedControl(items: [
+            lang(key: "Auto"),
+            "IPv4",
+            "IPv6"
+        ])
+        ipVersionCell.cell.accessoryView = segmentControl
         switch UserOptions.ipVersion {
         case .Automatic:
             segmentControl.selectedSegmentIndex = 0
@@ -145,9 +134,8 @@ class AdvancedOptionsTableViewController: UITableViewController {
         }
         segmentControl.removeTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
         segmentControl.addTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
-        label.text = lang(key: "Use IP Version")
 
-        return cell
+        return ipVersionCell
     }
 
     func buildLogsSection() -> TableViewSection {
@@ -191,6 +179,10 @@ class AdvancedOptionsTableViewController: UITableViewController {
             self.buildRootCASection(),
             self.buildResetSection()
         ]
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 
     // MARK: - Table view data source

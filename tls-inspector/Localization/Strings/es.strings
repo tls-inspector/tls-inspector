@@ -17,6 +17,10 @@ AppIcon::Dark	Oscuro
 AppIcon::Default	Por defecto
 AppIcon::Light	Claro
 AppIcon::Pride	Orgullo
+# TODO
+AppIcon::Skew	Skew
+# TODO
+AppIcon::Slate	Slate
 AppIcon::Trans	Trans
 # TODO
 AppIconFooter	The "Progress" pride flag was created by Daniel Quasar and is licensed under Create Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
@@ -439,6 +443,8 @@ Signature Algorithm	Algoritmo de firma
 Signature Type	Tipo de firma
 Size	Tamaño
 Something Else	Otra cosa
+# TODO
+Special	Special
 Specifying a host IP address will bypass name resolution.	Si especificas una dirección IP de host, se omitirá la resolución de nombres.
 Status Providers	Proveedores de estado
 Subject	Firmante

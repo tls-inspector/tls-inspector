@@ -24,6 +24,10 @@ AppIcon::Dark	Donker
 AppIcon::Default	Standaard
 AppIcon::Light	Licht
 AppIcon::Pride	Pride
+# TODO
+AppIcon::Skew	Skew
+# TODO
+AppIcon::Slate	Slate
 AppIcon::Trans	Trans
 AppIconFooter	De "Progress" pride vlag is gemaakt door Daniel Quasar en is gelicenseerd onder Create Commons BY-NC-SA. De trans vlag is gemaakt door Monica Helms en gepubliceerd als public domain.
 Apple Support	Apple Support
@@ -445,6 +449,8 @@ Signature Algorithm	Handtekening Algoritme
 Signature Type	Handtekening Soort
 Size	Grootte
 Something Else	Iets Anders
+# TODO
+Special	Special
 Specifying a host IP address will bypass name resolution.	Met een IP-adres wordt DNS naamresolutie overgeslagen.
 Status Providers	Status Providers
 Subject	Subject (Onderwerp)

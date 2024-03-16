@@ -16,6 +16,8 @@ AppIcon::Dark	Dark
 AppIcon::Default	Default
 AppIcon::Light	Light
 AppIcon::Pride	Pride
+AppIcon::Skew	Skew
+AppIcon::Slate	Slate
 AppIcon::Trans	Trans
 AppIconFooter	The "Progress" pride flag was created by Daniel Quasar and is licensed under Create Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
 Apple Support	Apple Support
@@ -326,6 +328,7 @@ Fingerprints	Fingerprints
 Finished	Finished
 Follow @tlsinspector on Mastodon	Follow @tlsinspector on Mastodon
 General	General
+General	General
 Get Involved	Get Involved
 HTTP Headers	HTTP Headers
 Host IP Address	Host IP Address
@@ -429,6 +432,7 @@ Signature Algorithm	Signature Algorithm
 Signature Type	Signature Type
 Size	Size
 Something Else	Something Else
+Special	Special
 Specifying a host IP address will bypass name resolution.	Specifying a host IP address will bypass name resolution.
 Status Providers	Status Providers
 Subject	Subject

@@ -1,46 +1,54 @@
 import UIKit
 
 class AppIconTableViewController: UITableViewController {
-    let iconNames = [ "Default", "Light", "Dark", "Pride", "Trans" ]
+    let generalIcons = [ "Default", "Light", "Dark", "Skew", "Slate" ]
+    let specialIcons = [ "Pride", "Trans" ]
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // FIXME(ian): I fought for like an hour to try and get the footer text to not be cut off from the cells, and I give up. UITableView is the worst. I hate it.
-        // Insert a blank section just to space it out. It looks dumb but better than being cut off.
         return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return self.iconNames.count
+            return generalIcons.count
+        } else if section == 1 {
+            return specialIcons.count
         }
+
         return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "IconCell", for: indexPath)
-        let iconName = self.iconNames[indexPath.row]
+        var iconName = ""
+        if indexPath.section == 0 {
+            iconName = generalIcons[indexPath.row]
+        } else if indexPath.section == 1 {
+            iconName = specialIcons[indexPath.row]
+        }
+
+        let cell = UITableViewCell()
+        cell.textLabel?.text = lang(key: "AppIcon::\(iconName)")
 
         guard let image = UIImage(named: "Icon\(iconName)") else {
             return cell
         }
 
-        guard let imageView = cell.viewWithTag(2) as? UIImageView else {
-            return cell
-        }
-
-        guard let label = cell.viewWithTag(1) as? UILabel else {
-            return cell
-        }
-
-        imageView.image = image
-        label.text = lang(key: "AppIcon::\(iconName)")
+        cell.imageView?.image = image
+        cell.imageView?.cornerRadius = 15.0
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let iconName = self.iconNames[indexPath.row]
+        var iconName = ""
+        if indexPath.section == 0 {
+            iconName = generalIcons[indexPath.row]
+        } else if indexPath.section == 1 {
+            iconName = specialIcons[indexPath.row]
+        } else {
+            return
+        }
 
         if iconName == "Default" {
             UIApplication.shared.setAlternateIconName(nil)
@@ -51,6 +59,16 @@ class AppIconTableViewController: UITableViewController {
                 }
             }
         }
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return lang(key: "General")
+        } else if section == 1 {
+            return lang(key: "Special")
+        }
+
+        return nil
     }
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
