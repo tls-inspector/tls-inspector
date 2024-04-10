@@ -238,7 +238,7 @@ jobs:
           xcodebuild -resolvePackageDependencies -project "tls-inspector.xcodeproj"
           xcodebuild -scheme "idna" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
           xcodebuild -scheme "CertificateKit" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "Inspect Websote" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          xcodebuild -scheme "Inspect Website" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
           xcodebuild -scheme "TLS Inspector" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
 
       - name: Install Go
