@@ -500,11 +500,10 @@ advanced_settings_nag	These settings are for advanced troubleshooting. Incorrect
 app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
 certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy network engine.
-copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2023 Ian Spence.
-crypto_engine::network_framework	Apple - Modern
+copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2024 Ian Spence.
+crypto_engine::network_framework	Apple
 crypto_engine::openssl	OpenSSL
-crypto_engine::secure_transport	Apple - Legacy
-crypto_engine_footer	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device. TLS 1.3 is not available on the legacy Apple engine.
+crypto_engine_footer	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
 date_unit_plural::day	days
 date_unit_plural::hour	hours
 date_unit_plural::minute	minutes
@@ -550,7 +549,6 @@ keyUsage::keyEncipherment	Key Encipherment
 keyUsage::nonRepudiation	Non-Repudiation
 keyUsage::serverAuth	Server Auth
 keyUsage::timeStamping	Time Stamping
-legacy_apple_engine_warning	The legacy Apple network engine will be removed from TLS Inspector a future update.
 microsoft	Microsoft
 mozilla	Mozilla
 proxy_safety_warning	If you are unfamiliar with what a HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support immediately. Avoid using your device if possible.

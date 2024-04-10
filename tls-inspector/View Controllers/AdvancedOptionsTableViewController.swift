@@ -45,7 +45,6 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         engineSection.tag = SectionTags.Engine.rawValue
 
         engineSection.cells.maybeAppend(engineCell(engine: .NetworkFramework))
-        engineSection.cells.maybeAppend(engineCell(engine: .SecureTransport))
         engineSection.cells.maybeAppend(engineCell(engine: .OpenSSL))
 
         return engineSection
@@ -228,10 +227,6 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         guard let after = CryptoEngine.from(int: cell.tag) else { return }
         if before == after {
             return
-        }
-
-        if after == .SecureTransport {
-            UIHelper(self).presentAlert(title: lang(key: "Notice"), body: lang(key: "legacy_apple_engine_warning"), dismissed: nil)
         }
 
         UserOptions.cryptoEngine = after

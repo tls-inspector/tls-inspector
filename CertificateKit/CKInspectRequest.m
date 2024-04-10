@@ -21,7 +21,6 @@
 
 #import "CKInspectRequest.h"
 #import "CKNetworkFrameworkInspector.h"
-#import "CKSecureTransportInspector.h"
 #import "CKOpenSSLInspector.h"
 #import "CKResolver.h"
 #import "CKInspector.h"
@@ -74,9 +73,6 @@
         switch (self.internalParameters.cryptoEngine) {
             case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
                 self.inspector = [CKNetworkFrameworkInspector new];
-                break;
-            case CRYPTO_ENGINE_SECURE_TRANSPORT:
-                self.inspector = [CKSecureTransportInspector new];
                 break;
             case CRYPTO_ENGINE_OPENSSL:
                 self.inspector = [CKOpenSSLInspector new];

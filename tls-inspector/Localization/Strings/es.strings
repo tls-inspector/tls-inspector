@@ -518,7 +518,6 @@ certificate_status_footer	El desactivar la consulta OCSP puede producir resultad
 copyright_license_footer	TLS Inspector es software libre y gratuito bajo licencia GNU GPLv3. Derechos de autor de TLS Inspector © 2016-2023 Ian Spence.
 crypto_engine::network_framework	Apple - moderno
 crypto_engine::openssl	OpenSSL
-crypto_engine::secure_transport	Apple - legado
 crypto_engine_footer	Cambiar el motor de cifrado puede hacer que TLS Inspector muestre información de conexión diferente a la que usa tu dispositivo iOS. El motor moderno de Apple requiere iOS 12 o posterior. TLS 1.3 no está disponible en el motor legado de Apple.
 date_unit_plural::day	días
 date_unit_plural::hour	horas
@@ -565,8 +564,6 @@ keyUsage::keyEncipherment	Cifrado de clave
 keyUsage::nonRepudiation	No repudio
 keyUsage::serverAuth	Autenticación de servidor
 keyUsage::timeStamping	Marcado de tiempo
-# TODO
-legacy_apple_engine_warning	The legacy Apple network engine will be removed from TLS Inspector a future update.
 microsoft	Microsoft
 mozilla	Mozilla
 # TODO

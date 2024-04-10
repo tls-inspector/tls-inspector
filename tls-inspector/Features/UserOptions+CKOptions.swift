@@ -11,8 +11,6 @@ extension UserOptions {
         switch UserOptions.cryptoEngine {
         case .NetworkFramework:
             parameters.cryptoEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK
-        case .SecureTransport:
-            parameters.cryptoEngine = CRYPTO_ENGINE_SECURE_TRANSPORT
         case .OpenSSL:
             parameters.cryptoEngine = CRYPTO_ENGINE_OPENSSL
         }

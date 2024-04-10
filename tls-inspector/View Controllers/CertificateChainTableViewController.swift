@@ -125,33 +125,12 @@ class CertificateChainTableViewController: UITableViewController {
     func buildTable() {
         self.sections = []
 
-        self.sections.maybeAppend(makeDeprecatedWarningSection())
         self.sections.maybeAppend(makeCertificateSection())
         self.sections.maybeAppend(makeConnectionInfoSection())
         self.sections.maybeAppend(makeRedirectSection())
         self.sections.maybeAppend(makeHeadersSection())
 
         self.tableView.reloadData()
-    }
-
-    func makeDeprecatedWarningSection() -> TableViewSection? {
-        if self.certificateChain?.networkEngine != CRYPTO_ENGINE_SECURE_TRANSPORT {
-            return nil
-        }
-
-        let warningSection = TableViewSection()
-        warningSection.title = lang(key: "Notice")
-        warningSection.tag = warningSectionTag
-
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "warning")
-        cell.textLabel?.text = lang(key: "legacy_apple_engine_warning")
-        cell.textLabel?.numberOfLines = 0
-        if #available(iOS 13, *) {
-            cell.imageView?.image = UIImage(systemName: "exclamationmark.triangle.fill")
-        }
-        cell.imageView?.tintColor = UIColor.materialAmber()
-        warningSection.cells.append(TableViewCell(cell))
-        return warningSection
     }
 
     func makeCertificateSection() -> TableViewSection? {

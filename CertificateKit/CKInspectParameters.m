@@ -242,8 +242,6 @@
             return @"crypto_engine::openssl";
         case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
             return @"crypto_engine::network_framework";
-        case CRYPTO_ENGINE_SECURE_TRANSPORT:
-            return @"crypto_engine::secure_transport";
     }
 
     return @"Unknown";

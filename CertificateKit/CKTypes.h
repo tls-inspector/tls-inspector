@@ -18,10 +18,6 @@ typedef enum __CRYPTO_ENGINE {
      */
     CRYPTO_ENGINE_NETWORK_FRAMEWORK = 0,
     /**
-     The legacy Apple getter using SecureTransport
-     */
-    CRYPTO_ENGINE_SECURE_TRANSPORT = 1,
-    /**
      The OpenSSL getter
      */
     CRYPTO_ENGINE_OPENSSL = 2,

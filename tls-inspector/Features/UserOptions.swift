@@ -24,13 +24,11 @@ private let KEY_APP_LANGUAGE = "app_language"
 
 public enum CryptoEngine: String {
     case NetworkFramework = "network_framework"
-    case SecureTransport = "secure_transport"
     case OpenSSL = "openssl"
 
     static func allValues() -> [CryptoEngine] {
         return [
             .NetworkFramework,
-            .SecureTransport,
             .OpenSSL,
         ]
     }
@@ -39,8 +37,6 @@ public enum CryptoEngine: String {
         switch self {
         case .NetworkFramework:
             return 1
-        case .SecureTransport:
-            return 2
         case .OpenSSL:
             return 3
         }
@@ -50,8 +46,6 @@ public enum CryptoEngine: String {
         switch int {
         case 1:
             return .NetworkFramework
-        case 2:
-            return .SecureTransport
         case 3:
             return .OpenSSL
         default:
@@ -128,7 +122,7 @@ class UserOptions {
             AppDefaults.set(defaults[key], forKey: key)
         }
 
-        let wantedVersion = 1
+        let wantedVersion = 2
         let currentVersion = (AppDefaults.value(forKey: KEY_OPTIONS_SCHEMA_VERSION) as? NSNumber)?.intValue ?? 0
 
         if currentVersion < wantedVersion {
@@ -142,6 +136,13 @@ class UserOptions {
                     AppDefaults.setValue(CryptoEngine.NetworkFramework.rawValue, forKey: KEY_CRYPTO_ENGINE)
                 }
                 AppDefaults.removeObject(forKey: "use_openssl")
+            }
+            if currentVersion < 2 {
+                let cryptoEngine = AppDefaults.string(forKey: KEY_CRYPTO_ENGINE)
+                if cryptoEngine == "secure_transport" {
+                    print("Migrating legacy crypto engine key. Setting \(KEY_CRYPTO_ENGINE) to \(CryptoEngine.NetworkFramework.rawValue)")
+                    AppDefaults.setValue(CryptoEngine.NetworkFramework.rawValue, forKey: KEY_CRYPTO_ENGINE)
+                }
             }
 
             AppDefaults.setValue(NSNumber.init(value: wantedVersion), forKey: KEY_OPTIONS_SCHEMA_VERSION)
