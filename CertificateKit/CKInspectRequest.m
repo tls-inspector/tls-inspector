@@ -53,13 +53,13 @@
             CKResolvedAddress * resovledAddress;
             NSError * resolveError;
             switch (self.internalParameters.ipVersion) {
-                case IP_VERSION_AUTOMATIC:
+                case CKIPAddressVersionUnspecified:
                     resovledAddress = [[CKResolver sharedResolver] getAddressFromDomain:self.internalParameters.hostAddress withError:&resolveError];
                     break;
-                case IP_VERSION_IPV4:
+                case CKIPAddressVersion4:
                     resovledAddress = [[CKResolver sharedResolver] getIPv4AddressFromDomain:self.internalParameters.hostAddress withError:&resolveError];
                     break;
-                case IP_VERSION_IPV6:
+                case CKIPAddressVersion6:
                     resovledAddress = [[CKResolver sharedResolver] getIPv6AddressFromDomain:self.internalParameters.hostAddress withError:&resolveError];
                     break;
             }
@@ -74,10 +74,10 @@
         }
 
         switch (self.internalParameters.cryptoEngine) {
-            case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
+            case CKNetworkEngineNetworkFramework:
                 self.inspector = [CKNetworkFrameworkInspector new];
                 break;
-            case CRYPTO_ENGINE_OPENSSL:
+            case CKNetworkEngineOpenSSL:
                 self.inspector = [CKOpenSSLInspector new];
                 break;
             default:

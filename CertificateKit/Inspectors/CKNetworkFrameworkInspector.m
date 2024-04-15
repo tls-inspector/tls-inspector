@@ -50,7 +50,7 @@
 
     self.parameters = parameters;
     self.chain = [CKCertificateChain new];
-    self.chain.networkEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK;
+    self.chain.networkEngine = CKNetworkEngineNetworkFramework;
     self.chain.domain = parameters.hostAddress;
 
     const char * portStr = [[NSString alloc] initWithFormat:@"%i", parameters.port].UTF8String;
@@ -152,9 +152,9 @@
     nw_parameters_t nwparameters = nw_parameters_create_secure_tcp(configure_tls, configure_tcp);
     nw_protocol_stack_t protocol_stack = nw_parameters_copy_default_protocol_stack(nwparameters);
     nw_protocol_options_t ip_options = nw_protocol_stack_copy_internet_protocol(protocol_stack);
-    if (parameters.ipVersion == IP_VERSION_IPV4) {
+    if (parameters.ipVersion == CKIPAddressVersion4) {
         nw_ip_options_set_version(ip_options, nw_ip_version_4);
-    } else if (parameters.ipVersion == IP_VERSION_IPV6) {
+    } else if (parameters.ipVersion == CKIPAddressVersion6) {
         nw_ip_options_set_version(ip_options, nw_ip_version_6);
     }
 

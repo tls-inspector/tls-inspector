@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, CKCertificateChainTrustStatus) {
 /**
  *  The network engine used to build this certificate chain
  */
-@property (nonatomic) CRYPTO_ENGINE networkEngine;
+@property (nonatomic) CKNetworkEngine networkEngine;
 
 /**
  Check if one or more certificates in the chain are known bad certificates

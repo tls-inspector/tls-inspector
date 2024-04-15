@@ -9,36 +9,22 @@
 #ifndef CKTypes_h
 #define CKTypes_h
 
-/**
- Possible options for the crypto engine used to chain getters
- */
-typedef enum __CRYPTO_ENGINE {
-    /**
-     The modern Apple getter using the Network Framework
-     */
-    CRYPTO_ENGINE_NETWORK_FRAMEWORK = 0,
-    /**
-     The OpenSSL getter
-     */
-    CRYPTO_ENGINE_OPENSSL = 2,
-} CRYPTO_ENGINE;
+/// Network engine enum values
+typedef NS_ENUM(NSInteger, CKNetworkEngine) {
+    /// The Apple Network Framework engine
+    CKNetworkEngineNetworkFramework = 0,
+    /// OpenSSL network engine
+    CKNetworkEngineOpenSSL = 2,
+};
 
-/**
- Possible options for IP versions
- */
-typedef enum __IP_VERSIONS {
-    /**
-     Let the system choose which IP version to use
-     */
-    IP_VERSION_AUTOMATIC = 0,
-    /**
-     Prefer IPv4 connections
-     */
-    IP_VERSION_IPV4 = 1,
-    /**
-     Prefer IPv6 connections
-     */
-    IP_VERSION_IPV6 = 2,
-} IP_VERSION;
+/// IP Address versions or family
+typedef NS_ENUM(NSInteger, CKIPAddressVersion) {
+    /// Unspecified or automatic
+    CKIPAddressVersionUnspecified = 0,
+    /// IPv4
+    CKIPAddressVersion4 = 4,
+    /// IPv6
+    CKIPAddressVersion6 = 6,
+};
 
 #endif /* CKTypes_h */

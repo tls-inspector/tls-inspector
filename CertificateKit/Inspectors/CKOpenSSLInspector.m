@@ -106,13 +106,13 @@ static CFMutableStringRef keyLog = NULL;
     }
 
     switch (parameters.ipVersion) {
-        case IP_VERSION_AUTOMATIC:
+        case CKIPAddressVersionUnspecified:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPANY);
             break;
-        case IP_VERSION_IPV4:
+        case CKIPAddressVersion4:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV4);
             break;
-        case IP_VERSION_IPV6:
+        case CKIPAddressVersion6:
             BIO_set_conn_ip_family(conn, BIO_FAMILY_IPV6);
             break;
     }
@@ -187,7 +187,7 @@ static CFMutableStringRef keyLog = NULL;
     }
 
     self.chain = [CKCertificateChain new];
-    self.chain.networkEngine = CRYPTO_ENGINE_OPENSSL;
+    self.chain.networkEngine = CKNetworkEngineOpenSSL;
     const SSL_CIPHER * cipher = SSL_get_current_cipher(ssl);
     self.chain.protocol = [self protocolString:SSL_version(ssl)];
     self.chain.cipherSuite = [NSString stringWithUTF8String:SSL_CIPHER_get_name(cipher)];

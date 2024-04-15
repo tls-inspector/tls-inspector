@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The IP version for the resolved address.
  */
-@property (nonatomic) IP_VERSION version;
+@property (nonatomic) CKIPAddressVersion version;
 
 @end
 

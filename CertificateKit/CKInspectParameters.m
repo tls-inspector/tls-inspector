@@ -49,8 +49,8 @@
     parameters.queryServerInfo = true;
     parameters.checkOCSP = true;
     parameters.checkCRL = false;
-    parameters.cryptoEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK;
-    parameters.ipVersion = IP_VERSION_AUTOMATIC;
+    parameters.cryptoEngine = CKNetworkEngineNetworkFramework;
+    parameters.ipVersion = CKIPAddressVersionUnspecified;
     parameters.ciphers = [CertificateKit defaultCiphersuite];
 
     CKRegex * protocolPattern = [CKRegex compile:@"^[a-z]+://"];
@@ -147,8 +147,8 @@
             self.queryServerInfo ? @"YES" : @"NO",
             self.checkOCSP ? @"YES" : @"NO",
             self.checkCRL ? @"YES" : @"NO",
-            self.cryptoEngine,
-            self.ipVersion,
+            (int)self.cryptoEngine,
+            (int)self.ipVersion,
             self.ciphers.description];
 }
 
@@ -191,8 +191,8 @@
         KEY_QUERY_SERVER_INFO: [NSNumber numberWithBool:self.queryServerInfo],
         KEY_CHECK_OCSP: [NSNumber numberWithBool:self.checkOCSP],
         KEY_CHECK_CRL: [NSNumber numberWithBool:self.checkCRL],
-        KEY_CRYPTO_ENGINE: [NSNumber numberWithInt:self.cryptoEngine],
-        KEY_IP_VERSION: [NSNumber numberWithInt:self.ipVersion],
+        KEY_CRYPTO_ENGINE: [NSNumber numberWithInt:(int)self.cryptoEngine],
+        KEY_IP_VERSION: [NSNumber numberWithInt:(int)self.ipVersion],
         KEY_CIPHERS: self.ciphers,
     };
 }
@@ -230,18 +230,18 @@
     parameters.queryServerInfo = queryServerInfoNumber.boolValue;
     parameters.checkOCSP = checkOCSPNumber.boolValue;
     parameters.checkCRL = checkCRLNumber.boolValue;
-    parameters.cryptoEngine = (CRYPTO_ENGINE)cryptoEngineNumber.intValue;
-    parameters.ipVersion = (IP_VERSION)ipVersionNumber.intValue;
+    parameters.cryptoEngine = (CKNetworkEngine)cryptoEngineNumber.intValue;
+    parameters.ipVersion = (CKIPAddressVersion)ipVersionNumber.intValue;
     parameters.ciphers = ciphers;
     return parameters;
 }
 
 - (NSString *) cryptoEngineString {
     switch (self.cryptoEngine) {
-        case CRYPTO_ENGINE_OPENSSL:
-            return @"crypto_engine::openssl";
-        case CRYPTO_ENGINE_NETWORK_FRAMEWORK:
-            return @"crypto_engine::network_framework";
+        case CKNetworkEngineOpenSSL:
+            return @"CKNetworkEngine::openssl";
+        case CKNetworkEngineNetworkFramework:
+            return @"CKNetworkEngine::network_framework";
     }
 
     return @"Unknown";
@@ -249,11 +249,11 @@
 
 - (NSString *) ipVersionString {
     switch (self.ipVersion) {
-        case IP_VERSION_AUTOMATIC:
+        case CKIPAddressVersionUnspecified:
             return @"Auto";
-        case IP_VERSION_IPV4:
+        case CKIPAddressVersion4:
             return @"IPv4";
-        case IP_VERSION_IPV6:
+        case CKIPAddressVersion6:
             return @"IPv6";
     }
 
@@ -265,7 +265,7 @@
 }
 
 - (NSString *) socketAddress {
-    if (self.resolvedAddress.version == IP_VERSION_IPV6) {
+    if (self.resolvedAddress.version == CKIPAddressVersion6) {
         return [NSString stringWithFormat:@"[%@]:%i", self.ipAddress, self.port];
     }
     return [NSString stringWithFormat:@"%@:%i", self.ipAddress, self.port];

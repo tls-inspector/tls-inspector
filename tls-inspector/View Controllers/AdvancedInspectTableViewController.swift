@@ -28,11 +28,11 @@ class AdvancedInspectTableViewController: UITableViewController {
     @objc func changeIPVersion(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            parameters.ipVersion = IP_VERSION_AUTOMATIC
+            parameters.ipVersion = .versionUnspecified
         case 1:
-            parameters.ipVersion = IP_VERSION_IPV4
+            parameters.ipVersion = .version4
         case 2:
-            parameters.ipVersion = IP_VERSION_IPV6
+            parameters.ipVersion = .version6
         default:
             break
         }
@@ -100,11 +100,11 @@ class AdvancedInspectTableViewController: UITableViewController {
         guard let segment = cell.cell.viewWithTag(1) as? UISegmentedControl else { return nil }
 
         switch self.parameters.ipVersion {
-        case IP_VERSION_AUTOMATIC:
+        case .versionUnspecified:
             segment.selectedSegmentIndex = 0
-        case IP_VERSION_IPV4:
+        case .version4:
             segment.selectedSegmentIndex = 1
-        case IP_VERSION_IPV6:
+        case .version6:
             segment.selectedSegmentIndex = 2
         default:
             break

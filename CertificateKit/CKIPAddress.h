@@ -26,14 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Describes an IP address
 @interface CKIPAddress : NSObject
 
-/// IP Address versions or family
-typedef NS_ENUM(NSInteger, CKIPAddressVersion) {
-    /// IPv4
-    CKIPAddressVersion4,
-    /// IPv6
-    CKIPAddressVersion6,
-};
-
 /// Create a new CKIPAddress object from the given IP address string
 /// - Parameter value: A string representing an IP address, either IPv4 or 6. IPv4 addresses must have all 4 quartets, however leading redundant zeros may be omitted. IPv6 addresses may be shortened.
 + (CKIPAddress * _Nullable) fromString:(NSString * _Nonnull)value;

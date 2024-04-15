@@ -10,19 +10,19 @@ extension UserOptions {
         parameters.checkCRL = UserOptions.checkCRL
         switch UserOptions.cryptoEngine {
         case .NetworkFramework:
-            parameters.cryptoEngine = CRYPTO_ENGINE_NETWORK_FRAMEWORK
+            parameters.cryptoEngine = .networkFramework
         case .OpenSSL:
-            parameters.cryptoEngine = CRYPTO_ENGINE_OPENSSL
+            parameters.cryptoEngine = .openSSL
         }
         parameters.ciphers = UserOptions.preferredCiphers
 
         switch UserOptions.ipVersion {
         case .Automatic:
-            parameters.ipVersion = IP_VERSION_AUTOMATIC
+            parameters.ipVersion = .versionUnspecified
         case .IPv4:
-            parameters.ipVersion = IP_VERSION_IPV4
+            parameters.ipVersion = .version4
         case .IPv6:
-            parameters.ipVersion = IP_VERSION_IPV6
+            parameters.ipVersion = .version6
         }
 
         parameters.timeout = UserOptions.inspectTimeout
