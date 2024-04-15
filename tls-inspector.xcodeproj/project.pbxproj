@@ -168,6 +168,8 @@
 		3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */; };
 		3CCEB4D823DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
 		3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
+		3CD1C66E2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */; };
+		3CD1C66F2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */; };
 		3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4933825A56721002AC7BD /* OptionsButton.swift */; };
 		3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */; };
 		3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AD2398B40800B2C8FC /* Globals.swift */; };
@@ -461,6 +463,7 @@
 		3CCD029A239DDE7F009364D0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustDetailsTableViewController.swift; sourceTree = "<group>"; };
 		3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+AppendIfNotNil.swift"; sourceTree = "<group>"; };
+		3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Bold.swift"; sourceTree = "<group>"; };
 		3CD4933825A56721002AC7BD /* OptionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsButton.swift; sourceTree = "<group>"; };
 		3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateTableViewController.swift; sourceTree = "<group>"; };
 		3CD4A7AD2398B40800B2C8FC /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
@@ -761,12 +764,13 @@
 				3CCD028F239DD0D5009364D0 /* GradientView.swift */,
 				3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */,
 				3CD4933825A56721002AC7BD /* OptionsButton.swift */,
+				3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */,
 				3C2556AB28E60C430057FE4D /* TableViewCell.swift */,
 				3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */,
 				3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */,
 				3C7269632394C2E1002A0B19 /* UIHelper.swift */,
+				3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */,
 				3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */,
-				3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1476,6 +1480,7 @@
 				3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */,
 				3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */,
 				3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */,
+				3CD1C66E2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */,
 				3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */,
 				3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */,
 				3CCD0292239DD412009364D0 /* AboutViewController.swift in Sources */,
@@ -1549,6 +1554,7 @@
 				3C6FF89C23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,
 				3CDC14CB23B045E10053932F /* FontAwesome.swift in Sources */,
 				3CDC14B823B045B20053932F /* UIHelper.swift in Sources */,
+				3CD1C66F2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
