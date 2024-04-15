@@ -25,6 +25,8 @@ extension UserOptions {
             parameters.ipVersion = IP_VERSION_IPV6
         }
 
+        parameters.timeout = UserOptions.inspectTimeout
+
         return parameters
     }
 }

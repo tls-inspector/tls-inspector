@@ -85,6 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSString * ciphers;
 
 /**
+ The number of seconds to wait before giving up when connecting to a slow or non-responsive host
+ */
+@property (nonatomic) NSInteger timeout;
+
+/**
  Compare this instance of CKInspectParameters with the provided other.
  */
 - (BOOL) isEqual:(CKInspectParameters * _Nullable)other;

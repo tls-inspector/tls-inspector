@@ -322,6 +322,8 @@ Engine Settings	Configuración del motor
 Engine has no options	El motor no tiene opciones
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Introduce el nombre de dominio totalmente calificado o la dirección IP del host que deseas inspeccionar. También puedes especificar un número de puerto aquí.
 Enter the value to verify	Introduce el valor a verificar
+# TODO
+Error	Error
 Errors	Errores
 Export NSS Keylog	Exportar registro de claves NSS (NSS Keylog)
 Extended	Extendido
@@ -468,6 +470,8 @@ Tell Friends About TLS Inspector	Cuéntale a tus amigos sobre TLS Inspector
 Test New Features	Prueba nuevas características
 The certificate for {domain} expires on {date}	El certificado para {0} caduca el {1}
 The host you provided is not valid	El host que has proporcionado no es válido
+# TODO
+Timeout	Timeout
 Timestamp	Marca de tiempo
 Timestamps	Marcas de tiempo
 Treat Unrecognized as Trusted	Tratar los no reconocidos como de confianza

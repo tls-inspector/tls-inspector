@@ -454,4 +454,24 @@
     }
 }
 
++ (void) testTimeout:(CRYPTO_ENGINE)engine {
+    CKInspectParameters * parameters = [CKInspectParameters fromQuery:@"localhost:8413"];
+    parameters.cryptoEngine = engine;
+    parameters.timeout = 2;
+    CKInspectRequest * request = [CKInspectRequest requestWithParameters:parameters];
+    dispatch_queue_t inspectQueue = dispatch_queue_create("timeout", NULL);
+    dispatch_semaphore_t sync = dispatch_semaphore_create(0);
+    NSNumber * __block passed = @NO;
+    [request executeOn:inspectQueue completed:^(CKInspectResponse * response, NSError * error) {
+        XCTAssertNotNil(error);
+        XCTAssertNil(response);
+        passed = @YES;
+        dispatch_semaphore_signal(sync);
+    }];
+    dispatch_semaphore_wait(sync, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TEST_TIMEOUT * NSEC_PER_SEC)));
+    if (!passed.boolValue) {
+        XCTFail("Timeout without error");
+    }
+}
+
 @end

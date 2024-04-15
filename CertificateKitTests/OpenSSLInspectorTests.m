@@ -74,4 +74,8 @@
     [CKInspectorTests testTooManyHTTPHeadersWithEngine:ENGINE_NAME];
 }
 
+- (void) testTimeout {
+    [CKInspectorTests testTimeout:ENGINE_NAME];
+}
+
 @end

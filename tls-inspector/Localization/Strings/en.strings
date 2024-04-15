@@ -318,6 +318,7 @@ Engine Settings	Engine Settings
 Engine has no options	Engine has no options
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.
 Enter the value to verify	Enter the value to verify
+Error	Error
 Errors	Errors
 Export NSS Keylog	Export NSS Keylog
 Extended	Extended
@@ -456,6 +457,7 @@ Tell Friends About TLS Inspector	Tell Friends About TLS Inspector
 Test New Features	Test New Features
 The certificate for {domain} expires on {date}	The certificate for {0} expires on {1}
 The host you provided is not valid	The host you provided is not valid
+Timeout	Timeout
 Timestamp	Timestamp
 Timestamps	Timestamps
 Treat Unrecognized as Trusted	Treat Unrecognized as Trusted

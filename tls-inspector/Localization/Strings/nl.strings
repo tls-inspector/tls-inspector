@@ -328,6 +328,8 @@ Engine Settings	Crypto Driver Instellingen
 Engine has no options	Crypto Driver heeft geen opties
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Voer de volledig gekwalificeerde domeinnaam of het IP-adres van de server in die u wilt inspecteren.  U kunt hier ook een poortnummer opgeven.
 Enter the value to verify	Voer de waarde om te verifi?en in
+# TODO
+Error	Error
 Errors	Fouten
 Export NSS Keylog	Exporteer NSS Keylog
 Extended	Uitgebreid
@@ -474,6 +476,8 @@ Tell Friends About TLS Inspector	Vertel Vrienden Over TLS Inspector
 Test New Features	Test Nieuwe Eigenschappen
 The certificate for {domain} expires on {date}	Het certificaat voor {0} verloopt op {1}
 The host you provided is not valid	De door u opgegeven server is ongeldig
+# TODO
+Timeout	Timeout
 Timestamp	Tijdstempel
 Timestamps	Tijdstempels
 Treat Unrecognized as Trusted	Behandel Niet Herkend als Vertrouwd

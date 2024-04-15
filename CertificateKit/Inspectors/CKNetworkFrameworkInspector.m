@@ -73,6 +73,7 @@
         sec_protocol_options_set_tls_resumption_enabled(sec_options, false); // Don't reuse sessions otherwise the verify block is not called
         sec_protocol_options_set_verify_block(sec_options, ^(sec_protocol_metadata_t  _Nonnull metadata, sec_trust_t  _Nonnull trust_ref, sec_protocol_verify_complete_t  _Nonnull complete) {
             PDebug(@"Starting TLS verification");
+
             // Determine trust and get the root certificate
             SecTrustRef trust = sec_trust_copy_ref(trust_ref);
             SecTrustResultType trustStatus;
@@ -241,7 +242,6 @@
             }
         }
     });
-    nw_connection_start(connection);
 }
 
 - (void) getHeadersForConnection:(nw_connection_t)connection queue:(dispatch_queue_t)queue completed:(void (^)(CKHTTPResponse *))completed {

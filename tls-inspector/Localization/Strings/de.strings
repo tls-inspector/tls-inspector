@@ -346,6 +346,8 @@ Engine Settings	Engine-Einstellungen
 Engine has no options	Engine hat keine Einstellungsmöglichkeiten
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Fully Qualified Domain Name oder IP-Adresse des zu inspizierenden Hosts angeben. Es kann auch eine Port-Nummer angegeben werden.
 Enter the value to verify	Wert zur Verifizierung eingeben
+# TODO
+Error	Error
 Errors	Fehler
 # TODO
 Export NSS Keylog	Export NSS Keylog
@@ -501,6 +503,8 @@ Tell Friends About TLS Inspector	Erzähle Freunden von TLS Inspector
 Test New Features	Teste neue Funktionen
 The certificate for {domain} expires on {date}	Das Zertifikat für {0} läuft am {1} ab
 The host you provided is not valid	Der angegebene Host ist ungültig
+# TODO
+Timeout	Timeout
 # TODO
 Timestamp	Timestamp
 # TODO

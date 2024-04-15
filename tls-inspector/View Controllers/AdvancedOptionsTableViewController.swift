@@ -56,6 +56,7 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         engineOptionsSection.tag = SectionTags.EngineOptions.rawValue
         engineOptionsSection.cells.maybeAppend(buildCiphersCell())
         engineOptionsSection.cells.append(buildIPVersionCell())
+        engineOptionsSection.cells.append(buildTimeoutCell())
         return engineOptionsSection
     }
 
@@ -135,6 +136,30 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         segmentControl.addTarget(self, action: #selector(changeVersion(_:)), for: .valueChanged)
 
         return ipVersionCell
+    }
+
+    func buildTimeoutCell() -> TableViewCell {
+        let timeoutCell = TableViewCell(UITableViewCell())
+        timeoutCell.cell.textLabel?.text = lang(key: "Timeout")
+
+        let timeoutText = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        timeoutText.textAlignment = .right
+        timeoutText.font = UIFont.preferredFont(forTextStyle: .body)
+        timeoutText.text = "\(UserOptions.inspectTimeout)"
+        timeoutText.autocorrectionType = .no
+        timeoutText.autocapitalizationType = .none
+        timeoutText.keyboardType = .numberPad
+        timeoutText.smartQuotesType = .no
+        timeoutText.smartDashesType = .no
+        timeoutText.returnKeyType = .done
+        timeoutText.removeTarget(self, action: #selector(changeTimeout(_:)), for: .editingChanged)
+        timeoutText.addTarget(self, action: #selector(changeTimeout(_:)), for: .editingChanged)
+        timeoutText.delegate = self
+
+        timeoutCell.cell.accessoryView = timeoutText
+        timeoutCell.cell.selectionStyle = .none
+
+        return timeoutCell
     }
 
     func buildLogsSection() -> TableViewSection {
@@ -252,6 +277,16 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
 
     @objc func changeCiphers(_ sender: UITextField) {
         UserOptions.preferredCiphers = sender.text ?? ""
+    }
+
+    @objc func changeTimeout(_ sender: UITextField) {
+        guard let timeout = Int(sender.text ?? "") else {
+            return
+        }
+        if timeout < 0 {
+            return
+        }
+        UserOptions.inspectTimeout = timeout
     }
 
     @objc func changeVersion(_ sender: UISegmentedControl) {
