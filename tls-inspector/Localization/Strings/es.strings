@@ -426,6 +426,8 @@ SHA-512	SHA-512
 SHA1	SHA1
 Search on Shodan	Buscar en Shodan
 Search on crt.sh	Buscar en crt.sh
+# TODO
+Seconds	Seconds
 Secret	Secreto
 Security HTTP Headers	Encabezados HTTP de seguridad
 Select Feedback Type	Selecciona el tipo de comentarios

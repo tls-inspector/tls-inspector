@@ -56,7 +56,7 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         engineOptionsSection.tag = SectionTags.EngineOptions.rawValue
         engineOptionsSection.cells.maybeAppend(buildCiphersCell())
         engineOptionsSection.cells.append(buildIPVersionCell())
-        engineOptionsSection.cells.append(buildTimeoutCell())
+        engineOptionsSection.cells.maybeAppend(buildTimeoutCell())
         return engineOptionsSection
     }
 
@@ -138,28 +138,40 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
         return ipVersionCell
     }
 
-    func buildTimeoutCell() -> TableViewCell {
-        let timeoutCell = TableViewCell(UITableViewCell())
-        timeoutCell.cell.textLabel?.text = lang(key: "Timeout")
+    func buildTimeoutCell() -> TableViewCell? {
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "LabelInput") else {
+            return nil
+        }
+        guard let label = cell.viewWithTag(1) as? UILabel else {
+            return nil
+        }
+        guard let input = cell.viewWithTag(2) as? UITextField else {
+            return nil
+        }
+        guard let accessoryLabel = cell.viewWithTag(3) as? UILabel else {
+            return nil
+        }
 
-        let timeoutText = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        timeoutText.textAlignment = .right
-        timeoutText.font = UIFont.preferredFont(forTextStyle: .body)
-        timeoutText.text = "\(UserOptions.inspectTimeout)"
-        timeoutText.autocorrectionType = .no
-        timeoutText.autocapitalizationType = .none
-        timeoutText.keyboardType = .numberPad
-        timeoutText.smartQuotesType = .no
-        timeoutText.smartDashesType = .no
-        timeoutText.returnKeyType = .done
-        timeoutText.removeTarget(self, action: #selector(changeTimeout(_:)), for: .editingChanged)
-        timeoutText.addTarget(self, action: #selector(changeTimeout(_:)), for: .editingChanged)
-        timeoutText.delegate = self
 
-        timeoutCell.cell.accessoryView = timeoutText
-        timeoutCell.cell.selectionStyle = .none
+        cell.selectionStyle = .none
+        label.text = lang(key: "Timeout")
+        accessoryLabel.text = lang(key: "Seconds")
 
-        return timeoutCell
+        input.textAlignment = .right
+        input.font = UIFont.preferredFont(forTextStyle: .body)
+        input.text = "\(UserOptions.inspectTimeout)"
+        input.placeholder = "..."
+        input.autocorrectionType = .no
+        input.autocapitalizationType = .none
+        input.keyboardType = .numberPad
+        input.smartQuotesType = .no
+        input.smartDashesType = .no
+        input.returnKeyType = .done
+        input.removeTarget(self, action: #selector(changeTimeout(_:)), for: .editingChanged)
+        input.addTarget(self, action: #selector(changeTimeout(_:)), for: .editingChanged)
+        input.delegate = self
+
+        return TableViewCell(cell)
     }
 
     func buildLogsSection() -> TableViewSection {

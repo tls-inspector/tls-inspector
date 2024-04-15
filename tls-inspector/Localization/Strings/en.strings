@@ -414,6 +414,7 @@ SHA-512	SHA-512
 SHA1	SHA1
 Search on Shodan	Search on Shodan
 Search on crt.sh	Search on crt.sh
+Seconds	Seconds
 Secret	Secret
 Security HTTP Headers	Security HTTP Headers
 Select Feedback Type	Select Feedback Type

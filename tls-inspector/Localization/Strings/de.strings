@@ -458,6 +458,8 @@ SHA1	SHA1
 Search on Shodan	Auf Shodan suchen
 Search on crt.sh	Auf crt.sh suchen
 # TODO
+Seconds	Seconds
+# TODO
 Secret	Secret
 Security HTTP Headers	HTTP-Sicherheit
 Select Feedback Type	Art des Feedbacks auswählen

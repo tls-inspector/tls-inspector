@@ -432,6 +432,8 @@ SHA-512	SHA-512
 SHA1	SHA1
 Search on Shodan	Zoek op Shodan
 Search on crt.sh	Zoek op crt.sh
+# TODO
+Seconds	Seconds
 Secret	Geheim
 Security HTTP Headers	Security HTTP Headers
 Select Feedback Type	Selecteer Soort Terugkoppeling
