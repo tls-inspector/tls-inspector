@@ -242,6 +242,7 @@
             }
         }
     });
+    nw_connection_start(connection);
 }
 
 - (void) getHeadersForConnection:(nw_connection_t)connection queue:(dispatch_queue_t)queue completed:(void (^)(CKHTTPResponse *))completed {
