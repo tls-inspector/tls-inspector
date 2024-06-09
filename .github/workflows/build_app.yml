@@ -54,11 +54,8 @@ jobs:
         if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
         run: |
           gpg --import CertificateKit/build/openssl-ios/openssl.asc
-          echo 'trusted-key 0xD5E9E43F7DF9EE8C' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0xD9C4D26D0E604491' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0xB8EF1A6BA9DA2D5C' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0x231C84CDDCC69C45' >> ~/.gnupg/gpg.conf
           echo 'trusted-key 0xD894E2CE8B3D79F5' >> ~/.gnupg/gpg.conf
+          echo 'trusted-key 0x216094DFD0CB81EF' >> ~/.gnupg/gpg.conf
 
       - name: Build OpenSSL
         id: build_openssl
