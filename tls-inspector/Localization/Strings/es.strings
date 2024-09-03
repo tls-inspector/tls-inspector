@@ -32,6 +32,8 @@ Automatic will choose IPv6 if available.	Automático elegirá IPv6 si está disp
 Basic	Básico
 Build	Compilación
 Bundle Date	Fecha del paquete
+CKNetworkEngine::network_framework	Apple - moderno
+CKNetworkEngine::openssl	OpenSSL
 Cancel	Cancelar
 Certificate Authority	Autoridad de certificación
 Certificate Chain	Cadena de certificados
@@ -320,6 +322,8 @@ Embedded	Incrustado
 Enable Verbose Logging	Activar registro detallado
 Engine Settings	Configuración del motor
 Engine has no options	El motor no tiene opciones
+# TODO
+Engine: {engine}	Engine: {0}
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Introduce el nombre de dominio totalmente calificado o la dirección IP del host que deseas inspeccionar. También puedes especificar un número de puerto aquí.
 Enter the value to verify	Introduce el valor a verificar
 # TODO
@@ -522,8 +526,6 @@ app_language_footer	Interested in helping translate TLS Inspector? Let us know! 
 apple	Apple
 certificate_status_footer	El desactivar la consulta OCSP puede producir resultados de confianza incorrectos. Al activar la comprobación de CRL puede resultar en tiempos de procesamiento más largos y un mayor uso de datos. La consulta OCSP puede ocurrir aún cuando está desactivada mientras se usa el motor de cifrado legado.
 copyright_license_footer	TLS Inspector es software libre y gratuito bajo licencia GNU GPLv3. Derechos de autor de TLS Inspector © 2016-2023 Ian Spence.
-crypto_engine::network_framework	Apple - moderno
-crypto_engine::openssl	OpenSSL
 crypto_engine_footer	Cambiar el motor de cifrado puede hacer que TLS Inspector muestre información de conexión diferente a la que usa tu dispositivo iOS. El motor moderno de Apple requiere iOS 12 o posterior. TLS 1.3 no está disponible en el motor legado de Apple.
 date_unit_plural::day	días
 date_unit_plural::hour	horas

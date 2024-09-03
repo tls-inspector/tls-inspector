@@ -26,7 +26,7 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
     func engineCell(engine: CryptoEngine) -> TableViewCell? {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
 
-        cell.textLabel?.text = lang(key: "crypto_engine::" + engine.rawValue)
+        cell.textLabel?.text = lang(key: "CKNetworkEngine::" + engine.rawValue)
         cell.accessibilityLabel = engine.rawValue
         if UserOptions.cryptoEngine == engine {
             cell.accessoryType = .checkmark

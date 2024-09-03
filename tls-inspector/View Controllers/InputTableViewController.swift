@@ -331,7 +331,7 @@ class InputTableViewController: UITableViewController, UITextFieldDelegate, Relo
         let defaultParameters = UserOptions.inspectParameters(hostAddress: parameters.hostAddress)
 
         if parameters.cryptoEngine != defaultParameters.cryptoEngine {
-            details.append(lang(key: parameters.cryptoEngineString))
+            details.append(lang(key: "Engine: {engine}", args: [lang(key: parameters.cryptoEngineString)]))
         }
         if let ipAddress = parameters.ipAddress {
             details.append(String(format: "IP: %@", ipAddress))

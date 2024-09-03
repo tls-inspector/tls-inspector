@@ -39,6 +39,8 @@ Basic	Einfach
 Build	Build-Nummer
 # TODO
 Bundle Date	Bundle Date
+CKNetworkEngine::network_framework	Apple - Modern
+CKNetworkEngine::openssl	OpenSSL
 Cancel	Abbrechen
 Certificate Authority	Zertifizierungsstelle
 Certificate Chain	Zertifikatskette
@@ -344,6 +346,8 @@ Embedded	Embedded
 Enable Verbose Logging	Protokollierung aktivieren
 Engine Settings	Engine-Einstellungen
 Engine has no options	Engine hat keine Einstellungsmöglichkeiten
+# TODO
+Engine: {engine}	Engine: {0}
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Fully Qualified Domain Name oder IP-Adresse des zu inspizierenden Hosts angeben. Es kann auch eine Port-Nummer angegeben werden.
 Enter the value to verify	Wert zur Verifizierung eingeben
 # TODO
@@ -564,8 +568,6 @@ app_language_footer	Interested in helping translate TLS Inspector? Let us know! 
 apple	Apple
 certificate_status_footer	OCSP-Abfragen deaktivieren kann die Privatsphäre erhöhen, verringert jedoch die Datenqualität. CRL-Überprüfung aktivieren kann zu langsameren Abfragen und erhöhtem Datenverbrauch führen.
 copyright_license_footer	TLS Inspector ist Free und Libre Software lizenziert unter GNU GPLv3. TLS Inspector ist urheberrechtlich geschützt © 2016-2023 Ian Spence.
-crypto_engine::network_framework	Apple - Modern
-crypto_engine::openssl	OpenSSL
 crypto_engine_footer	Änderungen an der Crypto-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als jene, die von diesem iOS-Gerät verwendet werden.
 date_unit_plural::day	Tage
 date_unit_plural::hour	Stunden

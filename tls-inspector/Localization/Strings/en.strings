@@ -28,6 +28,8 @@ Automatic will choose IPv6 if available.	Automatic will choose IPv6 if available
 Basic	Basic
 Build	Build
 Bundle Date	Bundle Date
+CKNetworkEngine::network_framework	Apple
+CKNetworkEngine::openssl	OpenSSL
 Cancel	Cancel
 Certificate Authority	Certificate Authority
 Certificate Chain	Certificate Chain
@@ -316,6 +318,7 @@ Embedded	Embedded
 Enable Verbose Logging	Enable Verbose Logging
 Engine Settings	Engine Settings
 Engine has no options	Engine has no options
+Engine: {engine}	Engine: {0}
 Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.	Enter the fully qualified domain name or IP address of the host you wish to inspect.  You can specify a port number here as well.
 Enter the value to verify	Enter the value to verify
 Error	Error
@@ -504,8 +507,6 @@ app_language_footer	Interested in helping translate TLS Inspector? Let us know! 
 apple	Apple
 certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy network engine.
 copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2024 Ian Spence.
-crypto_engine::network_framework	Apple
-crypto_engine::openssl	OpenSSL
 crypto_engine_footer	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
 date_unit_plural::day	days
 date_unit_plural::hour	hours
