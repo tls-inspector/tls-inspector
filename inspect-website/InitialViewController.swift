@@ -39,37 +39,39 @@ class InitialViewController: UIViewController {
         // When you load an item from the attachment provider, it may make a HTTP request to fetch metadata
         // about that resource - we use the latch to determine if any of these potential requests may be
         // in progress when we check for URLs.
+        let attachments = self.extensionContext?.inputItems ?? []
+        print("[\(#fileID):\(#line)] Extension started with \(attachments.count) attachments")
         for object in self.extensionContext?.inputItems ?? [] {
             guard let item = object as? NSExtensionItem else {
                 continue
             }
 
-            for provider in item.attachments ?? [] {
-                let contentText = item.attributedContentText?.string
-                // Share page from within Safari 🧭
-                if provider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
-                    self.latch.increment()
-                    provider.loadItem(forTypeIdentifier: (kUTTypeURL as String), options: nil) { (urlObj, _) in
-                        self.latch.decrement()
-                        if let url = urlObj as? URL {
-                            self.values.append(url)
-                            RunOnMain { self.checkValues() }
-                        }
-                    }
-                // Share page from third-party browsers (Chrome, Brave 🦁)
-                } else if let urlString = contentText {
-                    if let url = URL(string: urlString) {
+            guard let attachments = item.attachments else {
+                continue
+            }
+
+            for attachment in attachments {
+                guard let attachmentType = attachment.registeredTypeIdentifiers.first else {
+                    continue
+                }
+
+                if attachmentType != "public.url" {
+                    print("[\(#fileID):\(#line)] Skipping attachment with type \(attachmentType)")
+                    continue
+                }
+
+                print("[\(#fileID):\(#line)] Attachment type: \(attachmentType)")
+
+                self.latch.increment()
+                self.findURLFromAttachmentItem(attachment) { result in
+                    self.latch.decrement()
+                    switch result {
+                    case .success(let url):
                         self.values.append(url)
                         RunOnMain { self.checkValues() }
-                    }
-                // Long-press on URL in Safari or share from other app 👆
-                } else if provider.hasItemConformingToTypeIdentifier(kUTTypePlainText as String) {
-                    self.latch.increment()
-                    provider.loadItem(forTypeIdentifier: (kUTTypePlainText as String), options: nil) { (text, _) in
-                        self.latch.decrement()
-                        if let url = URL(string: text as? String ?? "") {
-                            self.values.append(url)
-                            RunOnMain { self.checkValues() }
+                    case .failure(let failure):
+                        UIHelper(self).presentError(error: failure) {
+                            self.closeExtension()
                         }
                     }
                 }
@@ -141,12 +143,50 @@ class InitialViewController: UIViewController {
                     }
                     return
                 }
-                if let response = oResponse {
-                    CERTIFICATE_CHAIN = response.certificateChain
-                    HTTP_SERVER_INFO = response.httpServer
-                    self.performSegue(withIdentifier: "Inspect", sender: nil)
+                guard let response = oResponse else {
+                    self.closeExtension()
+                    return
                 }
+
+                CERTIFICATE_CHAIN = response.certificateChain
+                HTTP_SERVER_INFO = response.httpServer
+                self.performSegue(withIdentifier: "Inspect", sender: nil)
             }
+        }
+    }
+
+    func findURLFromAttachmentItem(_ attachment: NSItemProvider, _ complete: @escaping (Result<URL, Error>) -> Void) {
+        attachment.loadItem(forTypeIdentifier: "public.url") { (oValue, oError) in
+            if let error = oError {
+                print("[\(#fileID):\(#line)] Error loading attachment item: \(error)")
+                complete(.failure(error))
+                return
+            }
+            guard let value = oValue else {
+                print("[\(#fileID):\(#line)] Error loading attachment item: nil value")
+                complete(.failure(NSError(domain: "com.ecnepsnai.Certificate-Inspector.Inspect-Website", code: 1, userInfo: [NSLocalizedDescriptionKey: "Attachment has no value"])))
+                return
+            }
+            // Check of the attachment item is a URL
+            if let url = value as? URL {
+                print("[\(#fileID):\(#line)] Got URL: \(url)")
+                complete(.success(url))
+                return
+            }
+            // Check of the attachment item is a string containing a URL
+            if let url = URL(string: value as? String ?? "") {
+                print("[\(#fileID):\(#line)] Got URL: \(url)")
+                complete(.success(url))
+                return
+            }
+            // Check of the attachment item is raw bytes of a string containing a URL (yes, really, Safari on macOS will use this path)
+            if let data = value as? Data, let urlString = String(data: data, encoding: .utf8), let url = URL(string: urlString) {
+                print("[\(#fileID):\(#line)] Got URL: \(url)")
+                complete(.success(url))
+                return
+            }
+            print("[\(#fileID):\(#line)] Unable to parse attachment item: \(value)")
+            complete(.failure(NSError(domain: "com.ecnepsnai.Certificate-Inspector.Inspect-Website", code: 1, userInfo: [NSLocalizedDescriptionKey: "Unable to parse attachment value"])))
         }
     }
 }
