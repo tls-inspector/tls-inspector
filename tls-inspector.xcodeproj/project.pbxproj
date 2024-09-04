@@ -1625,7 +1625,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1645,7 +1645,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1670,7 +1670,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1691,7 +1691,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1722,7 +1722,7 @@
 				CODE_SIGN_ENTITLEMENTS = "tls-inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "tls-inspector/Info.plist";
@@ -1733,7 +1733,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
@@ -1764,7 +1764,7 @@
 				CODE_SIGN_ENTITLEMENTS = "tls-inspector/TLS Inspector.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1776,7 +1776,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1804,7 +1804,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1823,7 +1823,7 @@
 					"@loader_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1857,7 +1857,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1876,7 +1876,7 @@
 					"@loader_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				MTL_FAST_MATH = YES;
@@ -1907,7 +1907,7 @@
 				CODE_SIGN_ENTITLEMENTS = "inspect-website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "inspect-website/Info.plist";
@@ -1917,7 +1917,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
@@ -1947,7 +1947,7 @@
 				CODE_SIGN_ENTITLEMENTS = "inspect-website/Show Certificate.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1958,7 +1958,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
 				PRODUCT_NAME = "Show Certificate";
@@ -1983,7 +1983,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				INFOPLIST_FILE = CertificateKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1992,7 +1992,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2016,7 +2016,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				INFOPLIST_FILE = CertificateKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -2025,7 +2025,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2068,7 +2068,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2091,7 +2091,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2127,7 +2127,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2144,7 +2144,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
