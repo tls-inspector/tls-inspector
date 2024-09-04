@@ -47,7 +47,7 @@ class CertificateChainTableViewController: UITableViewController {
         var items = [
             lang(key: "Share Certificate Chain")
         ]
-        if #available(iOS 12, *) {
+        if #available(iOS 15, *) {
             items.append(lang(key: "View on SSL Labs"))
             items.append(lang(key: "Search on Shodan"))
             items.append(lang(key: "Search on crt.sh"))

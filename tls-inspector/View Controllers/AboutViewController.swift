@@ -29,9 +29,12 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
 
         self.sections = [
             buildShareSection(),
-            buildGetInvolvedSection(),
-            buildMoreFromSection()
+            buildGetInvolvedSection()
         ]
+
+        if #available(iOS 15, *) {
+            self.sections.append(buildMoreFromSection())
+        }
     }
 
     @objc func dismissView(_ sendor: Any?) {
@@ -60,20 +63,23 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
             AppLinks.current.showAppStoreIn(self, appId: AppLinks.tlsInspectorAppId, dismissed: nil)
         }
 
-        let feedbackCell = TableViewCell(UITableViewCell())
-        feedbackCell.cell.textLabel?.text = lang(key: "Provide Feedback")
-        feedbackCell.didSelect = { _, _ in
-            ContactTableViewController.show(self) { (support) in
-                AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: false, dismissed: nil)
-            }
-        }
-
-        section.cells = [
+        var cells = [
             shareCell,
-            rateCell,
-            feedbackCell,
+            rateCell
         ]
 
+        if #available(iOS 15, *) {
+            let feedbackCell = TableViewCell(UITableViewCell())
+            feedbackCell.cell.textLabel?.text = lang(key: "Provide Feedback")
+            feedbackCell.didSelect = { _, _ in
+                ContactTableViewController.show(self) { (support) in
+                    AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: false, dismissed: nil)
+                }
+            }
+            cells.append(feedbackCell)
+        }
+
+        section.cells = cells
         return section
     }
 

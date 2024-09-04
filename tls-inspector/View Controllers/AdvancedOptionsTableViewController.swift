@@ -187,21 +187,23 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
             UserOptions.verboseLogging = checked
         }))
 
-        if let submitLogsCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) {
-            guard let textLabel = submitLogsCell.cell.viewWithTag(1) as? UILabel else {
-                return loggingSection
+        if #available(iOS 15, *) {
+            if let submitLogsCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) {
+                guard let textLabel = submitLogsCell.cell.viewWithTag(1) as? UILabel else {
+                    return loggingSection
+                }
+
+                guard let iconLabel = submitLogsCell.cell.viewWithTag(2) as? UILabel else {
+                    return loggingSection
+                }
+
+                textLabel.text = lang(key: "Submit Logs")
+                iconLabel.font = FAIcon.FABugSolid.font(size: iconLabel.font.pointSize)
+                iconLabel.textColor = UIColor.red
+                iconLabel.text = FAIcon.FABugSolid.string()
+
+                loggingSection.cells.append(submitLogsCell)
             }
-
-            guard let iconLabel = submitLogsCell.cell.viewWithTag(2) as? UILabel else {
-                return loggingSection
-            }
-
-            textLabel.text = lang(key: "Submit Logs")
-            iconLabel.font = FAIcon.FABugSolid.font(size: iconLabel.font.pointSize)
-            iconLabel.textColor = UIColor.red
-            iconLabel.text = FAIcon.FABugSolid.string()
-
-            loggingSection.cells.append(submitLogsCell)
         }
 
         return loggingSection

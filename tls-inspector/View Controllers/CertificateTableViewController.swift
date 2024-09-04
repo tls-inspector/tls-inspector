@@ -16,7 +16,7 @@ class CertificateTableViewController: UITableViewController {
             lang(key: "Share Certificate"),
             lang(key: "Add Certificate Expiry Reminder")
         ]
-        if #available(iOS 12, *) {
+        if #available(iOS 15, *) {
             items.append(lang(key: "Show Certificate on crt.sh"))
         }
 
