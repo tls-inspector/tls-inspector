@@ -572,7 +572,7 @@ secure::issue_date_too_long	Most likely. Apple changed requirements for certific
 secure::leaf_keyusage	Most likely. A certificate that is missing the key usage parameter is likely still valid otherwise.
 secure::local_trust	Unlikely. Some enterprise or corporate networks may use these types of certificates for internal or private websites. However, it may also be an indication of a compromised device or network.
 secure::revoked	No. One or more certificates for this site have been revoked, meaning the certificates are no longer trustworthy.\n\nExercise caution if continuing to this website.
-secure::self_signed	No. The certificate for this site was not issued by any known certificate authority and therefor your device has no way of checking if the certificate is actually for the website and not an attacker.\n\nExercise extreme caution if continuing to this website.
+secure::self_signed	No. The certificate for this site was not issued by any known certificate authority and therefore your device has no way of checking if the certificate is actually for the website and not an attacker.\n\nExercise extreme caution if continuing to this website.
 secure::sha1_int	No. While currently unlikely, it may be possible for an attacker to craft a fake certificate that takes advantage of the weakness of SHA-1.\n\nExercise caution if continuing to this website.
 secure::sha1_leaf	No. While currently unlikely, it may be possible for an attacker to craft a fake certificate that takes advantage of the weakness of SHA-1.\n\nExercise caution if continuing to this website.
 secure::trust	Yes. Your device has determined that the connection to this site is secure.
