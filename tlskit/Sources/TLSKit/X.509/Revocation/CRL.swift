@@ -1,0 +1,155 @@
+// TLSKit
+// Copyright (C) 2024 Ian Spence
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+import Foundation
+import OpenSSL
+
+internal enum CRLStatus {
+    case revoked
+    case notFound
+}
+
+internal struct CRLResult {
+    let status: CRLStatus
+    let revocationReason: Int32?
+    let revocationDate: Date?
+    let informedBy: String?
+
+    init(status: CRLStatus, revocationReason: Int32? = nil, revocationDate: Date? = nil, informedBy: String? = nil) {
+        self.status = status
+        self.revocationReason = revocationReason
+        self.revocationDate = revocationDate
+        self.informedBy = informedBy
+    }
+}
+
+internal final class CRLManager {
+    static func checkCertificate(_ certificate: Certificate, issuedBy: Certificate) -> Result<CRLResult?, Error> {
+        var urls: [String] = []
+        for provider in (certificate.statusProviders ?? []) {
+            switch provider {
+            case .crl(let url):
+                urls.append(url)
+            default:
+                break
+            }
+        }
+        if urls.isEmpty {
+            return .success(nil)
+        }
+
+        var results: [CRLResult] = []
+
+        for url in urls {
+            let result = checkCertificateAgainstCrl(certificate, issuedBy: issuedBy, crl: url)
+            switch result {
+            case .success(let crlResult):
+                if crlResult.status == .revoked {
+                    return .success(crlResult)
+                }
+                results.append(crlResult)
+            case .failure(_):
+                continue
+            }
+        }
+
+        if results.isEmpty {
+            return .failure(MakeError("Unable to check any CRL specified on the certificate"))
+        }
+
+        return .success(results[0])
+    }
+
+    fileprivate static func checkCertificateAgainstCrl(_ certificate: Certificate, issuedBy: Certificate, crl: String) -> Result<CRLResult, Error> {
+        let curl: CurlClient
+        do {
+            curl = try CurlClient(url: crl)
+        } catch {
+            return .failure(error)
+        }
+        curl.headers.add("Accept", "application/pkix-crl")
+        curl.maxBodySize = 20 * (1024 * 1024)
+        let result = curl.get()
+        switch result {
+        case .success(let http):
+            if http.statusCode != 200 {
+                return .failure(MakeError("HTTP \(http.statusCode)"))
+            }
+            if let contentType = http.headers.get1("Content-Type"), contentType.lowercased() != "application/pkix-crl" {
+                return .failure(MakeError("CRL response has incorrect content type '\(contentType)'"))
+            }
+
+            guard let crl = http.body.withUnsafeBytes({
+                var b = $0.baseAddress?.assumingMemoryBound(to: UInt8.self)
+                return d2i_X509_CRL(nil, &b, $0.count)
+            }) else {
+                logOpenSSLError(inFile: #fileID, atLine: #line)
+                printError("[\(#fileID):\(#line)] d2i_X509_CRL returned nil")
+                return .failure(MakeError("Error deseralizing CRL response"))
+            }
+            defer {
+                X509_CRL_free(crl)
+            }
+
+            guard let issuerKey = X509_get_pubkey(issuedBy.x509) else {
+                printError("[\(#fileID):\(#line)] X509_get_pubkey returned nil")
+                return .failure(MakeError("Internal error"))
+            }
+
+            if X509_CRL_verify(crl, issuerKey) != 1 {
+                printError("[\(#fileID):\(#line)] CRL verification failure")
+                logOpenSSLError(inFile: #fileID, atLine: #line)
+                return .failure(MakeError("CRL verification failure"))
+            }
+
+            var revoked: OpaquePointer?
+            let rv = X509_CRL_get0_by_cert(crl, &revoked, certificate.x509)
+            if revoked == nil {
+                logOpenSSLError(inFile: #fileID, atLine: #line)
+                printError("[\(#fileID):\(#line)] X509_CRL_get0_by_cert did not populate X509_REVOKED object")
+                return .failure(MakeError("CRL parsing error"))
+            }
+
+            if rv > 0 { // Certificate is revoked
+                printDebug("[\(#fileID):\(#line)] Certificate present on CRL")
+
+                guard let reasonEnum = X509_REVOKED_get_ext_d2i(revoked!, NID_crl_reason, nil, nil)?.assumingMemoryBound(to: ASN1_ENUMERATED.self) else {
+                    logOpenSSLError(inFile: #fileID, atLine: #line)
+                    printError("[\(#fileID):\(#line)] X509_REVOKED_get_ext_d2i returned nil")
+                    return .failure(MakeError("CRL parsing error"))
+                }
+
+                let reason = ASN1_ENUMERATED_get(reasonEnum)
+
+                var revokedAt: Date?
+                if let v = X509_REVOKED_get0_revocationDate(revoked!) {
+                    revokedAt = Date.from(ASN1_TIME: v)
+                }
+
+                return .success(CRLResult(status: .revoked, revocationReason: Int32(reason), revocationDate: revokedAt))
+            } else if rv == 0 { // Certificate not on CRL
+                printDebug("[\(#fileID):\(#line)] Certificate not present on CRL")
+                return .success(CRLResult(status: .notFound))
+            }
+
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] CRL parsing error")
+            return .failure(MakeError("CRL parsing error"))
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+}

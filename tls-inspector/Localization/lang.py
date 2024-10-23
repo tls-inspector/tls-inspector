@@ -145,7 +145,7 @@ def generate_plist(lang):
     print("Generated %s" % plist_path)
 
 
-for lang in ['en', 'de', 'es', 'nl']:
+for lang in ['en', 'es']:
     process_strings(lang)
     generate_plist(lang)
 

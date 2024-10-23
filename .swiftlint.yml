@@ -1,16 +1,16 @@
 disabled_rules:
-    - identifier_name
-    - trailing_comma
     - colon
-    - type_body_length
-    - function_body_length
-    - opening_brace
-    - line_length
     - file_length
+    - function_body_length
+    - identifier_name
+    - line_length
+    - opening_brace
     - todo
+    - trailing_comma
+    - type_body_length
+    - type_name
 
 cyclomatic_complexity: 12
 
 included:
-    - "TLS Inspector"
-    - "inspect-website"
+    - "tls-inspector/"

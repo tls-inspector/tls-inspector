@@ -1,3 +1,6 @@
+> [!CAUTION]
+> **This is a development branch of TLS Inspector**. This branch is subject to frequent, major, and breaking changes. For the release version of the app (what's currently in the App Store), please use the `app-store` branch.
+
 # TLS Inspector
 
 [![Download](https://img.shields.io/itunes/v/1100539810.svg?label=iTunes%20App%20Store&logo=apple&style=flat)](https://tlsinspector.com/download.html)
