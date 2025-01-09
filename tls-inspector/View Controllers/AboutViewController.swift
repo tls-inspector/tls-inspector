@@ -3,10 +3,8 @@ import CertificateKit
 import WebKit
 
 class AboutTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    let projectGithubURL = "https://tlsinspector.com/github.html"
     let projectURL = "https://tlsinspector.com/"
-    let projectContributeURL = "https://tlsinspector.com/contribute.html"
-    let testflightURL = "https://tlsinspector.com/beta.html"
+    let projectContributeURL = "https://tlsinspector.com/github"
     let mastodonURL = "https://infosec.exchange/@tlsinspector"
     let blueskyURL = "https://bsky.app/profile/tlsinspector.com"
     @IBOutlet weak var lockCircle: UIImageView!
