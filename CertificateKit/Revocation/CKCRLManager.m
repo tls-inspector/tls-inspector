@@ -153,7 +153,7 @@ struct httpResponseBlock {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
     
-    curl_easy_setopt(curl, CURLOPT_PROTOCOLS, CURLPROTO_HTTP);
+    curl_easy_setopt(curl, CURLOPT_PROTOCOLS_STR, "http");
     curl_easy_setopt(curl, CURLOPT_HTTP_CONTENT_DECODING, 0);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 0);
     curl_easy_setopt(curl, CURLOPT_TCP_NODELAY, 1);
