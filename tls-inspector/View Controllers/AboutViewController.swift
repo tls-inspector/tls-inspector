@@ -8,6 +8,7 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
     let projectContributeURL = "https://tlsinspector.com/contribute.html"
     let testflightURL = "https://tlsinspector.com/beta.html"
     let mastodonURL = "https://infosec.exchange/@tlsinspector"
+    let blueskyURL = "https://bsky.app/profile/tlsinspector.com"
     @IBOutlet weak var lockCircle: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     var quotes: [String] = []
@@ -29,12 +30,15 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
 
         self.sections = [
             buildShareSection(),
+            buildFollowUsSection(),
             buildGetInvolvedSection()
         ]
 
         if #available(iOS 15, *) {
             self.sections.append(buildMoreFromSection())
         }
+
+        self.sections.append(buildFooter())
     }
 
     @objc func dismissView(_ sendor: Any?) {
@@ -83,17 +87,37 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         return section
     }
 
+    func buildFollowUsSection() -> TableViewSection {
+        let section = TableViewSection()
+
+        section.title = lang(key: "Follow Us")
+
+        let mastodonCell = TableViewCell(UITableViewCell())
+        mastodonCell.cell.textLabel?.text = lang(key: "Follow us on Mastodon")
+        mastodonCell.cell.imageView?.image = UIImage(named: "Mastodon")
+        mastodonCell.didSelect = { _, _ in
+            OpenURLInSafari(self.mastodonURL)
+        }
+
+        let blueskyCell = TableViewCell(UITableViewCell())
+        blueskyCell.cell.textLabel?.text = lang(key: "Follow us on Bluesky")
+        blueskyCell.cell.imageView?.image = UIImage(named: "Bluesky")
+        blueskyCell.didSelect = { _, _ in
+            OpenURLInSafari(self.blueskyURL)
+        }
+
+        section.cells = [
+            mastodonCell,
+            blueskyCell
+        ]
+
+        return section
+    }
+
     func buildGetInvolvedSection() -> TableViewSection {
         let section = TableViewSection()
         section.title = lang(key: "Get Involved")
         section.footer = lang(key: "copyright_license_footer")
-
-        let followCell = TableViewCell(UITableViewCell())
-        followCell.cell.textLabel?.text = lang(key: "Follow @tlsinspector on Mastodon")
-        followCell.cell.imageView?.image = UIImage(named: "Mastodon")
-        followCell.didSelect = { _, _ in
-            OpenURLInSafari(self.mastodonURL)
-        }
 
         let contributeCell = TableViewCell(UITableViewCell())
         contributeCell.cell.textLabel?.text = lang(key: "Contribute to TLS Inspector")
@@ -116,7 +140,6 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         }
 
         section.cells = [
-            followCell,
             contributeCell,
             attributeCell,
         ]
@@ -137,6 +160,14 @@ class AboutTableViewController: UIViewController, UITableViewDataSource, UITable
         }
 
         section.cells.append(dnsInspectorCell)
+
+        return section
+    }
+
+    func buildFooter() -> TableViewSection {
+        let section = TableViewSection()
+
+        section.footer = "🏳️‍⚧️ Trans Rights!" // If this footer upsets or bothers you, I invite you to please fuck right off.
 
         return section
     }
