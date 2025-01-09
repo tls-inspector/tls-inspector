@@ -233,14 +233,12 @@ static id _instance;
 }
 
 - (NSError *) updateNow {
-    NSDictionary<NSString *, id> * release;
-    NSError * error = [self getLatestRootcaRelease:&release];
+    NSError * error;
+    NSString * tagName = [self getLatestRootcaTagName:&error];
     if (error != nil) {
         PError(@"[rootca] error getting latest release: %@", error.localizedDescription);
         return error;
     }
-
-    NSString * tagName = release[@"tag_name"];
     PDebug(@"[rootca] Latest tag: %@", tagName);
 
     if ([tagName isEqualToString:self.embeddedBundleTag] || (self.downloadedBundleTag != nil && [tagName isEqualToString:self.downloadedBundleTag])) {
@@ -260,7 +258,7 @@ static id _instance;
 
     for (NSString * fileName in self.bundleFiles) {
         NSString * filePath = [self.bundleDirectory stringByAppendingPathComponent:fileName];
-        NSString * fileURL = [NSString stringWithFormat:@"https://tlsinspector.com/ca/download/%@/%@", tagName, fileName];
+        NSString * fileURL = [NSString stringWithFormat:@"https://api.tlsinspector.com/rootca/asset/%@/%@", tagName, fileName];
         error = [self downloadFile:fileURL toFile:filePath];
         if (error != nil) {
             PError(@"[rootca] error downloading asset %@: %@", fileURL, error.localizedDescription);
@@ -268,7 +266,7 @@ static id _instance;
         }
         NSString * signatureName = [NSString stringWithFormat:@"%@.sig", fileName];
         NSString * signaturePath = [self.bundleDirectory stringByAppendingPathComponent:signatureName];
-        NSString * signatureURL = [NSString stringWithFormat:@"https://tlsinspector.com/ca/download/%@/%@", tagName, signatureName];
+        NSString * signatureURL = [NSString stringWithFormat:@"https://api.tlsinspector.com/rootca/asset/%@/%@", tagName, signatureName];
         error = [self downloadFile:signatureURL toFile:signaturePath];
         if (error != nil) {
             PError(@"[rootca] error downloading asset %@: %@", signatureURL, error.localizedDescription);
@@ -307,25 +305,35 @@ CLEANUP:
 
 #pragma mark - Network Requests
 
-- (NSError *) getLatestRootcaRelease:(NSDictionary<NSString *, id> **)releasePtr {
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://tlsinspector.com/ca/latest"]];
+- (NSString *) getLatestRootcaTagName:(NSError **)errorPtr {
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://api.tlsinspector.com/rootca/latest"]];
 
     NSData * data;
     NSURLResponse * urlResponse;
 
     NSError * error = [self sendURLRequest:request withData:&data urlResponse:&urlResponse];
     if (error != nil) {
-        return error;
+        *errorPtr = error;
+        return nil;
     }
     if (((NSHTTPURLResponse *)urlResponse).statusCode != 200) {
         NSString * errDescription = [NSString stringWithFormat:@"HTTP %ld", (long)((NSHTTPURLResponse *)urlResponse).statusCode];
-        return MAKE_ERROR(1, errDescription);
+        *errorPtr = MAKE_ERROR(1, errDescription);
+        return nil;
     }
 
     NSError * jsonError;
     NSDictionary<NSString *, id> * result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-    *releasePtr = result;
-    return nil;
+    if (jsonError != nil) {
+        *errorPtr = jsonError;
+        return nil;
+    }
+    NSString * version = result[@"version"];
+    if (version == nil || version.length == 0) {
+        *errorPtr = MAKE_ERROR(1, @"No data from server");
+        return nil;
+    }
+    return version;
 }
 
 - (NSError *) downloadFile:(NSString *)fileURL toFile:(NSString *)filePath {
