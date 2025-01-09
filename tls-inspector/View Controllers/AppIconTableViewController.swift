@@ -30,12 +30,15 @@ class AppIconTableViewController: UITableViewController {
         let cell = UITableViewCell()
         cell.textLabel?.text = lang(key: "AppIcon::\(iconName)")
 
-        guard let image = UIImage(named: "Icon\(iconName)") else {
-            return cell
-        }
+        if let imageView = cell.imageView {
+            guard let image = UIImage(named: "SmallIcon\(iconName)") else {
+                print("No image named \"Icon\(iconName)\"")
+                return cell
+            }
 
-        cell.imageView?.image = image
-        cell.imageView?.cornerRadius = 15.0
+            imageView.image = image
+            imageView.cornerRadius = 9
+        }
 
         return cell
     }
