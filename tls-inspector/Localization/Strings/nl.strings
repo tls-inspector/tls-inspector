@@ -533,7 +533,7 @@ advanced_settings_nag	Deze instellingen zijn voor geavanceerd probleemherstel. O
 app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
 certificate_status_footer	OCSP-raadpleging uitzetten kan leiden tot onjuist vertrouwen. CRL-raadpleging kan meer tijd kosten en meer data ophalen. Als OCSP-raadpleging is uitgezet kan dit nog steeds plaatsvinden bij gebruik van de oude Apple crypto driver.
-copyright_license_footer	TLS Inspector is vrij beschikbare software met een GNU GPLv3 licentie. TLS Inspector is copyright ? 2016-2023 Ian Spence.
+copyright_license_footer	TLS Inspector is vrij beschikbare software met een GNU GPLv3 licentie. TLS Inspector is copyright ? 2016-2025 Ian Spence.
 crypto_engine_footer	Wijzigen van de crypto driver kan ertoe leiden dat TLS Inspector andere verbindingsgegevens vermeldt dan gebruikelijk bij uw iOS apparaat. De moderne Apple crypto driver is beschikbaar vanaf iOS 12. TLS 1.3 is niet beschikbaar in de oude Apple crypto driver.
 date_unit_plural::day	dagen
 date_unit_plural::hour	uren

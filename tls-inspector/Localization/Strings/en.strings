@@ -508,7 +508,7 @@ advanced_settings_nag	These settings are for advanced troubleshooting. Incorrect
 app_language_footer	Interested in helping translate TLS Inspector? Let us know! Use the "Provide Feedback" option on the "About TLS Inspector" page.
 apple	Apple
 certificate_status_footer	Disabling OCSP querying may produce incorrect trust results. Enabling CRL checking may result in longer processing times and more data usage. OCSP querying may still occur even when disable while using the legacy network engine.
-copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2024 Ian Spence.
+copyright_license_footer	TLS Inspector is Free and Libre software licensed under GNU GPLv3. TLS Inspector is copyright © 2016-2025 Ian Spence.
 crypto_engine_footer	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
 date_unit_plural::day	days
 date_unit_plural::hour	hours
