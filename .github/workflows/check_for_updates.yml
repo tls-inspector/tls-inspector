@@ -1,8 +1,9 @@
 name: "Check for Dependency Updates"
 
 on:
-  schedule:
-    - cron: "15 14 * * *"
+  # Temporarily disabled
+  # schedule:
+  #   - cron: "15 14 * * *"
   workflow_dispatch:
 
 permissions:
