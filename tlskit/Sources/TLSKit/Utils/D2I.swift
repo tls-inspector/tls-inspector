@@ -19,12 +19,17 @@ import OpenSSL
 
 internal final class D2I {
     static func X509(_ data: Data) -> OpaquePointer? {
-        var b = data
-        let bytesPtr = b.withUnsafeMutableBytes {
-            return $0.baseAddress
+        guard let bio = try? data.toBIO() else {
+            return nil
         }
-        var bytesPtrPtr = UnsafePointer<UInt8>(OpaquePointer(bytesPtr))
-
-        return d2i_X509(nil, &bytesPtrPtr, data.count)
+        defer {
+            BIO_free(bio)
+        }
+        guard let x509 = d2i_X509_bio(bio, nil) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] d2i_X509_bio returned nil")
+            return nil
+        }
+        return x509
     }
 }

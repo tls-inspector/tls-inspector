@@ -38,7 +38,7 @@ internal struct OCSPResult {
 }
 
 internal final class OCSPManager {
-    static func checkCertificate(_ certificate: Certificate, issuedBy: Certificate) -> Result<OCSPResult?, Error> {
+    static func checkCertificate(_ certificate: Certificate, issuedBy: Certificate) -> Result<OCSPResult?, TLSKitError> {
         var urls: [String] = []
         for provider in (certificate.statusProviders ?? []) {
             switch provider {
@@ -53,6 +53,7 @@ internal final class OCSPManager {
         }
 
         var results: [OCSPResult] = []
+        var lastError: TLSKitError?
 
         for url in urls {
             let result = queryOcspServerAboutCertificate(certificate, issuedBy: issuedBy, ocsp: url)
@@ -62,115 +63,124 @@ internal final class OCSPManager {
                     return .success(ocspResult)
                 }
                 results.append(ocspResult)
-            case .failure(_):
+            case .failure(let error):
+                lastError = error
                 continue
             }
         }
 
         if results.isEmpty {
-            return .failure(MakeError("Unable to check any OCSP specified on the certificate"))
+            if let error = lastError {
+                return .failure(.internalError(error.localizedDescription))
+            }
+            return .failure(.responseError("No OCSP response received"))
         }
 
         return .success(results[0])
     }
 
-    fileprivate static func queryOcspServerAboutCertificate(_ certificate: Certificate, issuedBy: Certificate, ocsp: String) -> Result<OCSPResult, Error> {
+    private static func queryOcspServerAboutCertificate(_ certificate: Certificate, issuedBy: Certificate, ocsp: String) -> Result<OCSPResult, TLSKitError> {
         guard let certId = OCSP_cert_to_id(nil, certificate.x509, issuedBy.x509) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] OCSP_cert_to_id returned null")
-            return .failure(MakeError("Internal error"))
+            return .failure(.invalidData("Unable to determine certificate ID"))
         }
         guard let ocspRequest = OCSP_REQUEST_new() else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] OCSP_REQUEST_new returned null")
-            return .failure(MakeError("Internal error"))
+            return .failure(.internalError("libssl error"))
         }
         OCSP_request_add0_id(ocspRequest, certId)
 
         guard let requestData = I2D.OCSP_REQUEST(ocspRequest) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] Error seralizing OCSP request")
-            return .failure(MakeError("Internal error"))
+            return .failure(.internalError("libssl error"))
         }
 
         let curl: CurlClient
         do {
             curl = try CurlClient(url: ocsp)
         } catch {
-            return .failure(error)
+            return .failure(.internalError(error.localizedDescription))
         }
         curl.headers.add("Content-Type", "application/ocsp-request")
         curl.headers.add("Accept", "application/ocsp-response")
         curl.maxBodySize = 20 * (1024 * 1024)
         curl.body = requestData
-        let result = curl.post()
-        switch result {
-        case .success(let http):
-            if http.statusCode != 200 {
-                return .failure(MakeError("HTTP \(http.statusCode)"))
-            }
-            if let contentType = http.headers.get1("Content-Type"), contentType.lowercased() != "application/ocsp-response" {
-                return .failure(MakeError("OCSP response has incorrect content type '\(contentType)'"))
-            }
 
-            guard let ocsp = http.body.withUnsafeBytes({
-                var b = $0.baseAddress?.assumingMemoryBound(to: UInt8.self)
-                return d2i_OCSP_RESPONSE(nil, &b, $0.count)
-            }) else {
-                logOpenSSLError(inFile: #fileID, atLine: #line)
-                printError("[\(#fileID):\(#line)] d2i_X509_CRL returned nil")
-                return .failure(MakeError("Error deseralizing CRL response"))
-            }
-            defer {
-                OCSP_RESPONSE_free(ocsp)
-            }
-
-            let ocspStatus = OCSP_response_status(ocsp)
-            if ocspStatus != OCSP_RESPONSE_STATUS_SUCCESSFUL {
-                printError("[\(#fileID):\(#line)] OCSP response code not successful \(ocspStatus)")
-                return .failure(MakeError("OCSP server response not successful"))
-            }
-
-            guard let resp = OCSP_response_get1_basic(ocsp) else {
-                logOpenSSLError(inFile: #fileID, atLine: #line)
-                printError("[\(#fileID):\(#line)] OCSP_response_get1_basic returned nil")
-                return .failure(MakeError("OCSP parsing error"))
-            }
-
-            var status: Int32 = 0
-            var reason: Int32 = 0
-            var revtime: UnsafeMutablePointer<ASN1_GENERALIZEDTIME>!
-            var thisupd: UnsafeMutablePointer<ASN1_GENERALIZEDTIME>! // not used
-            var nextupd: UnsafeMutablePointer<ASN1_GENERALIZEDTIME>! // not used
-            if OCSP_resp_find_status(resp, certId, &status, &reason, &revtime, &thisupd, &nextupd) == 0 {
-                logOpenSSLError(inFile: #fileID, atLine: #line)
-                printError("[\(#fileID):\(#line)] OCSP_resp_find_status unsuccessful")
-                return .failure(MakeError("Internal error"))
-            }
-
-            switch status {
-            case V_OCSP_CERTSTATUS_GOOD:
-                printDebug("[\(#fileID):\(#line)] OCSP status good")
-                return .success(OCSPResult(status: .notRevoked))
-            case V_OCSP_CERTSTATUS_UNKNOWN:
-                printDebug("[\(#fileID):\(#line)] OCSP status unknown")
-                return .success(OCSPResult(status: .notFound))
-            case V_OCSP_CERTSTATUS_REVOKED:
-                printDebug("[\(#fileID):\(#line)] OCSP status revoked")
-                var revokedAt: Date?
-                if revtime != nil {
-                    revokedAt = Date.from(ASN1_GENERALIZEDTIME: revtime)
-                } else {
-                    printWarning("[\(#fileID):\(#line)] Revoked status but no date provided")
-                }
-
-                return .success(OCSPResult(status: .revoked, revocationReason: reason, revocationDate: revokedAt))
-            default:
-                printError("[\(#fileID):\(#line)] Unknown cert status value \(status)")
-                return .failure(MakeError("OCSP parsing error"))
-            }
-        case .failure(let error):
+        let http: CurlResponse
+        do {
+            http = try curl.post().get()
+        } catch {
             return .failure(error)
+        }
+
+        if http.statusCode != 200 {
+            return .failure(.httpError(Int(http.statusCode)))
+        }
+        if let contentType = http.headers.get1("Content-Type"), contentType.lowercased() != "application/ocsp-response" {
+            return .failure(.invalidContentType(contentType))
+        }
+
+        guard let ocsp = http.body.withUnsafeBytes({
+            var b = $0.baseAddress?.assumingMemoryBound(to: UInt8.self)
+            return d2i_OCSP_RESPONSE(nil, &b, $0.count)
+        }) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] d2i_X509_CRL returned nil")
+            return .failure(.invalidData("Invalid OCSP data"))
+        }
+        defer {
+            OCSP_RESPONSE_free(ocsp)
+        }
+        return parseOcspResponse(ocsp, certId)
+    }
+
+    private static func parseOcspResponse(_ ocsp: OpaquePointer, _ certId: OpaquePointer) -> Result<OCSPResult, TLSKitError> {
+        let ocspStatus = OCSP_response_status(ocsp)
+        if ocspStatus != OCSP_RESPONSE_STATUS_SUCCESSFUL {
+            printError("[\(#fileID):\(#line)] OCSP response code not successful \(ocspStatus)")
+            return .failure(.responseError("OCSP server response not successful"))
+        }
+
+        guard let resp = OCSP_response_get1_basic(ocsp) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] OCSP_response_get1_basic returned nil")
+            return .failure(.invalidData("Invalid OCSP data"))
+        }
+
+        var status: Int32 = 0
+        var reason: Int32 = 0
+        var revtime: UnsafeMutablePointer<ASN1_GENERALIZEDTIME>!
+        var thisupd: UnsafeMutablePointer<ASN1_GENERALIZEDTIME>! // not used
+        var nextupd: UnsafeMutablePointer<ASN1_GENERALIZEDTIME>! // not used
+        if OCSP_resp_find_status(resp, certId, &status, &reason, &revtime, &thisupd, &nextupd) == 0 {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] OCSP_resp_find_status unsuccessful")
+            return .failure(.invalidData("Invalid OCSP data"))
+        }
+
+        switch status {
+        case V_OCSP_CERTSTATUS_GOOD:
+            printDebug("[\(#fileID):\(#line)] OCSP status good")
+            return .success(OCSPResult(status: .notRevoked))
+        case V_OCSP_CERTSTATUS_UNKNOWN:
+            printDebug("[\(#fileID):\(#line)] OCSP status unknown")
+            return .success(OCSPResult(status: .notFound))
+        case V_OCSP_CERTSTATUS_REVOKED:
+            printDebug("[\(#fileID):\(#line)] OCSP status revoked")
+            var revokedAt: Date?
+            if revtime != nil {
+                revokedAt = Date.from(ASN1_GENERALIZEDTIME: revtime)
+            } else {
+                printWarning("[\(#fileID):\(#line)] Revoked status but no date provided")
+            }
+
+            return .success(OCSPResult(status: .revoked, revocationReason: reason, revocationDate: revokedAt))
+        default:
+            printError("[\(#fileID):\(#line)] Unknown cert status value \(status)")
+            return .failure(.invalidData("Invalid OCSP data"))
         }
     }
 }

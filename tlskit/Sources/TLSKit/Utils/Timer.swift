@@ -18,9 +18,9 @@ import Foundation
 
 /// Describes a timer for measuring the duration of an operation
 internal final class Timer: Sendable {
-    fileprivate let startTime: DispatchTime
+    private let startTime: DispatchTime
 
-    fileprivate init(startTime: DispatchTime) {
+    private init(startTime: DispatchTime) {
         self.startTime = startTime
     }
 

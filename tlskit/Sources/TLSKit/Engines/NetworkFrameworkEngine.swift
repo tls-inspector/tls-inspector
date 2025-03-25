@@ -24,7 +24,7 @@ internal final class NetworkFrameworkEngine: Engine {
         self.engineOptions = engineOptions
     }
 
-    func execute(_ request: InspectionRequest, _ target: InspectionTarget, _ dispatchQueue: DispatchQueue, _ complete: @Sendable @escaping (Result<InspectionResponse, Error>) -> Void) {
+    func execute(_ request: InspectionRequest, _ target: InspectionTarget, _ dispatchQueue: DispatchQueue, _ complete: @Sendable @escaping (Result<InspectionResponse, TLSKitError>) -> Void) {
         printDebug("[\(#fileID):\(#line)] Starting inspection of target: \(target) with options: \(request)")
 
         let timer = Timer.start()
@@ -38,10 +38,7 @@ internal final class NetworkFrameworkEngine: Engine {
         sec_protocol_options_set_tls_ocsp_enabled(tlsOptions.securityProtocolOptions, false)
         // Enable SNI if serverName provided
         if let serverName = target.serverName {
-            serverName.withCString {
-                sec_protocol_options_set_tls_server_name(tlsOptions.securityProtocolOptions, $0)
-            }
-
+            sec_protocol_options_set_tls_server_name(tlsOptions.securityProtocolOptions, serverName)
             domain = serverName
         } else {
             domain = target.ipAddress.string
@@ -65,8 +62,12 @@ internal final class NetworkFrameworkEngine: Engine {
             let trust = sec_trust_copy_ref(trustRef).takeRetainedValue()
             var trustResult = SecTrustResultType.invalid
 
+            let numberOfCertificates1 = SecTrustGetCertificateCount(trust)
+
             var oEvalulateError: CFError?
             _ = SecTrustEvaluateWithError(trust, &oEvalulateError)
+
+            let numberOfCertificates2 = SecTrustGetCertificateCount(trust)
 
             if let error = SecTry(SecTrustGetTrustResult(trust, &trustResult)) {
                 didComplete.If(false) {
@@ -82,7 +83,8 @@ internal final class NetworkFrameworkEngine: Engine {
             if log?.getLevel() == .Debug {
                 printDebug("[\(#fileID):\(#line)] Trust result details: \(SecTrustCopyResult(trust).debugDescription)")
                 if let evalulateError = oEvalulateError {
-                    printDebug("[\(#fileID):\(#line)] Trust error: \(evalulateError.localizedDescription)")
+                    let code = CFErrorGetCode(evalulateError)
+                    printDebug("[\(#fileID):\(#line)] Trust error \(code): \(evalulateError.localizedDescription)")
                 }
             }
 
@@ -90,7 +92,7 @@ internal final class NetworkFrameworkEngine: Engine {
             if numberOfCertificates > CertificateChainMaximumLength {
                 didComplete.If(false) {
                     printError("[\(#fileID):\(#line)] server returned too many certificates \(numberOfCertificates)")
-                    complete(.failure(MakeError("Server returned too many certificates")))
+                    complete(.failure(.responseError("Server returned too many certificates")))
                     verifyComplete(false)
                     return true
                 }
@@ -100,7 +102,7 @@ internal final class NetworkFrameworkEngine: Engine {
             if numberOfCertificates == 0 {
                 didComplete.If(false) {
                     printError("[\(#fileID):\(#line)] server returned no certificates")
-                    complete(.failure(MakeError("Server returned no certificates")))
+                    complete(.failure(.responseError("Server returned no certificates")))
                     verifyComplete(false)
                     return true
                 }
@@ -121,31 +123,34 @@ internal final class NetworkFrameworkEngine: Engine {
                 guard let secCert = SecTrustGetCertificateAtIndex(trust, i) else {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] Unable to get certificate from trustref at index \(i)")
-                        complete(.failure(MakeError("Server returned no certificates")))
+                        complete(.failure(.responseError("Server returned no certificates")))
                         verifyComplete(false)
                         return true
                     }
                     semaphore.signal()
                     return
                 }
-                guard let cert = try? Certificate(secCertificate: secCert) else {
+                let certificate: Certificate
+                do {
+                    certificate = try Certificate(secCertificate: secCert)
+                } catch {
                     didComplete.If(false) {
-                        printError("[\(#fileID):\(#line)] Unable to deseralize seccert from chain at index \(i)")
-                        complete(.failure(MakeError("Server returned no certificates")))
+                        printError("[\(#fileID):\(#line)] Unable to deseralize seccert from chain at index \(i): \(error)")
+                        complete(.failure(.invalidData(error.localizedDescription)))
                         verifyComplete(false)
                         return true
                     }
                     semaphore.signal()
                     return
                 }
-                rCertificates.append(cert)
+                rCertificates.append(certificate)
             }
 
             if #available(iOS 13, *) {
                 guard let version = TLSVersion.from(tls_protocol_version_t: sec_protocol_metadata_get_negotiated_tls_protocol_version(metadata)) else {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] sec_protocol_metadata_get_negotiated_tls_protocol_version bad return")
-                        complete(.failure(MakeError("Unknown or unsupported protocol version")))
+                        complete(.failure(.invalidData("Unknown or unsupported protocol version")))
                         verifyComplete(false)
                         return true
                     }
@@ -157,7 +162,7 @@ internal final class NetworkFrameworkEngine: Engine {
                 guard let suite = Ciphersuite.from(tls_ciphersuite_t: sec_protocol_metadata_get_negotiated_tls_ciphersuite(metadata)) else {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] sec_protocol_metadata_get_negotiated_tls_ciphersuite bad return")
-                        complete(.failure(MakeError("Unknown or unsupported ciphersuite")))
+                        complete(.failure(.invalidData("Unknown or unsupported ciphersuite")))
                         verifyComplete(false)
                         return true
                     }
@@ -169,7 +174,7 @@ internal final class NetworkFrameworkEngine: Engine {
                 guard let version = TLSVersion.from(SSLProtocol: sec_protocol_metadata_get_negotiated_protocol_version(metadata)) else {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] sec_protocol_metadata_get_negotiated_protocol_version bad return")
-                        complete(.failure(MakeError("Unknown or unsupported protocol version")))
+                        complete(.failure(.invalidData("Unknown or unsupported protocol version")))
                         verifyComplete(false)
                         return true
                     }
@@ -181,7 +186,7 @@ internal final class NetworkFrameworkEngine: Engine {
                 guard let suite = Ciphersuite.from(SSLCipherSuite: sec_protocol_metadata_get_negotiated_ciphersuite(metadata)) else {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] sec_protocol_metadata_get_negotiated_ciphersuite bad return")
-                        complete(.failure(MakeError("Unknown or unsupported ciphersuite")))
+                        complete(.failure(.invalidData("Unknown or unsupported ciphersuite")))
                         verifyComplete(false)
                         return true
                     }
@@ -221,7 +226,7 @@ internal final class NetworkFrameworkEngine: Engine {
                 guard let innerEndpoint = connection.currentPath?.remoteEndpoint, case .hostPort(let host, _) = innerEndpoint else {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] No remote endpoint from nwconnection")
-                        complete(.failure(MakeError("Internal error")))
+                        complete(.failure(.internalError("Internal error")))
                         return true
                     }
                     semaphore.signal()
@@ -230,7 +235,7 @@ internal final class NetworkFrameworkEngine: Engine {
                 guard let remoteAddress = try? IPAddress.init("\(host)") else {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] Unable to decode IP address '\(host)'")
-                        complete(.failure(MakeError("Internal error")))
+                        complete(.failure(.internalError("Internal error")))
                         return true
                     }
                     semaphore.signal()
@@ -259,7 +264,7 @@ internal final class NetworkFrameworkEngine: Engine {
 
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] Unable to collect required information from TLS handshake")
-                        complete(.failure(MakeError("Internal error")))
+                        complete(.failure(.internalError("Internal error")))
                         return true
                     }
                     semaphore.signal()
@@ -306,7 +311,7 @@ internal final class NetworkFrameworkEngine: Engine {
         didComplete.If(false) {
             connection.cancel()
             printError("[\(#fileID):\(#line)] Connection timed out")
-            complete(.failure(MakeError("Connection timed out")))
+            complete(.failure(.timedOut))
             return true
         }
     }

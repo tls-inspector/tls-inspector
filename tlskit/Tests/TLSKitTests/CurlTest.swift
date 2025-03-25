@@ -19,7 +19,7 @@ import Testing
 
 @Suite("Curl") struct curlTests {
     @Test func httpGet() async throws {
-        let curl = try CurlClient(url: "https://www.example.com")
+        let curl = try CurlClient(url: "https://ianspence.com")
         let result = curl.get()
 
         switch result {

@@ -18,8 +18,8 @@ import Foundation
 
 /// AtomicBool is a thread-safe map
 internal final class AtomicMap<Key: Hashable, Value>: Sendable {
-    nonisolated(unsafe) fileprivate var value: [Key: Value]
-    nonisolated(unsafe) fileprivate var lock: NSObject = NSObject()
+    nonisolated(unsafe) private var value: [Key: Value]
+    nonisolated(unsafe) private var lock: NSObject = NSObject()
 
     /// Create a new thread-safe map with the initial value. The initial value can be an empty map.
     internal init(initialValue: [Key: Value]) {

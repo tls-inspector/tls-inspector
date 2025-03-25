@@ -25,12 +25,6 @@ public struct CertificateBundleMetadata: Sendable {
     public let sha256: String
     /// The number of certificates in this bundle
     public let certificateCount: UInt
-
-    internal init(date: Date, sha256: String, certificateCount: UInt) {
-        self.date = date
-        self.sha256 = sha256
-        self.certificateCount = certificateCount
-    }
 }
 
 internal struct RootCABundleMetadata: Codable {
@@ -38,7 +32,7 @@ internal struct RootCABundleMetadata: Codable {
     let microsoft: RootCABundleMetadataVendor
     let google: RootCABundleMetadataVendor
     let apple: RootCABundleMetadataVendor
-    let tlsinspector: RootCABundleMetadataVendor
+    let tls_inspector: RootCABundleMetadataVendor
 }
 
 internal struct RootCABundleMetadataVendor: Codable {
@@ -46,6 +40,27 @@ internal struct RootCABundleMetadataVendor: Codable {
     let key: String
     let num_certs: UInt
     let bundles: [String: RootCABundleMetadataVendorAsset]
+
+    internal func toCertificateBundleMetadata() -> CertificateBundleMetadata? {
+        ///  "2024-09-24T17:44:43Z"
+        ///  "yyyy-MM-ddTHH:mm:ssZ")
+
+        let dateFormatter = DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ")
+        guard let date = dateFormatter.date(from: self.date) else {
+            return nil
+        }
+        var key = ""
+        for fileName in self.bundles.keys where fileName.hasSuffix(".pem") {
+            key = fileName
+            break
+        }
+        if key == "" {
+            return nil
+        }
+        let sha = self.bundles[key]!.sha256
+
+        return CertificateBundleMetadata(date: date, sha256: sha, certificateCount: self.num_certs)
+    }
 }
 
 internal struct RootCABundleMetadataVendorAsset: Codable {

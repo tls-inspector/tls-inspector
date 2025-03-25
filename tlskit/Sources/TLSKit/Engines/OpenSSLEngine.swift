@@ -17,9 +17,6 @@
 import Foundation
 import OpenSSL
 
-// Due to the use of C-callback methods we need to have this be a global variable
-nonisolated(unsafe) fileprivate var rawCertificates: [Data] = []
-
 internal final class OpenSSLEngine: Engine {
     let engineOptions: EngineOptions
 
@@ -27,7 +24,7 @@ internal final class OpenSSLEngine: Engine {
         self.engineOptions = engineOptions
     }
 
-    func execute(_ request: InspectionRequest, _ target: InspectionTarget, _ dispatchQueue: DispatchQueue, _ complete: @Sendable @escaping  (Result<InspectionResponse, Error>) -> Void) {
+    func execute(_ request: InspectionRequest, _ target: InspectionTarget, _ dispatchQueue: DispatchQueue, _ complete: @Sendable @escaping  (Result<InspectionResponse, TLSKitError>) -> Void) {
         printDebug("[\(#fileID):\(#line)] Starting inspection of target: \(target) with options: \(request)")
 
         let semaphore = DispatchSemaphore(value: 0)
@@ -43,7 +40,11 @@ internal final class OpenSSLEngine: Engine {
                 semaphore.signal()
             } catch {
                 didComplete.If(false) {
-                    complete(.failure(error))
+                    if let error = error as? TLSKitError {
+                        complete(.failure(error))
+                    } else {
+                        complete(.failure(.internalError(error.localizedDescription)))
+                    }
                     return true
                 }
                 semaphore.signal()
@@ -53,68 +54,43 @@ internal final class OpenSSLEngine: Engine {
         _ = semaphore.wait(timeout: request.timeoutDispatchTime)
         didComplete.If(false) {
             printError("[\(#fileID):\(#line)] Connection timed out")
-            complete(.failure(MakeError("Connection timed out")))
+            complete(.failure(.timedOut))
             return true
         }
     }
 
-    fileprivate func getResponse(_ request: InspectionRequest, _ target: InspectionTarget) throws -> InspectionResponse {
+    private func getResponse(_ request: InspectionRequest, _ target: InspectionTarget) throws -> InspectionResponse {
         let timer = Timer.start()
 
         guard let context = SSL_CTX_new(TLS_client_method()) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] SSL_CTX_new returned nil")
-            throw MakeError("Internal error")
+            throw TLSKitError.internalError("libssl error")
         }
-
-        let verifyCallback: SSL_verify_cb = { (_ preverify: Int32, _ storeContext: OpaquePointer?) -> Int32 in
-            guard let certs = X509_STORE_CTX_get1_chain(storeContext) else {
-                return 0
-            }
-
-            let count = OPENSSL_sk_num(certs)
-            if count > CertificateChainMaximumLength {
-                printError("[\(#fileID):\(#line)] Certificate chain exceeds maximum number of supported certificates: Count: \(count), Max: \(CertificateChainMaximumLength)")
-                return 0
-            }
-
-            for i in 0..<count {
-                guard let x509 = OPENSSL_sk_value(certs, i) else {
-                    return 0
-                }
-
-                guard let certDer = I2D.X509(X509(x509)) else {
-                    return 0
-                }
-
-                rawCertificates.append(certDer)
-            }
-
-            return preverify
+        defer {
+            SSL_CTX_free(context)
         }
 
         let keylogCallback: SSL_CTX_keylog_cb_func = { (_ ctx: OpaquePointer?, _ buf: UnsafePointer<Int8>?) in
 
         }
 
-        SSL_CTX_set_verify(context, SSL_VERIFY_NONE, verifyCallback)
+        SSL_CTX_set_verify(context, SSL_VERIFY_NONE, nil)
         SSL_CTX_set_verify_depth(context, Int32(CertificateChainMaximumLength))
         SSL_CTX_set_options(context, UInt64(SSL_OP_NO_SSLv2))
         SSL_CTX_set_keylog_callback(context, keylogCallback)
 
-        nonisolated(unsafe) let conn: OpaquePointer! = BIO_new_ssl_connect(context)
-        if conn == nil {
+        guard let conn = BIO_new_ssl_connect(context) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] BIO_new_ssl_connect returned nil")
-            throw MakeError("Internal error")
+            throw TLSKitError.internalError("libssl error")
+        }
+        defer {
+            BIO_free(conn)
         }
 
-        var host = target.socketAddress()
-        if _BIO_set_conn_hostname(conn, host) <= 0 {
-            logOpenSSLError(inFile: #fileID, atLine: #line)
-            printError("[\(#fileID):\(#line)] BIO_set_conn_hostname returned nil")
-            throw MakeError("Internal error")
-        }
+        let host = target.socketAddress()
+        try BIO.setConnHostname(bio: conn, hostname: host)
 
         switch request.ipVersion {
         case .ipv4:
@@ -125,82 +101,78 @@ internal final class OpenSSLEngine: Engine {
             BIO_int_ctrl(conn, BIO_C_SET_CONNECT, 3, BIO_FAMILY_IPANY)
         }
 
-        var ssl: OpaquePointer?
-        BIO_ctrl(conn, BIO_C_GET_SSL, 0, &ssl)
-        if ssl == nil {
-            logOpenSSLError(inFile: #fileID, atLine: #line)
-            printError("[\(#fileID):\(#line)] BIO_get_ssl returned nil")
-            throw MakeError("Internal error")
+        guard let ssl = BIO.getSSL(bio: conn) else {
+            throw TLSKitError.internalError("libssl error")
         }
 
         if SSL_set_cipher_list(ssl, "HIGH:!aNULL:!MD5:!RC4") <= 0 {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] SSL_set_cipher_list returned nil")
-            throw MakeError("Internal error")
+            throw TLSKitError.internalError("libssl error")
         }
 
         let domain: String
-        if let serverName = request.serverName {
-            if withUnsafeMutablePointer(to: &host, { SSL_ctrl(ssl, SSL_CTRL_SET_TLSEXT_HOSTNAME, Int(TLSEXT_NAMETYPE_host_name), $0) }) <= 0 {
+        if var serverName = target.serverName?.cString(using: .ascii) {
+            if SSL_ctrl(ssl, SSL_CTRL_SET_TLSEXT_HOSTNAME, Int(TLSEXT_NAMETYPE_host_name), &serverName) <= 0 {
                 logOpenSSLError(inFile: #fileID, atLine: #line)
                 printError("[\(#fileID):\(#line)] SSL_set_tlsext_host_name returned nil")
-                throw MakeError("Internal error")
+                throw TLSKitError.internalError("libssl error")
             }
 
-            domain = serverName
+            domain = target.serverName!
         } else {
             domain = target.ipAddress.string
         }
 
         printDebug("[\(#fileID):\(#line)] Dialing \(target.socketAddress())...")
 
-        if _BIO_do_connect(conn) != 1 {
-            logOpenSSLError(inFile: #fileID, atLine: #line)
-            printError("[\(#fileID):\(#line)] BIO_do_connect returned nil")
-            throw MakeError("Connection failed")
-        }
-
+        try BIO.doConnect(bio: conn)
         printDebug("[\(#fileID):\(#line)] Connected")
 
         var fd: Int32 = 0
         if withUnsafeMutablePointer(to: &fd, { BIO_ctrl(conn, BIO_C_GET_FD, 0, $0) }) <= 0 {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] BIO_get_fd returned nil")
-            throw MakeError("Connection failed")
+            throw TLSKitError.connectionError(TLSKitError.internalError("libssl error"))
         }
 
-        guard let remoteAddress = IPAddress.from(socket: fd) else {
-            printError("[\(#fileID):\(#line)] Unable to get remote address from socket")
-            throw MakeError("Connection failed")
+        let remoteAddress: IPAddress
+        do {
+            remoteAddress = try IPAddress.from(socket: fd)
+        } catch {
+            printError("[\(#fileID):\(#line)] Unable to get remote address from socket \(error)")
+            throw TLSKitError.connectionError(error)
         }
 
         printDebug("[\(#fileID):\(#line)] Establashing TLS connection...")
 
-        if _BIO_do_handshake(conn) != 1 {
-            logOpenSSLError(inFile: #fileID, atLine: #line)
-            printError("[\(#fileID):\(#line)] BIO_do_handshake returned nil")
-            throw MakeError("Connection failed")
-        }
-
-        printDebug("[\(#fileID):\(#line)] Established with server providing \(rawCertificates.count) certificates")
-
-        if rawCertificates.count == 0 {
-            printError("[\(#fileID):\(#line)] No certificates returned")
-            throw MakeError("Connection failed")
-        }
+        try BIO.doHandshake(bio: conn)
 
         guard let cipherRaw = SSL_get_current_cipher(ssl) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] SSL_get_current_cipher returned nil")
-            throw MakeError("Connection failed")
+            throw TLSKitError.invalidData("Unknown or unsupported ciphersuite")
         }
         guard let ciphersuite = Ciphersuite.from(SSL_CIPHER: cipherRaw) else {
             printError("[\(#fileID):\(#line)] Unknown SSL ciphersuite")
-            throw MakeError("Connection failed")
+            throw TLSKitError.invalidData("Unknown or unsupported ciphersuite")
         }
         guard let version = TLSVersion.from(openssl: SSL_version(ssl)) else {
             printError("[\(#fileID):\(#line)] Unknown TLS version")
-            throw MakeError("Connection failed")
+            throw TLSKitError.invalidData("Unknown or unsupported protocol version")
+        }
+
+        guard let certs = SSL_get_peer_cert_chain(ssl) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] SSL_get_peer_cert_chain returned nil")
+            throw TLSKitError.internalError("libssl error")
+        }
+        let certCount = OPENSSL_sk_num(certs)
+        printDebug("[\(#fileID):\(#line)] Established with server providing \(certCount) certificates")
+
+        if certCount == 0 {
+            printError("[\(#fileID):\(#line)] No certificates returned")
+            throw TLSKitError.responseError("Server returned no certificates")
         }
 
         // For security purposes, regular iOS applications are not allowed to access the root CA store
@@ -211,10 +183,15 @@ internal final class OpenSSLEngine: Engine {
         // If the security library gave us one more certificate than what the server presented,
         // that's the system-installed root CA
         var secCertificates: [SecCertificate] = []
-        for certDer in rawCertificates {
-            guard let secCertificate = SecCertificateCreateWithData(nil, certDer as CFData) else {
+        for i in 0..<certCount {
+            guard let raw = OPENSSL_sk_value(certs, i), let x509 = OpaquePointer(to: raw) else {
+                printError("[\(#fileID):\(#line)] No certificates returned")
+                throw TLSKitError.responseError("Server returned no certificates")
+            }
+
+            guard let data = I2D.X509(x509), let secCertificate = SecCertificateCreateWithData(nil, data as CFData) else {
                 printError("[\(#fileID):\(#line)] Unable to decode DER bytes as certificate")
-                throw MakeError("Internal error")
+                throw TLSKitError.invalidData("Server returned no certificates")
             }
 
             secCertificates.append(secCertificate)
@@ -222,15 +199,16 @@ internal final class OpenSSLEngine: Engine {
 
         if secCertificates.count == 0 {
             printError("[\(#fileID):\(#line)] No sec certificates? This shouldn't happen...")
-            throw MakeError("Internal error")
+            throw TLSKitError.internalError("Server returned no certificates")
         }
 
+        // At this stage secCertificates contains only the certificates from the server, so we need to reconstruct the chain
         let policy = SecPolicyCreateSSL(true, request.address as CFString)
         var trust: SecTrust!
         SecTrustCreateWithCertificates(secCertificates as CFTypeRef, policy, &trust)
         if trust == nil {
             printError("[\(#fileID):\(#line)] Unable to create trust object with certificates")
-            throw MakeError("Internal error")
+            throw TLSKitError.invalidData("Server returned no certificates")
         }
 
         var trustResult: SecTrustResultType = .invalid
@@ -248,21 +226,21 @@ internal final class OpenSSLEngine: Engine {
             rTrustStatus = .locallyTrusted
         }
 
-        // The trust object should now have the root certificate
+        // The trust object should now have the full chain
         let certificateCount = SecTrustGetCertificateCount(trust)
         if certificateCount > CertificateChainMaximumLength {
             printError("[\(#fileID):\(#line)] Trust evalulation somehow produced too many certificates. Count \(certificateCount), Max \(CertificateChainMaximumLength)")
-            throw MakeError("Internal error")
+            throw TLSKitError.responseError("Server returned too many certificates")
         } else if certificateCount == 0 {
             printError("[\(#fileID):\(#line)] Trust evaluation somehow produced no certificates.")
-            throw MakeError("Internal error")
+            throw TLSKitError.invalidData("Server returned no certificates")
         }
 
         var certificates: [Certificate] = []
         if #available(iOS 15.0, *) {
             guard let secCertificates = SecTrustCopyCertificateChain(trust) as? [SecCertificate] else {
                 printError("[\(#fileID):\(#line)] SecTrustCopyCertificateChain returned nil")
-                throw MakeError("Internal error")
+                throw TLSKitError.internalError("Server returned no certificates")
             }
             for secCertificate in secCertificates {
                 do {
@@ -277,7 +255,7 @@ internal final class OpenSSLEngine: Engine {
             for i in 0 ..< certificateCount {
                 guard let secCertificate = SecTrustGetCertificateAtIndex(trust, i) else {
                     printError("[\(#fileID):\(#line)] SecTrustGetCertificateAtIndex returned nil at index \(i)")
-                    throw MakeError("Internal error")
+                    throw TLSKitError.internalError("Server returned no certificates")
                 }
                 do {
                     let certificate = try Certificate(secCertificate: secCertificate)

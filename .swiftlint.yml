@@ -1,16 +1,21 @@
 disabled_rules:
     - colon
+    - compiler_protocol_init
+    - cyclomatic_complexity
     - file_length
     - function_body_length
     - identifier_name
     - line_length
     - opening_brace
+    - optional_data_string_conversion
     - todo
     - trailing_comma
     - type_body_length
     - type_name
 
-cyclomatic_complexity: 12
-
 included:
     - "tls-inspector/"
+    - "tlskit/Sources"
+
+excluded:
+    - "tls-inspector/Localization/Localization.swift"

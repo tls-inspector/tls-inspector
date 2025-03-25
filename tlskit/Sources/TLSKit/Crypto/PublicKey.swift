@@ -31,17 +31,29 @@ public struct PublicKey: Sendable {
     public let algorithm: KeyAlgorithm
     /// The size of the public key
     public let size: Int32
+    /// The public key data
+    public let data: Data
 
     internal static func fromCertificate(_ x509: X509) throws -> PublicKey {
         guard let x509pubkey = X509_get_X509_PUBKEY(x509) else {
-            throw MakeError("X509_get_X509_PUBKEY returned nil")
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] X509_get_X509_PUBKEY returned nil")
+            throw TLSKitError.invalidData("Missing or invalid public key in certificate")
         }
 
         guard let pubkey = X509_PUBKEY_get0(x509pubkey) else {
-            throw MakeError("X509_PUBKEY_get0 returned nil")
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] X509_PUBKEY_get0 returned nil")
+            throw TLSKitError.invalidData("Missing or invalid public key in certificate")
         }
 
         let size = EVP_PKEY_get_bits(pubkey)
+
+        guard let data = I2D.PUBKEY(pubkey) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] i2d_PUBKEY returned nil")
+            throw TLSKitError.invalidData("Missing or invalid public key in certificate")
+        }
 
         let oid = EVP_PKEY_get_id(pubkey)
 
@@ -51,9 +63,10 @@ public struct PublicKey: Sendable {
         } else if oid == NID_rsaEncryption {
             algorithm = .rsa
         } else {
-            throw MakeError("Unknown public key algorithm \(oid)")
+            printError("[\(#fileID):\(#line)] Unknown public key algorithm OID \(oid)")
+            throw TLSKitError.unrecognizedAlgorithm
         }
 
-        return PublicKey(algorithm: algorithm, size: size)
+        return PublicKey(algorithm: algorithm, size: size, data: data)
     }
 }

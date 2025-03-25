@@ -17,7 +17,7 @@
 import Foundation
 import OpenSSL
 
-fileprivate typealias X509_STORE = OpaquePointer
+private typealias X509_STORE = OpaquePointer
 
 /// Describes a bundle of certificates used as anchor certificates in chain validation
 public struct CertificateBundle: Sendable {
@@ -29,9 +29,9 @@ public struct CertificateBundle: Sendable {
     internal let bundlePath: URL
     internal let keyIdMap: [String: Int]
     internal let subjectMap: [String: Int]
-    nonisolated(unsafe) fileprivate let store: X509_STORE!
+    nonisolated(unsafe) private let store: X509_STORE!
 
-    fileprivate init(name: String, metadata: CertificateBundleMetadata, bundlePath: URL, keyIdMap: [String : Int], subjectMap: [String : Int], store: X509_STORE!) {
+    private init(name: String, metadata: CertificateBundleMetadata, bundlePath: URL, keyIdMap: [String : Int], subjectMap: [String : Int], store: X509_STORE!) {
         self.name = name
         self.metadata = metadata
         self.bundlePath = bundlePath
@@ -44,25 +44,36 @@ public struct CertificateBundle: Sendable {
         guard let store = X509_STORE_new() else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] X509_STORE_new returned nil")
-            throw MakeError("Internal Error")
+            throw TLSKitError.internalError("Unable to load bundle")
         }
 
-        if X509_STORE_load_path(store, bundlePath.path) <= 0 {
-            logOpenSSLError(inFile: #fileID, atLine: #line)
-            printError("[\(#fileID):\(#line)] X509_STORE_load_path returned nil")
-            throw MakeError("Internal Error")
+        guard let bundleData = try? Data(contentsOf: bundlePath) else {
+            printError("[\(#fileID):\(#line)] Unable to read bundle file \(bundlePath)")
+            throw TLSKitError.internalError("Unable to load bundle")
+        }
+
+        let bio = try bundleData.toBIO()
+        while true {
+            guard let cert = PEM_read_bio_X509(bio, nil, nil, nil) else {
+                break
+            }
+            if X509_STORE_add_cert(store, cert) == 0 {
+                logOpenSSLError(inFile: #fileID, atLine: #line)
+                printError("[\(#fileID):\(#line)] X509_STORE_add_cert returned nil")
+                throw TLSKitError.internalError("Unable to load bundle")
+            }
         }
 
         guard let certs = X509_STORE_get1_all_certs(store) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] X509_STORE_get1_all_certs returned nil")
-            throw MakeError("Internal Error")
+            throw TLSKitError.internalError("Unable to load bundle")
         }
 
         let certCount = OPENSSL_sk_num(certs)
         if UInt(certCount) != metadata.certificateCount {
             printError("[\(#fileID):\(#line)] Unexpected number of certificates loaded into store. Expected \(metadata.certificateCount), got \(certCount)")
-            throw MakeError("Internal Error")
+            throw TLSKitError.internalError("Unable to load bundle")
         }
 
         var keyIdMap: [String: Int] = [:]
@@ -72,7 +83,7 @@ public struct CertificateBundle: Sendable {
             guard let x509 = OpaquePointer(OPENSSL_sk_value(certs, i)) else {
                 logOpenSSLError(inFile: #fileID, atLine: #line)
                 printError("[\(#fileID):\(#line)] OPENSSL_sk_value returned nil")
-                throw MakeError("Internal Error")
+                throw TLSKitError.internalError("Unable to load bundle")
             }
 
             if let rawSubjectId = X509_get_ext_d2i(x509, NID_subject_key_identifier, nil, nil)?.assumingMemoryBound(to: ASN1_OCTET_STRING.self), let subjectId = Data.from(asn1OctetString: rawSubjectId)?.hexEncodedString() {

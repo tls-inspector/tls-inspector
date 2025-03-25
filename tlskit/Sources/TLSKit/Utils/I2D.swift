@@ -43,4 +43,17 @@ internal final class I2D {
 
         return Data(bytes: data!, count: Int(length))
     }
+
+    static func PUBKEY(_ r: OpaquePointer) -> Data? {
+        var data: UnsafeMutablePointer<UInt8>?
+        let length = i2d_PUBKEY(r, &data)
+        if data == nil {
+            return nil
+        }
+        if length == 0 {
+            return Data()
+        }
+
+        return Data(bytes: data!, count: Int(length))
+    }
 }

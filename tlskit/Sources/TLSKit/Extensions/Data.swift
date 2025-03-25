@@ -41,4 +41,15 @@ internal extension Data {
         let format = options.contains(.upperCase) ? "%02hhX" : "%02hhx"
         return self.map { String(format: format, $0) }.joined()
     }
+
+    func toBIO() throws -> OpaquePointer! {
+        guard let bio = BIO_new(BIO_s_mem()) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] EVP_MD_CTX_new returned nil")
+            throw TLSKitError.internalError("BIO_new returned nil")
+        }
+        let buf: [UInt8] = .init(self)
+        BIO_write(bio, buf, Int32(buf.count))
+        return bio
+    }
 }

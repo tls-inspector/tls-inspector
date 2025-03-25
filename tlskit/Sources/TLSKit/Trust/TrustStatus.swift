@@ -63,12 +63,14 @@ public enum TrustStatus: Int, CaseIterable, Sendable {
     case revokedIntermediate = 10
     /// The leaf or intermediate certificate is using an RSA bey with fewer than 2048 bits.
     case weakRSAKey = 11
-    /// The leaf certificate has an issue date longer than 825 days
+    /// The leaf certificate has an issue date longer than 825 days.
     case issueDateTooLong = 12
-    /// The leaf certificate is missing require key usage permissions
+    /// The leaf certificate is missing require key usage permissions.
     case leafMissingRequiredKeyUsage = 13
-    /// The root or intermediate authority is known to violate internationally accepted rules
-    case badAuthority = 14
+    /// One or more certificates contain an unknown extension that is marked as critical
+    case unknownCriticalExtension = 14
+    /// The root or intermediate authority is known to violate internationally accepted rules.
+    case badAuthority = 99
 
     /// Pick an appropriate trust status from the certificate chain and host. This will only try to identify trust failures and should be used if the system has not
     /// trusted the connection.
@@ -207,6 +209,16 @@ public enum TrustStatus: Int, CaseIterable, Sendable {
         if certificates[0].validity.validFor > 825 {
             printDebug("[\(#fileID):\(#line)] Certificate '\(certificates[0].subject)' has a validity period that is too long")
             return .issueDateTooLong
+        }
+
+        // The only certificate extension we can safely assume is actually "unknown" is the precertificate poision extension
+        for certificate in certificates {
+            for ext in certificate.extensions ?? [] where ext.critical {
+                if ext.oid == "1.3.6.1.4.1.11129.2.4.3" {
+                    printDebug("[\(#fileID):\(#line)] Certificate '\(certificates[0].subject)' has unknown critical extension \(ext.oid)")
+                    return .unknownCriticalExtension
+                }
+            }
         }
 
         return nil

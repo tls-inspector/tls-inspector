@@ -62,11 +62,11 @@ let package = Package(
         .testTarget(
             name: "TLSKitTests",
             dependencies: ["TLSKit", "OpenSSL", "Curl"],
-            linkerSettings: [
-                .linkedLibrary("z")
-            ],
             exclude: [
                 "TestServer/"
+            ],
+            linkerSettings: [
+                .linkedLibrary("z")
             ]
         )
     ]

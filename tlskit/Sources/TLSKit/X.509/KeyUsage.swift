@@ -52,15 +52,15 @@ public struct KeyUsage: Sendable {
 
 /// Describes possible basic key usage types
 public enum BasicKeyUsage: String, CaseIterable, Sendable {
-    case digitalSignature = "digitalSignature"
-    case nonRepudiation = "nonRepudiation"
-    case keyEncipherment = "keyEncipherment"
-    case dataEncipherment = "dataEncipherment"
-    case keyAgreement = "keyAgreement"
-    case keyCertSign = "keyCertSign"
-    case cRLSign = "cRLSign"
-    case encipherOnly = "encipherOnly"
-    case decipherOnly = "decipherOnly"
+    case digitalSignature
+    case nonRepudiation
+    case keyEncipherment
+    case dataEncipherment
+    case keyAgreement
+    case keyCertSign
+    case cRLSign
+    case encipherOnly
+    case decipherOnly
 
     internal static func fromCertificate(_ x509: X509) -> [BasicKeyUsage]? {
         guard let keyUsage = X509_get_ext_d2i(x509, NID_key_usage, nil, nil)?.assumingMemoryBound(to: ASN1_BIT_STRING.self) else {
@@ -69,10 +69,8 @@ public enum BasicKeyUsage: String, CaseIterable, Sendable {
 
         var values: [BasicKeyUsage] = []
 
-        for i in 0..<BasicKeyUsage.allCases.count {
-            if ASN1_BIT_STRING_get_bit(keyUsage, Int32(i)) != 0 {
-                values.append(BasicKeyUsage.allCases[i])
-            }
+        for i in 0..<BasicKeyUsage.allCases.count where ASN1_BIT_STRING_get_bit(keyUsage, Int32(i)) != 0  {
+            values.append(BasicKeyUsage.allCases[i])
         }
 
         return values
@@ -81,13 +79,13 @@ public enum BasicKeyUsage: String, CaseIterable, Sendable {
 
 /// Describes possible extended key usage types
 public enum ExtendedKeyUsage: String, Sendable {
-    case serverAuth = "serverAuth"
-    case clientAuth = "clientAuth"
-    case emailProtection = "emailProtection"
-    case codeSigning = "codeSigning"
-    case oCSPSigning = "oCSPSigning"
-    case timeStamping = "timeStamping"
-    case unknown = "unknown"
+    case serverAuth
+    case clientAuth
+    case emailProtection
+    case codeSigning
+    case oCSPSigning
+    case timeStamping
+    case unknown
 
     internal static func fromCertificate(_ x509: X509) -> [ExtendedKeyUsage]? {
         var values: [ExtendedKeyUsage] = []

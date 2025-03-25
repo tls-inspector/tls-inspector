@@ -123,6 +123,8 @@ Optional options:
 
 func start(startPort uint16, ipv4 string, ipv6 string, servername string) {
 	servers := []IServer{
+		// Avoid changing the order of the tests as the order here maps directly to what port the test will be assigned
+		// and those ports are hard-coded in TLSKit's tests
 		&tserverHTTP{},
 		&tserverBasicHTTPS{},
 		&tserverBareTLS{},
@@ -136,6 +138,8 @@ func start(startPort uint16, ipv4 string, ipv6 string, servername string) {
 		&tserverExpiredInt{},
 		&tserverTooManyHTTPHeaders{},
 		&tserverTimeout{},
+		&tserverRootCA{},
+		&tserverCTPrecertificate{},
 	}
 
 	port := startPort

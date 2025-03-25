@@ -56,13 +56,13 @@ internal struct InspectionTarget: CustomStringConvertible {
     ///
     /// - Parameters:
     ///   - address: The inspection target. Supported formats are:
-    ///     - Hostname (`example.com`)
-    ///     - Hostname with port (`example.com:443`)
-    ///     - IPv4 address (`127.0.0.1`)
-    ///     - IPv4 address with port (`127.0.0.1:443`)
-    ///     - IPv6 address (`fe80::1`)
-    ///     - Wrapped IPv6 address (`[fe80::1]`)
-    ///     - IPv6 address with port (`[fe80::1]:443`)
+    ///     - Hostname: `example.com`
+    ///     - Hostname with port: `example.com:443`
+    ///     - IPv4 address: `127.0.0.1`
+    ///     - IPv4 address with port: `127.0.0.1:443`
+    ///     - IPv6 address: `fe80::1`
+    ///     - Wrapped IPv6 address: `[fe80::1]`
+    ///     - IPv6 address with port: `[fe80::1]:443`
     ///   - port: The default port to use if one is not specified in the address
     ///   - servername: The servername to use. If address is a domain name and this value is nil, then the value of
     ///   address if used.
@@ -76,7 +76,7 @@ internal struct InspectionTarget: CustomStringConvertible {
             }
         }
     }
-    
+
     /// Resolve the user-provided inspection target.
     ///
     /// Presently this method does not actually perform any asynchronous operations, however this will change in a
@@ -84,19 +84,19 @@ internal struct InspectionTarget: CustomStringConvertible {
     ///
     /// - Parameters:
     ///   - address: The inspection target. Supported formats are:
-    ///     - Hostname (`example.com`)
-    ///     - Hostname with port (`example.com:443`)
-    ///     - IPv4 address (`127.0.0.1`)
-    ///     - IPv4 address with port (`127.0.0.1:443`)
-    ///     - IPv6 address (`fe80::1`)
-    ///     - Wrapped IPv6 address (`[fe80::1]`)
-    ///     - IPv6 address with port (`[fe80::1]:443`)
+    ///     - Hostname: `example.com`
+    ///     - Hostname with port: `example.com:443`
+    ///     - IPv4 address: `127.0.0.1`
+    ///     - IPv4 address with port: `127.0.0.1:443`
+    ///     - IPv6 address: `fe80::1`
+    ///     - Wrapped IPv6 address: `[fe80::1]`
+    ///     - IPv6 address with port: `[fe80::1]:443`
     ///   - port: The default port to use if one is not specified in the address
     ///   - serverName: The servername to use. If address is a domain name and this value is nil, then the value of
     ///   address if used.
     ///   - ipVersion: The preferred IP version to use for resolution. If nil then automatic.
     ///   - complete: Called with the result of the resolution of the inspection target.
-    internal static func with(address: String, port defaultPort: UInt16, servername defaultServername: String?, ipVersion: IPAddressVersion? = nil, complete: @escaping (Result<InspectionTarget, Error>) -> Void) {
+    internal static func with(address: String, port defaultPort: UInt16, servername defaultServername: String?, ipVersion: IPAddressVersion? = nil, complete: @escaping (Result<InspectionTarget, TLSKitError>) -> Void) {
         var port = defaultPort
         let serverName = defaultServername
 
@@ -112,7 +112,7 @@ internal struct InspectionTarget: CustomStringConvertible {
         // Check if the query needs to be IDN encoded
         if !target.canBeConverted(to: .ascii) {
             guard let encodedUrl = URL(unicodeString: "https://\(target)/"), let host = encodedUrl.host else {
-                complete(.failure(MakeError("Invalid inspection target \(target)")))
+                complete(.failure(TLSKitError.invalidData("Invalid inspection target")))
                 return
             }
             printDebug("[\(#fileID):\(#line)] Encoding IDN '\(target)' to '\(host)'")
@@ -129,7 +129,7 @@ internal struct InspectionTarget: CustomStringConvertible {
         let wrappedIPv6AddressPattern = RegularExpression("\\[[a-fA-F0-9:]+\\]")
         if wrappedIPv6AddressPattern.matches(in: target) {
             guard var wrappedAddress = wrappedIPv6AddressPattern.firstMatch(in: target) else {
-                complete(.failure(MakeError("Invalid inspection target \(target)")))
+                complete(.failure(TLSKitError.invalidData("Invalid inspection target \(target)")))
                 return
             }
             if wrappedAddress.starts(with: "[") {
@@ -138,9 +138,12 @@ internal struct InspectionTarget: CustomStringConvertible {
             if wrappedAddress.hasSuffix("]") {
                 wrappedAddress.removeLast()
             }
-            guard let ipAddress = try? IPAddress(wrappedAddress) else {
+            let ipAddress: IPAddress
+            do {
+                ipAddress = try IPAddress(wrappedAddress)
+            } catch {
                 printError("[\(#fileID):\(#line)] Invalid IPv6 address \(wrappedAddress)")
-                complete(.failure(MakeError("Invalid inspection target \(target)")))
+                complete(.failure(.invalidData(error.localizedDescription)))
                 return
             }
 
@@ -151,7 +154,7 @@ internal struct InspectionTarget: CustomStringConvertible {
                 }
             } catch {
                 printError("[\(#fileID):\(#line)] Invalid port suffix on \(target): \(error)")
-                complete(.failure(MakeError("Invalid inspection target \(target)")))
+                complete(.failure(.invalidData(error.localizedDescription)))
                 return
             }
 
@@ -172,7 +175,7 @@ internal struct InspectionTarget: CustomStringConvertible {
             }
         } catch {
             printError("[\(#fileID):\(#line)] Invalid port suffix on \(target): \(error)")
-            complete(.failure(MakeError("Invalid inspection target \(target)")))
+            complete(.failure(.invalidData(error.localizedDescription)))
             return
         }
 
@@ -182,9 +185,8 @@ internal struct InspectionTarget: CustomStringConvertible {
             complete(.success(InspectionTarget(ipAddress: ipAddress, port: port, serverName: target)))
         } catch {
             printError("[\(#fileID):\(#line)] Unable to resolve inspection target: \(error)")
-            complete(.failure(error))
+            complete(.failure(.invalidData(error.localizedDescription)))
             return
         }
     }
 }
-

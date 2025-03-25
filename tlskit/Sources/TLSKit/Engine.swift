@@ -34,5 +34,5 @@ internal protocol Engine: Sendable {
     func execute(_ request: InspectionRequest,
                  _ target: InspectionTarget,
                  _ dispatchQueue: DispatchQueue,
-                 _ complete: @Sendable @escaping (Result<InspectionResponse, Error>) -> Void)
+                 _ complete: @Sendable @escaping (Result<InspectionResponse, TLSKitError>) -> Void)
 }

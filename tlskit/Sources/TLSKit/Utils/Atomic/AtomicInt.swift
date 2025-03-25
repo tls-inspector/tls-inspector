@@ -17,9 +17,9 @@
 import Foundation
 
 /// AtomicInt is a thread-safe integer
-public final class AtomicInt: Sendable {
-    nonisolated(unsafe) fileprivate var value: Int
-    nonisolated(unsafe) fileprivate var lock: NSObject = NSObject()
+internal final class AtomicInt: Sendable {
+    nonisolated(unsafe) private var value: Int
+    nonisolated(unsafe) private var lock: NSObject = NSObject()
 
     /// Create a new atomic integer with the given initial value
     /// - Parameter initialValue: The initial value for this integer

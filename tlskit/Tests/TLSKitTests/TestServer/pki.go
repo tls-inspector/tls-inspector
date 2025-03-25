@@ -92,6 +92,7 @@ type extraCertificateParameters struct {
 	LeafDateRange     *pkiDateRange
 	IntDateRange      *pkiDateRange
 	IncludeExtensions bool
+	CustomExtensions  []pkix.Extension
 }
 
 func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv6, servername string, extraParams *extraCertificateParameters) (*tls.Certificate, []Certificate, error) {
@@ -241,6 +242,9 @@ func generateCertificateChain(serverId string, nInts int, port uint16, ipv4, ipv
 					Value: boolVal,
 				},
 			}
+		}
+		if len(extraParams.CustomExtensions) > 0 {
+			serverTpl.ExtraExtensions = append(serverTpl.ExtraExtensions, extraParams.CustomExtensions...)
 		}
 	}
 

@@ -16,10 +16,25 @@
 
 import Foundation
 
-internal func MakeError(_ description: String) -> Error {
-    return MakeError(description, code: -1)
-}
-
-internal func MakeError(_ description: String, code: Int) -> Error {
-    return NSError(domain: "io.ecn.tlskit", code: code, userInfo: [NSLocalizedDescriptionKey: description])
+/// All possible errors that TLSKit can produce
+public enum TLSKitError: Error, Sendable {
+    /// The connection to the target was unsuccessful. More details are available.
+    case connectionError(Error)
+    /// The remote host took too long to respond.
+    case timedOut
+    /// The server produced a response that indicated an error has occured. More details are available.
+    case responseError(String)
+    /// An internal error occured while processing the data. More details are available.
+    case invalidData(String)
+    /// The certificate is invalid. More details are available.
+    case invalidCertificate(String)
+    /// The cryptographic algorithm presented is not supported by DNSKit.
+    case unrecognizedAlgorithm
+    /// An internal processing error has occured. More details are available.
+    case internalError(String)
+    /// The HTTP request was unsuccessful. Contains the HTTP status code.
+    case httpError(Int)
+    /// The content type header on the response was unexpected or missing. Contains the value of the content type
+    /// header, or an empty string if it was missing.
+    case invalidContentType(String)
 }

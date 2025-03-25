@@ -18,10 +18,10 @@ import Foundation
 
 /// An inspection session. Sessions are the primary entrypoint for TLSKit and should be retained for the duration of the inspection request.
 public final class InspectionSession: Sendable {
-    fileprivate let dispatchQueue: DispatchQueue
-    fileprivate let engineType: EngineType
-    fileprivate let engine: Engine
-    fileprivate let engineOptions: EngineOptions
+    private let dispatchQueue: DispatchQueue
+    private let engineType: EngineType
+    private let engine: Engine
+    private let engineOptions: EngineOptions
 
     /// Create a new inspection session
     /// - Parameters:
@@ -44,6 +44,9 @@ public final class InspectionSession: Sendable {
     /// Execute the request
     /// - Parameter request: The request to perform
     /// - Returns: The inspection response
+    ///
+    /// > Important: TLSKit does not officially support multiple inspections being performed at the same time, even if
+    /// > it may work without issue.
     @available(iOS 13.0, *)
     public func execute(_ request: InspectionRequest) async throws -> InspectionResponse {
         try await withCheckedThrowingContinuation { continuation in
@@ -57,7 +60,10 @@ public final class InspectionSession: Sendable {
     /// - Parameters:
     ///   - request: The request to perform
     ///   - complete: Called when the request is complete
-    public func execute(_ request: InspectionRequest, complete: @Sendable @escaping (Result<InspectionResponse, Error>) -> Void) {
+    ///
+    /// > Important: TLSKit does not officially support multiple inspections being performed at the same time, even if
+    /// > it may work without issue.
+    public func execute(_ request: InspectionRequest, complete: @Sendable @escaping (Result<InspectionResponse, TLSKitError>) -> Void) {
         request.getInspectionTarget { resolveResult in
             switch resolveResult {
             case .success(let target):
@@ -68,4 +74,3 @@ public final class InspectionSession: Sendable {
         }
     }
 }
-

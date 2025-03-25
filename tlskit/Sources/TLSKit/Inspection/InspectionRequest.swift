@@ -19,7 +19,7 @@ import Network
 import IDNA
 
 /// Describes a request to inspect a TLS connection and optional HTTP server
-public struct InspectionRequest: Codable, Sendable, CustomStringConvertible {
+public struct InspectionRequest: Codable, Equatable, Sendable, CustomStringConvertible {
     /// The host address. This can be an IP address or a host name.
     public let address: String
     /// The port number.
@@ -58,7 +58,7 @@ public struct InspectionRequest: Codable, Sendable, CustomStringConvertible {
         return try await InspectionTarget.with(address: self.address, port: self.port, servername: self.serverName, ipVersion: self.ipVersion)
     }
 
-    internal func getInspectionTarget(_ complete: @escaping (Result<InspectionTarget, Error>) -> Void) {
+    internal func getInspectionTarget(_ complete: @escaping (Result<InspectionTarget, TLSKitError>) -> Void) {
         InspectionTarget.with(address: self.address, port: self.port, servername: self.serverName, ipVersion: self.ipVersion, complete: complete)
     }
 

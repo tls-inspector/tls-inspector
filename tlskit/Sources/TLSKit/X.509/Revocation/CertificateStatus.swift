@@ -105,7 +105,7 @@ internal final class StatusProviderHelper {
                 switch result {
                 case .success(let status):
                     crlResult = status
-                case .failure(_):
+                case .failure:
                     continue
                 }
             }
@@ -114,7 +114,7 @@ internal final class StatusProviderHelper {
                 switch result {
                 case .success(let status):
                     ocspResult = status
-                case .failure(_):
+                case .failure:
                     continue
                 }
             }
@@ -154,7 +154,7 @@ internal final class StatusProviderHelper {
         return (crlPoints ?? []) + (ocspProviders ?? [])
     }
 
-    fileprivate static func crlPoints(_ x509: OpaquePointer) -> [StatusProvider]? {
+    private static func crlPoints(_ x509: OpaquePointer) -> [StatusProvider]? {
         guard let ext = X509_get_ext_d2i(x509, NID_crl_distribution_points, nil, nil) else {
             return nil
         }
@@ -197,7 +197,7 @@ internal final class StatusProviderHelper {
         return urls
     }
 
-    fileprivate static func ocspProviders(_ x509: OpaquePointer) -> [StatusProvider]? {
+    private static func ocspProviders(_ x509: OpaquePointer) -> [StatusProvider]? {
         guard let ext = X509_get_ext_d2i(x509, NID_info_access, nil, nil) else {
             return nil
         }

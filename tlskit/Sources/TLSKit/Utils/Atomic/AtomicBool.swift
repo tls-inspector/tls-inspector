@@ -18,8 +18,8 @@ import Foundation
 
 /// AtomicBool is a thread-safe boolean value
 internal final class AtomicBool: Sendable {
-    nonisolated(unsafe) fileprivate var value: Bool
-    nonisolated(unsafe) fileprivate var lock: NSObject = NSObject()
+    nonisolated(unsafe) private var value: Bool
+    nonisolated(unsafe) private var lock: NSObject = NSObject()
 
     /// Create a new atomic boolean with the given initial value
     /// - Parameter initialValue: The initial value for this boolean

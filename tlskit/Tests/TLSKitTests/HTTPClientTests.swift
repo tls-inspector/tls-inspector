@@ -15,10 +15,50 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import Testing
+import Network
 @testable import TLSKit
 
 @Suite("HTTP") struct HTTPClientTests {
-    @Test func httpGet() async throws {
+    @Test func httpGet() throws {
+        let queue = DispatchQueue(label: "HTTPClientTests.httpGet")
+        let semaphore = DispatchSemaphore(value: 0)
+        let didComplete = AtomicBool(initialValue: false)
 
+        let client = HTTPClient()
+        let connection = NWConnection(host: .name("example.com", nil), port: .https, using: .tls)
+        connection.stateUpdateHandler = { state in
+            if state == .ready {
+                let request = client.requestFor(host: "example.com")
+                connection.send(content: request, completion: .contentProcessed({ error in
+                    if let error = error {
+                        Issue.record(error)
+                        didComplete.Set(newValue: true)
+                        semaphore.signal()
+                        return
+                    }
+                    client.response(from: connection) { result in
+                        switch result {
+                        case .success(let serverInfo):
+                            #expect(serverInfo.statusCode == 200)
+                            #expect(serverInfo.headers.get1("Content-Length") != nil)
+                        case .failure(let failure):
+                            Issue.record(failure)
+                        }
+                        connection.cancel()
+                        didComplete.Set(newValue: true)
+                        semaphore.signal()
+                    }
+                }))
+            }
+        }
+        connection.start(queue: queue)
+
+        _ = semaphore.wait(timeout: DispatchTime.now().adding(seconds: 10))
+        didComplete.If(false) {
+            connection.cancel()
+            printError("[\(#fileID):\(#line)] Connection timed out")
+            Issue.record("Connection timed out")
+            return true
+        }
     }
 }

@@ -17,9 +17,9 @@
 import Foundation
 
 /// AtomicArray is a thread safe mutable array
-public final class AtomicArray<T>: Sendable {
-    nonisolated(unsafe) fileprivate var value: [T]
-    nonisolated(unsafe) fileprivate var lock: NSObject = NSObject()
+internal final class AtomicArray<T>: Sendable {
+    nonisolated(unsafe) private var value: [T]
+    nonisolated(unsafe) private var lock: NSObject = NSObject()
 
     /// Create a new atomic array with the given initial value.
     /// - Parameter initialValue: The initial value. This can be an empty array.

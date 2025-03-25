@@ -1,31 +1,31 @@
 // TLSKit
 // Copyright (C) 2024 Ian Spence
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import Curl
 import Foundation
 
-fileprivate final class DebugCallbackData {
-    var writeFunc: (_: LogLevel,_: String) -> Void
+private final class DebugCallbackData {
+    var writeFunc: (_: LogLevel, _: String) -> Void
 
     init(writeFunc: @escaping (_: LogLevel, _: String) -> Void) {
         self.writeFunc = writeFunc
     }
 }
 
-fileprivate final class WriteCallbackData {
+private final class WriteCallbackData {
     var data = Data()
 }
 
@@ -55,12 +55,12 @@ internal final class CurlClient {
     /// The URL of this handle.
     internal let url: String
 
-    fileprivate var handle: UnsafeMutableRawPointer
+    private var handle: UnsafeMutableRawPointer
 
     init(url: String) throws {
         curl_global_init(Int(CURL_GLOBAL_DEFAULT))
         guard let curl = curl_easy_init() else {
-            throw MakeError("curl_easy_init returned nil")
+            throw TLSKitError.internalError("curl_easy_init returned nil")
         }
 
         let userAgent = "TLSKit" + (UserAgentSuffix != nil ? " \(UserAgentSuffix!)" : "")
@@ -72,19 +72,39 @@ internal final class CurlClient {
         self.url = url
         self.handle = curl
     }
-    
+
     /// Send an HTTP GET request to the URL
     /// - Returns: The result, with the status code, headers, and body or an error
-    func get() -> Result<CurlResponse, Error> {
+    func get() -> Result<CurlResponse, TLSKitError> {
         if self.body != nil {
             printError("[\(#fileID):\(#line)] HTTP body defined but sending HTTP GET request")
         }
         return send("GET")
     }
 
+    /// Send an HTTP GET request to the URL and save the body to destination
+    /// - Parameter destination: The destination path to write the body to
+    /// - Returns: The size of the file
+    func downloadFile(_ destination: URL) throws -> Int {
+        let result: CurlResponse
+        switch self.get() {
+        case .success(let data):
+            result = data
+        case .failure(let error):
+            throw error
+        }
+
+        if result.statusCode != 200 {
+            throw TLSKitError.httpError(Int(result.statusCode))
+        }
+
+        try result.body.write(to: destination)
+        return result.body.count
+    }
+
     /// Send an HTTP POST request to the URL
     /// - Returns: The result, with the status code, headers, and body or an error
-    func post() -> Result<CurlResponse, Error> {
+    func post() -> Result<CurlResponse, TLSKitError> {
         if let data = self.body {
             curl_easy_setopt_string(self.handle, CURLOPT_POSTFIELDS, (data as NSData).bytes)
             curl_easy_setopt_int(self.handle, CURLOPT_POSTFIELDSIZE, Int32(data.count))
@@ -94,7 +114,7 @@ internal final class CurlClient {
 
     /// Send an HTTP PUT request to the URL
     /// - Returns: The result, with the status code, headers, and body or an error
-    func put() -> Result<CurlResponse, Error> {
+    func put() -> Result<CurlResponse, TLSKitError> {
         if let data = self.body {
             curl_easy_setopt_string(self.handle, CURLOPT_POSTFIELDS, (data as NSData).bytes)
             curl_easy_setopt_int(self.handle, CURLOPT_POSTFIELDSIZE, Int32(data.count))
@@ -102,17 +122,20 @@ internal final class CurlClient {
         return send("PUT")
     }
 
-    fileprivate func send(_ method: String) -> Result<CurlResponse, Error> {
+    private func send(_ method: String) -> Result<CurlResponse, TLSKitError> {
         defer {
             curl_easy_cleanup(self.handle)
         }
 
         if self.url.hasPrefix("https://") {
             guard let caBundlePath = Bundle.module.url(forResource: "apple_ca_bundle", withExtension: "pem") else {
-                return .failure(MakeError("file not found"))
+                return .failure(.internalError("CA bundle file not found"))
             }
-            guard var caBundleData = try? Data(contentsOf: caBundlePath) else {
-                return .failure(MakeError("file not readable"))
+            var caBundleData: Data
+            do {
+                caBundleData = try Data(contentsOf: caBundlePath)
+            } catch {
+                return .failure(.internalError(error.localizedDescription))
             }
             caBundleData.withUnsafeMutableBytes { ca in
                 var blob = curl_blob(data: ca.baseAddress, len: ca.count, flags: UInt32(CURL_BLOB_COPY))
@@ -144,7 +167,7 @@ internal final class CurlClient {
         curl_easy_setopt_int(self.handle, CURLOPT_TCP_NODELAY, 1)
 
         // Debug (log) Callback
-        let debugCallback: curl_debug_callback = { (ptr, type, data, size, userdata) -> Int32 in
+        let debugCallback: curl_debug_callback = { (_, type, data, _, userdata) -> Int32 in
             if data == nil {
                 printError("[\(#fileID):\(#line)] Nil data")
                 return 0
@@ -168,7 +191,7 @@ internal final class CurlClient {
             return 0
         }
         if log?.getLevel() == .Debug {
-            curl_easy_setopt_int(self.handle, CURLOPT_VERBOSE, 1);
+            curl_easy_setopt_int(self.handle, CURLOPT_VERBOSE, 1)
             curl_easy_setopt_debug_function(self.handle, CURLOPT_DEBUGFUNCTION, debugCallback)
         }
 
@@ -198,6 +221,7 @@ internal final class CurlClient {
         }
         curl_easy_setopt_write_function(self.handle, CURLOPT_WRITEFUNCTION, bodyCallback)
 
+        // TODO: In some rare cases this crashes, need to investigate and figure out why.
         let rv = withUnsafeMutablePointer(to: &debugCallbackData) { debugData in
             return withUnsafeMutablePointer(to: &headerCallbackData) { headerData in
                 return withUnsafeMutablePointer(to: &bodyCallbackData) { bodyData in
@@ -214,15 +238,15 @@ internal final class CurlClient {
 
         if rv != CURLE_OK {
             guard let error = curl_easy_strerror(rv) else {
-                return .failure(MakeError("Unknown libcurl error"))
+                return .failure(.internalError("Unknown libcurl error"))
             }
             let r = String(cString: error)
             printError("[\(#fileID):\(#line)] CURL error \(r)")
-            return .failure(MakeError("libcurl error \(r)"))
+            return .failure(.internalError(r))
         }
 
         guard let allHeaders = String(data: headerCallbackData.data, encoding: .utf8) else {
-            return .failure(MakeError("Unrecognized HTTP headers"))
+            return .failure(.invalidData("Unrecognized HTTP headers"))
         }
 
         let headers = HTTPHeaders.fromLines(allHeaders.split(separator: "\r\n"))

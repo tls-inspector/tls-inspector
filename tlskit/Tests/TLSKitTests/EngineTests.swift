@@ -27,7 +27,7 @@ let testEngines: [TLSEngine] = [
     .OpenSSL
 ]
 
-@Suite("Engine Tests") struct EngineTests {
+@Suite("Engine Tests", .serialized) struct EngineTests {
     @Test("Basic Inspection", arguments: testEngines) func inspect(engineType: TLSEngine) async throws {
         let session = InspectionSession(engineType: TLSKit.EngineType(rawValue: engineType.rawValue)!)
         let request = InspectionRequest(address: "20.47.87.112", serverName: "dns.tlsinspector.com", ipVersion: .ipv4)
@@ -45,8 +45,9 @@ let testEngines: [TLSEngine] = [
 
         let scts = leaf.signedTimestamps!
         #expect(scts.count > 0)
-        print(scts[0].logId.base64EncodedString())
-        #expect(scts[0].logName != nil)
+        if (scts.count > 0) {
+            #expect(scts[0].logName != nil)
+        }
     }
 
     @Test("Inspect with Headers", arguments: testEngines) func inspectWithHeaders(engineType: TLSEngine) async throws {
@@ -70,7 +71,7 @@ let testEngines: [TLSEngine] = [
         }
 
         #expect(httpServerInfo.headers.all().count > 0)
-        #expect(httpServerInfo.headers.get1("Date") != nil)
+        #expect(httpServerInfo.headers.get1("Content-Length") != nil)
     }
 
     @Test("Expired Leaf Certifificate", arguments: testEngines) func expiredLeaf(engineType: TLSEngine) async throws {

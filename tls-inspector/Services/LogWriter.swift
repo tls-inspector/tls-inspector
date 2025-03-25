@@ -42,7 +42,7 @@ internal final class LogWriter: ILogger {
 
         if !IO.fileExists(self.filePath) {
             // Create a blank file for writing
-            try? IO.write(self.filePath, data: Data([]))
+            try? Data([]).write(to: self.filePath)
         }
 
         if let writer = try? FileHandle(forUpdating: self.filePath) {

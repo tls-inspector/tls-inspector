@@ -19,7 +19,6 @@ import TLSKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        UserOptions.loadDefaults()
         TLSKit.log = LogWriter.shared
 
         LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] App loaded")

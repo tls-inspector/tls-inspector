@@ -17,7 +17,7 @@
 import Foundation
 
 internal final class RegularExpression: Sendable {
-    fileprivate let patttern: NSRegularExpression
+    private let patttern: NSRegularExpression
 
     init(_ patttern: String) {
         self.patttern = NSRegularExpression(patttern)

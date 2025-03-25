@@ -24,8 +24,6 @@
 			membershipExceptions = (
 				Localization/lang.py,
 				Localization/README.md,
-				Localization/Strings/en.strings,
-				Localization/Strings/es.strings,
 			);
 			target = 3CC954432CA9EC4200C3AEF8 /* tls-inspector */;
 		};

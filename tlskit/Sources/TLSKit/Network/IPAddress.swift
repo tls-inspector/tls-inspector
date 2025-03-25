@@ -54,7 +54,7 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
                 return inet_pton(AF_INET, string, b.baseAddress)
             }
             if r != 1 {
-                throw MakeError("Invalid IP address")
+                throw TLSKitError.invalidData("Invalid IP address")
             }
 
             self.string = string
@@ -65,7 +65,7 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
                 return inet_pton(AF_INET6, string, b.baseAddress)
             }
             if r != 1 {
-                throw MakeError("Invalid IP address")
+                throw TLSKitError.invalidData("Invalid IP address")
             }
 
             self.string = string
@@ -90,7 +90,7 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
             self.string = try IPAddress.v6(data)
             self.binary = data
         } else {
-            throw MakeError("Unrecognized IP Address byte format with length \(data.count)")
+            throw TLSKitError.invalidData("Unrecognized IP Address byte format with length \(data.count)")
         }
     }
 
@@ -103,53 +103,56 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
         }
     }
 
-    internal static func from(addrinfo: addrinfo) -> IPAddress? {
-        var addressString: NSString?
+    internal static func from(addrinfo: addrinfo) throws -> IPAddress {
+        let addressString: String
 
         switch Int32(addrinfo.ai_family) {
         case AF_INET:
-            addressString = addrinfo.ai_addr.withMemoryRebound(to: sockaddr_in.self, capacity: 1) { sockAddrInPtr in
+            addressString = try addrinfo.ai_addr.withMemoryRebound(to: sockaddr_in.self, capacity: 1) { sockAddrInPtr in
                 var sockAddrIn = sockAddrInPtr.pointee
                 let length = Int(INET_ADDRSTRLEN) + 2
                 var buffer = [CChar](repeating: 0, count: length)
                 guard inet_ntop(AF_INET, &sockAddrIn.sin_addr, &buffer, socklen_t(length)) != nil else {
-                    return nil
+                    throw TLSKitError.internalError("Unable to get IP address from socket")
                 }
-                return NSString(utf8String: buffer)
+                guard let addressString = NSString(utf8String: buffer) as? String else {
+                    throw TLSKitError.internalError("Unable to get IP address from socket")
+                }
+                return addressString
             }
 
         case AF_INET6:
-            addressString = addrinfo.ai_addr.withMemoryRebound(to: sockaddr_in6.self, capacity: 1) { sockAddrIn6Ptr in
+            addressString = try addrinfo.ai_addr.withMemoryRebound(to: sockaddr_in6.self, capacity: 1) { sockAddrIn6Ptr in
                 var sockAddrIn6 = sockAddrIn6Ptr.pointee
                 let length = Int(INET6_ADDRSTRLEN) + 2
                 var buffer = [CChar](repeating: 0, count: length)
                 guard inet_ntop(AF_INET6, &sockAddrIn6.sin6_addr, &buffer, socklen_t(length)) != nil else {
-                    return nil
+                    throw TLSKitError.internalError("Unable to get IP address from socket")
                 }
-                return NSString(utf8String: buffer)
+                guard let addressString = NSString(utf8String: buffer) as? String else {
+                    throw TLSKitError.internalError("Unable to get IP address from socket")
+                }
+                return addressString
             }
         default:
-            return nil
+            throw TLSKitError.invalidData("Unknown address family \(addrinfo.ai_family)")
         }
 
-        if addressString == nil {
-            return nil
-        }
-
-        return try? IPAddress(addressString! as String)
+        return try IPAddress(addressString)
     }
 
-    internal static func from(socket fd: Int32) -> IPAddress? {
+    internal static func from(socket fd: Int32) throws -> IPAddress {
         var addr = sockaddr()
         var addrLen = socklen_t(MemoryLayout<sockaddr>.size)
         let result = withUnsafeMutablePointer(to: &addr) { addrPtr in
             return getpeername(fd, addrPtr, &addrLen)
         }
         if result != 0 {
-            return nil
+            printError("[\(#fileID):\(#line)] getpeername returned 0")
+            throw TLSKitError.internalError("Unable to get IP address from socket")
         }
 
-        return withUnsafePointer(to: addr) { socketAddressPointer in
+        let addressString = try withUnsafePointer(to: addr) { socketAddressPointer in
             let socketAddress = socketAddressPointer.pointee
 
             var addressString: NSString?
@@ -177,15 +180,17 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
                     return NSString(utf8String: buffer)
                 }
             default:
-                return nil
+                throw TLSKitError.invalidData("Unknown address family \(socketAddress.sa_family)")
             }
 
-            if addressString == nil {
-                return nil
+            guard let addressString = addressString as? String else {
+                throw TLSKitError.internalError("Unable to get IP address from socket")
             }
 
-            return try? IPAddress(addressString! as String)
+            return addressString
         }
+
+        return try IPAddress(addressString)
     }
 
     /// Read the binary representation of an IPv4 address and return a formatted string
@@ -194,7 +199,7 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
     internal static func v4(_ data: Data) throws -> String {
         if data.count > 4 {
             printError("[\(#fileID):\(#line)] Invalid IPv4 address: expecting >= 4 bytes got \(data.count)")
-            throw MakeError("Invalid IPv4 address")
+            throw TLSKitError.invalidData("Invalid IPv4 address")
         }
 
         var buffer = ContiguousArray<Int8>(repeating: 0, count: Int(INET_ADDRSTRLEN))
@@ -212,7 +217,7 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
     internal static func v6(_ data: Data) throws -> String {
         if data.count > 16 {
             printError("[\(#fileID):\(#line)] Invalid IPv6 address: expecting >= 16 bytes got \(data.count)")
-            throw MakeError("Invalid IPv6 address")
+            throw TLSKitError.invalidData("Invalid IPv6 address")
         }
 
         var buffer = ContiguousArray<Int8>(repeating: 0, count: Int(INET6_ADDRSTRLEN))
@@ -247,7 +252,7 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
                           buffer[14], buffer[15])
         }
     }
-    
+
     /// Gets and removes a port suffix from the given address. If the address does not contain a port suffix the address
     /// is not changed. Throws if a port suffix is provided but has an invalid port.
     /// - Parameter address: An IP address or hostname with an optional port suffix. Will be replaced with a copy
@@ -262,7 +267,7 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
         colonAndPort.removeFirst()
 
         guard let port = UInt16(colonAndPort) else {
-            throw MakeError("Invalid port number from string '\(colonAndPort)'")
+            throw TLSKitError.invalidData("Invalid port number from string '\(colonAndPort)'")
         }
 
         address = portPattern.replaceAllMatches(in: address, with: "")

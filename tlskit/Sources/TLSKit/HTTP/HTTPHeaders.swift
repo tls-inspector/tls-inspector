@@ -20,8 +20,8 @@ import Foundation
 ///
 /// HTTP header names are case-insensitive and duplicate headers are valid, so this class exists to provide a map-like interface.
 public final class HTTPHeaders: Sendable {
-    fileprivate let allHeaders = AtomicMap<String, [String]>(initialValue: [:])
-    fileprivate let normalizedKeyMap = AtomicMap<String, String>(initialValue: [:])
+    private let allHeaders = AtomicMap<String, [String]>(initialValue: [:])
+    private let normalizedKeyMap = AtomicMap<String, String>(initialValue: [:])
 
     internal static func fromResponse(_ data: Data) -> HTTPHeaders {
         let lines = String(decoding: data, as: UTF8.self).split(separator: "\r\n")

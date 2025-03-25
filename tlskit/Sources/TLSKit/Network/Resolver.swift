@@ -35,16 +35,19 @@ internal final class Resolver: Sendable {
         if err != 0 {
             let message = Resolver.getErrorMessage(err)
             printError("[\(#fileID):\(#line)] getaddrinfo \(message)")
-            throw MakeError(message)
+            throw TLSKitError.responseError(message)
         }
         guard let result = resultPtr?.pointee else {
             printError("[\(#fileID):\(#line)] getaddrinfo did not populate result")
-            throw MakeError("Internal error")
+            throw TLSKitError.internalError("Unable to resolve name")
         }
 
-        guard let address = IPAddress.from(addrinfo: result) else {
-            printError("[\(#fileID):\(#line)] Unable to deseralize IP address from result addrinfo")
-            throw MakeError("Internal error")
+        let address: IPAddress
+        do {
+            address = try IPAddress.from(addrinfo: result)
+        } catch {
+            printError("[\(#fileID):\(#line)] Unable to deseralize IP address from result addrinfo: \(error)")
+            throw TLSKitError.invalidData(error.localizedDescription)
         }
 
         resultPtr?.deallocate()
@@ -54,7 +57,7 @@ internal final class Resolver: Sendable {
         return address
     }
 
-    fileprivate static func getErrorMessage(_ code: Int32) -> String {
+    private static func getErrorMessage(_ code: Int32) -> String {
         switch code {
         case EAI_ADDRFAMILY:
             return "Address family for hostname not supported (EAI::ADDRFAMILY)"

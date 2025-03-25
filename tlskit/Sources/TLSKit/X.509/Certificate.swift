@@ -55,8 +55,12 @@ public struct Certificate: Sendable {
     public let isCA: Bool
     /// Basic and extended key usage values for this certificate
     public let keyUsage: KeyUsage?
+    /// All extensions of the certificate
+    public let extensions: [CertificateExtension]?
     /// The version of this certificate.
     public let version: Int
+    /// The source of this certificate, if known
+    public let source: CertificateSource?
 
     /// Hash the data of this certificate into a digest, known as a fingerprint or thumbprint, using the given algorithm
     /// - Parameter withType: The digest algorithm to use
@@ -79,7 +83,7 @@ public struct Certificate: Sendable {
         guard X509_digest(self.x509, evpMethod, &fingerprint, &fingerprintLength) > 0 else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] X509_digest returned nil")
-            throw MakeError("Internal error")
+            throw TLSKitError.invalidData("unable to digest certificate")
         }
 
         return Data(bytes: fingerprint, count: Int(fingerprintLength))
@@ -87,61 +91,71 @@ public struct Certificate: Sendable {
 
     nonisolated(unsafe) internal let x509: X509
 
-    internal init(secCertificate: SecCertificate) throws {
+    internal init(secCertificate: SecCertificate, certificateSource: CertificateSource? = nil) throws {
         let data = SecCertificateCopyData(secCertificate) as Data
+        if log?.getLevel() == .Debug {
+            printDebug("[\(#fileID):\(#line)] -----BEGIN CERTIFICATE-----\n\(data.base64EncodedString())\n-----END CERTIFICATE-----")
+        }
         guard let cert = D2I.X509(data) else {
-            throw MakeError("Invalid certificate data")
+            throw TLSKitError.invalidData("Invalid X509 certificate data")
         }
 
-        try self.init(x509: cert)
+        try self.init(x509: cert, certificateSource: certificateSource)
     }
 
-    internal init(x509: X509) throws {
+    internal init(x509: X509, certificateSource: CertificateSource? = nil) throws {
+        self.source = certificateSource
         self.x509 = x509
 
         guard let subject = X509_get_subject_name(x509) else {
-            throw MakeError("Invalid certificate: missing subject name")
+            printError("[\(#fileID):\(#line)] X509_get_subject_name returned nil")
+            throw TLSKitError.invalidCertificate("Missing subject name")
         }
         self.subject = Name(subject)
 
         guard let issuer = X509_get_issuer_name(x509) else {
-            throw MakeError("Invalid certificate: missing issuer name")
+            printError("[\(#fileID):\(#line)] X509_get_issuer_name returned nil")
+            throw TLSKitError.invalidCertificate("Missing issuer name")
         }
         self.issuer = Name(issuer)
 
         guard let notBeforeStr = X509_get0_notBefore(x509) else {
-            throw MakeError("Invalid certificate: missing not before date")
+            printError("[\(#fileID):\(#line)] X509_get0_notBefore returned nil")
+            throw TLSKitError.invalidCertificate("Missing not before date")
         }
 
         guard let notBefore = Date.from(ASN1_TIME: notBeforeStr) else {
-            throw MakeError("Invalid certificate: missing not before date")
+            printError("[\(#fileID):\(#line)] Invalid not before string")
+            throw TLSKitError.invalidCertificate("Invalid not before date")
         }
 
         guard let notAfterStr = X509_get0_notAfter(x509) else {
-            throw MakeError("Invalid certificate: missing not after date")
+            printError("[\(#fileID):\(#line)] X509_get0_notAfter returned nil")
+            throw TLSKitError.invalidCertificate("Missing not after date")
         }
 
         guard let notAfter = Date.from(ASN1_TIME: notAfterStr) else {
-            throw MakeError("Invalid certificate: missing not after date")
+            printError("[\(#fileID):\(#line)] Invalid not after string")
+            throw TLSKitError.invalidCertificate("Invalid not after date")
         }
         self.validity = ValidityPeriod(notBefore: notBefore, notAfter: notAfter)
 
         guard let serialBytes = X509_get0_serialNumber(x509) else {
-            throw MakeError("Invalid certificate: missing serial number")
+            throw TLSKitError.invalidCertificate("Missing serial number")
         }
 
         guard let serial = Data.from(asn1: serialBytes) else {
-            throw MakeError("Invalid certificate: missing serial number")
+            throw TLSKitError.invalidCertificate("Invalid serial number")
         }
 
         self.serial = serial
 
         guard let sigType = X509_get0_tbs_sigalg(x509) else {
-            throw MakeError("Invalid certificate: missing signature type")
+            throw TLSKitError.invalidCertificate("Unknown signature type")
         }
 
         guard let signatureAlgorithm = String.from(obj: sigType.pointee.algorithm, maxLength: 128) else {
-            throw MakeError("Invalid certificate: missing signature algorithm")
+            throw TLSKitError.invalidCertificate("Unknown signature type")
         }
         self.signatureAlgorithm = signatureAlgorithm
 
@@ -150,7 +164,7 @@ public struct Certificate: Sendable {
         do {
             self.publicKey = try PublicKey.fromCertificate(x509)
         } catch {
-            throw MakeError("Invalid certificate: missing or invalid public key: \(error)")
+            throw TLSKitError.invalidCertificate("Invalid or unsupported public key: \(error.localizedDescription)")
         }
 
         if let subjectId = X509_get_ext_d2i(x509, NID_subject_key_identifier, nil, nil)?.assumingMemoryBound(to: ASN1_OCTET_STRING.self) {
@@ -172,10 +186,12 @@ public struct Certificate: Sendable {
 
         self.keyUsage = KeyUsage.fromCertificate(x509)
 
+        self.extensions = CertificateExtension.fromCertificate(x509)
+
         self.version = X509_get_version(x509)
     }
 
-    fileprivate static func isCA(_ x509: X509) -> Bool {
+    private static func isCA(_ x509: X509) -> Bool {
         guard let constraints = X509_get_ext_d2i(x509, NID_basic_constraints, nil, nil)?.assumingMemoryBound(to: BASIC_CONSTRAINTS_st.self) else {
             return false
         }

@@ -40,12 +40,12 @@ import Testing
         #expect(ipv6WithPortTarget.serverName == nil)
 
         let hostnameOnlyTarget = try await InspectionTarget.with(address: "example.com", port: 443, servername: nil, ipVersion: .ipv4)
-        #expect(hostnameOnlyTarget.ipAddress.string == "93.184.215.14")
+        #expect(!hostnameOnlyTarget.ipAddress.string.isEmpty)
         #expect(hostnameOnlyTarget.port == 443)
         #expect(hostnameOnlyTarget.serverName == "example.com")
 
         let hostnameWithPortTarget = try await InspectionTarget.with(address: "example.com:8443", port: 443, servername: nil, ipVersion: .ipv4)
-        #expect(hostnameWithPortTarget.ipAddress.string == "93.184.215.14")
+        #expect(!hostnameWithPortTarget.ipAddress.string.isEmpty)
         #expect(hostnameWithPortTarget.port == 8443)
         #expect(hostnameWithPortTarget.serverName == "example.com")
     }

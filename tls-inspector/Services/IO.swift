@@ -16,7 +16,11 @@
 
 import Foundation
 
+/// Provides a basic filesystem interface
 public class IO {
+    /// Return a file path for a file with `name` in the documents directory of the app
+    /// - Parameter name: The file name to use
+    /// - Returns: A URL pointing to the file path
     public static func fileInDocumentsDirectory(_ name: String) -> URL {
         let basePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
@@ -27,6 +31,9 @@ public class IO {
         }
     }
 
+    /// Returns true if the given path exists
+    /// - Parameter path: The path of the file or directory
+    /// - Returns: True if a file or directory exists at the given path
     public static func fileExists(_ path: URL) -> Bool {
         if #available(iOS 16, *) {
             return FileManager.default.fileExists(atPath: path.path())
@@ -35,6 +42,9 @@ public class IO {
         }
     }
 
+    /// Returns the size of the file at `path`
+    /// - Parameter path: The file path
+    /// - Returns: The file size or 0
     public static func fileSize(_ path: URL) -> Int64 {
         let attributes: [FileAttributeKey: Any]
         do {
@@ -54,15 +64,9 @@ public class IO {
         return itemSize
     }
 
+    /// Delete the file or directory located at `path`
+    /// - Parameter path: The path of the item to remove
     public static func delete(_ path: URL) throws {
         try FileManager.default.removeItem(at: path)
-    }
-
-    public static func read(_ path: URL) throws -> Data {
-        return try Data(contentsOf: path)
-    }
-
-    public static func write(_ path: URL, data: Data) throws {
-        return try data.write(to: path)
     }
 }

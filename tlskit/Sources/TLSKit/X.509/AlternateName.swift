@@ -25,13 +25,15 @@ public enum AlternateName: Sendable, Hashable {
     case email(String)
 
     internal static func fromCertificate(_ cert: X509) -> [AlternateName]? {
-        guard let ext = X509_get_ext_d2i(cert, NID_subject_alt_name, nil, nil)?.assumingMemoryBound(to: GENERAL_NAME_st.self) else {
+        guard let rawExt = X509_get_ext_d2i(cert, NID_subject_alt_name, nil, nil) else {
             return nil
         }
-        let names = OpaquePointer(ext)
+        guard let names = OpaquePointer(to: rawExt) else {
+            return nil
+        }
 
         let nameCount = OPENSSL_sk_num(names)
-        if nameCount < 1 {
+        if nameCount <= 0 {
             return nil
         }
         if nameCount > 10_000 {

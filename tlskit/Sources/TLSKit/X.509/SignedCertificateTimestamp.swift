@@ -69,7 +69,7 @@ public struct SignedCertificateTimestamp: Sendable {
         if logIdLength == 0 || logIdRaw == nil {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] SCT_get0_log_id returned 0")
-            throw MakeError("Unable to parse sct")
+            throw TLSKitError.invalidData("Unable to parse SCT")
         }
 
         let logId = Data(bytes: logIdRaw!, count: logIdLength)
@@ -82,7 +82,7 @@ public struct SignedCertificateTimestamp: Sendable {
         if signatureLength == 0 || signatureRaw == nil {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] SCT_get0_signature returned 0")
-            throw MakeError("Unable to parse sct")
+            throw TLSKitError.invalidData("Unable to parse SCT")
         }
         let signature = Data(bytes: signatureRaw!, count: signatureLength)
 
@@ -90,7 +90,7 @@ public struct SignedCertificateTimestamp: Sendable {
         let algorithm = SignatureAlgorithm.from(nid: SCT_get_signature_nid(sct))
         if algorithm == .Unknown {
             printError("[\(#fileID):\(#line)] Unknown or unsupported signature algorithm in SCT: \(sigNid)")
-            throw MakeError("Unsupported SCT format")
+            throw TLSKitError.unrecognizedAlgorithm
         }
 
         return SignedCertificateTimestamp(logId: logId, timestamp: timestamp, signatureAlgorithm: algorithm, signature: signature)

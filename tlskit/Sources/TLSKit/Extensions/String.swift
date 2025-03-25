@@ -18,12 +18,16 @@ import Foundation
 import OpenSSL
 
 internal extension String {
+    func escapeNewlines() -> String {
+        return self.replacingOccurrences(of: "\n", with: "\\n").replacingOccurrences(of: "\r", with: "\\r")
+    }
+
     func kvSplit() -> (String, String) {
         let parts = self.split(separator: ":")
         if parts.count != 2 {
             return ("", "")
         }
-        
+
         let key = String(parts[0].trimmingCharacters(in: .whitespaces))
         let value = String(parts[1].trimmingCharacters(in: .whitespaces))
 
@@ -46,12 +50,12 @@ internal extension String {
         return String(cString: data)
     }
 
-    static func from(obj: OpaquePointer, maxLength: Int) -> String? {
+    static func from(obj: OpaquePointer, maxLength: Int, numerical: Bool = false) -> String? {
         let buffer = UnsafeMutablePointer<CChar>.allocate(capacity: maxLength)
         defer {
             buffer.deallocate()
         }
-        OBJ_obj2txt(buffer, Int32(maxLength), obj, 0)
+        OBJ_obj2txt(buffer, Int32(maxLength), obj, numerical ? 1 : 0)
         return String(validatingCString: buffer)
     }
 

@@ -94,27 +94,22 @@ public enum Ciphersuite: Int, CaseIterable, Sendable {
     case RSA_WITH_AES_256_GCM_SHA384 = 5
     case RSA_WITH_AES_128_CBC_SHA256 = 6
     case RSA_WITH_AES_256_CBC_SHA256 = 7
-    case ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA = 8
-    case ECDHE_ECDSA_WITH_AES_128_CBC_SHA = 9
-    case ECDHE_ECDSA_WITH_AES_256_CBC_SHA = 10
-    case ECDHE_RSA_WITH_3DES_EDE_CBC_SHA = 11
-    case ECDHE_RSA_WITH_AES_128_CBC_SHA = 12
-    case ECDHE_RSA_WITH_AES_256_CBC_SHA = 13
-    case ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = 14
-    case ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = 15
-    case ECDHE_RSA_WITH_AES_128_CBC_SHA256 = 16
-    case ECDHE_RSA_WITH_AES_256_CBC_SHA384 = 17
-    case ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 = 18
-    case ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 = 19
-    case ECDHE_RSA_WITH_AES_128_GCM_SHA256 = 20
-    case ECDHE_RSA_WITH_AES_256_GCM_SHA384 = 21
-    case ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = 22
-    case ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = 23
-    case AES_128_GCM_SHA256 = 24
-    case AES_256_GCM_SHA384 = 25
-    case CHACHA20_POLY1305_SHA256 = 26
+    case RSA_WITH_AES_256_CBC_SHA384 = 8
+    case ECDSA_WITH_3DES_EDE_CBC_SHA = 9
+    case ECDSA_WITH_AES_128_CBC_SHA = 10
+    case ECDSA_WITH_AES_256_CBC_SHA = 11
+    case ECDSA_WITH_AES_128_CBC_SHA256 = 12
+    case ECDSA_WITH_AES_256_CBC_SHA384 = 13
+    case ECDSA_WITH_AES_128_GCM_SHA256 = 14
+    case ECDSA_WITH_AES_256_GCM_SHA384 = 15
+    case RSA_WITH_CHACHA20_POLY1305_SHA256 = 16
+    case ECDSA_WITH_CHACHA20_POLY1305_SHA256 = 17
+    case AES_128_GCM_SHA256 = 18
+    case AES_256_GCM_SHA384 = 19
+    case CHACHA20_POLY1305_SHA256 = 20
     // swiftlint:enable identifier_name
 
+    // swiftlint:disable cyclomatic_complexity
     internal static func from(SSL_CIPHER: OpaquePointer) -> Ciphersuite? {
         guard let rawName = SSL_CIPHER_standard_name(SSL_CIPHER) else {
             return nil
@@ -137,37 +132,27 @@ public enum Ciphersuite: Int, CaseIterable, Sendable {
         case TLS1_RFC_ECDHE_RSA_WITH_AES_256_SHA384:
             return .RSA_WITH_AES_256_CBC_SHA256
         case TLS1_RFC_ECDHE_ECDSA_WITH_DES_192_CBC3_SHA:
-            return .ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+            return .ECDSA_WITH_3DES_EDE_CBC_SHA
         case TLS1_RFC_ECDHE_ECDSA_WITH_AES_128_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+            return .ECDSA_WITH_AES_128_CBC_SHA
         case TLS1_RFC_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_AES_256_CBC_SHA
-        case TLS1_RFC_ECDHE_RSA_WITH_DES_192_CBC3_SHA:
-            return .ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
-        case TLS1_RFC_ECDHE_RSA_WITH_AES_128_CBC_SHA:
-            return .ECDHE_RSA_WITH_AES_128_CBC_SHA
-        case TLS1_RFC_ECDHE_RSA_WITH_AES_256_CBC_SHA:
-            return .ECDHE_RSA_WITH_AES_256_CBC_SHA
+            return .ECDSA_WITH_AES_256_CBC_SHA
         case TLS1_RFC_ECDHE_ECDSA_WITH_AES_128_SHA256:
-            return .ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+            return .ECDSA_WITH_AES_128_CBC_SHA256
         case TLS1_RFC_ECDHE_ECDSA_WITH_AES_256_SHA384:
-            return .ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
-        case TLS1_RFC_ECDHE_RSA_WITH_AES_128_SHA256:
-            return .ECDHE_RSA_WITH_AES_128_CBC_SHA256
-        case TLS1_RFC_ECDHE_RSA_WITH_AES_256_SHA384:
-            return .ECDHE_RSA_WITH_AES_256_CBC_SHA384
+            return .ECDSA_WITH_AES_256_CBC_SHA384
         case TLS1_RFC_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:
-            return .ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+            return .ECDSA_WITH_AES_128_GCM_SHA256
         case TLS1_RFC_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:
-            return .ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+            return .ECDSA_WITH_AES_256_GCM_SHA384
         case TLS1_RFC_ECDHE_RSA_WITH_AES_128_GCM_SHA256:
-            return .ECDHE_RSA_WITH_AES_128_GCM_SHA256
+            return .RSA_WITH_AES_128_GCM_SHA256
         case TLS1_RFC_ECDHE_RSA_WITH_AES_256_GCM_SHA384:
-            return .ECDHE_RSA_WITH_AES_256_GCM_SHA384
+            return .RSA_WITH_AES_256_GCM_SHA384
         case TLS1_RFC_ECDHE_RSA_WITH_CHACHA20_POLY1305:
-            return .ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+            return .RSA_WITH_CHACHA20_POLY1305_SHA256
         case TLS1_RFC_ECDHE_ECDSA_WITH_CHACHA20_POLY1305:
-            return .ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+            return .ECDSA_WITH_CHACHA20_POLY1305_SHA256
         case TLS1_3_RFC_AES_128_GCM_SHA256:
             return .AES_128_GCM_SHA256
         case TLS1_3_RFC_AES_256_GCM_SHA384:
@@ -179,7 +164,9 @@ public enum Ciphersuite: Int, CaseIterable, Sendable {
             return nil
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 
+    // swiftlint:disable cyclomatic_complexity
     internal static func from(SSLCipherSuite: SSLCipherSuite) -> Ciphersuite? {
         switch SSLCipherSuite {
         case TLS_RSA_WITH_3DES_EDE_CBC_SHA:
@@ -197,37 +184,37 @@ public enum Ciphersuite: Int, CaseIterable, Sendable {
         case TLS_RSA_WITH_AES_256_CBC_SHA256:
             return .RSA_WITH_AES_256_CBC_SHA256
         case TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+            return .ECDSA_WITH_3DES_EDE_CBC_SHA
         case TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+            return .ECDSA_WITH_AES_128_CBC_SHA
         case TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+            return .ECDSA_WITH_AES_256_CBC_SHA
         case TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA:
-            return .ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+            return .RSA_WITH_3DES_EDE_CBC_SHA
         case TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA:
-            return .ECDHE_RSA_WITH_AES_128_CBC_SHA
+            return .RSA_WITH_AES_128_CBC_SHA
         case TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA:
-            return .ECDHE_RSA_WITH_AES_256_CBC_SHA
+            return .RSA_WITH_AES_256_CBC_SHA
         case TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:
-            return .ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+            return .ECDSA_WITH_AES_128_CBC_SHA256
         case TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384:
-            return .ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+            return .ECDSA_WITH_AES_256_CBC_SHA384
         case TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256:
-            return .ECDHE_RSA_WITH_AES_128_CBC_SHA256
+            return .RSA_WITH_AES_128_CBC_SHA256
         case TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384:
-            return .ECDHE_RSA_WITH_AES_256_CBC_SHA384
+            return .RSA_WITH_AES_256_CBC_SHA384
         case TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:
-            return .ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+            return .ECDSA_WITH_AES_128_GCM_SHA256
         case TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:
-            return .ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+            return .ECDSA_WITH_AES_256_GCM_SHA384
         case TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:
-            return .ECDHE_RSA_WITH_AES_128_GCM_SHA256
+            return .RSA_WITH_AES_128_GCM_SHA256
         case TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:
-            return .ECDHE_RSA_WITH_AES_256_GCM_SHA384
+            return .RSA_WITH_AES_256_GCM_SHA384
         case TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:
-            return .ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+            return .RSA_WITH_CHACHA20_POLY1305_SHA256
         case TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:
-            return .ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+            return .ECDSA_WITH_CHACHA20_POLY1305_SHA256
         case TLS_AES_128_GCM_SHA256:
             return .AES_128_GCM_SHA256
         case TLS_AES_256_GCM_SHA384:
@@ -238,7 +225,9 @@ public enum Ciphersuite: Int, CaseIterable, Sendable {
             return nil
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 
+    // swiftlint:disable cyclomatic_complexity
     internal static func from(tls_ciphersuite_t: tls_ciphersuite_t) -> Ciphersuite? {
         switch tls_ciphersuite_t {
         case .RSA_WITH_3DES_EDE_CBC_SHA:
@@ -256,37 +245,37 @@ public enum Ciphersuite: Int, CaseIterable, Sendable {
         case .RSA_WITH_AES_256_CBC_SHA256:
             return .RSA_WITH_AES_256_CBC_SHA256
         case .ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+            return .ECDSA_WITH_3DES_EDE_CBC_SHA
         case .ECDHE_ECDSA_WITH_AES_128_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+            return .ECDSA_WITH_AES_128_CBC_SHA
         case .ECDHE_ECDSA_WITH_AES_256_CBC_SHA:
-            return .ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+            return .ECDSA_WITH_AES_256_CBC_SHA
         case .ECDHE_RSA_WITH_3DES_EDE_CBC_SHA:
-            return .ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+            return .RSA_WITH_3DES_EDE_CBC_SHA
         case .ECDHE_RSA_WITH_AES_128_CBC_SHA:
-            return .ECDHE_RSA_WITH_AES_128_CBC_SHA
+            return .RSA_WITH_AES_128_CBC_SHA
         case .ECDHE_RSA_WITH_AES_256_CBC_SHA:
-            return .ECDHE_RSA_WITH_AES_256_CBC_SHA
+            return .RSA_WITH_AES_256_CBC_SHA
         case .ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:
-            return .ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+            return .ECDSA_WITH_AES_128_CBC_SHA256
         case .ECDHE_ECDSA_WITH_AES_256_CBC_SHA384:
-            return .ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+            return .ECDSA_WITH_AES_256_CBC_SHA384
         case .ECDHE_RSA_WITH_AES_128_CBC_SHA256:
-            return .ECDHE_RSA_WITH_AES_128_CBC_SHA256
+            return .RSA_WITH_AES_128_CBC_SHA256
         case .ECDHE_RSA_WITH_AES_256_CBC_SHA384:
-            return .ECDHE_RSA_WITH_AES_256_CBC_SHA384
+            return .RSA_WITH_AES_256_CBC_SHA384
         case .ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:
-            return .ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+            return .ECDSA_WITH_AES_128_GCM_SHA256
         case .ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:
-            return .ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+            return .ECDSA_WITH_AES_256_GCM_SHA384
         case .ECDHE_RSA_WITH_AES_128_GCM_SHA256:
-            return .ECDHE_RSA_WITH_AES_128_GCM_SHA256
+            return .RSA_WITH_AES_128_GCM_SHA256
         case .ECDHE_RSA_WITH_AES_256_GCM_SHA384:
-            return .ECDHE_RSA_WITH_AES_256_GCM_SHA384
+            return .RSA_WITH_AES_256_GCM_SHA384
         case .ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:
-            return .ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+            return .RSA_WITH_CHACHA20_POLY1305_SHA256
         case .ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:
-            return .ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+            return .ECDSA_WITH_CHACHA20_POLY1305_SHA256
         case .AES_128_GCM_SHA256:
             return .AES_128_GCM_SHA256
         case .AES_256_GCM_SHA384:
@@ -297,6 +286,7 @@ public enum Ciphersuite: Int, CaseIterable, Sendable {
             return nil
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 
     public func string() -> String {
         return String(describing: self)
@@ -362,4 +352,10 @@ public enum SignatureAlgorithm: Sendable {
             return .Unknown
         }
     }
+}
+
+/// Sources for a certificate
+public enum CertificateSource: String, Sendable {
+    case server
+    case localStore
 }

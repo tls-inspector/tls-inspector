@@ -1,43 +1,71 @@
 # Localization
 
-DNS Inspector supports multiple languages through the code located here.
+TLS Inspector supports multiple languages through the code located here.
 
-Most of the text seen in the DNS Inspector application, such as labels on buttons and dialog
-messages, are localized strings which are loaded in from a dictionary at launch time.
+Most of the text seen in the TLS Inspector application, such as labels on buttons and dialog
+messages, are localized into any of the languages supported by the app.
 
-Items are mapped from a fixed key to the translated string. The key is typically the English
-translation, however it may be an identifier if the string is long, or the key is determined by a 
-variable.
+Translated items are identified using a key, which is typically (but not always) the English
+translation, and mapped to each of the translations.
 
-Sometimes strings need to have variables inserted at specific locations within them. For example
-with `"Hello {name}"` we would need to replace `{name}` with a value.
+For example:
 
-To identify a variable within a translated string you specify the index of that variable, for
-example: `"Hello {0}"`. In code, we pass an array of values that are populated into the string by
-their index. The order of the variables does not matter in the translated string, only that the
-index matches that of the array. For example, this is perfectly valid:
-`"My name is {1}, are you {0}?"`. Variables can be repeated multiple times.
+```yaml
+- key: Trusted
+  values:
+    en: Trusted
+    es: De confianza
+    de: Vertrauenswürdig
+```
 
-## Strings Files
+Some translated items may require values to be populated at runtime by the app, for example if we
+need to specify a domain name in a translated string, that value would be different each time
+depending on what the user is doing.
 
-DNS Inspector's localized strings are stored in so-called `.strings` files. These files contain
-one entry per line in the format of `key TAB value` (without spaces). Lines that begin with a `#`
-are ignored and can be used for comments. Values that contain line brakes should use literal `\n`.
-The file should be alphabetically sorted by key.
+To help with this, some items include variables identified in the key. For example:
 
-English is the primary language, as that is the language best known by the developer. The English
-strings file is used as a reference for what strings needs to be present in the other string files.
+```yaml
+- key: Renew Certificate for {domain}
+  values:
+    en: Renew Certificate for {0}
+    es: Renovar certificado para {0}
+    de: Erneuere Zertifikat für {0}
+```
 
-Keys that are in need of translation will have a preceding `TODO` comment above the entry. Please
-remove this comment when the translation has been completed.
+Here the value for `{domain}` would be populated by the app. You'll notice in the translated strings
+that we use `{0}` - this number refers to the index (starting at 0) of the variable from the key. If
+we had multiple variables, you would reference those with `{1}`, `{2}`, and so on. This is needed
+because the position of that variable may differ between languages.
 
-As build time, these strings files are used to generate a Apple property list file, which is
-embedded in DNS Inspector.
+## Adding a New Language
 
-The header at the top of the strings file must be present, but you may wish to update the
-copyright year should that be incorrect.
+Thank you for your interest in localizing TLS Inspector into a new language! To add a new language
+to the app, you must:
+
+- Add a translated version for each item in your language in `strings.yml`
+- Add your language to `languages` and `languageNameMap` in `lang.py`
+
+## Localization Guidelines
+
+### Country Names
+
+TLS Inspector includes a mapping of ISO two letter country codes to their name. As geopolitical
+matters can often be complex (are are often deeply rooted in racist colonialism), use your best 
+judgement when providing these translations. Keep in mind how a country is referred to may differ
+greatly than how governments or political bodies may refer to it.
+
+#### Requirements
+
+While we ask you to use your best judgement for country names, we do have the following non-negotiable requirements:
+
+- Taiwan (`TW`) must never include "Province of China", or use "Chinese Taipei".
+- Ukraine (`UA`) must never include "Province" or "Territory" of Russia.
+- Canada (`CA`), Greenland (`GL`), Panama (`PA`) must never include "Territory" or "State" of The United States of America.
+
+Willful violation of these requirements may result in your contributions being removed as well as being banned from
+future contributions to the project.
 
 ## Licensing
 
-While DNS Inspector is primarily a GPL3.0 product, localization strings are
-licensed using CC BY-SA 4.0 Attribution-ShareAlike 4.0 International.
+While TLS Inspector is primarily a GPL3.0 product, localization strings are licensed using CC BY-SA
+4.0 Attribution-ShareAlike 4.0 International.
