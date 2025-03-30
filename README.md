@@ -7,7 +7,7 @@
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/6942/badge)](https://bestpractices.coreinfrastructure.org/projects/6942)
 
 TLS Inspector is a free & open-source iOS app that enables you to inspect, analyze, and troubleshoot TLS connections.  
-**[Learn More about TLS Inspector »](https://tlsinspector.com/about.html)**
+**[Learn More about TLS Inspector »](https://tlsinspector.com/)**
 
 <img src="https://tlsinspector.com/static/img/screenshots.webp" alt="TLS Inspector Screenshots" />
 
