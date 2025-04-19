@@ -23,7 +23,9 @@ public struct CertificateMetadataView: View {
     public var body: some View {
         Section(Localize.metadata()) {
             TitleValueView(title: Localize.serialnumber()) {
-                Text(certificate.serial.hexEncodedString()).monospaced()
+                Text(certificate.serial.hexEncodedString())
+                    .monospaced()
+                    .textSelection(.enabled)
             }
             if let source = certificate.source {
                 HStack {

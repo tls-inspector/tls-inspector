@@ -32,6 +32,7 @@ public struct CertificateExtensionsView: View {
             "2.5.29.35", // Issuer key id
             "2.5.29.37", // Ext key usage
             "1.3.6.1.4.1.11129.2.4.2", // SCTs
+            "1.3.6.1.5.5.7.1.1", // AIA
         ]
         self.extensions = extensions.filter { ext in
             return ignoredOids.firstIndex(of: ext.oid) == nil

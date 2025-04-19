@@ -1,5 +1,5 @@
 // TLS Inspector
-// Copyright (C) 2024 Ian Spence
+// Copyright (C) 2025 Ian Spence
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,26 +17,22 @@
 import SwiftUI
 import TLSKit
 
-public struct CertificateKeyUsageView: View {
-    public let keyUsage: KeyUsage
+public struct ConnectionInformation: View {
+    public let response: InspectionResponse
 
     public var body: some View {
-        Section(Localize.keyusage()) {
-            if let basic = keyUsage.basic {
-                TitleValueView(title: Localize.basic()) {
-                    Text(basic.map({ ku in
-                        return ku.rawValue
-                    }).joined(separator: ", "))
+        Section(Localize.connectioninformation()) {
+            TitleValueView(title: Localize.negotiatedciphersuite()) {
+                Text(String(describing: response.tlsConnection.ciphersuite))
                     .textSelection(.enabled)
-                }
             }
-            if let extended = keyUsage.extended {
-                TitleValueView(title: Localize.extended()) {
-                    Text(extended.map({ ku in
-                        return ku.rawValue
-                    }).joined(separator: ", "))
+            TitleValueView(title: Localize.negotiatedversion()) {
+                Text(response.tlsConnection.version.string())
                     .textSelection(.enabled)
-                }
+            }
+            TitleValueView(title: Localize.remoteaddress()) {
+                Text(String(describing: response.tlsConnection.remoteAddress.string))
+                    .textSelection(.enabled)
             }
         }
     }

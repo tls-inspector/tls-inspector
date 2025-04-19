@@ -439,3 +439,30 @@
 - key: ProxyDanger
   values:
     en: If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
+- key: Sent by server
+  values:
+    en: Sent by server
+- key: Found on device
+  values:
+    en: Found on device
+- key: Add reminder for certificate expiry
+  values:
+    en: Add reminder for certificate expiry
+- key: Export certificate
+  values:
+    en: Export certificate
+- key: Export certificate chain
+  values:
+    en: Export certificate chain
+- key: Search on crt.sh
+  values:
+    en: Search on crt.sh
+- key: Search on Shodan
+  values:
+    en: Search on Shodan
+- key: Show certificate on crt.sh
+  values:
+    en: Show certificate on crt.sh
+- key: View on SSL Labs
+  values:
+    en: View on SSL Labs

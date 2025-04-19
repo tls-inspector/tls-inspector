@@ -198,4 +198,12 @@ public struct Certificate: Sendable {
 
         return constraints.pointee.ca > 0
     }
+
+    public func pemString() throws -> String {
+        guard let base64 = I2D.X509(x509) else {
+            printError("[\(#fileID):\(#line)] I2D_X509 returned nil")
+            throw TLSKitError.invalidData("Invalid certificate data")
+        }
+        return "-----BEGIN CERTIFICATE-----\n\(base64)\n-----END CERTIFICATE-----\n"
+    }
 }

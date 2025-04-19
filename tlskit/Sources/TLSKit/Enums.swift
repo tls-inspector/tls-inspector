@@ -356,6 +356,8 @@ public enum SignatureAlgorithm: Sendable {
 
 /// Sources for a certificate
 public enum CertificateSource: String, Sendable {
+    /// Indicating this certificate was sent by the server
     case server
+    /// Indicating this certificate was found on the device
     case localStore
 }

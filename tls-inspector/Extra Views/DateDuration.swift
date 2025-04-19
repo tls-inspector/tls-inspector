@@ -19,18 +19,18 @@ import Foundation
 @MainActor
 internal class DateDuration {
     private static let unitSingular: [Calendar.Component: () -> String] = [
-        .year: Localize.n1year,
-        .month: Localize.n1month,
-        .day: Localize.n1day,
-        .hour: Localize.n1hour,
-        .minute: Localize.n1minute,
+        .year: { return Localize.n1year() },
+        .month: { return Localize.n1month() },
+        .day: { return Localize.n1day() },
+        .hour: { return Localize.n1hour() },
+        .minute: { return Localize.n1minute() },
     ]
     private static let unitPlural: [Calendar.Component: (String) -> String] = [
-        .year: Localize.numberyears(number:),
-        .month: Localize.numbermonths(number:),
-        .day: Localize.numberdays(number:),
-        .hour: Localize.numberhours(number:),
-        .minute: Localize.numberminutes(number:),
+        .year: { v in return Localize.numberyears(number: v) },
+        .month: { v in return Localize.numbermonths(number: v) },
+        .day: { v in return Localize.numberdays(number: v) },
+        .hour: { v in return Localize.numberhours(number: v) },
+        .minute: { v in return Localize.numberminutes(number: v) },
     ]
 
     static func between(first: Date, second: Date) -> String {

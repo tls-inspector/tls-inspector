@@ -1,5 +1,5 @@
 // TLS Inspector
-// Copyright (C) 2024 Ian Spence
+// Copyright (C) 2025 Ian Spence
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,26 +17,29 @@
 import SwiftUI
 import TLSKit
 
-public struct CertificateKeyUsageView: View {
-    public let keyUsage: KeyUsage
+private let securityHeaders = [
+    "Content-Security-Policy",
+    "Cross-Origin-Opener-Policy",
+    "Cross-Origin-Resource-Policy",
+    "Permissions-Policy",
+    "Referrer-Policy",
+    "Strict-Transport-Security",
+    "X-Content-Type-Options",
+    "X-Frame-Options",
+]
+
+public struct HTTPServerInfo: View {
+    public let httpServerInfo: TLSKit.HTTPServerInfo
 
     public var body: some View {
-        Section(Localize.keyusage()) {
-            if let basic = keyUsage.basic {
-                TitleValueView(title: Localize.basic()) {
-                    Text(basic.map({ ku in
-                        return ku.rawValue
-                    }).joined(separator: ", "))
-                    .textSelection(.enabled)
-                }
+        Section(Localize.securityhttpheaders()) {
+            ForEach(securityHeaders, id: \.self) { headerName in
+                HTTPSecurityHeaderView(key: headerName, headers: httpServerInfo.headers)
             }
-            if let extended = keyUsage.extended {
-                TitleValueView(title: Localize.extended()) {
-                    Text(extended.map({ ku in
-                        return ku.rawValue
-                    }).joined(separator: ", "))
-                    .textSelection(.enabled)
-                }
+            NavigationLink {
+                HTTPHeadersView(headers: httpServerInfo.headers)
+            } label: {
+                Text(Localize.viewall())
             }
         }
     }

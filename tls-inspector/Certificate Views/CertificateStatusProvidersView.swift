@@ -26,11 +26,15 @@ public struct CertificateStatusProvidersView: View {
                 switch provider {
                 case .crl(let url):
                     TitleValueView(title: "CRL") {
-                        Text(url).monospaced()
+                        Text(url)
+                            .monospaced()
+                            .textSelection(.enabled)
                     }
                 case .ocsp(let url):
                     TitleValueView(title: "OCSP") {
-                        Text(url).monospaced()
+                        Text(url)
+                            .monospaced()
+                            .textSelection(.enabled)
                     }
                 }
             }

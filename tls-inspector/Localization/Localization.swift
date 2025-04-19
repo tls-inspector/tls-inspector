@@ -906,4 +906,58 @@ public final class Localize {
             return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible."
         }
     }
+    static func sentbyserver() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Sent by server"
+        }
+    }
+    static func foundondevice() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Found on device"
+        }
+    }
+    static func addreminderforcertificateexpiry() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Add reminder for certificate expiry"
+        }
+    }
+    static func exportcertificate() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Export certificate"
+        }
+    }
+    static func exportcertificatechain() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Export certificate chain"
+        }
+    }
+    static func searchoncrtsh() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Search on crt.sh"
+        }
+    }
+    static func searchonshodan() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Search on Shodan"
+        }
+    }
+    static func showcertificateoncrtsh() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Show certificate on crt.sh"
+        }
+    }
+    static func viewonssllabs() -> String {
+        switch currentLanguage {
+        case .English:
+            return "View on SSL Labs"
+        }
+    }
 }

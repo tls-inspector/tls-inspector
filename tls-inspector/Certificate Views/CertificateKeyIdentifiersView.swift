@@ -24,12 +24,16 @@ public struct CertificateKeyIdentifiersView: View {
         Section(Localize.keyidentifiers()) {
             if let subject = certificate.subjectKeyId {
                 TitleValueView(title: Localize.subject()) {
-                    Text(subject.hexEncodedString()).monospaced()
+                    Text(subject.hexEncodedString())
+                        .monospaced()
+                        .textSelection(.enabled)
                 }
             }
             if let authority = certificate.authorityKeyId {
                 TitleValueView(title: Localize.authority()) {
-                    Text(authority.hexEncodedString()).monospaced()
+                    Text(authority.hexEncodedString())
+                        .monospaced()
+                        .textSelection(.enabled)
                 }
             }
         }

@@ -25,11 +25,14 @@ public struct CertificateTimestampView: View {
             ForEach(timestamps, id: \.logId) { timestamp in
                 Section {
                     TitleValueView(title: Localize.logid()) {
-                        Text(timestamp.logId.hexEncodedString()).monospaced()
+                        Text(timestamp.logId.hexEncodedString())
+                            .monospaced()
+                            .textSelection(.enabled)
                     }
                     if let logName = timestamp.logName {
                         TitleValueView(title: Localize.logname()) {
                             Text(logName)
+                                .textSelection(.enabled)
                         }
                     }
                     HStack {

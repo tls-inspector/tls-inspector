@@ -42,5 +42,30 @@ public struct CertificateView: View {
             CertificateMetadataView(certificate: certificate)
         }
         .navigationTitle(certificate.subject.description)
+        .toolbar {
+            ToolbarItem {
+                Menu {
+                    Button {
+                        //
+                    } label: {
+                        Text(Localize.exportcertificate())
+                    }
+                    Divider()
+                    Button {
+                        //
+                    } label: {
+                        Text(Localize.addreminderforcertificateexpiry())
+                    }
+                    Divider()
+                    Button {
+                        //
+                    } label: {
+                        Text(Localize.showcertificateoncrtsh())
+                    }
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+        }
     }
 }

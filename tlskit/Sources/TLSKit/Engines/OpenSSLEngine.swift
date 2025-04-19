@@ -72,7 +72,7 @@ internal final class OpenSSLEngine: Engine {
         }
 
         let keylogCallback: SSL_CTX_keylog_cb_func = { (_ ctx: OpaquePointer?, _ buf: UnsafePointer<Int8>?) in
-
+            // TODO
         }
 
         SSL_CTX_set_verify(context, SSL_VERIFY_NONE, nil)
@@ -162,6 +162,7 @@ internal final class OpenSSLEngine: Engine {
             throw TLSKitError.invalidData("Unknown or unsupported protocol version")
         }
 
+        var certificatesSentByServer: [Data] = []
         guard let certs = SSL_get_peer_cert_chain(ssl) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] SSL_get_peer_cert_chain returned nil")
@@ -195,6 +196,7 @@ internal final class OpenSSLEngine: Engine {
             }
 
             secCertificates.append(secCertificate)
+            certificatesSentByServer.add(data)
         }
 
         if secCertificates.count == 0 {
@@ -237,19 +239,32 @@ internal final class OpenSSLEngine: Engine {
         }
 
         var certificates: [Certificate] = []
+        let addCertificate = { (secCertificate: SecCertificate) throws in
+            do {
+                var source: CertificateSource?
+                if let data = SecCertificateCopyData(secCertificate) as? Data {
+                    if certificatesSentByServer.firstIndex(of: data) == nil {
+                        source = .localStore
+                    } else {
+                        source = .server
+                    }
+                }
+
+                let certificate = try Certificate(secCertificate: secCertificate, certificateSource: source)
+                certificates.append(certificate)
+            } catch {
+                printError("[\(#fileID):\(#line)] Error decoding certificate: \(error.localizedDescription)")
+                throw error
+            }
+        }
+
         if #available(iOS 15.0, *) {
             guard let secCertificates = SecTrustCopyCertificateChain(trust) as? [SecCertificate] else {
                 printError("[\(#fileID):\(#line)] SecTrustCopyCertificateChain returned nil")
                 throw TLSKitError.internalError("Server returned no certificates")
             }
             for secCertificate in secCertificates {
-                do {
-                    let certificate = try Certificate(secCertificate: secCertificate)
-                    certificates.append(certificate)
-                } catch {
-                    printError("[\(#fileID):\(#line)] Error decoding certificate: \(error.localizedDescription)")
-                    throw error
-                }
+                try addCertificate(secCertificate)
             }
         } else {
             for i in 0 ..< certificateCount {
@@ -257,13 +272,7 @@ internal final class OpenSSLEngine: Engine {
                     printError("[\(#fileID):\(#line)] SecTrustGetCertificateAtIndex returned nil at index \(i)")
                     throw TLSKitError.internalError("Server returned no certificates")
                 }
-                do {
-                    let certificate = try Certificate(secCertificate: secCertificate)
-                    certificates.append(certificate)
-                } catch {
-                    printError("[\(#fileID):\(#line)] Error decoding certificate: \(error.localizedDescription)")
-                    throw error
-                }
+                try addCertificate(secCertificate)
             }
         }
 

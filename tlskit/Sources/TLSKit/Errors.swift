@@ -17,7 +17,7 @@
 import Foundation
 
 /// All possible errors that TLSKit can produce
-public enum TLSKitError: Error, Sendable {
+public enum TLSKitError: Error, Sendable, LocalizedError {
     /// The connection to the target was unsuccessful. More details are available.
     case connectionError(Error)
     /// The remote host took too long to respond.
@@ -37,4 +37,27 @@ public enum TLSKitError: Error, Sendable {
     /// The content type header on the response was unexpected or missing. Contains the value of the content type
     /// header, or an empty string if it was missing.
     case invalidContentType(String)
+
+    public var errorDescription: String? {
+        switch self {
+        case .connectionError(let underlaying):
+            return "Connection error: \(underlaying)"
+        case .timedOut:
+            return "Timed out"
+        case .responseError(let underlaying):
+            return "Response error: \(underlaying)"
+        case .invalidData(let underlaying):
+            return "Invalid data: \(underlaying)"
+        case .invalidCertificate(let underlaying):
+            return "Invalid certificate: \(underlaying)"
+        case .unrecognizedAlgorithm:
+            return "Unrecognized algorithm"
+        case .internalError(let underlaying):
+            return "Internal error: \(underlaying):"
+        case .httpError(let underlaying):
+            return "HTTP error: \(underlaying)"
+        case .invalidContentType(let underlaying):
+            return "Invalid content type: \(underlaying)"
+        }
+    }
 }

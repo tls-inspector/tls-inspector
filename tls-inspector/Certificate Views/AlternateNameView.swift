@@ -27,18 +27,22 @@ struct AlternateNameView: View {
                 case .dns(let dns):
                     TitleValueView(title: Localize.dnsname()) {
                         Text(dns)
+                            .textSelection(.enabled)
                     }
                 case .email(let email):
                     TitleValueView(title: Localize.emailaddress()) {
                         Text(email)
+                            .textSelection(.enabled)
                     }
                 case .ipAddress(let ip):
                     TitleValueView(title: Localize.ipaddress()) {
                         Text(ip.string)
+                            .textSelection(.enabled)
                     }
                 case .uri(let uri):
                     TitleValueView(title: Localize.uri()) {
                         Text(uri)
+                            .textSelection(.enabled)
                     }
                 }
             }

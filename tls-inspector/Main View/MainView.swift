@@ -54,6 +54,7 @@ struct MainView: View {
                     if let error = self.inspectionError {
                         HStack {
                             Image(systemName: "exclamationmark.triangle")
+                                .foregroundStyle(.red)
                             Text(error)
                         }
                     }
@@ -127,10 +128,11 @@ struct MainView: View {
         }
 
         self.isLoading = true
-        let session = InspectionSession(engineType: UserOptions.current.cryptoEngine.engineType())
+        let session = InspectionSession(engineType: .NetworkFramework)
         do {
             let result = try await session.execute(request)
             self.inspectionResponse = result
+            self.inspectionError = nil
             self.isLoading = false
             InspectionHistoryManager.shared.add(request)
         } catch {

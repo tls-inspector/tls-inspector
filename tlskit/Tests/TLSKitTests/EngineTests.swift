@@ -42,6 +42,7 @@ let testEngines: [TLSEngine] = [
         #expect((try? leaf.fingerprint(.sha1)) != nil)
         #expect((try? leaf.fingerprint(.sha256)) != nil)
         #expect((try? leaf.fingerprint(.sha512)) != nil)
+        #expect(try leaf.pemString().contains("BEGIN CERTIFICATE"))
 
         let scts = leaf.signedTimestamps!
         #expect(scts.count > 0)

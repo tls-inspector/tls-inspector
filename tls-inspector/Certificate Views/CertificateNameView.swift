@@ -44,31 +44,37 @@ private struct CertificateNameView: View {
             ForEach(name.commonName, id: \.self) { cn in
                 TitleValueView(title: Localize.commonname()) {
                     Text(cn)
+                        .textSelection(.enabled)
                 }
             }
             ForEach(name.country, id: \.self) { c in
                 TitleValueView(title: Localize.country()) {
                     Text(c)
+                        .textSelection(.enabled)
                 }
             }
             ForEach(name.locality, id: \.self) { l in
                 TitleValueView(title: Localize.citylocality()) {
                     Text(l)
+                        .textSelection(.enabled)
                 }
             }
             ForEach(name.state, id: \.self) { s in
                 TitleValueView(title: Localize.stateprovince()) {
                     Text(s)
+                        .textSelection(.enabled)
                 }
             }
             ForEach(name.organization, id: \.self) { o in
                 TitleValueView(title: Localize.organization()) {
                     Text(o)
+                        .textSelection(.enabled)
                 }
             }
             ForEach(name.organizationUnit, id: \.self) { ou in
                 TitleValueView(title: Localize.organizationalunit()) {
                     Text(ou)
+                        .textSelection(.enabled)
                 }
             }
             if let sans = alternateNames {

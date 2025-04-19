@@ -57,7 +57,15 @@ internal final class NetworkFrameworkEngine: Engine {
         // Don't reuse sessions otherwise the verify block is not called
         sec_protocol_options_set_tls_resumption_enabled(tlsOptions.securityProtocolOptions, false)
 
+        var certificatesSentByServer: [Data] = []
+
         sec_protocol_options_set_verify_block(tlsOptions.securityProtocolOptions, { metadata, trustRef, verifyComplete in
+
+            // Get only the certificates presented by the server
+            sec_protocol_metadata_access_peer_certificate_chain(metadata) { cert in
+                let secCert = sec_certificate_copy_ref(cert).takeRetainedValue()
+                certificatesSentByServer.add(SecCertificateCopyData(secCert) as? Data)
+            }
 
             let trust = sec_trust_copy_ref(trustRef).takeRetainedValue()
             var trustResult = SecTrustResultType.invalid
@@ -131,8 +139,18 @@ internal final class NetworkFrameworkEngine: Engine {
                     return
                 }
                 let certificate: Certificate
+
+                var source: CertificateSource?
+                if let data = SecCertificateCopyData(secCert) as? Data {
+                    if certificatesSentByServer.firstIndex(of: data) == nil {
+                        source = .localStore
+                    } else {
+                        source = .server
+                    }
+                }
+
                 do {
-                    certificate = try Certificate(secCertificate: secCert)
+                    certificate = try Certificate(secCertificate: secCert, certificateSource: source)
                 } catch {
                     didComplete.If(false) {
                         printError("[\(#fileID):\(#line)] Unable to deseralize seccert from chain at index \(i): \(error)")
