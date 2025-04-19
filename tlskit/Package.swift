@@ -1,7 +1,7 @@
 // swift-tools-version: 6.0
 
 // TLSKit
-// Copyright (C) 2024 Ian Spence
+// Copyright (C) Ian Spence and other TLSKit Contributors
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
