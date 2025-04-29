@@ -47,7 +47,7 @@ internal final class CurlClient {
     /// Optional request body
     internal var body: Data?
     /// The maximum body size of a response. Defaults to 32MiB.
-    internal var maxBodySize: Int32 = 33_554_432 // 32MiB
+    internal var maxBodySize: Int32 = 33_554_432
     /// The maximum number of seconds to wait before failing
     internal var timeoutSeconds: Int32 = 5
     /// If HTTP redirections should be followed
@@ -122,25 +122,24 @@ internal final class CurlClient {
         return send("PUT")
     }
 
+    /// Act on the curl request
     private func send(_ method: String) -> Result<CurlResponse, TLSKitError> {
+        /**
+         Developer note: you need to be careful and pay attetion to which values
+         are copied by curl, and which are referenced. For anything that is not
+         copied, i.e. a pointer, you need to ensure that swift does not release
+         that pointer before curl is finished using it.
+         */
         defer {
             curl_easy_cleanup(self.handle)
         }
 
+        // Load the ca bundle if we're connecting using https
         if self.url.hasPrefix("https://") {
-            guard let caBundlePath = Bundle.module.url(forResource: "apple_ca_bundle", withExtension: "pem") else {
+            guard let caBundlePath = Bundle.module.url(forResource: "apple_ca_bundle", withExtension: "pem")?.path else {
                 return .failure(.internalError("CA bundle file not found"))
             }
-            var caBundleData: Data
-            do {
-                caBundleData = try Data(contentsOf: caBundlePath)
-            } catch {
-                return .failure(.internalError(error.localizedDescription))
-            }
-            caBundleData.withUnsafeMutableBytes { ca in
-                var blob = curl_blob(data: ca.baseAddress, len: ca.count, flags: UInt32(CURL_BLOB_COPY))
-                curl_easy_setopt_blob(self.handle, CURLOPT_CAINFO_BLOB, &blob)
-            }
+            curl_easy_setopt_string(self.handle, CURLOPT_CAINFO, caBundlePath)
         }
 
         curl_easy_setopt_string(self.handle, CURLOPT_CUSTOMREQUEST, method)
@@ -154,7 +153,7 @@ internal final class CurlClient {
         var requestHeaders: UnsafeMutablePointer<curl_slist>?
         for (key, values) in self.headers.all() {
             for value in values {
-                requestHeaders = curl_slist_append(requestHeaders, "\(key): \(value)")
+                requestHeaders = curl_slist_append(requestHeaders, "\(key): \(value)") // curl copies the string
             }
         }
         curl_easy_setopt_slist(self.handle, CURLOPT_HTTPHEADER, requestHeaders)
@@ -221,17 +220,11 @@ internal final class CurlClient {
         }
         curl_easy_setopt_write_function(self.handle, CURLOPT_WRITEFUNCTION, bodyCallback)
 
-        // TODO: In some rare cases this crashes, need to investigate and figure out why.
-        let rv = withUnsafeMutablePointer(to: &debugCallbackData) { debugData in
-            return withUnsafeMutablePointer(to: &headerCallbackData) { headerData in
-                return withUnsafeMutablePointer(to: &bodyCallbackData) { bodyData in
-                    curl_easy_setopt_pointer(self.handle, CURLOPT_DEBUGDATA, debugData)
-                    curl_easy_setopt_pointer(self.handle, CURLOPT_HEADERDATA, headerData)
-                    curl_easy_setopt_pointer(self.handle, CURLOPT_WRITEDATA, bodyData)
-                    return curl_easy_perform(self.handle)
-                }
-            }
-        }
+        let rv = self.curl_do(
+            debugData: &debugCallbackData,
+            headerData: &headerCallbackData,
+            bodyBody: &bodyCallbackData
+        )
 
         var responseCode: Int32 = 0
         curl_easy_getinfo_int(self.handle, CURLINFO_RESPONSE_CODE, &responseCode)
@@ -252,5 +245,17 @@ internal final class CurlClient {
         let headers = HTTPHeaders.fromLines(allHeaders.split(separator: "\r\n"))
 
         return .success(CurlResponse(statusCode: responseCode, headers: headers, body: bodyCallbackData.data))
+    }
+
+    // Break out this into a dedicated function to avoid needing to do a nest of withUnsafeMutablePointer
+    private func curl_do(
+        debugData: UnsafeMutablePointer<DebugCallbackData>,
+        headerData: UnsafeMutablePointer<WriteCallbackData>,
+        bodyBody: UnsafeMutablePointer<WriteCallbackData>
+    ) -> CURLcode {
+        curl_easy_setopt_pointer(self.handle, CURLOPT_DEBUGDATA, debugData)
+        curl_easy_setopt_pointer(self.handle, CURLOPT_HEADERDATA, headerData)
+        curl_easy_setopt_pointer(self.handle, CURLOPT_WRITEDATA, bodyBody)
+        return curl_easy_perform(self.handle)
     }
 }

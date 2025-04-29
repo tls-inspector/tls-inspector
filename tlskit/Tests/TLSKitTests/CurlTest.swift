@@ -19,7 +19,20 @@ import Testing
 
 @Suite("Curl") struct curlTests {
     @Test func httpGet() async throws {
-        let curl = try CurlClient(url: "https://ianspence.com")
+        let curl = try CurlClient(url: "http://example.com")
+        let result = curl.get()
+
+        switch result {
+        case .success(let response):
+            #expect(response.headers.get1("Content-Type")?.contains("text/html") ?? false, "Content type must be defined")
+            #expect(response.body.count > 0, "Response must have a body")
+        case .failure(let error):
+            Issue.record(error, "GET request failed")
+        }
+    }
+
+    @Test func httpsGet() async throws {
+        let curl = try CurlClient(url: "https://example.com")
         let result = curl.get()
 
         switch result {

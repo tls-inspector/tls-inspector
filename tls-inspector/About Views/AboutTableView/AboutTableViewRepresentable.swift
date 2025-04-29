@@ -14,8 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
+import SwiftUI
 
-let optionsChangedNotification = Notification.Name(rawValue: "preset.server.changed")
-let inspectionHistoryUpdated = Notification.Name(rawValue: "inspection.history.changed")
-let showFeedbackNotification = Notification.Name(rawValue: "show.feedback")
+struct AboutTableViewRepresentable: UIViewRepresentable {
+    typealias UIViewType = AboutTableView
+
+    func makeUIView(context: Context) -> AboutTableView {
+        let view = AboutTableView()
+        return view
+    }
+
+    func updateUIView(_ uiView: AboutTableView, context: Context) {}
+}

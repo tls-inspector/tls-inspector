@@ -960,4 +960,184 @@ public final class Localize {
             return "View on SSL Labs"
         }
     }
+    static func sharetlsinspector() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Share TLS Inspector"
+        }
+    }
+    static func rateinappstore() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Rate in App Store"
+        }
+    }
+    static func sharefeedback() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Share & Feedback"
+        }
+    }
+    static func appversionbuildopensslversioncurlversion(version: String, build: String, opensslversion: String, curlversion: String) -> String {
+        switch currentLanguage {
+        case .English:
+            return "App: \(version) (\(build)), OpenSSL: \(opensslversion), curl: \(curlversion)"
+        }
+    }
+    static func followus() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Follow Us"
+        }
+    }
+    static func getinvolved() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Get Involved"
+        }
+    }
+    static func morefromthedeveloper() -> String {
+        switch currentLanguage {
+        case .English:
+            return "More from the Developer"
+        }
+    }
+    static func followusonmastodon() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Follow us on Mastodon"
+        }
+    }
+    static func followusonbluesky() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Follow us on Bluesky"
+        }
+    }
+    static func contributetotlsinspector() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Contribute to TLS Inspector"
+        }
+    }
+    static func providefeedback() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Provide Feedback"
+        }
+    }
+    static func opensourcelicensesattributions() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Open source licenses & attributions"
+        }
+    }
+    static func licensefooter() -> String {
+        switch currentLanguage {
+        case .English:
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
+        }
+    }
+    static func rootcalicensefooter() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities."
+        }
+    }
+    static func cancel() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Cancel"
+        }
+    }
+    static func contactsupportrequiresmailaccount() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Contacting support requires that at least one email account be configured on this device."
+        }
+    }
+    static func feedbacksent() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Feedback Sent"
+        }
+    }
+    static func mailaccountrequired() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Mail Account Required"
+        }
+    }
+    static func pleasenote() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Please Note"
+        }
+    }
+    static func providedetails() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Provide Details"
+        }
+    }
+    static func providefeedbackdetails() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Provide Feedback Details"
+        }
+    }
+    static func reportabug() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Report a Bug"
+        }
+    }
+    static func requestafeature() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Request a Feature"
+        }
+    }
+    static func selectfeedbacktype() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Select Feedback Type"
+        }
+    }
+    static func sendfeedback() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Send Feedback"
+        }
+    }
+    static func somethingelse() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Something Else"
+        }
+    }
+    static func submit() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Submit"
+        }
+    }
+    static func supportisonlyprovidedinenglish() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Support is only provided in English."
+        }
+    }
+    static func supportnote() -> String {
+        switch currentLanguage {
+        case .English:
+            return "TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support."
+        }
+    }
+    static func yourfeedbackhasbeensent() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Your feedback has been sent."
+        }
+    }
 }

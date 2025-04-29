@@ -26,13 +26,28 @@ struct MainView: View {
     @State var showAboutView = false
     @State var showOptionsView = false
     @State var showProxyWarning = false
+    @State var showRootCACertificatesView = false
+    @State var showFeedbackView = false
+    let randomSite = FunStuff.randomWebsite()
 
     var body: some View {
         NavigationStack {
             List {
+                Section("Debug") {
+                    ListButton {
+                        self.showRootCACertificatesView.toggle()
+                    } label: {
+                        Text("Root CA Certificates")
+                    }
+                    ListButton {
+                        self.showFeedbackView.toggle()
+                    } label: {
+                        Text("Feedback")
+                    }
+                }
                 Section(Localize.domainnameoripaddress()) {
                     TextField(text: $host) {
-                        Text("google.com")
+                        Text(self.randomSite)
                     }
                     .submitLabel(.go)
                     .onSubmit {
@@ -65,6 +80,12 @@ struct MainView: View {
                     }
                 }
             }
+            .fullScreenCover(isPresented: $showRootCACertificatesView, content: {
+                RootCACertificatesView(isPresented: $showRootCACertificatesView)
+            })
+            .fullScreenCover(isPresented: $showFeedbackView, content: {
+                FeedbackView()
+            })
             .navigationTitle("TLS Inspector")
             .sheet(isPresented: $showAboutView, content: {
                 AboutView()

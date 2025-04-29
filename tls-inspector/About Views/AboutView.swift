@@ -19,6 +19,10 @@ import TLSKit
 
 public struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var showFeedbackSheet: Bool = false
+    @State private var tapCount = 0
+    @State private var showQuote = false
+    private let showFeedback = NotificationCenter.Publisher(center: .default, name: showFeedbackNotification)
 
     public var body: some View {
         GeometryReader { geometry in
@@ -29,52 +33,44 @@ public struct AboutView: View {
                             .resizable(resizingMode: .stretch)
                             .foregroundColor(Color.white)
                             .frame(width: 75.0, height: 75.0)
+                            .onTapGesture {
+                                self.tapCount += 1
+                                if self.tapCount >= 5 {
+                                    self.showQuote = true
+                                }
+                            }
                         Text("TLS Inspector")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: geometry.size.height*0.40)
+                    .frame(maxWidth: .infinity, maxHeight: geometry.size.height*0.30)
                     .background(.linearGradient(.init(colors: [Color("GradientLeft", bundle: nil), Color("GradientRight", bundle: nil)]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                    AboutTableViewRepresentable()
                 }
-                List {
-                    Section {
-                        Text("Share TLS Inspector")
-                        Text("Rate in App Store")
-                    } header: {
-                        Text("Share & Feedback")
-                    } footer: {
-                        Text("App: 2.8.3 (135), OpenSSL: 3.4.1, curl: 8.11.1")
-                    }
-                    Section("Follow Us") {
-                        Text("Follow us on Mastodon")
-                        Text("Follow us on Bluesky")
-                    }
-                    Section("Get Involved") {
-                        Text("Contribute to TLS Inspector")
-                        Text("Provide Feedback")
-                    }
-                    Section("More from the Developer") {
-                        Text("DNS Inspector")
-                    }
-                    Section {
-                        //
-                    } footer: {
-                        Text("Trans rights!")
+                .ignoresSafeArea()
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button(action: {
+                            self.dismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                        .tint(.white)
                     }
                 }
             }
-            .ignoresSafeArea()
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(action: {
-                        self.dismiss()
-                    }, label: {
-                        Image(systemName: "xmark")
-                    })
-                    .tint(.white)
+            .alert(FunStuff.randomQuote(), isPresented: $showQuote, actions: {
+                Button(Localize.dismiss()) {
+                    self.tapCount = 0
                 }
-            }
+            })
+            .sheet(isPresented: $showFeedbackSheet, content: {
+                FeedbackView()
+            })
+            .onReceive(showFeedback, perform: { _ in
+                self.showFeedbackSheet = true
+            })
             .background(Color(uiColor: UIColor.systemGroupedBackground))
         }
     }

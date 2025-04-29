@@ -95,6 +95,8 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
 
         if self.shouldUseDownloadedBundle() {
             printDebug("[\(#fileID):\(#line)] Loading downloaded bundles")
+            try self.loadDownloadedBundles()
+            printDebug("[\(#fileID):\(#line)] Loaded downloaded bundles")
         } else {
             printDebug("[\(#fileID):\(#line)] Loading embedded bundles")
             try self.loadEmbeddedBundles()
@@ -282,7 +284,7 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
         return verified
     }
 
-    // MARK: Embedded
+    // MARK: - Embedded
     private func loadEmbeddedBundles() throws {
         // Apple
         guard let appleBundlePath = Bundle.module.url(forResource: "apple_ca_bundle", withExtension: "pem") else {
@@ -355,7 +357,69 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
         }
     }
 
-    // MARK: Downloaded
+    // MARK: - Downloaded
+
+    private func loadDownloadedBundles() throws {
+        guard let bundleMetadata = try? self.readBundleMetadata(self.downloadedBundleDirectory.appendingPathComponent("bundle_metadata.json")) else {
+            printError("[\(#fileID):\(#line)] Downloaded bundle has invalid metadata file")
+            throw TLSKitError.invalidData("Invalid downloaded bundle metadata")
+        }
+
+        // Apple
+        guard let metadata = bundleMetadata.apple.toCertificateBundleMetadata() else {
+            throw TLSKitError.invalidData("Invalid downloaded metadata for Apple bundle")
+        }
+        do {
+            self.appleBundle = try CertificateBundle.from(self.downloadedBundleDirectory.appendingPathComponent("apple_ca_bundle.pem"), name: "Apple", metadata: metadata)
+        } catch {
+            printError("[\(#fileID):\(#line)] Error loading downloaded Apple bundle")
+            throw error
+        }
+
+        // Google
+        guard let metadata = bundleMetadata.google.toCertificateBundleMetadata() else {
+            throw TLSKitError.invalidData("Invalid downloaded metadata for Google bundle")
+        }
+        do {
+            self.googleBundle = try CertificateBundle.from(self.downloadedBundleDirectory.appendingPathComponent("google_ca_bundle.pem"), name: "Google", metadata: metadata)
+        } catch {
+            printError("[\(#fileID):\(#line)] Error loading downloaded Google bundle")
+            throw error
+        }
+
+        // Microsoft
+        guard let metadata = bundleMetadata.microsoft.toCertificateBundleMetadata() else {
+            throw TLSKitError.invalidData("Invalid downloaded metadata for Microsoft bundle")
+        }
+        do {
+            self.microsoftBundle = try CertificateBundle.from(self.downloadedBundleDirectory.appendingPathComponent("microsoft_ca_bundle.pem"), name: "Microsoft", metadata: metadata)
+        } catch {
+            printError("[\(#fileID):\(#line)] Error loading downloaded Microsoft bundle")
+            throw error
+        }
+
+        // Mozilla
+        guard let metadata = bundleMetadata.mozilla.toCertificateBundleMetadata() else {
+            throw TLSKitError.invalidData("Invalid downloaded metadata for Mozilla bundle")
+        }
+        do {
+            self.mozillaBundle = try CertificateBundle.from(self.downloadedBundleDirectory.appendingPathComponent("mozilla_ca_bundle.pem"), name: "Mozilla", metadata: metadata)
+        } catch {
+            printError("[\(#fileID):\(#line)] Error loading downloaded Mozilla bundle")
+            throw error
+        }
+
+        // TLS Inspector
+        guard let metadata = bundleMetadata.tls_inspector.toCertificateBundleMetadata() else {
+            throw TLSKitError.invalidData("Invalid downloaded metadata for TLS Inspector bundle")
+        }
+        do {
+            self.tlsinspectorBundle = try CertificateBundle.from(self.downloadedBundleDirectory.appendingPathComponent("tlsinspector_ca_bundle.pem"), name: "TLS Inspector", metadata: metadata)
+        } catch {
+            printError("[\(#fileID):\(#line)] Error loading downloaded TLS Inspector bundle")
+            throw error
+        }
+    }
 
     /// Check for and download, if needed, a newer root CA certificate bundle.
     @available(iOS 13.0, *)

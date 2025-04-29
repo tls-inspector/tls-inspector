@@ -26,21 +26,28 @@ import Testing
     @Test func loadAndUpdateBundle() async throws {
         AnchorBundleManager.shared.purgeDownloadedBundles()
         try AnchorBundleManager.shared.loadBundles()
-        #expect(AnchorBundleManager.shared.appleBundle != nil)
-        #expect(AnchorBundleManager.shared.appleBundle!.embedded())
-        #expect(AnchorBundleManager.shared.googleBundle != nil)
-        #expect(AnchorBundleManager.shared.googleBundle!.embedded())
-        #expect(AnchorBundleManager.shared.microsoftBundle != nil)
-        #expect(AnchorBundleManager.shared.microsoftBundle!.embedded())
-        #expect(AnchorBundleManager.shared.mozillaBundle != nil)
-        #expect(AnchorBundleManager.shared.mozillaBundle!.embedded())
-        #expect(AnchorBundleManager.shared.tlsinspectorBundle != nil)
-        #expect(AnchorBundleManager.shared.tlsinspectorBundle!.embedded())
+
+        let verifyBundle = { (bundle: CertificateBundle?, embedded: Bool) in
+            #expect(bundle != nil)
+            #expect(bundle!.embedded() == embedded)
+            #expect(bundle!.certificateCount == bundle!.metadata.certificateCount)
+        }
+
+        verifyBundle(AnchorBundleManager.shared.appleBundle, true)
+        verifyBundle(AnchorBundleManager.shared.googleBundle, true)
+        verifyBundle(AnchorBundleManager.shared.microsoftBundle, true)
+        verifyBundle(AnchorBundleManager.shared.mozillaBundle, true)
+        verifyBundle(AnchorBundleManager.shared.tlsinspectorBundle, true)
 
         // Fake the embedded bundle version
         AnchorBundleManager.shared.embeddedBundleTag = "bundle_20201126"
 
         let result = try await AnchorBundleManager.shared.updateNow()
         #expect(result == .updated)
+        verifyBundle(AnchorBundleManager.shared.appleBundle, false)
+        verifyBundle(AnchorBundleManager.shared.googleBundle, false)
+        verifyBundle(AnchorBundleManager.shared.microsoftBundle, false)
+        verifyBundle(AnchorBundleManager.shared.mozillaBundle, false)
+        verifyBundle(AnchorBundleManager.shared.tlsinspectorBundle, false)
     }
 }

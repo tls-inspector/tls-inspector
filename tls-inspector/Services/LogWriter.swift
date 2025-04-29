@@ -26,7 +26,7 @@ internal final class LogWriter: ILogger {
     /// The minimum log level. Messages below this level are discarded. Can be modified at any time.
     nonisolated(unsafe) private var level: LogLevel
 
-    private let filePath: URL
+    internal let filePath: URL
     private let fileWriter: FileHandle?
     private let lock: NSObject = NSObject()
     private var isOpen = false

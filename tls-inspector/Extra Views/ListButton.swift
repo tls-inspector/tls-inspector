@@ -19,21 +19,25 @@ import SwiftUI
 public struct ListButton<Label: View>: View {
     public let label: Label
     public let onTap: () -> Void
+    public let showDisclosureIndicator: Bool
     @State private var isLongPressing: Bool = false
     @GestureState private var isDragging = false
 
-    public init(onTap: @escaping () -> Void, @ViewBuilder label: () -> Label) {
+    public init(showDisclosureIndicator: Bool = true, onTap: @escaping () -> Void, @ViewBuilder label: () -> Label) {
         self.label = label()
+        self.showDisclosureIndicator = showDisclosureIndicator
         self.onTap = onTap
     }
 
     public var body: some View {
         HStack {
             label
-            Spacer()
-            Image(systemName: "chevron.right")
-                .opacity(0.25)
-                .imageScale(.small)
+            if showDisclosureIndicator {
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .opacity(0.25)
+                    .imageScale(.small)
+            }
         }
         .contentShape(Rectangle())
         .listRowBackground(Rectangle().fill(isLongPressing ? Color.listButtonSelectedBackground : Color.listButtonBackground))

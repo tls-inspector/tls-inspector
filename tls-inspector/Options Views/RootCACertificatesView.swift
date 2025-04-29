@@ -59,30 +59,21 @@ public struct RootCACertificatesView: View {
                     if let tlsinspector = AnchorBundleManager.shared.tlsinspectorBundle {
                         AnchorBundleView(title: "TLS Inspector", bundle: tlsinspector)
                     }
-                    Button {
-                        Task {
-                            isUpdating = true
-                            await checkForUpdates()
+                    Section {
+                        Button {
+                            Task {
+                                isUpdating = true
+                                await checkForUpdates()
+                            }
+                        } label: {
+                            Label(Localize.checkforupdates(), systemImage: "arrow.clockwise.square.fill")
                         }
-                    } label: {
-                        Label(Localize.checkforupdates(), systemImage: "arrow.clockwise.square.fill")
+                    } footer: {
+                        Text(Localize.rootcalicensefooter())
                     }
                 }
             }
-            .overlay {
-                Group {
-                    if isUpdating {
-                        VStack(alignment: .center) {
-                            ProgressView().controlSize(.large)
-                            Text(Localize.pleasewait())
-                        }
-                        .padding()
-                        .background(.black.opacity(0.5))
-                        .clipped()
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                    }
-                }
-            }
+            .progressOverlay(presented: $isUpdating)
             .navigationTitle(Localize.rootcacertificates())
             .toolbar {
                 ToolbarItem(placement: .automatic) {
@@ -140,6 +131,7 @@ public struct RootCACertificatesView: View {
 private struct AnchorBundleView: View {
     public let title: String
     public let bundle: CertificateBundle
+    @State public var showShaPopover = false
 
     public var body: some View {
         Section(title) {
@@ -168,11 +160,8 @@ private struct AnchorBundleView: View {
                     }
                 }
             }
-            NavigationLink {
-                Text(bundle.metadata.sha256)
-                    .textSelection(.enabled)
-                    .lineLimit(nil)
-                    .navigationTitle("SHA-256")
+            ListButton {
+                self.showShaPopover.toggle()
             } label: {
                 HStack {
                     Text(Localize.signature()).bold()
@@ -182,6 +171,18 @@ private struct AnchorBundleView: View {
                         Text(Localize.verified())
                     }
                 }
+            }
+            .popover(isPresented: $showShaPopover) {
+                Group {
+                    Text(bundle.metadata.sha256)
+                        .monospaced()
+                        .textSelection(.enabled)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.vertical, 16)
+                .padding(.horizontal, 12)
+                .presentationCompactAdaptation(.popover)
             }
         }
     }
