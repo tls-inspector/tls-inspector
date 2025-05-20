@@ -56,7 +56,7 @@ These rules are *in addition* to the privacy policy of the app.
 
 It is **expressly forbidden** to contribute to TLS Inspector any content that has been created with the assistance of natural language processing artificial intelligence tools, hereby referred to as NLP-AI.
 
-The code and documentation that makes up TLS Inspector **MUST** be written by people. We reserve the right to selectively approve, reject or remove contributions where NLP-AI tools have been, or are suspected to have been, used, at our discretion.
+The code and documentation that makes up TLS Inspector **MUST** be written by people. We reserve the right to selectively approve, reject or remove contributions where NLP-AI tools have been, or are suspected to have been, used, at our discretion. This policy includes user-submitted content such as but not limited to GitHub issues, pull requests, or security reports.
 
 TLS Inspector believes that NLP-AI tools produce subpar content, introduce security risks, and rob individuals of compensation or recognition for their labour.
 
