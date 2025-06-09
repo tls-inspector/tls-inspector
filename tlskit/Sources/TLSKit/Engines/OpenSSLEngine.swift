@@ -205,7 +205,7 @@ internal final class OpenSSLEngine: Engine {
         }
 
         // At this stage secCertificates contains only the certificates from the server, so we need to reconstruct the chain
-        let policy = SecPolicyCreateSSL(true, request.address as CFString)
+        let policy = SecPolicyCreateSSL(true, (request.serverName ?? request.address) as CFString)
         var trust: SecTrust!
         SecTrustCreateWithCertificates(secCertificates as CFTypeRef, policy, &trust)
         if trust == nil {
@@ -218,6 +218,12 @@ internal final class OpenSSLEngine: Engine {
             printError("[\(#fileID):\(#line)] error getting trust result: \(error)")
             throw error
         }
+
+        if let details = SecTrustCopyResult(trust) {
+            printDebug("[\(#fileID):\(#line)] Trust details \(details as NSDictionary)")
+        }
+
+        printDebug("[\(#fileID):\(#line)] Trust result \(String(describing: trustResult))")
 
         var rTrustStatus: TrustStatus?
         if trustResult == .unspecified {
@@ -238,16 +244,17 @@ internal final class OpenSSLEngine: Engine {
             throw TLSKitError.invalidData("Server returned no certificates")
         }
 
+        printDebug("[\(#fileID):\(#line)] Certificates from server \(certificatesSentByServer.count), certificates in reassembled chain \(certificateCount)")
+
         var certificates: [Certificate] = []
         let addCertificate = { (secCertificate: SecCertificate) throws in
             do {
                 var source: CertificateSource?
-                if let data = SecCertificateCopyData(secCertificate) as? Data {
-                    if certificatesSentByServer.firstIndex(of: data) == nil {
-                        source = .localStore
-                    } else {
-                        source = .server
-                    }
+                let data = SecCertificateCopyData(secCertificate) as Data
+                if certificatesSentByServer.firstIndex(of: data) == nil {
+                    source = .localStore
+                } else {
+                    source = .server
                 }
 
                 let certificate = try Certificate(secCertificate: secCertificate, certificateSource: source)
@@ -281,6 +288,7 @@ internal final class OpenSSLEngine: Engine {
             rTrustStatus = trustFailureReason
         }
         if rTrustStatus == nil {
+            printWarning("[\(#fileID):\(#line)] Trust status was not trusted but unable to determine cause")
             rTrustStatus = .untrusted
         }
 

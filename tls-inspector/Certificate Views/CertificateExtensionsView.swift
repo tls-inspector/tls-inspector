@@ -53,7 +53,7 @@ public struct CertificateExtensionsView: View {
                                 Image(systemName: "exclamationmark.circle")
                             }
                         }
-                        Text(ext.value.hexEncodedString()).monospaced()
+                        Text(ext.stringValue ?? ext.value.hexEncodedString()).monospaced().textSelection(.enabled)
                     }
                 }
             }

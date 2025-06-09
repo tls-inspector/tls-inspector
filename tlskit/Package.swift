@@ -49,8 +49,6 @@ let package = Package(
                 .copy("External/Anchors/mozilla_ca_bundle.pem"),
                 .copy("External/Anchors/tlsinspector_ca_bundle.pem"),
                 .copy("External/Anchors/bundle_metadata.json"),
-                .embedInCode("External/Anchors/bundle_version.txt"),
-                .embedInCode("External/Anchors/signing_key.pem"),
                 .copy("External/CT Logs/ct_log_list.min.json"),
             ],
             linkerSettings: [

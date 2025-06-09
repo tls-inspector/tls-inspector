@@ -24,6 +24,7 @@ public struct RootCACertificatesView: View {
     @State private var isUpdating = false
     @State private var updateResult: AnchorBundleUpdateResult?
     @State private var showUpdateResult = false
+    @State private var viewCache = UUID()
 
     public var body: some View {
         Navigation {
@@ -68,11 +69,22 @@ public struct RootCACertificatesView: View {
                         } label: {
                             Label(Localize.checkforupdates(), systemImage: "arrow.clockwise.square.fill")
                         }
+                        if AnchorBundleManager.shared.usingDownloadedBundles {
+                            Button {
+                                Task {
+                                    AnchorBundleManager.shared.clearDownloadedBundles()
+                                    self.viewCache = UUID()
+                                }
+                            } label: {
+                                Label(Localize.cleardownloadedbundles(), systemImage: "trash.fill")
+                            }
+                        }
                     } footer: {
                         Text(Localize.rootcalicensefooter())
                     }
                 }
             }
+            .id(self.viewCache)
             .progressOverlay(presented: $isUpdating)
             .navigationTitle(Localize.rootcacertificates())
             .toolbar {

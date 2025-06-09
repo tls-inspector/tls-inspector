@@ -64,18 +64,14 @@ internal final class NetworkFrameworkEngine: Engine {
             // Get only the certificates presented by the server
             sec_protocol_metadata_access_peer_certificate_chain(metadata) { cert in
                 let secCert = sec_certificate_copy_ref(cert).takeRetainedValue()
-                certificatesSentByServer.add(SecCertificateCopyData(secCert) as? Data)
+                certificatesSentByServer.add(SecCertificateCopyData(secCert) as Data)
             }
 
             let trust = sec_trust_copy_ref(trustRef).takeRetainedValue()
             var trustResult = SecTrustResultType.invalid
 
-            let numberOfCertificates1 = SecTrustGetCertificateCount(trust)
-
             var oEvalulateError: CFError?
             _ = SecTrustEvaluateWithError(trust, &oEvalulateError)
-
-            let numberOfCertificates2 = SecTrustGetCertificateCount(trust)
 
             if let error = SecTry(SecTrustGetTrustResult(trust, &trustResult)) {
                 didComplete.If(false) {
@@ -141,12 +137,11 @@ internal final class NetworkFrameworkEngine: Engine {
                 let certificate: Certificate
 
                 var source: CertificateSource?
-                if let data = SecCertificateCopyData(secCert) as? Data {
-                    if certificatesSentByServer.firstIndex(of: data) == nil {
-                        source = .localStore
-                    } else {
-                        source = .server
-                    }
+                let data = SecCertificateCopyData(secCert) as Data
+                if certificatesSentByServer.firstIndex(of: data) == nil {
+                    source = .localStore
+                } else {
+                    source = .server
                 }
 
                 do {
@@ -264,6 +259,10 @@ internal final class NetworkFrameworkEngine: Engine {
                 StatusProviderHelper.checkCertificates(&rCertificates, checkCRL: request.checkCRL, checkOCSP: request.checkOCSP)
                 if let trustFailureReason = TrustStatus.fromChain(certificates: rCertificates, peername: domain, peeraddress: remoteAddress) {
                     rTrustStatus = trustFailureReason
+                }
+                if rTrustStatus == nil {
+                    printWarning("[\(#fileID):\(#line)] Trust status was not trusted but unable to determine cause")
+                    rTrustStatus = .untrusted
                 }
 
                 guard let remoteaddress = rRemoteAddress, let version = rVersion, let ciphersuite = rCiphersuite, let truststatus = rTrustStatus else {

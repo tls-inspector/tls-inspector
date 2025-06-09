@@ -90,7 +90,7 @@ public enum CryptoEngine: String, Sendable, Codable {
         }
     }
 
-    func engineType() -> EngineType {
+    func toTLSKit() -> EngineType {
         switch self {
         case .NetworkFramework:
             return .NetworkFramework
@@ -134,6 +134,17 @@ public enum IPVersion: String, Sendable, Codable {
             return .IPv6
         default:
             return nil
+        }
+    }
+
+    func toTLSKit() -> IPAddressVersion? {
+        switch self {
+        case .Automatic:
+            return nil
+        case .IPv4:
+            return .ipv4
+        case .IPv6:
+            return .ipv6
         }
     }
 }

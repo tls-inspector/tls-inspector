@@ -1140,4 +1140,10 @@ public final class Localize {
             return "Your feedback has been sent."
         }
     }
+    static func cleardownloadedbundles() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Clear downloaded bundles"
+        }
+    }
 }

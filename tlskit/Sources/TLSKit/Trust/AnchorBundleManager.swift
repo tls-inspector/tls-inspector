@@ -52,6 +52,9 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
     /// The TLS Inspector root CA certificate bundle
     nonisolated(unsafe) public private(set) var tlsinspectorBundle: CertificateBundle?
 
+    /// If the currently loaded bundles are downloaded (true) or embedded (false)
+    nonisolated(unsafe) public private(set) var usingDownloadedBundles: Bool = false
+
     private let bundleFiles: [String] = [
         "bundle_metadata.json",
         "apple_ca_bundle.pem",
@@ -69,7 +72,6 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
     nonisolated(unsafe) private var downloadedBundleMetadata: RootCABundleMetadata?
 
     // Only modified for unit tests
-    nonisolated(unsafe) internal var embeddedBundleTag = String(decoding: PackageResources.bundle_version_txt, as: UTF8.self)
     nonisolated(unsafe) internal var ignoreOlderEmbeddedBundled: Bool = false
 
     /// Loads either the embedded or downloaded bundles into the manager depending on whichever is newer
@@ -97,10 +99,12 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
             printDebug("[\(#fileID):\(#line)] Loading downloaded bundles")
             try self.loadDownloadedBundles()
             printDebug("[\(#fileID):\(#line)] Loaded downloaded bundles")
+            self.usingDownloadedBundles = true
         } else {
             printDebug("[\(#fileID):\(#line)] Loading embedded bundles")
             try self.loadEmbeddedBundles()
             printDebug("[\(#fileID):\(#line)] Loaded embedded bundles")
+            self.usingDownloadedBundles = false
         }
     }
 
@@ -245,7 +249,7 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
             EVP_MD_CTX_free(mctx)
         }
 
-        guard let keyBio = try? Data(PackageResources.signing_key_pem).toBIO() else {
+        guard let keyBio = try? EmbeddedAnchorBundleVersion.data(using: .utf8)?.toBIO() else {
             return false
         }
         defer {
@@ -446,11 +450,11 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
     private func updateNowSync() throws -> AnchorBundleUpdateResult {
         let latestTag = try RootCAAPIClient.getLatestTag()
 
-        if self.embeddedBundleTag == latestTag {
-            printDebug("[\(#fileID):\(#line)] Embedded bundles are up to date: \(self.embeddedBundleTag)")
+        if EmbeddedAnchorBundleVersion == latestTag {
+            printDebug("[\(#fileID):\(#line)] Embedded bundles are up to date: \(EmbeddedAnchorBundleVersion)")
             return .isLatest
         }
-        printDebug("[\(#fileID):\(#line)] Embedded bundles are outdated: \(self.embeddedBundleTag) -> \(latestTag)")
+        printDebug("[\(#fileID):\(#line)] Embedded bundles are outdated: \(EmbeddedAnchorBundleVersion) -> \(latestTag)")
 
         let metadata = try RootCAAPIClient.getMetadata(tag: latestTag)
 
@@ -464,5 +468,15 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
         try self.loadBundles()
 
         return .updated
+    }
+
+    /// Clear any downloaded bundles and revert to the embedded bundles
+    public func clearDownloadedBundles() {
+        do {
+            try FileManager.default.removeItem(at: self.downloadedBundleDirectory)
+            try self.loadBundles()
+        } catch {
+            printError("[\(#fileID):\(#line)] Error clearing downloaded bundles: \(error)")
+        }
     }
 }

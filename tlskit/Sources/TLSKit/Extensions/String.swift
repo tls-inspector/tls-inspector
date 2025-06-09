@@ -50,6 +50,14 @@ internal extension String {
         return String(cString: data)
     }
 
+    static func from(asn1UTFString: UnsafePointer<ASN1_UTF8STRING>) -> String? {
+        guard let data = asn1UTFString.pointee.data else {
+            return nil
+        }
+
+        return String(cString: data)
+    }
+
     static func from(obj: OpaquePointer, maxLength: Int, numerical: Bool = false) -> String? {
         let buffer = UnsafeMutablePointer<CChar>.allocate(capacity: maxLength)
         defer {

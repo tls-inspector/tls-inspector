@@ -33,3 +33,6 @@ download_bundle mozilla
 download_bundle tlsinspector
 
 printf ${LATEST_VERSION} > bundle_version.txt
+
+cat AnchorVersion.swift | sed "s/internal let EmbeddedAnchorBundleVersion = \".*\"/internal let EmbeddedAnchorBundleVersion = \"${LATEST_VERSION}\"/g" > AnchorVersion.swift.new
+mv AnchorVersion.swift.new AnchorVersion.swift

@@ -26,6 +26,8 @@ public struct CertificateExtension: Sendable, Equatable, Comparable {
     /// The value of the extension
     public let value: Data
 
+    public let stringValue: String?
+
     internal static func fromCertificate(_ cert: X509) -> [CertificateExtension]? {
         var extensions: [CertificateExtension] = []
         let extCount = X509_get_ext_count(cert)
@@ -50,14 +52,17 @@ public struct CertificateExtension: Sendable, Equatable, Comparable {
         }
 
         let critical = X509_EXTENSION_get_critical(ext)
-        guard let value = X509_EXTENSION_get_data(ext) else {
+        guard var value = X509_EXTENSION_get_data(ext) else {
             return nil
         }
+
+        let stringValue = String.from(asn1: value)
+
         guard let data = Data.from(asn1OctetString: value) else {
             return nil
         }
 
-        return CertificateExtension(oid: oid, critical: critical == 1, value: data)
+        return CertificateExtension(oid: oid, critical: critical == 1, value: data, stringValue: stringValue)
     }
 
     public static func < (lhs: CertificateExtension, rhs: CertificateExtension) -> Bool {

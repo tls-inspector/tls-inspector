@@ -51,6 +51,29 @@ let testEngines: [TLSEngine] = [
         }
     }
 
+    @Test("Basic Inspection with OCSP", arguments: testEngines) func inspectWithOCSP(engineType: TLSEngine) async throws {
+        let session = InspectionSession(engineType: TLSKit.EngineType(rawValue: engineType.rawValue)!)
+        let request = InspectionRequest(address: "20.157.26.77", serverName: "tlsinspector.com", checkOCSP: true, ipVersion: .ipv4)
+        let result = try await session.execute(request)
+        #expect(result.tlsConnection.trust == .trusted)
+        #expect(result.tlsConnection.certificates.count >= 3)
+
+        let leaf = result.tlsConnection.certificates[0]
+        #expect(leaf.signedTimestamps != nil)
+
+        #expect((try? leaf.fingerprint(.md5)) != nil)
+        #expect((try? leaf.fingerprint(.sha1)) != nil)
+        #expect((try? leaf.fingerprint(.sha256)) != nil)
+        #expect((try? leaf.fingerprint(.sha512)) != nil)
+        #expect(try leaf.pemString().contains("BEGIN CERTIFICATE"))
+
+        let scts = leaf.signedTimestamps!
+        #expect(scts.count > 0)
+        if (scts.count > 0) {
+            #expect(scts[0].logName != nil)
+        }
+    }
+
     @Test("Inspect with Headers", arguments: testEngines) func inspectWithHeaders(engineType: TLSEngine) async throws {
         let session = InspectionSession(engineType: TLSKit.EngineType(rawValue: engineType.rawValue)!)
         let request = InspectionRequest(address: "ianspence.com")

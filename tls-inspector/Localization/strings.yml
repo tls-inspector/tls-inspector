@@ -556,3 +556,6 @@
 - key: Your feedback has been sent.
   values:
     en: "Your feedback has been sent."
+- key: Clear downloaded bundles
+  values:
+    en: Clear downloaded bundles
