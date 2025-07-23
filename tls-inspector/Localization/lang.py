@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import yaml
 import re
+import os
 
 languages = ["en"]
 languageNameMap = {
@@ -46,7 +47,7 @@ def functionDef(key):
     else:
         return "static func " + normalizeKey(key) + "() -> String"
 
-with open('Localization.swift', 'w') as file:
+with open('Localization.swift.new', 'w') as file:
     header = """// TLS Inspector
 // Copyright (C) Ian Spence and other TLS Inspector Contributors
 //
@@ -111,3 +112,51 @@ public final class Localize {
         file.write("        }\n")
         file.write("    }\n")
     file.write("}\n")
+
+os.rename('Localization.swift.new', 'Localization.swift')
+
+# Sort strings file
+with open('strings.yml', 'r') as reader:
+    with open('strings-sorted.yml', 'w') as writer:
+        # First lines of the file are copyright and license
+
+        in_header = True
+
+        in_string_entry = False
+        entry_buffer = ""
+        entry_key = ""
+        string_entries = {}
+
+        line_num = 0
+
+        for line in reader:
+            line_num += 1
+
+            if line_num <= 3:
+                writer.write(line)
+                continue
+
+            if line[0] == "#":
+                if entry_key != "":
+                    string_entries[entry_key] = entry_buffer
+                    entry_key = ""
+                    entry_buffer = ""
+
+                entry_buffer += line
+            elif line[0] == "-":
+                if entry_key != "":
+                    string_entries[entry_key] = entry_buffer
+                    entry_key = ""
+                    entry_buffer = ""
+
+                entry_key = line.replace("- key: ", "").replace("\"", "").lower().rstrip()
+                entry_buffer += line
+            else:
+                entry_buffer += line
+
+        sorted_keys = sorted(string_entries.keys())
+
+        for key in sorted_keys:
+            writer.write(string_entries[key])
+
+os.rename('strings-sorted.yml', 'strings.yml')

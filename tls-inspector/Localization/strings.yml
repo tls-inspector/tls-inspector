@@ -1,219 +1,6 @@
 # Localization for TLS Inspector
 # Copyright Ian Spence and TLS Inspector Authors
 # Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
-- key: About
-  values:
-    en: About
-- key: Trusted
-  values:
-    en: Trusted
-- key: Locally Trusted
-  values:
-    en: Locally Trusted
-- key: Untrusted
-  values:
-    en: Untrusted
-- key: Unrecognized
-  values:
-    en: Unrecognized
-- key: Dangerous & Unsafe
-  values:
-    en: Dangerous & Unsafe
-- key: Trust Details
-  values:
-    en: Trust Details
-- key: What does this mean?
-  values:
-    en: What does this mean?
-- key: whatDoesThisMean::trusted
-  values:
-    en: This means that your device was able to establish a secure and trusted connection to the host.
-- key: whatDoesThisMean::locallyTrusted
-  values:
-    en: This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network.
-- key: whatDoesThisMean::untrusted
-  values:
-    en: This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host.
-- key: whatDoesThisMean::invalidDate
-  values:
-    en: This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.
-- key: whatDoesThisMean::wrongHost
-  values:
-    en: This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to.
-- key: whatDoesThisMean::sha1Leaf
-  values:
-    en: This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
-- key: whatDoesThisMean::sha1Intermediate
-  values:
-    en: This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
-- key: whatDoesThisMean::selfSigned
-  values:
-    en: This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities.
-- key: whatDoesThisMean::revokedLeaf
-  values:
-    en: This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
-- key: whatDoesThisMean::revokedIntermediate
-  values:
-    en: This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
-- key: whatDoesThisMean::weakRSAKey
-  values:
-    en: This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection.
-- key: whatDoesThisMean::issueDateTooLong
-  values:
-    en: This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range.
-- key: whatDoesThisMean::leafMissingRequiredKeyUsage
-  values:
-    en: This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for.
-- key: whatDoesThisMean::unknownCriticalExtension
-  values:
-    en: This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical.
-- key: whatDoesThisMean::badAuthority
-  values:
-    en: This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority. 
-- key: Is the connection to this site secure?
-  values:
-    en: Is the connection to this site secure?
-- key: Danger
-  values:
-    en: Danger
-- key: Invalid Certificate
-  values:
-    en: Invalid Certificate
-- key: guidance_warning
-  values:
-    en: If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
-- key: Quick Exit
-  values:
-    en: Quick Exit
-- key: DNS Name
-  values:
-    en: Alternate Names
-- key: Email Address
-  values:
-    en: Alternate Names
-- key: IP Address
-  values:
-    en: Alternate Names
-- key: URI
-  values:
-    en: Alternate Names
-- key: Alternate Names
-  values:
-    en: Alternate Names
-- key: Fingerprints
-  values:
-    en: Fingerprints
-- key: Issuer
-  values:
-    en: Issuer
-- key: Common Name
-  values:
-    en: Common Name
-- key: Country
-  values:
-    en: Country
-- key: City / Locality
-  values:
-    en: City / Locality
-- key: State / Province
-  values:
-    en: State / Province
-- key: Organization
-  values:
-    en: Organization
-- key: Organizational Unit
-  values:
-    en: Organizational Unit
-- key: Key Identifiers
-  values:
-    en: Key Identifiers
-- key: Subject
-  values:
-    en: Subject
-- key: Authority
-  values:
-    en: Authority
-- key: Key Usage
-  values:
-    en: Key Usage
-- key: Basic
-  values:
-    en: Basic
-- key: Extended
-  values:
-    en: Extended
-- key: Metadata
-  values:
-    en: Metadata
-- key: Serial Number
-  values:
-    en: Serial Number
-- key: Certificate Authority
-  values:
-    en: Certificate Authority
-- key: "Yes"
-  values:
-    en: "Yes"
-- key: "No"
-  values:
-    en: "No"
-- key: Version
-  values:
-    en: Version
-- key: Certificate Timestamps
-  values:
-    en: Certificate Timestamps
-- key: Public Key
-  values:
-    en: Public Key
-- key: Algorithm
-  values:
-    en: Algorithm
-- key: Signature
-  values:
-    en: Signature
-- key: Key Size
-  values:
-    en: Key Size
-- key: Status Providers
-  values:
-    en: Status Providers
-- key: Log ID
-  values:
-    en: Log ID
-- key: Log Name
-  values:
-    en: Log Name
-- key: Timestamp
-  values:
-    en: Timestamp
-- key: Signature Type
-  values:
-    en: Signature Type
-- key: Timestamps
-  values:
-    en: Timestamps
-- key: Validity Period
-  values:
-    en: Validity Period
-- key: Not Before
-  values:
-    en: Not Before
-- key: Not After
-  values:
-    en: Not After
-- key: Valid For
-  values:
-    en: Valid For
-- key: Expires In
-  values:
-    en: Expires In
-- key: 1 year
-  values:
-    en: 1 year
-- key: 1 month
-  values:
-    en: 1 month
 - key: 1 day
   values:
     en: 1 day
@@ -223,12 +10,537 @@
 - key: 1 minute
   values:
     en: 1 minute
-- key: "{number} years"
+- key: 1 month
   values:
-    en: "{0} years"
-- key: "{number} months"
+    en: 1 month
+- key: 1 year
   values:
-    en: "{0} months"
+    en: 1 year
+- key: About
+  values:
+    en: About
+- key: Add reminder for certificate expiry
+  values:
+    en: Add reminder for certificate expiry
+- key: Advanced Options
+  values:
+    en: Advanced Options
+- key: AdvancedSettingsNag
+  values:
+    en: These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly.
+- key: Algorithm
+  values:
+    en: Algorithm
+- key: Allowed ciphers
+  values:
+    en: Allowed ciphers
+- key: Alternate Names
+  values:
+    en: Alternate Names
+- key: App Icon
+  values:
+    en: App Icon
+- key: App Language
+  values:
+    en: App Language
+- key: AppIconFooter
+  values:
+   en: The "Progress" pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
+- key: app{version}{build}{opensslversion}{curlversion}
+  values:
+    en: "App: {0} ({1}), OpenSSL: {2}, curl: {3}"
+- key: Authority
+  values:
+    en: Authority
+- key: Auto
+  values:
+    en: Auto
+- key: Basic
+  values:
+    en: Basic
+- key: Bundle date
+  values:
+    en: Bundle date
+- key: Cancel
+  values:
+    en: "Cancel"
+- key: Certificate Authority
+  values:
+    en: Certificate Authority
+- key: Certificate Status
+  values:
+    en: Certificate Status
+- key: Certificate Timestamps
+  values:
+    en: Certificate Timestamps
+- key: Certificates
+  values:
+    en: Certificates
+- key: CertificateStatusFooter
+  values:
+    en: Certificate status checks are used to check if a certificate has been revoked.
+- key: Check for updates
+  values:
+    en: Check for updates
+- key: City / Locality
+  values:
+    en: City / Locality
+- key: Common Name
+  values:
+    en: Common Name
+- key: Connection Information
+  values:
+    en: Connection Information
+- key: contactsupportrequiresmailaccount
+  values:
+    en: "Contacting support requires that at least one email account be configured on this device."
+- key: Contribute to TLS Inspector
+  values:
+    en: Contribute to TLS Inspector
+- key: Country
+  values:
+    en: Country
+- key: Critical
+  values:
+    en: Critical
+- key: Danger
+  values:
+    en: Danger
+- key: Dangerous & Unsafe
+  values:
+    en: Dangerous & Unsafe
+- key: Data
+  values:
+    en: Data
+- key: Dismiss
+  values:
+    en: Dismiss
+- key: DNS Name
+  values:
+    en: Alternate Names
+- key: Domain Name or IP Address
+  values:
+    en: Domain Name or IP Address
+- key: Done
+  values:
+    en: Done
+- key: Download & Check CRL
+  values:
+    en: Download & Check CRL
+- key: Downloaded
+  values:
+    en: Downloaded
+- key: Email Address
+  values:
+    en: Alternate Names
+- key: Embedded
+  values:
+    en: Embedded
+- key: Engine Options
+  values:
+    en: Engine Options
+- key: Error
+  values:
+    en: Error
+- key: Expires In
+  values:
+    en: Expires In
+- key: Export certificate
+  values:
+    en: Export certificate
+- key: Export certificate chain
+  values:
+    en: Export certificate chain
+- key: Extended
+  values:
+    en: Extended
+- key: Extensions
+  values:
+    en: Extensions
+- key: Feedback Sent
+  values:
+    en: "Feedback Sent"
+- key: Fingerprints
+  values:
+    en: Fingerprints
+- key: Follow Us
+  values:
+    en: Follow Us
+- key: Follow us on Bluesky
+  values:
+    en: Follow us on Bluesky
+- key: Follow us on Mastodon
+  values:
+    en: Follow us on Mastodon
+- key: Found on device
+  values:
+    en: Found on device
+- key: General
+  values:
+    en: General
+- key: Get Involved
+  values:
+    en: Get Involved
+- key: guidance_warning
+  values:
+    en: If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
+- key: HTTP Headers
+  values:
+    en: "HTTP Headers"
+- key: IconDark
+  values:
+    en: Dark
+- key: IconDefault
+  values:
+    en: Default
+- key: IconLight
+  values:
+    en: Light
+- key: IconPride
+  values:
+    en: Pride
+- key: IconSkew
+  values:
+    en: Skew
+- key: IconSlate
+  values:
+    en: Slate
+- key: IconTrans
+  values:
+    en: Trans
+- key: Identifier
+  values:
+    en: Identifier
+- key: Invalid Certificate
+  values:
+    en: Invalid Certificate
+- key: IP Address
+  values:
+    en: Alternate Names
+- key: Is the connection to this site secure?
+  values:
+    en: Is the connection to this site secure?
+- key: Issuer
+  values:
+    en: Issuer
+- key: Key Identifiers
+  values:
+    en: Key Identifiers
+- key: Key Size
+  values:
+    en: Key Size
+- key: Key Usage
+  values:
+    en: Key Usage
+- key: LicenseFooter
+  values:
+    en: "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
+- key: Locally Trusted
+  values:
+    en: Locally Trusted
+- key: Log ID
+  values:
+    en: Log ID
+- key: Log Name
+  values:
+    en: Log Name
+- key: Logging & Support
+  values:
+    en: Logging & Support
+- key: LoggingFooter
+  values:
+    en: If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button.
+- key: Mail Account Required
+  values:
+    en: "Mail Account Required"
+- key: Metadata
+  values:
+    en: Metadata
+- key: More from the Developer
+  values:
+    en: More from the Developer
+- key: Negotiated Ciphersuite
+  values:
+    en: Negotiated Ciphersuite
+- key: Negotiated Version
+  values:
+    en: Negotiated Version
+- key: Network Engine
+  values:
+    en: Network Engine
+- key: Network Options
+  values:
+    en: Network Options
+- key: NetworkEngineFooter
+  values:
+    en: Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
+- key: "No"
+  values:
+    en: "No"
+- key: Not After
+  values:
+    en: Not After
+- key: Not Before
+  values:
+    en: Not Before
+- key: Notice
+  values:
+    en: Notice
+- key: Open source licenses & attributions
+  values:
+    en: "Open source licenses & attributions"
+- key: Options
+  values:
+    en: Options
+- key: Organization
+  values:
+    en: Organization
+- key: Organizational Unit
+  values:
+    en: Organizational Unit
+- key: Please Note
+  values:
+    en: "Please Note"
+- key: Please wait...
+  values:
+    en: Please wait...
+- key: Provide Details
+  values:
+    en: "Provide Details"
+- key: Provide Feedback
+  values:
+    en: Provide Feedback
+- key: Provide Feedback Details
+  values:
+    en: "Provide Feedback Details"
+- key: ProxyDanger
+  values:
+    en: If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
+- key: ProxyNotice
+  values:
+    en: An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
+- key: Public Key
+  values:
+    en: Public Key
+- key: Query OCSP Responder
+  values:
+    en: Query OCSP Responder
+- key: Quick Exit
+  values:
+    en: Quick Exit
+- key: Rate in App Store
+  values:
+    en: Rate in App Store
+- key: Recent Lookups
+  values:
+    en: Recent Lookups
+- key: Remember Recent Lookups
+  values:
+    en: Remember Recent Lookups
+- key: Remote Address
+  values:
+    en: Remote Address
+- key: Report a Bug
+  values:
+    en: "Report a Bug"
+- key: Request a Feature
+  values:
+    en: "Request a Feature"
+- key: Reset to default settings
+  values:
+    en: Reset to default settings
+- key: Root
+  values:
+    en: Root
+- key: Root CA Certificates
+  values:
+    en: Root CA Certificates
+- key: RootCABundleAbout
+  values:
+    en: TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector.
+- key: RootCALicenseFooter
+  values:
+    en: Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities.
+- key: Search on crt.sh
+  values:
+    en: Search on crt.sh
+- key: Search on Shodan
+  values:
+    en: Search on Shodan
+- key: Seconds
+  values:
+    en: Seconds
+- key: Security HTTP Headers
+  values:
+    en: Security HTTP Headers
+- key: Select Feedback Type
+  values:
+    en: "Select Feedback Type"
+- key: Send Feedback
+  values:
+    en: "Send Feedback"
+- key: Sent by server
+  values:
+    en: Sent by server
+- key: Serial Number
+  values:
+    en: Serial Number
+- key: Share & Feedback
+  values:
+    en: Share & Feedback
+- key: Share TLS Inspector
+  values:
+    en: Share TLS Inspector
+- key: Show certificate on crt.sh
+  values:
+    en: Show certificate on crt.sh
+- key: Show HTTP Headers
+  values:
+    en: Show HTTP Headers
+- key: Show Tips
+  values:
+    en: Show Tips
+- key: Signature
+  values:
+    en: Signature
+- key: Signature Type
+  values:
+    en: Signature Type
+- key: Something Else
+  values:
+    en: "Something Else"
+- key: Source
+  values:
+    en: Source
+- key: Special
+  values:
+    en: Special
+- key: State / Province
+  values:
+    en: State / Province
+- key: Status Providers
+  values:
+    en: Status Providers
+- key: Subject
+  values:
+    en: Subject
+- key: Submit
+  values:
+    en: "Submit"
+- key: Submit logs
+  values:
+    en: Submit logs
+- key: Support is only provided in English.
+  values:
+    en: "Support is only provided in English."
+- key: SupportNote
+  values:
+    en: "TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support."
+- key: Timeout
+  values:
+    en: Timeout
+- key: Timestamp
+  values:
+    en: Timestamp
+- key: Timestamps
+  values:
+    en: Timestamps
+- key: Treat Unrecognized as Trusted
+  values:
+    en: Treat Unrecognized as Trusted
+- key: Trust Details
+  values:
+    en: Trust Details
+- key: Trusted
+  values:
+    en: Trusted
+- key: Unrecognized
+  values:
+    en: Unrecognized
+- key: Untrusted
+  values:
+    en: Untrusted
+- key: URI
+  values:
+    en: Alternate Names
+- key: Use IP version
+  values:
+    en: Use IP version
+- key: Valid For
+  values:
+    en: Valid For
+- key: Validity Period
+  values:
+    en: Validity Period
+- key: Verbose logging
+  values:
+    en: Verbose logging
+- key: Verified
+  values:
+    en: Verified
+- key: Version
+  values:
+    en: Version
+- key: View All
+  values:
+    en: View All
+- key: View on SSL Labs
+  values:
+    en: View on SSL Labs
+- key: What does this mean?
+  values:
+    en: What does this mean?
+- key: whatDoesThisMean::badAuthority
+  values:
+    en: This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority. 
+- key: whatDoesThisMean::invalidDate
+  values:
+    en: This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.
+- key: whatDoesThisMean::issueDateTooLong
+  values:
+    en: This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range.
+- key: whatDoesThisMean::leafMissingRequiredKeyUsage
+  values:
+    en: This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for.
+- key: whatDoesThisMean::locallyTrusted
+  values:
+    en: This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network.
+- key: whatDoesThisMean::revokedIntermediate
+  values:
+    en: This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
+- key: whatDoesThisMean::revokedLeaf
+  values:
+    en: This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
+- key: whatDoesThisMean::selfSigned
+  values:
+    en: This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities.
+- key: whatDoesThisMean::sha1Intermediate
+  values:
+    en: This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
+- key: whatDoesThisMean::sha1Leaf
+  values:
+    en: This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
+- key: whatDoesThisMean::trusted
+  values:
+    en: This means that your device was able to establish a secure and trusted connection to the host.
+- key: whatDoesThisMean::unknownCriticalExtension
+  values:
+    en: This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical.
+- key: whatDoesThisMean::untrusted
+  values:
+    en: This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host.
+- key: whatDoesThisMean::weakRSAKey
+  values:
+    en: This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection.
+- key: whatDoesThisMean::wrongHost
+  values:
+    en: This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to.
+- key: "Yes"
+  values:
+    en: "Yes"
+- key: Your feedback has been sent.
+  values:
+    en: "Your feedback has been sent."
 - key: "{number} days"
   values:
     en: "{0} days"
@@ -238,324 +550,9 @@
 - key: "{number} minutes"
   values:
     en: "{0} minutes"
-- key: HTTP Headers
+- key: "{number} months"
   values:
-    en: "HTTP Headers"
-- key: Certificates
+    en: "{0} months"
+- key: "{number} years"
   values:
-    en: Certificates
-- key: Root
-  values:
-    en: Root
-- key: Connection Information
-  values:
-    en: Connection Information
-- key: Negotiated Ciphersuite
-  values:
-    en: Negotiated Ciphersuite
-- key: Negotiated Version
-  values:
-    en: Negotiated Version
-- key: Remote Address
-  values:
-    en: Remote Address
-- key: Security HTTP Headers
-  values:
-    en: Security HTTP Headers
-- key: View All
-  values:
-    en: View All
-- key: Domain Name or IP Address
-  values:
-    en: Domain Name or IP Address
-- key: Please wait...
-  values:
-    en: Please wait...
-- key: Dismiss
-  values:
-    en: Dismiss
-- key: Error
-  values:
-    en: Error
-- key: Options
-  values:
-    en: Options
-- key: General
-  values:
-    en: General
-- key: Special
-  values:
-    en: Special
-- key: Remember Recent Lookups
-  values:
-    en: Remember Recent Lookups
-- key: Show HTTP Headers
-  values:
-    en: Show HTTP Headers
-- key: Show Tips
-  values:
-    en: Show Tips
-- key: Treat Unrecognized as Trusted
-  values:
-    en: Treat Unrecognized as Trusted
-- key: App Icon
-  values:
-    en: App Icon
-- key: App Language
-  values:
-    en: App Language
-- key: Certificate Status
-  values:
-    en: Certificate Status
-- key: Query OCSP Responder
-  values:
-    en: Query OCSP Responder
-- key: Download & Check CRL
-  values:
-    en: Download & Check CRL
-- key: Advanced Options
-  values:
-    en: Advanced Options
-- key: CertificateStatusFooter
-  values:
-    en: Certificate status checks are used to check if a certificate has been revoked.
-- key: AdvancedSettingsNag
-  values:
-    en: These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly.
-- key: Network Engine
-  values:
-    en: Network Engine
-- key: NetworkEngineFooter
-  values:
-    en: Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
-- key: Network Options
-  values:
-    en: Network Options
-- key: Use IP version
-  values:
-    en: Use IP version
-- key: Timeout
-  values:
-    en: Timeout
-- key: Auto
-  values:
-    en: Auto
-- key: Allowed ciphers
-  values:
-    en: Allowed ciphers
-- key: Seconds
-  values:
-    en: Seconds
-- key: Engine Options
-  values:
-    en: Engine Options
-- key: Verbose logging
-  values:
-    en: Verbose logging
-- key: Submit logs
-  values:
-    en: Submit logs
-- key: LoggingFooter
-  values:
-    en: If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button.
-- key: Logging & Support
-  values:
-    en: Logging & Support
-- key: Root CA Certificates
-  values:
-    en: Root CA Certificates
-- key: Reset to default settings
-  values:
-    en: Reset to default settings
-- key: Done
-  values:
-    en: Done
-- key: Bundle date
-  values:
-    en: Bundle date
-- key: Embedded
-  values:
-    en: Embedded
-- key: Verified
-  values:
-    en: Verified
-- key: Check for updates
-  values:
-    en: Check for updates
-- key: IconDefault
-  values:
-    en: Default
-- key: IconLight
-  values:
-    en: Light
-- key: IconDark
-  values:
-    en: Dark
-- key: IconSkew
-  values:
-    en: Skew
-- key: IconSlate
-  values:
-    en: Slate
-- key: IconPride
-  values:
-    en: Pride
-- key: IconTrans
-  values:
-    en: Trans
-- key: AppIconFooter
-  values:
-   en: The "Progress" pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
-- key: RootCABundleAbout
-  values:
-    en: TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector.
-- key: Source
-  values:
-    en: Source
-- key: Downloaded
-  values:
-    en: Downloaded
-- key: Recent Lookups
-  values:
-    en: Recent Lookups
-- key: Extensions
-  values:
-    en: Extensions
-- key: Identifier
-  values:
-    en: Identifier
-- key: Critical
-  values:
-    en: Critical
-- key: Data
-  values:
-    en: Data
-- key: Notice
-  values:
-    en: Notice
-- key: ProxyNotice
-  values:
-    en: An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
-- key: ProxyDanger
-  values:
-    en: If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
-- key: Sent by server
-  values:
-    en: Sent by server
-- key: Found on device
-  values:
-    en: Found on device
-- key: Add reminder for certificate expiry
-  values:
-    en: Add reminder for certificate expiry
-- key: Export certificate
-  values:
-    en: Export certificate
-- key: Export certificate chain
-  values:
-    en: Export certificate chain
-- key: Search on crt.sh
-  values:
-    en: Search on crt.sh
-- key: Search on Shodan
-  values:
-    en: Search on Shodan
-- key: Show certificate on crt.sh
-  values:
-    en: Show certificate on crt.sh
-- key: View on SSL Labs
-  values:
-    en: View on SSL Labs
-- key: Share TLS Inspector
-  values:
-    en: Share TLS Inspector
-- key: Rate in App Store
-  values:
-    en: Rate in App Store
-- key: Share & Feedback
-  values:
-    en: Share & Feedback
-- key: app{version}{build}{opensslversion}{curlversion}
-  values:
-    en: "App: {0} ({1}), OpenSSL: {2}, curl: {3}"
-- key: Follow Us
-  values:
-    en: Follow Us
-- key: Get Involved
-  values:
-    en: Get Involved
-- key: More from the Developer
-  values:
-    en: More from the Developer
-- key: Follow us on Mastodon
-  values:
-    en: Follow us on Mastodon
-- key: Follow us on Bluesky
-  values:
-    en: Follow us on Bluesky
-- key: Contribute to TLS Inspector
-  values:
-    en: Contribute to TLS Inspector
-- key: Provide Feedback
-  values:
-    en: Provide Feedback
-- key: Open source licenses & attributions
-  values:
-    en: "Open source licenses & attributions"
-- key: LicenseFooter
-  values:
-    en: "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
-- key: RootCALicenseFooter
-  values:
-    en: Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities.
-- key: Cancel
-  values:
-    en: "Cancel"
-- key: contactsupportrequiresmailaccount
-  values:
-    en: "Contacting support requires that at least one email account be configured on this device."
-- key: Feedback Sent
-  values:
-    en: "Feedback Sent"
-- key: Mail Account Required
-  values:
-    en: "Mail Account Required"
-- key: Please Note
-  values:
-    en: "Please Note"
-- key: Provide Details
-  values:
-    en: "Provide Details"
-- key: Provide Feedback Details
-  values:
-    en: "Provide Feedback Details"
-- key: Report a Bug
-  values:
-    en: "Report a Bug"
-- key: Request a Feature
-  values:
-    en: "Request a Feature"
-- key: Select Feedback Type
-  values:
-    en: "Select Feedback Type"
-- key: Send Feedback
-  values:
-    en: "Send Feedback"
-- key: Something Else
-  values:
-    en: "Something Else"
-- key: Submit
-  values:
-    en: "Submit"
-- key: Support is only provided in English.
-  values:
-    en: "Support is only provided in English."
-- key: SupportNote
-  values:
-    en: "TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support."
-- key: Your feedback has been sent.
-  values:
-    en: "Your feedback has been sent."
-- key: Clear downloaded bundles
-  values:
-    en: Clear downloaded bundles
+    en: "{0} years"
