@@ -67,9 +67,9 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
     nonisolated(unsafe) private var urlSession: URLSession!
     private let downloadedBundleDirectory: URL!
     private let updateQueue: DispatchQueue!
-    nonisolated(unsafe) private var embeddedBundleMetadata: RootCABundleMetadata?
-    private let downloadedBundleTag: String? = nil
-    nonisolated(unsafe) private var downloadedBundleMetadata: RootCABundleMetadata?
+    nonisolated(unsafe) internal var embeddedBundleMetadata: RootCABundleMetadata?
+    internal let downloadedBundleTag: String? = nil
+    nonisolated(unsafe) internal var downloadedBundleMetadata: RootCABundleMetadata?
 
     // Only modified for unit tests
     nonisolated(unsafe) internal var ignoreOlderEmbeddedBundled: Bool = false
@@ -117,6 +117,7 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
     }
 
     internal func purgeDownloadedBundles() {
+        printDebug("[\(#fileID):\(#line)] Purging downloaded bundles, deleting \(self.downloadedBundleDirectory.description)")
         try? FileManager.default.removeItem(at: self.downloadedBundleDirectory)
     }
 

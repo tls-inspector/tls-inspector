@@ -40,7 +40,7 @@ import Testing
         verifyBundle(AnchorBundleManager.shared.tlsinspectorBundle, true)
 
         // Fake the embedded bundle version
-        AnchorBundleManager.shared.embeddedBundleTag = "bundle_20201126"
+        EmbeddedAnchorBundleVersion = "bundle_20201126"
 
         let result = try await AnchorBundleManager.shared.updateNow()
         #expect(result == .updated)

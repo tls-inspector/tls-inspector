@@ -288,7 +288,15 @@ internal final class NetworkFrameworkEngine: Engine {
                     return
                 }
 
-                let tlsConnectionInfo = TLSConnection(domain: domain, remoteAddress: remoteaddress, certificates: rCertificates, version: version, ciphersuite: ciphersuite, trust: truststatus, signedTimestamps: nil)
+                let tlsConnectionInfo = TLSConnection(
+                    domain: domain,
+                    remoteAddress: remoteaddress,
+                    certificates: rCertificates,
+                    version: version,
+                    ciphersuite: ciphersuite,
+                    trust: truststatus,
+                    signedTimestamps: nil,
+                )
 
                 if !request.checkHTTP {
                     didComplete.If(false) {

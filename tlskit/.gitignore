@@ -8,6 +8,7 @@ DerivedData/
 .netrc
 *.xcframework
 /Sources/TLSKit/External/Anchors/*
+!/Sources/TLSKit/External/Anchors/AnchorVersion.swift
 !/Sources/TLSKit/External/Anchors/bundle_version.txt
 !/Sources/TLSKit/External/Anchors/signing_key.pem
 /Sources/TLSKit/External/CT Logs/*.json

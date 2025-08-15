@@ -94,6 +94,7 @@ public struct CertificateBundle: Sendable {
 
         if count != metadata.certificateCount {
             printError("[\(#fileID):\(#line)] Certificate count from metadata did not match number of certificates imported from bundle. Expected \(metadata.certificateCount) got \(count)")
+            throw TLSKitError.internalError("Unable to load all certificates from bundle")
         }
 
         return CertificateBundle(name: name, metadata: metadata, certificateCount: count, bundlePath: bundlePath, keyIdMap: keyIdMap, subjectMap: subjectMap, store: store)
