@@ -62,7 +62,7 @@ public struct AdvancedOptionsView: View {
             Section {
                 Toggle(Localize.verboselogging(), isOn: $verboseLogging)
                 NavigationLink {
-                    Text("Placeholder")
+                    FeedbackView()
                 } label: {
                     HStack {
                         Image(systemName: "ladybug.fill")

@@ -30,7 +30,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/dns-inspector/dnskit", revision: "2a1496f6b5beda9c2609768ed5ae4fb9635641c2"),
+        .package(url: "https://github.com/dns-inspector/dnskit", revision: "d5883384c61d69e7b2a80e813b0824d341672b5f"),
         .package(url: "https://github.com/Wevah/IDNA-Cocoa", revision: "96de66e18f27edd40e41321f63637fbf2a83eb41")
     ],
     targets: [

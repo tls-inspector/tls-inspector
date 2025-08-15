@@ -1,12 +1,12 @@
 {
-  "originHash" : "2f91347e02659f0b5e9b887f0f0cd8fcbc6eb318729836c3108a88adf81105b2",
+  "originHash" : "b6123a60347364ea23033b46e0760df81e8e9468e00b397e3f63c24d415aa5fb",
   "pins" : [
     {
       "identity" : "dnskit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dns-inspector/dnskit",
       "state" : {
-        "revision" : "2a1496f6b5beda9c2609768ed5ae4fb9635641c2"
+        "revision" : "d5883384c61d69e7b2a80e813b0824d341672b5f"
       }
     },
     {
