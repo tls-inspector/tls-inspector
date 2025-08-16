@@ -31,6 +31,8 @@ public struct Certificate: Sendable {
     public let subject: Name
     /// The issuer name
     public let issuer: Name
+    /// If the certificate was self-signed, meaning the subject and issuer are the same
+    public let isSelfSigned: Bool
     /// The validity period
     public let validity: ValidityPeriod
     /// The serial number
@@ -61,6 +63,8 @@ public struct Certificate: Sendable {
     public let version: Int
     /// The source of this certificate, if known
     public let source: CertificateSource?
+    /// If the certificate or the key used is present in these bundles. Only populated for CA certificates.
+    public let foundInBundles: [BundleProvider: Bool]?
 
     /// Hash the data of this certificate into a digest, known as a fingerprint or thumbprint, using the given algorithm
     /// - Parameter withType: The digest algorithm to use
@@ -89,6 +93,27 @@ public struct Certificate: Sendable {
         return Data(bytes: fingerprint, count: Int(fingerprintLength))
     }
 
+    private static func isCertificateTrustedBy(provider: BundleProvider, x509: X509, subjectKeyId: Data?, subject: OpaquePointer) -> Bool {
+        do {
+            try AnchorBundleManager.shared.loadBundles()
+        } catch {
+            return false
+        }
+
+        switch provider {
+        case .apple:
+            return AnchorBundleManager.shared.appleBundle?.includes(x509, subjectKeyId: subjectKeyId, subject: subject) ?? false
+        case .google:
+            return AnchorBundleManager.shared.googleBundle?.includes(x509, subjectKeyId: subjectKeyId, subject: subject) ?? false
+        case .microsoft:
+            return AnchorBundleManager.shared.microsoftBundle?.includes(x509, subjectKeyId: subjectKeyId, subject: subject) ?? false
+        case .mozilla:
+            return AnchorBundleManager.shared.mozillaBundle?.includes(x509, subjectKeyId: subjectKeyId, subject: subject) ?? false
+        case .tlsInspector:
+            return AnchorBundleManager.shared.tlsinspectorBundle?.includes(x509, subjectKeyId: subjectKeyId, subject: subject) ?? false
+        }
+    }
+
     nonisolated(unsafe) internal let x509: X509
 
     internal init(secCertificate: SecCertificate, certificateSource: CertificateSource? = nil) throws {
@@ -111,13 +136,18 @@ public struct Certificate: Sendable {
             printError("[\(#fileID):\(#line)] X509_get_subject_name returned nil")
             throw TLSKitError.invalidCertificate("Missing subject name")
         }
-        self.subject = Name(subject)
+        let subjectName = Name(subject)
+        self.subject = subjectName
 
         guard let issuer = X509_get_issuer_name(x509) else {
             printError("[\(#fileID):\(#line)] X509_get_issuer_name returned nil")
             throw TLSKitError.invalidCertificate("Missing issuer name")
         }
-        self.issuer = Name(issuer)
+        let issuerName = Name(issuer)
+        self.issuer = issuerName
+
+        let isSelfSigned = subjectName == issuerName
+        self.isSelfSigned = isSelfSigned
 
         guard let notBeforeStr = X509_get0_notBefore(x509) else {
             printError("[\(#fileID):\(#line)] X509_get0_notBefore returned nil")
@@ -182,13 +212,24 @@ public struct Certificate: Sendable {
 
         self.signedTimestamps = SignedCertificateTimestamp.fromCertificate(x509)
 
-        self.isCA = Certificate.isCA(x509)
+        let isCA = Certificate.isCA(x509)
+        self.isCA = isCA
 
         self.keyUsage = KeyUsage.fromCertificate(x509)
 
         self.extensions = CertificateExtension.fromCertificate(x509)
 
         self.version = X509_get_version(x509)
+
+        if isCA && isSelfSigned {
+            var foundInBundles: [BundleProvider: Bool] = [:]
+            for provider in BundleProvider.allCases {
+                foundInBundles[provider] = Certificate.isCertificateTrustedBy(provider: provider, x509: x509, subjectKeyId: subjectKeyId, subject: subject)
+            }
+            self.foundInBundles = foundInBundles
+        } else {
+            self.foundInBundles = nil
+        }
     }
 
     private static func isCA(_ x509: X509) -> Bool {

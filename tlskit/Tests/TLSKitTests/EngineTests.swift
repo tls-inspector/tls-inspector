@@ -49,6 +49,13 @@ let testEngines: [TLSEngine] = [
         if (scts.count > 0) {
             #expect(scts[0].logName != nil)
         }
+
+        guard let root = result.tlsConnection.certificates.last else {
+            Issue.record("No root cert")
+            return
+        }
+        #expect(root.isCA)
+        #expect(root.foundInBundles?[.apple] ?? false)
     }
 
     @Test("Basic Inspection with OCSP", arguments: testEngines) func inspectWithOCSP(engineType: TLSEngine) async throws {

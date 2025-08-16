@@ -37,6 +37,10 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
         self.urlSession = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
     }
 
+    private let lock = UInt8(1)
+
+    private let bundlesLoaded = AtomicBool(initialValue: false)
+
     /// The Apple root CA certificate bundle
     nonisolated(unsafe) public private(set) var appleBundle: CertificateBundle?
 
@@ -76,6 +80,14 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
 
     /// Loads either the embedded or downloaded bundles into the manager depending on whichever is newer
     public func loadBundles() throws {
+        objc_sync_enter(self.lock)
+        defer {
+            objc_sync_exit(self.lock)
+        }
+        if self.bundlesLoaded.Get() {
+            return
+        }
+
         guard let bundleMetadataPath = Bundle.module.url(forResource: "bundle_metadata", withExtension: "json") else {
             printError("[\(#fileID):\(#line)] Unable to locate bundle metadata file")
             throw TLSKitError.internalError("Unable to locate bundle metadata file")
@@ -106,6 +118,8 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
             printDebug("[\(#fileID):\(#line)] Loaded embedded bundles")
             self.usingDownloadedBundles = false
         }
+
+        self.bundlesLoaded.Set(newValue: true)
     }
 
     internal func unloadBundles() {

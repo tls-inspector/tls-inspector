@@ -39,6 +39,9 @@ public struct CertificateView: View {
             if let statusProviders = certificate.statusProviders {
                 CertificateStatusProvidersView(providers: statusProviders)
             }
+            if let foundInBundles = self.certificate.foundInBundles {
+                CertificateBundleTrustView(foundInBundles: foundInBundles)
+            }
             CertificateMetadataView(certificate: certificate)
         }
         .navigationTitle(certificate.subject.description)
