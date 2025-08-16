@@ -1,0 +1,389 @@
+# DNS Inspector localization strings for English
+# Copyright 2025 Ian Spence and DNS Inspector Authors
+# Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
+# TODO
+1 day	1 day
+# TODO
+1 hour	1 hour
+# TODO
+1 minute	1 minute
+# TODO
+1 month	1 month
+# TODO
+1 year	1 year
+# TODO
+About	About
+# TODO
+Add reminder for certificate expiry	Add reminder for certificate expiry
+# TODO
+Advanced Options	Advanced Options
+# TODO
+AdvancedSettingsNag	These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly.
+# TODO
+Algorithm	Algorithm
+# TODO
+Allowed ciphers	Allowed ciphers
+# TODO
+Alternate Names	Alternate Names
+# TODO
+App Icon	App Icon
+# TODO
+App Language	App Language
+# TODO
+AppIconFooter	The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
+# TODO
+Apple	Apple
+# TODO
+Authority	Authority
+# TODO
+Auto	Auto
+# TODO
+Basic	Basic
+# TODO
+Bundle date	Bundle date
+# TODO
+Cancel	Cancel
+# TODO
+Certificate Authority	Certificate Authority
+# TODO
+Certificate Status	Certificate Status
+# TODO
+Certificate Timestamps	Certificate Timestamps
+# TODO
+Certificate Trust	Certificate Trust
+# TODO
+Certificate not trusted	Certificate not trusted
+# TODO
+CertificateStatusFooter	Certificate status checks are used to check if a certificate has been revoked.
+# TODO
+Certificates	Certificates
+# TODO
+Check for updates	Check for updates
+# TODO
+City / Locality	City / Locality
+# TODO
+Clear downloaded bundles	Clear downloaded bundles
+# TODO
+Common Name	Common Name
+# TODO
+Connection Information	Connection Information
+# TODO
+Contribute to TLS Inspector	Contribute to TLS Inspector
+# TODO
+Country	Country
+# TODO
+Critical	Critical
+# TODO
+DNS Name	Alternate Names
+# TODO
+Danger	Danger
+# TODO
+Dangerous & Unsafe	Dangerous & Unsafe
+# TODO
+Data	Data
+# TODO
+Dismiss	Dismiss
+# TODO
+Domain Name or IP Address	Domain Name or IP Address
+# TODO
+Done	Done
+# TODO
+Download & Check CRL	Download & Check CRL
+# TODO
+Downloaded	Downloaded
+# TODO
+Email Address	Alternate Names
+# TODO
+Embedded	Embedded
+# TODO
+Engine Options	Engine Options
+# TODO
+Error	Error
+# TODO
+Expires In	Expires In
+# TODO
+Export certificate	Export certificate
+# TODO
+Export certificate chain	Export certificate chain
+# TODO
+Extended	Extended
+# TODO
+Extensions	Extensions
+# TODO
+Feedback Sent	Feedback Sent
+# TODO
+Fingerprints	Fingerprints
+# TODO
+Follow Us	Follow Us
+# TODO
+Follow us on Bluesky	Follow us on Bluesky
+# TODO
+Follow us on Mastodon	Follow us on Mastodon
+# TODO
+Found on device	Found on device
+# TODO
+General	General
+# TODO
+Get Involved	Get Involved
+# TODO
+Google	Google
+# TODO
+HTTP Headers	HTTP Headers
+# TODO
+IP Address	Alternate Names
+# TODO
+IconDark	Dark
+# TODO
+IconDefault	Default
+# TODO
+IconLight	Light
+# TODO
+IconPride	Pride
+# TODO
+IconSkew	Skew
+# TODO
+IconSlate	Slate
+# TODO
+IconTrans	Trans
+# TODO
+Identifier	Identifier
+# TODO
+Invalid Certificate	Invalid Certificate
+# TODO
+Is the connection to this site secure?	Is the connection to this site secure?
+# TODO
+Issuer	Issuer
+# TODO
+Key Identifiers	Key Identifiers
+# TODO
+Key Size	Key Size
+# TODO
+Key Usage	Key Usage
+# TODO
+LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors.
+# TODO
+Locally Trusted	Locally Trusted
+# TODO
+Log ID	Log ID
+# TODO
+Log Name	Log Name
+# TODO
+Logging & Support	Logging & Support
+# TODO
+LoggingFooter	If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button.
+# TODO
+Mail Account Required	Mail Account Required
+# TODO
+Metadata	Metadata
+# TODO
+Microsoft	Microsoft
+# TODO
+More from the Developer	More from the Developer
+# TODO
+Mozilla	Mozilla
+# TODO
+Negotiated Ciphersuite	Negotiated Ciphersuite
+# TODO
+Negotiated Version	Negotiated Version
+# TODO
+Network Engine	Network Engine
+# TODO
+Network Options	Network Options
+# TODO
+NetworkEngineFooter	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
+# TODO
+No	No
+# TODO
+Not After	Not After
+# TODO
+Not Before	Not Before
+# TODO
+Notice	Notice
+# TODO
+Open source licenses & attributions	Open source licenses & attributions
+# TODO
+Options	Options
+# TODO
+Organization	Organization
+# TODO
+Organizational Unit	Organizational Unit
+# TODO
+Please Note	Please Note
+# TODO
+Please wait...	Please wait...
+# TODO
+Provide Details	Provide Details
+# TODO
+Provide Feedback	Provide Feedback
+# TODO
+Provide Feedback Details	Provide Feedback Details
+# TODO
+ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
+# TODO
+ProxyNotice	An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
+# TODO
+Public Key	Public Key
+# TODO
+Query OCSP Responder	Query OCSP Responder
+# TODO
+Quick Exit	Quick Exit
+# TODO
+Rate in App Store	Rate in App Store
+# TODO
+Recent Lookups	Recent Lookups
+# TODO
+Remember Recent Lookups	Remember Recent Lookups
+# TODO
+Remote Address	Remote Address
+# TODO
+Report a Bug	Report a Bug
+# TODO
+Request a Feature	Request a Feature
+# TODO
+Reset to default settings	Reset to default settings
+# TODO
+Root	Root
+# TODO
+Root CA Certificates	Root CA Certificates
+# TODO
+RootCABundleAbout	TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector.
+# TODO
+RootCALicenseFooter	Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities.
+# TODO
+Search on Shodan	Search on Shodan
+# TODO
+Search on crt.sh	Search on crt.sh
+# TODO
+Seconds	Seconds
+# TODO
+Security HTTP Headers	Security HTTP Headers
+# TODO
+Select Feedback Type	Select Feedback Type
+# TODO
+Send Feedback	Send Feedback
+# TODO
+Sent by server	Sent by server
+# TODO
+Serial Number	Serial Number
+# TODO
+Share & Feedback	Share & Feedback
+# TODO
+Share TLS Inspector	Share TLS Inspector
+# TODO
+Show HTTP Headers	Show HTTP Headers
+# TODO
+Show Tips	Show Tips
+# TODO
+Show certificate on crt.sh	Show certificate on crt.sh
+# TODO
+Signature	Signature
+# TODO
+Signature Type	Signature Type
+# TODO
+Something Else	Something Else
+# TODO
+Source	Source
+# TODO
+Special	Special
+# TODO
+State / Province	State / Province
+# TODO
+Status Providers	Status Providers
+# TODO
+Subject	Subject
+# TODO
+Submit	Submit
+# TODO
+Submit logs	Submit logs
+# TODO
+Support is only provided in English.	Support is only provided in English.
+# TODO
+SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
+# TODO
+TLS Inspector	TLS Inspector
+# TODO
+Timeout	Timeout
+# TODO
+Timestamp	Timestamp
+# TODO
+Timestamps	Timestamps
+# TODO
+Treat Unrecognized as Trusted	Treat Unrecognized as Trusted
+# TODO
+Trust Details	Trust Details
+# TODO
+Trusted	Trusted
+# TODO
+URI	Alternate Names
+# TODO
+Unrecognized	Unrecognized
+# TODO
+Untrusted	Untrusted
+# TODO
+Use IP version	Use IP version
+# TODO
+Valid For	Valid For
+# TODO
+Validity Period	Validity Period
+# TODO
+Verbose logging	Verbose logging
+# TODO
+Verified	Verified
+# TODO
+Version	Version
+# TODO
+View All	View All
+# TODO
+View on SSL Labs	View on SSL Labs
+# TODO
+What does this mean?	What does this mean?
+# TODO
+Yes	Yes
+# TODO
+Your feedback has been sent.	Your feedback has been sent.
+# TODO
+app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
+# TODO
+contactsupportrequiresmailaccount	Contacting support requires that at least one email account be configured on this device.
+# TODO
+guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
+# TODO
+whatDoesThisMean::badAuthority	This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority.
+# TODO
+whatDoesThisMean::invalidDate	This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.
+# TODO
+whatDoesThisMean::issueDateTooLong	This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range.
+# TODO
+whatDoesThisMean::leafMissingRequiredKeyUsage	This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for.
+# TODO
+whatDoesThisMean::locallyTrusted	This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network.
+# TODO
+whatDoesThisMean::revokedIntermediate	This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
+# TODO
+whatDoesThisMean::revokedLeaf	This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
+# TODO
+whatDoesThisMean::selfSigned	This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities.
+# TODO
+whatDoesThisMean::sha1Intermediate	This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
+# TODO
+whatDoesThisMean::sha1Leaf	This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
+# TODO
+whatDoesThisMean::trusted	This means that your device was able to establish a secure and trusted connection to the host.
+# TODO
+whatDoesThisMean::unknownCriticalExtension	This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical.
+# TODO
+whatDoesThisMean::untrusted	This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host.
+# TODO
+whatDoesThisMean::weakRSAKey	This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection.
+# TODO
+whatDoesThisMean::wrongHost	This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to.
+# TODO
+{number} days	{0} days
+# TODO
+{number} hours	{0} hours
+# TODO
+{number} minutes	{0} minutes
+# TODO
+{number} months	{0} months
+# TODO
+{number} years	{0} years
