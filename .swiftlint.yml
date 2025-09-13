@@ -16,6 +16,7 @@ disabled_rules:
 included:
     - "tls-inspector/"
     - "tlskit/Sources"
+    - "crashpad/Sources"
 
 excluded:
     - "tls-inspector/Localization/Localization.swift"

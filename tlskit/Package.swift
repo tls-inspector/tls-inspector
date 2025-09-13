@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 // TLSKit
 // Copyright (C) Ian Spence and other TLSKit Contributors

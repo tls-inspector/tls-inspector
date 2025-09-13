@@ -35,6 +35,11 @@ scopes = [
         "dir": "tlskit",
         "project": "TLSKit",
         "license": "GNU Lesser General Public License"
+    },
+    {
+        "dir": "crashpad",
+        "project": "Crashpad",
+        "license": "GNU Lesser General Public License"
     }
 ]
 
@@ -88,6 +93,8 @@ def is_excluded(filepath):
     excluded_paths = [
         "tlskit/.build",
         "tlskit/Package.swift",
+        "crashpad/.build",
+        "crashpad/Package.swift",
     ]
 
     for p in excluded_paths:
