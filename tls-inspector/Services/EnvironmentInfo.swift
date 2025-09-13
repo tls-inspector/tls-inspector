@@ -45,10 +45,7 @@ public struct EnvironmentInfo {
         var machine = [CChar](repeating: 0, count: size)
         sysctlbyname("hw.machine", &machine, &size, nil, 0)
 
-        let machineString = machine.withUnsafeBufferPointer {
-            $0.baseAddress.map { String(cString: $0) }
-        }
-        return machineString ?? "Unknown"
+        return NSString(bytes: machine, length: size, encoding: NSASCIIStringEncoding) as? String ?? "unknown"
     }
 
     /// Get a friendly name of the platform, or the platform identifier if not found.

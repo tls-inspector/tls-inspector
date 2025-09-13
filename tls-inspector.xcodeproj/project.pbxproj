@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0485512E724BC600DCA9F4 /* Crashpad in Frameworks */ = {isa = PBXBuildFile; productRef = 3C0485502E724BC600DCA9F4 /* Crashpad */; };
 		3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6412CAA28F00075B2BA /* curl.xcframework */; };
 		3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */; };
 		3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC954562CA9EC6200C3AEF8 /* TLSKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		3C2CE6412CAA28F00075B2BA /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = curl.xcframework; path = tlskit/curl.xcframework; sourceTree = "<group>"; };
 		3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = openssl.xcframework; path = tlskit/openssl.xcframework; sourceTree = "<group>"; };
 		3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tls-inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,7 @@
 			files = (
 				3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */,
 				3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */,
+				3C0485512E724BC600DCA9F4 /* Crashpad in Frameworks */,
 				3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,6 +64,7 @@
 		3C2CE6402CAA28F00075B2BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */,
 				3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */,
 				3C2CE6412CAA28F00075B2BA /* curl.xcframework */,
 			);
@@ -106,6 +110,7 @@
 			name = "tls-inspector";
 			packageProductDependencies = (
 				3CC954562CA9EC6200C3AEF8 /* TLSKit */,
+				3C0485502E724BC600DCA9F4 /* Crashpad */,
 			);
 			productName = "tls-inspector";
 			productReference = 3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */;
@@ -137,6 +142,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */,
+				3C04854F2E724BC600DCA9F4 /* XCLocalSwiftPackageReference "crashpad" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3CC954452CA9EC4200C3AEF8 /* Products */;
@@ -404,6 +410,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		3C04854F2E724BC600DCA9F4 /* XCLocalSwiftPackageReference "crashpad" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = crashpad;
+		};
 		3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = tlskit;
@@ -411,6 +421,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3C0485502E724BC600DCA9F4 /* Crashpad */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Crashpad;
+		};
 		3CC954562CA9EC6200C3AEF8 /* TLSKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TLSKit;

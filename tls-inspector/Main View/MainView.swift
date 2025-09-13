@@ -149,14 +149,22 @@ struct MainView: View {
         }
 
         self.isLoading = true
-        let session = InspectionSession(engineType: UserOptions.current.cryptoEngine.toTLSKit())
+        let cryptoEngine = UserOptions.current.cryptoEngine.toTLSKit()
+        let session = InspectionSession(engineType: cryptoEngine)
+        let telemetry = Telemetry()
         do {
             let result = try await session.execute(request)
             self.inspectionResponse = result
             self.inspectionError = nil
             self.isLoading = false
             InspectionHistoryManager.shared.add(request)
+            DispatchQueue.global(qos: .background).async {
+                telemetry.inspectionRequestSuccess(engineType: cryptoEngine, request: request, elapsed: result.elapsedNs)
+            }
         } catch {
+            DispatchQueue.global(qos: .background).async {
+                telemetry.inspectionRequestFailed(engineType: cryptoEngine, request: request, error: error)
+            }
             self.inspectionError = error.localizedDescription
             self.isLoading = false
             self.showInspectionError = true
