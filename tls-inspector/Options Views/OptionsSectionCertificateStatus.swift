@@ -17,27 +17,20 @@
 import SwiftUI
 import TLSKit
 
-public struct HTTPHeadersView: View {
-    private let keys: [String]
-    private let headers: HTTPHeaders
-
-    public init(headers: HTTPHeaders) {
-        self.keys = headers.all().keys.sorted()
-        self.headers = headers
-    }
+public struct OptionsSectionCertificateStatus: View {
+    public let queryOcsp: Binding<Bool>
+    public let checkCrl: Binding<Bool>
 
     public var body: some View {
-        List {
-            ForEach(keys, id: \.self) { key in
-                ForEach(headers.get(key)!, id: \.self) { value in
-                    HStack {
-                        Text(key)
-                        Spacer()
-                        Text(value).fixedwidth()
-                    }
-                }
-            }
+        Section {
+            Toggle(Localize.queryocspresponder(), isOn: queryOcsp)
+                .tint(.accent)
+            Toggle(Localize.downloadcheckcrl(), isOn: checkCrl)
+                .tint(.accent)
+        } header: {
+            Text(Localize.certificatestatus())
+        } footer: {
+            Text(Localize.certificatestatusfooter())
         }
-        .navigationTitle(Localize.httpheaders())
     }
 }

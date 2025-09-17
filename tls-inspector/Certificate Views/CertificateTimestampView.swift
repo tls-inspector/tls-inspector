@@ -26,7 +26,7 @@ public struct CertificateTimestampView: View {
                 Section {
                     TitleValueView(title: Localize.logid()) {
                         Text(timestamp.logId.hexEncodedString())
-                            .monospaced()
+                            .fixedwidth()
                             .textSelection(.enabled)
                     }
                     if let logName = timestamp.logName {
@@ -46,7 +46,7 @@ public struct CertificateTimestampView: View {
                         Text(timestamp.signatureAlgorithm.string())
                     }
                     TitleValueView(title: Localize.signature()) {
-                        Text(timestamp.signature.hexEncodedString()).monospaced()
+                        Text(timestamp.signature.hexEncodedString()).fixedwidth()
                     }
                 }
             }

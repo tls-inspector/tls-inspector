@@ -45,7 +45,10 @@ public struct EnvironmentInfo {
         var machine = [CChar](repeating: 0, count: size)
         sysctlbyname("hw.machine", &machine, &size, nil, 0)
 
-        return NSString(bytes: machine, length: size, encoding: NSASCIIStringEncoding) as? String ?? "unknown"
+        let machineString = machine.withUnsafeBufferPointer {
+            $0.baseAddress.map { String(cString: $0) }
+        }
+        return machineString ?? "Unknown"
     }
 
     /// Get a friendly name of the platform, or the platform identifier if not found.
@@ -126,6 +129,10 @@ public struct EnvironmentInfo {
             "iPhone17,1": "iPhone 16 Pro",
             "iPhone17,2": "iPhone 16 Pro Max",
             "iPhone17,5": "iPhone 16e",
+            "iPhone18,4": "iPhone Air",
+            "iPhone18,3": "iPhone 17",
+            "iPhone18,1": "iPhone 17 Pro",
+            "iPhone18,2": "iPhone 17 Pro Max",
 
             // iPod Touch
             "iPod1,1": "iPod Touch Gen. 1",

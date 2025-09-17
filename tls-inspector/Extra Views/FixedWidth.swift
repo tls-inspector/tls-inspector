@@ -15,29 +15,24 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import SwiftUI
-import TLSKit
 
-public struct HTTPHeadersView: View {
-    private let keys: [String]
-    private let headers: HTTPHeaders
+extension Text {
+    public func fixedwidth(_ size: CGFloat = 16, isActive: Bool = true) -> Text {
+        return self.font(Font.custom("Menlo", size: size, relativeTo: .body))
+    }
+}
 
-    public init(headers: HTTPHeaders) {
-        self.keys = headers.all().keys.sorted()
-        self.headers = headers
+struct FixedWidthText: View {
+    let text: String
+
+    init(_ text: String) {
+        self.text = text
     }
 
-    public var body: some View {
-        List {
-            ForEach(keys, id: \.self) { key in
-                ForEach(headers.get(key)!, id: \.self) { value in
-                    HStack {
-                        Text(key)
-                        Spacer()
-                        Text(value).fixedwidth()
-                    }
-                }
-            }
-        }
-        .navigationTitle(Localize.httpheaders())
+    var body: some View {
+        Text(text)
+            .fixedwidth()
+            .textSelection(.enabled)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }

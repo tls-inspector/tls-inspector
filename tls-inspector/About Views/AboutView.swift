@@ -26,7 +26,7 @@ public struct AboutView: View {
 
     public var body: some View {
         GeometryReader { geometry in
-            NavigationStack {
+            Navigation {
                 VStack {
                     VStack {
                         Image(systemName: "lock.circle.fill")

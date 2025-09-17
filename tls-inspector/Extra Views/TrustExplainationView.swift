@@ -22,7 +22,7 @@ public struct TrustExplainationView: View {
     @Environment(\.dismiss) private var dismiss
 
     public var body: some View {
-        NavigationStack {
+        Navigation {
             List {
                 TrustStatusView(status: status, showDetailsButton: false)
                 Section(Localize.whatdoesthismean()) {
@@ -61,7 +61,7 @@ public struct TrustExplainationView: View {
                 }
                 if status == .locallyTrusted {
                     SafetyWarningView(title: Localize.danger(), message: Localize.guidancewarning())
-                        .listRowBackground(RoundedRectangle(cornerRadius: 10).fill(.clear).strokeBorder(Color.red, lineWidth: 2))
+                        .background(IRoundedRectangle(backgroundColor: .clear, borderColor: .red, borderWidth: 2))
                 }
             }
             .navigationTitle(Localize.trustdetails())

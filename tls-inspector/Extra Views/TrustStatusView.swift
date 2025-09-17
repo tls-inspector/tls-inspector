@@ -98,7 +98,7 @@ public struct TrustStatusView: View {
                 .foregroundStyle(self.textColor)
             }
         }
-        .listRowBackground(RoundedRectangle(cornerRadius: 10).fill(backgroundColor).strokeBorder(borderColor ?? .clear, lineWidth: borderWidth ?? 0))
+        .listRowBackground(IRoundedRectangle(backgroundColor: backgroundColor, borderColor: borderColor ?? .clear, borderWidth: borderWidth ?? 0))
         .popover(isPresented: $showDetails) {
             TrustExplainationView(status: status)
         }

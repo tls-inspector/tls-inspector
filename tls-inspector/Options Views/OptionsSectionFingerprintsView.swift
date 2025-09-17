@@ -17,27 +17,22 @@
 import SwiftUI
 import TLSKit
 
-public struct HTTPHeadersView: View {
-    private let keys: [String]
-    private let headers: HTTPHeaders
-
-    public init(headers: HTTPHeaders) {
-        self.keys = headers.all().keys.sorted()
-        self.headers = headers
-    }
+public struct OptionsSectionFingerprintsView: View {
+    public let showFingerprintMd5: Binding<Bool>
+    public let showFingerprintSha1: Binding<Bool>
+    public let showFingerprintSha256: Binding<Bool>
+    public let showFingerprintSha512: Binding<Bool>
 
     public var body: some View {
-        List {
-            ForEach(keys, id: \.self) { key in
-                ForEach(headers.get(key)!, id: \.self) { value in
-                    HStack {
-                        Text(key)
-                        Spacer()
-                        Text(value).fixedwidth()
-                    }
-                }
-            }
+        Section(Localize.fingerprints()) {
+            Toggle("MD5", isOn: showFingerprintMd5)
+                .tint(.accent)
+            Toggle("SHA-1", isOn: showFingerprintSha1)
+                .tint(.accent)
+            Toggle("SHA-256", isOn: showFingerprintSha256)
+                .tint(.accent)
+            Toggle("SHA-512", isOn: showFingerprintSha512)
+                .tint(.accent)
         }
-        .navigationTitle(Localize.httpheaders())
     }
 }

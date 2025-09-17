@@ -17,27 +17,25 @@
 import SwiftUI
 import TLSKit
 
-public struct HTTPHeadersView: View {
-    private let keys: [String]
-    private let headers: HTTPHeaders
-
-    public init(headers: HTTPHeaders) {
-        self.keys = headers.all().keys.sorted()
-        self.headers = headers
-    }
+public struct OptionsSectionGeneralView: View {
+    public let rememberRecentLookups: Binding<Bool>
+    public let showTips: Binding<Bool>
+    public let getHttpHeaders: Binding<Bool>
+    public let treatUnrecognizedAsTrusted: Binding<Bool>
 
     public var body: some View {
-        List {
-            ForEach(keys, id: \.self) { key in
-                ForEach(headers.get(key)!, id: \.self) { value in
-                    HStack {
-                        Text(key)
-                        Spacer()
-                        Text(value).fixedwidth()
-                    }
-                }
+        Section(Localize.general()) {
+            Toggle(Localize.rememberrecentlookups(), isOn: rememberRecentLookups)
+                .tint(.accent)
+            Toggle(Localize.showtips(), isOn: showTips)
+                .tint(.accent)
+            Toggle(Localize.httpheaders(), isOn: getHttpHeaders)
+                .tint(.accent)
+            Toggle(Localize.treatunrecognizedastrusted(), isOn: treatUnrecognizedAsTrusted)
+                .tint(.accent)
+            NavigationLink(Localize.appicon()) {
+                AppIconView()
             }
         }
-        .navigationTitle(Localize.httpheaders())
     }
 }

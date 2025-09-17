@@ -22,7 +22,7 @@ public struct InspectionResponseView: View {
     @Environment(\.dismiss) private var dismiss
 
     public var body: some View {
-        NavigationStack {
+        Navigation {
             List {
                 Section {
                     TrustStatusView(status: response.tlsConnection.trust)

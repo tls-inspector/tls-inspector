@@ -10,13 +10,39 @@
 		3C0485512E724BC600DCA9F4 /* Crashpad in Frameworks */ = {isa = PBXBuildFile; productRef = 3C0485502E724BC600DCA9F4 /* Crashpad */; };
 		3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6412CAA28F00075B2BA /* curl.xcframework */; };
 		3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */; };
+		3C6272F22E75228F00EAB12D /* Inspect Website.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C6272E82E75228F00EAB12D /* Inspect Website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC954562CA9EC6200C3AEF8 /* TLSKit */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3C6272F02E75228F00EAB12D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CC9543C2CA9EC4200C3AEF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C6272E72E75228F00EAB12D;
+			remoteInfo = "Inspect Website";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3C6272F32E75228F00EAB12D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3C6272F22E75228F00EAB12D /* Inspect Website.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		3C2CE6412CAA28F00075B2BA /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = curl.xcframework; path = tlskit/curl.xcframework; sourceTree = "<group>"; };
 		3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = openssl.xcframework; path = tlskit/openssl.xcframework; sourceTree = "<group>"; };
+		3C6272E82E75228F00EAB12D /* Inspect Website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Inspect Website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tls-inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -33,9 +59,24 @@
 			);
 			target = 3CC954432CA9EC4200C3AEF8 /* tls-inspector */;
 		};
+		3C6272F72E75228F00EAB12D /* Exceptions for "Inspect Website" folder in "Inspect Website" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3C6272E72E75228F00EAB12D /* Inspect Website */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		3C6272E92E75228F00EAB12D /* Inspect Website */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3C6272F72E75228F00EAB12D /* Exceptions for "Inspect Website" folder in "Inspect Website" target */,
+			);
+			path = "Inspect Website";
+			sourceTree = "<group>";
+		};
 		3CC954462CA9EC4200C3AEF8 /* tls-inspector */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -47,6 +88,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C6272E52E75228F00EAB12D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CC954412CA9EC4200C3AEF8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -75,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				3CC954462CA9EC4200C3AEF8 /* tls-inspector */,
+				3C6272E92E75228F00EAB12D /* Inspect Website */,
 				3C2CE6402CAA28F00075B2BA /* Frameworks */,
 				3CC954452CA9EC4200C3AEF8 /* Products */,
 			);
@@ -84,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */,
+				3C6272E82E75228F00EAB12D /* Inspect Website.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,6 +141,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3C6272E72E75228F00EAB12D /* Inspect Website */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C6272F62E75228F00EAB12D /* Build configuration list for PBXNativeTarget "Inspect Website" */;
+			buildPhases = (
+				3C6272E42E75228F00EAB12D /* Sources */,
+				3C6272E52E75228F00EAB12D /* Frameworks */,
+				3C6272E62E75228F00EAB12D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3C6272E92E75228F00EAB12D /* Inspect Website */,
+			);
+			name = "Inspect Website";
+			packageProductDependencies = (
+			);
+			productName = "Inspect Website";
+			productReference = 3C6272E82E75228F00EAB12D /* Inspect Website.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		3CC954432CA9EC4200C3AEF8 /* tls-inspector */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CC954522CA9EC4300C3AEF8 /* Build configuration list for PBXNativeTarget "tls-inspector" */;
@@ -99,10 +171,12 @@
 				3CC954402CA9EC4200C3AEF8 /* Sources */,
 				3CC954412CA9EC4200C3AEF8 /* Frameworks */,
 				3CC954422CA9EC4200C3AEF8 /* Resources */,
+				3C6272F32E75228F00EAB12D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3C6272F12E75228F00EAB12D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3CC954462CA9EC4200C3AEF8 /* tls-inspector */,
@@ -123,9 +197,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					3C6272E72E75228F00EAB12D = {
+						CreatedOnToolsVersion = 26.0;
+					};
 					3CC954432CA9EC4200C3AEF8 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -150,11 +227,19 @@
 			projectRoot = "";
 			targets = (
 				3CC954432CA9EC4200C3AEF8 /* tls-inspector */,
+				3C6272E72E75228F00EAB12D /* Inspect Website */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3C6272E62E75228F00EAB12D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CC954422CA9EC4200C3AEF8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,6 +272,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3C6272E42E75228F00EAB12D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CC954402CA9EC4200C3AEF8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,7 +288,83 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3C6272F12E75228F00EAB12D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C6272E72E75228F00EAB12D /* Inspect Website */;
+			targetProxy = 3C6272F02E75228F00EAB12D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		3C6272F42E75228F00EAB12D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Inspect Website/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Inspect Website";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C6272F52E75228F00EAB12D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Inspect Website/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Inspect Website";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3CC954502CA9EC4300C3AEF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -324,6 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "tls-inspector/tls-inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 133;
 				DEVELOPMENT_ASSET_PATHS = "\"tls-inspector/Preview Content\"";
@@ -337,6 +506,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.8;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,6 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "tls-inspector/tls-inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 133;
 				DEVELOPMENT_ASSET_PATHS = "\"tls-inspector/Preview Content\"";
@@ -371,6 +542,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.8;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,6 +561,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C6272F62E75228F00EAB12D /* Build configuration list for PBXNativeTarget "Inspect Website" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C6272F42E75228F00EAB12D /* Debug */,
+				3C6272F52E75228F00EAB12D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3CC9543F2CA9EC4200C3AEF8 /* Build configuration list for PBXProject "tls-inspector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

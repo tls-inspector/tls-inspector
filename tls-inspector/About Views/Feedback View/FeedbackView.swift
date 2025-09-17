@@ -54,11 +54,10 @@ struct FeedbackView: View {
                             await self.submitFeedback()
                         }
                     }
-                    .bold()
                     .disabled(!self.feedbackIsValid)
                 }
             }
-            .onChange(of: self.feedbackMessage) { _, _ in
+            .onChange(of: self.feedbackMessage) { _ in
                 self.feedbackIsValid = self.feedbackMessage.count >= 20
             }
             .alert(Localize.pleasenote(), isPresented: $showConfirmSend) {
@@ -132,9 +131,15 @@ private struct FeedbackInputView: View {
                 }
             }
             Section(Localize.providedetails()) {
-                TextField(Localize.providefeedbackdetails(), text: self.feedbackMessage, axis: .vertical)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(5, reservesSpace: true)
+                if #available(iOS 16.0, *) {
+                    TextField(Localize.providefeedbackdetails(), text: self.feedbackMessage, axis: .vertical)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(5, reservesSpace: true)
+                } else {
+                    TextField(Localize.providefeedbackdetails(), text: self.feedbackMessage)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(5)
+                }
             }
             Section {
                 if !isEnglish {

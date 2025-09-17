@@ -31,7 +31,7 @@ struct MainView: View {
     let randomSite = FunStuff.randomWebsite()
 
     var body: some View {
-        NavigationStack {
+        Navigation {
             List {
                 Section("Debug") {
                     ListButton {
@@ -43,6 +43,11 @@ struct MainView: View {
                         self.showFeedbackView.toggle()
                     } label: {
                         Text("Feedback")
+                    }
+                    ListButton {
+                        self.showProxyWarning.toggle()
+                    } label: {
+                        Text("Proxy Warning")
                     }
                 }
                 Section(Localize.domainnameoripaddress()) {

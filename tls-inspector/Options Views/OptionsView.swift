@@ -33,39 +33,9 @@ public struct OptionsView: View {
     public var body: some View {
         Navigation {
             List {
-                Section(Localize.general()) {
-                    Toggle(Localize.rememberrecentlookups(), isOn: $rememberRecentLookups)
-                        .tint(.accent)
-                    Toggle(Localize.showtips(), isOn: $showTips)
-                        .tint(.accent)
-                    Toggle(Localize.httpheaders(), isOn: $getHttpHeaders)
-                        .tint(.accent)
-                    Toggle(Localize.treatunrecognizedastrusted(), isOn: $treatUnrecognizedAsTrusted)
-                        .tint(.accent)
-                    NavigationLink(Localize.appicon()) {
-                        AppIconView()
-                    }
-                }
-                Section {
-                    Toggle(Localize.queryocspresponder(), isOn: $queryOcsp)
-                        .tint(.accent)
-                    Toggle(Localize.downloadcheckcrl(), isOn: $checkCrl)
-                        .tint(.accent)
-                } header: {
-                    Text(Localize.certificatestatus())
-                } footer: {
-                    Text(Localize.certificatestatusfooter())
-                }
-                Section(Localize.fingerprints()) {
-                    Toggle("MD5", isOn: $showFingerprintMd5)
-                        .tint(.accent)
-                    Toggle("SHA-1", isOn: $showFingerprintSha1)
-                        .tint(.accent)
-                    Toggle("SHA-256", isOn: $showFingerprintSha256)
-                        .tint(.accent)
-                    Toggle("SHA-512", isOn: $showFingerprintSha512)
-                        .tint(.accent)
-                }
+                OptionsSectionGeneralView(rememberRecentLookups: $rememberRecentLookups, showTips: $showTips, getHttpHeaders: $getHttpHeaders, treatUnrecognizedAsTrusted: $treatUnrecognizedAsTrusted)
+                OptionsSectionCertificateStatus(queryOcsp: $queryOcsp, checkCrl: $checkCrl)
+                OptionsSectionFingerprintsView(showFingerprintMd5: $showFingerprintMd5, showFingerprintSha1: $showFingerprintSha1, showFingerprintSha256: $showFingerprintSha256, showFingerprintSha512: $showFingerprintSha512)
                 Section {
                     NavigationLink(Localize.advancedoptions()) {
                         AdvancedOptionsView()
@@ -82,36 +52,36 @@ public struct OptionsView: View {
                     }
                 }
             }
-            .onChange(of: rememberRecentLookups, { _, newValue in
-                UserOptions.current.rememberRecentLookups = newValue
-            })
-            .onChange(of: showTips, { _, newValue in
-                UserOptions.current.showTips = newValue
-            })
-            .onChange(of: getHttpHeaders, { _, newValue in
-                UserOptions.current.getHttpHeaders = newValue
-            })
-            .onChange(of: treatUnrecognizedAsTrusted, { _, newValue in
-                UserOptions.current.treatUnrecognizedAsTrusted = newValue
-            })
-            .onChange(of: queryOcsp, { _, newValue in
-                UserOptions.current.queryOcsp = newValue
-            })
-            .onChange(of: checkCrl, { _, newValue in
-                UserOptions.current.checkCrl = newValue
-            })
-            .onChange(of: showFingerprintMd5, { _, newValue in
-                UserOptions.current.showFingerprintMd5 = newValue
-            })
-            .onChange(of: showFingerprintSha1, { _, newValue in
-                UserOptions.current.showFingerprintSha1 = newValue
-            })
-            .onChange(of: showFingerprintSha256, { _, newValue in
-                UserOptions.current.showFingerprintSha256 = newValue
-            })
-            .onChange(of: showFingerprintSha512, { _, newValue in
-                UserOptions.current.showFingerprintSha512 = newValue
-            })
+            .onChange(of: rememberRecentLookups) {
+                UserOptions.current.rememberRecentLookups = $0
+            }
+            .onChange(of: showTips) {
+                UserOptions.current.showTips = $0
+            }
+            .onChange(of: getHttpHeaders) {
+                UserOptions.current.getHttpHeaders = $0
+            }
+            .onChange(of: treatUnrecognizedAsTrusted) {
+                UserOptions.current.treatUnrecognizedAsTrusted = $0
+            }
+            .onChange(of: queryOcsp) {
+                UserOptions.current.queryOcsp = $0
+            }
+            .onChange(of: checkCrl) {
+                UserOptions.current.checkCrl = $0
+            }
+            .onChange(of: showFingerprintMd5) {
+                UserOptions.current.showFingerprintMd5 = $0
+            }
+            .onChange(of: showFingerprintSha1) {
+                UserOptions.current.showFingerprintSha1 = $0
+            }
+            .onChange(of: showFingerprintSha256) {
+                UserOptions.current.showFingerprintSha256 = $0
+            }
+            .onChange(of: showFingerprintSha512) {
+                UserOptions.current.showFingerprintSha512 = $0
+            }
         }
     }
 }

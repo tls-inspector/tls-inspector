@@ -20,7 +20,7 @@ public struct ProxyNoticeView: View {
     @Environment(\.dismiss) private var dismiss
 
     public var body: some View {
-        NavigationStack {
+        Navigation {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     Image(systemName: "info.circle.fill")
@@ -29,7 +29,7 @@ public struct ProxyNoticeView: View {
                 }.padding(.bottom)
                 SafetyWarningView(title: Localize.danger(), message: Localize.proxydanger())
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).fill(.clear).strokeBorder(Color.red, lineWidth: 2))
+                    .background(IRoundedRectangle(backgroundColor: .clear, borderColor: .red, borderWidth: 2))
                 Spacer()
                 Button {
                     dismiss()

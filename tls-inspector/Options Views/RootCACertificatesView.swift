@@ -92,7 +92,6 @@ public struct RootCACertificatesView: View {
                     Button(Localize.done()) {
                         isPresented.wrappedValue = false
                     }
-                    .bold()
                     .disabled(isUpdating)
                 }
             }
@@ -187,14 +186,18 @@ private struct AnchorBundleView: View {
             .popover(isPresented: $showShaPopover) {
                 Group {
                     Text(bundle.metadata.sha256)
-                        .monospaced()
+                        .fixedwidth()
                         .textSelection(.enabled)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.vertical, 16)
                 .padding(.horizontal, 12)
-                .presentationCompactAdaptation(.popover)
+                .modify {
+                    if #available(iOS 16.4, *) {
+                        $0.presentationCompactAdaptation(.popover)
+                    }
+                }
             }
         }
     }

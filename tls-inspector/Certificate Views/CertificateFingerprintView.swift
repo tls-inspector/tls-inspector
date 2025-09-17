@@ -27,7 +27,7 @@ public struct CertificateFingerprintView: View {
                     Text("MD5").opacity(0.5)
                     Spacer()
                     Text(md5.hexEncodedString())
-                        .monospaced()
+                        .fixedwidth()
                 }
             }
             if let sha1 = try? certificate.fingerprint(.sha1) {
@@ -35,7 +35,7 @@ public struct CertificateFingerprintView: View {
                     Text("SHA1").opacity(0.5)
                     Spacer()
                     Text(sha1.hexEncodedString())
-                        .monospaced()
+                        .fixedwidth()
                 }
             }
             if let sha256 = try? certificate.fingerprint(.sha256) {
@@ -43,7 +43,7 @@ public struct CertificateFingerprintView: View {
                     Text("SHA-256").opacity(0.5)
                     Spacer()
                     Text(sha256.hexEncodedString())
-                        .monospaced()
+                        .fixedwidth()
                 }
             }
             if let sha512 = try? certificate.fingerprint(.sha512) {
@@ -51,7 +51,7 @@ public struct CertificateFingerprintView: View {
                     Text("SHA-512").opacity(0.5)
                     Spacer()
                     Text(sha512.hexEncodedString())
-                        .monospaced()
+                        .fixedwidth()
                 }
             }
         }

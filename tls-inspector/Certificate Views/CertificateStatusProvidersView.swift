@@ -27,13 +27,13 @@ public struct CertificateStatusProvidersView: View {
                 case .crl(let url):
                     TitleValueView(title: "CRL") {
                         Text(url)
-                            .monospaced()
+                            .fixedwidth()
                             .textSelection(.enabled)
                     }
                 case .ocsp(let url):
                     TitleValueView(title: "OCSP") {
                         Text(url)
-                            .monospaced()
+                            .fixedwidth()
                             .textSelection(.enabled)
                     }
                 }

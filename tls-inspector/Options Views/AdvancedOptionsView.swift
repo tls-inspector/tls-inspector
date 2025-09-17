@@ -105,16 +105,16 @@ public struct AdvancedOptionsView: View {
                 showNag = true
             }
         }
-        .onChange(of: networkEngine) { _, newValue in
+        .onChange(of: networkEngine) { newValue in
             UserOptions.current.cryptoEngine = newValue
         }
-        .onChange(of: preferredCiphers) { _, newValue in
+        .onChange(of: preferredCiphers) { newValue in
             UserOptions.current.preferredCiphers = newValue
         }
-        .onChange(of: ipVersion) { _, newValue in
+        .onChange(of: ipVersion) { newValue in
             UserOptions.current.ipVersion = newValue
         }
-        .onChange(of: inspectTimeout) { _, newValue in
+        .onChange(of: inspectTimeout) { newValue in
             UserOptions.current.inspectTimeout = newValue
         }
         .fullScreenCover(isPresented: $showRootCaCertificateView) {

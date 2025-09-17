@@ -15,29 +15,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import SwiftUI
-import TLSKit
 
-public struct HTTPHeadersView: View {
-    private let keys: [String]
-    private let headers: HTTPHeaders
-
-    public init(headers: HTTPHeaders) {
-        self.keys = headers.all().keys.sorted()
-        self.headers = headers
-    }
-
-    public var body: some View {
-        List {
-            ForEach(keys, id: \.self) { key in
-                ForEach(headers.get(key)!, id: \.self) { value in
-                    HStack {
-                        Text(key)
-                        Spacer()
-                        Text(value).fixedwidth()
-                    }
-                }
-            }
-        }
-        .navigationTitle(Localize.httpheaders())
+extension View {
+    func modify<T: View>(@ViewBuilder _ modifier: (Self) -> T) -> some View {
+        return modifier(self)
     }
 }
