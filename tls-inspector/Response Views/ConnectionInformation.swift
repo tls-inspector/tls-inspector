@@ -34,6 +34,11 @@ public struct ConnectionInformation: View {
                 Text(String(describing: response.tlsConnection.remoteAddress.string))
                     .textSelection(.enabled)
             }
+            if let alpn = response.tlsConnection.alpn {
+                TitleValueView(title: "ALPN") {
+                    Text(alpn).textSelection(.enabled)
+                }
+            }
         }
     }
 }

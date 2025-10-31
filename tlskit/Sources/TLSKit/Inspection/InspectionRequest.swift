@@ -36,9 +36,11 @@ public struct InspectionRequest: Codable, Equatable, Sendable, CustomStringConve
     public let checkHTTP: Bool
     /// The number of seconds to wait before failing an incomplete inspection request.
     public let timeoutSeconds: UInt8
+    /// Application names to pass within the TLS handshake
+    public let alpn: [String]?
 
     /// Create a new inspection request using default values.
-    public init(address: String, port: UInt16 = 443, serverName: String? = nil, checkCRL: Bool = false, checkOCSP: Bool = true, ipVersion: IPAddressVersion? = nil, checkHTTP: Bool = true, timeoutSeconds: UInt8 = 10) {
+    public init(address: String, port: UInt16 = 443, serverName: String? = nil, checkCRL: Bool = false, checkOCSP: Bool = true, ipVersion: IPAddressVersion? = nil, checkHTTP: Bool = true, timeoutSeconds: UInt8 = 10, alpn: [String]? = nil) {
         self.address = address
         self.port = port
         self.serverName = serverName
@@ -47,10 +49,11 @@ public struct InspectionRequest: Codable, Equatable, Sendable, CustomStringConve
         self.ipVersion = ipVersion
         self.checkHTTP = checkHTTP
         self.timeoutSeconds = timeoutSeconds
+        self.alpn = alpn
     }
 
     public var description: String {
-        return String(stringLiteral: "InspectionRequest(address: \(self.address), port: \(self.port), serverName: \(self.serverName ?? "nil"), checkCRL: \(self.checkCRL), checkOCSP: \(self.checkOCSP), ipVersion: \(self.ipVersion?.rawValue ?? -1), checkHTTP: \(self.checkHTTP), timeoutSeconds: \(self.timeoutSeconds))")
+        return String(stringLiteral: "InspectionRequest(address: \(self.address), port: \(self.port), serverName: \(self.serverName ?? "nil"), checkCRL: \(self.checkCRL), checkOCSP: \(self.checkOCSP), ipVersion: \(self.ipVersion?.rawValue ?? -1), checkHTTP: \(self.checkHTTP), timeoutSeconds: \(self.timeoutSeconds), alpn: \(self.alpn ?? [])")
     }
 
     @available(iOS 13.0, *)

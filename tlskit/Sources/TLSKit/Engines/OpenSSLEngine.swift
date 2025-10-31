@@ -80,6 +80,21 @@ internal final class OpenSSLEngine: Engine {
         SSL_CTX_set_options(context, UInt64(SSL_OP_NO_SSLv2))
         SSL_CTX_set_keylog_callback(context, keylogCallback)
 
+        // OpenSSL needs the alpn to be in wire format of: length (uint8) + proto
+        if let alpnProtos = request.alpn {
+            var alpnWire = Data()
+
+            for alpnProto in alpnProtos {
+                let cstr = alpnProto.data(using: .ascii)!
+                alpnWire.append(contentsOf: [UInt8(cstr.count)])
+                alpnWire.append(cstr)
+            }
+
+            _ = alpnWire.withUnsafeBytes {
+                SSL_CTX_set_alpn_protos(context, $0.baseAddress, UInt32(alpnWire.count))
+            }
+        }
+
         guard let conn = BIO_new_ssl_connect(context) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] BIO_new_ssl_connect returned nil")
@@ -292,6 +307,16 @@ internal final class OpenSSLEngine: Engine {
             rTrustStatus = .untrusted
         }
 
+        var rALPN: String?
+        var alpnData: UnsafePointer<UInt8>?
+        var alpnLen: UInt32 = 0
+        SSL_get0_alpn_selected(ssl, &alpnData, &alpnLen)
+        if alpnLen > 0 {
+            if let alpnData = alpnData {
+                rALPN = String(cString: alpnData)
+            }
+        }
+
         var handshakeScts: [SignedCertificateTimestamp]?
         if let rawScts = SSL_get0_peer_scts(ssl), OPENSSL_sk_num(rawScts) > 0 {
             var scts: [SignedCertificateTimestamp] = []
@@ -309,7 +334,7 @@ internal final class OpenSSLEngine: Engine {
             }
         }
 
-        let tlsConnection = TLSConnection(domain: domain, remoteAddress: remoteAddress, certificates: certificates, version: version, ciphersuite: ciphersuite, trust: rTrustStatus!, signedTimestamps: handshakeScts)
+        let tlsConnection = TLSConnection(domain: domain, remoteAddress: remoteAddress, certificates: certificates, version: version, ciphersuite: ciphersuite, trust: rTrustStatus!, signedTimestamps: handshakeScts, alpn: rALPN)
 
         if !request.checkHTTP {
             return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, elapsedNs: timer.stop())

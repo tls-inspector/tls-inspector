@@ -50,6 +50,7 @@ internal final class NetworkFrameworkEngine: Engine {
         nonisolated(unsafe) var rVersion: TLSVersion?
         nonisolated(unsafe) var rCiphersuite: Ciphersuite?
         nonisolated(unsafe) var rTrustStatus: TrustStatus?
+        nonisolated(unsafe) var rALPN: String?
 
         let semaphore = DispatchSemaphore(value: 0)
         let didComplete = AtomicBool(initialValue: false)
@@ -59,12 +60,27 @@ internal final class NetworkFrameworkEngine: Engine {
 
         var certificatesSentByServer: [Data] = []
 
+        for application in request.alpn ?? [] {
+            sec_protocol_options_add_tls_application_protocol(tlsOptions.securityProtocolOptions, application)
+        }
+
         sec_protocol_options_set_verify_block(tlsOptions.securityProtocolOptions, { metadata, trustRef, verifyComplete in
 
             // Get only the certificates presented by the server
             sec_protocol_metadata_access_peer_certificate_chain(metadata) { cert in
                 let secCert = sec_certificate_copy_ref(cert).takeRetainedValue()
                 certificatesSentByServer.add(SecCertificateCopyData(secCert) as Data)
+            }
+
+            if #available(iOS 18.5, *) {
+                if let alpnc = sec_protocol_metadata_copy_negotiated_protocol(metadata) {
+                    rALPN = String(cString: alpnc)
+                    alpnc.deallocate()
+                }
+            } else {
+                if let alpnc = sec_protocol_metadata_get_negotiated_protocol(metadata) {
+                    rALPN = String(cString: alpnc)
+                }
             }
 
             let trust = sec_trust_copy_ref(trustRef).takeRetainedValue()
@@ -296,6 +312,7 @@ internal final class NetworkFrameworkEngine: Engine {
                     ciphersuite: ciphersuite,
                     trust: truststatus,
                     signedTimestamps: nil,
+                    alpn: rALPN,
                 )
 
                 if !request.checkHTTP {

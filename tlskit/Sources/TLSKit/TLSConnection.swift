@@ -33,4 +33,6 @@ public struct TLSConnection: Sendable {
     /// Signed certificate timestamps included in the TLS connection.
     /// Only supported with the OpenSSL engine.
     public let signedTimestamps: [SignedCertificateTimestamp]?
+    /// The application agreed to use by the server in response to the ALPN in the handshake.
+    public let alpn: String?
 }
