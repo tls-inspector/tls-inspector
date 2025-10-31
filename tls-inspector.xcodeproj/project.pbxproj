@@ -10,17 +10,18 @@
 		3C0485512E724BC600DCA9F4 /* Crashpad in Frameworks */ = {isa = PBXBuildFile; productRef = 3C0485502E724BC600DCA9F4 /* Crashpad */; };
 		3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6412CAA28F00075B2BA /* curl.xcframework */; };
 		3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */; };
-		3C6272F22E75228F00EAB12D /* Inspect Website.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C6272E82E75228F00EAB12D /* Inspect Website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */; };
+		3C8742EE2EB4524200154664 /* inspect-website.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C8742E02EB4524200154664 /* inspect-website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC954562CA9EC6200C3AEF8 /* TLSKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3C6272F02E75228F00EAB12D /* PBXContainerItemProxy */ = {
+		3C8742EC2EB4524200154664 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CC9543C2CA9EC4200C3AEF8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3C6272E72E75228F00EAB12D;
-			remoteInfo = "Inspect Website";
+			remoteGlobalIDString = 3C8742DF2EB4524200154664;
+			remoteInfo = "inspect-website";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -31,7 +32,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3C6272F22E75228F00EAB12D /* Inspect Website.appex in Embed Foundation Extensions */,
+				3C8742EE2EB4524200154664 /* inspect-website.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,7 +43,8 @@
 		3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		3C2CE6412CAA28F00075B2BA /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = curl.xcframework; path = tlskit/curl.xcframework; sourceTree = "<group>"; };
 		3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = openssl.xcframework; path = tlskit/openssl.xcframework; sourceTree = "<group>"; };
-		3C6272E82E75228F00EAB12D /* Inspect Website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Inspect Website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C8742E02EB4524200154664 /* inspect-website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "inspect-website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tls-inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,22 +61,22 @@
 			);
 			target = 3CC954432CA9EC4200C3AEF8 /* tls-inspector */;
 		};
-		3C6272F72E75228F00EAB12D /* Exceptions for "Inspect Website" folder in "Inspect Website" target */ = {
+		3C8742F22EB4524200154664 /* Exceptions for "inspect-website" folder in "inspect-website" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 3C6272E72E75228F00EAB12D /* Inspect Website */;
+			target = 3C8742DF2EB4524200154664 /* inspect-website */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		3C6272E92E75228F00EAB12D /* Inspect Website */ = {
+		3C8742E32EB4524200154664 /* inspect-website */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				3C6272F72E75228F00EAB12D /* Exceptions for "Inspect Website" folder in "Inspect Website" target */,
+				3C8742F22EB4524200154664 /* Exceptions for "inspect-website" folder in "inspect-website" target */,
 			);
-			path = "Inspect Website";
+			path = "inspect-website";
 			sourceTree = "<group>";
 		};
 		3CC954462CA9EC4200C3AEF8 /* tls-inspector */ = {
@@ -88,10 +90,11 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3C6272E52E75228F00EAB12D /* Frameworks */ = {
+		3C8742DD2EB4524200154664 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +118,7 @@
 				3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */,
 				3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */,
 				3C2CE6412CAA28F00075B2BA /* curl.xcframework */,
+				3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				3CC954462CA9EC4200C3AEF8 /* tls-inspector */,
-				3C6272E92E75228F00EAB12D /* Inspect Website */,
+				3C8742E32EB4524200154664 /* inspect-website */,
 				3C2CE6402CAA28F00075B2BA /* Frameworks */,
 				3CC954452CA9EC4200C3AEF8 /* Products */,
 			);
@@ -133,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */,
-				3C6272E82E75228F00EAB12D /* Inspect Website.appex */,
+				3C8742E02EB4524200154664 /* inspect-website.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,26 +145,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3C6272E72E75228F00EAB12D /* Inspect Website */ = {
+		3C8742DF2EB4524200154664 /* inspect-website */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3C6272F62E75228F00EAB12D /* Build configuration list for PBXNativeTarget "Inspect Website" */;
+			buildConfigurationList = 3C8742EF2EB4524200154664 /* Build configuration list for PBXNativeTarget "inspect-website" */;
 			buildPhases = (
-				3C6272E42E75228F00EAB12D /* Sources */,
-				3C6272E52E75228F00EAB12D /* Frameworks */,
-				3C6272E62E75228F00EAB12D /* Resources */,
+				3C8742DC2EB4524200154664 /* Sources */,
+				3C8742DD2EB4524200154664 /* Frameworks */,
+				3C8742DE2EB4524200154664 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				3C6272E92E75228F00EAB12D /* Inspect Website */,
+				3C8742E32EB4524200154664 /* inspect-website */,
 			);
-			name = "Inspect Website";
+			name = "inspect-website";
 			packageProductDependencies = (
 			);
-			productName = "Inspect Website";
-			productReference = 3C6272E82E75228F00EAB12D /* Inspect Website.appex */;
+			productName = "inspect-website";
+			productReference = 3C8742E02EB4524200154664 /* inspect-website.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		3CC954432CA9EC4200C3AEF8 /* tls-inspector */ = {
@@ -176,7 +180,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3C6272F12E75228F00EAB12D /* PBXTargetDependency */,
+				3C8742ED2EB4524200154664 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3CC954462CA9EC4200C3AEF8 /* tls-inspector */,
@@ -200,7 +204,7 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					3C6272E72E75228F00EAB12D = {
+					3C8742DF2EB4524200154664 = {
 						CreatedOnToolsVersion = 26.0;
 					};
 					3CC954432CA9EC4200C3AEF8 = {
@@ -227,13 +231,13 @@
 			projectRoot = "";
 			targets = (
 				3CC954432CA9EC4200C3AEF8 /* tls-inspector */,
-				3C6272E72E75228F00EAB12D /* Inspect Website */,
+				3C8742DF2EB4524200154664 /* inspect-website */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3C6272E62E75228F00EAB12D /* Resources */ = {
+		3C8742DE2EB4524200154664 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,7 +276,7 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3C6272E42E75228F00EAB12D /* Sources */ = {
+		3C8742DC2EB4524200154664 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -289,34 +293,34 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3C6272F12E75228F00EAB12D /* PBXTargetDependency */ = {
+		3C8742ED2EB4524200154664 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3C6272E72E75228F00EAB12D /* Inspect Website */;
-			targetProxy = 3C6272F02E75228F00EAB12D /* PBXContainerItemProxy */;
+			target = 3C8742DF2EB4524200154664 /* inspect-website */;
+			targetProxy = 3C8742EC2EB4524200154664 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3C6272F42E75228F00EAB12D /* Debug */ = {
+		3C8742F02EB4524200154664 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Inspect Website/Info.plist";
+				INFOPLIST_FILE = "inspect-website/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Inspect Website";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.8;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.inspect-website";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -331,26 +335,26 @@
 			};
 			name = Debug;
 		};
-		3C6272F52E75228F00EAB12D /* Release */ = {
+		3C8742F12EB4524200154664 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Inspect Website/Inspect Website.entitlements";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Inspect Website/Info.plist";
+				INFOPLIST_FILE = "inspect-website/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Inspect Website";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.8;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.inspect-website";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -561,11 +565,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3C6272F62E75228F00EAB12D /* Build configuration list for PBXNativeTarget "Inspect Website" */ = {
+		3C8742EF2EB4524200154664 /* Build configuration list for PBXNativeTarget "inspect-website" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3C6272F42E75228F00EAB12D /* Debug */,
-				3C6272F52E75228F00EAB12D /* Release */,
+				3C8742F02EB4524200154664 /* Debug */,
+				3C8742F12EB4524200154664 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
