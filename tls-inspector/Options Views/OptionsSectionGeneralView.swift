@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import Localization
 
 public struct OptionsSectionGeneralView: View {
     public let rememberRecentLookups: Binding<Bool>

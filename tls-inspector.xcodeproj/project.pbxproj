@@ -10,8 +10,13 @@
 		3C0485512E724BC600DCA9F4 /* Crashpad in Frameworks */ = {isa = PBXBuildFile; productRef = 3C0485502E724BC600DCA9F4 /* Crashpad */; };
 		3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6412CAA28F00075B2BA /* curl.xcframework */; };
 		3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */; };
+		3C4E8A1F2EBA7B9D00433307 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4E8A1E2EBA7B9D00433307 /* Localization */; };
+		3C4E8A212EBA7BA500433307 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4E8A202EBA7BA500433307 /* Localization */; };
 		3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */; };
 		3C8742EE2EB4524200154664 /* inspect-website.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C8742E02EB4524200154664 /* inspect-website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C8744E32EB46EA100154664 /* TLSUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8744E22EB46EA100154664 /* TLSUI */; };
+		3C8745E12EB55EAC00154664 /* TLSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8745E02EB55EAC00154664 /* TLSKit */; };
+		3C8745E32EB55EAC00154664 /* TLSUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8745E22EB55EAC00154664 /* TLSUI */; };
 		3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC954562CA9EC6200C3AEF8 /* TLSKit */; };
 /* End PBXBuildFile section */
 
@@ -49,18 +54,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3C566FF32CC9A922002E8CB2 /* Exceptions for "tls-inspector" folder in "tls-inspector" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Localization/lang.py,
-				Localization/README.md,
-				Localization/Strings/de.strings,
-				Localization/Strings/en.strings,
-				Localization/Strings/es.strings,
-				Localization/Strings/nl.strings,
-			);
-			target = 3CC954432CA9EC4200C3AEF8 /* tls-inspector */;
-		};
 		3C8742F22EB4524200154664 /* Exceptions for "inspect-website" folder in "inspect-website" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -81,9 +74,6 @@
 		};
 		3CC954462CA9EC4200C3AEF8 /* tls-inspector */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				3C566FF32CC9A922002E8CB2 /* Exceptions for "tls-inspector" folder in "tls-inspector" target */,
-			);
 			path = "tls-inspector";
 			sourceTree = "<group>";
 		};
@@ -94,7 +84,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C8745E32EB55EAC00154664 /* TLSUI in Frameworks */,
+				3C4E8A212EBA7BA500433307 /* Localization in Frameworks */,
 				3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */,
+				3C8745E12EB55EAC00154664 /* TLSKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,9 +96,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */,
+				3C8744E32EB46EA100154664 /* TLSUI in Frameworks */,
 				3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */,
 				3C0485512E724BC600DCA9F4 /* Crashpad in Frameworks */,
 				3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */,
+				3C4E8A1F2EBA7B9D00433307 /* Localization in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +157,9 @@
 			);
 			name = "inspect-website";
 			packageProductDependencies = (
+				3C8745E02EB55EAC00154664 /* TLSKit */,
+				3C8745E22EB55EAC00154664 /* TLSUI */,
+				3C4E8A202EBA7BA500433307 /* Localization */,
 			);
 			productName = "inspect-website";
 			productReference = 3C8742E02EB4524200154664 /* inspect-website.appex */;
@@ -189,6 +187,8 @@
 			packageProductDependencies = (
 				3CC954562CA9EC6200C3AEF8 /* TLSKit */,
 				3C0485502E724BC600DCA9F4 /* Crashpad */,
+				3C8744E22EB46EA100154664 /* TLSUI */,
+				3C4E8A1E2EBA7B9D00433307 /* Localization */,
 			);
 			productName = "tls-inspector";
 			productReference = 3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */;
@@ -224,6 +224,7 @@
 			packageReferences = (
 				3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */,
 				3C04854F2E724BC600DCA9F4 /* XCLocalSwiftPackageReference "crashpad" */,
+				3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3CC954452CA9EC4200C3AEF8 /* Products */;
@@ -311,7 +312,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inspect-website/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Inspect Website";
+				INFOPLIST_KEY_CFBundleDisplayName = "View Certificate";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.8;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -345,7 +346,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inspect-website/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Inspect Website";
+				INFOPLIST_KEY_CFBundleDisplayName = "View Certificate";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.8;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -499,7 +500,6 @@
 				CODE_SIGN_ENTITLEMENTS = "tls-inspector/tls-inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 133;
-				DEVELOPMENT_ASSET_PATHS = "\"tls-inspector/Preview Content\"";
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -535,7 +535,6 @@
 				CODE_SIGN_ENTITLEMENTS = "tls-inspector/tls-inspector.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 133;
-				DEVELOPMENT_ASSET_PATHS = "\"tls-inspector/Preview Content\"";
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -599,6 +598,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = crashpad;
 		};
+		3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = tlsui;
+		};
 		3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = tlskit;
@@ -609,6 +612,31 @@
 		3C0485502E724BC600DCA9F4 /* Crashpad */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Crashpad;
+		};
+		3C4E8A1E2EBA7B9D00433307 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = Localization;
+		};
+		3C4E8A202EBA7BA500433307 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = Localization;
+		};
+		3C8744E22EB46EA100154664 /* TLSUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = TLSUI;
+		};
+		3C8745E02EB55EAC00154664 /* TLSKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */;
+			productName = TLSKit;
+		};
+		3C8745E22EB55EAC00154664 /* TLSUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = TLSUI;
 		};
 		3CC954562CA9EC6200C3AEF8 /* TLSKit */ = {
 			isa = XCSwiftPackageProductDependency;

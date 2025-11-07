@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import Localization
 
 public struct AboutView: View {
     @Environment(\.dismiss) private var dismiss

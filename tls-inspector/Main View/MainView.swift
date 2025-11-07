@@ -16,6 +16,8 @@
 
 import SwiftUI
 import TLSKit
+import TLSUI
+import Localization
 
 struct MainView: View {
     @State var host: String = ""
@@ -96,7 +98,7 @@ struct MainView: View {
                 AboutView()
             })
             .fullScreenCover(item: $inspectionResponse) { response in
-                InspectionResponseView(response: response)
+                TLSUI.InspectionResponseView(response: response)
             }
             .fullScreenCover(isPresented: $showOptionsView, content: {
                 OptionsView(presented: $showOptionsView)

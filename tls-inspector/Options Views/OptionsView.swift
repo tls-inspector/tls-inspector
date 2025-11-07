@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import Localization
 
 public struct OptionsView: View {
     public let presented: Binding<Bool>

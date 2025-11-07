@@ -15,7 +15,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import SwiftUI
-import TLSKit
+import TLSUI
+import Localization
 
 private enum AppDefaultsKeys: String {
     case firstRunComplete = "first_run_complete"
@@ -59,93 +60,82 @@ private final class AppDefaults: Sendable {
     }
 }
 
-public enum CryptoEngine: String, Sendable, Codable {
-    case NetworkFramework = "network_framework"
-    case OpenSSL = "openssl"
-
-    static func allValues() -> [CryptoEngine] {
-        return [
-            .NetworkFramework,
-            .OpenSSL,
-        ]
+@MainActor
+public final class OptionsProvider: TLSUI.IOptions {
+    public func firstRunComplete() -> Bool {
+        return AppDefaults.get(.firstRunComplete, false)
     }
 
-    func intValue() -> Int {
-        switch self {
-        case .NetworkFramework:
-            return 1
-        case .OpenSSL:
-            return 3
-        }
+    public func rememberRecentLookups() -> Bool {
+        return AppDefaults.get(.rememberRecentLookups, true)
     }
 
-    static func from(int: Int) -> CryptoEngine? {
-        switch int {
-        case 1:
-            return .NetworkFramework
-        case 3:
-            return .OpenSSL
-        default:
-            return nil
-        }
+    public func showTips() -> Bool {
+        return AppDefaults.get(.showTips, true)
     }
 
-    func toTLSKit() -> EngineType {
-        switch self {
-        case .NetworkFramework:
-            return .NetworkFramework
-        case .OpenSSL:
-            return .OpenSSL
-        }
-    }
-}
-
-public enum IPVersion: String, Sendable, Codable {
-    case Automatic = "automatic"
-    case IPv4 = "ipv4"
-    case IPv6 = "ipv6"
-
-    static func allValues() -> [IPVersion] {
-        return [
-            .Automatic,
-            .IPv4,
-            .IPv6,
-        ]
+    public func getHttpHeaders() -> Bool {
+        return AppDefaults.get(.getHttpHeaders, true)
     }
 
-    func intValue() -> Int {
-        switch self {
-        case .Automatic:
-            return 1
-        case .IPv4:
-            return 2
-        case .IPv6:
-            return 3
-        }
+    public func queryOcsp() -> Bool {
+        return AppDefaults.get(.queryOcsp, false)
     }
 
-    static func from(int: Int) -> IPVersion? {
-        switch int {
-        case 1:
-            return .Automatic
-        case 2:
-            return .IPv4
-        case 3:
-            return .IPv6
-        default:
-            return nil
-        }
+    public func checkCrl() -> Bool {
+        return AppDefaults.get(.checkCrl, true)
     }
 
-    func toTLSKit() -> IPAddressVersion? {
-        switch self {
-        case .Automatic:
-            return nil
-        case .IPv4:
-            return .ipv4
-        case .IPv6:
-            return .ipv6
-        }
+    public func showFingerprintMd5() -> Bool {
+        return AppDefaults.get(.showFingerprintMd5, false)
+    }
+
+    public func showFingerprintSha1() -> Bool {
+        return AppDefaults.get(.showFingerprintSha1, true)
+    }
+
+    public func showFingerprintSha256() -> Bool {
+        return AppDefaults.get(.showFingerprintSha256, true)
+    }
+
+    public func showFingerprintSha512() -> Bool {
+        return AppDefaults.get(.showFingerprintSha512, false)
+    }
+
+    public func cryptoEngine() -> TLSUI.CryptoEngine {
+        return CryptoEngine(rawValue: AppDefaults.get(.cryptoEngine, CryptoEngine.NetworkFramework.rawValue)) ?? .NetworkFramework
+    }
+
+    public func ipVersion() -> TLSUI.IPVersion {
+        return IPVersion(rawValue: AppDefaults.get(.ipVersion, IPVersion.Automatic.rawValue)) ?? .Automatic
+    }
+
+    public func preferredCiphers() -> String {
+        return AppDefaults.get(.preferredCiphers, "HIGH:!aNULL:!MD5:!RC4")
+    }
+
+    public func contactNagDismissed() -> Bool {
+        return AppDefaults.get(.contactNagDismissed, false)
+    }
+
+    public func advancedSettingsNagDismissed() -> Bool {
+        return AppDefaults.get(.advancedSettingsNagDismissed, false)
+    }
+
+    public func treatUnrecognizedAsTrusted() -> Bool {
+        return AppDefaults.get(.treatUnrecognizedAsTrusted, true)
+    }
+
+    public func appLanguage() -> String {
+        return AppDefaults.get(.appLanguage, SupportedLanguages.English.rawValue)
+    }
+
+    public func inspectTimeout() -> Int {
+        return AppDefaults.get(.inspectTimeout, 10)
+    }
+
+    public func verboseLogging() -> Bool {
+        return UserOptions.current.verboseLogging
     }
 }
 

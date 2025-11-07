@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import Localization
 
 public struct RootCACertificatesView: View {
     public let isPresented: Binding<Bool>

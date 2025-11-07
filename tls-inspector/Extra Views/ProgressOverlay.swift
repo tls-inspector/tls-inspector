@@ -15,6 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import SwiftUI
+import Localization
 
 extension View {
     func progressOverlay(presented: Binding<Bool>) -> some View {

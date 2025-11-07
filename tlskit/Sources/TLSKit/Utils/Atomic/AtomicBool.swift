@@ -17,7 +17,7 @@
 import Foundation
 
 /// AtomicBool is a thread-safe boolean value
-internal final class AtomicBool: Sendable {
+public final class AtomicBool: Sendable {
     nonisolated(unsafe) private var value: Bool
     nonisolated(unsafe) private var lock: NSObject = NSObject()
 

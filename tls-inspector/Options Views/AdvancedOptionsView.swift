@@ -16,6 +16,8 @@
 
 import SwiftUI
 import TLSKit
+import TLSUI
+import Localization
 
 public struct AdvancedOptionsView: View {
     @State private var showNag = false

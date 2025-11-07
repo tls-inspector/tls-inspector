@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import Localization
 
 public struct OptionsSectionFingerprintsView: View {
     public let showFingerprintMd5: Binding<Bool>

@@ -16,6 +16,7 @@
 
 import SwiftUI
 import MessageUI
+import Localization
 
 enum FeedbackType {
     case bug

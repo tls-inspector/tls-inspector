@@ -17,6 +17,7 @@
 import UIKit
 import StoreKit
 import TLSKit
+import Localization
 
 class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @preconcurrency SKStoreProductViewControllerDelegate {
     private let dnsInspectorAppId = 6470965982

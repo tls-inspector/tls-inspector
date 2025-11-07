@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import Localization
 
 struct RecentInspectionsView: View {
     let onSelect: (InspectionRequest) -> Void

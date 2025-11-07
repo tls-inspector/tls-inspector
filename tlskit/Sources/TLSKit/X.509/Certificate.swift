@@ -26,7 +26,7 @@ public enum CertificateDigestType: Sendable {
 }
 
 /// Describes a X.509 certificate
-public struct Certificate: Sendable {
+public struct Certificate: Sendable, Equatable, Hashable {
     /// The subject name
     public let subject: Name
     /// The issuer name
@@ -65,6 +65,16 @@ public struct Certificate: Sendable {
     public let source: CertificateSource?
     /// If the certificate or the key used is present in these bundles. Only populated for CA certificates.
     public let foundInBundles: [BundleProvider: Bool]?
+
+    private let thumbprint: Data
+
+    public static func == (lhs: Certificate, rhs: Certificate) -> Bool {
+        return lhs.thumbprint == rhs.thumbprint
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        self.thumbprint.hash(into: &hasher)
+    }
 
     /// Hash the data of this certificate into a digest, known as a fingerprint or thumbprint, using the given algorithm
     /// - Parameter withType: The digest algorithm to use
@@ -230,6 +240,16 @@ public struct Certificate: Sendable {
         } else {
             self.foundInBundles = nil
         }
+
+        var thumbprint = [UInt8](repeating: 0, count: Int(EVP_MAX_MD_SIZE))
+        var thumbprintLength = UInt32(thumbprint.count)
+        guard X509_digest(self.x509, EVP_sha256(), &thumbprint, &thumbprintLength) > 0 else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] X509_digest returned nil")
+            throw TLSKitError.invalidData("unable to digest certificate")
+        }
+
+        self.thumbprint = Data(bytes: thumbprint, count: Int(thumbprintLength))
     }
 
     private static func isCA(_ x509: X509) -> Bool {

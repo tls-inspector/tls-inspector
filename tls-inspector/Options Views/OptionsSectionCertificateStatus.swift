@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import Localization
 
 public struct OptionsSectionCertificateStatus: View {
     public let queryOcsp: Binding<Bool>
