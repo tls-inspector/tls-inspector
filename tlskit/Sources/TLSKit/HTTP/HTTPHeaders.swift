@@ -19,7 +19,7 @@ import Foundation
 /// A collection of HTTP headers.
 ///
 /// HTTP header names are case-insensitive and duplicate headers are valid, so this class exists to provide a map-like interface.
-public final class HTTPHeaders: Sendable {
+public final class HTTPHeaders: Sendable, Equatable, Hashable {
     private let allHeaders = AtomicMap<String, [String]>(initialValue: [:])
     private let normalizedKeyMap = AtomicMap<String, String>(initialValue: [:])
 
@@ -67,6 +67,14 @@ public final class HTTPHeaders: Sendable {
         }
 
         return allHeaders.Get(matchingKey)
+    }
+
+    public static func == (lhs: HTTPHeaders, rhs: HTTPHeaders) -> Bool {
+        return lhs.all() == rhs.all()
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        self.all().hash(into: &hasher)
     }
 
     internal func add(_ key: String, _ value: String) {

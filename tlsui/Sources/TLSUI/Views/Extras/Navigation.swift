@@ -32,8 +32,30 @@ public struct Navigation<Content: View>: View {
     }
 }
 
-#Preview {
-    Navigation {
-        Text("hi")
+public struct SplitView<Primary: View, Secondary: View>: View {
+    public var primary: () -> Primary
+    public var secondary: () -> Secondary
+
+    public init(
+        @ViewBuilder primary: @escaping () -> Primary,
+        @ViewBuilder secondary: @escaping () -> Secondary
+    ) {
+        self.primary = primary
+        self.secondary = secondary
+    }
+
+    public var body: some View {
+        if #available(iOS 16, *) {
+            NavigationSplitView {
+                primary()
+            } detail: {
+                secondary()
+            }
+        } else {
+            NavigationView {
+                primary()
+                secondary()
+            }.navigationViewStyle(.columns)
+        }
     }
 }

@@ -18,16 +18,23 @@ import SwiftUI
 import TLSKit
 import Localization
 
+private enum ViewOptions: Hashable {
+    case certificate(Certificate)
+    case httpHeaders(HTTPHeaders)
+}
+
 public struct InspectionResponseView: View {
     public let response: InspectionResponse
+    @State private var presentedView: ViewOptions
     @Environment(\.dismiss) private var dismiss
 
     public init(response: InspectionResponse) {
         self.response = response
+        self.presentedView = .certificate(response.tlsConnection.certificates[0])
     }
 
     public var body: some View {
-        Navigation {
+        SplitView {
             List {
                 Section {
                     TrustStatusView(status: response.tlsConnection.trust)
@@ -75,6 +82,13 @@ public struct InspectionResponseView: View {
                         Image(systemName: "square.and.arrow.up")
                     }
                 }
+            }
+        } secondary: {
+            switch self.presentedView {
+            case .certificate(let certificate):
+                CertificateView(certificate: certificate)
+            case .httpHeaders(let headers):
+                HTTPHeadersView(headers: headers)
             }
         }
     }
