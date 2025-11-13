@@ -323,6 +323,7 @@ Enter the fully qualified domain name or IP address of the host you wish to insp
 Enter the value to verify	Enter the value to verify
 Error	Error
 Errors	Errors
+Export Logs	Export Logs
 Export NSS Keylog	Export NSS Keylog
 Extended	Extended
 Features	Features
