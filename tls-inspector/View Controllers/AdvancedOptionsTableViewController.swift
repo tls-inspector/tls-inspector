@@ -187,23 +187,21 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
             UserOptions.verboseLogging = checked
         }))
 
-        if #available(iOS 15, *) {
-            if let submitLogsCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) {
-                guard let textLabel = submitLogsCell.cell.viewWithTag(1) as? UILabel else {
-                    return loggingSection
-                }
-
-                guard let iconLabel = submitLogsCell.cell.viewWithTag(2) as? UILabel else {
-                    return loggingSection
-                }
-
-                textLabel.text = lang(key: "Submit Logs")
-                iconLabel.font = FAIcon.FABugSolid.font(size: iconLabel.font.pointSize)
-                iconLabel.textColor = UIColor.red
-                iconLabel.text = FAIcon.FABugSolid.string()
-
-                loggingSection.cells.append(submitLogsCell)
+        if let submitLogsCell = TableViewCell.from(self.tableView.dequeueReusableCell(withIdentifier: "Icon")) {
+            guard let textLabel = submitLogsCell.cell.viewWithTag(1) as? UILabel else {
+                return loggingSection
             }
+
+            guard let iconLabel = submitLogsCell.cell.viewWithTag(2) as? UILabel else {
+                return loggingSection
+            }
+
+            textLabel.text = lang(key: "Export Logs")
+            iconLabel.font = FAIcon.FABugSolid.font(size: iconLabel.font.pointSize)
+            iconLabel.textColor = UIColor.red
+            iconLabel.text = FAIcon.FABugSolid.string()
+
+            loggingSection.cells.append(submitLogsCell)
         }
 
         return loggingSection
@@ -284,9 +282,19 @@ class AdvancedOptionsTableViewController: UITableViewController, UITextFieldDele
                                         dismissed: nil)
             return
         }
-        ContactTableViewController.show(self) { (support) in
-            AppLinks.current.showEmailCompose(viewController: self, object: support, includeLogs: true, dismissed: nil)
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        if paths.count == 0 {
+            return
         }
+        let documentsDirectory = URL(fileURLWithPath: paths[0])
+
+        let filePath = documentsDirectory.appendingPathComponent("CertificateKit.log")
+        if !FileManager.default.fileExists(atPath: filePath.path) {
+            return
+        }
+
+        let exportActivity = UIActivityViewController(activityItems: [filePath], applicationActivities: nil)
+        self.present(exportActivity, animated: true, completion: nil)
     }
 
     @objc func changeCiphers(_ sender: UITextField) {
