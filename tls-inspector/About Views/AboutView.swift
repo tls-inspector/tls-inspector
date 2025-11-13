@@ -20,10 +20,8 @@ import Localization
 
 public struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var showFeedbackSheet: Bool = false
     @State private var tapCount = 0
     @State private var showQuote = false
-    private let showFeedback = NotificationCenter.Publisher(center: .default, name: showFeedbackNotification)
 
     public var body: some View {
         GeometryReader { geometry in
@@ -65,12 +63,6 @@ public struct AboutView: View {
                 Button(Localize.dismiss()) {
                     self.tapCount = 0
                 }
-            })
-            .sheet(isPresented: $showFeedbackSheet, content: {
-                FeedbackView()
-            })
-            .onReceive(showFeedback, perform: { _ in
-                self.showFeedbackSheet = true
             })
             .background(Color(uiColor: UIColor.systemGroupedBackground))
         }

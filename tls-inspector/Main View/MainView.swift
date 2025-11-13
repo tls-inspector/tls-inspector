@@ -90,9 +90,6 @@ struct MainView: View {
             .fullScreenCover(isPresented: $showRootCACertificatesView, content: {
                 RootCACertificatesView(isPresented: $showRootCACertificatesView)
             })
-            .fullScreenCover(isPresented: $showFeedbackView, content: {
-                FeedbackView()
-            })
             .navigationTitle("TLS Inspector")
             .sheet(isPresented: $showAboutView, content: {
                 AboutView()

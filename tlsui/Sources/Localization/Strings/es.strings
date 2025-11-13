@@ -218,12 +218,6 @@ Please Note	Please Note
 # TODO
 Please wait...	Please wait...
 # TODO
-Provide Details	Provide Details
-# TODO
-Provide Feedback	Provide Feedback
-# TODO
-Provide Feedback Details	Provide Feedback Details
-# TODO
 ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
 # TODO
 ProxyNotice	An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
@@ -242,10 +236,6 @@ Remember Recent Lookups	Remember Recent Lookups
 # TODO
 Remote Address	Remote Address
 # TODO
-Report a Bug	Report a Bug
-# TODO
-Request a Feature	Request a Feature
-# TODO
 Reset to default settings	Reset to default settings
 # TODO
 Root	Root
@@ -263,8 +253,6 @@ Search on crt.sh	Search on crt.sh
 Seconds	Seconds
 # TODO
 Security HTTP Headers	Security HTTP Headers
-# TODO
-Select Feedback Type	Select Feedback Type
 # TODO
 Send Feedback	Send Feedback
 # TODO
@@ -286,8 +274,6 @@ Signature	Signature
 # TODO
 Signature Type	Signature Type
 # TODO
-Something Else	Something Else
-# TODO
 Source	Source
 # TODO
 Special	Special
@@ -301,8 +287,6 @@ Subject	Subject
 Submit	Submit
 # TODO
 Submit logs	Submit logs
-# TODO
-Support is only provided in English.	Support is only provided in English.
 # TODO
 SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
 # TODO
@@ -346,11 +330,7 @@ What does this mean?	What does this mean?
 # TODO
 Yes	Yes
 # TODO
-Your feedback has been sent.	Your feedback has been sent.
-# TODO
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
-# TODO
-contactsupportrequiresmailaccount	Contacting support requires that at least one email account be configured on this device.
 # TODO
 guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
 # TODO

@@ -109,9 +109,6 @@ Organization	Organization
 Organizational Unit	Organizational Unit
 Please Note	Please Note
 Please wait...	Please wait...
-Provide Details	Provide Details
-Provide Feedback	Provide Feedback
-Provide Feedback Details	Provide Feedback Details
 ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
 ProxyNotice	An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
 Public Key	Public Key
@@ -121,8 +118,6 @@ Rate in App Store	Rate in App Store
 Recent Lookups	Recent Lookups
 Remember Recent Lookups	Remember Recent Lookups
 Remote Address	Remote Address
-Report a Bug	Report a Bug
-Request a Feature	Request a Feature
 Reset to default settings	Reset to default settings
 Root	Root
 Root CA Certificates	Root CA Certificates
@@ -132,7 +127,6 @@ Search on Shodan	Search on Shodan
 Search on crt.sh	Search on crt.sh
 Seconds	Seconds
 Security HTTP Headers	Security HTTP Headers
-Select Feedback Type	Select Feedback Type
 Send Feedback	Send Feedback
 Sent by server	Sent by server
 Serial Number	Serial Number
@@ -143,7 +137,6 @@ Show Tips	Show Tips
 Show certificate on crt.sh	Show certificate on crt.sh
 Signature	Signature
 Signature Type	Signature Type
-Something Else	Something Else
 Source	Source
 Special	Special
 State / Province	State / Province
@@ -151,7 +144,6 @@ Status Providers	Status Providers
 Subject	Subject
 Submit	Submit
 Submit logs	Submit logs
-Support is only provided in English.	Support is only provided in English.
 SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
 TLS Inspector	TLS Inspector
 Timeout	Timeout
@@ -173,9 +165,7 @@ View All	View All
 View on SSL Labs	View on SSL Labs
 What does this mean?	What does this mean?
 Yes	Yes
-Your feedback has been sent.	Your feedback has been sent.
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
-contactsupportrequiresmailaccount	Contacting support requires that at least one email account be configured on this device.
 guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
 whatDoesThisMean::badAuthority	This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority.
 whatDoesThisMean::invalidDate	This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.

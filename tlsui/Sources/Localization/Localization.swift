@@ -1437,45 +1437,6 @@ public final class Localize {
             return "Please wait..."
         }
     }
-    // key: Provide Details
-    public static func providedetails() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Provide Details"
-        case .Spanish:
-            return "Provide Details"
-        case .German:
-            return "Provide Details"
-        case .Dutch:
-            return "Provide Details"
-        }
-    }
-    // key: Provide Feedback
-    public static func providefeedback() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Provide Feedback"
-        case .Spanish:
-            return "Provide Feedback"
-        case .German:
-            return "Provide Feedback"
-        case .Dutch:
-            return "Provide Feedback"
-        }
-    }
-    // key: Provide Feedback Details
-    public static func providefeedbackdetails() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Provide Feedback Details"
-        case .Spanish:
-            return "Provide Feedback Details"
-        case .German:
-            return "Provide Feedback Details"
-        case .Dutch:
-            return "Provide Feedback Details"
-        }
-    }
     // key: ProxyDanger
     public static func proxydanger() -> String {
         switch currentLanguage {
@@ -1593,32 +1554,6 @@ public final class Localize {
             return "Remote Address"
         }
     }
-    // key: Report a Bug
-    public static func reportabug() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Report a Bug"
-        case .Spanish:
-            return "Report a Bug"
-        case .German:
-            return "Report a Bug"
-        case .Dutch:
-            return "Report a Bug"
-        }
-    }
-    // key: Request a Feature
-    public static func requestafeature() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Request a Feature"
-        case .Spanish:
-            return "Request a Feature"
-        case .German:
-            return "Request a Feature"
-        case .Dutch:
-            return "Request a Feature"
-        }
-    }
     // key: Reset to default settings
     public static func resettodefaultsettings() -> String {
         switch currentLanguage {
@@ -1734,19 +1669,6 @@ public final class Localize {
             return "Security HTTP Headers"
         case .Dutch:
             return "Security HTTP Headers"
-        }
-    }
-    // key: Select Feedback Type
-    public static func selectfeedbacktype() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Select Feedback Type"
-        case .Spanish:
-            return "Select Feedback Type"
-        case .German:
-            return "Select Feedback Type"
-        case .Dutch:
-            return "Select Feedback Type"
         }
     }
     // key: Send Feedback
@@ -1879,19 +1801,6 @@ public final class Localize {
             return "Signature Type"
         }
     }
-    // key: Something Else
-    public static func somethingelse() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Something Else"
-        case .Spanish:
-            return "Something Else"
-        case .German:
-            return "Something Else"
-        case .Dutch:
-            return "Something Else"
-        }
-    }
     // key: Source
     public static func source() -> String {
         switch currentLanguage {
@@ -1981,19 +1890,6 @@ public final class Localize {
             return "Submit logs"
         case .Dutch:
             return "Submit logs"
-        }
-    }
-    // key: Support is only provided in English.
-    public static func supportisonlyprovidedinenglish() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Support is only provided in English."
-        case .Spanish:
-            return "Support is only provided in English."
-        case .German:
-            return "Support is only provided in English."
-        case .Dutch:
-            return "Support is only provided in English."
         }
     }
     // key: SupportNote
@@ -2269,19 +2165,6 @@ public final class Localize {
             return "Yes"
         }
     }
-    // key: Your feedback has been sent.
-    public static func yourfeedbackhasbeensent() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Your feedback has been sent."
-        case .Spanish:
-            return "Your feedback has been sent."
-        case .German:
-            return "Your feedback has been sent."
-        case .Dutch:
-            return "Your feedback has been sent."
-        }
-    }
     // key: app{version}{build}{opensslversion}{curlversion}
     public static func appversionbuildopensslversioncurlversion(version: String, build: String, opensslversion: String, curlversion: String) -> String {
         switch currentLanguage {
@@ -2293,19 +2176,6 @@ public final class Localize {
             return "App: \(version) (\(build)), OpenSSL: \(opensslversion), curl: \(curlversion)"
         case .Dutch:
             return "App: \(version) (\(build)), OpenSSL: \(opensslversion), curl: \(curlversion)"
-        }
-    }
-    // key: contactsupportrequiresmailaccount
-    public static func contactsupportrequiresmailaccount() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Contacting support requires that at least one email account be configured on this device."
-        case .Spanish:
-            return "Contacting support requires that at least one email account be configured on this device."
-        case .German:
-            return "Contacting support requires that at least one email account be configured on this device."
-        case .Dutch:
-            return "Contacting support requires that at least one email account be configured on this device."
         }
     }
     // key: guidance_warning

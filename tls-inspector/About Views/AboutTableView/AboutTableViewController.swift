@@ -43,7 +43,6 @@ class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @
                 AboutTableView.iconCell(text: Localize.followusonbluesky(), image: UIImage(resource: .bluesky), reuseIdentifier: "bluesky"),
             ],
             [
-                AboutTableView.iconCell(text: Localize.providefeedback(), image: UIImage(systemName: "questionmark.bubble")!, reuseIdentifier: "feedback"),
                 AboutTableView.iconCell(text: Localize.contributetotlsinspector(), image: UIImage(systemName: "apple.terminal")!, reuseIdentifier: "contribute"),
                 AboutTableView.iconCell(text: Localize.opensourcelicensesattributions(), image: UIImage(systemName: "heart.fill")!, reuseIdentifier: "oss"),
             ],
@@ -127,8 +126,6 @@ class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @
             UIApplication.shared.open(mastodonURL)
         case "bluesky":
             UIApplication.shared.open(blueskyURL)
-        case "feedback":
-            NotificationCenter.default.post(name: showFeedbackNotification, object: nil)
         case "contribute":
             UIApplication.shared.open(projectContributeURL)
         case "foss":
