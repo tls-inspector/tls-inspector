@@ -26,7 +26,7 @@ public enum CertificateDigestType: Sendable {
 }
 
 /// Describes a X.509 certificate
-public struct Certificate: Sendable, Equatable, Hashable {
+public struct Certificate: Identifiable, Sendable, Equatable, Hashable {
     /// The subject name
     public let subject: Name
     /// The issuer name
@@ -49,10 +49,10 @@ public struct Certificate: Sendable, Equatable, Hashable {
     public let authorityKeyId: Data?
     /// Providers for certificate status (both CRL and OCSP)
     public let statusProviders: [StatusProvider]?
+    /// The revocation status of this certificate. Only populated if the certificate had a status provider and a status check was performed.
+    public internal(set) var statusResults: [CertificateStatus]?
     /// Signed certificate timestamps
     public let signedTimestamps: [SignedCertificateTimestamp]?
-    /// The revocation status of this certificate. Only populated if the certificate had a status provider and a status check was performed.
-    public internal(set) var status: CertificateStatus?
     /// If this certificate has the "Is CA" extension set
     public let isCA: Bool
     /// Basic and extended key usage values for this certificate
@@ -65,6 +65,8 @@ public struct Certificate: Sendable, Equatable, Hashable {
     public let source: CertificateSource?
     /// If the certificate or the key used is present in these bundles. Only populated for CA certificates.
     public let foundInBundles: [BundleProvider: Bool]?
+    /// The identifer of this certificate, used only to fufill the Identifiable protocol. Does not reflect any data on the certificate itself.
+    public let id: UUID
 
     private let thumbprint: Data
 
@@ -125,6 +127,16 @@ public struct Certificate: Sendable, Equatable, Hashable {
     }
 
     nonisolated(unsafe) internal let x509: X509
+
+    internal init(pemString: String, certificateSource: CertificateSource? = nil) throws {
+        guard let pemData = try pemString.data(using: .utf8)?.toBIO() else {
+            throw TLSKitError.invalidData("Invalid PEM data")
+        }
+        guard let x509 = PEM_read_bio_X509(pemData, nil, nil, nil) else {
+            throw TLSKitError.invalidData("Invalid X509 certificate data")
+        }
+        try self.init(x509: x509, certificateSource: certificateSource)
+    }
 
     internal init(secCertificate: SecCertificate, certificateSource: CertificateSource? = nil) throws {
         let data = SecCertificateCopyData(secCertificate) as Data
@@ -250,6 +262,7 @@ public struct Certificate: Sendable, Equatable, Hashable {
         }
 
         self.thumbprint = Data(bytes: thumbprint, count: Int(thumbprintLength))
+        self.id = UUID()
     }
 
     private static func isCA(_ x509: X509) -> Bool {

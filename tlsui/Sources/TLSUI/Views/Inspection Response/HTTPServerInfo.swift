@@ -42,6 +42,7 @@ public struct HTTPServerInfo: View {
             } label: {
                 Text(Localize.viewall())
             }
+            .tag(InspectionResponseViewOptions.httpHeaders(httpServerInfo.headers))
         }
     }
 }

@@ -505,7 +505,7 @@ public final class Localize {
     public static func dnsname() -> String {
         switch currentLanguage {
         case .English:
-            return "Alternate Names"
+            return "DNS Name"
         case .Spanish:
             return "Alternate Names"
         case .German:
@@ -622,7 +622,7 @@ public final class Localize {
     public static func emailaddress() -> String {
         switch currentLanguage {
         case .English:
-            return "Alternate Names"
+            return "Email Address"
         case .Spanish:
             return "Alternate Names"
         case .German:
@@ -869,7 +869,7 @@ public final class Localize {
     public static func ipaddress() -> String {
         switch currentLanguage {
         case .English:
-            return "Alternate Names"
+            return "IP Address"
         case .Spanish:
             return "Alternate Names"
         case .German:
@@ -1333,6 +1333,19 @@ public final class Localize {
             return "Not Before"
         }
     }
+    // key: Not revoked
+    public static func notrevoked() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Not revoked"
+        case .Spanish:
+            return "Not revoked"
+        case .German:
+            return "Not revoked"
+        case .Dutch:
+            return "Not revoked"
+        }
+    }
     // key: Notice
     public static func notice() -> String {
         switch currentLanguage {
@@ -1565,6 +1578,19 @@ public final class Localize {
             return "Reset to default settings"
         case .Dutch:
             return "Reset to default settings"
+        }
+    }
+    // key: Revoked: {reason}
+    public static func revokedreason(reason: String) -> String {
+        switch currentLanguage {
+        case .English:
+            return "Revoked: \(reason)"
+        case .Spanish:
+            return "Revoked: \(reason)"
+        case .German:
+            return "Revoked: \(reason)"
+        case .Dutch:
+            return "Revoked: \(reason)"
         }
     }
     // key: Root
@@ -2000,7 +2026,7 @@ public final class Localize {
     public static func uri() -> String {
         switch currentLanguage {
         case .English:
-            return "Alternate Names"
+            return "URI"
         case .Spanish:
             return "Alternate Names"
         case .German:

@@ -18,14 +18,14 @@ import SwiftUI
 import TLSKit
 import Localization
 
-private enum ViewOptions: Hashable {
+internal enum InspectionResponseViewOptions: Hashable {
     case certificate(Certificate)
     case httpHeaders(HTTPHeaders)
 }
 
 public struct InspectionResponseView: View {
     public let response: InspectionResponse
-    @State private var presentedView: ViewOptions
+    @State private var presentedView: InspectionResponseViewOptions
     @Environment(\.dismiss) private var dismiss
 
     public init(response: InspectionResponse) {
@@ -45,6 +45,7 @@ public struct InspectionResponseView: View {
                     HTTPServerInfo(httpServerInfo: httpServerInfo)
                 }
             }
+            .listStyle(.insetGrouped)
             .navigationTitle(response.tlsConnection.domain)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -63,19 +64,13 @@ public struct InspectionResponseView: View {
                             Text(Localize.exportcertificatechain())
                         }
                         Divider()
-                        Button {
-                            // TODO
-                        } label: {
+                        Link(destination: URL(string: "https://www.ssllabs.com/ssltest/analyze.html?d=\(response.tlsConnection.domain)&hideResults=on")!) {
                             Text(Localize.viewonssllabs())
                         }
-                        Button {
-                            // TODO
-                        } label: {
+                        Link(destination: URL(string: "https://www.shodan.io/host/\(response.tlsConnection.remoteAddress)")!) {
                             Text(Localize.searchonshodan())
                         }
-                        Button {
-                            // TODO
-                        } label: {
+                        Link(destination: URL(string: "https://crt.sh/?q=\(response.tlsConnection.domain)")!) {
                             Text(Localize.searchoncrtsh())
                         }
                     } label: {
@@ -83,12 +78,14 @@ public struct InspectionResponseView: View {
                     }
                 }
             }
-        } secondary: {
-            switch self.presentedView {
-            case .certificate(let certificate):
-                CertificateView(certificate: certificate)
-            case .httpHeaders(let headers):
-                HTTPHeadersView(headers: headers)
+        } content: {
+            Navigation {
+                switch self.presentedView {
+                case .certificate(let certificate):
+                    CertificateView(certificate: certificate)
+                case .httpHeaders(let headers):
+                    HTTPHeadersView(headers: headers)
+                }
             }
         }
     }

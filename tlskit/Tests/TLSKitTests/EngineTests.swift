@@ -112,17 +112,31 @@ let testEngines: [TLSEngine] = [
         #expect(result.tlsConnection.trust == .invalidDate)
     }
 
-    @Test("Revoked by CRL", arguments: testEngines) func revokedCRL(engineType: TLSEngine) async throws {
+    @Test("CRL Revoked", arguments: testEngines) func crlRevoked(engineType: TLSEngine) async throws {
         let session = InspectionSession(engineType: .NetworkFramework)
         let request = InspectionRequest(address: "127.0.0.1", port: 8408, serverName: "localhost", checkCRL: true, checkOCSP: false, ipVersion: .ipv4, checkHTTP: false)
         let result = try await session.execute(request)
         #expect(result.tlsConnection.trust == .revokedLeaf)
     }
 
-    @Test("Revoked by OCSP", arguments: testEngines) func revokedOCSP(engineType: TLSEngine) async throws {
+    @Test("CRL Good", arguments: testEngines) func crlGood(engineType: TLSEngine) async throws {
+        let session = InspectionSession(engineType: .NetworkFramework)
+        let request = InspectionRequest(address: "127.0.0.1", port: 8416, serverName: "localhost", checkCRL: true, checkOCSP: false, ipVersion: .ipv4, checkHTTP: false)
+        let result = try await session.execute(request)
+        #expect(result.tlsConnection.trust == .locallyTrusted)
+    }
+
+    @Test("OCSP Revoked", arguments: testEngines) func ocspRevoked(engineType: TLSEngine) async throws {
         let session = InspectionSession(engineType: .NetworkFramework)
         let request = InspectionRequest(address: "127.0.0.1", port: 8408, serverName: "localhost", checkCRL: false, checkOCSP: true, ipVersion: .ipv4, checkHTTP: false)
         let result = try await session.execute(request)
         #expect(result.tlsConnection.trust == .revokedLeaf)
+    }
+
+    @Test("OCSP Good", arguments: testEngines) func ocspGood(engineType: TLSEngine) async throws {
+        let session = InspectionSession(engineType: .NetworkFramework)
+        let request = InspectionRequest(address: "127.0.0.1", port: 8416, serverName: "localhost", checkCRL: false, checkOCSP: true, ipVersion: .ipv4, checkHTTP: false)
+        let result = try await session.execute(request)
+        #expect(result.tlsConnection.trust == .locallyTrusted)
     }
 }

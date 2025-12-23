@@ -23,7 +23,7 @@ public struct CertificateList: View {
 
     public var body: some View {
         Section(Localize.certificates()) {
-            ForEach(response.tlsConnection.certificates, id: \.subject.description) { certificate in
+            ForEach(response.tlsConnection.certificates) { certificate in
                 NavigationLink {
                     CertificateView(certificate: certificate)
                 } label: {
@@ -40,9 +40,9 @@ public struct CertificateList: View {
                             Spacer()
                             Text(Localize.root()).opacity(0.5)
                         }
-
                     }
                 }
+                .tag(InspectionResponseViewOptions.certificate(certificate))
             }
         }
     }

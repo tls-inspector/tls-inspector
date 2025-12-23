@@ -95,6 +95,8 @@ public final class HTTPClient: Sendable {
             }
             let data: [UInt8] = Array(oContent!)
 
+            // TODO: This doesn't work for WebCentral / tlsinspector.com
+
             // The HTTP client only supports HTTP/1.1
             let httpVersion = String(decoding: data[..<8], as: UTF8.self).lowercased()
             if httpVersion != "http/1.1" {

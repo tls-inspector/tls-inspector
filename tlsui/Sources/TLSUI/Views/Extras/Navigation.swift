@@ -27,35 +27,40 @@ public struct Navigation<Content: View>: View {
         if #available(iOS 16, *) {
             NavigationStack(root: content)
         } else {
-            NavigationView(content: content).navigationViewStyle(.stack)
+            NavigationView(content: content)
+                .navigationViewStyle(.stack)
         }
     }
 }
 
-public struct SplitView<Primary: View, Secondary: View>: View {
-    public var primary: () -> Primary
-    public var secondary: () -> Secondary
+public struct SplitView<Sidebar, Content>: View where Sidebar: View, Content: View
+{
+    private var sidebar: Sidebar
+    private var content: Content
 
     public init(
-        @ViewBuilder primary: @escaping () -> Primary,
-        @ViewBuilder secondary: @escaping () -> Secondary
+        @ViewBuilder sidebar: () -> Sidebar,
+        @ViewBuilder content: () -> Content
     ) {
-        self.primary = primary
-        self.secondary = secondary
+        self.sidebar = sidebar()
+        self.content = content()
     }
 
     public var body: some View {
-        if #available(iOS 16, *) {
+        if #available(iOS 16, macOS 13, tvOS 16, watchOS 9, visionOS 1, *) {
+            // Use the latest API.
             NavigationSplitView {
-                primary()
+                sidebar
             } detail: {
-                secondary()
+                content
             }
         } else {
+            // Support previous platform versions.
             NavigationView {
-                primary()
-                secondary()
-            }.navigationViewStyle(.columns)
+                sidebar
+                content
+            }
+            .navigationViewStyle(.columns)
         }
     }
 }

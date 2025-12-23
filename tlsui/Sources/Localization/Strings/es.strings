@@ -202,6 +202,8 @@ Not After	Not After
 # TODO
 Not Before	Not Before
 # TODO
+Not revoked	Not revoked
+# TODO
 Notice	Notice
 # TODO
 Only HTTPS URLs can be inspected.	Only HTTPS URLs can be inspected.
@@ -237,6 +239,8 @@ Remember Recent Lookups	Remember Recent Lookups
 Remote Address	Remote Address
 # TODO
 Reset to default settings	Reset to default settings
+# TODO
+Revoked: {reason}	Revoked: {0}
 # TODO
 Root	Root
 # TODO

@@ -119,14 +119,14 @@ public enum TrustStatus: Int, CaseIterable, Sendable {
         }
 
         // Revoked leaf
-        if certificates[0].status?.revoked == true {
+        if certificates[0].statusResults?.first(where: { $0.revoked }) != nil {
             printDebug("[\(#fileID):\(#line)] Certificate '\(certificates[0].subject)' is revoked")
             return .revokedLeaf
         }
 
-        // Revoked intermedia
+        // Revoked intermediate
         if certificates.count > 2 {
-            for certificate in certificates[1..<certificates.count-1] where certificate.status?.revoked == true {
+            for certificate in certificates[1..<certificates.count-1] where certificate.statusResults?.first(where: { $0.revoked }) != nil {
                 printDebug("[\(#fileID):\(#line)] Certificate '\(certificate.subject)' is revoked")
                 return .revokedIntermediate
             }

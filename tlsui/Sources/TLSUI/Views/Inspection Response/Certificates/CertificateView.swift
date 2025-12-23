@@ -38,7 +38,7 @@ public struct CertificateView: View {
                 CertificateKeyIdentifiersView(certificate: certificate)
             }
             if let statusProviders = certificate.statusProviders {
-                CertificateStatusProvidersView(providers: statusProviders)
+                CertificateStatusProvidersView(providers: statusProviders, statusResults: certificate.statusResults)
             }
             if let foundInBundles = self.certificate.foundInBundles {
                 CertificateBundleTrustView(foundInBundles: foundInBundles)

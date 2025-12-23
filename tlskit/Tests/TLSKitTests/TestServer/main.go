@@ -133,13 +133,14 @@ func start(startPort uint16, ipv4 string, ipv6 string, servername string) {
 		&tserverFuzzHTTP{},
 		&tserverFuzzTLS{},
 		&tserverBigHTTPHeader{},
-		&tserverRevokedCert{}, &tserverCRLOCSPProvider{},
+		&tserverStatusRevokedCert{}, &tserverRevokedCRLOCSPProvider{},
 		&tserverExpiredLeaf{},
 		&tserverExpiredInt{},
 		&tserverTooManyHTTPHeaders{},
 		&tserverTimeout{},
 		&tserverRootCA{},
 		&tserverCTPrecertificate{},
+		&tserverStatusNotRevokedCert{}, &tserverNotRevokedCRLOCSPProvider{},
 	}
 
 	port := startPort

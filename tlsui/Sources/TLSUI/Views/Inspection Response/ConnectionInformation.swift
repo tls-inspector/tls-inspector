@@ -20,6 +20,13 @@ import Localization
 
 public struct ConnectionInformation: View {
     public let response: InspectionResponse
+    private let ipName: String?
+
+    public init(response: InspectionResponse) {
+        self.response = response
+        self.ipName = response.tlsConnection.remoteAddress.resolve()
+        print(String(describing: self.ipName))
+    }
 
     public var body: some View {
         Section(Localize.connectioninformation()) {
@@ -34,6 +41,12 @@ public struct ConnectionInformation: View {
             TitleValueView(title: Localize.remoteaddress()) {
                 Text(String(describing: response.tlsConnection.remoteAddress.string))
                     .textSelection(.enabled)
+            }
+            if let ipName = self.ipName {
+                TitleValueView(title: Localize.dnsname()) {
+                    Text(ipName)
+                        .textSelection(.enabled)
+                }
             }
             if let alpn = response.tlsConnection.alpn {
                 TitleValueView(title: "ALPN") {

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import Foundation
+import DNSKit
 
 internal final class Resolver: Sendable {
     static func resolveAddress(fromDomain domain: String, addressFamily: IPAddressVersion?) throws -> IPAddress {
@@ -55,6 +56,19 @@ internal final class Resolver: Sendable {
         printDebug("[\(#fileID):\(#line)] Resolved \(domain) to \(address.string)")
 
         return address
+    }
+
+    static func resolveIp(_ ip: IPAddress) -> String? {
+        guard let reply = try? SystemResolver.query(question: Question(name: ip.string, recordType: .PTR)) else {
+            return nil
+        }
+        let record = reply.answers.first {
+            return $0.recordType == .PTR
+        }
+        guard let data = record?.data as? PTRRecordData else {
+            return nil
+        }
+        return data.name
     }
 
     private static func getErrorMessage(_ code: Int32) -> String {

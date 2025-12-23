@@ -26,9 +26,9 @@ internal struct CRLResult {
     let status: CRLStatus
     let revocationReason: Int32?
     let revocationDate: Date?
-    let informedBy: String?
+    let informedBy: String
 
-    init(status: CRLStatus, revocationReason: Int32? = nil, revocationDate: Date? = nil, informedBy: String? = nil) {
+    init(status: CRLStatus, revocationReason: Int32? = nil, revocationDate: Date? = nil, informedBy: String) {
         self.status = status
         self.revocationReason = revocationReason
         self.revocationDate = revocationDate
@@ -37,7 +37,7 @@ internal struct CRLResult {
 }
 
 internal final class CRLManager {
-    static func checkCertificate(_ certificate: Certificate, issuedBy: Certificate) -> Result<CRLResult?, TLSKitError> {
+    static func checkCertificate(_ certificate: Certificate, issuedBy: Certificate) -> Result<[CRLResult], TLSKitError> {
         var urls: [String] = []
         for provider in (certificate.statusProviders ?? []) {
             switch provider {
@@ -48,18 +48,18 @@ internal final class CRLManager {
             }
         }
         if urls.isEmpty {
-            return .success(nil)
+            return .success([])
         }
 
         var results: [CRLResult] = []
         var lastError: TLSKitError?
 
         for url in urls {
-            let result = checkCertificateAgainstCrl(certificate, issuedBy: issuedBy, crl: url)
+            let result = checkCertificateAgainstCrl(certificate, issuedBy: issuedBy, crlUrl: url)
             switch result {
             case .success(let crlResult):
                 if crlResult.status == .revoked {
-                    return .success(crlResult)
+                    results.append(crlResult)
                 }
                 results.append(crlResult)
             case .failure(let error):
@@ -76,13 +76,13 @@ internal final class CRLManager {
             return .failure(.responseError("No results"))
         }
 
-        return .success(results[0])
+        return .success(results)
     }
 
-    private static func checkCertificateAgainstCrl(_ certificate: Certificate, issuedBy: Certificate, crl: String) -> Result<CRLResult, TLSKitError> {
+    private static func checkCertificateAgainstCrl(_ certificate: Certificate, issuedBy: Certificate, crlUrl: String) -> Result<CRLResult, TLSKitError> {
         let curl: CurlClient
         do {
-            curl = try CurlClient(url: crl)
+            curl = try CurlClient(url: crlUrl)
         } catch {
             return .failure(.internalError(error.localizedDescription))
         }
@@ -128,36 +128,34 @@ internal final class CRLManager {
 
         var revoked: OpaquePointer?
         let rv = X509_CRL_get0_by_cert(crl, &revoked, certificate.x509)
+        if rv == 0 {
+            // Certificate was not present on CRL
+            printDebug("[\(#fileID):\(#line)] Certificate not present on CRL")
+            return .success(CRLResult(status: .notFound, informedBy: crlUrl))
+        }
+
         if revoked == nil {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] X509_CRL_get0_by_cert did not populate X509_REVOKED object")
             return .failure(.invalidData("Invalid CRL data"))
         }
 
-        if rv > 0 { // Certificate is revoked
-            printDebug("[\(#fileID):\(#line)] Certificate present on CRL")
+        printDebug("[\(#fileID):\(#line)] Certificate present on CRL")
 
-            guard let reasonEnum = X509_REVOKED_get_ext_d2i(revoked!, NID_crl_reason, nil, nil)?.assumingMemoryBound(to: ASN1_ENUMERATED.self) else {
-                logOpenSSLError(inFile: #fileID, atLine: #line)
-                printError("[\(#fileID):\(#line)] X509_REVOKED_get_ext_d2i returned nil")
-                return .failure(.invalidData("Invalid CRL data"))
-            }
-
-            let reason = ASN1_ENUMERATED_get(reasonEnum)
-
-            var revokedAt: Date?
-            if let v = X509_REVOKED_get0_revocationDate(revoked!) {
-                revokedAt = Date.from(ASN1_TIME: v)
-            }
-
-            return .success(CRLResult(status: .revoked, revocationReason: Int32(reason), revocationDate: revokedAt))
-        } else if rv == 0 { // Certificate not on CRL
-            printDebug("[\(#fileID):\(#line)] Certificate not present on CRL")
-            return .success(CRLResult(status: .notFound))
+        guard let reasonEnum = X509_REVOKED_get_ext_d2i(revoked!, NID_crl_reason, nil, nil)?.assumingMemoryBound(to: ASN1_ENUMERATED.self) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] X509_REVOKED_get_ext_d2i returned nil")
+            return .failure(.invalidData("Invalid CRL data"))
         }
 
-        logOpenSSLError(inFile: #fileID, atLine: #line)
-        printError("[\(#fileID):\(#line)] CRL parsing error")
-        return .failure(.invalidData("Invalid CRL data"))
+        let reason = ASN1_ENUMERATED_get(reasonEnum)
+
+        var revokedAt: Date?
+        if let v = X509_REVOKED_get0_revocationDate(revoked!) {
+            revokedAt = Date.from(ASN1_TIME: v)
+        }
+
+        return .success(CRLResult(status: .revoked, revocationReason: Int32(reason), revocationDate: revokedAt, informedBy: crlUrl))
+
     }
 }

@@ -28,30 +28,11 @@ struct MainView: View {
     @State var showAboutView = false
     @State var showOptionsView = false
     @State var showProxyWarning = false
-    @State var showRootCACertificatesView = false
-    @State var showFeedbackView = false
     let randomSite = FunStuff.randomWebsite()
 
     var body: some View {
         Navigation {
             List {
-                Section("Debug") {
-                    ListButton {
-                        self.showRootCACertificatesView.toggle()
-                    } label: {
-                        Text("Root CA Certificates")
-                    }
-                    ListButton {
-                        self.showFeedbackView.toggle()
-                    } label: {
-                        Text("Feedback")
-                    }
-                    ListButton {
-                        self.showProxyWarning.toggle()
-                    } label: {
-                        Text("Proxy Warning")
-                    }
-                }
                 Section(Localize.domainnameoripaddress()) {
                     TextField(text: $host) {
                         Text(self.randomSite)
@@ -87,9 +68,6 @@ struct MainView: View {
                     }
                 }
             }
-            .fullScreenCover(isPresented: $showRootCACertificatesView, content: {
-                RootCACertificatesView(isPresented: $showRootCACertificatesView)
-            })
             .navigationTitle("TLS Inspector")
             .sheet(isPresented: $showAboutView, content: {
                 AboutView()

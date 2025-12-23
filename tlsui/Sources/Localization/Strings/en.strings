@@ -37,7 +37,7 @@ Connection Information	Connection Information
 Contribute to TLS Inspector	Contribute to TLS Inspector
 Country	Country
 Critical	Critical
-DNS Name	Alternate Names
+DNS Name	DNS Name
 Danger	Danger
 Dangerous & Unsafe	Dangerous & Unsafe
 Data	Data
@@ -46,7 +46,7 @@ Domain Name or IP Address	Domain Name or IP Address
 Done	Done
 Download & Check CRL	Download & Check CRL
 Downloaded	Downloaded
-Email Address	Alternate Names
+Email Address	Email Address
 Embedded	Embedded
 Engine Options	Engine Options
 Error	Error
@@ -65,7 +65,7 @@ General	General
 Get Involved	Get Involved
 Google	Google
 HTTP Headers	HTTP Headers
-IP Address	Alternate Names
+IP Address	IP Address
 IconDark	Dark
 IconDefault	Default
 IconLight	Light
@@ -101,6 +101,7 @@ No	No
 No Supported URL Found	No Supported URL Found
 Not After	Not After
 Not Before	Not Before
+Not revoked	Not revoked
 Notice	Notice
 Only HTTPS URLs can be inspected.	Only HTTPS URLs can be inspected.
 Open source licenses & attributions	Open source licenses & attributions
@@ -119,6 +120,7 @@ Recent Lookups	Recent Lookups
 Remember Recent Lookups	Remember Recent Lookups
 Remote Address	Remote Address
 Reset to default settings	Reset to default settings
+Revoked: {reason}	Revoked: {0}
 Root	Root
 Root CA Certificates	Root CA Certificates
 RootCABundleAbout	TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector.
@@ -152,7 +154,7 @@ Timestamps	Timestamps
 Treat Unrecognized as Trusted	Treat Unrecognized as Trusted
 Trust Details	Trust Details
 Trusted	Trusted
-URI	Alternate Names
+URI	URI
 Unrecognized	Unrecognized
 Untrusted	Untrusted
 Use IP version	Use IP version

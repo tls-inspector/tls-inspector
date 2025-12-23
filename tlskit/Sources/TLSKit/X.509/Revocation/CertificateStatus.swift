@@ -18,7 +18,7 @@ import Foundation
 import OpenSSL
 
 /// Describes providers for certificate status
-public enum StatusProvider: Hashable, Sendable {
+public enum StatusProvider: Equatable, Hashable, Sendable {
     /// A URL to a certificate revocation list (CRL)
     case crl(String)
     /// A URL to an online certificate status protocol (OCSP) provider
@@ -28,7 +28,7 @@ public enum StatusProvider: Hashable, Sendable {
 /// Possible reasons a certificate can be revoked.
 ///
 /// Note that TLSKit does not support all possible revocation reasons possible CRL or OCSP responses, such as temporary or "hold" reasons.
-public enum RevocationReason: Sendable {
+public enum RevocationReason: String, Equatable, Hashable, Sendable {
     case keyCompromise
     case caCompromise
     case affiliationChanged
@@ -97,49 +97,62 @@ public struct CertificateStatus: Sendable {
 internal final class StatusProviderHelper {
     static func checkCertificates(_ certificates: inout [Certificate], checkCRL: Bool, checkOCSP: Bool) {
         for i in 0..<certificates.count-1 {
-            var crlResult: CRLResult?
-            var ocspResult: OCSPResult?
-
+            var crlResults: [CRLResult] = []
+            var ocspResults: [OCSPResult] = []
             if checkCRL {
-                let result = CRLManager.checkCertificate(certificates[i], issuedBy: certificates[i+1])
-                switch result {
-                case .success(let status):
-                    crlResult = status
-                case .failure:
-                    continue
+                switch CRLManager.checkCertificate(certificates[i], issuedBy: certificates[i+1]) {
+                case .success(let results):
+                    crlResults = results
+                case .failure(let error):
+                    printError("[\(#fileID):\(#line)] Failed to get certificate status from CRL: \(error)")
                 }
             }
             if checkOCSP {
-                let result = OCSPManager.checkCertificate(certificates[i], issuedBy: certificates[i+1])
-                switch result {
-                case .success(let status):
-                    ocspResult = status
-                case .failure:
-                    continue
+                switch OCSPManager.checkCertificate(certificates[i], issuedBy: certificates[i+1]) {
+                case .success(let results):
+                    ocspResults = results
+                case .failure(let error):
+                    printError("[\(#fileID):\(#line)] Failed to get certificate status from OCSP: \(error)")
                 }
             }
 
-            if crlResult == nil && ocspResult == nil {
-                continue
+            for crl in crlResults {
+                var certificate = certificates[i]
+                var revoked = false
+                var revocationReason: RevocationReason?
+                var revocationDate: Date?
+
+                if crl.status == .revoked {
+                    revoked = true
+                    revocationReason = RevocationReason.fromCrlReason(crl.revocationReason ?? -1)
+                    revocationDate = crl.revocationDate
+                }
+
+                var results = certificate.statusResults ?? []
+                results.append(CertificateStatus(revoked: revoked, revocationReason: revocationReason, revocationDate: revocationDate, informedBy: .crl(crl.informedBy)))
+                certificate.statusResults = results
+
+                certificates[i] = certificate
             }
 
-            var certificate = certificates[i]
-            certificate.status = CertificateStatus(revoked: false)
+            for ocsp in ocspResults {
+                var certificate = certificates[i]
+                var revoked = false
+                var revocationReason: RevocationReason?
+                var revocationDate: Date?
 
-            if let crl = crlResult, crl.status == .revoked {
-                let reason = RevocationReason.fromCrlReason(crl.revocationReason ?? -1)
-                let date = crl.revocationDate
-                let informedBy: StatusProvider? = crl.informedBy != nil ? StatusProvider.crl(crl.informedBy!) : nil
-                certificate.status = CertificateStatus(revoked: true, revocationReason: reason, revocationDate: date, informedBy: informedBy)
-            }
-            if let ocsp = ocspResult, ocsp.status == .revoked {
-                let reason = RevocationReason.fromOcspReason(ocsp.revocationReason ?? -1)
-                let date = ocsp.revocationDate
-                let informedBy: StatusProvider? = ocsp.informedBy != nil ? StatusProvider.ocsp(ocsp.informedBy!) : nil
-                certificate.status = CertificateStatus(revoked: true, revocationReason: reason, revocationDate: date, informedBy: informedBy)
-            }
+                if ocsp.status == .revoked {
+                    revoked = true
+                    revocationReason = RevocationReason.fromCrlReason(ocsp.revocationReason ?? -1)
+                    revocationDate = ocsp.revocationDate
+                }
 
-            certificates[i] = certificate
+                var results = certificate.statusResults ?? []
+                results.append(CertificateStatus(revoked: revoked, revocationReason: revocationReason, revocationDate: revocationDate, informedBy: .ocsp(ocsp.informedBy)))
+                certificate.statusResults = results
+
+                certificates[i] = certificate
+            }
         }
     }
 

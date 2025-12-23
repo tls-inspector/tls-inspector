@@ -36,29 +36,27 @@ import (
 	"golang.org/x/crypto/ocsp"
 )
 
-var revokedCertificate *Certificate
-var crlocspSigningCertificateForRevokedTest *Certificate
+var crlocspSigningCertificateForNotRevokedTest *Certificate
 
-type tserverStatusRevokedCert struct{}
-type tserverRevokedCRLOCSPProvider struct{}
+type tserverStatusNotRevokedCert struct{}
+type tserverNotRevokedCRLOCSPProvider struct{}
 
-func (s *tserverStatusRevokedCert) Prepare() error {
+func (s *tserverStatusNotRevokedCert) Prepare() error {
 	return nil
 }
 
-func (s *tserverStatusRevokedCert) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
+func (s *tserverStatusNotRevokedCert) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
 	crlURL := fmt.Sprintf("http://%s:%d/crl", servername, port+1)
 	ocspURL := fmt.Sprintf("http://%s:%d/ocsp", servername, port+1)
 
-	chain, certs, err := generateCertificateChain("StatusRevokedCert", 1, port, ipv4, ipv6, servername, &extraCertificateParameters{
+	chain, certs, err := generateCertificateChain("StatusNotRevokedCert", 1, port, ipv4, ipv6, servername, &extraCertificateParameters{
 		CRL:  &crlURL,
 		OCSP: &ocspURL,
 	})
 	if err != nil {
 		return err
 	}
-	crlocspSigningCertificateForRevokedTest = &certs[0]
-	revokedCertificate = &certs[1]
+	crlocspSigningCertificateForNotRevokedTest = &certs[0]
 
 	tlsConfig := &tls.Config{
 		Certificates: []tls.Certificate{*chain},
@@ -91,23 +89,23 @@ func (s *tserverStatusRevokedCert) Start(port uint16, ipv4 string, ipv6 string, 
 		wg.Done()
 	}()
 
-	fmt.Printf("StatusRevokedCert ready on %d\n", port)
+	fmt.Printf("StatusNotRevokedCert ready on %d\n", port)
 	wg.Wait()
 	return httpError
 }
 
-func (s *tserverStatusRevokedCert) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (s *tserverStatusNotRevokedCert) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Add("Content-Type", "text/html")
-	rw.Header().Add("X-CertificateKit-Test-Name", "StatusRevokedCert")
+	rw.Header().Add("X-CertificateKit-Test-Name", "StatusNotRevokedCert")
 	rw.WriteHeader(200)
 	rw.Write([]byte("<html><body><h1>It worked!</h1></body></html>"))
 }
 
-func (s *tserverRevokedCRLOCSPProvider) Prepare() error {
+func (s *tserverNotRevokedCRLOCSPProvider) Prepare() error {
 	return nil
 }
 
-func (s *tserverRevokedCRLOCSPProvider) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
+func (s *tserverNotRevokedCRLOCSPProvider) Start(port uint16, ipv4 string, ipv6 string, servername string) error {
 	t4l, err := net.Listen("tcp4", fmt.Sprintf("%s:%d", ipv4, port))
 	if err != nil {
 		return err
@@ -139,7 +137,7 @@ func (s *tserverRevokedCRLOCSPProvider) Start(port uint16, ipv4 string, ipv6 str
 	return httpError
 }
 
-func (s *tserverRevokedCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (s *tserverNotRevokedCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/cert":
 		data := pem.EncodeToMemory(&pem.Block{
@@ -153,7 +151,7 @@ func (s *tserverRevokedCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *htt
 	case "/ca":
 		data := pem.EncodeToMemory(&pem.Block{
 			Type:  "CERTIFICATE",
-			Bytes: crlocspSigningCertificateForRevokedTest.Certificate.Raw,
+			Bytes: crlocspSigningCertificateForNotRevokedTest.Certificate.Raw,
 		})
 		rw.Header().Add("Content-Type", "application/x-pem-file")
 		rw.Header().Add("Content-Length", fmt.Sprintf("%d", len(data)))
@@ -172,17 +170,11 @@ func (s *tserverRevokedCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *htt
 		}
 
 		crl := &x509.RevocationList{
-			Number: big.NewInt(1),
-			RevokedCertificateEntries: []x509.RevocationListEntry{
-				{
-					SerialNumber:   revokedCertificate.Certificate.SerialNumber,
-					RevocationTime: time.Now(),
-					ReasonCode:     1,
-				},
-			},
+			Number:                    big.NewInt(1),
+			RevokedCertificateEntries: []x509.RevocationListEntry{},
 		}
 
-		data, err := x509.CreateRevocationList(rand.Reader, crl, crlocspSigningCertificateForRevokedTest.Certificate, crlocspSigningCertificateForRevokedTest.PrivateKey)
+		data, err := x509.CreateRevocationList(rand.Reader, crl, crlocspSigningCertificateForNotRevokedTest.Certificate, crlocspSigningCertificateForNotRevokedTest.PrivateKey)
 		if err != nil {
 			log.Printf("Error generating CRL: %s", err.Error())
 			rw.WriteHeader(500)
@@ -239,13 +231,11 @@ func (s *tserverRevokedCRLOCSPProvider) ServeHTTP(rw http.ResponseWriter, r *htt
 		}
 
 		if request.SerialNumber.Cmp(revokedCertificate.Certificate.SerialNumber) == 0 {
-			response.Status = ocsp.Revoked
-			response.RevocationReason = 1
-			response.RevokedAt = time.Now()
+			response.Status = ocsp.Good
 			response.SerialNumber = revokedCertificate.Certificate.SerialNumber
 		}
 
-		data, err := ocsp.CreateResponse(crlocspSigningCertificateForRevokedTest.Certificate, crlocspSigningCertificateForRevokedTest.Certificate, response, crlocspSigningCertificateForRevokedTest.PrivateKey)
+		data, err := ocsp.CreateResponse(crlocspSigningCertificateForNotRevokedTest.Certificate, crlocspSigningCertificateForNotRevokedTest.Certificate, response, crlocspSigningCertificateForNotRevokedTest.PrivateKey)
 		if err != nil {
 			log.Printf("Error generating OCSP response: %s", err.Error())
 			rw.WriteHeader(500)

@@ -20,24 +20,48 @@ import Localization
 
 public struct CertificateStatusProvidersView: View {
     public let providers: [StatusProvider]
+    public let statusResults: [CertificateStatus]?
 
     public var body: some View {
         Section(Localize.statusproviders()) {
             ForEach(providers, id: \.self) { provider in
-                switch provider {
-                case .crl(let url):
-                    TitleValueView(title: "CRL") {
-                        Text(url)
-                            .fixedwidth()
-                            .textSelection(.enabled)
-                    }
-                case .ocsp(let url):
-                    TitleValueView(title: "OCSP") {
-                        Text(url)
-                            .fixedwidth()
-                            .textSelection(.enabled)
+                StatusView(provider: provider, result: self.statusResults?.first(where: { $0.informedBy == provider }))
+            }
+        }
+    }
+}
+
+private struct StatusView: View {
+    let provider: StatusProvider
+    let result: CertificateStatus?
+
+    public var body: some View {
+        VStack(alignment: .leading) {
+            switch provider {
+            case .crl(let url):
+                TitleValueView(title: "CRL") {
+                    Text(url)
+                        .fixedwidth()
+                        .textSelection(.enabled)
+                }
+            case .ocsp(let url):
+                TitleValueView(title: "OCSP") {
+                    Text(url)
+                        .fixedwidth()
+                        .textSelection(.enabled)
+                }
+            }
+            if let result = self.result {
+                HStack {
+                    if result.revoked {
+                        Image(systemName: "multiply.circle.fill").foregroundStyle(.red)
+                        Text(Localize.revokedreason(reason: result.revocationReason?.rawValue ?? "unknown"))
+                    } else {
+                        Image(systemName: "checkmark.circle").foregroundStyle(.green)
+                        Text(Localize.notrevoked())
                     }
                 }
+                .padding(.top, 2)
             }
         }
     }

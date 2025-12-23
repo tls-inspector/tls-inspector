@@ -27,9 +27,9 @@ internal struct OCSPResult {
     let status: OCSPStatus
     let revocationReason: Int32?
     let revocationDate: Date?
-    let informedBy: String?
+    let informedBy: String
 
-    init(status: OCSPStatus, revocationReason: Int32? = nil, revocationDate: Date? = nil, informedBy: String? = nil) {
+    init(status: OCSPStatus, revocationReason: Int32? = nil, revocationDate: Date? = nil, informedBy: String) {
         self.status = status
         self.revocationReason = revocationReason
         self.revocationDate = revocationDate
@@ -38,7 +38,7 @@ internal struct OCSPResult {
 }
 
 internal final class OCSPManager {
-    static func checkCertificate(_ certificate: Certificate, issuedBy: Certificate) -> Result<OCSPResult?, TLSKitError> {
+    static func checkCertificate(_ certificate: Certificate, issuedBy: Certificate) -> Result<[OCSPResult], TLSKitError> {
         var urls: [String] = []
         for provider in (certificate.statusProviders ?? []) {
             switch provider {
@@ -49,18 +49,18 @@ internal final class OCSPManager {
             }
         }
         if urls.isEmpty {
-            return .success(nil)
+            return .success([])
         }
 
         var results: [OCSPResult] = []
         var lastError: TLSKitError?
 
         for url in urls {
-            let result = queryOcspServerAboutCertificate(certificate, issuedBy: issuedBy, ocsp: url)
+            let result = queryOcspServerAboutCertificate(certificate, issuedBy: issuedBy, ocspUrl: url)
             switch result {
             case .success(let ocspResult):
                 if ocspResult.status == .revoked {
-                    return .success(ocspResult)
+                    results.append(ocspResult)
                 }
                 results.append(ocspResult)
             case .failure(let error):
@@ -76,10 +76,10 @@ internal final class OCSPManager {
             return .failure(.responseError("No OCSP response received"))
         }
 
-        return .success(results[0])
+        return .success(results)
     }
 
-    private static func queryOcspServerAboutCertificate(_ certificate: Certificate, issuedBy: Certificate, ocsp: String) -> Result<OCSPResult, TLSKitError> {
+    private static func queryOcspServerAboutCertificate(_ certificate: Certificate, issuedBy: Certificate, ocspUrl: String) -> Result<OCSPResult, TLSKitError> {
         guard let certId = OCSP_cert_to_id(nil, certificate.x509, issuedBy.x509) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] OCSP_cert_to_id returned null")
@@ -100,7 +100,7 @@ internal final class OCSPManager {
 
         let curl: CurlClient
         do {
-            curl = try CurlClient(url: ocsp)
+            curl = try CurlClient(url: ocspUrl)
         } catch {
             return .failure(.internalError(error.localizedDescription))
         }
@@ -134,10 +134,10 @@ internal final class OCSPManager {
         defer {
             OCSP_RESPONSE_free(ocsp)
         }
-        return parseOcspResponse(ocsp, certId)
+        return parseOcspResponse(ocspUrl, ocsp, certId)
     }
 
-    private static func parseOcspResponse(_ ocsp: OpaquePointer, _ certId: OpaquePointer) -> Result<OCSPResult, TLSKitError> {
+    private static func parseOcspResponse(_ url: String, _ ocsp: OpaquePointer, _ certId: OpaquePointer) -> Result<OCSPResult, TLSKitError> {
         let ocspStatus = OCSP_response_status(ocsp)
         if ocspStatus != OCSP_RESPONSE_STATUS_SUCCESSFUL {
             printError("[\(#fileID):\(#line)] OCSP response code not successful \(ocspStatus)")
@@ -164,10 +164,10 @@ internal final class OCSPManager {
         switch status {
         case V_OCSP_CERTSTATUS_GOOD:
             printDebug("[\(#fileID):\(#line)] OCSP status good")
-            return .success(OCSPResult(status: .notRevoked))
+            return .success(OCSPResult(status: .notRevoked, informedBy: url))
         case V_OCSP_CERTSTATUS_UNKNOWN:
             printDebug("[\(#fileID):\(#line)] OCSP status unknown")
-            return .success(OCSPResult(status: .notFound))
+            return .success(OCSPResult(status: .notFound, informedBy: url))
         case V_OCSP_CERTSTATUS_REVOKED:
             printDebug("[\(#fileID):\(#line)] OCSP status revoked")
             var revokedAt: Date?
@@ -177,7 +177,7 @@ internal final class OCSPManager {
                 printWarning("[\(#fileID):\(#line)] Revoked status but no date provided")
             }
 
-            return .success(OCSPResult(status: .revoked, revocationReason: reason, revocationDate: revokedAt))
+            return .success(OCSPResult(status: .revoked, revocationReason: reason, revocationDate: revokedAt, informedBy: url))
         default:
             printError("[\(#fileID):\(#line)] Unknown cert status value \(status)")
             return .failure(.invalidData("Invalid OCSP data"))

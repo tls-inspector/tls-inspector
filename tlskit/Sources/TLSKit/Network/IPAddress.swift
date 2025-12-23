@@ -44,6 +44,16 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
         return string
     }
 
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.binary == rhs.binary
+    }
+
+    /// Perform a DNS PTR lookup on this IP address
+    /// - Returns: The DNS name for this address or nil
+    public func resolve() -> String? {
+        return Resolver.resolveIp(self)
+    }
+
     internal init(_ string: String) throws {
         self.family = string.contains(":") ? .ipv6 : .ipv4
 
@@ -272,9 +282,5 @@ public struct IPAddress: Equatable, Sendable, Hashable, CustomStringConvertible 
 
         address = portPattern.replaceAllMatches(in: address, with: "")
         return port
-    }
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.binary == rhs.binary
     }
 }
