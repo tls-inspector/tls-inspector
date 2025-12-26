@@ -51,6 +51,7 @@ Embedded	Embedded
 Engine Options	Engine Options
 Error	Error
 Expires In	Expires In
+Export Logs	Export Logs
 Export certificate	Export certificate
 Export certificate chain	Export certificate chain
 Extended	Extended
@@ -145,7 +146,6 @@ State / Province	State / Province
 Status Providers	Status Providers
 Subject	Subject
 Submit	Submit
-Submit logs	Submit logs
 SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
 TLS Inspector	TLS Inspector
 Timeout	Timeout

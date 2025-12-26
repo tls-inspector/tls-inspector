@@ -683,6 +683,19 @@ public final class Localize {
             return "Expires In"
         }
     }
+    // key: Export Logs
+    public static func exportlogs() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Export Logs"
+        case .Spanish:
+            return "Export Logs"
+        case .German:
+            return "Export Logs"
+        case .Dutch:
+            return "Export Logs"
+        }
+    }
     // key: Export certificate
     public static func exportcertificate() -> String {
         switch currentLanguage {
@@ -1903,19 +1916,6 @@ public final class Localize {
             return "Submit"
         case .Dutch:
             return "Submit"
-        }
-    }
-    // key: Submit logs
-    public static func submitlogs() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Submit logs"
-        case .Spanish:
-            return "Submit logs"
-        case .German:
-            return "Submit logs"
-        case .Dutch:
-            return "Submit logs"
         }
     }
     // key: SupportNote

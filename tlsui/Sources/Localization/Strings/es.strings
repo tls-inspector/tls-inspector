@@ -102,6 +102,8 @@ Error	Error
 # TODO
 Expires In	Expires In
 # TODO
+Export Logs	Export Logs
+# TODO
 Export certificate	Export certificate
 # TODO
 Export certificate chain	Export certificate chain
@@ -289,8 +291,6 @@ Status Providers	Status Providers
 Subject	Subject
 # TODO
 Submit	Submit
-# TODO
-Submit logs	Submit logs
 # TODO
 SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
 # TODO

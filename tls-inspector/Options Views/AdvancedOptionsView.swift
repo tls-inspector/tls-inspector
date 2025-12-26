@@ -63,13 +63,11 @@ public struct AdvancedOptionsView: View {
             }
             Section {
                 Toggle(Localize.verboselogging(), isOn: $verboseLogging)
-                NavigationLink {
-                    // TODO
-                } label: {
+                ExportFileView(fileUrl: LogWriter.shared.filePath) {
                     HStack {
                         Image(systemName: "ladybug.fill")
                             .foregroundStyle(.red)
-                        Text(Localize.submitlogs())
+                        Text(Localize.exportlogs())
                     }
                 }
             } header: {
