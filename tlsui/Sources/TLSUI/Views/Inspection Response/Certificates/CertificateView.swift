@@ -20,6 +20,13 @@ import Localization
 
 public struct CertificateView: View {
     public let certificate: Certificate
+    private let sha256Thumbprint: String?
+    @State private var exportedCertUrl: URL?
+
+    public init(certificate: Certificate) {
+        self.certificate = certificate
+        self.sha256Thumbprint = try? certificate.fingerprint(.sha256).hexEncodedString()
+    }
 
     public var body: some View {
         List {
@@ -45,31 +52,61 @@ public struct CertificateView: View {
             }
             CertificateMetadataView(certificate: certificate)
         }
+        .sheet(isPresented: .init(get: {
+            return self.exportedCertUrl != nil
+        }, set: { _ in
+            self.exportedCertUrl = nil
+        })) {
+            if let exportedCertUrl = self.exportedCertUrl {
+                ExportSheet(activityItems: [exportedCertUrl])
+            } else {
+                Text("Huh?")
+            }
+        }
         .navigationTitle(certificate.subject.description)
         .toolbar {
             ToolbarItem {
                 Menu {
                     Button {
-                        // TODO
+                        exportCert()
                     } label: {
-                        Text(Localize.exportcertificate())
+                        Label(Localize.exportcertificate(), systemImage: "square.and.arrow.up")
                     }
-                    Divider()
-                    Button {
-                        // TODO
+                    Menu {
+                        Button(Localize.numbernot1weeks(number_not_1: "2")) {
+                            // TODO
+                        }
+                        Button(Localize.n1month()) {
+                            // TODO
+                        }
+                        Button(Localize.numbernot1months(number_not_1: "3")) {
+                            // TODO
+                        }
+                        Button(Localize.numbernot1months(number_not_1: "6")) {
+                            // TODO
+                        }
                     } label: {
-                        Text(Localize.addreminderforcertificateexpiry())
+                        Label(Localize.addreminderforcertificateexpiry(), systemImage: "calendar")
                     }
-                    Divider()
-                    Button {
-                        // TODO
-                    } label: {
-                        Text(Localize.showcertificateoncrtsh())
+                    if let sha256Thumbprint = self.sha256Thumbprint {
+                        Link(destination: URL(string: "https://crt.sh/?q=\(sha256Thumbprint)")!) {
+                            Label(Localize.showcertificateoncrtsh(), systemImage: "magnifyingglass")
+                        }
                     }
                 } label: {
                     Image(systemName: "square.and.arrow.up")
                 }
             }
+        }
+    }
+
+    private func exportCert() {
+        let certUrl = FileManager.default.temporaryDirectory.appendingPathComponent("certificate.pem")
+        do {
+            try self.certificate.pemString().write(toFile: certUrl.path, atomically: false, encoding: .ascii)
+            self.exportedCertUrl = certUrl
+        } catch {
+            LogWriter.write(.Error, message: "[\(#fileID):\(#line)] Failed to write certificate to temporary file: \(error)")
         }
     }
 }

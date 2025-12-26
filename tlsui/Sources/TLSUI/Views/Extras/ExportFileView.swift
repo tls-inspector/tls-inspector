@@ -49,7 +49,7 @@ public struct ExportFileView<Label: View>: View {
 
 // Apple added ShareLink in iOS 16, so we need to break out to add support for iOS 15 by falling back
 // to using a share sheet
-struct ExportSheet: UIViewControllerRepresentable {
+internal struct ExportSheet: UIViewControllerRepresentable {
     let activityItems: [URL]
     let applicationActivities: [UIActivity]? = nil
 

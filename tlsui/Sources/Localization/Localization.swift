@@ -85,6 +85,19 @@ public final class Localize {
             return "1 month"
         }
     }
+    // key: 1 week
+    public static func n1week() -> String {
+        switch currentLanguage {
+        case .English:
+            return "1 week"
+        case .Spanish:
+            return "1 week"
+        case .German:
+            return "1 week"
+        case .Dutch:
+            return "1 week"
+        }
+    }
     // key: 1 year
     public static func n1year() -> String {
         switch currentLanguage {
@@ -2412,69 +2425,82 @@ public final class Localize {
             return "This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to."
         }
     }
-    // key: {number} days
-    public static func numberdays(number: String) -> String {
+    // key: {number_not_1} days
+    public static func numbernot1days(number_not_1: String) -> String {
         switch currentLanguage {
         case .English:
-            return "\(number) days"
+            return "\(number_not_1) days"
         case .Spanish:
-            return "\(number) days"
+            return "\(number_not_1) days"
         case .German:
-            return "\(number) days"
+            return "\(number_not_1) days"
         case .Dutch:
-            return "\(number) days"
+            return "\(number_not_1) days"
         }
     }
-    // key: {number} hours
-    public static func numberhours(number: String) -> String {
+    // key: {number_not_1} hours
+    public static func numbernot1hours(number_not_1: String) -> String {
         switch currentLanguage {
         case .English:
-            return "\(number) hours"
+            return "\(number_not_1) hours"
         case .Spanish:
-            return "\(number) hours"
+            return "\(number_not_1) hours"
         case .German:
-            return "\(number) hours"
+            return "\(number_not_1) hours"
         case .Dutch:
-            return "\(number) hours"
+            return "\(number_not_1) hours"
         }
     }
-    // key: {number} minutes
-    public static func numberminutes(number: String) -> String {
+    // key: {number_not_1} minutes
+    public static func numbernot1minutes(number_not_1: String) -> String {
         switch currentLanguage {
         case .English:
-            return "\(number) minutes"
+            return "\(number_not_1) minutes"
         case .Spanish:
-            return "\(number) minutes"
+            return "\(number_not_1) minutes"
         case .German:
-            return "\(number) minutes"
+            return "\(number_not_1) minutes"
         case .Dutch:
-            return "\(number) minutes"
+            return "\(number_not_1) minutes"
         }
     }
-    // key: {number} months
-    public static func numbermonths(number: String) -> String {
+    // key: {number_not_1} months
+    public static func numbernot1months(number_not_1: String) -> String {
         switch currentLanguage {
         case .English:
-            return "\(number) months"
+            return "\(number_not_1) months"
         case .Spanish:
-            return "\(number) months"
+            return "\(number_not_1) months"
         case .German:
-            return "\(number) months"
+            return "\(number_not_1) months"
         case .Dutch:
-            return "\(number) months"
+            return "\(number_not_1) months"
         }
     }
-    // key: {number} years
-    public static func numberyears(number: String) -> String {
+    // key: {number_not_1} weeks
+    public static func numbernot1weeks(number_not_1: String) -> String {
         switch currentLanguage {
         case .English:
-            return "\(number) years"
+            return "\(number_not_1) weeks"
         case .Spanish:
-            return "\(number) years"
+            return "\(number_not_1) weeks"
         case .German:
-            return "\(number) years"
+            return "\(number_not_1) weeks"
         case .Dutch:
-            return "\(number) years"
+            return "\(number_not_1) weeks"
+        }
+    }
+    // key: {number_not_1} years
+    public static func numbernot1years(number_not_1: String) -> String {
+        switch currentLanguage {
+        case .English:
+            return "\(number_not_1) years"
+        case .Spanish:
+            return "\(number_not_1) years"
+        case .German:
+            return "\(number_not_1) years"
+        case .Dutch:
+            return "\(number_not_1) years"
         }
     }
 }

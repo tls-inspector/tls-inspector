@@ -5,6 +5,7 @@
 1 hour	1 hour
 1 minute	1 minute
 1 month	1 month
+1 week	1 week
 1 year	1 year
 About	About
 Add reminder for certificate expiry	Add reminder for certificate expiry
@@ -184,8 +185,9 @@ whatDoesThisMean::unknownCriticalExtension	This means that one or more certifica
 whatDoesThisMean::untrusted	This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host.
 whatDoesThisMean::weakRSAKey	This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection.
 whatDoesThisMean::wrongHost	This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to.
-{number} days	{0} days
-{number} hours	{0} hours
-{number} minutes	{0} minutes
-{number} months	{0} months
-{number} years	{0} years
+{number_not_1} days	{0} days
+{number_not_1} hours	{0} hours
+{number_not_1} minutes	{0} minutes
+{number_not_1} months	{0} months
+{number_not_1} weeks	{0} weeks
+{number_not_1} years	{0} years

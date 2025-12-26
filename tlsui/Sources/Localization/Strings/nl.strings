@@ -1,6 +1,3 @@
-# DNS Inspector localization strings for English
-# Copyright 2025 Ian Spence and DNS Inspector Authors
-# Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
 # TODO
 1 day	1 day
 # TODO
@@ -9,6 +6,8 @@
 1 minute	1 minute
 # TODO
 1 month	1 month
+# TODO
+1 week	1 week
 # TODO
 1 year	1 year
 # TODO
@@ -368,12 +367,14 @@ whatDoesThisMean::weakRSAKey	This means that one or more certificates presented 
 # TODO
 whatDoesThisMean::wrongHost	This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to.
 # TODO
-{number} days	{0} days
+{number_not_1} days	{0} days
 # TODO
-{number} hours	{0} hours
+{number_not_1} hours	{0} hours
 # TODO
-{number} minutes	{0} minutes
+{number_not_1} minutes	{0} minutes
 # TODO
-{number} months	{0} months
+{number_not_1} months	{0} months
 # TODO
-{number} years	{0} years
+{number_not_1} weeks	{0} weeks
+# TODO
+{number_not_1} years	{0} years

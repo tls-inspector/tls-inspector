@@ -27,11 +27,11 @@ internal class DateDuration {
         .minute: { return Localize.n1minute() },
     ]
     private static let unitPlural: [Calendar.Component: (String) -> String] = [
-        .year: { v in return Localize.numberyears(number: v) },
-        .month: { v in return Localize.numbermonths(number: v) },
-        .day: { v in return Localize.numberdays(number: v) },
-        .hour: { v in return Localize.numberhours(number: v) },
-        .minute: { v in return Localize.numberminutes(number: v) },
+        .year: { v in return Localize.numbernot1years(number_not_1: v) },
+        .month: { v in return Localize.numbernot1months(number_not_1: v) },
+        .day: { v in return Localize.numbernot1days(number_not_1: v) },
+        .hour: { v in return Localize.numbernot1hours(number_not_1: v) },
+        .minute: { v in return Localize.numbernot1minutes(number_not_1: v) },
     ]
 
     static func between(first: Date, second: Date) -> String {
