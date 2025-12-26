@@ -26,6 +26,7 @@ internal enum InspectionResponseViewOptions: Hashable {
 public struct InspectionResponseView: View {
     public let response: InspectionResponse
     @State private var presentedView: InspectionResponseViewOptions
+    @State private var exportedChainUrl: URL?
     @Environment(\.dismiss) private var dismiss
 
     public init(response: InspectionResponse) {
@@ -59,7 +60,7 @@ public struct InspectionResponseView: View {
                 ToolbarItem {
                     Menu {
                         Button {
-                            // TODO
+                            self.exportCertificateChain()
                         } label: {
                             Text(Localize.exportcertificatechain())
                         }
@@ -78,6 +79,15 @@ public struct InspectionResponseView: View {
                     }
                 }
             }
+            .sheet(isPresented: .init(get: {
+                return self.exportedChainUrl != nil
+            }, set: { _ in
+                self.exportedChainUrl = nil
+            })) {
+                if let exportedChainUrl = self.exportedChainUrl {
+                    ExportSheet(activityItems: [exportedChainUrl])
+                }
+            }
         } content: {
             Navigation {
                 switch self.presentedView {
@@ -87,6 +97,22 @@ public struct InspectionResponseView: View {
                     HTTPHeadersView(headers: headers)
                 }
             }
+        }
+    }
+
+    private func exportCertificateChain() {
+        let chainUrl = FileManager.default.temporaryDirectory.appendingPathComponent("chain.pem")
+        do {
+            var chainData = Data()
+            for certificate in response.tlsConnection.certificates {
+                let data = try Data(certificate.pemString().utf8)
+                chainData.append(data)
+                chainData.append(Data("\n".utf8))
+            }
+            try chainData.write(to: chainUrl)
+            self.exportedChainUrl = chainUrl
+        } catch {
+            LogWriter.write(.Error, message: "[\(#fileID):\(#line)] Failed to write certificate chain to file: \(error)")
         }
     }
 }

@@ -86,16 +86,19 @@ public struct CertificateView: View {
                 }
             }
         }
+        // Reminder added
         .alert(Localize.reminderadded(), isPresented: $showReminderAddedAlert) {
             Button(Localize.done()) {}
         } message: {
             Text(Localize.revieworupdatethereminderintheremindersapp())
         }
+        // Reminder permission denied
         .alert(Localize.permissiondenied(), isPresented: $showReminderPermissionAlert) {
             Button(Localize.done()) {}
         } message: {
             Text(Localize.reminderpermissionmessage())
         }
+        // Other reminder error
         .alert(Localize.erroraddingreminder(), isPresented: .init(get: {
             return self.reminderErrorMessage != nil
         }, set: { _ in
