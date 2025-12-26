@@ -30,25 +30,20 @@ public struct ListButton<Label: View>: View {
     }
 
     public var body: some View {
-        HStack {
-            label
-            if showDisclosureIndicator {
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .opacity(0.25)
-                    .imageScale(.small)
+        Button {
+            self.onTap()
+        } label: {
+            HStack {
+                self.label
+                if self.showDisclosureIndicator {
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.footnote)
+                        .foregroundStyle(.tertiary)
+                }
             }
+            .contentShape(Rectangle())
         }
-        .contentShape(Rectangle())
-        .listRowBackground(Rectangle().fill(isLongPressing ? Color.listButtonSelectedBackground : Color.listButtonBackground))
-        .onTapGesture(perform: onTap)
-        .simultaneousGesture(DragGesture(minimumDistance: 0)
-            .updating($isDragging, body: { _, _, _ in
-                self.isLongPressing = true
-            })
-            .onEnded({ _ in
-                self.isLongPressing = false
-            })
-        )
+        .buttonStyle(.plain)
     }
 }
