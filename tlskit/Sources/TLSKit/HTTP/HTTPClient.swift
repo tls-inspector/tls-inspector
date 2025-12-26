@@ -25,11 +25,26 @@ public final class HTTPClient: Sendable {
     // Nonisolated because the network framework only calls one callback at a time
     nonisolated(unsafe) private var headerData = Data()
 
-    internal func requestFor(host: String) -> Data {
+    internal func requestFor(host: String) throws -> Data {
+        guard let url = URL(string: "https://\(host)/") else {
+            throw TLSKitError.invalidData("Invalid host provided")
+        }
+
+        let request = CFHTTPMessageCreateRequest(nil, "GET" as CFString, url as CFURL, kCFHTTPVersion1_1).takeRetainedValue()
+        if let host = url.host {
+            CFHTTPMessageSetHeaderFieldValue(request, "Host" as CFString, host as CFString)
+        }
+
         let userAgent = "TLSKit" + (UserAgentSuffix != nil ? " \(UserAgentSuffix!)" : "")
-        let request = "GET / HTTP/1.1\r\nHost: \(host)\r\nUser-Agent: \(userAgent)\r\nAccept: */*\r\n\r\n"
-        printDebug("[\(#fileID):\(#line)] HTTP Request: \(request.escapeNewlines())")
-        return request.data(using: .ascii)!
+        CFHTTPMessageSetHeaderFieldValue(request, "User-Agent" as CFString, userAgent as CFString)
+        CFHTTPMessageSetHeaderFieldValue(request, "Accept" as CFString, "*/*" as CFString)
+
+        guard let serialized = CFHTTPMessageCopySerializedMessage(request)?.takeUnretainedValue() as? Data else {
+            throw TLSKitError.internalError("Unable to seralize HTTP request")
+        }
+
+        printDebug("[\(#fileID):\(#line)] HTTP request: \(serialized.hexEncodedString())")
+        return serialized
     }
 
     private func connectionReadLoop(_ connection: NWConnection, _ statusCode: UInt16, _ complete: @Sendable @escaping (Result<HTTPServerInfo, TLSKitError>) -> Void) {
@@ -81,45 +96,47 @@ public final class HTTPClient: Sendable {
     }
 
     internal func response(from connection: NWConnection, _ complete: @Sendable @escaping (Result<HTTPServerInfo, TLSKitError>) -> Void) {
-        // Read the first 12 bytes, which should contain both the HTTP status code and version
-        connection.receive(minimumIncompleteLength: 12, maximumLength: 12) { oContent, _, _, oError in
-            if let error = oError {
-                printError("[\(#fileID):\(#line)] Error recieving data: \(error)")
-                complete(.failure(.connectionError(error)))
-                return
-            }
-            if oContent == nil {
-                printError("[\(#fileID):\(#line)] No response from HTTP server")
-                complete(.failure(.invalidData("No response")))
-                return
-            }
-            let data: [UInt8] = Array(oContent!)
+        // Nonisolated is safe here because the receive callback from a NWConnection is only ever called once
+        nonisolated(unsafe) let responseMessage = CFHTTPMessageCreateEmpty(nil, false).takeRetainedValue()
+        nonisolated(unsafe) var recieve: (@Sendable (NWConnection) -> Void)!
+        recieve = { connection in
+            connection.receive(minimumIncompleteLength: 1, maximumLength: Int(UInt16.max)) { content, _, _, error in
+                if let error = error {
+                    printError("[\(#fileID):\(#line)] Error recieving data: \(error)")
+                    complete(.failure(.connectionError(error)))
+                    return
+                }
+                guard let content = content else {
+                    printError("[\(#fileID):\(#line)] No response from HTTP server")
+                    complete(.failure(.invalidData("No response")))
+                    return
+                }
 
-            // TODO: This doesn't work for WebCentral / tlsinspector.com
+                content.withUnsafeBytes { rawBuffer in
+                    if let baseAddress = rawBuffer.baseAddress {
+                        printDebug("[\(#fileID):\(#line)] Recieved \(content.count)B")
+                        CFHTTPMessageAppendBytes(responseMessage, baseAddress.assumingMemoryBound(to: UInt8.self), content.count)
+                    }
+                }
 
-            // The HTTP client only supports HTTP/1.1
-            let httpVersion = String(decoding: data[..<8], as: UTF8.self).lowercased()
-            if httpVersion != "http/1.1" {
-                printError("[\(#fileID):\(#line)] Unknown or unsupported HTTP version in response: \(httpVersion)")
-                complete(.failure(.responseError("Unsupported HTTP version \(httpVersion)")))
+                if !CFHTTPMessageIsHeaderComplete(responseMessage) {
+                    printDebug("[\(#fileID):\(#line)] Still waiting for complete HTTP message")
+                    recieve(connection)
+                    return
+                }
+
+                let statusCode = CFHTTPMessageGetResponseStatusCode(responseMessage)
+                guard let headers = CFHTTPMessageCopyAllHeaderFields(responseMessage)?.takeRetainedValue() as? [String: String] else {
+                    printError("[\(#fileID):\(#line)] Unable to get headers from HTTP message")
+                    complete(.failure(.invalidData("No headers")))
+                    return
+                }
+
+                complete(.success(HTTPServerInfo(headers: HTTPHeaders.fromMap(headers), statusCode: UInt16(statusCode))))
                 return
             }
-
-            let statusCodeString = String(decoding: data[9..<12], as: UTF8.self)
-            guard let statusCode = UInt16(statusCodeString) else {
-                printError("[\(#fileID):\(#line)] Invalid HTTP status code: \(statusCodeString)")
-                complete(.failure(.invalidData("Invalid HTTP status code \(statusCodeString)")))
-                return
-            }
-            if statusCode < 100 || statusCode > 599 {
-                printError("[\(#fileID):\(#line)] Invalid HTTP status code: \(statusCode)")
-                complete(.failure(.invalidData("Invalid HTTP status code \(statusCodeString)")))
-                return
-            }
-
-            printDebug("[\(#fileID):\(#line)] HTTP response from server \(String(decoding: data, as: UTF8.self))")
-            self.connectionReadLoop(connection, statusCode, complete)
         }
+        recieve(connection)
     }
 
     internal func response(from bio: OpaquePointer) -> Result<HTTPServerInfo, TLSKitError> {
@@ -137,7 +154,7 @@ public final class HTTPClient: Sendable {
         // The HTTP client only supports HTTP/1.1
         let httpVersion = String(decoding: responseGreeting[..<8], as: UTF8.self).lowercased()
         if httpVersion != "http/1.1" {
-            printError("[\(#fileID):\(#line)] Unknown or unsupported HTTP version in response: \(httpVersion)")
+            printError("[\(#fileID):\(#line)] Unknown or unsupported HTTP version in response: \(Data(responseGreeting).hexEncodedString())")
             return .failure(.responseError("Unsupported HTTP version \(httpVersion)"))
         }
 

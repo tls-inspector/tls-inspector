@@ -42,6 +42,14 @@ public final class HTTPHeaders: Sendable, Equatable, Hashable {
         return headers
     }
 
+    internal static func fromMap(_ m: [String: String]) -> HTTPHeaders {
+        let headers = HTTPHeaders()
+        for (name, value) in m {
+            headers.add(name, value)
+        }
+        return headers
+    }
+
     /// Return all HTTP headers
     /// - Returns: A map of header name to values. Duplicate header use the name from the first occurance.
     public func all() -> [String: [String]] {

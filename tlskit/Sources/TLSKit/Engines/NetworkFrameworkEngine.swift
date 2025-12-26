@@ -315,7 +315,28 @@ internal final class NetworkFrameworkEngine: Engine {
                     alpn: rALPN,
                 )
 
-                if !request.checkHTTP {
+                let httpClient = HTTPClient()
+                let httpRequest = try? httpClient.requestFor(host: domain)
+
+                if request.checkHTTP && httpRequest != nil {
+                    connection.send(content: httpRequest, completion: NWConnection.SendCompletion.contentProcessed({ _ in
+                        httpClient.response(from: connection) { result in
+                            let httpServerInfo: HTTPServerInfo?
+                            switch result {
+                            case .success(let r):
+                                httpServerInfo = r
+                            case .failure:
+                                httpServerInfo = nil
+                            }
+
+                            didComplete.If(false) {
+                                complete(.success(InspectionResponse(tlsConnection: tlsConnectionInfo, httpServerInfo: httpServerInfo, elapsedNs: timer.stop())))
+                                return true
+                            }
+                            semaphore.signal()
+                        }
+                    }))
+                } else {
                     didComplete.If(false) {
                         complete(.success(InspectionResponse(tlsConnection: tlsConnectionInfo, httpServerInfo: nil, elapsedNs: timer.stop())))
                         return true
@@ -323,26 +344,6 @@ internal final class NetworkFrameworkEngine: Engine {
                     semaphore.signal()
                     return
                 }
-
-                let httpClient = HTTPClient()
-                let httpRequest = httpClient.requestFor(host: domain)
-                connection.send(content: httpRequest, completion: NWConnection.SendCompletion.contentProcessed({ _ in
-                    httpClient.response(from: connection) { result in
-                        let httpServerInfo: HTTPServerInfo?
-                        switch result {
-                        case .success(let r):
-                            httpServerInfo = r
-                        case .failure:
-                            httpServerInfo = nil
-                        }
-
-                        didComplete.If(false) {
-                            complete(.success(InspectionResponse(tlsConnection: tlsConnectionInfo, httpServerInfo: httpServerInfo, elapsedNs: timer.stop())))
-                            return true
-                        }
-                        semaphore.signal()
-                    }
-                }))
             default:
                 break
             }

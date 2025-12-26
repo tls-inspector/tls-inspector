@@ -120,7 +120,7 @@ struct MainView: View {
     }
 
     func inspectFromInput() async {
-        let request = InspectionRequest(address: self.host, checkCRL: UserOptions.current.checkCrl, checkOCSP: UserOptions.current.queryOcsp, ipVersion: UserOptions.current.ipVersion.toTLSKit(), checkHTTP: UserOptions.current.getHttpHeaders, timeoutSeconds: UInt8(UserOptions.current.inspectTimeout), alpn: ["http/1.1", "h2", "h3"])
+        let request = InspectionRequest(address: self.host, checkCRL: UserOptions.current.checkCrl, checkOCSP: UserOptions.current.queryOcsp, ipVersion: UserOptions.current.ipVersion.toTLSKit(), checkHTTP: UserOptions.current.getHttpHeaders, timeoutSeconds: UInt8(UserOptions.current.inspectTimeout), alpn: ["http/1.1"])
         await executeInspectionRequest(request)
     }
 

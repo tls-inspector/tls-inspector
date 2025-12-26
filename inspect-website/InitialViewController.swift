@@ -171,7 +171,7 @@ class InitialViewController: UIViewController {
             ipVersion: nil,
             checkHTTP: true,
             timeoutSeconds: UInt8(5),
-            alpn: ["http/1.1", "h2", "h3"],
+            alpn: ["http/1.1"],
         )
 
         do {

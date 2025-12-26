@@ -336,20 +336,23 @@ internal final class OpenSSLEngine: Engine {
 
         let tlsConnection = TLSConnection(domain: domain, remoteAddress: remoteAddress, certificates: certificates, version: version, ciphersuite: ciphersuite, trust: rTrustStatus!, signedTimestamps: handshakeScts, alpn: rALPN)
 
-        if !request.checkHTTP {
-            return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, elapsedNs: timer.stop())
-        }
-
         let client = HTTPClient()
-        _ = client.requestFor(host: domain).withUnsafeBytes {
-            printDebug("[\(#fileID):\(#line)] Writing \($0.count)B to connection")
-            return BIO_write(conn, $0.baseAddress, Int32($0.count))
-        }
-        let result = client.response(from: conn)
-        switch result {
-        case .success(let r):
-            return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: r, elapsedNs: timer.stop())
-        case .failure:
+        let httpRequest = try? client.requestFor(host: domain)
+
+        if request.checkHTTP && httpRequest != nil {
+            httpRequest!.withUnsafeBytes {
+                printDebug("[\(#fileID):\(#line)] Writing \($0.count)B to connection")
+                return BIO_write(conn, $0.baseAddress, Int32($0.count))
+            }
+
+            let result = client.response(from: conn)
+            switch result {
+            case .success(let r):
+                return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: r, elapsedNs: timer.stop())
+            case .failure:
+                return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, elapsedNs: timer.stop())
+            }
+        } else {
             return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, elapsedNs: timer.stop())
         }
     }
