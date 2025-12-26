@@ -61,6 +61,13 @@
 			);
 			target = 3C8742DF2EB4524200154664 /* inspect-website */;
 		};
+		3CFEA3B32EFF3B550065BBCA /* Exceptions for "tls-inspector" folder in "tls-inspector" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3CC954432CA9EC4200C3AEF8 /* tls-inspector */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -74,6 +81,9 @@
 		};
 		3CC954462CA9EC4200C3AEF8 /* tls-inspector */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3CFEA3B32EFF3B550065BBCA /* Exceptions for "tls-inspector" folder in "tls-inspector" target */,
+			);
 			path = "tls-inspector";
 			sourceTree = "<group>";
 		};
@@ -503,8 +513,10 @@
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tls-inspector/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "TLS Inspector can add reminders about upcoming certificate expiration dates.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -538,8 +550,10 @@
 				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tls-inspector/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "TLS Inspector can add reminders about upcoming certificate expiration dates.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

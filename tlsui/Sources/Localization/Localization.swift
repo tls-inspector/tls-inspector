@@ -683,6 +683,19 @@ public final class Localize {
             return "Error"
         }
     }
+    // key: Error adding reminder
+    public static func erroraddingreminder() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Error adding reminder"
+        case .Spanish:
+            return "Error adding reminder"
+        case .German:
+            return "Error adding reminder"
+        case .Dutch:
+            return "Error adding reminder"
+        }
+    }
     // key: Expires In
     public static func expiresin() -> String {
         switch currentLanguage {
@@ -1450,6 +1463,19 @@ public final class Localize {
             return "Organizational Unit"
         }
     }
+    // key: Permission Denied
+    public static func permissiondenied() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Permission Denied"
+        case .Spanish:
+            return "Permission Denied"
+        case .German:
+            return "Permission Denied"
+        case .Dutch:
+            return "Permission Denied"
+        }
+    }
     // key: Please Note
     public static func pleasenote() -> String {
         switch currentLanguage {
@@ -1580,6 +1606,19 @@ public final class Localize {
             return "Remember Recent Lookups"
         }
     }
+    // key: Reminder Added
+    public static func reminderadded() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Reminder Added"
+        case .Spanish:
+            return "Reminder Added"
+        case .German:
+            return "Reminder Added"
+        case .Dutch:
+            return "Reminder Added"
+        }
+    }
     // key: Remote Address
     public static func remoteaddress() -> String {
         switch currentLanguage {
@@ -1593,6 +1632,19 @@ public final class Localize {
             return "Remote Address"
         }
     }
+    // key: Renew Certificate '{domain}'
+    public static func renewcertificatedomain(domain: String) -> String {
+        switch currentLanguage {
+        case .English:
+            return "Renew Certificate '\(domain)'"
+        case .Spanish:
+            return "Renew Certificate '\(domain)'"
+        case .German:
+            return "Renew Certificate '\(domain)'"
+        case .Dutch:
+            return "Renew Certificate '\(domain)'"
+        }
+    }
     // key: Reset to default settings
     public static func resettodefaultsettings() -> String {
         switch currentLanguage {
@@ -1604,6 +1656,19 @@ public final class Localize {
             return "Reset to default settings"
         case .Dutch:
             return "Reset to default settings"
+        }
+    }
+    // key: Review or update the reminder in the Reminders app
+    public static func revieworupdatethereminderintheremindersapp() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Review or update the reminder in the Reminders app"
+        case .Spanish:
+            return "Review or update the reminder in the Reminders app"
+        case .German:
+            return "Review or update the reminder in the Reminders app"
+        case .Dutch:
+            return "Review or update the reminder in the Reminders app"
         }
     }
     // key: Revoked: {reason}
@@ -1957,6 +2022,19 @@ public final class Localize {
             return "TLS Inspector"
         }
     }
+    // key: The certificate '{domain}' expires on {date}
+    public static func thecertificatedomainexpiresondate(domain: String, date: String) -> String {
+        switch currentLanguage {
+        case .English:
+            return "The certificate '\(domain)' expires on \(date)"
+        case .Spanish:
+            return "The certificate '\(domain)' expires on \(date)"
+        case .German:
+            return "The certificate '\(domain)' expires on \(date)"
+        case .Dutch:
+            return "The certificate '\(domain)' expires on \(date)"
+        }
+    }
     // key: Timeout
     public static func timeout() -> String {
         switch currentLanguage {
@@ -2228,6 +2306,19 @@ public final class Localize {
             return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
         case .Dutch:
             return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
+        }
+    }
+    // key: reminder_permission_message
+    public static func reminderpermissionmessage() -> String {
+        switch currentLanguage {
+        case .English:
+            return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
+        case .Spanish:
+            return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
+        case .German:
+            return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
+        case .Dutch:
+            return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
         }
     }
     // key: whatDoesThisMean::badAuthority

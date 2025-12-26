@@ -51,6 +51,7 @@ Email Address	Email Address
 Embedded	Embedded
 Engine Options	Engine Options
 Error	Error
+Error adding reminder	Error adding reminder
 Expires In	Expires In
 Export Logs	Export Logs
 Export certificate	Export certificate
@@ -110,6 +111,7 @@ Open source licenses & attributions	Open source licenses & attributions
 Options	Options
 Organization	Organization
 Organizational Unit	Organizational Unit
+Permission Denied	Permission Denied
 Please Note	Please Note
 Please wait...	Please wait...
 ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
@@ -120,8 +122,11 @@ Quick Exit	Quick Exit
 Rate in App Store	Rate in App Store
 Recent Lookups	Recent Lookups
 Remember Recent Lookups	Remember Recent Lookups
+Reminder Added	Reminder Added
 Remote Address	Remote Address
+Renew Certificate '{domain}'	Renew Certificate '{0}'
 Reset to default settings	Reset to default settings
+Review or update the reminder in the Reminders app	Review or update the reminder in the Reminders app
 Revoked: {reason}	Revoked: {0}
 Root	Root
 Root CA Certificates	Root CA Certificates
@@ -149,6 +154,7 @@ Subject	Subject
 Submit	Submit
 SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
 TLS Inspector	TLS Inspector
+The certificate '{domain}' expires on {date}	The certificate '{0}' expires on {1}
 Timeout	Timeout
 Timestamp	Timestamp
 Timestamps	Timestamps
@@ -170,6 +176,7 @@ What does this mean?	What does this mean?
 Yes	Yes
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
+reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
 whatDoesThisMean::badAuthority	This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority.
 whatDoesThisMean::invalidDate	This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.
 whatDoesThisMean::issueDateTooLong	This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range.

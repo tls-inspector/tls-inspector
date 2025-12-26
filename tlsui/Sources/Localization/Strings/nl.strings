@@ -99,6 +99,8 @@ Engine Options	Engine Options
 # TODO
 Error	Error
 # TODO
+Error adding reminder	Error adding reminder
+# TODO
 Expires In	Expires In
 # TODO
 Export Logs	Export Logs
@@ -217,6 +219,8 @@ Organization	Organization
 # TODO
 Organizational Unit	Organizational Unit
 # TODO
+Permission Denied	Permission Denied
+# TODO
 Please Note	Please Note
 # TODO
 Please wait...	Please wait...
@@ -237,9 +241,15 @@ Recent Lookups	Recent Lookups
 # TODO
 Remember Recent Lookups	Remember Recent Lookups
 # TODO
+Reminder Added	Reminder Added
+# TODO
 Remote Address	Remote Address
 # TODO
+Renew Certificate '{domain}'	Renew Certificate '{0}'
+# TODO
 Reset to default settings	Reset to default settings
+# TODO
+Review or update the reminder in the Reminders app	Review or update the reminder in the Reminders app
 # TODO
 Revoked: {reason}	Revoked: {0}
 # TODO
@@ -295,6 +305,8 @@ SupportNote	TLS Inspector does not provide you or your device with protection fr
 # TODO
 TLS Inspector	TLS Inspector
 # TODO
+The certificate '{domain}' expires on {date}	The certificate '{0}' expires on {1}
+# TODO
 Timeout	Timeout
 # TODO
 Timestamp	Timestamp
@@ -336,6 +348,8 @@ Yes	Yes
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 # TODO
 guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
+# TODO
+reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
 # TODO
 whatDoesThisMean::badAuthority	This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority.
 # TODO

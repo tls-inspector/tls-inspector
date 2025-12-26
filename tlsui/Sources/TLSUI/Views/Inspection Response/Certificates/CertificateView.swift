@@ -22,6 +22,9 @@ public struct CertificateView: View {
     public let certificate: Certificate
     private let sha256Thumbprint: String?
     @State private var exportedCertUrl: URL?
+    @State private var showReminderAddedAlert = false
+    @State private var showReminderPermissionAlert = false
+    @State private var reminderErrorMessage: String?
 
     public init(certificate: Certificate) {
         self.certificate = certificate
@@ -72,22 +75,7 @@ public struct CertificateView: View {
                     } label: {
                         Label(Localize.exportcertificate(), systemImage: "square.and.arrow.up")
                     }
-                    Menu {
-                        Button(Localize.numbernot1weeks(number_not_1: "2")) {
-                            // TODO
-                        }
-                        Button(Localize.n1month()) {
-                            // TODO
-                        }
-                        Button(Localize.numbernot1months(number_not_1: "3")) {
-                            // TODO
-                        }
-                        Button(Localize.numbernot1months(number_not_1: "6")) {
-                            // TODO
-                        }
-                    } label: {
-                        Label(Localize.addreminderforcertificateexpiry(), systemImage: "calendar")
-                    }
+                    AddReminderButton(certificate: self.certificate, showAddAlert: $showReminderAddedAlert, showPermissionError: $showReminderPermissionAlert, errorMessage: $reminderErrorMessage)
                     if let sha256Thumbprint = self.sha256Thumbprint {
                         Link(destination: URL(string: "https://crt.sh/?q=\(sha256Thumbprint)")!) {
                             Label(Localize.showcertificateoncrtsh(), systemImage: "magnifyingglass")
@@ -97,6 +85,25 @@ public struct CertificateView: View {
                     Image(systemName: "square.and.arrow.up")
                 }
             }
+        }
+        .alert(Localize.reminderadded(), isPresented: $showReminderAddedAlert) {
+            Button(Localize.done()) {}
+        } message: {
+            Text(Localize.revieworupdatethereminderintheremindersapp())
+        }
+        .alert(Localize.permissiondenied(), isPresented: $showReminderPermissionAlert) {
+            Button(Localize.done()) {}
+        } message: {
+            Text(Localize.reminderpermissionmessage())
+        }
+        .alert(Localize.erroraddingreminder(), isPresented: .init(get: {
+            return self.reminderErrorMessage != nil
+        }, set: { _ in
+            self.reminderErrorMessage = nil
+        })) {
+            Button(Localize.done()) {}
+        } message: {
+            Text(self.reminderErrorMessage ?? "Unknown")
         }
     }
 
