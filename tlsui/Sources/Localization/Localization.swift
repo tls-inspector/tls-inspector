@@ -1112,6 +1112,19 @@ public final class Localize {
             return "Key Usage"
         }
     }
+    // key: Learn More
+    public static func learnmore() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Learn More"
+        case .Spanish:
+            return "Learn More"
+        case .German:
+            return "Learn More"
+        case .Dutch:
+            return "Learn More"
+        }
+    }
     // key: LicenseFooter
     public static func licensefooter() -> String {
         switch currentLanguage {

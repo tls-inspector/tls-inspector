@@ -33,6 +33,7 @@ struct MainView: View {
     var body: some View {
         Navigation {
             List {
+                PreviewBuildView()
                 Section(Localize.domainnameoripaddress()) {
                     TextField(text: $host) {
                         Text(self.randomSite)

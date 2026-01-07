@@ -20,15 +20,21 @@ public struct IRoundedRectangle: View {
     public let backgroundColor: Color
     public let borderColor: Color
     public let borderWidth: CGFloat
+    private let cornerRadius: CGFloat
 
     public init(backgroundColor: Color, borderColor: Color, borderWidth: CGFloat = 2) {
         self.backgroundColor = backgroundColor
         self.borderColor = borderColor
         self.borderWidth = borderWidth
+        if #available(iOS 26.0, *) {
+            self.cornerRadius = 28
+        } else {
+            self.cornerRadius = 10
+        }
     }
 
     public var body: some View {
-        RoundedRectangle(cornerRadius: 10)
+        RoundedRectangle(cornerRadius: self.cornerRadius)
             .modify {
                 if #available(iOS 17.0, *) {
                     $0.fill(backgroundColor)

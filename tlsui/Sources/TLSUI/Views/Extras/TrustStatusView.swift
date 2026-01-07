@@ -52,7 +52,7 @@ public struct TrustStatusView: View {
                 backgroundColor = .clear
                 borderColor = .trustColourLocallyTrusted
                 borderWidth = 2
-                textColor = .white
+                textColor = .textColor
                 iconName = "questionmark.circle"
                 text = Localize.unrecognized()
             }

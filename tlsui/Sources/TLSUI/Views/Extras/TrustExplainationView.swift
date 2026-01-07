@@ -62,7 +62,7 @@ public struct TrustExplainationView: View {
                 }
                 if status == .locallyTrusted {
                     SafetyWarningView(title: Localize.danger(), message: Localize.guidancewarning())
-                        .background(IRoundedRectangle(backgroundColor: .clear, borderColor: .red, borderWidth: 2))
+                        .listRowBackground(IRoundedRectangle(backgroundColor: .clear, borderColor: .red, borderWidth: 2))
                 }
             }
             .navigationTitle(Localize.trustdetails())

@@ -16,9 +16,12 @@
 
 import SwiftUI
 import Localization
+import TLSUI
 
 public struct ProxyNoticeView: View {
     @Environment(\.dismiss) private var dismiss
+
+    public init() {}
 
     public var body: some View {
         Navigation {
@@ -26,13 +29,19 @@ public struct ProxyNoticeView: View {
                 HStack(alignment: .top) {
                     Image(systemName: "info.circle.fill")
                         .foregroundStyle(.blue)
-                    Text(Localize.proxynotice())
+                    VStack(alignment: .leading) {
+                        Text(Localize.proxynotice())
+                        Link(destination: URL(string: "https://tlsinspector.com/wiki/About-HTTPS-Proxies")!) {
+                            Text(Localize.learnmore())
+                        }
+                    }
                 }.padding(.bottom)
                 SafetyWarningView(title: Localize.danger(), message: Localize.proxydanger())
                     .padding()
                     .background(IRoundedRectangle(backgroundColor: .clear, borderColor: .red, borderWidth: 2))
                 Spacer()
                 Button {
+                    NotificationCenter.default.post(name: closedInspectionViewNotification, object: nil)
                     dismiss()
                 } label: {
                     Text(Localize.dismiss())
@@ -40,8 +49,12 @@ public struct ProxyNoticeView: View {
                         .foregroundStyle(.white)
                         .padding(5)
                 }
-                .background {
-                    RoundedRectangle(cornerRadius: 5.0).fill(.blue)
+                .modify {
+                    if #available(iOS 26.0, *) {
+                        $0.buttonStyle(.glassProminent)
+                    } else {
+                        $0.buttonStyle(.borderedProminent)
+                    }
                 }
             }
             .padding()

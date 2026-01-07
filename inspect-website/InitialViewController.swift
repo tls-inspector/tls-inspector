@@ -35,6 +35,13 @@ class InitialViewController: UIViewController {
             self.closeExtension()
         }
 
+        if isProxyEnabled() {
+            DispatchQueue.main.async {
+                self.showProxyWarningView()
+            }
+            return
+        }
+
         /// Actually getting the host from whatever input was passed to the extension is surprisingly complex.
         /// You'd think you could just access the relevant data type that maps to the activation rule, but instead there's a bunch of asynchronous logic
         /// because when you try to load an attachment it might make an addtional HTTP request to fetch metadata.
@@ -187,6 +194,12 @@ class InitialViewController: UIViewController {
                 self.showErrorAndCloseExtension(Localize.error(), "\(error)")
             }
         }
+    }
+
+    func showProxyWarningView() {
+        let warningView = UIHostingController(rootView: ProxyNoticeView())
+        warningView.modalPresentationStyle = .fullScreen
+        self.present(warningView, animated: false, completion: nil)
     }
 
     @IBAction func cancelButtonPress(_ sender: UIButton) {
