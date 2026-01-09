@@ -15,10 +15,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import SwiftUI
-import TLSUI
 import Localization
 
 private enum AppDefaultsKeys: String {
+    case verboseLogging = "verbose_logging"
     case firstRunComplete = "first_run_complete"
     case rememberRecentLookups = "remember_recent_lookups"
     case showTips = "show_tips"
@@ -55,97 +55,15 @@ private final class AppDefaults: Sendable {
 
     public static func set(_ key: AppDefaultsKeys, _ value: Any) {
         LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Set AppDefault: \(key) = \(value)")
-        NotificationCenter.default.post(name: optionsChangedNotification, object: nil)
         return s.set(value, forKey: key.rawValue)
-    }
-}
-
-@MainActor
-public final class OptionsProvider: TLSUI.IOptions {
-    public func firstRunComplete() -> Bool {
-        return AppDefaults.get(.firstRunComplete, false)
-    }
-
-    public func rememberRecentLookups() -> Bool {
-        return AppDefaults.get(.rememberRecentLookups, true)
-    }
-
-    public func showTips() -> Bool {
-        return AppDefaults.get(.showTips, true)
-    }
-
-    public func getHttpHeaders() -> Bool {
-        return AppDefaults.get(.getHttpHeaders, true)
-    }
-
-    public func queryOcsp() -> Bool {
-        return AppDefaults.get(.queryOcsp, false)
-    }
-
-    public func checkCrl() -> Bool {
-        return AppDefaults.get(.checkCrl, true)
-    }
-
-    public func showFingerprintMd5() -> Bool {
-        return AppDefaults.get(.showFingerprintMd5, false)
-    }
-
-    public func showFingerprintSha1() -> Bool {
-        return AppDefaults.get(.showFingerprintSha1, true)
-    }
-
-    public func showFingerprintSha256() -> Bool {
-        return AppDefaults.get(.showFingerprintSha256, true)
-    }
-
-    public func showFingerprintSha512() -> Bool {
-        return AppDefaults.get(.showFingerprintSha512, false)
-    }
-
-    public func cryptoEngine() -> TLSUI.CryptoEngine {
-        return CryptoEngine(rawValue: AppDefaults.get(.cryptoEngine, CryptoEngine.NetworkFramework.rawValue)) ?? .NetworkFramework
-    }
-
-    public func ipVersion() -> TLSUI.IPVersion {
-        return IPVersion(rawValue: AppDefaults.get(.ipVersion, IPVersion.Automatic.rawValue)) ?? .Automatic
-    }
-
-    public func preferredCiphers() -> String {
-        return AppDefaults.get(.preferredCiphers, "HIGH:!aNULL:!MD5:!RC4")
-    }
-
-    public func contactNagDismissed() -> Bool {
-        return AppDefaults.get(.contactNagDismissed, false)
-    }
-
-    public func advancedSettingsNagDismissed() -> Bool {
-        return AppDefaults.get(.advancedSettingsNagDismissed, false)
-    }
-
-    public func treatUnrecognizedAsTrusted() -> Bool {
-        return AppDefaults.get(.treatUnrecognizedAsTrusted, true)
-    }
-
-    public func appLanguage() -> String {
-        return AppDefaults.get(.appLanguage, SupportedLanguages.English.rawValue)
-    }
-
-    public func inspectTimeout() -> Int {
-        return AppDefaults.get(.inspectTimeout, 10)
-    }
-
-    public func verboseLogging() -> Bool {
-        return UserOptions.current.verboseLogging
     }
 }
 
 @MainActor
 public final class UserOptions {
     public static let current = UserOptions()
-    private static var _verboseLogging = false
-    private static var _inspectionsWithVerboseLogging = 0
 
-    var firstRunComplete: Bool {
+    public var firstRunComplete: Bool {
         get {
             return AppDefaults.get(.firstRunComplete, false)
         }
@@ -154,19 +72,16 @@ public final class UserOptions {
         }
     }
 
-    var rememberRecentLookups: Bool {
+    public var rememberRecentLookups: Bool {
         get {
             return AppDefaults.get(.rememberRecentLookups, true)
         }
         set {
             AppDefaults.set(.rememberRecentLookups, newValue)
-            if !newValue {
-                InspectionHistoryManager.shared.removeAll()
-            }
         }
     }
 
-    var showTips: Bool {
+    public var showTips: Bool {
         get {
             return AppDefaults.get(.showTips, true)
         }
@@ -175,7 +90,7 @@ public final class UserOptions {
         }
     }
 
-    var getHttpHeaders: Bool {
+    public var getHttpHeaders: Bool {
         get {
             return AppDefaults.get(.getHttpHeaders, true)
         }
@@ -184,7 +99,7 @@ public final class UserOptions {
         }
     }
 
-    var queryOcsp: Bool {
+    public var queryOcsp: Bool {
         get {
             return AppDefaults.get(.queryOcsp, false)
         }
@@ -193,7 +108,7 @@ public final class UserOptions {
         }
     }
 
-    var checkCrl: Bool {
+    public var checkCrl: Bool {
         get {
             return AppDefaults.get(.checkCrl, true)
         }
@@ -202,7 +117,7 @@ public final class UserOptions {
         }
     }
 
-    var showFingerprintMd5: Bool {
+    public var showFingerprintMd5: Bool {
         get {
             return AppDefaults.get(.showFingerprintMd5, false)
         }
@@ -211,7 +126,7 @@ public final class UserOptions {
         }
     }
 
-    var showFingerprintSha1: Bool {
+    public var showFingerprintSha1: Bool {
         get {
             return AppDefaults.get(.showFingerprintSha1, true)
         }
@@ -220,7 +135,7 @@ public final class UserOptions {
         }
     }
 
-    var showFingerprintSha256: Bool {
+    public var showFingerprintSha256: Bool {
         get {
             return AppDefaults.get(.showFingerprintSha256, true)
         }
@@ -229,7 +144,7 @@ public final class UserOptions {
         }
     }
 
-    var showFingerprintSha512: Bool {
+    public var showFingerprintSha512: Bool {
         get {
             return AppDefaults.get(.showFingerprintSha512, false)
         }
@@ -238,7 +153,7 @@ public final class UserOptions {
         }
     }
 
-    var cryptoEngine: CryptoEngine {
+    public var cryptoEngine: CryptoEngine {
         get {
             return CryptoEngine(rawValue: AppDefaults.get(.cryptoEngine, CryptoEngine.NetworkFramework.rawValue)) ?? .NetworkFramework
         }
@@ -247,7 +162,7 @@ public final class UserOptions {
         }
     }
 
-    var ipVersion: IPVersion {
+    public var ipVersion: IPVersion {
         get {
             return IPVersion(rawValue: AppDefaults.get(.ipVersion, IPVersion.Automatic.rawValue)) ?? .Automatic
         }
@@ -256,7 +171,7 @@ public final class UserOptions {
         }
     }
 
-    var preferredCiphers: String {
+    public var preferredCiphers: String {
         get {
             return AppDefaults.get(.preferredCiphers, "HIGH:!aNULL:!MD5:!RC4")
         }
@@ -265,7 +180,7 @@ public final class UserOptions {
         }
     }
 
-    var contactNagDismissed: Bool {
+    public var contactNagDismissed: Bool {
         get {
             return AppDefaults.get(.contactNagDismissed, false)
         }
@@ -274,7 +189,7 @@ public final class UserOptions {
         }
     }
 
-    var advancedSettingsNagDismissed: Bool {
+    public var advancedSettingsNagDismissed: Bool {
         get {
             return AppDefaults.get(.advancedSettingsNagDismissed, false)
         }
@@ -283,7 +198,7 @@ public final class UserOptions {
         }
     }
 
-    var treatUnrecognizedAsTrusted: Bool {
+    public var treatUnrecognizedAsTrusted: Bool {
         get {
             return AppDefaults.get(.treatUnrecognizedAsTrusted, true)
         }
@@ -292,7 +207,7 @@ public final class UserOptions {
         }
     }
 
-    var appLanguage: SupportedLanguages {
+    public var appLanguage: SupportedLanguages {
         get {
             return SupportedLanguages(rawValue: AppDefaults.get(.appLanguage, SupportedLanguages.English.rawValue)) ?? .English
         }
@@ -301,7 +216,7 @@ public final class UserOptions {
         }
     }
 
-    var inspectTimeout: Int {
+    public var inspectTimeout: Int {
         get {
             return AppDefaults.get(.inspectTimeout, 10)
         }
@@ -310,5 +225,17 @@ public final class UserOptions {
         }
     }
 
-    var verboseLogging: Bool = false
+    public var verboseLogging: Bool {
+        get {
+            return AppDefaults.get(.verboseLogging, true)
+        }
+        set {
+            AppDefaults.set(.verboseLogging, newValue)
+            if newValue {
+                LogWriter.shared.setLevel(.Debug)
+            } else {
+                LogWriter.shared.setLevel(.Error)
+            }
+        }
+    }
 }

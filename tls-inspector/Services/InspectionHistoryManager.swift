@@ -16,6 +16,7 @@
 
 import Foundation
 import TLSKit
+import TLSUI
 
 /// Provides an interface for maintaining a list of recent inspections
 @MainActor

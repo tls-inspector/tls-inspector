@@ -348,12 +348,12 @@ internal final class OpenSSLEngine: Engine {
             let result = client.response(from: conn)
             switch result {
             case .success(let r):
-                return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: r, elapsedNs: timer.stop())
-            case .failure:
-                return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, elapsedNs: timer.stop())
+                return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: r, httpServerError: nil, elapsedNs: timer.stop())
+            case .failure(let error):
+                return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, httpServerError: error, elapsedNs: timer.stop())
             }
         } else {
-            return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, elapsedNs: timer.stop())
+            return InspectionResponse(tlsConnection: tlsConnection, httpServerInfo: nil, httpServerError: nil, elapsedNs: timer.stop())
         }
     }
 }

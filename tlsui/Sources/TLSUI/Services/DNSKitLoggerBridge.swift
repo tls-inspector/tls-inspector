@@ -19,14 +19,14 @@ import DNSKit
 import TLSKit
 
 /// Bridge between DNSKit's logger and TLSKit's logger, which are 1-to-1 compatible
-internal final class DNSKitLoggerBridge: DNSKit.ILogger {
-    nonisolated(unsafe) static let shared = DNSKitLoggerBridge()
+public final class DNSKitLoggerBridge: DNSKit.ILogger {
+    nonisolated(unsafe) public static let shared = DNSKitLoggerBridge()
 
-    func write(_ level: DNSKit.LogLevel, message: String) {
+    public func write(_ level: DNSKit.LogLevel, message: String) {
         LogWriter.shared.write(TLSKit.LogLevel(rawValue: level.rawValue)!, message: message)
     }
 
-    func currentLevel() -> DNSKit.LogLevel? {
+    public func currentLevel() -> DNSKit.LogLevel? {
         return DNSKit.LogLevel(rawValue: LogWriter.shared.getLevel().rawValue)!
     }
 }

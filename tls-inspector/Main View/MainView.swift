@@ -95,15 +95,19 @@ struct MainView: View {
                         Button {
                             self.showAboutView = true
                         } label: {
-                            Label(Localize.about(), systemImage: "info.circle")
+                            Label(Localize.about(), systemImage: "info")
                         }
                         Button {
                             self.showOptionsView = true
                         } label: {
-                            Label(Localize.options(), systemImage: "gearshape.circle")
+                            Label(Localize.options(), systemImage: "gearshape.fill")
                         }
                     } label: {
-                        Image(systemName: "ellipsis.circle")
+                        if #available(iOS 26.0, *) {
+                            Image(systemName: "ellipsis")
+                        } else {
+                            Image(systemName: "ellipsis.circle")
+                        }
                     }
                 }
                 ToolbarItem(placement: .automatic) {
@@ -112,7 +116,11 @@ struct MainView: View {
                             await self.inspectFromInput()
                         }
                     } label: {
-                        Image(systemName: "arrow.right.circle")
+                        if #available(iOS 26.0, *) {
+                            Image(systemName: "arrow.right")
+                        } else {
+                            Image(systemName: "arrow.right.circle")
+                        }
                     }
                     .disabled(self.isLoading)
                 }
@@ -134,7 +142,7 @@ struct MainView: View {
         self.isLoading = true
         let cryptoEngine = UserOptions.current.cryptoEngine.toTLSKit()
         let session = InspectionSession(engineType: cryptoEngine)
-        let telemetry = Telemetry()
+        let telemetry = Telemetry(source: "app")
         do {
             let result = try await session.execute(request)
             self.inspectionResponse = result
@@ -143,6 +151,9 @@ struct MainView: View {
             InspectionHistoryManager.shared.add(request)
             DispatchQueue.global(qos: .background).async {
                 telemetry.inspectionRequestSuccess(engineType: cryptoEngine, request: request, elapsed: result.elapsedNs)
+                if let error = result.httpServerError {
+                    telemetry.httpInspectionFailed(request: request, error: error)
+                }
             }
         } catch {
             DispatchQueue.global(qos: .background).async {

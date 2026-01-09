@@ -31,9 +31,7 @@ public struct HTTPHeadersView: View {
         List {
             ForEach(keys, id: \.self) { key in
                 ForEach(headers.get(key)!, id: \.self) { value in
-                    HStack {
-                        Text(key)
-                        Spacer()
+                    TitleValueView(title: key) {
                         Text(value).fixedwidth()
                     }
                 }

@@ -31,12 +31,12 @@ internal final class CertificateReminder {
 
         let accessCallback: ((Bool, Error?) -> Void) = { granted, error in
             if !granted {
-                LogWriter.write(.Error, message: "[\(#fileID):\(#line)] Permission was denied to add a reminder")
+                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Permission was denied to add a reminder")
                 complete(ReminderError.permissionDenied)
                 return
             }
             if let error = error {
-                LogWriter.write(.Error, message: "[\(#fileID):\(#line)] Access error while requesting reminders permission: \(error)")
+                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Access error while requesting reminders permission: \(error)")
                 complete(error)
                 return
             }
@@ -59,9 +59,9 @@ internal final class CertificateReminder {
             var saveError: Error?
             do {
                 try store.save(reminder, commit: true)
-                LogWriter.write(.Debug, message: "[\(#fileID):\(#line)] Reminder created for certificate \(certificate.subject.description) on \(alarmDate)")
+                LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Reminder created for certificate \(certificate.subject.description) on \(alarmDate)")
             } catch {
-                LogWriter.write(.Error, message: "[\(#fileID):\(#line)] Error adding certificate expiry reminder for \(certificate.subject.description) on \(alarmDate): \(error)")
+                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Error adding certificate expiry reminder for \(certificate.subject.description) on \(alarmDate): \(error)")
                 saveError = error
             }
             complete(saveError)

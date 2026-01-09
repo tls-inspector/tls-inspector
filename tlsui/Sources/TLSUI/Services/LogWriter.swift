@@ -20,13 +20,13 @@ import TLSKit
 /// Describes the logging facility for DNS Inspector.
 ///
 /// > Warning: Do not create more than once instance of this class. Only use the `LogWriter.shared` singleton.
-internal final class LogWriter: ILogger {
+public final class LogWriter: ILogger {
     /// The shared instance of the logging facility.
-    nonisolated(unsafe) static let shared = LogWriter()
+    nonisolated(unsafe) public static let shared = LogWriter()
     /// The minimum log level. Messages below this level are discarded. Can be modified at any time.
     nonisolated(unsafe) private var level: LogLevel
 
-    internal let filePath: URL
+    public let filePath: URL
     private let fileWriter: FileHandle?
     private let lock: NSObject = NSObject()
     private var isOpen = false
@@ -69,7 +69,7 @@ internal final class LogWriter: ILogger {
 
     /// Update the current logging level
     /// - Parameter level: The new level to use
-    func setLevel(_ level: TLSKit.LogLevel) {
+    public func setLevel(_ level: TLSKit.LogLevel) {
         objc_sync_enter(self.lock)
         defer { objc_sync_exit(self.lock) }
         self.level = level
@@ -81,7 +81,7 @@ internal final class LogWriter: ILogger {
     /// - Parameters:
     ///   - level: The level of the event
     ///   - message: The message to write
-    func write(_ level: TLSKit.LogLevel, message: String) {
+    public func write(_ level: TLSKit.LogLevel, message: String) {
         if level.rawValue < self.level.rawValue {
             return
         }
@@ -104,7 +104,7 @@ internal final class LogWriter: ILogger {
         try? writer.write(contentsOf: data)
     }
 
-    func getLevel() -> TLSKit.LogLevel {
+    public func getLevel() -> TLSKit.LogLevel {
         objc_sync_enter(self.lock)
         defer { objc_sync_exit(self.lock) }
 
@@ -112,7 +112,7 @@ internal final class LogWriter: ILogger {
     }
 
     /// Close the log file. If the log file was not open take no action. Threadsafe.
-    func close() {
+    public func close() {
         objc_sync_enter(self.lock)
         defer { objc_sync_exit(self.lock) }
 

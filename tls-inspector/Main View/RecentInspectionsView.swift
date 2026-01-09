@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import TLSUI
 import Localization
 
 struct RecentInspectionsView: View {

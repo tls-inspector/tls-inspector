@@ -112,7 +112,7 @@ public struct InspectionResponseView: View {
             try chainData.write(to: chainUrl)
             self.exportedChainUrl = chainUrl
         } catch {
-            LogWriter.write(.Error, message: "[\(#fileID):\(#line)] Failed to write certificate chain to file: \(error)")
+            LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Failed to write certificate chain to file: \(error)")
         }
     }
 }

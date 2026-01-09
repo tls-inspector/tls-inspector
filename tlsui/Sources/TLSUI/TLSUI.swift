@@ -18,15 +18,3 @@ import TLSKit
 import SwiftUI
 
 public let closedInspectionViewNotification = Notification.Name(rawValue: "inspection.view.closed")
-
-internal nonisolated(unsafe) var LogWriter: ILogger!
-internal nonisolated(unsafe) var UserOptions: IOptions!
-
-/// Prepares the TLSUI package for use in an app or extension. This must be called exactly once and before any of the views of this package are displayed.
-/// - Parameters:
-///   - logger: The logging interface
-///   - userOptions: The options provider
-public func setup(logger: ILogger, userOptions: IOptions) {
-    LogWriter = logger
-    UserOptions = userOptions
-}

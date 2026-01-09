@@ -54,9 +54,11 @@ public struct CertificateMetadataView: View {
                 NavigationLink {
                     CertificateTimestampView(timestamps: timestamps)
                 } label: {
-                    Text(Localize.certificatetimestamps())
-                    Spacer()
-                    Text(verbatim: "\(timestamps.count)").opacity(0.5)
+                    HStack {
+                        Text(Localize.certificatetimestamps())
+                        Spacer()
+                        Text(verbatim: "\(timestamps.count)").opacity(0.5)
+                    }
                 }
             }
         }

@@ -17,6 +17,7 @@
 import SwiftUI
 import TLSKit
 import Localization
+import TLSUI
 
 public struct OptionsView: View {
     public let presented: Binding<Bool>
@@ -55,6 +56,9 @@ public struct OptionsView: View {
             }
             .onChange(of: rememberRecentLookups) {
                 UserOptions.current.rememberRecentLookups = $0
+                if !$0 {
+                    InspectionHistoryManager.shared.removeAll()
+                }
             }
             .onChange(of: showTips) {
                 UserOptions.current.showTips = $0

@@ -22,7 +22,7 @@ struct PreviewBuildView: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "airplane.up.right.app.fill")
+            Image(systemName: "airplane.circle.fill")
                 .foregroundStyle(.black)
             Text("Preview Build")
                 .font(.headline)

@@ -19,10 +19,6 @@ import Foundation
 /// Class for getting meta information about the app
 @MainActor
 public struct EnvironmentInfo {
-    public static func feedbackBodyHtml(withMessage message: String) -> String {
-        return "<p><b>App Version: \(version()) (\(build()))</b><br/><b>Device: \(platformName())</b></p><hr/><p>\(message)</p>"
-    }
-
     /// Get the current version of the app
     public static func version() -> String {
         return (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown"

@@ -23,7 +23,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         TLSKit.log = LogWriter.shared
         DNSKit.log = DNSKitLoggerBridge.shared
-        TLSUI.setup(logger: LogWriter.shared, userOptions: OptionsProvider())
 
         LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] App loaded")
 

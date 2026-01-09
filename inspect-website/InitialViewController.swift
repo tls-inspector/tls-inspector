@@ -19,6 +19,7 @@ import SwiftUI
 import TLSKit
 import TLSUI
 import Localization
+import DNSKit
 
 /// The initial view controller is responsible for accepting the data sent by the system to the extension, try to determine the host that needs to be inspected, handle the inspection, and present the
 /// results.
@@ -29,6 +30,9 @@ class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        TLSKit.log = LogWriter.shared
+        DNSKit.log = DNSKitLoggerBridge.shared
 
         /// We use a notification to know when the user dismissed the split view
         NotificationCenter.default.addObserver(forName: closedInspectionViewNotification, object: nil, queue: nil) { _ in
@@ -173,25 +177,36 @@ class InitialViewController: UIViewController {
         let request = InspectionRequest(
             address: host,
             port: port,
-            checkCRL: true,
-            checkOCSP: false,
-            ipVersion: nil,
-            checkHTTP: true,
-            timeoutSeconds: UInt8(5),
+            checkCRL: UserOptions.current.checkCrl,
+            checkOCSP: UserOptions.current.queryOcsp,
+            ipVersion: UserOptions.current.ipVersion.toTLSKit(),
+            checkHTTP: UserOptions.current.getHttpHeaders,
+            timeoutSeconds: UInt8(UserOptions.current.inspectTimeout),
             alpn: ["http/1.1"],
         )
+        let telemetry = Telemetry(source: "extension")
+        let cryptoengine = UserOptions.current.cryptoEngine.toTLSKit()
 
         do {
-            let session = InspectionSession(engineType: .NetworkFramework)
+            let session = InspectionSession(engineType: cryptoengine)
             let result = try await session.execute(request)
             DispatchQueue.main.async {
                 let responseView = UIHostingController(rootView: InspectionResponseView(response: result))
                 responseView.modalPresentationStyle = .fullScreen
                 self.present(responseView, animated: false, completion: nil)
             }
+            DispatchQueue.global(qos: .background).async {
+                telemetry.inspectionRequestSuccess(engineType: cryptoengine, request: request, elapsed: result.elapsedNs)
+                if let error = result.httpServerError {
+                    telemetry.httpInspectionFailed(request: request, error: error)
+                }
+            }
         } catch {
             DispatchQueue.main.async {
                 self.showErrorAndCloseExtension(Localize.error(), "\(error)")
+            }
+            DispatchQueue.global(qos: .background).async {
+                telemetry.inspectionRequestFailed(engineType: .NetworkFramework, request: request, error: error)
             }
         }
     }

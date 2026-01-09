@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C00F9E02F1039D600FB9CC3 /* Crashpad in Frameworks */ = {isa = PBXBuildFile; productRef = 3C00F9DF2F1039D600FB9CC3 /* Crashpad */; };
 		3C0485512E724BC600DCA9F4 /* Crashpad in Frameworks */ = {isa = PBXBuildFile; productRef = 3C0485502E724BC600DCA9F4 /* Crashpad */; };
 		3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6412CAA28F00075B2BA /* curl.xcframework */; };
 		3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */; };
@@ -96,6 +97,7 @@
 			files = (
 				3C8745E32EB55EAC00154664 /* TLSUI in Frameworks */,
 				3C4E8A212EBA7BA500433307 /* Localization in Frameworks */,
+				3C00F9E02F1039D600FB9CC3 /* Crashpad in Frameworks */,
 				3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */,
 				3C8745E12EB55EAC00154664 /* TLSKit in Frameworks */,
 			);
@@ -170,6 +172,7 @@
 				3C8745E02EB55EAC00154664 /* TLSKit */,
 				3C8745E22EB55EAC00154664 /* TLSUI */,
 				3C4E8A202EBA7BA500433307 /* Localization */,
+				3C00F9DF2F1039D600FB9CC3 /* Crashpad */,
 			);
 			productName = "inspect-website";
 			productReference = 3C8742E02EB4524200154664 /* inspect-website.appex */;
@@ -621,6 +624,11 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3C00F9DF2F1039D600FB9CC3 /* Crashpad */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C04854F2E724BC600DCA9F4 /* XCLocalSwiftPackageReference "crashpad" */;
+			productName = Crashpad;
+		};
 		3C0485502E724BC600DCA9F4 /* Crashpad */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Crashpad;

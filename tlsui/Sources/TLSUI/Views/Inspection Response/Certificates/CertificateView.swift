@@ -116,7 +116,7 @@ public struct CertificateView: View {
             try self.certificate.pemString().write(toFile: certUrl.path, atomically: false, encoding: .ascii)
             self.exportedCertUrl = certUrl
         } catch {
-            LogWriter.write(.Error, message: "[\(#fileID):\(#line)] Failed to write certificate to temporary file: \(error)")
+            LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Failed to write certificate to temporary file: \(error)")
         }
     }
 }

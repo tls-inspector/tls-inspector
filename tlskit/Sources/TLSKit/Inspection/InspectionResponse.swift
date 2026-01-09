@@ -20,6 +20,15 @@ import Foundation
 public struct InspectionResponse: Identifiable, Sendable {
     public let tlsConnection: TLSConnection
     public let httpServerInfo: HTTPServerInfo?
+    public let httpServerError: TLSKitError?
     public let elapsedNs: UInt64
     public var id = UUID()
+
+    public init(tlsConnection: TLSConnection, httpServerInfo: HTTPServerInfo?, httpServerError: TLSKitError?, elapsedNs: UInt64, id: UUID = UUID()) {
+        self.tlsConnection = tlsConnection
+        self.httpServerInfo = httpServerInfo
+        self.httpServerError = httpServerError
+        self.elapsedNs = elapsedNs
+        self.id = id
+    }
 }

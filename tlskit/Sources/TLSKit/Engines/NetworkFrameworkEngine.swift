@@ -322,15 +322,18 @@ internal final class NetworkFrameworkEngine: Engine {
                     connection.send(content: httpRequest, completion: NWConnection.SendCompletion.contentProcessed({ _ in
                         httpClient.response(from: connection) { result in
                             let httpServerInfo: HTTPServerInfo?
+                            let httpServerError: TLSKitError?
                             switch result {
                             case .success(let r):
                                 httpServerInfo = r
-                            case .failure:
+                                httpServerError = nil
+                            case .failure(let error):
                                 httpServerInfo = nil
+                                httpServerError = error
                             }
 
                             didComplete.If(false) {
-                                complete(.success(InspectionResponse(tlsConnection: tlsConnectionInfo, httpServerInfo: httpServerInfo, elapsedNs: timer.stop())))
+                                complete(.success(InspectionResponse(tlsConnection: tlsConnectionInfo, httpServerInfo: httpServerInfo, httpServerError: httpServerError, elapsedNs: timer.stop())))
                                 return true
                             }
                             semaphore.signal()
@@ -338,7 +341,7 @@ internal final class NetworkFrameworkEngine: Engine {
                     }))
                 } else {
                     didComplete.If(false) {
-                        complete(.success(InspectionResponse(tlsConnection: tlsConnectionInfo, httpServerInfo: nil, elapsedNs: timer.stop())))
+                        complete(.success(InspectionResponse(tlsConnection: tlsConnectionInfo, httpServerInfo: nil, httpServerError: nil, elapsedNs: timer.stop())))
                         return true
                     }
                     semaphore.signal()
