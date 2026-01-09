@@ -18,6 +18,8 @@ import UIKit
 import StoreKit
 import TLSKit
 import Localization
+import WebKit
+import TLSUI
 
 class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @preconcurrency SKStoreProductViewControllerDelegate {
     private let dnsInspectorAppId = 6470965982
@@ -132,6 +134,8 @@ class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @
             break
         case "dnsi":
             self.showProductInAppStore(dnsInspectorAppId, campaignId: dnsInspectorAppStoreCampaignId)
+        case "oss":
+            self.showLicenseWebView()
         default:
             break
         }
@@ -154,5 +158,28 @@ class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @
         ]
         productViewController.loadProduct(withParameters: parameters, completionBlock: nil)
         self.present(productViewController, animated: true)
+    }
+
+    // MARK: - OSS Methods
+
+    func showLicenseWebView() {
+        guard let attrPath = Bundle.main.url(forResource: "attr", withExtension: "html") else { return }
+        guard let attrHtml = try? String(contentsOf: attrPath) else { return }
+
+        let viewController = UIViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissLicenseView))
+
+        viewController.navigationItem.leftBarButtonItem = closeButton
+        let webView = WKWebView()
+        viewController.view = webView
+        viewController.title = "Open Source Licenses & Attributions"
+        webView.loadHTMLString(attrHtml, baseURL: nil)
+
+        self.present(navigationController, animated: true)
+    }
+
+    @objc func dismissLicenseView(_ target: UIBarButtonItem) {
+        self.window?.rootViewController?.presentedViewController?.dismiss(animated: true)
     }
 }
