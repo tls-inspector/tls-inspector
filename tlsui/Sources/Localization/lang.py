@@ -37,6 +37,13 @@ languageNameMap = {
 
 import re
 import os
+import sys
+import subprocess
+
+validate = False
+for arg in sys.argv:
+    if arg == "--validate":
+        validate = True
 
 def normalizeKey(key):
     normalizedKey = re.sub(r"[^A-Za-z0-9]", "", key.lower())
@@ -169,34 +176,6 @@ def functionDef(key):
     else:
         return "public static func " + normalizeKey(key) + "() -> String"
 
-# Entrypoint
-for lang in languages:
-    process_strings(lang)
-
-dictionary = []
-en_entries = read_strings("en")
-langs = {}
-for lang in languages:
-    if lang == "en":
-        continue
-    langs[lang] = read_strings(lang)
-
-
-for en_entry in en_entries:
-    entry = {
-        "key": en_entry["key"],
-        "values": {
-            "en": en_entry["value"]
-        }
-    }
-    for lang in languages:
-        if lang == "en":
-            continue
-        for le in langs[lang]:
-            if le["key"] == en_entry["key"]:
-                entry["values"][lang] = le["value"]
-    dictionary.append(entry)
-
 def write_localization_file(name):
     with open(name+'.new', 'w') as file:
         header = """// TLS Inspector
@@ -268,4 +247,47 @@ public final class Localize {
         file.write("}\n")
     os.rename(name+'.new', name)
 
+# Entrypoint
+for lang in languages:
+    process_strings(lang)
+
+dictionary = []
+en_entries = read_strings("en")
+langs = {}
+for lang in languages:
+    if lang == "en":
+        continue
+    langs[lang] = read_strings(lang)
+
+
+for en_entry in en_entries:
+    entry = {
+        "key": en_entry["key"],
+        "values": {
+            "en": en_entry["value"]
+        }
+    }
+    for lang in languages:
+        if lang == "en":
+            continue
+        for le in langs[lang]:
+            if le["key"] == en_entry["key"]:
+                entry["values"][lang] = le["value"]
+    dictionary.append(entry)
+
 write_localization_file('Localization.swift')
+
+if not validate:
+    sys.exit()
+
+is_valid = True
+for entry in en_entries:
+    q = "Localize." + normalizeKey(entry["key"])
+    r = subprocess.run(["git", "--no-pager", "grep", q, "../../../"], capture_output=True)
+
+    if len(r.stdout) == 0:
+        print("Error: Unused localization key: " + entry["key"])
+        is_valid = False
+
+if not is_valid:
+    sys.exit(1)

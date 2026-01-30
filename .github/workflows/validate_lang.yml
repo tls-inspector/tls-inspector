@@ -25,7 +25,7 @@ jobs:
         id: validate_localization
         run: |
           cd tlsui/Sources/Localization
-          python3 lang.py
+          python3 lang.py --validate
           if [[ $(git diff --stat) != '' ]]; then
             echo "::error ::Untracked changes to localization detected!"
             git status
