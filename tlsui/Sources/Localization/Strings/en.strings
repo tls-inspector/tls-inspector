@@ -5,7 +5,6 @@
 1 hour	1 hour
 1 minute	1 minute
 1 month	1 month
-1 week	1 week
 1 year	1 year
 About	About
 Add reminder for certificate expiry	Add reminder for certificate expiry
@@ -22,7 +21,6 @@ Authority	Authority
 Auto	Auto
 Basic	Basic
 Bundle date	Bundle date
-Cancel	Cancel
 Certificate Authority	Certificate Authority
 Certificate Status	Certificate Status
 Certificate Timestamps	Certificate Timestamps
@@ -37,11 +35,9 @@ Common Name	Common Name
 Connection Information	Connection Information
 Contribute to TLS Inspector	Contribute to TLS Inspector
 Country	Country
-Critical	Critical
 DNS Name	DNS Name
 Danger	Danger
 Dangerous & Unsafe	Dangerous & Unsafe
-Data	Data
 Dismiss	Dismiss
 Domain Name or IP Address	Domain Name or IP Address
 Done	Done
@@ -58,7 +54,6 @@ Export certificate	Export certificate
 Export certificate chain	Export certificate chain
 Extended	Extended
 Extensions	Extensions
-Feedback Sent	Feedback Sent
 Fingerprints	Fingerprints
 Follow Us	Follow Us
 Follow us on Bluesky	Follow us on Bluesky
@@ -67,7 +62,6 @@ Found on device	Found on device
 General	General
 Get Involved	Get Involved
 Google	Google
-HTTP Headers	HTTP Headers
 IP Address	IP Address
 IconDark	Dark
 IconDefault	Default
@@ -76,10 +70,8 @@ IconPride	Pride
 IconSkew	Skew
 IconSlate	Slate
 IconTrans	Trans
-Identifier	Identifier
 If you believe this to be in error, contact support from within the TLS Inspector app.	If you believe this to be in error, contact support from within the TLS Inspector app.
 Invalid Certificate	Invalid Certificate
-Is the connection to this site secure?	Is the connection to this site secure?
 Issuer	Issuer
 Key Identifiers	Key Identifiers
 Key Size	Key Size
@@ -91,7 +83,6 @@ Log ID	Log ID
 Log Name	Log Name
 Logging & Support	Logging & Support
 LoggingFooter	If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button.
-Mail Account Required	Mail Account Required
 Metadata	Metadata
 Microsoft	Microsoft
 More from the Developer	More from the Developer
@@ -113,7 +104,6 @@ Options	Options
 Organization	Organization
 Organizational Unit	Organizational Unit
 Permission Denied	Permission Denied
-Please Note	Please Note
 Please wait...	Please wait...
 ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediately. Avoid using your device if possible.
 ProxyNotice	An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
@@ -136,7 +126,6 @@ RootCALicenseFooter	Apple, Google, Microsoft, and Mozilla are all registered tra
 Search on {website}	Search on {0}
 Seconds	Seconds
 Security HTTP Headers	Security HTTP Headers
-Send Feedback	Send Feedback
 Sent by server	Sent by server
 Serial Number	Serial Number
 Share & Feedback	Share & Feedback
@@ -151,8 +140,6 @@ Special	Special
 State / Province	State / Province
 Status Providers	Status Providers
 Subject	Subject
-Submit	Submit
-SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
 TLS Inspector	TLS Inspector
 The certificate '{domain}' expires on {date}	The certificate '{0}' expires on {1}
 Timeout	Timeout

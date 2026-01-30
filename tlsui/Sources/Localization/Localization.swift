@@ -85,19 +85,6 @@ public final class Localize {
             return "1 month"
         }
     }
-    // key: 1 week
-    public static func n1week() -> String {
-        switch currentLanguage {
-        case .English:
-            return "1 week"
-        case .Spanish:
-            return "1 week"
-        case .German:
-            return "1 week"
-        case .Dutch:
-            return "1 week"
-        }
-    }
     // key: 1 year
     public static func n1year() -> String {
         switch currentLanguage {
@@ -306,19 +293,6 @@ public final class Localize {
             return "Bundle date"
         }
     }
-    // key: Cancel
-    public static func cancel() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Cancel"
-        case .Spanish:
-            return "Cancel"
-        case .German:
-            return "Cancel"
-        case .Dutch:
-            return "Cancel"
-        }
-    }
     // key: Certificate Authority
     public static func certificateauthority() -> String {
         switch currentLanguage {
@@ -501,19 +475,6 @@ public final class Localize {
             return "Country"
         }
     }
-    // key: Critical
-    public static func critical() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Critical"
-        case .Spanish:
-            return "Critical"
-        case .German:
-            return "Critical"
-        case .Dutch:
-            return "Critical"
-        }
-    }
     // key: DNS Name
     public static func dnsname() -> String {
         switch currentLanguage {
@@ -551,19 +512,6 @@ public final class Localize {
             return "Dangerous & Unsafe"
         case .Dutch:
             return "Dangerous & Unsafe"
-        }
-    }
-    // key: Data
-    public static func data() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Data"
-        case .Spanish:
-            return "Data"
-        case .German:
-            return "Data"
-        case .Dutch:
-            return "Data"
         }
     }
     // key: Dismiss
@@ -774,19 +722,6 @@ public final class Localize {
             return "Extensions"
         }
     }
-    // key: Feedback Sent
-    public static func feedbacksent() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Feedback Sent"
-        case .Spanish:
-            return "Feedback Sent"
-        case .German:
-            return "Feedback Sent"
-        case .Dutch:
-            return "Feedback Sent"
-        }
-    }
     // key: Fingerprints
     public static func fingerprints() -> String {
         switch currentLanguage {
@@ -889,19 +824,6 @@ public final class Localize {
             return "Google"
         case .Dutch:
             return "Google"
-        }
-    }
-    // key: HTTP Headers
-    public static func httpheaders() -> String {
-        switch currentLanguage {
-        case .English:
-            return "HTTP Headers"
-        case .Spanish:
-            return "HTTP Headers"
-        case .German:
-            return "HTTP Headers"
-        case .Dutch:
-            return "HTTP Headers"
         }
     }
     // key: IP Address
@@ -1008,19 +930,6 @@ public final class Localize {
             return "Trans"
         }
     }
-    // key: Identifier
-    public static func identifier() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Identifier"
-        case .Spanish:
-            return "Identifier"
-        case .German:
-            return "Identifier"
-        case .Dutch:
-            return "Identifier"
-        }
-    }
     // key: If you believe this to be in error, contact support from within the TLS Inspector app.
     public static func ifyoubelievethistobeinerrorcontactsupportfromwithinthetlsinspectorapp() -> String {
         switch currentLanguage {
@@ -1045,19 +954,6 @@ public final class Localize {
             return "Invalid Certificate"
         case .Dutch:
             return "Invalid Certificate"
-        }
-    }
-    // key: Is the connection to this site secure?
-    public static func istheconnectiontothissitesecure() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Is the connection to this site secure?"
-        case .Spanish:
-            return "Is the connection to this site secure?"
-        case .German:
-            return "Is the connection to this site secure?"
-        case .Dutch:
-            return "Is the connection to this site secure?"
         }
     }
     // key: Issuer
@@ -1201,19 +1097,6 @@ public final class Localize {
             return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
         case .Dutch:
             return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
-        }
-    }
-    // key: Mail Account Required
-    public static func mailaccountrequired() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Mail Account Required"
-        case .Spanish:
-            return "Mail Account Required"
-        case .German:
-            return "Mail Account Required"
-        case .Dutch:
-            return "Mail Account Required"
         }
     }
     // key: Metadata
@@ -1487,19 +1370,6 @@ public final class Localize {
             return "Permission Denied"
         case .Dutch:
             return "Permission Denied"
-        }
-    }
-    // key: Please Note
-    public static func pleasenote() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Please Note"
-        case .Spanish:
-            return "Please Note"
-        case .German:
-            return "Please Note"
-        case .Dutch:
-            return "Please Note"
         }
     }
     // key: Please wait...
@@ -1788,19 +1658,6 @@ public final class Localize {
             return "Security HTTP Headers"
         }
     }
-    // key: Send Feedback
-    public static func sendfeedback() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Send Feedback"
-        case .Spanish:
-            return "Send Feedback"
-        case .German:
-            return "Send Feedback"
-        case .Dutch:
-            return "Send Feedback"
-        }
-    }
     // key: Sent by server
     public static func sentbyserver() -> String {
         switch currentLanguage {
@@ -1981,32 +1838,6 @@ public final class Localize {
             return "Subject"
         case .Dutch:
             return "Subject"
-        }
-    }
-    // key: Submit
-    public static func submit() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Submit"
-        case .Spanish:
-            return "Submit"
-        case .German:
-            return "Submit"
-        case .Dutch:
-            return "Submit"
-        }
-    }
-    // key: SupportNote
-    public static func supportnote() -> String {
-        switch currentLanguage {
-        case .English:
-            return "TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support."
-        case .Spanish:
-            return "TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support."
-        case .German:
-            return "TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support."
-        case .Dutch:
-            return "TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support."
         }
     }
     // key: TLS Inspector

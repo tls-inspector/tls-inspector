@@ -286,7 +286,7 @@ for entry in en_entries:
     r = subprocess.run(["git", "--no-pager", "grep", q, "../../../"], capture_output=True)
 
     if len(r.stdout) == 0:
-        print("Error: Unused localization key: " + entry["key"])
+        print("::error ::Unused localization key: " + entry["key"])
         is_valid = False
 
 if not is_valid:

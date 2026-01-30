@@ -7,8 +7,6 @@
 # TODO
 1 month	1 month
 # TODO
-1 week	1 week
-# TODO
 1 year	1 year
 # TODO
 About	About
@@ -41,8 +39,6 @@ Basic	Basic
 # TODO
 Bundle date	Bundle date
 # TODO
-Cancel	Cancel
-# TODO
 Certificate Authority	Certificate Authority
 # TODO
 Certificate Status	Certificate Status
@@ -71,15 +67,11 @@ Contribute to TLS Inspector	Contribute to TLS Inspector
 # TODO
 Country	Country
 # TODO
-Critical	Critical
-# TODO
 DNS Name	Alternate Names
 # TODO
 Danger	Danger
 # TODO
 Dangerous & Unsafe	Dangerous & Unsafe
-# TODO
-Data	Data
 # TODO
 Dismiss	Dismiss
 # TODO
@@ -113,8 +105,6 @@ Extended	Extended
 # TODO
 Extensions	Extensions
 # TODO
-Feedback Sent	Feedback Sent
-# TODO
 Fingerprints	Fingerprints
 # TODO
 Follow Us	Follow Us
@@ -130,8 +120,6 @@ General	General
 Get Involved	Get Involved
 # TODO
 Google	Google
-# TODO
-HTTP Headers	HTTP Headers
 # TODO
 IP Address	Alternate Names
 # TODO
@@ -149,13 +137,9 @@ IconSlate	Slate
 # TODO
 IconTrans	Trans
 # TODO
-Identifier	Identifier
-# TODO
 If you believe this to be in error, contact support from within the TLS Inspector app.	If you believe this to be in error, contact support from within the TLS Inspector app.
 # TODO
 Invalid Certificate	Invalid Certificate
-# TODO
-Is the connection to this site secure?	Is the connection to this site secure?
 # TODO
 Issuer	Issuer
 # TODO
@@ -178,8 +162,6 @@ Log Name	Log Name
 Logging & Support	Logging & Support
 # TODO
 LoggingFooter	If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button.
-# TODO
-Mail Account Required	Mail Account Required
 # TODO
 Metadata	Metadata
 # TODO
@@ -222,8 +204,6 @@ Organization	Organization
 Organizational Unit	Organizational Unit
 # TODO
 Permission Denied	Permission Denied
-# TODO
-Please Note	Please Note
 # TODO
 Please wait...	Please wait...
 # TODO
@@ -269,8 +249,6 @@ Seconds	Seconds
 # TODO
 Security HTTP Headers	Security HTTP Headers
 # TODO
-Send Feedback	Send Feedback
-# TODO
 Sent by server	Sent by server
 # TODO
 Serial Number	Serial Number
@@ -298,10 +276,6 @@ State / Province	State / Province
 Status Providers	Status Providers
 # TODO
 Subject	Subject
-# TODO
-Submit	Submit
-# TODO
-SupportNote	TLS Inspector does not provide you or your device with protection from viruses or malware. If you are concerned about the security of your device, contact Apple Support.
 # TODO
 TLS Inspector	TLS Inspector
 # TODO
