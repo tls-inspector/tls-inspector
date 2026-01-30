@@ -1129,7 +1129,7 @@ public final class Localize {
     public static func licensefooter() -> String {
         switch currentLanguage {
         case .English:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
         case .Spanish:
             return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
         case .German:
@@ -1519,7 +1519,7 @@ public final class Localize {
     public static func proxydanger() -> String {
         switch currentLanguage {
         case .English:
-            return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible."
+            return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediately. Avoid using your device if possible."
         case .Spanish:
             return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible."
         case .German:
@@ -1749,30 +1749,17 @@ public final class Localize {
             return "Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities."
         }
     }
-    // key: Search on Shodan
-    public static func searchonshodan() -> String {
+    // key: Search on {website}
+    public static func searchonwebsite(website: String) -> String {
         switch currentLanguage {
         case .English:
-            return "Search on Shodan"
+            return "Search on \(website)"
         case .Spanish:
-            return "Search on Shodan"
+            return "Search on \(website)"
         case .German:
-            return "Search on Shodan"
+            return "Search on \(website)"
         case .Dutch:
-            return "Search on Shodan"
-        }
-    }
-    // key: Search on crt.sh
-    public static func searchoncrtsh() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Search on crt.sh"
-        case .Spanish:
-            return "Search on crt.sh"
-        case .German:
-            return "Search on crt.sh"
-        case .Dutch:
-            return "Search on crt.sh"
+            return "Search on \(website)"
         }
     }
     // key: Seconds
@@ -1892,17 +1879,17 @@ public final class Localize {
             return "Show Tips"
         }
     }
-    // key: Show certificate on crt.sh
-    public static func showcertificateoncrtsh() -> String {
+    // key: Show certificate on {website}
+    public static func showcertificateonwebsite(website: String) -> String {
         switch currentLanguage {
         case .English:
-            return "Show certificate on crt.sh"
+            return "Show certificate on \(website)"
         case .Spanish:
-            return "Show certificate on crt.sh"
+            return "Show certificate on \(website)"
         case .German:
-            return "Show certificate on crt.sh"
+            return "Show certificate on \(website)"
         case .Dutch:
-            return "Show certificate on crt.sh"
+            return "Show certificate on \(website)"
         }
     }
     // key: Signature
@@ -2256,19 +2243,6 @@ public final class Localize {
             return "View All"
         }
     }
-    // key: View on SSL Labs
-    public static func viewonssllabs() -> String {
-        switch currentLanguage {
-        case .English:
-            return "View on SSL Labs"
-        case .Spanish:
-            return "View on SSL Labs"
-        case .German:
-            return "View on SSL Labs"
-        case .Dutch:
-            return "View on SSL Labs"
-        }
-    }
     // key: What does this mean?
     public static func whatdoesthismean() -> String {
         switch currentLanguage {
@@ -2364,7 +2338,7 @@ public final class Localize {
     public static func whatdoesthismeanissuedatetoolong() -> String {
         switch currentLanguage {
         case .English:
-            return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
+            return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, one of the certificate's lifetime is too long. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .Spanish:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .German:

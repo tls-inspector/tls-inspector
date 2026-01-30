@@ -171,7 +171,6 @@ Verbose logging	Verbose logging
 Verified	Verified
 Version	Version
 View All	View All
-View on SSL Labs	View on SSL Labs
 What does this mean?	What does this mean?
 Yes	Yes
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}

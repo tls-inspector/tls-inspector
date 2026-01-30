@@ -263,9 +263,7 @@ RootCABundleAbout	TLS Inspector uses the root CA certificates present on your de
 # TODO
 RootCALicenseFooter	Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities.
 # TODO
-Search on Shodan	Search on Shodan
-# TODO
-Search on crt.sh	Search on crt.sh
+Search on {website}	Search on {0}
 # TODO
 Seconds	Seconds
 # TODO
@@ -285,7 +283,7 @@ Show HTTP Headers	Show HTTP Headers
 # TODO
 Show Tips	Show Tips
 # TODO
-Show certificate on crt.sh	Show certificate on crt.sh
+Show certificate on {website}	Show certificate on {0}
 # TODO
 Signature	Signature
 # TODO
@@ -340,8 +338,6 @@ Verified	Verified
 Version	Version
 # TODO
 View All	View All
-# TODO
-View on SSL Labs	View on SSL Labs
 # TODO
 What does this mean?	What does this mean?
 # TODO
