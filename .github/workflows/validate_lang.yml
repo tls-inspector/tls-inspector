@@ -4,10 +4,10 @@ on:
   push:
     paths:
       - '.github/workflows/validate_lang.yml'
-      - 'tls-inspector/Localization/**'
+      - 'tlsui/Sources/Localization/Strings/*.strings'
   pull_request:
     paths:
-      - 'tls-inspector/Localization/**'
+      - 'tlsui/Sources/Localization/Strings/*.strings'
 
 permissions:
   packages: read
@@ -15,16 +15,16 @@ permissions:
 jobs:
   build:
     name: "Validate Localization"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout Source
         id: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       
       - name: Validate localization
         id: validate_localization
         run: |
-          cd "tls-inspector/Localization"
+          cd tlsui/Sources/Localization
           python3 lang.py
           if [[ $(git diff --stat) != '' ]]; then
             echo "::error ::Untracked changes to localization detected!"
@@ -33,3 +33,10 @@ jobs:
           else
             echo "No untracked changes to localization detected"
           fi
+
+      - name: Check Spelling
+        id: spellcheck
+        run: |
+          cd .github/spellcheck
+          npm ci
+          node index.js ../../tlsui/Sources/Localization/Strings/en.strings

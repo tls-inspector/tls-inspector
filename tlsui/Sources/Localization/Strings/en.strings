@@ -85,7 +85,7 @@ Key Identifiers	Key Identifiers
 Key Size	Key Size
 Key Usage	Key Usage
 Learn More	Learn More
-LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors.
+LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors.
 Locally Trusted	Locally Trusted
 Log ID	Log ID
 Log Name	Log Name
@@ -115,7 +115,7 @@ Organizational Unit	Organizational Unit
 Permission Denied	Permission Denied
 Please Note	Please Note
 Please wait...	Please wait...
-ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
+ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediately. Avoid using your device if possible.
 ProxyNotice	An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
 Public Key	Public Key
 Query OCSP Responder	Query OCSP Responder
@@ -133,8 +133,7 @@ Root	Root
 Root CA Certificates	Root CA Certificates
 RootCABundleAbout	TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector.
 RootCALicenseFooter	Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities.
-Search on Shodan	Search on Shodan
-Search on crt.sh	Search on crt.sh
+Search on {website}	Search on {0}
 Seconds	Seconds
 Security HTTP Headers	Security HTTP Headers
 Send Feedback	Send Feedback
@@ -144,7 +143,7 @@ Share & Feedback	Share & Feedback
 Share TLS Inspector	Share TLS Inspector
 Show HTTP Headers	Show HTTP Headers
 Show Tips	Show Tips
-Show certificate on crt.sh	Show certificate on crt.sh
+Show certificate on {website}	Show certificate on {0}
 Signature	Signature
 Signature Type	Signature Type
 Source	Source
@@ -180,7 +179,7 @@ guidance_warning	If you are seeing this warning while inspecting the website for
 reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
 whatDoesThisMean::badAuthority	This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority.
 whatDoesThisMean::invalidDate	This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.
-whatDoesThisMean::issueDateTooLong	This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range.
+whatDoesThisMean::issueDateTooLong	This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, one of the certificate's lifetime is too long. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range.
 whatDoesThisMean::leafMissingRequiredKeyUsage	This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for.
 whatDoesThisMean::locallyTrusted	This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network.
 whatDoesThisMean::revokedIntermediate	This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
