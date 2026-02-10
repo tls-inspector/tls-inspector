@@ -29,7 +29,7 @@ public struct CertificateList: View {
                 } label: {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(certificate.subject.description)
+                            Text(certificate.description ?? Localize.unnamedcertificate())
                             if let source = certificate.source {
                                 Text(source == .server ? Localize.sentbyserver() : Localize.foundondevice())
                                     .opacity(0.5)

@@ -62,6 +62,7 @@ Found on device	Found on device
 General	General
 Get Involved	Get Involved
 Google	Google
+HTTP Headers	HTTP Headers
 IP Address	IP Address
 IconDark	Dark
 IconDefault	Default
@@ -149,6 +150,7 @@ Treat Unrecognized as Trusted	Treat Unrecognized as Trusted
 Trust Details	Trust Details
 Trusted	Trusted
 URI	URI
+Unnamed Certificate	Unnamed Certificate
 Unrecognized	Unrecognized
 Untrusted	Untrusted
 Use IP version	Use IP version

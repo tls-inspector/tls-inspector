@@ -22,8 +22,8 @@ import TLSKit
 public final class DNSKitLoggerBridge: DNSKit.ILogger {
     nonisolated(unsafe) public static let shared = DNSKitLoggerBridge()
 
-    public func write(_ level: DNSKit.LogLevel, message: String) {
-        LogWriter.shared.write(TLSKit.LogLevel(rawValue: level.rawValue)!, message: message)
+    public func write(_ level: DNSKit.LogLevel, message: @autoclosure () -> String) {
+        LogWriter.shared.write(TLSKit.LogLevel(rawValue: level.rawValue)!, message: message())
     }
 
     public func currentLevel() -> DNSKit.LogLevel? {

@@ -826,6 +826,19 @@ public final class Localize {
             return "Google"
         }
     }
+    // key: HTTP Headers
+    public static func httpheaders() -> String {
+        switch currentLanguage {
+        case .English:
+            return "HTTP Headers"
+        case .Spanish:
+            return "HTTP Headers"
+        case .German:
+            return "HTTP Headers"
+        case .Dutch:
+            return "HTTP Headers"
+        }
+    }
     // key: IP Address
     public static func ipaddress() -> String {
         switch currentLanguage {
@@ -1955,6 +1968,19 @@ public final class Localize {
             return "Alternate Names"
         case .Dutch:
             return "Alternate Names"
+        }
+    }
+    // key: Unnamed Certificate
+    public static func unnamedcertificate() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Unnamed Certificate"
+        case .Spanish:
+            return "Unnamed Certificate"
+        case .German:
+            return "Unnamed Certificate"
+        case .Dutch:
+            return "Unnamed Certificate"
         }
     }
     // key: Unrecognized

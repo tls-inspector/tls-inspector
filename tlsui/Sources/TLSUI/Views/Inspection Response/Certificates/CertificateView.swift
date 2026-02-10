@@ -66,7 +66,7 @@ public struct CertificateView: View {
                 Text("Huh?")
             }
         }
-        .navigationTitle(certificate.subject.description)
+        .navigationTitle(certificate.description ?? Localize.unnamedcertificate())
         .toolbar {
             ToolbarItem {
                 Menu {
@@ -78,7 +78,7 @@ public struct CertificateView: View {
                     AddReminderButton(certificate: self.certificate, showAddAlert: $showReminderAddedAlert, showPermissionError: $showReminderPermissionAlert, errorMessage: $reminderErrorMessage)
                     if let sha256Thumbprint = self.sha256Thumbprint {
                         Link(destination: URL(string: "https://crt.sh/?q=\(sha256Thumbprint)")!) {
-                            Label(Localize.showcertificateoncrtsh(), systemImage: "magnifyingglass")
+                            Label(Localize.showcertificateonwebsite(website: "crt.sh"), systemImage: "magnifyingglass")
                         }
                     }
                 } label: {

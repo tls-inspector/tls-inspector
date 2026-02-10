@@ -16,19 +16,29 @@
 
 import UIKit
 import Crashpad
-import TLSKit
 
 public struct Telemetry: Sendable {
     private let source: String
     private let platform: String
     private let systemVersion: String
     private let appVersion: String
+    private let appBuild: String
 
-    @MainActor public init(source: String) {
-        self.source = source
-        self.platform = EnvironmentInfo.platform()
+    @MainActor public init() {
+        self.source = Bundle.main.bundleIdentifier ?? "Unknown"
         self.systemVersion = UIDevice.current.systemVersion
-        self.appVersion = EnvironmentInfo.version()
+        self.appVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown"
+        self.appBuild = (Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as? String) ?? "Unknown"
+
+        var size = 0
+        sysctlbyname("hw.machine", nil, &size, nil, 0)
+        var machine = [CChar](repeating: 0, count: size)
+        sysctlbyname("hw.machine", &machine, &size, nil, 0)
+
+        let machineString = machine.withUnsafeBufferPointer {
+            $0.baseAddress.map { String(cString: $0) }
+        }
+        self.platform = machineString ?? "Unknown"
     }
 
     public func inspectionRequestSuccess(engineType: EngineType, request: InspectionRequest, elapsed: UInt64) {
@@ -43,9 +53,9 @@ public struct Telemetry: Sendable {
         ])
         Crashpad.send(event: event) { error in
             if let error = error {
-                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Error submitting crashpad event: \(error)")
+                printError("[\(#fileID):\(#line)] Error submitting crashpad event: \(error)")
             } else {
-                LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Submitted crashpad event 'inspection_request_success'")
+                printError("[\(#fileID):\(#line)] Submitted crashpad event 'inspection_request_success'")
             }
         }
     }
@@ -62,9 +72,9 @@ public struct Telemetry: Sendable {
         ])
         Crashpad.send(event: event) { error in
             if let error = error {
-                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Error submitting crashpad event: \(error)")
+                printError("[\(#fileID):\(#line)] Error submitting crashpad event: \(error)")
             } else {
-                LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Submitted crashpad event 'inspection_request_failed'")
+                printError("[\(#fileID):\(#line)] Submitted crashpad event 'inspection_request_failed'")
             }
         }
     }
@@ -77,9 +87,9 @@ public struct Telemetry: Sendable {
         ])
         Crashpad.send(event: event) { error in
             if let error = error {
-                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Error submitting crashpad event: \(error)")
+                printError("[\(#fileID):\(#line)] Error submitting crashpad event: \(error)")
             } else {
-                LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Submitted crashpad event 'http_inspection_request_failed'")
+                printError("[\(#fileID):\(#line)] Submitted crashpad event 'http_inspection_request_failed'")
             }
         }
     }

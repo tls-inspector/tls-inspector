@@ -22,6 +22,8 @@ import WebKit
 import TLSUI
 
 class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @preconcurrency SKStoreProductViewControllerDelegate {
+    private let appVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown"
+    private let appBuild = (Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as? String) ?? "Unknown"
     private let dnsInspectorAppId = 6470965982
     private let dnsInspectorAppStoreCampaignId = "crash-override"
     private let tlsInspectorAppId = 1100539810
@@ -61,7 +63,7 @@ class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @
             nil,
         ]
         self.sectionFooters = [
-            Localize.appversionbuildopensslversioncurlversion(version: EnvironmentInfo.version(), build: EnvironmentInfo.build(), opensslversion: Versions.openssl.string, curlversion: Versions.curl.string),
+            Localize.appversionbuildopensslversioncurlversion(version: appVersion, build: appBuild, opensslversion: Versions.openssl.string, curlversion: Versions.curl.string),
             nil,
             nil,
             Localize.licensefooter(),

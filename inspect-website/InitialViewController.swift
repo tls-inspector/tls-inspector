@@ -184,7 +184,6 @@ class InitialViewController: UIViewController {
             timeoutSeconds: UInt8(UserOptions.current.inspectTimeout),
             alpn: ["http/1.1"],
         )
-        let telemetry = Telemetry(source: "extension")
         let cryptoengine = UserOptions.current.cryptoEngine.toTLSKit()
 
         do {
@@ -195,18 +194,9 @@ class InitialViewController: UIViewController {
                 responseView.modalPresentationStyle = .fullScreen
                 self.present(responseView, animated: false, completion: nil)
             }
-            DispatchQueue.global(qos: .background).async {
-                telemetry.inspectionRequestSuccess(engineType: cryptoengine, request: request, elapsed: result.elapsedNs)
-                if let error = result.httpServerError {
-                    telemetry.httpInspectionFailed(request: request, error: error)
-                }
-            }
         } catch {
             DispatchQueue.main.async {
                 self.showErrorAndCloseExtension(Localize.error(), "\(error)")
-            }
-            DispatchQueue.global(qos: .background).async {
-                telemetry.inspectionRequestFailed(engineType: .NetworkFramework, request: request, error: error)
             }
         }
     }

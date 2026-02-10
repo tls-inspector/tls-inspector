@@ -33,12 +33,11 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "TLSKit", path: "../tlskit"),
-        .package(name: "Crashpad", path: "../crashpad"),
     ],
     targets: [
         .target(
             name: "TLSUI",
-            dependencies: ["Localization", "TLSKit", "Crashpad"],
+            dependencies: ["Localization", "TLSKit"],
             resources: [.process("Resources")],
         ),
         .target(

@@ -30,7 +30,7 @@ public struct AdvancedOptionsView: View {
 
     public var body: some View {
         List {
-            Section(Localize.engineoptions()) {
+            Section {
                 Picker(Localize.networkengine(), selection: $networkEngine) {
                     Text("Apple").tag(CryptoEngine.NetworkFramework)
                     Text("OpenSSL").tag(CryptoEngine.OpenSSL)
@@ -42,8 +42,13 @@ public struct AdvancedOptionsView: View {
                             .keyboardType(.asciiCapable)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
+                            .font(Font.custom("Menlo", size: 16, relativeTo: .body))
                     }
                 }
+            } header: {
+                Text(Localize.engineoptions())
+            } footer: {
+                Text(Localize.networkenginefooter())
             }
             Section(Localize.networkoptions()) {
                 Picker(Localize.useipversion(), selection: $ipVersion) {

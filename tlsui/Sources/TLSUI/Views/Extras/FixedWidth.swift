@@ -22,6 +22,12 @@ extension Text {
     }
 }
 
+extension TextField {
+    public func fixedwidth(_ size: CGFloat = 16, isActive: Bool = true) -> View {
+        return self.font(Font.custom("Menlo", size: size, relativeTo: .body))
+    }
+}
+
 struct FixedWidthText: View {
     let text: String
 

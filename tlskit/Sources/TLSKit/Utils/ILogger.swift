@@ -18,7 +18,7 @@ import Foundation
 import OpenSSL
 
 /// Log message levels
-public enum LogLevel: Int {
+public enum LogLevel: Int, Comparable {
     case Debug = 0
     case Information = 1
     case Warning = 2
@@ -26,6 +26,10 @@ public enum LogLevel: Int {
 
     public func string() -> String {
         return String(describing: self)
+    }
+
+    public static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue < rhs.rawValue
     }
 }
 
@@ -35,7 +39,7 @@ public protocol ILogger {
     /// - Parameters:
     ///   - level: The level of the message
     ///   - message: The log message
-    func write(_ level: LogLevel, message: String)
+    func write(_ level: LogLevel, message: @autoclosure () -> String)
 
     /// Return the current log facility level.
     /// - Returns: The current log level
@@ -46,27 +50,29 @@ public protocol ILogger {
 /// This should only be set once, preferably during startup of the application, and must never be changed once TLSKit is used.
 nonisolated(unsafe) public var log: ILogger? = PrintLogger()
 
-internal func printDebug(_ message: String) {
-    log?.write(.Debug, message: message)
+internal func printDebug(_ message: @autoclosure () -> String) {
+    log?.write(.Debug, message: message())
 }
 
-internal func printInformation(_ message: String) {
-    log?.write(.Information, message: message)
+internal func printInformation(_ message: @autoclosure () -> String) {
+    log?.write(.Information, message: message())
 }
 
-internal func printWarning(_ message: String) {
-    log?.write(.Warning, message: message)
+internal func printWarning(_ message: @autoclosure () -> String) {
+    log?.write(.Warning, message: message())
 }
 
-internal func printError(_ message: String) {
-    log?.write(.Error, message: message)
+internal func printError(_ message: @autoclosure () -> String) {
+    log?.write(.Error, message: message())
 }
 
 internal struct PrintLogger: ILogger {
     internal let dateFormatter = DateFormatter.iso8601()
 
-    func write(_ level: LogLevel, message: String) {
-        print("[\(level.string().uppercased())] [\(dateFormatter.string(from: Date()))] \(message)")
+    func write(_ level: LogLevel, message: @autoclosure () -> String) {
+        if getLevel() <= level {
+            print("[\(level.string().uppercased())] [\(dateFormatter.string(from: Date()))] \(message())")
+        }
     }
 
     func getLevel() -> LogLevel {

@@ -16,6 +16,7 @@
 
 import Foundation
 import Network
+import DNSKit
 
 /// Describes the target for performing an inspection
 internal struct InspectionTarget: CustomStringConvertible {
@@ -109,16 +110,6 @@ internal struct InspectionTarget: CustomStringConvertible {
             target = String(target.split(separator: "/").first!)
         }
 
-        // Check if the query needs to be IDN encoded
-        if !target.canBeConverted(to: .ascii) {
-            guard let encodedUrl = URL(unicodeString: "https://\(target)/"), let host = encodedUrl.host else {
-                complete(.failure(TLSKitError.invalidData("Invalid inspection target")))
-                return
-            }
-            printDebug("[\(#fileID):\(#line)] Encoding IDN '\(target)' to '\(host)'")
-            target = host
-        }
-
         // First check if the target is already an IP address, if so then pack it up, we're done here.
         if let ipAddress = try? IPAddress(target) {
             complete(.success(InspectionTarget(ipAddress: ipAddress, port: port, serverName: serverName)))
@@ -162,6 +153,9 @@ internal struct InspectionTarget: CustomStringConvertible {
             return
         }
 
+        // We've exhausted all support IP address formats, so assume it's a domain name and we need to resolve it.
+
+        // First strip the port if present
         do {
             let oPort = try IPAddress.getAndStripPort(&target)
             if let p = oPort {
@@ -179,8 +173,9 @@ internal struct InspectionTarget: CustomStringConvertible {
             return
         }
 
-        // We've exhausted all support IP address formats, so assume it's a domain name and resolve it
+        // Then do punycode/idna if needed
         do {
+            let name = try Punycode.toASCII(target)
             let ipAddress = try Resolver.resolveAddress(fromDomain: target, addressFamily: ipVersion)
             complete(.success(InspectionTarget(ipAddress: ipAddress, port: port, serverName: target)))
         } catch {

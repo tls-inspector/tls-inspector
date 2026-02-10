@@ -16,7 +16,6 @@
 
 import Foundation
 import Network
-import IDNA
 
 /// Describes a request to inspect a TLS connection and optional HTTP server
 public struct InspectionRequest: Codable, Equatable, Sendable, CustomStringConvertible {

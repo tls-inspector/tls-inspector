@@ -38,8 +38,6 @@ public struct Name: Equatable, Sendable {
     public let organizationUnit: [String]
     /// The email address
     public let emailAddress: [String]
-    /// General description of the name. This is typically the first common name.
-    public let description: String
 
     internal init(commonName: [String] = [], country: [String] = [], state: [String] = [], locality: [String] = [], organization: [String] = [], organizationUnit: [String] = [], emailAddress: [String] = []) {
         self.commonName = commonName
@@ -49,7 +47,6 @@ public struct Name: Equatable, Sendable {
         self.organization = organization
         self.organizationUnit = organizationUnit
         self.emailAddress = emailAddress
-        self.description = commonName.count > 0 ? commonName[0] : "Unnamed Certificate"
     }
 
     internal init(_ name: X509_NAME) {

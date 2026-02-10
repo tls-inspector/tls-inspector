@@ -46,10 +46,10 @@ internal final class CertificateReminder {
             formatter.timeStyle = .none
 
             let reminder = EKReminder(eventStore: store)
-            reminder.title = Localize.renewcertificatedomain(domain: certificate.subject.description)
+            reminder.title = Localize.renewcertificatedomain(domain: certificate.description ?? Localize.unnamedcertificate())
             let expiry = formatter.string(from: certificate.validity.notAfter)
 
-            reminder.notes = Localize.thecertificatedomainexpiresondate(domain: certificate.subject.description, date: expiry)
+            reminder.notes = Localize.thecertificatedomainexpiresondate(domain: certificate.description ?? Localize.unnamedcertificate(), date: expiry)
             let days = daysBeforeExpire - (daysBeforeExpire * 2)
             guard let alarmDate = Calendar.current.date(byAdding: .day, value: days, to: certificate.validity.notAfter) else {
                 return
@@ -59,9 +59,9 @@ internal final class CertificateReminder {
             var saveError: Error?
             do {
                 try store.save(reminder, commit: true)
-                LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Reminder created for certificate \(certificate.subject.description) on \(alarmDate)")
+                LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Reminder created for certificate \(certificate.description ?? Localize.unnamedcertificate()) on \(alarmDate)")
             } catch {
-                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Error adding certificate expiry reminder for \(certificate.subject.description) on \(alarmDate): \(error)")
+                LogWriter.shared.write(.Error, message: "[\(#fileID):\(#line)] Error adding certificate expiry reminder for \(certificate.description ?? Localize.unnamedcertificate()) on \(alarmDate): \(error)")
                 saveError = error
             }
             complete(saveError)

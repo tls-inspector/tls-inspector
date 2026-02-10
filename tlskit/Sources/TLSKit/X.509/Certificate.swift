@@ -105,6 +105,40 @@ public struct Certificate: Identifiable, Sendable, Equatable, Hashable {
         return Data(bytes: fingerprint, count: Int(fingerprintLength))
     }
 
+    /// Generates a PEM-encoded string of this certificate
+    public func pemString() throws -> String {
+        guard let base64 = I2D.X509(x509) else {
+            printError("[\(#fileID):\(#line)] I2D_X509 returned nil")
+            throw TLSKitError.invalidData("Invalid certificate data")
+        }
+        return "-----BEGIN CERTIFICATE-----\n\(base64)\n-----END CERTIFICATE-----\n"
+    }
+
+    /// General description of the certificate. This may be a commonName in the subject, or the first DNS, URI, or IP (in that order) entry of the SAN.
+    public var description: String? {
+        if !subject.commonName.isEmpty {
+            return subject.commonName[0]
+        } else if !(alternateNames ?? []).isEmpty {
+            for name in alternateNames! {
+                if case .dns(let dns) = name {
+                    return dns
+                }
+            }
+            for name in alternateNames! {
+                if case .uri(let uri) = name {
+                    return uri
+                }
+            }
+            for name in alternateNames! {
+                if case .ipAddress(let ip) = name {
+                    return ip.string
+                }
+            }
+        }
+
+        return nil
+    }
+
     private static func isCertificateTrustedBy(provider: BundleProvider, x509: X509, subjectKeyId: Data?, subject: OpaquePointer) -> Bool {
         do {
             try AnchorBundleManager.shared.loadBundles()
@@ -262,6 +296,7 @@ public struct Certificate: Identifiable, Sendable, Equatable, Hashable {
         }
 
         self.thumbprint = Data(bytes: thumbprint, count: Int(thumbprintLength))
+
         self.id = UUID()
     }
 
@@ -271,13 +306,5 @@ public struct Certificate: Identifiable, Sendable, Equatable, Hashable {
         }
 
         return constraints.pointee.ca > 0
-    }
-
-    public func pemString() throws -> String {
-        guard let base64 = I2D.X509(x509) else {
-            printError("[\(#fileID):\(#line)] I2D_X509 returned nil")
-            throw TLSKitError.invalidData("Invalid certificate data")
-        }
-        return "-----BEGIN CERTIFICATE-----\n\(base64)\n-----END CERTIFICATE-----\n"
     }
 }

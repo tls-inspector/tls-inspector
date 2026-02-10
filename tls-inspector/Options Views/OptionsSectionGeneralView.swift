@@ -30,10 +30,14 @@ public struct OptionsSectionGeneralView: View {
                 .tint(.accent)
             Toggle(Localize.showtips(), isOn: showTips)
                 .tint(.accent)
-            Toggle(Localize.httpheaders(), isOn: getHttpHeaders)
+            Toggle(Localize.showhttpheaders(), isOn: getHttpHeaders)
                 .tint(.accent)
             Toggle(Localize.treatunrecognizedastrusted(), isOn: treatUnrecognizedAsTrusted)
                 .tint(.accent)
+            NavigationLink(Localize.applanguage()) {
+                // TODO
+                EmptyView()
+            }
             NavigationLink(Localize.appicon()) {
                 AppIconView()
             }

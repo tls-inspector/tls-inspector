@@ -66,13 +66,13 @@ public struct InspectionResponseView: View {
                         }
                         Divider()
                         Link(destination: URL(string: "https://www.ssllabs.com/ssltest/analyze.html?d=\(response.tlsConnection.domain)&hideResults=on")!) {
-                            Text(Localize.viewonssllabs())
+                            Text(Localize.searchonwebsite(website: "ssllabs.com"))
                         }
                         Link(destination: URL(string: "https://www.shodan.io/host/\(response.tlsConnection.remoteAddress)")!) {
-                            Text(Localize.searchonshodan())
+                            Text(Localize.searchonwebsite(website: "shodan.io"))
                         }
                         Link(destination: URL(string: "https://crt.sh/?q=\(response.tlsConnection.domain)")!) {
-                            Text(Localize.searchoncrtsh())
+                            Text(Localize.searchonwebsite(website: "crt.sh"))
                         }
                     } label: {
                         Image(systemName: "square.and.arrow.up")

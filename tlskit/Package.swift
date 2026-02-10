@@ -30,16 +30,16 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/dns-inspector/dnskit", revision: "4f8949d752510ddd6c3b46b94844cdf7edf176a4"),
-        .package(url: "https://github.com/Wevah/IDNA-Cocoa", revision: "96de66e18f27edd40e41321f63637fbf2a83eb41")
+        .package(name: "Crashpad", path: "../crashpad"),
+        .package(url: "https://github.com/dns-inspector/dnskit", revision: "572ea4b3f003c2804f083d509c5e2cf9cd649cdb"),
     ],
     targets: [
         .target(
             name: "TLSKit",
             dependencies: [
+                "Crashpad",
                 "OpenSSL",
                 "Curl",
-                .product(name: "IDNA", package: "idna-cocoa"),
                 .product(name: "DNSKit", package: "dnskit"),
             ],
             resources: [
