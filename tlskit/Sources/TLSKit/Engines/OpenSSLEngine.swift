@@ -71,14 +71,9 @@ internal final class OpenSSLEngine: Engine {
             SSL_CTX_free(context)
         }
 
-        let keylogCallback: SSL_CTX_keylog_cb_func = { (_ ctx: OpaquePointer?, _ buf: UnsafePointer<Int8>?) in
-            // TODO
-        }
-
         SSL_CTX_set_verify(context, SSL_VERIFY_NONE, nil)
         SSL_CTX_set_verify_depth(context, Int32(CertificateChainMaximumLength))
         SSL_CTX_set_options(context, UInt64(SSL_OP_NO_SSLv2))
-        SSL_CTX_set_keylog_callback(context, keylogCallback)
 
         // OpenSSL needs the alpn to be in wire format of: length (uint8) + proto
         if let alpnProtos = request.alpn {

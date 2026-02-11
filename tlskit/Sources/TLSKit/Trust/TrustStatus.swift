@@ -202,8 +202,15 @@ public enum TrustStatus: Int, CaseIterable, Sendable {
             return .wrongHost
         }
 
-        // Server cert is missing serverAuth EKU
-        // TODO: -
+        // Server cert is missing digitalSignature KU or serverAuth EKU
+        if certificates[0].keyUsage?.basic?.firstIndex(of: .digitalSignature) == nil {
+            printDebug("[\(#fileID):\(#line)] Certificate '\(certificates[0].subject)' missing digitalSignature key usage")
+            return .leafMissingRequiredKeyUsage
+        }
+        if certificates[0].keyUsage?.extended?.firstIndex(of: .serverAuth) == nil {
+            printDebug("[\(#fileID):\(#line)] Certificate '\(certificates[0].subject)' missing serverAuth extended key usage")
+            return .leafMissingRequiredKeyUsage
+        }
 
         // Issue date too long
         if certificates[0].validity.validFor > 825 {
