@@ -105,9 +105,9 @@ public struct RootCACertificatesView: View {
             } message: { result in
                 switch result {
                 case .isLatest:
-                    Text("Is latest")
+                    Text(Localize.noupdatesavailableatthistime())
                 case .updated:
-                    Text("Updated")
+                    Text(Localize.bundleshavebeenupdatedtotheirlatestversions())
                 }
             }
         }

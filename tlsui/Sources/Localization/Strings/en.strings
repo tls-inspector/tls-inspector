@@ -21,6 +21,7 @@ Authority	Authority
 Auto	Auto
 Basic	Basic
 Bundle date	Bundle date
+Bundles have been updated to their latest versions.	Bundles have been updated to their latest versions.
 Certificate Authority	Certificate Authority
 Certificate Status	Certificate Status
 Certificate Timestamps	Certificate Timestamps
@@ -96,6 +97,7 @@ Network Options	Network Options
 NetworkEngineFooter	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
 No	No
 No Supported URL Found	No Supported URL Found
+No updates available at this time.	No updates available at this time.
 Not After	Not After
 Not Before	Not Before
 Not revoked	Not revoked

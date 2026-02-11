@@ -39,6 +39,8 @@ Basic	Basic
 # TODO
 Bundle date	Bundle date
 # TODO
+Bundles have been updated to their latest versions.	Bundles have been updated to their latest versions.
+# TODO
 Certificate Authority	Certificate Authority
 # TODO
 Certificate Status	Certificate Status
@@ -188,6 +190,8 @@ NetworkEngineFooter	Changing the network engine may result in TLS Inspector show
 No	No
 # TODO
 No Supported URL Found	No Supported URL Found
+# TODO
+No updates available at this time.	No updates available at this time.
 # TODO
 Not After	Not After
 # TODO

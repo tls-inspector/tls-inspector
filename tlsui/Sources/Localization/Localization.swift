@@ -293,6 +293,19 @@ public final class Localize {
             return "Bundle date"
         }
     }
+    // key: Bundles have been updated to their latest versions.
+    public static func bundleshavebeenupdatedtotheirlatestversions() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Bundles have been updated to their latest versions."
+        case .Spanish:
+            return "Bundles have been updated to their latest versions."
+        case .German:
+            return "Bundles have been updated to their latest versions."
+        case .Dutch:
+            return "Bundles have been updated to their latest versions."
+        }
+    }
     // key: Certificate Authority
     public static func certificateauthority() -> String {
         switch currentLanguage {
@@ -1266,6 +1279,19 @@ public final class Localize {
             return "No Supported URL Found"
         case .Dutch:
             return "No Supported URL Found"
+        }
+    }
+    // key: No updates available at this time.
+    public static func noupdatesavailableatthistime() -> String {
+        switch currentLanguage {
+        case .English:
+            return "No updates available at this time."
+        case .Spanish:
+            return "No updates available at this time."
+        case .German:
+            return "No updates available at this time."
+        case .Dutch:
+            return "No updates available at this time."
         }
     }
     // key: Not After
