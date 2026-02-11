@@ -1021,6 +1021,19 @@ public final class Localize {
             return "Key Usage"
         }
     }
+    // key: Language Updated
+    public static func languageupdated() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Language Updated"
+        case .Spanish:
+            return "Language Updated"
+        case .German:
+            return "Language Updated"
+        case .Dutch:
+            return "Language Updated"
+        }
+    }
     // key: Learn More
     public static func learnmore() -> String {
         switch currentLanguage {
@@ -2124,6 +2137,19 @@ public final class Localize {
             return "Yes"
         case .Dutch:
             return "Yes"
+        }
+    }
+    // key: You must restart the app for the change to take effect.
+    public static func youmustrestarttheappforthechangetotakeeffect() -> String {
+        switch currentLanguage {
+        case .English:
+            return "You must restart the app for the change to take effect."
+        case .Spanish:
+            return "You must restart the app for the change to take effect."
+        case .German:
+            return "You must restart the app for the change to take effect."
+        case .Dutch:
+            return "You must restart the app for the change to take effect."
         }
     }
     // key: app{version}{build}{opensslversion}{curlversion}

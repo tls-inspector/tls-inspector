@@ -151,6 +151,8 @@ Key Size	Key Size
 # TODO
 Key Usage	Key Usage
 # TODO
+Language Updated	Language Updated
+# TODO
 Learn More	Learn More
 # TODO
 LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors.
@@ -320,6 +322,8 @@ View All	View All
 What does this mean?	What does this mean?
 # TODO
 Yes	Yes
+# TODO
+You must restart the app for the change to take effect.	You must restart the app for the change to take effect.
 # TODO
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 # TODO

@@ -77,6 +77,7 @@ Issuer	Issuer
 Key Identifiers	Key Identifiers
 Key Size	Key Size
 Key Usage	Key Usage
+Language Updated	Language Updated
 Learn More	Learn More
 LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors.
 Locally Trusted	Locally Trusted
@@ -162,6 +163,7 @@ Version	Version
 View All	View All
 What does this mean?	What does this mean?
 Yes	Yes
+You must restart the app for the change to take effect.	You must restart the app for the change to take effect.
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
 reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
