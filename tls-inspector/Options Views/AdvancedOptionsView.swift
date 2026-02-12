@@ -27,6 +27,7 @@ public struct AdvancedOptionsView: View {
     @State private var inspectTimeout = UserOptions.current.inspectTimeout
     @State private var verboseLogging = UserOptions.current.verboseLogging
     @State private var showRootCaCertificateView = false
+    @State private var didReset = false
 
     public var body: some View {
         List {
@@ -68,6 +69,8 @@ public struct AdvancedOptionsView: View {
             }
             Section {
                 Toggle(Localize.verboselogging(), isOn: $verboseLogging)
+                    .tint(.accent)
+                    .disabled(true) // TESTFLIGHT: remove .disabled(true)
                 ExportFileView(fileUrl: LogWriter.shared.filePath) {
                     HStack {
                         Image(systemName: "ladybug.fill")
@@ -89,11 +92,13 @@ public struct AdvancedOptionsView: View {
             }
             Section {
                 ListButton {
-                    //
+                    UserOptions.current.reset()
+                    self.didReset = true
                 } label: {
                     Text(Localize.resettodefaultsettings())
                         .foregroundStyle(.red)
                 }
+                .disabled(self.didReset)
             }
         }
         .navigationTitle(Localize.advancedoptions())

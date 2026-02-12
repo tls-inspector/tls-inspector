@@ -17,7 +17,7 @@
 import SwiftUI
 import Localization
 
-private enum AppDefaultsKeys: String {
+private enum AppDefaultsKeys: String, CaseIterable {
     case verboseLogging = "verbose_logging"
     case firstRunComplete = "first_run_complete"
     case rememberRecentLookups = "remember_recent_lookups"
@@ -30,7 +30,6 @@ private enum AppDefaultsKeys: String {
     case showFingerprintSha256 = "fingerprint_sha256"
     case showFingerprintSha512 = "fingerprint_sha512"
     case preferredCiphers = "preferred_ciphers"
-    case contactNagDismissed = "contact_nag_dismissed"
     case advancedSettingsNagDismissed = "advanced_settings_nag_dismissed"
     case cryptoEngine = "crypto_engine"
     case ipVersion = "use_ip_version"
@@ -42,20 +41,45 @@ private enum AppDefaultsKeys: String {
 
 private final class AppDefaults: Sendable {
     nonisolated(unsafe) private static let s = UserDefaults(suiteName: "group.com.ecnepsnai.TLS-Inspector")!
+    nonisolated(unsafe) private static let defaultValues: [AppDefaultsKeys: Any] = [
+        .verboseLogging: true,
+        .firstRunComplete: false,
+        .rememberRecentLookups: true,
+        .showTips: true,
+        .getHttpHeaders: true,
+        .queryOcsp: false,
+        .checkCrl: true,
+        .showFingerprintMd5: false,
+        .showFingerprintSha1: true,
+        .showFingerprintSha256: true,
+        .showFingerprintSha512: false,
+        .preferredCiphers: "HIGH:!aNULL:!MD5:!RC4",
+        .advancedSettingsNagDismissed: false,
+        .cryptoEngine: CryptoEngine.NetworkFramework.rawValue,
+        .ipVersion: IPVersion.Automatic.rawValue,
+        .optionsSchemaVersion: "",
+        .treatUnrecognizedAsTrusted: true,
+        .appLanguage: SupportedLanguages.English.rawValue,
+        .inspectTimeout: 10,
+    ]
 
-    public static func get<T>(_ key: AppDefaultsKeys) -> T? {
+    public static func get<T>(_ key: AppDefaultsKeys) -> T {
         let r = s.value(forKey: key.rawValue) as? T
         LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Get AppDefault: \(key) = \(String(describing: r))")
-        return r
-    }
-
-    public static func get<T>(_ key: AppDefaultsKeys, _ defaultValue: T) -> T {
-        return get(key) ?? defaultValue
+        // swiftlint:disable force_cast
+        return r ?? AppDefaults.defaultValues[key] as! T
+        // swiftlint:enable force_cast
     }
 
     public static func set(_ key: AppDefaultsKeys, _ value: Any) {
         LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Set AppDefault: \(key) = \(value)")
         return s.set(value, forKey: key.rawValue)
+    }
+
+    public static func reset() {
+        for key in AppDefaultsKeys.allCases {
+            set(key, AppDefaults.defaultValues[key])
+        }
     }
 }
 
@@ -63,9 +87,13 @@ private final class AppDefaults: Sendable {
 public final class UserOptions {
     public static let current = UserOptions()
 
+    public func reset() {
+        AppDefaults.reset()
+    }
+
     public var firstRunComplete: Bool {
         get {
-            return AppDefaults.get(.firstRunComplete, false)
+            return AppDefaults.get(.firstRunComplete)
         }
         set {
             AppDefaults.set(.firstRunComplete, newValue)
@@ -74,7 +102,7 @@ public final class UserOptions {
 
     public var rememberRecentLookups: Bool {
         get {
-            return AppDefaults.get(.rememberRecentLookups, true)
+            return AppDefaults.get(.rememberRecentLookups)
         }
         set {
             AppDefaults.set(.rememberRecentLookups, newValue)
@@ -83,7 +111,7 @@ public final class UserOptions {
 
     public var showTips: Bool {
         get {
-            return AppDefaults.get(.showTips, true)
+            return AppDefaults.get(.showTips)
         }
         set {
             AppDefaults.set(.showTips, newValue)
@@ -92,7 +120,7 @@ public final class UserOptions {
 
     public var getHttpHeaders: Bool {
         get {
-            return AppDefaults.get(.getHttpHeaders, true)
+            return AppDefaults.get(.getHttpHeaders)
         }
         set {
             AppDefaults.set(.getHttpHeaders, newValue)
@@ -101,7 +129,7 @@ public final class UserOptions {
 
     public var queryOcsp: Bool {
         get {
-            return AppDefaults.get(.queryOcsp, false)
+            return AppDefaults.get(.queryOcsp)
         }
         set {
             AppDefaults.set(.queryOcsp, newValue)
@@ -110,7 +138,7 @@ public final class UserOptions {
 
     public var checkCrl: Bool {
         get {
-            return AppDefaults.get(.checkCrl, true)
+            return AppDefaults.get(.checkCrl)
         }
         set {
             AppDefaults.set(.checkCrl, newValue)
@@ -119,7 +147,7 @@ public final class UserOptions {
 
     public var showFingerprintMd5: Bool {
         get {
-            return AppDefaults.get(.showFingerprintMd5, false)
+            return AppDefaults.get(.showFingerprintMd5)
         }
         set {
             AppDefaults.set(.showFingerprintMd5, newValue)
@@ -128,7 +156,7 @@ public final class UserOptions {
 
     public var showFingerprintSha1: Bool {
         get {
-            return AppDefaults.get(.showFingerprintSha1, true)
+            return AppDefaults.get(.showFingerprintSha1)
         }
         set {
             AppDefaults.set(.showFingerprintSha1, newValue)
@@ -137,7 +165,7 @@ public final class UserOptions {
 
     public var showFingerprintSha256: Bool {
         get {
-            return AppDefaults.get(.showFingerprintSha256, true)
+            return AppDefaults.get(.showFingerprintSha256)
         }
         set {
             AppDefaults.set(.showFingerprintSha256, newValue)
@@ -146,7 +174,7 @@ public final class UserOptions {
 
     public var showFingerprintSha512: Bool {
         get {
-            return AppDefaults.get(.showFingerprintSha512, false)
+            return AppDefaults.get(.showFingerprintSha512)
         }
         set {
             AppDefaults.set(.showFingerprintSha512, newValue)
@@ -155,7 +183,7 @@ public final class UserOptions {
 
     public var cryptoEngine: CryptoEngine {
         get {
-            return CryptoEngine(rawValue: AppDefaults.get(.cryptoEngine, CryptoEngine.NetworkFramework.rawValue)) ?? .NetworkFramework
+            return CryptoEngine(rawValue: AppDefaults.get(.cryptoEngine)) ?? .NetworkFramework
         }
         set {
             AppDefaults.set(.cryptoEngine, newValue.rawValue)
@@ -164,7 +192,7 @@ public final class UserOptions {
 
     public var ipVersion: IPVersion {
         get {
-            return IPVersion(rawValue: AppDefaults.get(.ipVersion, IPVersion.Automatic.rawValue)) ?? .Automatic
+            return IPVersion(rawValue: AppDefaults.get(.ipVersion)) ?? .Automatic
         }
         set {
             AppDefaults.set(.ipVersion, newValue.rawValue)
@@ -173,25 +201,16 @@ public final class UserOptions {
 
     public var preferredCiphers: String {
         get {
-            return AppDefaults.get(.preferredCiphers, "HIGH:!aNULL:!MD5:!RC4")
+            return AppDefaults.get(.preferredCiphers)
         }
         set {
             AppDefaults.set(.preferredCiphers, newValue)
         }
     }
 
-    public var contactNagDismissed: Bool {
-        get {
-            return AppDefaults.get(.contactNagDismissed, false)
-        }
-        set {
-            AppDefaults.set(.contactNagDismissed, newValue)
-        }
-    }
-
     public var advancedSettingsNagDismissed: Bool {
         get {
-            return AppDefaults.get(.advancedSettingsNagDismissed, false)
+            return AppDefaults.get(.advancedSettingsNagDismissed)
         }
         set {
             AppDefaults.set(.advancedSettingsNagDismissed, newValue)
@@ -200,7 +219,7 @@ public final class UserOptions {
 
     public var treatUnrecognizedAsTrusted: Bool {
         get {
-            return AppDefaults.get(.treatUnrecognizedAsTrusted, true)
+            return AppDefaults.get(.treatUnrecognizedAsTrusted)
         }
         set {
             AppDefaults.set(.treatUnrecognizedAsTrusted, newValue)
@@ -209,7 +228,7 @@ public final class UserOptions {
 
     public var appLanguage: SupportedLanguages {
         get {
-            return SupportedLanguages(rawValue: AppDefaults.get(.appLanguage, SupportedLanguages.English.rawValue)) ?? .English
+            return SupportedLanguages(rawValue: AppDefaults.get(.appLanguage)) ?? .English
         }
         set {
             AppDefaults.set(.appLanguage, newValue.rawValue)
@@ -218,7 +237,7 @@ public final class UserOptions {
 
     public var inspectTimeout: Int {
         get {
-            return AppDefaults.get(.inspectTimeout, 10)
+            return AppDefaults.get(.inspectTimeout)
         }
         set {
             AppDefaults.set(.inspectTimeout, newValue)
@@ -227,7 +246,7 @@ public final class UserOptions {
 
     public var verboseLogging: Bool {
         get {
-            return AppDefaults.get(.verboseLogging, true)
+            return AppDefaults.get(.verboseLogging)
         }
         set {
             AppDefaults.set(.verboseLogging, newValue)

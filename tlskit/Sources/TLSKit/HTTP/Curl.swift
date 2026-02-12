@@ -58,6 +58,8 @@ internal final class CurlClient {
     private var handle: UnsafeMutableRawPointer
 
     init(url: String) throws {
+        printDebug("[\(#fileID):\(#line)] curl_global_init: \(url)")
+
         curl_global_init(Int(CURL_GLOBAL_DEFAULT))
         guard let curl = curl_easy_init() else {
             throw TLSKitError.internalError("curl_easy_init returned nil")
@@ -124,6 +126,8 @@ internal final class CurlClient {
 
     /// Act on the curl request
     private func send(_ method: String) -> Result<CurlResponse, TLSKitError> {
+        printDebug("[\(#fileID):\(#line)] send: \(method)")
+
         /**
          Developer note: you need to be careful and pay attetion to which values
          are copied by curl, and which are referenced. For anything that is not
@@ -131,19 +135,22 @@ internal final class CurlClient {
          that pointer before curl is finished using it.
          */
         defer {
+            printDebug("[\(#fileID):\(#line)] curl_easy_cleanup")
             curl_easy_cleanup(self.handle)
         }
 
         // Load the ca bundle if we're connecting using https
         if self.url.hasPrefix("https://") {
+            printDebug("[\(#fileID):\(#line)] https URL detected, loading apple_ca_bundle")
             guard let caBundlePath = Bundle.module.url(forResource: "apple_ca_bundle", withExtension: "pem")?.path else {
+                printError("[\(#fileID):\(#line)] Unable to load CA bundle")
                 return .failure(.internalError("CA bundle file not found"))
             }
             curl_easy_setopt_string(self.handle, CURLOPT_CAINFO, caBundlePath)
+            printDebug("[\(#fileID):\(#line)] CA bundle loaded")
         }
 
         curl_easy_setopt_string(self.handle, CURLOPT_CUSTOMREQUEST, method)
-        printDebug("[\(#fileID):\(#line)] HTTP \(method) \(self.url)")
         var headerCallbackData = WriteCallbackData()
         var bodyCallbackData = WriteCallbackData()
         var debugCallbackData = DebugCallbackData { l, m in
@@ -154,6 +161,7 @@ internal final class CurlClient {
         for (key, values) in self.headers.all() {
             for value in values {
                 requestHeaders = curl_slist_append(requestHeaders, "\(key): \(value)") // curl copies the string
+                printDebug("[\(#fileID):\(#line)] set header \(key): \(value)")
             }
         }
         curl_easy_setopt_slist(self.handle, CURLOPT_HTTPHEADER, requestHeaders)
@@ -220,14 +228,13 @@ internal final class CurlClient {
         }
         curl_easy_setopt_write_function(self.handle, CURLOPT_WRITEFUNCTION, bodyCallback)
 
+        printDebug("[\(#fileID):\(#line)] curl_do")
         let rv = self.curl_do(
             debugData: &debugCallbackData,
             headerData: &headerCallbackData,
             bodyBody: &bodyCallbackData
         )
-
-        var responseCode: Int32 = 0
-        curl_easy_getinfo_int(self.handle, CURLINFO_RESPONSE_CODE, &responseCode)
+        printDebug("[\(#fileID):\(#line)] curl_do = \(rv)")
 
         if rv != CURLE_OK {
             guard let error = curl_easy_strerror(rv) else {
@@ -237,6 +244,10 @@ internal final class CurlClient {
             printError("[\(#fileID):\(#line)] CURL error \(r)")
             return .failure(.internalError(r))
         }
+
+        var responseCode: Int32 = 0
+        curl_easy_getinfo_int(self.handle, CURLINFO_RESPONSE_CODE, &responseCode)
+        printDebug("[\(#fileID):\(#line)] HTTP \(responseCode)")
 
         guard let allHeaders = String(data: headerCallbackData.data, encoding: .utf8) else {
             return .failure(.invalidData("Unrecognized HTTP headers"))
