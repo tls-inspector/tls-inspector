@@ -32,4 +32,19 @@ internal final class D2I {
         }
         return x509
     }
+
+    static func X509_CRL(_ data: Data) -> OpaquePointer? {
+        guard let bio = try? data.toBIO() else {
+            return nil
+        }
+        defer {
+            BIO_free(bio)
+        }
+        guard let x509 = d2i_X509_CRL_bio(bio, nil) else {
+            logOpenSSLError(inFile: #fileID, atLine: #line)
+            printError("[\(#fileID):\(#line)] d2i_X509_CRL_bio returned nil")
+            return nil
+        }
+        return x509
+    }
 }

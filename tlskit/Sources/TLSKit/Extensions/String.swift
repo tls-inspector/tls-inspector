@@ -34,6 +34,14 @@ internal extension String {
         return (key, value)
     }
 
+    static func from(data: Data) -> String? {
+        if #available(iOS 18, *) {
+            return String(validating: data, as: UTF8.self)
+        } else {
+            return String(data: data, encoding: .utf8)
+        }
+    }
+
     static func from(asn1: UnsafePointer<ASN1_STRING>) -> String? {
         guard let data = ASN1_STRING_get0_data(asn1) else {
             return nil

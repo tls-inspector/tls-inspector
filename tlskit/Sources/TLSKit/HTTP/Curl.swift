@@ -25,10 +25,6 @@ private final class DebugCallbackData {
     }
 }
 
-private final class WriteCallbackData {
-    var data = Data()
-}
-
 /// Describes the response from a curl request
 internal struct CurlResponse {
     /// The HTTP status code
@@ -78,6 +74,7 @@ internal final class CurlClient {
     /// Send an HTTP GET request to the URL
     /// - Returns: The result, with the status code, headers, and body or an error
     func get() -> Result<CurlResponse, TLSKitError> {
+        defer { printDebug("[\(#fileID):\(#line)] get() returns") }
         if self.body != nil {
             printError("[\(#fileID):\(#line)] HTTP body defined but sending HTTP GET request")
         }
@@ -107,6 +104,7 @@ internal final class CurlClient {
     /// Send an HTTP POST request to the URL
     /// - Returns: The result, with the status code, headers, and body or an error
     func post() -> Result<CurlResponse, TLSKitError> {
+        defer { printDebug("[\(#fileID):\(#line)] post() returns") }
         if let data = self.body {
             curl_easy_setopt_string(self.handle, CURLOPT_POSTFIELDS, (data as NSData).bytes)
             curl_easy_setopt_int(self.handle, CURLOPT_POSTFIELDSIZE, Int32(data.count))
@@ -117,6 +115,7 @@ internal final class CurlClient {
     /// Send an HTTP PUT request to the URL
     /// - Returns: The result, with the status code, headers, and body or an error
     func put() -> Result<CurlResponse, TLSKitError> {
+        defer { printDebug("[\(#fileID):\(#line)] put() returns") }
         if let data = self.body {
             curl_easy_setopt_string(self.handle, CURLOPT_POSTFIELDS, (data as NSData).bytes)
             curl_easy_setopt_int(self.handle, CURLOPT_POSTFIELDSIZE, Int32(data.count))
@@ -126,6 +125,7 @@ internal final class CurlClient {
 
     /// Act on the curl request
     private func send(_ method: String) -> Result<CurlResponse, TLSKitError> {
+        defer { printDebug("[\(#fileID):\(#line)] send() returns") }
         printDebug("[\(#fileID):\(#line)] send: \(method)")
 
         /**
@@ -135,8 +135,9 @@ internal final class CurlClient {
          that pointer before curl is finished using it.
          */
         defer {
-            printDebug("[\(#fileID):\(#line)] curl_easy_cleanup")
+            printDebug("[\(#fileID):\(#line)] curl_easy_cleanup >")
             curl_easy_cleanup(self.handle)
+            printDebug("[\(#fileID):\(#line)] curl_easy_cleanup <")
         }
 
         // Load the ca bundle if we're connecting using https
@@ -151,8 +152,8 @@ internal final class CurlClient {
         }
 
         curl_easy_setopt_string(self.handle, CURLOPT_CUSTOMREQUEST, method)
-        var headerCallbackData = WriteCallbackData()
-        var bodyCallbackData = WriteCallbackData()
+        var headerData = NSMutableData()
+        var bodyData = NSMutableData()
         var debugCallbackData = DebugCallbackData { l, m in
             log?.write(l, message: m)
         }
@@ -165,7 +166,11 @@ internal final class CurlClient {
             }
         }
         curl_easy_setopt_slist(self.handle, CURLOPT_HTTPHEADER, requestHeaders)
-        defer { curl_slist_free_all(requestHeaders) }
+        defer {
+            printDebug("[\(#fileID):\(#line)] curl_slist_free_all >")
+            curl_slist_free_all(requestHeaders)
+            printDebug("[\(#fileID):\(#line)] curl_slist_free_all <")
+        }
 
         curl_easy_setopt_int(self.handle, CURLOPT_MAXFILESIZE, Int32(self.maxBodySize))
         curl_easy_setopt_int(self.handle, CURLOPT_TIMEOUT, self.timeoutSeconds)
@@ -205,12 +210,11 @@ internal final class CurlClient {
         // Header Callback
         let headerCallback: curl_write_callback = { (ptr, size, nmemb, userdata) -> Int in
             let count = size * nmemb
-            if let writeCallbackDataPointer = userdata?.assumingMemoryBound(to: WriteCallbackData.self) {
-                let writeCallbackData = writeCallbackDataPointer.pointee
-                ptr?.withMemoryRebound(to: UInt8.self, capacity: count) {
-                    writeCallbackData.data.append(&$0.pointee, count: count)
-                }
+            guard let headerData = userdata?.assumingMemoryBound(to: NSMutableData.self) else {
+                return count
             }
+
+            headerData.pointee.append(ptr!, length: count)
             return count
         }
         curl_easy_setopt_write_function(self.handle, CURLOPT_HEADERFUNCTION, headerCallback)
@@ -218,21 +222,21 @@ internal final class CurlClient {
         // Body Callback
         let bodyCallback: curl_write_callback = { (ptr, size, nmemb, userdata) -> Int in
             let count = size * nmemb
-            if let writeCallbackDataPointer = userdata?.assumingMemoryBound(to: WriteCallbackData.self) {
-                let writeCallbackData = writeCallbackDataPointer.pointee
-                ptr?.withMemoryRebound(to: UInt8.self, capacity: count) {
-                    writeCallbackData.data.append(&$0.pointee, count: count)
-                }
+            guard let bodyData = userdata?.assumingMemoryBound(to: NSMutableData.self) else {
+                return count
             }
+
+            bodyData.pointee.append(ptr!, length: count)
             return count
         }
         curl_easy_setopt_write_function(self.handle, CURLOPT_WRITEFUNCTION, bodyCallback)
 
         printDebug("[\(#fileID):\(#line)] curl_do")
+        print("bodyData: \(Unmanaged.passUnretained(bodyData).toOpaque())")
         let rv = self.curl_do(
             debugData: &debugCallbackData,
-            headerData: &headerCallbackData,
-            bodyBody: &bodyCallbackData
+            headerData: &headerData,
+            bodyBody: &bodyData
         )
         printDebug("[\(#fileID):\(#line)] curl_do = \(rv)")
 
@@ -249,20 +253,35 @@ internal final class CurlClient {
         curl_easy_getinfo_int(self.handle, CURLINFO_RESPONSE_CODE, &responseCode)
         printDebug("[\(#fileID):\(#line)] HTTP \(responseCode)")
 
-        guard let allHeaders = String(data: headerCallbackData.data, encoding: .utf8) else {
+        if headerData.isEmpty {
+            printError("[\(#fileID):\(#line)] Empty header data")
+            return .failure(.invalidData("Empty HTTP headers"))
+        }
+
+        if bodyData.isEmpty {
+            printError("[\(#fileID):\(#line)] Empty body data")
+            return .failure(.invalidData("Empty HTTP body"))
+        }
+
+        guard let allHeaders = String.from(data: headerData as Data) else {
+            printError("[\(#fileID):\(#line)] Unable to parse HTTP header data as a UTF8 string")
             return .failure(.invalidData("Unrecognized HTTP headers"))
         }
 
+        printDebug("[\(#fileID):\(#line)] Going to parse \(headerData.count) bytes of headers")
         let headers = HTTPHeaders.fromLines(allHeaders.split(separator: "\r\n"))
+        printDebug("[\(#fileID):\(#line)] Got \(headers.all().count) HTTP headers")
 
-        return .success(CurlResponse(statusCode: responseCode, headers: headers, body: bodyCallbackData.data))
+        let result = CurlResponse(statusCode: responseCode, headers: headers, body: bodyData as Data)
+        printDebug("[\(#fileID):\(#line)] send() Got result, going to return")
+        return .success(result)
     }
 
     // Break out this into a dedicated function to avoid needing to do a nest of withUnsafeMutablePointer
     private func curl_do(
         debugData: UnsafeMutablePointer<DebugCallbackData>,
-        headerData: UnsafeMutablePointer<WriteCallbackData>,
-        bodyBody: UnsafeMutablePointer<WriteCallbackData>
+        headerData: UnsafeMutablePointer<NSMutableData>,
+        bodyBody: UnsafeMutablePointer<NSMutableData>
     ) -> CURLcode {
         curl_easy_setopt_pointer(self.handle, CURLOPT_DEBUGDATA, debugData)
         curl_easy_setopt_pointer(self.handle, CURLOPT_HEADERDATA, headerData)

@@ -30,7 +30,7 @@ internal final class Resolver: Sendable {
         hints.ai_protocol = 0
         var resultPtr: UnsafeMutablePointer<addrinfo>?
 
-        printDebug("[\(#fileID):\(#line)] Resolving \(domain)")
+        printDebug("[\(#fileID):\(#line)] Resolving \(hints.ai_family): \(domain)")
 
         let err = getaddrinfo(domain, nil, &hints, &resultPtr)
         if err != 0 {

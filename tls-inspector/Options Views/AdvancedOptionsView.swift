@@ -28,6 +28,7 @@ public struct AdvancedOptionsView: View {
     @State private var verboseLogging = UserOptions.current.verboseLogging
     @State private var showRootCaCertificateView = false
     @State private var didReset = false
+    @State private var didTruncate = false
 
     public var body: some View {
         List {
@@ -78,6 +79,18 @@ public struct AdvancedOptionsView: View {
                         Text(Localize.exportlogs())
                     }
                 }
+                ListButton {
+                    do {
+                        try LogWriter.shared.truncate()
+                        self.didTruncate = true
+                    } catch {
+                        //
+                    }
+                } label: {
+                    Text("Empty log file")
+                        .foregroundStyle(.red)
+                }
+                .disabled(self.didTruncate)
             } header: {
                 Text(Localize.loggingsupport())
             } footer: {

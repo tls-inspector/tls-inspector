@@ -27,32 +27,42 @@ public final class LogWriter: ILogger {
     nonisolated(unsafe) private var level: LogLevel
 
     public let filePath: URL
-    private let fileWriter: FileHandle?
     private let lock: NSObject = NSObject()
+    private var fileWriter: FileHandle?
     private var isOpen = false
 
     private init() {
-        self.filePath = IO.fileInDocumentsDirectory("TLSKit.log")
+        let filePath = IO.fileInDocumentsDirectory("TLSKit.log")
+        self.filePath = filePath
 
-        // Truncate the log if over 1M
-        let size = IO.fileSize(self.filePath)
-        if size > 1028*1028 {
-            try? IO.delete(self.filePath)
-        }
-
-        if !IO.fileExists(self.filePath) {
-            // Create a blank file for writing
-            try? Data([]).write(to: self.filePath)
-        }
-
-        if let writer = try? FileHandle(forUpdating: self.filePath) {
-            _ = try? writer.seekToEnd()
+        if let writer = LogWriter.open(filePath: filePath) {
             self.fileWriter = writer
+            self.isOpen = true
         } else {
             self.fileWriter = nil
+            self.isOpen = false
         }
-        self.isOpen = true
         self.level = LogWriter.defaultLogLevel()
+    }
+
+    private static func open(filePath: URL) -> FileHandle? {
+        // Truncate the log if over 1M
+        let size = IO.fileSize(filePath)
+        if size > 1028*1028 {
+            try? IO.delete(filePath)
+        }
+
+        if !IO.fileExists(filePath) {
+            // Create a blank file for writing
+            try? Data([]).write(to: filePath)
+        }
+
+        if let writer = try? FileHandle(forUpdating: filePath) {
+            _ = try? writer.seekToEnd()
+            return writer
+        }
+
+        return nil
     }
 
     /// Returns the default log level to use.
@@ -120,5 +130,28 @@ public final class LogWriter: ILogger {
         try? self.fileWriter?.synchronize()
         try? self.fileWriter?.close()
         self.isOpen = false
+    }
+
+    /// Delete the current log file and open a fresh empty file. Threadsafe.
+    public func truncate() throws {
+        guard let fileWriter = self.fileWriter else {
+            return
+        }
+
+        objc_sync_enter(self.lock)
+        defer { objc_sync_exit(self.lock) }
+
+        try fileWriter.synchronize()
+        try fileWriter.close()
+        self.fileWriter = nil
+        self.isOpen = false
+        try IO.delete(self.filePath)
+
+        guard let writer = LogWriter.open(filePath: self.filePath) else {
+            return
+        }
+
+        self.fileWriter = writer
+        self.isOpen = true
     }
 }

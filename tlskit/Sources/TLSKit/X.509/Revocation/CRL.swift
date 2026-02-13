@@ -79,40 +79,9 @@ internal final class CRLManager {
         return .success(results)
     }
 
-    private static func checkCertificateAgainstCrl(_ certificate: Certificate, issuedBy: Certificate, crlUrl: String) -> Result<CRLResult, TLSKitError> {
-        let curl: CurlClient
-        do {
-            curl = try CurlClient(url: crlUrl)
-        } catch {
-            return .failure(.internalError(error.localizedDescription))
-        }
-        curl.headers.add("Accept", "application/pkix-crl")
-        curl.maxBodySize = 20 * (1024 * 1024)
-
-        let http: CurlResponse
-        do {
-            http = try curl.get().get()
-        } catch {
-            return .failure(error)
-        }
-
-        if http.statusCode != 200 {
-            return .failure(.httpError(Int(http.statusCode)))
-        }
-        if let contentType = http.headers.get1("Content-Type"), contentType.lowercased() != "application/pkix-crl" {
-            return .failure(.invalidContentType(contentType))
-        }
-
-        guard let crl = http.body.withUnsafeBytes({
-            var b = $0.baseAddress?.assumingMemoryBound(to: UInt8.self)
-            return d2i_X509_CRL(nil, &b, $0.count)
-        }) else {
-            logOpenSSLError(inFile: #fileID, atLine: #line)
-            printError("[\(#fileID):\(#line)] d2i_X509_CRL returned nil")
+    internal static func check(certificate: Certificate, issuedBy: Certificate, crlUrl: String, data: Data) -> Result<CRLResult, TLSKitError> {
+        guard let crl = D2I.X509_CRL(data) else {
             return .failure(.invalidData("Invalid CRL data"))
-        }
-        defer {
-            X509_CRL_free(crl)
         }
 
         guard let issuerKey = X509_get_pubkey(issuedBy.x509) else {
@@ -134,7 +103,7 @@ internal final class CRLManager {
             return .success(CRLResult(status: .notFound, informedBy: crlUrl))
         }
 
-        if revoked == nil {
+        guard let revoked = revoked else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] X509_CRL_get0_by_cert did not populate X509_REVOKED object")
             return .failure(.invalidData("Invalid CRL data"))
@@ -142,7 +111,7 @@ internal final class CRLManager {
 
         printDebug("[\(#fileID):\(#line)] Certificate present on CRL")
 
-        guard let reasonEnum = X509_REVOKED_get_ext_d2i(revoked!, NID_crl_reason, nil, nil)?.assumingMemoryBound(to: ASN1_ENUMERATED.self) else {
+        guard let reasonEnum = X509_REVOKED_get_ext_d2i(revoked, NID_crl_reason, nil, nil)?.assumingMemoryBound(to: ASN1_ENUMERATED.self) else {
             logOpenSSLError(inFile: #fileID, atLine: #line)
             printError("[\(#fileID):\(#line)] X509_REVOKED_get_ext_d2i returned nil")
             return .failure(.invalidData("Invalid CRL data"))
@@ -151,11 +120,49 @@ internal final class CRLManager {
         let reason = ASN1_ENUMERATED_get(reasonEnum)
 
         var revokedAt: Date?
-        if let v = X509_REVOKED_get0_revocationDate(revoked!) {
+        if let v = X509_REVOKED_get0_revocationDate(revoked) {
             revokedAt = Date.from(ASN1_TIME: v)
         }
 
         return .success(CRLResult(status: .revoked, revocationReason: Int32(reason), revocationDate: revokedAt, informedBy: crlUrl))
 
+    }
+
+    private static func checkCertificateAgainstCrl(_ certificate: Certificate, issuedBy: Certificate, crlUrl: String) -> Result<CRLResult, TLSKitError> {
+        let curl: CurlClient
+        do {
+            curl = try CurlClient(url: crlUrl)
+        } catch {
+            return .failure(.internalError(error.localizedDescription))
+        }
+        curl.headers.add("Accept", "application/pkix-crl")
+        curl.maxBodySize = 20 * (1024 * 1024)
+
+        let http: CurlResponse
+        do {
+            // The two .get()'s are intentional:
+            http = try curl.get().get()
+            //             .get() <-- HTTP GET request
+            //                   .get() <-- get successful result or throw
+            printDebug("[\(#fileID):\(#line)] Curl get returned")
+        } catch {
+            printError("[\(#fileID):\(#line)] Curl get failed: \(error)")
+            return .failure(error)
+        }
+
+        if http.statusCode != 200 {
+            return .failure(.httpError(Int(http.statusCode)))
+        }
+        if let contentType = http.headers.get1("Content-Type"), contentType.lowercased() != "application/pkix-crl" {
+            printError("[\(#fileID):\(#line)] Unexpected content-type: \(contentType)")
+            return .failure(.invalidContentType(contentType))
+        }
+        if http.body.isEmpty {
+            printError("[\(#fileID):\(#line)] Empty response body")
+            return .failure(.responseError("Empty response body"))
+        }
+
+        printDebug("[\(#fileID):\(#line)] Going to attempt to parse \(http.body.count) bytes as CRL")
+        return check(certificate: certificate, issuedBy: issuedBy, crlUrl: crlUrl, data: http.body)
     }
 }
