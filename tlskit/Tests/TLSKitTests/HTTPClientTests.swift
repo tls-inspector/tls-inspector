@@ -28,7 +28,7 @@ import Network
         let connection = NWConnection(host: .name("example.com", nil), port: .https, using: .tls)
         connection.stateUpdateHandler = { state in
             if state == .ready {
-                let request = client.requestFor(host: "example.com")
+                let request = try! client.requestFor(host: "example.com")
                 connection.send(content: request, completion: .contentProcessed({ error in
                     if let error = error {
                         Issue.record(error)

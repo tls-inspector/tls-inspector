@@ -1,20 +1,20 @@
 {
-  "originHash" : "b6123a60347364ea23033b46e0760df81e8e9468e00b397e3f63c24d415aa5fb",
+  "originHash" : "fcd220f269a3a50684920bf85795611bf7427fcb15d1630e2423a97e8f10ad3a",
   "pins" : [
     {
       "identity" : "dnskit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dns-inspector/dnskit",
       "state" : {
-        "revision" : "d5883384c61d69e7b2a80e813b0824d341672b5f"
+        "revision" : "572ea4b3f003c2804f083d509c5e2cf9cd649cdb"
       }
     },
     {
-      "identity" : "idna-cocoa",
+      "identity" : "idnarules-swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Wevah/IDNA-Cocoa",
+      "location" : "https://github.com/dns-inspector/IDNARules-Swift.git",
       "state" : {
-        "revision" : "96de66e18f27edd40e41321f63637fbf2a83eb41"
+        "revision" : "7f47c398379e46f324bb82f803829026c48763d0"
       }
     }
   ],
