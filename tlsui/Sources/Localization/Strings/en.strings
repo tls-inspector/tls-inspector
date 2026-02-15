@@ -1,5 +1,5 @@
 # DNS Inspector localization strings for English
-# Copyright 2025 Ian Spence and DNS Inspector Authors
+# Copyright 2026 Ian Spence and DNS Inspector Authors
 # Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
 1 day	1 day
 1 hour	1 hour
@@ -80,7 +80,7 @@ Key Size	Key Size
 Key Usage	Key Usage
 Language Updated	Language Updated
 Learn More	Learn More
-LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors.
+LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors.
 Locally Trusted	Locally Trusted
 Log ID	Log ID
 Log Name	Log Name

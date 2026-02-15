@@ -1064,13 +1064,13 @@ public final class Localize {
     public static func licensefooter() -> String {
         switch currentLanguage {
         case .English:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
         case .Spanish:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
         case .German:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
         case .Dutch:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2025 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
         }
     }
     // key: Locally Trusted
