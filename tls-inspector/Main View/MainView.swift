@@ -19,8 +19,15 @@ import TLSKit
 import TLSUI
 import Localization
 
+internal class InspectionParameters: ObservableObject {
+    @Published var host = ""
+    @Published var ipAddress = ""
+    @Published var port: UInt16 = 443
+    @Published var useIpVersion = IPVersion.Automatic
+}
+
 struct MainView: View {
-    @State var host: String = ""
+    @State var inspectionParameters = InspectionParameters()
     @State var isLoading: Bool = false
     @State var inspectionResponse: InspectionResponse?
     @State var inspectionError: String?
@@ -28,26 +35,43 @@ struct MainView: View {
     @State var showAboutView = false
     @State var showOptionsView = false
     @State var showProxyWarning = false
+    @State var showAdvancedInspectionOptions = false
     let randomSite = FunStuff.randomWebsite()
 
     var body: some View {
         Navigation {
             List {
                 PreviewBuildView()
-                Section(Localize.domainnameoripaddress()) {
-                    TextField(text: $host) {
-                        Text(self.randomSite)
-                    }
-                    .submitLabel(.go)
-                    .onSubmit {
-                        Task {
-                            await self.inspectFromInput()
+                Section(showAdvancedInspectionOptions ? Localize.target() : Localize.domainnameoripaddress()) {
+                    HStack {
+                        TextField(text: $inspectionParameters.host) {
+                            if showAdvancedInspectionOptions {
+                                Text(Localize.domainnameoripaddress())
+                            } else {
+                                Text(self.randomSite)
+                            }
+                        }
+                        .submitLabel(.go)
+                        .onSubmit {
+                            Task {
+                                await self.inspectFromInput()
+                            }
+                        }
+                        .keyboardType(.URL)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .disabled(self.isLoading)
+                        Button {
+                            withAnimation {
+                                self.showAdvancedInspectionOptions.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "gearshape.fill")
                         }
                     }
-                    .keyboardType(.URL)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .disabled(self.isLoading)
+                    if showAdvancedInspectionOptions {
+                        AdvancedInspectionParametersView(parameters: $inspectionParameters)
+                    }
                     if isLoading {
                         HStack {
                             ProgressView()
@@ -129,7 +153,19 @@ struct MainView: View {
     }
 
     func inspectFromInput() async {
-        let request = InspectionRequest(address: self.host, checkCRL: UserOptions.current.checkCrl, checkOCSP: UserOptions.current.queryOcsp, ipVersion: UserOptions.current.ipVersion.toTLSKit(), checkHTTP: UserOptions.current.getHttpHeaders, timeoutSeconds: UInt8(UserOptions.current.inspectTimeout), alpn: ["http/1.1"])
+        let address = inspectionParameters.ipAddress.isEmpty ? inspectionParameters.host : inspectionParameters.ipAddress
+        let serverName = inspectionParameters.ipAddress.isEmpty ? nil : inspectionParameters.host
+
+        let request = InspectionRequest(
+            address: address,
+            serverName: serverName,
+            checkCRL: UserOptions.current.checkCrl,
+            checkOCSP: UserOptions.current.queryOcsp,
+            ipVersion: inspectionParameters.useIpVersion.toTLSKit(),
+            checkHTTP: UserOptions.current.getHttpHeaders,
+            timeoutSeconds: UInt8(UserOptions.current.inspectTimeout),
+            alpn: ["http/1.1"]
+        )
         await executeInspectionRequest(request)
     }
 

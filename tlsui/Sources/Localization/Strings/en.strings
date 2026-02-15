@@ -145,6 +145,7 @@ State / Province	State / Province
 Status Providers	Status Providers
 Subject	Subject
 TLS Inspector	TLS Inspector
+Target	Target
 The certificate '{domain}' expires on {date}	The certificate '{0}' expires on {1}
 Timeout	Timeout
 Timestamp	Timestamp

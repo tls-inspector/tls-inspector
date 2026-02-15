@@ -1905,6 +1905,19 @@ public final class Localize {
             return "TLS Inspector"
         }
     }
+    // key: Target
+    public static func target() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Target"
+        case .Spanish:
+            return "Target"
+        case .German:
+            return "Target"
+        case .Dutch:
+            return "Target"
+        }
+    }
     // key: The certificate '{domain}' expires on {date}
     public static func thecertificatedomainexpiresondate(domain: String, date: String) -> String {
         switch currentLanguage {
