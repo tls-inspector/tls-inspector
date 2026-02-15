@@ -68,10 +68,8 @@ public struct TrustExplainationView: View {
             .navigationTitle(Localize.trustdetails())
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button {
+                    CloseButton {
                         dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
                     }
                 }
             }

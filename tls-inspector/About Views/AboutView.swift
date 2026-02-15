@@ -16,6 +16,7 @@
 
 import SwiftUI
 import TLSKit
+import TLSUI
 import Localization
 
 public struct AboutView: View {
@@ -50,11 +51,9 @@ public struct AboutView: View {
                 .ignoresSafeArea()
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button(action: {
-                            self.dismiss()
-                        }, label: {
-                            Image(systemName: "xmark")
-                        })
+                        CloseButton {
+                            dismiss()
+                        }
                         .tint(.white)
                     }
                 }

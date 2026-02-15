@@ -50,11 +50,9 @@ public struct InspectionResponseView: View {
             .navigationTitle(response.tlsConnection.domain)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button {
+                    CloseButton {
                         NotificationCenter.default.post(name: closedInspectionViewNotification, object: nil)
                         dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
                     }
                 }
                 ToolbarItem {

@@ -47,10 +47,8 @@ public struct OptionsView: View {
             .navigationTitle(Localize.options())
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button {
+                    CloseButton {
                         self.presented.wrappedValue = false
-                    } label: {
-                        Image(systemName: "xmark")
                     }
                 }
             }

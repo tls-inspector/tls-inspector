@@ -100,7 +100,7 @@ public struct TrustStatusView: View {
             }
         }
         .listRowBackground(IRoundedRectangle(backgroundColor: backgroundColor, borderColor: borderColor ?? .clear, borderWidth: borderWidth ?? 0))
-        .popover(isPresented: $showDetails) {
+        .sheet(isPresented: $showDetails) {
             TrustExplainationView(status: status)
         }
     }
