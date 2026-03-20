@@ -16,7 +16,7 @@ if [[ -d "${BUILD_PWD}/openssl.xcframework" ]]; then
 fi
 cd "${BUILD_OPENSSL_PATH}"
 ./build-ios.sh -o "${BUILD_OPENSSL_VERSION}" -vsg -- -no-apps -no-argon2 -no-blake2 -no-camellia -no-deprecated -no-md4 -no-hw -no-engine
-cp -fv "${BUILD_OPENSSL_PATH}/openssl.tar.xz" "${BUILD_CURL_PATH}/openssl-${BUILD_OPENSSL_VERSION}.tar.xz"
+cp -fv "${BUILD_OPENSSL_PATH}/openssl-${BUILD_OPENSSL_VERSION}.tar.xz" "${BUILD_CURL_PATH}/openssl-${BUILD_OPENSSL_VERSION}.tar.xz"
 mv -v "${BUILD_OPENSSL_PATH}/openssl.xcframework" "${BUILD_PWD}/openssl.xcframework"
 cd "${BUILD_PWD}"
 
