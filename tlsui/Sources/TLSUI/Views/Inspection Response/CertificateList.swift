@@ -20,29 +20,47 @@ import Localization
 
 public struct CertificateList: View {
     public let response: InspectionResponse
+    @Binding var presentedView: InspectionResponseViewOptions?
 
     public var body: some View {
         Section(Localize.certificates()) {
             ForEach(response.tlsConnection.certificates) { certificate in
-                NavigationLink {
-                    CertificateView(certificate: certificate)
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(certificate.description ?? Localize.unnamedcertificate())
-                            if let source = certificate.source {
-                                Text(source == .server ? Localize.sentbyserver() : Localize.foundondevice())
-                                    .opacity(0.5)
-                                    .font(.subheadline)
-                            }
-                        }
-                        if certificate.isCA && certificate.subject == certificate.issuer {
-                            Spacer()
-                            Text(Localize.root()).opacity(0.5)
-                        }
+                let tag = InspectionResponseViewOptions.certificate(certificate)
+                if #available(iOS 16, *) {
+                    CertificateListRowLabel(certificate: certificate).tag(tag)
+                } else {
+                    NavigationLink(tag: tag, selection: $presentedView) {
+                        CertificateView(certificate: certificate)
+                    } label: {
+                        CertificateListRowLabel(certificate: certificate)
                     }
                 }
-                .tag(InspectionResponseViewOptions.certificate(certificate))
+            }
+        }
+    }
+}
+
+private struct CertificateListRowLabel: View {
+    public let certificate: Certificate
+
+    public var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(certificate.description ?? Localize.unnamedcertificate())
+                if let source = certificate.source {
+                    Text(source == .server ? Localize.sentbyserver() : Localize.foundondevice())
+                        .opacity(0.5)
+                        .font(.subheadline)
+                }
+            }
+            Spacer()
+            HStack {
+                if certificate.isCA && certificate.subject == certificate.issuer {
+                    Text(Localize.root()).opacity(0.5)
+                }
+                Image(systemName: "chevron.right")
+                    .font(.footnote)
+                    .foregroundStyle(.tertiary)
             }
         }
     }

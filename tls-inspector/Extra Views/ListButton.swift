@@ -20,8 +20,6 @@ public struct ListButton<Label: View>: View {
     public let label: Label
     public let onTap: () -> Void
     public let showDisclosureIndicator: Bool
-    @State private var isLongPressing: Bool = false
-    @GestureState private var isDragging = false
 
     public init(showDisclosureIndicator: Bool = true, onTap: @escaping () -> Void, @ViewBuilder label: () -> Label) {
         self.label = label()

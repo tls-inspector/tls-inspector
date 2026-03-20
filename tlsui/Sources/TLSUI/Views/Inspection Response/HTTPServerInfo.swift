@@ -31,18 +31,35 @@ private let securityHeaders = [
 
 public struct HTTPServerInfo: View {
     public let httpServerInfo: TLSKit.HTTPServerInfo
+    @Binding var presentedView: InspectionResponseViewOptions?
 
     public var body: some View {
         Section(Localize.securityhttpheaders()) {
             ForEach(securityHeaders, id: \.self) { headerName in
                 HTTPSecurityHeaderView(key: headerName, headers: httpServerInfo.headers)
             }
-            NavigationLink {
-                HTTPHeadersView(headers: httpServerInfo.headers)
-            } label: {
-                Text(Localize.viewall())
+
+            let tag = InspectionResponseViewOptions.httpHeaders(httpServerInfo.headers)
+            if #available(iOS 16, *) {
+                viewAllLabel.tag(tag)
+            } else {
+                NavigationLink(tag: tag, selection: $presentedView) {
+                    HTTPHeadersView(headers: httpServerInfo.headers)
+                } label: {
+                    viewAllLabel
+                }
             }
-            .tag(InspectionResponseViewOptions.httpHeaders(httpServerInfo.headers))
+        }
+    }
+
+    @ViewBuilder
+    private var viewAllLabel: some View {
+        HStack {
+            Text(Localize.viewall())
+            Spacer()
+            Image(systemName: "chevron.right")
+                .font(.footnote)
+                .foregroundStyle(.tertiary)
         }
     }
 }

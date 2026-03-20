@@ -25,28 +25,28 @@ internal enum InspectionResponseViewOptions: Hashable {
 
 public struct InspectionResponseView: View {
     public let response: InspectionResponse
-    @State private var presentedView: InspectionResponseViewOptions
+    @State private var presentedView: InspectionResponseViewOptions?
     @State private var exportedChainUrl: URL?
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     public init(response: InspectionResponse) {
         self.response = response
-        self.presentedView = .certificate(response.tlsConnection.certificates[0])
     }
 
     public var body: some View {
         SplitView {
-            List {
-                Section {
-                    TrustStatusView(status: response.tlsConnection.trust)
-                }
-                CertificateList(response: response)
-                ConnectionInformation(response: response)
-                if let httpServerInfo = response.httpServerInfo {
-                    HTTPServerInfo(httpServerInfo: httpServerInfo)
+            Group {
+                if #available(iOS 16, *) {
+                    List(selection: $presentedView) {
+                        sidebarContent
+                    }
+                } else {
+                    List {
+                        sidebarContent
+                    }
                 }
             }
-            .listStyle(.insetGrouped)
             .navigationTitle(response.tlsConnection.domain)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -86,6 +86,15 @@ public struct InspectionResponseView: View {
                     ExportSheet(activityItems: [exportedChainUrl])
                 }
             }
+            .modify {
+                if ProcessInfo.processInfo.isiOSAppOnMac {
+                    // Apple applies some bizarre appearance changes to sidebars when an iPad app
+                    // is running on macOS. Try to fix them here.
+                    $0.listStyle(.sidebar)
+                } else {
+                    $0.listStyle(.insetGrouped)
+                }
+            }
         } content: {
             Navigation {
                 switch self.presentedView {
@@ -93,8 +102,30 @@ public struct InspectionResponseView: View {
                     CertificateView(certificate: certificate)
                 case .httpHeaders(let headers):
                     HTTPHeadersView(headers: headers)
+                case nil:
+                    EmptyView()
                 }
             }
+        }
+        .onAppear {
+            // Bit of a hack but it achieves the behaviour I want:
+            // - On iOS the sidebar of the split view should be the default view.
+            // - On iPad the split view should appear with the first certificate already selected.
+            if horizontalSizeClass == .regular {
+                presentedView = .certificate(response.tlsConnection.certificates[0])
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var sidebarContent: some View {
+        Section {
+            TrustStatusView(status: response.tlsConnection.trust)
+        }
+        CertificateList(response: response, presentedView: $presentedView)
+        ConnectionInformation(response: response)
+        if let httpServerInfo = response.httpServerInfo {
+            HTTPServerInfo(httpServerInfo: httpServerInfo, presentedView: $presentedView)
         }
     }
 
