@@ -30,6 +30,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(url: "https://github.com/tls-inspector/tlskit-external-dependencies", revision: "2475bd07730a6fafb705542ab24e40a1087b5fae"),
         .package(name: "Crashpad", path: "../crashpad"),
         .package(url: "https://github.com/dns-inspector/dnskit", revision: "572ea4b3f003c2804f083d509c5e2cf9cd649cdb"),
     ],
@@ -38,8 +39,8 @@ let package = Package(
             name: "TLSKit",
             dependencies: [
                 "Crashpad",
-                "OpenSSL",
-                "Curl",
+                .product(name: "OpenSSL", package: "tlskit-external-dependencies"),
+                .product(name: "Curl", package: "tlskit-external-dependencies"),
                 .product(name: "DNSKit", package: "dnskit"),
             ],
             resources: [
@@ -55,11 +56,13 @@ let package = Package(
                 .linkedLibrary("z")
             ]
         ),
-        .binaryTarget(name: "OpenSSL", path: "openssl.xcframework"),
-        .binaryTarget(name: "Curl", path: "curl.xcframework"),
         .testTarget(
             name: "TLSKitTests",
-            dependencies: ["TLSKit", "OpenSSL", "Curl"],
+            dependencies: [
+                "TLSKit",
+                .product(name: "OpenSSL", package: "tlskit-external-dependencies"),
+                .product(name: "Curl", package: "tlskit-external-dependencies"),
+            ],
             exclude: [
                 "TestServer/"
             ],

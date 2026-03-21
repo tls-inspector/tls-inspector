@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6412CAA28F00075B2BA /* curl.xcframework */; };
-		3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */; };
 		3C4E8A1F2EBA7B9D00433307 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4E8A1E2EBA7B9D00433307 /* Localization */; };
 		3C4E8A212EBA7BA500433307 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4E8A202EBA7BA500433307 /* Localization */; };
 		3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */; };
@@ -45,8 +43,6 @@
 
 /* Begin PBXFileReference section */
 		3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
-		3C2CE6412CAA28F00075B2BA /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = curl.xcframework; path = tlskit/curl.xcframework; sourceTree = "<group>"; };
-		3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = openssl.xcframework; path = tlskit/openssl.xcframework; sourceTree = "<group>"; };
 		3C8742E02EB4524200154664 /* inspect-website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "inspect-website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tls-inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,9 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C2CE6442CAA28FC0075B2BA /* openssl.xcframework in Frameworks */,
 				3C8744E32EB46EA100154664 /* TLSUI in Frameworks */,
-				3C2CE6422CAA28F00075B2BA /* curl.xcframework in Frameworks */,
 				3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */,
 				3C4E8A1F2EBA7B9D00433307 /* Localization in Frameworks */,
 			);
@@ -119,8 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */,
-				3C2CE6432CAA28FC0075B2BA /* openssl.xcframework */,
-				3C2CE6412CAA28F00075B2BA /* curl.xcframework */,
 				3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */,
 			);
 			name = Frameworks;
@@ -209,7 +201,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2600;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					3C8742DF2EB4524200154664 = {
 						CreatedOnToolsVersion = 26.0;
@@ -445,6 +437,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
@@ -503,6 +496,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
