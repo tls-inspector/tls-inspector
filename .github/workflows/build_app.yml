@@ -4,116 +4,39 @@ on:
   push:
     paths:
       - '.github/workflows/build_app.yml'
-      - 'CertificateKit/**'
-      - 'CertificateKitTests/**'
-      - 'inspect-website/**'
-      - 'tls-inspector/**'
       - 'tls-inspector.xcodeproj/**'
+      - 'tls-inspector/**'
+      - 'inspect-website/**'
+      - 'tlsui/**'
+      - 'tlskit/**'
+      - '.swiftlint.yml'
   pull_request:
     paths:
-      - 'CertificateKit/**'
-      - 'CertificateKitTests/**'
-      - 'inspect-website/**'
-      - 'tls-inspector/**'
+      - '.github/workflows/build_app.yml'
       - 'tls-inspector.xcodeproj/**'
-  schedule:
-    - cron: "16 16 */2 * *"
+      - 'tls-inspector/**'
+      - 'inspect-website/**'
+      - 'tlsui/**'
+      - 'tlskit/**'
+      - '.swiftlint.yml'
 
 permissions:
   packages: read
 
 env:
-  TEST_DEVICE: "iPhone 15 Pro"
+  TEST_DEVICE: "iPhone 17 Pro"
+  XCODE_VERSION: "Xcode_26.3" # https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md
 
 jobs:
-  openssl:
-    name: "Build OpenSSL"
-    runs-on: macos-14
-    steps:
-      - name: "Checkout Source"
-        id: checkout
-        uses: actions/checkout@v5
-        with:
-          submodules: 'recursive'
-
-      - name: "Generate Cache Key"
-        id: cache_key
-        run: |
-          echo "OPENSSL_CACHE_KEY=openssl_$(cat CertificateKit/build/openssl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
-
-      - name: Restore Cached OpenSSL
-        id: restore_openssl
-        uses: actions/cache@v4
-        with:
-          key: ${{ steps.cache_key.outputs.OPENSSL_CACHE_KEY }}
-          path: |
-            CertificateKit/openssl.xcframework
-      
-      - name: "Setup Verification"
-        id: gpg
-        if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
-        run: |
-          gpg --import CertificateKit/build/openssl-ios/openssl.asc
-          echo 'trusted-key 0x216094DFD0CB81EF' >> ~/.gnupg/gpg.conf
-
-      - name: Build OpenSSL
-        id: build_openssl
-        if: ${{ steps.restore_openssl.outputs.cache-hit != 'true' }}
-        run: |
-          echo "::notice ::Compiling OpenSSL"
-          cd CertificateKit/build
-          ./build-openssl.sh
-
-  curl:
-    name: "Build curl"
-    runs-on: macos-14
-    steps:
-      - name: "Checkout Source"
-        id: checkout
-        uses: actions/checkout@v5
-        with:
-          submodules: 'recursive'
-
-      - name: "Generate Cache Key"
-        id: cache_key
-        run: |
-          echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
-
-      - name: Restore Cached curl
-        id: restore_curl
-        uses: actions/cache@v4
-        with:
-          key: ${{ steps.cache_key.outputs.CURL_CACHE_KEY }}
-          path: |
-            CertificateKit/curl.xcframework
-      
-      - name: "Setup Verification"
-        id: gpg
-        if: ${{ steps.restore_curl.outputs.cache-hit != 'true' }}
-        run: |
-          gpg --import CertificateKit/build/curl-ios/curl.asc
-          echo 'trusted-key 0x78E11C6B279D5C91' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0xF9FEAFF9D34A1BDB' >> ~/.gnupg/gpg.conf
-          echo 'trusted-key 0x5CC908FDB71E12C2' >> ~/.gnupg/gpg.conf
-
-      - name: Build curl
-        id: build_curl
-        if: ${{ steps.restore_curl.outputs.cache-hit != 'true' }}
-        run: |
-          echo "::notice ::Compiling curl"
-          cd CertificateKit/build
-          ./build-curl.sh
-
   build:
     name: "Build App"
-    runs-on: macos-14
-    needs: [openssl, curl]
+    runs-on: macos-26
     steps:
       - name: Checkout Source
         id: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #pin v6.0.2
         with:
-          submodules: 'recursive'
+          persist-credentials: false
 
       - name: Install Profile and Certificates
         id: install_credentials
@@ -135,31 +58,27 @@ jobs:
           security import dev.key -t priv -k ~/Library/Keychains/login.keychain-db -f openssl -A
           echo 'imported dev.key'
           rm dev.key dev.crt
-      
+
       - name: "Prepare Build Environment"
         id: prepare
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "OPENSSL_CACHE_KEY=openssl_$(cat CertificateKit/build/openssl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
-          echo "CURL_CACHE_KEY=curl_$(cat CertificateKit/build/curl.want | cut -d '=' -f2)" >> "$GITHUB_OUTPUT"
-          echo "CTLOG_CACHE_KEY=ctlog_$(cat CertificateKit/CTLogs/ct_log_version.txt)" >> "$GITHUB_OUTPUT"
-          echo "ROOTCA_CACHE_KEY=rootca_$(cat CertificateKit/RootCACerts/bundle_version.txt)" >> "$GITHUB_OUTPUT"
-          echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
-          echo "IDNACOCOA_CACHE_KEY=idnacocoa_$(grep -a5 "Wevah/IDNA-Cocoa" TLS\ Inspector.xcodeproj/project.pbxproj | grep 'revision =' | cut -d '=' -f2 | awk '{$1=$1};1' | cut -c 1-8)" >> "$GITHUB_OUTPUT"
-          echo "DERIVEDDATA_PATH=$(xcodebuild -project TLS\ Inspector.xcodeproj -showBuildSettings -configuration Debug 2>/dev/null | grep " BUILD_DIR = " | cut -d '=' -f2 | awk '{$1=$1};1' | sed 's%/Build/Products%%g')" >> "$GITHUB_OUTPUT"
-          sudo xcode-select -s /Applications/Xcode_15.0.1.app/Contents/Developer
+          echo "Switching to ${{ env.XCODE_VERSION }}"
+          sudo xcode-select -s /Applications/${{ env.XCODE_VERSION }}.app/Contents/Developer
           xcode-select -p
+          mkdir -p /Users/runner/derived_data
+          echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
 
-      - name: Restore Cached SwiftLint
+      - name: "Restore Cached SwiftLint"
         id: restore_swiftlint
-        uses: actions/cache@v4
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 #pin v5.0.4
         with:
           key: ${{ steps.prepare.outputs.SWIFTLINT_CACHE_KEY }}
           path: |
             /Users/runner/bin/swiftlint
-      
-      - name: Install SwiftLint
+
+      - name: "Install SwiftLint"
         id: install_swiftlint
         if: ${{ steps.restore_swiftlint.outputs.cache-hit != 'true' }}
         env:
@@ -172,82 +91,25 @@ jobs:
           unzip swiftlint.zip
           rm swiftlint.zip LICENSE
           chmod a+x swiftlint
-      
-      - name: Restore CT Logs
-        id: restore_ctlogs
-        uses: actions/cache@v4
-        with:
-          key: ${{ steps.prepare.outputs.CTLOG_CACHE_KEY }}
-          path: |
-            CertificateKit/CTLogs/ct_log_list.min.json
-
-      - name: Update CT Logs
-        id: update_ctlogs
-        if: ${{ steps.restore_ctlogs.outputs.cache-hit != 'true' }}
-        run: |
-          cd CertificateKit/CTLogs
-          ./update.sh
-
-      - name: Restore Root CA Certs
-        id: restore_rootca
-        uses: actions/cache@v4
-        with:
-          key: ${{ steps.prepare.outputs.ROOTCA_CACHE_KEY }}
-          path: |
-            CertificateKit/RootCACerts/*.p7b
-            CertificateKit/RootCACerts/*.p7b.sig
-            CertificateKit/RootCACerts/*.json
-            CertificateKit/RootCACerts/*.json.sig
-
-      - name: Update Root CA Certs
-        id: update_rootca
-        if: ${{ steps.restore_rootca.outputs.cache-hit != 'true' }}
-        run: |
-          cd CertificateKit/RootCACerts
-          ./update.sh
-
-      - name: Generate Strings
-        id: generate_strings
-        run: |
-          cd "tls-inspector/Localization"
-          python3 lang.py
-
-      - name: Restore Cached OpenSSL
-        id: restore_openssl
-        uses: actions/cache@v4
-        with:
-          key: ${{ steps.prepare.outputs.OPENSSL_CACHE_KEY }}
-          path: |
-            CertificateKit/openssl.xcframework
-
-      - name: Restore Cached curl
-        id: restore_curl
-        uses: actions/cache@v4
-        with:
-          key: ${{ steps.prepare.outputs.CURL_CACHE_KEY }}
-          path: |
-            CertificateKit/curl.xcframework
 
       - name: Build
         id: build
         run: |
           xcodebuild -resolvePackageDependencies -project "tls-inspector.xcodeproj"
-          xcodebuild -scheme "idna" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "CertificateKit" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
           xcodebuild -scheme "Inspect Website" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
           xcodebuild -scheme "TLS Inspector" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
 
-      - name: Install Go
+      - name: "Install Go"
         id: install_go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 #pin v6.3.0
         with:
           go-version: "stable"
-          cache-dependency-path: CertificateKit/TestServer/go.sum
+          cache-dependency-path: tlskit/Tests/TLSKitTests/TestServer/go.sum
 
       - name: Prepare Test Server
         id: testserver_prepare
         run: |
-          cd CertificateKit/TestServer
+          cd tlskit/Tests/TLSKitTests/TestServer
           echo "Compiling test server"
           CGO_ENABLED=0 go build
           echo "Generating certifiate & key"
@@ -259,16 +121,16 @@ jobs:
         id: testserver_start
         shell: bash
         run: |
-          cd CertificateKit/TestServer
+          cd tlskit/Tests/TLSKitTests/TestServer
           nohup ./TestServer -c root.crt -k root.key &
 
       - name: Run Automated Tests
         id: certificatekit_tests
         run: |
-          xcodebuild -scheme "CertificateKitTests" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' test
+          xcodebuild -scheme TLSKit test -derivedDataPath ~/derived_data -destination "platform=iOS Simulator,name=${{ env.TEST_DEVICE }}"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #pin v7.0.0
         if: failure()
         with:
           name: test-results
-          path: /Users/runner/derived_data/Logs/Test/Test-CertificateKitTests-*.xcresult
+          path: /Users/runner/derived_data/Logs/Test/Test-TLSKit-*.xcresult

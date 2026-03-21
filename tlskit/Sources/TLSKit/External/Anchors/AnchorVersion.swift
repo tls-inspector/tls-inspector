@@ -19,9 +19,9 @@ import Foundation
 // This file is modified by the update-root-ca-bundles.sh script
 
 #if DEBUG
-nonisolated(unsafe) internal var EmbeddedAnchorBundleVersion = "bundle_202507150250715250715"
+nonisolated(unsafe) internal var EmbeddedAnchorBundleVersion = "bundle_20260319"
 #else
-internal let EmbeddedAnchorBundleVersion = "bundle_202507150250715250715"
+internal let EmbeddedAnchorBundleVersion = "bundle_20260319"
 #endif
 
 internal let AnchorBundleSigningKey = """

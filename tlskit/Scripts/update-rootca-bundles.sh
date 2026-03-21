@@ -1,5 +1,6 @@
 #!/bin/zsh
 set -e
+set -x
 
 ANCHORS_DIR=${1:?Must specify path to anchors directory}
 
@@ -37,5 +38,5 @@ download_bundle tlsinspector
 
 printf ${LATEST_VERSION} > bundle_version.txt
 
-cat AnchorVersion.swift | sed "s/${CURRENT_VERSION}/${LATEST_VERSION}/g" > AnchorVersion.swift.new
+cat AnchorVersion.swift | sed "s/EmbeddedAnchorBundleVersion = \".*\"/EmbeddedAnchorBundleVersion = \"${LATEST_VERSION}\"/g" > AnchorVersion.swift.new
 mv AnchorVersion.swift.new AnchorVersion.swift
