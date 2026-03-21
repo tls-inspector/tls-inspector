@@ -33,6 +33,7 @@ public final class HTTPHeaders: Sendable, Equatable, Hashable {
         for line in headerLines {
             let (name, value) = String(line).kvSplit()
             if name.isEmpty || value.isEmpty {
+                printWarning("[\(#fileID):\(#line)] Ignoring invalid HTTP header line: \(line)")
                 continue
             }
 

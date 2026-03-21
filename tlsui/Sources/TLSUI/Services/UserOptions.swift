@@ -21,7 +21,6 @@ private enum AppDefaultsKeys: String, CaseIterable {
     case verboseLogging = "verbose_logging"
     case firstRunComplete = "first_run_complete"
     case rememberRecentLookups = "remember_recent_lookups"
-    case showTips = "show_tips"
     case getHttpHeaders = "get_http_headers"
     case queryOcsp = "query_ocsp"
     case checkCrl = "check_crl"
@@ -45,7 +44,6 @@ private final class AppDefaults: Sendable {
         .verboseLogging: true,
         .firstRunComplete: false,
         .rememberRecentLookups: true,
-        .showTips: true,
         .getHttpHeaders: true,
         .queryOcsp: false,
         .checkCrl: true,
@@ -106,15 +104,6 @@ public final class UserOptions {
         }
         set {
             AppDefaults.set(.rememberRecentLookups, newValue)
-        }
-    }
-
-    public var showTips: Bool {
-        get {
-            return AppDefaults.get(.showTips)
-        }
-        set {
-            AppDefaults.set(.showTips, newValue)
         }
     }
 

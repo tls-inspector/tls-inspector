@@ -40,7 +40,7 @@ import Network
                         switch result {
                         case .success(let serverInfo):
                             #expect(serverInfo.statusCode == 200)
-                            #expect(serverInfo.headers.get1("Content-Length") != nil)
+                            #expect(serverInfo.headers.get1("Date") != nil)
                         case .failure(let failure):
                             Issue.record(failure)
                         }

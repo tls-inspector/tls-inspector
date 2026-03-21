@@ -22,7 +22,6 @@ import TLSUI
 public struct OptionsView: View {
     public let presented: Binding<Bool>
     @State private var rememberRecentLookups = UserOptions.current.rememberRecentLookups
-    @State private var showTips = UserOptions.current.showTips
     @State private var getHttpHeaders = UserOptions.current.getHttpHeaders
     @State private var treatUnrecognizedAsTrusted = UserOptions.current.treatUnrecognizedAsTrusted
     @State private var queryOcsp = UserOptions.current.queryOcsp
@@ -35,7 +34,7 @@ public struct OptionsView: View {
     public var body: some View {
         Navigation {
             List {
-                OptionsSectionGeneralView(rememberRecentLookups: $rememberRecentLookups, showTips: $showTips, getHttpHeaders: $getHttpHeaders, treatUnrecognizedAsTrusted: $treatUnrecognizedAsTrusted)
+                OptionsSectionGeneralView(rememberRecentLookups: $rememberRecentLookups, getHttpHeaders: $getHttpHeaders, treatUnrecognizedAsTrusted: $treatUnrecognizedAsTrusted)
                 OptionsSectionCertificateStatus(queryOcsp: $queryOcsp, checkCrl: $checkCrl)
                 OptionsSectionFingerprintsView(showFingerprintMd5: $showFingerprintMd5, showFingerprintSha1: $showFingerprintSha1, showFingerprintSha256: $showFingerprintSha256, showFingerprintSha512: $showFingerprintSha512)
                 Section {
@@ -57,9 +56,6 @@ public struct OptionsView: View {
                 if !$0 {
                     InspectionHistoryManager.shared.removeAll()
                 }
-            }
-            .onChange(of: showTips) {
-                UserOptions.current.showTips = $0
             }
             .onChange(of: getHttpHeaders) {
                 UserOptions.current.getHttpHeaders = $0

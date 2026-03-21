@@ -85,6 +85,7 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
             objc_sync_exit(self.lock)
         }
         if self.bundlesLoaded.Get() {
+            printDebug("[\(#fileID):\(#line)] Bundles already loaded")
             return
         }
 
@@ -128,6 +129,8 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
         self.microsoftBundle = nil
         self.mozillaBundle = nil
         self.tlsinspectorBundle = nil
+        self.bundlesLoaded.Set(newValue: false)
+        printDebug("[\(#fileID):\(#line)] Unloading all bundles")
     }
 
     internal func purgeDownloadedBundles() {
@@ -264,7 +267,7 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
             EVP_MD_CTX_free(mctx)
         }
 
-        guard let keyBio = try? EmbeddedAnchorBundleVersion.data(using: .utf8)?.toBIO() else {
+        guard let keyBio = try? AnchorBundleSigningKey.data(using: .utf8)?.toBIO() else {
             return false
         }
         defer {
@@ -487,8 +490,9 @@ public final class AnchorBundleManager: NSObject, Sendable, URLSessionDelegate {
 
     /// Clear any downloaded bundles and revert to the embedded bundles
     public func clearDownloadedBundles() {
+        try? FileManager.default.removeItem(at: self.downloadedBundleDirectory)
+        self.unloadBundles()
         do {
-            try FileManager.default.removeItem(at: self.downloadedBundleDirectory)
             try self.loadBundles()
         } catch {
             printError("[\(#fileID):\(#line)] Error clearing downloaded bundles: \(error)")

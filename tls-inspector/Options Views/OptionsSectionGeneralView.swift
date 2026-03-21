@@ -33,15 +33,13 @@ private let LanguageChoices: [LanguageOption] = [
 
 public struct OptionsSectionGeneralView: View {
     public let rememberRecentLookups: Binding<Bool>
-    public let showTips: Binding<Bool>
     public let getHttpHeaders: Binding<Bool>
     public let treatUnrecognizedAsTrusted: Binding<Bool>
     @State private var currentLanguage: LanguageOption
     @State private var showLanguageChangeAlert = false
 
-    init(rememberRecentLookups: Binding<Bool>, showTips: Binding<Bool>, getHttpHeaders: Binding<Bool>, treatUnrecognizedAsTrusted: Binding<Bool>) {
+    init(rememberRecentLookups: Binding<Bool>, getHttpHeaders: Binding<Bool>, treatUnrecognizedAsTrusted: Binding<Bool>) {
         self.rememberRecentLookups = rememberRecentLookups
-        self.showTips = showTips
         self.getHttpHeaders = getHttpHeaders
         self.treatUnrecognizedAsTrusted = treatUnrecognizedAsTrusted
         self.currentLanguage = LanguageChoices.first {
@@ -52,8 +50,6 @@ public struct OptionsSectionGeneralView: View {
     public var body: some View {
         Section {
             Toggle(Localize.rememberrecentlookups(), isOn: rememberRecentLookups)
-                .tint(.accent)
-            Toggle(Localize.showtips(), isOn: showTips)
                 .tint(.accent)
             Toggle(Localize.showhttpheaders(), isOn: getHttpHeaders)
                 .tint(.accent)

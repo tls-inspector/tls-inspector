@@ -24,30 +24,35 @@ import Testing
     }
 
     @Test func loadAndUpdateBundle() async throws {
-        AnchorBundleManager.shared.purgeDownloadedBundles()
-        try AnchorBundleManager.shared.loadBundles()
+        let manager = AnchorBundleManager.shared
 
-        let verifyBundle = { (bundle: CertificateBundle?, embedded: Bool) in
-            #expect(bundle != nil)
-            #expect(bundle!.embedded() == embedded)
-            #expect(bundle!.certificateCount == bundle!.metadata.certificateCount)
+        manager.purgeDownloadedBundles()
+        try manager.loadBundles()
+
+        let verifyBundle = { (name: String, bundle: CertificateBundle?, embedded: Bool) in
+            guard let bundle = bundle else {
+                Issue.record("\(embedded ? "Embedded" : "Downloaded") \(name) bundle was nil")
+                return
+            }
+            #expect(bundle.embedded() == embedded)
+            #expect(bundle.certificateCount == bundle.metadata.certificateCount)
         }
 
-        verifyBundle(AnchorBundleManager.shared.appleBundle, true)
-        verifyBundle(AnchorBundleManager.shared.googleBundle, true)
-        verifyBundle(AnchorBundleManager.shared.microsoftBundle, true)
-        verifyBundle(AnchorBundleManager.shared.mozillaBundle, true)
-        verifyBundle(AnchorBundleManager.shared.tlsinspectorBundle, true)
+        verifyBundle("Apple", manager.appleBundle, true)
+        verifyBundle("Google", manager.googleBundle, true)
+        verifyBundle("Microsoft", manager.microsoftBundle, true)
+        verifyBundle("Mozilla", manager.mozillaBundle, true)
+        verifyBundle("TLS Inspector", manager.tlsinspectorBundle, true)
 
         // Fake the embedded bundle version
         EmbeddedAnchorBundleVersion = "bundle_20201126"
 
-        let result = try await AnchorBundleManager.shared.updateNow()
+        let result = try await manager.updateNow()
         #expect(result == .updated)
-        verifyBundle(AnchorBundleManager.shared.appleBundle, false)
-        verifyBundle(AnchorBundleManager.shared.googleBundle, false)
-        verifyBundle(AnchorBundleManager.shared.microsoftBundle, false)
-        verifyBundle(AnchorBundleManager.shared.mozillaBundle, false)
-        verifyBundle(AnchorBundleManager.shared.tlsinspectorBundle, false)
+        verifyBundle("Apple", manager.appleBundle, false)
+        verifyBundle("Google", manager.googleBundle, false)
+        verifyBundle("Microsoft", manager.microsoftBundle, false)
+        verifyBundle("Mozilla", manager.mozillaBundle, false)
+        verifyBundle("TLS Inspector", manager.tlsinspectorBundle, false)
     }
 }
