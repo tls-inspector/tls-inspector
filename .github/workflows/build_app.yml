@@ -1,4 +1,4 @@
-name: "Build App"
+name: "Build & Test App"
 
 on:
   push:
@@ -95,9 +95,12 @@ jobs:
       - name: Build
         id: build
         run: |
+          echo "resolvePackageDependencies"
           xcodebuild -resolvePackageDependencies -project "tls-inspector.xcodeproj"
-          xcodebuild -scheme "Inspect Website" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
-          xcodebuild -scheme "TLS Inspector" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ env.TEST_DEVICE }}' build
+          echo "Inspect Website"
+          xcodebuild -scheme "Inspect Website" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,arch=arm64,name=${{ env.TEST_DEVICE }}' build
+          echo "TLS Inspector"
+          xcodebuild -scheme "TLS Inspector" -project "tls-inspector.xcodeproj" -derivedDataPath ~/derived_data -sdk iphonesimulator -destination 'platform=iOS Simulator,arch=arm64,name=${{ env.TEST_DEVICE }}' build
 
       - name: "Install Go"
         id: install_go
@@ -117,19 +120,20 @@ jobs:
           xcrun simctl boot "${{ env.TEST_DEVICE }}"
           xcrun simctl keychain "${{ env.TEST_DEVICE }}" add-root-cert ./root.crt
 
-      - name: Start Test Server
+      - name: "Start Test Server"
         id: testserver_start
         shell: bash
         run: |
           cd tlskit/Tests/TLSKitTests/TestServer
           nohup ./TestServer -c root.crt -k root.key &
 
-      - name: Run Automated Tests
+      - name: "Run Automated Tests"
         id: certificatekit_tests
         run: |
           xcodebuild -scheme TLSKit test -derivedDataPath ~/derived_data -destination "platform=iOS Simulator,name=${{ env.TEST_DEVICE }}"
 
-      - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #pin v7.0.0
+      - name: "Upload Test Results"
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #pin v7.0.0
         if: failure()
         with:
           name: test-results
