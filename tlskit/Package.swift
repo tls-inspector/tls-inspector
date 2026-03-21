@@ -50,7 +50,7 @@ let package = Package(
                 .copy("External/Anchors/mozilla_ca_bundle.pem"),
                 .copy("External/Anchors/tlsinspector_ca_bundle.pem"),
                 .copy("External/Anchors/bundle_metadata.json"),
-                .copy("External/CT Logs/ct_log_list.min.json"),
+                .copy("External/CT-Logs/ct_log_list.min.json"),
             ],
             linkerSettings: [
                 .linkedLibrary("z")
