@@ -1,6 +1,5 @@
-#!/bin/zsh
+#!/bin/sh
 set -e
-set -x
 
 ANCHORS_DIR=${1:?Must specify path to anchors directory}
 
@@ -8,8 +7,11 @@ cd $ANCHORS_DIR
 CURRENT_VERSION=$(cat bundle_version.txt)
 LATEST_VERSION=$(curl -A "tls-inspector/tlskit" -Ss https://api.tlsinspector.com/rootca/latest | jq -r .version)
 
-if [[ $CURRENT_VERSION == $LATEST_VERSION ]]; then
-    exit 0
+if [[ -f bundle_metadata.json ]]; then
+    if [[ $CURRENT_VERSION == $LATEST_VERSION ]]; then
+        echo "Root CA bundles already up-to-date"
+        exit 0
+    fi
 fi
 
 echo "Updating root CA bundles to ${LATEST_VERSION}..."
