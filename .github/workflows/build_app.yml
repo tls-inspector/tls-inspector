@@ -69,6 +69,8 @@ jobs:
           xcode-select -p
           mkdir -p /Users/runner/derived_data
           echo "SWIFTLINT_CACHE_KEY=swiftlint_$(gh api repos/realm/swiftlint/releases/latest --jq '.assets[] | select(.name == "portable_swiftlint.zip") | .id')" >> "$GITHUB_OUTPUT"
+          echo "ROOTCA=$(cat tlskit/Sources/TLSKit/External/Anchors/bundle_version.txt)" >> "$GITHUB_OUTPUT"
+          echo "CT_LOGS=$(cat tlskit/Sources/TLSKit/External/CT Logs/ct_log_version.txt)" >> "$GITHUB_OUTPUT"
 
       - name: "Restore Cached SwiftLint"
         id: restore_swiftlint
@@ -92,7 +94,40 @@ jobs:
           rm swiftlint.zip LICENSE
           chmod a+x swiftlint
 
-      - name: Build
+      - name: "Restore Cached Anchors"
+        id: restore_anchors
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 #pin v5.0.4
+        with:
+          key: ${{ steps.prepare.outputs.ROOTCA }}
+          path: |
+            tlskit/Sources/TLSKit/External/Anchors/apple_ca_bundle.pem
+            tlskit/Sources/TLSKit/External/Anchors/google_ca_bundle.pem
+            tlskit/Sources/TLSKit/External/Anchors/microsoft_ca_bundle.pem
+            tlskit/Sources/TLSKit/External/Anchors/mozilla_ca_bundle.pem
+            tlskit/Sources/TLSKit/External/Anchors/tlsinspector_ca_bundle.pem
+            tlskit/Sources/TLSKit/External/Anchors/bundle_metadata.json
+
+      - name: "Download Anchors"
+        id: download_anchors
+        if: ${{ steps.restore_anchors.outputs.cache-hit != 'true' }}
+        run: |
+          ./tlskit/Scripts/update-rootca-bundles.sh tlskit/Sources/TLSKit/External/Anchors
+
+      - name: "Restore Cached CT Logs"
+        id: restore_ctlogs
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 #pin v5.0.4
+        with:
+          key: ${{ steps.prepare.outputs.CT_LOGS }}
+          path: |
+            tlskit/Sources/TLSKit/External/CT Logs/ct_log_list.min.json
+
+      - name: "Download CT Logs"
+        id: download_ctlogs
+        if: ${{ steps.restore_ctlogs.outputs.cache-hit != 'true' }}
+        run: |
+          ./tlskit/Scripts/update-ctlogs.sh "tlskit/Sources/TLSKit/External/CT Logs"
+
+      - name: "Build"
         id: build
         run: |
           echo "resolvePackageDependencies"
