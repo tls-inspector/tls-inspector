@@ -1775,19 +1775,6 @@ public final class Localize {
             return "Show HTTP Headers"
         }
     }
-    // key: Show Tips
-    public static func showtips() -> String {
-        switch currentLanguage {
-        case .English:
-            return "Show Tips"
-        case .Spanish:
-            return "Show Tips"
-        case .German:
-            return "Show Tips"
-        case .Dutch:
-            return "Show Tips"
-        }
-    }
     // key: Show certificate on {website}
     public static func showcertificateonwebsite(website: String) -> String {
         switch currentLanguage {
