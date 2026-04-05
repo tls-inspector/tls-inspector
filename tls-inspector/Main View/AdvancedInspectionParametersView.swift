@@ -20,16 +20,18 @@ import TLSUI
 import Localization
 
 internal struct AdvancedInspectionParametersView: View {
-    private let parameters: Binding<InspectionParameters>
+    private let ipAddress: Binding<String>
+    private let useIpVersion: Binding<IPVersion>
 
-    public init(parameters: Binding<InspectionParameters>) {
-        self.parameters = parameters
+    public init(ipAddress: Binding<String>, useIpVersion: Binding<IPVersion>) {
+        self.ipAddress = ipAddress
+        self.useIpVersion = useIpVersion
     }
 
     public var body: some View {
         Group {
-            TextField(Localize.ipaddress(), text: parameters.ipAddress)
-            Picker(selection: parameters.useIpVersion) {
+            TextField(Localize.ipaddress(), text: ipAddress)
+            Picker(selection: useIpVersion) {
                 Text(Localize.auto()).tag(IPVersion.Automatic)
                 Text("IPv4").tag(IPVersion.IPv4)
                 Text("IPv6").tag(IPVersion.IPv6)

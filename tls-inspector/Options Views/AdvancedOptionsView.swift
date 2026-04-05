@@ -20,12 +20,8 @@ import TLSUI
 import Localization
 
 public struct AdvancedOptionsView: View {
+    @EnvironmentObject private var userOptions: UserOptions
     @State private var showNag = false
-    @State private var networkEngine = UserOptions.current.cryptoEngine
-    @State private var preferredCiphers = UserOptions.current.preferredCiphers
-    @State private var ipVersion = UserOptions.current.ipVersion
-    @State private var inspectTimeout = UserOptions.current.inspectTimeout
-    @State private var verboseLogging = UserOptions.current.verboseLogging
     @State private var showRootCaCertificateView = false
     @State private var didReset = false
     @State private var didTruncate = false
@@ -33,14 +29,14 @@ public struct AdvancedOptionsView: View {
     public var body: some View {
         List {
             Section {
-                Picker(Localize.networkengine(), selection: $networkEngine) {
+                Picker(Localize.networkengine(), selection: $userOptions.cryptoEngine) {
                     Text("Apple").tag(CryptoEngine.NetworkFramework)
                     Text("OpenSSL").tag(CryptoEngine.OpenSSL)
                 }
-                if networkEngine == .OpenSSL {
+                if UserOptions().cryptoEngine == .OpenSSL {
                     VStack(alignment: .leading) {
                         Text(Localize.allowedciphers()).bold()
-                        TextField(Localize.allowedciphers(), text: $preferredCiphers)
+                        TextField(Localize.allowedciphers(), text: $userOptions.preferredCiphers)
                             .keyboardType(.asciiCapable)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
@@ -53,14 +49,14 @@ public struct AdvancedOptionsView: View {
                 Text(Localize.networkenginefooter())
             }
             Section(Localize.networkoptions()) {
-                Picker(Localize.useipversion(), selection: $ipVersion) {
+                Picker(Localize.useipversion(), selection: $userOptions.ipVersion) {
                     Text(Localize.auto()).tag(IPVersion.Automatic)
                     Text("IPv4").tag(IPVersion.IPv4)
                     Text("IPv6").tag(IPVersion.IPv6)
                 }
                 HStack {
                     Text(Localize.timeout())
-                    TextField(Localize.timeout(), value: $inspectTimeout, format: .number)
+                    TextField(Localize.timeout(), value: $userOptions.inspectTimeout, format: .number)
                         .keyboardType(.numberPad)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
@@ -69,7 +65,7 @@ public struct AdvancedOptionsView: View {
                 }
             }
             Section {
-                Toggle(Localize.verboselogging(), isOn: $verboseLogging)
+                Toggle(Localize.verboselogging(), isOn: $userOptions.verboseLogging)
                     .tint(.accent)
                     .disabled(true) // TESTFLIGHT: remove .disabled(true)
                 ExportFileView(fileUrl: LogWriter.shared.filePath) {
@@ -105,7 +101,7 @@ public struct AdvancedOptionsView: View {
             }
             Section {
                 ListButton {
-                    UserOptions.current.reset()
+                    UserOptions.reset()
                     self.didReset = true
                 } label: {
                     Text(Localize.resettodefaultsettings())
@@ -118,27 +114,15 @@ public struct AdvancedOptionsView: View {
         .alert(Localize.advancedoptions(), isPresented: $showNag, actions: {
             Button(Localize.dismiss()) {
                 self.showNag = false
-                UserOptions.current.advancedSettingsNagDismissed = true
+                userOptions.advancedSettingsNagDismissed = true
             }
         }, message: {
             Text(Localize.advancedsettingsnag())
         })
         .task {
-            if UserOptions.current.advancedSettingsNagDismissed == false {
+            if !userOptions.advancedSettingsNagDismissed {
                 showNag = true
             }
-        }
-        .onChange(of: networkEngine) { newValue in
-            UserOptions.current.cryptoEngine = newValue
-        }
-        .onChange(of: preferredCiphers) { newValue in
-            UserOptions.current.preferredCiphers = newValue
-        }
-        .onChange(of: ipVersion) { newValue in
-            UserOptions.current.ipVersion = newValue
-        }
-        .onChange(of: inspectTimeout) { newValue in
-            UserOptions.current.inspectTimeout = newValue
         }
         .fullScreenCover(isPresented: $showRootCaCertificateView) {
             RootCACertificatesView(isPresented: $showRootCaCertificateView)

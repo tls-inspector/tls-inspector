@@ -43,7 +43,7 @@ public struct TrustStatusView: View {
             iconName = "checkmark.circle.fill"
             text = Localize.trusted()
         case .locallyTrusted:
-            if UserOptions.current.treatUnrecognizedAsTrusted {
+            if UserOptions().treatUnrecognizedAsTrusted {
                 backgroundColor = .trustColourLocallyTrusted
                 textColor = .white
                 iconName = "checkmark.circle"

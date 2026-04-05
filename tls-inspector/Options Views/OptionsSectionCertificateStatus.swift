@@ -16,17 +16,17 @@
 
 import SwiftUI
 import TLSKit
+import TLSUI
 import Localization
 
 public struct OptionsSectionCertificateStatus: View {
-    public let queryOcsp: Binding<Bool>
-    public let checkCrl: Binding<Bool>
+    @EnvironmentObject private var userOptions: UserOptions
 
     public var body: some View {
         Section {
-            Toggle(Localize.queryocspresponder(), isOn: queryOcsp)
+            Toggle(Localize.queryocspresponder(), isOn: $userOptions.queryOcsp)
                 .tint(.accent)
-            Toggle(Localize.downloadcheckcrl(), isOn: checkCrl)
+            Toggle(Localize.downloadcheckcrl(), isOn: $userOptions.checkCrl)
                 .tint(.accent)
         } header: {
             Text(Localize.certificatestatus())

@@ -23,25 +23,25 @@ public struct CertificateFingerprintView: View {
 
     public var body: some View {
         Section(Localize.fingerprints()) {
-            if let md5 = try? certificate.fingerprint(.md5) {
+            if UserOptions().showFingerprintMd5, let md5 = try? certificate.fingerprint(.md5) {
                 TitleValueView(title: "MD5") {
                     Text(md5.hexEncodedString())
                         .fixedwidth()
                 }
             }
-            if let sha1 = try? certificate.fingerprint(.sha1) {
+            if UserOptions().showFingerprintSha1, let sha1 = try? certificate.fingerprint(.sha1) {
                 TitleValueView(title: "SHA1") {
                     Text(sha1.hexEncodedString())
                         .fixedwidth()
                 }
             }
-            if let sha256 = try? certificate.fingerprint(.sha256) {
+            if UserOptions().showFingerprintSha256, let sha256 = try? certificate.fingerprint(.sha256) {
                 TitleValueView(title: "SHA-256") {
                     Text(sha256.hexEncodedString())
                         .fixedwidth()
                 }
             }
-            if let sha512 = try? certificate.fingerprint(.sha512) {
+            if UserOptions().showFingerprintSha512, let sha512 = try? certificate.fingerprint(.sha512) {
                 TitleValueView(title: "SHA-512") {
                     Text(sha512.hexEncodedString())
                         .fixedwidth()

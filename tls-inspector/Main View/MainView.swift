@@ -27,7 +27,7 @@ internal class InspectionParameters: ObservableObject {
 }
 
 struct MainView: View {
-    @State var inspectionParameters = InspectionParameters()
+    @StateObject var inspectionParameters = InspectionParameters()
     @State var isLoading: Bool = false
     @State var inspectionResponse: InspectionResponse?
     @State var inspectionError: String?
@@ -36,7 +36,6 @@ struct MainView: View {
     @State var showOptionsView = false
     @State var showProxyWarning = false
     @State var showAdvancedInspectionOptions = false
-    let randomSite = FunStuff.randomWebsite()
 
     var body: some View {
         Navigation {
@@ -44,33 +43,26 @@ struct MainView: View {
                 PreviewBuildView()
                 Section(showAdvancedInspectionOptions ? Localize.target() : Localize.domainnameoripaddress()) {
                     HStack {
-                        TextField(text: $inspectionParameters.host) {
-                            if showAdvancedInspectionOptions {
-                                Text(Localize.domainnameoripaddress())
-                            } else {
-                                Text(self.randomSite)
-                            }
-                        }
-                        .submitLabel(.go)
-                        .onSubmit {
+                        DomainInput(host: $inspectionParameters.host, showAdvancedInspectionOptions: $showAdvancedInspectionOptions, isLoading: $isLoading) {
                             Task {
                                 await self.inspectFromInput()
                             }
                         }
-                        .keyboardType(.URL)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .disabled(self.isLoading)
                         Button {
                             withAnimation {
                                 self.showAdvancedInspectionOptions.toggle()
                             }
                         } label: {
                             Image(systemName: "gearshape.fill")
+                                .tint(.accent)
+                                .padding(.vertical, 11)
+                                .padding(.horizontal, 16)
                         }
+                        .buttonStyle(.plain)
                     }
+                    .listRowInsets(EdgeInsets())
                     if showAdvancedInspectionOptions {
-                        AdvancedInspectionParametersView(parameters: $inspectionParameters)
+                        AdvancedInspectionParametersView(ipAddress: $inspectionParameters.ipAddress, useIpVersion: $inspectionParameters.useIpVersion)
                     }
                     if isLoading {
                         HStack {
@@ -159,11 +151,11 @@ struct MainView: View {
         let request = InspectionRequest(
             address: address,
             serverName: serverName,
-            checkCRL: UserOptions.current.checkCrl,
-            checkOCSP: UserOptions.current.queryOcsp,
+            checkCRL: UserOptions().checkCrl,
+            checkOCSP: UserOptions().queryOcsp,
             ipVersion: inspectionParameters.useIpVersion.toTLSKit(),
-            checkHTTP: UserOptions.current.getHttpHeaders,
-            timeoutSeconds: UInt8(UserOptions.current.inspectTimeout),
+            checkHTTP: UserOptions().getHttpHeaders,
+            timeoutSeconds: UInt8(UserOptions().inspectTimeout),
             alpn: ["http/1.1"]
         )
         await executeInspectionRequest(request)
@@ -176,7 +168,7 @@ struct MainView: View {
         }
 
         self.isLoading = true
-        let cryptoEngine = UserOptions.current.cryptoEngine.toTLSKit()
+        let cryptoEngine = UserOptions().cryptoEngine.toTLSKit()
         let session = InspectionSession(engineType: cryptoEngine)
         do {
             let result = try await session.execute(request)

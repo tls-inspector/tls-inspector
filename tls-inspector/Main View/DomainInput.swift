@@ -19,19 +19,30 @@ import TLSKit
 import TLSUI
 import Localization
 
-public struct OptionsSectionFingerprintsView: View {
-    @EnvironmentObject private var userOptions: UserOptions
+struct DomainInput: View {
+    let host: Binding<String>
+    let showAdvancedInspectionOptions: Binding<Bool>
+    let isLoading: Binding<Bool>
+    let onSubmit: () -> Void
+    private let randomSite = FunStuff.randomWebsite()
 
-    public var body: some View {
-        Section(Localize.fingerprints()) {
-            Toggle("MD5", isOn: $userOptions.showFingerprintMd5)
-                .tint(.accent)
-            Toggle("SHA-1", isOn: $userOptions.showFingerprintSha1)
-                .tint(.accent)
-            Toggle("SHA-256", isOn: $userOptions.showFingerprintSha256)
-                .tint(.accent)
-            Toggle("SHA-512", isOn: $userOptions.showFingerprintSha512)
-                .tint(.accent)
+    var body: some View {
+        TextField(text: host) {
+            if showAdvancedInspectionOptions.wrappedValue {
+                Text(Localize.domainnameoripaddress())
+            } else {
+                Text(self.randomSite)
+            }
         }
+        .submitLabel(.go)
+        .onSubmit {
+            onSubmit()
+        }
+        .keyboardType(.URL)
+        .autocorrectionDisabled()
+        .textInputAutocapitalization(.never)
+        .disabled(isLoading.wrappedValue)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.leading, 20)
     }
 }

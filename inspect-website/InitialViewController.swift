@@ -177,14 +177,14 @@ class InitialViewController: UIViewController {
         let request = InspectionRequest(
             address: host,
             port: port,
-            checkCRL: UserOptions.current.checkCrl,
-            checkOCSP: UserOptions.current.queryOcsp,
-            ipVersion: UserOptions.current.ipVersion.toTLSKit(),
-            checkHTTP: UserOptions.current.getHttpHeaders,
-            timeoutSeconds: UInt8(UserOptions.current.inspectTimeout),
+            checkCRL: UserOptions().checkCrl,
+            checkOCSP: UserOptions().queryOcsp,
+            ipVersion: UserOptions().ipVersion.toTLSKit(),
+            checkHTTP: UserOptions().getHttpHeaders,
+            timeoutSeconds: UInt8(UserOptions().inspectTimeout),
             alpn: ["http/1.1"],
         )
-        let cryptoengine = UserOptions.current.cryptoEngine.toTLSKit()
+        let cryptoengine = UserOptions().cryptoEngine.toTLSKit()
 
         do {
             let session = InspectionSession(engineType: cryptoengine)

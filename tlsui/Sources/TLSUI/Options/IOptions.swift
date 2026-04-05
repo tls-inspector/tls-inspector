@@ -57,10 +57,12 @@ public enum CryptoEngine: String, Sendable, Codable {
     }
 }
 
-public enum IPVersion: String, Sendable, Codable {
+public enum IPVersion: String, Identifiable, Sendable, Codable {
     case Automatic = "automatic"
     case IPv4 = "ipv4"
     case IPv6 = "ipv6"
+
+    public var id: Self { self }
 
     public static func allValues() -> [IPVersion] {
         return [

@@ -19,48 +19,24 @@ import TLSKit
 import TLSUI
 import Localization
 
-private struct LanguageOption: Sendable, Hashable, Identifiable {
-    let title: String
-    var id: SupportedLanguages
-}
-
-private let LanguageChoices: [LanguageOption] = [
-    .init(title: "English", id: .English),
-    .init(title: "Nederlands", id: .Dutch),
-    .init(title: "Deutsch", id: .German),
-    .init(title: "Español", id: .Spanish),
-]
-
 public struct OptionsSectionGeneralView: View {
-    public let rememberRecentLookups: Binding<Bool>
-    public let getHttpHeaders: Binding<Bool>
-    public let treatUnrecognizedAsTrusted: Binding<Bool>
-    @State private var currentLanguage: LanguageOption
+    @EnvironmentObject private var userOptions: UserOptions
     @State private var showLanguageChangeAlert = false
-
-    init(rememberRecentLookups: Binding<Bool>, getHttpHeaders: Binding<Bool>, treatUnrecognizedAsTrusted: Binding<Bool>) {
-        self.rememberRecentLookups = rememberRecentLookups
-        self.getHttpHeaders = getHttpHeaders
-        self.treatUnrecognizedAsTrusted = treatUnrecognizedAsTrusted
-        self.currentLanguage = LanguageChoices.first {
-            return $0.id == UserOptions.current.appLanguage
-        } ?? LanguageChoices[0]
-    }
 
     public var body: some View {
         Section {
-            Toggle(Localize.rememberrecentlookups(), isOn: rememberRecentLookups)
+            Toggle(Localize.rememberrecentlookups(), isOn: $userOptions.rememberRecentLookups)
                 .tint(.accent)
-            Toggle(Localize.showhttpheaders(), isOn: getHttpHeaders)
+            Toggle(Localize.showhttpheaders(), isOn: $userOptions.getHttpHeaders)
                 .tint(.accent)
-            Toggle(Localize.treatunrecognizedastrusted(), isOn: treatUnrecognizedAsTrusted)
+            Toggle(Localize.treatunrecognizedastrusted(), isOn: $userOptions.treatUnrecognizedAsTrusted)
                 .tint(.accent)
             NavigationLink(Localize.appicon()) {
                 AppIconView()
             }
-            Picker(Localize.applanguage(), selection: $currentLanguage) {
-                ForEach(LanguageChoices) { choice in
-                    Text(choice.title).tag(choice)
+            Picker(Localize.applanguage(), selection: $userOptions.appLanguage) {
+                ForEach(SupportedLanguages.allCases) { lang in
+                    Text(lang.localizedName()).tag(lang)
                 }
             }
         } header: {
@@ -68,8 +44,8 @@ public struct OptionsSectionGeneralView: View {
         } footer: {
             Text("Interested in helping translate TLS Inspector? We've love to hear from you! Get in touch using the links on the About page.")
         }
-        .onChange(of: currentLanguage) { newValue in
-            UserOptions.current.appLanguage = newValue.id
+        .onChange(of: userOptions.appLanguage) { newValue in
+            currentLanguage = newValue
             self.showLanguageChangeAlert = true
         }
         .alert(Localize.languageupdated(), isPresented: $showLanguageChangeAlert) {

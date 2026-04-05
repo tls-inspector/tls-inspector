@@ -20,12 +20,28 @@
 
 import Foundation
 
-@MainActor
-public enum SupportedLanguages: String, CaseIterable, Codable {
+public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIterable, Codable {
     case English = "en"
     case Spanish = "es"
     case German = "de"
     case Dutch = "nl"
+
+    public var id: Self {
+        return self
+    }
+
+    public func localizedName() -> String {
+        switch self {
+        case .English:
+            return "English"
+        case .Spanish:
+            return "Spanish"
+        case .German:
+            return "German"
+        case .Dutch:
+            return "Dutch"
+        }
+    }
 }
 
 @MainActor

@@ -17,7 +17,7 @@
 import SwiftUI
 import Localization
 
-private enum AppDefaultsKeys: String, CaseIterable {
+public enum AppDefaultsKeys: String, CaseIterable {
     case verboseLogging = "verbose_logging"
     case firstRunComplete = "first_run_complete"
     case rememberRecentLookups = "remember_recent_lookups"
@@ -81,169 +81,104 @@ private final class AppDefaults: Sendable {
     }
 }
 
-@MainActor
-public final class UserOptions {
-    public static let current = UserOptions()
-
-    public func reset() {
-        AppDefaults.reset()
+public final class UserOptions: ObservableObject {
+    public init() {
+        verboseLogging = AppDefaults.get(.verboseLogging)
+        firstRunComplete = AppDefaults.get(.firstRunComplete)
+        rememberRecentLookups = AppDefaults.get(.rememberRecentLookups)
+        getHttpHeaders = AppDefaults.get(.getHttpHeaders)
+        queryOcsp = AppDefaults.get(.queryOcsp)
+        checkCrl = AppDefaults.get(.checkCrl)
+        showFingerprintMd5 = AppDefaults.get(.showFingerprintMd5)
+        showFingerprintSha1 = AppDefaults.get(.showFingerprintSha1)
+        showFingerprintSha256 = AppDefaults.get(.showFingerprintSha256)
+        showFingerprintSha512 = AppDefaults.get(.showFingerprintSha512)
+        preferredCiphers = AppDefaults.get(.preferredCiphers)
+        advancedSettingsNagDismissed = AppDefaults.get(.advancedSettingsNagDismissed)
+        cryptoEngine = CryptoEngine.init(rawValue: AppDefaults.get(.cryptoEngine))!
+        ipVersion = IPVersion.init(rawValue: AppDefaults.get(.ipVersion))!
+        appLanguage = SupportedLanguages.init(rawValue: AppDefaults.get(.appLanguage))!
+        treatUnrecognizedAsTrusted = AppDefaults.get(.treatUnrecognizedAsTrusted)
+        inspectTimeout = AppDefaults.get(.inspectTimeout)
     }
 
-    public var firstRunComplete: Bool {
-        get {
-            return AppDefaults.get(.firstRunComplete)
-        }
-        set {
-            AppDefaults.set(.firstRunComplete, newValue)
-        }
-    }
+    @Published public var verboseLogging: Bool {
+        didSet {
+            AppDefaults.set(.verboseLogging, verboseLogging)
 
-    public var rememberRecentLookups: Bool {
-        get {
-            return AppDefaults.get(.rememberRecentLookups)
-        }
-        set {
-            AppDefaults.set(.rememberRecentLookups, newValue)
-        }
-    }
-
-    public var getHttpHeaders: Bool {
-        get {
-            return AppDefaults.get(.getHttpHeaders)
-        }
-        set {
-            AppDefaults.set(.getHttpHeaders, newValue)
-        }
-    }
-
-    public var queryOcsp: Bool {
-        get {
-            return AppDefaults.get(.queryOcsp)
-        }
-        set {
-            AppDefaults.set(.queryOcsp, newValue)
-        }
-    }
-
-    public var checkCrl: Bool {
-        get {
-            return AppDefaults.get(.checkCrl)
-        }
-        set {
-            AppDefaults.set(.checkCrl, newValue)
-        }
-    }
-
-    public var showFingerprintMd5: Bool {
-        get {
-            return AppDefaults.get(.showFingerprintMd5)
-        }
-        set {
-            AppDefaults.set(.showFingerprintMd5, newValue)
-        }
-    }
-
-    public var showFingerprintSha1: Bool {
-        get {
-            return AppDefaults.get(.showFingerprintSha1)
-        }
-        set {
-            AppDefaults.set(.showFingerprintSha1, newValue)
-        }
-    }
-
-    public var showFingerprintSha256: Bool {
-        get {
-            return AppDefaults.get(.showFingerprintSha256)
-        }
-        set {
-            AppDefaults.set(.showFingerprintSha256, newValue)
-        }
-    }
-
-    public var showFingerprintSha512: Bool {
-        get {
-            return AppDefaults.get(.showFingerprintSha512)
-        }
-        set {
-            AppDefaults.set(.showFingerprintSha512, newValue)
-        }
-    }
-
-    public var cryptoEngine: CryptoEngine {
-        get {
-            return CryptoEngine(rawValue: AppDefaults.get(.cryptoEngine)) ?? .NetworkFramework
-        }
-        set {
-            AppDefaults.set(.cryptoEngine, newValue.rawValue)
-        }
-    }
-
-    public var ipVersion: IPVersion {
-        get {
-            return IPVersion(rawValue: AppDefaults.get(.ipVersion)) ?? .Automatic
-        }
-        set {
-            AppDefaults.set(.ipVersion, newValue.rawValue)
-        }
-    }
-
-    public var preferredCiphers: String {
-        get {
-            return AppDefaults.get(.preferredCiphers)
-        }
-        set {
-            AppDefaults.set(.preferredCiphers, newValue)
-        }
-    }
-
-    public var advancedSettingsNagDismissed: Bool {
-        get {
-            return AppDefaults.get(.advancedSettingsNagDismissed)
-        }
-        set {
-            AppDefaults.set(.advancedSettingsNagDismissed, newValue)
-        }
-    }
-
-    public var treatUnrecognizedAsTrusted: Bool {
-        get {
-            return AppDefaults.get(.treatUnrecognizedAsTrusted)
-        }
-        set {
-            AppDefaults.set(.treatUnrecognizedAsTrusted, newValue)
-        }
-    }
-
-    public var appLanguage: SupportedLanguages {
-        get {
-            return SupportedLanguages(rawValue: AppDefaults.get(.appLanguage)) ?? .English
-        }
-        set {
-            AppDefaults.set(.appLanguage, newValue.rawValue)
-        }
-    }
-
-    public var inspectTimeout: Int {
-        get {
-            return AppDefaults.get(.inspectTimeout)
-        }
-        set {
-            AppDefaults.set(.inspectTimeout, newValue)
-        }
-    }
-
-    public var verboseLogging: Bool {
-        get {
-            return AppDefaults.get(.verboseLogging)
-        }
-        set {
-            AppDefaults.set(.verboseLogging, newValue)
-            if newValue {
+            if verboseLogging {
                 LogWriter.shared.setLevel(.Debug)
             } else {
                 LogWriter.shared.setLevel(.Error)
             }
         }
+    }
+
+    @Published public var firstRunComplete: Bool {
+        didSet { AppDefaults.set(.firstRunComplete, firstRunComplete) }
+    }
+
+    @Published public var rememberRecentLookups: Bool {
+        didSet { AppDefaults.set(.rememberRecentLookups, rememberRecentLookups) }
+    }
+
+    @Published public var getHttpHeaders: Bool {
+        didSet { AppDefaults.set(.getHttpHeaders, getHttpHeaders) }
+    }
+
+    @Published public var queryOcsp: Bool {
+        didSet { AppDefaults.set(.queryOcsp, queryOcsp) }
+    }
+
+    @Published public var checkCrl: Bool {
+        didSet { AppDefaults.set(.checkCrl, checkCrl) }
+    }
+
+    @Published public var showFingerprintMd5: Bool {
+        didSet { AppDefaults.set(.showFingerprintMd5, showFingerprintMd5) }
+    }
+
+    @Published public var showFingerprintSha1: Bool {
+        didSet { AppDefaults.set(.showFingerprintSha1, showFingerprintSha1) }
+    }
+
+    @Published public var showFingerprintSha256: Bool {
+        didSet { AppDefaults.set(.showFingerprintSha256, showFingerprintSha256) }
+    }
+
+    @Published public var showFingerprintSha512: Bool {
+        didSet { AppDefaults.set(.showFingerprintSha512, showFingerprintSha512) }
+    }
+
+    @Published public var preferredCiphers: String {
+        didSet { AppDefaults.set(.preferredCiphers, preferredCiphers) }
+    }
+
+    @Published public var advancedSettingsNagDismissed: Bool {
+        didSet { AppDefaults.set(.advancedSettingsNagDismissed, advancedSettingsNagDismissed) }
+    }
+
+    @Published public var cryptoEngine: CryptoEngine {
+        didSet { AppDefaults.set(.cryptoEngine, cryptoEngine.rawValue) }
+    }
+
+    @Published public var ipVersion: IPVersion {
+        didSet { AppDefaults.set(.ipVersion, ipVersion.rawValue) }
+    }
+
+    @Published public var appLanguage: SupportedLanguages {
+        didSet { AppDefaults.set(.appLanguage, appLanguage.rawValue) }
+    }
+
+    @Published public var treatUnrecognizedAsTrusted: Bool {
+        didSet { AppDefaults.set(.treatUnrecognizedAsTrusted, treatUnrecognizedAsTrusted) }
+    }
+
+    @Published public var inspectTimeout: Int {
+        didSet { AppDefaults.set(.inspectTimeout, inspectTimeout) }
+    }
+
+    public static func reset() {
+        AppDefaults.reset()
     }
 }

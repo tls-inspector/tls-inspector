@@ -21,25 +21,17 @@ import TLSUI
 
 public struct OptionsView: View {
     public let presented: Binding<Bool>
-    @State private var rememberRecentLookups = UserOptions.current.rememberRecentLookups
-    @State private var getHttpHeaders = UserOptions.current.getHttpHeaders
-    @State private var treatUnrecognizedAsTrusted = UserOptions.current.treatUnrecognizedAsTrusted
-    @State private var queryOcsp = UserOptions.current.queryOcsp
-    @State private var checkCrl = UserOptions.current.checkCrl
-    @State private var showFingerprintMd5 = UserOptions.current.showFingerprintMd5
-    @State private var showFingerprintSha1 = UserOptions.current.showFingerprintSha1
-    @State private var showFingerprintSha256 = UserOptions.current.showFingerprintSha256
-    @State private var showFingerprintSha512 = UserOptions.current.showFingerprintSha512
+    @StateObject private var userOptions = UserOptions()
 
     public var body: some View {
         Navigation {
             List {
-                OptionsSectionGeneralView(rememberRecentLookups: $rememberRecentLookups, getHttpHeaders: $getHttpHeaders, treatUnrecognizedAsTrusted: $treatUnrecognizedAsTrusted)
-                OptionsSectionCertificateStatus(queryOcsp: $queryOcsp, checkCrl: $checkCrl)
-                OptionsSectionFingerprintsView(showFingerprintMd5: $showFingerprintMd5, showFingerprintSha1: $showFingerprintSha1, showFingerprintSha256: $showFingerprintSha256, showFingerprintSha512: $showFingerprintSha512)
+                OptionsSectionGeneralView().environmentObject(userOptions)
+                OptionsSectionCertificateStatus().environmentObject(userOptions)
+                OptionsSectionFingerprintsView().environmentObject(userOptions)
                 Section {
                     NavigationLink(Localize.advancedoptions()) {
-                        AdvancedOptionsView()
+                        AdvancedOptionsView().environmentObject(userOptions)
                     }
                 }
             }
@@ -50,36 +42,6 @@ public struct OptionsView: View {
                         self.presented.wrappedValue = false
                     }
                 }
-            }
-            .onChange(of: rememberRecentLookups) {
-                UserOptions.current.rememberRecentLookups = $0
-                if !$0 {
-                    InspectionHistoryManager.shared.removeAll()
-                }
-            }
-            .onChange(of: getHttpHeaders) {
-                UserOptions.current.getHttpHeaders = $0
-            }
-            .onChange(of: treatUnrecognizedAsTrusted) {
-                UserOptions.current.treatUnrecognizedAsTrusted = $0
-            }
-            .onChange(of: queryOcsp) {
-                UserOptions.current.queryOcsp = $0
-            }
-            .onChange(of: checkCrl) {
-                UserOptions.current.checkCrl = $0
-            }
-            .onChange(of: showFingerprintMd5) {
-                UserOptions.current.showFingerprintMd5 = $0
-            }
-            .onChange(of: showFingerprintSha1) {
-                UserOptions.current.showFingerprintSha1 = $0
-            }
-            .onChange(of: showFingerprintSha256) {
-                UserOptions.current.showFingerprintSha256 = $0
-            }
-            .onChange(of: showFingerprintSha512) {
-                UserOptions.current.showFingerprintSha512 = $0
             }
         }
     }
