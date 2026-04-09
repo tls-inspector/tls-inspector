@@ -40,7 +40,6 @@ struct MainView: View {
     var body: some View {
         Navigation {
             List {
-                PreviewBuildView()
                 Section(showAdvancedInspectionOptions ? Localize.target() : Localize.domainnameoripaddress()) {
                     HStack {
                         DomainInput(host: $inspectionParameters.host, showAdvancedInspectionOptions: $showAdvancedInspectionOptions, isLoading: $isLoading) {

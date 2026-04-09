@@ -67,7 +67,6 @@ public struct AdvancedOptionsView: View {
             Section {
                 Toggle(Localize.verboselogging(), isOn: $userOptions.verboseLogging)
                     .tint(.accent)
-                    .disabled(true) // TESTFLIGHT: remove .disabled(true)
                 ExportFileView(fileUrl: LogWriter.shared.filePath) {
                     HStack {
                         Image(systemName: "ladybug.fill")

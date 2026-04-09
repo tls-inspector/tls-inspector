@@ -70,12 +70,11 @@ public final class LogWriter: ILogger {
     /// On debug configurations the level is `Debug`, on release configurations it is `Error`.
     /// - Returns: A log level
     static func defaultLogLevel() -> LogLevel {
-        // TESTFLIGHT: Restore .Error default logging level
-// #if DEBUG
+#if DEBUG
         return .Debug
-// #else
-//        return .Error
-// #endif
+ #else
+        return .Error
+ #endif
     }
 
     /// Update the current logging level
