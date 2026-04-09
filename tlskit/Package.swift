@@ -21,7 +21,7 @@ import PackageDescription
 let package = Package(
     name: "TLSKit",
     platforms: [
-        .iOS(.v12)
+        .iOS(.v15)
     ],
     products: [
         .library(
@@ -30,15 +30,13 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/tls-inspector/tlskit-external-dependencies", revision: "2475bd07730a6fafb705542ab24e40a1087b5fae"),
-        .package(name: "Crashpad", path: "../crashpad"),
+        .package(url: "https://github.com/tls-inspector/tlskit-external-dependencies", revision: "ea7b18f54f7ac413c964f61d5089902ddc8dc3f0"),
         .package(url: "https://github.com/dns-inspector/dnskit", revision: "572ea4b3f003c2804f083d509c5e2cf9cd649cdb"),
     ],
     targets: [
         .target(
             name: "TLSKit",
             dependencies: [
-                "Crashpad",
                 .product(name: "OpenSSL", package: "tlskit-external-dependencies"),
                 .product(name: "Curl", package: "tlskit-external-dependencies"),
                 .product(name: "DNSKit", package: "dnskit"),
