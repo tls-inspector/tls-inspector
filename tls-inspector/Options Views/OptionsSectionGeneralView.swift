@@ -36,7 +36,7 @@ public struct OptionsSectionGeneralView: View {
             }
             Picker(Localize.applanguage(), selection: $userOptions.appLanguage) {
                 ForEach(SupportedLanguages.allCases) { lang in
-                    Text(lang.localizedName()).tag(lang)
+                    Text(String(describing: lang)).tag(lang)
                 }
             }
         } header: {

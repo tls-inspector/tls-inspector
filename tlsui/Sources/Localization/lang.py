@@ -200,8 +200,7 @@ def write_localization_file(name):
 
 import Foundation
 
-@MainActor
-public enum SupportedLanguages: String, CaseIterable, Codable {
+public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIterable, Codable {
 """
         file.write(header)
 
@@ -209,7 +208,11 @@ public enum SupportedLanguages: String, CaseIterable, Codable {
             file.write("    case " + languageNameMap[language] + " = \"" + language + "\"\n")
 
 
-        header = """}
+        header = """
+    public var id: Self {
+        return self
+    }
+}
 
 @MainActor
 public var currentLanguage: SupportedLanguages = .English

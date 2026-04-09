@@ -46,7 +46,13 @@ private struct CertificateListRowLabel: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(certificate.description ?? Localize.unnamedcertificate())
+                HStack {
+                    Text(certificate.description ?? Localize.unnamedcertificate())
+                    if certificate.validity.isExpired {
+                        Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red)
+                        Text(Localize.expired()).foregroundStyle(.red)
+                    }
+                }
                 if let source = certificate.source {
                     Text(source == .server ? Localize.sentbyserver() : Localize.foundondevice())
                         .opacity(0.5)

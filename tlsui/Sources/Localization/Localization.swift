@@ -29,19 +29,6 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
     public var id: Self {
         return self
     }
-
-    public func localizedName() -> String {
-        switch self {
-        case .English:
-            return "English"
-        case .Spanish:
-            return "Spanish"
-        case .German:
-            return "German"
-        case .Dutch:
-            return "Dutch"
-        }
-    }
 }
 
 @MainActor
@@ -671,6 +658,19 @@ public final class Localize {
             return "Error adding reminder"
         case .Dutch:
             return "Error adding reminder"
+        }
+    }
+    // key: Expired
+    public static func expired() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Expired"
+        case .Spanish:
+            return "Caducado"
+        case .German:
+            return "Abgelaufen"
+        case .Dutch:
+            return "Verlopen"
         }
     }
     // key: Expires In
