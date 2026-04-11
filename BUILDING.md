@@ -5,32 +5,40 @@ This document will describe the process for building TLS Inspector.
 # Requirements
 
 - The latest release of Xcode
-- Git (1.8 or later)
 - An Apple Developer Membership (only required for distribution or installing on physical devices)
-- Swiftlint
-- gpg
 
-*Note: while it may be possible to build the project on a virtual machine or "hackintosh", it is untested
-and not supported. Furthermore, it may violate the Apple Developer rules to submit apps from unauthorized copies
-of macOS.*
+> [!NOTE]
+> While it may be _possible_ to build the project on a virtual machine or "hackintosh", it is untested
+and not _supported_. Furthermore, it may violate the Apple Developer rules to submit apps from unauthorized copies
+of macOS.
 
-# Downloading the Source Code
+# External Dependencies
 
-TLS Inspector makes use of two git submodules that are required to build the project.
+## Certificate Transparancy Logs
 
-When cloning the source code, you need to tell git to also initialize these submodules.
+The app depends on, but does not include in its source code, lists of certificate transparancy logs. This list is provided by Google on Github.
 
-If you are using git 2.13 or later, use:
-
-```bash
-git clone --recurse-submodules https://github.com/tls-inspector/tls-inspector.git
-```
-
-For older versions of git, use:
+The first time you check out the app, or to update the list, run:
 
 ```bash
-git clone --recursive https://github.com/tls-inspector/tls-inspector.git
+cd tlskit/Scripts
+./update-ctlogs.sh ../Sources/TLSKit/External/CT-Logs
 ```
+
+## Root CA Certificate Bundles
+
+The app depends on, but does not include in its source code, collections of root CA certificates.
+
+The first time you check out the app, or to update the list, run:
+
+```bash
+cd tlskit/Scripts
+./update-rootca-bundles.sh ../Sources/TLSKit/External/Anchors
+```
+
+## Curl & OpenSSL
+
+The first time you open the TLS Inspector project, Xcode will download the required libraries from our [dedicated repo](https://github.com/tls-inspector/tlskit-external-dependencies). Refer to that repo for build instructions.
 
 # Configuring the Project
 
@@ -40,11 +48,3 @@ Unless you're Ian Spence, you will need to change this to your own team and code
 deploy the app to a physical iOS device.
 
 This requires that you have an Apple Developer Membership, which can be purchased here: https://developer.apple.com/programs/
-
-# Building the Project
-
-TLS Inspector requires OpenSSL and tiny-curl, both of which will be compiled the first time you build the project in Xcode.
-
-**The first time you build the project in Xcode it will take a while (5-15 minutes depending on hardware).**
-
-You can change the version of OpenSSL or tiny-curl used by altering the associated `.want` file in `CertificateKit/build/`

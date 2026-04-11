@@ -55,7 +55,3 @@ fastlane/screenshots
 defines.pch
 *.xcworkspacedata
 /tls-inspector.xcodeproj/project.xcworkspace
-
-# OpenSSL and cURL Frameworks
-/TLSKit/openssl.xcframework
-/TLSKit/curl.xcframework
