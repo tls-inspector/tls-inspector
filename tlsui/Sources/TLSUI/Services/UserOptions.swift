@@ -95,9 +95,9 @@ public final class UserOptions: ObservableObject {
         showFingerprintSha512 = AppDefaults.get(.showFingerprintSha512)
         preferredCiphers = AppDefaults.get(.preferredCiphers)
         advancedSettingsNagDismissed = AppDefaults.get(.advancedSettingsNagDismissed)
-        cryptoEngine = CryptoEngine.init(rawValue: AppDefaults.get(.cryptoEngine))!
-        ipVersion = IPVersion.init(rawValue: AppDefaults.get(.ipVersion))!
-        appLanguage = SupportedLanguages.init(rawValue: AppDefaults.get(.appLanguage))!
+        cryptoEngine = CryptoEngine.init(rawValue: AppDefaults.get(.cryptoEngine)) ?? .NetworkFramework
+        ipVersion = IPVersion.init(rawValue: AppDefaults.get(.ipVersion)) ?? .Automatic
+        appLanguage = SupportedLanguages.init(rawValue: AppDefaults.get(.appLanguage)) ?? .English
         treatUnrecognizedAsTrusted = AppDefaults.get(.treatUnrecognizedAsTrusted)
         inspectTimeout = AppDefaults.get(.inspectTimeout)
     }
