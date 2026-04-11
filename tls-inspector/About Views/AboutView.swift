@@ -27,7 +27,7 @@ public struct AboutView: View {
     public var body: some View {
         GeometryReader { geometry in
             Navigation {
-                VStack {
+                VStack(spacing: 0) {
                     VStack {
                         Image(systemName: "lock.circle.fill")
                             .resizable(resizingMode: .stretch)
