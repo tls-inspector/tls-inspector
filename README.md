@@ -1,5 +1,3 @@
-> [!CAUTION]
-
 # TLS Inspector
 
 [![Follow us on Mastodon](https://img.shields.io/mastodon/follow/109742126529751070?domain=https%3A%2F%2Finfosec.exchange&logo=mastodon&logoColor=white&style=flat)](https://infosec.exchange/@tlsinspector)
