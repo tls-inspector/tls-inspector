@@ -1,0 +1,22 @@
+{
+  "originHash" : "b55062bedd203e5d88a545062757abdffc8670ae90cc90215fe156a5e5513f09",
+  "pins" : [
+    {
+      "identity" : "dnskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dns-inspector/dnskit",
+      "state" : {
+        "revision" : "d5883384c61d69e7b2a80e813b0824d341672b5f"
+      }
+    },
+    {
+      "identity" : "idna-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Wevah/IDNA-Cocoa",
+      "state" : {
+        "revision" : "96de66e18f27edd40e41321f63637fbf2a83eb41"
+      }
+    }
+  ],
+  "version" : 3
+}

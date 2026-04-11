@@ -1,0 +1,7 @@
+{
+  "name": "spellcheck",
+  "type": "module",
+  "dependencies": {
+    "harper.js": "^1.5.1"
+  }
+}

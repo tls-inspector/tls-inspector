@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1620"
+   LastUpgradeVersion = "2630"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -15,9 +16,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3CDC14A623B0453B0053932F"
-               BuildableName = "Show Certificate.appex"
-               BlueprintName = "Inspect Website"
+               BlueprintIdentifier = "3C8742DF2EB4524200154664"
+               BuildableName = "inspect-website.appex"
+               BlueprintName = "inspect-website"
                ReferencedContainer = "container:tls-inspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +30,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3C72692323949ABD002A0B19"
-               BuildableName = "TLS Inspector.app"
-               BlueprintName = "TLS Inspector"
+               BlueprintIdentifier = "3CC954432CA9EC4200C3AEF8"
+               BuildableName = "tls-inspector.app"
+               BlueprintName = "tls-inspector"
                ReferencedContainer = "container:tls-inspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -41,28 +42,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3C72692323949ABD002A0B19"
-            BuildableName = "TLS Inspector.app"
-            BlueprintName = "TLS Inspector"
-            ReferencedContainer = "container:tls-inspector.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3CF397401EB50E0900E8DBF4"
-               BuildableName = "CertificateKitTests.xctest"
-               BlueprintName = "CertificateKitTests"
-               ReferencedContainer = "container:tls-inspector.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -80,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3C72692323949ABD002A0B19"
-            BuildableName = "TLS Inspector.app"
-            BlueprintName = "TLS Inspector"
+            BlueprintIdentifier = "3CC954432CA9EC4200C3AEF8"
+            BuildableName = "tls-inspector.app"
+            BlueprintName = "tls-inspector"
             ReferencedContainer = "container:tls-inspector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -99,9 +80,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3C72692323949ABD002A0B19"
-            BuildableName = "TLS Inspector.app"
-            BlueprintName = "TLS Inspector"
+            BlueprintIdentifier = "3CC954432CA9EC4200C3AEF8"
+            BuildableName = "tls-inspector.app"
+            BlueprintName = "tls-inspector"
             ReferencedContainer = "container:tls-inspector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

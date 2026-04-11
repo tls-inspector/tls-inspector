@@ -1,44 +1,55 @@
-import UIKit
-import MobileCoreServices
-import CertificateKit
+// TLS Inspector
+// Copyright (C) Ian Spence and other TLS Inspector Contributors
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-/// The initial view controller is responsible for bootstrapping the rest of the application and acting as the getter delegate.
-/// This extension can be used in a number of places, and each can report the host URL in a different way.
+import UIKit
+import SwiftUI
+import TLSKit
+import TLSUI
+import Localization
+import DNSKit
+
+/// The initial view controller is responsible for accepting the data sent by the system to the extension, try to determine the host that needs to be inspected, handle the inspection, and present the
+/// results.
 class InitialViewController: UIViewController {
-    var values: [URL] = []
-    let latch = AtomicInt(defaultValue: 0)
-    let requestQueue = DispatchQueue(label: "com.ecnepsnai.Inspect-Website.RequestQueue")
-    var certificateChain: CKCertificateChain?
-    var httpServerInfo: CKHTTPServerInfo?
     var observer: NSObjectProtocol?
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let latch: AtomicInt = AtomicInt(initialValue: 0)
+    var values: [URL] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(iOS 13, *) {
-            self.activityIndicator.style = .large
+        TLSKit.log = LogWriter.shared
+        DNSKit.log = DNSKitLoggerBridge.shared
+
+        /// We use a notification to know when the user dismissed the split view
+        NotificationCenter.default.addObserver(forName: closedInspectionViewNotification, object: nil, queue: nil) { _ in
+            self.closeExtension()
         }
 
-        if CertificateKit.isProxyConfigured() {
-            UIHelper(self).presentAlert(title: lang(key: "Proxy Detected"),
-                                        body: lang(key: "proxy_warning"),
-                                        dismissed: nil)
-            self.closeExtension()
+        if isProxyEnabled() {
+            DispatchQueue.main.async {
+                self.showProxyWarningView()
+            }
             return
         }
 
-        // We use a notification to know when the user dismissed the split view
-        self.observer = NotificationCenter.default.addObserver(forName: VIEW_CLOSE_NOTIFICATION,
-                                                               object: nil,
-                                                               queue: nil) { (_) in
-            self.closeExtension()
-        }
-
-        // When you load an item from the attachment provider, it may make a HTTP request to fetch metadata
-        // about that resource - we use the latch to determine if any of these potential requests may be
-        // in progress when we check for URLs.
+        /// Actually getting the host from whatever input was passed to the extension is surprisingly complex.
+        /// You'd think you could just access the relevant data type that maps to the activation rule, but instead there's a bunch of asynchronous logic
+        /// because when you try to load an attachment it might make an addtional HTTP request to fetch metadata.
+        /// We use a latch to determine if any of these potential requests may be in progress when we check for URL attachments.
         let attachments = self.extensionContext?.inputItems ?? []
         print("[\(#fileID):\(#line)] Extension started with \(attachments.count) attachments")
         for object in self.extensionContext?.inputItems ?? [] {
@@ -62,96 +73,25 @@ class InitialViewController: UIViewController {
 
                 print("[\(#fileID):\(#line)] Attachment type: \(attachmentType)")
 
-                self.latch.increment()
+                _ = self.latch.IncrementAndGet()
                 self.findURLFromAttachmentItem(attachment) { result in
-                    self.latch.decrement()
+                    _ = self.latch.DecrementAndGet()
                     switch result {
                     case .success(let url):
                         self.values.append(url)
-                        RunOnMain { self.checkValues() }
+                        DispatchQueue.main.async {
+                            self.checkValues()
+                        }
                     case .failure(let failure):
-                        UIHelper(self).presentError(error: failure) {
-                            self.closeExtension()
+                        DispatchQueue.main.async {
+                            self.showErrorAndCloseExtension(Localize.error(), "\(failure)")
                         }
                     }
                 }
             }
         }
-        RunOnMain { self.checkValues() }
-    }
-
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        self.closeExtension()
-    }
-
-    func closeExtension() {
-        if let observer = self.observer {
-            NotificationCenter.default.removeObserver(observer, name: VIEW_CLOSE_NOTIFICATION, object: nil)
-        }
-        self.extensionContext?.completeRequest(returningItems: self.extensionContext?.inputItems,
-                                               completionHandler: nil)
-    }
-
-    func checkValues() {
-        if self.latch.get() > 0 {
-            return
-        }
-
-        if self.values.count == 0 {
-            UIHelper(self).presentAlert(
-            title: lang(key: "No Supported URL Found"),
-            body: lang(key: "If you believe this to be in error, contact support from within the TLS Inspector app.")) {
-                self.closeExtension()
-            }
-        }
-
-        var foundURL = false
-        for url in values {
-            if url.scheme != "https" {
-                continue
-            }
-
-            guard let host = url.host else {
-                continue
-            }
-
-            let port = UInt16(url.port ?? 443)
-
-            foundURL = true
-            doInspect(hostAddress: host, port: port)
-        }
-
-        if !foundURL {
-            UIHelper(self).presentAlert(
-            title: lang(key: "No Supported URL Found"),
-            body: lang(key: "Only HTTPS URLs can be inspected")) {
-                self.closeExtension()
-            }
-        }
-    }
-
-    func doInspect(hostAddress: String, port: UInt16) {
-        let parameters = UserOptions.inspectParameters(hostAddress: hostAddress)
-        parameters.port = port
-
-        let request = CKInspectRequest(parameters: parameters)
-        request.execute(on: requestQueue) { oResponse, oError in
-            RunOnMain {
-                if let error = oError {
-                    UIHelper(self).presentError(error: error) {
-                        self.closeExtension()
-                    }
-                    return
-                }
-                guard let response = oResponse else {
-                    self.closeExtension()
-                    return
-                }
-
-                CERTIFICATE_CHAIN = response.certificateChain
-                HTTP_SERVER_INFO = response.httpServer
-                self.performSegue(withIdentifier: "Inspect", sender: nil)
-            }
+        DispatchQueue.main.async {
+            self.checkValues()
         }
     }
 
@@ -188,5 +128,94 @@ class InitialViewController: UIViewController {
             print("[\(#fileID):\(#line)] Unable to parse attachment item: \(value)")
             complete(.failure(NSError(domain: "com.ecnepsnai.Certificate-Inspector.Inspect-Website", code: 1, userInfo: [NSLocalizedDescriptionKey: "Unable to parse attachment value"])))
         }
+    }
+
+    func checkValues() {
+        if self.latch.Get() > 0 {
+            return
+        }
+
+        if self.values.count == 0 {
+            self.showErrorAndCloseExtension(Localize.nosupportedurlfound(), Localize.ifyoubelievethistobeinerrorcontactsupportfromwithinthetlsinspectorapp())
+            return
+        }
+
+        var foundURL = false
+        for url in values {
+            if url.scheme != "https" {
+                continue
+            }
+
+            guard let host = url.host else {
+                continue
+            }
+
+            let port = UInt16(url.port ?? 443)
+
+            foundURL = true
+            Task {
+                await executeInspectionRequest(host: host, port: port)
+            }
+        }
+
+        if !foundURL {
+            self.showErrorAndCloseExtension(Localize.nosupportedurlfound(), Localize.onlyhttpsurlscanbeinspected())
+            return
+        }
+    }
+
+    func showErrorAndCloseExtension(_ title: String, _ message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { _ in
+            self.closeExtension()
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func executeInspectionRequest(host: String, port: UInt16) async {
+        let request = InspectionRequest(
+            address: host,
+            port: port,
+            checkCRL: UserOptions().checkCrl,
+            checkOCSP: UserOptions().queryOcsp,
+            ipVersion: UserOptions().ipVersion.toTLSKit(),
+            checkHTTP: UserOptions().getHttpHeaders,
+            timeoutSeconds: UInt8(UserOptions().inspectTimeout),
+            alpn: ["http/1.1"],
+        )
+        let cryptoengine = UserOptions().cryptoEngine.toTLSKit()
+
+        do {
+            let session = InspectionSession(engineType: cryptoengine)
+            let result = try await session.execute(request)
+            DispatchQueue.main.async {
+                let responseView = UIHostingController(rootView: InspectionResponseView(response: result))
+                responseView.modalPresentationStyle = .fullScreen
+                self.present(responseView, animated: false, completion: nil)
+            }
+        } catch {
+            DispatchQueue.main.async {
+                self.showErrorAndCloseExtension(Localize.error(), "\(error)")
+            }
+        }
+    }
+
+    func showProxyWarningView() {
+        let warningView = UIHostingController(rootView: ProxyNoticeView())
+        warningView.modalPresentationStyle = .fullScreen
+        self.present(warningView, animated: false, completion: nil)
+    }
+
+    @IBAction func cancelButtonPress(_ sender: UIButton) {
+        self.closeExtension()
+    }
+
+    func closeExtension() {
+        if let observer = self.observer {
+            NotificationCenter.default.removeObserver(observer, name: closedInspectionViewNotification, object: nil)
+        }
+        self.extensionContext?.completeRequest(returningItems: self.extensionContext?.inputItems,
+                                               completionHandler: nil)
     }
 }

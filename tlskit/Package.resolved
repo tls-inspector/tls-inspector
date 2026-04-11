@@ -1,0 +1,30 @@
+{
+  "originHash" : "18bb9849db2087b89397794ac0afa650aced2bedbcd4c03892a3f87468e2fa4c",
+  "pins" : [
+    {
+      "identity" : "dnskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dns-inspector/dnskit",
+      "state" : {
+        "revision" : "572ea4b3f003c2804f083d509c5e2cf9cd649cdb"
+      }
+    },
+    {
+      "identity" : "idnarules-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dns-inspector/IDNARules-Swift.git",
+      "state" : {
+        "revision" : "7f47c398379e46f324bb82f803829026c48763d0"
+      }
+    },
+    {
+      "identity" : "tlskit-external-dependencies",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tls-inspector/tlskit-external-dependencies",
+      "state" : {
+        "revision" : "2475bd07730a6fafb705542ab24e40a1087b5fae"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -57,5 +57,5 @@ defines.pch
 /tls-inspector.xcodeproj/project.xcworkspace
 
 # OpenSSL and cURL Frameworks
-/CertificateKit/openssl.xcframework
-/CertificateKit/curl.xcframework
+/TLSKit/openssl.xcframework
+/TLSKit/curl.xcframework

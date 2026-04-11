@@ -3,309 +3,38 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C03BED52B3E07F100928B6E /* CKCertificateExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C03BED32B3E07F100928B6E /* CKCertificateExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C03BED62B3E07F100928B6E /* CKCertificateExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03BED42B3E07F100928B6E /* CKCertificateExtension.m */; };
-		3C03BED82B3E113800928B6E /* CKCertificateExtension+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C03BED72B3E113800928B6E /* CKCertificateExtension+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C03BEDB2B3E5EBD00928B6E /* NSDate+GeneralizedTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C03BED92B3E5EBD00928B6E /* NSDate+GeneralizedTime.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C03BEDC2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03BEDA2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m */; };
-		3C03BEDE2B3E609800928B6E /* NSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03BEDD2B3E609800928B6E /* NSDateTests.m */; };
-		3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C091B7F2A2EAE3E00A8BE92 /* Network.framework */; };
-		3C091B842A2EB88000A8BE92 /* CKHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */; };
-		3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */; };
-		3C091B882A2EB9E400A8BE92 /* CKHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C091B862A2EB9E400A8BE92 /* CKHTTPResponse.h */; };
-		3C091B892A2EB9E400A8BE92 /* CKHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C091B872A2EB9E400A8BE92 /* CKHTTPResponse.m */; };
-		3C091B8C2A2EB9EE00A8BE92 /* CKHTTPHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C091B8A2A2EB9EE00A8BE92 /* CKHTTPHeaders.h */; };
-		3C091B8D2A2EB9EE00A8BE92 /* CKHTTPHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C091B8B2A2EB9EE00A8BE92 /* CKHTTPHeaders.m */; };
-		3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
-		3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */; };
-		3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1A0D0D263914C200267CF9 /* CKRegex.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A0D0E263914C300267CF9 /* CKRegex.m */; };
-		3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C1D28AA2009677300A606BB /* CKNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D28AB2009677300A606BB /* CKNameObject.m */; platformFilter = ios; };
-		3C1D34472B3CDE2B001DB576 /* ProxyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D34462B3CDE2B001DB576 /* ProxyViewController.swift */; };
-		3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
-		3C1D3CFA2B352A3A003CDAE2 /* CertificateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
-		3C1D3CFD2B352AB9003CDAE2 /* idna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3C1D3D002B352ACC003CDAE2 /* idna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9475422B1A9E8700DC1637 /* idna.framework */; };
-		3C1D3D062B353478003CDAE2 /* attr.html in Resources */ = {isa = PBXBuildFile; fileRef = 3C1D3D052B353478003CDAE2 /* attr.html */; };
-		3C1D3D0A2B353696003CDAE2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1D3D072B35353A003CDAE2 /* WebKit.framework */; };
-		3C1D3D0B2B35395C003CDAE2 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
-		3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
-		3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2556AB28E60C430057FE4D /* TableViewCell.swift */; };
-		3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C28D0B2204209E8004C260F /* CKRevoked.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C28D0B3204209E8004C260F /* CKRevoked.m */; platformFilter = ios; };
-		3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */; };
-		3C30025C2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */; };
-		3C30025F2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C30025D2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C3002602980E13500F8B2F0 /* CKSignedCertificateTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C30025E2980E13500F8B2F0 /* CKSignedCertificateTimestamp.m */; };
-		3C3002622980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */; };
-		3C3002632980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */; };
-		3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */; };
-		3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */; };
-		3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C36B3B220412564005C66E8 /* CKOCSPResponse.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36B3B320412564005C66E8 /* CKOCSPResponse.m */; platformFilter = ios; };
-		3C3DE1FE29B823A90025DA94 /* NSString+ASN1OctetString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */; };
-		3C3DE1FF29B823A90025DA94 /* NSString+ASN1OctetString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */; };
-		3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */; };
-		3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C45AD5823D831A900E541EC /* CKCurlCommon.h */; };
-		3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C45AD5923D831A900E541EC /* CKCurlCommon.m */; platformFilter = ios; };
-		3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */; };
-		3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */; };
-		3C4E23772A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4E23762A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6242712947B12C00A7814A /* openssl.xcframework */; };
-		3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C62426F2947B10200A7814A /* curl.xcframework */; };
-		3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */; };
-		3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */; };
-		3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F49E23B0220300DCCB54 /* SupportType.swift */; };
-		3C57F4A123B0243300DCCB54 /* UIDevicePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */; };
-		3C57F4A323B02B0700DCCB54 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C57F4A223B02B0700DCCB54 /* AppLinks.swift */; };
-		3C58E67723F8B7D800B622C6 /* CKSocketUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */; };
-		3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */; platformFilter = ios; };
-		3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
-		3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C599F6A23EA8D8200791DF1 /* AppInfo.swift */; };
-		3C5A84F724D25F6100A1917E /* de.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A84F624D25F6100A1917E /* de.plist */; };
-		3C5F4654239A169400B3A727 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */; };
-		3C5F4656239D77CA00B3A727 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4655239D77CA00B3A727 /* SplitViewController.swift */; };
-		3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */; };
-		3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */; };
-		3C5F4660239DAE9900B3A727 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5F465F239DAE9900B3A727 /* en.plist */; };
-		3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036302947BEBE00981444 /* bundle_metadata.json */; };
-		3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */; };
-		3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */; };
-		3C6036392947BEBE00981444 /* bundle_version.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C6036342947BEBE00981444 /* bundle_version.txt */; };
-		3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363A2947C01300981444 /* CKRootCACertificateBundleManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */; };
-		3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60363E2947C0A000981444 /* CKCertificateBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60363F2947C0A000981444 /* CKCertificateBundle.m */; };
-		3C6036432947C7A000981444 /* RootCACertificatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */; };
-		3C6220902A6C5324008F822E /* CKInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C62208F2A6C5324008F822E /* CKInspector.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C6220922A6C55AC008F822E /* CKInspectParameters+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220912A6C55AC008F822E /* CKInspectParameters+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C6220942A6C56C1008F822E /* CKCertificate+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6220932A6C56C1008F822E /* CKCertificate+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */; };
-		3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */; };
-		3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DADC1E836BE9004AD96D /* CertificateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAE61E836C15004AD96D /* CKCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE71E836C15004AD96D /* CKCertificate.m */; platformFilter = ios; };
-		3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAE81E836C15004AD96D /* CKCertificateChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAE91E836C15004AD96D /* CKCertificateChain.m */; platformFilter = ios; };
-		3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */; };
-		3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */; platformFilter = ios; };
-		3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C66083D2A735171008B58E8 /* CKLogging+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */; };
-		3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */; };
-		3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */; };
-		3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; };
-		3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
-		3C6FF89923B1A420008DC981 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89723B1A420008DC981 /* AtomicInt.swift */; };
-		3C6FF89B23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */; };
-		3C6FF89C23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */; };
-		3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C70425020100CA900BE941A /* CKOCSPManager.h */; };
-		3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C70425120100CA900BE941A /* CKOCSPManager.m */; platformFilter = ios; };
-		3C72692723949ABD002A0B19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C72692623949ABD002A0B19 /* AppDelegate.swift */; };
-		3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C72692F23949ABD002A0B19 /* Assets.xcassets */; };
-		3C72693A2394BC1D002A0B19 /* InputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269392394BC1D002A0B19 /* InputTableViewController.swift */; };
-		3C72695C2394BDF0002A0B19 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */; };
-		3C7269642394C2E1002A0B19 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269632394C2E1002A0B19 /* UIHelper.swift */; };
-		3C7269662394C916002A0B19 /* CertificateChainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */; };
-		3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */; };
-		3C7B09FF23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */; };
-		3C7CEE6220A15BD500DCC770 /* CKAlternateNameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C7CEE6320A15BD500DCC770 /* CKAlternateNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7CEE6120A15BD500DCC770 /* CKAlternateNameObject.m */; platformFilter = ios; };
-		3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */; };
-		3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
-		3C84A98623AD9FCD003B76D3 /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
-		3C84C9F72A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C84C9F52A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h */; };
-		3C84C9F82A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C84C9F62A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m */; };
-		3C84C9FF2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C84C9FD2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m */; };
-		3C84CA002A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C84C9FE2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h */; };
-		3C84F3132644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
-		3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F3122644C275003E6A66 /* Date+DurationString.swift */; };
-		3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8B1AEB23CBD0050093E65D /* QuoteList.plist */; };
-		3C922C0329D613630064274F /* AppIconTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C922C0229D613630064274F /* AppIconTableViewController.swift */; };
-		3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */; };
-		3C9475452B1A9E8700DC1637 /* idna.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C9475442B1A9E8700DC1637 /* idna.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C9475502B1A9EFF00DC1637 /* NSString+IDNA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94754C2B1A9EFF00DC1637 /* NSString+IDNA.swift */; };
-		3C9475572B1A9F2000DC1637 /* String+IDNA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475512B1A9F2000DC1637 /* String+IDNA.swift */; };
-		3C9475582B1A9F2000DC1637 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475522B1A9F2000DC1637 /* Data+Extensions.swift */; };
-		3C9475592B1A9F2000DC1637 /* uts46 in Resources */ = {isa = PBXBuildFile; fileRef = 3C9475532B1A9F2000DC1637 /* uts46 */; };
-		3C94755A2B1A9F2000DC1637 /* UTS46+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */; };
-		3C94755B2B1A9F2000DC1637 /* Scanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */; };
-		3C94755C2B1A9F2000DC1637 /* UTS46.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9475562B1A9F2000DC1637 /* UTS46.swift */; };
-		3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */; };
-		3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */; };
-		3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */; };
-		3C99C7C925A57231002ABA15 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */; };
-		3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */; };
-		3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005C23974A660027D1C1 /* FontAwesome.swift */; };
-		3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
-		3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2006023974F710027D1C1 /* fa-solid.ttf */; };
-		3CA6EAEA29AFD22A00BFB6E2 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */; };
-		3CB1080C2A95A53700CFE080 /* CKInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */; };
-		3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB483FC2058BA0400322723 /* CertificateKit.m */; platformFilter = ios; };
-		3CB940392250353B0055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
-		3CB9403D225035E80055C067 /* (null) in Headers */ = {isa = PBXBuildFile; };
-		3CB94045225036FC0055C067 /* CKOpenSSLInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB94041225036FC0055C067 /* CKOpenSSLInspector.m */; platformFilter = ios; };
-		3CB94047225036FC0055C067 /* CKOpenSSLInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */; };
-		3CBF85BF253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */; };
-		3CBF85C0253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */; platformFilter = ios; };
-		3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CCBE2D7294FF81600E0DD6D /* CKCertificateBundleMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */; };
-		3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */; };
-		3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028A239DC64C009364D0 /* RecentLookups.swift */; };
-		3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD028D239DCEB6009364D0 /* More.storyboard */; };
-		3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028F239DD0D5009364D0 /* GradientView.swift */; };
-		3CCD0292239DD412009364D0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD0291239DD412009364D0 /* AboutViewController.swift */; };
-		3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */; };
-		3CCD0299239DDE68009364D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD0298239DDE68009364D0 /* Main.storyboard */; };
-		3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD029A239DDE7F009364D0 /* LaunchScreen.storyboard */; };
-		3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */; };
-		3CCEB4D823DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
-		3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */; };
-		3CD1C66E2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */; };
-		3CD1C66F2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */; };
-		3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4933825A56721002AC7BD /* OptionsButton.swift */; };
-		3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */; };
-		3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AD2398B40800B2C8FC /* Globals.swift */; };
-		3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */; };
-		3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B32398BC1700B2C8FC /* Lang.swift */; };
-		3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */; };
-		3CD6DE432A661BE0004A54F5 /* NSData+ByteAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */; };
-		3CD6DE442A661BE0004A54F5 /* NSData+ByteAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */; };
-		3CD6DE472A662C37004A54F5 /* CKInspectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD6DE452A662C37004A54F5 /* CKInspectRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CD6DE482A662C37004A54F5 /* CKInspectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6DE462A662C37004A54F5 /* CKInspectRequest.m */; };
-		3CD6DE4B2A662D88004A54F5 /* CKInspectResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD6DE492A662D88004A54F5 /* CKInspectResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CD6DE4C2A662D88004A54F5 /* CKInspectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */; };
-		3CD74669258C1406003D609E /* offensive_words.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CD74668258C1406003D609E /* offensive_words.plist */; };
-		3CDC14AD23B0453B0053932F /* Extension.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC14AB23B0453B0053932F /* Extension.storyboard */; };
-		3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CDC14A723B0453B0053932F /* Show Certificate.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3CDC14B723B045B20053932F /* ActionTipTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */; };
-		3CDC14B823B045B20053932F /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269632394C2E1002A0B19 /* UIHelper.swift */; };
-		3CDC14B923B045B20053932F /* TitleValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */; };
-		3CDC14BA23B045B20053932F /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */; };
-		3CDC14BB23B045B20053932F /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */; };
-		3CDC14BC23B045B20053932F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD028F239DD0D5009364D0 /* GradientView.swift */; };
-		3CDC14BD23B045C50053932F /* GetterErrorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */; };
-		3CDC14BE23B045C50053932F /* TrustDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */; };
-		3CDC14BF23B045C50053932F /* HTTPHeadersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */; };
-		3CDC14C023B045C50053932F /* CertificateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */; };
-		3CDC14C123B045C50053932F /* CertificateChainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */; };
-		3CDC14C223B045C50053932F /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F4655239D77CA00B3A727 /* SplitViewController.swift */; };
-		3CDC14C323B045C50053932F /* SANListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */; };
-		3CDC14C423B045CF0053932F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CCD0298239DDE68009364D0 /* Main.storyboard */; };
-		3CDC14C523B045DA0053932F /* UIObject+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9823A482F500535173 /* UIObject+Lang.swift */; };
-		3CDC14C623B045DA0053932F /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B32398BC1700B2C8FC /* Lang.swift */; };
-		3CDC14C723B045DA0053932F /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5F465F239DAE9900B3A727 /* en.plist */; };
-		3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */; };
-		3CDC14C923B045E10053932F /* fa-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2005F23974F710027D1C1 /* fa-regular.ttf */; };
-		3CDC14CA23B045E10053932F /* fa-solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA2006023974F710027D1C1 /* fa-solid.ttf */; };
-		3CDC14CB23B045E10053932F /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA2005C23974A660027D1C1 /* FontAwesome.swift */; };
-		3CDC14CC23B046000053932F /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7AD2398B40800B2C8FC /* Globals.swift */; };
-		3CDC14CD23B046000053932F /* UserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */; };
-		3CDC14CE23B046000053932F /* CertificateReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */; };
-		3CDC14D023B046410053932F /* AppOnlyGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */; };
-		3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC14D123B0479B0053932F /* InitialViewController.swift */; };
-		3CE11BE629FCA097009673A2 /* es.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE429FCA097009673A2 /* es.plist */; };
-		3CE11BE729FCA097009673A2 /* es.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE429FCA097009673A2 /* es.plist */; };
-		3CE11BE829FCA097009673A2 /* nl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE529FCA097009673A2 /* nl.plist */; };
-		3CE11BE929FCA097009673A2 /* nl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE11BE529FCA097009673A2 /* nl.plist */; };
-		3CE11BEA29FCA09D009673A2 /* de.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A84F624D25F6100A1917E /* de.plist */; };
-		3CE5EE8C29E21CE7009F7026 /* ct_log_list.min.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */; };
-		3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */; };
-		3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A693261BBC5900460B7F /* CKInspectParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0A694261BBC5900460B7F /* CKInspectParameters.m */; };
-		3CF0A69E261BBCA300460B7F /* CKTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0A69D261BBCA300460B7F /* CKTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CF397441EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */; };
-		3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */; platformFilter = ios; };
-		3CF6772A2046335D00A3B4C1 /* CKCRLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677282046335D00A3B4C1 /* CKCRLManager.h */; };
-		3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF677292046335D00A3B4C1 /* CKCRLManager.m */; platformFilter = ios; };
-		3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */; platformFilter = ios; };
-		3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF6773520464C7E00A3B4C1 /* CKLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6773620464C7E00A3B4C1 /* CKLogging.m */; platformFilter = ios; };
-		3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */; };
-		3CF9CC9623A4804600535173 /* DomainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9523A4804600535173 /* DomainList.plist */; };
-		3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9CC9823A482F500535173 /* UIObject+Lang.swift */; };
-		9A31DECB2A917EAE0095857D /* CKRevoked+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9AFD2BEB2A883CEA00FFF40F /* CKIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */; };
-		9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */; };
-		A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */; platformFilter = ios; };
+		3C4E8A1F2EBA7B9D00433307 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4E8A1E2EBA7B9D00433307 /* Localization */; };
+		3C4E8A212EBA7BA500433307 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4E8A202EBA7BA500433307 /* Localization */; };
+		3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */; };
+		3C8742EE2EB4524200154664 /* inspect-website.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C8742E02EB4524200154664 /* inspect-website.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C8744E32EB46EA100154664 /* TLSUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8744E22EB46EA100154664 /* TLSUI */; };
+		3C8745E12EB55EAC00154664 /* TLSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8745E02EB55EAC00154664 /* TLSKit */; };
+		3C8745E32EB55EAC00154664 /* TLSUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8745E22EB55EAC00154664 /* TLSUI */; };
+		3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC954562CA9EC6200C3AEF8 /* TLSKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3C1A0D132639222B00267CF9 /* PBXContainerItemProxy */ = {
+		3C8742EC2EB4524200154664 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
+			containerPortal = 3CC9543C2CA9EC4200C3AEF8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3C72692323949ABD002A0B19;
-			remoteInfo = "TLS Inspector";
-		};
-		3C1D3CFE2B352AB9003CDAE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
-			remoteInfo = idna;
-		};
-		3C1D3D022B352ACC003CDAE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C9475412B1A9E8700DC1637;
-			remoteInfo = idna;
-		};
-		3C6FF89423B1A280008DC981 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
-			remoteInfo = CertificateKit;
-		};
-		3C72695F2394C16F002A0B19 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C65DAD91E836BE9004AD96D;
-			remoteInfo = CertificateKit;
-		};
-		3CDC14AF23B0453B0053932F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CFAE6CE1CA8440400CD946B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3CDC14A623B0453B0053932F;
+			remoteGlobalIDString = 3C8742DF2EB4524200154664;
 			remoteInfo = "inspect-website";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3C1D3CFB2B352A3A003CDAE2 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3C1D3CFD2B352AB9003CDAE2 /* idna.framework in Embed Frameworks */,
-				3C1D3CFA2B352A3A003CDAE2 /* CertificateKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CCD029F239DDF4D009364D0 /* Embed Foundation Extensions */ = {
+		3C6272F32E75228F00EAB12D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3CDC14B123B0453B0053932F /* Show Certificate.appex in Embed Foundation Extensions */,
+				3C8742EE2EB4524200154664 /* inspect-website.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,947 +42,208 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C03BED32B3E07F100928B6E /* CKCertificateExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateExtension.h; sourceTree = "<group>"; };
-		3C03BED42B3E07F100928B6E /* CKCertificateExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateExtension.m; sourceTree = "<group>"; };
-		3C03BED72B3E113800928B6E /* CKCertificateExtension+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKCertificateExtension+Private.h"; sourceTree = "<group>"; };
-		3C03BED92B3E5EBD00928B6E /* NSDate+GeneralizedTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+GeneralizedTime.h"; sourceTree = "<group>"; };
-		3C03BEDA2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GeneralizedTime.m"; sourceTree = "<group>"; };
-		3C03BEDD2B3E609800928B6E /* NSDateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDateTests.m; sourceTree = "<group>"; };
-		3C091B7F2A2EAE3E00A8BE92 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/PrivateFrameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
-		3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPClient.h; sourceTree = "<group>"; };
-		3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPClient.m; sourceTree = "<group>"; };
-		3C091B862A2EB9E400A8BE92 /* CKHTTPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPResponse.h; sourceTree = "<group>"; };
-		3C091B872A2EB9E400A8BE92 /* CKHTTPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPResponse.m; sourceTree = "<group>"; };
-		3C091B8A2A2EB9EE00A8BE92 /* CKHTTPHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPHeaders.h; sourceTree = "<group>"; };
-		3C091B8B2A2EB9EE00A8BE92 /* CKHTTPHeaders.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPHeaders.m; sourceTree = "<group>"; };
-		3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyingMaterialTableViewController.swift; sourceTree = "<group>"; };
-		3C1A0D0D263914C200267CF9 /* CKRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRegex.h; sourceTree = "<group>"; };
-		3C1A0D0E263914C300267CF9 /* CKRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRegex.m; sourceTree = "<group>"; };
-		3C1D28AA2009677300A606BB /* CKNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNameObject.h; sourceTree = "<group>"; };
-		3C1D28AB2009677300A606BB /* CKNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNameObject.m; sourceTree = "<group>"; };
-		3C1D34462B3CDE2B001DB576 /* ProxyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyViewController.swift; sourceTree = "<group>"; };
-		3C1D3D052B353478003CDAE2 /* attr.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = attr.html; sourceTree = "<group>"; };
-		3C1D3D072B35353A003CDAE2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		3C2556AB28E60C430057FE4D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		3C28D0B2204209E8004C260F /* CKRevoked.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRevoked.h; sourceTree = "<group>"; };
-		3C28D0B3204209E8004C260F /* CKRevoked.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRevoked.m; sourceTree = "<group>"; };
-		3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustBannerParameters.swift; sourceTree = "<group>"; };
-		3C30025D2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKSignedCertificateTimestamp.h; sourceTree = "<group>"; };
-		3C30025E2980E13500F8B2F0 /* CKSignedCertificateTimestamp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKSignedCertificateTimestamp.m; sourceTree = "<group>"; };
-		3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateTimestampsTableViewController.swift; sourceTree = "<group>"; };
-		3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+HexString.h"; sourceTree = "<group>"; };
-		3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+HexString.m"; sourceTree = "<group>"; };
-		3C36B3B220412564005C66E8 /* CKOCSPResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPResponse.h; sourceTree = "<group>"; };
-		3C36B3B320412564005C66E8 /* CKOCSPResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPResponse.m; sourceTree = "<group>"; };
-		3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+ASN1OctetString.h"; sourceTree = "<group>"; };
-		3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+ASN1OctetString.m"; sourceTree = "<group>"; };
-		3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKitTests.h; sourceTree = "<group>"; };
-		3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenSSLInspectorTests.m; sourceTree = "<group>"; };
-		3C45AD5823D831A900E541EC /* CKCurlCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCurlCommon.h; sourceTree = "<group>"; };
-		3C45AD5923D831A900E541EC /* CKCurlCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCurlCommon.m; sourceTree = "<group>"; };
-		3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+SplitFirst.h"; sourceTree = "<group>"; };
-		3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+SplitFirst.m"; sourceTree = "<group>"; };
-		3C4E23762A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKHTTPServerInfo+Private.h"; sourceTree = "<group>"; };
-		3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
-		3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
-		3C57F49E23B0220300DCCB54 /* SupportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportType.swift; sourceTree = "<group>"; };
-		3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevicePlatform.swift; sourceTree = "<group>"; };
-		3C57F4A223B02B0700DCCB54 /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
-		3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKSocketUtils.h; sourceTree = "<group>"; };
-		3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKSocketUtils.m; sourceTree = "<group>"; };
-		3C599F6A23EA8D8200791DF1 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
-		3C5A84F624D25F6100A1917E /* de.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = de.plist; sourceTree = "<group>"; };
-		3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
-		3C5F4655239D77CA00B3A727 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
-		3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeadersTableViewController.swift; sourceTree = "<group>"; };
-		3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANListTableViewController.swift; sourceTree = "<group>"; };
-		3C5F465F239DAE9900B3A727 /* en.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
-		3C6036302947BEBE00981444 /* bundle_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bundle_metadata.json; sourceTree = "<group>"; };
-		3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mozilla_ca_bundle.p7b; sourceTree = "<group>"; };
-		3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = microsoft_ca_bundle.p7b; sourceTree = "<group>"; };
-		3C6036342947BEBE00981444 /* bundle_version.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bundle_version.txt; sourceTree = "<group>"; };
-		3C60363A2947C01300981444 /* CKRootCACertificateBundleManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKRootCACertificateBundleManager.h; sourceTree = "<group>"; };
-		3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRootCACertificateBundleManager.m; sourceTree = "<group>"; };
-		3C60363E2947C0A000981444 /* CKCertificateBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundle.h; sourceTree = "<group>"; };
-		3C60363F2947C0A000981444 /* CKCertificateBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundle.m; sourceTree = "<group>"; wrapsLines = 1; };
-		3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCACertificatesTableViewController.swift; sourceTree = "<group>"; };
-		3C62208F2A6C5324008F822E /* CKInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspector.h; sourceTree = "<group>"; };
-		3C6220912A6C55AC008F822E /* CKInspectParameters+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKInspectParameters+Private.h"; sourceTree = "<group>"; };
-		3C6220932A6C56C1008F822E /* CKCertificate+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKCertificate+Private.h"; sourceTree = "<group>"; };
-		3C62426F2947B10200A7814A /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = curl.xcframework; sourceTree = "<group>"; };
-		3C6242712947B12C00A7814A /* openssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = openssl.xcframework; sourceTree = "<group>"; };
-		3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageTableViewController.swift; sourceTree = "<group>"; };
-		3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolver.h; sourceTree = "<group>"; };
-		3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKResolver.m; sourceTree = "<group>"; };
-		3C65DADA1E836BE9004AD96D /* CertificateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CertificateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C65DADC1E836BE9004AD96D /* CertificateKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKit.h; sourceTree = "<group>"; };
-		3C65DADD1E836BE9004AD96D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C65DAE61E836C15004AD96D /* CKCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificate.h; sourceTree = "<group>"; };
-		3C65DAE71E836C15004AD96D /* CKCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificate.m; sourceTree = "<group>"; };
-		3C65DAE81E836C15004AD96D /* CKCertificateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificateChain.h; sourceTree = "<group>"; };
-		3C65DAE91E836C15004AD96D /* CKCertificateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificateChain.m; sourceTree = "<group>"; };
-		3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ASN1_TIME.h"; sourceTree = "<group>"; };
-		3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ASN1_TIME.m"; sourceTree = "<group>"; };
-		3C66083D2A735171008B58E8 /* CKLogging+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKLogging+Private.h"; sourceTree = "<group>"; };
-		3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple_ca_bundle.p7b; sourceTree = "<group>"; };
-		3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKHTTPServerInfo.h; sourceTree = "<group>"; };
-		3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKHTTPServerInfo.m; sourceTree = "<group>"; };
-		3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
-		3C6FF89723B1A420008DC981 /* AtomicInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
-		3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserOptions+CKOptions.swift"; sourceTree = "<group>"; };
-		3C70425020100CA900BE941A /* CKOCSPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKOCSPManager.h; sourceTree = "<group>"; };
-		3C70425120100CA900BE941A /* CKOCSPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKOCSPManager.m; sourceTree = "<group>"; };
-		3C72692423949ABD002A0B19 /* TLS Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TLS Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C72692623949ABD002A0B19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3C72692F23949ABD002A0B19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3C72693423949ABD002A0B19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C7269392394BC1D002A0B19 /* InputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewController.swift; sourceTree = "<group>"; };
-		3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3C7269632394C2E1002A0B19 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
-		3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChainTableViewController.swift; sourceTree = "<group>"; };
-		3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleValueTableViewCell.swift; sourceTree = "<group>"; };
-		3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedOptionsTableViewController.swift; sourceTree = "<group>"; };
-		3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKAlternateNameObject.h; sourceTree = "<group>"; };
-		3C7CEE6120A15BD500DCC770 /* CKAlternateNameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKAlternateNameObject.m; sourceTree = "<group>"; };
-		3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterErrorTableViewController.swift; sourceTree = "<group>"; };
-		3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateReminder.swift; sourceTree = "<group>"; };
-		3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTipTarget.swift; sourceTree = "<group>"; };
-		3C84C9F52A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKNetworkFrameworkInspector+EnumValues.h"; sourceTree = "<group>"; };
-		3C84C9F62A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CKNetworkFrameworkInspector+EnumValues.m"; sourceTree = "<group>"; };
-		3C84C9FD2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKOpenSSLInspector+EnumValues.m"; sourceTree = "<group>"; };
-		3C84C9FE2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKOpenSSLInspector+EnumValues.h"; sourceTree = "<group>"; };
-		3C84F3122644C275003E6A66 /* Date+DurationString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DurationString.swift"; sourceTree = "<group>"; };
-		3C8B1AEB23CBD0050093E65D /* QuoteList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = QuoteList.plist; sourceTree = "<group>"; };
-		3C922C0229D613630064274F /* AppIconTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconTableViewController.swift; sourceTree = "<group>"; };
-		3C9475422B1A9E8700DC1637 /* idna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = idna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C9475442B1A9E8700DC1637 /* idna.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = idna.h; sourceTree = "<group>"; };
-		3C94754C2B1A9EFF00DC1637 /* NSString+IDNA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+IDNA.swift"; path = "CertificateKit/build/idna-cocoa/Swift/NSString+IDNA.swift"; sourceTree = SOURCE_ROOT; };
-		3C9475512B1A9F2000DC1637 /* String+IDNA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+IDNA.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/String+IDNA.swift"; sourceTree = SOURCE_ROOT; };
-		3C9475522B1A9F2000DC1637 /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Data+Extensions.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/Data+Extensions.swift"; sourceTree = SOURCE_ROOT; };
-		3C9475532B1A9F2000DC1637 /* uts46 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uts46; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/uts46"; sourceTree = SOURCE_ROOT; };
-		3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UTS46+Loading.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/UTS46+Loading.swift"; sourceTree = SOURCE_ROOT; };
-		3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Scanner+Extensions.swift"; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/Scanner+Extensions.swift"; sourceTree = SOURCE_ROOT; };
-		3C9475562B1A9F2000DC1637 /* UTS46.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UTS46.swift; path = "CertificateKit/build/idna-cocoa/Sources/IDNA/UTS46.swift"; sourceTree = SOURCE_ROOT; };
-		3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAccessabilityHints.swift; sourceTree = "<group>"; };
-		3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDomainName.swift; sourceTree = "<group>"; };
-		3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInspectTableViewController.swift; sourceTree = "<group>"; };
-		3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
-		3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+MaterialColors.swift"; sourceTree = "<group>"; };
-		3CA2005C23974A660027D1C1 /* FontAwesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
-		3CA2005F23974F710027D1C1 /* fa-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular.ttf"; sourceTree = "<group>"; };
-		3CA2006023974F710027D1C1 /* fa-solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid.ttf"; sourceTree = "<group>"; };
-		3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
-		3CAA8C0D2B50A9E400B57CB3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectorTests.h; sourceTree = "<group>"; };
-		3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectorTests.m; sourceTree = "<group>"; };
-		3CB483FC2058BA0400322723 /* CertificateKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificateKit.m; sourceTree = "<group>"; };
-		3CB94041225036FC0055C067 /* CKOpenSSLInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKOpenSSLInspector.m; sourceTree = "<group>"; };
-		3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKOpenSSLInspector.h; sourceTree = "<group>"; };
-		3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKNetworkFrameworkInspector.h; sourceTree = "<group>"; };
-		3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKNetworkFrameworkInspector.m; sourceTree = "<group>"; };
-		3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCertificateBundleMetadata.h; sourceTree = "<group>"; };
-		3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCertificateBundleMetadata.m; sourceTree = "<group>"; };
-		3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = google_ca_bundle.p7b; sourceTree = "<group>"; };
-		3CCD028A239DC64C009364D0 /* RecentLookups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentLookups.swift; sourceTree = "<group>"; };
-		3CCD028D239DCEB6009364D0 /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
-		3CCD028F239DD0D5009364D0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		3CCD0291239DD412009364D0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
-		3CCD0298239DDE68009364D0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		3CCD029A239DDE7F009364D0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustDetailsTableViewController.swift; sourceTree = "<group>"; };
-		3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+AppendIfNotNil.swift"; sourceTree = "<group>"; };
-		3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Bold.swift"; sourceTree = "<group>"; };
-		3CD4933825A56721002AC7BD /* OptionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsButton.swift; sourceTree = "<group>"; };
-		3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateTableViewController.swift; sourceTree = "<group>"; };
-		3CD4A7AD2398B40800B2C8FC /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
-		3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
-		3CD4A7B32398BC1700B2C8FC /* Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lang.swift; sourceTree = "<group>"; };
-		3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptions.swift; sourceTree = "<group>"; };
-		3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+ByteAtIndex.h"; sourceTree = "<group>"; };
-		3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+ByteAtIndex.m"; sourceTree = "<group>"; };
-		3CD6DE452A662C37004A54F5 /* CKInspectRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectRequest.h; sourceTree = "<group>"; };
-		3CD6DE462A662C37004A54F5 /* CKInspectRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectRequest.m; sourceTree = "<group>"; };
-		3CD6DE492A662D88004A54F5 /* CKInspectResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectResponse.h; sourceTree = "<group>"; };
-		3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectResponse.m; sourceTree = "<group>"; };
-		3CD74668258C1406003D609E /* offensive_words.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = offensive_words.plist; sourceTree = "<group>"; };
-		3CDC14A723B0453B0053932F /* Show Certificate.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Show Certificate.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CDC14AC23B0453B0053932F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Extension.storyboard; sourceTree = "<group>"; };
-		3CDC14AE23B0453B0053932F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CDC14B523B045460053932F /* Show Certificate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Show Certificate.entitlements"; sourceTree = "<group>"; };
-		3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnlyGlobals.swift; sourceTree = "<group>"; };
-		3CDC14D123B0479B0053932F /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		3CE11BE429FCA097009673A2 /* es.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = es.plist; sourceTree = "<group>"; };
-		3CE11BE529FCA097009673A2 /* nl.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nl.plist; sourceTree = "<group>"; };
-		3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ct_log_list.min.json; sourceTree = "<group>"; };
-		3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKResolvedAddress.h; sourceTree = "<group>"; };
-		3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKResolvedAddress.m; sourceTree = "<group>"; };
-		3CF0A693261BBC5900460B7F /* CKInspectParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKInspectParameters.h; sourceTree = "<group>"; };
-		3CF0A694261BBC5900460B7F /* CKInspectParameters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKInspectParameters.m; sourceTree = "<group>"; };
-		3CF0A69D261BBCA300460B7F /* CKTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTypes.h; sourceTree = "<group>"; };
-		3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkFrameworkInspectorTests.m; sourceTree = "<group>"; };
-		3CF397451EB50E0900E8DBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CF677282046335D00A3B4C1 /* CKCRLManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCRLManager.h; sourceTree = "<group>"; };
-		3CF677292046335D00A3B4C1 /* CKCRLManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCRLManager.m; sourceTree = "<group>"; };
-		3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKCRLResponse.h; sourceTree = "<group>"; };
-		3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKCRLResponse.m; sourceTree = "<group>"; };
-		3CF6773520464C7E00A3B4C1 /* CKLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKLogging.h; sourceTree = "<group>"; };
-		3CF6773620464C7E00A3B4C1 /* CKLogging.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKLogging.m; sourceTree = "<group>"; };
-		3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificateKit_PrefixHeader.pch; sourceTree = "<group>"; };
-		3CF9CC9523A4804600535173 /* DomainList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DomainList.plist; sourceTree = "<group>"; };
-		3CF9CC9823A482F500535173 /* UIObject+Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIObject+Lang.swift"; sourceTree = "<group>"; };
-		3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TLS Inspector.entitlements"; sourceTree = "<group>"; };
-		9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CKRevoked+Private.h"; sourceTree = "<group>"; };
-		9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKIPAddress.h; sourceTree = "<group>"; };
-		9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddress.m; sourceTree = "<group>"; };
-		9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKIPAddressTests.m; sourceTree = "<group>"; };
-		A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCertificatePublicKey.h; sourceTree = "<group>"; };
-		A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCertificatePublicKey.m; sourceTree = "<group>"; };
-		A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		3C8742E02EB4524200154664 /* inspect-website.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "inspect-website.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tls-inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3C8742F22EB4524200154664 /* Exceptions for "inspect-website" folder in "inspect-website" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3C8742DF2EB4524200154664 /* inspect-website */;
+		};
+		3CFEA3B32EFF3B550065BBCA /* Exceptions for "tls-inspector" folder in "tls-inspector" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3CC954432CA9EC4200C3AEF8 /* tls-inspector */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3C8742E32EB4524200154664 /* inspect-website */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3C8742F22EB4524200154664 /* Exceptions for "inspect-website" folder in "inspect-website" target */,
+			);
+			path = "inspect-website";
+			sourceTree = "<group>";
+		};
+		3CC954462CA9EC4200C3AEF8 /* tls-inspector */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3CFEA3B32EFF3B550065BBCA /* Exceptions for "tls-inspector" folder in "tls-inspector" target */,
+			);
+			path = "tls-inspector";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		3C65DAD61E836BE9004AD96D /* Frameworks */ = {
+		3C8742DD2EB4524200154664 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C53FFBB2B35284200DEF55D /* curl.xcframework in Frameworks */,
-				3C53FFB92B35284000DEF55D /* openssl.xcframework in Frameworks */,
-				3C1D3D002B352ACC003CDAE2 /* idna.framework in Frameworks */,
-				3C091B802A2EAE3E00A8BE92 /* Network.framework in Frameworks */,
+				3C8745E32EB55EAC00154664 /* TLSUI in Frameworks */,
+				3C4E8A212EBA7BA500433307 /* Localization in Frameworks */,
+				3C8742E22EB4524200154664 /* UniformTypeIdentifiers.framework in Frameworks */,
+				3C8745E12EB55EAC00154664 /* TLSKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3C72692123949ABD002A0B19 /* Frameworks */ = {
+		3CC954412CA9EC4200C3AEF8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C1D3D0A2B353696003CDAE2 /* WebKit.framework in Frameworks */,
-				3C1D3CFC2B352AB9003CDAE2 /* idna.framework in Frameworks */,
-				3C1D3D0B2B35395C003CDAE2 /* SafariServices.framework in Frameworks */,
-				3C1D3CF92B352A3A003CDAE2 /* CertificateKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C94753F2B1A9E8700DC1637 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CDC14A423B0453B0053932F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C946E4D23C1867900013B72 /* SafariServices.framework in Frameworks */,
-				3C6FF89223B1A280008DC981 /* CertificateKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CF3973E1EB50E0900E8DBF4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CF3974B1EB50E2000E8DBF4 /* CertificateKit.framework in Frameworks */,
+				3C8744E32EB46EA100154664 /* TLSUI in Frameworks */,
+				3CC954572CA9EC6200C3AEF8 /* TLSKit in Frameworks */,
+				3C4E8A1F2EBA7B9D00433307 /* Localization in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C091B812A2EB84900A8BE92 /* HTTP */ = {
+		3C2CE6402CAA28F00075B2BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3C091B822A2EB88000A8BE92 /* CKHTTPClient.h */,
-				3C091B832A2EB88000A8BE92 /* CKHTTPClient.m */,
-				3C091B8A2A2EB9EE00A8BE92 /* CKHTTPHeaders.h */,
-				3C091B8B2A2EB9EE00A8BE92 /* CKHTTPHeaders.m */,
-				3C091B862A2EB9E400A8BE92 /* CKHTTPResponse.h */,
-				3C091B872A2EB9E400A8BE92 /* CKHTTPResponse.m */,
-			);
-			path = HTTP;
-			sourceTree = "<group>";
-		};
-		3C218DB929AEF12F000D84BC /* CTLogs */ = {
-			isa = PBXGroup;
-			children = (
-				3CE5EE8B29E21CE7009F7026 /* ct_log_list.min.json */,
-			);
-			path = CTLogs;
-			sourceTree = "<group>";
-		};
-		3C5F465D239DAE7D00B3A727 /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				3CF9CC9723A482DA00535173 /* UI Elements */,
-				3CD4A7B32398BC1700B2C8FC /* Lang.swift */,
-				3C5F465E239DAE8400B3A727 /* Strings */,
-			);
-			path = Localization;
-			sourceTree = "<group>";
-		};
-		3C5F465E239DAE8400B3A727 /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				3CE11BE429FCA097009673A2 /* es.plist */,
-				3CE11BE529FCA097009673A2 /* nl.plist */,
-				3C5A84F624D25F6100A1917E /* de.plist */,
-				3C5F465F239DAE9900B3A727 /* en.plist */,
-			);
-			path = Strings;
-			sourceTree = "<group>";
-		};
-		3C60362F2947B88700981444 /* RootCACerts */ = {
-			isa = PBXGroup;
-			children = (
-				3C6E6B3B297F817C007BF8E8 /* apple_ca_bundle.p7b */,
-				3C6036302947BEBE00981444 /* bundle_metadata.json */,
-				3C6036342947BEBE00981444 /* bundle_version.txt */,
-				3CCBE2D8294FFBB800E0DD6D /* google_ca_bundle.p7b */,
-				3C6036332947BEBE00981444 /* microsoft_ca_bundle.p7b */,
-				3C6036322947BEBE00981444 /* mozilla_ca_bundle.p7b */,
-			);
-			path = RootCACerts;
-			sourceTree = "<group>";
-		};
-		3C65DADB1E836BE9004AD96D /* CertificateKit */ = {
-			isa = PBXGroup;
-			children = (
-				3CF677392046503000A3B4C1 /* CertificateKit_PrefixHeader.pch */,
-				3C65DADC1E836BE9004AD96D /* CertificateKit.h */,
-				3CB483FC2058BA0400322723 /* CertificateKit.m */,
-				3C7CEE6020A15BD500DCC770 /* CKAlternateNameObject.h */,
-				3C7CEE6120A15BD500DCC770 /* CKAlternateNameObject.m */,
-				3C65DAE61E836C15004AD96D /* CKCertificate.h */,
-				3C65DAE71E836C15004AD96D /* CKCertificate.m */,
-				3C6220932A6C56C1008F822E /* CKCertificate+Private.h */,
-				3C60363E2947C0A000981444 /* CKCertificateBundle.h */,
-				3C60363F2947C0A000981444 /* CKCertificateBundle.m */,
-				3CCBE2D4294FF81600E0DD6D /* CKCertificateBundleMetadata.h */,
-				3CCBE2D5294FF81600E0DD6D /* CKCertificateBundleMetadata.m */,
-				3C65DAE81E836C15004AD96D /* CKCertificateChain.h */,
-				3C65DAE91E836C15004AD96D /* CKCertificateChain.m */,
-				3C03BED32B3E07F100928B6E /* CKCertificateExtension.h */,
-				3C03BED42B3E07F100928B6E /* CKCertificateExtension.m */,
-				3C03BED72B3E113800928B6E /* CKCertificateExtension+Private.h */,
-				A15D41B81EB1797F0070FF87 /* CKCertificatePublicKey.h */,
-				A15D41B91EB1797F0070FF87 /* CKCertificatePublicKey.m */,
-				3C45AD5823D831A900E541EC /* CKCurlCommon.h */,
-				3C45AD5923D831A900E541EC /* CKCurlCommon.m */,
-				3C6F48242A662FA4007894D8 /* CKHTTPServerInfo.h */,
-				3C6F48252A662FA4007894D8 /* CKHTTPServerInfo.m */,
-				3C4E23762A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h */,
-				3C62208F2A6C5324008F822E /* CKInspector.h */,
-				3CF0A693261BBC5900460B7F /* CKInspectParameters.h */,
-				3CF0A694261BBC5900460B7F /* CKInspectParameters.m */,
-				3C6220912A6C55AC008F822E /* CKInspectParameters+Private.h */,
-				3CD6DE452A662C37004A54F5 /* CKInspectRequest.h */,
-				3CD6DE462A662C37004A54F5 /* CKInspectRequest.m */,
-				3CD6DE492A662D88004A54F5 /* CKInspectResponse.h */,
-				3CD6DE4A2A662D88004A54F5 /* CKInspectResponse.m */,
-				9AFD2BE82A883CEA00FFF40F /* CKIPAddress.h */,
-				9AFD2BE92A883CEA00FFF40F /* CKIPAddress.m */,
-				3CF6773520464C7E00A3B4C1 /* CKLogging.h */,
-				3CF6773620464C7E00A3B4C1 /* CKLogging.m */,
-				3C66083D2A735171008B58E8 /* CKLogging+Private.h */,
-				3C1D28AA2009677300A606BB /* CKNameObject.h */,
-				3C1D28AB2009677300A606BB /* CKNameObject.m */,
-				3C1A0D0D263914C200267CF9 /* CKRegex.h */,
-				3C1A0D0E263914C300267CF9 /* CKRegex.m */,
-				3CF0A686261BBAC900460B7F /* CKResolvedAddress.h */,
-				3CF0A687261BBAC900460B7F /* CKResolvedAddress.m */,
-				3C64D5DC25BDFA2700AE4B4A /* CKResolver.h */,
-				3C64D5DD25BDFA2700AE4B4A /* CKResolver.m */,
-				3C60363A2947C01300981444 /* CKRootCACertificateBundleManager.h */,
-				3C60363B2947C01300981444 /* CKRootCACertificateBundleManager.m */,
-				3C30025D2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h */,
-				3C30025E2980E13500F8B2F0 /* CKSignedCertificateTimestamp.m */,
-				3C58E67523F8B7D800B622C6 /* CKSocketUtils.h */,
-				3C58E67623F8B7D800B622C6 /* CKSocketUtils.m */,
-				3CF0A69D261BBCA300460B7F /* CKTypes.h */,
-				3C218DB929AEF12F000D84BC /* CTLogs */,
-				3C62426F2947B10200A7814A /* curl.xcframework */,
-				3C6FE49D1EF4C0EF002021E3 /* Extensions */,
-				3C091B812A2EB84900A8BE92 /* HTTP */,
-				3C94753C2B1A9E3A00DC1637 /* idna */,
-				3C65DADD1E836BE9004AD96D /* Info.plist */,
-				67F686EF1FC8FAE400BB7AE8 /* Inspectors */,
-				3C6242712947B12C00A7814A /* openssl.xcframework */,
-				3CF6773420464A9E00A3B4C1 /* Revocation */,
-				3C60362F2947B88700981444 /* RootCACerts */,
-			);
-			path = CertificateKit;
-			sourceTree = "<group>";
-		};
-		3C6FE49D1EF4C0EF002021E3 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				3C84C9F52A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h */,
-				3C84C9F62A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m */,
-				3C84C9FE2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h */,
-				3C84C9FD2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m */,
-				3CD6DE412A661BE0004A54F5 /* NSData+ByteAtIndex.h */,
-				3CD6DE422A661BE0004A54F5 /* NSData+ByteAtIndex.m */,
-				3C3002642980ED3C00F8B2F0 /* NSData+HexString.h */,
-				3C3002652980ED3C00F8B2F0 /* NSData+HexString.m */,
-				3C65DAEE1E836C15004AD96D /* NSDate+ASN1_TIME.h */,
-				3C65DAEF1E836C15004AD96D /* NSDate+ASN1_TIME.m */,
-				3C03BED92B3E5EBD00928B6E /* NSDate+GeneralizedTime.h */,
-				3C03BEDA2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m */,
-				3C3DE1FC29B823A90025DA94 /* NSString+ASN1OctetString.h */,
-				3C3DE1FD29B823A90025DA94 /* NSString+ASN1OctetString.m */,
-				3C4956AD2A28530900E6A814 /* NSString+SplitFirst.h */,
-				3C4956AE2A28530900E6A814 /* NSString+SplitFirst.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		3C72692523949ABD002A0B19 /* tls-inspector */ = {
-			isa = PBXGroup;
-			children = (
-				3C72692623949ABD002A0B19 /* AppDelegate.swift */,
-				3C72692F23949ABD002A0B19 /* Assets.xcassets */,
-				3CCD0289239DC072009364D0 /* External */,
-				3CD4A7B62398C2F100B2C8FC /* Features */,
-				3C72693423949ABD002A0B19 /* Info.plist */,
-				3C5F465D239DAE7D00B3A727 /* Localization */,
-				3CAA8C0D2B50A9E400B57CB3 /* PrivacyInfo.xcprivacy */,
-				3C72695B2394BDF0002A0B19 /* SceneDelegate.swift */,
-				3CCD028C239DCEA7009364D0 /* Storyboards */,
-				3CF9CC9423A4802400535173 /* Supporting Files */,
-				3CF9CC9A23A4881600535173 /* TLS Inspector.entitlements */,
-				3C7269622394C2D3002A0B19 /* User Interface */,
-				3C7269382394BC0F002A0B19 /* View Controllers */,
-			);
-			path = "tls-inspector";
-			sourceTree = "<group>";
-		};
-		3C7269382394BC0F002A0B19 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3CCD0291239DD412009364D0 /* AboutViewController.swift */,
-				3C99C7C325A56BC4002ABA15 /* AdvancedInspectTableViewController.swift */,
-				3C7B09FE23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift */,
-				3C922C0229D613630064274F /* AppIconTableViewController.swift */,
-				3C64C6752A72EE2E006F52F7 /* AppLanguageTableViewController.swift */,
-				3C7269652394C916002A0B19 /* CertificateChainTableViewController.swift */,
-				3CD4A7AB2398B3D400B2C8FC /* CertificateTableViewController.swift */,
-				3C3002612980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift */,
-				3C57F49C23B011B200DCCB54 /* ContactTableViewController.swift */,
-				3C84A98123AD8CCD003B76D3 /* GetterErrorTableViewController.swift */,
-				3C5F4659239D7D4900B3A727 /* HTTPHeadersTableViewController.swift */,
-				3C7269392394BC1D002A0B19 /* InputTableViewController.swift */,
-				3C0B4FEE28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift */,
-				3C57F49A23B0090700DCCB54 /* NoticeViewController.swift */,
-				3CCD0295239DDA79009364D0 /* OptionsTableViewController.swift */,
-				3C6036422947C7A000981444 /* RootCACertificatesTableViewController.swift */,
-				3C5F465B239D7D5300B3A727 /* SANListTableViewController.swift */,
-				3C5F4655239D77CA00B3A727 /* SplitViewController.swift */,
-				3CCD02A023A33E65009364D0 /* TrustDetailsTableViewController.swift */,
-				3C1D34462B3CDE2B001DB576 /* ProxyViewController.swift */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		3C7269622394C2D3002A0B19 /* User Interface */ = {
-			isa = PBXGroup;
-			children = (
-				3C84A98523AD9FCD003B76D3 /* ActionTipTarget.swift */,
-				3CCD028F239DD0D5009364D0 /* GradientView.swift */,
-				3C99C7C825A57231002ABA15 /* InputTableViewCell.swift */,
-				3CD4933825A56721002AC7BD /* OptionsButton.swift */,
-				3CA6EAE929AFD22A00BFB6E2 /* SwitchTableViewCell.swift */,
-				3C2556AB28E60C430057FE4D /* TableViewCell.swift */,
-				3CD4A7B12398B75E00B2C8FC /* TableViewSection.swift */,
-				3C7269672394CE3A002A0B19 /* TitleValueTableViewCell.swift */,
-				3C7269632394C2E1002A0B19 /* UIHelper.swift */,
-				3CD1C66D2BCCCAEB00065D3F /* UILabel+Bold.swift */,
-				3C5F4653239A169400B3A727 /* UIView+RoundedCorners.swift */,
-			);
-			path = "User Interface";
-			sourceTree = "<group>";
-		};
-		3C94753C2B1A9E3A00DC1637 /* idna */ = {
-			isa = PBXGroup;
-			children = (
-				3C9475522B1A9F2000DC1637 /* Data+Extensions.swift */,
-				3C9475442B1A9E8700DC1637 /* idna.h */,
-				3C94754C2B1A9EFF00DC1637 /* NSString+IDNA.swift */,
-				3C9475552B1A9F2000DC1637 /* Scanner+Extensions.swift */,
-				3C9475512B1A9F2000DC1637 /* String+IDNA.swift */,
-				3C9475532B1A9F2000DC1637 /* uts46 */,
-				3C9475562B1A9F2000DC1637 /* UTS46.swift */,
-				3C9475542B1A9F2000DC1637 /* UTS46+Loading.swift */,
-			);
-			path = idna;
-			sourceTree = "<group>";
-		};
-		3CA2005E23974F160027D1C1 /* FontAwesome */ = {
-			isa = PBXGroup;
-			children = (
-				3CA2005F23974F710027D1C1 /* fa-regular.ttf */,
-				3CA2006023974F710027D1C1 /* fa-solid.ttf */,
-				3CA2005C23974A660027D1C1 /* FontAwesome.swift */,
-			);
-			path = FontAwesome;
-			sourceTree = "<group>";
-		};
-		3CCD0289239DC072009364D0 /* External */ = {
-			isa = PBXGroup;
-			children = (
-				3CCEB4D723DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift */,
-				3CA2005A2397457A0027D1C1 /* UIColor+MaterialColors.swift */,
-				3CA2005E23974F160027D1C1 /* FontAwesome */,
-			);
-			path = External;
-			sourceTree = "<group>";
-		};
-		3CCD028C239DCEA7009364D0 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				3CCD0298239DDE68009364D0 /* Main.storyboard */,
-				3CCD029A239DDE7F009364D0 /* LaunchScreen.storyboard */,
-				3CCD028D239DCEB6009364D0 /* More.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		3CD4A7B62398C2F100B2C8FC /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				3C599F6A23EA8D8200791DF1 /* AppInfo.swift */,
-				3C57F4A223B02B0700DCCB54 /* AppLinks.swift */,
-				3CDC14CF23B046410053932F /* AppOnlyGlobals.swift */,
-				3C6FF89723B1A420008DC981 /* AtomicInt.swift */,
-				3C84A98323AD98E6003B76D3 /* CertificateReminder.swift */,
-				3C84F3122644C275003E6A66 /* Date+DurationString.swift */,
-				3CD4A7AD2398B40800B2C8FC /* Globals.swift */,
-				3C96559C25E1B9B5004DE565 /* RandomDomainName.swift */,
-				3CCD028A239DC64C009364D0 /* RecentLookups.swift */,
-				3C57F49E23B0220300DCCB54 /* SupportType.swift */,
-				3C30025A2980BC1D00F8B2F0 /* TrustBannerParameters.swift */,
-				3C96559725E1B754004DE565 /* UIAccessabilityHints.swift */,
-				3C57F4A023B0243300DCCB54 /* UIDevicePlatform.swift */,
-				3CD4A7B72398C30A00B2C8FC /* UserOptions.swift */,
-				3C6FF89A23B1A9B6008DC981 /* UserOptions+CKOptions.swift */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		3CD74667258C13DA003D609E /* OffensiveWords */ = {
-			isa = PBXGroup;
-			children = (
-				3CD74668258C1406003D609E /* offensive_words.plist */,
-			);
-			path = OffensiveWords;
-			sourceTree = "<group>";
-		};
-		3CDC14A823B0453B0053932F /* inspect-website */ = {
-			isa = PBXGroup;
-			children = (
-				3CDC14AB23B0453B0053932F /* Extension.storyboard */,
-				3C6FF89023B1A20E008DC981 /* ExtensionAssets.xcassets */,
-				3CDC14AE23B0453B0053932F /* Info.plist */,
-				3CDC14D123B0479B0053932F /* InitialViewController.swift */,
-				3CDC14B523B045460053932F /* Show Certificate.entitlements */,
-			);
-			path = "inspect-website";
-			sourceTree = "<group>";
-		};
-		3CF397421EB50E0900E8DBF4 /* CertificateKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				3C45722C2A748FF2009EF7BB /* CertificateKitTests.h */,
-				3CB1080A2A95A53700CFE080 /* CKInspectorTests.h */,
-				3CB1080B2A95A53700CFE080 /* CKInspectorTests.m */,
-				9AFD2BEC2A8860CD00FFF40F /* CKIPAddressTests.m */,
-				3CF397451EB50E0900E8DBF4 /* Info.plist */,
-				3CF397431EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m */,
-				3C03BEDD2B3E609800928B6E /* NSDateTests.m */,
-				3C45722D2A74912D009EF7BB /* OpenSSLInspectorTests.m */,
-			);
-			path = CertificateKitTests;
-			sourceTree = "<group>";
-		};
-		3CF6773420464A9E00A3B4C1 /* Revocation */ = {
-			isa = PBXGroup;
-			children = (
-				3CF677282046335D00A3B4C1 /* CKCRLManager.h */,
-				3CF677292046335D00A3B4C1 /* CKCRLManager.m */,
-				3CF6772C2046338900A3B4C1 /* CKCRLResponse.h */,
-				3CF6772D2046338900A3B4C1 /* CKCRLResponse.m */,
-				3C70425020100CA900BE941A /* CKOCSPManager.h */,
-				3C70425120100CA900BE941A /* CKOCSPManager.m */,
-				3C36B3B220412564005C66E8 /* CKOCSPResponse.h */,
-				3C36B3B320412564005C66E8 /* CKOCSPResponse.m */,
-				3C28D0B2204209E8004C260F /* CKRevoked.h */,
-				3C28D0B3204209E8004C260F /* CKRevoked.m */,
-				9A31DECA2A917EAE0095857D /* CKRevoked+Private.h */,
-			);
-			path = Revocation;
-			sourceTree = "<group>";
-		};
-		3CF9CC9423A4802400535173 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3C1D3D052B353478003CDAE2 /* attr.html */,
-				3CF9CC9523A4804600535173 /* DomainList.plist */,
-				3CD74667258C13DA003D609E /* OffensiveWords */,
-				3C8B1AEB23CBD0050093E65D /* QuoteList.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3CF9CC9723A482DA00535173 /* UI Elements */ = {
-			isa = PBXGroup;
-			children = (
-				3CF9CC9823A482F500535173 /* UIObject+Lang.swift */,
-			);
-			path = "UI Elements";
-			sourceTree = "<group>";
-		};
-		3CFAE6CD1CA8440400CD946B = {
-			isa = PBXGroup;
-			children = (
-				3C72692523949ABD002A0B19 /* tls-inspector */,
-				3CDC14A823B0453B0053932F /* inspect-website */,
-				3C65DADB1E836BE9004AD96D /* CertificateKit */,
-				3CF397421EB50E0900E8DBF4 /* CertificateKitTests */,
-				3CFAE6D71CA8440400CD946B /* Products */,
-				A1BA8BE21E8EB2B30004FB0F /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		3CFAE6D71CA8440400CD946B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3C65DADA1E836BE9004AD96D /* CertificateKit.framework */,
-				3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */,
-				3C72692423949ABD002A0B19 /* TLS Inspector.app */,
-				3CDC14A723B0453B0053932F /* Show Certificate.appex */,
-				3C9475422B1A9E8700DC1637 /* idna.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		67F686EF1FC8FAE400BB7AE8 /* Inspectors */ = {
-			isa = PBXGroup;
-			children = (
-				3CB94043225036FC0055C067 /* CKOpenSSLInspector.h */,
-				3CB94041225036FC0055C067 /* CKOpenSSLInspector.m */,
-				3CBF85BD253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h */,
-				3CBF85BE253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m */,
-			);
-			path = Inspectors;
-			sourceTree = "<group>";
-		};
-		A1BA8BE21E8EB2B30004FB0F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3C1D3D072B35353A003CDAE2 /* WebKit.framework */,
-				3C091B7F2A2EAE3E00A8BE92 /* Network.framework */,
-				A1BA8BE31E8EB2B30004FB0F /* SafariServices.framework */,
+				3C0485542E724E0400DCA9F4 /* libresolv.9.tbd */,
+				3C8742E12EB4524200154664 /* UniformTypeIdentifiers.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3CC9543B2CA9EC4200C3AEF8 = {
+			isa = PBXGroup;
+			children = (
+				3CC954462CA9EC4200C3AEF8 /* tls-inspector */,
+				3C8742E32EB4524200154664 /* inspect-website */,
+				3C2CE6402CAA28F00075B2BA /* Frameworks */,
+				3CC954452CA9EC4200C3AEF8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3CC954452CA9EC4200C3AEF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */,
+				3C8742E02EB4524200154664 /* inspect-website.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		3C65DAD71E836BE9004AD96D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C03BED52B3E07F100928B6E /* CKCertificateExtension.h in Headers */,
-				3C6220902A6C5324008F822E /* CKInspector.h in Headers */,
-				3C6220922A6C55AC008F822E /* CKInspectParameters+Private.h in Headers */,
-				3C091B882A2EB9E400A8BE92 /* CKHTTPResponse.h in Headers */,
-				3CF6772A2046335D00A3B4C1 /* CKCRLManager.h in Headers */,
-				3CF0A69E261BBCA300460B7F /* CKTypes.h in Headers */,
-				3C65DAF31E836C15004AD96D /* CKCertificateChain.h in Headers */,
-				3C7CEE6220A15BD500DCC770 /* CKAlternateNameObject.h in Headers */,
-				3C58E67723F8B7D800B622C6 /* CKSocketUtils.h in Headers */,
-				3C65DAF91E836C15004AD96D /* NSDate+ASN1_TIME.h in Headers */,
-				3CF6772E2046338900A3B4C1 /* CKCRLResponse.h in Headers */,
-				3C36B3B420412564005C66E8 /* CKOCSPResponse.h in Headers */,
-				3C65DADE1E836BE9004AD96D /* CertificateKit.h in Headers */,
-				3CD6DE432A661BE0004A54F5 /* NSData+ByteAtIndex.h in Headers */,
-				3C1A0D0F263914C300267CF9 /* CKRegex.h in Headers */,
-				A15D41BA1EB1797F0070FF87 /* CKCertificatePublicKey.h in Headers */,
-				3C6036402947C0A000981444 /* CKCertificateBundle.h in Headers */,
-				3CB94047225036FC0055C067 /* CKOpenSSLInspector.h in Headers */,
-				3CF0A688261BBAC900460B7F /* CKResolvedAddress.h in Headers */,
-				3C03BED82B3E113800928B6E /* CKCertificateExtension+Private.h in Headers */,
-				3CB940392250353B0055C067 /* (null) in Headers */,
-				3C3002662980ED3C00F8B2F0 /* NSData+HexString.h in Headers */,
-				9A31DECB2A917EAE0095857D /* CKRevoked+Private.h in Headers */,
-				3C66083E2A735171008B58E8 /* CKLogging+Private.h in Headers */,
-				3C6F48262A662FA4007894D8 /* CKHTTPServerInfo.h in Headers */,
-				3C4956AF2A28530900E6A814 /* NSString+SplitFirst.h in Headers */,
-				3C3DE1FE29B823A90025DA94 /* NSString+ASN1OctetString.h in Headers */,
-				3CBF85BF253AA7DD0025FF16 /* CKNetworkFrameworkInspector.h in Headers */,
-				3CB9403D225035E80055C067 /* (null) in Headers */,
-				3C1D28AC2009677300A606BB /* CKNameObject.h in Headers */,
-				3C65DAF11E836C15004AD96D /* CKCertificate.h in Headers */,
-				3CF6773A2046503000A3B4C1 /* CertificateKit_PrefixHeader.pch in Headers */,
-				3C6220942A6C56C1008F822E /* CKCertificate+Private.h in Headers */,
-				3CF0A695261BBC5900460B7F /* CKInspectParameters.h in Headers */,
-				3CD6DE4B2A662D88004A54F5 /* CKInspectResponse.h in Headers */,
-				3C091B8C2A2EB9EE00A8BE92 /* CKHTTPHeaders.h in Headers */,
-				3C70425220100CA900BE941A /* CKOCSPManager.h in Headers */,
-				3C64D5DE25BDFA2700AE4B4A /* CKResolver.h in Headers */,
-				3C03BEDB2B3E5EBD00928B6E /* NSDate+GeneralizedTime.h in Headers */,
-				3C30025F2980E13500F8B2F0 /* CKSignedCertificateTimestamp.h in Headers */,
-				3C60363C2947C01300981444 /* CKRootCACertificateBundleManager.h in Headers */,
-				3C091B842A2EB88000A8BE92 /* CKHTTPClient.h in Headers */,
-				3CCBE2D6294FF81600E0DD6D /* CKCertificateBundleMetadata.h in Headers */,
-				3C45AD5A23D831A900E541EC /* CKCurlCommon.h in Headers */,
-				3C4E23772A6CD2E300C6AA4C /* CKHTTPServerInfo+Private.h in Headers */,
-				3CF6773720464C7E00A3B4C1 /* CKLogging.h in Headers */,
-				3CD6DE472A662C37004A54F5 /* CKInspectRequest.h in Headers */,
-				9AFD2BEA2A883CEA00FFF40F /* CKIPAddress.h in Headers */,
-				3C28D0B4204209E8004C260F /* CKRevoked.h in Headers */,
-				3C84CA002A75D7660037A902 /* CKOpenSSLInspector+EnumValues.h in Headers */,
-				3C84C9F72A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C94753D2B1A9E8700DC1637 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C9475452B1A9E8700DC1637 /* idna.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		3C65DAD91E836BE9004AD96D /* CertificateKit */ = {
+		3C8742DF2EB4524200154664 /* inspect-website */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */;
+			buildConfigurationList = 3C8742EF2EB4524200154664 /* Build configuration list for PBXNativeTarget "inspect-website" */;
 			buildPhases = (
-				3C000AB22471D154009BC68A /* Compile OpenSSL */,
-				3C5AE3E22471D9B00004292C /* Compile cURL */,
-				3C65DAD51E836BE9004AD96D /* Sources */,
-				3C65DAD61E836BE9004AD96D /* Frameworks */,
-				3C65DAD71E836BE9004AD96D /* Headers */,
-				3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */,
-				3C218DBE29AEF6A0000D84BC /* Update CT Logs (Release Only) */,
-				3C65DAD81E836BE9004AD96D /* Resources */,
+				3C8742DC2EB4524200154664 /* Sources */,
+				3C8742DD2EB4524200154664 /* Frameworks */,
+				3C8742DE2EB4524200154664 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3C1D3D032B352ACC003CDAE2 /* PBXTargetDependency */,
 			);
-			name = CertificateKit;
-			productName = CertificateKit;
-			productReference = 3C65DADA1E836BE9004AD96D /* CertificateKit.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		3C72692323949ABD002A0B19 /* TLS Inspector */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C72693723949ABD002A0B19 /* Build configuration list for PBXNativeTarget "TLS Inspector" */;
-			buildPhases = (
-				3CCD0288239DB79B009364D0 /* SwiftLint */,
-				3C72692023949ABD002A0B19 /* Sources */,
-				3C72692123949ABD002A0B19 /* Frameworks */,
-				3C72692223949ABD002A0B19 /* Resources */,
-				3CCD029F239DDF4D009364D0 /* Embed Foundation Extensions */,
-				3C1D3CFB2B352A3A003CDAE2 /* Embed Frameworks */,
+			fileSystemSynchronizedGroups = (
+				3C8742E32EB4524200154664 /* inspect-website */,
 			);
-			buildRules = (
-			);
-			dependencies = (
-				3C7269602394C16F002A0B19 /* PBXTargetDependency */,
-				3CDC14B023B0453B0053932F /* PBXTargetDependency */,
-				3C1D3CFF2B352AB9003CDAE2 /* PBXTargetDependency */,
-			);
-			name = "TLS Inspector";
+			name = "inspect-website";
 			packageProductDependencies = (
-			);
-			productName = "tls-inspector";
-			productReference = 3C72692423949ABD002A0B19 /* TLS Inspector.app */;
-			productType = "com.apple.product-type.application";
-		};
-		3C9475412B1A9E8700DC1637 /* idna */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C9475462B1A9E8700DC1637 /* Build configuration list for PBXNativeTarget "idna" */;
-			buildPhases = (
-				3C94753D2B1A9E8700DC1637 /* Headers */,
-				3C94753E2B1A9E8700DC1637 /* Sources */,
-				3C94753F2B1A9E8700DC1637 /* Frameworks */,
-				3C9475402B1A9E8700DC1637 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = idna;
-			productName = idna;
-			productReference = 3C9475422B1A9E8700DC1637 /* idna.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		3CDC14A623B0453B0053932F /* Inspect Website */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3CDC14B223B0453B0053932F /* Build configuration list for PBXNativeTarget "Inspect Website" */;
-			buildPhases = (
-				3CDC14B623B045730053932F /* SwiftLint */,
-				3CDC14A323B0453B0053932F /* Sources */,
-				3CDC14A423B0453B0053932F /* Frameworks */,
-				3C777D3429AFF7710090F5B8 /* Generate Localization */,
-				3CDC14A523B0453B0053932F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3C6FF89523B1A280008DC981 /* PBXTargetDependency */,
-			);
-			name = "Inspect Website";
-			packageProductDependencies = (
+				3C8745E02EB55EAC00154664 /* TLSKit */,
+				3C8745E22EB55EAC00154664 /* TLSUI */,
+				3C4E8A202EBA7BA500433307 /* Localization */,
 			);
 			productName = "inspect-website";
-			productReference = 3CDC14A723B0453B0053932F /* Show Certificate.appex */;
+			productReference = 3C8742E02EB4524200154664 /* inspect-website.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		3CF397401EB50E0900E8DBF4 /* CertificateKitTests */ = {
+		3CC954432CA9EC4200C3AEF8 /* tls-inspector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3CF397481EB50E0900E8DBF4 /* Build configuration list for PBXNativeTarget "CertificateKitTests" */;
+			buildConfigurationList = 3CC954522CA9EC4300C3AEF8 /* Build configuration list for PBXNativeTarget "tls-inspector" */;
 			buildPhases = (
-				3CF3973D1EB50E0900E8DBF4 /* Sources */,
-				3CF3973E1EB50E0900E8DBF4 /* Frameworks */,
-				3CF3973F1EB50E0900E8DBF4 /* Resources */,
+				3C5941DF2CC9B02900056AC3 /* SwiftLint */,
+				3CC954402CA9EC4200C3AEF8 /* Sources */,
+				3CC954412CA9EC4200C3AEF8 /* Frameworks */,
+				3CC954422CA9EC4200C3AEF8 /* Resources */,
+				3C6272F32E75228F00EAB12D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3C1A0D142639222B00267CF9 /* PBXTargetDependency */,
+				3C8742ED2EB4524200154664 /* PBXTargetDependency */,
 			);
-			name = CertificateKitTests;
-			productName = CertificateKitTests;
-			productReference = 3CF397411EB50E0900E8DBF4 /* CertificateKitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			fileSystemSynchronizedGroups = (
+				3CC954462CA9EC4200C3AEF8 /* tls-inspector */,
+			);
+			name = "tls-inspector";
+			packageProductDependencies = (
+				3CC954562CA9EC6200C3AEF8 /* TLSKit */,
+				3C8744E22EB46EA100154664 /* TLSUI */,
+				3C4E8A1E2EBA7B9D00433307 /* Localization */,
+			);
+			productName = "tls-inspector";
+			productReference = 3CC954442CA9EC4200C3AEF8 /* tls-inspector.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3CFAE6CE1CA8440400CD946B /* Project object */ = {
+		3CC9543C2CA9EC4200C3AEF8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1620;
-				ORGANIZATIONNAME = "Ian Spence";
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
-					3C65DAD91E836BE9004AD96D = {
-						CreatedOnToolsVersion = 8.2.1;
-						LastSwiftMigration = 1430;
-						ProvisioningStyle = Manual;
+					3C8742DF2EB4524200154664 = {
+						CreatedOnToolsVersion = 26.0;
 					};
-					3C72692323949ABD002A0B19 = {
-						CreatedOnToolsVersion = 11.2.1;
-					};
-					3C9475412B1A9E8700DC1637 = {
-						CreatedOnToolsVersion = 15.0.1;
-						LastSwiftMigration = 1500;
-					};
-					3CDC14A623B0453B0053932F = {
-						CreatedOnToolsVersion = 11.3;
-					};
-					3CF397401EB50E0900E8DBF4 = {
-						CreatedOnToolsVersion = 8.3.2;
-						TestTargetID = 3C72692323949ABD002A0B19;
+					3CC954432CA9EC4200C3AEF8 = {
+						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
-			buildConfigurationList = 3CFAE6D11CA8440400CD946B /* Build configuration list for PBXProject "tls-inspector" */;
-			compatibilityVersion = "Xcode 3.2";
+			buildConfigurationList = 3CC9543F2CA9EC4200C3AEF8 /* Build configuration list for PBXProject "tls-inspector" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 3CFAE6CD1CA8440400CD946B;
+			mainGroup = 3CC9543B2CA9EC4200C3AEF8;
+			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */,
+				3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */,
 			);
-			productRefGroup = 3CFAE6D71CA8440400CD946B /* Products */;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3CC954452CA9EC4200C3AEF8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3C72692323949ABD002A0B19 /* TLS Inspector */,
-				3CDC14A623B0453B0053932F /* Inspect Website */,
-				3C65DAD91E836BE9004AD96D /* CertificateKit */,
-				3CF397401EB50E0900E8DBF4 /* CertificateKitTests */,
-				3C9475412B1A9E8700DC1637 /* idna */,
+				3CC954432CA9EC4200C3AEF8 /* tls-inspector */,
+				3C8742DF2EB4524200154664 /* inspect-website */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3C65DAD81E836BE9004AD96D /* Resources */ = {
+		3C8742DE2EB4524200154664 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6E6B3C297F817C007BF8E8 /* apple_ca_bundle.p7b in Resources */,
-				3CE5EE8C29E21CE7009F7026 /* ct_log_list.min.json in Resources */,
-				3C6036392947BEBE00981444 /* bundle_version.txt in Resources */,
-				3C6036382947BEBE00981444 /* microsoft_ca_bundle.p7b in Resources */,
-				3CCBE2D9294FFBB800E0DD6D /* google_ca_bundle.p7b in Resources */,
-				3C6036372947BEBE00981444 /* mozilla_ca_bundle.p7b in Resources */,
-				3C6036352947BEBE00981444 /* bundle_metadata.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3C72692223949ABD002A0B19 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CE11BE629FCA097009673A2 /* es.plist in Resources */,
-				3CCD0299239DDE68009364D0 /* Main.storyboard in Resources */,
-				3C8B1AEC23CBD0050093E65D /* QuoteList.plist in Resources */,
-				3CA2006123974F710027D1C1 /* fa-regular.ttf in Resources */,
-				3C5A84F724D25F6100A1917E /* de.plist in Resources */,
-				3CCD028E239DCEB6009364D0 /* More.storyboard in Resources */,
-				3C72693023949ABD002A0B19 /* Assets.xcassets in Resources */,
-				3CE11BE829FCA097009673A2 /* nl.plist in Resources */,
-				3CCD029B239DDE7F009364D0 /* LaunchScreen.storyboard in Resources */,
-				3C5F4660239DAE9900B3A727 /* en.plist in Resources */,
-				3CD74669258C1406003D609E /* offensive_words.plist in Resources */,
-				3CF9CC9623A4804600535173 /* DomainList.plist in Resources */,
-				3C1D3D062B353478003CDAE2 /* attr.html in Resources */,
-				3CA2006223974F710027D1C1 /* fa-solid.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C9475402B1A9E8700DC1637 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C9475592B1A9F2000DC1637 /* uts46 in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CDC14A523B0453B0053932F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C6FF89123B1A20E008DC981 /* ExtensionAssets.xcassets in Resources */,
-				3CDC14C923B045E10053932F /* fa-regular.ttf in Resources */,
-				3CE11BE729FCA097009673A2 /* es.plist in Resources */,
-				3CDC14C723B045DA0053932F /* en.plist in Resources */,
-				3CE11BE929FCA097009673A2 /* nl.plist in Resources */,
-				3CDC14AD23B0453B0053932F /* Extension.storyboard in Resources */,
-				3CE11BEA29FCA09D009673A2 /* de.plist in Resources */,
-				3CDC14CA23B045E10053932F /* fa-solid.ttf in Resources */,
-				3CDC14C423B045CF0053932F /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CF3973F1EB50E0900E8DBF4 /* Resources */ = {
+		3CC954422CA9EC4200C3AEF8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1263,122 +253,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C000AB22471D154009BC68A /* Compile OpenSSL */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Compile OpenSSL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\nenv -i ./build-openssl.sh\n";
-		};
-		3C218DBE29AEF6A0000D84BC /* Update CT Logs (Release Only) */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update CT Logs (Release Only)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/CTLogs\"\nexport PATH=$PATH:/opt/homebrew/bin\n./update.sh\n";
-		};
-		3C3D620E294AED4E00E0C58C /* Update Root CA Certificates (Release Only) */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Root CA Certificates (Release Only)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nif [ ${CONFIGURATION} == \"Debug\" ]; then\n    echo \"skipping for debug builds\"\n    exit 0\nfi\n\ncd \"${PROJECT_DIR}/CertificateKit/RootCACerts\"\n./update.sh\n";
-		};
-		3C5AE3E22471D9B00004292C /* Compile cURL */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Compile cURL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "cd ${PROJECT_DIR}/CertificateKit/build\nenv -i ./build-curl.sh\n";
-			showEnvVarsInLog = 0;
-		};
-		3C777D3429AFF7710090F5B8 /* Generate Localization */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Localization";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"${DERIVED_FILE_DIR}/tls-inspector/Localization/Strings\"\nfind \"${PROJECT_DIR}/tls-inspector/Localization/Strings\" -name '*.plist' -exec cp {} \"${DERIVED_FILE_DIR}/tls-inspector/Localization/Strings/\" \\;\n";
-		};
-		3CCD0288239DB79B009364D0 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		3CDC14B623B045730053932F /* SwiftLint */ = {
+		3C5941DF2CC9B02900056AC3 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1400,660 +275,127 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3C65DAD51E836BE9004AD96D /* Sources */ = {
+		3C8742DC2EB4524200154664 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6F48272A662FA4007894D8 /* CKHTTPServerInfo.m in Sources */,
-				3C65DAF21E836C15004AD96D /* CKCertificate.m in Sources */,
-				3C091B852A2EB88000A8BE92 /* CKHTTPClient.m in Sources */,
-				3C03BED62B3E07F100928B6E /* CKCertificateExtension.m in Sources */,
-				3CBF85C0253AA7DD0025FF16 /* CKNetworkFrameworkInspector.m in Sources */,
-				3C36B3B520412564005C66E8 /* CKOCSPResponse.m in Sources */,
-				3CF6772B2046335D00A3B4C1 /* CKCRLManager.m in Sources */,
-				3C091B892A2EB9E400A8BE92 /* CKHTTPResponse.m in Sources */,
-				3CF6772F2046338900A3B4C1 /* CKCRLResponse.m in Sources */,
-				3C3002672980ED3C00F8B2F0 /* NSData+HexString.m in Sources */,
-				3C6036412947C0A000981444 /* CKCertificateBundle.m in Sources */,
-				3C7CEE6320A15BD500DCC770 /* CKAlternateNameObject.m in Sources */,
-				3C65DAF41E836C15004AD96D /* CKCertificateChain.m in Sources */,
-				3C70425320100CA900BE941A /* CKOCSPManager.m in Sources */,
-				3C3DE1FF29B823A90025DA94 /* NSString+ASN1OctetString.m in Sources */,
-				3C45AD5B23D831A900E541EC /* CKCurlCommon.m in Sources */,
-				3CCBE2D7294FF81600E0DD6D /* CKCertificateBundleMetadata.m in Sources */,
-				3C1A0D10263914C300267CF9 /* CKRegex.m in Sources */,
-				3C091B8D2A2EB9EE00A8BE92 /* CKHTTPHeaders.m in Sources */,
-				3CF6773820464C7E00A3B4C1 /* CKLogging.m in Sources */,
-				3C84C9F82A75D5320037A902 /* CKNetworkFrameworkInspector+EnumValues.m in Sources */,
-				3CB94045225036FC0055C067 /* CKOpenSSLInspector.m in Sources */,
-				9AFD2BEB2A883CEA00FFF40F /* CKIPAddress.m in Sources */,
-				3CF0A689261BBAC900460B7F /* CKResolvedAddress.m in Sources */,
-				A15D41BB1EB1797F0070FF87 /* CKCertificatePublicKey.m in Sources */,
-				3C65DAFA1E836C15004AD96D /* NSDate+ASN1_TIME.m in Sources */,
-				3CF0A696261BBC5900460B7F /* CKInspectParameters.m in Sources */,
-				3C3002602980E13500F8B2F0 /* CKSignedCertificateTimestamp.m in Sources */,
-				3C60363D2947C01300981444 /* CKRootCACertificateBundleManager.m in Sources */,
-				3C28D0B5204209E8004C260F /* CKRevoked.m in Sources */,
-				3CD6DE4C2A662D88004A54F5 /* CKInspectResponse.m in Sources */,
-				3C1D28AD2009677300A606BB /* CKNameObject.m in Sources */,
-				3C03BEDC2B3E5EBD00928B6E /* NSDate+GeneralizedTime.m in Sources */,
-				3CD6DE482A662C37004A54F5 /* CKInspectRequest.m in Sources */,
-				3C64D5DF25BDFA2700AE4B4A /* CKResolver.m in Sources */,
-				3C4956B02A28530900E6A814 /* NSString+SplitFirst.m in Sources */,
-				3C58E67823F8B7D800B622C6 /* CKSocketUtils.m in Sources */,
-				3CD6DE442A661BE0004A54F5 /* NSData+ByteAtIndex.m in Sources */,
-				3C84C9FF2A75D7660037A902 /* CKOpenSSLInspector+EnumValues.m in Sources */,
-				3CB483FD2058BA0400322723 /* CertificateKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3C72692023949ABD002A0B19 /* Sources */ = {
+		3CC954402CA9EC4200C3AEF8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CF9CC9923A482F500535173 /* UIObject+Lang.swift in Sources */,
-				3C0B4FEF28305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
-				3C3002622980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */,
-				3C1D34472B3CDE2B001DB576 /* ProxyViewController.swift in Sources */,
-				3CCD0290239DD0D5009364D0 /* GradientView.swift in Sources */,
-				3C57F49D23B011B200DCCB54 /* ContactTableViewController.swift in Sources */,
-				3C5F465C239D7D5300B3A727 /* SANListTableViewController.swift in Sources */,
-				3C57F4A323B02B0700DCCB54 /* AppLinks.swift in Sources */,
-				3C57F4A123B0243300DCCB54 /* UIDevicePlatform.swift in Sources */,
-				3C72693A2394BC1D002A0B19 /* InputTableViewController.swift in Sources */,
-				3CCD02A123A33E65009364D0 /* TrustDetailsTableViewController.swift in Sources */,
-				3C7269682394CE3A002A0B19 /* TitleValueTableViewCell.swift in Sources */,
-				3CD4A7B82398C30A00B2C8FC /* UserOptions.swift in Sources */,
-				3C64C6762A72EE2E006F52F7 /* AppLanguageTableViewController.swift in Sources */,
-				3CD4A7B42398BC1700B2C8FC /* Lang.swift in Sources */,
-				3C30025B2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
-				3C72692723949ABD002A0B19 /* AppDelegate.swift in Sources */,
-				3C57F49F23B0220300DCCB54 /* SupportType.swift in Sources */,
-				3C7269642394C2E1002A0B19 /* UIHelper.swift in Sources */,
-				3CCEB4D823DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
-				3C84A98223AD8CCD003B76D3 /* GetterErrorTableViewController.swift in Sources */,
-				3CD4A7AE2398B40800B2C8FC /* Globals.swift in Sources */,
-				3C6FF89823B1A420008DC981 /* AtomicInt.swift in Sources */,
-				3CCD028B239DC64C009364D0 /* RecentLookups.swift in Sources */,
-				3C922C0329D613630064274F /* AppIconTableViewController.swift in Sources */,
-				3C599F6B23EA8D8200791DF1 /* AppInfo.swift in Sources */,
-				3CCD0296239DDA79009364D0 /* OptionsTableViewController.swift in Sources */,
-				3C96559D25E1B9B5004DE565 /* RandomDomainName.swift in Sources */,
-				3CA2005B2397457A0027D1C1 /* UIColor+MaterialColors.swift in Sources */,
-				3CD1C66E2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */,
-				3C99C7C425A56BC4002ABA15 /* AdvancedInspectTableViewController.swift in Sources */,
-				3CD4933925A56721002AC7BD /* OptionsButton.swift in Sources */,
-				3CCD0292239DD412009364D0 /* AboutViewController.swift in Sources */,
-				3C99C7C925A57231002ABA15 /* InputTableViewCell.swift in Sources */,
-				3C57F49B23B0090700DCCB54 /* NoticeViewController.swift in Sources */,
-				3C84F3132644C275003E6A66 /* Date+DurationString.swift in Sources */,
-				3C84A98423AD98E6003B76D3 /* CertificateReminder.swift in Sources */,
-				3C72695C2394BDF0002A0B19 /* SceneDelegate.swift in Sources */,
-				3CA6EAEA29AFD22A00BFB6E2 /* SwitchTableViewCell.swift in Sources */,
-				3CA2005D23974A660027D1C1 /* FontAwesome.swift in Sources */,
-				3C7B09FF23AFECF400D6B699 /* AdvancedOptionsTableViewController.swift in Sources */,
-				3CD4A7B22398B75E00B2C8FC /* TableViewSection.swift in Sources */,
-				3C96559825E1B754004DE565 /* UIAccessabilityHints.swift in Sources */,
-				3C5F4654239A169400B3A727 /* UIView+RoundedCorners.swift in Sources */,
-				3C7269662394C916002A0B19 /* CertificateChainTableViewController.swift in Sources */,
-				3CD4A7AC2398B3D400B2C8FC /* CertificateTableViewController.swift in Sources */,
-				3CDC14D023B046410053932F /* AppOnlyGlobals.swift in Sources */,
-				3C5F465A239D7D4900B3A727 /* HTTPHeadersTableViewController.swift in Sources */,
-				3C6036432947C7A000981444 /* RootCACertificatesTableViewController.swift in Sources */,
-				3C5F4656239D77CA00B3A727 /* SplitViewController.swift in Sources */,
-				3C6FF89B23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,
-				3C2556AC28E60C430057FE4D /* TableViewCell.swift in Sources */,
-				3C84A98623AD9FCD003B76D3 /* ActionTipTarget.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C94753E2B1A9E8700DC1637 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C94755B2B1A9F2000DC1637 /* Scanner+Extensions.swift in Sources */,
-				3C9475572B1A9F2000DC1637 /* String+IDNA.swift in Sources */,
-				3C9475502B1A9EFF00DC1637 /* NSString+IDNA.swift in Sources */,
-				3C94755C2B1A9F2000DC1637 /* UTS46.swift in Sources */,
-				3C9475582B1A9F2000DC1637 /* Data+Extensions.swift in Sources */,
-				3C94755A2B1A9F2000DC1637 /* UTS46+Loading.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CDC14A323B0453B0053932F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CDC14B723B045B20053932F /* ActionTipTarget.swift in Sources */,
-				3CDC14C323B045C50053932F /* SANListTableViewController.swift in Sources */,
-				3CDC14B923B045B20053932F /* TitleValueTableViewCell.swift in Sources */,
-				3CDC14BD23B045C50053932F /* GetterErrorTableViewController.swift in Sources */,
-				3CDC14CE23B046000053932F /* CertificateReminder.swift in Sources */,
-				3CDC14BE23B045C50053932F /* TrustDetailsTableViewController.swift in Sources */,
-				3CDC14CC23B046000053932F /* Globals.swift in Sources */,
-				3CDC14C123B045C50053932F /* CertificateChainTableViewController.swift in Sources */,
-				3C599F6C23EA8D8200791DF1 /* AppInfo.swift in Sources */,
-				3CDC14C623B045DA0053932F /* Lang.swift in Sources */,
-				3CDC14BB23B045B20053932F /* UIView+RoundedCorners.swift in Sources */,
-				3CDC14C023B045C50053932F /* CertificateTableViewController.swift in Sources */,
-				3CDC14BF23B045C50053932F /* HTTPHeadersTableViewController.swift in Sources */,
-				3CDC14D223B0479B0053932F /* InitialViewController.swift in Sources */,
-				3CDC14C223B045C50053932F /* SplitViewController.swift in Sources */,
-				3C2556AD28E60C430057FE4D /* TableViewCell.swift in Sources */,
-				3CDC14BC23B045B20053932F /* GradientView.swift in Sources */,
-				3CDC14C523B045DA0053932F /* UIObject+Lang.swift in Sources */,
-				3C6FF89923B1A420008DC981 /* AtomicInt.swift in Sources */,
-				3C84F3142644C275003E6A66 /* Date+DurationString.swift in Sources */,
-				3CDC14CD23B046000053932F /* UserOptions.swift in Sources */,
-				3CCEB4D923DA9CE100E4CBF2 /* Array+AppendIfNotNil.swift in Sources */,
-				3C0B4FF028305BC8003E6AF8 /* KeyingMaterialTableViewController.swift in Sources */,
-				3CDC14C823B045E10053932F /* UIColor+MaterialColors.swift in Sources */,
-				3C3002632980E79600F8B2F0 /* CertificateTimestampsTableViewController.swift in Sources */,
-				3C30025C2980BC1D00F8B2F0 /* TrustBannerParameters.swift in Sources */,
-				3CDC14BA23B045B20053932F /* TableViewSection.swift in Sources */,
-				3C6FF89C23B1A9B6008DC981 /* UserOptions+CKOptions.swift in Sources */,
-				3CDC14CB23B045E10053932F /* FontAwesome.swift in Sources */,
-				3CDC14B823B045B20053932F /* UIHelper.swift in Sources */,
-				3CD1C66F2BCCCAEB00065D3F /* UILabel+Bold.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CF3973D1EB50E0900E8DBF4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CB1080C2A95A53700CFE080 /* CKInspectorTests.m in Sources */,
-				3C03BEDE2B3E609800928B6E /* NSDateTests.m in Sources */,
-				9AFD2BED2A8860CD00FFF40F /* CKIPAddressTests.m in Sources */,
-				3C45722E2A74912D009EF7BB /* OpenSSLInspectorTests.m in Sources */,
-				3CF397441EB50E0900E8DBF4 /* NetworkFrameworkInspectorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3C1A0D142639222B00267CF9 /* PBXTargetDependency */ = {
+		3C8742ED2EB4524200154664 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3C72692323949ABD002A0B19 /* TLS Inspector */;
-			targetProxy = 3C1A0D132639222B00267CF9 /* PBXContainerItemProxy */;
-		};
-		3C1D3CFF2B352AB9003CDAE2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C9475412B1A9E8700DC1637 /* idna */;
-			targetProxy = 3C1D3CFE2B352AB9003CDAE2 /* PBXContainerItemProxy */;
-		};
-		3C1D3D032B352ACC003CDAE2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C9475412B1A9E8700DC1637 /* idna */;
-			targetProxy = 3C1D3D022B352ACC003CDAE2 /* PBXContainerItemProxy */;
-		};
-		3C6FF89523B1A280008DC981 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
-			targetProxy = 3C6FF89423B1A280008DC981 /* PBXContainerItemProxy */;
-		};
-		3C7269602394C16F002A0B19 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C65DAD91E836BE9004AD96D /* CertificateKit */;
-			targetProxy = 3C72695F2394C16F002A0B19 /* PBXContainerItemProxy */;
-		};
-		3CDC14B023B0453B0053932F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3CDC14A623B0453B0053932F /* Inspect Website */;
-			targetProxy = 3CDC14AF23B0453B0053932F /* PBXContainerItemProxy */;
+			target = 3C8742DF2EB4524200154664 /* inspect-website */;
+			targetProxy = 3C8742EC2EB4524200154664 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		3CDC14AB23B0453B0053932F /* Extension.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3CDC14AC23B0453B0053932F /* Base */,
-			);
-			name = Extension.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		3C65DAE41E836BE9004AD96D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 135;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/CertificateKit",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = CertificateKit/CertificateKit_PrefixHeader.pch;
-				INFOPLIST_FILE = CertificateKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.8.3;
-				OTHER_LDFLAGS = "-lz";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		3C65DAE51E836BE9004AD96D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 135;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/CertificateKit",
-				);
-				GCC_OPTIMIZATION_LEVEL = z;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = CertificateKit/CertificateKit_PrefixHeader.pch;
-				INFOPLIST_FILE = CertificateKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.8.3;
-				OTHER_LDFLAGS = "-lz";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlsinspector.CertificateKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3C72693523949ABD002A0B19 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "tls-inspector/TLS Inspector.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 136;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "tls-inspector/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.8.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "TLS Inspector (Development)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3C72693623949ABD002A0B19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "tls-inspector/TLS Inspector.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 136;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_OPTIMIZATION_LEVEL = z;
-				INFOPLIST_FILE = "tls-inspector/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.8.4;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "TLS Inspector (Development)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		3C9475472B1A9E8700DC1637 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 135;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Ian Spence licensed using the GNU General Public License v3.0.";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.8.3;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.ecn.idna;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		3C9475482B1A9E8700DC1637 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 135;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Ian Spence licensed using the GNU General Public License v3.0.";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.8.3;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.ecn.idna;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3CDC14B323B0453B0053932F /* Debug */ = {
+		3C8742F02EB4524200154664 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_OPTIMIZATION = "";
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "inspect-website/Show Certificate.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "inspect-website/inspect-website.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 136;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				CURRENT_PROJECT_VERSION = 149;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inspect-website/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "View Certificate";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.8.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
-				PRODUCT_NAME = "Show Certificate";
-				PROVISIONING_PROFILE_SPECIFIER = "Inspect Website (Development)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Inspect Website (Development)";
 				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		3CDC14B423B0453B0053932F /* Release */ = {
+		3C8742F12EB4524200154664 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "inspect-website/Show Certificate.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "inspect-website/inspect-website.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 136;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_OPTIMIZATION_LEVEL = z;
+				CURRENT_PROJECT_VERSION = 149;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inspect-website/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "View Certificate";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.8.4;
-				MTL_FAST_MATH = YES;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector.Inspect-Website";
-				PRODUCT_NAME = "Show Certificate";
-				PROVISIONING_PROFILE_SPECIFIER = "Inspect Website (Development)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Inspect Website (Distribution)";
 				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		3CF397491EB50E0900E8DBF4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 135;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				INFOPLIST_FILE = CertificateKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.8.3;
-				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
-			};
-			name = Debug;
-		};
-		3CF3974A1EB50E0900E8DBF4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 135;
-				DEVELOPMENT_TEAM = WCW84NC7Y8;
-				INFOPLIST_FILE = CertificateKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.8.3;
-				PRODUCT_BUNDLE_IDENTIFIER = ecn.CertificateKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TLS Inspector.app/TLS Inspector";
-			};
-			name = Release;
-		};
-		3CFAE6EB1CA8440400CD946B /* Debug */ = {
+		3CC954502CA9EC4300C3AEF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2062,18 +404,20 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 135;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2081,38 +425,43 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.8.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
-		3CFAE6EC1CA8440400CD946B /* Release */ = {
+		3CC954512CA9EC4300C3AEF8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2121,95 +470,197 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 135;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
+				DEVELOPMENT_TEAM = WCW84NC7Y8;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3CC954532CA9EC4300C3AEF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "tls-inspector/tls-inspector.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 149;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tls-inspector/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "TLS Inspector can add reminders about upcoming certificate expiration dates.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TLS Inspector (Development)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3CC954542CA9EC4300C3AEF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = IconDefault;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "tls-inspector/tls-inspector.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 149;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WCW84NC7Y8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tls-inspector/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TLS Inspector";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "TLS Inspector can add reminders about upcoming certificate expiration dates.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecnepsnai.Certificate-Inspector";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TLS Inspector (Distribution)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3C65DAE31E836BE9004AD96D /* Build configuration list for PBXNativeTarget "CertificateKit" */ = {
+		3C8742EF2EB4524200154664 /* Build configuration list for PBXNativeTarget "inspect-website" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3C65DAE41E836BE9004AD96D /* Debug */,
-				3C65DAE51E836BE9004AD96D /* Release */,
+				3C8742F02EB4524200154664 /* Debug */,
+				3C8742F12EB4524200154664 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3C72693723949ABD002A0B19 /* Build configuration list for PBXNativeTarget "TLS Inspector" */ = {
+		3CC9543F2CA9EC4200C3AEF8 /* Build configuration list for PBXProject "tls-inspector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3C72693523949ABD002A0B19 /* Debug */,
-				3C72693623949ABD002A0B19 /* Release */,
+				3CC954502CA9EC4300C3AEF8 /* Debug */,
+				3CC954512CA9EC4300C3AEF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3C9475462B1A9E8700DC1637 /* Build configuration list for PBXNativeTarget "idna" */ = {
+		3CC954522CA9EC4300C3AEF8 /* Build configuration list for PBXNativeTarget "tls-inspector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3C9475472B1A9E8700DC1637 /* Debug */,
-				3C9475482B1A9E8700DC1637 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3CDC14B223B0453B0053932F /* Build configuration list for PBXNativeTarget "Inspect Website" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3CDC14B323B0453B0053932F /* Debug */,
-				3CDC14B423B0453B0053932F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3CF397481EB50E0900E8DBF4 /* Build configuration list for PBXNativeTarget "CertificateKitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3CF397491EB50E0900E8DBF4 /* Debug */,
-				3CF3974A1EB50E0900E8DBF4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3CFAE6D11CA8440400CD946B /* Build configuration list for PBXProject "tls-inspector" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3CFAE6EB1CA8440400CD946B /* Debug */,
-				3CFAE6EC1CA8440400CD946B /* Release */,
+				3CC954532CA9EC4300C3AEF8 /* Debug */,
+				3CC954542CA9EC4300C3AEF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = tlsui;
+		};
+		3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = tlskit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3C4E8A1E2EBA7B9D00433307 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = Localization;
+		};
+		3C4E8A202EBA7BA500433307 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = Localization;
+		};
+		3C8744E22EB46EA100154664 /* TLSUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = TLSUI;
+		};
+		3C8745E02EB55EAC00154664 /* TLSKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CC954552CA9EC6200C3AEF8 /* XCLocalSwiftPackageReference "tlskit" */;
+			productName = TLSKit;
+		};
+		3C8745E22EB55EAC00154664 /* TLSUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C8744412EB46BFD00154664 /* XCLocalSwiftPackageReference "tlsui" */;
+			productName = TLSUI;
+		};
+		3CC954562CA9EC6200C3AEF8 /* TLSKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TLSKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 3CFAE6CE1CA8440400CD946B /* Project object */;
+	rootObject = 3CC9543C2CA9EC4200C3AEF8 /* Project object */;
 }

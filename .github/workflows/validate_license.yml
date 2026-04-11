@@ -4,14 +4,14 @@ on:
   push:
     paths:
       - '.github/workflows/validate_license.yml'
-      - '**/*.m'
-      - '**/*.h'
-      - '**/*.c'
+      - '**/*.swift'
+      - '**/*.py'
+      - '**/*.go'
   pull_request:
     paths:
-      - '**/*.m'
-      - '**/*.h'
-      - '**/*.c'
+      - '**/*.swift'
+      - '**/*.py'
+      - '**/*.go'
 
 permissions:
   packages: read
@@ -19,13 +19,15 @@ permissions:
 jobs:
   build:
     name: "Validate License"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout Source
         id: checkout
-        uses: actions/checkout@v4
-      
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #pin v6.0.2
+        with:
+          persist-credentials: false
+
       - name: Validate license
         id: validate_license
         run: |
-          ./validate_license_header.sh
+          python3 .github/check-license.py
