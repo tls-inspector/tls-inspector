@@ -1080,13 +1080,13 @@ public final class Localize {
     public static func licensefooter() -> String {
         switch currentLanguage {
         case .English:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .Spanish:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .German:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .Dutch:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License v3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors."
+            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         }
     }
     // key: Locally Trusted
