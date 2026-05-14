@@ -1,0 +1,193 @@
+# DNS Inspector localization strings for Polish
+# Copyright 2026 Ian Spence and DNS Inspector Authors
+# Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
+1 day	1 dzień
+1 hour	1 godzina
+1 minute	1 minuta
+1 month	1 miesiąc
+1 year	1 rok
+About	O aplikacji
+Add reminder for certificate expiry	Dodaj przypomnienie o wygaśnięciu certyfikatu
+Advanced Options	Opcje zaawansowane
+AdvancedSettingsNag	Te opcje służą do zaawansowanej analizy i rozwiązywania problemów. Użycie nieprawidłowych wartości może uniemożliwić poprawne działanie TLS Inspector.
+Algorithm	Algorytm
+Allowed ciphers	Dozwolone szyfry
+Alternate Names	Nazwy alternatywne
+App Icon	Ikona aplikacji
+App Language	Język aplikacji
+AppIconFooter	Flaga Progress Pride została stworzona przez Daniela Quasara i jest licencjonowana na Creative Commons BY-NC-SA. Flaga trans została stworzona przez Monicę Helms i przekazana do domeny publicznej.
+Apple	Apple
+Authority	Urząd
+Auto	Automatycznie
+Basic	Podstawowe
+Bundle date	Data pakietu
+Bundles have been updated to their latest versions.	Pakiety zostały zaktualizowane do najnowszych wersji.
+Certificate Authority	Urząd certyfikacji
+Certificate Status	Status certyfikatu
+Certificate Timestamps	Znaczniki czasu certyfikatu
+Certificate Trust	Zaufanie certyfikatu
+Certificate not trusted	Certyfikat niezaufany
+CertificateStatusFooter	Sprawdzanie statusu certyfikatu służy do weryfikacji, czy certyfikat został unieważniony.
+Certificates	Certyfikaty
+Check for updates	Sprawdź aktualizacje
+City / Locality	Miasto / Miejscowość
+Clear downloaded bundles	Wyczyść pobrane pakiety
+Common Name	Nazwa pospolita (CN)
+Connection Information	Informacje o połączeniu
+Contribute to TLS Inspector	Wspieraj TLS Inspector
+Country	Kraj
+DNS Name	Nazwa DNS
+Danger	Niebezpieczeństwo
+Dangerous & Unsafe	Niebezpieczne i niepewne
+Dismiss	Zamknij
+Domain Name or IP Address	Nazwa domeny lub adres IP
+Done	Gotowe
+Download & Check CRL	Pobierz i sprawdź CRL
+Downloaded	Pobrano
+Email Address	Adres e-mail
+Embedded	Osadzone
+Engine Options	Opcje silnika
+Error	Błąd
+Error adding reminder	Błąd podczas dodawania przypomnienia
+Expired	Wygasł
+Expires In	Wygasa za
+Export Logs	Eksportuj logi
+Export certificate	Eksportuj certyfikat
+Export certificate chain	Eksportuj łańcuch certyfikatów
+Extended	Rozszerzone
+Extensions	Rozszerzenia
+Fingerprints	Odciski
+Follow Us	Obserwuj nas
+Follow us on Bluesky	Obserwuj nas na Bluesky
+Follow us on Mastodon	Obserwuj nas na Mastodon
+Found on device	Znaleziono na urządzeniu
+General	Ogólne
+Get Involved	Zaangażuj się
+Google	Google
+HTTP Headers	Nagłówki HTTP
+IP Address	Adres IP
+IconDark	Ciemna
+IconDefault	Domyślna
+IconLight	Jasna
+IconPride	Pride
+IconSkew	Skew
+IconSlate	Slate
+IconTrans	Trans
+If you believe this to be in error, contact support from within the TLS Inspector app.	Jeśli uważasz, że to błąd, skontaktuj się ze wsparciem z poziomu aplikacji TLS Inspector.
+Invalid Certificate	Nieprawidłowy certyfikat
+Issuer	Wystawca
+Key Identifiers	Identyfikatory klucza
+Key Size	Rozmiar klucza
+Key Usage	Użycie klucza
+Language Updated	Zaktualizowano język
+Learn More	Dowiedz się więcej
+LicenseFooter	TLS Inspector to wolne i otwarte oprogramowanie (FLOSS) licencjonowane na GNU General Public License w wersji 3 (GPLv3). Copyright © 2016-2026 Ian Spence i inni współtwórcy TLS Inspector. TLS Inspector powstał całkowicie bez użycia sztucznej inteligencji (AI) lub dużych modeli językowych (LLM).
+Locally Trusted	Lokalnie zaufany
+Log ID	ID logu
+Log Name	Nazwa logu
+Logging & Support	Logowanie i wsparcie
+LoggingFooter	Jeśli masz problem z TLS Inspector, możemy poprosić o włączenie logowania debug i przesłanie logów, aby lepiej zidentyfikować problem. Nie zbieramy danych osobowych, jednak po włączeniu logowania uwzględniane są hosty, które sprawdzasz. Nigdy nie pobieramy tych logów, chyba że wyślesz je do nas za pomocą przycisku powyżej.
+Metadata	Metadane
+Microsoft	Microsoft
+More from the Developer	Więcej od dewelopera
+Mozilla	Mozilla
+Negotiated Ciphersuite	Uzgodniony zestaw szyfrów
+Negotiated Version	Uzgodniona wersja
+Network Engine	Silnik sieciowy
+Network Options	Opcje sieci
+NetworkEngineFooter	Zmiana silnika sieciowego może spowodować, że TLS Inspector będzie wyświetlał inne informacje o połączeniu niż te używane przez Twoje urządzenie iOS.
+No	Nie
+No Supported URL Found	Nie znaleziono obsługiwanego adresu URL
+No updates available at this time.	Brak dostępnych aktualizacji w tej chwili.
+Not After	Nie po
+Not Before	Nie przed
+Not revoked	Nie unieważniono
+Notice	Uwaga
+Only HTTPS URLs can be inspected.	Można analizować tylko adresy URL HTTPS.
+Open source licenses & attributions	Licencje open source i atrybucje
+Options	Opcje
+Organization	Organizacja
+Organizational Unit	Jednostka organizacyjna
+Permission Denied	Brak uprawnień
+Please wait...	Proszę czekać...
+ProxyDanger	Jeśli nie wiesz, czym jest proxy HTTPS ani dlaczego jest skonfigurowane na Twoim urządzeniu, natychmiast skontaktuj się z Apple Support lub zaufaną osobą. Jeśli to możliwe, unikaj używania urządzenia.
+ProxyNotice	Na Twoim urządzeniu skonfigurowano proxy HTTPS. TLS Inspector nie jest zgodny z proxy HTTPS i analiza nie może zostać wykonana. Aby korzystać z TLS Inspector, wyłącz proxy HTTPS w ustawieniach Wi‑Fi.
+Public Key	Klucz publiczny
+Query OCSP Responder	Zapytaj responder OCSP
+Quick Exit	Szybkie wyjście
+Rate in App Store	Oceń w App Store
+Recent Lookups	Ostatnie sprawdzenia
+Remember Recent Lookups	Zapamiętuj ostatnie sprawdzenia
+Reminder Added	Przypomnienie dodane
+Remote Address	Adres zdalny
+Renew Certificate '{domain}'	Odnów certyfikat „{0}”
+Reset to default settings	Przywróć ustawienia domyślne
+Review or update the reminder in the Reminders app	Sprawdź lub zaktualizuj przypomnienie w aplikacji Przypomnienia
+Revoked: {reason}	Unieważniono: {0}
+Root	Główny
+Root CA Certificates	Główne certyfikaty CA
+RootCABundleAbout	TLS Inspector używa głównych certyfikatów CA obecnych na Twoim urządzeniu oraz certyfikatów od zaufanych dostawców, aby podejmować decyzje o zaufaniu z wysoką pewnością. Aktualizacje pakietów certyfikatów są rzadkie, a kopia jest dołączona do TLS Inspector.
+RootCALicenseFooter	Apple, Google, Microsoft i Mozilla są zastrzeżonymi znakami towarowymi należącymi do ich właścicieli. TLS Inspector nie jest powiązany ani wspierany przez żadną stronę trzecią, w tym między innymi wymienione podmioty.
+Search on {website}	Szukaj w {0}
+Seconds	Sekundy
+Security HTTP Headers	Nagłówki bezpieczeństwa HTTP
+Sent by server	Wysłane przez serwer
+Serial Number	Numer seryjny
+Share & Feedback	Udostępnianie i opinie
+Share TLS Inspector	Udostępnij TLS Inspector
+Show HTTP Headers	Pokaż nagłówki HTTP
+Show certificate on {website}	Pokaż certyfikat w {0}
+Signature	Podpis
+Signature Type	Typ podpisu
+Source	Źródło
+Special	Specjalne
+State / Province	Stan / Województwo
+Status Providers	Dostawcy statusu
+Subject	Podmiot
+TLS Inspector	TLS Inspector
+Target	Cel
+The certificate '{domain}' expires on {date}	Certyfikat „{0}” wygasa {1}
+Timeout	Limit czasu
+Timestamp	Znacznik czasu
+Timestamps	Znaczniki czasu
+Treat Unrecognized as Trusted	Traktuj nierozpoznane jako zaufane
+Trust Details	Szczegóły zaufania
+Trusted	Zaufany
+URI	URI
+Unnamed Certificate	Certyfikat bez nazwy
+Unrecognized	Nierozpoznany
+Untrusted	Niezaufany
+Use IP version	Użyj wersji IP
+Valid For	Ważny przez
+Validity Period	Okres ważności
+Verbose logging	Szczegółowe logowanie
+Verified	Zweryfikowano
+Version	Wersja
+View All	Zobacz wszystko
+What does this mean?	Co to oznacza?
+Yes	Tak
+You must restart the app for the change to take effect.	Musisz ponownie uruchomić aplikację, aby zmiana zaczęła obowiązywać.
+app{version}{build}{opensslversion}{curlversion}	Aplikacja: {0} ({1}), OpenSSL: {2}, curl: {3}
+guidance_warning	Jeśli widzisz to ostrzeżenie podczas sprawdzania stron mediów społecznościowych, banków lub prywatnej poczty e-mail, bezpieczeństwo Twojego urządzenia może być naruszone. Jeśli możesz, unikaj używania urządzenia i natychmiast poproś o pomoc Apple Support lub zaufaną osobę.
+reminder_permission_message	TLS Inspector wymaga uprawnień do Twoich przypomnień, aby dodać przypomnienie o wygaśnięciu certyfikatu. Uprawnienia możesz zmienić w aplikacji Ustawienia.
+whatDoesThisMean::badAuthority	Oznacza to, że certyfikat przedstawiony przez zdalny serwer został wystawiony przez znanego, niegodnego zaufania i niebezpiecznego wystawcę lub urząd.
+whatDoesThisMean::invalidDate	Oznacza to, że certyfikat używany przez zdalny host jest poza swoim okresem ważności. Wszystkie certyfikaty muszą mieć zakres dat, w których są ważne, a ten certyfikat jest obecnie poza tym zakresem.
+whatDoesThisMean::issueDateTooLong	Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny serwer jest nieprawidłowy.\n\nDokładniej: okres ważności jednego z certyfikatów jest zbyt długi. Wszystkie certyfikaty internetowe muszą określać zakres dat, w których są ważne, a Twoje urządzenie ustala maksymalny dopuszczalny zakres. Ten certyfikat przekracza ten limit.
+whatDoesThisMean::leafMissingRequiredKeyUsage	Oznacza to, że certyfikat przedstawiony przez zdalny serwer jest nieprawidłowy.\n\nDokładniej: brakuje w nim wymaganych informacji o tym, do czego certyfikat może być używany. Certyfikaty internetowe mogą być używane tylko do określonych zadań, a w tym certyfikacie brakuje wymaganych zastosowań.
+whatDoesThisMean::locallyTrusted	Oznacza to, że Twoje urządzenie zostało skonfigurowane tak, aby ufać temu połączeniu, mimo że normalnie by tego nie zrobiło.\n\nUrządzenia firmowe lub korporacyjne mogą używać takich certyfikatów dla wewnętrznych lub prywatnych stron, ale może to też wskazywać na naruszenie bezpieczeństwa urządzenia lub sieci.
+whatDoesThisMean::revokedIntermediate	Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host został oznaczony jako „unieważniony”. Certyfikaty są unieważniane, gdy z różnych powodów nie można im już ufać.
+whatDoesThisMean::revokedLeaf	Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host został oznaczony jako „unieważniony”. Certyfikaty są unieważniane, gdy z różnych powodów nie można im już ufać.
+whatDoesThisMean::selfSigned	Oznacza to, że certyfikaty przedstawione przez zdalny host nie zostały wystawione przez zaufany urząd certyfikacji. Urządzenie ufa certyfikatom internetowym tylko wtedy, gdy zostały wydane przez odpowiedzialne i renomowane urzędy.
+whatDoesThisMean::sha1Intermediate	Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host używa algorytmu SHA-1. Algorytm ten był powszechnie używany, ale okazał się podatny na ataki i nie jest już uznawany za bezpieczny.
+whatDoesThisMean::sha1Leaf	Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host używa algorytmu SHA-1. Algorytm ten był powszechnie używany, ale okazał się podatny na ataki i nie jest już uznawany za bezpieczny.
+whatDoesThisMean::trusted	Oznacza to, że Twoje urządzenie mogło nawiązać bezpieczne i zaufane połączenie z hostem.
+whatDoesThisMean::unknownCriticalExtension	Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny serwer jest nieprawidłowy.\n\nDokładniej: zawiera informacje nieznane TLS Inspector, ale oznaczone jako krytyczne. W takim przypadku certyfikat nie może zostać uznany za zaufany, ponieważ TLS Inspector nie może przetworzyć informacji oznaczonych jako krytyczne.
+whatDoesThisMean::untrusted	Oznacza to, że Twoje urządzenie nie mogło nawiązać bezpiecznego połączenia albo nie miało pewności co do tożsamości zdalnego hosta.
+whatDoesThisMean::weakRSAKey	Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host używa słabej kryptografii. Twoje urządzenie musi móc nawiązać bezpieczne połączenie ze zdalnym hostem, ale zdalny host zażądał użycia niebezpiecznych ustawień.
+whatDoesThisMean::wrongHost	Oznacza to, że certyfikat użyty przez zdalny host nie jest przeznaczony dla hosta, z którym się połączono. Certyfikaty internetowe dotyczą tylko konkretnych nazw domen lub adresów IP, a ten certyfikat nie zawiera wartości pasujących do hosta, z którym się połączono.
+{number_not_1} days	{0} dni
+{number_not_1} hours	{0} godzin
+{number_not_1} minutes	{0} minut
+{number_not_1} months	{0} miesięcy
+{number_not_1} weeks	{0} tygodni
+{number_not_1} years	{0} lat
