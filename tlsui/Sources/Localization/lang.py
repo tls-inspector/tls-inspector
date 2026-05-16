@@ -165,6 +165,17 @@ def process_strings(lang):
 
     os.rename(atomic_path, strings_path)
 
+def pct_complete(lang):
+    strings = read_strings(lang)
+
+    complete = len(strings)
+
+    for entry in strings:
+        if len(entry["comments"]) > 0 and entry["comments"][0] == "TODO":
+            complete = complete - 1
+
+    return int((complete / len(strings)) * 100)
+
 def getArgs(key):
     return re.findall(r"\{[A-Za-z0-9\-_]+\}", key)
 
@@ -213,6 +224,18 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
         header = """
     public var id: Self {
         return self
+    }
+
+    public var percentTranslated: Int {
+        switch self {
+"""
+        file.write(header)
+
+        for language in languages:
+            file.write("        case ." + languageNameMap[language] + ": return " + str(pct_complete(language)) + "\n")
+
+
+        header = """        }
     }
 }
 

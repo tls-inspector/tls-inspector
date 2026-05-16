@@ -30,6 +30,16 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
     public var id: Self {
         return self
     }
+
+    public var percentTranslated: Int {
+        switch self {
+        case .English: return 100
+        case .Spanish: return 42
+        case .German: return 34
+        case .Dutch: return 43
+        case .Polish: return 100
+        }
+    }
 }
 
 @MainActor
@@ -2900,6 +2910,21 @@ public final class Localize {
             return "\(number_not_1) years"
         case .Polish:
             return "\(number_not_1) lat"
+        }
+    }
+    // key: {percent}% complete
+    public static func percentcomplete(percent: String) -> String {
+        switch currentLanguage {
+        case .English:
+            return "\(percent)% complete"
+        case .Spanish:
+            return "\(percent)% completado"
+        case .German:
+            return "\(percent)% fertig"
+        case .Dutch:
+            return "\(percent)% voltooid"
+        case .Polish:
+            return "\(percent)% ukończenia"
         }
     }
 }

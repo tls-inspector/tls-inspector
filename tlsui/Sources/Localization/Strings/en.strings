@@ -192,3 +192,4 @@ whatDoesThisMean::wrongHost	This means that the certificate used by the remote h
 {number_not_1} months	{0} months
 {number_not_1} weeks	{0} weeks
 {number_not_1} years	{0} years
+{percent}% complete	{0}% complete

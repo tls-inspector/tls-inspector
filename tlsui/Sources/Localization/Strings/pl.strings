@@ -192,3 +192,4 @@ whatDoesThisMean::wrongHost	Oznacza to, że certyfikat użyty przez zdalny host 
 {number_not_1} months	{0} miesięcy
 {number_not_1} weeks	{0} tygodni
 {number_not_1} years	{0} lat
+{percent}% complete	{0}% ukończenia

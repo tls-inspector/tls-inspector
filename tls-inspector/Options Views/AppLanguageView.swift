@@ -36,7 +36,10 @@ struct AppLanguageView: View {
                         userOptions.languageOverride = language
                     } label: {
                         HStack {
-                            Text(String.init(describing: language))
+                            VStack(alignment: .leading) {
+                                Text(String.init(describing: language))
+                                Text(Localize.percentcomplete(percent: "\(language.percentTranslated)")).font(.caption)
+                            }
                             Spacer()
                             if userOptions.languageOverride == language {
                                 Image(systemName: "checkmark").foregroundStyle(.accent)
