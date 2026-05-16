@@ -17,7 +17,7 @@ This is the Git repository for the TLS Inspector application. The code of the ap
 
 - `tls-inspector/` - This directory contains code and user interface that is specific to the app itself, for example the input view, recent inspections, about and option view.
 - `inspect-website/` - This directory contains a minimal set of code for the show certificate share extension.
-- `tlsui/` - This directory contains nearly all of the user interface and supporting systems for it. As the user interface for the app is shared between both the app and the extension, a local swift package is used.
+- `tlsui/` - This directory contains nearly all of the user interface and supporting systems for it, as well as all of the localization code and strings. As the user interface for the app is shared between both the app and the extension, a local swift package is used.
 - `tlskit/` - This directory contains all of the logic that performs TLS connection and certificate inspection.
 
 This project also depends on [DNSKit](https://github.com/dns-inspector/dnskit), [external pre-compiled copies of libcurl and openssl](https://github.com/tls-inspector/tlskit-external-dependencies), [root CA certificate bundles](https://github.com/tls-inspector/rootca), and [lists of certificate transparancy logs](https://github.com/google/certificate-transparency-community-site/blob/master/docs/google/known-logs.md).

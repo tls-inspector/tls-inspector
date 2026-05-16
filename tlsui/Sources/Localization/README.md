@@ -15,17 +15,20 @@ you have a smooth process localizing the app into your language.
 To translate the app, please:
 
 1. Review section 1 ("How Localization Works in TLS Inspector") and section 4 ("Licensing") below
-2. Download a copy the [English strings file](https://github.com/tls-inspector/tls-inspector/blob/app-store/tls-inspector/Localization/Strings/en.strings)
+2. Download a copy the [English strings file](https://github.com/tls-inspector/tls-inspector/blob/app-store/tlsui/Sources/Localization/Strings/en.strings)
 3. Translate all the string values
 
 If you are not comfortable making code changes or using git, you may stop here and email your
 translated file to hello@tlsinspector.com and we will take care of the rest. Otherwise, you can:
 
-4. Fork this repo and add your translated file to `tlsinspector/Localization/Strings`. Name the
+4. Fork this repo and add your translated file to `tlsui/Sources/Localization/Strings`. Name the
 file with your language's two-letter code, similar to the other files in that directory.
-5. Modify the `languages` and `languageNameMap` variables in `tlsinspector/Localization/lang.py`
+5. Modify the `languages` and `languageNameMap` variables in `tlsui/Sources/Localization/lang.py`.
+ `languages` should contains the two-letter code of the language, and `languageNameMap` should map
+ that two-letter code to the English name of the language.
 6. Run `lang.py` to update the localization source
-7. Submit a pull request with your changes
+7. Submit a pull request with your changes. Be sure to indicate how you want to be attributed, this
+ could be your name, an alias or username, or if you don't want to be publically attributed.
 
 ## 1. How Localization Works in TLS Inspector
 
@@ -51,6 +54,10 @@ In the value, we define the position of that variable with `{0}`. The number 0 i
 refers to the first parameter (`{name}`). The number is always one less, so `{0}` refers to the
 first, `{1}` would refer to the second, so on.
 
+Because languages can use different orders of words (subject-verb-order, for example), the order of
+the values (`{0}`, `{1}`, so on) should reflect their correct positions in the language, rather than
+be in numerical sequence.
+
 ### 1.2. Strings Files
 
 TLS Inspector's localized strings are stored in `.strings` files. These files contain one entry per
@@ -59,6 +66,8 @@ line in the format of the key and value separated by the TAB character (\t).
 There's a few rules with strings files that you should know:
 
 - The copyright and license at the top of the file is required and should not be changed.
+    - Note: you **will** recieve proper attribution for your contributions, however due to legal
+      requirements the copyright must be transfered.
 - Lines that begin with a `#` are ignored and can be used for comments.
 - If a string value must have a newline, instead use a literal `\n`.
 - Keys are case-insensitive, duplicate keys aren't allowed.
@@ -66,28 +75,9 @@ There's a few rules with strings files that you should know:
 English is the primary language, as that is the language best known by the developer. The English
 strings file is used as a reference for what strings needs to be present in the other string files.
 
-Keys that are in need of translation will have a preceding `#TODO` comment above the entry. Please
-remove this comment when the translation has been completed.
-
-### 1.3 Country Names
-
-TLS Inspector includes a mapping of ISO two letter country codes to their name. As geopolitical
-matters can often be complex (and are often deeply rooted in racist colonialism), we ask that you 
-use your best judgement when providing these translations. Keep in mind how a country is referred to
-may differ greatly than how governments or political bodies may wish you to refer to it.
-
-#### 1.3.1 Requirements
-
-While we ask you to use your best judgement for country names, we do have the following
-**non-negotiable** requirements:
-
-- Taiwan (`TW`) must never include _"Province of China"_, or be called _"Chinese Taipei"_.
-- Ukraine (`UA`) must never include _"Province"_ or _"Territory"_ of Russia.
-- Canada (`CA`), Greenland (`GL`), Panama (`PA`) must never include _"Territory"_ or _"State"_ of
-The United States of America.
-
-**Intentional violation of these requirements will result in your contributions being removed and
-your account being banned from future contributions to the project.**
+Keys that are in need of translation will have a preceding `# TODO` comment above the entry. Please
+remove this comment when the translation has been completed. The presence of this comment is used to
+determine the overall completion of a language.
 
 ## 2. Compiling Localization
 
@@ -108,6 +98,12 @@ through as parameters to the function.
 ## 4. Licensing
 
 While TLS Inspector is primarily a GPL3.0 product, localization strings are
-licensed using CC BY-SA 4.0 Attribution-ShareAlike 4.0 International.
+licensed using CC BY-SA 4.0 Attribution-ShareAlike 4.0 International. The following license header
+must be present at the top of the file:
 
-Your contributions will be credited in the app using a name of your choice.
+```
+% Copyright Ian Spence and TLS Inspector Authors
+% Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
+```
+
+Your contributions **will** be credited in the app using a name of your choice.

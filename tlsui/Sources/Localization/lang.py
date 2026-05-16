@@ -47,6 +47,24 @@ for arg in sys.argv:
     if arg == "--validate":
         validate = True
 
+licnese_header = """% Copyright Ian Spence and TLS Inspector Authors
+% Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International"""
+
+def check_license(r):
+    header_lines = licnese_header.split("\n")
+
+    l = 0
+    for expected_line in header_lines:
+        actual_line = r.readline().rstrip()
+
+        if actual_line != expected_line:
+            print("Expected line: '%s'\nActual line: '%s'" % (expected_line, actual_line))
+            return -1
+
+        l += 1
+
+    return l
+
 def normalizeKey(key):
     normalizedKey = re.sub(r"[^A-Za-z0-9]", "", key.lower())
     if key[0] >= '0' and key[0] <= '9':
@@ -63,6 +81,14 @@ def read_strings(lang):
         line_n = 0
         last_comment = []
         while True:
+            if line_n == 0:
+                skipped = check_license(r)
+                if skipped == -1:
+                    print("error: Invalid or missing license header in %s" % (lang+".strings"))
+                    os.exit(1)
+                line_n += skipped
+                continue
+
             line_n += 1
             line = r.readline()
             if not line:
@@ -149,6 +175,7 @@ def process_strings(lang):
 
     # Write new lang file
     with open(atomic_path, 'w') as w:
+        w.write(licnese_header + "\n")
         for entry in lang_entries:
             key = entry['key']
             value = entry['value']
