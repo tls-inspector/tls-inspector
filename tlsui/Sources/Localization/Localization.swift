@@ -2392,6 +2392,21 @@ public final class Localize {
             return "Użyj wersji IP"
         }
     }
+    // key: Use system language
+    public static func usesystemlanguage() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Use system language"
+        case .Spanish:
+            return "Usar idioma del sistema"
+        case .German:
+            return "Systemsprache verwenden"
+        case .Dutch:
+            return "Gebruik systeemtaal"
+        case .Polish:
+            return "Użyj języka systemowego"
+        }
+    }
     // key: Valid For
     public static func validfor() -> String {
         switch currentLanguage {

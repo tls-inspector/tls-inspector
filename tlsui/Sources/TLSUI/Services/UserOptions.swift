@@ -34,7 +34,8 @@ public enum AppDefaultsKeys: String, CaseIterable {
     case ipVersion = "use_ip_version"
     case optionsSchemaVersion = "options_schema_version"
     case treatUnrecognizedAsTrusted = "treat_unrecognized_as_trusted"
-    case appLanguage = "app_language"
+    case useSystemLanguage = "use_system_language"
+    case languageOverride = "app_language"
     case inspectTimeout = "inspect_timeout"
 }
 
@@ -57,7 +58,8 @@ private final class AppDefaults: Sendable {
         .ipVersion: IPVersion.Automatic.rawValue,
         .optionsSchemaVersion: "",
         .treatUnrecognizedAsTrusted: true,
-        .appLanguage: SupportedLanguages.English.rawValue,
+        .useSystemLanguage: true,
+        .languageOverride: SupportedLanguages.English.rawValue,
         .inspectTimeout: 10,
     ]
 
@@ -97,7 +99,8 @@ public final class UserOptions: ObservableObject {
         advancedSettingsNagDismissed = AppDefaults.get(.advancedSettingsNagDismissed)
         cryptoEngine = CryptoEngine.init(rawValue: AppDefaults.get(.cryptoEngine)) ?? .NetworkFramework
         ipVersion = IPVersion.init(rawValue: AppDefaults.get(.ipVersion)) ?? .Automatic
-        appLanguage = SupportedLanguages.init(rawValue: AppDefaults.get(.appLanguage)) ?? .English
+        useSystemLanguage = AppDefaults.get(.useSystemLanguage)
+        languageOverride = SupportedLanguages.init(rawValue: AppDefaults.get(.languageOverride)) ?? .English
         treatUnrecognizedAsTrusted = AppDefaults.get(.treatUnrecognizedAsTrusted)
         inspectTimeout = AppDefaults.get(.inspectTimeout)
     }
@@ -166,8 +169,12 @@ public final class UserOptions: ObservableObject {
         didSet { AppDefaults.set(.ipVersion, ipVersion.rawValue) }
     }
 
-    @Published public var appLanguage: SupportedLanguages {
-        didSet { AppDefaults.set(.appLanguage, appLanguage.rawValue) }
+    @Published public var useSystemLanguage: Bool {
+        didSet { AppDefaults.set(.useSystemLanguage, useSystemLanguage) }
+    }
+
+    @Published public var languageOverride: SupportedLanguages {
+        didSet { AppDefaults.set(.languageOverride, languageOverride.rawValue) }
     }
 
     @Published public var treatUnrecognizedAsTrusted: Bool {

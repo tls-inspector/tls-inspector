@@ -34,19 +34,12 @@ public struct OptionsSectionGeneralView: View {
             NavigationLink(Localize.appicon()) {
                 AppIconView()
             }
-            Picker(Localize.applanguage(), selection: $userOptions.appLanguage) {
-                ForEach(SupportedLanguages.allCases) { lang in
-                    Text(String(describing: lang)).tag(lang)
-                }
+            NavigationLink(Localize.applanguage()) {
+                AppLanguageView()
+                    .environmentObject(userOptions)
             }
         } header: {
             Text(Localize.general())
-        } footer: {
-            Text("Interested in helping translate TLS Inspector? We've love to hear from you! Get in touch using the links on the About page.")
-        }
-        .onChange(of: userOptions.appLanguage) { newValue in
-            currentLanguage = newValue
-            self.showLanguageChangeAlert = true
         }
         .alert(Localize.languageupdated(), isPresented: $showLanguageChangeAlert) {
             Button(Localize.dismiss()) {
