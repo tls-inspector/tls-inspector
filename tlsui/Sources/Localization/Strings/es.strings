@@ -4,24 +4,19 @@
 1 hour	1 hour
 # TODO
 1 minute	1 minute
-# TODO
-1 month	1 month
+1 month	1 mes
 # TODO
 1 year	1 year
-# TODO
-About	About
+About	Acerca de
 # TODO
 Add reminder for certificate expiry	Add reminder for certificate expiry
-# TODO
-Advanced Options	Advanced Options
+Advanced Options	Opciones avanzadas
 # TODO
 AdvancedSettingsNag	These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly.
-# TODO
-Algorithm	Algorithm
+Algorithm	Algoritmo
 # TODO
 Allowed ciphers	Allowed ciphers
-# TODO
-Alternate Names	Alternate Names
+Alternate Names	Nombres alternativos
 # TODO
 App Icon	App Icon
 # TODO
@@ -30,64 +25,47 @@ App Language	App Language
 AppIconFooter	The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
 # TODO
 Apple	Apple
-# TODO
-Authority	Authority
-# TODO
+Authority	Autoridad
 Auto	Auto
-# TODO
-Basic	Basic
+Basic	Básico
 # TODO
 Bundle date	Bundle date
 # TODO
 Bundles have been updated to their latest versions.	Bundles have been updated to their latest versions.
-# TODO
-Certificate Authority	Certificate Authority
-# TODO
-Certificate Status	Certificate Status
-# TODO
-Certificate Timestamps	Certificate Timestamps
-# TODO
-Certificate Trust	Certificate Trust
+Certificate Authority	Autoridad de certificación
+Certificate Status	Estado del certificado
+Certificate Timestamps	Marcas de tiempo del certificado
+Certificate Trust	Confianza en el certificado
 # TODO
 Certificate not trusted	Certificate not trusted
 # TODO
 CertificateStatusFooter	Certificate status checks are used to check if a certificate has been revoked.
-# TODO
-Certificates	Certificates
-# TODO
-Check for updates	Check for updates
+Certificates	Certificados
+Check for updates	Buscar actualizaciones
 # TODO
 City / Locality	City / Locality
-# TODO
-Clear downloaded bundles	Clear downloaded bundles
+Clear downloaded bundles	Limpiar paquetes descargados
 # TODO
 Common Name	Common Name
-# TODO
-Connection Information	Connection Information
-# TODO
-Contribute to TLS Inspector	Contribute to TLS Inspector
+Connection Information	Información de la conexión
+Contribute to TLS Inspector	Contribuir a TLS Inspector
 # TODO
 Country	Country
 # TODO
 DNS Name	Alternate Names
-# TODO
-Danger	Danger
+Danger	Peligro
 # TODO
 Dangerous & Unsafe	Dangerous & Unsafe
-# TODO
-Dismiss	Dismiss
-# TODO
-Domain Name or IP Address	Domain Name or IP Address
+Dismiss	Cerrar
+Domain Name or IP Address	Nombre de dominio o dirección IP
 # TODO
 Done	Done
-# TODO
-Download & Check CRL	Download & Check CRL
+Download & Check CRL	Descargar y comprobar CRL
 # TODO
 Downloaded	Downloaded
 # TODO
 Email Address	Alternate Names
-# TODO
-Embedded	Embedded
+Embedded	Incrustado
 # TODO
 Engine Options	Engine Options
 # TODO
@@ -103,28 +81,20 @@ Export Logs	Export Logs
 Export certificate	Export certificate
 # TODO
 Export certificate chain	Export certificate chain
-# TODO
-Extended	Extended
+Extended	Extendido
 # TODO
 Extensions	Extensions
-# TODO
-Fingerprints	Fingerprints
-# TODO
-Follow Us	Follow Us
-# TODO
-Follow us on Bluesky	Follow us on Bluesky
-# TODO
-Follow us on Mastodon	Follow us on Mastodon
+Fingerprints	Huellas digitales
+Follow Us	Síguenos
+Follow us on Bluesky	Síguenos en Bluesky
+Follow us on Mastodon	Síguenos en Mastodon
 # TODO
 Found on device	Found on device
-# TODO
 General	General
-# TODO
-Get Involved	Get Involved
+Get Involved	Participa
 # TODO
 Google	Google
-# TODO
-HTTP Headers	HTTP Headers
+HTTP Headers	Encabezados HTTP
 # TODO
 IP Address	Alternate Names
 # TODO
@@ -141,72 +111,56 @@ IconSkew	Skew
 IconSlate	Slate
 # TODO
 IconTrans	Trans
-# TODO
-If you believe this to be in error, contact support from within the TLS Inspector app.	If you believe this to be in error, contact support from within the TLS Inspector app.
+If you believe this to be in error, contact support from within the TLS Inspector app.	Si crees que esto es un error, ponte en contacto con soporte desde la aplicación TLS Inspector.
 # TODO
 Invalid Certificate	Invalid Certificate
-# TODO
-Issuer	Issuer
+Issuer	Emisora
 # TODO
 Key Identifiers	Key Identifiers
 # TODO
 Key Size	Key Size
-# TODO
-Key Usage	Key Usage
+Key Usage	Uso de la clave
 # TODO
 Language Updated	Language Updated
 # TODO
 Learn More	Learn More
 # TODO
 LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs).
-# TODO
-Locally Trusted	Locally Trusted
-# TODO
-Log ID	Log ID
-# TODO
-Log Name	Log Name
+Locally Trusted	Marcado como de confianza local
+Log ID	ID del registro
+Log Name	Nombre del registro
 # TODO
 Logging & Support	Logging & Support
 # TODO
 LoggingFooter	If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button.
-# TODO
-Metadata	Metadata
+Metadata	Metadatos
 # TODO
 Microsoft	Microsoft
 # TODO
 More from the Developer	More from the Developer
 # TODO
 Mozilla	Mozilla
-# TODO
-Negotiated Ciphersuite	Negotiated Ciphersuite
-# TODO
-Negotiated Version	Negotiated Version
-# TODO
-Network Engine	Network Engine
+Negotiated Ciphersuite	Conjunto de algoritmos de cifrado negociado
+Negotiated Version	Versión negociada
+Network Engine	Motor de red
 # TODO
 Network Options	Network Options
 # TODO
 NetworkEngineFooter	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
-# TODO
 No	No
-# TODO
-No Supported URL Found	No Supported URL Found
+No Supported URL Found	No se encontró ninguna URL compatible
 # TODO
 No updates available at this time.	No updates available at this time.
-# TODO
-Not After	Not After
-# TODO
-Not Before	Not Before
+Not After	No después de
+Not Before	No antes de
 # TODO
 Not revoked	Not revoked
-# TODO
-Notice	Notice
+Notice	Aviso
 # TODO
 Only HTTPS URLs can be inspected.	Only HTTPS URLs can be inspected.
 # TODO
 Open source licenses & attributions	Open source licenses & attributions
-# TODO
-Options	Options
+Options	Opciones
 # TODO
 Organization	Organization
 # TODO
@@ -219,22 +173,15 @@ Please wait...	Please wait...
 ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
 # TODO
 ProxyNotice	An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
-# TODO
-Public Key	Public Key
-# TODO
-Query OCSP Responder	Query OCSP Responder
+Public Key	Clave pública
+Query OCSP Responder	Servidor de consulta OCSP
 # TODO
 Quick Exit	Quick Exit
-# TODO
-Rate in App Store	Rate in App Store
-# TODO
-Recent Lookups	Recent Lookups
-# TODO
-Remember Recent Lookups	Remember Recent Lookups
-# TODO
-Reminder Added	Reminder Added
-# TODO
-Remote Address	Remote Address
+Rate in App Store	Calificar en la App Store
+Recent Lookups	Búsquedas recientes
+Remember Recent Lookups	Recordar búsquedas recientes
+Reminder Added	Recordatorio añadido
+Remote Address	Dirección remota
 # TODO
 Renew Certificate '{domain}'	Renew Certificate '{0}'
 # TODO
@@ -245,8 +192,7 @@ Review or update the reminder in the Reminders app	Review or update the reminder
 Revoked: {reason}	Revoked: {0}
 # TODO
 Root	Root
-# TODO
-Root CA Certificates	Root CA Certificates
+Root CA Certificates	Certificados de CA raíz
 # TODO
 RootCABundleAbout	TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector.
 # TODO
@@ -255,85 +201,60 @@ RootCALicenseFooter	Apple, Google, Microsoft, and Mozilla are all registered tra
 Search on {website}	Search on {0}
 # TODO
 Seconds	Seconds
-# TODO
-Security HTTP Headers	Security HTTP Headers
+Security HTTP Headers	Encabezados HTTP de seguridad
 # TODO
 Sent by server	Sent by server
 # TODO
 Serial Number	Serial Number
-# TODO
-Share & Feedback	Share & Feedback
-# TODO
-Share TLS Inspector	Share TLS Inspector
-# TODO
-Show HTTP Headers	Show HTTP Headers
+Share & Feedback	Compartir y comentarios
+Share TLS Inspector	Compartir TLS Inspector
+Show HTTP Headers	Mostrar encabezados HTTP
 # TODO
 Show certificate on {website}	Show certificate on {0}
-# TODO
-Signature	Signature
-# TODO
-Signature Type	Signature Type
+Signature	Firma
+Signature Type	Tipo de firma
 # TODO
 Source	Source
 # TODO
 Special	Special
 # TODO
 State / Province	State / Province
-# TODO
-Status Providers	Status Providers
-# TODO
-Subject	Subject
-# TODO
+Status Providers	Proveedores de estado
+Subject	Firmante
 TLS Inspector	TLS Inspector
-# TODO
-Target	Target
+Target	Destino
 # TODO
 The certificate '{domain}' expires on {date}	The certificate '{0}' expires on {1}
 # TODO
 Timeout	Timeout
-# TODO
-Timestamp	Timestamp
-# TODO
-Timestamps	Timestamps
-# TODO
-Treat Unrecognized as Trusted	Treat Unrecognized as Trusted
-# TODO
-Trust Details	Trust Details
-# TODO
-Trusted	Trusted
+Timestamp	Marca de tiempo
+Timestamps	Marcas de tiempo
+Treat Unrecognized as Trusted	Tratar los no reconocidos como de confianza
+Trust Details	Detalles de confianza
+Trusted	De confianza
 # TODO
 URI	Alternate Names
 # TODO
 Unnamed Certificate	Unnamed Certificate
-# TODO
-Unrecognized	Unrecognized
-# TODO
-Untrusted	Untrusted
+Unrecognized	No reconocido
+Untrusted	No es de confianza
 # TODO
 Use IP version	Use IP version
 Use system language	Usar idioma del sistema
-# TODO
-Valid For	Valid For
-# TODO
-Validity Period	Validity Period
+Valid For	Válido por
+Validity Period	Periodo de validez
 # TODO
 Verbose logging	Verbose logging
-# TODO
-Verified	Verified
-# TODO
-Version	Version
-# TODO
-View All	View All
-# TODO
-What does this mean?	What does this mean?
-# TODO
-Yes	Yes
+Verified	Verificado
+Version	Versión
+View All	Ver todo
+What does this mean?	¿Qué significa esto?
+Yes	Sí
 # TODO
 You must restart the app for the change to take effect.	You must restart the app for the change to take effect.
 # TODO
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
-# TODO
-guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
+guidance_warning	Si ves esto en redes sociales, correo electrónico público, bancos u otros sitios web populares, no continúes y busca asistencia en el soporte de Apple.
 # TODO
 reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
 # TODO

@@ -88,11 +88,11 @@ public final class Localize {
         case .English:
             return "1 month"
         case .Spanish:
-            return "1 month"
+            return "1 mes"
         case .German:
-            return "1 month"
+            return "1 Monat"
         case .Dutch:
-            return "1 month"
+            return "1 maand"
         case .Polish:
             return "1 miesiąc"
         }
@@ -118,11 +118,11 @@ public final class Localize {
         case .English:
             return "About"
         case .Spanish:
-            return "About"
+            return "Acerca de"
         case .German:
-            return "About"
+            return "Info"
         case .Dutch:
-            return "About"
+            return "Over"
         case .Polish:
             return "O aplikacji"
         }
@@ -148,11 +148,11 @@ public final class Localize {
         case .English:
             return "Advanced Options"
         case .Spanish:
-            return "Advanced Options"
+            return "Opciones avanzadas"
         case .German:
-            return "Advanced Options"
+            return "Erweiterte Optionen"
         case .Dutch:
-            return "Advanced Options"
+            return "Geavanceerde Opties"
         case .Polish:
             return "Opcje zaawansowane"
         }
@@ -178,11 +178,11 @@ public final class Localize {
         case .English:
             return "Algorithm"
         case .Spanish:
-            return "Algorithm"
+            return "Algoritmo"
         case .German:
-            return "Algorithm"
+            return "Algorithmus"
         case .Dutch:
-            return "Algorithm"
+            return "Algoritme"
         case .Polish:
             return "Algorytm"
         }
@@ -208,11 +208,11 @@ public final class Localize {
         case .English:
             return "Alternate Names"
         case .Spanish:
-            return "Alternate Names"
+            return "Nombres alternativos"
         case .German:
-            return "Alternate Names"
+            return "Alternative Namen"
         case .Dutch:
-            return "Alternate Names"
+            return "Alternatieve Namen"
         case .Polish:
             return "Nazwy alternatywne"
         }
@@ -257,7 +257,7 @@ public final class Localize {
         case .German:
             return "The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain."
         case .Dutch:
-            return "The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain."
+            return "De \"Progress\" pride vlag is gemaakt door Daniel Quasar en is gelicenseerd onder Create Commons BY-NC-SA. De trans vlag is gemaakt door Monica Helms en gepubliceerd als public domain."
         case .Polish:
             return "Flaga Progress Pride została stworzona przez Daniela Quasara i jest licencjonowana na Creative Commons BY-NC-SA. Flaga trans została stworzona przez Monicę Helms i przekazana do domeny publicznej."
         }
@@ -283,11 +283,11 @@ public final class Localize {
         case .English:
             return "Authority"
         case .Spanish:
-            return "Authority"
+            return "Autoridad"
         case .German:
-            return "Authority"
+            return "Zertifizierungsstelle"
         case .Dutch:
-            return "Authority"
+            return "Autoriteit"
         case .Polish:
             return "Urząd"
         }
@@ -313,11 +313,11 @@ public final class Localize {
         case .English:
             return "Basic"
         case .Spanish:
-            return "Basic"
+            return "Básico"
         case .German:
-            return "Basic"
+            return "Einfach"
         case .Dutch:
-            return "Basic"
+            return "Basis"
         case .Polish:
             return "Podstawowe"
         }
@@ -358,11 +358,11 @@ public final class Localize {
         case .English:
             return "Certificate Authority"
         case .Spanish:
-            return "Certificate Authority"
+            return "Autoridad de certificación"
         case .German:
-            return "Certificate Authority"
+            return "Zertifizierungsstelle"
         case .Dutch:
-            return "Certificate Authority"
+            return "Certificaatautoriteit"
         case .Polish:
             return "Urząd certyfikacji"
         }
@@ -373,11 +373,11 @@ public final class Localize {
         case .English:
             return "Certificate Status"
         case .Spanish:
-            return "Certificate Status"
+            return "Estado del certificado"
         case .German:
-            return "Certificate Status"
+            return "Zertifikatsstatus"
         case .Dutch:
-            return "Certificate Status"
+            return "Certificaatstatus"
         case .Polish:
             return "Status certyfikatu"
         }
@@ -388,11 +388,11 @@ public final class Localize {
         case .English:
             return "Certificate Timestamps"
         case .Spanish:
-            return "Certificate Timestamps"
+            return "Marcas de tiempo del certificado"
         case .German:
             return "Certificate Timestamps"
         case .Dutch:
-            return "Certificate Timestamps"
+            return "Certificaat-tijdstempels"
         case .Polish:
             return "Znaczniki czasu certyfikatu"
         }
@@ -403,11 +403,11 @@ public final class Localize {
         case .English:
             return "Certificate Trust"
         case .Spanish:
-            return "Certificate Trust"
+            return "Confianza en el certificado"
         case .German:
             return "Certificate Trust"
         case .Dutch:
-            return "Certificate Trust"
+            return "Certificaatvertrouwen"
         case .Polish:
             return "Zaufanie certyfikatu"
         }
@@ -448,11 +448,11 @@ public final class Localize {
         case .English:
             return "Certificates"
         case .Spanish:
-            return "Certificates"
+            return "Certificados"
         case .German:
-            return "Certificates"
+            return "Zertifikate"
         case .Dutch:
-            return "Certificates"
+            return "Certificaten"
         case .Polish:
             return "Certyfikaty"
         }
@@ -463,11 +463,11 @@ public final class Localize {
         case .English:
             return "Check for updates"
         case .Spanish:
-            return "Check for updates"
+            return "Buscar actualizaciones"
         case .German:
             return "Check for updates"
         case .Dutch:
-            return "Check for updates"
+            return "Check op updates"
         case .Polish:
             return "Sprawdź aktualizacje"
         }
@@ -493,11 +493,11 @@ public final class Localize {
         case .English:
             return "Clear downloaded bundles"
         case .Spanish:
-            return "Clear downloaded bundles"
+            return "Limpiar paquetes descargados"
         case .German:
             return "Clear downloaded bundles"
         case .Dutch:
-            return "Clear downloaded bundles"
+            return "Wis gedownloade bundels"
         case .Polish:
             return "Wyczyść pobrane pakiety"
         }
@@ -523,11 +523,11 @@ public final class Localize {
         case .English:
             return "Connection Information"
         case .Spanish:
-            return "Connection Information"
+            return "Información de la conexión"
         case .German:
-            return "Connection Information"
+            return "Verbindungsinformationen"
         case .Dutch:
-            return "Connection Information"
+            return "Verbindingsinformatie"
         case .Polish:
             return "Informacje o połączeniu"
         }
@@ -538,11 +538,11 @@ public final class Localize {
         case .English:
             return "Contribute to TLS Inspector"
         case .Spanish:
-            return "Contribute to TLS Inspector"
+            return "Contribuir a TLS Inspector"
         case .German:
-            return "Contribute to TLS Inspector"
+            return "Trage zu TLS Inspector bei"
         case .Dutch:
-            return "Contribute to TLS Inspector"
+            return "Draag bij aan TLS Inspector"
         case .Polish:
             return "Wspieraj TLS Inspector"
         }
@@ -583,11 +583,11 @@ public final class Localize {
         case .English:
             return "Danger"
         case .Spanish:
-            return "Danger"
+            return "Peligro"
         case .German:
             return "Danger"
         case .Dutch:
-            return "Danger"
+            return "Gevaar"
         case .Polish:
             return "Niebezpieczeństwo"
         }
@@ -613,11 +613,11 @@ public final class Localize {
         case .English:
             return "Dismiss"
         case .Spanish:
-            return "Dismiss"
+            return "Cerrar"
         case .German:
-            return "Dismiss"
+            return "Verwerfen"
         case .Dutch:
-            return "Dismiss"
+            return "Sluiten"
         case .Polish:
             return "Zamknij"
         }
@@ -628,11 +628,11 @@ public final class Localize {
         case .English:
             return "Domain Name or IP Address"
         case .Spanish:
-            return "Domain Name or IP Address"
+            return "Nombre de dominio o dirección IP"
         case .German:
-            return "Domain Name or IP Address"
+            return "Domainname oder IP-Adresse"
         case .Dutch:
-            return "Domain Name or IP Address"
+            return "Domeinnaam of IP-Adres"
         case .Polish:
             return "Nazwa domeny lub adres IP"
         }
@@ -658,9 +658,9 @@ public final class Localize {
         case .English:
             return "Download & Check CRL"
         case .Spanish:
-            return "Download & Check CRL"
+            return "Descargar y comprobar CRL"
         case .German:
-            return "Download & Check CRL"
+            return "CRL herunterladen & überprüfen"
         case .Dutch:
             return "Download & Check CRL"
         case .Polish:
@@ -703,7 +703,7 @@ public final class Localize {
         case .English:
             return "Embedded"
         case .Spanish:
-            return "Embedded"
+            return "Incrustado"
         case .German:
             return "Embedded"
         case .Dutch:
@@ -838,11 +838,11 @@ public final class Localize {
         case .English:
             return "Extended"
         case .Spanish:
-            return "Extended"
+            return "Extendido"
         case .German:
-            return "Extended"
+            return "Erweitert"
         case .Dutch:
-            return "Extended"
+            return "Uitgebreid"
         case .Polish:
             return "Rozszerzone"
         }
@@ -868,11 +868,11 @@ public final class Localize {
         case .English:
             return "Fingerprints"
         case .Spanish:
-            return "Fingerprints"
+            return "Huellas digitales"
         case .German:
-            return "Fingerprints"
+            return "Fingerabdrücke"
         case .Dutch:
-            return "Fingerprints"
+            return "Vingerafdrukken"
         case .Polish:
             return "Odciski"
         }
@@ -883,11 +883,11 @@ public final class Localize {
         case .English:
             return "Follow Us"
         case .Spanish:
-            return "Follow Us"
+            return "Síguenos"
         case .German:
-            return "Follow Us"
+            return "Folge uns"
         case .Dutch:
-            return "Follow Us"
+            return "Volg ons"
         case .Polish:
             return "Obserwuj nas"
         }
@@ -898,11 +898,11 @@ public final class Localize {
         case .English:
             return "Follow us on Bluesky"
         case .Spanish:
-            return "Follow us on Bluesky"
+            return "Síguenos en Bluesky"
         case .German:
-            return "Follow us on Bluesky"
+            return "Folgen Sie uns auf Bluesky"
         case .Dutch:
-            return "Follow us on Bluesky"
+            return "Volg ons op Bluesky"
         case .Polish:
             return "Obserwuj nas na Bluesky"
         }
@@ -913,11 +913,11 @@ public final class Localize {
         case .English:
             return "Follow us on Mastodon"
         case .Spanish:
-            return "Follow us on Mastodon"
+            return "Síguenos en Mastodon"
         case .German:
-            return "Follow us on Mastodon"
+            return "Folgen Sie uns auf Mastodon"
         case .Dutch:
-            return "Follow us on Mastodon"
+            return "Volg ons op Mastodon"
         case .Polish:
             return "Obserwuj nas na Mastodon"
         }
@@ -945,9 +945,9 @@ public final class Localize {
         case .Spanish:
             return "General"
         case .German:
-            return "General"
+            return "Allgemein"
         case .Dutch:
-            return "General"
+            return "Algemeen"
         case .Polish:
             return "Ogólne"
         }
@@ -958,11 +958,11 @@ public final class Localize {
         case .English:
             return "Get Involved"
         case .Spanish:
-            return "Get Involved"
+            return "Participa"
         case .German:
-            return "Get Involved"
+            return "Mach mit"
         case .Dutch:
-            return "Get Involved"
+            return "Draag eraan bij"
         case .Polish:
             return "Zaangażuj się"
         }
@@ -988,11 +988,11 @@ public final class Localize {
         case .English:
             return "HTTP Headers"
         case .Spanish:
-            return "HTTP Headers"
+            return "Encabezados HTTP"
         case .German:
-            return "HTTP Headers"
+            return "HTTP-Header"
         case .Dutch:
-            return "HTTP Headers"
+            return "HTTP Kopregels"
         case .Polish:
             return "Nagłówki HTTP"
         }
@@ -1123,11 +1123,11 @@ public final class Localize {
         case .English:
             return "If you believe this to be in error, contact support from within the TLS Inspector app."
         case .Spanish:
-            return "If you believe this to be in error, contact support from within the TLS Inspector app."
+            return "Si crees que esto es un error, ponte en contacto con soporte desde la aplicación TLS Inspector."
         case .German:
-            return "If you believe this to be in error, contact support from within the TLS Inspector app."
+            return "Wenn du glaubst, es handelt sich um einen Fehler, kontaktiere den Support über die TLS Inspector-App."
         case .Dutch:
-            return "If you believe this to be in error, contact support from within the TLS Inspector app."
+            return "Als u denkt dat dit onjuist is, contacteer dan support vanuit de TLS Inspector app."
         case .Polish:
             return "Jeśli uważasz, że to błąd, skontaktuj się ze wsparciem z poziomu aplikacji TLS Inspector."
         }
@@ -1153,11 +1153,11 @@ public final class Localize {
         case .English:
             return "Issuer"
         case .Spanish:
-            return "Issuer"
+            return "Emisora"
         case .German:
-            return "Issuer"
+            return "Aussteller"
         case .Dutch:
-            return "Issuer"
+            return "Uitgever"
         case .Polish:
             return "Wystawca"
         }
@@ -1198,11 +1198,11 @@ public final class Localize {
         case .English:
             return "Key Usage"
         case .Spanish:
-            return "Key Usage"
+            return "Uso de la clave"
         case .German:
-            return "Key Usage"
+            return "Verwendungszweck"
         case .Dutch:
-            return "Key Usage"
+            return "Sleutelgebruik"
         case .Polish:
             return "Użycie klucza"
         }
@@ -1258,11 +1258,11 @@ public final class Localize {
         case .English:
             return "Locally Trusted"
         case .Spanish:
-            return "Locally Trusted"
+            return "Marcado como de confianza local"
         case .German:
-            return "Locally Trusted"
+            return "Lokal vertrauenswürdig"
         case .Dutch:
-            return "Locally Trusted"
+            return "Lokaal Vertrouwd"
         case .Polish:
             return "Lokalnie zaufany"
         }
@@ -1273,7 +1273,7 @@ public final class Localize {
         case .English:
             return "Log ID"
         case .Spanish:
-            return "Log ID"
+            return "ID del registro"
         case .German:
             return "Log ID"
         case .Dutch:
@@ -1288,11 +1288,11 @@ public final class Localize {
         case .English:
             return "Log Name"
         case .Spanish:
-            return "Log Name"
+            return "Nombre del registro"
         case .German:
             return "Log Name"
         case .Dutch:
-            return "Log Name"
+            return "Log Naam"
         case .Polish:
             return "Nazwa logu"
         }
@@ -1333,9 +1333,9 @@ public final class Localize {
         case .English:
             return "Metadata"
         case .Spanish:
-            return "Metadata"
+            return "Metadatos"
         case .German:
-            return "Metadata"
+            return "Metadaten"
         case .Dutch:
             return "Metadata"
         case .Polish:
@@ -1393,11 +1393,11 @@ public final class Localize {
         case .English:
             return "Negotiated Ciphersuite"
         case .Spanish:
-            return "Negotiated Ciphersuite"
+            return "Conjunto de algoritmos de cifrado negociado"
         case .German:
-            return "Negotiated Ciphersuite"
+            return "Verhandelte Ciphersuite"
         case .Dutch:
-            return "Negotiated Ciphersuite"
+            return "Overeengekomen Ciphersuite"
         case .Polish:
             return "Uzgodniony zestaw szyfrów"
         }
@@ -1408,11 +1408,11 @@ public final class Localize {
         case .English:
             return "Negotiated Version"
         case .Spanish:
-            return "Negotiated Version"
+            return "Versión negociada"
         case .German:
-            return "Negotiated Version"
+            return "Verhandelte Version"
         case .Dutch:
-            return "Negotiated Version"
+            return "Overeengekomen Versie"
         case .Polish:
             return "Uzgodniona wersja"
         }
@@ -1423,11 +1423,11 @@ public final class Localize {
         case .English:
             return "Network Engine"
         case .Spanish:
-            return "Network Engine"
+            return "Motor de red"
         case .German:
-            return "Network Engine"
+            return "Netzwerk-Engine"
         case .Dutch:
-            return "Network Engine"
+            return "Netwerk Driver"
         case .Polish:
             return "Silnik sieciowy"
         }
@@ -1470,9 +1470,9 @@ public final class Localize {
         case .Spanish:
             return "No"
         case .German:
-            return "No"
+            return "Nein"
         case .Dutch:
-            return "No"
+            return "Nee"
         case .Polish:
             return "Nie"
         }
@@ -1483,11 +1483,11 @@ public final class Localize {
         case .English:
             return "No Supported URL Found"
         case .Spanish:
-            return "No Supported URL Found"
+            return "No se encontró ninguna URL compatible"
         case .German:
-            return "No Supported URL Found"
+            return "Keine unterstützte URL gefunden"
         case .Dutch:
-            return "No Supported URL Found"
+            return "Geen Ondersteunde URL Gevonden"
         case .Polish:
             return "Nie znaleziono obsługiwanego adresu URL"
         }
@@ -1513,11 +1513,11 @@ public final class Localize {
         case .English:
             return "Not After"
         case .Spanish:
-            return "Not After"
+            return "No después de"
         case .German:
-            return "Not After"
+            return "Nicht nach"
         case .Dutch:
-            return "Not After"
+            return "Niet Na"
         case .Polish:
             return "Nie po"
         }
@@ -1528,11 +1528,11 @@ public final class Localize {
         case .English:
             return "Not Before"
         case .Spanish:
-            return "Not Before"
+            return "No antes de"
         case .German:
-            return "Not Before"
+            return "Nicht vor"
         case .Dutch:
-            return "Not Before"
+            return "Niet V?r"
         case .Polish:
             return "Nie przed"
         }
@@ -1558,11 +1558,11 @@ public final class Localize {
         case .English:
             return "Notice"
         case .Spanish:
-            return "Notice"
+            return "Aviso"
         case .German:
-            return "Notice"
+            return "Meldung"
         case .Dutch:
-            return "Notice"
+            return "Merk Op"
         case .Polish:
             return "Uwaga"
         }
@@ -1603,11 +1603,11 @@ public final class Localize {
         case .English:
             return "Options"
         case .Spanish:
-            return "Options"
+            return "Opciones"
         case .German:
-            return "Options"
+            return "Optionen"
         case .Dutch:
-            return "Options"
+            return "Opties"
         case .Polish:
             return "Opcje"
         }
@@ -1708,11 +1708,11 @@ public final class Localize {
         case .English:
             return "Public Key"
         case .Spanish:
-            return "Public Key"
+            return "Clave pública"
         case .German:
-            return "Public Key"
+            return "Öffentlicher Schlüssel"
         case .Dutch:
-            return "Public Key"
+            return "Publieke Sleutel"
         case .Polish:
             return "Klucz publiczny"
         }
@@ -1723,11 +1723,11 @@ public final class Localize {
         case .English:
             return "Query OCSP Responder"
         case .Spanish:
-            return "Query OCSP Responder"
+            return "Servidor de consulta OCSP"
         case .German:
-            return "Query OCSP Responder"
+            return "OCSP-Responder abfragen"
         case .Dutch:
-            return "Query OCSP Responder"
+            return "Raadpleeg OCSP Responder"
         case .Polish:
             return "Zapytaj responder OCSP"
         }
@@ -1753,11 +1753,11 @@ public final class Localize {
         case .English:
             return "Rate in App Store"
         case .Spanish:
-            return "Rate in App Store"
+            return "Calificar en la App Store"
         case .German:
-            return "Rate in App Store"
+            return "Im App Store bewerten"
         case .Dutch:
-            return "Rate in App Store"
+            return "Waardeer in App Store"
         case .Polish:
             return "Oceń w App Store"
         }
@@ -1768,11 +1768,11 @@ public final class Localize {
         case .English:
             return "Recent Lookups"
         case .Spanish:
-            return "Recent Lookups"
+            return "Búsquedas recientes"
         case .German:
-            return "Recent Lookups"
+            return "Verlauf"
         case .Dutch:
-            return "Recent Lookups"
+            return "Recente Opdrachten"
         case .Polish:
             return "Ostatnie sprawdzenia"
         }
@@ -1783,11 +1783,11 @@ public final class Localize {
         case .English:
             return "Remember Recent Lookups"
         case .Spanish:
-            return "Remember Recent Lookups"
+            return "Recordar búsquedas recientes"
         case .German:
-            return "Remember Recent Lookups"
+            return "Kürzliche Anfragen im Verlauf zeigen"
         case .Dutch:
-            return "Remember Recent Lookups"
+            return "Onthoud Recente Opdrachten"
         case .Polish:
             return "Zapamiętuj ostatnie sprawdzenia"
         }
@@ -1798,11 +1798,11 @@ public final class Localize {
         case .English:
             return "Reminder Added"
         case .Spanish:
-            return "Reminder Added"
+            return "Recordatorio añadido"
         case .German:
-            return "Reminder Added"
+            return "Erinnerung hinzugefügt"
         case .Dutch:
-            return "Reminder Added"
+            return "Herinnering toegevoegd"
         case .Polish:
             return "Przypomnienie dodane"
         }
@@ -1813,11 +1813,11 @@ public final class Localize {
         case .English:
             return "Remote Address"
         case .Spanish:
-            return "Remote Address"
+            return "Dirección remota"
         case .German:
-            return "Remote Address"
+            return "Entfernte Adresse"
         case .Dutch:
-            return "Remote Address"
+            return "Serveradres"
         case .Polish:
             return "Adres zdalny"
         }
@@ -1903,11 +1903,11 @@ public final class Localize {
         case .English:
             return "Root CA Certificates"
         case .Spanish:
-            return "Root CA Certificates"
+            return "Certificados de CA raíz"
         case .German:
             return "Root CA Certificates"
         case .Dutch:
-            return "Root CA Certificates"
+            return "Root CA Certificaten"
         case .Polish:
             return "Główne certyfikaty CA"
         }
@@ -1978,9 +1978,9 @@ public final class Localize {
         case .English:
             return "Security HTTP Headers"
         case .Spanish:
-            return "Security HTTP Headers"
+            return "Encabezados HTTP de seguridad"
         case .German:
-            return "Security HTTP Headers"
+            return "HTTP-Sicherheit"
         case .Dutch:
             return "Security HTTP Headers"
         case .Polish:
@@ -2023,11 +2023,11 @@ public final class Localize {
         case .English:
             return "Share & Feedback"
         case .Spanish:
-            return "Share & Feedback"
+            return "Compartir y comentarios"
         case .German:
-            return "Share & Feedback"
+            return "Teilen & Feedback"
         case .Dutch:
-            return "Share & Feedback"
+            return "Delen & Terugkoppeling"
         case .Polish:
             return "Udostępnianie i opinie"
         }
@@ -2038,11 +2038,11 @@ public final class Localize {
         case .English:
             return "Share TLS Inspector"
         case .Spanish:
-            return "Share TLS Inspector"
+            return "Compartir TLS Inspector"
         case .German:
-            return "Share TLS Inspector"
+            return "Teile TLS Inspector"
         case .Dutch:
-            return "Share TLS Inspector"
+            return "Deel TLS Inspector"
         case .Polish:
             return "Udostępnij TLS Inspector"
         }
@@ -2053,11 +2053,11 @@ public final class Localize {
         case .English:
             return "Show HTTP Headers"
         case .Spanish:
-            return "Show HTTP Headers"
+            return "Mostrar encabezados HTTP"
         case .German:
-            return "Show HTTP Headers"
+            return "HTTP Header anzeigen"
         case .Dutch:
-            return "Show HTTP Headers"
+            return "Toon HTTP Kopregels"
         case .Polish:
             return "Pokaż nagłówki HTTP"
         }
@@ -2083,11 +2083,11 @@ public final class Localize {
         case .English:
             return "Signature"
         case .Spanish:
-            return "Signature"
+            return "Firma"
         case .German:
-            return "Signature"
+            return "Signatur"
         case .Dutch:
-            return "Signature"
+            return "Handtekening"
         case .Polish:
             return "Podpis"
         }
@@ -2098,11 +2098,11 @@ public final class Localize {
         case .English:
             return "Signature Type"
         case .Spanish:
-            return "Signature Type"
+            return "Tipo de firma"
         case .German:
             return "Signature Type"
         case .Dutch:
-            return "Signature Type"
+            return "Handtekening Soort"
         case .Polish:
             return "Typ podpisu"
         }
@@ -2158,9 +2158,9 @@ public final class Localize {
         case .English:
             return "Status Providers"
         case .Spanish:
-            return "Status Providers"
+            return "Proveedores de estado"
         case .German:
-            return "Status Providers"
+            return "Status-Provider"
         case .Dutch:
             return "Status Providers"
         case .Polish:
@@ -2173,11 +2173,11 @@ public final class Localize {
         case .English:
             return "Subject"
         case .Spanish:
-            return "Subject"
+            return "Firmante"
         case .German:
-            return "Subject"
+            return "Subjekt"
         case .Dutch:
-            return "Subject"
+            return "Subject (Onderwerp)"
         case .Polish:
             return "Podmiot"
         }
@@ -2203,11 +2203,11 @@ public final class Localize {
         case .English:
             return "Target"
         case .Spanish:
-            return "Target"
+            return "Destino"
         case .German:
-            return "Target"
+            return "Ziel"
         case .Dutch:
-            return "Target"
+            return "Doel"
         case .Polish:
             return "Cel"
         }
@@ -2248,11 +2248,11 @@ public final class Localize {
         case .English:
             return "Timestamp"
         case .Spanish:
-            return "Timestamp"
+            return "Marca de tiempo"
         case .German:
             return "Timestamp"
         case .Dutch:
-            return "Timestamp"
+            return "Tijdstempel"
         case .Polish:
             return "Znacznik czasu"
         }
@@ -2263,11 +2263,11 @@ public final class Localize {
         case .English:
             return "Timestamps"
         case .Spanish:
-            return "Timestamps"
+            return "Marcas de tiempo"
         case .German:
             return "Timestamps"
         case .Dutch:
-            return "Timestamps"
+            return "Tijdstempels"
         case .Polish:
             return "Znaczniki czasu"
         }
@@ -2278,11 +2278,11 @@ public final class Localize {
         case .English:
             return "Treat Unrecognized as Trusted"
         case .Spanish:
-            return "Treat Unrecognized as Trusted"
+            return "Tratar los no reconocidos como de confianza"
         case .German:
             return "Treat Unrecognized as Trusted"
         case .Dutch:
-            return "Treat Unrecognized as Trusted"
+            return "Behandel Niet Herkend als Vertrouwd"
         case .Polish:
             return "Traktuj nierozpoznane jako zaufane"
         }
@@ -2293,11 +2293,11 @@ public final class Localize {
         case .English:
             return "Trust Details"
         case .Spanish:
-            return "Trust Details"
+            return "Detalles de confianza"
         case .German:
-            return "Trust Details"
+            return "Vertrauens-Details"
         case .Dutch:
-            return "Trust Details"
+            return "Vertrouwen Details"
         case .Polish:
             return "Szczegóły zaufania"
         }
@@ -2308,11 +2308,11 @@ public final class Localize {
         case .English:
             return "Trusted"
         case .Spanish:
-            return "Trusted"
+            return "De confianza"
         case .German:
-            return "Trusted"
+            return "Vertrauenswürdig"
         case .Dutch:
-            return "Trusted"
+            return "Vertrouwd"
         case .Polish:
             return "Zaufany"
         }
@@ -2353,11 +2353,11 @@ public final class Localize {
         case .English:
             return "Unrecognized"
         case .Spanish:
-            return "Unrecognized"
+            return "No reconocido"
         case .German:
             return "Unrecognized"
         case .Dutch:
-            return "Unrecognized"
+            return "Niet Herkend"
         case .Polish:
             return "Nierozpoznany"
         }
@@ -2368,11 +2368,11 @@ public final class Localize {
         case .English:
             return "Untrusted"
         case .Spanish:
-            return "Untrusted"
+            return "No es de confianza"
         case .German:
-            return "Untrusted"
+            return "Nicht vertrauenswürdig"
         case .Dutch:
-            return "Untrusted"
+            return "Niet Vertrouwd"
         case .Polish:
             return "Niezaufany"
         }
@@ -2413,11 +2413,11 @@ public final class Localize {
         case .English:
             return "Valid For"
         case .Spanish:
-            return "Valid For"
+            return "Válido por"
         case .German:
-            return "Valid For"
+            return "Gültig für"
         case .Dutch:
-            return "Valid For"
+            return "Geldig voor"
         case .Polish:
             return "Ważny przez"
         }
@@ -2428,11 +2428,11 @@ public final class Localize {
         case .English:
             return "Validity Period"
         case .Spanish:
-            return "Validity Period"
+            return "Periodo de validez"
         case .German:
-            return "Validity Period"
+            return "Gültigkeitsperiode"
         case .Dutch:
-            return "Validity Period"
+            return "Geldigheidsduur"
         case .Polish:
             return "Okres ważności"
         }
@@ -2458,11 +2458,11 @@ public final class Localize {
         case .English:
             return "Verified"
         case .Spanish:
-            return "Verified"
+            return "Verificado"
         case .German:
-            return "Verified"
+            return "Verifiziert"
         case .Dutch:
-            return "Verified"
+            return "Geverifieerd"
         case .Polish:
             return "Zweryfikowano"
         }
@@ -2473,11 +2473,11 @@ public final class Localize {
         case .English:
             return "Version"
         case .Spanish:
-            return "Version"
+            return "Versión"
         case .German:
             return "Version"
         case .Dutch:
-            return "Version"
+            return "Versie"
         case .Polish:
             return "Wersja"
         }
@@ -2488,11 +2488,11 @@ public final class Localize {
         case .English:
             return "View All"
         case .Spanish:
-            return "View All"
+            return "Ver todo"
         case .German:
-            return "View All"
+            return "Alle anzeigen"
         case .Dutch:
-            return "View All"
+            return "Bekijk Alles"
         case .Polish:
             return "Zobacz wszystko"
         }
@@ -2503,11 +2503,11 @@ public final class Localize {
         case .English:
             return "What does this mean?"
         case .Spanish:
-            return "What does this mean?"
+            return "¿Qué significa esto?"
         case .German:
-            return "What does this mean?"
+            return "Was bedeutet das?"
         case .Dutch:
-            return "What does this mean?"
+            return "Wat betekent dit?"
         case .Polish:
             return "Co to oznacza?"
         }
@@ -2518,11 +2518,11 @@ public final class Localize {
         case .English:
             return "Yes"
         case .Spanish:
-            return "Yes"
+            return "Sí"
         case .German:
-            return "Yes"
+            return "Ja"
         case .Dutch:
-            return "Yes"
+            return "Ja"
         case .Polish:
             return "Tak"
         }
@@ -2563,11 +2563,11 @@ public final class Localize {
         case .English:
             return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
         case .Spanish:
-            return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
+            return "Si ves esto en redes sociales, correo electrónico público, bancos u otros sitios web populares, no continúes y busca asistencia en el soporte de Apple."
         case .German:
             return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
         case .Dutch:
-            return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
+            return "Als u dit ziet op publieke servers voor social media, e-mail, banken, of andere populaire websites, ga dan niet verder maar zoek contact met Apple Support."
         case .Polish:
             return "Jeśli widzisz to ostrzeżenie podczas sprawdzania stron mediów społecznościowych, banków lub prywatnej poczty e-mail, bezpieczeństwo Twojego urządzenia może być naruszone. Jeśli możesz, unikaj używania urządzenia i natychmiast poproś o pomoc Apple Support lub zaufaną osobę."
         }
