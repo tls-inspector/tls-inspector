@@ -19,6 +19,7 @@ import TLSKit
 import DNSKit
 import TLSUI
 
+@MainActor
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         TLSKit.log = LogWriter.shared

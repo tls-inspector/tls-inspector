@@ -21,6 +21,10 @@ import TLSUI
 struct TLSInspectorApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
+    init() {
+        UserOptions.bootstrapLanguage()
+    }
+
     var body: some Scene {
         WindowGroup {
             MainView()
