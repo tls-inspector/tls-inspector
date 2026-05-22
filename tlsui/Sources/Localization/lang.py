@@ -270,6 +270,23 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
 public var currentLanguage: SupportedLanguages = .English
 
 @MainActor
+public func updateCurrentLanguageToDeviceLocale() {
+    for lang in Locale.preferredLanguages {
+"""
+        file.write(header)
+
+        for language in languages:
+            file.write("        if lang.hasPrefix(\"" + language + "-\") {\n")
+            file.write("            currentLanguage = ." + languageNameMap[language] + "\n")
+            file.write("            return\n")
+            file.write("        }\n")
+
+        header = """    }
+
+    currentLanguage = .English
+}
+
+@MainActor
 public final class Localize {
 """
         file.write(header)

@@ -46,6 +46,34 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
 public var currentLanguage: SupportedLanguages = .English
 
 @MainActor
+public func updateCurrentLanguageToDeviceLocale() {
+    for lang in Locale.preferredLanguages {
+        if lang.hasPrefix("en-") {
+            currentLanguage = .English
+            return
+        }
+        if lang.hasPrefix("es-") {
+            currentLanguage = .Spanish
+            return
+        }
+        if lang.hasPrefix("de-") {
+            currentLanguage = .German
+            return
+        }
+        if lang.hasPrefix("nl-") {
+            currentLanguage = .Dutch
+            return
+        }
+        if lang.hasPrefix("pl-") {
+            currentLanguage = .Polish
+            return
+        }
+    }
+
+    currentLanguage = .English
+}
+
+@MainActor
 public final class Localize {
     // key: 1 day
     public static func n1day() -> String {
