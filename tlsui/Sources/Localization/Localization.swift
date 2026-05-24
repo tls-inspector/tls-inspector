@@ -26,6 +26,7 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
     case German = "de"
     case Dutch = "nl"
     case Polish = "pl"
+    case French = "fr"
 
     public var id: Self {
         return self
@@ -38,6 +39,7 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
         case .German: return 34
         case .Dutch: return 43
         case .Polish: return 100
+        case .French: return 98
         }
     }
 }
@@ -60,6 +62,8 @@ public final class Localize {
             return "1 day"
         case .Polish:
             return "1 dzień"
+        case .French:
+            return "1 jour"
         }
     }
     // key: 1 hour
@@ -75,6 +79,8 @@ public final class Localize {
             return "1 hour"
         case .Polish:
             return "1 godzina"
+        case .French:
+            return "1 heure"
         }
     }
     // key: 1 minute
@@ -90,6 +96,8 @@ public final class Localize {
             return "1 minute"
         case .Polish:
             return "1 minuta"
+        case .French:
+            return "1 minute"
         }
     }
     // key: 1 month
@@ -105,6 +113,8 @@ public final class Localize {
             return "1 maand"
         case .Polish:
             return "1 miesiąc"
+        case .French:
+            return "1 mois"
         }
     }
     // key: 1 year
@@ -120,6 +130,8 @@ public final class Localize {
             return "1 year"
         case .Polish:
             return "1 rok"
+        case .French:
+            return "1 an"
         }
     }
     // key: About
@@ -135,6 +147,8 @@ public final class Localize {
             return "Over"
         case .Polish:
             return "O aplikacji"
+        case .French:
+            return "À propos"
         }
     }
     // key: Add reminder for certificate expiry
@@ -150,6 +164,8 @@ public final class Localize {
             return "Add reminder for certificate expiry"
         case .Polish:
             return "Dodaj przypomnienie o wygaśnięciu certyfikatu"
+        case .French:
+            return "Ajouter un rappel pour l'expiration du certificat"
         }
     }
     // key: Advanced Options
@@ -165,6 +181,8 @@ public final class Localize {
             return "Geavanceerde Opties"
         case .Polish:
             return "Opcje zaawansowane"
+        case .French:
+            return "Options avancées"
         }
     }
     // key: AdvancedSettingsNag
@@ -180,6 +198,8 @@ public final class Localize {
             return "These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly."
         case .Polish:
             return "Te opcje służą do zaawansowanej analizy i rozwiązywania problemów. Użycie nieprawidłowych wartości może uniemożliwić poprawne działanie TLS Inspector."
+        case .French:
+            return "Ces options sont utilisées un examen approfondi et le diagnostic. Des valeurs invalides peuvent empêcher TLS Inspector de fonctionner correctement."
         }
     }
     // key: Algorithm
@@ -195,6 +215,8 @@ public final class Localize {
             return "Algoritme"
         case .Polish:
             return "Algorytm"
+        case .French:
+            return "Algorithme"
         }
     }
     // key: Allowed ciphers
@@ -210,6 +232,8 @@ public final class Localize {
             return "Allowed ciphers"
         case .Polish:
             return "Dozwolone szyfry"
+        case .French:
+            return "Algorithmes de chiffrement autorisés"
         }
     }
     // key: Alternate Names
@@ -225,6 +249,8 @@ public final class Localize {
             return "Alternatieve Namen"
         case .Polish:
             return "Nazwy alternatywne"
+        case .French:
+            return "Nom alternatif"
         }
     }
     // key: App Icon
@@ -240,6 +266,8 @@ public final class Localize {
             return "App Icon"
         case .Polish:
             return "Ikona aplikacji"
+        case .French:
+            return "Icone de l'application"
         }
     }
     // key: App Language
@@ -255,6 +283,8 @@ public final class Localize {
             return "App Language"
         case .Polish:
             return "Język aplikacji"
+        case .French:
+            return "Langue de l'application"
         }
     }
     // key: AppIconFooter
@@ -270,6 +300,8 @@ public final class Localize {
             return "De \"Progress\" pride vlag is gemaakt door Daniel Quasar en is gelicenseerd onder Create Commons BY-NC-SA. De trans vlag is gemaakt door Monica Helms en gepubliceerd als public domain."
         case .Polish:
             return "Flaga Progress Pride została stworzona przez Daniela Quasara i jest licencjonowana na Creative Commons BY-NC-SA. Flaga trans została stworzona przez Monicę Helms i przekazana do domeny publicznej."
+        case .French:
+            return "Le drapeau Progress pride est une création de Daniel Quasar et est sous licence Creative Commons BY-NC-SA. Le drapeau trans est une création de Monica Helms et a été remis dans le domaine public."
         }
     }
     // key: Apple
@@ -284,6 +316,8 @@ public final class Localize {
         case .Dutch:
             return "Apple"
         case .Polish:
+            return "Apple"
+        case .French:
             return "Apple"
         }
     }
@@ -300,6 +334,8 @@ public final class Localize {
             return "Autoriteit"
         case .Polish:
             return "Urząd"
+        case .French:
+            return "Authorité"
         }
     }
     // key: Auto
@@ -315,6 +351,8 @@ public final class Localize {
             return "Auto"
         case .Polish:
             return "Automatycznie"
+        case .French:
+            return "Auto"
         }
     }
     // key: Basic
@@ -330,6 +368,8 @@ public final class Localize {
             return "Basis"
         case .Polish:
             return "Podstawowe"
+        case .French:
+            return "Basique"
         }
     }
     // key: Bundle date
@@ -345,6 +385,8 @@ public final class Localize {
             return "Bundle date"
         case .Polish:
             return "Data pakietu"
+        case .French:
+            return "Date du bundle"
         }
     }
     // key: Bundles have been updated to their latest versions.
@@ -360,6 +402,8 @@ public final class Localize {
             return "Bundles have been updated to their latest versions."
         case .Polish:
             return "Pakiety zostały zaktualizowane do najnowszych wersji."
+        case .French:
+            return "Les bundles ont été mis à jour à leur dernière version."
         }
     }
     // key: Certificate Authority
@@ -375,6 +419,8 @@ public final class Localize {
             return "Certificaatautoriteit"
         case .Polish:
             return "Urząd certyfikacji"
+        case .French:
+            return "Autorité de certification"
         }
     }
     // key: Certificate Status
@@ -390,6 +436,8 @@ public final class Localize {
             return "Certificaatstatus"
         case .Polish:
             return "Status certyfikatu"
+        case .French:
+            return "Statut du certificat"
         }
     }
     // key: Certificate Timestamps
@@ -405,6 +453,8 @@ public final class Localize {
             return "Certificaat-tijdstempels"
         case .Polish:
             return "Znaczniki czasu certyfikatu"
+        case .French:
+            return "Horodatages du certificat"
         }
     }
     // key: Certificate Trust
@@ -420,6 +470,8 @@ public final class Localize {
             return "Certificaatvertrouwen"
         case .Polish:
             return "Zaufanie certyfikatu"
+        case .French:
+            return "Niveau de confiance du certificat"
         }
     }
     // key: Certificate not trusted
@@ -435,6 +487,8 @@ public final class Localize {
             return "Certificate not trusted"
         case .Polish:
             return "Certyfikat niezaufany"
+        case .French:
+            return "Le certificat n'est pas approuvé"
         }
     }
     // key: CertificateStatusFooter
@@ -450,6 +504,8 @@ public final class Localize {
             return "Certificate status checks are used to check if a certificate has been revoked."
         case .Polish:
             return "Sprawdzanie statusu certyfikatu służy do weryfikacji, czy certyfikat został unieważniony."
+        case .French:
+            return "Les vérifications du statut du certificat servent à déterminer si un certificat a été révoqué."
         }
     }
     // key: Certificates
@@ -465,6 +521,8 @@ public final class Localize {
             return "Certificaten"
         case .Polish:
             return "Certyfikaty"
+        case .French:
+            return "Certificats"
         }
     }
     // key: Check for updates
@@ -480,6 +538,8 @@ public final class Localize {
             return "Check op updates"
         case .Polish:
             return "Sprawdź aktualizacje"
+        case .French:
+            return "Vérifier les mises à jour"
         }
     }
     // key: City / Locality
@@ -495,6 +555,8 @@ public final class Localize {
             return "City / Locality"
         case .Polish:
             return "Miasto / Miejscowość"
+        case .French:
+            return "Ville / Localité"
         }
     }
     // key: Clear downloaded bundles
@@ -510,6 +572,8 @@ public final class Localize {
             return "Wis gedownloade bundels"
         case .Polish:
             return "Wyczyść pobrane pakiety"
+        case .French:
+            return "Supprimer les bundles téléchargés"
         }
     }
     // key: Common Name
@@ -525,6 +589,8 @@ public final class Localize {
             return "Common Name"
         case .Polish:
             return "Nazwa pospolita (CN)"
+        case .French:
+            return "Nom commun"
         }
     }
     // key: Connection Information
@@ -540,6 +606,8 @@ public final class Localize {
             return "Verbindingsinformatie"
         case .Polish:
             return "Informacje o połączeniu"
+        case .French:
+            return "Détails de connexion"
         }
     }
     // key: Contribute to TLS Inspector
@@ -555,6 +623,8 @@ public final class Localize {
             return "Draag bij aan TLS Inspector"
         case .Polish:
             return "Wspieraj TLS Inspector"
+        case .French:
+            return "Participer à TLS Inspector"
         }
     }
     // key: Country
@@ -570,6 +640,8 @@ public final class Localize {
             return "Country"
         case .Polish:
             return "Kraj"
+        case .French:
+            return "Pays"
         }
     }
     // key: DNS Name
@@ -585,6 +657,8 @@ public final class Localize {
             return "Alternate Names"
         case .Polish:
             return "Nazwa DNS"
+        case .French:
+            return "Nom DNS"
         }
     }
     // key: Danger
@@ -600,6 +674,8 @@ public final class Localize {
             return "Gevaar"
         case .Polish:
             return "Niebezpieczeństwo"
+        case .French:
+            return "Danger"
         }
     }
     // key: Dangerous & Unsafe
@@ -615,6 +691,8 @@ public final class Localize {
             return "Dangerous & Unsafe"
         case .Polish:
             return "Niebezpieczne i niepewne"
+        case .French:
+            return "Dangereux et non sécurisé"
         }
     }
     // key: Dismiss
@@ -630,6 +708,8 @@ public final class Localize {
             return "Sluiten"
         case .Polish:
             return "Zamknij"
+        case .French:
+            return "Fermer"
         }
     }
     // key: Domain Name or IP Address
@@ -645,6 +725,8 @@ public final class Localize {
             return "Domeinnaam of IP-Adres"
         case .Polish:
             return "Nazwa domeny lub adres IP"
+        case .French:
+            return "Nom de domain ou adresse IP"
         }
     }
     // key: Done
@@ -660,6 +742,8 @@ public final class Localize {
             return "Done"
         case .Polish:
             return "Gotowe"
+        case .French:
+            return "Terminé"
         }
     }
     // key: Download & Check CRL
@@ -675,6 +759,8 @@ public final class Localize {
             return "Download & Check CRL"
         case .Polish:
             return "Pobierz i sprawdź CRL"
+        case .French:
+            return "Télécharger et vérifier la liste de révocation de certificats (CRL)"
         }
     }
     // key: Downloaded
@@ -690,6 +776,8 @@ public final class Localize {
             return "Downloaded"
         case .Polish:
             return "Pobrano"
+        case .French:
+            return "Téléchargé"
         }
     }
     // key: Email Address
@@ -705,6 +793,8 @@ public final class Localize {
             return "Alternate Names"
         case .Polish:
             return "Adres e-mail"
+        case .French:
+            return "Adresse email"
         }
     }
     // key: Embedded
@@ -720,6 +810,8 @@ public final class Localize {
             return "Embedded"
         case .Polish:
             return "Osadzone"
+        case .French:
+            return "Intégré"
         }
     }
     // key: Engine Options
@@ -735,6 +827,8 @@ public final class Localize {
             return "Engine Options"
         case .Polish:
             return "Opcje silnika"
+        case .French:
+            return "Options du moteur"
         }
     }
     // key: Error
@@ -750,6 +844,8 @@ public final class Localize {
             return "Error"
         case .Polish:
             return "Błąd"
+        case .French:
+            return "Erreur"
         }
     }
     // key: Error adding reminder
@@ -765,6 +861,8 @@ public final class Localize {
             return "Error adding reminder"
         case .Polish:
             return "Błąd podczas dodawania przypomnienia"
+        case .French:
+            return "Impossible d'ajouter le rappel"
         }
     }
     // key: Expired
@@ -780,6 +878,8 @@ public final class Localize {
             return "Verlopen"
         case .Polish:
             return "Wygasł"
+        case .French:
+            return "Expiré"
         }
     }
     // key: Expires In
@@ -795,6 +895,8 @@ public final class Localize {
             return "Expires In"
         case .Polish:
             return "Wygasa za"
+        case .French:
+            return "Expire dans"
         }
     }
     // key: Export Logs
@@ -810,6 +912,8 @@ public final class Localize {
             return "Export Logs"
         case .Polish:
             return "Eksportuj logi"
+        case .French:
+            return "Exporter les logs"
         }
     }
     // key: Export certificate
@@ -825,6 +929,8 @@ public final class Localize {
             return "Export certificate"
         case .Polish:
             return "Eksportuj certyfikat"
+        case .French:
+            return "Exporter le certificat"
         }
     }
     // key: Export certificate chain
@@ -840,6 +946,8 @@ public final class Localize {
             return "Export certificate chain"
         case .Polish:
             return "Eksportuj łańcuch certyfikatów"
+        case .French:
+            return "Exporter la chaîne de confiance des certificats"
         }
     }
     // key: Extended
@@ -855,6 +963,8 @@ public final class Localize {
             return "Uitgebreid"
         case .Polish:
             return "Rozszerzone"
+        case .French:
+            return "Étendu"
         }
     }
     // key: Extensions
@@ -870,6 +980,8 @@ public final class Localize {
             return "Extensions"
         case .Polish:
             return "Rozszerzenia"
+        case .French:
+            return "Extensions"
         }
     }
     // key: Fingerprints
@@ -885,6 +997,8 @@ public final class Localize {
             return "Vingerafdrukken"
         case .Polish:
             return "Odciski"
+        case .French:
+            return "Empreinte numérique"
         }
     }
     // key: Follow Us
@@ -900,6 +1014,8 @@ public final class Localize {
             return "Volg ons"
         case .Polish:
             return "Obserwuj nas"
+        case .French:
+            return "Nous suivre"
         }
     }
     // key: Follow us on Bluesky
@@ -915,6 +1031,8 @@ public final class Localize {
             return "Volg ons op Bluesky"
         case .Polish:
             return "Obserwuj nas na Bluesky"
+        case .French:
+            return "Suivez nous sur Bluesky"
         }
     }
     // key: Follow us on Mastodon
@@ -930,6 +1048,8 @@ public final class Localize {
             return "Volg ons op Mastodon"
         case .Polish:
             return "Obserwuj nas na Mastodon"
+        case .French:
+            return "Suivez nous sur Mastodon"
         }
     }
     // key: Found on device
@@ -945,6 +1065,8 @@ public final class Localize {
             return "Found on device"
         case .Polish:
             return "Znaleziono na urządzeniu"
+        case .French:
+            return "Trouvé sur l'appareil"
         }
     }
     // key: General
@@ -960,6 +1082,8 @@ public final class Localize {
             return "Algemeen"
         case .Polish:
             return "Ogólne"
+        case .French:
+            return "Général"
         }
     }
     // key: Get Involved
@@ -975,6 +1099,8 @@ public final class Localize {
             return "Draag eraan bij"
         case .Polish:
             return "Zaangażuj się"
+        case .French:
+            return "Participer"
         }
     }
     // key: Google
@@ -989,6 +1115,8 @@ public final class Localize {
         case .Dutch:
             return "Google"
         case .Polish:
+            return "Google"
+        case .French:
             return "Google"
         }
     }
@@ -1005,6 +1133,8 @@ public final class Localize {
             return "HTTP Kopregels"
         case .Polish:
             return "Nagłówki HTTP"
+        case .French:
+            return "En-têtes HTTP"
         }
     }
     // key: IP Address
@@ -1020,6 +1150,8 @@ public final class Localize {
             return "Alternate Names"
         case .Polish:
             return "Adres IP"
+        case .French:
+            return "Adresse IP"
         }
     }
     // key: IconDark
@@ -1035,6 +1167,8 @@ public final class Localize {
             return "Dark"
         case .Polish:
             return "Ciemna"
+        case .French:
+            return "Sombre"
         }
     }
     // key: IconDefault
@@ -1050,6 +1184,8 @@ public final class Localize {
             return "Default"
         case .Polish:
             return "Domyślna"
+        case .French:
+            return "Défaut"
         }
     }
     // key: IconLight
@@ -1065,6 +1201,8 @@ public final class Localize {
             return "Light"
         case .Polish:
             return "Jasna"
+        case .French:
+            return "Clair"
         }
     }
     // key: IconPride
@@ -1079,6 +1217,8 @@ public final class Localize {
         case .Dutch:
             return "Pride"
         case .Polish:
+            return "Pride"
+        case .French:
             return "Pride"
         }
     }
@@ -1095,6 +1235,8 @@ public final class Localize {
             return "Skew"
         case .Polish:
             return "Skew"
+        case .French:
+            return "Skew"
         }
     }
     // key: IconSlate
@@ -1109,6 +1251,8 @@ public final class Localize {
         case .Dutch:
             return "Slate"
         case .Polish:
+            return "Slate"
+        case .French:
             return "Slate"
         }
     }
@@ -1125,6 +1269,8 @@ public final class Localize {
             return "Trans"
         case .Polish:
             return "Trans"
+        case .French:
+            return "Trans"
         }
     }
     // key: If you believe this to be in error, contact support from within the TLS Inspector app.
@@ -1140,6 +1286,8 @@ public final class Localize {
             return "Als u denkt dat dit onjuist is, contacteer dan support vanuit de TLS Inspector app."
         case .Polish:
             return "Jeśli uważasz, że to błąd, skontaktuj się ze wsparciem z poziomu aplikacji TLS Inspector."
+        case .French:
+            return "Si vous pensez que c'est une erreur, contactez le support depuis l'app TLS Inspector."
         }
     }
     // key: Invalid Certificate
@@ -1155,6 +1303,8 @@ public final class Localize {
             return "Invalid Certificate"
         case .Polish:
             return "Nieprawidłowy certyfikat"
+        case .French:
+            return "Certificat invalide"
         }
     }
     // key: Issuer
@@ -1170,6 +1320,8 @@ public final class Localize {
             return "Uitgever"
         case .Polish:
             return "Wystawca"
+        case .French:
+            return "Émetteur"
         }
     }
     // key: Key Identifiers
@@ -1185,6 +1337,8 @@ public final class Localize {
             return "Key Identifiers"
         case .Polish:
             return "Identyfikatory klucza"
+        case .French:
+            return "Identifiants de clé"
         }
     }
     // key: Key Size
@@ -1200,6 +1354,8 @@ public final class Localize {
             return "Key Size"
         case .Polish:
             return "Rozmiar klucza"
+        case .French:
+            return "Taille de la clé"
         }
     }
     // key: Key Usage
@@ -1215,6 +1371,8 @@ public final class Localize {
             return "Sleutelgebruik"
         case .Polish:
             return "Użycie klucza"
+        case .French:
+            return "Usage de la clé"
         }
     }
     // key: Language Updated
@@ -1230,6 +1388,8 @@ public final class Localize {
             return "Language Updated"
         case .Polish:
             return "Zaktualizowano język"
+        case .French:
+            return "Langue mise à jour"
         }
     }
     // key: Learn More
@@ -1245,6 +1405,8 @@ public final class Localize {
             return "Learn More"
         case .Polish:
             return "Dowiedz się więcej"
+        case .French:
+            return "En savoir plus"
         }
     }
     // key: LicenseFooter
@@ -1260,6 +1422,8 @@ public final class Localize {
             return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .Polish:
             return "TLS Inspector to wolne i otwarte oprogramowanie (FLOSS) licencjonowane na GNU General Public License w wersji 3 (GPLv3). Copyright © 2016-2026 Ian Spence i inni współtwórcy TLS Inspector. TLS Inspector powstał całkowicie bez użycia sztucznej inteligencji (AI) lub dużych modeli językowych (LLM)."
+        case .French:
+            return "TLS Inspector est un logiciel libre et open source (FLOSS) distribué sous licence GNU General Public License version 3 (GPLv3). Droits d’auteur © 2016‑2026 Ian Spence et les autres contributeurs de TLS Inspector. TLS Inspector est entièrement conçu sans recourir à l’Intelligence Artificielle (IA) ni aux modèles de langage de grande taille (LLMs)."
         }
     }
     // key: Locally Trusted
@@ -1275,6 +1439,8 @@ public final class Localize {
             return "Lokaal Vertrouwd"
         case .Polish:
             return "Lokalnie zaufany"
+        case .French:
+            return "Approuvé sur cet appareil"
         }
     }
     // key: Log ID
@@ -1290,6 +1456,8 @@ public final class Localize {
             return "Log ID"
         case .Polish:
             return "ID logu"
+        case .French:
+            return "Identifiant de journal"
         }
     }
     // key: Log Name
@@ -1305,6 +1473,8 @@ public final class Localize {
             return "Log Naam"
         case .Polish:
             return "Nazwa logu"
+        case .French:
+            return "Nom du journal"
         }
     }
     // key: Logging & Support
@@ -1320,6 +1490,8 @@ public final class Localize {
             return "Logging & Support"
         case .Polish:
             return "Logowanie i wsparcie"
+        case .French:
+            return "Journalisation et support"
         }
     }
     // key: LoggingFooter
@@ -1335,6 +1507,8 @@ public final class Localize {
             return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
         case .Polish:
             return "Jeśli masz problem z TLS Inspector, możemy poprosić o włączenie logowania debug i przesłanie logów, aby lepiej zidentyfikować problem. Nie zbieramy danych osobowych, jednak po włączeniu logowania uwzględniane są hosty, które sprawdzasz. Nigdy nie pobieramy tych logów, chyba że wyślesz je do nas za pomocą przycisku powyżej."
+        case .French:
+            return "Si vous rencontrez un problème avec TLS Inspector, il se peut que nous vous demandions d’activer la journalisation de débogage et de nous envoyer les journaux afin que nous puissions mieux identifier le problème. Aucune information personnelle n’est collectée ; toutefois, lorsque cette fonction est activée, les hôtes que vous inspectez sont inclus. Nous ne collectons jamais ces journaux, sauf si vous nous les envoyez à l’aide du bouton ci‑dessus."
         }
     }
     // key: Metadata
@@ -1350,6 +1524,8 @@ public final class Localize {
             return "Metadata"
         case .Polish:
             return "Metadane"
+        case .French:
+            return "Metadonnées"
         }
     }
     // key: Microsoft
@@ -1364,6 +1540,8 @@ public final class Localize {
         case .Dutch:
             return "Microsoft"
         case .Polish:
+            return "Microsoft"
+        case .French:
             return "Microsoft"
         }
     }
@@ -1380,6 +1558,8 @@ public final class Localize {
             return "More from the Developer"
         case .Polish:
             return "Więcej od dewelopera"
+        case .French:
+            return "Autres application du même développeur"
         }
     }
     // key: Mozilla
@@ -1394,6 +1574,8 @@ public final class Localize {
         case .Dutch:
             return "Mozilla"
         case .Polish:
+            return "Mozilla"
+        case .French:
             return "Mozilla"
         }
     }
@@ -1410,6 +1592,8 @@ public final class Localize {
             return "Overeengekomen Ciphersuite"
         case .Polish:
             return "Uzgodniony zestaw szyfrów"
+        case .French:
+            return "Suite de chiffrement négociée"
         }
     }
     // key: Negotiated Version
@@ -1425,6 +1609,8 @@ public final class Localize {
             return "Overeengekomen Versie"
         case .Polish:
             return "Uzgodniona wersja"
+        case .French:
+            return "Version négociée"
         }
     }
     // key: Network Engine
@@ -1440,6 +1626,8 @@ public final class Localize {
             return "Netwerk Driver"
         case .Polish:
             return "Silnik sieciowy"
+        case .French:
+            return "Moteur de traitement réseau"
         }
     }
     // key: Network Options
@@ -1455,6 +1643,8 @@ public final class Localize {
             return "Network Options"
         case .Polish:
             return "Opcje sieci"
+        case .French:
+            return "Options du moteur"
         }
     }
     // key: NetworkEngineFooter
@@ -1470,6 +1660,8 @@ public final class Localize {
             return "Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device."
         case .Polish:
             return "Zmiana silnika sieciowego może spowodować, że TLS Inspector będzie wyświetlał inne informacje o połączeniu niż te używane przez Twoje urządzenie iOS."
+        case .French:
+            return "Changer le moteur réseau dans TLS Inspector peut entraîner l'affichage d'informations de connexion différentes de celles utilisées par votre appareil iOS."
         }
     }
     // key: No
@@ -1485,6 +1677,8 @@ public final class Localize {
             return "Nee"
         case .Polish:
             return "Nie"
+        case .French:
+            return "Non"
         }
     }
     // key: No Supported URL Found
@@ -1500,6 +1694,8 @@ public final class Localize {
             return "Geen Ondersteunde URL Gevonden"
         case .Polish:
             return "Nie znaleziono obsługiwanego adresu URL"
+        case .French:
+            return "Aucune URL prise en charge n'a été trouvée"
         }
     }
     // key: No updates available at this time.
@@ -1515,6 +1711,8 @@ public final class Localize {
             return "No updates available at this time."
         case .Polish:
             return "Brak dostępnych aktualizacji w tej chwili."
+        case .French:
+            return "Pas de mise à jour disponible."
         }
     }
     // key: Not After
@@ -1530,6 +1728,8 @@ public final class Localize {
             return "Niet Na"
         case .Polish:
             return "Nie po"
+        case .French:
+            return "Pas après"
         }
     }
     // key: Not Before
@@ -1545,6 +1745,8 @@ public final class Localize {
             return "Niet V?r"
         case .Polish:
             return "Nie przed"
+        case .French:
+            return "Pas avant"
         }
     }
     // key: Not revoked
@@ -1560,6 +1762,8 @@ public final class Localize {
             return "Not revoked"
         case .Polish:
             return "Nie unieważniono"
+        case .French:
+            return "Non révoqué"
         }
     }
     // key: Notice
@@ -1575,6 +1779,8 @@ public final class Localize {
             return "Merk Op"
         case .Polish:
             return "Uwaga"
+        case .French:
+            return "Notice"
         }
     }
     // key: Only HTTPS URLs can be inspected.
@@ -1590,6 +1796,8 @@ public final class Localize {
             return "Only HTTPS URLs can be inspected."
         case .Polish:
             return "Można analizować tylko adresy URL HTTPS."
+        case .French:
+            return "Seules les URLs HTTPS peuvent être examinées."
         }
     }
     // key: Open source licenses & attributions
@@ -1605,6 +1813,8 @@ public final class Localize {
             return "Open source licenses & attributions"
         case .Polish:
             return "Licencje open source i atrybucje"
+        case .French:
+            return "Licences open source et crédits"
         }
     }
     // key: Options
@@ -1620,6 +1830,8 @@ public final class Localize {
             return "Opties"
         case .Polish:
             return "Opcje"
+        case .French:
+            return "Options"
         }
     }
     // key: Organization
@@ -1635,6 +1847,8 @@ public final class Localize {
             return "Organization"
         case .Polish:
             return "Organizacja"
+        case .French:
+            return "Organisation"
         }
     }
     // key: Organizational Unit
@@ -1650,6 +1864,8 @@ public final class Localize {
             return "Organizational Unit"
         case .Polish:
             return "Jednostka organizacyjna"
+        case .French:
+            return "Unité organisationnelle"
         }
     }
     // key: Permission Denied
@@ -1665,6 +1881,8 @@ public final class Localize {
             return "Permission Denied"
         case .Polish:
             return "Brak uprawnień"
+        case .French:
+            return "Accès refusé"
         }
     }
     // key: Please wait...
@@ -1680,6 +1898,8 @@ public final class Localize {
             return "Please wait..."
         case .Polish:
             return "Proszę czekać..."
+        case .French:
+            return "Veillez patienter..."
         }
     }
     // key: ProxyDanger
@@ -1695,6 +1915,8 @@ public final class Localize {
             return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible."
         case .Polish:
             return "Jeśli nie wiesz, czym jest proxy HTTPS ani dlaczego jest skonfigurowane na Twoim urządzeniu, natychmiast skontaktuj się z Apple Support lub zaufaną osobą. Jeśli to możliwe, unikaj używania urządzenia."
+        case .French:
+            return "Si vous ne savez pas ce qu’est un proxy HTTPS ou pourquoi un proxy est configuré sur votre appareil, contactez immédiatement le support Apple ou quelqu’un de confiance. Si possible, évitez d’utiliser votre appareil."
         }
     }
     // key: ProxyNotice
@@ -1710,6 +1932,8 @@ public final class Localize {
             return "An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector."
         case .Polish:
             return "Na Twoim urządzeniu skonfigurowano proxy HTTPS. TLS Inspector nie jest zgodny z proxy HTTPS i analiza nie może zostać wykonana. Aby korzystać z TLS Inspector, wyłącz proxy HTTPS w ustawieniach Wi‑Fi."
+        case .French:
+            return "Un proxy HTTPS est configuré sur votre appareil. TLS Inspector n'est pas compatibles avec les proxies HTTPS et l'inspection ne peut pas se poursuivre. YoVous devez désactiver le proxy HTTPS dans les réglages Wi‑Fi de votre appareil avant de pouvoir utiliser TLS Inspector."
         }
     }
     // key: Public Key
@@ -1725,6 +1949,8 @@ public final class Localize {
             return "Publieke Sleutel"
         case .Polish:
             return "Klucz publiczny"
+        case .French:
+            return "Clé publique"
         }
     }
     // key: Query OCSP Responder
@@ -1740,6 +1966,8 @@ public final class Localize {
             return "Raadpleeg OCSP Responder"
         case .Polish:
             return "Zapytaj responder OCSP"
+        case .French:
+            return "Interroger le service OCSP"
         }
     }
     // key: Quick Exit
@@ -1755,6 +1983,8 @@ public final class Localize {
             return "Quick Exit"
         case .Polish:
             return "Szybkie wyjście"
+        case .French:
+            return "Quitter rapidement"
         }
     }
     // key: Rate in App Store
@@ -1770,6 +2000,8 @@ public final class Localize {
             return "Waardeer in App Store"
         case .Polish:
             return "Oceń w App Store"
+        case .French:
+            return "Laisser une note dans l'App Store"
         }
     }
     // key: Recent Lookups
@@ -1785,6 +2017,8 @@ public final class Localize {
             return "Recente Opdrachten"
         case .Polish:
             return "Ostatnie sprawdzenia"
+        case .French:
+            return "Requêtes récentes"
         }
     }
     // key: Remember Recent Lookups
@@ -1800,6 +2034,8 @@ public final class Localize {
             return "Onthoud Recente Opdrachten"
         case .Polish:
             return "Zapamiętuj ostatnie sprawdzenia"
+        case .French:
+            return "Remember Recent Lookups"
         }
     }
     // key: Reminder Added
@@ -1815,6 +2051,8 @@ public final class Localize {
             return "Herinnering toegevoegd"
         case .Polish:
             return "Przypomnienie dodane"
+        case .French:
+            return "Rappel ajouté"
         }
     }
     // key: Remote Address
@@ -1830,6 +2068,8 @@ public final class Localize {
             return "Serveradres"
         case .Polish:
             return "Adres zdalny"
+        case .French:
+            return "Adresse distante"
         }
     }
     // key: Renew Certificate '{domain}'
@@ -1845,6 +2085,8 @@ public final class Localize {
             return "Renew Certificate '\(domain)'"
         case .Polish:
             return "Odnów certyfikat „\(domain)”"
+        case .French:
+            return "Renouveler le certificat '\(domain)'"
         }
     }
     // key: Reset to default settings
@@ -1860,6 +2102,8 @@ public final class Localize {
             return "Reset to default settings"
         case .Polish:
             return "Przywróć ustawienia domyślne"
+        case .French:
+            return "Revenir aux paramètres par défaut"
         }
     }
     // key: Review or update the reminder in the Reminders app
@@ -1875,6 +2119,8 @@ public final class Localize {
             return "Review or update the reminder in the Reminders app"
         case .Polish:
             return "Sprawdź lub zaktualizuj przypomnienie w aplikacji Przypomnienia"
+        case .French:
+            return "Consultez ou mettez à jour le rappel dans l’application Rappels."
         }
     }
     // key: Revoked: {reason}
@@ -1890,6 +2136,8 @@ public final class Localize {
             return "Revoked: \(reason)"
         case .Polish:
             return "Unieważniono: \(reason)"
+        case .French:
+            return "Révoqué : \(reason)"
         }
     }
     // key: Root
@@ -1905,6 +2153,8 @@ public final class Localize {
             return "Root"
         case .Polish:
             return "Główny"
+        case .French:
+            return "Racine"
         }
     }
     // key: Root CA Certificates
@@ -1920,6 +2170,8 @@ public final class Localize {
             return "Root CA Certificaten"
         case .Polish:
             return "Główne certyfikaty CA"
+        case .French:
+            return "Certificats racine de confiance"
         }
     }
     // key: RootCABundleAbout
@@ -1935,6 +2187,8 @@ public final class Localize {
             return "TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector."
         case .Polish:
             return "TLS Inspector używa głównych certyfikatów CA obecnych na Twoim urządzeniu oraz certyfikatów od zaufanych dostawców, aby podejmować decyzje o zaufaniu z wysoką pewnością. Aktualizacje pakietów certyfikatów są rzadkie, a kopia jest dołączona do TLS Inspector."
+        case .French:
+            return "TLS Inspector utilise les certificats racine de confiance presents sur votre appareil ainsi que de fournisseurs de confiance, afin de prendre des décisions de confiance à haute fiabilité. Les mises à jour des bundles de certificats racine sont peu fréquentes, et une copie est incluse avec TLS Inspector."
         }
     }
     // key: RootCALicenseFooter
@@ -1950,6 +2204,8 @@ public final class Localize {
             return "Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities."
         case .Polish:
             return "Apple, Google, Microsoft i Mozilla są zastrzeżonymi znakami towarowymi należącymi do ich właścicieli. TLS Inspector nie jest powiązany ani wspierany przez żadną stronę trzecią, w tym między innymi wymienione podmioty."
+        case .French:
+            return "Apple, Google, Microsoft et Mozilla sont des marques déposées appartenant à leurs propriétaires respectifs. TLS Inspector n’est affilié ni parrainé par aucun tiers, y compris, sans s’y limiter, les entités mentionnées ci-dessus."
         }
     }
     // key: Search on {website}
@@ -1965,6 +2221,8 @@ public final class Localize {
             return "Search on \(website)"
         case .Polish:
             return "Szukaj w \(website)"
+        case .French:
+            return "Chercher sur \(website)"
         }
     }
     // key: Seconds
@@ -1980,6 +2238,8 @@ public final class Localize {
             return "Seconds"
         case .Polish:
             return "Sekundy"
+        case .French:
+            return "Secondes"
         }
     }
     // key: Security HTTP Headers
@@ -1995,6 +2255,8 @@ public final class Localize {
             return "Security HTTP Headers"
         case .Polish:
             return "Nagłówki bezpieczeństwa HTTP"
+        case .French:
+            return "En-têtes de sécurité HTTP"
         }
     }
     // key: Sent by server
@@ -2010,6 +2272,8 @@ public final class Localize {
             return "Sent by server"
         case .Polish:
             return "Wysłane przez serwer"
+        case .French:
+            return "Envpyé par le serveur"
         }
     }
     // key: Serial Number
@@ -2025,6 +2289,8 @@ public final class Localize {
             return "Serial Number"
         case .Polish:
             return "Numer seryjny"
+        case .French:
+            return "Numéro de série"
         }
     }
     // key: Share & Feedback
@@ -2040,6 +2306,8 @@ public final class Localize {
             return "Delen & Terugkoppeling"
         case .Polish:
             return "Udostępnianie i opinie"
+        case .French:
+            return "Partager et feedback"
         }
     }
     // key: Share TLS Inspector
@@ -2055,6 +2323,8 @@ public final class Localize {
             return "Deel TLS Inspector"
         case .Polish:
             return "Udostępnij TLS Inspector"
+        case .French:
+            return "Partage TLS Inspector"
         }
     }
     // key: Show HTTP Headers
@@ -2070,6 +2340,8 @@ public final class Localize {
             return "Toon HTTP Kopregels"
         case .Polish:
             return "Pokaż nagłówki HTTP"
+        case .French:
+            return "Montrer les en-têtes HTTP"
         }
     }
     // key: Show certificate on {website}
@@ -2085,6 +2357,8 @@ public final class Localize {
             return "Show certificate on \(website)"
         case .Polish:
             return "Pokaż certyfikat w \(website)"
+        case .French:
+            return "Afficher le certificat sur \(website)"
         }
     }
     // key: Signature
@@ -2100,6 +2374,8 @@ public final class Localize {
             return "Handtekening"
         case .Polish:
             return "Podpis"
+        case .French:
+            return "Signature"
         }
     }
     // key: Signature Type
@@ -2115,6 +2391,8 @@ public final class Localize {
             return "Handtekening Soort"
         case .Polish:
             return "Typ podpisu"
+        case .French:
+            return "Type de signature"
         }
     }
     // key: Source
@@ -2130,6 +2408,8 @@ public final class Localize {
             return "Source"
         case .Polish:
             return "Źródło"
+        case .French:
+            return "Source"
         }
     }
     // key: Special
@@ -2145,6 +2425,8 @@ public final class Localize {
             return "Special"
         case .Polish:
             return "Specjalne"
+        case .French:
+            return "Spécial"
         }
     }
     // key: State / Province
@@ -2160,6 +2442,8 @@ public final class Localize {
             return "State / Province"
         case .Polish:
             return "Stan / Województwo"
+        case .French:
+            return "État / Province"
         }
     }
     // key: Status Providers
@@ -2175,6 +2459,8 @@ public final class Localize {
             return "Status Providers"
         case .Polish:
             return "Dostawcy statusu"
+        case .French:
+            return "Fournisseurs de statut"
         }
     }
     // key: Subject
@@ -2190,6 +2476,8 @@ public final class Localize {
             return "Subject (Onderwerp)"
         case .Polish:
             return "Podmiot"
+        case .French:
+            return "Sujet"
         }
     }
     // key: TLS Inspector
@@ -2204,6 +2492,8 @@ public final class Localize {
         case .Dutch:
             return "TLS Inspector"
         case .Polish:
+            return "TLS Inspector"
+        case .French:
             return "TLS Inspector"
         }
     }
@@ -2220,6 +2510,8 @@ public final class Localize {
             return "Doel"
         case .Polish:
             return "Cel"
+        case .French:
+            return "Cible"
         }
     }
     // key: The certificate '{domain}' expires on {date}
@@ -2235,6 +2527,8 @@ public final class Localize {
             return "The certificate '\(domain)' expires on \(date)"
         case .Polish:
             return "Certyfikat „\(domain)” wygasa \(date)"
+        case .French:
+            return "The certificate '\(domain)' expires on \(date)"
         }
     }
     // key: Timeout
@@ -2250,6 +2544,8 @@ public final class Localize {
             return "Timeout"
         case .Polish:
             return "Limit czasu"
+        case .French:
+            return "Délai d'attente"
         }
     }
     // key: Timestamp
@@ -2265,6 +2561,8 @@ public final class Localize {
             return "Tijdstempel"
         case .Polish:
             return "Znacznik czasu"
+        case .French:
+            return "Horodatage"
         }
     }
     // key: Timestamps
@@ -2280,6 +2578,8 @@ public final class Localize {
             return "Tijdstempels"
         case .Polish:
             return "Znaczniki czasu"
+        case .French:
+            return "Horodatages"
         }
     }
     // key: Treat Unrecognized as Trusted
@@ -2295,6 +2595,8 @@ public final class Localize {
             return "Behandel Niet Herkend als Vertrouwd"
         case .Polish:
             return "Traktuj nierozpoznane jako zaufane"
+        case .French:
+            return "Traiter les éléments non reconnus comme fiables"
         }
     }
     // key: Trust Details
@@ -2310,6 +2612,8 @@ public final class Localize {
             return "Vertrouwen Details"
         case .Polish:
             return "Szczegóły zaufania"
+        case .French:
+            return "Informations sur la confiance"
         }
     }
     // key: Trusted
@@ -2325,6 +2629,8 @@ public final class Localize {
             return "Vertrouwd"
         case .Polish:
             return "Zaufany"
+        case .French:
+            return "Fiable"
         }
     }
     // key: URI
@@ -2339,6 +2645,8 @@ public final class Localize {
         case .Dutch:
             return "Alternate Names"
         case .Polish:
+            return "URI"
+        case .French:
             return "URI"
         }
     }
@@ -2355,6 +2663,8 @@ public final class Localize {
             return "Unnamed Certificate"
         case .Polish:
             return "Certyfikat bez nazwy"
+        case .French:
+            return "Certificat sans nom"
         }
     }
     // key: Unrecognized
@@ -2370,6 +2680,8 @@ public final class Localize {
             return "Niet Herkend"
         case .Polish:
             return "Nierozpoznany"
+        case .French:
+            return "Non reconnu"
         }
     }
     // key: Untrusted
@@ -2385,6 +2697,8 @@ public final class Localize {
             return "Niet Vertrouwd"
         case .Polish:
             return "Niezaufany"
+        case .French:
+            return "Non fiable"
         }
     }
     // key: Use IP version
@@ -2400,6 +2714,8 @@ public final class Localize {
             return "Use IP version"
         case .Polish:
             return "Użyj wersji IP"
+        case .French:
+            return "Utiliser la version IP"
         }
     }
     // key: Use system language
@@ -2415,6 +2731,8 @@ public final class Localize {
             return "Gebruik systeemtaal"
         case .Polish:
             return "Użyj języka systemowego"
+        case .French:
+            return "Utiliser la langue du système"
         }
     }
     // key: Valid For
@@ -2430,6 +2748,8 @@ public final class Localize {
             return "Geldig voor"
         case .Polish:
             return "Ważny przez"
+        case .French:
+            return "Valide pour"
         }
     }
     // key: Validity Period
@@ -2445,6 +2765,8 @@ public final class Localize {
             return "Geldigheidsduur"
         case .Polish:
             return "Okres ważności"
+        case .French:
+            return "Période de validité"
         }
     }
     // key: Verbose logging
@@ -2460,6 +2782,8 @@ public final class Localize {
             return "Verbose logging"
         case .Polish:
             return "Szczegółowe logowanie"
+        case .French:
+            return "Journalisation détaillée"
         }
     }
     // key: Verified
@@ -2475,6 +2799,8 @@ public final class Localize {
             return "Geverifieerd"
         case .Polish:
             return "Zweryfikowano"
+        case .French:
+            return "Verifié"
         }
     }
     // key: Version
@@ -2490,6 +2816,8 @@ public final class Localize {
             return "Versie"
         case .Polish:
             return "Wersja"
+        case .French:
+            return "Version"
         }
     }
     // key: View All
@@ -2505,6 +2833,8 @@ public final class Localize {
             return "Bekijk Alles"
         case .Polish:
             return "Zobacz wszystko"
+        case .French:
+            return "Afficher tout"
         }
     }
     // key: What does this mean?
@@ -2520,6 +2850,8 @@ public final class Localize {
             return "Wat betekent dit?"
         case .Polish:
             return "Co to oznacza?"
+        case .French:
+            return "Qu'est-ce que cela signifie ?"
         }
     }
     // key: Yes
@@ -2535,6 +2867,8 @@ public final class Localize {
             return "Ja"
         case .Polish:
             return "Tak"
+        case .French:
+            return "Oui"
         }
     }
     // key: You must restart the app for the change to take effect.
@@ -2550,6 +2884,8 @@ public final class Localize {
             return "You must restart the app for the change to take effect."
         case .Polish:
             return "Musisz ponownie uruchomić aplikację, aby zmiana zaczęła obowiązywać."
+        case .French:
+            return "Redémarrez l’application pour appliquer le changement."
         }
     }
     // key: app{version}{build}{opensslversion}{curlversion}
@@ -2565,6 +2901,8 @@ public final class Localize {
             return "App: \(version) (\(build)), OpenSSL: \(opensslversion), curl: \(curlversion)"
         case .Polish:
             return "Aplikacja: \(version) (\(build)), OpenSSL: \(opensslversion), curl: \(curlversion)"
+        case .French:
+            return "App: \(version) (\(build)), OpenSSL: \(opensslversion), curl: \(curlversion)"
         }
     }
     // key: guidance_warning
@@ -2580,6 +2918,8 @@ public final class Localize {
             return "Als u dit ziet op publieke servers voor social media, e-mail, banken, of andere populaire websites, ga dan niet verder maar zoek contact met Apple Support."
         case .Polish:
             return "Jeśli widzisz to ostrzeżenie podczas sprawdzania stron mediów społecznościowych, banków lub prywatnej poczty e-mail, bezpieczeństwo Twojego urządzenia może być naruszone. Jeśli możesz, unikaj używania urządzenia i natychmiast poproś o pomoc Apple Support lub zaufaną osobę."
+        case .French:
+            return "Si cet avertissement apparaît lorsque vous inspectez un site de réseaux sociaux, une banque ou une messagerie personnelle, la sécurité de votre appareil peut être compromise. Évitez d’utiliser votre appareil et demandez immédiatement de l’aide auprès du support Apple ou d’une personne de confiance."
         }
     }
     // key: reminder_permission_message
@@ -2595,6 +2935,8 @@ public final class Localize {
             return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
         case .Polish:
             return "TLS Inspector wymaga uprawnień do Twoich przypomnień, aby dodać przypomnienie o wygaśnięciu certyfikatu. Uprawnienia możesz zmienić w aplikacji Ustawienia."
+        case .French:
+            return "TLS Inspector nécessite l’autorisation d’accéder à vos rappels pour ajouter un rappel d’expiration de certificat. Vous pouvez modifier ces autorisations depuis l’application Réglages."
         }
     }
     // key: whatDoesThisMean::badAuthority
@@ -2610,6 +2952,8 @@ public final class Localize {
             return "This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority."
         case .Polish:
             return "Oznacza to, że certyfikat przedstawiony przez zdalny serwer został wystawiony przez znanego, niegodnego zaufania i niebezpiecznego wystawcę lub urząd."
+        case .French:
+            return "Cela signifie que le certificat présenté par le serveur distant a été émis par une autorité ou un émetteur connu pour être non fiable et dangereux."
         }
     }
     // key: whatDoesThisMean::invalidDate
@@ -2625,6 +2969,8 @@ public final class Localize {
             return "This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range."
         case .Polish:
             return "Oznacza to, że certyfikat używany przez zdalny host jest poza swoim okresem ważności. Wszystkie certyfikaty muszą mieć zakres dat, w których są ważne, a ten certyfikat jest obecnie poza tym zakresem."
+        case .French:
+            return "Cela signifie que le certificat utilisé par l’hôte distant est en dehors de sa période de validité. Tous les certificats doivent avoir une période de validité définie par une plage de dates, et ce certificat est actuellement en dehors de cette période."
         }
     }
     // key: whatDoesThisMean::issueDateTooLong
@@ -2640,6 +2986,8 @@ public final class Localize {
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .Polish:
             return "Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny serwer jest nieprawidłowy.\n\nDokładniej: okres ważności jednego z certyfikatów jest zbyt długi. Wszystkie certyfikaty internetowe muszą określać zakres dat, w których są ważne, a Twoje urządzenie ustala maksymalny dopuszczalny zakres. Ten certyfikat przekracza ten limit."
+        case .French:
+            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\Plus précisément, la durée de vie de l’un des certificats est trop longue. Tous les certificats Internet doivent avoir une plage de dates de validité, et votre appareil impose une durée maximale à cette plage. Ce certificat dépasse cette durée maximale."
         }
     }
     // key: whatDoesThisMean::leafMissingRequiredKeyUsage
@@ -2655,6 +3003,8 @@ public final class Localize {
             return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
         case .Polish:
             return "Oznacza to, że certyfikat przedstawiony przez zdalny serwer jest nieprawidłowy.\n\nDokładniej: brakuje w nim wymaganych informacji o tym, do czego certyfikat może być używany. Certyfikaty internetowe mogą być używane tylko do określonych zadań, a w tym certyfikacie brakuje wymaganych zastosowań."
+        case .French:
+            return "Cela signifie que le certificat du serveur distant est invalide.\n\Plus précisément, il manque des informations requises indiquant les usages autorisés de ce certificat. Les certificats Internet ne peuvent être utilisés que pour des tâches spécifiques, et ce certificat ne contient pas les usages requis autorisés."
         }
     }
     // key: whatDoesThisMean::locallyTrusted
@@ -2670,6 +3020,8 @@ public final class Localize {
             return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
         case .Polish:
             return "Oznacza to, że Twoje urządzenie zostało skonfigurowane tak, aby ufać temu połączeniu, mimo że normalnie by tego nie zrobiło.\n\nUrządzenia firmowe lub korporacyjne mogą używać takich certyfikatów dla wewnętrznych lub prywatnych stron, ale może to też wskazywać na naruszenie bezpieczeństwa urządzenia lub sieci."
+        case .French:
+            return "Cela signifie que votre appareil a été configuré pour faire confiance à cette connexion, alors qu’il ne l’aurait pas fait normalement.\n\Les appareils d’entreprise peuvent utiliser ces certificats pour des sites internes ou privés, mais cela peut aussi indiquer qu’un appareil ou un réseau est compromis."
         }
     }
     // key: whatDoesThisMean::revokedIntermediate
@@ -2685,6 +3037,8 @@ public final class Localize {
             return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
         case .Polish:
             return "Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host został oznaczony jako „unieważniony”. Certyfikaty są unieważniane, gdy z różnych powodów nie można im już ufać."
+        case .French:
+            return "Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant ont été révoqués. Un certificat est révoqué lorsqu’il n’est plus digne de confiance, pour plusieurs raisons."
         }
     }
     // key: whatDoesThisMean::revokedLeaf
@@ -2700,6 +3054,8 @@ public final class Localize {
             return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
         case .Polish:
             return "Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host został oznaczony jako „unieważniony”. Certyfikaty są unieważniane, gdy z różnych powodów nie można im już ufać."
+        case .French:
+            return "Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant ont été révoqués. Un certificat est révoqué lorsqu’il n’est plus digne de confiance, pour plusieurs raisons."
         }
     }
     // key: whatDoesThisMean::selfSigned
@@ -2715,6 +3071,8 @@ public final class Localize {
             return "This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities."
         case .Polish:
             return "Oznacza to, że certyfikaty przedstawione przez zdalny host nie zostały wystawione przez zaufany urząd certyfikacji. Urządzenie ufa certyfikatom internetowym tylko wtedy, gdy zostały wydane przez odpowiedzialne i renomowane urzędy."
+        case .French:
+            return "Cela signifie que les certificats présentés par l’hôte distant n’ont pas été émis par une autorité de certification de confiance. Votre appareil ne fait confiance aux certificats Internet que s’ils ont été émis par des autorités responsables et réputées."
         }
     }
     // key: whatDoesThisMean::sha1Intermediate
@@ -2730,6 +3088,8 @@ public final class Localize {
             return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
         case .Polish:
             return "Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host używa algorytmu SHA-1. Algorytm ten był powszechnie używany, ale okazał się podatny na ataki i nie jest już uznawany za bezpieczny."
+        case .French:
+            return "Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant utilisent l’algorithme SHA-1. Bien que cet algorithme ait été très répandu, il est désormais considéré comme vulnérable et n’est plus jugé sécurisé."
         }
     }
     // key: whatDoesThisMean::sha1Leaf
@@ -2745,6 +3105,8 @@ public final class Localize {
             return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
         case .Polish:
             return "Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host używa algorytmu SHA-1. Algorytm ten był powszechnie używany, ale okazał się podatny na ataki i nie jest już uznawany za bezpieczny."
+        case .French:
+            return "Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant utilisent l’algorithme SHA-1. Bien que cet algorithme ait été très répandu, il est désormais considéré comme vulnérable et n’est plus jugé sécurisé."
         }
     }
     // key: whatDoesThisMean::trusted
@@ -2760,6 +3122,8 @@ public final class Localize {
             return "This means that your device was able to establish a secure and trusted connection to the host."
         case .Polish:
             return "Oznacza to, że Twoje urządzenie mogło nawiązać bezpieczne i zaufane połączenie z hostem."
+        case .French:
+            return "Cela signifie que votre appareil a réussi à établir une connexion sécurisée et fiable avec l’hôte."
         }
     }
     // key: whatDoesThisMean::unknownCriticalExtension
@@ -2775,6 +3139,8 @@ public final class Localize {
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
         case .Polish:
             return "Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny serwer jest nieprawidłowy.\n\nDokładniej: zawiera informacje nieznane TLS Inspector, ale oznaczone jako krytyczne. W takim przypadku certyfikat nie może zostać uznany za zaufany, ponieważ TLS Inspector nie może przetworzyć informacji oznaczonych jako krytyczne."
+        case .French:
+            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\Plus précisément, ils contiennent des informations que TLS Inspector ne connaît pas, mais qui sont marquées comme critiques. Dans le cas présent, le certificat ne peut pas être considéré comme digne de confiance, car TLS Inspector ne peut pas traiter les informations marquées comme critiques."
         }
     }
     // key: whatDoesThisMean::untrusted
@@ -2790,6 +3156,8 @@ public final class Localize {
             return "This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host."
         case .Polish:
             return "Oznacza to, że Twoje urządzenie nie mogło nawiązać bezpiecznego połączenia albo nie miało pewności co do tożsamości zdalnego hosta."
+        case .French:
+            return "Cela signifie que votre appareil n’a pas réussi à établir une connexion sécurisée, ou n’a pas été en mesure de faire confiance à l’identité de l’hôte distant."
         }
     }
     // key: whatDoesThisMean::weakRSAKey
@@ -2805,6 +3173,8 @@ public final class Localize {
             return "This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection."
         case .Polish:
             return "Oznacza to, że co najmniej jeden certyfikat przedstawiony przez zdalny host używa słabej kryptografii. Twoje urządzenie musi móc nawiązać bezpieczne połączenie ze zdalnym hostem, ale zdalny host zażądał użycia niebezpiecznych ustawień."
+        case .French:
+            return "Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant utilisent un chiffrement faible. Votre appareil doit pouvoir établir une connexion sécurisée avec l’hôte distant, mais celui-ci a demandé à votre appareil d’utiliser des paramètres non sécurisés pour cette connexion."
         }
     }
     // key: whatDoesThisMean::wrongHost
@@ -2820,6 +3190,8 @@ public final class Localize {
             return "This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to."
         case .Polish:
             return "Oznacza to, że certyfikat użyty przez zdalny host nie jest przeznaczony dla hosta, z którym się połączono. Certyfikaty internetowe dotyczą tylko konkretnych nazw domen lub adresów IP, a ten certyfikat nie zawiera wartości pasujących do hosta, z którym się połączono."
+        case .French:
+            return "Cela signifie que le certificat utilisé par l’hôte distant n’est pas destiné à l’hôte vers lequel vous vous êtes connecté. Les certificats Internet ne sont valables que pour des noms de domaine ou des adresses IP spécifiques, et ce certificat ne contient aucune valeur correspondant à l’hôte auquel vous êtes connecté."
         }
     }
     // key: {number_not_1} days
@@ -2835,6 +3207,8 @@ public final class Localize {
             return "\(number_not_1) days"
         case .Polish:
             return "\(number_not_1) dni"
+        case .French:
+            return "\(number_not_1) jours"
         }
     }
     // key: {number_not_1} hours
@@ -2850,6 +3224,8 @@ public final class Localize {
             return "\(number_not_1) hours"
         case .Polish:
             return "\(number_not_1) godzin"
+        case .French:
+            return "\(number_not_1) heures"
         }
     }
     // key: {number_not_1} minutes
@@ -2865,6 +3241,8 @@ public final class Localize {
             return "\(number_not_1) minutes"
         case .Polish:
             return "\(number_not_1) minut"
+        case .French:
+            return "\(number_not_1) minutes"
         }
     }
     // key: {number_not_1} months
@@ -2880,6 +3258,8 @@ public final class Localize {
             return "\(number_not_1) months"
         case .Polish:
             return "\(number_not_1) miesięcy"
+        case .French:
+            return "\(number_not_1) mois"
         }
     }
     // key: {number_not_1} weeks
@@ -2895,6 +3275,8 @@ public final class Localize {
             return "\(number_not_1) weeks"
         case .Polish:
             return "\(number_not_1) tygodni"
+        case .French:
+            return "\(number_not_1) semaines"
         }
     }
     // key: {number_not_1} years
@@ -2910,6 +3292,8 @@ public final class Localize {
             return "\(number_not_1) years"
         case .Polish:
             return "\(number_not_1) lat"
+        case .French:
+            return "\(number_not_1) années"
         }
     }
     // key: {percent}% complete
@@ -2925,6 +3309,8 @@ public final class Localize {
             return "\(percent)% voltooid"
         case .Polish:
             return "\(percent)% ukończenia"
+        case .French:
+            return "\(percent)% achevé"
         }
     }
 }

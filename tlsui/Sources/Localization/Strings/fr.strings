@@ -116,7 +116,8 @@ Query OCSP Responder	Interroger le service OCSP
 Quick Exit	Quitter rapidement
 Rate in App Store	Laisser une note dans l'App Store
 Recent Lookups	Requêtes récentes
-Remember Recent Se souvenir des dernières requêtes	
+# TODO
+Remember Recent Lookups	Remember Recent Lookups
 Reminder Added	Rappel ajouté
 Remote Address	Adresse distante
 Renew Certificate '{domain}'	Renouveler le certificat '{0}'
@@ -145,7 +146,8 @@ Status Providers	Fournisseurs de statut
 Subject	Sujet
 TLS Inspector	TLS Inspector
 Target	Cible
-The certificate '{domain}' expire le {date}	Le certificat '{0}' expire le {1}
+# TODO
+The certificate '{domain}' expires on {date}	The certificate '{0}' expires on {1}
 Timeout	Délai d'attente
 Timestamp	Horodatage
 Timestamps	Horodatages
