@@ -17,14 +17,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 
-# Two-letter ISO code for language
+# Two-letter ISO code for language.
+# Leave english as the first but sort the rest alphabetically.
 languages = [
     "en",
-    "es",
     "de",
+    "es",
+    "fr",
     "nl",
     "pl",
-    "fr",
 ]
 
 # Language name (in English) - Must be a single word with no symbols
