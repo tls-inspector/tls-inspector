@@ -10,11 +10,11 @@ Add reminder for certificate expiry	Dodaj przypomnienie o wygaśnięciu certyfik
 Advanced Options	Opcje zaawansowane
 AdvancedSettingsNag	Te opcje służą do zaawansowanej analizy i rozwiązywania problemów. Użycie nieprawidłowych wartości może uniemożliwić poprawne działanie TLS Inspector.
 Algorithm	Algorytm
-Allowed ciphers	Dozwolone szyfry
+Allowed ciphers	Dozwolone szyfrowanie
 Alternate Names	Nazwy alternatywne
 App Icon	Ikona aplikacji
 App Language	Język aplikacji
-AppIconFooter	Flaga Progress Pride została stworzona przez Daniela Quasara i jest licencjonowana na Creative Commons BY-NC-SA. Flaga trans została stworzona przez Monicę Helms i przekazana do domeny publicznej.
+AppIconFooter	Ikona Pride została stworzona przez Daniela Quasara i jest licencjonowana na Creative Commons BY-NC-SA. Ikona trans została stworzona przez Monicę Helms i przekazana do domeny publicznej.
 Apple	Apple
 Authority	Urząd
 Auto	Automatycznie
@@ -36,7 +36,7 @@ Connection Information	Informacje o połączeniu
 Contribute to TLS Inspector	Wspieraj TLS Inspector
 Country	Kraj
 DNS Name	Nazwa DNS
-Danger	Niebezpieczeństwo
+Danger	Niebezpieczne
 Dangerous & Unsafe	Niebezpieczne i niepewne
 Dismiss	Zamknij
 Domain Name or IP Address	Nazwa domeny lub adres IP
@@ -115,8 +115,8 @@ Public Key	Klucz publiczny
 Query OCSP Responder	Zapytaj responder OCSP
 Quick Exit	Szybkie wyjście
 Rate in App Store	Oceń w App Store
-Recent Lookups	Ostatnie sprawdzenia
-Remember Recent Lookups	Zapamiętuj ostatnie sprawdzenia
+Recent Lookups	Ostatnio sprawdzono
+Remember Recent Lookups	Zapamiętuj ostatnio sprawdzone
 Reminder Added	Przypomnienie dodane
 Remote Address	Adres zdalny
 Renew Certificate '{domain}'	Odnów certyfikat „{0}”
@@ -128,7 +128,7 @@ Root CA Certificates	Główne certyfikaty CA
 RootCABundleAbout	TLS Inspector używa głównych certyfikatów CA obecnych na Twoim urządzeniu oraz certyfikatów od zaufanych dostawców, aby podejmować decyzje o zaufaniu z wysoką pewnością. Aktualizacje pakietów certyfikatów są rzadkie, a kopia jest dołączona do TLS Inspector.
 RootCALicenseFooter	Apple, Google, Microsoft i Mozilla są zastrzeżonymi znakami towarowymi należącymi do ich właścicieli. TLS Inspector nie jest powiązany ani wspierany przez żadną stronę trzecią, w tym między innymi wymienione podmioty.
 Search on {website}	Szukaj w {0}
-Seconds	Sekundy
+Seconds	Sekund
 Security HTTP Headers	Nagłówki bezpieczeństwa HTTP
 Sent by server	Wysłane przez serwer
 Serial Number	Numer seryjny
@@ -191,4 +191,4 @@ whatDoesThisMean::wrongHost	Oznacza to, że certyfikat użyty przez zdalny host 
 {number_not_1} months	{0} miesięcy
 {number_not_1} weeks	{0} tygodni
 {number_not_1} years	{0} lat
-{percent}% complete	{0}% ukończenia
+{percent}% complete	Ukończono {0}%
