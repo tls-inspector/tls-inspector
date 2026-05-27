@@ -265,7 +265,7 @@ public final class Localize {
         case .Dutch:
             return "Allowed ciphers"
         case .Polish:
-            return "Dozwolone szyfry"
+            return "Dozwolone szyfrowanie"
         }
     }
     // key: Alternate Names
@@ -333,7 +333,7 @@ public final class Localize {
         case .Dutch:
             return "De \"Progress\" pride vlag is gemaakt door Daniel Quasar en is gelicenseerd onder Create Commons BY-NC-SA. De trans vlag is gemaakt door Monica Helms en gepubliceerd als public domain."
         case .Polish:
-            return "Flaga Progress Pride została stworzona przez Daniela Quasara i jest licencjonowana na Creative Commons BY-NC-SA. Flaga trans została stworzona przez Monicę Helms i przekazana do domeny publicznej."
+            return "Ikona Pride została stworzona przez Daniela Quasara i jest licencjonowana na Creative Commons BY-NC-SA. Ikona trans została stworzona przez Monicę Helms i przekazana do domeny publicznej."
         }
     }
     // key: Apple
@@ -707,7 +707,7 @@ public final class Localize {
         case .Dutch:
             return "Gevaar"
         case .Polish:
-            return "Niebezpieczeństwo"
+            return "Niebezpieczne"
         }
     }
     // key: Dangerous & Unsafe
@@ -2050,7 +2050,7 @@ public final class Localize {
         case .Dutch:
             return "Recente Opdrachten"
         case .Polish:
-            return "Ostatnie sprawdzenia"
+            return "Ostatnio sprawdzono"
         }
     }
     // key: Remember Recent Lookups
@@ -2067,7 +2067,7 @@ public final class Localize {
         case .Dutch:
             return "Onthoud Recente Opdrachten"
         case .Polish:
-            return "Zapamiętuj ostatnie sprawdzenia"
+            return "Zapamiętuj ostatnio sprawdzone"
         }
     }
     // key: Reminder Added
@@ -2271,7 +2271,7 @@ public final class Localize {
         case .Dutch:
             return "Seconds"
         case .Polish:
-            return "Sekundy"
+            return "Sekund"
         }
     }
     // key: Security HTTP Headers
@@ -3342,7 +3342,7 @@ public final class Localize {
         case .Dutch:
             return "\(percent)% voltooid"
         case .Polish:
-            return "\(percent)% ukończenia"
+            return "Ukończono \(percent)%"
         }
     }
 }
