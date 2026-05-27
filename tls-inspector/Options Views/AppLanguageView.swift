@@ -51,7 +51,7 @@ struct AppLanguageView: View {
                 }
             } footer: {
                 // This is intentionally not localized
-                Text("Interested in helping translate TLS Inspector? We've love to hear from you! Get in touch using the links on the About page.")
+                Text("• Spanish translation by Kevin López Brante\n• German translation by David Czihak\n• Dutch translation by Erik van Straten\n• Polish translation by Github user @marcinmajsc\n• French translation by Github user @nmhuy\n\nInterested in helping translate TLS Inspector? We've love to hear from you! Get in touch using the links on the About page.")
             }
         }
         .navigationTitle(Localize.applanguage())

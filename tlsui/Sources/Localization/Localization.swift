@@ -3015,7 +3015,7 @@ public final class Localize {
         case .Spanish:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .French:
-            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\Plus précisément, la durée de vie de l’un des certificats est trop longue. Tous les certificats Internet doivent avoir une plage de dates de validité, et votre appareil impose une durée maximale à cette plage. Ce certificat dépasse cette durée maximale."
+            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\nPlus précisément, la durée de vie de l’un des certificats est trop longue. Tous les certificats Internet doivent avoir une plage de dates de validité, et votre appareil impose une durée maximale à cette plage. Ce certificat dépasse cette durée maximale."
         case .Dutch:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .Polish:
@@ -3032,7 +3032,7 @@ public final class Localize {
         case .Spanish:
             return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
         case .French:
-            return "Cela signifie que le certificat du serveur distant est invalide.\n\Plus précisément, il manque des informations requises indiquant les usages autorisés de ce certificat. Les certificats Internet ne peuvent être utilisés que pour des tâches spécifiques, et ce certificat ne contient pas les usages requis autorisés."
+            return "Cela signifie que le certificat du serveur distant est invalide.\n\nPlus précisément, il manque des informations requises indiquant les usages autorisés de ce certificat. Les certificats Internet ne peuvent être utilisés que pour des tâches spécifiques, et ce certificat ne contient pas les usages requis autorisés."
         case .Dutch:
             return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
         case .Polish:
@@ -3049,7 +3049,7 @@ public final class Localize {
         case .Spanish:
             return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
         case .French:
-            return "Cela signifie que votre appareil a été configuré pour faire confiance à cette connexion, alors qu’il ne l’aurait pas fait normalement.\n\Les appareils d’entreprise peuvent utiliser ces certificats pour des sites internes ou privés, mais cela peut aussi indiquer qu’un appareil ou un réseau est compromis."
+            return "Cela signifie que votre appareil a été configuré pour faire confiance à cette connexion, alors qu’il ne l’aurait pas fait normalement.\n\nLes appareils d’entreprise peuvent utiliser ces certificats pour des sites internes ou privés, mais cela peut aussi indiquer qu’un appareil ou un réseau est compromis."
         case .Dutch:
             return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
         case .Polish:
@@ -3168,7 +3168,7 @@ public final class Localize {
         case .Spanish:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
         case .French:
-            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\Plus précisément, ils contiennent des informations que TLS Inspector ne connaît pas, mais qui sont marquées comme critiques. Dans le cas présent, le certificat ne peut pas être considéré comme digne de confiance, car TLS Inspector ne peut pas traiter les informations marquées comme critiques."
+            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\nPlus précisément, ils contiennent des informations que TLS Inspector ne connaît pas, mais qui sont marquées comme critiques. Dans le cas présent, le certificat ne peut pas être considéré comme digne de confiance, car TLS Inspector ne peut pas traiter les informations marquées comme critiques."
         case .Dutch:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
         case .Polish:
