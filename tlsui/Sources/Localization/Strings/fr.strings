@@ -39,7 +39,7 @@ DNS Name	Nom DNS
 Danger	Danger
 Dangerous & Unsafe	Dangereux et non sécurisé
 Dismiss	Fermer
-Domain Name or IP Address	Nom de domain ou adresse IP
+Domain Name or IP Address	Nom de domaine ou adresse IP
 Done	Terminé
 Download & Check CRL	Télécharger et vérifier la liste de révocation de certificats (CRL)
 Downloaded	Téléchargé
@@ -117,7 +117,7 @@ Quick Exit	Quitter rapidement
 Rate in App Store	Laisser une note dans l'App Store
 Recent Lookups	Requêtes récentes
 # TODO
-Remember Recent Lookups	Remember Recent Lookups
+Remember Recent Lookups	Se souvenir des requêtes
 Reminder Added	Rappel ajouté
 Remote Address	Adresse distante
 Renew Certificate '{domain}'	Renouveler le certificat '{0}'
@@ -131,10 +131,10 @@ RootCALicenseFooter	Apple, Google, Microsoft et Mozilla sont des marques dépos�
 Search on {website}	Chercher sur {0}
 Seconds	Secondes
 Security HTTP Headers	En-têtes de sécurité HTTP
-Sent by server	Envpyé par le serveur
+Sent by server	Envoyé par le serveur
 Serial Number	Numéro de série
-Share & Feedback	Partager et feedback
-Share TLS Inspector	Partage TLS Inspector
+Share & Feedback	Partage et feedback
+Share TLS Inspector	Partager TLS Inspector
 Show HTTP Headers	Montrer les en-têtes HTTP
 Show certificate on {website}	Afficher le certificat sur {0}
 Signature	Signature
@@ -202,5 +202,5 @@ whatDoesThisMean::wrongHost	Cela signifie que le certificat utilisé par l’hô
 {number_not_1} minutes	{0} minutes
 {number_not_1} months	{0} mois
 {number_not_1} weeks	{0} semaines
-{number_not_1} years	{0} années
+{number_not_1} years	{0} ans
 {percent}% complete	{0}% achevé
