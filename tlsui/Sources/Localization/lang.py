@@ -17,11 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 
-# Two-letter ISO code for language
+# Two-letter ISO code for language.
+# Leave english as the first but sort the rest alphabetically.
 languages = [
     "en",
-    "es",
     "de",
+    "es",
+    "fr",
     "nl",
     "pl",
     "fr",
@@ -270,6 +272,23 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
 
 @MainActor
 public var currentLanguage: SupportedLanguages = .English
+
+@MainActor
+public func updateCurrentLanguageToDeviceLocale() {
+    for lang in Locale.preferredLanguages {
+"""
+        file.write(header)
+
+        for language in languages:
+            file.write("        if lang.hasPrefix(\"" + language + "-\") {\n")
+            file.write("            currentLanguage = ." + languageNameMap[language] + "\n")
+            file.write("            return\n")
+            file.write("        }\n")
+
+        header = """    }
+
+    currentLanguage = .English
+}
 
 @MainActor
 public final class Localize {

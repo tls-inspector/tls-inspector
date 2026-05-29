@@ -73,7 +73,7 @@ async function main() {
     const stringsData = await fs.readFile(process.argv[2], { encoding: 'utf-8' });
     const lines = stringsData.split('\n');
     for (const line of lines) {
-        if (line.startsWith('#') || line === '') {
+        if (line.startsWith('%') || line.startsWith('#') || line === '') {
             continue;
         }
 

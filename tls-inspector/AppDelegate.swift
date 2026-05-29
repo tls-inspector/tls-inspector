@@ -26,27 +26,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         DNSKit.log = DNSKitLoggerBridge.shared
 
         if UserOptions().useSystemLanguage {
-            var didSet = false
-            // Try to find the preferredn language
-            for lang in Locale.preferredLanguages {
-                if lang.hasPrefix("en-") {
-                    currentLanguage = .English
-                    didSet = true
-                } else if lang.hasPrefix("es-") {
-                    currentLanguage = .Spanish
-                    didSet = true
-                } else if lang.hasPrefix("de-") {
-                    currentLanguage = .German
-                    didSet = true
-                } else if lang.hasPrefix("pl-") {
-                    currentLanguage = .Polish
-                    didSet = true
-                }
-            }
-
-            if !didSet {
-                currentLanguage = .English
-            }
+            updateCurrentLanguageToDeviceLocale()
         } else {
             currentLanguage = UserOptions().languageOverride
         }

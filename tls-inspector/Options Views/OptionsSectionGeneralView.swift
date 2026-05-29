@@ -31,12 +31,16 @@ public struct OptionsSectionGeneralView: View {
                 .tint(.accent)
             Toggle(Localize.treatunrecognizedastrusted(), isOn: $userOptions.treatUnrecognizedAsTrusted)
                 .tint(.accent)
-            NavigationLink(Localize.appicon()) {
-                AppIconView()
-            }
-            NavigationLink(Localize.applanguage()) {
+            NavigationLink {
                 AppLanguageView()
                     .environmentObject(userOptions)
+            } label: {
+                Label(Localize.applanguage(), systemImage: "globe")
+            }
+            NavigationLink {
+                AppIconView()
+            } label: {
+                Label(Localize.appicon(), systemImage: "app.badge")
             }
         } header: {
             Text(Localize.general())

@@ -1,319 +1,194 @@
 % Copyright Ian Spence and TLS Inspector Authors
 % Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
-# TODO
-1 day	1 day
-# TODO
-1 hour	1 hour
-# TODO
-1 minute	1 minute
+1 day	1 Tag
+1 hour	1 Stunde
+1 minute	1 Minute
 1 month	1 Monat
-# TODO
-1 year	1 year
+1 year	1 Jahr
 About	Info
-# TODO
-Add reminder for certificate expiry	Add reminder for certificate expiry
+Add reminder for certificate expiry	Erinnerung zum Ablauf des Zertifikats hinzufügen
 Advanced Options	Erweiterte Optionen
-# TODO
-AdvancedSettingsNag	These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly.
+AdvancedSettingsNag	Diese Optionen dienen der erweiterten Analyse und Fehlerbehebung. Die Verwendung ungültiger Werte kann dazu führen, dass TLS Inspector nicht ordnungsgemäß funktioniert.
 Algorithm	Algorithmus
-# TODO
-Allowed ciphers	Allowed ciphers
+Allowed ciphers	Zulässige Verschlüsselungsalgorithmen
 Alternate Names	Alternative Namen
-# TODO
-App Icon	App Icon
-# TODO
-App Language	App Language
-# TODO
-AppIconFooter	The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain.
-# TODO
+App Icon	App Symbol
+App Language	App Sprache
+AppIconFooter	Die Progress-Pride-Flagge wurde von Daniel Quasar entworfen und steht unter der Creative-Commons-Lizenz BY-NC-SA. Die Trans-Flagge wurde von Monica Helms entworfen und der Public Domain zur Verfügung gestellt.
 Apple	Apple
 Authority	Zertifizierungsstelle
 Auto	Auto
 Basic	Einfach
-# TODO
-Bundle date	Bundle date
-# TODO
-Bundles have been updated to their latest versions.	Bundles have been updated to their latest versions.
+Bundle date	Datum des Pakets
+Bundles have been updated to their latest versions.	Die Pakete wurden auf die neuesten Versionen aktualisiert.
 Certificate Authority	Zertifizierungsstelle
 Certificate Status	Zertifikatsstatus
-# TODO
-Certificate Timestamps	Certificate Timestamps
-# TODO
-Certificate Trust	Certificate Trust
-# TODO
-Certificate not trusted	Certificate not trusted
-# TODO
-CertificateStatusFooter	Certificate status checks are used to check if a certificate has been revoked.
+Certificate Timestamps	Zertifikatszeitstempel
+Certificate Trust	Zertifikatsvertrauen
+Certificate not trusted	Zertifikat nicht vertrauenswürdig
+CertificateStatusFooter	Zertifikatsstatusprüfungen werden genutzt, um zu prüfen ob ein Zertifikat widerrufen wurde.
 Certificates	Zertifikate
-# TODO
-Check for updates	Check for updates
-# TODO
-City / Locality	City / Locality
-# TODO
-Clear downloaded bundles	Clear downloaded bundles
-# TODO
-Common Name	Common Name
+Check for updates	Nach Updates suchen
+City / Locality	Stadt / Ort
+Clear downloaded bundles	Heruntergeladene Pakete löschen
+Common Name	Allgemeiner Name
 Connection Information	Verbindungsinformationen
 Contribute to TLS Inspector	Trage zu TLS Inspector bei
-# TODO
-Country	Country
-# TODO
-DNS Name	Alternate Names
-# TODO
-Danger	Danger
-# TODO
-Dangerous & Unsafe	Dangerous & Unsafe
+Country	Land
+DNS Name	DNS Name
+Danger	Gefahr
+Dangerous & Unsafe	Gefährlich & Unsicher
 Dismiss	Verwerfen
 Domain Name or IP Address	Domainname oder IP-Adresse
-# TODO
-Done	Done
+Done	Fertig
 Download & Check CRL	CRL herunterladen & überprüfen
-# TODO
-Downloaded	Downloaded
-# TODO
-Email Address	Alternate Names
-# TODO
-Embedded	Embedded
-# TODO
-Engine Options	Engine Options
-# TODO
-Error	Error
-# TODO
-Error adding reminder	Error adding reminder
+Downloaded	Heruntergeladen
+Email Address	E-mail-Adresse
+Embedded	Eingebettet
+Engine Options	Engine-Optionen
+Error	Fehler
+Error adding reminder	Fehler beim Hinzufügen der Erinnerung
 Expired	Abgelaufen
-# TODO
-Expires In	Expires In
-# TODO
-Export Logs	Export Logs
-# TODO
-Export certificate	Export certificate
-# TODO
-Export certificate chain	Export certificate chain
+Expires In	Läuft ab am
+Export Logs	Logs exportieren
+Export certificate	Zertifikat exportieren
+Export certificate chain	Zertifikatskette exportieren
 Extended	Erweitert
-# TODO
-Extensions	Extensions
+Extensions	Erweiterung
 Fingerprints	Fingerabdrücke
 Follow Us	Folge uns
-Follow us on Bluesky	Folgen Sie uns auf Bluesky
-Follow us on Mastodon	Folgen Sie uns auf Mastodon
-# TODO
-Found on device	Found on device
+Follow us on Bluesky	Folge uns auf Bluesky
+Follow us on Mastodon	Folge uns auf Mastodon
+Found on device	Auf diesem Gerät gefunden
 General	Allgemein
 Get Involved	Mach mit
-# TODO
 Google	Google
 HTTP Headers	HTTP-Header
-# TODO
-IP Address	Alternate Names
-# TODO
-IconDark	Dark
-# TODO
-IconDefault	Default
-# TODO
-IconLight	Light
-# TODO
+IP Address	IP-Adresse
+IconDark	Dunkel
+IconDefault	Standard
+IconLight	Hell
 IconPride	Pride
-# TODO
 IconSkew	Skew
-# TODO
 IconSlate	Slate
-# TODO
 IconTrans	Trans
 If you believe this to be in error, contact support from within the TLS Inspector app.	Wenn du glaubst, es handelt sich um einen Fehler, kontaktiere den Support über die TLS Inspector-App.
-# TODO
-Invalid Certificate	Invalid Certificate
+Invalid Certificate	Zertifikat ungültig
 Issuer	Aussteller
-# TODO
-Key Identifiers	Key Identifiers
-# TODO
-Key Size	Key Size
-Key Usage	Verwendungszweck
-# TODO
-Language Updated	Language Updated
-# TODO
-Learn More	Learn More
-# TODO
-LicenseFooter	TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs).
+Key Identifiers	Schlüsselbezeichner
+Key Size	Schlüsselgröße
+Key Usage	Schlüsselverwendung
+Language Updated	Sprache aktualisiert
+Learn More	Mehr erfahren
+LicenseFooter	TLS Inspector ist freie und quelloffene Software (FLOSS), die unter der GNU General Public License Version 3 (GPLv3) lizenziert ist. Copyright © 2016–2026 Ian Spence und andere Mitwirkende an TLS Inspector. TLS Inspector wurde vollständig ohne den Einsatz von künstlicher Intelligenz (KI) oder großen Sprachmodellen (LLMs) entwickelt.
 Locally Trusted	Lokal vertrauenswürdig
-# TODO
-Log ID	Log ID
-# TODO
-Log Name	Log Name
-# TODO
-Logging & Support	Logging & Support
-# TODO
-LoggingFooter	If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button.
+Log ID	Protokoll ID
+Log Name	Protokoll Name
+Logging & Support	Protokollierung & Support
+LoggingFooter	Sollten Sie ein Problem mit TLS Inspector haben, bitten wir Sie möglicherweise, die Debug-Protokollierung zu aktivieren und uns die Protokolle zu übermitteln, damit wir das Problem besser identifizieren können. Es werden keine personenbezogenen Daten erfasst; bei Aktivierung dieser Funktion werden jedoch die von Ihnen überprüften Hosts erfasst. Wir sammeln diese Protokolle niemals, es sei denn, Sie senden sie uns über die obenstehende Schaltfläche zu.
 Metadata	Metadaten
-# TODO
 Microsoft	Microsoft
-# TODO
-More from the Developer	More from the Developer
-# TODO
+More from the Developer	Mehr von diesem Entwickler
 Mozilla	Mozilla
-Negotiated Ciphersuite	Verhandelte Ciphersuite
-Negotiated Version	Verhandelte Version
+Negotiated Ciphersuite	Ausgehandelte Verschlüsselungssuite
+Negotiated Version	Ausgehandelte Version
 Network Engine	Netzwerk-Engine
-# TODO
-Network Options	Network Options
-# TODO
-NetworkEngineFooter	Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device.
+Network Options	Netzwerk-Optionen
+NetworkEngineFooter	Ein Wechsel der Netzwerk-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als die, die von Ihrem iOS-Gerät verwendet werden.
 No	Nein
 No Supported URL Found	Keine unterstützte URL gefunden
-# TODO
-No updates available at this time.	No updates available at this time.
+No updates available at this time.	Derzeit sind keine Updates verfügbar.
 Not After	Nicht nach
 Not Before	Nicht vor
-# TODO
-Not revoked	Not revoked
+Not revoked	Nicht widerrufen
 Notice	Meldung
-# TODO
-Only HTTPS URLs can be inspected.	Only HTTPS URLs can be inspected.
-# TODO
-Open source licenses & attributions	Open source licenses & attributions
+Only HTTPS URLs can be inspected.	Es können nur HTTPS URLs geprüft werden.
+Open source licenses & attributions	Open-Source-Lizenzen und Quellenangaben
 Options	Optionen
-# TODO
-Organization	Organization
-# TODO
-Organizational Unit	Organizational Unit
-# TODO
-Permission Denied	Permission Denied
-# TODO
-Please wait...	Please wait...
-# TODO
-ProxyDanger	If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible.
-# TODO
-ProxyNotice	An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector.
+Organization	Organisation
+Organizational Unit	Organisationseinheit
+Permission Denied	Berechtigung verweigert
+Please wait...	Bitte warten...
+ProxyDanger	Wenn Sie nicht wissen, was ein HTTPS-Proxy ist oder warum auf Ihrem Gerät einer konfiguriert wurde, wenden Sie sich bitte umgehend an den Apple Support oder eine vertrauenswürdige Person. Vermeiden Sie nach Möglichkeit die Nutzung Ihres Geräts.
+ProxyNotice	Auf Ihrem Gerät ist ein HTTPS-Proxy konfiguriert. TLS Inspector ist nicht mit HTTPS-Proxys kompatibel, sodass die Überprüfung nicht fortgesetzt werden kann. Sie müssen den HTTPS-Proxy in Ihren WLAN-Einstellungen deaktivieren, bevor Sie TLS Inspector nutzen können.
 Public Key	Öffentlicher Schlüssel
 Query OCSP Responder	OCSP-Responder abfragen
-# TODO
-Quick Exit	Quick Exit
+Quick Exit	Schnell verlassen
 Rate in App Store	Im App Store bewerten
 Recent Lookups	Verlauf
 Remember Recent Lookups	Kürzliche Anfragen im Verlauf zeigen
 Reminder Added	Erinnerung hinzugefügt
 Remote Address	Entfernte Adresse
-# TODO
-Renew Certificate '{domain}'	Renew Certificate '{0}'
-# TODO
-Reset to default settings	Reset to default settings
-# TODO
-Review or update the reminder in the Reminders app	Review or update the reminder in the Reminders app
-# TODO
-Revoked: {reason}	Revoked: {0}
-# TODO
-Root	Root
-# TODO
-Root CA Certificates	Root CA Certificates
-# TODO
-RootCABundleAbout	TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector.
-# TODO
-RootCALicenseFooter	Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities.
-# TODO
-Search on {website}	Search on {0}
-# TODO
-Seconds	Seconds
-Security HTTP Headers	HTTP-Sicherheit
-# TODO
-Sent by server	Sent by server
-# TODO
-Serial Number	Serial Number
+Renew Certificate '{domain}'	Zertifikat erneuern '{0}'
+Reset to default settings	Auf Standardeinstellungen zurücksetzen
+Review or update the reminder in the Reminders app	Überprüfen oder aktualisieren Sie die Erinnerung in der Erinnerungs-App
+Revoked: {reason}	Widerrufen: {0}
+Root	Stamm
+Root CA Certificates	Stammzertifikate der Zertifizierungsstelle
+RootCABundleAbout	TLS Inspector nutzt die auf Ihrem Gerät vorhandenen Stammzertifikate der Zertifizierungsstelle sowie Zertifikate vertrauenswürdiger Anbieter, um äußerst zuverlässige Vertrauensentscheidungen zu treffen. Aktualisierungen der Zertifikatspakete erfolgen nur selten und eine Kopie ist im Lieferumfang von TLS Inspector enthalten.
+RootCALicenseFooter	Apple, Google, Microsoft und Mozilla sind eingetragene Marken ihrer jeweiligen Eigentümer. TLS Inspector steht in keiner Verbindung zu Dritten, einschließlich, aber nicht beschränkt auf die oben genannten Unternehmen und wird von diesen nicht unterstützt.
+Search on {website}	Suche auf {0}
+Seconds	Sekunden
+Security HTTP Headers	Sicherheits-HTTP-Header
+Sent by server	Vom Server gesendet
+Serial Number	Seriennummer
 Share & Feedback	Teilen & Feedback
 Share TLS Inspector	Teile TLS Inspector
-Show HTTP Headers	HTTP Header anzeigen
-# TODO
-Show certificate on {website}	Show certificate on {0}
+Show HTTP Headers	HTTP-Header anzeigen
+Show certificate on {website}	Zeritifkat anzeigen auf {0}
 Signature	Signatur
-# TODO
-Signature Type	Signature Type
-# TODO
-Source	Source
-# TODO
-Special	Special
-# TODO
-State / Province	State / Province
+Signature Type	Signatur-Typ
+Source	Quelle
+Special	Spezial
+State / Province	Bundesland / Provinz
 Status Providers	Status-Provider
-Subject	Subjekt
+Subject	Inhaber
 TLS Inspector	TLS Inspector
 Target	Ziel
-# TODO
-The certificate '{domain}' expires on {date}	The certificate '{0}' expires on {1}
-# TODO
-Timeout	Timeout
-# TODO
-Timestamp	Timestamp
-# TODO
-Timestamps	Timestamps
-# TODO
-Treat Unrecognized as Trusted	Treat Unrecognized as Trusted
+The certificate '{domain}' expires on {date}	Das Zertifikat '{0}' läuft ab am {1}
+Timeout	Zeitüberschreitung
+Timestamp	Zeitstempel
+Timestamps	Zeitstempel
+Treat Unrecognized as Trusted	Unbekannt als vertrauenswürdig behandeln
 Trust Details	Vertrauens-Details
 Trusted	Vertrauenswürdig
-# TODO
-URI	Alternate Names
-# TODO
-Unnamed Certificate	Unnamed Certificate
-# TODO
-Unrecognized	Unrecognized
+URI	URI
+Unnamed Certificate	Zertifikat ohne Namen
+Unrecognized	Nicht erkannt
 Untrusted	Nicht vertrauenswürdig
-# TODO
-Use IP version	Use IP version
+Use IP version	IP Version verwenden
 Use system language	Systemsprache verwenden
 Valid For	Gültig für
 Validity Period	Gültigkeitsperiode
-# TODO
-Verbose logging	Verbose logging
+Verbose logging	Ausführliche Debug-Protokollierung
 Verified	Verifiziert
 Version	Version
 View All	Alle anzeigen
 What does this mean?	Was bedeutet das?
 Yes	Ja
-# TODO
-You must restart the app for the change to take effect.	You must restart the app for the change to take effect.
-# TODO
+You must restart the app for the change to take effect.	Sie müssen die App neu starten, damit die Änderung wirksam wird.
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
-# TODO
-guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
-# TODO
-reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
-# TODO
-whatDoesThisMean::badAuthority	This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority.
-# TODO
-whatDoesThisMean::invalidDate	This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.
-# TODO
-whatDoesThisMean::issueDateTooLong	This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range.
-# TODO
-whatDoesThisMean::leafMissingRequiredKeyUsage	This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for.
-# TODO
-whatDoesThisMean::locallyTrusted	This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network.
-# TODO
-whatDoesThisMean::revokedIntermediate	This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
-# TODO
-whatDoesThisMean::revokedLeaf	This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons.
-# TODO
-whatDoesThisMean::selfSigned	This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities.
-# TODO
-whatDoesThisMean::sha1Intermediate	This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
-# TODO
-whatDoesThisMean::sha1Leaf	This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure.
-# TODO
-whatDoesThisMean::trusted	This means that your device was able to establish a secure and trusted connection to the host.
-# TODO
-whatDoesThisMean::unknownCriticalExtension	This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical.
-# TODO
-whatDoesThisMean::untrusted	This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host.
-# TODO
-whatDoesThisMean::weakRSAKey	This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection.
-# TODO
-whatDoesThisMean::wrongHost	This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to.
-# TODO
-{number_not_1} days	{0} days
-# TODO
-{number_not_1} hours	{0} hours
-# TODO
-{number_not_1} minutes	{0} minutes
-# TODO
-{number_not_1} months	{0} months
-# TODO
-{number_not_1} weeks	{0} weeks
-# TODO
-{number_not_1} years	{0} years
+guidance_warning	Wenn diese Warnung angezeigt wird, während Sie die Website für soziale Medien, Bankgeschäfte oder private E-Mails aufrufen, ist die Sicherheit Ihres Geräts möglicherweise gefährdet. Verwenden Sie Ihr Gerät nach Möglichkeit nicht weiter und wenden Sie sich umgehend an den Apple Support oder eine vertrauenswürdige Person
+reminder_permission_message	TLS Inspector benötigt Zugriff auf Ihre Erinnerungen, um eine Erinnerung zum Ablauf von Zertifikaten hinzuzufügen. Sie können die Berechtigungen in der App „Einstellungen“ anpassen.
+whatDoesThisMean::badAuthority	Das bedeutet, dass das vom entfernten Server vorgelegte Zertifikat von einer als unzuverlässig und gefährlich bekannten Zertifizierungsstelle oder Instanz ausgestellt wurde.
+whatDoesThisMean::invalidDate	Das bedeutet, dass das vom entfernten Server verwendete Zertifikat nicht mehr gültig ist. Alle Zertifikate müssen einen Gültigkeitszeitraum aufweisen und dieses Zertifikat liegt derzeit außerhalb dieses Zeitraums.
+whatDoesThisMean::issueDateTooLong	Das bedeutet, dass ein oder mehrere vom entfernten Server vorgelegte Zertifikate ungültig sind.\n\nKonkret hat ein Zertifikat eine zu lange Gültigkeitsdauer. Alle Internet-Zertifikate müssen einen Gültigkeitszeitraum definieren und Ihr Gerät hat für diesen Zeitraum ein Maximum festgelegt. Dieses Zertifikat überschreitet diesen maximalen Zeitraum.
+whatDoesThisMean::leafMissingRequiredKeyUsage	Das bedeutet, dass das vom entfernten Server vorgelegte Zertifikat ungültig ist.\n\nKonkret fehlen erforderliche Angaben dazu, wofür dieses Zertifikat verwendet werden darf. Internet-Zertifikate können nur für bestimmte Aufgaben verwendet werden und bei diesem Zertifikat fehlen die erforderlichen Angaben zu den zulässigen Verwendungszwecken.
+whatDoesThisMean::locallyTrusted	Das bedeutet, dass Ihr Gerät so konfiguriert wurde, dass es dieser Verbindung vertraut, obwohl es dies unter normalen Umständen nicht tun würde.\n\nGeräte in Unternehmen oder Konzernen verwenden solche Zertifikate möglicherweise für interne oder private Websites, sie können jedoch auch ein Hinweis auf ein kompromittiertes Gerät oder Netzwerk sein.
+whatDoesThisMean::revokedIntermediate	Das bedeutet, dass ein oder mehrere vom entfernten Server vorgelegte Zertifikate als „widerrufen“ markiert wurden. Zertifikate werden widerrufen, wenn sie aus verschiedenen Gründen nicht mehr als vertrauenswürdig gelten.
+whatDoesThisMean::revokedLeaf	Das bedeutet, dass ein oder mehrere vom entfernten Server vorgelegte Zertifikate als „widerrufen“ markiert wurden. Zertifikate werden widerrufen, wenn sie aus verschiedenen Gründen nicht mehr als vertrauenswürdig gelten.
+whatDoesThisMean::selfSigned	Das bedeutet, dass die vom entfernten Server vorgelegten Zertifikate nicht von einer vertrauenswürdigen Zertifizierungsstelle ausgestellt wurden. Internet-Zertifikate werden von Ihrem Gerät nur dann als vertrauenswürdig eingestuft, wenn sie von verantwortungsbewussten und seriösen Zertifizierungsstellen ausgestellt wurden.
+whatDoesThisMean::sha1Intermediate	Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate den SHA-1-Algorithmus verwenden. Dieser Algorithmus war weit verbreitet, hat sich jedoch als anfällig erwiesen und gilt nicht mehr als sicher.
+whatDoesThisMean::sha1Leaf	Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate den SHA-1-Algorithmus verwenden. Dieser Algorithmus war weit verbreitet, hat sich jedoch als anfällig erwiesen und gilt nicht mehr als sicher.
+whatDoesThisMean::trusted	Das bedeutet, dass Ihr Gerät eine sichere und vertrauenswürdige Verbindung zum Host herstellen konnte.
+whatDoesThisMean::unknownCriticalExtension	Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate ungültig sind.\n\nKonkret enthalten sie Informationen, die TLS Inspector unbekannt sind, aber als kritisch markiert wurden. In diesem Fall kann dem Zertifikat nicht vertraut werden, da TLS Inspector Informationen, die als kritisch markiert wurden, nicht verarbeiten kann.
+whatDoesThisMean::untrusted	Das bedeutet, dass Ihr Gerät keine sichere Verbindung herstellen konnte oder die Identität des entfernten Hosts nicht als vertrauenswürdig eingestuft hat.
+whatDoesThisMean::weakRSAKey	Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate eine schwache Verschlüsselung verwenden. Ihr Gerät muss in der Lage sein, eine sichere Verbindung zum entfernten Server herzustellen, doch der entfernte Server hat verlangt, dass Ihr Gerät für diese Verbindung unsichere Einstellungen verwendet.
+whatDoesThisMean::wrongHost	Das bedeutet, dass das vom entfernten Server verwendete Zertifikat nicht für den Host bestimmt ist, mit dem Sie eine Verbindung hergestellt haben. Internet-Zertifikate gelten nur für bestimmte Domainnamen oder IP-Adressen und dieses Zertifikat enthält keine Angaben, die mit dem Host übereinstimmen, mit dem Sie eine Verbindung hergestellt haben.
+{number_not_1} days	{0} Tage
+{number_not_1} hours	{0} Stunden
+{number_not_1} minutes	{0} Minuten
+{number_not_1} months	{0} Monate
+{number_not_1} weeks	{0} Wochen
+{number_not_1} years	{0} Jahre
 {percent}% complete	{0}% fertig
