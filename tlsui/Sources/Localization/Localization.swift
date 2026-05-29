@@ -35,7 +35,7 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
     public var percentTranslated: Int {
         switch self {
         case .English: return 100
-        case .German: return 34
+        case .German: return 100
         case .Spanish: return 42
         case .French: return 98
         case .Dutch: return 43
@@ -87,7 +87,7 @@ public final class Localize {
         case .English:
             return "1 day"
         case .German:
-            return "1 day"
+            return "1 Tag"
         case .Spanish:
             return "1 day"
         case .French:
@@ -104,7 +104,7 @@ public final class Localize {
         case .English:
             return "1 hour"
         case .German:
-            return "1 hour"
+            return "1 Stunde"
         case .Spanish:
             return "1 hour"
         case .French:
@@ -121,7 +121,7 @@ public final class Localize {
         case .English:
             return "1 minute"
         case .German:
-            return "1 minute"
+            return "1 Minute"
         case .Spanish:
             return "1 minute"
         case .French:
@@ -155,7 +155,7 @@ public final class Localize {
         case .English:
             return "1 year"
         case .German:
-            return "1 year"
+            return "1 Jahr"
         case .Spanish:
             return "1 year"
         case .French:
@@ -189,7 +189,7 @@ public final class Localize {
         case .English:
             return "Add reminder for certificate expiry"
         case .German:
-            return "Add reminder for certificate expiry"
+            return "Erinnerung zum Ablauf des Zertifikats hinzufügen"
         case .Spanish:
             return "Add reminder for certificate expiry"
         case .French:
@@ -223,7 +223,7 @@ public final class Localize {
         case .English:
             return "These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly."
         case .German:
-            return "These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly."
+            return "Diese Optionen dienen der erweiterten Analyse und Fehlerbehebung. Die Verwendung ungültiger Werte kann dazu führen, dass TLS Inspector nicht ordnungsgemäß funktioniert."
         case .Spanish:
             return "These options are for advanced investigation and troubleshooting. Using invalid values can prevent TLS Inspector from working correctly."
         case .French:
@@ -257,7 +257,7 @@ public final class Localize {
         case .English:
             return "Allowed ciphers"
         case .German:
-            return "Allowed ciphers"
+            return "Zulässige Verschlüsselungsalgorithmen"
         case .Spanish:
             return "Allowed ciphers"
         case .French:
@@ -291,7 +291,7 @@ public final class Localize {
         case .English:
             return "App Icon"
         case .German:
-            return "App Icon"
+            return "App Symbol"
         case .Spanish:
             return "App Icon"
         case .French:
@@ -308,7 +308,7 @@ public final class Localize {
         case .English:
             return "App Language"
         case .German:
-            return "App Language"
+            return "App Sprache"
         case .Spanish:
             return "App Language"
         case .French:
@@ -325,7 +325,7 @@ public final class Localize {
         case .English:
             return "The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain."
         case .German:
-            return "The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain."
+            return "Die Progress-Pride-Flagge wurde von Daniel Quasar entworfen und steht unter der Creative-Commons-Lizenz BY-NC-SA. Die Trans-Flagge wurde von Monica Helms entworfen und der Public Domain zur Verfügung gestellt."
         case .Spanish:
             return "The Progress pride flag was created by Daniel Quasar and is licensed under Creative Commons BY-NC-SA. The trans flag was created by Monica Helms and was released to the public domain."
         case .French:
@@ -410,7 +410,7 @@ public final class Localize {
         case .English:
             return "Bundle date"
         case .German:
-            return "Bundle date"
+            return "Datum des Pakets"
         case .Spanish:
             return "Bundle date"
         case .French:
@@ -427,7 +427,7 @@ public final class Localize {
         case .English:
             return "Bundles have been updated to their latest versions."
         case .German:
-            return "Bundles have been updated to their latest versions."
+            return "Die Pakete wurden auf die neuesten Versionen aktualisiert."
         case .Spanish:
             return "Bundles have been updated to their latest versions."
         case .French:
@@ -478,7 +478,7 @@ public final class Localize {
         case .English:
             return "Certificate Timestamps"
         case .German:
-            return "Certificate Timestamps"
+            return "Zertifikatszeitstempel"
         case .Spanish:
             return "Marcas de tiempo del certificado"
         case .French:
@@ -495,7 +495,7 @@ public final class Localize {
         case .English:
             return "Certificate Trust"
         case .German:
-            return "Certificate Trust"
+            return "Zertifikatsvertrauen"
         case .Spanish:
             return "Confianza en el certificado"
         case .French:
@@ -512,7 +512,7 @@ public final class Localize {
         case .English:
             return "Certificate not trusted"
         case .German:
-            return "Certificate not trusted"
+            return "Zertifikat nicht vertrauenswürdig"
         case .Spanish:
             return "Certificate not trusted"
         case .French:
@@ -529,7 +529,7 @@ public final class Localize {
         case .English:
             return "Certificate status checks are used to check if a certificate has been revoked."
         case .German:
-            return "Certificate status checks are used to check if a certificate has been revoked."
+            return "Zertifikatsstatusprüfungen werden genutzt, um zu prüfen ob ein Zertifikat widerrufen wurde."
         case .Spanish:
             return "Certificate status checks are used to check if a certificate has been revoked."
         case .French:
@@ -563,7 +563,7 @@ public final class Localize {
         case .English:
             return "Check for updates"
         case .German:
-            return "Check for updates"
+            return "Nach Updates suchen"
         case .Spanish:
             return "Buscar actualizaciones"
         case .French:
@@ -580,7 +580,7 @@ public final class Localize {
         case .English:
             return "City / Locality"
         case .German:
-            return "City / Locality"
+            return "Stadt / Ort"
         case .Spanish:
             return "City / Locality"
         case .French:
@@ -597,7 +597,7 @@ public final class Localize {
         case .English:
             return "Clear downloaded bundles"
         case .German:
-            return "Clear downloaded bundles"
+            return "Heruntergeladene Pakete löschen"
         case .Spanish:
             return "Limpiar paquetes descargados"
         case .French:
@@ -614,7 +614,7 @@ public final class Localize {
         case .English:
             return "Common Name"
         case .German:
-            return "Common Name"
+            return "Allgemeiner Name"
         case .Spanish:
             return "Common Name"
         case .French:
@@ -665,7 +665,7 @@ public final class Localize {
         case .English:
             return "Country"
         case .German:
-            return "Country"
+            return "Land"
         case .Spanish:
             return "Country"
         case .French:
@@ -682,7 +682,7 @@ public final class Localize {
         case .English:
             return "DNS Name"
         case .German:
-            return "Alternate Names"
+            return "DNS Name"
         case .Spanish:
             return "Alternate Names"
         case .French:
@@ -699,7 +699,7 @@ public final class Localize {
         case .English:
             return "Danger"
         case .German:
-            return "Danger"
+            return "Gefahr"
         case .Spanish:
             return "Peligro"
         case .French:
@@ -716,7 +716,7 @@ public final class Localize {
         case .English:
             return "Dangerous & Unsafe"
         case .German:
-            return "Dangerous & Unsafe"
+            return "Gefährlich & Unsicher"
         case .Spanish:
             return "Dangerous & Unsafe"
         case .French:
@@ -767,7 +767,7 @@ public final class Localize {
         case .English:
             return "Done"
         case .German:
-            return "Done"
+            return "Fertig"
         case .Spanish:
             return "Done"
         case .French:
@@ -801,7 +801,7 @@ public final class Localize {
         case .English:
             return "Downloaded"
         case .German:
-            return "Downloaded"
+            return "Heruntergeladen"
         case .Spanish:
             return "Downloaded"
         case .French:
@@ -818,7 +818,7 @@ public final class Localize {
         case .English:
             return "Email Address"
         case .German:
-            return "Alternate Names"
+            return "E-mail-Adresse"
         case .Spanish:
             return "Alternate Names"
         case .French:
@@ -835,7 +835,7 @@ public final class Localize {
         case .English:
             return "Embedded"
         case .German:
-            return "Embedded"
+            return "Eingebettet"
         case .Spanish:
             return "Incrustado"
         case .French:
@@ -852,7 +852,7 @@ public final class Localize {
         case .English:
             return "Engine Options"
         case .German:
-            return "Engine Options"
+            return "Engine-Optionen"
         case .Spanish:
             return "Engine Options"
         case .French:
@@ -869,7 +869,7 @@ public final class Localize {
         case .English:
             return "Error"
         case .German:
-            return "Error"
+            return "Fehler"
         case .Spanish:
             return "Error"
         case .French:
@@ -886,7 +886,7 @@ public final class Localize {
         case .English:
             return "Error adding reminder"
         case .German:
-            return "Error adding reminder"
+            return "Fehler beim Hinzufügen der Erinnerung"
         case .Spanish:
             return "Error adding reminder"
         case .French:
@@ -920,7 +920,7 @@ public final class Localize {
         case .English:
             return "Expires In"
         case .German:
-            return "Expires In"
+            return "Läuft ab am"
         case .Spanish:
             return "Expires In"
         case .French:
@@ -937,7 +937,7 @@ public final class Localize {
         case .English:
             return "Export Logs"
         case .German:
-            return "Export Logs"
+            return "Logs exportieren"
         case .Spanish:
             return "Export Logs"
         case .French:
@@ -954,7 +954,7 @@ public final class Localize {
         case .English:
             return "Export certificate"
         case .German:
-            return "Export certificate"
+            return "Zertifikat exportieren"
         case .Spanish:
             return "Export certificate"
         case .French:
@@ -971,7 +971,7 @@ public final class Localize {
         case .English:
             return "Export certificate chain"
         case .German:
-            return "Export certificate chain"
+            return "Zertifikatskette exportieren"
         case .Spanish:
             return "Export certificate chain"
         case .French:
@@ -1005,7 +1005,7 @@ public final class Localize {
         case .English:
             return "Extensions"
         case .German:
-            return "Extensions"
+            return "Erweiterung"
         case .Spanish:
             return "Extensions"
         case .French:
@@ -1056,7 +1056,7 @@ public final class Localize {
         case .English:
             return "Follow us on Bluesky"
         case .German:
-            return "Folgen Sie uns auf Bluesky"
+            return "Folge uns auf Bluesky"
         case .Spanish:
             return "Síguenos en Bluesky"
         case .French:
@@ -1073,7 +1073,7 @@ public final class Localize {
         case .English:
             return "Follow us on Mastodon"
         case .German:
-            return "Folgen Sie uns auf Mastodon"
+            return "Folge uns auf Mastodon"
         case .Spanish:
             return "Síguenos en Mastodon"
         case .French:
@@ -1090,7 +1090,7 @@ public final class Localize {
         case .English:
             return "Found on device"
         case .German:
-            return "Found on device"
+            return "Auf diesem Gerät gefunden"
         case .Spanish:
             return "Found on device"
         case .French:
@@ -1175,7 +1175,7 @@ public final class Localize {
         case .English:
             return "IP Address"
         case .German:
-            return "Alternate Names"
+            return "IP-Adresse"
         case .Spanish:
             return "Alternate Names"
         case .French:
@@ -1192,7 +1192,7 @@ public final class Localize {
         case .English:
             return "Dark"
         case .German:
-            return "Dark"
+            return "Dunkel"
         case .Spanish:
             return "Dark"
         case .French:
@@ -1209,7 +1209,7 @@ public final class Localize {
         case .English:
             return "Default"
         case .German:
-            return "Default"
+            return "Standard"
         case .Spanish:
             return "Default"
         case .French:
@@ -1226,7 +1226,7 @@ public final class Localize {
         case .English:
             return "Light"
         case .German:
-            return "Light"
+            return "Hell"
         case .Spanish:
             return "Light"
         case .French:
@@ -1328,7 +1328,7 @@ public final class Localize {
         case .English:
             return "Invalid Certificate"
         case .German:
-            return "Invalid Certificate"
+            return "Zertifikat ungültig"
         case .Spanish:
             return "Invalid Certificate"
         case .French:
@@ -1362,7 +1362,7 @@ public final class Localize {
         case .English:
             return "Key Identifiers"
         case .German:
-            return "Key Identifiers"
+            return "Schlüsselbezeichner"
         case .Spanish:
             return "Key Identifiers"
         case .French:
@@ -1379,7 +1379,7 @@ public final class Localize {
         case .English:
             return "Key Size"
         case .German:
-            return "Key Size"
+            return "Schlüsselgröße"
         case .Spanish:
             return "Key Size"
         case .French:
@@ -1396,7 +1396,7 @@ public final class Localize {
         case .English:
             return "Key Usage"
         case .German:
-            return "Verwendungszweck"
+            return "Schlüsselverwendung"
         case .Spanish:
             return "Uso de la clave"
         case .French:
@@ -1413,7 +1413,7 @@ public final class Localize {
         case .English:
             return "Language Updated"
         case .German:
-            return "Language Updated"
+            return "Sprache aktualisiert"
         case .Spanish:
             return "Language Updated"
         case .French:
@@ -1430,7 +1430,7 @@ public final class Localize {
         case .English:
             return "Learn More"
         case .German:
-            return "Learn More"
+            return "Mehr erfahren"
         case .Spanish:
             return "Learn More"
         case .French:
@@ -1447,7 +1447,7 @@ public final class Localize {
         case .English:
             return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .German:
-            return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
+            return "TLS Inspector ist freie und quelloffene Software (FLOSS), die unter der GNU General Public License Version 3 (GPLv3) lizenziert ist. Copyright © 2016–2026 Ian Spence und andere Mitwirkende an TLS Inspector. TLS Inspector wurde vollständig ohne den Einsatz von künstlicher Intelligenz (KI) oder großen Sprachmodellen (LLMs) entwickelt."
         case .Spanish:
             return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .French:
@@ -1481,7 +1481,7 @@ public final class Localize {
         case .English:
             return "Log ID"
         case .German:
-            return "Log ID"
+            return "Protokoll ID"
         case .Spanish:
             return "ID del registro"
         case .French:
@@ -1498,7 +1498,7 @@ public final class Localize {
         case .English:
             return "Log Name"
         case .German:
-            return "Log Name"
+            return "Protokoll Name"
         case .Spanish:
             return "Nombre del registro"
         case .French:
@@ -1515,7 +1515,7 @@ public final class Localize {
         case .English:
             return "Logging & Support"
         case .German:
-            return "Logging & Support"
+            return "Protokollierung & Support"
         case .Spanish:
             return "Logging & Support"
         case .French:
@@ -1532,7 +1532,7 @@ public final class Localize {
         case .English:
             return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
         case .German:
-            return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
+            return "Sollten Sie ein Problem mit TLS Inspector haben, bitten wir Sie möglicherweise, die Debug-Protokollierung zu aktivieren und uns die Protokolle zu übermitteln, damit wir das Problem besser identifizieren können. Es werden keine personenbezogenen Daten erfasst; bei Aktivierung dieser Funktion werden jedoch die von Ihnen überprüften Hosts erfasst. Wir sammeln diese Protokolle niemals, es sei denn, Sie senden sie uns über die obenstehende Schaltfläche zu."
         case .Spanish:
             return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
         case .French:
@@ -1583,7 +1583,7 @@ public final class Localize {
         case .English:
             return "More from the Developer"
         case .German:
-            return "More from the Developer"
+            return "Mehr von diesem Entwickler"
         case .Spanish:
             return "More from the Developer"
         case .French:
@@ -1617,7 +1617,7 @@ public final class Localize {
         case .English:
             return "Negotiated Ciphersuite"
         case .German:
-            return "Verhandelte Ciphersuite"
+            return "Ausgehandelte Verschlüsselungssuite"
         case .Spanish:
             return "Conjunto de algoritmos de cifrado negociado"
         case .French:
@@ -1634,7 +1634,7 @@ public final class Localize {
         case .English:
             return "Negotiated Version"
         case .German:
-            return "Verhandelte Version"
+            return "Ausgehandelte Version"
         case .Spanish:
             return "Versión negociada"
         case .French:
@@ -1668,7 +1668,7 @@ public final class Localize {
         case .English:
             return "Network Options"
         case .German:
-            return "Network Options"
+            return "Netzwerk-Optionen"
         case .Spanish:
             return "Network Options"
         case .French:
@@ -1685,7 +1685,7 @@ public final class Localize {
         case .English:
             return "Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device."
         case .German:
-            return "Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device."
+            return "Ein Wechsel der Netzwerk-Engine kann dazu führen, dass TLS Inspector andere Verbindungsinformationen anzeigt als die, die von Ihrem iOS-Gerät verwendet werden."
         case .Spanish:
             return "Changing the network engine may result in TLS Inspector showing different connection information than what is used by your iOS device."
         case .French:
@@ -1736,7 +1736,7 @@ public final class Localize {
         case .English:
             return "No updates available at this time."
         case .German:
-            return "No updates available at this time."
+            return "Derzeit sind keine Updates verfügbar."
         case .Spanish:
             return "No updates available at this time."
         case .French:
@@ -1787,7 +1787,7 @@ public final class Localize {
         case .English:
             return "Not revoked"
         case .German:
-            return "Not revoked"
+            return "Nicht widerrufen"
         case .Spanish:
             return "Not revoked"
         case .French:
@@ -1821,7 +1821,7 @@ public final class Localize {
         case .English:
             return "Only HTTPS URLs can be inspected."
         case .German:
-            return "Only HTTPS URLs can be inspected."
+            return "Es können nur HTTPS URLs geprüft werden."
         case .Spanish:
             return "Only HTTPS URLs can be inspected."
         case .French:
@@ -1838,7 +1838,7 @@ public final class Localize {
         case .English:
             return "Open source licenses & attributions"
         case .German:
-            return "Open source licenses & attributions"
+            return "Open-Source-Lizenzen und Quellenangaben"
         case .Spanish:
             return "Open source licenses & attributions"
         case .French:
@@ -1872,7 +1872,7 @@ public final class Localize {
         case .English:
             return "Organization"
         case .German:
-            return "Organization"
+            return "Organisation"
         case .Spanish:
             return "Organization"
         case .French:
@@ -1889,7 +1889,7 @@ public final class Localize {
         case .English:
             return "Organizational Unit"
         case .German:
-            return "Organizational Unit"
+            return "Organisationseinheit"
         case .Spanish:
             return "Organizational Unit"
         case .French:
@@ -1906,7 +1906,7 @@ public final class Localize {
         case .English:
             return "Permission Denied"
         case .German:
-            return "Permission Denied"
+            return "Berechtigung verweigert"
         case .Spanish:
             return "Permission Denied"
         case .French:
@@ -1923,7 +1923,7 @@ public final class Localize {
         case .English:
             return "Please wait..."
         case .German:
-            return "Please wait..."
+            return "Bitte warten..."
         case .Spanish:
             return "Please wait..."
         case .French:
@@ -1940,7 +1940,7 @@ public final class Localize {
         case .English:
             return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediately. Avoid using your device if possible."
         case .German:
-            return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible."
+            return "Wenn Sie nicht wissen, was ein HTTPS-Proxy ist oder warum auf Ihrem Gerät einer konfiguriert wurde, wenden Sie sich bitte umgehend an den Apple Support oder eine vertrauenswürdige Person. Vermeiden Sie nach Möglichkeit die Nutzung Ihres Geräts."
         case .Spanish:
             return "If you are unfamiliar with what an HTTPS proxy is or why one is configured on your device, seek assistance from Apple Support or a trusted friendly immediatly. Avoid using your device if possible."
         case .French:
@@ -1957,7 +1957,7 @@ public final class Localize {
         case .English:
             return "An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector."
         case .German:
-            return "An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector."
+            return "Auf Ihrem Gerät ist ein HTTPS-Proxy konfiguriert. TLS Inspector ist nicht mit HTTPS-Proxys kompatibel, sodass die Überprüfung nicht fortgesetzt werden kann. Sie müssen den HTTPS-Proxy in Ihren WLAN-Einstellungen deaktivieren, bevor Sie TLS Inspector nutzen können."
         case .Spanish:
             return "An HTTPS proxy is configured on your device. TLS Inspector is not compatible with HTTPS proxies and your inspection cannot proceed. You must disable your HTTPS proxy from your WiFi settings before you can use TLS Inspector."
         case .French:
@@ -2008,7 +2008,7 @@ public final class Localize {
         case .English:
             return "Quick Exit"
         case .German:
-            return "Quick Exit"
+            return "Schnell verlassen"
         case .Spanish:
             return "Quick Exit"
         case .French:
@@ -2110,7 +2110,7 @@ public final class Localize {
         case .English:
             return "Renew Certificate '\(domain)'"
         case .German:
-            return "Renew Certificate '\(domain)'"
+            return "Zertifikat erneuern '\(domain)'"
         case .Spanish:
             return "Renew Certificate '\(domain)'"
         case .French:
@@ -2127,7 +2127,7 @@ public final class Localize {
         case .English:
             return "Reset to default settings"
         case .German:
-            return "Reset to default settings"
+            return "Auf Standardeinstellungen zurücksetzen"
         case .Spanish:
             return "Reset to default settings"
         case .French:
@@ -2144,7 +2144,7 @@ public final class Localize {
         case .English:
             return "Review or update the reminder in the Reminders app"
         case .German:
-            return "Review or update the reminder in the Reminders app"
+            return "Überprüfen oder aktualisieren Sie die Erinnerung in der Erinnerungs-App"
         case .Spanish:
             return "Review or update the reminder in the Reminders app"
         case .French:
@@ -2161,7 +2161,7 @@ public final class Localize {
         case .English:
             return "Revoked: \(reason)"
         case .German:
-            return "Revoked: \(reason)"
+            return "Widerrufen: \(reason)"
         case .Spanish:
             return "Revoked: \(reason)"
         case .French:
@@ -2178,7 +2178,7 @@ public final class Localize {
         case .English:
             return "Root"
         case .German:
-            return "Root"
+            return "Stamm"
         case .Spanish:
             return "Root"
         case .French:
@@ -2195,7 +2195,7 @@ public final class Localize {
         case .English:
             return "Root CA Certificates"
         case .German:
-            return "Root CA Certificates"
+            return "Stammzertifikate der Zertifizierungsstelle"
         case .Spanish:
             return "Certificados de CA raíz"
         case .French:
@@ -2212,7 +2212,7 @@ public final class Localize {
         case .English:
             return "TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector."
         case .German:
-            return "TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector."
+            return "TLS Inspector nutzt die auf Ihrem Gerät vorhandenen Stammzertifikate der Zertifizierungsstelle sowie Zertifikate vertrauenswürdiger Anbieter, um äußerst zuverlässige Vertrauensentscheidungen zu treffen. Aktualisierungen der Zertifikatspakete erfolgen nur selten und eine Kopie ist im Lieferumfang von TLS Inspector enthalten."
         case .Spanish:
             return "TLS Inspector uses the root CA certificates present on your device as well as from trusted vendors to yield high-confidence trust decisions. Updates to certificate bundles are infrequent and a copy is included with TLS Inspector."
         case .French:
@@ -2229,7 +2229,7 @@ public final class Localize {
         case .English:
             return "Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities."
         case .German:
-            return "Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities."
+            return "Apple, Google, Microsoft und Mozilla sind eingetragene Marken ihrer jeweiligen Eigentümer. TLS Inspector steht in keiner Verbindung zu Dritten, einschließlich, aber nicht beschränkt auf die oben genannten Unternehmen und wird von diesen nicht unterstützt."
         case .Spanish:
             return "Apple, Google, Microsoft, and Mozilla are all registered trademarks belonging to their respective owners. TLS Inspector is not affiliated with or endorsed by any third party, including but not limited to the aforementioned entities."
         case .French:
@@ -2246,7 +2246,7 @@ public final class Localize {
         case .English:
             return "Search on \(website)"
         case .German:
-            return "Search on \(website)"
+            return "Suche auf \(website)"
         case .Spanish:
             return "Search on \(website)"
         case .French:
@@ -2263,7 +2263,7 @@ public final class Localize {
         case .English:
             return "Seconds"
         case .German:
-            return "Seconds"
+            return "Sekunden"
         case .Spanish:
             return "Seconds"
         case .French:
@@ -2280,7 +2280,7 @@ public final class Localize {
         case .English:
             return "Security HTTP Headers"
         case .German:
-            return "HTTP-Sicherheit"
+            return "Sicherheits-HTTP-Header"
         case .Spanish:
             return "Encabezados HTTP de seguridad"
         case .French:
@@ -2297,7 +2297,7 @@ public final class Localize {
         case .English:
             return "Sent by server"
         case .German:
-            return "Sent by server"
+            return "Vom Server gesendet"
         case .Spanish:
             return "Sent by server"
         case .French:
@@ -2314,7 +2314,7 @@ public final class Localize {
         case .English:
             return "Serial Number"
         case .German:
-            return "Serial Number"
+            return "Seriennummer"
         case .Spanish:
             return "Serial Number"
         case .French:
@@ -2365,7 +2365,7 @@ public final class Localize {
         case .English:
             return "Show HTTP Headers"
         case .German:
-            return "HTTP Header anzeigen"
+            return "HTTP-Header anzeigen"
         case .Spanish:
             return "Mostrar encabezados HTTP"
         case .French:
@@ -2382,7 +2382,7 @@ public final class Localize {
         case .English:
             return "Show certificate on \(website)"
         case .German:
-            return "Show certificate on \(website)"
+            return "Zeritifkat anzeigen auf \(website)"
         case .Spanish:
             return "Show certificate on \(website)"
         case .French:
@@ -2416,7 +2416,7 @@ public final class Localize {
         case .English:
             return "Signature Type"
         case .German:
-            return "Signature Type"
+            return "Signatur-Typ"
         case .Spanish:
             return "Tipo de firma"
         case .French:
@@ -2433,7 +2433,7 @@ public final class Localize {
         case .English:
             return "Source"
         case .German:
-            return "Source"
+            return "Quelle"
         case .Spanish:
             return "Source"
         case .French:
@@ -2450,7 +2450,7 @@ public final class Localize {
         case .English:
             return "Special"
         case .German:
-            return "Special"
+            return "Spezial"
         case .Spanish:
             return "Special"
         case .French:
@@ -2467,7 +2467,7 @@ public final class Localize {
         case .English:
             return "State / Province"
         case .German:
-            return "State / Province"
+            return "Bundesland / Provinz"
         case .Spanish:
             return "State / Province"
         case .French:
@@ -2501,7 +2501,7 @@ public final class Localize {
         case .English:
             return "Subject"
         case .German:
-            return "Subjekt"
+            return "Inhaber"
         case .Spanish:
             return "Firmante"
         case .French:
@@ -2552,7 +2552,7 @@ public final class Localize {
         case .English:
             return "The certificate '\(domain)' expires on \(date)"
         case .German:
-            return "The certificate '\(domain)' expires on \(date)"
+            return "Das Zertifikat '\(domain)' läuft ab am \(date)"
         case .Spanish:
             return "The certificate '\(domain)' expires on \(date)"
         case .French:
@@ -2569,7 +2569,7 @@ public final class Localize {
         case .English:
             return "Timeout"
         case .German:
-            return "Timeout"
+            return "Zeitüberschreitung"
         case .Spanish:
             return "Timeout"
         case .French:
@@ -2586,7 +2586,7 @@ public final class Localize {
         case .English:
             return "Timestamp"
         case .German:
-            return "Timestamp"
+            return "Zeitstempel"
         case .Spanish:
             return "Marca de tiempo"
         case .French:
@@ -2603,7 +2603,7 @@ public final class Localize {
         case .English:
             return "Timestamps"
         case .German:
-            return "Timestamps"
+            return "Zeitstempel"
         case .Spanish:
             return "Marcas de tiempo"
         case .French:
@@ -2620,7 +2620,7 @@ public final class Localize {
         case .English:
             return "Treat Unrecognized as Trusted"
         case .German:
-            return "Treat Unrecognized as Trusted"
+            return "Unbekannt als vertrauenswürdig behandeln"
         case .Spanish:
             return "Tratar los no reconocidos como de confianza"
         case .French:
@@ -2671,7 +2671,7 @@ public final class Localize {
         case .English:
             return "URI"
         case .German:
-            return "Alternate Names"
+            return "URI"
         case .Spanish:
             return "Alternate Names"
         case .French:
@@ -2688,7 +2688,7 @@ public final class Localize {
         case .English:
             return "Unnamed Certificate"
         case .German:
-            return "Unnamed Certificate"
+            return "Zertifikat ohne Namen"
         case .Spanish:
             return "Unnamed Certificate"
         case .French:
@@ -2705,7 +2705,7 @@ public final class Localize {
         case .English:
             return "Unrecognized"
         case .German:
-            return "Unrecognized"
+            return "Nicht erkannt"
         case .Spanish:
             return "No reconocido"
         case .French:
@@ -2739,7 +2739,7 @@ public final class Localize {
         case .English:
             return "Use IP version"
         case .German:
-            return "Use IP version"
+            return "IP Version verwenden"
         case .Spanish:
             return "Use IP version"
         case .French:
@@ -2807,7 +2807,7 @@ public final class Localize {
         case .English:
             return "Verbose logging"
         case .German:
-            return "Verbose logging"
+            return "Ausführliche Debug-Protokollierung"
         case .Spanish:
             return "Verbose logging"
         case .French:
@@ -2909,7 +2909,7 @@ public final class Localize {
         case .English:
             return "You must restart the app for the change to take effect."
         case .German:
-            return "You must restart the app for the change to take effect."
+            return "Sie müssen die App neu starten, damit die Änderung wirksam wird."
         case .Spanish:
             return "You must restart the app for the change to take effect."
         case .French:
@@ -2943,7 +2943,7 @@ public final class Localize {
         case .English:
             return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
         case .German:
-            return "If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend."
+            return "Wenn diese Warnung angezeigt wird, während Sie die Website für soziale Medien, Bankgeschäfte oder private E-Mails aufrufen, ist die Sicherheit Ihres Geräts möglicherweise gefährdet. Verwenden Sie Ihr Gerät nach Möglichkeit nicht weiter und wenden Sie sich umgehend an den Apple Support oder eine vertrauenswürdige Person"
         case .Spanish:
             return "Si ves esto en redes sociales, correo electrónico público, bancos u otros sitios web populares, no continúes y busca asistencia en el soporte de Apple."
         case .French:
@@ -2960,7 +2960,7 @@ public final class Localize {
         case .English:
             return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
         case .German:
-            return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
+            return "TLS Inspector benötigt Zugriff auf Ihre Erinnerungen, um eine Erinnerung zum Ablauf von Zertifikaten hinzuzufügen. Sie können die Berechtigungen in der App „Einstellungen“ anpassen."
         case .Spanish:
             return "TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app."
         case .French:
@@ -2977,7 +2977,7 @@ public final class Localize {
         case .English:
             return "This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority."
         case .German:
-            return "This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority."
+            return "Das bedeutet, dass das vom entfernten Server vorgelegte Zertifikat von einer als unzuverlässig und gefährlich bekannten Zertifizierungsstelle oder Instanz ausgestellt wurde."
         case .Spanish:
             return "This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority."
         case .French:
@@ -2994,7 +2994,7 @@ public final class Localize {
         case .English:
             return "This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range."
         case .German:
-            return "This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range."
+            return "Das bedeutet, dass das vom entfernten Server verwendete Zertifikat nicht mehr gültig ist. Alle Zertifikate müssen einen Gültigkeitszeitraum aufweisen und dieses Zertifikat liegt derzeit außerhalb dieses Zeitraums."
         case .Spanish:
             return "This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range."
         case .French:
@@ -3011,7 +3011,7 @@ public final class Localize {
         case .English:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, one of the certificate's lifetime is too long. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .German:
-            return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
+            return "Das bedeutet, dass ein oder mehrere vom entfernten Server vorgelegte Zertifikate ungültig sind.\n\nKonkret hat ein Zertifikat eine zu lange Gültigkeitsdauer. Alle Internet-Zertifikate müssen einen Gültigkeitszeitraum definieren und Ihr Gerät hat für diesen Zeitraum ein Maximum festgelegt. Dieses Zertifikat überschreitet diesen maximalen Zeitraum."
         case .Spanish:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .French:
@@ -3028,7 +3028,7 @@ public final class Localize {
         case .English:
             return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
         case .German:
-            return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
+            return "Das bedeutet, dass das vom entfernten Server vorgelegte Zertifikat ungültig ist.\n\nKonkret fehlen erforderliche Angaben dazu, wofür dieses Zertifikat verwendet werden darf. Internet-Zertifikate können nur für bestimmte Aufgaben verwendet werden und bei diesem Zertifikat fehlen die erforderlichen Angaben zu den zulässigen Verwendungszwecken."
         case .Spanish:
             return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
         case .French:
@@ -3045,7 +3045,7 @@ public final class Localize {
         case .English:
             return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
         case .German:
-            return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
+            return "Das bedeutet, dass Ihr Gerät so konfiguriert wurde, dass es dieser Verbindung vertraut, obwohl es dies unter normalen Umständen nicht tun würde.\n\nGeräte in Unternehmen oder Konzernen verwenden solche Zertifikate möglicherweise für interne oder private Websites, sie können jedoch auch ein Hinweis auf ein kompromittiertes Gerät oder Netzwerk sein."
         case .Spanish:
             return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
         case .French:
@@ -3062,7 +3062,7 @@ public final class Localize {
         case .English:
             return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
         case .German:
-            return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
+            return "Das bedeutet, dass ein oder mehrere vom entfernten Server vorgelegte Zertifikate als „widerrufen“ markiert wurden. Zertifikate werden widerrufen, wenn sie aus verschiedenen Gründen nicht mehr als vertrauenswürdig gelten."
         case .Spanish:
             return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
         case .French:
@@ -3079,7 +3079,7 @@ public final class Localize {
         case .English:
             return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
         case .German:
-            return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
+            return "Das bedeutet, dass ein oder mehrere vom entfernten Server vorgelegte Zertifikate als „widerrufen“ markiert wurden. Zertifikate werden widerrufen, wenn sie aus verschiedenen Gründen nicht mehr als vertrauenswürdig gelten."
         case .Spanish:
             return "This means that one or more certificates presented by the remote host have been marked as “revoked”. Certificates are revoked when they can no longer be trusted due to several reasons."
         case .French:
@@ -3096,7 +3096,7 @@ public final class Localize {
         case .English:
             return "This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities."
         case .German:
-            return "This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities."
+            return "Das bedeutet, dass die vom entfernten Server vorgelegten Zertifikate nicht von einer vertrauenswürdigen Zertifizierungsstelle ausgestellt wurden. Internet-Zertifikate werden von Ihrem Gerät nur dann als vertrauenswürdig eingestuft, wenn sie von verantwortungsbewussten und seriösen Zertifizierungsstellen ausgestellt wurden."
         case .Spanish:
             return "This means that the certificates presented by the remote host were not issued by a trusted certificate issuer or authority. Internet certificates are only trusted by your device if they were issued by responsible and reputable authorities."
         case .French:
@@ -3113,7 +3113,7 @@ public final class Localize {
         case .English:
             return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
         case .German:
-            return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
+            return "Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate den SHA-1-Algorithmus verwenden. Dieser Algorithmus war weit verbreitet, hat sich jedoch als anfällig erwiesen und gilt nicht mehr als sicher."
         case .Spanish:
             return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
         case .French:
@@ -3130,7 +3130,7 @@ public final class Localize {
         case .English:
             return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
         case .German:
-            return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
+            return "Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate den SHA-1-Algorithmus verwenden. Dieser Algorithmus war weit verbreitet, hat sich jedoch als anfällig erwiesen und gilt nicht mehr als sicher."
         case .Spanish:
             return "This means that one or more certificates presented by the remote host uses the SHA-1 algorithm. This algorithm was widely used but has been found to be vulnerable and is no longer considered secure."
         case .French:
@@ -3147,7 +3147,7 @@ public final class Localize {
         case .English:
             return "This means that your device was able to establish a secure and trusted connection to the host."
         case .German:
-            return "This means that your device was able to establish a secure and trusted connection to the host."
+            return "Das bedeutet, dass Ihr Gerät eine sichere und vertrauenswürdige Verbindung zum Host herstellen konnte."
         case .Spanish:
             return "This means that your device was able to establish a secure and trusted connection to the host."
         case .French:
@@ -3164,7 +3164,7 @@ public final class Localize {
         case .English:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
         case .German:
-            return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
+            return "Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate ungültig sind.\n\nKonkret enthalten sie Informationen, die TLS Inspector unbekannt sind, aber als kritisch markiert wurden. In diesem Fall kann dem Zertifikat nicht vertraut werden, da TLS Inspector Informationen, die als kritisch markiert wurden, nicht verarbeiten kann."
         case .Spanish:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
         case .French:
@@ -3181,7 +3181,7 @@ public final class Localize {
         case .English:
             return "This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host."
         case .German:
-            return "This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host."
+            return "Das bedeutet, dass Ihr Gerät keine sichere Verbindung herstellen konnte oder die Identität des entfernten Hosts nicht als vertrauenswürdig eingestuft hat."
         case .Spanish:
             return "This means that your device was unable to establish a secure connection or did not have confidence in the identity of the remote host."
         case .French:
@@ -3198,7 +3198,7 @@ public final class Localize {
         case .English:
             return "This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection."
         case .German:
-            return "This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection."
+            return "Das bedeutet, dass eines oder mehrere der vom entfernten Server vorgelegten Zertifikate eine schwache Verschlüsselung verwenden. Ihr Gerät muss in der Lage sein, eine sichere Verbindung zum entfernten Server herzustellen, doch der entfernte Server hat verlangt, dass Ihr Gerät für diese Verbindung unsichere Einstellungen verwendet."
         case .Spanish:
             return "This means that one or more certificates presented by the remote host are using weak cryptography. Your device needs to be able to establish a secure connection to the remote host, but the remote host has requested that your device use insecure settings for that connection."
         case .French:
@@ -3215,7 +3215,7 @@ public final class Localize {
         case .English:
             return "This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to."
         case .German:
-            return "This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to."
+            return "Das bedeutet, dass das vom entfernten Server verwendete Zertifikat nicht für den Host bestimmt ist, mit dem Sie eine Verbindung hergestellt haben. Internet-Zertifikate gelten nur für bestimmte Domainnamen oder IP-Adressen und dieses Zertifikat enthält keine Angaben, die mit dem Host übereinstimmen, mit dem Sie eine Verbindung hergestellt haben."
         case .Spanish:
             return "This means that the certificate used by the remote host is not intended for the host you’ve connected to. Internet certificates only apply to specific domain names or IP addresses, and this certificate does not contain any values that match the host you’ve connected to."
         case .French:
@@ -3232,7 +3232,7 @@ public final class Localize {
         case .English:
             return "\(number_not_1) days"
         case .German:
-            return "\(number_not_1) days"
+            return "\(number_not_1) Tage"
         case .Spanish:
             return "\(number_not_1) days"
         case .French:
@@ -3249,7 +3249,7 @@ public final class Localize {
         case .English:
             return "\(number_not_1) hours"
         case .German:
-            return "\(number_not_1) hours"
+            return "\(number_not_1) Stunden"
         case .Spanish:
             return "\(number_not_1) hours"
         case .French:
@@ -3266,7 +3266,7 @@ public final class Localize {
         case .English:
             return "\(number_not_1) minutes"
         case .German:
-            return "\(number_not_1) minutes"
+            return "\(number_not_1) Minuten"
         case .Spanish:
             return "\(number_not_1) minutes"
         case .French:
@@ -3283,7 +3283,7 @@ public final class Localize {
         case .English:
             return "\(number_not_1) months"
         case .German:
-            return "\(number_not_1) months"
+            return "\(number_not_1) Monate"
         case .Spanish:
             return "\(number_not_1) months"
         case .French:
@@ -3300,7 +3300,7 @@ public final class Localize {
         case .English:
             return "\(number_not_1) weeks"
         case .German:
-            return "\(number_not_1) weeks"
+            return "\(number_not_1) Wochen"
         case .Spanish:
             return "\(number_not_1) weeks"
         case .French:
@@ -3317,7 +3317,7 @@ public final class Localize {
         case .English:
             return "\(number_not_1) years"
         case .German:
-            return "\(number_not_1) years"
+            return "\(number_not_1) Jahre"
         case .Spanish:
             return "\(number_not_1) years"
         case .French:
