@@ -1,0 +1,194 @@
+% Copyright Ian Spence and TLS Inspector Authors
+% Licensed under CC BY-SA 4.0 Attribution-ShareAlike 4.0 International
+1 day	1 天
+1 hour	1 小时
+1 minute	1 分钟
+1 month	1 个月
+1 year	1 年
+About	关于
+Add reminder for certificate expiry	为证书到期添加提醒
+Advanced Options	高级选项
+AdvancedSettingsNag	这些选项用于高级调查和故障排查。无效的值可能导致 TLS Inspector 无法正常工作。
+Algorithm	算法
+Allowed ciphers	允许的密码套件
+Alternate Names	备用名称
+App Icon	App 图标
+App Language	App 语言
+AppIconFooter	进步骄傲旗由 Daniel Quasar 创作，并采用 Creative Commons BY-NC-SA 许可。跨性别旗由 Monica Helms 创作，并已发布到公有领域。
+Apple	Apple
+Authority	颁发机构
+Auto	自动
+Basic	基本
+Bundle date	证书包日期
+Bundles have been updated to their latest versions.	证书包已更新到最新版本。
+Certificate Authority	证书颁发机构
+Certificate Status	证书状态
+Certificate Timestamps	证书时间戳
+Certificate Trust	证书信任
+Certificate not trusted	证书不受信任
+CertificateStatusFooter	证书状态检查用于检查证书是否已被吊销。
+Certificates	证书
+Check for updates	检查更新
+City / Locality	城市 / 地区
+Clear downloaded bundles	清除已下载的证书包
+Common Name	通用名称
+Connection Information	连接信息
+Contribute to TLS Inspector	参与 TLS Inspector
+Country	国家/地区
+DNS Name	DNS 名称
+Danger	危险
+Dangerous & Unsafe	危险且不安全
+Dismiss	关闭
+Domain Name or IP Address	域名或 IP 地址
+Done	完成
+Download & Check CRL	下载并检查 CRL
+Downloaded	已下载
+Email Address	电子邮件地址
+Embedded	内置
+Engine Options	引擎选项
+Error	错误
+Error adding reminder	添加提醒时出错
+Expired	已过期
+Expires In	距离到期
+Export Logs	导出日志
+Export certificate	导出证书
+Export certificate chain	导出证书链
+Extended	扩展
+Extensions	扩展项
+Fingerprints	指纹
+Follow Us	关注我们
+Follow us on Bluesky	在 Bluesky 上关注我们
+Follow us on Mastodon	在 Mastodon 上关注我们
+Found on device	在设备上找到
+General	通用
+Get Involved	参与进来
+Google	Google
+HTTP Headers	HTTP 标头
+IP Address	IP 地址
+IconDark	深色
+IconDefault	默认
+IconLight	浅色
+IconPride	骄傲
+IconSkew	倾斜
+IconSlate	石板灰
+IconTrans	跨性别
+If you believe this to be in error, contact support from within the TLS Inspector app.	如果你认为这是误判，请在 TLS Inspector App 内联系支持。
+Invalid Certificate	无效证书
+Issuer	颁发者
+Key Identifiers	密钥标识符
+Key Size	密钥大小
+Key Usage	密钥用途
+Language Updated	语言已更新
+Learn More	了解更多
+LicenseFooter	TLS Inspector 是自由和开源软件（FLOSS），根据 GNU 通用公共许可证第 3 版（GPLv3）授权。版权所有 © 2016-2026 Ian Spence 及其他 TLS Inspector 贡献者。TLS Inspector 完全未使用人工智能（AI）或大型语言模型（LLM）制作。
+Locally Trusted	本地受信任
+Log ID	日志 ID
+Log Name	日志名称
+Logging & Support	日志与支持
+LoggingFooter	如果你在使用 TLS Inspector 时遇到问题，我们可能会要求你启用调试日志并将日志提交给我们，以便更好地定位问题。不会收集个人信息；但启用后，你检查的主机名会包含在日志中。除非你使用上方按钮将这些日志发送给我们，否则我们绝不会收集它们。
+Metadata	元数据
+Microsoft	Microsoft
+More from the Developer	开发者的更多作品
+Mozilla	Mozilla
+Negotiated Ciphersuite	协商的密码套件
+Negotiated Version	协商的版本
+Network Engine	网络引擎
+Network Options	网络选项
+NetworkEngineFooter	更改网络引擎可能会导致 TLS Inspector 显示的连接信息与你的 iOS 设备实际使用的信息不同。
+No	否
+No Supported URL Found	未找到支持的 URL
+No updates available at this time.	目前没有可用更新。
+Not After	截止时间
+Not Before	生效时间
+Not revoked	未吊销
+Notice	注意
+Only HTTPS URLs can be inspected.	只能检查 HTTPS URL。
+Open source licenses & attributions	开源许可证与署名
+Options	选项
+Organization	组织
+Organizational Unit	组织单位
+Permission Denied	权限被拒绝
+Please wait...	请稍候...
+ProxyDanger	如果你不熟悉 HTTPS 代理是什么，或者不知道为什么你的设备上配置了代理，请立即向 Apple 支持或可信赖的朋友寻求帮助。如有可能，请避免使用你的设备。
+ProxyNotice	你的设备上配置了 HTTPS 代理。TLS Inspector 与 HTTPS 代理不兼容，因此无法继续检查。你必须先在 Wi-Fi 设置中停用 HTTPS 代理，然后才能使用 TLS Inspector。
+Public Key	公钥
+Query OCSP Responder	查询 OCSP 响应程序
+Quick Exit	快速退出
+Rate in App Store	在 App Store 评分
+Recent Lookups	最近查询
+Remember Recent Lookups	记住最近查询
+Reminder Added	已添加提醒
+Remote Address	远程地址
+Renew Certificate '{domain}'	续订证书“{0}”
+Reset to default settings	重置为默认设置
+Review or update the reminder in the Reminders app	在“提醒事项”App 中查看或更新提醒
+Revoked: {reason}	已吊销：{0}
+Root	根
+Root CA Certificates	根 CA 证书
+RootCABundleAbout	TLS Inspector 使用你设备上的根 CA 证书，以及来自可信供应商的根 CA 证书，以做出高置信度的信任判断。证书包更新并不频繁，TLS Inspector 已随附一份副本。
+RootCALicenseFooter	Apple、Google、Microsoft 和 Mozilla 均为其各自所有者的注册商标。TLS Inspector 与任何第三方均无关联，也未获得其认可，包括但不限于前述实体。
+Search on {website}	在 {0} 上搜索
+Seconds	秒
+Security HTTP Headers	安全 HTTP 标头
+Sent by server	由服务器发送
+Serial Number	序列号
+Share & Feedback	分享与反馈
+Share TLS Inspector	分享 TLS Inspector
+Show HTTP Headers	显示 HTTP 标头
+Show certificate on {website}	在 {0} 上查看证书
+Signature	签名
+Signature Type	签名类型
+Source	来源
+Special	特殊
+State / Province	州/省
+Status Providers	状态提供方
+Subject	使用者
+TLS Inspector	TLS Inspector
+Target	目标
+The certificate '{domain}' expires on {date}	证书“{0}”将于 {1} 到期
+Timeout	超时
+Timestamp	时间戳
+Timestamps	时间戳
+Treat Unrecognized as Trusted	将无法识别视为可信
+Trust Details	信任详情
+Trusted	受信任
+URI	URI
+Unnamed Certificate	未命名证书
+Unrecognized	无法识别
+Untrusted	不受信任
+Use IP version	使用 IP 版本
+Use system language	使用系统语言
+Valid For	有效时长
+Validity Period	有效期
+Verbose logging	详细日志
+Verified	已验证
+Version	版本
+View All	查看全部
+What does this mean?	这是什么意思？
+Yes	是
+You must restart the app for the change to take effect.	你必须重新启动 App 才能使更改生效。
+app{version}{build}{opensslversion}{curlversion}	App：{0}（{1}），OpenSSL：{2}，curl：{3}
+guidance_warning	如果你在检查社交媒体、银行或个人电子邮件网站时看到此警告，则你的设备安全可能已受到威胁。如有可能，请避免使用你的设备，并立即向 Apple 支持或可信赖的朋友寻求帮助。
+reminder_permission_message	TLS Inspector 需要访问你的提醒事项，才能添加证书到期提醒。你可以在“设置”App 中更新权限。
+whatDoesThisMean::badAuthority	这意味着远程服务器提供的证书由已知不可信且危险的颁发者或颁发机构签发。
+whatDoesThisMean::invalidDate	这意味着远程主机使用的证书不在其有效期内。所有证书都必须有一个有效日期范围，而此证书当前不在该范围内。
+whatDoesThisMean::issueDateTooLong	这意味着远程服务器提供的一个或多个证书无效。\n\n具体来说，其中一个证书的生命周期过长。所有互联网证书都必须定义其有效日期范围，而你的设备已为该范围设定最大值。此证书超过了该最大范围。
+whatDoesThisMean::leafMissingRequiredKeyUsage	这意味着远程服务器提供的证书无效。\n\n具体来说，它缺少有关该证书可用于哪些用途的必要信息。互联网证书只能用于特定任务，而此证书在允许用途中缺少必要任务。
+whatDoesThisMean::locallyTrusted	这意味着你的设备已被配置为信任此连接，即使在正常情况下它不会这样做。\n\n企业或公司设备可能会将这类证书用于内部或私有网站，但这也可能表示设备或网络已受到威胁。
+whatDoesThisMean::revokedIntermediate	这意味着远程主机提供的一个或多个证书已被标记为“已吊销”。证书会因多种原因在不再可信时被吊销。
+whatDoesThisMean::revokedLeaf	这意味着远程主机提供的一个或多个证书已被标记为“已吊销”。证书会因多种原因在不再可信时被吊销。
+whatDoesThisMean::selfSigned	这意味着远程主机提供的证书并非由受信任的证书颁发者或颁发机构签发。互联网证书只有在由负责且声誉良好的机构签发时，才会受到你的设备信任。
+whatDoesThisMean::sha1Intermediate	这意味着远程主机提供的一个或多个证书使用了 SHA-1 算法。该算法曾被广泛使用，但已被发现存在漏洞，且不再被认为安全。
+whatDoesThisMean::sha1Leaf	这意味着远程主机提供的一个或多个证书使用了 SHA-1 算法。该算法曾被广泛使用，但已被发现存在漏洞，且不再被认为安全。
+whatDoesThisMean::trusted	这意味着你的设备能够与该主机建立安全且受信任的连接。
+whatDoesThisMean::unknownCriticalExtension	这意味着远程服务器提供的一个或多个证书无效。\n\n具体来说，它们包含 TLS Inspector 无法识别、但被标记为关键的信息。在这种情况下，该证书不可信，因为 TLS Inspector 无法处理被标记为关键的信息。
+whatDoesThisMean::untrusted	这意味着你的设备无法建立安全连接，或者无法确信远程主机的身份。
+whatDoesThisMean::weakRSAKey	这意味着远程主机提供的一个或多个证书正在使用弱加密。你的设备需要能够与远程主机建立安全连接，但远程主机要求你的设备为该连接使用不安全的设置。
+whatDoesThisMean::wrongHost	这意味着远程主机使用的证书并不适用于你连接到的主机。互联网证书只适用于特定域名或 IP 地址，而此证书不包含任何与你连接到的主机匹配的值。
+{number_not_1} days	{0} 天
+{number_not_1} hours	{0} 小时
+{number_not_1} minutes	{0} 分钟
+{number_not_1} months	{0} 个月
+{number_not_1} weeks	{0} 周
+{number_not_1} years	{0} 年
+{percent}% complete	已完成 {0}%

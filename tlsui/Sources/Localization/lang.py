@@ -26,6 +26,7 @@ languages = [
     "fr",
     "nl",
     "pl",
+    "zh",
 ]
 
 # Language name (in English) - Must be a single word with no symbols
@@ -36,6 +37,7 @@ languageNameMap = {
     "nl": "Dutch",
     "pl": "Polish",
     "fr": "French",
+    "zh": "Chinese",
 }
 
 
