@@ -49,16 +49,16 @@ These rules are *in addition* to the security policy of the app.
 
 These rules are *in addition* to the privacy policy of the app.
 
-- With the exception of certificate status checks, the app **MUST NOT** contact any third-party without the explicit action and consent of the user
+- With the exception of certificate status checks, the app **MUST NOT** contact any third-party without the explicit action and consent of the user.
 - User-provided data, including the inspection target, **MUST NOT** appear in error logs. Such data can appear in debug logs, which are disabled by default.
 
 ## AI Generated Content
 
-It is **expressly forbidden** to contribute to TLS Inspector any content that has been created with the assistance of natural language processing artificial intelligence tools, hereby referred to as NLP-AI.
+It is **expressly forbidden** to contribute to TLS Inspector any content that has been created with the assistance of large language models or other prompt-based artificial intelligence tooling. This includes tools such as, but not limited to, ChatGPT, Claude, Copilot, and Gemini.
 
-The code and documentation that makes up TLS Inspector **MUST** be written by people. We reserve the right to selectively approve, reject or remove contributions where NLP-AI tools have been, or are suspected to have been, used, at our discretion. This policy includes user-submitted content such as but not limited to GitHub issues, pull requests, or security reports.
+The code, documentation, and localization that makes up TLS Inspector **MUST** be written by people. We reserve the right to selectively approve, reject or remove contributions where AI or LLM tools have been, or are suspected to have been, used, at our discretion. This policy includes user-submitted content such as but not limited to GitHub issues, pull requests, or security reports.
 
-TLS Inspector believes that NLP-AI tools produce subpar content, introduce security risks, and rob individuals of compensation or recognition for their labour.
+TLS Inspector believes that AI or LLM tools produce subpar content, introduce security risks, and most importantly rob individuals of compensation or recognition for their labour.
 
 ## Conduct
 
