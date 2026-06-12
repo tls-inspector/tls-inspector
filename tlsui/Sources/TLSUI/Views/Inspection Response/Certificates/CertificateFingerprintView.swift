@@ -27,24 +27,28 @@ public struct CertificateFingerprintView: View {
                 TitleValueView(title: "MD5") {
                     Text(md5.hexEncodedString())
                         .fixedwidth()
+                        .textSelection(.enabled)
                 }
             }
             if UserOptions().showFingerprintSha1, let sha1 = try? certificate.fingerprint(.sha1) {
                 TitleValueView(title: "SHA1") {
                     Text(sha1.hexEncodedString())
                         .fixedwidth()
+                        .textSelection(.enabled)
                 }
             }
             if UserOptions().showFingerprintSha256, let sha256 = try? certificate.fingerprint(.sha256) {
                 TitleValueView(title: "SHA-256") {
                     Text(sha256.hexEncodedString())
                         .fixedwidth()
+                        .textSelection(.enabled)
                 }
             }
             if UserOptions().showFingerprintSha512, let sha512 = try? certificate.fingerprint(.sha512) {
                 TitleValueView(title: "SHA-512") {
                     Text(sha512.hexEncodedString())
                         .fixedwidth()
+                        .textSelection(.enabled)
                 }
             }
         }
