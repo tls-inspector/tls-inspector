@@ -26,7 +26,7 @@ Certificate Status	Zertifikatsstatus
 Certificate Timestamps	Zertifikatszeitstempel
 Certificate Trust	Zertifikatsvertrauen
 Certificate not trusted	Zertifikat nicht vertrauenswürdig
-CertificateStatusFooter	Zertifikatsstatusprüfungen werden genutzt, um zu prüfen ob ein Zertifikat widerrufen wurde.
+CertificateStatusFooter	Zertifikatsstatusprüfungen werden genutzt, um zu prüfen ob, ein Zertifikat widerrufen wurde.
 Certificates	Zertifikate
 Check for updates	Nach Updates suchen
 City / Locality	Stadt / Ort
@@ -35,7 +35,7 @@ Common Name	Allgemeiner Name
 Connection Information	Verbindungsinformationen
 Contribute to TLS Inspector	Trage zu TLS Inspector bei
 Country	Land
-DNS Name	DNS Name
+DNS Name	DNS-Name
 Danger	Gefahr
 Dangerous & Unsafe	Gefährlich & Unsicher
 Dismiss	Verwerfen
@@ -43,7 +43,7 @@ Domain Name or IP Address	Domainname oder IP-Adresse
 Done	Fertig
 Download & Check CRL	CRL herunterladen & überprüfen
 Downloaded	Heruntergeladen
-Email Address	E-mail-Adresse
+Email Address	E-Mail-Adresse
 Embedded	Eingebettet
 Engine Options	Engine-Optionen
 Error	Fehler
@@ -56,12 +56,12 @@ Export certificate chain	Zertifikatskette exportieren
 Extended	Erweitert
 Extensions	Erweiterung
 Fingerprints	Fingerabdrücke
-Follow Us	Folge uns
-Follow us on Bluesky	Folge uns auf Bluesky
-Follow us on Mastodon	Folge uns auf Mastodon
+Follow Us	Folgen Sie uns
+Follow us on Bluesky	Folgen Sie uns auf Bluesky
+Follow us on Mastodon	Folgen Sie uns auf Mastodon
 Found on device	Auf diesem Gerät gefunden
 General	Allgemein
-Get Involved	Mach mit
+Get Involved	Machen Sie mit
 Google	Google
 HTTP Headers	HTTP-Header
 IP Address	IP-Adresse
@@ -72,20 +72,20 @@ IconPride	Pride
 IconSkew	Skew
 IconSlate	Slate
 IconTrans	Trans
-If you believe this to be in error, contact support from within the TLS Inspector app.	Wenn du glaubst, es handelt sich um einen Fehler, kontaktiere den Support über die TLS Inspector-App.
+If you believe this to be in error, contact support from within the TLS Inspector app.	Wenn Sie glauben, es handelt sich um einen Fehler, kontaktieren Sie den Support über die TLS Inspector App.
 Invalid Certificate	Zertifikat ungültig
 Issuer	Aussteller
 Key Identifiers	Schlüsselbezeichner
 Key Size	Schlüsselgröße
 Key Usage	Schlüsselverwendung
 Language Updated	Sprache aktualisiert
-Learn More	Mehr erfahren
-LicenseFooter	TLS Inspector ist freie und quelloffene Software (FLOSS), die unter der GNU General Public License Version 3 (GPLv3) lizenziert ist. Copyright © 2016–2026 Ian Spence und andere Mitwirkende an TLS Inspector. TLS Inspector wurde vollständig ohne den Einsatz von künstlicher Intelligenz (KI) oder großen Sprachmodellen (LLMs) entwickelt.
+Learn More	Erfahren Sie mehr
+LicenseFooter	TLS Inspector ist eine kostenlose, freie und quelloffene Software (FLOSS), die unter der GNU General Public License Version 3 (GPLv3) lizenziert ist. Copyright © 2016–2026 Ian Spence und andere Mitwirkende an TLS Inspector. TLS Inspector wurde vollständig ohne den Einsatz von künstlicher Intelligenz (KI) oder großen Sprachmodellen (LLMs) entwickelt.
 Locally Trusted	Lokal vertrauenswürdig
 Log ID	Protokoll ID
 Log Name	Protokoll Name
 Logging & Support	Protokollierung & Support
-LoggingFooter	Sollten Sie ein Problem mit TLS Inspector haben, bitten wir Sie möglicherweise, die Debug-Protokollierung zu aktivieren und uns die Protokolle zu übermitteln, damit wir das Problem besser identifizieren können. Es werden keine personenbezogenen Daten erfasst; bei Aktivierung dieser Funktion werden jedoch die von Ihnen überprüften Hosts erfasst. Wir sammeln diese Protokolle niemals, es sei denn, Sie senden sie uns über die obenstehende Schaltfläche zu.
+LoggingFooter	Sollten Sie ein Problem mit TLS Inspector haben, bitten wir Sie möglicherweise, die ausführliche Protokollierung zu aktivieren und uns die Protokolle zu übermitteln, damit wir das Problem besser identifizieren können. Es werden keine personenbezogenen Daten erfasst; bei Aktivierung dieser Funktion werden jedoch die von Ihnen überprüften Hosts erfasst. Wir sammeln diese Protokolle niemals, es sei denn, Sie senden sie uns über die obenstehende Schaltfläche zu.
 Metadata	Metadaten
 Microsoft	Microsoft
 More from the Developer	Mehr von diesem Entwickler
@@ -135,7 +135,7 @@ Serial Number	Seriennummer
 Share & Feedback	Teilen & Feedback
 Share TLS Inspector	Teile TLS Inspector
 Show HTTP Headers	HTTP-Header anzeigen
-Show certificate on {website}	Zeritifkat anzeigen auf {0}
+Show certificate on {website}	Zertifikat anzeigen auf {0}
 Signature	Signatur
 Signature Type	Signatur-Typ
 Source	Quelle
@@ -160,7 +160,7 @@ Use IP version	IP Version verwenden
 Use system language	Systemsprache verwenden
 Valid For	Gültig für
 Validity Period	Gültigkeitsperiode
-Verbose logging	Ausführliche Debug-Protokollierung
+Verbose logging	Ausführliche Protokollierung
 Verified	Verifiziert
 Version	Version
 View All	Alle anzeigen

@@ -88,7 +88,7 @@ def read_strings(lang):
                 skipped = check_license(r)
                 if skipped == -1:
                     print("error: Invalid or missing license header in %s" % (lang+".strings"))
-                    os.exit(1)
+                    sys.exit(1)
                 line_n += skipped
                 continue
 
@@ -104,19 +104,19 @@ def read_strings(lang):
             parts = line.split('\t')
             if len(parts) != 2:
                 print("error: Invalid string entry in %s:%d" % (lang+".strings", line_n))
-                os.exit(1)
+                sys.exit(1)
 
             key = parts[0].rstrip()
             value = parts[1].rstrip()
 
             if keys.get(normalizeKey(key)) is not None:
                 print("error: Invalid entry in %s:%d - duplicate entry key" % (lang+".strings", line_n))
-                os.exit(1)
+                sys.exit(1)
             keys[normalizeKey(key)] = True
 
             if "{" in value and "{" not in key:
                 print("error: Invalid entry in %s:%d - value contains a parameter but key does not" % (lang+".strings", line_n))
-                os.exit(1)
+                sys.exit(1)
 
             entries.append({
                 "key": parts[0].rstrip(),

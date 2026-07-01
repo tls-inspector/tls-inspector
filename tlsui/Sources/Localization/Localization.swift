@@ -529,7 +529,7 @@ public final class Localize {
         case .English:
             return "Certificate status checks are used to check if a certificate has been revoked."
         case .German:
-            return "Zertifikatsstatusprüfungen werden genutzt, um zu prüfen ob ein Zertifikat widerrufen wurde."
+            return "Zertifikatsstatusprüfungen werden genutzt, um zu prüfen ob, ein Zertifikat widerrufen wurde."
         case .Spanish:
             return "Certificate status checks are used to check if a certificate has been revoked."
         case .French:
@@ -682,7 +682,7 @@ public final class Localize {
         case .English:
             return "DNS Name"
         case .German:
-            return "DNS Name"
+            return "DNS-Name"
         case .Spanish:
             return "Alternate Names"
         case .French:
@@ -818,7 +818,7 @@ public final class Localize {
         case .English:
             return "Email Address"
         case .German:
-            return "E-mail-Adresse"
+            return "E-Mail-Adresse"
         case .Spanish:
             return "Alternate Names"
         case .French:
@@ -1039,7 +1039,7 @@ public final class Localize {
         case .English:
             return "Follow Us"
         case .German:
-            return "Folge uns"
+            return "Folgen Sie uns"
         case .Spanish:
             return "Síguenos"
         case .French:
@@ -1056,7 +1056,7 @@ public final class Localize {
         case .English:
             return "Follow us on Bluesky"
         case .German:
-            return "Folge uns auf Bluesky"
+            return "Folgen Sie uns auf Bluesky"
         case .Spanish:
             return "Síguenos en Bluesky"
         case .French:
@@ -1073,7 +1073,7 @@ public final class Localize {
         case .English:
             return "Follow us on Mastodon"
         case .German:
-            return "Folge uns auf Mastodon"
+            return "Folgen Sie uns auf Mastodon"
         case .Spanish:
             return "Síguenos en Mastodon"
         case .French:
@@ -1124,7 +1124,7 @@ public final class Localize {
         case .English:
             return "Get Involved"
         case .German:
-            return "Mach mit"
+            return "Machen Sie mit"
         case .Spanish:
             return "Participa"
         case .French:
@@ -1311,7 +1311,7 @@ public final class Localize {
         case .English:
             return "If you believe this to be in error, contact support from within the TLS Inspector app."
         case .German:
-            return "Wenn du glaubst, es handelt sich um einen Fehler, kontaktiere den Support über die TLS Inspector-App."
+            return "Wenn Sie glauben, es handelt sich um einen Fehler, kontaktieren Sie den Support über die TLS Inspector App."
         case .Spanish:
             return "Si crees que esto es un error, ponte en contacto con soporte desde la aplicación TLS Inspector."
         case .French:
@@ -1430,7 +1430,7 @@ public final class Localize {
         case .English:
             return "Learn More"
         case .German:
-            return "Mehr erfahren"
+            return "Erfahren Sie mehr"
         case .Spanish:
             return "Learn More"
         case .French:
@@ -1447,7 +1447,7 @@ public final class Localize {
         case .English:
             return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .German:
-            return "TLS Inspector ist freie und quelloffene Software (FLOSS), die unter der GNU General Public License Version 3 (GPLv3) lizenziert ist. Copyright © 2016–2026 Ian Spence und andere Mitwirkende an TLS Inspector. TLS Inspector wurde vollständig ohne den Einsatz von künstlicher Intelligenz (KI) oder großen Sprachmodellen (LLMs) entwickelt."
+            return "TLS Inspector ist eine kostenlose, freie und quelloffene Software (FLOSS), die unter der GNU General Public License Version 3 (GPLv3) lizenziert ist. Copyright © 2016–2026 Ian Spence und andere Mitwirkende an TLS Inspector. TLS Inspector wurde vollständig ohne den Einsatz von künstlicher Intelligenz (KI) oder großen Sprachmodellen (LLMs) entwickelt."
         case .Spanish:
             return "TLS Inspector is Free and Libre open source software (FLOSS) licensed under the GNU General Public License version 3 (GPLv3). Copyright © 2016-2026 Ian Spence and other TLS Inspector contributors. TLS Inspector is made entirely without the use of Artificial Intelligence (AI) or Large Language Models (LLMs)."
         case .French:
@@ -1532,7 +1532,7 @@ public final class Localize {
         case .English:
             return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
         case .German:
-            return "Sollten Sie ein Problem mit TLS Inspector haben, bitten wir Sie möglicherweise, die Debug-Protokollierung zu aktivieren und uns die Protokolle zu übermitteln, damit wir das Problem besser identifizieren können. Es werden keine personenbezogenen Daten erfasst; bei Aktivierung dieser Funktion werden jedoch die von Ihnen überprüften Hosts erfasst. Wir sammeln diese Protokolle niemals, es sei denn, Sie senden sie uns über die obenstehende Schaltfläche zu."
+            return "Sollten Sie ein Problem mit TLS Inspector haben, bitten wir Sie möglicherweise, die ausführliche Protokollierung zu aktivieren und uns die Protokolle zu übermitteln, damit wir das Problem besser identifizieren können. Es werden keine personenbezogenen Daten erfasst; bei Aktivierung dieser Funktion werden jedoch die von Ihnen überprüften Hosts erfasst. Wir sammeln diese Protokolle niemals, es sei denn, Sie senden sie uns über die obenstehende Schaltfläche zu."
         case .Spanish:
             return "If you're having a problem with TLS Inspector we may ask you to enable debug logging and submit the logs to us so we can better identify the issue. No personal information is collected, however when enabled the hosts you inspect are included. We never collect these logs unless you send them to us using the above button."
         case .French:
@@ -2382,7 +2382,7 @@ public final class Localize {
         case .English:
             return "Show certificate on \(website)"
         case .German:
-            return "Zeritifkat anzeigen auf \(website)"
+            return "Zertifikat anzeigen auf \(website)"
         case .Spanish:
             return "Show certificate on \(website)"
         case .French:
@@ -2807,7 +2807,7 @@ public final class Localize {
         case .English:
             return "Verbose logging"
         case .German:
-            return "Ausführliche Debug-Protokollierung"
+            return "Ausführliche Protokollierung"
         case .Spanish:
             return "Verbose logging"
         case .French:
