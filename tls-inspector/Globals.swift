@@ -18,3 +18,4 @@ import Foundation
 
 let optionsChangedNotification = Notification.Name(rawValue: "preset.server.changed")
 let inspectionHistoryUpdated = Notification.Name(rawValue: "inspection.history.changed")
+let appId = 1100539810

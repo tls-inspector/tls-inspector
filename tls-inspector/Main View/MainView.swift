@@ -36,10 +36,35 @@ struct MainView: View {
     @State var showOptionsView = false
     @State var showProxyWarning = false
     @State var showAdvancedInspectionOptions = false
+    @State var isNewerVersionAvailable = false
 
     var body: some View {
         Navigation {
             List {
+                if isNewerVersionAvailable {
+                    Section {
+                        HStack(alignment: .center) {
+                            Image(.previewIconDefault)
+                                .resizable()
+                                .clipped()
+                                .clipShape(RoundedRectangle(cornerRadius: 7))
+                                .frame(width: 48, height: 48)
+                            VStack(alignment: .leading) {
+                                Text(Localize.anewversionoftlsinspectorisavailable()).bold()
+                                Text(Localize.newversiontext())
+                                HStack {
+                                    Link(Localize.openinappstore(), destination: URL(string: "itms-apps://itunes.apple.com/app/id\(appId)")!).buttonStyle(.borderedProminent)
+                                    Button(Localize.dontshowagain()) {
+                                        UserOptions().checkForUpdates = false
+                                        withAnimation {
+                                            self.isNewerVersionAvailable = false
+                                        }
+                                    }.buttonStyle(.bordered)
+                                }
+                            }.padding(.leading, 4)
+                        }
+                    }
+                }
                 Section(showAdvancedInspectionOptions ? Localize.target() : Localize.domainnameoripaddress()) {
                     HStack {
                         DomainInput(host: $inspectionParameters.host, showAdvancedInspectionOptions: $showAdvancedInspectionOptions, isLoading: $isLoading) {
@@ -140,6 +165,9 @@ struct MainView: View {
                     .disabled(self.isLoading)
                 }
             }
+            .task {
+                await self.checkForUpdates()
+            }
         }
     }
 
@@ -179,6 +207,32 @@ struct MainView: View {
             self.inspectionError = error.localizedDescription
             self.isLoading = false
             self.showInspectionError = true
+        }
+    }
+
+    func checkForUpdates() async {
+        if !UserOptions().checkForUpdates {
+            LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Skipping update check: user disabled")
+            return
+        }
+
+        if let lastUpdateCheck = UserOptions().lastUpdateCheck {
+            if Date.now.timeIntervalSince(lastUpdateCheck) < 60 * 60 * 24 {
+                LogWriter.shared.write(.Debug, message: "[\(#fileID):\(#line)] Skipping update check: checked recently")
+                return
+            }
+        }
+
+        UserOptions().lastUpdateCheck = Date.now
+
+        UpdateCheck.checkForNewerVersion { newerVersionAvailable in
+            if newerVersionAvailable {
+                Task{ @MainActor in
+                    withAnimation {
+                        self.isNewerVersionAvailable = true
+                    }
+                }
+            }
         }
     }
 }

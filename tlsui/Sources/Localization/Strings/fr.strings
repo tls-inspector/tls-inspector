@@ -5,6 +5,8 @@
 1 minute	1 minute
 1 month	1 mois
 1 year	1 an
+# TODO
+A new version of TLS Inspector is available	A new version of TLS Inspector is available
 About	À propos
 Add reminder for certificate expiry	Ajouter un rappel pour l'expiration du certificat
 Advanced Options	Options avancées
@@ -39,7 +41,9 @@ DNS Name	Nom DNS
 Danger	Danger
 Dangerous & Unsafe	Dangereux et non sécurisé
 Dismiss	Fermer
-Domain Name or IP Address	Nom de domain ou adresse IP
+Domain Name or IP Address	Nom de domaine ou adresse IP
+# TODO
+Don't Show Again	Don't Show Again
 Done	Terminé
 Download & Check CRL	Télécharger et vérifier la liste de révocation de certificats (CRL)
 Downloaded	Téléchargé
@@ -103,6 +107,8 @@ Not Before	Pas avant
 Not revoked	Non révoqué
 Notice	Notice
 Only HTTPS URLs can be inspected.	Seules les URLs HTTPS peuvent être examinées.
+# TODO
+Open in App Store	Open in App Store
 Open source licenses & attributions	Licences open source et crédits
 Options	Options
 Organization	Organisation
@@ -117,7 +123,7 @@ Quick Exit	Quitter rapidement
 Rate in App Store	Laisser une note dans l'App Store
 Recent Lookups	Requêtes récentes
 # TODO
-Remember Recent Lookups	Remember Recent Lookups
+Remember Recent Lookups	Se souvenir des requêtes
 Reminder Added	Rappel ajouté
 Remote Address	Adresse distante
 Renew Certificate '{domain}'	Renouveler le certificat '{0}'
@@ -131,10 +137,10 @@ RootCALicenseFooter	Apple, Google, Microsoft et Mozilla sont des marques dépos�
 Search on {website}	Chercher sur {0}
 Seconds	Secondes
 Security HTTP Headers	En-têtes de sécurité HTTP
-Sent by server	Envpyé par le serveur
+Sent by server	Envoyé par le serveur
 Serial Number	Numéro de série
-Share & Feedback	Partager et feedback
-Share TLS Inspector	Partage TLS Inspector
+Share & Feedback	Partage et feedback
+Share TLS Inspector	Partager TLS Inspector
 Show HTTP Headers	Montrer les en-têtes HTTP
 Show certificate on {website}	Afficher le certificat sur {0}
 Signature	Signature
@@ -169,21 +175,25 @@ View All	Afficher tout
 What does this mean?	Qu'est-ce que cela signifie ?
 Yes	Oui
 You must restart the app for the change to take effect.	Redémarrez l’application pour appliquer le changement.
+# TODO
+about_check_for_updates	TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check.
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 guidance_warning	Si cet avertissement apparaît lorsque vous inspectez un site de réseaux sociaux, une banque ou une messagerie personnelle, la sécurité de votre appareil peut être compromise. Évitez d’utiliser votre appareil et demandez immédiatement de l’aide auprès du support Apple ou d’une personne de confiance.
+# TODO
+new_version_text	Update to receive the latest features, bug fixes, and performance improvements.
 reminder_permission_message	TLS Inspector nécessite l’autorisation d’accéder à vos rappels pour ajouter un rappel d’expiration de certificat. Vous pouvez modifier ces autorisations depuis l’application Réglages.
 whatDoesThisMean::badAuthority	Cela signifie que le certificat présenté par le serveur distant a été émis par une autorité ou un émetteur connu pour être non fiable et dangereux.
 whatDoesThisMean::invalidDate	Cela signifie que le certificat utilisé par l’hôte distant est en dehors de sa période de validité. Tous les certificats doivent avoir une période de validité définie par une plage de dates, et ce certificat est actuellement en dehors de cette période.
-whatDoesThisMean::issueDateTooLong	Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\nPlus précisément, la durée de vie de l’un des certificats est trop longue. Tous les certificats Internet doivent avoir une plage de dates de validité, et votre appareil impose une durée maximale à cette plage. Ce certificat dépasse cette durée maximale.
-whatDoesThisMean::leafMissingRequiredKeyUsage	Cela signifie que le certificat du serveur distant est invalide.\n\nPlus précisément, il manque des informations requises indiquant les usages autorisés de ce certificat. Les certificats Internet ne peuvent être utilisés que pour des tâches spécifiques, et ce certificat ne contient pas les usages requis autorisés.
-whatDoesThisMean::locallyTrusted	Cela signifie que votre appareil a été configuré pour faire confiance à cette connexion, alors qu’il ne l’aurait pas fait normalement.\n\nLes appareils d’entreprise peuvent utiliser ces certificats pour des sites internes ou privés, mais cela peut aussi indiquer qu’un appareil ou un réseau est compromis.
+whatDoesThisMean::issueDateTooLong	Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\nPlus précisément, la durée de vie de l’un des certificats est trop longue. Tous les certificats Internet doivent avoir une plage de dates de validité, et votre appareil impose une durée maximale à cette plage. Ce certificat dépasse cette durée maximale.
+whatDoesThisMean::leafMissingRequiredKeyUsage	Cela signifie que le certificat du serveur distant est invalide.\nPlus précisément, il manque des informations requises indiquant les usages autorisés de ce certificat. Les certificats Internet ne peuvent être utilisés que pour des tâches spécifiques, et ce certificat ne contient pas les usages requis autorisés.
+whatDoesThisMean::locallyTrusted	Cela signifie que votre appareil a été configuré pour faire confiance à cette connexion, alors qu’il ne l’aurait pas fait normalement.\nLes appareils d’entreprise peuvent utiliser ces certificats pour des sites internes ou privés, mais cela peut aussi indiquer qu’un appareil ou un réseau est compromis.
 whatDoesThisMean::revokedIntermediate	Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant ont été révoqués. Un certificat est révoqué lorsqu’il n’est plus digne de confiance, pour plusieurs raisons.
 whatDoesThisMean::revokedLeaf	Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant ont été révoqués. Un certificat est révoqué lorsqu’il n’est plus digne de confiance, pour plusieurs raisons.
 whatDoesThisMean::selfSigned	Cela signifie que les certificats présentés par l’hôte distant n’ont pas été émis par une autorité de certification de confiance. Votre appareil ne fait confiance aux certificats Internet que s’ils ont été émis par des autorités responsables et réputées.
 whatDoesThisMean::sha1Intermediate	Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant utilisent l’algorithme SHA-1. Bien que cet algorithme ait été très répandu, il est désormais considéré comme vulnérable et n’est plus jugé sécurisé.
 whatDoesThisMean::sha1Leaf	Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant utilisent l’algorithme SHA-1. Bien que cet algorithme ait été très répandu, il est désormais considéré comme vulnérable et n’est plus jugé sécurisé.
 whatDoesThisMean::trusted	Cela signifie que votre appareil a réussi à établir une connexion sécurisée et fiable avec l’hôte.
-whatDoesThisMean::unknownCriticalExtension	Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\nPlus précisément, ils contiennent des informations que TLS Inspector ne connaît pas, mais qui sont marquées comme critiques. Dans le cas présent, le certificat ne peut pas être considéré comme digne de confiance, car TLS Inspector ne peut pas traiter les informations marquées comme critiques.
+whatDoesThisMean::unknownCriticalExtension	Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\nPlus précisément, ils contiennent des informations que TLS Inspector ne connaît pas, mais qui sont marquées comme critiques. Dans le cas présent, le certificat ne peut pas être considéré comme digne de confiance, car TLS Inspector ne peut pas traiter les informations marquées comme critiques.
 whatDoesThisMean::untrusted	Cela signifie que votre appareil n’a pas réussi à établir une connexion sécurisée, ou n’a pas été en mesure de faire confiance à l’identité de l’hôte distant.
 whatDoesThisMean::weakRSAKey	Cela signifie qu’un ou plusieurs certificats présentés par l’hôte distant utilisent un chiffrement faible. Votre appareil doit pouvoir établir une connexion sécurisée avec l’hôte distant, mais celui-ci a demandé à votre appareil d’utiliser des paramètres non sécurisés pour cette connexion.
 whatDoesThisMean::wrongHost	Cela signifie que le certificat utilisé par l’hôte distant n’est pas destiné à l’hôte vers lequel vous vous êtes connecté. Les certificats Internet ne sont valables que pour des noms de domaine ou des adresses IP spécifiques, et ce certificat ne contient aucune valeur correspondant à l’hôte auquel vous êtes connecté.
@@ -192,5 +202,5 @@ whatDoesThisMean::wrongHost	Cela signifie que le certificat utilisé par l’hô
 {number_not_1} minutes	{0} minutes
 {number_not_1} months	{0} mois
 {number_not_1} weeks	{0} semaines
-{number_not_1} years	{0} années
+{number_not_1} years	{0} ans
 {percent}% complete	{0}% achevé

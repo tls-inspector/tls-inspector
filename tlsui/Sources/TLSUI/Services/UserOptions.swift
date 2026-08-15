@@ -37,6 +37,8 @@ public enum AppDefaultsKeys: String, CaseIterable {
     case useSystemLanguage = "use_system_language"
     case languageOverride = "app_language"
     case inspectTimeout = "inspect_timeout"
+    case checkForUpdates = "check_for_updates"
+    case lastUpdateCheck = "last_update_check"
 }
 
 private final class AppDefaults: Sendable {
@@ -61,6 +63,8 @@ private final class AppDefaults: Sendable {
         .useSystemLanguage: true,
         .languageOverride: SupportedLanguages.English.rawValue,
         .inspectTimeout: 10,
+        .checkForUpdates: true,
+        .lastUpdateCheck: Double(0),
     ]
 
     public static func get<T>(_ key: AppDefaultsKeys) -> T {
@@ -103,6 +107,8 @@ public final class UserOptions: ObservableObject {
         languageOverride = SupportedLanguages.init(rawValue: AppDefaults.get(.languageOverride)) ?? .English
         treatUnrecognizedAsTrusted = AppDefaults.get(.treatUnrecognizedAsTrusted)
         inspectTimeout = AppDefaults.get(.inspectTimeout)
+        checkForUpdates = AppDefaults.get(.checkForUpdates)
+        lastUpdateCheck = Date(timeIntervalSince1970: AppDefaults.get(.lastUpdateCheck))
     }
 
     @Published public var verboseLogging: Bool {
@@ -183,6 +189,14 @@ public final class UserOptions: ObservableObject {
 
     @Published public var inspectTimeout: Int {
         didSet { AppDefaults.set(.inspectTimeout, inspectTimeout) }
+    }
+
+    @Published public var checkForUpdates: Bool {
+        didSet { AppDefaults.set(.checkForUpdates, checkForUpdates) }
+    }
+
+    @Published public var lastUpdateCheck: Date? {
+        didSet { AppDefaults.set(.lastUpdateCheck, lastUpdateCheck?.timeIntervalSince1970 ?? 0)}
     }
 
     public static func reset() {

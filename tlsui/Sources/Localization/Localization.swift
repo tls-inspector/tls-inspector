@@ -35,11 +35,11 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
     public var percentTranslated: Int {
         switch self {
         case .English: return 100
-        case .German: return 100
-        case .Spanish: return 42
-        case .French: return 98
-        case .Dutch: return 43
-        case .Polish: return 100
+        case .German: return 97
+        case .Spanish: return 41
+        case .French: return 96
+        case .Dutch: return 42
+        case .Polish: return 97
         }
     }
 }
@@ -164,6 +164,23 @@ public final class Localize {
             return "1 year"
         case .Polish:
             return "1 rok"
+        }
+    }
+    // key: A new version of TLS Inspector is available
+    public static func anewversionoftlsinspectorisavailable() -> String {
+        switch currentLanguage {
+        case .English:
+            return "A new version of TLS Inspector is available"
+        case .German:
+            return "A new version of TLS Inspector is available"
+        case .Spanish:
+            return "A new version of TLS Inspector is available"
+        case .French:
+            return "A new version of TLS Inspector is available"
+        case .Dutch:
+            return "A new version of TLS Inspector is available"
+        case .Polish:
+            return "A new version of TLS Inspector is available"
         }
     }
     // key: About
@@ -561,7 +578,7 @@ public final class Localize {
     public static func checkforupdates() -> String {
         switch currentLanguage {
         case .English:
-            return "Check for updates"
+            return "Check For Updates"
         case .German:
             return "Nach Updates suchen"
         case .Spanish:
@@ -754,11 +771,28 @@ public final class Localize {
         case .Spanish:
             return "Nombre de dominio o dirección IP"
         case .French:
-            return "Nom de domain ou adresse IP"
+            return "Nom de domaine ou adresse IP"
         case .Dutch:
             return "Domeinnaam of IP-Adres"
         case .Polish:
             return "Nazwa domeny lub adres IP"
+        }
+    }
+    // key: Don't Show Again
+    public static func dontshowagain() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Don't Show Again"
+        case .German:
+            return "Don't Show Again"
+        case .Spanish:
+            return "Don't Show Again"
+        case .French:
+            return "Don't Show Again"
+        case .Dutch:
+            return "Don't Show Again"
+        case .Polish:
+            return "Don't Show Again"
         }
     }
     // key: Done
@@ -1832,6 +1866,23 @@ public final class Localize {
             return "Można analizować tylko adresy URL HTTPS."
         }
     }
+    // key: Open in App Store
+    public static func openinappstore() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Open in App Store"
+        case .German:
+            return "Open in App Store"
+        case .Spanish:
+            return "Open in App Store"
+        case .French:
+            return "Open in App Store"
+        case .Dutch:
+            return "Open in App Store"
+        case .Polish:
+            return "Open in App Store"
+        }
+    }
     // key: Open source licenses & attributions
     public static func opensourcelicensesattributions() -> String {
         switch currentLanguage {
@@ -2063,7 +2114,7 @@ public final class Localize {
         case .Spanish:
             return "Recordar búsquedas recientes"
         case .French:
-            return "Remember Recent Lookups"
+            return "Se souvenir des requêtes"
         case .Dutch:
             return "Onthoud Recente Opdrachten"
         case .Polish:
@@ -2301,7 +2352,7 @@ public final class Localize {
         case .Spanish:
             return "Sent by server"
         case .French:
-            return "Envpyé par le serveur"
+            return "Envoyé par le serveur"
         case .Dutch:
             return "Sent by server"
         case .Polish:
@@ -2335,7 +2386,7 @@ public final class Localize {
         case .Spanish:
             return "Compartir y comentarios"
         case .French:
-            return "Partager et feedback"
+            return "Partage et feedback"
         case .Dutch:
             return "Delen & Terugkoppeling"
         case .Polish:
@@ -2352,7 +2403,7 @@ public final class Localize {
         case .Spanish:
             return "Compartir TLS Inspector"
         case .French:
-            return "Partage TLS Inspector"
+            return "Partager TLS Inspector"
         case .Dutch:
             return "Deel TLS Inspector"
         case .Polish:
@@ -2920,6 +2971,23 @@ public final class Localize {
             return "Musisz ponownie uruchomić aplikację, aby zmiana zaczęła obowiązywać."
         }
     }
+    // key: about_check_for_updates
+    public static func aboutcheckforupdates() -> String {
+        switch currentLanguage {
+        case .English:
+            return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
+        case .German:
+            return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
+        case .Spanish:
+            return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
+        case .French:
+            return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
+        case .Dutch:
+            return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
+        case .Polish:
+            return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
+        }
+    }
     // key: app{version}{build}{opensslversion}{curlversion}
     public static func appversionbuildopensslversioncurlversion(version: String, build: String, opensslversion: String, curlversion: String) -> String {
         switch currentLanguage {
@@ -2952,6 +3020,23 @@ public final class Localize {
             return "Als u dit ziet op publieke servers voor social media, e-mail, banken, of andere populaire websites, ga dan niet verder maar zoek contact met Apple Support."
         case .Polish:
             return "Jeśli widzisz to ostrzeżenie podczas sprawdzania stron mediów społecznościowych, banków lub prywatnej poczty e-mail, bezpieczeństwo Twojego urządzenia może być naruszone. Jeśli możesz, unikaj używania urządzenia i natychmiast poproś o pomoc Apple Support lub zaufaną osobę."
+        }
+    }
+    // key: new_version_text
+    public static func newversiontext() -> String {
+        switch currentLanguage {
+        case .English:
+            return "Update to receive the latest features, bug fixes, and performance improvements."
+        case .German:
+            return "Update to receive the latest features, bug fixes, and performance improvements."
+        case .Spanish:
+            return "Update to receive the latest features, bug fixes, and performance improvements."
+        case .French:
+            return "Update to receive the latest features, bug fixes, and performance improvements."
+        case .Dutch:
+            return "Update to receive the latest features, bug fixes, and performance improvements."
+        case .Polish:
+            return "Update to receive the latest features, bug fixes, and performance improvements."
         }
     }
     // key: reminder_permission_message
@@ -3015,7 +3100,7 @@ public final class Localize {
         case .Spanish:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .French:
-            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\nPlus précisément, la durée de vie de l’un des certificats est trop longue. Tous les certificats Internet doivent avoir une plage de dates de validité, et votre appareil impose une durée maximale à cette plage. Ce certificat dépasse cette durée maximale."
+            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\nPlus précisément, la durée de vie de l’un des certificats est trop longue. Tous les certificats Internet doivent avoir une plage de dates de validité, et votre appareil impose une durée maximale à cette plage. Ce certificat dépasse cette durée maximale."
         case .Dutch:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, a certificate has too long of a lifetime. All internet certificates must define a date range for which they are valid, and your device has established a maximum for that range. This certificate exceeds that maximum range."
         case .Polish:
@@ -3032,7 +3117,7 @@ public final class Localize {
         case .Spanish:
             return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
         case .French:
-            return "Cela signifie que le certificat du serveur distant est invalide.\n\nPlus précisément, il manque des informations requises indiquant les usages autorisés de ce certificat. Les certificats Internet ne peuvent être utilisés que pour des tâches spécifiques, et ce certificat ne contient pas les usages requis autorisés."
+            return "Cela signifie que le certificat du serveur distant est invalide.\nPlus précisément, il manque des informations requises indiquant les usages autorisés de ce certificat. Les certificats Internet ne peuvent être utilisés que pour des tâches spécifiques, et ce certificat ne contient pas les usages requis autorisés."
         case .Dutch:
             return "This means that the certificate presented by the remote server is invalid.\n\nSpecifically, it is missing required information about what that certificate can be used for. Internet certificates can only be used for specific tasks, and this certificate is missing the required tasks in what it’s allowed to be used for."
         case .Polish:
@@ -3049,7 +3134,7 @@ public final class Localize {
         case .Spanish:
             return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
         case .French:
-            return "Cela signifie que votre appareil a été configuré pour faire confiance à cette connexion, alors qu’il ne l’aurait pas fait normalement.\n\nLes appareils d’entreprise peuvent utiliser ces certificats pour des sites internes ou privés, mais cela peut aussi indiquer qu’un appareil ou un réseau est compromis."
+            return "Cela signifie que votre appareil a été configuré pour faire confiance à cette connexion, alors qu’il ne l’aurait pas fait normalement.\nLes appareils d’entreprise peuvent utiliser ces certificats pour des sites internes ou privés, mais cela peut aussi indiquer qu’un appareil ou un réseau est compromis."
         case .Dutch:
             return "This means that your device has been configured to trust this connection even though it would not have done so normally.\n\nEnterprise or corporate devices may use these types of certificates for internal or private websites, but they can also be an indication of a compromised device or network."
         case .Polish:
@@ -3168,7 +3253,7 @@ public final class Localize {
         case .Spanish:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
         case .French:
-            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\n\nPlus précisément, ils contiennent des informations que TLS Inspector ne connaît pas, mais qui sont marquées comme critiques. Dans le cas présent, le certificat ne peut pas être considéré comme digne de confiance, car TLS Inspector ne peut pas traiter les informations marquées comme critiques."
+            return "Cela signifie que l’un ou plusieurs des certificats présentés par le serveur distant sont invalides.\nPlus précisément, ils contiennent des informations que TLS Inspector ne connaît pas, mais qui sont marquées comme critiques. Dans le cas présent, le certificat ne peut pas être considéré comme digne de confiance, car TLS Inspector ne peut pas traiter les informations marquées comme critiques."
         case .Dutch:
             return "This means that one or more certificates presented by the remote server are invalid.\n\nSpecifically, they contain information that is unknown to TLS Inspector but is marked as being critical. In this instance, the certificate cannot be trusted as TLS Inspector cannot process information that has been marked as critical."
         case .Polish:
@@ -3321,7 +3406,7 @@ public final class Localize {
         case .Spanish:
             return "\(number_not_1) years"
         case .French:
-            return "\(number_not_1) années"
+            return "\(number_not_1) ans"
         case .Dutch:
             return "\(number_not_1) years"
         case .Polish:

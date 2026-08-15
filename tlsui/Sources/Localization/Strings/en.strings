@@ -5,6 +5,7 @@
 1 minute	1 minute
 1 month	1 month
 1 year	1 year
+A new version of TLS Inspector is available	A new version of TLS Inspector is available
 About	About
 Add reminder for certificate expiry	Add reminder for certificate expiry
 Advanced Options	Advanced Options
@@ -28,7 +29,7 @@ Certificate Trust	Certificate Trust
 Certificate not trusted	Certificate not trusted
 CertificateStatusFooter	Certificate status checks are used to check if a certificate has been revoked.
 Certificates	Certificates
-Check for updates	Check for updates
+Check for updates	Check For Updates
 City / Locality	City / Locality
 Clear downloaded bundles	Clear downloaded bundles
 Common Name	Common Name
@@ -40,6 +41,7 @@ Danger	Danger
 Dangerous & Unsafe	Dangerous & Unsafe
 Dismiss	Dismiss
 Domain Name or IP Address	Domain Name or IP Address
+Don't Show Again	Don't Show Again
 Done	Done
 Download & Check CRL	Download & Check CRL
 Downloaded	Downloaded
@@ -103,6 +105,7 @@ Not Before	Not Before
 Not revoked	Not revoked
 Notice	Notice
 Only HTTPS URLs can be inspected.	Only HTTPS URLs can be inspected.
+Open in App Store	Open in App Store
 Open source licenses & attributions	Open source licenses & attributions
 Options	Options
 Organization	Organization
@@ -167,8 +170,10 @@ View All	View All
 What does this mean?	What does this mean?
 Yes	Yes
 You must restart the app for the change to take effect.	You must restart the app for the change to take effect.
+about_check_for_updates	TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check.
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 guidance_warning	If you are seeing this warning while inspecting the website for social media, banks, personal email, then your device’s security may be compromised. Avoid using your device if you can and seek immediate assistance from Apple Support or a trusted friend.
+new_version_text	Update to receive the latest features, bug fixes, and performance improvements.
 reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
 whatDoesThisMean::badAuthority	This means that the certificate presented by the remote server was issued by a known untrustworthy & dangerous issuer or authority.
 whatDoesThisMean::invalidDate	This means that the certificate used by the remote host is outside of its validity period. All certificates must have a date range for when they are valid, and this certificate is currently outside of that range.

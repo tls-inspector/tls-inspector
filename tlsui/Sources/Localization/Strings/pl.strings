@@ -5,6 +5,8 @@
 1 minute	1 minuta
 1 month	1 miesiąc
 1 year	1 rok
+# TODO
+A new version of TLS Inspector is available	A new version of TLS Inspector is available
 About	O aplikacji
 Add reminder for certificate expiry	Dodaj przypomnienie o wygaśnięciu certyfikatu
 Advanced Options	Opcje zaawansowane
@@ -40,6 +42,8 @@ Danger	Niebezpieczne
 Dangerous & Unsafe	Niebezpieczne i niepewne
 Dismiss	Zamknij
 Domain Name or IP Address	Nazwa domeny lub adres IP
+# TODO
+Don't Show Again	Don't Show Again
 Done	Gotowe
 Download & Check CRL	Pobierz i sprawdź CRL
 Downloaded	Pobrano
@@ -103,6 +107,8 @@ Not Before	Nie przed
 Not revoked	Nie unieważniono
 Notice	Uwaga
 Only HTTPS URLs can be inspected.	Można analizować tylko adresy URL HTTPS.
+# TODO
+Open in App Store	Open in App Store
 Open source licenses & attributions	Licencje open source i atrybucje
 Options	Opcje
 Organization	Organizacja
@@ -167,8 +173,12 @@ View All	Zobacz wszystko
 What does this mean?	Co to oznacza?
 Yes	Tak
 You must restart the app for the change to take effect.	Musisz ponownie uruchomić aplikację, aby zmiana zaczęła obowiązywać.
+# TODO
+about_check_for_updates	TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check.
 app{version}{build}{opensslversion}{curlversion}	Aplikacja: {0} ({1}), OpenSSL: {2}, curl: {3}
 guidance_warning	Jeśli widzisz to ostrzeżenie podczas sprawdzania stron mediów społecznościowych, banków lub prywatnej poczty e-mail, bezpieczeństwo Twojego urządzenia może być naruszone. Jeśli możesz, unikaj używania urządzenia i natychmiast poproś o pomoc Apple Support lub zaufaną osobę.
+# TODO
+new_version_text	Update to receive the latest features, bug fixes, and performance improvements.
 reminder_permission_message	TLS Inspector wymaga uprawnień do Twoich przypomnień, aby dodać przypomnienie o wygaśnięciu certyfikatu. Uprawnienia możesz zmienić w aplikacji Ustawienia.
 whatDoesThisMean::badAuthority	Oznacza to, że certyfikat przedstawiony przez zdalny serwer został wystawiony przez znanego, niegodnego zaufania i niebezpiecznego wystawcę lub urząd.
 whatDoesThisMean::invalidDate	Oznacza to, że certyfikat używany przez zdalny host jest poza swoim okresem ważności. Wszystkie certyfikaty muszą mieć zakres dat, w których są ważne, a ten certyfikat jest obecnie poza tym zakresem.

@@ -26,7 +26,6 @@ class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @
     private let appBuild = (Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as? String) ?? "Unknown"
     private let dnsInspectorAppId = 6470965982
     private let dnsInspectorAppStoreCampaignId = "crash-override"
-    private let tlsInspectorAppId = 1100539810
     private let tlsInspectorAppStoreCampaignId = "crash-override"
     private let projectURL = URL(string: "https://tlsinspector.com/")!
     private let projectContributeURL = URL(string: "https://tlsinspector.com/github")!
@@ -125,7 +124,7 @@ class AboutTableView: UITableView, UITableViewDataSource, UITableViewDelegate, @
         case "share":
             break
         case "rate":
-            self.showProductInAppStore(tlsInspectorAppId, campaignId: tlsInspectorAppStoreCampaignId)
+            self.showProductInAppStore(appId, campaignId: tlsInspectorAppStoreCampaignId)
         case "mastodon":
             UIApplication.shared.open(mastodonURL)
         case "bluesky":

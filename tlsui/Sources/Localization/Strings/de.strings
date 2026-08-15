@@ -5,6 +5,8 @@
 1 minute	1 Minute
 1 month	1 Monat
 1 year	1 Jahr
+# TODO
+A new version of TLS Inspector is available	A new version of TLS Inspector is available
 About	Info
 Add reminder for certificate expiry	Erinnerung zum Ablauf des Zertifikats hinzufügen
 Advanced Options	Erweiterte Optionen
@@ -40,6 +42,8 @@ Danger	Gefahr
 Dangerous & Unsafe	Gefährlich & Unsicher
 Dismiss	Verwerfen
 Domain Name or IP Address	Domainname oder IP-Adresse
+# TODO
+Don't Show Again	Don't Show Again
 Done	Fertig
 Download & Check CRL	CRL herunterladen & überprüfen
 Downloaded	Heruntergeladen
@@ -103,6 +107,8 @@ Not Before	Nicht vor
 Not revoked	Nicht widerrufen
 Notice	Meldung
 Only HTTPS URLs can be inspected.	Es können nur HTTPS URLs geprüft werden.
+# TODO
+Open in App Store	Open in App Store
 Open source licenses & attributions	Open-Source-Lizenzen und Quellenangaben
 Options	Optionen
 Organization	Organisation
@@ -167,8 +173,12 @@ View All	Alle anzeigen
 What does this mean?	Was bedeutet das?
 Yes	Ja
 You must restart the app for the change to take effect.	Sie müssen die App neu starten, damit die Änderung wirksam wird.
+# TODO
+about_check_for_updates	TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check.
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 guidance_warning	Wenn diese Warnung angezeigt wird, während Sie die Website für soziale Medien, Bankgeschäfte oder private E-Mails aufrufen, ist die Sicherheit Ihres Geräts möglicherweise gefährdet. Verwenden Sie Ihr Gerät nach Möglichkeit nicht weiter und wenden Sie sich umgehend an den Apple Support oder eine vertrauenswürdige Person
+# TODO
+new_version_text	Update to receive the latest features, bug fixes, and performance improvements.
 reminder_permission_message	TLS Inspector benötigt Zugriff auf Ihre Erinnerungen, um eine Erinnerung zum Ablauf von Zertifikaten hinzuzufügen. Sie können die Berechtigungen in der App „Einstellungen“ anpassen.
 whatDoesThisMean::badAuthority	Das bedeutet, dass das vom entfernten Server vorgelegte Zertifikat von einer als unzuverlässig und gefährlich bekannten Zertifizierungsstelle oder Instanz ausgestellt wurde.
 whatDoesThisMean::invalidDate	Das bedeutet, dass das vom entfernten Server verwendete Zertifikat nicht mehr gültig ist. Alle Zertifikate müssen einen Gültigkeitszeitraum aufweisen und dieses Zertifikat liegt derzeit außerhalb dieses Zeitraums.

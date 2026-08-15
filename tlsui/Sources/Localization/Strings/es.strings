@@ -9,6 +9,8 @@
 1 month	1 mes
 # TODO
 1 year	1 year
+# TODO
+A new version of TLS Inspector is available	A new version of TLS Inspector is available
 About	Acerca de
 # TODO
 Add reminder for certificate expiry	Add reminder for certificate expiry
@@ -60,6 +62,8 @@ Danger	Peligro
 Dangerous & Unsafe	Dangerous & Unsafe
 Dismiss	Cerrar
 Domain Name or IP Address	Nombre de dominio o dirección IP
+# TODO
+Don't Show Again	Don't Show Again
 # TODO
 Done	Done
 Download & Check CRL	Descargar y comprobar CRL
@@ -161,6 +165,8 @@ Notice	Aviso
 # TODO
 Only HTTPS URLs can be inspected.	Only HTTPS URLs can be inspected.
 # TODO
+Open in App Store	Open in App Store
+# TODO
 Open source licenses & attributions	Open source licenses & attributions
 Options	Opciones
 # TODO
@@ -255,8 +261,12 @@ Yes	Sí
 # TODO
 You must restart the app for the change to take effect.	You must restart the app for the change to take effect.
 # TODO
+about_check_for_updates	TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check.
+# TODO
 app{version}{build}{opensslversion}{curlversion}	App: {0} ({1}), OpenSSL: {2}, curl: {3}
 guidance_warning	Si ves esto en redes sociales, correo electrónico público, bancos u otros sitios web populares, no continúes y busca asistencia en el soporte de Apple.
+# TODO
+new_version_text	Update to receive the latest features, bug fixes, and performance improvements.
 # TODO
 reminder_permission_message	TLS Inspector requires permissions to your reminders to add a certificate expiry reminder. You can update permissions from the Settings app.
 # TODO

@@ -22,6 +22,7 @@ import Localization
 public struct OptionsSectionGeneralView: View {
     @EnvironmentObject private var userOptions: UserOptions
     @State private var showLanguageChangeAlert = false
+    @State private var showCheckForUpdateHelp = false
 
     public var body: some View {
         Section {
@@ -31,6 +32,18 @@ public struct OptionsSectionGeneralView: View {
                 .tint(.accent)
             Toggle(Localize.treatunrecognizedastrusted(), isOn: $userOptions.treatUnrecognizedAsTrusted)
                 .tint(.accent)
+            Toggle(isOn: $userOptions.checkForUpdates) {
+                HStack {
+                    Text(Localize.checkforupdates())
+                    Spacer()
+                    Button {
+                        self.showCheckForUpdateHelp.toggle()
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                    }
+                }
+            }
+            .tint(.accent)
             NavigationLink {
                 AppLanguageView()
                     .environmentObject(userOptions)
@@ -51,6 +64,13 @@ public struct OptionsSectionGeneralView: View {
             }
         } message: {
             Text(Localize.youmustrestarttheappforthechangetotakeeffect())
+        }
+        .alert(Localize.checkforupdates(), isPresented: $showCheckForUpdateHelp) {
+            Button(Localize.dismiss()) {
+                self.showCheckForUpdateHelp = false
+            }
+        } message: {
+            Text(Localize.aboutcheckforupdates())
         }
     }
 }
