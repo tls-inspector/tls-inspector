@@ -60,7 +60,7 @@ public struct TrustExplainationView: View {
                         Text(Localize.whatdoesthismeanbadauthority())
                     }
                 }
-                if status == .locallyTrusted || status == .untrusted || status == .selfSigned {
+                if status == .locallyTrusted || status == .untrusted || status == .selfSigned || status == .badAuthority {
                     SafetyWarningView(title: Localize.danger(), message: Localize.guidancewarning())
                         .listRowBackground(IRoundedRectangle(backgroundColor: .clear, borderColor: .red, borderWidth: 2))
                 }
