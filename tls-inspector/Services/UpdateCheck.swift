@@ -104,8 +104,7 @@ internal final class UpdateCheck {
         LogWriter.shared.write(.Debug, message: "Checking for newer versions defined on TXT ios-release.tlsinspector.com")
 
         let currentIosVersion = ProcessInfo.processInfo.operatingSystemVersion.majorVersion
-        // let currentAppVersion = (try? SemVer(string: (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.0.0")) ?? SemVer(major: 0, minor: 0, patch: 0)
-        let currentAppVersion = SemVer(major: 2, minor: 1, patch: 2)
+         let currentAppVersion = (try? SemVer(string: (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.0.0")) ?? SemVer(major: 0, minor: 0, patch: 0)
         UpdateCheck.getLatestVersionFromDNS { versions in
             guard let versions = versions else {
                 completion(false)

@@ -30,8 +30,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/tls-inspector/tlskit-external-dependencies", revision: "bd78cc226d5bc45d0c49068fb9c2c7c44b11637a"),
-        .package(url: "https://github.com/dns-inspector/dnskit", revision: "572ea4b3f003c2804f083d509c5e2cf9cd649cdb"),
+        .package(url: "https://github.com/tls-inspector/tlskit-external-dependencies", revision: "f6a70dfacb8d34e7d123c6e758d6eecc269e0aab"),
+        .package(url: "https://github.com/dns-inspector/dnskit", revision: "1277f41964f29c4b088815fdc98d2b358a2c163e"),
     ],
     targets: [
         .target(

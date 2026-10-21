@@ -19,7 +19,7 @@ import Foundation
 /// A list of known certificate authorities that have violated CA/B baseline TLS Requirements.
 /// Certificates are represented by a SHA-256 sum (uppercase hex) of the certificate.
 ///
-/// > Warning: These authorities pose significant risk to the safety of internet users worldwide and have violated internationally accepted regulations.
+/// > Warning: These authorities pose significant risk to the safety of internet users worldwide and have violated accepted regulations.
 /// >
 /// > **Under no circumstances should a connection be trusted if a certificate issue tree is rooted with any of these certificates.**
 ///
@@ -37,6 +37,50 @@ import Foundation
 /// ```
 internal let knownBadAuthorities: [String] = [
     "D26D2D0231B7C39F92CC738512BA54103519E4405D68B5BD703E9788CA8ECF31"
+]
+
+/// A list of known intermediate certificates that are comrpomised in a way that they are considered dangerous.
+/// Certificates are represented by a SHA-256 sum (uppercase hex) of the certificate.
+///
+/// > Warning: These certificates pose significant risk to the safety of internet users worldwide and have likely violated accepted regulations.
+/// >
+/// > **Under no circumstances should a connection be trusted if a certificate issue tree contains any of these certificates.**
+///
+/// ## Current entries:
+///
+/// * `CN=EM DV TLS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM DV TLS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM OV TLS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM OV TLS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM EV TLS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM EV TLS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM DV TLS CA - G3C,O=eMudhra Inc,C=US`
+/// * `CN=EM DV TLS CA - G3C,O=eMudhra Inc,C=US`
+/// * `CN=EM OV TLS CA - G3C,O=eMudhra Inc,C=US`
+/// * `CN=EM OV TLS CA - G3C,O=eMudhra Inc,C=US`
+/// * `CN=EM EV TLS CA - G3C,O=eMudhra Inc,C=US`
+/// * `CN=EM EV TLS CA - G3C,O=eMudhra Inc,C=US`
+/// * `CN=EM OV CS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM OV CS CA - G3B,O=eMudhra BV,C=NL`
+/// * `CN=EM OV CS CA - G3C,O=eMudhra Inc,C=US`
+/// * `CN=EM OV CS CA - G3C,O=eMudhra Inc,C=US`
+internal let knownBadIntermediates: [String] = [
+    "42C4ACCD12C4F59597925E1A08A7A90102608543809308D50EC427E118BA1493",
+    "45A883F349AEDFD5F3A649B5498FFB121712BA8B448F3F2A91DBC5A766FCDDBE",
+    "98B896625C0C230ADEEC3EB2CF6AAD5001ECF9156A68644E82374CE5833BC25B",
+    "5F1DED4DD590AF74631290CF073B122A2AAC6A1FA479778A0BD43579BD832699",
+    "E7568FE6E12331F4FD7DE61DA4C7559D0F8EB192A218D4741A3BA75184333838",
+    "579480AEA166290BD3C643589E795FC0D0E54E86505D180F1DFF99EFD3199512",
+    "0164D7CEAE5BB909C272AF151FF44B1177AE9B47D9424B94F1D9558C30934D19",
+    "62B7F9868263F72F6911FC78CEAF72C1979158B7368BF648683BB2AA39B02E72",
+    "CB6E15165AC802E9B3F993F16C25D41F4E81C21EBDE71AE1B012AC00BF9C7C3F",
+    "7485B51C0ED192878FA1D2F948FB529AE1842CC5086C4B67F7BE5B2039DE9489",
+    "432EC25F0D28DE9006D97BF752F17BBB2CD41F669933FCB072D9A1148D0261F3",
+    "FD9D5C2DBBD4995AB69B8D50C439D9527B00529199C2FD01B2174EB58F07021F",
+    "9E39DE2881273ACC225A149C72BA3E0F51424963669AB633EE1DC7DF5DB067B4",
+    "A496E23AC0CAB8155FC9B117B97EAE368EFCBB9041AEC8804D5A308D2D01C2D8",
+    "4B2460A466F95FD40113BCDCCA2CEB29B3B093921DE45474DA7DF48874C630B1",
+    "84112972B8E59D14560AE7E7119654474AAD119990CF3722BFC1E3B91615E1FD",
 ]
 
 /// Trust status results
@@ -69,7 +113,7 @@ public enum TrustStatus: Int, CaseIterable, Sendable {
     case leafMissingRequiredKeyUsage = 13
     /// One or more certificates contain an unknown extension that is marked as critical
     case unknownCriticalExtension = 14
-    /// The root or intermediate authority is known to violate internationally accepted rules.
+    /// The root or intermediate authority is known to violate accepted rules.
     case badAuthority = 99
 
     /// Pick an appropriate trust status from the certificate chain and host. This will only try to identify trust failures and should be used if the system has not
@@ -79,6 +123,20 @@ public enum TrustStatus: Int, CaseIterable, Sendable {
     ///   - host: The address or name of the remote host
     /// - Returns: A trust status
     internal static func fromChain(certificates: [Certificate], peername: String, peeraddress: IPAddress) -> TrustStatus? {
+        if let certificate = certificates.last, let thumbprint = try? certificate.fingerprint(.sha256).hexEncodedString().uppercased() {
+            if knownBadAuthorities.contains(thumbprint) {
+                return .badAuthority
+            }
+        }
+        for certificate in certificates.suffix(from: 1) {
+            if let thumbprint = try? certificate.fingerprint(.sha256) {
+                printDebug("[\(#fileID):\(#line)] \(certificate.description) \(thumbprint.hexEncodedString().uppercased())")
+                if knownBadIntermediates.contains(thumbprint.hexEncodedString().uppercased()) {
+                    return .badAuthority
+                }
+            }
+        }
+
         // Expired/Not Yet Valid
         for certificate in certificates {
             if certificate.validity.isExpired {
