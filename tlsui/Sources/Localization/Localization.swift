@@ -39,7 +39,7 @@ public enum SupportedLanguages: String, Sendable, Hashable, Identifiable, CaseIt
         case .Spanish: return 41
         case .French: return 96
         case .Dutch: return 42
-        case .Polish: return 97
+        case .Polish: return 100
         }
     }
 }
@@ -180,7 +180,7 @@ public final class Localize {
         case .Dutch:
             return "A new version of TLS Inspector is available"
         case .Polish:
-            return "A new version of TLS Inspector is available"
+            return "Nowa wersja TLS Inspector jest dostępna"
         }
     }
     // key: About
@@ -792,7 +792,7 @@ public final class Localize {
         case .Dutch:
             return "Don't Show Again"
         case .Polish:
-            return "Don't Show Again"
+            return "Nie pokazuj ponownie"
         }
     }
     // key: Done
@@ -1880,7 +1880,7 @@ public final class Localize {
         case .Dutch:
             return "Open in App Store"
         case .Polish:
-            return "Open in App Store"
+            return "Otwórz w App Store"
         }
     }
     // key: Open source licenses & attributions
@@ -2985,7 +2985,7 @@ public final class Localize {
         case .Dutch:
             return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
         case .Polish:
-            return "TLS Inspector uses oblivious DNS records to check for newer versions while protecting your privacy. No information about you or your device is sent to our servers as part of this check."
+            return "TLS Inspector korzysta z rekordów Oblivious DNS, aby sprawdzać dostępność nowszych wersji, jednocześnie chroniąc Twoją prywatność. W ramach tego sprawdzania na nasze serwery nie są przesyłane żadne informacje o Tobie ani Twoim urządzeniu."
         }
     }
     // key: app{version}{build}{opensslversion}{curlversion}
@@ -3036,7 +3036,7 @@ public final class Localize {
         case .Dutch:
             return "Update to receive the latest features, bug fixes, and performance improvements."
         case .Polish:
-            return "Update to receive the latest features, bug fixes, and performance improvements."
+            return "Zaktualizuj aplikację, aby uzyskać najnowsze funkcje, poprawki błędów i ulepszenia wydajności."
         }
     }
     // key: reminder_permission_message
